@@ -244,12 +244,14 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function clean_post_cache( $post_id, $include_homepage = true ) {
-		$post = get_post( $post_id );
-
-		if ( $post->post_type == 'revision' || get_post_status( $post_id ) != 'publish' )
+		if ( get_post_type( $post_id ) == 'revision' || get_post_status( $post_id ) != 'publish' )
 			return;
 
-		$urls = array( get_permalink( $post_id ) );
+		$urls = array();
+		$post_link = get_permalink( $post_id );
+		if ( $post_link ) {
+			$urls[] = $post_link;
+		}
 
 		if ( $include_homepage ) {
 			$urls[] = get_option( 'home' );
@@ -317,6 +319,7 @@ class Pantheon_Cache {
 
 
 	public function enqueue_urls( $urls ) {
+		$urls = array_filter( $urls, 'is_string' );
 		$this->urls = array_merge( $this->urls, (array) $urls );
 	}
 
