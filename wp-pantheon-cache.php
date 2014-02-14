@@ -270,8 +270,12 @@ class Pantheon_Cache {
 	 */
 	public function clean_term_cache( $term_ids, $taxonomy ) {
 		$urls = array();
+
 		foreach ( (array) $term_ids as $term_id ) {
-			$urls[] = get_term_link( $term_id, $taxonomy );
+			$term_link = get_term_link( intval( $term_id ), $taxonomy );
+			if ( ! is_wp_error( $term_link ) ) {
+				$urls[] = $term_link;
+			}
 		}
 
 		$urls = apply_filters( 'pantheon_clean_term_cache', $urls, $term_ids, $taxonomy );
