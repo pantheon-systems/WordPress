@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Plugin Name: Pantheon Cache
 	Plugin URI: http://www.getpantheon.com/
@@ -22,7 +21,7 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-
+if ( isset($_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 class Pantheon_Cache {
 
 	/**
@@ -370,8 +369,15 @@ class Pantheon_Cache {
 		$this->urls = apply_filters( 'pantheon_clean_urls', array_unique( $this->urls ) );
 
 		# Call the big daddy here
+		$url = home_url();
+		$parsed = parse_url( $url );
+		$host = $parsed[PHP_URL_HOST];
+		if ( function_exists( 'pantheon_clear_edge' ) ) {
+			pantheon_clear_edge( $host, $this->urls );
+		}
 	}
 }
+
 
 
 /**
@@ -408,4 +414,5 @@ function pantheon_clean_term_cache( $term_ids, $taxonomy ) {
  */
 function pantheon_enqueue_urls( $urls ) {
 	Pantheon_Cache()->enqueue_urls( $urls );
+}
 }
