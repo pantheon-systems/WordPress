@@ -186,9 +186,9 @@ class Pantheon_Cache {
 				<?php submit_button(); ?>
 			</form>
 
-			<hr />
+			<?php if ( apply_filters( 'pantheon_cache_allow_clear_all', true ) ) : ?>
 
-			<?php if ( apply_filters( 'pantheon_allow_clear_all_cache', true ) ) : ?>
+				<hr />
 
 				<form action="admin-post.php" method="POST">
 					<input type="hidden" name="action" value="pantheon_cache_flush_site" />
