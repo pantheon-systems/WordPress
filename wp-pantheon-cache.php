@@ -3,10 +3,10 @@
 /*
 	Plugin Name: Pantheon Cache
 	Plugin URI: http://www.getpantheon.com/
-	Description: A cache plugin for Pantheon
+	Description: Control Pantheon's Edge Cache from WordPress
 	Version: 0.1
 	Author: Matthew Boynes
-	Author URI: http://www.getpantheon.com/
+	Author URI: http://www.alleyinteractive.com/
 */
 /*	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
