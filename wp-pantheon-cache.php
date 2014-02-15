@@ -319,8 +319,8 @@ class Pantheon_Cache {
 
 
 	public function enqueue_urls( $urls ) {
-		$urls = array_filter( $urls, 'is_string' );
-		$this->urls = array_merge( $this->urls, (array) $urls );
+		$urls = array_filter( (array) $urls, 'is_string' );
+		$this->urls = array_merge( $this->urls, $urls );
 	}
 
 
