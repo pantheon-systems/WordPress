@@ -331,14 +331,14 @@ class Pantheon_Cache {
 
 		# Call the big daddy here
 		$url = home_url();
- 			$parsed = parse_url($url);
- 			$host = $parsed['PHP_URL_HOST'];
- 			if ( function_exists( 'pantheon_clear_edge' ) ) {
-				pantheon_clear_edge( $host, $this->urls );
- 	    	}
- 	    }
+		$parsed = parse_url( $url );
+		$host = $parsed[PHP_URL_HOST];
+		if ( function_exists( 'pantheon_clear_edge' ) ) {
+			pantheon_clear_edge( $host, $this->urls );
+		}
 	}
 }
+
 
 
 /**
