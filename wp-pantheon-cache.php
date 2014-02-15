@@ -21,7 +21,8 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-if ( isset($_ENV['PANTHEON_ENVIRONMENT'] ) ) {
+if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) :
+
 class Pantheon_Cache {
 
 	/**
@@ -415,4 +416,5 @@ function pantheon_clean_term_cache( $term_ids, $taxonomy ) {
 function pantheon_enqueue_urls( $urls ) {
 	Pantheon_Cache()->enqueue_urls( $urls );
 }
-}
+
+endif; # Ensuring that this is on Pantheon
