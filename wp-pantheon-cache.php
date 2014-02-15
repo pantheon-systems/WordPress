@@ -362,3 +362,11 @@ function pantheon_clean_post_cache( $post_id, $include_homepage = true ) {
 function pantheon_clean_term_cache( $term_ids, $taxonomy ) {
 	Pantheon_Cache()->clean_term_cache( $term_ids, $taxonomy );
 }
+
+
+/**
+ * @see Pantheon_Cache::enqueue_urls
+ */
+function pantheon_enqueue_urls( $urls ) {
+	Pantheon_Cache()->enqueue_urls( $urls );
+}
