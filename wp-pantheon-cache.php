@@ -102,6 +102,7 @@ class Pantheon_Cache {
 		add_action( 'clean_post_cache',                      array( $this, 'clean_post_cache' ) );
 		add_action( 'clean_term_cache',                      array( $this, 'clean_term_cache' ), 10, 2 );
 		add_action( 'admin_post_pantheon_cache_delete_page', array( $this, 'clean_specific_page' ) );
+		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
 		if ( ! is_admin() ) {
 			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
@@ -171,12 +172,33 @@ class Pantheon_Cache {
 		?>
 		<div class="wrap">
 			<h2><?php _e( 'Pantheon Cache', 'pantheon-cache' ); ?></h2>
-			<p><?php _e( 'Settings for the Pantheon Cache Plugin', 'pantheon-cache' ); ?></p>
+
+			<?php if ( ! empty( $_GET['cache-cleared'] ) && 'true' == $_GET['cache-cleared'] ) : ?>
+				<div class="updated below-h2">
+					<p><?php esc_html_e( 'Site cache flushed.', 'pantheon-cache' ); ?></p>
+				</div>
+			<?php endif ?>
+
+			<h3><?php _e( 'General Settings', 'pantheon-cache' ); ?></h3>
 			<form action="options.php" method="POST">
 				<?php settings_fields( self::SLUG ); ?>
 				<?php do_settings_sections( self::SLUG ); ?>
 				<?php submit_button(); ?>
 			</form>
+
+			<hr />
+
+			<?php if ( apply_filters( 'pantheon_allow_clear_all_cache', true ) ) : ?>
+
+				<form action="admin-post.php" method="POST">
+					<input type="hidden" name="action" value="pantheon_cache_flush_site" />
+					<?php wp_nonce_field( 'pantheon-cache-clear-all', 'pantheon-cache-nonce' ); ?>
+					<h3><?php _e( 'Clear Site Cache', 'pantheon-cache' ); ?></h3>
+					<p><?php _e( "Clear the cache for the entire site. Use with care, as it will negatively impact your site's performance for a short period of time.", 'pantheon-cache' ); ?></p>
+					<?php submit_button( __( 'Clear Cache', 'pantheon-cache' ), 'secondary' ); ?>
+				</form>
+
+			<?php endif ?>
 		</div>
 		<?php
 	}
@@ -226,12 +248,29 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function clean_specific_page() {
-		if ( function_exists( 'current_user_can' ) && false == current_user_can( 'delete_others_posts' ) )
+		if ( ! function_exists( 'current_user_can' ) || false == current_user_can( 'delete_others_posts' ) )
 			return false;
 
 		if ( ! empty( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'delete-cache' ) ) {
 			$this->enqueue_urls( $_REQUEST['path'] );
 			wp_redirect( preg_replace( '/[ <>\'\"\r\n\t\(\)]/', '', $_REQUEST['path'] ) );
+			exit();
+		}
+	}
+
+
+	/**
+	 * Clear the cache for the entire site.
+	 *
+	 * @return void
+	 */
+	public function flush_site() {
+		if ( ! function_exists( 'current_user_can' ) || false == current_user_can( 'manage_options' ) )
+			return false;
+
+		if ( ! empty( $_POST['pantheon-cache-nonce'] ) && wp_verify_nonce( $_POST['pantheon-cache-nonce'], 'pantheon-cache-clear-all' ) ) {
+			$this->enqueue_urls( get_option( 'home' ) . '.*' );
+			wp_redirect( admin_url( 'options-general.php?page=pantheon-cache&cache-cleared=true' ) );
 			exit();
 		}
 	}
