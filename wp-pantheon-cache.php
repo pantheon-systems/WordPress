@@ -374,14 +374,14 @@ class Pantheon_Cache {
 		$host = parse_url( $url, PHP_URL_HOST );
 		$paths = array();
 		foreach ( $this->urls as $full_url ) {
-		  # Parse down to the path+query, escape regex, dedupe.
-		  $parsed = parse_url( $full_url );
-		  $path = $parsed['path'] . $parsed['query'];
-		  if ( '' == $path ) {
-		    continue;
-		  }
-		  $regex_safe = '^' . preg_quote( $path ) . '$';
-		  $paths[ $regex_safe ] = true;
+			# Parse down to the path+query, escape regex, dedupe.
+			$parsed = parse_url( $full_url );
+			$path = $parsed['path'] . $parsed['query'];
+			if ( '' == $path ) {
+				continue;
+			}
+			$regex_safe = '^' . preg_quote( $path ) . '$';
+			$paths[ $regex_safe ] = true;
 		}
 
 		$paths = apply_filters( 'pantheon_final_clean_urls', $paths );
