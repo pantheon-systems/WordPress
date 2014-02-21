@@ -372,8 +372,19 @@ class Pantheon_Cache {
 		# Call the big daddy here
 		$url = home_url();
 		$host = parse_url( $url, PHP_URL_HOST );
+		$paths = array();
+		foreach ($this->urls as $full_url) {
+		  # Parse down to the path+query, escape regex, dedupe.
+		  $parsed = parse_url( $full_url );
+		  $path = $parsed['path'] . $parsed['query'];
+		  if ( $path == '' ) {
+		    continue;
+		  }
+		  $regex_safe = '^' . preg_quote( $path ) . '$';
+		  $paths[$regex_safe] = TRUE;
+		}
 		if ( function_exists( 'pantheon_clear_edge' ) ) {
-			pantheon_clear_edge( $host, $this->urls );
+			pantheon_clear_edge( $host, array_keys($paths) );
 		}
 	}
 }
