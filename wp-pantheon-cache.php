@@ -47,11 +47,11 @@ class Pantheon_Cache {
 	public $options = array();
 
 	/**
-	 * Store the URLs to be flushed at shutdown.
+	 * Store the Paths to be flushed at shutdown.
 	 *
 	 * @var array
 	 */
-	public $urls = array();
+	public $paths = array();
 
 	/**
 	 * The slug for the plugin, used in various places like the options page.
@@ -269,7 +269,7 @@ class Pantheon_Cache {
 			return false;
 
 		if ( ! empty( $_POST['pantheon-cache-nonce'] ) && wp_verify_nonce( $_POST['pantheon-cache-nonce'], 'pantheon-cache-clear-all' ) ) {
-			$this->enqueue_urls('/.*');
+			$this->enqueue_regex( '/.*' );
 			wp_redirect( admin_url( 'options-general.php?page=pantheon-cache&cache-cleared=true' ) );
 			exit();
 		}
@@ -356,24 +356,54 @@ class Pantheon_Cache {
 		$this->enqueue_urls( $urls );
 	}
 
-
+	/**
+	 * Enqueue Fully-qualified urls to be cleared on shutdown.
+	 *
+	 * @param array|string $urls List of full urls to clear.
+	 * @return void
+	 */
 	public function enqueue_urls( $urls ) {
+	  $paths = array();
 		$urls = array_filter( (array) $urls, 'is_string' );
-		$this->urls = array_merge( $this->urls, $urls );
+		foreach ( $urls as $full_url ) {
+			# Parse down to the path+query, escape regex.
+			$parsed = parse_url( $full_url );
+			$path = $parsed['path'] . $parsed['query'];
+			if ( '' == $path ) {
+				continue;
+			}
+			$path = '^' . preg_quote( $path ) . '$';
+			$paths[] = $path;
+		}
+
+		$this->paths = array_merge( $this->paths, $paths );
+	}
+
+	/**
+	 * Enqueue a regex to be cleared.
+	 *
+	 * You must understand regular expressions to use this, and be careful.
+	 *
+	 * @param string $regex path regex to clear.
+	 * @return void
+	 */
+	public function enqueue_regex( $regex ) {
+		$this->paths[] = $regex;
 	}
 
 
 	public function cache_clean_urls() {
-		if ( empty( $this->urls ) )
+		if ( empty( $this->paths ) )
 			return;
 
-		$this->urls = apply_filters( 'pantheon_clean_urls', array_unique( $this->urls ) );
+		$this->paths = apply_filters( 'pantheon_clean_urls', array_unique( $this->paths ) );
 
 		# Call the big daddy here
 		$url = home_url();
 		$host = parse_url( $url, PHP_URL_HOST );
+		$this->paths = apply_filters( 'pantheon_final_clean_urls', $this->paths );
 		if ( function_exists( 'pantheon_clear_edge' ) ) {
-			pantheon_clear_edge( $host, $this->urls );
+			pantheon_clear_edge( $host, $this->paths );
 		}
 	}
 }
