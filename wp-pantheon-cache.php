@@ -269,7 +269,7 @@ class Pantheon_Cache {
 			return false;
 
 		if ( ! empty( $_POST['pantheon-cache-nonce'] ) && wp_verify_nonce( $_POST['pantheon-cache-nonce'], 'pantheon-cache-clear-all' ) ) {
-			$this->enqueue_urls( get_option( 'home' ) . '.*' );
+			$this->enqueue_urls('/.*');
 			wp_redirect( admin_url( 'options-general.php?page=pantheon-cache&cache-cleared=true' ) );
 			exit();
 		}
@@ -371,8 +371,7 @@ class Pantheon_Cache {
 
 		# Call the big daddy here
 		$url = home_url();
-		$parsed = parse_url( $url );
-		$host = $parsed[PHP_URL_HOST];
+		$host = parse_url( $url, PHP_URL_HOST );
 		if ( function_exists( 'pantheon_clear_edge' ) ) {
 			pantheon_clear_edge( $host, $this->urls );
 		}
