@@ -1,12 +1,11 @@
 <?php
-
-//
-// Disable Core Updates EVERYWHERE (use git upstream)
-//
-add_filter( 'pre_site_transient_update_core', create_function( '$a', "return null;" ) );
-
 // Only in Test and Live Environments...
 if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], Array('test', 'live') ) ) {
+  //
+  // Disable Core Updates EVERYWHERE (use git upstream)
+  //
+  add_filter( 'pre_site_transient_update_core', create_function( '$a', "return null;" ) );
+
   //
   // Disable Plugin Updates
   //
