@@ -10,7 +10,7 @@
 
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) :
 
-require_once( 'pantheon-cache.php' );
-require_once( 'pantheon-updates.php' );
+require_once( 'pantheon/pantheon-cache.php' );
+require_once( 'pantheon/pantheon-updates.php' );
 
 endif; # Ensuring that this is on Pantheon
