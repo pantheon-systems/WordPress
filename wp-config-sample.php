@@ -26,7 +26,7 @@
  * keep your config separate, we recommend using a 'wp-config-local.php' file,
  * which you should also make sure you .gitignore.
  */
-if (dirname(__FILE__) . file_exists('wp-config-local.php') && !isset($_ENV['PANTHEON_ENVIRONMENT'])):
+if (File_exists(dirname(__FILE__) . 'wp-config-local.php') && !isset($_ENV['PANTHEON_ENVIRONMENT'])):
   # IMPORTANT: ensure your local config does not include wp-settings.php
   require_once(dirname(__FILE__) . '/wp-config-local.php');
 
@@ -84,13 +84,12 @@ else:
     // Don't show deprecations; useful under PHP 5.5
     error_reporting(E_ALL ^ E_DEPRECATED);
 
-
   else:
     /**
-     * This block will be executed if you have no wp-config-local.php and you are
-     * not running on Pantheon. Insert your own config here if necessary.
+     * This block will be executed if you have NO wp-config-local.php and you
+     * are NOT running on Pantheon. Insert alternate config here if necessary.
      *
-     * If you are only running on Pantheon, you don't need to edit this at all.
+     * If you are only running on Pantheon, you can ignore this block.
      */
     define('DB_NAME',          'database_name');
     define('DB_USER',          'database_username');
@@ -107,41 +106,42 @@ else:
     define('LOGGED_IN_SALT',   'put your unique phrase here');
     define('NONCE_SALT',       'put your unique phrase here');
   endif;
-
-  /** Standard wp-config.php stuff from here on down. **/
-
-  /**
-   * WordPress Database Table prefix.
-   *
-   * You can have multiple installations in one database if you give each a unique
-   * prefix. Only numbers, letters, and underscores please!
-   */
-  $table_prefix  = 'wp_';
-
-  /**
-   * WordPress Localized Language, defaults to English.
-   *
-   * Change this to localize WordPress. A corresponding MO file for the chosen
-   * language must be installed to wp-content/languages. For example, install
-   * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
-   * language support.
-   */
-  define('WPLANG', '');
-
-  /**
-   * For developers: WordPress debugging mode.
-   *
-   * Change this to true to enable the display of notices during development.
-   * It is strongly recommended that plugin and theme developers use WP_DEBUG
-   * in their development environments.
-   *
-   * You may want to examine $_ENV['PANTHEON_ENVIRONMENT'] to set this to be
-   * "true" in dev, but false in test and live.
-   */
-  define('WP_DEBUG', false);
-
-  /* That's all, stop editing! Happy blogging. */
 endif;
+
+/** Standard wp-config.php stuff from here on down. **/
+
+/**
+ * WordPress Database Table prefix.
+ *
+ * You can have multiple installations in one database if you give each a unique
+ * prefix. Only numbers, letters, and underscores please!
+ */
+$table_prefix  = 'wp_';
+
+/**
+ * WordPress Localized Language, defaults to English.
+ *
+ * Change this to localize WordPress. A corresponding MO file for the chosen
+ * language must be installed to wp-content/languages. For example, install
+ * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
+ * language support.
+ */
+define('WPLANG', '');
+
+/**
+ * For developers: WordPress debugging mode.
+ *
+ * Change this to true to enable the display of notices during development.
+ * It is strongly recommended that plugin and theme developers use WP_DEBUG
+ * in their development environments.
+ *
+ * You may want to examine $_ENV['PANTHEON_ENVIRONMENT'] to set this to be
+ * "true" in dev, but false in test and live.
+ */
+define('WP_DEBUG', false);
+
+/* That's all, stop editing! Happy Pressing. */
+
 
 
 
