@@ -2,7 +2,7 @@
 /*
   Plugin Name: Pantheon
   Plugin URI: http://www.getpantheon.com/
-  Description: Building on Pantheon's and Wordpress's strengths, together.
+  Description: Building on Pantheon's and WordPress's strengths, together.
   Version: 0.1
   Author: Pantheon
   Author URI: http://getpantheon.com

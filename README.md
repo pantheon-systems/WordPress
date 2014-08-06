@@ -1,6 +1,6 @@
 # WordPress
 
-This is a Wordpress repository configured to run on the [Pantheon platform](https://www.getpantheon.com).
+This is a WordPress repository configured to run on the [Pantheon platform](https://www.getpantheon.com).
 
 Pantheon is website platform optimized and configured to run high performance sites with an amazing developer workflow. There is built-in support for features such as Varnish, redis, Apache Solr, New Relic, Nginx, PHP-FPM, MySQL, PhantomJS and more. 
 
@@ -16,9 +16,9 @@ When the spin-up process is complete, you will be redirected to the site's dashb
 
 ![alt](http://i.imgur.com/2wjCj9j.png?1, '')
 
-### 3. Run the Wordpress installer
+### 3. Run the WordPress installer
 
-How about the Wordpress database config screen? No need to worry about database connection information as that is taken care of in the background. The only step that you need to complete is the site information and the installation process will be complete.
+How about the WordPress database config screen? No need to worry about database connection information as that is taken care of in the background. The only step that you need to complete is the site information and the installation process will be complete.
 
 We will post more information about how this works but we recommend developers take a look at `wp-congfig.php` to get an understanding.
 

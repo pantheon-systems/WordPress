@@ -1,11 +1,11 @@
 Pantheon Plugin
 =================
 
-Building on Pantheon's and Wordpress's strengths, together.
+Building on Pantheon's and WordPress's strengths, together.
 
 Workflow
 --------
-Integrates Wordpress with Pantheon Flow. Encourages updating plugins and themes in the Development environment and using Pantheon's git-based upstream core updates.
+Integrates WordPress with Pantheon Flow. Encourages updating plugins and themes in the Development environment and using Pantheon's git-based upstream core updates.
 
 Edge Cache
 -----------
