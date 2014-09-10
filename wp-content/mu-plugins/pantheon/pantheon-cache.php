@@ -358,7 +358,21 @@ class Pantheon_Cache {
 		foreach ( $urls as $full_url ) {
 			# Parse down to the path+query, escape regex.
 			$parsed = parse_url( $full_url );
-			$path = $parsed['path'] . $parsed['query'];
+			# Sometimes parse_url can return false, on malformed urls
+			if (FALSE == $parsed) {
+				continue;
+			}
+			# Build up the path, checking if the array key exists first
+			if (array_key_exists('path', $parsed)) {
+				$path = $parsed['path'];
+				if (array_key_exists('query', $parsed))  {
+					$path = $path . $parsed['query'];
+				}
+			}
+			# If the path doesn't exist, set it to the null string
+			else {
+				$path = '';
+			}			
 			if ( '' == $path ) {
 				continue;
 			}
