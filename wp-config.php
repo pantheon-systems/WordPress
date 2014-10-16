@@ -69,6 +69,9 @@ else:
     if (isset($_SERVER['HTTP_HOST'])) {
       define('WP_HOME', 'http://' . $_SERVER['HTTP_HOST']);
       define('WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST']);
+      
+      // Use http host as redis key salt 
+      define('WP_CACHE_KEY_SALT', $_SERVER['HTTP_HOST']."-");
     }
     // Don't show deprecations; useful under PHP 5.5
     error_reporting(E_ALL ^ E_DEPRECATED);
