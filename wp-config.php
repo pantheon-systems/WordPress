@@ -29,7 +29,7 @@ else:
     define('DB_NAME', $_ENV['DB_NAME']);
 
     /** MySQL database username */
-    define('DB_USER', $_ENV['DB_USER']);
+#    define('DB_USER', $_ENV['DB_USER']);
 
     /** MySQL database password */
     define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
