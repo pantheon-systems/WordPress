@@ -29,7 +29,11 @@ else:
     define('DB_NAME', $_ENV['DB_NAME']);
 
     /** MySQL database username */
-#    define('DB_USER', $_ENV['DB_USER']);
+<<<<<<< HEAD
+    define('DB_USER', $_ENV['DB_USER']);
+=======
+    define('DB_USER', $_ENV['DB_USER']);
+>>>>>>> parent of 174ae13... breaking wp upstream test
 
     /** MySQL database password */
     define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
