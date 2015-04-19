@@ -259,7 +259,7 @@ class Pantheon_Cache {
 			return false;
 
 		if ( ! empty( $_POST['pantheon-cache-nonce'] ) && wp_verify_nonce( $_POST['pantheon-cache-nonce'], 'pantheon-cache-clear-all' ) ) {
-			$this->enqueue_regex( '/.*' );
+			$this->flush_all = TRUE;
 			wp_redirect( admin_url( 'options-general.php?page=pantheon-cache&cache-cleared=true' ) );
 			exit();
 		}
@@ -372,7 +372,7 @@ class Pantheon_Cache {
 			# If the path doesn't exist, set it to the null string
 			else {
 				$path = '';
-			}			
+			}
 			if ( '' == $path ) {
 				continue;
 			}
@@ -386,29 +386,44 @@ class Pantheon_Cache {
 	/**
 	 * Enqueue a regex to be cleared.
 	 *
-	 * You must understand regular expressions to use this, and be careful.
+	 * Deprecated.
 	 *
-	 * @param string $regex path regex to clear.
+	 * @param string $regex path regex to might have wanted to clear.
 	 * @return void
 	 */
 	public function enqueue_regex( $regex ) {
-		$this->paths[] = $regex;
+	  # TODO: Use a trigger_error() here to inform developers.
+	  # Ala https://github.com/WordPress/WordPress/blob/master/wp-includes/functions.php#L3350-L3518
+		return;
 	}
 
-
+  /**
+   * This is where the action happens.
+   *
+   * This function will either flush everything or hit individual paths,
+   * depending on what's been queued up previously.
+   */
 	public function cache_clean_urls() {
-		if ( empty( $this->paths ) )
+    if ( !function_exists( 'pantheon_clear_edge' ) )
+      # Do not proceed if we are not on Pantheon.
+      return;
+		if (  empty( $this->paths ) && !isset( $this->flush_all ) )
+		  # No need to do anything if we have nothing to do.
 			return;
 
-		$this->paths = apply_filters( 'pantheon_clean_urls', array_unique( $this->paths ) );
+    if ( isset( $this->flush_all ) && $this->flush_all === TRUE ) {
+      # If we're flushing everything, we can just do that and be done with it.
+      pantheon_api_cache_flush( $host );
+      return;
+    }
 
-		# Call the big daddy here
+    # Ok, let's purge ourselves some granular urls.
+    # TODO: if this is more than 10, call in batches.
+		$this->paths = apply_filters( 'pantheon_clean_urls', array_unique( $this->paths ) );
 		$url = home_url();
 		$host = parse_url( $url, PHP_URL_HOST );
 		$this->paths = apply_filters( 'pantheon_final_clean_urls', $this->paths );
-		if ( function_exists( 'pantheon_clear_edge' ) ) {
-			pantheon_clear_edge( $host, $this->paths );
-		}
+    pantheon_purge_edge_urls( $this->paths, $host );
 	}
 }
 
