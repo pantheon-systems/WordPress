@@ -93,7 +93,7 @@
 <div class="wrap alert critical">
 	<?php if ( $level == 'yellow' ): ?>
 	<h3 class="key-status failed"><?php esc_html_e("You're using your Akismet key on more sites than your Pro subscription allows.", 'akismet'); ?></h3>
-	<p class="description"><?php printf( __('If you would like to use Akismet on more than 10 sites, you will need to <a href="%s" target="_blank">upgrade to an Enterprise subscription</a>. If you have any questions, please <a href="%s" target="_blank">get in touch with our support team</a>', 'akismet'), 'https://akismet.com/account/upgrade/', 'https://akismet.com/contact/'); ?></p>
+	<p class="description"><?php printf( __('Your Pro subscription allows the use of Akismet on only one site. Please <a href="http://docs.akismet.com/billing/add-more-sites/">purchase additional Pro subscriptions</a> or upgrade to an Enterprise subscription that allows the use of Akismet on unlimited sites.<br /><br />If you have any questions, please get in touch with our support team.', 'akismet'), 'https://akismet.com/account/upgrade/', 'https://akismet.com/contact/'); ?></p>
 	<?php elseif ( $level == 'red' ): ?>
 	<h3 class="key-status failed"><?php esc_html_e("You're using Akismet on far too many sites for your Pro subscription.", 'akismet'); ?></h3>
 	<p class="description"><?php printf( __('To continue your service, <a href="%s" target="_blank">upgrade to an Enterprise subscription</a>, which covers an unlimited number of sites. Please <a href="%s" target="_blank">contact our support team</a> with any questions.', 'akismet'), 'https://akismet.com/account/upgrade/', 'https://akismet.com/contact/'); ?></p>

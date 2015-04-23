@@ -18,9 +18,11 @@ jQuery( function ( $ ) {
 		var thisId = $(this).attr('commentid');
 		$(this).insertAfter('#comment-' + thisId + ' .author strong:first').show();
 	});
-	$('#the-comment-list').find('tr.comment, tr[id ^= "comment-"]').find('.column-author a[title ^= "http://"], .column-author a[title ^= "https://"]').each(function () {
+	$('#the-comment-list').find('tr.comment, tr[id ^= "comment-"]').find('.column-author a[title]').each(function () {
+		// Comment author URLs are the only URL with a title attribute in the author column.
 		var thisTitle = $(this).attr('title');
-			thisCommentId = $(this).parents('tr:first').attr('id').split("-");
+
+		var thisCommentId = $(this).parents('tr:first').attr('id').split("-");
 
 		$(this).attr("id", "author_comment_url_"+ thisCommentId[1]);
 
