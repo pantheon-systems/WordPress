@@ -20,7 +20,7 @@ When the spin-up process is complete, you will be redirected to the site's dashb
 
 How about the WordPress database config screen? No need to worry about database connection information as that is taken care of in the background. The only step that you need to complete is the site information and the installation process will be complete.
 
-We will post more information about how this works but we recommend developers take a look at `wp-congfig.php` to get an understanding.
+We will post more information about how this works but we recommend developers take a look at `wp-config.php` to get an understanding.
 
 ![alt](http://i.imgur.com/4EOcqYN.png, '')
 
