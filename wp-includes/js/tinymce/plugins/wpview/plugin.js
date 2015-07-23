@@ -152,6 +152,7 @@ tinymce.PluginManager.add( 'wpview', function( editor ) {
 		};
 	}
 
+<<<<<<< HEAD
 	// Remove the content of view wrappers from HTML string
 	function emptyViews( content ) {
 		content = content.replace( /<div[^>]+data-wpview-text="([^"]+)"[^>]*>[\s\S]+?wpview-selection-after[^>]+>[^<>]*<\/p>\s*<\/div>/g, function( all, match ) {
@@ -159,12 +160,26 @@ tinymce.PluginManager.add( 'wpview', function( editor ) {
 		});
 
 		return content.replace( / data-wpview-marker="[^"]+"/g, '' );
+=======
+	function resetViewsCallback( match, viewText ) {
+		return '<p>' + window.decodeURIComponent( viewText ) + '</p>';
+	}
+
+	// Replace the view tags with the view string
+	function resetViews( content ) {
+		return content.replace( /<div[^>]+data-wpview-text="([^"]+)"[^>]*>(?:[\s\S]+?wpview-selection-after[^>]+>[^<>]*<\/p>\s*|\.)<\/div>/g, resetViewsCallback )
+			.replace( /<p [^>]*?data-wpview-marker="([^"]+)"[^>]*>[\s\S]*?<\/p>/g, resetViewsCallback );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	}
 
 	// Prevent adding undo levels on changes inside a view wrapper
 	editor.on( 'BeforeAddUndo', function( event ) {
 		if ( event.level.content ) {
+<<<<<<< HEAD
 			event.level.content = emptyViews( event.level.content );
+=======
+			event.level.content = resetViews( event.level.content );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 		}
 	});
 
@@ -348,6 +363,7 @@ tinymce.PluginManager.add( 'wpview', function( editor ) {
 		}
 	});
 
+<<<<<<< HEAD
 	function resetViews( rootNode ) {
 		// Replace view nodes
 		$( 'div[data-wpview-text]', rootNode ).each( function( i, node ) {
@@ -373,6 +389,31 @@ tinymce.PluginManager.add( 'wpview', function( editor ) {
 		wp.mce.views.unbind();
 		deselect();
 		resetViews( editor.getBody() );
+=======
+	// Empty the wpview wrap and marker nodes
+	function emptyViewNodes( rootNode ) {
+		$( 'div[data-wpview-text], p[data-wpview-marker]', rootNode ).each( function( i, node ) {
+			node.innerHTML = '.';
+		});
+	}
+
+	// Run that before the DOM cleanup
+	editor.on( 'PreProcess', function( event ) {
+		emptyViewNodes( event.node );
+	}, true );
+
+	editor.on( 'hide', function() {
+		wp.mce.views.unbind();
+		deselect();
+		emptyViewNodes();
+	});
+
+	editor.on( 'PostProcess', function( event ) {
+		if ( event.content ) {
+			event.content = event.content.replace( /<div [^>]*?data-wpview-text="([^"]+)"[^>]*>[\s\S]*?<\/div>/g, resetViewsCallback )
+				.replace( /<p [^>]*?data-wpview-marker="([^"]+)"[^>]*>[\s\S]*?<\/p>/g, resetViewsCallback );
+		}
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	});
 
 	// Excludes arrow keys, delete, backspace, enter, space bar.

@@ -250,7 +250,11 @@ window.wp = window.wp || {};
 	wp.updates.updateError = function( response ) {
 		var $message, name;
 		wp.updates.updateDoneSuccessfully = false;
+<<<<<<< HEAD
 		if ( response.errorCode && response.errorCode == 'unable_to_connect_to_filesystem' ) {
+=======
+		if ( response.errorCode && response.errorCode == 'unable_to_connect_to_filesystem' && wp.updates.shouldRequestFilesystemCredentials ) {
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 			wp.updates.credentialError( response, 'update-plugin' );
 			return;
 		}
@@ -263,10 +267,25 @@ window.wp = window.wp || {};
 			$message.attr( 'aria-label', wp.updates.l10n.updateFailedLabel.replace( '%s', name ) );
 		}
 		$message.removeClass( 'updating-message' );
+<<<<<<< HEAD
 		$message.text( wp.updates.l10n.updateFailed );
 		wp.a11y.speak( wp.updates.l10n.updateFailed );
 
 		$(document).trigger( 'wp-plugin-update-error', response );
+=======
+		$message.html( wp.updates.l10n.updateFailed + ': ' + response.error );
+		wp.a11y.speak( wp.updates.l10n.updateFailed );
+
+		/*
+		 * The lock can be released since this failure was
+		 * after the credentials form.
+		 */
+		wp.updates.updateLock = false;
+
+		$(document).trigger( 'wp-plugin-update-error', response );
+
+		wp.updates.queueChecker();
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	};
 
 	/**
@@ -467,6 +486,14 @@ window.wp = window.wp || {};
 			wp.updates.requestForCredentialsModalCancel();
 		});
 
+<<<<<<< HEAD
+=======
+		// Hide SSH fields when not selected
+		$( '#request-filesystem-credentials-dialog input[name="connection_type"]' ).on( 'change', function() {
+			$( this ).parents( 'form' ).find( '#private_key, #public_key' ).parents( 'label' ).toggle( ( 'ssh' == $( this ).val() ) );
+		}).change();
+
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 		// Click handler for plugin updates in List Table view.
 		$( '.plugin-update-tr' ).on( 'click', '.update-link', function( e ) {
 			e.preventDefault();
@@ -490,7 +517,10 @@ window.wp = window.wp || {};
 			wp.updates.updatePlugin( $button.data( 'plugin' ), $button.data( 'slug' ) );
 		} );
 
+<<<<<<< HEAD
 		//
+=======
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 		$( '#plugin_update_from_iframe' ).on( 'click' , function( e ) {
 			var target,	data;
 

@@ -545,6 +545,10 @@ span.wp-media-buttons-icon:before {
 .notification-dialog {
 	position: fixed;
 	top: 30%;
+<<<<<<< HEAD
+=======
+	max-height: 70%;
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	left: 50%;
 	width: 450px;
 	margin-left: -225px;
@@ -553,6 +557,10 @@ span.wp-media-buttons-icon:before {
 	box-shadow: 0 3px 6px rgba( 0, 0, 0, 0.3 );
 	line-height: 1.5;
 	z-index: 1000005;
+<<<<<<< HEAD
+=======
+	overflow-y: auto;
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 }
 
 .notification-dialog-background {

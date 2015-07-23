@@ -70,6 +70,7 @@
 								node = node.parentNode;
 							}
 
+<<<<<<< HEAD
 							if ( ! node || ( node.className && node.className.indexOf( 'wp-exclude-emoji' ) !== -1 ) ) {
 								continue;
 							}
@@ -77,6 +78,15 @@
 							if ( node && node.nodeType === 1 ) {
 								parse( node );
 							}
+=======
+							if ( ! node || node.nodeType !== 1 || ( 'ownerSVGElement' in node ) ||
+								( node.className && typeof node.className === 'string' && node.className.indexOf( 'wp-exclude-emoji' ) !== -1 ) ) {
+
+ 								continue;
+ 							}
+
+							parse( node );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 						}
 					}
 				} ).observe( document.body, {

@@ -1,6 +1,10 @@
 /*global ajaxurl, isRtl */
 var wpWidgets;
 (function($) {
+<<<<<<< HEAD
+=======
+	var $document = $( document );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 wpWidgets = {
 
@@ -22,10 +26,19 @@ wpWidgets = {
 			} else {
 				$wrap.addClass('closed');
 			}
+<<<<<<< HEAD
+=======
+
+			$document.triggerHandler( 'wp-pin-menu' );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 		});
 
 		$('#widgets-left .sidebar-name').click( function() {
 			$(this).closest('.widgets-holder-wrap').toggleClass('closed');
+<<<<<<< HEAD
+=======
+			$document.triggerHandler( 'wp-pin-menu' );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 		});
 
 		$(document.body).bind('click.widgets-toggle', function(e) {
@@ -89,7 +102,11 @@ wpWidgets = {
 			distance: 2,
 			helper: 'clone',
 			zIndex: 100,
+<<<<<<< HEAD
 			containment: 'document',
+=======
+			containment: '#wpwrap',
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 			start: function( event, ui ) {
 				var chooser = $(this).find('.widgets-chooser');
 
@@ -119,7 +136,11 @@ wpWidgets = {
 			handle: '> .widget-top > .widget-title',
 			cursor: 'move',
 			distance: 2,
+<<<<<<< HEAD
 			containment: 'document',
+=======
+			containment: '#wpwrap',
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 			start: function( event, ui ) {
 				var height, $this = $(this),
 					$wrap = $this.parent(),
@@ -174,7 +195,11 @@ wpWidgets = {
 
 					wpWidgets.save( $widget, 0, 0, 1 );
 					$widget.find('input.add_new').val('');
+<<<<<<< HEAD
 					$( document ).trigger( 'widget-added', [ $widget ] );
+=======
+					$document.trigger( 'widget-added', [ $widget ] );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 				}
 
 				$sidebar = $widget.parent();
@@ -381,7 +406,11 @@ wpWidgets = {
 				if ( r && r.length > 2 ) {
 					$( 'div.widget-content', widget ).html( r );
 					wpWidgets.appendTitle( widget );
+<<<<<<< HEAD
 					$( document ).trigger( 'widget-updated', [ widget ] );
+=======
+					$document.trigger( 'widget-updated', [ widget ] );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 				}
 			}
 			if ( order ) {
@@ -446,7 +475,11 @@ wpWidgets = {
 		// No longer "new" widget
 		widget.find( 'input.add_new' ).val('');
 
+<<<<<<< HEAD
 		$( document ).trigger( 'widget-added', [ widget ] );
+=======
+		$document.trigger( 'widget-added', [ widget ] );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 		/*
 		 * Check if any part of the sidebar is visible in the viewport. If it is, don't scroll.
@@ -489,6 +522,10 @@ wpWidgets = {
 	}
 };
 
+<<<<<<< HEAD
 $(document).ready( function(){ wpWidgets.init(); } );
+=======
+$document.ready( function(){ wpWidgets.init(); } );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 })(jQuery);

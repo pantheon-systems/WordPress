@@ -704,7 +704,11 @@ VideoDetails = MediaDetails.extend({
 
 			if ( -1 === content.indexOf( attachment.get( 'url' ) ) ) {
 				content += [
+<<<<<<< HEAD
 					'<track srclang="en" label="English"kind="subtitles" src="',
+=======
+					'<track srclang="en" label="English" kind="subtitles" src="',
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 					attachment.get( 'url' ),
 					'" />'
 				].join('');

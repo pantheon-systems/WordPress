@@ -860,7 +860,11 @@ $(document).ready( function() {
 	window.wpResponsive.init();
 	setPinMenu();
 
+<<<<<<< HEAD
 	$document.on( 'wp-window-resized.pin-menu postboxes-columnchange.pin-menu postbox-toggled.pin-menu wp-collapse-menu.pin-menu wp-scroll-start.pin-menu', setPinMenu );
+=======
+	$document.on( 'wp-pin-menu wp-window-resized.pin-menu postboxes-columnchange.pin-menu postbox-toggled.pin-menu wp-collapse-menu.pin-menu wp-scroll-start.pin-menu', setPinMenu );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 });
 
 // Fire a custom jQuery event at the end of window resize

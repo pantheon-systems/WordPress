@@ -93,8 +93,12 @@ window.wp = window.wp || {};
 		setMarkers: function( content ) {
 			var pieces = [ { content: content } ],
 				self = this,
+<<<<<<< HEAD
 				instance,
 				current;
+=======
+				instance, current;
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 			_.each( views, function( view, type ) {
 				current = pieces.slice();
@@ -102,7 +106,11 @@ window.wp = window.wp || {};
 
 				_.each( current, function( piece ) {
 					var remaining = piece.content,
+<<<<<<< HEAD
 						result;
+=======
+						result, text;
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 					// Ignore processed pieces, but retain their location.
 					if ( piece.processed ) {
@@ -119,10 +127,18 @@ window.wp = window.wp || {};
 						}
 
 						instance = self.createInstance( type, result.content, result.options );
+<<<<<<< HEAD
 
 						// Add the processed piece for the match.
 						pieces.push( {
 							content: '<p data-wpview-marker="' + instance.encodedText + '">' + instance.text + '</p>',
+=======
+						text = instance.loader ? '.' : instance.text;
+
+						// Add the processed piece for the match.
+						pieces.push( {
+							content: '<p data-wpview-marker="' + instance.encodedText + '">' + text + '</p>',
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 							processed: true
 						} );
 
@@ -138,7 +154,12 @@ window.wp = window.wp || {};
 				} );
 			} );
 
+<<<<<<< HEAD
 			return _.pluck( pieces, 'content' ).join( '' );
+=======
+			content = _.pluck( pieces, 'content' ).join( '' );
+			return content.replace( /<p>\s*<p data-wpview-marker=/g, '<p data-wpview-marker=' ).replace( /<\/p>\s*<\/p>/g, '</p>' );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 		},
 
 		/**
@@ -155,14 +176,24 @@ window.wp = window.wp || {};
 				encodedText,
 				instance;
 
+<<<<<<< HEAD
 			text = tinymce.DOM.decode( text ),
 			encodedText = encodeURIComponent( text ),
 			instance = this.getInstance( encodedText );
+=======
+			text = tinymce.DOM.decode( text );
+			instance = this.getInstance( text );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 			if ( instance ) {
 				return instance;
 			}
 
+<<<<<<< HEAD
+=======
+			encodedText = encodeURIComponent( text );
+
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 			options = _.extend( options || {}, {
 				text: text,
 				encodedText: encodedText
@@ -416,7 +447,11 @@ window.wp = window.wp || {};
 		 */
 		replaceMarkers: function() {
 			this.getMarkers( function( editor, node ) {
+<<<<<<< HEAD
 				if ( $( node ).text() !== this.text ) {
+=======
+				if ( ! this.loader && $( node ).text() !== this.text ) {
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 					editor.dom.setAttrib( node, 'data-wpview-marker', null );
 					return;
 				}
