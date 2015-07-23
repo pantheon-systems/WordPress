@@ -524,6 +524,7 @@ function upgrade_all() {
 	if ( $wp_current_db_version < 29630 )
 		upgrade_400();
 
+<<<<<<< HEAD
 	// Don't harsh my mellow. upgrade_422() must be called before
 	// upgrade_420() to catch bad comments prior to any auto-expansion of
 	// MySQL column widths.
@@ -532,6 +533,13 @@ function upgrade_all() {
 
 	if ( $wp_current_db_version < 31351 )
 		upgrade_420();
+=======
+	if ( $wp_current_db_version < 31534 )
+		upgrade_422();
+
+	if ( $wp_current_db_version < 31536 )
+		upgrade_423();
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 	maybe_disable_link_manager();
 
@@ -1426,6 +1434,7 @@ function upgrade_400() {
  * @since 4.2.0
  */
 function upgrade_420() {
+<<<<<<< HEAD
 	global $wp_current_db_version, $wpdb;
 
 	if ( $wp_current_db_version < 31351 && $wpdb->charset === 'utf8mb4' ) {
@@ -1439,6 +1448,8 @@ function upgrade_420() {
 			maybe_convert_table_to_utf8mb4( $table );
 		}
 	}
+=======
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 }
 
 /**
@@ -1498,6 +1509,34 @@ function upgrade_422() {
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * Execute changes made in WordPress 4.2.0.
+ *
+ * @since 4.2.3
+ */
+function upgrade_423() {
+	global $wp_current_db_version, $wpdb;
+
+	if ( $wp_current_db_version < 31536 && $wpdb->charset === 'utf8mb4' ) {
+		if ( is_multisite() ) {
+			$tables = $wpdb->tables( 'blog' );
+		} else {
+			$tables = $wpdb->tables( 'all' );
+			if ( defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
+				$global_tables = $wpdb->tables( 'global' );
+				$tables = array_diff_assoc( $tables, $global_tables );
+			}
+		}
+
+		foreach ( $tables as $table ) {
+			maybe_convert_table_to_utf8mb4( $table );
+		}
+	}
+}
+
+/**
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
  * Executes network-level upgrade routines.
  *
  * @since 3.0.0
@@ -1596,7 +1635,11 @@ function upgrade_network() {
 
 	// 4.2
 	if ( $wp_current_db_version < 31351 && $wpdb->charset === 'utf8mb4' ) {
+<<<<<<< HEAD
 		if ( ! ( defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) && DO_NOT_UPGRADE_GLOBAL_TABLES ) ) {
+=======
+		if ( ! defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 			$wpdb->query( "ALTER TABLE $wpdb->usermeta DROP INDEX meta_key, ADD INDEX meta_key(meta_key(191))" );
 			$wpdb->query( "ALTER TABLE $wpdb->site DROP INDEX domain, ADD INDEX domain(domain(140),path(51))" );
 			$wpdb->query( "ALTER TABLE $wpdb->sitemeta DROP INDEX meta_key, ADD INDEX meta_key(meta_key(191))" );
@@ -1612,7 +1655,11 @@ function upgrade_network() {
 
 	// 4.2.2
 	if ( $wp_current_db_version < 31535 && 'utf8mb4' === $wpdb->charset ) {
+<<<<<<< HEAD
 		if ( ! ( defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) && DO_NOT_UPGRADE_GLOBAL_TABLES ) ) {
+=======
+		if ( ! defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 			$upgrade = false;
 			$indexes = $wpdb->get_results( "SHOW INDEXES FROM $wpdb->signups" );
 			foreach( $indexes as $index ) {
@@ -1627,6 +1674,20 @@ function upgrade_network() {
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+
+	// 4.2.3
+	if ( $wp_current_db_version < 31536 && $wpdb->charset === 'utf8mb4' ) {
+		if ( ! defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
+			$tables = $wpdb->tables( 'global' );
+
+			foreach ( $tables as $table ) {
+				maybe_convert_table_to_utf8mb4( $table );
+			}
+		}
+	}
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 }
 
 //
@@ -1759,6 +1820,20 @@ function maybe_convert_table_to_utf8mb4( $table ) {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	$table_details = $wpdb->get_row( "SHOW TABLE STATUS LIKE '$table'" );
+	if ( ! $table_details ) {
+		return false;
+	}
+
+	list( $table_charset ) = explode( '_', $table_details->Collation );
+	$table_charset = strtolower( $table_charset );
+	if ( 'utf8mb4' === $table_charset ) {
+		return true;
+	}
+
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	return $wpdb->query( "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" );
 }
 
@@ -2446,6 +2521,7 @@ function pre_schema_upgrade() {
 		}
 	}
 
+<<<<<<< HEAD
 	if ( $wp_current_db_version < 30133 ) {
 		// dbDelta() can recreate but can't drop the index.
 		$wpdb->query( "ALTER TABLE $wpdb->terms DROP INDEX slug" );
@@ -2454,6 +2530,11 @@ function pre_schema_upgrade() {
 	// Upgrade versions prior to 4.2.
 	if ( $wp_current_db_version < 31351 ) {
 		if ( ! is_multisite() ) {
+=======
+	// Upgrade versions prior to 4.2.
+	if ( $wp_current_db_version < 31351 ) {
+		if ( ! is_multisite() && ! defined( 'DO_NOT_UPGRADE_GLOBAL_TABLES' ) ) {
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 			$wpdb->query( "ALTER TABLE $wpdb->usermeta DROP INDEX meta_key, ADD INDEX meta_key(meta_key(191))" );
 		}
 		$wpdb->query( "ALTER TABLE $wpdb->terms DROP INDEX slug, ADD INDEX slug(slug(191))" );

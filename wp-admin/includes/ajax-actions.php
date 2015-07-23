@@ -2883,6 +2883,11 @@ function wp_ajax_destroy_sessions() {
  * @see Plugin_Upgrader
  */
 function wp_ajax_update_plugin() {
+<<<<<<< HEAD
+=======
+	global $wp_filesystem;
+
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	$plugin = urldecode( $_POST['plugin'] );
 
 	$status = array(
@@ -2892,6 +2897,10 @@ function wp_ajax_update_plugin() {
 		'oldVersion' => '',
 		'newVersion' => '',
 	);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin );
 	if ( $plugin_data['Version'] ) {
 		$status['oldVersion'] = sprintf( __( 'Version %s' ), $plugin_data['Version'] );
@@ -2906,6 +2915,7 @@ function wp_ajax_update_plugin() {
 
 	include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
 
+<<<<<<< HEAD
 	$current = get_site_transient( 'update_plugins' );
 	if ( empty( $current ) ) {
 		wp_update_plugins();
@@ -2915,6 +2925,19 @@ function wp_ajax_update_plugin() {
 	$result = $upgrader->bulk_upgrade( array( $plugin ) );
 
 	if ( is_array( $result ) ) {
+=======
+	wp_update_plugins();
+
+	$skin = new Automatic_Upgrader_Skin();
+	$upgrader = new Plugin_Upgrader( $skin );
+	$result = $upgrader->bulk_upgrade( array( $plugin ) );
+
+	if ( is_array( $result ) && empty( $result[$plugin] ) && is_wp_error( $skin->result ) ) {
+		$result = $skin->result;
+	}
+
+	if ( is_array( $result ) && !empty( $result[ $plugin ] ) ) {
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 		$plugin_update_data = current( $result );
 
 		/*
@@ -2929,7 +2952,12 @@ function wp_ajax_update_plugin() {
  			wp_send_json_error( $status );
 		}
 
+<<<<<<< HEAD
 		$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin );
+=======
+		$plugin_data = get_plugins( '/' . $result[ $plugin ]['destination_name'] );
+		$plugin_data = reset( $plugin_data );
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 
 		if ( $plugin_data['Version'] ) {
 			$status['newVersion'] = sprintf( __( 'Version %s' ), $plugin_data['Version'] );
@@ -2939,10 +2967,25 @@ function wp_ajax_update_plugin() {
 	} else if ( is_wp_error( $result ) ) {
 		$status['error'] = $result->get_error_message();
  		wp_send_json_error( $status );
+<<<<<<< HEAD
 	} else if ( is_bool( $result ) && ! $result ) {
 		$status['errorCode'] = 'unable_to_connect_to_filesystem';
 		$status['error'] = __( 'Unable to connect to the filesystem. Please confirm your credentials.' );
 		wp_send_json_error( $status );
+=======
+
+ 	} else if ( is_bool( $result ) && ! $result ) {
+		$status['errorCode'] = 'unable_to_connect_to_filesystem';
+		$status['error'] = __( 'Unable to connect to the filesystem. Please confirm your credentials.' );
+
+		// Pass through the error from WP_Filesystem if one was raised
+		if ( is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->get_error_code() ) {
+			$status['error'] = $wp_filesystem->errors->get_error_message();
+		}
+
+		wp_send_json_error( $status );
+
+>>>>>>> 30f9771a5dc148742cfd693926ddb786b322f912
 	}
 }
 
