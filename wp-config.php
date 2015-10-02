@@ -95,6 +95,20 @@ else:
     define('LOGGED_IN_SALT',   'put your unique phrase here');
     define('NONCE_SALT',       'put your unique phrase here');
   endif;
+
+  /**
+   * For developers: WordPress debugging mode.
+   *
+   * Change this to true to enable the display of notices during development.
+   * It is strongly recommended that plugin and theme developers use WP_DEBUG
+   * in their development environments.
+   *
+   * You may want to examine $_ENV['PANTHEON_ENVIRONMENT'] to set this to be
+   * "true" in dev, but false in test and live.
+   */
+  define('WP_DEBUG', false);
+  
+
 endif;
 
 /** Standard wp-config.php stuff from here on down. **/
@@ -116,18 +130,6 @@ $table_prefix = 'wp_';
  * language support.
  */
 define('WPLANG', '');
-
-/**
- * For developers: WordPress debugging mode.
- *
- * Change this to true to enable the display of notices during development.
- * It is strongly recommended that plugin and theme developers use WP_DEBUG
- * in their development environments.
- *
- * You may want to examine $_ENV['PANTHEON_ENVIRONMENT'] to set this to be
- * "true" in dev, but false in test and live.
- */
-define('WP_DEBUG', false);
 
 /* That's all, stop editing! Happy Pressing. */
 
