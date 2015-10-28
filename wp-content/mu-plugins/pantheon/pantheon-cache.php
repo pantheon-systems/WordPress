@@ -23,20 +23,6 @@ class Pantheon_Cache {
 	public $options_capability = 'manage_options';
 
 	/**
-	 * Define the default options, which are overridden by what's in wp_options.
-	 *
-	 * @var array
-	 */
-	public $default_options = array();
-
-	/**
-	 * Stores the options for this plugin (from wp_options).
-	 *
-	 * @var array
-	 */
-	public $options = array();
-
-	/**
 	 * Store the Paths to be flushed at shutdown.
 	 *
 	 * @var array
@@ -80,11 +66,6 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	protected function setup() {
-		$this->options = get_option( self::SLUG, array() );
-		$this->default_options = array(
-			'default_ttl' => 600
-		);
-		$this->options = wp_parse_args( $this->options, $this->default_options );
 
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
@@ -131,9 +112,24 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function default_ttl_field() {
-		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $this->options['default_ttl'] . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
+		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . esc_attr( $this->get_option( 'default_ttl' ) ) . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
 	}
 
+	/**
+	 * Get the value for a given plugin option
+	 *
+	 * @param string $key The key for the option
+	 * @return mixed
+	 */
+	public function get_option( $key ) {
+		$defaults = array(
+			'default_ttl'         => 600,
+			);
+		$options = get_option( self::SLUG, array() );
+		$options = array_merge( $defaults, $options );
+		$retval = isset( $options[ $key ] ) ? $options[ $key ] : null;
+		return apply_filters( "pantheon_cache_{$key}", $retval );
+	}
 
 	/**
 	 * Sanitize our options.
@@ -200,7 +196,7 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function cache_add_headers() {
-		$ttl = absint( $this->options['default_ttl'] );
+		$ttl = $this->get_option( 'default_ttl' );
 		if ( $ttl < 60 )
 			$ttl = 600;
 
