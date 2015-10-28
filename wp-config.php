@@ -72,6 +72,12 @@ else:
     }
     // Don't show deprecations; useful under PHP 5.5
     error_reporting(E_ALL ^ E_DEPRECATED);
+    // Force the use of a safe temp directory when in a container
+    if ( 0 === stripos( dirname( __FILE__ ), '/srv/bindings/' ) ):
+        $pantheon_file_path_parts = explode( '/', trim( dirname( __FILE__ ), '/' ) );
+        define( 'WP_TEMP_DIR', sprintf( '/srv/bindings/%s/tmp', $pantheon_file_path_parts[2] ) );
+        unset( $pantheon_file_path_parts );
+    endif;
 
   else:
     /**
