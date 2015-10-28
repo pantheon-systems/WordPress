@@ -201,8 +201,9 @@ class Pantheon_Cache {
 	 */
 	public function cache_add_headers() {
 		$ttl = absint( $this->options['default_ttl'] );
-		if ( $ttl < 60 )
-			$ttl = 600;
+		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+			$ttl = 60;
+		}
 
 		header( 'cache-control: public, max-age=' . $ttl );
 	}
