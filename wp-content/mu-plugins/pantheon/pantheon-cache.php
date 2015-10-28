@@ -353,7 +353,7 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function enqueue_urls( $urls ) {
-	  $paths = array();
+		$paths = array();
 		$urls = array_filter( (array) $urls, 'is_string' );
 		foreach ( $urls as $full_url ) {
 			# Parse down to the path+query, escape regex.
