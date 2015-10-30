@@ -99,6 +99,14 @@ class Pantheon_Cache {
 			add_action( 'wp_before_admin_bar_render', array( $this, 'cache_admin_bar_render' ) );
 		}
 
+		add_action( 'admin_notices', function(){
+			global $wp_object_cache;
+			if ( empty( $wp_object_cache->missing_redis_message ) ) {
+				return;
+			}
+			$wp_object_cache->missing_redis_message = 'Alert! The Pantheon Redis service needs to be enabled before the WP Redis object cache will function properly.';
+		}, 9 ); // Before the message is displayed in the plugin notice.
+
 		add_action( 'shutdown', array( $this, 'cache_clean_urls' ), 999 );
 	}
 
