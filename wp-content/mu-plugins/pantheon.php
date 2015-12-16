@@ -12,6 +12,7 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) :
 
 require_once( 'pantheon/pantheon-cache.php' );
 require_once( 'pantheon/pantheon-updates.php' );
+require_once( 'pantheon/pantheon-messages.php');
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	require_once dirname( __FILE__ ) . '/pantheon/pantheon-cache-cli.php';
