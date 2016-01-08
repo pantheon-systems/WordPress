@@ -7,7 +7,7 @@ add_action('admin_enqueue_scripts', 'pantheon_admin_theme_style');
 add_action('login_enqueue_scripts', 'pantheon_admin_theme_style');
 
 if (defined('PANTHEON_ENVIRONMENT')) {
-  // Only on live environment.
+  // Only when filesystem credentials are requested when in development environments in Git mode
   if(has_filter('request_filesystem_credentials')){
   apply_filter('request_filesystem_credentials');
 }
