@@ -18,8 +18,8 @@ if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], Array('test', 'live') ) ) {
 	//
 	// Disable Plugin Updates
 	//
-	add_action('admin_menu','hide_admin_notices');
-	function hide_admin_notices() {
+	add_action('admin_menu','_pantheon_hide_admin_notices');
+	function _pantheon_hide_admin_notices() {
 		remove_action( 'admin_notices', 'update_nag', 3 );
 	}
 
