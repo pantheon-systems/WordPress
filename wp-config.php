@@ -5,7 +5,7 @@
  *
  * See our documentation for more details:
  *
- * http://helpdesk.getpantheon.com/
+ * https://pantheon.io/docs
  */
 
 /**
