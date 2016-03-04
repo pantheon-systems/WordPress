@@ -66,9 +66,12 @@ else:
     /**#@-*/
 
     /** A couple extra tweaks to help things run well on Pantheon. **/
-    if (isset($_SERVER['HTTP_HOST'])) {
-      define('WP_HOME', 'http://' . $_SERVER['HTTP_HOST']);
-      define('WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST']);
+    if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+      $is_ssl = ( isset( $_SERVER['HTTP_X_SSL'] ) && 'ON' === $_SERVER['HTTP_X_SSL'] );
+      $protocol = ( $is_ssl ? 'https://' : 'http://' );
+      define( 'WP_HOME', $protocol . $_SERVER['HTTP_HOST'] );
+      define( 'WP_SITEURL', $protocol . $_SERVER['HTTP_HOST'] );
+      unset( $is_ssl, $protocol );
     }
     // Don't show deprecations; useful under PHP 5.5
     error_reporting(E_ALL ^ E_DEPRECATED);
