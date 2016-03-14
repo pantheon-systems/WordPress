@@ -270,6 +270,7 @@ class Pantheon_Cache {
 
 		if ( ! empty( $_POST['pantheon-cache-nonce'] ) && wp_verify_nonce( $_POST['pantheon-cache-nonce'], 'pantheon-cache-clear-all' ) ) {
 			$this->enqueue_regex( '/.*' );
+			wp_cache_flush();
 			wp_redirect( admin_url( 'options-general.php?page=pantheon-cache&cache-cleared=true' ) );
 			exit();
 		}
