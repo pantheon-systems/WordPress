@@ -154,8 +154,9 @@ class Pantheon_Cache {
 
 		// Validate default_ttl
 		$out['default_ttl'] = absint( $in['default_ttl'] );
-		if ( ! $out['default_ttl'] )
-			$out['default_ttl'] = 600;
+		if ( $out['default_ttl'] < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+			$out['default_ttl'] = 60;
+		}
 
 		return $out;
 	}
