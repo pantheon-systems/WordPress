@@ -222,23 +222,23 @@ class Pantheon_Cache {
 	 *
 	 * @return void
 	 */
-	public function cache_admin_bar_render() {
-		global $wp_admin_bar;
+	 public function cache_admin_bar_render() {
+ 		global $wp_admin_bar;
 
-		if ( ! is_user_logged_in() )
-			return false;
+ 		if ( ! is_user_logged_in() )
+ 			return false;
 
-		if ( function_exists( 'current_user_can' ) && !current_user_can( 'delete_others_posts' ) )
-		  return false;
-				
-		$wp_admin_bar->add_menu( array(
-			'parent' => '',
-			'id' => 'delete-cache',
-			'title' => __( 'Delete Cache', 'pantheon-cache' ),
-			'meta' => array( 'title' => __( 'Delete cache of the current page', 'pantheon-cache' ) ),
-			'href' => wp_nonce_url( admin_url( 'admin-post.php?action=pantheon_cache_delete_page&path=' . urlencode( preg_replace( '/[ <>\'\"\r\n\t\(\)]/', '', $_SERVER[ 'REQUEST_URI' ] ) ) ), 'delete-cache' )
-		) );
-	}
+ 		if ( function_exists( 'current_user_can' ) && !current_user_can( 'delete_others_posts' ) )
+ 			return false;
+
+ 		$wp_admin_bar->add_menu( array(
+ 			'parent' => '',
+ 			'id' => 'delete-cache',
+ 			'title' => __( 'Delete Cache', 'pantheon-cache' ),
+ 			'meta' => array( 'title' => __( 'Delete cache of the current page', 'pantheon-cache' ) ),
+ 			'href' => wp_nonce_url( admin_url( 'admin-post.php?action=pantheon_cache_delete_page&path=' . urlencode( preg_replace( '/[ <>\'\"\r\n\t\(\)]/', '', $_SERVER[ 'REQUEST_URI' ] ) ) ), 'delete-cache' )
+ 		) );
+ 	}
 
 
 	/**
