@@ -228,9 +228,9 @@ class Pantheon_Cache {
 		if ( ! is_user_logged_in() )
 			return false;
 
-		if ( function_exists( 'current_user_can' ) && false == current_user_can( 'delete_others_posts' ) )
-			return false;
-
+		if ( function_exists( 'current_user_can' ) && !current_user_can( 'delete_others_posts' ) )
+		  return false;
+				
 		$wp_admin_bar->add_menu( array(
 			'parent' => '',
 			'id' => 'delete-cache',
@@ -381,7 +381,7 @@ class Pantheon_Cache {
 			# If the path doesn't exist, set it to the null string
 			else {
 				$path = '';
-			}			
+			}
 			if ( '' == $path ) {
 				continue;
 			}
