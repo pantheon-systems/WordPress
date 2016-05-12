@@ -1,0 +1,362 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TinyMCE Advanced\n"
+"POT-Creation-Date: 2016-03-17 12:21-0800\n"
+"PO-Revision-Date: 2016-03-17 14:16-0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../tadv_admin.php:140
+msgid "Default settings restored."
+msgstr "Standardinställningar återställda."
+
+#: ../tadv_admin.php:152
+msgid "TinyMCE Advanced Settings Export"
+msgstr "TinyMCE Avancerad Inställningsexport"
+
+#: ../tadv_admin.php:156
+msgid "The settings are exported as a JSON encoded string."
+msgstr "Inställningarna exporteras som en JSON-kodad sträng."
+
+#: ../tadv_admin.php:157
+msgid ""
+"Please copy the content and save it in a <b>text</b> (.txt) file, using a "
+"plain text editor like Notepad."
+msgstr ""
+"Vänligen kopiera innehållet och spara det i en <b>text</b>-fil (.txt), genom "
+"en ren texteditor såsom Anteckningar."
+
+#: ../tadv_admin.php:158
+msgid ""
+"It is important that the export is not changed in any way, no spaces, line "
+"breaks, etc."
+msgstr ""
+"Det är viktigt att exporten inte ändras på något sätt, inga mellanrum eller "
+"radbrytningar etc."
+
+#: ../tadv_admin.php:163
+msgid "Select All"
+msgstr "Välj allt"
+
+#: ../tadv_admin.php:165 ../tadv_admin.php:191
+msgid "Back to Editor Settings"
+msgstr "Tillbaka till redigerarinställningar"
+
+#: ../tadv_admin.php:177
+msgid "TinyMCE Advanced Settings Import"
+msgstr "TinyMCE Avancerad Inställningsimport"
+
+#: ../tadv_admin.php:180
+msgid ""
+"The settings are imported from a JSON encoded string. Please paste the "
+"exported string in the text area below."
+msgstr ""
+"Inställningarna importeras från en JSON-kodad sträng. Vänligen klistra in "
+"den exporterade strängen i textfältet nedan."
+
+#: ../tadv_admin.php:185
+msgid "Verify"
+msgstr "Jämför"
+
+#: ../tadv_admin.php:186
+msgid "Import"
+msgstr "Importera"
+
+#: ../tadv_admin.php:216
+msgid "Importing of settings failed."
+msgstr "Import av inställningar misslyckades."
+
+#: ../tadv_admin.php:242
+msgid "ERROR: All toolbars are empty. Default settings loaded."
+msgstr "FEL: Alla verktygsfält är tomma. Ursprungsinställningar inladdade."
+
+#: ../tadv_admin.php:254
+msgid "Editor Settings"
+msgstr "Redigerarinställningar"
+
+#: ../tadv_admin.php:261
+msgid "Settings saved."
+msgstr "Inställningar sparade."
+
+#: ../tadv_admin.php:270 ../tadv_admin.php:540
+msgid "Save Changes"
+msgstr "Spara ändringar"
+
+#: ../tadv_admin.php:277
+msgid "Enable the editor menu."
+msgstr "Aktivera redigerarmenyn."
+
+#: ../tadv_admin.php:389
+msgid ""
+"Drag buttons from the unused buttons below and drop them in the toolbars "
+"above, or drag the buttons in the toolbars to rearrange them."
+msgstr ""
+"Dra knappar från de oanvända knapparna nedan och släpp dem i verktygsfälten "
+"ovan, eller dra knapparna i verktygsfältet för att arrangera om dem."
+
+#: ../tadv_admin.php:392
+msgid "Unused Buttons"
+msgstr "Oanvända knappar"
+
+#: ../tadv_admin.php:434
+#, fuzzy
+msgid "Options"
+msgstr "Avancerade tillval"
+
+#: ../tadv_admin.php:437
+msgid "List Style Options"
+msgstr "Liststil-tillval"
+
+#: ../tadv_admin.php:439
+msgid ""
+"Enable more list options: upper or lower case letters for ordered lists, "
+"disk or square for unordered lists, etc."
+msgstr ""
+
+#: ../tadv_admin.php:444
+msgid "Context Menu"
+msgstr "Sammanhangsmeny"
+
+#: ../tadv_admin.php:446
+msgid "Replace the browser context (right-click) menu."
+msgstr ""
+
+#: ../tadv_admin.php:451
+msgid "Alternative link dialog"
+msgstr ""
+
+#: ../tadv_admin.php:453
+msgid ""
+"Open the TinyMCE link dialog when using the link button on the toolbar or "
+"the link menu item."
+msgstr ""
+
+#: ../tadv_admin.php:458
+msgid "Font sizes"
+msgstr ""
+
+#: ../tadv_admin.php:459
+msgid ""
+"Replace the size setting available for fonts with: 8px 10px 12px 14px 16px "
+"20px 24px 28px 32px 36px 48px 60px."
+msgstr ""
+"Ersätter storleksinställningen för teckensnitt med: 8px 10px 12px 14px 16px "
+"20px 24px 28px 32px 36px 48px 60px."
+
+#: ../tadv_admin.php:467
+msgid "Advanced Options"
+msgstr "Avancerade tillval"
+
+#: ../tadv_admin.php:476
+msgid "Create CSS classes menu"
+msgstr ""
+
+#: ../tadv_admin.php:478
+msgid ""
+"Load the CSS classes used in editor-style.css and replace the Formats button "
+"and sub-menu."
+msgstr ""
+"Ladda CSS-klasser från editor-style.css och ersätt Formaterings-knapp och "
+"undermeny."
+
+#: ../tadv_admin.php:488
+msgid "Keep paragraph tags"
+msgstr ""
+
+#: ../tadv_admin.php:490
+#, fuzzy
+msgid ""
+"Stop removing the &lt;p&gt; and &lt;br /&gt; tags when saving and show them "
+"in the Text editor."
+msgstr ""
+"Sluta ta bort &lt;p&gt; och &lt;br /&gt;-taggar vid sparande och visa dem i "
+"textredigeraren"
+
+#: ../tadv_admin.php:491
+msgid ""
+"This will make it possible to use more advanced coding in the HTML editor "
+"without the back-end filtering affecting it much."
+msgstr ""
+"Detta möjliggör mer avancerad kodning i HTML-redigeraren utan att backend-"
+"filtrering påverkar så mycket."
+
+#: ../tadv_admin.php:492
+msgid ""
+"However it may behave unexpectedly in rare cases, so test it thoroughly "
+"before enabling it permanently."
+msgstr ""
+"Ändå kan det uppföra sig oväntat i särskilda fall, så testa noggrant innan "
+"du aktiverar det permanent."
+
+#: ../tadv_admin.php:493
+msgid ""
+"Line breaks in the HTML editor would still affect the output, in particular "
+"do not use empty lines, line breaks inside HTML tags or multiple &lt;br /"
+"&gt; tags."
+msgstr ""
+"Radbrytningar i HTML-redigeraren skulle fortfarande påverka utmatningen så "
+"använd i synnerhet inte några tomma rader, radbrytningar inuti HTML-taggar "
+"eller flera &lt;br /&gt;-taggar."
+
+#: ../tadv_admin.php:498
+msgid "Enable pasting of image source"
+msgstr "Aktivera inklistring av bildkällor"
+
+#: ../tadv_admin.php:500
+msgid ""
+"Works only in Firefox and Safari. These browsers support pasting of images "
+"directly in the editor and convert them to base64 encoded text."
+msgstr ""
+"Fungerar enbart med Firefox och Safari. Dessa webbläsare stöder inklistring "
+"av bilder direkt i redigeraren och konverterar dem till base64-kodad text."
+
+#: ../tadv_admin.php:501
+msgid ""
+"This is not acceptable for larger images like photos or graphics, but may be "
+"useful in some cases for very small images like icons, not larger than 2-3KB."
+msgstr ""
+"Detta är inte acceptabelt för större bilder som foton eller grafik, men kan "
+"vara användbart i vissa fall för väldigt små bilder såsom ikoner, inte "
+"större än 2-3kB."
+
+#: ../tadv_admin.php:502
+msgid "These images will not be available in the Media Library."
+msgstr "Dessa bilder kommer inte att finnas i Mediabiblioteket."
+
+#: ../tadv_admin.php:508
+msgid "Administration"
+msgstr "Administration"
+
+#: ../tadv_admin.php:510
+msgid "Settings import and export"
+msgstr ""
+
+#: ../tadv_admin.php:512
+msgid "Export Settings"
+msgstr "Exportera inställningar"
+
+#: ../tadv_admin.php:513
+msgid "Import Settings"
+msgstr "Importera inställningar"
+
+#: ../tadv_admin.php:517
+#, fuzzy
+msgid "Enable the editor enhancements for:"
+msgstr "Aktivera redigerarmenyn."
+
+#: ../tadv_admin.php:520
+msgid "The main editor (Add New and Edit posts and pages)"
+msgstr ""
+
+#: ../tadv_admin.php:524
+msgid "Other editors in wp-admin"
+msgstr ""
+
+#: ../tadv_admin.php:528
+msgid "Editors on the front end of the site"
+msgstr ""
+
+#: ../tadv_admin.php:539
+msgid "Restore Default Settings"
+msgstr "Återställ ursprungsinställningar"
+
+#: ../tadv_admin.php:545
+msgid ""
+"The [Toolbar toggle] button shows or hides the second, third, and forth "
+"button rows. It will only work when it is in the first row and there are "
+"buttons in the second row."
+msgstr ""
+"[Växla verktygsfält]-knappen visar eller gömmer den andra, tredje och fjärde "
+"knappraden. Det fungerar endast när knappen finns på den första raden och "
+"det finns knappar i den andra raden."
+
+#: ../tinymce-advanced.php:221
+#, php-format
+msgid ""
+"TinyMCE Advanced requires WordPress version %1$s or newer. It appears that "
+"you are running %2$s. This can make the editor unstable."
+msgstr ""
+"Detta tillägg kräver WordPress version %1$s eller nyare. Det verkar som att "
+"du kör %2$s. Detta kan göra redigeraren instabil."
+
+#: ../tinymce-advanced.php:228
+#, php-format
+msgid ""
+"Please upgrade your WordPress installation or download an <a href=\"%s"
+"\">older version of the plugin</a>."
+msgstr ""
+"Vänligen uppgradera din WordPress-installation eller ladda hem en <a href="
+"\"%s\">äldre version av tillägget</a>."
+
+#: ../tinymce-advanced.php:703
+#, fuzzy
+msgid "Settings"
+msgstr "Redigerarinställningar"
+
+#~ msgid ""
+#~ "New in TinyMCE 4.0/WordPress 3.9 is the editor menu. When it is enabled, "
+#~ "most buttons are also available as menu items."
+#~ msgstr ""
+#~ "Nytt i TinyMCE 4.0/WordPress 3.9 är redigerarmenyn. När den är aktiverad "
+#~ "blir de flesta knapparna också tillgängliga som menyval."
+
+#~ msgid "Also enable:"
+#~ msgstr "Aktivera också:"
+
+#~ msgid "Link (replaces the Insert/Edit Link dialog)"
+#~ msgstr "Länk (ersätter dialogfönstret Infoga/redigera länk)"
+
+#~ msgid "Import editor-style.css."
+#~ msgstr "Importera editor-style.css."
+
+#~ msgid ""
+#~ "It seems your theme does not support customised styles for the editor."
+#~ msgstr ""
+#~ "Det verkar som att ditt tema inte stöder anpassade stilar för redigeraren."
+
+#~ msgid ""
+#~ "You can create a CSS file named <code>editor-style.css</code> and upload "
+#~ "it to your theme's directory."
+#~ msgstr ""
+#~ "Du kan skapa en CSS-fil namngiven <code>editor-style.css</code> och ladda "
+#~ "upp till ditt temas mapp."
+
+#~ msgid "After that, enable this setting."
+#~ msgstr "Efteråt, aktivera denna inställning."
+
+#~ msgid "Replace font size settings"
+#~ msgstr "Ersätt textstorleksinställningar"
+
+#~ msgid "Markdown typing support (text pattern plugin)"
+#~ msgstr "Stöd för att skriva Markdown (tillägg för textflöde)"
+
+#~ msgid ""
+#~ "This plugin matches special patterns while you type and applies formats "
+#~ "or executes commands on the matched text."
+#~ msgstr ""
+#~ "Detta tillägg matchar speciella mönster medan du skriver och applicerar "
+#~ "formatering eller utför kommandon utifrån matchad text."
+
+#~ msgid ""
+#~ "The default patterns are the same as the markdown syntax so you can type "
+#~ "<code># text</code> to create a header, <code>1. text</code> to create a "
+#~ "list, <code>**text**</code> to make it bold, etc."
+#~ msgstr ""
+#~ "Standardmönster är samma som markdown-syntax så att du kan skriva <code># "
+#~ "text</code> för att skapa en rubrik, <code>1. text</code> för att skapa "
+#~ "en lista, <code>**text**</code> för fet stil etc."
+
+#~ msgid "More information"
+#~ msgstr "Mer information"

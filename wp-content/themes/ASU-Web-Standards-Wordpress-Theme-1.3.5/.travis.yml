@@ -1,0 +1,42 @@
+language: php
+
+# TODO: figure out how to not use apt-get
+#sudo: false
+
+cache:
+  directories:
+    - .standards/vendor
+    - $HOME/.composer/cache
+    - .standards/node_modules
+
+services:
+  - mysql
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+
+env:
+  # - WP_VERSION=latest WP_MULTISITE=1
+  - WP_VERSION=4.4.1 WP_MULTISITE=1
+
+before_install:
+  # - sudo apt-get update
+  # - gem update --system
+  - cd .standards
+  - composer install
+  - ./vendor/bin/phpcs -vvv -w --config-set installed_paths "../../../coding_standards/"
+  - cd ../
+  - bash ./bin/dep.sh
+  - gem update --system
+before_script:
+  # For your convenience:
+  # sudo mysqladmin drop -f wordpress_test --user="root" --password="root"
+  # sudo bash bin/install-wp-tests.sh wordpress_test root 'root' localhost latest
+  - sudo bash bin/install-wp-tests.sh wordpress_test travis '' localhost $WP_VERSION
+  - cd .standards
+
+script:
+  - grunt test

@@ -1,0 +1,169 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Divi 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/divi-builder\n"
+"POT-Creation-Date: 2016-03-30 15:45:26+00:00\n"
+"PO-Revision-Date: 2015-10-19 18:36+0300\n"
+"Last-Translator: \n"
+"Language-Team: Elegant Themes\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+"X-Poedit-SearchPathExcluded-0: ../includes/builder\n"
+"X-Poedit-SearchPathExcluded-1: ../node_modules\n"
+"X-Poedit-SearchPathExcluded-2: ../core\n"
+
+#: dashboard/dashboard.php:37
+msgid "Save Changes"
+msgstr "บันทึกการเปลี่ยนแปลง"
+
+#: dashboard/dashboard.php:1268 divi-builder.php:241
+msgid "Re-Authorize"
+msgstr "Re-อนุญาต"
+
+#: dashboard/dashboard.php:1376
+msgid ""
+"You can either export your %1$s Settings or import settings from another "
+"install of %1$s below."
+msgstr ""
+
+#: dashboard/dashboard.php:1377
+msgid "Export %1$s Settings"
+msgstr ""
+
+#: dashboard/includes/options.php:10 dashboard/includes/options.php:110
+msgid "Newsletter Settings"
+msgstr "การตั้งค่าจดหมายข่าว"
+
+#: dashboard/includes/options.php:46
+msgid "MailChimp API Key:"
+msgstr "MailChimp API สำคัญ:"
+
+#: dashboard/includes/options.php:53
+msgid "Enter your MailChimp API key. You can create an api key "
+msgstr "ปุ่ม Enter API ของคุณ MailChimp คุณสามารถสร้างคีย์ API "
+
+#: dashboard/includes/options.php:54 dashboard/includes/options.php:84
+msgid "here"
+msgstr "ที่นี่"
+
+#: dashboard/includes/options.php:61
+msgid "Regenerate MailChimp Lists"
+msgstr "สร้างรายการ MailChimp ใหม่"
+
+#: dashboard/includes/options.php:78
+msgid "AWeber code:"
+msgstr "AWeber รหัส:"
+
+#: dashboard/includes/options.php:86
+msgid "Generate authorization code"
+msgstr "สร้างรหัสอนุมัติ"
+
+#: dashboard/includes/options.php:87
+msgid " then paste in the authorization code and click authorize button"
+msgstr " แล้ววางในรหัสการอนุมัติและคลิกที่ปุ่มอนุญาต"
+
+#: dashboard/includes/options.php:93
+msgid "Authorize AWeber"
+msgstr "อนุญาต AWeber"
+
+#: dashboard/includes/options.php:101
+msgid "Regenerate AWeber Lists"
+msgstr "งอกรายการ AWeber"
+
+#: divi-builder.php:159
+msgid "You don't have sufficient permissions to access this page"
+msgstr "คุณไม่มีสิทธิ์เพียงพอในการเข้าถึงหน้านี้"
+
+#: divi-builder.php:169
+msgid "Save Settings"
+msgstr "บันทึกการตั้งค่า"
+
+#: divi-builder.php:170
+msgid "Divi Builder Options"
+msgstr "ตัวเลือก Divi สร้าง"
+
+#: divi-builder.php:207
+msgid "Plugin Options"
+msgstr "ตัวเลือกปลั๊กอิน"
+
+#: divi-builder.php:240
+msgid "Authorize"
+msgstr "อนุญาต"
+
+#: divi-builder.php:242
+msgid "AWeber successfully authorized"
+msgstr "AWeber ประสบความสำเร็จที่ได้รับอนุญาต"
+
+#: divi-builder.php:258
+msgid "please paste valid authorization code"
+msgstr "โปรดวางโค้ดอนุญาตที่ถูกต้อง"
+
+#: divi-builder.php:262
+msgid "Authorization failed: "
+msgstr "อนุมัติล้มเหลว: "
+
+#: divi-builder.php:289
+msgid "Error: Please make sure %1$s"
+msgstr "ข้อผิดพลาด: โปรดตรวจสอบว่า %1$s"
+
+#: divi-builder.php:289
+msgid "MailChimp API key is correct"
+msgstr "MailChimp สำคัญ API เป็นที่ถูกต้อง"
+
+#: divi-builder.php:289
+msgid "AWeber is authorized"
+msgstr "AWeber เป็นผู้มีอำนาจ"
+
+#: divi-builder.php:291
+msgid "Lists have been successfully regenerated"
+msgstr "รายการที่ได้รับการสร้างใหม่ที่ประสบความสำเร็จ"
+
+#: divi-builder.php:311
+msgid ""
+"Authorization code is invalid. Try regenerating it and paste in the new code."
+msgstr "รหัสการยืนยันไม่ถูกต้อง พยายามสร้างใหม่อีกครั้งและแปะรหัสใหม่"
+
+#: divi-builder.php:335
+msgid "AWeberAPIException."
+msgstr "AWeber ยกเว้น API"
+
+#: divi-builder.php:336
+msgid "Type"
+msgstr "ประเภท"
+
+#: divi-builder.php:337
+msgid "Message"
+msgstr "ข้อความ"
+
+#: divi-builder.php:338
+msgid "Documentation"
+msgstr "เอกสาร"
+
+#: includes/navigation.php:3
+msgid "&laquo; Older Entries"
+msgstr "&laquo; โพสต์ก่อนหน้า"
+
+#: includes/navigation.php:7
+msgid "Next Entries &raquo;"
+msgstr "โพสต์ต่อไป &raquo;"
+
+#: includes/no-results.php:4
+msgid "No Results Found"
+msgstr "ไม่พบผลลัพธ์"
+
+#: includes/no-results.php:7
+msgid ""
+"The page you requested could not be found. Try refining your search, or use "
+"the navigation above to locate the post."
+msgstr "ไม่พบหน้าที่คุณค้นหา ลองปรับการค้นหาหรือใช้แผงควบคุมด้านบนเพื่อค้นหาโพสต์"

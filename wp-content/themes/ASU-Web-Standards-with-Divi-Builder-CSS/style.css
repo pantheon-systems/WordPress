@@ -1,0 +1,27 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/*
+Theme Name:   ASU Web Standards theme with Divi Builder CSS
+Theme URI: 
+Description:  A child theme for the <a href="https://github.com/gios-asu/ASU-Web-Standards-Wordpress-Theme">ASU Web Standards Wordpress Theme</a> which provides CSS format Divi Builder module elements. 
+Author:      Ira A. Fulton Schools of Engineering
+Author URI:   http://engineering.asu.edu/
+Template:     ASU-Web-Standards-Wordpress-Theme
+*/
+
+/* =Theme customization starts here
+-------------------------------------------------------------- */
+
+.et_divi_builder #et_builder_outer_content .et_pb_module li {
+list-style: initial !important;
+}
+.et_divi_builder #et_builder_outer_content .et_pb_module ul {
+margin-left: 25px !important;
+}
+
+.et_divi_builder #et_builder_outer_content .et_pb_module a { color:#8C1D40; text-decoration: underline dotted;
+}
+.et_divi_builder #et_builder_outer_content .et_pb_module  a:hover { color:#670000; text-decoration: underline dotted; 
+}
+

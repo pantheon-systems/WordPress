@@ -1,0 +1,283 @@
+/*
+Theme Name:     Twenty Fourteen ASU
+Description:    Child theme for the Twenty Fourteen theme
+Author:         Ira A. Fulton Schools of Engineering
+Author URI:     http://engineering.asu.edu
+Template:       twentyfourteen
+Version:        1.1
+*/
+
+
+#eng-footer {
+	clear: both;
+	display: block;
+	font: 12px Arial,Helvetica,sans-serif;
+	line-height: 15px;
+	margin: 12px 0 36px 0;
+	padding: 0 30px 0 0;
+	text-align: right;
+}
+	
+#eng-footer a:link, #eng-footer a:visited, #eng-footer a:hover {
+	color: #FFB310;
+}
+
+.masthead-fixed .site-header {
+	position: relative;
+	top: 0;
+}
+
+.admin-bar.masthead-fixed .site-header {
+	top: 0;
+}
+
+.masthead-fixed .site-main {
+	margin-top: 0;
+}
+
+.site-content .entry-header, .site-content .entry-content, .site-content .entry-summary, .site-content .entry-meta, .page-content {
+	max-width:600px;
+}
+
+#secondary a h2.site-description, #secondary a:hover h2.site-description {
+	color:#fff;
+}
+
+/* replace #55d737, #24890d, 41a62a with #FFB310 or #F47c00. */
+button:active,
+.button:active,
+input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active {
+	background-color: #F47C00;
+}
+button:hover,
+button:focus,
+.button:hover,
+.button:focus,
+input[type="button"]:hover,
+input[type="button"]:focus,
+input[type="reset"]:hover,
+input[type="reset"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+	background-color: #990033;
+	color: #fff;
+}
+.site-navigation .current_page_item > a,
+.site-navigation .current_page_ancestor > a,
+.site-navigation .current-menu-item > a,
+.site-navigation .current-menu-ancestor > a {
+	color: #FFB310;
+}
+.hentry .mejs-controls .mejs-time-rail .mejs-time-current,
+.search-toggle {
+	background-color: #FFB310;
+}
+.search-toggle:hover,
+.search-toggle.active {
+	background-color: #000;
+}
+.search-box {
+	background-color: #FFB310;
+	padding: 12px;
+}
+.hentry .mejs-overlay:hover .mejs-overlay-button {
+	background-color: #FFB310;
+	color: #fff;
+}
+.hentry .mejs-controls .mejs-button button:hover {
+	color: #F47C00;
+}
+.paging-navigation .page-numbers.current {
+	border-top: 5px solid #FFB310;
+}
+.widget button,
+.widget .button,
+.widget input[type="button"],
+.widget input[type="reset"],
+.widget input[type="submit"] {
+	background-color: #FFB310;
+}
+
+.widget_calendar tbody a {
+	background-color: #FFB310;
+	color: #fff;
+}
+
+.content-sidebar .widget a {
+	color: #000;
+}
+
+.content-sidebar .widget input[type="button"],
+.content-sidebar .widget input[type="reset"],
+.content-sidebar .widget input[type="submit"] {
+	background-color: #FFB310;
+	border: 0;
+	color: #000;
+}
+.slider-control-paging a:hover:before {
+	background-color: #FFB310;
+}
+.slider-control-paging .slider-active:before,
+.slider-control-paging .slider-active:hover:before {
+	background-color: #FFB310;
+}
+.slider-direction-nav a:hover {
+	background-color: #FFB310;
+}
+	.primary-navigation a {
+		color:#fff;
+	}
+	.primary-navigation ul ul {
+		background-color: #FFB310;
+	}
+	.primary-navigation li:hover > a,
+	.primary-navigation li.focus > a {
+		background-color: #FFB310;
+		color: #000;
+	}
+	.primary-navigation ul ul a:hover,
+	.primary-navigation ul ul li.focus > a {
+		background-color: #FFB310;
+	}
+	.secondary-navigation ul ul {
+		background-color: #FFB310;
+	}
+	.secondary-navigation li:hover > a,
+	.secondary-navigation li.focus > a {
+		background-color: #FFB310;
+		color: #000;
+	}
+	.secondary-navigation ul ul a:hover,
+	.secondary-navigation ul ul li.focus > a {
+		background-color: #FFB310;
+	}
+a {
+	color: #F47C00;
+}
+a:active,
+a:hover {
+	color: #FFB310;
+}
+::selection {
+	background: #FFB310;
+	color: #000;
+}
+::-moz-selection {
+	background: #FFB310;
+	color: #000;
+}
+button,
+.button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	background-color: #FFB310;
+	color: black;
+}
+.entry-title a:hover {
+	color: #FFB310;
+}
+.entry-meta a:hover {
+	color: #767676;
+}
+.cat-links a:hover {
+	color: #FFB310;
+}
+.entry-meta .tag-links a:hover {
+	background-color: #FFB310;
+	color: #000;
+}
+.entry-meta .tag-links a:hover:before {
+	border-right-color: #FFB310;
+}
+.entry-content .edit-link a:hover {
+	color: #F47C00;
+}
+.page-links a:hover {
+	background: #FFB310;
+	border: 1px solid #FFB310;
+	color: #000;
+}
+.post-navigation a:hover,
+.image-navigation a:hover {
+	color: #F47C00;
+}
+.paging-navigation a:hover {
+	border-top: 5px solid #FFB310;
+}
+.comment-author a:hover,
+.comment-list .pingback a:hover,
+.comment-list .trackback a:hover,
+.comment-metadata a:hover {
+	color: #F47C00;
+}
+.comment-reply-title small a:hover {
+	color: #F47C00;
+}
+.widget a:hover {
+	color: #FFB310;
+}
+.widget input[type="button"]:hover,
+.widget input[type="button"]:focus,
+.widget input[type="reset"]:hover,
+.widget input[type="reset"]:focus,
+.widget input[type="submit"]:hover,
+.widget input[type="submit"]:focus {
+	background-color: #FFB310;
+}
+.widget-title a:hover {
+	color: #FFB310;
+}
+.widget_calendar tbody a:hover {
+	background-color: #FFB310;
+}
+
+.widget_calendar tbody a:hover {
+	color: #000;
+}
+	.primary-sidebar .widget {
+		font-size: 14px;
+	}
+	.primary-sidebar .widget a:hover {
+		color: #FFB310;
+	}
+	.primary-sidebar .widget h1.widget-title,
+	.primary-sidebar .widget h2.widget-title,
+	.primary-sidebar .widget h3.widget-title,
+	.primary-sidebar .widget h4.widget-title,
+	.primary-sidebar .widget h5.widget-title,
+	.primary-sidebar .widget h6.widget-title {
+		font-size: 16px;
+	}
+.widget_twentyfourteen_ephemera .entry-meta a:hover {
+	color: #FFB310;
+}
+.content-sidebar .widget a {
+	color: #000;
+}
+
+.content-sidebar .widget a:hover {
+	color: #FFB310;
+}
+.content-sidebar .widget input[type="button"]:hover,
+.content-sidebar .widget input[type="button"]:focus,
+.content-sidebar .widget input[type="reset"]:hover,
+.content-sidebar .widget input[type="reset"]:focus,
+.content-sidebar .widget input[type="submit"]:hover,
+.content-sidebar .widget input[type="submit"]:focus {
+	background-color: #FFB310;
+}
+.content-sidebar .widget .widget-title a:hover {
+	color: #FFB310;
+}
+.content-sidebar .widget_twentyfourteen_ephemera .entry-meta a:hover {
+	color: #FFB310;
+}
+.site-info a:hover {
+	color: #FFB310;
+}
+.featured-content a:hover {
+	color: #FFB310;
+}

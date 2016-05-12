@@ -1,0 +1,272 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Antispam Bee\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-21 22:20+0300\n"
+"PO-Revision-Date: Tue Mar 10 2015 08:17:13 GMT+0100 (CET)\n"
+"Last-Translator: glueckpress <caspar@glueckpress.com>\n"
+"Language-Team: Andrey Ananin\n"
+"Language: Russian\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+"X-Loco-Target-Locale: ru_RU\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: ../antispam_bee.php:421
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../antispam_bee.php:472
+msgid "Antispam Bee requires WordPress 3.4 and PHP 5.2.4"
+msgstr "Для работы Antispam Bee требуются WordPress 3.4 и PHP 5.2.4"
+
+#: ../antispam_bee.php:651
+msgid "Blocked"
+msgstr "заблокировано"
+
+#: ../antispam_bee.php:758
+msgid "Today"
+msgstr "Сегодня"
+
+#: ../antispam_bee.php:816
+msgid "No data available."
+msgstr "Нет данных"
+
+#: ../antispam_bee.php:1823
+msgid "Comment marked as spam"
+msgstr "Комментарий отмечен как спам"
+
+#: ../antispam_bee.php:1830
+msgid "Content removed by Antispam Bee"
+msgstr "Содержимое удалено Antispam Bee"
+
+#: ../antispam_bee.php:1837
+msgid "New spam comment on your post"
+msgstr "Новый спам-комментарий на запись"
+
+#: ../antispam_bee.php:1841
+msgid "Author"
+msgstr "Автор"
+
+#: ../antispam_bee.php:1848
+msgid "Type"
+msgstr "Тип"
+
+#: ../antispam_bee.php:1855
+#: ../inc/gui.class.php:361
+msgid "Spam Reason"
+msgstr "Причина спама"
+
+#: ../antispam_bee.php:1864
+msgid "Trash it"
+msgstr "В корзину"
+
+#: ../antispam_bee.php:1870
+msgid "Delete it"
+msgstr "Удалить"
+
+#: ../antispam_bee.php:1876
+msgid "Approve it"
+msgstr "Одобрить"
+
+#: ../antispam_bee.php:1880
+msgid "Spam list"
+msgstr "Список спам-сообщений"
+
+#: ../antispam_bee.php:1884
+msgid "Notify message by Antispam Bee"
+msgstr "Уведомление от Antispam Bee"
+
+#: ../antispam_bee.php:1885
+msgid "http://antispambee.com"
+msgstr "http://antispambee.com"
+
+#: ../inc/gui.class.php:30
+msgid "Cheatin&#8217; uh?"
+msgstr "Жульничаете?"
+
+#: ../inc/gui.class.php:198
+msgid "Antispam filter"
+msgstr "Антиспам-фильтр"
+
+#: ../inc/gui.class.php:201
+msgid "Filter in the execution order"
+msgstr "Фильтрация в порядке выполнения"
+
+#: ../inc/gui.class.php:207
+msgid "Trust approved commenters"
+msgstr "Доверять одобренным комментаторам"
+
+#: ../inc/gui.class.php:208
+msgid "Always approve previously approved users"
+msgstr "Не проверять для пользов. с коммент."
+
+msgid "BBCode is spam"
+msgstr "BBCod это спам"
+
+msgid "Review the comment contents for BBCode links"
+msgstr "Просматривание коммент. на BBCode ссылки"
+
+#: ../inc/gui.class.php:215
+msgid "Use a public antispam database"
+msgstr "Использовать общую БД антиспама"
+
+#: ../inc/gui.class.php:216
+msgid ""
+"Matching the ip address with <a href=\"https://dnsbl.tornevall.org\" "
+"target=\"_blank\">Tornevall</a>"
+msgstr ""
+"Проверять IP-адрес в <a href=\"https://dnsbl.tornevall.org\" "
+"target=\"_blank\">Tornevall</a>"
+
+#: ../inc/gui.class.php:223
+msgid "Validate the ip address of commenters"
+msgstr "Проверять IP-адреса пользователей"
+
+#: ../inc/gui.class.php:224
+msgid "Validity check for used ip address"
+msgstr "Проверка используемого IP-адреса"
+
+#: ../inc/gui.class.php:231
+msgid "Look in the local spam database"
+msgstr "Поиск в локальной БД спама"
+
+#: ../inc/gui.class.php:232
+msgid "Already marked as spam? Yes? No?"
+msgstr "Уже помечен как спам? Да? Нет?"
+
+#: ../inc/gui.class.php:239
+msgid "Block comments from specific countries"
+msgstr "Блокировать комментарии по странам"
+
+#: ../inc/gui.class.php:240
+msgid "Filtering the requests depending on country"
+msgstr "Фильтр коммент. в зависимости от страны"
+
+#: ../inc/gui.class.php:262
+msgid "Allow comments only in certain language"
+msgstr "Разрешить коммент. только на опред. языке"
+
+#: ../inc/gui.class.php:263
+msgid "Detection and approval in specified language"
+msgstr "Определ. и одобр. на указанном языке"
+
+#: ../inc/gui.class.php:275
+msgid "Language"
+msgstr "Язык"
+
+#: ../inc/gui.class.php:286
+msgid "Advanced"
+msgstr "Расширенные настройки"
+
+#: ../inc/gui.class.php:289
+msgid "Other antispam tools"
+msgstr "Дополнительные средства против спама"
+
+#: ../inc/gui.class.php:295
+msgid "Mark as spam, do not delete"
+msgstr "Помечать как спам, не удалять"
+
+#: ../inc/gui.class.php:296
+msgid "Keep the spam in my blog."
+msgstr "Оставить спам в блоге."
+
+#: ../inc/gui.class.php:303
+msgid "Notification by email"
+msgstr "Уведомление по email"
+
+#: ../inc/gui.class.php:304
+msgid "Notify admins by e-mail about incoming spam"
+msgstr "Послать предупреждение администратору"
+
+#: ../inc/gui.class.php:311
+msgid "Not store the reason in the comment body"
+msgstr "Не сохр. причину в теле комментария"
+
+#: ../inc/gui.class.php:312
+msgid "Filter name as reason for current suspicion"
+msgstr "Фильтр имени как признака спама"
+
+#: ../inc/gui.class.php:320
+#, php-format
+msgid "Delete existing spam after %s days"
+msgstr "Удалять спам через %s дней"
+
+#: ../inc/gui.class.php:323
+msgid "Cleaning up the database from old entries"
+msgstr "Очистить БД от старых записей"
+
+#: ../inc/gui.class.php:331
+#, php-format
+msgid "Limit approval to %s"
+msgstr "Ограничить на %s"
+
+#: ../inc/gui.class.php:341
+msgid "Other types of spam will be deleted immediately"
+msgstr "Другой тип спама будет сразу удален"
+
+#: ../inc/gui.class.php:348
+msgid "Delete comments by spam reasons"
+msgstr "Удалять комментарии по причине спама"
+
+#: ../inc/gui.class.php:349
+msgid "For multiple selections press Ctrl/CMD"
+msgstr "Множеств. выбор нажатием Ctrl/CMD"
+
+#: ../inc/gui.class.php:372
+msgid "More"
+msgstr "Дополнительно"
+
+#: ../inc/gui.class.php:375
+msgid "A few little things"
+msgstr "Несколько мелочей"
+
+#: ../inc/gui.class.php:381
+msgid "Statistics on the dashboard"
+msgstr "Статистика в консоли"
+
+#: ../inc/gui.class.php:382
+msgid "Daily updates of spam detection rate"
+msgstr "Частота выявления спама по дням"
+
+#: ../inc/gui.class.php:389
+msgid "Spam counter on the dashboard"
+msgstr "Счетчик спама в консоли"
+
+#: ../inc/gui.class.php:390
+msgid "Amount of identified spam comments"
+msgstr "Кол-во обнаруженных спам-комментариев"
+
+#: ../inc/gui.class.php:397
+msgid "Do not check trackbacks / pingbacks"
+msgstr "Не проверять обратные ссылки/уведомления"
+
+#: ../inc/gui.class.php:398
+msgid "No spam check for trackback notifications"
+msgstr "Отключить для уведомл. по обр. ссылкам"
+
+#: ../inc/gui.class.php:405
+msgid "Comment form used outside of posts"
+msgstr "Комментарии вне записей блога"
+
+#: ../inc/gui.class.php:406
+msgid "Check for comment forms on archive pages"
+msgstr "Проверять коммент. на страницах архива"
+
+#: ../inc/gui.class.php:422
+msgid "Save Changes"
+msgstr "Сохранить изменения"

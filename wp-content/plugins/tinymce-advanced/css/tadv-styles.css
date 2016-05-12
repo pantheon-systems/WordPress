@@ -1,0 +1,283 @@
+
+.tadv-more-plugins label {
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+.advanced-options label {
+	font-weight: bold;
+}
+
+.advanced-options {
+	margin: 20px 0;
+	border: 1px solid #ccc;
+	padding: 0 15px;
+}
+
+.advanced-options div {
+	margin: 1.2em 0;
+}
+
+.advanced-options p {
+	margin-left: 22px;
+	margin-top: 5px;
+}
+
+.advanced-options h3 {
+	margin-top: 15px;
+}
+
+.tadv-more-plugins {
+	margin-bottom: 30px;
+}
+
+.tadv-submit .button-large {
+	float: right;
+}
+
+#tadv-import-error {
+	height: 22px;
+}
+
+#tadv-confirm-uninstall {
+	display: none;
+	background: #FFFFE0;
+	border: 1px solid #E6DB55;
+	padding: 8px;
+}
+
+#tadv-confirm-uninstall .button {
+	margin: 0 5px;
+}
+
+.tadv-import-export {
+	max-width: 800px;
+	min-width: 320px;
+}
+
+#tadv-export,
+#tadv-import {
+	width: 100%;
+	height: 300px;
+	padding: 8px 12px;
+}
+
+ul.container,
+#unused {
+	position: relative;
+}
+
+.tadvitem i.mce-ico {
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: text-top;
+	margin: 0;
+	padding: 0;
+	color: #555;
+}
+
+.tadvitem i.mce-ico.mce-i-ltr {
+	font-family: tinymce;
+	font-size: 16px;
+	vertical-align: text-top;
+}
+
+.tadvitem i.mce-ico.mce-i-ltr:before {
+	content: "\e02f";
+}
+
+#tadv-mce-menu {
+	margin-bottom: 0;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-bottom: 0;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+
+#tadv-mce-menu.enabled {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
+#tadv-mce-menu.mce-menubar .mce-menubtn:hover {
+	background: transparent;
+}
+
+#tadv-mce-menu .mce-btn .mce-caret {
+	margin-top: 9px;
+	margin-left: 1px;
+}
+
+#tadv-mce-menu * {
+	cursor: default;
+}
+
+#tadvzones,
+#unused {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#tadvadmin p.submit {
+	padding-right: 10px;
+}
+
+#tadvadmin #save {
+	float: right;
+}
+
+#tadvzones {
+	margin: 25px 280px 0 0;
+}
+
+.tadvdropzone {
+	padding: 2px 4px;
+	margin: 0 0 10px;
+	background-color: #fff;
+	border: 1px solid #bbb;
+}
+
+.tadvdropzone .descr {
+	display: none;
+}
+
+.tadvdropzone .mce-menubtn .descr {
+	padding: 0;
+	font-size: 13px;
+}
+
+.tadvdropzone .tadvmodule .tadvitem {
+	border: 1px solid transparent;
+	display: block;
+	margin: 1px 2px;
+	padding: 2px 3px;
+	width: 20px;
+	height: 20px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.tadvdropzone .tadvmodule .tadvitem.mce-widget {
+	width: auto;
+	height: 20px;
+	border-color: #ccc;
+	background-color: #fff;
+	cursor: move;
+}
+
+.tadvdropzone.mce-toolbar .mce-btn .the-button {
+	padding: 0 3px;
+}
+
+.tadvdropzone .tadvmodule .tadvitem:hover {
+	border-color: #999;
+	background-image: none;
+}
+
+.tadvdropzone ul {
+	height: 30px;
+	width: 100%;
+	margin: 0;
+	padding: 1px 0 0;
+	line-height: 1;
+}
+
+#unuseddiv {
+	padding: 10px;
+	border: 1px solid #ccc;
+}
+
+#unuseddiv h3 {
+	margin: 5px 5px 12px;
+}
+
+#unused li,
+.tadvdropzone li {
+	margin: 0;
+	padding: 0;
+	border: none;
+	display: inline-block;
+	cursor: move;
+	vertical-align: top;
+}
+
+#unused li {
+	margin: 4px;
+}
+
+#unused {
+	margin: 0;
+	min-height: 36px;
+}
+
+#unused .tadvmodule .tadvitem {
+	display: block;
+	height: 22px;
+	width: 140px;
+	border: 1px solid #bbb;
+	background-color: #fff;
+	margin: 1px;
+	padding: 1px 3px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background-image: none;
+	box-shadow: none;
+}
+
+#unused .tadvmodule .descr {
+	display: inline;
+	font-size: 12px;
+	line-height: 22px;
+}
+
+#unused .tadvmodule .the-button .descr {
+	padding: 0 4px;
+	font-size: 13px;
+}
+
+.tadvdropzone #formatselect,
+.tadvdropzone #styleselect,
+.tadvdropzone #fontsizeselect,
+.tadvdropzone #fontselect {
+	width: 115px;
+}
+
+div.tadv-error {
+	color: #ff0000;
+	font-weight: bold;
+	height: 26px;
+	line-height: 26px;
+	display: none;
+}
+
+.wp-adv-error #wp-adv-error-message {
+	visibility: visible;
+}
+
+.wp-adv-error #wp_adv .tadvitem {
+	border-color: red;
+}
+
+.tadv-placeholder {
+	vertical-align: bottom;
+	display: inline-block;
+	position: static;
+	visibility: hidden;
+}
+
+.tadvdropzone .tadv-placeholder {
+	height: 28px;
+}
+
+.tadv-error {
+	color: #d54e21;
+	font-weight: bold;
+}
