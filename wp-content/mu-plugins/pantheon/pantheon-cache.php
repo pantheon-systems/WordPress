@@ -89,6 +89,8 @@ class Pantheon_Cache {
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
 
+		add_action( 'clean_post_cache',                      array( $this, 'clean_post_cache' ) );
+		add_action( 'clean_term_cache',                      array( $this, 'clean_term_cache' ), 10, 2 );
 		add_action( 'admin_post_pantheon_cache_delete_page', array( $this, 'clean_specific_page' ) );
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
@@ -274,6 +276,86 @@ class Pantheon_Cache {
 		}
 	}
 
+
+	/**
+	 * Clear the cache for a post.
+	 *
+	 * @param  int $post_id A post ID to clean.
+	 * @return void
+	 */
+	public function clean_post_cache( $post_id, $include_homepage = true ) {
+		if ( get_post_type( $post_id ) == 'revision' || get_post_status( $post_id ) != 'publish' )
+			return;
+
+		$urls = array();
+		$post_link = get_permalink( $post_id );
+		if ( $post_link ) {
+			$urls[] = $post_link;
+		}
+
+		if ( $include_homepage ) {
+			$urls[] = get_option( 'home' );
+			$urls[] = trailingslashit( get_option( 'home' ) );
+		}
+
+		$urls = apply_filters( 'pantheon_clean_post_cache', $urls, $post_id, $include_homepage );
+		$this->enqueue_urls( $urls );
+	}
+
+
+	/**
+	 * Clear the cache for a given term or terms and taxonomy.
+	 *
+	 * @param int|array $ids Single or list of Term IDs.
+	 * @param string $taxonomy Can be empty and will assume tt_ids, else will use for context.
+	 * @return void
+	 */
+	public function clean_term_cache( $term_ids, $taxonomy ) {
+		$urls = array();
+
+		foreach ( (array) $term_ids as $term_id ) {
+			$term_link = get_term_link( intval( $term_id ), $taxonomy );
+			if ( ! is_wp_error( $term_link ) ) {
+				$urls[] = $term_link;
+			}
+		}
+
+		$urls = apply_filters( 'pantheon_clean_term_cache', $urls, $term_ids, $taxonomy );
+		$this->enqueue_urls( $urls );
+	}
+
+
+	/**
+	 * Clear the cache for a given term or terms and taxonomy.
+	 *
+	 * This is a placeholder and is not currently active.
+	 *
+	 * @param int|array $object_ids Single or list of term object ID(s).
+	 * @param array|string $object_type The taxonomy object type.
+	 * @return void
+	 */
+	public function clean_object_term_cache( $object_ids, $object_type ) {
+		$urls = array();
+		if ( post_type_exists( $object_type ) ) {
+			foreach ( (array) $object_ids as $post_id ) {
+				$urls[] = get_permalink( $post_id );
+			}
+		}
+
+		global $wp_rewrite;
+		$taxonomies = get_object_taxonomies( $object_type );
+		foreach ( $taxonomies as $taxonomy ) {
+			$termlink = $wp_rewrite->get_extra_permastruct( $taxonomy );
+			# Let's make sure that the taxonomy doesn't have a root-level permalink,
+			# which is unlikely, but possible. If it did, this would clear the whole site.
+			if ( preg_match( "#^.+/%$taxonomy%#i", $termlink ) ) {
+				$urls[] = str_replace( "%$taxonomy%", '.*', $termlink );
+			}
+		}
+
+		$urls = apply_filters( 'pantheon_clean_object_term_cache', $urls, $object_ids, $object_type );
+		$this->enqueue_urls( $urls );
+	}
 
 	/**
 	 * Enqueue Fully-qualified urls to be cleared on shutdown.
