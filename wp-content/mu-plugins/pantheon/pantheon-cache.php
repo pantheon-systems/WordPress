@@ -267,7 +267,9 @@ class Pantheon_Cache {
 			return false;
 
 		if ( ! empty( $_POST['pantheon-cache-nonce'] ) && wp_verify_nonce( $_POST['pantheon-cache-nonce'], 'pantheon-cache-clear-all' ) ) {
-			$this->enqueue_regex( '/.*' );
+			if ( function_exists( 'pantheon_clear_edge_all' ) ) {
+				pantheon_clear_edge_all();
+			}
 			wp_cache_flush();
 			wp_redirect( admin_url( 'options-general.php?page=pantheon-cache&cache-cleared=true' ) );
 			exit();
