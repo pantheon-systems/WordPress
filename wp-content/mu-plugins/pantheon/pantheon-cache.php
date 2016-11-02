@@ -400,6 +400,8 @@ add_action( 'plugins_loaded', 'Pantheon_Cache' );
 
 /**
  * @see Pantheon_Cache::clean_post_cache
+ *
+ * @deprecated Please call Pantheon Integrated CDN instead.
  */
 function pantheon_clean_post_cache( $post_id, $include_homepage = true ) {
 	Pantheon_Cache()->clean_post_cache( $post_id, $include_homepage );
@@ -408,6 +410,8 @@ function pantheon_clean_post_cache( $post_id, $include_homepage = true ) {
 
 /**
  * @see Pantheon_Cache::clean_term_cache
+ *
+ * @deprecated Please call Pantheon Integrated CDN instead.
  */
 function pantheon_clean_term_cache( $term_ids, $taxonomy ) {
 	Pantheon_Cache()->clean_term_cache( $term_ids, $taxonomy );
@@ -416,6 +420,8 @@ function pantheon_clean_term_cache( $term_ids, $taxonomy ) {
 
 /**
  * @see Pantheon_Cache::enqueue_urls
+ *
+ * @deprecated Please call Pantheon Integrated CDN instead.
  */
 function pantheon_enqueue_urls( $urls ) {
 	Pantheon_Cache()->enqueue_urls( $urls );
