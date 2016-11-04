@@ -176,6 +176,13 @@ class Pantheon_Cache {
 				</div>
 			<?php endif ?>
 
+			<?php
+			/**
+			 * Permits the Pantheon Advanced Page Cache plugin to add
+			 * supplemental text.
+			 */
+			do_action( 'pantheon_cache_settings_page_top' ); ?>
+
 			<h3><?php _e( 'General Settings', 'pantheon-cache' ); ?></h3>
 			<form action="options.php" method="POST">
 				<?php settings_fields( self::SLUG ); ?>
@@ -196,6 +203,14 @@ class Pantheon_Cache {
 				</form>
 
 			<?php endif ?>
+
+			<?php
+			/**
+			 * Permits the Pantheon Advanced Page Cache plugin to add
+			 * supplemental text.
+			 */
+			do_action( 'pantheon_cache_settings_page_bottom' ); ?>
+
 		</div>
 		<?php
 	}
