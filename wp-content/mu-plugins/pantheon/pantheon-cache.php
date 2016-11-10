@@ -89,12 +89,10 @@ class Pantheon_Cache {
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
 
-		add_action( 'admin_post_pantheon_cache_delete_page', array( $this, 'clean_specific_page' ) );
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
 		if ( ! is_admin() ) {
 			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
-			add_action( 'wp_before_admin_bar_render', array( $this, 'cache_admin_bar_render' ) );
 		}
 
 		add_action( 'admin_notices', function(){
@@ -228,47 +226,6 @@ class Pantheon_Cache {
 		}
 
 		header( 'cache-control: public, max-age=' . $ttl );
-	}
-
-
-	/**
-	 * Add the "Delete Cache" button to the admin bar.
-	 *
-	 * @return void
-	 */
-	public function cache_admin_bar_render() {
-		global $wp_admin_bar;
-
-		if ( ! is_user_logged_in() )
-			return false;
-
-		if ( function_exists( 'current_user_can' ) && false == current_user_can( 'delete_others_posts' ) )
-			return false;
-
-		$wp_admin_bar->add_menu( array(
-			'parent' => '',
-			'id' => 'delete-cache',
-			'title' => __( 'Delete Cache', 'pantheon-cache' ),
-			'meta' => array( 'title' => __( 'Delete cache of the current page', 'pantheon-cache' ) ),
-			'href' => wp_nonce_url( admin_url( 'admin-post.php?action=pantheon_cache_delete_page&path=' . urlencode( preg_replace( '/[ <>\'\"\r\n\t\(\)]/', '', $_SERVER[ 'REQUEST_URI' ] ) ) ), 'delete-cache' )
-		) );
-	}
-
-
-	/**
-	 * Clear a specific path from cache. This handles the action from the admin bar button.
-	 *
-	 * @return void
-	 */
-	public function clean_specific_page() {
-		if ( ! function_exists( 'current_user_can' ) || false == current_user_can( 'delete_others_posts' ) )
-			return false;
-
-		if ( ! empty( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'delete-cache' ) ) {
-			$this->enqueue_urls( $_REQUEST['path'] );
-			wp_redirect( preg_replace( '/[ <>\'\"\r\n\t\(\)]/', '', $_REQUEST['path'] ) );
-			exit();
-		}
 	}
 
 
