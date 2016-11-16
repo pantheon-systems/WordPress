@@ -349,8 +349,8 @@ class Pantheon_Cache {
 		$url = home_url();
 		$host = parse_url( $url, PHP_URL_HOST );
 		$this->paths = apply_filters( 'pantheon_final_clean_urls', $this->paths );
-		if ( function_exists( 'pantheon_clear_edge' ) ) {
-			pantheon_clear_edge( $host, $this->paths );
+		if ( function_exists( 'pantheon_clear_edge_paths' ) ) {
+			pantheon_clear_edge_paths( $this->paths );
 		}
 	}
 }
