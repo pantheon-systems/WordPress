@@ -258,7 +258,9 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function clean_post_cache( $post_id, $include_homepage = true ) {
-		// Handled by Pantheon Integrated CDN
+		if ( method_exists( 'Pantheon_Advanced_Page_Cache\Purger', 'action_clean_post_cache' ) ) {
+			Pantheon_Advanced_Page_Cache\Purger::action_clean_post_cache( $post_id );
+		}
 	}
 
 
@@ -272,7 +274,9 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function clean_term_cache( $term_ids, $taxonomy ) {
-		// Handled by Pantheon Integrated CDN
+		if ( method_exists( 'Pantheon_Advanced_Page_Cache\Purger', 'action_clean_term_cache' ) ) {
+			Pantheon_Advanced_Page_Cache\Purger::action_clean_term_cache( $term_ids );
+		}
 	}
 
 
