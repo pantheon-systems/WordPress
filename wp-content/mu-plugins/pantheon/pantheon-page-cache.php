@@ -166,7 +166,7 @@ class Pantheon_Cache {
 	public function view_settings_page() {
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Pantheon Cache', 'pantheon-cache' ); ?></h2>
+			<h2><?php _e( 'Pantheon Page Cache', 'pantheon-cache' ); ?></h2>
 
 			<?php if ( ! empty( $_GET['cache-cleared'] ) && 'true' == $_GET['cache-cleared'] ) : ?>
 				<div class="updated below-h2">
