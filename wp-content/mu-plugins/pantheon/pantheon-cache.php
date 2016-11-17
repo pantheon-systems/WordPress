@@ -125,7 +125,7 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function action_admin_menu() {
-		add_options_page( __( 'Pantheon Cache', 'pantheon-cache' ), __( 'Pantheon Cache', 'pantheon-cache' ), $this->options_capability, self::SLUG, array( self::$instance, 'view_settings_page' ) );
+		add_options_page( __( 'Pantheon Page Cache', 'pantheon-cache' ), __( 'Pantheon Page Cache', 'pantheon-cache' ), $this->options_capability, self::SLUG, array( self::$instance, 'view_settings_page' ) );
 	}
 
 
