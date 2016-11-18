@@ -94,6 +94,7 @@ class Pantheon_Cache {
 		if ( ! is_admin() ) {
 			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
 		}
+		add_filter( 'rest_post_dispatch', array( $this, 'filter_rest_post_dispatch_send_cache_control' ), 10, 2 );
 
 		add_action( 'admin_notices', function(){
 			global $wp_object_cache;
@@ -228,6 +229,17 @@ class Pantheon_Cache {
 		header( 'cache-control: public, max-age=' . $ttl );
 	}
 
+	/**
+	 * Send the cache control header for REST API requests
+	 */
+	public function filter_rest_post_dispatch_send_cache_control( $response, $server ) {
+		$ttl = absint( $this->options['default_ttl'] );
+		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+			$ttl = 60;
+		}
+		$server->send_header( 'Cache-Control', 'public, max-age=' . $ttl );
+		return $response;
+	}
 
 	/**
 	 * Clear the cache for the entire site.
