@@ -116,7 +116,7 @@ class Pantheon_Cache {
 	public function action_admin_init() {
 		register_setting( self::SLUG, self::SLUG, array( self::$instance, 'sanitize_options' ) );
 		add_settings_section( 'general', false, '__return_false', self::SLUG );
-		add_settings_field( 'default_ttl', __( 'Default Cache Time', 'pantheon-cache' ), array( self::$instance, 'default_ttl_field' ), self::SLUG, 'general' );
+		add_settings_field( 'default_ttl', null, array( self::$instance, 'default_ttl_field' ), self::SLUG, 'general' );
 	}
 
 
@@ -136,6 +136,7 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function default_ttl_field() {
+		echo '<p>' . __( 'Maximum time a cached page will be served. A higher TTL typically improves site performance.', 'pantheon-cache' ) . '</p>';
 		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $this->options['default_ttl'] . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
 	}
 
@@ -188,26 +189,41 @@ class Pantheon_Cache {
 			 */
 			do_action( 'pantheon_cache_settings_page_top' ); ?>
 
-			<h3><?php _e( 'General Settings', 'pantheon-cache' ); ?></h3>
-			<form action="options.php" method="POST">
-				<?php settings_fields( self::SLUG ); ?>
-				<?php do_settings_sections( self::SLUG ); ?>
-				<?php submit_button(); ?>
-			</form>
-
 			<?php if ( apply_filters( 'pantheon_cache_allow_clear_all', true ) ) : ?>
-
-				<hr />
 
 				<form action="admin-post.php" method="POST">
 					<input type="hidden" name="action" value="pantheon_cache_flush_site" />
 					<?php wp_nonce_field( 'pantheon-cache-clear-all', 'pantheon-cache-nonce' ); ?>
 					<h3><?php _e( 'Clear Site Cache', 'pantheon-cache' ); ?></h3>
-					<p><?php _e( "Clear the cache for the entire site. Use with care, as it will negatively impact your site's performance for a short period of time.", 'pantheon-cache' ); ?></p>
+					<p><?php _e( 'Use with care. Clearing the entire site cache will negatively impact performance for a short period of time.', 'pantheon-cache' ); ?></p>
 					<?php submit_button( __( 'Clear Cache', 'pantheon-cache' ), 'secondary' ); ?>
 				</form>
 
+				<hr />
+
 			<?php endif ?>
+
+			<style>
+			.ttl-form th[scope="row"] {
+				display: none;
+			}
+			.ttl-form td {
+				padding-left: 0;
+			}
+			.ttl-form td p {
+				margin-bottom: 1em;
+				font-size: 13px;
+			}
+			</style>
+
+			<h3><?php _e( 'Default Time to Live (TTL)', 'pantheon-cache' ); ?></h3>
+			<form action="options.php" method="POST" class="ttl-form">
+				<?php settings_fields( self::SLUG ); ?>
+				<?php do_settings_sections( self::SLUG ); ?>
+				<?php submit_button( __( 'Update TTL', 'pantheon-cache' ) ); ?>
+			</form>
+
+			<hr />
 
 			<?php
 			/**
