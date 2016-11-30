@@ -175,6 +175,12 @@ class Pantheon_Cache {
 				</div>
 			<?php endif ?>
 
+			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : ?>
+				<div class="notice notice-success"><p><?php echo sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://github.com/pantheon-systems/pantheon-advanced-page-cache' ); ?></p></div>
+			<?php else : ?>
+				<div class="notice notice-warning"><p><?php echo sprintf( __( 'Want to automatically clear related pages when you update content? Install <a target="_blank" href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), 'https://github.com/pantheon-systems/pantheon-advanced-page-cache' ); ?></p></div>
+			<?php endif; ?>
+
 			<?php
 			/**
 			 * Permits the Pantheon Advanced Page Cache plugin to add
