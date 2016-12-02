@@ -88,6 +88,7 @@ class Pantheon_Cache {
 
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
+		add_action( 'load-plugin-install.php', array( $this, 'action_load_plugin_install' ) );
 
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
@@ -129,6 +130,31 @@ class Pantheon_Cache {
 		add_options_page( __( 'Pantheon Page Cache', 'pantheon-cache' ), __( 'Pantheon Page Cache', 'pantheon-cache' ), $this->options_capability, self::SLUG, array( self::$instance, 'view_settings_page' ) );
 	}
 
+	/**
+	 * Check to see if JavaScript should trigger the opening of the plugin install box
+	 */
+	public function action_load_plugin_install() {
+		if ( empty( $_GET['action'] ) || 'pantheon-load-infobox' !== $_GET['action'] ) {
+			return;
+		}
+		add_action( 'admin_footer', array( $this, 'action_admin_footer_trigger_plugin_open' ) );
+	}
+
+	/**
+	 * Trigger the opening of the Pantheon Advanced Page Cache infobox
+	 */
+	public function action_admin_footer_trigger_plugin_open() {
+		?>
+		<script>
+			jQuery(document).ready(function(){
+				// Wait until the click event handler is bound by core JavaScript
+				setTimeout(function(){
+					jQuery('.plugin-card-pantheon-advanced-page-cache a.open-plugin-details-modal').trigger('click');
+				}, 1 )
+			});
+		</script>
+		<?php
+	}
 
 	/**
 	 * Add the HTML for the default TTL field.
@@ -179,10 +205,8 @@ class Pantheon_Cache {
 			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : ?>
 				<div class="notice notice-success"><p><?php echo sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://github.com/pantheon-systems/pantheon-advanced-page-cache' ); ?></p></div>
 			<?php else :
-				wp_enqueue_script('plugin-install');
-				add_thickbox();
 				?>
-				<div class="notice notice-warning"><p><?php echo sprintf( __( 'Want to automatically clear related pages when you update content? Install <a target="_blank" class="thickbox" href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), admin_url( 'plugin-install.php?tab=plugin-information&plugin=pantheon-advanced-page-cache&TB_iframe=true&width=772&height=620' ) ); ?></p></div>
+				<div class="notice notice-warning"><p><?php echo sprintf( __( 'Want to automatically clear related pages when you update content? Install <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), admin_url( 'plugin-install.php?s=pantheon+advanced+page+cache&tab=search&type=term&action=pantheon-load-infobox' ) ); ?></p></div>
 			<?php endif; ?>
 
 			<?php
