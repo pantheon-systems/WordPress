@@ -88,16 +88,14 @@ class Pantheon_Cache {
 
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
+		add_action( 'load-plugin-install.php', array( $this, 'action_load_plugin_install' ) );
 
-		add_action( 'clean_post_cache',                      array( $this, 'clean_post_cache' ) );
-		add_action( 'clean_term_cache',                      array( $this, 'clean_term_cache' ), 10, 2 );
-		add_action( 'admin_post_pantheon_cache_delete_page', array( $this, 'clean_specific_page' ) );
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
 		if ( ! is_admin() ) {
 			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
-			add_action( 'wp_before_admin_bar_render', array( $this, 'cache_admin_bar_render' ) );
 		}
+		add_filter( 'rest_post_dispatch', array( $this, 'filter_rest_post_dispatch_send_cache_control' ), 10, 2 );
 
 		add_action( 'admin_notices', function(){
 			global $wp_object_cache;
@@ -119,7 +117,7 @@ class Pantheon_Cache {
 	public function action_admin_init() {
 		register_setting( self::SLUG, self::SLUG, array( self::$instance, 'sanitize_options' ) );
 		add_settings_section( 'general', false, '__return_false', self::SLUG );
-		add_settings_field( 'default_ttl', __( 'Default Cache Time', 'pantheon-cache' ), array( self::$instance, 'default_ttl_field' ), self::SLUG, 'general' );
+		add_settings_field( 'default_ttl', null, array( self::$instance, 'default_ttl_field' ), self::SLUG, 'general' );
 	}
 
 
@@ -129,9 +127,34 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function action_admin_menu() {
-		add_options_page( __( 'Pantheon Cache', 'pantheon-cache' ), __( 'Pantheon Cache', 'pantheon-cache' ), $this->options_capability, self::SLUG, array( self::$instance, 'view_settings_page' ) );
+		add_options_page( __( 'Pantheon Page Cache', 'pantheon-cache' ), __( 'Pantheon Page Cache', 'pantheon-cache' ), $this->options_capability, self::SLUG, array( self::$instance, 'view_settings_page' ) );
 	}
 
+	/**
+	 * Check to see if JavaScript should trigger the opening of the plugin install box
+	 */
+	public function action_load_plugin_install() {
+		if ( empty( $_GET['action'] ) || 'pantheon-load-infobox' !== $_GET['action'] ) {
+			return;
+		}
+		add_action( 'admin_footer', array( $this, 'action_admin_footer_trigger_plugin_open' ) );
+	}
+
+	/**
+	 * Trigger the opening of the Pantheon Advanced Page Cache infobox
+	 */
+	public function action_admin_footer_trigger_plugin_open() {
+		?>
+		<script>
+			jQuery(document).ready(function(){
+				// Wait until the click event handler is bound by core JavaScript
+				setTimeout(function(){
+					jQuery('.plugin-card-pantheon-advanced-page-cache a.open-plugin-details-modal').trigger('click');
+				}, 1 )
+			});
+		</script>
+		<?php
+	}
 
 	/**
 	 * Add the HTML for the default TTL field.
@@ -139,6 +162,7 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function default_ttl_field() {
+		echo '<p>' . __( 'Maximum time a cached page will be served. A higher TTL typically improves site performance.', 'pantheon-cache' ) . '</p>';
 		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $this->options['default_ttl'] . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
 	}
 
@@ -170,7 +194,7 @@ class Pantheon_Cache {
 	public function view_settings_page() {
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Pantheon Cache', 'pantheon-cache' ); ?></h2>
+			<h2><?php _e( 'Pantheon Page Cache', 'pantheon-cache' ); ?></h2>
 
 			<?php if ( ! empty( $_GET['cache-cleared'] ) && 'true' == $_GET['cache-cleared'] ) : ?>
 				<div class="updated below-h2">
@@ -178,26 +202,63 @@ class Pantheon_Cache {
 				</div>
 			<?php endif ?>
 
-			<h3><?php _e( 'General Settings', 'pantheon-cache' ); ?></h3>
-			<form action="options.php" method="POST">
-				<?php settings_fields( self::SLUG ); ?>
-				<?php do_settings_sections( self::SLUG ); ?>
-				<?php submit_button(); ?>
-			</form>
+			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : ?>
+				<div class="notice notice-success"><p><?php echo sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://github.com/pantheon-systems/pantheon-advanced-page-cache' ); ?></p></div>
+			<?php else :
+				?>
+				<div class="notice notice-warning"><p><?php echo sprintf( __( 'Want to automatically clear related pages when you update content? Install <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), admin_url( 'plugin-install.php?s=pantheon+advanced+page+cache&tab=search&type=term&action=pantheon-load-infobox' ) ); ?></p></div>
+			<?php endif; ?>
+
+			<?php
+			/**
+			 * Permits the Pantheon Advanced Page Cache plugin to add
+			 * supplemental text.
+			 */
+			do_action( 'pantheon_cache_settings_page_top' ); ?>
 
 			<?php if ( apply_filters( 'pantheon_cache_allow_clear_all', true ) ) : ?>
-
-				<hr />
 
 				<form action="admin-post.php" method="POST">
 					<input type="hidden" name="action" value="pantheon_cache_flush_site" />
 					<?php wp_nonce_field( 'pantheon-cache-clear-all', 'pantheon-cache-nonce' ); ?>
 					<h3><?php _e( 'Clear Site Cache', 'pantheon-cache' ); ?></h3>
-					<p><?php _e( "Clear the cache for the entire site. Use with care, as it will negatively impact your site's performance for a short period of time.", 'pantheon-cache' ); ?></p>
+					<p><?php _e( 'Use with care. Clearing the entire site cache will negatively impact performance for a short period of time.', 'pantheon-cache' ); ?></p>
 					<?php submit_button( __( 'Clear Cache', 'pantheon-cache' ), 'secondary' ); ?>
 				</form>
 
+				<hr />
+
 			<?php endif ?>
+
+			<style>
+			.ttl-form th[scope="row"] {
+				display: none;
+			}
+			.ttl-form td {
+				padding-left: 0;
+			}
+			.ttl-form td p {
+				margin-bottom: 1em;
+				font-size: 13px;
+			}
+			</style>
+
+			<h3><?php _e( 'Default Time to Live (TTL)', 'pantheon-cache' ); ?></h3>
+			<form action="options.php" method="POST" class="ttl-form">
+				<?php settings_fields( self::SLUG ); ?>
+				<?php do_settings_sections( self::SLUG ); ?>
+				<?php submit_button( __( 'Update TTL', 'pantheon-cache' ) ); ?>
+			</form>
+
+			<hr />
+
+			<?php
+			/**
+			 * Permits the Pantheon Advanced Page Cache plugin to add
+			 * supplemental text.
+			 */
+			do_action( 'pantheon_cache_settings_page_bottom' ); ?>
+
 		</div>
 		<?php
 	}
@@ -217,47 +278,17 @@ class Pantheon_Cache {
 		header( 'cache-control: public, max-age=' . $ttl );
 	}
 
-
 	/**
-	 * Add the "Delete Cache" button to the admin bar.
-	 *
-	 * @return void
+	 * Send the cache control header for REST API requests
 	 */
-	public function cache_admin_bar_render() {
-		global $wp_admin_bar;
-
-		if ( ! is_user_logged_in() )
-			return false;
-
-		if ( function_exists( 'current_user_can' ) && false == current_user_can( 'delete_others_posts' ) )
-			return false;
-
-		$wp_admin_bar->add_menu( array(
-			'parent' => '',
-			'id' => 'delete-cache',
-			'title' => __( 'Delete Cache', 'pantheon-cache' ),
-			'meta' => array( 'title' => __( 'Delete cache of the current page', 'pantheon-cache' ) ),
-			'href' => wp_nonce_url( admin_url( 'admin-post.php?action=pantheon_cache_delete_page&path=' . urlencode( preg_replace( '/[ <>\'\"\r\n\t\(\)]/', '', $_SERVER[ 'REQUEST_URI' ] ) ) ), 'delete-cache' )
-		) );
-	}
-
-
-	/**
-	 * Clear a specific path from cache. This handles the action from the admin bar button.
-	 *
-	 * @return void
-	 */
-	public function clean_specific_page() {
-		if ( ! function_exists( 'current_user_can' ) || false == current_user_can( 'delete_others_posts' ) )
-			return false;
-
-		if ( ! empty( $_REQUEST[ '_wpnonce' ] ) && wp_verify_nonce( $_REQUEST[ '_wpnonce' ], 'delete-cache' ) ) {
-			$this->enqueue_urls( $_REQUEST['path'] );
-			wp_redirect( preg_replace( '/[ <>\'\"\r\n\t\(\)]/', '', $_REQUEST['path'] ) );
-			exit();
+	public function filter_rest_post_dispatch_send_cache_control( $response, $server ) {
+		$ttl = absint( $this->options['default_ttl'] );
+		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+			$ttl = 60;
 		}
+		$server->send_header( 'Cache-Control', 'public, max-age=' . $ttl );
+		return $response;
 	}
-
 
 	/**
 	 * Clear the cache for the entire site.
@@ -269,7 +300,9 @@ class Pantheon_Cache {
 			return false;
 
 		if ( ! empty( $_POST['pantheon-cache-nonce'] ) && wp_verify_nonce( $_POST['pantheon-cache-nonce'], 'pantheon-cache-clear-all' ) ) {
-			$this->enqueue_regex( '/.*' );
+			if ( function_exists( 'pantheon_clear_edge_all' ) ) {
+				pantheon_clear_edge_all();
+			}
 			wp_cache_flush();
 			wp_redirect( admin_url( 'options-general.php?page=pantheon-cache&cache-cleared=true' ) );
 			exit();
@@ -280,81 +313,45 @@ class Pantheon_Cache {
 	/**
 	 * Clear the cache for a post.
 	 *
+	 * @deprecated
+	 *
 	 * @param  int $post_id A post ID to clean.
 	 * @return void
 	 */
 	public function clean_post_cache( $post_id, $include_homepage = true ) {
-		if ( get_post_type( $post_id ) == 'revision' || get_post_status( $post_id ) != 'publish' )
-			return;
-
-		$urls = array();
-		$post_link = get_permalink( $post_id );
-		if ( $post_link ) {
-			$urls[] = $post_link;
+		if ( method_exists( 'Pantheon_Advanced_Page_Cache\Purger', 'action_clean_post_cache' ) ) {
+			Pantheon_Advanced_Page_Cache\Purger::action_clean_post_cache( $post_id );
 		}
-
-		if ( $include_homepage ) {
-			$urls[] = get_option( 'home' );
-			$urls[] = trailingslashit( get_option( 'home' ) );
-		}
-
-		$urls = apply_filters( 'pantheon_clean_post_cache', $urls, $post_id, $include_homepage );
-		$this->enqueue_urls( $urls );
 	}
 
 
 	/**
 	 * Clear the cache for a given term or terms and taxonomy.
+	 *
+	 * @deprecated
 	 *
 	 * @param int|array $ids Single or list of Term IDs.
 	 * @param string $taxonomy Can be empty and will assume tt_ids, else will use for context.
 	 * @return void
 	 */
 	public function clean_term_cache( $term_ids, $taxonomy ) {
-		$urls = array();
-
-		foreach ( (array) $term_ids as $term_id ) {
-			$term_link = get_term_link( intval( $term_id ), $taxonomy );
-			if ( ! is_wp_error( $term_link ) ) {
-				$urls[] = $term_link;
-			}
+		if ( method_exists( 'Pantheon_Advanced_Page_Cache\Purger', 'action_clean_term_cache' ) ) {
+			Pantheon_Advanced_Page_Cache\Purger::action_clean_term_cache( $term_ids );
 		}
-
-		$urls = apply_filters( 'pantheon_clean_term_cache', $urls, $term_ids, $taxonomy );
-		$this->enqueue_urls( $urls );
 	}
 
 
 	/**
 	 * Clear the cache for a given term or terms and taxonomy.
 	 *
-	 * This is a placeholder and is not currently active.
+	 * @deprecated
 	 *
 	 * @param int|array $object_ids Single or list of term object ID(s).
 	 * @param array|string $object_type The taxonomy object type.
 	 * @return void
 	 */
 	public function clean_object_term_cache( $object_ids, $object_type ) {
-		$urls = array();
-		if ( post_type_exists( $object_type ) ) {
-			foreach ( (array) $object_ids as $post_id ) {
-				$urls[] = get_permalink( $post_id );
-			}
-		}
-
-		global $wp_rewrite;
-		$taxonomies = get_object_taxonomies( $object_type );
-		foreach ( $taxonomies as $taxonomy ) {
-			$termlink = $wp_rewrite->get_extra_permastruct( $taxonomy );
-			# Let's make sure that the taxonomy doesn't have a root-level permalink,
-			# which is unlikely, but possible. If it did, this would clear the whole site.
-			if ( preg_match( "#^.+/%$taxonomy%#i", $termlink ) ) {
-				$urls[] = str_replace( "%$taxonomy%", '.*', $termlink );
-			}
-		}
-
-		$urls = apply_filters( 'pantheon_clean_object_term_cache', $urls, $object_ids, $object_type );
-		$this->enqueue_urls( $urls );
+		// Handled by Pantheon Integrated CDN
 	}
 
 	/**
@@ -417,8 +414,8 @@ class Pantheon_Cache {
 		$url = home_url();
 		$host = parse_url( $url, PHP_URL_HOST );
 		$this->paths = apply_filters( 'pantheon_final_clean_urls', $this->paths );
-		if ( function_exists( 'pantheon_clear_edge' ) ) {
-			pantheon_clear_edge( $host, $this->paths );
+		if ( function_exists( 'pantheon_clear_edge_paths' ) ) {
+			pantheon_clear_edge_paths( $this->paths );
 		}
 	}
 }
@@ -440,6 +437,8 @@ add_action( 'plugins_loaded', 'Pantheon_Cache' );
 
 /**
  * @see Pantheon_Cache::clean_post_cache
+ *
+ * @deprecated Please call Pantheon Integrated CDN instead.
  */
 function pantheon_clean_post_cache( $post_id, $include_homepage = true ) {
 	Pantheon_Cache()->clean_post_cache( $post_id, $include_homepage );
@@ -448,6 +447,8 @@ function pantheon_clean_post_cache( $post_id, $include_homepage = true ) {
 
 /**
  * @see Pantheon_Cache::clean_term_cache
+ *
+ * @deprecated Please call Pantheon Integrated CDN instead.
  */
 function pantheon_clean_term_cache( $term_ids, $taxonomy ) {
 	Pantheon_Cache()->clean_term_cache( $term_ids, $taxonomy );
@@ -456,6 +457,8 @@ function pantheon_clean_term_cache( $term_ids, $taxonomy ) {
 
 /**
  * @see Pantheon_Cache::enqueue_urls
+ *
+ * @deprecated Please call Pantheon Integrated CDN instead.
  */
 function pantheon_enqueue_urls( $urls ) {
 	Pantheon_Cache()->enqueue_urls( $urls );
