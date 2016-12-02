@@ -179,6 +179,7 @@ class Pantheon_Cache {
 			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : ?>
 				<div class="notice notice-success"><p><?php echo sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://github.com/pantheon-systems/pantheon-advanced-page-cache' ); ?></p></div>
 			<?php else :
+				wp_enqueue_script('plugin-install');
 				add_thickbox();
 				?>
 				<div class="notice notice-warning"><p><?php echo sprintf( __( 'Want to automatically clear related pages when you update content? Install <a target="_blank" class="thickbox" href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), admin_url( 'plugin-install.php?tab=plugin-information&plugin=pantheon-advanced-page-cache&TB_iframe=true&width=772&height=620' ) ); ?></p></div>
