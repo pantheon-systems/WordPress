@@ -10,11 +10,7 @@
 
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) :
 
-require_once( 'pantheon/pantheon-cache.php' );
+require_once( 'pantheon/pantheon-page-cache.php' );
 require_once( 'pantheon/pantheon-updates.php' );
-
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	require_once dirname( __FILE__ ) . '/pantheon/pantheon-cache-cli.php';
-}
 
 endif; # Ensuring that this is on Pantheon
