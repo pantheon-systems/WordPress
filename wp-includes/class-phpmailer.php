@@ -31,7 +31,7 @@ class PHPMailer
      * The PHPMailer Version number.
      * @var string
      */
-    public $Version = '5.2.19';
+    public $Version = '5.2.21';
 
     /**
      * Email priority.
@@ -288,7 +288,7 @@ class PHPMailer
 
     /**
      * SMTP auth type.
-     * Options are LOGIN (default), PLAIN, NTLM, CRAM-MD5
+     * Options are CRAM-MD5, LOGIN, PLAIN, attempted in that order if not specified
      * @var string
      */
     public $AuthType = '';
@@ -946,6 +946,61 @@ class PHPMailer
     }
 
     /**
+     * Parse and validate a string containing one or more RFC822-style comma-separated email addresses
+     * of the form "display name <address>" into an array of name/address pairs.
+     * Uses the imap_rfc822_parse_adrlist function if the IMAP extension is available.
+     * Note that quotes in the name part are removed.
+     * @param string $addrstr The address list string
+     * @param bool $useimap Whether to use the IMAP extension to parse the list
+     * @return array
+     * @link http://www.andrew.cmu.edu/user/agreen1/testing/mrbs/web/Mail/RFC822.php A more careful implementation
+     */
+    public function parseAddresses($addrstr, $useimap = true)
+    {
+        $addresses = array();
+        if ($useimap and function_exists('imap_rfc822_parse_adrlist')) {
+            //Use this built-in parser if it's available
+            $list = imap_rfc822_parse_adrlist($addrstr, '');
+            foreach ($list as $address) {
+                if ($address->host != '.SYNTAX-ERROR.') {
+                    if ($this->validateAddress($address->mailbox . '@' . $address->host)) {
+                        $addresses[] = array(
+                            'name' => (property_exists($address, 'personal') ? $address->personal : ''),
+                            'address' => $address->mailbox . '@' . $address->host
+                        );
+                    }
+                }
+            }
+        } else {
+            //Use this simpler parser
+            $list = explode(',', $addrstr);
+            foreach ($list as $address) {
+                $address = trim($address);
+                //Is there a separate name part?
+                if (strpos($address, '<') === false) {
+                    //No separate name, just use the whole thing
+                    if ($this->validateAddress($address)) {
+                        $addresses[] = array(
+                            'name' => '',
+                            'address' => $address
+                        );
+                    }
+                } else {
+                    list($name, $email) = explode('<', $address);
+                    $email = trim(str_replace('>', '', $email));
+                    if ($this->validateAddress($email)) {
+                        $addresses[] = array(
+                            'name' => trim(str_replace(array('"', "'"), '', $name)),
+                            'address' => $email
+                        );
+                    }
+                }
+            }
+        }
+        return $addresses;
+    }
+
+    /**
      * Set the From and FromName properties.
      * @param string $address
      * @param string $name
@@ -1309,19 +1364,24 @@ class PHPMailer
      */
     protected function sendmailSend($header, $body)
     {
-        if (!empty($this->Sender)) {
+        // CVE-2016-10033, CVE-2016-10045: Don't pass -f if characters will be escaped.
+        if (!empty($this->Sender) and self::isShellSafe($this->Sender)) {
             if ($this->Mailer == 'qmail') {
-                $sendmail = sprintf('%s -f%s', escapeshellcmd($this->Sendmail), escapeshellarg($this->Sender));
+                $sendmailFmt = '%s -f%s';
             } else {
-                $sendmail = sprintf('%s -oi -f%s -t', escapeshellcmd($this->Sendmail), escapeshellarg($this->Sender));
+                $sendmailFmt = '%s -oi -f%s -t';
             }
         } else {
             if ($this->Mailer == 'qmail') {
-                $sendmail = sprintf('%s', escapeshellcmd($this->Sendmail));
+                $sendmailFmt = '%s';
             } else {
-                $sendmail = sprintf('%s -oi -t', escapeshellcmd($this->Sendmail));
+                $sendmailFmt = '%s -oi -t';
             }
         }
+
+        // TODO: If possible, this should be changed to escapeshellarg.  Needs thorough testing.
+        $sendmail = sprintf($sendmailFmt, escapeshellcmd($this->Sendmail), $this->Sender);
+
         if ($this->SingleTo) {
             foreach ($this->SingleToArray as $toAddr) {
                 if (!@$mail = popen($sendmail, 'w')) {
@@ -1368,6 +1428,40 @@ class PHPMailer
     }
 
     /**
+     * Fix CVE-2016-10033 and CVE-2016-10045 by disallowing potentially unsafe shell characters.
+     *
+     * Note that escapeshellarg and escapeshellcmd are inadequate for our purposes, especially on Windows.
+     * @param string $string The string to be validated
+     * @see https://github.com/PHPMailer/PHPMailer/issues/924 CVE-2016-10045 bug report
+     * @access protected
+     * @return boolean
+     */
+    protected static function isShellSafe($string)
+    {
+        // Future-proof
+        if (escapeshellcmd($string) !== $string
+            or !in_array(escapeshellarg($string), array("'$string'", "\"$string\""))
+        ) {
+            return false;
+        }
+
+        $length = strlen($string);
+
+        for ($i = 0; $i < $length; $i++) {
+            $c = $string[$i];
+
+            // All other characters have a special meaning in at least one common shell, including = and +.
+            // Full stop (.) has a special meaning in cmd.exe, but its impact should be negligible here.
+            // Note that this does permit non-Latin alphanumeric characters based on the current locale.
+            if (!ctype_alnum($c) && strpos('@_-.', $c) === false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Send mail using the PHP mail() function.
      * @param string $header The message headers
      * @param string $body The message body
@@ -1387,7 +1481,10 @@ class PHPMailer
         $params = null;
         //This sets the SMTP envelope sender which gets turned into a return-path header by the receiver
         if (!empty($this->Sender) and $this->validateAddress($this->Sender)) {
-            $params = sprintf('-f%s', escapeshellarg($this->Sender));
+            // CVE-2016-10033, CVE-2016-10045: Don't pass -f if characters will be escaped.
+            if (self::isShellSafe($this->Sender)) {
+                $params = sprintf('-f%s', $this->Sender);
+            }
         }
         if (!empty($this->Sender) and !ini_get('safe_mode') and $this->validateAddress($this->Sender)) {
             $old_from = ini_get('sendmail_from');
@@ -2122,7 +2219,7 @@ class PHPMailer
         }
         //If lines are too long, and we're not already using an encoding that will shorten them,
         //change to quoted-printable transfer encoding for the body part only
-        if (self::hasLineLongerThanMax($this->Body)) {
+        if ('base64' != $this->Encoding and self::hasLineLongerThanMax($this->Body)) {
             $bodyEncoding = 'quoted-printable';
         }
 
@@ -2133,7 +2230,7 @@ class PHPMailer
             $altBodyEncoding = '7bit';
             //All ISO 8859, Windows codepage and UTF-8 charsets are ascii compatible up to 7-bit
             $altBodyCharSet = 'us-ascii';
-         }
+        }
         //If lines are too long, and we're not already using an encoding that will shorten them,
         //change to quoted-printable transfer encoding for the alt body part only
         if ('base64' != $altBodyEncoding and self::hasLineLongerThanMax($this->AltBody)) {

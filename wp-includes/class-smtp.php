@@ -30,7 +30,7 @@ class SMTP
      * The PHPMailer SMTP version number.
      * @var string
      */
-    const VERSION = '5.2.19';
+    const VERSION = '5.2.21';
 
     /**
      * SMTP line break constant.
@@ -81,7 +81,7 @@ class SMTP
      * @deprecated Use the `VERSION` constant instead
      * @see SMTP::VERSION
      */
-    public $Version = '5.2.19';
+    public $Version = '5.2.21';
 
     /**
      * SMTP server port number.
@@ -378,7 +378,7 @@ class SMTP
      * @see hello()
      * @param string $username The user name
      * @param string $password The password
-     * @param string $authtype The auth type (PLAIN, LOGIN, NTLM, CRAM-MD5, XOAUTH2)
+     * @param string $authtype The auth type (PLAIN, LOGIN, CRAM-MD5)
      * @param string $realm The auth realm for NTLM
      * @param string $workstation The auth workstation for NTLM
      * @param null|OAuth $OAuth An optional OAuth instance (@see PHPMailerOAuth)
@@ -414,7 +414,7 @@ class SMTP
             );
 
             if (empty($authtype)) {
-                foreach (array('LOGIN', 'CRAM-MD5', 'PLAIN') as $method) {
+                foreach (array('CRAM-MD5', 'LOGIN', 'PLAIN') as $method) {
                     if (in_array($method, $this->server_caps['AUTH'])) {
                         $authtype = $method;
                         break;
