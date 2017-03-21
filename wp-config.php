@@ -51,7 +51,7 @@ else:
      * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
      *
      * Pantheon sets these values for you also. If you want to shuffle them you
-     * can do so via your dashboard.
+     * must contact support: https://pantheon.io/docs/getting-support 
      *
      * @since 2.6.0
      */
