@@ -1,0 +1,174 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "WordPress Importer"
+msgstr ""
+
+#. Short description.
+msgid "Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file."
+msgstr ""
+
+#. Found in description list item.
+msgid "Posts, pages and other custom post types"
+msgstr ""
+
+#. Found in description list item.
+msgid "Comments"
+msgstr ""
+
+#. Found in description list item.
+msgid "Custom fields and post meta"
+msgstr ""
+
+#. Found in description list item.
+msgid "Categories, tags and terms from custom taxonomies"
+msgstr ""
+
+#. Found in description list item.
+msgid "Authors"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "The WordPress Importer will import the following content from a WordPress export file:"
+msgstr ""
+
+#. Found in description paragraph.
+msgid "For further information and instructions please see the <a href=\"http://codex.wordpress.org/Importing_Content#WordPress\">Codex page on Importing Content</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Visit Tools -&gt; Import in the WordPress dashboard"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Click on the WordPress link in the list of importers"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Click \"Install Now\""
+msgstr ""
+
+#. Found in installation list item.
+msgid "Finally click \"Activate Plugin &amp; Run Importer\""
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the <code>wordpress-importer</code> folder to the <code>/wp-content/plugins/</code> directory"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' menu in WordPress"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Go to the Tools -&gt; Import screen, click on WordPress"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "The quickest method for installing the importer is:"
+msgstr ""
+
+#. Found in installation paragraph.
+msgid "If you would prefer to do things manually then follow these instructions:"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Support for WXR 1.2 and multiple CDATA sections"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Post aren't duplicates if their post_type's are different"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Import comment meta (requires export from WordPress 3.2)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Minor bugfixes and enhancements"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Map comment user_id where possible"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Import attachments from <code>wp:attachment_url</code>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Upload attachments to correct directory"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remap resized image URLs correctly"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Use an XML Parser if possible"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Proper import support for nav menus"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "... and much more, see <a href=\"http://core.trac.wordpress.org/ticket/15197\">Trac ticket #15197</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Initial release"
+msgstr ""
+
+#. Found in faq header.
+msgid "Help! I'm getting out of memory errors or a blank screen."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "If your exported file is very large, the import script may run into your host's configured memory limit for PHP."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "A message like \"Fatal error: Allowed memory size of 8388608 bytes exhausted\" indicates that the script can't successfully import your XML file under the current PHP memory limit. If you have access to the php.ini file, you can manually increase the limit; if you do not (your WordPress installation is hosted on a shared server, for instance), you might have to break your exported XML file into several smaller pieces and run the import script one at a time."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "For those with shared hosting, the best alternative may be to consult hosting support to determine the safest approach for running the import. A host may be willing to temporarily lift the memory limit and/or run the process directly from their end."
+msgstr ""
+
+#. Found in faq paragraph.
+msgid "-- <a href=\"http://codex.wordpress.org/Importing_Content#Before_Importing\">WordPress Codex: Importing Content</a>"
+msgstr ""
+
+#. Found in remaining content header.
+msgid "Filters"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "<code>import_allow_create_users</code>: return false if you only want to allow mapping to existing users"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "<code>import_allow_fetch_attachments</code>: return false if you do not wish to allow importing and downloading of attachments"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "<code>import_attachment_size_limit</code>: return an integer value for the maximum file size in bytes to save (default is 0, which is unlimited)"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "<code>import_start</code>: occurs after the export file has been uploaded and author import settings have been chosen"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "<code>import_end</code>: called after the last output from the importer"
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid "The importer has a couple of filters to allow you to completely enable/block certain features:"
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid "There are also a few actions available to hook into:"
+msgstr ""

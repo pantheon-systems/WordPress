@@ -1,0 +1,430 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GitHub Updater\n"
+"POT-Creation-Date: 2016-04-13 13:48-0700\n"
+"PO-Revision-Date: 2016-04-13 13:48-0700\n"
+"Last-Translator: Hyyan Abo Fakher <tiribthea4hyyan@gmail.com>\n"
+"Language-Team: Hyyan Abo Fakher <tiribthea4hyyan@gmail.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: mu/ghu-loader.php:68
+msgid "Activated as mu-plugin"
+msgstr "تفعيل كإضافة تلقائية"
+
+#: src/GitHub_Updater/Base.php:503
+#, php-format
+msgid "Rename successful using extended name to %1$s"
+msgstr ""
+
+#: src/GitHub_Updater/Install.php:68
+msgid "A repository URI is required."
+msgstr ""
+
+#: src/GitHub_Updater/Install.php:238 src/GitHub_Updater/Settings.php:82
+msgid "Install Plugin"
+msgstr "تنصيب إضافة"
+
+#: src/GitHub_Updater/Install.php:241 src/GitHub_Updater/Settings.php:83
+msgid "Install Theme"
+msgstr "تنصيب موضوع"
+
+#: src/GitHub_Updater/Install.php:259
+msgid "Plugin"
+msgstr "إضافة"
+
+#: src/GitHub_Updater/Install.php:262
+msgid "Theme"
+msgstr "موضوع"
+
+#: src/GitHub_Updater/Install.php:273
+#, php-format
+msgid "GitHub Updater Install %s"
+msgstr "تحميل %s"
+
+#: src/GitHub_Updater/Install.php:280
+#, php-format
+msgid "%s URI"
+msgstr "رابط %s"
+
+#: src/GitHub_Updater/Install.php:288
+msgid "Repository Branch"
+msgstr "الفرع"
+
+#: src/GitHub_Updater/Install.php:296
+msgid "Remote Repository Host"
+msgstr "مستضيف المستودعات"
+
+#: src/GitHub_Updater/Install.php:304
+msgid "Private Bitbucket Repository"
+msgstr "مستودع Bitbucket  خاص"
+
+#: src/GitHub_Updater/Install.php:312
+msgid "GitHub Access Token"
+msgstr "رمز وصول GitHub "
+
+#: src/GitHub_Updater/Install.php:323
+#, fuzzy
+msgid "GitLab Private Token"
+msgstr "إعدادت GitHub  الخاصة"
+
+#: src/GitHub_Updater/Install.php:340
+msgid "URI is case sensitive."
+msgstr ""
+
+#: src/GitHub_Updater/Install.php:354
+msgid "Enter branch name or leave empty for `master`"
+msgstr "إدخل اسم الفرع أو اتركه فارغاً لاستخدام `master`"
+
+#: src/GitHub_Updater/Install.php:385
+#, fuzzy
+msgid "Check for private Bitbucket repositories."
+msgstr "مستودع Bitbucket  خاص"
+
+#: src/GitHub_Updater/Install.php:399
+msgid "Enter GitHub Access Token for private GitHub repositories."
+msgstr "أدخل رمز وصول GitHub  من مستوعات GitHub  الخاصة"
+
+#: src/GitHub_Updater/Install.php:413
+#, fuzzy
+msgid "Enter GitLab Private Token for private GitLab repositories."
+msgstr "أدخل رمز وصول GitHub  من مستوعات GitHub  الخاصة"
+
+#: src/GitHub_Updater/Install.php:457
+msgid "Activate"
+msgstr ""
+
+#: src/GitHub_Updater/Install.php:466
+msgctxt "This refers to a network activation in a multisite installation"
+msgid "Network Enable"
+msgstr ""
+
+#: src/GitHub_Updater/Messages.php:95 src/GitHub_Updater/Messages.php:130
+#: src/GitHub_Updater/Messages.php:169
+#, fuzzy
+msgid "GitHub Updater Error Code:"
+msgstr "‏%1$s  غير موجود . رمز خطأ GitHub  : %2$s"
+
+#: src/GitHub_Updater/Messages.php:100
+#, php-format
+msgid "GitHub API's rate limit will reset in %s minutes."
+msgstr "GitHub API's rate limit will reset in %1$s minutes."
+
+#: src/GitHub_Updater/Messages.php:105
+#, php-format
+msgid ""
+"It looks like you are running into GitHub API rate limits. Be sure and "
+"configure a %sPersonal Access Token%s to avoid this issue."
+msgstr ""
+
+#: src/GitHub_Updater/Messages.php:134
+#, fuzzy
+msgid ""
+"There is probably an access token or password error on the GitHub Updater "
+"Settings page."
+msgstr "هناك خطأ ما في صفحة إعدادت GitHub "
+
+#: src/GitHub_Updater/Messages.php:154
+msgid ""
+"You must set a GitLab.com, GitLab CE, or GitLab Enterprise Private Token."
+msgstr ""
+
+#: src/GitHub_Updater/Plugin.php:326 src/GitHub_Updater/Theme.php:482
+#, fuzzy, php-format
+msgid "Current branch is `%1$s`, try %2$sanother branch%3$s."
+msgstr "النسخة الحالية محدثة . قم بتجربة %sanother version%s"
+
+#: src/GitHub_Updater/Plugin.php:378
+#, fuzzy
+msgid "View details"
+msgstr "تفاصيل"
+
+#: src/GitHub_Updater/Settings.php:81 src/GitHub_Updater/Settings.php:704
+msgid "Settings"
+msgstr "الإعدادت"
+
+#: src/GitHub_Updater/Settings.php:84 src/GitHub_Updater/Settings.php:504
+msgid "Remote Management"
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:95 src/GitHub_Updater/Settings.php:103
+#: src/GitHub_Updater/Settings.php:198
+msgid "GitHub Updater Settings"
+msgstr "إعدادت GitHub Updater"
+
+#. Plugin Name of the plugin/theme
+#: src/GitHub_Updater/Settings.php:96 src/GitHub_Updater/Settings.php:104
+#: src/GitHub_Updater/Settings.php:141
+msgid "GitHub Updater"
+msgstr "GitHub Updater"
+
+#: src/GitHub_Updater/Settings.php:145
+msgid "Saved."
+msgstr "تم الحفظ"
+
+#: src/GitHub_Updater/Settings.php:205
+msgid "Enable Branch Switching"
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:217
+#, fuzzy
+msgid "Personal GitHub Access Token"
+msgstr "رمز وصول GitHub "
+
+#: src/GitHub_Updater/Settings.php:224
+#, fuzzy
+msgid "GitHub.com Access Token"
+msgstr "رمز وصول GitHub "
+
+#: src/GitHub_Updater/Settings.php:234
+#, fuzzy
+msgid "GitHub Enterprise Access Token"
+msgstr "رمز وصول GitHub "
+
+#: src/GitHub_Updater/Settings.php:248
+msgid "GitHub Private Settings"
+msgstr "إعدادت GitHub  الخاصة"
+
+#: src/GitHub_Updater/Settings.php:261
+#, fuzzy
+msgid "GitLab Private Settings"
+msgstr "إعدادت GitHub  الخاصة"
+
+#: src/GitHub_Updater/Settings.php:270
+#, fuzzy
+msgid "GitLab.com Private Token"
+msgstr "إعدادت GitHub  الخاصة"
+
+#: src/GitHub_Updater/Settings.php:281
+msgid "GitLab CE or GitLab Enterprise Private Token"
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:294
+msgid "Bitbucket Private Settings"
+msgstr "إعدادت Bitbucket  الخاصة"
+
+#: src/GitHub_Updater/Settings.php:301
+msgid "Bitbucket Username"
+msgstr "اسم المستخدم (Bitbucket )"
+
+#: src/GitHub_Updater/Settings.php:310
+msgid "Bitbucket Password"
+msgstr "كلمة المرور (Bitbucket )"
+
+#: src/GitHub_Updater/Settings.php:323
+msgid "Bitbucket Private Repositories"
+msgstr "مستودعات Bitbucket الخاصة"
+
+#: src/GitHub_Updater/Settings.php:335
+msgid "No private repositories are installed."
+msgstr "لم يتم إضافة أي مستودعات خاصة"
+
+#: src/GitHub_Updater/Settings.php:431
+msgid "Theme:"
+msgstr "الموضوع :"
+
+#: src/GitHub_Updater/Settings.php:553
+#, php-format
+msgid "Extended Naming is %sactive%s."
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:558
+#, php-format
+msgid "Extended Naming is %snot active%s."
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:560
+#, php-format
+msgid ""
+"Extended Naming renames plugin directories %s to prevent possible conflicts "
+"with WP.org plugins."
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:561
+#, php-format
+msgid "Activate Extended Naming by setting %s"
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:562
+msgid "Check to enable branch switching from the Plugins or Themes page."
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:569
+msgid "Enter your GitHub Access Token. Leave empty for public repositories."
+msgstr "أدخل رمز وصول GitHub  . قم بتركه فارغاً من أجل المستودعات العامة"
+
+#: src/GitHub_Updater/Settings.php:576
+#, fuzzy
+msgid ""
+"Enter your personal GitHub.com or GitHub Enterprise Access Token to avoid "
+"API access limits."
+msgstr "أدخل رمز وصول GitHub  . قم بتركه فارغاً من أجل المستودعات العامة"
+
+#: src/GitHub_Updater/Settings.php:583
+msgid ""
+"Check box if private repository. Leave unchecked for public repositories."
+msgstr "قم بالاختيار إذا كان المستودع خاص , قم بتركه من أجل المستودعات العامة"
+
+#: src/GitHub_Updater/Settings.php:590
+msgid "Enter your personal Bitbucket username and password."
+msgstr "أدخل اسم المستخدم و كلمة السر لحساب Bitbucket  الخاص بك"
+
+#: src/GitHub_Updater/Settings.php:597
+msgid "Enter your GitLab.com, GitLab CE, or GitLab Enterprise Private Token."
+msgstr ""
+
+#: src/GitHub_Updater/Settings.php:604
+msgid ""
+"Use of Remote Management services may result increase some page load speeds "
+"only for `admin` level users in the dashboard."
+msgstr ""
+
+#: src/GitHub_Updater/Theme.php:383
+msgid "Theme is up-to-date!"
+msgstr "الموضوع محدث"
+
+#: src/GitHub_Updater/Theme.php:388
+msgid "Rollback to:"
+msgstr "التراجع ل :"
+
+#: src/GitHub_Updater/Theme.php:406 src/GitHub_Updater/Theme.php:647
+msgid "No previous tags to rollback to."
+msgstr "لا يوجد أية tags  لتراجع "
+
+#: src/GitHub_Updater/Theme.php:414 src/GitHub_Updater/Theme.php:428
+#, php-format
+msgid "GitHub Updater shows a new version of %s available."
+msgstr "نسخة  %1$s   جديدة متوافرة "
+
+#: src/GitHub_Updater/Theme.php:421
+#, php-format
+msgid "View version %s details."
+msgstr "رؤية تفاصيل نسخة %s"
+
+#: src/GitHub_Updater/Theme.php:425
+msgid "Automatic update is unavailable for this theme."
+msgstr "التحديث التلقائي غير متوافر لهذا الموضوع"
+
+#: src/GitHub_Updater/Theme.php:435 src/GitHub_Updater/Theme.php:601
+#, php-format
+msgid "View version %1$s details%2$s or %3$supdate now%4$s."
+msgstr "رؤية نسخة %1$s  وتفاصيل %2$s أو %3$s  وقم بالتحديث الأن %4$s."
+
+#: src/GitHub_Updater/Theme.php:594
+#, php-format
+msgid "There is a new version of %s available now."
+msgstr "هناك نسخة جديدة من %s متوافرة الأن"
+
+#: src/GitHub_Updater/Theme.php:621
+#, php-format
+msgid "Current version is up to date. Try %sanother version%s"
+msgstr "النسخة الحالية محدثة . قم بتجربة %sanother version%s"
+
+#: src/GitHub_Updater/Theme.php:635
+msgid "Choose a Version"
+msgstr "قم باختيار نسخة"
+
+#: src/GitHub_Updater/Theme.php:652
+msgid "Install"
+msgstr "تنصيب"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/afragen/github-updater"
+msgstr "https://github.com/afragen/github-updater"
+
+#. Description of the plugin/theme
+msgid ""
+"A plugin to automatically update GitHub, Bitbucket, or GitLab hosted plugins "
+"and themes. It also allows for remote installation of plugins or themes into "
+"WordPress."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Andy Fragen"
+msgstr "Andy Fragen"
+
+#~ msgid "Renaming %1$s to %2$s"
+#~ msgstr "إعادة تسمية %s  إلى %s"
+
+#~ msgid "Rename successful"
+#~ msgstr "تمت إعادة التسمية بنجاح"
+
+#~ msgid "Unable to rename downloaded repository."
+#~ msgstr "غير قادر على إعادة تسمية المستودع الذي تم تنزيله"
+
+#~ msgid "this plugin"
+#~ msgstr "هذه الإضافة"
+
+#~ msgid "Unfortunately, %1$s can not run on PHP versions older than %2$s."
+#~ msgstr "للأسف , %1$s  لا يمكن أن يعمل على نسخة PHP أقدم من %2$s."
+
+#~ msgid "Read more information about %show you can update%s."
+#~ msgstr "اقرأ المزيد عن %s وكيفية التحديث %s."
+
+#~ msgid "%1$s recommends a PHP version greater than %2$s."
+#~ msgstr "%1$s  ينصح باستخدام نسخة PHP  أحدث من %2$s."
+
+#, fuzzy
+#~ msgid ""
+#~ "A plugin to automatically update GitHub, Bitbucket or GitLab hosted "
+#~ "plugins and themes. It also allows for remote installation of plugins or "
+#~ "themes into WordPress. Plugin class based upon <a href=\"https://github."
+#~ "com/codepress/github-plugin-updater\">codepress/github-plugin-updater</"
+#~ "a>. Theme class based upon <a href=\"https://github.com/WordPress-Phoenix/"
+#~ "whitelabel-framework\">Whitelabel Framework</a> modifications."
+#~ msgstr ""
+#~ "إضافة لتحديث التقائي للإضافات والموضوعات المستضافة على GitHub  أو   "
+#~ "Bitbucket  , الإضافة تسمح أيضاً بتنزيل الإضافات والموضوعات  مباشرة "
+#~ "لوردبريس , برمجة الإضافة معتمدة على <a href=\"https://github.com/"
+#~ "codepress/github-plugin-updater\">codepress/github-plugin-updater</a>. ,"
+#~ "ايضاً <a href=\"https://github.com/WordPress-Phoenix/whitelabel-framework"
+#~ "\">Whitelabel Framework</a> "
+
+#~ msgid ""
+#~ "No changelog is available via GitHub Updater. Create a file <code>CHANGES."
+#~ "md</code> or <code>CHANGELOG.md</code> in your repository."
+#~ msgstr ""
+#~ "ملف متابعة التغيرات غير متوافر من خلال GitHub Updater. قم بإنشاء ملف "
+#~ "<code>CHANGES.md</code>  أو <code>CHANGELOG.md</code> في المستودع الخاص بك"
+
+#, fuzzy
+#~ msgid "%sView version %s details%s or %supdate now%s."
+#~ msgstr ""
+#~ "<a %2$s> مراجعة تفاصيل الإصدار %3$s  </a> أو <a href=\"%4$s\"> حدث الأن </"
+#~ "a>."
+
+#~ msgid "URI"
+#~ msgstr "(الرابط)"
+
+#~ msgid "available now."
+#~ msgstr "متوافر الأن"
+
+#~ msgid "View version"
+#~ msgstr "رؤية الإصدار"
+
+#~ msgid "or"
+#~ msgstr "أو"
+
+#~ msgid "update now"
+#~ msgstr "حدث الأن"
+
+#~ msgid "another version?"
+#~ msgstr "نسخة أخرى ؟"
+
+#~ msgid ""
+#~ "GitHub Updater will not load. It requires PHP 5.3 or greater. Please ask "
+#~ "your service provider to update PHP on your server"
+#~ msgstr ""
+#~ "لن يتم تفعيل الإضافة . إن الإضافة تحتاج PHP 5.3  أو أعلى . الرجاء طلب "
+#~ "تحديث النسخة الحالية من قبل مزود الخدمة"

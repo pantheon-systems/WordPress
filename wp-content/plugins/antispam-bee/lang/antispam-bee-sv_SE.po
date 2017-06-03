@@ -1,0 +1,286 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Antispam Bee\n"
+"POT-Creation-Date: 2015-04-17 12:23+0100\n"
+"PO-Revision-Date: 2015-04-17 15:18+0100\n"
+"Last-Translator: Sergej Müller\n"
+"Language-Team: Elger Lindgren <elger@bilddigital.se>\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: antispam_bee.php:501
+msgid "Settings"
+msgstr "Inställningar"
+
+#: antispam_bee.php:699
+msgid "Blocked"
+msgstr "Blockerad"
+
+#: antispam_bee.php:838
+msgid "No data available."
+msgstr "Inga data tillgängliga."
+
+#: antispam_bee.php:2354
+msgid "Comment marked as spam"
+msgstr "Kommentar markeras som skräppost"
+
+#: antispam_bee.php:2361
+msgid "Content removed by Antispam Bee"
+msgstr "Innehållet avlägsnades av Antispam Bee"
+
+#: antispam_bee.php:2368
+msgid "New spam comment on your post"
+msgstr "Ny spam kommentar ditt inlägg"
+
+#: antispam_bee.php:2372
+msgid "Author"
+msgstr "Skapare"
+
+#: antispam_bee.php:2379
+msgid "Type"
+msgstr "Typ"
+
+#: antispam_bee.php:2386 inc/columns.class.php:30 inc/gui.class.php:400
+msgid "Spam Reason"
+msgstr "Spam Anledning"
+
+#: antispam_bee.php:2395
+msgid "Trash it"
+msgstr "Kasta det"
+
+#: antispam_bee.php:2401
+msgid "Delete it"
+msgstr "Radera det"
+
+#: antispam_bee.php:2407
+msgid "Approve it"
+msgstr "Godkänn det"
+
+#: antispam_bee.php:2411
+msgid "Spam list"
+msgstr "Skräppostlista"
+
+#: antispam_bee.php:2415
+msgid "Notify message by Antispam Bee"
+msgstr "Uppmärksammande meddelande av Antispam Bee"
+
+#: antispam_bee.php:2416
+msgid "http://antispambee.com"
+msgstr "http://antispambee.com"
+
+#: inc/gui.class.php:30 inc/gui.class.php:35
+msgid "Cheatin&#8217; uh?"
+msgstr "Fuskar du eller?"
+
+#: inc/gui.class.php:205
+msgid "Antispam filter"
+msgstr "Antispam-filter"
+
+#: inc/gui.class.php:208
+msgid "Filter in the execution order"
+msgstr "Filter i utförandeordning"
+
+#: inc/gui.class.php:215
+msgid "Trust approved commenters"
+msgstr "Lita på godkända kommenterare"
+
+#: inc/gui.class.php:216
+msgid "Always approve previously approved users"
+msgstr "Godkänn alltid tidigare godkända användare"
+
+#: inc/gui.class.php:223
+msgid "Trust commenters with a Gravatar"
+msgstr "Lita på kommenterare med Gravatar"
+
+#: inc/gui.class.php:224
+msgid "Check if commenter has a Gravatar image"
+msgstr "Kontrollera om kommenterare har en Gravatarbild"
+
+#: inc/gui.class.php:231
+msgid "Consider the comment time"
+msgstr "Tänk på kommentartiden"
+
+#: inc/gui.class.php:232
+msgid "Not recommended when using page caching"
+msgstr "Rekommenderas inte om du använder sidcachning"
+
+#: inc/gui.class.php:239
+msgid "BBCode is spam"
+msgstr "BBC ode är spam"
+
+#: inc/gui.class.php:240
+msgid "Review the comment contents for BBCode links"
+msgstr "Granska kommentar som innehåller BBCode länkar"
+
+#: inc/gui.class.php:247
+msgid "Validate the ip address of commenters"
+msgstr "Validera IP-adressen för kommenterare"
+
+#: inc/gui.class.php:248
+msgid "Validity check for used ip address"
+msgstr "Giltighetskontroll för använd ip-adress"
+
+#: inc/gui.class.php:255
+msgid "Use regular expressions"
+msgstr "Använd reguljära uttryck"
+
+#: inc/gui.class.php:256
+msgid ""
+"Predefined and custom patterns by <a href=\"https://gist.github."
+"com/4242142\" target=\"_blank\">plugin hook</a>"
+msgstr ""
+"Fördefinierade och anpassade mönster av  <a href=\"https://gist.github."
+"com/4242142\" target=\"_blank\">plugin hook</a>"
+
+#: inc/gui.class.php:263
+msgid "Look in the local spam database"
+msgstr "Titta i den lokala spam databasen"
+
+#: inc/gui.class.php:264
+msgid "Already marked as spam? Yes? No?"
+msgstr "Redan markerad som skräppost? Ja? Nej?"
+
+#: inc/gui.class.php:271
+msgid "Use a public antispam database"
+msgstr "Använd en offentlig antispam databas"
+
+#: inc/gui.class.php:272
+msgid ""
+"Matching the ip address with <a href=\"https://dnsbl.tornevall.org\" target="
+"\"_blank\">Tornevall</a>"
+msgstr ""
+"Matcha IP-adressen med  <a href=\"https://dnsbl.tornevall.org\" target="
+"\"_blank\">Tornevall</a>"
+
+#: inc/gui.class.php:279
+msgid "Block comments from specific countries"
+msgstr "Block kommentarer från vissa länder"
+
+#: inc/gui.class.php:280
+msgid "Filtering the requests depending on country"
+msgstr "Filtrering av förfrågningar beroende på land"
+
+#: inc/gui.class.php:302
+msgid "Allow comments only in certain language"
+msgstr "Tillåt kommentarer endast på vissa språk"
+
+#: inc/gui.class.php:303
+msgid "Detection and approval in specified language"
+msgstr "Detektering och godkännande i angivet språk"
+
+#: inc/gui.class.php:314
+msgid "Language"
+msgstr "Språk"
+
+#: inc/gui.class.php:325
+msgid "Advanced"
+msgstr "Avancerat"
+
+#: inc/gui.class.php:328
+msgid "Other antispam tools"
+msgstr "Andra antispam verktyg"
+
+#: inc/gui.class.php:335
+msgid "Mark as spam, do not delete"
+msgstr "Markera som spam, radera inte"
+
+#: inc/gui.class.php:336
+msgid "Keep the spam in my blog."
+msgstr "Behåll spam i min blogg."
+
+#: inc/gui.class.php:343
+msgid "Notification by email"
+msgstr "Meddela via e-post"
+
+#: inc/gui.class.php:344
+msgid "Notify admins by e-mail about incoming spam"
+msgstr "Meddela admins via e-post om inkommande spam"
+
+#: inc/gui.class.php:351
+msgid "Not save the spam reason"
+msgstr "Spara inte spamorsaken"
+
+#: inc/gui.class.php:352
+msgid "Spam reason as table column in the spam overview"
+msgstr "Spam-orsak som tabellkolumn i spam-översikten"
+
+#: inc/gui.class.php:360
+#, php-format
+msgid "Delete existing spam after %s days"
+msgstr "Radera befintliga skräppost efter %s dagar"
+
+#: inc/gui.class.php:363
+msgid "Cleaning up the database from old entries"
+msgstr "Rensa upp databasen från gamla poster"
+
+#: inc/gui.class.php:371
+#, php-format
+msgid "Limit approval to %s"
+msgstr "Begränsa godkännande till %s"
+
+#: inc/gui.class.php:381
+msgid "Other types of spam will be deleted immediately"
+msgstr "Andra typer av spam kommer att raderas omedelbart"
+
+#: inc/gui.class.php:388
+msgid "Delete comments by spam reasons"
+msgstr "Radera kommentarer enligt spam-orsak"
+
+#: inc/gui.class.php:389
+msgid "For multiple selections press Ctrl/CMD"
+msgstr "För flera val tryck Ctrl/CMD"
+
+#: inc/gui.class.php:411
+msgid "More"
+msgstr "Mer"
+
+#: inc/gui.class.php:414
+msgid "A few little things"
+msgstr "Några små saker"
+
+#: inc/gui.class.php:421
+msgid "Statistics on the dashboard"
+msgstr "Statistik på instrumentbrädan"
+
+#: inc/gui.class.php:422
+msgid "Daily updates of spam detection rate"
+msgstr "Daglig uppdatering av skräppostupptäckts-nivå"
+
+#: inc/gui.class.php:429
+msgid "Spam counter on the dashboard"
+msgstr "Spamräknare på instrumentbrädan"
+
+#: inc/gui.class.php:430
+msgid "Amount of identified spam comments"
+msgstr "Mängd identifierade spamkommentarer"
+
+#: inc/gui.class.php:437
+msgid "Do not check trackbacks / pingbacks"
+msgstr "Kontrollera inte trackbacks / pingbacks"
+
+#: inc/gui.class.php:438
+msgid "No spam check for trackback notifications"
+msgstr "Ingen spam check för trackbacknoteringar"
+
+#: inc/gui.class.php:445
+msgid "Comment form used outside of posts"
+msgstr "Kommentarsformulär som används utanför inläggen"
+
+#: inc/gui.class.php:446
+msgid "Check for comment forms on archive pages"
+msgstr "Kontrollera för kommentarformulär på arkivsidor"
+
+#: inc/gui.class.php:465
+msgid "Save Changes"
+msgstr "Spara ändringar"

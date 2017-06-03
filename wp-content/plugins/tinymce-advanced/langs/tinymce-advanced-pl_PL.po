@@ -1,0 +1,366 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TinyMCE Advanced\n"
+"POT-Creation-Date: 2016-03-17 12:21-0800\n"
+"PO-Revision-Date: 2016-03-17 12:24-0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../tadv_admin.php:140
+msgid "Default settings restored."
+msgstr "Domyślne ustawienia przywrócone."
+
+#: ../tadv_admin.php:152
+msgid "TinyMCE Advanced Settings Export"
+msgstr "Eksport Ustawień TinyMCE Advanced"
+
+#: ../tadv_admin.php:156
+msgid "The settings are exported as a JSON encoded string."
+msgstr "Ustawienia zostaną wyeksportowane jako zakodowany tekst JSON."
+
+#: ../tadv_admin.php:157
+msgid ""
+"Please copy the content and save it in a <b>text</b> (.txt) file, using a "
+"plain text editor like Notepad."
+msgstr ""
+"Skopiuj tekst i zapisz go w pliku <b>tekstowym</b> (.txt), używając edytora "
+"zwykłego tekstu takiego jak Notatnik."
+
+#: ../tadv_admin.php:158
+msgid ""
+"It is important that the export is not changed in any way, no spaces, line "
+"breaks, etc."
+msgstr ""
+"Ważne jest, aby tekst nie został w żaden sposób zmieniony, żadnych spacji, "
+"nowych linii, itd."
+
+#: ../tadv_admin.php:163
+msgid "Select All"
+msgstr "Wybierz Wszystko"
+
+#: ../tadv_admin.php:165 ../tadv_admin.php:191
+msgid "Back to Editor Settings"
+msgstr "Powrót do Ustawień Edytora"
+
+#: ../tadv_admin.php:177
+msgid "TinyMCE Advanced Settings Import"
+msgstr "Import Ustawień TinyMCE Advanced"
+
+#: ../tadv_admin.php:180
+msgid ""
+"The settings are imported from a JSON encoded string. Please paste the "
+"exported string in the text area below."
+msgstr ""
+"Ustawienia zostaną zaimportowane z zakodowanego tekstu JSON. Wklej "
+"wyeksportowany tekst poniżej."
+
+#: ../tadv_admin.php:185
+msgid "Verify"
+msgstr "Zweryfikuj"
+
+#: ../tadv_admin.php:186
+msgid "Import"
+msgstr "Importuj"
+
+#: ../tadv_admin.php:216
+msgid "Importing of settings failed."
+msgstr "Importowanie ustawień nie powiodło się."
+
+#: ../tadv_admin.php:242
+msgid "ERROR: All toolbars are empty. Default settings loaded."
+msgstr ""
+"BŁĄD: Wszystkie paski narzędzi są puste. Domyślne ustawienia przywrócone."
+
+#: ../tadv_admin.php:254
+msgid "Editor Settings"
+msgstr "Ustawienia Edytora"
+
+#: ../tadv_admin.php:261
+msgid "Settings saved."
+msgstr "Ustawienia zapisane."
+
+#: ../tadv_admin.php:270 ../tadv_admin.php:540
+msgid "Save Changes"
+msgstr "Zapisz Zmiany"
+
+#: ../tadv_admin.php:277
+msgid "Enable the editor menu."
+msgstr "Włącz menu edytora."
+
+#: ../tadv_admin.php:389
+msgid ""
+"Drag buttons from the unused buttons below and drop them in the toolbars "
+"above, or drag the buttons in the toolbars to rearrange them."
+msgstr ""
+"Przeciągnij przyciski z nieużywanych przycisków poniżej i upuść je w paskach "
+"powyżej, lub przeciągnij je w paskach, by zmienić ich położenie."
+
+#: ../tadv_admin.php:392
+msgid "Unused Buttons"
+msgstr "Nieużywane przyciski"
+
+#: ../tadv_admin.php:434
+#, fuzzy
+msgid "Options"
+msgstr "Ustawienia Zaawansowane"
+
+#: ../tadv_admin.php:437
+msgid "List Style Options"
+msgstr "Ustawienia Stylu Listy"
+
+#: ../tadv_admin.php:439
+msgid ""
+"Enable more list options: upper or lower case letters for ordered lists, "
+"disk or square for unordered lists, etc."
+msgstr ""
+
+#: ../tadv_admin.php:444
+msgid "Context Menu"
+msgstr "Menu Kontekstowe"
+
+#: ../tadv_admin.php:446
+msgid "Replace the browser context (right-click) menu."
+msgstr ""
+
+#: ../tadv_admin.php:451
+msgid "Alternative link dialog"
+msgstr ""
+
+#: ../tadv_admin.php:453
+msgid ""
+"Open the TinyMCE link dialog when using the link button on the toolbar or "
+"the link menu item."
+msgstr ""
+
+#: ../tadv_admin.php:458
+msgid "Font sizes"
+msgstr ""
+
+#: ../tadv_admin.php:459
+msgid ""
+"Replace the size setting available for fonts with: 8px 10px 12px 14px 16px "
+"20px 24px 28px 32px 36px 48px 60px."
+msgstr ""
+"Zmienia dostępne rozmiary czcionki na: 8px 10px 12px 14px 16px 20px 24px "
+"28px 32px 36px 48px 60px."
+
+#: ../tadv_admin.php:467
+msgid "Advanced Options"
+msgstr "Ustawienia Zaawansowane"
+
+#: ../tadv_admin.php:476
+msgid "Create CSS classes menu"
+msgstr ""
+
+#: ../tadv_admin.php:478
+msgid ""
+"Load the CSS classes used in editor-style.css and replace the Formats button "
+"and sub-menu."
+msgstr ""
+"Załaduj klasy CSS użyte w editor-style.css i zmień przycisk oraz podmenu "
+"Formaty."
+
+#: ../tadv_admin.php:488
+msgid "Keep paragraph tags"
+msgstr ""
+
+#: ../tadv_admin.php:490
+#, fuzzy
+msgid ""
+"Stop removing the &lt;p&gt; and &lt;br /&gt; tags when saving and show them "
+"in the Text editor."
+msgstr ""
+"Przestań usuwać tagi &lt;p&gt; i &lt;br /&gt; podczas zapisywania i pokazuj "
+"je w edytorze Tekstowym."
+
+#: ../tadv_admin.php:491
+msgid ""
+"This will make it possible to use more advanced coding in the HTML editor "
+"without the back-end filtering affecting it much."
+msgstr ""
+"Umożliwi to zaawansowaną edycję w edytorze HTMLa bez szczególnego "
+"filtrowania backendu zbyt zmieniającego pisany kod."
+
+#: ../tadv_admin.php:492
+msgid ""
+"However it may behave unexpectedly in rare cases, so test it thoroughly "
+"before enabling it permanently."
+msgstr ""
+"Może to jednak zachowywać się nieprzewidzianie w rzadkich przypadkach, więc "
+"przetestuj tą opcję dogłębnie przed korzystaniem z niej na stałe."
+
+#: ../tadv_admin.php:493
+msgid ""
+"Line breaks in the HTML editor would still affect the output, in particular "
+"do not use empty lines, line breaks inside HTML tags or multiple &lt;br /"
+"&gt; tags."
+msgstr ""
+"Znaki nowej linii w edytorze HTMLa nadal będą zmieniać wyjście, nie używaj "
+"pustych linii, nowych linii wewnątrz tagów HTMLa ani wielu tagów &lt;br /"
+"&gt;."
+
+#: ../tadv_admin.php:498
+msgid "Enable pasting of image source"
+msgstr "Włącz wklejanie źródeł obrazów."
+
+#: ../tadv_admin.php:500
+msgid ""
+"Works only in Firefox and Safari. These browsers support pasting of images "
+"directly in the editor and convert them to base64 encoded text."
+msgstr ""
+"Działa tylko w Firefoksie i Safari. Te przeglądarki umożliwiają wklejanie "
+"obrazów bezpośrednio w edytorze i ich konwersję do zakodowanego tekstu "
+"base64."
+
+#: ../tadv_admin.php:501
+msgid ""
+"This is not acceptable for larger images like photos or graphics, but may be "
+"useful in some cases for very small images like icons, not larger than 2-3KB."
+msgstr ""
+"Nie jest to sensowne dla dużych obrazów jak zdjęcia czy grafiki, ale może "
+"być przydatne dla bardzo małych obrazków jak ikony, nie większych niż 2-3KB."
+
+#: ../tadv_admin.php:502
+msgid "These images will not be available in the Media Library."
+msgstr "Obrazy te nie będą dostępne w Bibliotece Mediów."
+
+#: ../tadv_admin.php:508
+msgid "Administration"
+msgstr "Administracja"
+
+#: ../tadv_admin.php:510
+msgid "Settings import and export"
+msgstr ""
+
+#: ../tadv_admin.php:512
+msgid "Export Settings"
+msgstr "Eksport Ustawień"
+
+#: ../tadv_admin.php:513
+msgid "Import Settings"
+msgstr "Import Ustawień"
+
+#: ../tadv_admin.php:517
+#, fuzzy
+msgid "Enable the editor enhancements for:"
+msgstr "Włącz menu edytora."
+
+#: ../tadv_admin.php:520
+msgid "The main editor (Add New and Edit posts and pages)"
+msgstr ""
+
+#: ../tadv_admin.php:524
+msgid "Other editors in wp-admin"
+msgstr ""
+
+#: ../tadv_admin.php:528
+msgid "Editors on the front end of the site"
+msgstr ""
+
+#: ../tadv_admin.php:539
+msgid "Restore Default Settings"
+msgstr "Przywróć Domyślne Ustawienia"
+
+#: ../tadv_admin.php:545
+msgid ""
+"The [Toolbar toggle] button shows or hides the second, third, and forth "
+"button rows. It will only work when it is in the first row and there are "
+"buttons in the second row."
+msgstr ""
+"Przycisk [Przełącz widoczność paska narzędzi] pokazuje lub ukrywa drugi, "
+"trzeci i czwarty rząd przycisków. Będzie działać tylko jeśli jest w "
+"pierwszym rzędzie i istnieją przyciski w drugim."
+
+#: ../tinymce-advanced.php:221
+#, php-format
+msgid ""
+"TinyMCE Advanced requires WordPress version %1$s or newer. It appears that "
+"you are running %2$s. This can make the editor unstable."
+msgstr ""
+"TinyMCE Advanced requires WordPress version %1$s or newer. It appears that "
+"you are running %2$s. This can make the editor unstable."
+
+#: ../tinymce-advanced.php:228
+#, php-format
+msgid ""
+"Please upgrade your WordPress installation or download an <a href=\"%s"
+"\">older version of the plugin</a>."
+msgstr ""
+"Zaktualizuj swoją instalację WordPressa lub pobierz <a href=\"%s\">starszą "
+"wersję tej wtyczki</a>."
+
+#: ../tinymce-advanced.php:703
+#, fuzzy
+msgid "Settings"
+msgstr "Ustawienia Edytora"
+
+#~ msgid ""
+#~ "New in TinyMCE 4.0/WordPress 3.9 is the editor menu. When it is enabled, "
+#~ "most buttons are also available as menu items."
+#~ msgstr ""
+#~ "Nowością w TinyMCE 4.0/WordPressie 3.9 jest menu edytora. Gdy włączone, "
+#~ "większość przycisków dostępne jest również jako opcje w menu."
+
+#~ msgid "Also enable:"
+#~ msgstr "Włącz również:"
+
+#~ msgid "Link (replaces the Insert/Edit Link dialog)"
+#~ msgstr "Link (zastępuje okno Wstaw/Edytuj Link)"
+
+#~ msgid "Import editor-style.css."
+#~ msgstr "Zaimportuj editor-style.css."
+
+#~ msgid ""
+#~ "It seems your theme does not support customised styles for the editor."
+#~ msgstr ""
+#~ "Wygląda na to, że twój motyw nie wspiera zmodyfikowanych stylów dla "
+#~ "edytora."
+
+#~ msgid ""
+#~ "You can create a CSS file named <code>editor-style.css</code> and upload "
+#~ "it to your theme's directory."
+#~ msgstr ""
+#~ "Możesz utworzyć plik CSS nazwany <code>editor-style.css</code> i "
+#~ "załadować go do katalogu twojego motywu."
+
+#~ msgid "After that, enable this setting."
+#~ msgstr "Gdy to zrobisz, aktywuj tą opcję."
+
+#~ msgid "Replace font size settings"
+#~ msgstr "Zmień ustawienia rozmiaru czcionki"
+
+#~ msgid "Markdown typing support (text pattern plugin)"
+#~ msgstr "Wsparcie Markdown (wtyczka szablonu tekstu)"
+
+#~ msgid ""
+#~ "This plugin matches special patterns while you type and applies formats "
+#~ "or executes commands on the matched text."
+#~ msgstr ""
+#~ "Ta wtyczka będzie oznaczać specjalne wyrażenia podczas pisania i "
+#~ "automatycznie dodawać formatowanie lub wykonywać polecenia na oznaczonym "
+#~ "tekście."
+
+#~ msgid ""
+#~ "The default patterns are the same as the markdown syntax so you can type "
+#~ "<code># text</code> to create a header, <code>1. text</code> to create a "
+#~ "list, <code>**text**</code> to make it bold, etc."
+#~ msgstr ""
+#~ "Domyślnie działa to jak Markdown, więc możesz napisać <code># tekst</"
+#~ "code> aby stworzyć nagłówek, <code>1. tekst</code> aby stworzyć listę, "
+#~ "<code>**tekst**</code> aby pogrubić, itd."
+
+#~ msgid "More information"
+#~ msgstr "Więcej informacji"

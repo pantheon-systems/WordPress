@@ -1,0 +1,1053 @@
+/*
+ *  ASU Header  /asuthemes/4.1/css
+ */
+
+
+/* =Added by 29th Drive
+ *  Ugly css is kept here so you can see any changes
+ *  made to existing styles
+--------------------------------------------------------- */
+
+#asu_hdr {
+  padding-right: 0 !important;
+}
+#asu_hdr a {
+  border-bottom: 0;
+  text-decoration: none;
+}
+#asu_mobile_hdr {
+  float: left;
+}
+#asu_mobile_menu {
+  float: right;
+  margin-top: 10px;
+}
+#asu_logo {
+  padding-left: 10px !important;
+}
+#asu_school_name {
+  float: left;
+  clear: left;
+  padding-left: 0;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -1px;
+  color: #2a2a2a;
+}
+
+/* Turn off ASU Global nav items for demonstration */
+@media (max-width: 991px) {
+  #asu_mobile_button {
+    display: none !important;
+  }
+  #asu_login_module {
+    display: none !important;
+  }
+  #asu_nav_menu {
+    display: none !important;
+  }
+  #asu_search {
+    display: none !important;
+  }
+  #asu_school_name {
+    display: none !important;
+  }
+  #block-asu-brand-asu-brand-header > .container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 992px) {
+  #asu_mobile_hdr {
+    max-width: 414px;
+  }
+  #asu_logo {
+    padding-left: 0 !important;
+  }
+}
+@media (min-width: 1200px) {
+  #asu_mobile_hdr {
+    max-width: 610px;
+  }
+}
+
+/* =Header Styles
+--------------------------------------------------------- */
+#asu_hdr {
+  position: relative;
+  display: block;
+  overflow: visible !important;
+  height: 60px;
+  margin: 0 0 0 0;
+  padding: 0 22px 0 0;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1em;
+  color: #000;
+  z-index: 500;
+}
+#asu_hdr img {
+  border: 0;
+}
+#asu_logo {
+  margin: 0;
+  padding-left: 22px;
+  display: block;
+  float: left;
+  min-width: 203px;
+}
+#asu_mobile_button,
+#asu_print_logo {
+  display: none;
+}
+/* =Universal Nav
+------------------------------------------------------ */
+#asu_nav_wrapper {
+  margin: 0;
+  /* float: right;
+  max-width: 630px; */
+  display: block;
+  z-index: 100;
+}
+#asu_nav_menu {
+  position: relative;
+  float: right;
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 100;
+}
+#asu_universal_nav ul {
+  margin: 0;
+  list-style: none;
+  white-space: nowrap;
+  text-align: left;
+  display: inline-block;
+  background-color: transparent;
+  padding: 0;
+}
+#asu_universal_nav ul {
+  display: inline;
+}
+#asu_universal_nav li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#asu_universal_nav li {
+  display: inline;
+}
+#asu_universal_nav ul ul {
+  position: absolute;
+  left: 0;
+  display: none;
+  background-color: #fff;
+  padding-top: 10px;
+  -moz-box-shadow: 0px 3px 3px 0px #999;
+  -webkit-box-shadow: 0px 3px 3px 0px #999;
+  box-shadow: 0px 3px 3px 0px #999;
+  /* IE8 and lower */
+  zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#dddddd, direction=135, strength=5), progid:DXImageTransform.Microsoft.Shadow(color=#dddddd, direction=225, strength=5);
+}
+#asu_universal_nav > ul {
+  display: table;
+  margin: 0 auto;
+}
+#asu_universal_nav > ul > li {
+  float: left;
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+#asu_universal_nav > ul > li:hover {
+  display: inline-block;
+  z-index: 10;
+}
+#asu_universal_nav ul a {
+  display: block;
+  font: 12px/12px Arial, Helvetica, sans-serif;
+  color: #000;
+  text-decoration: none;
+  padding: 8px 8px 5px 8px;
+}
+#asu_universal_nav ul ul a {
+  padding: 0;
+  margin: 5px 10px;
+  line-height: 20px;
+}
+#asu_universal_nav ul li:hover > ul {
+  display: block;
+  top: 20px;
+  z-index: -1;
+}
+#asu_universal_nav ul ul li:hover > a {
+  color: #903;
+  text-decoration: underline;
+}
+#asu_universal_nav > ul > li:hover > a {
+  color: #903;
+  text-decoration: underline;
+}
+#asu_universal_nav > ul > li.parent > a {
+  background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_arrow_closed.gif) 100% 55% no-repeat;
+  padding-right: 23px;
+}
+#asu_universal_nav > ul > li.parent:hover > a {
+  background: #ffffff url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_arrow_open.gif) 100% 55% no-repeat;
+  -moz-box-shadow: 3px 0px 3px -3px #999999, -3px 0px 3px -3px #999999;
+  -webkit-box-shadow: 3px 0px 3px -3px #999999, -3px 0px 3px -3px #999999;
+  box-shadow: 3px 0px 3px -3px #999999, -3px 0px 3px -3px #999999;
+  /* IE8 and lower */
+  zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.Shadow(color=#dddddd, direction=90, strength=5), progid:DXImageTransform.Microsoft.Shadow(color=#dddddd, direction=270, strength=5);
+}
+#asu_universal_nav li.parent ul li a.border {
+  border-bottom: 1px dotted #a6a6a6;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+}
+#asu_universal_nav img.asu_touch {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: -1;
+}
+#asu_universal_nav ul:hover + img.asu_touch {
+  display: block;
+}
+/* ----{ Sign-In Links }---- */
+#asu_login_module {
+  border-left: 1px solid #999;
+  margin: 8px 0 0 8px;
+  padding: 0 0 0 8px;
+  float: right;
+  display: inline-block;
+}
+#asu_login_module li {
+  color: #000;
+  font-weight: bold;
+  line-height: 1em;
+  float: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 .41em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#asu_login_module li.end {
+  text-transform: uppercase;
+  padding-right: 0;
+}
+#asu_login_module li a {
+  text-decoration: none;
+  line-height: 1em;
+}
+#asu_login_module li a:hover {
+  text-decoration: underline;
+}
+/* ----{ Search Module }---- */
+#asu_search_module {
+  clear: right;
+  float: right;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 6px;
+}
+#asu_hdr .hidden,
+#asu_search_module .search_range legend {
+  visibility: visible;
+  display: none;
+}
+#asu_search_module input.asu_search_box {
+  background-color: #fff;
+  background-image: none;
+  border: 0 none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  width: 180px;
+  height: 22px;
+  margin: 00;
+  padding: 1px 0 0 6px;
+  vertical-align: middle;
+  font: 11px/15px Arial, Helvetica, sans-serif;
+  color: #333;
+}
+#asu_search_module input.asu_search_button,
+#asu_search_module input[type="submit"] {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_search_btn.png) 0 0 no-repeat;
+  border: 0 none;
+  border-radius: 0 0 0 0;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  font-size: 0.01px;
+  line-height: 15px;
+  cursor: pointer;
+  text-indent: -9999px;
+}
+#asu_search_module input.asu_search_button:hover,
+#asu_search_module input[type="submit"]:hover {
+  background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_srch_btn.gif) 0 0 no-repeat;
+}
+#asu_search_module .asu_search_selection {
+  background-color: transparent;
+  background-image: none;
+  border: 0 none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  position: static;
+  text-align: left;
+  vertical-align: middle;
+}
+#asu_search_module .asu_search_selection input {
+  border: 0;
+  margin: -1px 4px 0 2px;
+  vertical-align: middle;
+}
+#asu_search_module .asu_search_selection label {
+  margin: 0 5px 0 3px;
+  cursor: pointer;
+  display: inline;
+  font-weight: normal;
+  font-size: 12px;
+}
+/* =Footer Styles
+--------------------------------------------------------- */
+#asu_footer {
+  font: 12px Arial, Helvetica, sans-serif;
+  display: block;
+  height: 24px;
+  margin: 0;
+  padding: 0 25px 0 0;
+  text-align: right;
+  clear: both;
+}
+#asu_footer li.no-border {
+  border-right: none;
+}
+.asu_black_footer {
+  background-color: #000;
+}
+.asu_dark_grey_footer {
+  background-color: #666;
+}
+.asu_light_grey_footer {
+  background-color: #999;
+}
+#asu_footer ul {
+  margin: 0;
+  padding: 0;
+}
+#asu_footer li {
+  border-right: 1px solid #fff;
+  display: inline;
+  list-style-type: none;
+  font: normal 12px/24px Arial, sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+#asu_footer li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 8px;
+}
+#asu_footer li a:hover {
+  color: #ffb310;
+  text-decoration: underline;
+}
+#asu_footer.asu_light_grey_footer li a:hover {
+  color: #903;
+}
+#asu_footer_contact_info {
+  clear: both;
+  text-align: right;
+  margin: 0;
+  padding: 10px 30px 10px 0;
+  font: normal 0.75em/1.2em Arial, sans-serif;
+  color: #666;
+  background-color: #fff;
+  display: block;
+}
+#asu_footer_contact_info p {
+  font-size: .95em;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+#asu_footer_contact_info a {
+  color: #903;
+  text-decoration: underline;
+  font-size: inherit;
+}
+#asu_footer_contact_info a:hover {
+  color: #903;
+  text-decoration: underline;
+}
+#asu_footer_contact_info a:visited {
+  color: #666;
+}
+/* myasu tabs */
+#myasu_bar {
+  height: 25px;
+  background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/tab_gradient.jpg);
+  padding-right: 20px;
+  border-top: 2px solid #9A2537;
+}
+#myasu_bar_myasu {
+  float: left;
+  padding-left: 26px;
+}
+#myasu_bar_stuff {
+  float: right;
+}
+#myasu_bar_info {
+  float: right;
+}
+#myasu_bar_profile {
+  float: right;
+}
+#myasu_bar_star {
+  float: right;
+}
+#myasu_bar img {
+  border: 0;
+}
+#back_to_myasu_anchor {
+  text-decoration: none;
+  color: #555;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7em;
+  line-height: 1em;
+  display: inline-block;
+  margin: 7px 0 0 0;
+  padding: 0;
+}
+#back_to_myasu_anchor:hover {
+  text-decoration: underline;
+  color: #990033;
+}
+#back_to_myasu_arrow_left {
+  border: 0px;
+  padding: 1px 0 0 10px;
+  margin: 0px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+/* myasu footer */
+#my_asu_footer {
+  background: #FFF;
+  border-top: 2px #CCC solid;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 20px 20px;
+  padding: 20px 0 0;
+}
+#my_asu_footer div.block-left {
+  float: left;
+  margin: 0 20px;
+  width: 175px;
+}
+#my_asu_footer div.block-left h2 {
+  border: none;
+  font-size: 2.5em;
+  line-height: 1em;
+  font-weight: bold;
+  letter-spacing: -0.05em;
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+}
+#my_asu_footer div.block-left h2 a {
+  color: #999;
+  text-decoration: underline;
+}
+#my_asu_footer div.block-left p {
+  color: #666;
+  padding: 2px 0 0 0;
+  margin: 0;
+}
+#my_asu_footer ul.multicolumn-menu {
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+#my_asu_footer ul.multicolumn-menu li {
+  list-style-type: none;
+  list-style-image: none;
+}
+#my_asu_footer ul.multicolumn-menu li a {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+#my_asu_footer ul.multicolumn-menu li.expanded {
+  float: left;
+  text-transform: lowercase;
+  width: 135px;
+}
+#my_asu_footer ul.multicolumn-menu li ul.menu {
+  margin: 0;
+  padding: 0;
+}
+#my_asu_footer ul.multicolumn-menu li ul.menu li {
+  margin: 0;
+  padding: 2px 0 0 0;
+}
+#my_asu_footer ul.multicolumn-menu li ul.menu li a {
+  color: #666;
+  font-weight: normal;
+}
+#my_asu_footer ul.multicolumn-menu li ul.menu li a:hover {
+  color: #000;
+}
+/** Gold **/
+#asu_hdr.asu_hdr_gold {
+  position: relative;
+  background: #ffcb66;
+}
+.asu_hdr_gold #asu_logo a {
+  color: #000;
+}
+.asu_hdr_gold #asu_login_module li {
+  color: #666;
+}
+.asu_hdr_gold #asu_login_module li a {
+  color: #000;
+}
+.asu_hdr_gold #asu_login_module li a:hover {
+  color: #990033;
+}
+.asu_hdr_gold #asu_universal_nav li,
+.asu_hdr_gold #asu_universal_nav li a {
+  color: #000;
+}
+.asu_hdr_gold #asu_universal_nav li a:hover {
+  text-decoration: underline;
+  color: #903;
+}
+/** White **/
+#asu_hdr.asu_hdr_white {
+  position: relative;
+  background: #fff;
+}
+.asu_hdr_white #asu_logo a {
+  color: #000;
+}
+.asu_hdr_white #asu_login_module li {
+  color: #000;
+}
+.asu_hdr_white #asu_login_module li a,
+.asu_hdr_white #asu_login_module li a:hover {
+  color: #000;
+}
+.asu_hdr_white #asu_universal_nav li,
+.asu_hdr_white #asu_universal_nav li a {
+  color: #000;
+}
+.asu_hdr_white #asu_search_module input.asu_search_box {
+  background-color: #efefef;
+}
+/** Maroon **/
+#asu_hdr.asu_hdr_maroon {
+  position: relative;
+  background: #860025;
+}
+.asu_hdr_maroon #asu_logo a {
+  color: #fff;
+}
+.asu_hdr_maroon #asu_login_module li {
+  color: #fff;
+}
+.asu_hdr_maroon #asu_login_module li a,
+.asu_hdr_maroon #asu_login_module li a:hover {
+  color: #fff;
+}
+.asu_hdr_maroon .asu_search_selection {
+  color: #fff;
+}
+.asu_hdr_maroon #asu_universal_nav li {
+  color: #fff;
+}
+.asu_hdr_maroon #asu_universal_nav li a:link,
+.asu_hdr_maroon #asu_universal_nav li a:visited {
+  color: #fff;
+}
+.asu_hdr_maroon #asu_universal_nav li a:hover,
+.asu_hdr_maroon #asu_universal_nav li a:active {
+  color: #fff;
+}
+.asu_hdr_maroon #asu_universal_nav > ul > li.parent:hover > a,
+.asu_hdr_maroon #asu_universal_nav li.parent:hover,
+.asu_hdr_maroon #asu_universal_nav li.parent a:hover,
+.asu_hdr_maroon #asu_universal_nav li li,
+.asu_hdr_maroon #asu_universal_nav li li a:link,
+.asu_hdr_maroon #asu_universal_nav li li a:visited,
+.asu_hdr_maroon #asu_universal_nav li li a:hover,
+.asu_hdr_maroon #asu_universal_nav li li a:active {
+  color: #000;
+}
+.asu_hdr_maroon #asu_universal_nav > ul > li.parent > a {
+  background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_white_arrow_closed.gif);
+}
+.asu_hdr_maroon #asu_universal_nav > ul > li.parent:hover > a {
+  background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_arrow_open.gif);
+}
+/** Black **/
+#asu_hdr.asu_hdr_black {
+  position: relative;
+  background: #000;
+}
+.asu_hdr_black #asu_logo a {
+  color: #fff;
+}
+.asu_hdr_black #asu_login_module li {
+  color: #fff;
+}
+.asu_hdr_black #asu_login_module li a,
+.asu_hdr_black #asu_login_module li a:hover {
+  color: #fff;
+}
+.asu_hdr_black .asu_search_selection {
+  color: #fff;
+}
+.asu_hdr_black #asu_universal_nav li {
+  color: #fff;
+}
+.asu_hdr_black #asu_universal_nav li a:link,
+.asu_hdr_black #asu_universal_nav li a:visited {
+  color: #fff;
+}
+.asu_hdr_black #asu_universal_nav li a:hover,
+.asu_hdr_black #asu_universal_nav li a:active {
+  color: #fff;
+}
+.asu_hdr_black #asu_universal_nav > ul > li.parent:hover > a,
+.asu_hdr_black #asu_universal_nav li.parent:hover,
+.asu_hdr_black #asu_universal_nav li.parent a:hover,
+.asu_hdr_black #asu_universal_nav li li,
+.asu_hdr_black #asu_universal_nav li li a:link,
+.asu_hdr_black #asu_universal_nav li li a:visited,
+.asu_hdr_black #asu_universal_nav li li a:hover,
+.asu_hdr_black #asu_universal_nav li li a:active {
+  color: #000;
+}
+.asu_hdr_black #asu_universal_nav > ul > li.parent > a {
+  background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_white_arrow_closed.gif);
+}
+.asu_hdr_black #asu_universal_nav > ul > li.parent:hover > a {
+  background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_arrow_open.gif);
+}
+/* Universal Print Styles */
+@media print {
+  /* hide header, nav, search, and footer */
+  #asu_logo,
+  #asu_nav_wrapper,
+  #asu_search_module,
+  #asu_footer {
+    display: none;
+  }
+  #asu_print_logo {
+    display: block;
+  }
+  #asu_footer_contact_info {
+    border-top: thin solid #ccc;
+    margin: .25in 0 .1in 0;
+    font-size: 90%;
+    line-height: 1.1em;
+  }
+}
+/* =RESPONSIVE MEDIA QUERIES
+-------------------------------------------------------------- */
+/* ----------- 930px ----------- */
+@media only screen and (max-width: 930px) {
+  /* Remove z-index */
+  #asu_hdr,
+  #asu_nav_wrapper,
+  #asu_nav_menu,
+  #asu_universal_nav > ul > li,
+  #asu_universal_nav > ul > li:hover,
+  #asu_universal_nav ul li:hover > ul {
+    z-index: 0;
+  }
+  /* Remove height from header */
+  #asu_hdr {
+    padding-right: 0;
+    height: auto;
+  }
+  /* Put height and background on secondary "mobile" header div */
+  #asu_mobile_hdr {
+    display: block;
+    width: 100%;
+    height: 60px;
+  }
+  /* Provide hide/show styles for menu button */
+  #asu_mobile_button.asuhide {
+    display: none;
+  }
+  #asu_mobile_button.asushow {
+    display: block;
+  }
+  /* Mobile menu dropdown container */
+  #asu_mobile_menu {
+    clear: both;
+    background: #303030 url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_bg.png) 0 0 repeat-x;
+    width: 100%;
+  }
+  #asu_mobile_menu.asutoggle_off {
+    display: none;
+  }
+  #asu_mobile_menu.asutoggle_on {
+    display: block;
+  }
+  #asu_nav_wrapper {
+    float: none;
+    margin: 0;
+    max-width: 100%;
+  }
+  #asu_nav_menu {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  /* Menu button */
+  #asu_mobile_button {
+    display: block;
+    background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_bttn.png) no-repeat 0 0;
+    position: absolute;
+    top: 20px;
+    right: 21px;
+    width: 27px;
+    height: 19px;
+  }
+  #asu_mobile_button:hover {
+    background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_bttn.png) no-repeat 0 -16px;
+  }
+  #asu_mobile_button a {
+    display: block;
+    width: 27px;
+    height: 19px;
+    overflow: hidden;
+    letter-spacing: -20px;
+    text-indent: -9999px;
+    text-decoration: none;
+    border-bottom: none;
+    cursor: pointer;
+  }
+  /* Sign In */
+  #asu_login_module {
+    float: none;
+    border-left: 0 none;
+    width: 100%;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+  }
+  #asu_login_module li {
+    margin: 13px 0 0 0;
+    padding: 0 0 0 18px;
+    color: #b0b5b7;
+    font-weight: normal;
+    font-size: 16px;
+  }
+  #asu_login_module li.end {
+    padding-right: 0;
+    text-transform: capitalize;
+  }
+  #asu_login_module li a {
+    display: block;
+    background: #323232 url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_signin.png) 7px 9px no-repeat;
+    border: 1px solid #5a5959;
+    padding: 10px 8px 9px 27px;
+    margin: 0;
+    color: #b0b5b7;
+    font-weight: normal;
+    font-size: 16px;
+    text-decoration: none;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -khtml-border-radius: 2px;
+    cursor: pointer;
+  }
+  #asu_login_module li a:hover {
+    background-color: #232323;
+  }
+  /* Must precede li#asu_hdr_ssi rule */
+  #asu_login_module li:first-child {
+    display: none;
+  }
+  /* Must follow li:first-child rule */
+  #asu_login_module li#asu_hdr_ssi,
+  #asu_login_module li#asu_hdr_sso {
+    display: block;
+  }
+  #asu_login_module li#asu_hdr_ssi a,
+  #asu_login_module li#asu_hdr_sso a {
+    display: block;
+  }
+  /* Search */
+  #asu_search_module {
+    position: absolute;
+    top: 73px;
+    right: 8px;
+    color: #b0b5b7;
+  }
+  #asu_search_module input.asu_search_box {
+    background: #323232 url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_search.png) 7px 9px no-repeat;
+    border-color: #5a5959;
+    color: #b0b5b7;
+    font-weight: normal;
+    font-size: 16px;
+    text-decoration: none;
+    height: auto;
+    padding: 9px 8px 6px 37px;
+    margin: 0;
+    width: auto;
+    max-width: 210px;
+  }
+  input.asu_search_button,
+  #asu_search_module input[type="submit"] {
+    display: none;
+  }
+  #asu_search_module .asu_search_selection {
+    position: absolute;
+    top: 40px;
+    right: 8px;
+  }
+  #asu_search_module #asu_search_alternate {
+    background-color: #323232;
+  }
+  /* Menu styles */
+  #asu_universal_nav {
+    position: static;
+    float: none;
+    text-align: left;
+    width: 100%;
+  }
+  #asu_universal_nav ul {
+    display: block;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+  }
+  #asu_universal_nav ul ul,
+  #asu_universal_nav ul li:hover > ul {
+    display: none;
+  }
+  #asu_universal_nav > ul > li {
+    float: none;
+  }
+  #asu_universal_nav ul li {
+    display: block;
+    border-top: 1px solid #404040;
+    border-bottom: 1px solid #262626;
+    margin-bottom: 1px;
+  }
+  #asu_universal_nav ul li a {
+    padding: 19px 0 19px 23px;
+    font-weight: normal;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+  }
+  #asu_universal_nav ul li a,
+  #asu_universal_nav > ul > li.parent > a {
+    background-position: 97% 50%;
+    background-repeat: no-repeat;
+    background-color: #323232;
+    background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_arrw.png);
+    color: #b0b5b7;
+  }
+  #asu_universal_nav ul li a:link,
+  #asu_universal_nav ul li a:focus {
+    color: #b0b5b7;
+    text-decoration: none;
+  }
+  #asu_universal_nav ul li a:hover,
+  #asu_universal_nav > ul > li.parent:hover > a {
+    background-position: 95% 50%;
+    background-repeat: no-repeat;
+    background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_arrw.png);
+    background-color: #2e2e2e;
+    color: #b0b5b7;
+    text-decoration: none;
+  }
+  #asu_universal_nav li a:hover {
+    text-decoration: none;
+  }
+  #asu_universal_nav > ul > li:hover {
+    display: block;
+    text-decoration: none;
+  }
+  #asu_universal_nav > ul > li.parent:hover > a {
+    background-color: #2e2e2e;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  /** Gold **/
+  #asu_hdr.asu_hdr_gold {
+    background-color: transparent;
+  }
+  #asu_hdr.asu_hdr_gold #asu_mobile_hdr {
+    background-color: #ffcb66;
+  }
+  .asu_hdr_gold #asu_login_module li,
+  .asu_hdr_gold #asu_login_module li a,
+  .asu_hdr_gold #asu_login_module li a:hover,
+  .asu_hdr_gold #asu_universal_nav li,
+  .asu_hdr_gold #asu_universal_nav li a,
+  .asu_hdr_gold #asu_universal_nav li a:hover {
+    color: #b0b5b7;
+    text-decoration: none;
+  }
+  /** Maroon **/
+  #asu_hdr.asu_hdr_maroon {
+    background-color: transparent;
+  }
+  #asu_hdr.asu_hdr_maroon #asu_mobile_hdr {
+    background-color: #860025;
+  }
+  .asu_hdr_maroon #asu_login_module li,
+  .asu_hdr_maroon #asu_login_module li a,
+  .asu_hdr_maroon #asu_login_module li a:hover,
+  .asu_hdr_maroon #asu_universal_nav li,
+  .asu_hdr_maroon #asu_universal_nav li a,
+  .asu_hdr_maroon #asu_universal_nav li a:hover {
+    color: #b0b5b7;
+    text-decoration: none;
+  }
+  .asu_hdr_maroon #asu_mobile_button {
+    background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_bttn_wht.png) no-repeat 0 0;
+  }
+  .asu_hdr_maroon #asu_mobile_button:hover {
+    background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_bttn_wht.png) no-repeat 0 -16px;
+  }
+  /** White **/
+  #asu_hdr.asu_hdr_white {
+    background-color: transparent;
+  }
+  #asu_hdr.asu_hdr_white #asu_mobile_hdr {
+    background-color: #fff;
+  }
+  .asu_hdr_white #asu_login_module li,
+  .asu_hdr_white #asu_login_module li a,
+  .asu_hdr_white #asu_login_module li a:hover,
+  .asu_hdr_white #asu_universal_nav li,
+  .asu_hdr_white #asu_universal_nav li a,
+  .asu_hdr_white #asu_universal_nav li a:hover {
+    color: #b0b5b7;
+    text-decoration: none;
+  }
+  .asu_hdr_white #asu_search_module input.asu_search_box {
+    background-color: #323232;
+  }
+  /** Black **/
+  #asu_hdr.asu_hdr_black {
+    background-color: transparent;
+  }
+  #asu_hdr.asu_hdr_black #asu_mobile_hdr {
+    background-color: #000;
+  }
+  .asu_hdr_black #asu_login_module li,
+  .asu_hdr_black #asu_login_module li a,
+  .asu_hdr_black #asu_login_module li a:hover,
+  .asu_hdr_black #asu_universal_nav li,
+  .asu_hdr_black #asu_universal_nav li a,
+  .asu_hdr_black #asu_universal_nav li a:hover {
+    color: #b0b5b7;
+    text-decoration: none;
+  }
+  .asu_hdr_black #asu_mobile_button {
+    background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_bttn_wht.png) no-repeat 0 0;
+  }
+  .asu_hdr_black #asu_mobile_button:hover {
+    background: transparent url(//www.asu.edu/asuthemes/4.0-rsp.1/images/asu_mobile_menu_bttn_wht.png) no-repeat 0 -16px;
+  }
+}
+/* ----------- 768px ----------- */
+@media only screen and (max-width: 768px) {
+  /* Decrease header height to 40px */
+  #asu_mobile_hdr {
+    height: 40px;
+  }
+  /* Switch to smaller mobile logo */
+  #asu_logo a img {
+    display: none;
+  }
+  #asu_logo {
+    padding-left: 10px;
+  }
+  #asu_logo a {
+    background-color: transparent;
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/logos/asu_logo_mobile_gold.png);
+    display: block;
+    width: 77px;
+    height: 32px;
+    margin-top: 5px;
+  }
+  #asu_hdr.asu_hdr_white #asu_logo a {
+    background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/logos/asu_logo_mobile_white.png);
+  }
+  #asu_hdr.asu_hdr_maroon #asu_logo a {
+    background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/logos/asu_logo_maroon.png);
+  }
+  #asu_hdr.asu_hdr_black #asu_logo a {
+    background-image: url(//www.asu.edu/asuthemes/4.0-rsp.1/images/logos/asu_logo_black.png);
+  }
+  /* Move menu utton and search box up */
+  #asu_mobile_button {
+    top: 10px;
+  }
+  #asu_search {
+    top: 47px;
+  }
+  #asu_search_module {
+    top: 53px;
+  }
+  /* Move Sign In and Menu left */
+  #asu_login_module li {
+    padding-left: 8px;
+  }
+  #asu_universal_nav ul li a {
+    padding-left: 10px;
+  }
+  #asu_universal_nav ul li a,
+  #asu_universal_nav > ul > li.parent > a {
+    background-position: 95% 50%;
+  }
+  /* Footer transition to mobile */
+  #asu_footer {
+    height: auto;
+    padding: 8px 0 32px 3px;
+    text-align: left;
+  }
+  #asu_footer li {
+    border-right: none;
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+/* ----------- 420px ----------- */
+@media only screen and (max-width: 420px) {
+  #asu_search_module input.asu_search_box {
+    max-width: 120px;
+  }
+}

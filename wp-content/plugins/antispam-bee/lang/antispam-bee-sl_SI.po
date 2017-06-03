@@ -1,0 +1,388 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Antispam Bee v2.6.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-04-20 10:27:44+0200\n"
+"Last-Translator: Mitja Mihelič - mitja@arnes.si\n"
+"Language-Team: ARNES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Slovenian\n"
+"X-Poedit-Country: SLOVENIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: antispam_bee.php:838
+#@ antispam_bee
+msgid "No data available."
+msgstr "Ni podatkov."
+
+#: antispam_bee.php:2368
+#@ antispam_bee
+msgid "New spam comment on your post"
+msgstr "Nova nezaželena vsebina na vašem prispevku"
+
+#: antispam_bee.php:2379
+#@ antispam_bee
+msgid "Type"
+msgstr "Tip"
+
+#: antispam_bee.php:2386
+#: inc/columns.class.php:30
+#: inc/gui.class.php:400
+#@ antispam_bee
+msgid "Spam Reason"
+msgstr "Vzrok nezaželene oglasne vsebine"
+
+#: antispam_bee.php:2407
+#@ antispam_bee
+msgid "Approve it"
+msgstr "Potrdi"
+
+#: antispam_bee.php:2401
+#@ antispam_bee
+msgid "Delete it"
+msgstr "Izbriši"
+
+#: antispam_bee.php:2395
+#@ antispam_bee
+msgid "Trash it"
+msgstr "Premakni v smeti"
+
+#: antispam_bee.php:2411
+#@ antispam_bee
+msgid "Spam list"
+msgstr "Seznam nezaželene vsebine"
+
+#: antispam_bee.php:2415
+#@ antispam_bee
+msgid "Notify message by Antispam Bee"
+msgstr "Antispam Bee obvestilo"
+
+#: antispam_bee.php:2361
+#@ antispam_bee
+msgid "Content removed by Antispam Bee"
+msgstr "Antispam Bee je odstranil vsebino"
+
+#: antispam_bee.php:699
+#@ antispam_bee
+msgid "Blocked"
+msgstr "Onemogočenih"
+
+#. translators: plugin header field 'Description'
+#: antispam_bee.php:0
+#@ antispam_bee
+msgid "Easy and extremely productive spam-fighting plugin with many sophisticated solutions. Includes protection again trackback spam."
+msgstr "Preprost, napreden in izjemno učinkovit vtičnik v boju proti nezaželeni oglasni vsebini (spam)."
+
+#. translators: plugin header field 'PluginURI'
+#: antispam_bee.php:0
+#: antispam_bee.php:2416
+#@ antispam_bee
+msgid "http://antispambee.com"
+msgstr "http://antispambee.com"
+
+#: antispam_bee.php:2354
+#@ antispam_bee
+msgid "Comment marked as spam"
+msgstr "Komentar označen kot nezaželena vsebina"
+
+#  Sprachen
+#: inc/gui.class.php:314
+#@ antispam_bee
+msgid "Language"
+msgstr "Jezik"
+
+#  Antispam-Filter
+#: inc/gui.class.php:205
+#@ antispam_bee
+msgid "Antispam filter"
+msgstr "Pravila Antispam"
+
+#: inc/gui.class.php:208
+#@ antispam_bee
+msgid "Filter in the execution order"
+msgstr "Filtri v vrstnem redu izvrševanja"
+
+#: inc/gui.class.php:215
+#@ antispam_bee
+msgid "Trust approved commenters"
+msgstr "Zaupanja vredni komentatorji"
+
+#: inc/gui.class.php:216
+#@ antispam_bee
+msgid "Always approve previously approved users"
+msgstr "Ne preverjaj avtorjev, ki so že komentirali"
+
+#: inc/gui.class.php:239
+#@ antispam_bee
+msgid "BBCode is spam"
+msgstr "Obravnavaj kodo BBCode kot nezaželeo vsebino"
+
+#: inc/gui.class.php:240
+#@ antispam_bee
+msgid "Review the comment contents for BBCode links"
+msgstr "Preveri vsebino komentarjev, če vsebujejo povezave BBCode"
+
+#: inc/gui.class.php:271
+#@ antispam_bee
+msgid "Use a public antispam database"
+msgstr "Uporabi javno podatkovno zbirko z nezaželeno vsebino"
+
+#: inc/gui.class.php:272
+#@ antispam_bee
+msgid "Matching the ip address with <a href=\"https://dnsbl.tornevall.org\" target=\"_blank\">Tornevall</a>"
+msgstr "IP naslov preveri v podatkovni bazi <a href=\"https://dnsbl.tornevall.org\" target=\"_blank\">Tornevall</a>"
+
+#: inc/gui.class.php:247
+#@ antispam_bee
+msgid "Validate the ip address of commenters"
+msgstr "Preveri veljavnost naslovov IP komentatorjev"
+
+#: inc/gui.class.php:248
+#@ antispam_bee
+msgid "Validity check for used ip address"
+msgstr "Preverjanje veljavnosti uporabljenih naslovov IP"
+
+#: inc/gui.class.php:255
+#@ antispam_bee
+msgid "Use regular expressions"
+msgstr "Uporabi regularne izraze"
+
+#: inc/gui.class.php:256
+#@ antispam_bee
+msgid "Predefined and custom patterns by <a href=\"https://gist.github.com/4242142\" target=\"_blank\">plugin hook</a>"
+msgstr "Vnaprej pripravljeni in lastni vzorci prek <a href=\"https://gist.github.com/4242142\" target=\"_blank\">vtičnika</a>"
+
+#: inc/gui.class.php:263
+#@ antispam_bee
+msgid "Look in the local spam database"
+msgstr "Uporabi lokalno podatkovno zbirko"
+
+#: inc/gui.class.php:264
+#@ antispam_bee
+msgid "Already marked as spam? Yes? No?"
+msgstr "Išči v zbriki lastnega spletišča"
+
+#: inc/gui.class.php:279
+#@ antispam_bee
+msgid "Block comments from specific countries"
+msgstr "Onemogoči komentarje iz določenih držav"
+
+#: inc/gui.class.php:280
+#@ antispam_bee
+msgid "Filtering the requests depending on country"
+msgstr "Filtriranje zahtevkov glede na državo izvora"
+
+#: inc/gui.class.php:302
+#@ antispam_bee
+msgid "Allow comments only in certain language"
+msgstr "Dovoli komentarje v zgolj določenih jezikih"
+
+#: inc/gui.class.php:303
+#@ antispam_bee
+msgid "Detection and approval in specified language"
+msgstr "Zaznavanje in odobritev v določenem jeziku"
+
+#  Erweitert
+#: inc/gui.class.php:325
+#@ antispam_bee
+msgid "Advanced"
+msgstr "Napredne nastavitve"
+
+#: inc/gui.class.php:328
+#@ antispam_bee
+msgid "Other antispam tools"
+msgstr "Dodatna orodja proti nezaželeni vsebini"
+
+#: inc/gui.class.php:335
+#@ antispam_bee
+msgid "Mark as spam, do not delete"
+msgstr "Le označi kot nezaželeno, ne izbriši"
+
+#: inc/gui.class.php:336
+#@ antispam_bee
+msgid "Keep the spam in my blog."
+msgstr "Obdrži nezaželeno vzebino na spletišču"
+
+#: inc/gui.class.php:343
+#@ antispam_bee
+msgid "Notification by email"
+msgstr "Pošlji obvestilo ob prejetju neželene vsebine"
+
+#: inc/gui.class.php:344
+#@ antispam_bee
+msgid "Notify admins by e-mail about incoming spam"
+msgstr "Pošiljanje obvestil administratorju"
+
+#: inc/gui.class.php:351
+#@ antispam_bee
+msgid "Not save the spam reason"
+msgstr "Razlog za izbris komentarja"
+
+#: inc/gui.class.php:352
+#@ antispam_bee
+msgid "Spam reason as table column in the spam overview"
+msgstr "Prikaži razlog v pregledu nezaželene vsebino"
+
+#: inc/gui.class.php:360
+#, c-format, php-format
+#@ antispam_bee
+msgid "Delete existing spam after %s days"
+msgstr "Neželeno vsebino izbriši čez %s dni"
+
+#: inc/gui.class.php:363
+#@ antispam_bee
+msgid "Cleaning up the database from old entries"
+msgstr "Izbris starih vnosov iz podatkovne zbirke"
+
+#: inc/gui.class.php:371
+#, c-format, php-format
+#@ antispam_bee
+msgid "Limit approval to %s"
+msgstr "Omejitev velja le za %s"
+
+#: inc/gui.class.php:381
+#@ antispam_bee
+msgid "Other types of spam will be deleted immediately"
+msgstr "Ostala nezaželena vsebina bo izbrisana takoj"
+
+#: inc/gui.class.php:388
+#@ antispam_bee
+msgid "Delete comments by spam reasons"
+msgstr "Pri vnaprej določenih pogojih izbriši takoj"
+
+#: inc/gui.class.php:389
+#@ antispam_bee
+msgid "For multiple selections press Ctrl/CMD"
+msgstr "S CTRL lahko izberete tudi več pogojev"
+
+#  Sonstiges
+#: inc/gui.class.php:411
+#@ antispam_bee
+msgid "More"
+msgstr "Ostale nastavitve"
+
+#: inc/gui.class.php:414
+#@ antispam_bee
+msgid "A few little things"
+msgstr "Manj pomembne nastavitve"
+
+#: inc/gui.class.php:421
+#@ antispam_bee
+msgid "Statistics on the dashboard"
+msgstr "Prikaz statistike na Nadzorni plošči"
+
+#: inc/gui.class.php:422
+#@ antispam_bee
+msgid "Daily updates of spam detection rate"
+msgstr "Prikaz prepoznane vsebine na dnevni ravni"
+
+#: inc/gui.class.php:429
+#@ antispam_bee
+msgid "Spam counter on the dashboard"
+msgstr "Prikaz števca nezaželene vsebine na Nadzorni plošči"
+
+#: inc/gui.class.php:430
+#@ antispam_bee
+msgid "Amount of identified spam comments"
+msgstr "Količina prepoznane nezaželene vsebine"
+
+#: inc/gui.class.php:437
+#@ antispam_bee
+msgid "Do not check trackbacks / pingbacks"
+msgstr "Ne preverjaj povratnih sledi/pingbackov"
+
+#: inc/gui.class.php:438
+#@ antispam_bee
+msgid "No spam check for trackback notifications"
+msgstr "Ne preverjaj obvestil o povratnih sledeh"
+
+#: inc/gui.class.php:445
+#@ antispam_bee
+msgid "Comment form used outside of posts"
+msgstr "Komentarji so omogočeni tudi izven prispevkov"
+
+#: inc/gui.class.php:446
+#@ antispam_bee
+msgid "Check for comment forms on archive pages"
+msgstr "Preverjanje komentarjev na arhiviranih straneh"
+
+#. translators: plugin header field 'Name'
+#: antispam_bee.php:0
+#@ antispam_bee
+msgid "Antispam Bee"
+msgstr ""
+
+#. translators: plugin header field 'Author'
+#: antispam_bee.php:0
+#@ antispam_bee
+msgid "Sergej M&uuml;ller"
+msgstr ""
+
+#. translators: plugin header field 'AuthorURI'
+#: antispam_bee.php:0
+#@ antispam_bee
+msgid "http://wpcoder.de"
+msgstr ""
+
+#. translators: plugin header field 'Version'
+#: antispam_bee.php:0
+#@ antispam_bee
+msgid "2.6.6"
+msgstr ""
+
+#: antispam_bee.php:501
+#@ default
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: antispam_bee.php:2372
+#@ default
+msgid "Author"
+msgstr "Avtor"
+
+#: antispam_bee.php:2380
+#@ antispam_bee
+msgid "comment_typeCommentTrackback"
+msgstr ""
+
+#: inc/gui.class.php:30
+#: inc/gui.class.php:35
+#@ default
+msgid "Cheatin&#8217; uh?"
+msgstr "Goljufate, kaj?"
+
+#: inc/gui.class.php:223
+#@ antispam_bee
+msgid "Trust commenters with a Gravatar"
+msgstr "Zaupaj komentatorjem, ki imajo Gravater"
+
+#: inc/gui.class.php:224
+#@ antispam_bee
+msgid "Check if commenter has a Gravatar image"
+msgstr "Preveri, ali ima komentrator sliko Gravatar"
+
+#: inc/gui.class.php:231
+#@ antispam_bee
+msgid "Consider the comment time"
+msgstr "Upoštevaj čas komentarja"
+
+#: inc/gui.class.php:232
+#@ antispam_bee
+msgid "Not recommended when using page caching"
+msgstr "Ni priproročljivo ob uporabi predpomnenja strani"
+
+#: inc/gui.class.php:465
+#@ default
+msgid "Save Changes"
+msgstr "Shrani spremembe"
+

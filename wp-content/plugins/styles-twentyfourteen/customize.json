@@ -1,0 +1,326 @@
+{
+	"Featured Content Styles": [
+		/* Background */
+		{ "selector": ".featured-content", "type": "background-color", "label": "Featured BG" },
+		{ "selector": ".featured-content .entry-header", "type": "background-color", "label": "Entry Header" },
+		{ "selector": ".grid .featured-content .entry-header,.featured-content .entry-header", "type": "border-color", "label": "Grid Border", "important": true },
+		/* Featured Content */
+		{ "selector": ".featured-content .entry-title", "type": "text", "label": "Featured Title", "important": true },
+		{ "selector": ".featured-content .entry-title a", "type": "color", "label": "Featured Title", "important": true },
+		{ "selector": ".featured-content .entry-title a:hover", "type": "color", "label": "Featured Title", "important": true },
+		/* Link */
+		{ "selector": ".featured-content .entry-meta a", "type": "color", "label": "Featured Meta" },
+		{ "selector": ".featured-content .entry-meta a:hover", "type": "color", "label": "Featured Meta", "important": true },
+		/* Slider Content */
+		{ "selector": ".slider-control-paging", "type": "background-color", "label": "Slider Paging" },
+		{ "selector": ".slider-control-paging a:before", "type": "background-color", "label": "Slider Paging a:before" },
+		{ "selector": ".slider-control-paging a:hover:before", "type": "background-color", "label": "Paging a:before Hover" },
+		{ "selector": ".slider-control-paging .slider-active:before,.slider-control-paging .slider-active:hover:before", "type": "background-color", "label": "Paging Active/Hover" },
+		{ "selector": ".slider-direction-nav a", "type": "background-color", "label": "Slider Direction" },
+		{ "selector": ".slider-direction-nav a:hover", "type": "background-color", "label": "Direction Hover" },
+		{ "selector": ".slider-direction-nav a:before", "type": "color", "label": "Direction a:before" },
+		{}
+	],
+	"Global Styles": [
+		/* Global */
+		{ "selector": "#page", "type": "background-color", "label": "Inner area" },
+		{ "selector": ".search-toggle,.search-box,.search-toggle.active", "type": "background-color", "label": "Header Search" },
+		{ "selector": ".search-toggle:hover", "type": "background-color", "label": "Search Toggle Hover" },
+		{ "selector": ".search-toggle:before", "type": "color", "label": "Toggle Before (Icon)" },
+		{ "selector": "#page", "type": "text", "label": "Default" },
+		{ "selector": "#page", "type": "color", "label": "Default" },
+		/* Link */
+		{ "selector": "#page a", "type": "text", "label": "Default link" },
+		{ "selector": "#page a", "type": "color", "label": "Default link" },
+		{ "selector": "#page a:hover", "type": "color", "label": "Default link" },
+		{}
+	],
+	"Header Styles": [
+		/* Background */
+		{ "selector": "#page #masthead", "type": "background-color", "label": "Header", "template": "$selector {background: $value url(); }" },
+		/* Title */
+		{ "selector": "#page .site-title", "type": "text", "label": "Title" },
+		{ "selector": "#page .site-title a", "type": "color", "label": "Title", "important": true },
+		{ "selector": "#page .site-title a:hover", "type": "color", "label": "Title", "important": true },
+		{}
+	],
+	"Menu Styles – Primary": [
+		/* Top items */
+		{ "selector": "#masthead .primary-navigation li a,#masthead .primary-navigation li > a", "type": "text", "label": "Top item" },
+		{ "selector": "#masthead .primary-navigation li a,#masthead .primary-navigation li > a", "type": "color", "label": "Top item" },
+		{ "selector": "#masthead .primary-navigation li a:hover,#masthead .primary-navigation li:hover > a", "type": "color", "label": "Top item" },
+		{ "selector": ".primary-navigation ul ul,.primary-navigation ul ul a:hover,.primary-navigation ul ul li.focus > a,.primary-navigation li:hover > a,.primary-navigation li > a:hover,.primary-navigation li.focus > a,.primary-navigation li.focus > a", "type": "background-color", "label": "Top item" },
+		{ "selector": ".site-navigation .current-menu-item > a,.site-navigation .current-menu-ancestor > a,.site-navigation .current_page_item > a,.site-navigation .current_page_ancestor > a", "type": "color", "label": "Active menu item", "important": true },
+        { "selector": ".site-navigation .current-menu-item > a,.site-navigation .current-menu-ancestor > a,.site-navigation .current_page_item > a,.site-navigation .current_page_ancestor > a", "type": "background-color", "label": "Active menu item", "important": true },
+        { "selector": ".site-navigation .current-menu-item > a,.site-navigation .current-menu-ancestor > a:hover,.site-navigation .current_page_item > a:hover,.site-navigation .current_page_ancestor > a:hover", "type": "color", "label": "Active menu item", "important": true },
+        { "selector": ".site-navigation .current-menu-item > a,.site-navigation .current-menu-ancestor > a:hover,.site-navigation .current_page_item > a:hover,.site-navigation .current_page_ancestor > a:hover", "type": "background-color", "label": "Active menu item", "important": true },
+		/* Sub items */
+		{ "selector": "#masthead .primary-navigation ul ul a", "type": "text", "label": "Submenu item" },
+		{ "selector": "#masthead .primary-navigation li li a", "type": "color", "label": "Submenu item" },
+		{ "selector": "#masthead .primary-navigation li li a:hover", "type": "color", "label": "Submenu item" },
+		{ "selector": ".primary-navigation li li a", "type": "background-color", "label": "Submenu item" },
+		{ "selector": ".primary-navigation li li a:hover", "type": "background-color", "label": "Submenu item" },
+		/* Sub item border -- Specific to the this theme */
+		{}
+	],
+	"Menu Styles – Secondary": [
+		/* Tagline */
+		{ "selector": ".site-description", "type": "text", "label": "Tagline" },
+		{ "selector": ".site-description", "type": "color", "label": "Tagline", "important": true },
+		/* Top items */
+		{ "selector": "#secondary .secondary-navigation li a", "type": "text", "label": "Top item" },
+		{ "selector": "#secondary .secondary-navigation li a", "type": "color", "label": "Top item" },
+		{ "selector": "#secondary .secondary-navigation li:hover > a,.secondary-navigation li.focus > a", "type": "color", "label": "Top item" },
+		{ "selector": ".secondary-navigation ul ul,.secondary-navigation ul ul a:hover,.secondary-navigation ul ul li.focus > a,.secondary-navigation li:hover > a,.secondary-navigation li > a:hover,.secondary-navigation li.focus > a,.secondary-navigation li.focus > a", "type": "background-color", "label": "Top item" },
+		/* Sub items */
+		{ "selector": "#secondary .secondary-navigation ul ul a", "type": "text", "label": "Submenu item" },
+		{ "selector": "#secondary .secondary-navigation li li a", "type": "color", "label": "Submenu item" },
+		{ "selector": "#secondary .secondary-navigation li li a:hover", "type": "color", "label": "Submenu item" },
+		{ "selector": ".secondary-navigation li li a", "type": "background-color", "label": "Submenu item" },
+		{ "selector": ".secondary-navigation ul ul a:hover,.secondary-navigation ul ul li.focus > a", "type": "background-color", "label": "Submenu item" },
+		/* Sub item border -- Specific to the this theme */
+		{}
+	],
+	"Entry Styles – Headings": [
+		/* Title */
+		{ "selector": ".entry-title, #page .entry-title a", "type": "text", "label": "Title" },
+		{ "selector": ".entry-title, #page .entry-title a", "type": "color", "label": "Title" },
+		{ "selector": "#page .entry-title a:hover", "type": "color", "label": "Title link" },
+		/* Headers */
+		{ "selector": ".site-content h1", "type": "text", "label": "Heading 1" },
+		{ "selector": ".site-content h1", "type": "color", "label": "Heading 1" },
+		{ "selector": ".site-content h2", "type": "text", "label": "Heading 2" },
+		{ "selector": ".site-content h2", "type": "color", "label": "Heading 2" },
+		{ "selector": ".site-content h3", "type": "text", "label": "Heading 3" },
+		{ "selector": ".site-content h3", "type": "color", "label": "Heading 3" },
+		{ "selector": ".site-content h4", "type": "text", "label": "Heading 4" },
+		{ "selector": ".site-content h4", "type": "color", "label": "Heading 4" },
+		{ "selector": ".site-content h5", "type": "text", "label": "Heading 5" },
+		{ "selector": ".site-content h5", "type": "color", "label": "Heading 5" },
+		{ "selector": ".site-content h6", "type": "text", "label": "Heading 6" },
+		{ "selector": ".site-content h6", "type": "color", "label": "Heading 6" },
+		/* Archive Title */
+		{ "selector": ".archive-header", "type": "background-color", "label": "Archive title" },
+		{ "selector": ".archive-title", "type": "text", "label": "Archive title" },
+		{ "selector": ".archive-title", "type": "color", "label": "Archive title" },
+		{}
+	],
+	"Entry Styles – Content": [
+		/* Paragraph */
+		{ "selector": ".site-content p, #page .site-content p a, #respond p", "type": "text", "label": "Paragraph" },
+		{ "selector": ".site-content p, #respond p", "type": "color", "label": "Paragraph" },
+		 /* Links set for content and comments. Comment selection should override */
+		{ "selector": "#page .site-content a, #commentform a", "type": "color", "label": "Link" },
+		{ "selector": "#page .site-content a:hover, #commentform a:hover", "type": "color", "label": "Link" },
+		 /* Lists */ { "selector": ".site-content li, .site-content li p", "type": "text", "label": "List" },
+		{ "selector": ".site-content li, .site-content li p", "type": "color", "label": "List" },
+		/* Small */
+		{ "selector": ".site-content small", "type": "text", "label": "Small" },
+		{ "selector": ".site-content small", "type": "color", "label": "Small" },
+		 /* Preformatted & Code - Set for content and comments. Comments section might override */
+		{ "selector": ".site-content pre, .comment-content pre, .site-content code, .comment-content code", "type": "text", "label": "Preformatted, code" },
+		{ "selector": ".site-content pre, .comment-content pre, .site-content code, .comment-content code", "type": "color", "label": "Preformatted, code" },
+		{ "selector": ".site-content pre, .comment-content pre, .site-content code, .comment-content code", "type": "background-color", "label": "Preformatted, code" },
+		/* Blockquote */
+		{ "selector": ".site-content blockquote, .site-content blockquote p", "type": "text", "label": "Blockquote" },
+		{ "selector": ".site-content blockquote, .site-content blockquote p", "type": "color", "label": "Blockquote" },
+		{ "selector": ".site-content blockquote", "type": "background-color", "label": "Blockquote" },
+		/* Address */
+		{ "selector": ".site-content address", "type": "text", "label": "Address" },
+		{ "selector": ".site-content address", "type": "color", "label": "Address" },
+		 /* Table */
+		{ "selector": "#content table", "type": "border-bottom-color", "label": "Table" },
+		 /* Table Heading */
+		{ "selector": "#content th", "type": "text", "label": "Table heading" },
+		{ "selector": "#content th", "type": "color", "label": "Table heading" },
+		{ "selector": "#content th", "type": "background-color", "label": "Table heading" },
+		/* Table Content */
+		{ "selector": "#content td, #content td p", "type": "text", "label": "Table content" },
+		{ "selector": "#content td, #content td p", "type": "color", "label": "Table content" },
+		{ "selector": "#content td", "type": "background-color", "label": "Table content" },
+		{ "selector": "#content td", "type": "border-top-color", "label": "Table content" },
+		 /* Image */
+		{ "selector": ".site-content .wp-caption-text", "type": "text", "label": "Caption" },
+		{ "selector": ".site-content .wp-caption-text", "type": "color", "label": "Caption" },
+		 /* Password */
+		{ "selector": ".post-password-required input[type='password']", "type": "text", "label": "Password input" },
+		{ "selector": ".post-password-required input[type='password']", "type": "color", "label": "Password input" },
+		{ "selector": ".post-password-required input[type='password']", "type": "background-color", "label": "Password input" },
+		{ "selector": ".post-password-required input[type='password']:focus", "type": "background-color", "label": "Password input" },
+		{ "selector": ".post-password-required input[type='password']", "type": "border-color", "label": "Password input" },
+		{ "selector": ".post-password-required input[type='submit']", "type": "text", "label": "Password submit" },
+		{ "selector": ".post-password-required input[type='submit']", "type": "color", "label": "Password submit" },
+		{ "selector": ".post-password-required input[type='submit']", "type": "background-color", "label": "Password submit" },
+		{ "selector": ".post-password-required input[type='submit']", "type": "border-color", "label": "Password submit" },
+		{}
+	],
+	"Entry Styles – Navigation": [
+		/* Post Previous/next */
+		{ "selector": ".post-navigation", "type": "background-color", "label": "Previous/next" },
+		{ "selector": "#page .post-navigation a", "type": "text", "label": "Previous/next link" },
+		{ "selector": "#page .post-navigation a", "type": "color", "label": "Previous/next link" },
+		{ "selector": "#page .post-navigation a:hover", "type": "color", "label": "Previous/next link" },
+		/* Blog Navigation */
+		{ "selector": ".paging-navigation", "type": "background-color", "label": "Older/newer" },
+		{ "selector": "#page .paging-navigation a .meta-nav", "type": "color", "label": "Older/newer arrow" },
+		{ "selector": "#page .paging-navigation .nav-links a", "type": "text", "label": "Older/newer link" },
+		{ "selector": "#page .paging-navigation .nav-links a", "type": "color", "label": "Older/newer link" },
+		{ "selector": "#page .paging-navigation .nav-links a:hover", "type": "color", "label": "Older/newer link" },
+		/* Paging */
+		{ "selector": ".page-links, .page-links a", "type": "text", "label": "Paging" },
+		{ "selector": ".page-links", "type": "color", "label": "Paging label" },
+		{ "selector": "#page .page-links a", "type": "color", "label": "Paging link" },
+		{ "selector": "#page .page-links a:hover", "type": "color", "label": "Paging link" },
+		{ "selector": "#page .page-links a", "type": "background-color", "label": "Paging link" },
+		{ "selector": "#page .page-links a:hover", "type": "background-color", "label": "Paging link" },
+		{ "selector": "#page .page-links a", "type": "border-color", "label": "Paging link" },
+		{}
+	],
+	"Entry Styles – Meta": [
+		/* Meta */
+		{ "selector": ".entry-meta, #page .entry-meta a", "type": "text", "label": "Meta" },
+		{ "selector": ".entry-meta", "type": "color", "label": "Meta" },
+		{ "selector": "#page .entry-meta a", "type": "color", "label": "Meta link" },
+		{ "selector": "#page .entry-meta a:hover", "type": "color", "label": "Meta link" },
+		{ "selector": ".entry-meta .tag-links a", "type": "background-color", "label": "Meta Tag Link BG" },
+		{ "selector": ".entry-meta .tag-links a:hover", "type": "background-color", "label": "Meta Tag Link BG" },
+		{ "selector": ".entry-meta .tag-links a:before", "type": "border-right-color", "label": "Border Right" },
+		{ "selector": ".entry-meta .tag-links a:hover:before", "type": "border-right-color", "label": "Border Right" },
+		/* Edit link - Affects Entry, Comment */
+		{ "selector": "#page .edit-link a", "type": "text", "label": "Edit link" },
+		{ "selector": "#page .edit-link a", "type": "color", "label": "Edit link" },
+		{ "selector": "#page .edit-link a:hover", "type": "color", "label": "Edit link" },
+		{}
+	],
+	"Comment Styles – Content": [
+		{ "selector": ".comments-area", "type": "background-color", "label": "Area" },
+		/* Comment content    - This may need to change to effect comment meta as well */
+		{ "selector": ".comment-content, .comment-content p, #page .comment-content a", "type": "text", "label": "Content" },
+		{ "selector": ".comment-content, .comment-content p, .comment-content h1, .comment-content h2, .comment-content h3, .comment-content h4, .comment-content h5, .comment-content h6, .comment-content blockquote cite, .comment-content th, .comment-content dt", "type": "color", "label": "Content" },
+		/* Comment link    - Also set in Entry Content
+		                   - Affects comment content and meta links. Following sections should override */
+		{ "selector": "#comments a", "type": "color", "label": "Link" },
+		{ "selector": "#comments a:hover", "type": "color", "label": "Link" },
+		/* Preformatted & Code - Also set in Entry Content  */
+		{ "selector": ".comment-content pre, .comment-content code", "type": "text", "label": "Preformatted, code" },
+		{ "selector": ".comment-content pre, .comment-content code", "type": "color", "label": "Preformatted, code" },
+		{ "selector": ".comment-content pre, .comment-content code", "type": "background-color", "label": "Preformatted, code" },
+		{}
+	],
+	"Comments Styles – Author": [
+		/* Author */
+		{ "selector": "#comments .comment-author, #comments .comment-meta cite a", "type": "text", "label": "Author" },
+		{ "selector": "#comments .comment-author", "type": "color", "label": "Author" },
+		{ "selector": "#comments .comment-author a", "type": "color", "label": "Author name link" },
+		{ "selector": "#comments .comment-author a:hover", "type": "color", "label": "Author name link" },
+		{}
+	],
+	"Comments Styles – Meta": [
+		/* List title */
+		{ "selector": ".comments-title", "type": "text", "label": "List title" },
+		{ "selector": ".comments-title", "type": "color", "label": "List title" },
+		/* Meta */
+		{ "selector": "#comments .comment-meta time", "type": "text", "label": "Date" },
+		{ "selector": "#comments .comment-meta a time", "type": "color", "label": "Date link" },
+		{ "selector": "#comments .comment-meta a:hover time", "type": "color", "label": "Date link" },
+		/* Reply link */
+		{ "selector": "#comments a.comment-reply-link", "type": "text", "label": "Reply link" },
+		{ "selector": "#comments a.comment-reply-link", "type": "color", "label": "Reply link" },
+		{ "selector": "#comments a.comment-reply-link:hover", "type": "color", "label": "Reply link" },
+		{}
+	],
+	"Comments Styles – Pingback": [
+		/* Pingbacks */
+		{ "selector": ".comment-list .pingback", "type": "background-color", "label": "Pingback BG" },
+		{ "selector": "#page #comments .pingback, #page #comments .pingback a, #page #comments .trackback, #page #comments .trackback a", "type": "text", "label": "Pingback" },
+		{ "selector": "#page #comments .pingback, #page #comments .trackback", "type": "color", "label": "Pingback" },
+		{ "selector": "#page #comments .pingback a, #page #comments .trackback a", "type": "color", "label": "Pingback link" },
+		{ "selector": "#page #comments .pingback a:hover, #page #comments .trackback a:hover", "type": "color", "label": "Pingback link" },
+		{}
+	],
+	"Comments Styles – Response Form": [
+		/* Title */
+		{ "selector": "#respond h3#reply-title", "type": "text", "label": "Title" },
+		{ "selector": "#respond h3#reply-title, #respond h3#reply-title a", "type": "color", "label": "Title" },
+		/* Description */
+		{ "selector": "#respond p, p.no-comments", "type": "text", "label": "Description" },
+		{ "selector": "#respond p, p.no-comments", "type": "color", "label": "Description" },
+		{ "selector": "#commentform a", "type": "text", "label": "Description link" },
+		{ "selector": "#commentform a", "type": "color", "label": "Description link" },
+		{ "selector": "#commentform a:hover", "type": "color", "label": "Description link" },
+		/* Allowed Tags */
+		{ "selector": "#respond form .form-allowed-tags, #respond form .form-allowed-tags code", "type": "text", "label": "Allowed tags" },
+		{ "selector": "#respond form .form-allowed-tags, #respond form .form-allowed-tags code", "type": "color", "label": "Allowed tags" },
+		/* Label */
+		{ "selector": "#respond label", "type": "text", "label": "Label" },
+		{ "selector": "#respond label", "type": "color", "label": "Label" },
+		/* Response field (textarea) */
+		{ "selector": "#respond textarea, #respond input[type='text'], #respond input[type='email'], #respond input[type='url']", "type": "text", "label": "Textarea" },
+		{ "selector": "#respond textarea, #respond input[type='text'], #respond input[type='email'], #respond input[type='url']", "type": "color", "label": "Textarea" },
+		{ "selector": "#respond textarea, #respond input[type='text'], #respond input[type='email'], #respond input[type='url']", "type": "background-color", "label": "Textarea" },
+		{ "selector": "#respond textarea:focus, #respond input[type='text']:focus, #respond input[type='email']:focus, #respond input[type='url']:focus", "type": "background-color", "label": "Textarea" },
+		{ "selector": "#respond textarea, #respond input[type='text'], #respond input[type='email'], #respond input[type='url']", "type": "border-color", "label": "Textarea" },
+		/* Submit button */
+		{ "selector": "#respond input#submit", "type": "text", "label": "Submit button" },
+		{ "selector": "#respond input#submit", "type": "color", "label": "Submit button" },
+		{ "selector": "#respond input#submit", "type": "background-color", "label": "Submit button" },
+		{}
+	],
+	"Primary Sidebar Styles": [
+		/* Background */		
+		{ "selector": ".site:before,#secondary", "type": "background-color", "label": "Left Sidebar" },
+		/* Title */
+		{ "selector": ".primary-sidebar .widget-title", "type": "text", "label": "Widget Title" },
+		{ "selector": ".primary-sidebar .widget-title", "type": "color", "label": "Widget Title" },
+		/* Content */
+		{ "selector": ".primary-sidebar .widget", "type": "text", "label": "Widget Content" },
+		{ "selector": ".primary-sidebar .widget", "type": "color", "label": "Widget Content" },
+		/* Link */
+		{ "selector": ".primary-sidebar .widget a", "type": "color", "label": "Widget Link", "important": true },
+		{ "selector": ".primary-sidebar .widget a:hover", "type": "color", "label": "Widget Link", "important": true },
+		{ "selector": ".primary-sidebar #wp-calendar thead th", "type": "background-color", "label": "Calendar Days" },
+		{ "selector": ".primary-sidebar #wp-calendar thead th", "type": "color", "label": "Calendar Days" },
+		{}
+	],
+	"Content Sidebar Styles": [
+		{ "selector": ".content-sidebar .widget .widget-title", "type": "border-top-color", "label": "Top Border" },
+		{ "selector": ".content-sidebar .widget_twentyfourteen_ephemera .widget-title:before", "type": "background-color", "label": "Ephemera Title Before" },
+		{ "selector": ".content-sidebar .widget_twentyfourteen_ephemera .widget-title:before", "type": "color", "label": "Ephemera Title Before" },
+		/* Title */
+		{ "selector": ".content-sidebar .widget-title", "type": "text", "label": "Widget Title" },
+		{ "selector": ".content-sidebar .widget-title", "type": "color", "label": "Widget Title" },
+		/* Content */
+		{ "selector": ".content-sidebar .widget", "type": "text", "label": "Widget Content" },
+		{ "selector": ".content-sidebar .widget, .content-sidebar .widget_twentyfourteen_ephemera .entry-meta", "type": "color", "label": "Widget Content" },
+		/* Link */
+		{ "selector": ".content-sidebar .widget a, .content-sidebar .widget_twentyfourteen_ephemera .entry-meta a", "type": "color", "label": "Widget Link", "important": true },
+		{ "selector": ".content-sidebar .widget a:hover, .content-sidebar .widget_twentyfourteen_ephemera .entry-meta a:hover", "type": "color", "label": "Widget Link", "important": true },
+		{ "selector": ".content-sidebar #wp-calendar thead th", "type": "background-color", "label": "Calendar Days" },
+		{ "selector": ".content-sidebar #wp-calendar thead th", "type": "color", "label": "Calendar Days" },
+		{}
+	],
+	"Footer Widgets Styles": [
+		/* Title */
+		{ "selector": ".footer-sidebar .widget-title, .widget_calendar caption", "type": "text", "label": "Widget Title" },
+		{ "selector": ".footer-sidebar .widget-title, .widget_calendar caption", "type": "color", "label": "Widget Title" },
+		/* Content */
+		{ "selector": ".footer-sidebar .widget, footer-sidebar .widget ul li, footer-sidebar .widget a", "type": "text", "label": "Widget Content" },
+		{ "selector": ".footer-sidebar .widget, footer-sidebar .widget ul li", "type": "color", "label": "Widegt Content" },
+		/* Link */
+		{ "selector": ".footer-sidebar .widget a", "type": "color", "label": "Link", "important": true },
+		{ "selector": ".footer-sidebar .widget a:hover", "type": "color", "label": "Link", "important": true },
+		{ "selector": ".footer-sidebar #wp-calendar thead th", "type": "background-color", "label": "Calendar Days" },
+		{ "selector": ".footer-sidebar #wp-calendar thead th", "type": "color", "label": "Calendar Days" },
+		{}
+	],
+	"Footer Styles": [
+		/* Area */
+		{ "selector": ".site-footer", "type": "background-color", "label": "Footer Area" },
+		/* Credit */
+		{ "selector": "#page .site-info a", "type": "text", "label": "Footer Credit" },
+		{ "selector": "#page .site-info a", "type": "color", "label": "Credit link" },
+		{ "selector": "#page .site-info a:hover", "type": "color", "label": "Credit link" },
+		{ "selector": "#page .site-info", "type": "color", "label": "Footer" },
+		{}
+	]
+}

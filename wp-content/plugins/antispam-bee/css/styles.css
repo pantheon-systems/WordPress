@@ -1,0 +1,269 @@
+/* @group Webfont */
+
+@font-face {
+    font-family: icons;
+    src: url('../font/icons.woff2') format('woff2'),
+         url('../font/icons.woff') format('woff');
+}
+
+/* @end group */
+
+
+/* @group Allgemein */
+
+.ab-main *,
+.ab-main *:after,
+.ab-main *:before {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    box-sizing:         border-box;
+}
+
+/* @end group */
+
+
+/* @group Browse Happy */
+
+.browsehappy {
+    margin: 0 0 20px;
+    padding: 10px;
+    border: 1px solid #e66f00;
+    text-align: center;
+}
+
+/* @end group */
+
+
+/* @group Spalten */
+
+.ab-wrap {
+    color: #2f353e;
+    margin: 0 0 0 -10px;
+    padding: 20px 0 0 0;
+    text-rendering: optimizeLegibility;
+}
+.ab-column {
+    float: left;
+    margin: 0 0 0 10px;
+    position: relative;
+}
+
+/* @end group */
+
+
+/* @group Überschriften + Icons */
+
+.ab-column h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+.ab-column h3.icon:before {
+    font: normal 30px/30px icons;
+    top: 4px;
+    right: 20px;
+    speak: none;
+    width: 1em;
+    color: #8e959c;
+    position: absolute;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.ab-column.ab-arrow h3.icon:before {
+    content: '\2387';
+}
+.ab-column.ab-join h3.icon:before {
+    content: '\e795';
+}
+.ab-column.ab-diff h3.icon:before {
+    content: '\e73c';
+}
+
+.ab-column h6 {
+    clear: both;
+    color: #8e959c;
+    margin: 0 0 20px;
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+/* @end group */
+
+
+/* @group Formular */
+
+.ab-column input[type="text"],
+.ab-column select {
+    height: 20px;
+    font-size: 11px;
+    text-align: center;
+    background: #f8f8f9;
+}
+.ab-column select[multiple] {
+    width: 150px;
+    height: 56px;
+}
+.ab-column input.ab-mini-field {
+    width: 30px;
+}
+.ab-column input.ab-medium-field {
+    width: 120px;
+}
+.ab-column input[type="text"] + label,
+.ab-column select + label {
+    color: #8e959c;
+    margin: 0 0 0 7px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+/* @end group */
+
+
+/* @group Spalteninhalte */
+
+.ab-column > ul {
+    padding: 0 20px 0 0;
+}
+.ab-column:last-of-type > ul {
+    border: 0;
+}
+.ab-column > ul > li {
+    width: 330px;
+    margin: 0 0 36px;
+    padding: 10px 0 12px 12px;
+    position: relative;
+    background: #fff;
+    list-style: none;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.ab-column > ul > li a {
+    text-decoration: none;
+    border-bottom: 1px dotted #e0e5e9;
+}
+.ab-column > ul > li a:hover {
+    border-color: inherit;
+}
+
+.ab-column > ul > li input[type="checkbox"] {
+    display: inline-block;
+    margin: 0 8px 0 0;
+}
+.ab-column > ul > li label {
+    cursor: default;
+    display: inline-block;
+    overflow: hidden;
+    line-height: 24px;
+}
+.ab-column > ul > li label span {
+    color: #8e959c;
+    display: block;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+/* @end group */
+
+
+/* @group Trenner */
+
+.ab-column > ul > li:after,
+.ab-column > ul > li:before {
+    width: 0;
+    content: '';
+    position: absolute;
+}
+
+.ab-column.ab-arrow > ul > li:before,
+.ab-column.ab-arrow > ul > li:after {
+    left: 157px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+}
+.ab-column.ab-arrow > ul > li:before {
+    bottom: -24px;
+    border-color: #fff transparent;
+}
+.ab-column.ab-arrow > ul > li:after {
+    bottom: -22px;
+    border-color: #f1f1f1 transparent;
+}
+
+.ab-column.ab-join > ul > li:before {
+    left: 171px;
+    bottom: -27px;
+    height: 18px;
+    border-right: 2px solid #fff;
+}
+
+.ab-column.ab-diff > ul > li:before {
+    left: 162px;
+    bottom: -19px;
+    width: 18px;
+    height: 0;
+    border-bottom: 2px solid #fff;
+}
+
+/* @end group */
+
+
+/* @group Submit & Service */
+
+.ab-column--service {
+    width: 342px;
+    text-align: center;
+    border-top: 1px solid #e0e5e9;
+    border-bottom: 1px solid #e0e5e9;
+    margin-right: 20px;
+}
+.ab-column--service p {
+    margin: 8px 0;
+}
+.ab-column--service a {
+    padding: 0 2px;
+}
+.ab-column--submit {
+    width: 342px;
+    margin-top: 35px;
+}
+.ab-column--submit .button {
+    width: 100%;
+}
+
+/* @end group */
+
+
+/* @group 2. Ebene */
+
+.ab-column > ul > li:last-of-type:after,
+.ab-column > ul > li:last-of-type:before {
+    display: none;
+}
+
+.ab-column > ul > li > ul {
+    margin: 10px 10px 0 26px;
+    display: none;
+    list-style: none;
+}
+.ab-column > ul > li > ul li {
+    padding: 2px 0;
+}
+.ab-column > ul > li > ul label {
+    margin: 0 0 0 7px;
+}
+.ab-column > ul > li > input[type="checkbox"]:checked ~ ul {
+    display: block;
+}
+
+/* @end group */

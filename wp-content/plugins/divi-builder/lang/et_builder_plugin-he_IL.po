@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Divi 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/divi-builder\n"
+"POT-Creation-Date: 2016-03-30 15:45:26+00:00\n"
+"PO-Revision-Date: 2015-10-19 17:25+0300\n"
+"Last-Translator: \n"
+"Language-Team: Elegant Themes\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+"X-Poedit-SearchPathExcluded-0: ../includes/builder\n"
+"X-Poedit-SearchPathExcluded-1: ../node_modules\n"
+"X-Poedit-SearchPathExcluded-2: ../core\n"
+
+#: dashboard/dashboard.php:37
+msgid "Save Changes"
+msgstr "שמור שינויים"
+
+#: dashboard/dashboard.php:1268 divi-builder.php:241
+msgid "Re-Authorize"
+msgstr "לאשר מחדש את"
+
+#: dashboard/dashboard.php:1376
+msgid ""
+"You can either export your %1$s Settings or import settings from another "
+"install of %1$s below."
+msgstr ""
+
+#: dashboard/dashboard.php:1377
+msgid "Export %1$s Settings"
+msgstr ""
+
+#: dashboard/includes/options.php:10 dashboard/includes/options.php:110
+msgid "Newsletter Settings"
+msgstr "הגדרות עלון"
+
+#: dashboard/includes/options.php:46
+msgid "MailChimp API Key:"
+msgstr "מפתח API MailChimp:"
+
+#: dashboard/includes/options.php:53
+msgid "Enter your MailChimp API key. You can create an api key "
+msgstr "הזן את מפתח ה- API שלך MailChimp. אתה יכול ליצור מפתח API "
+
+#: dashboard/includes/options.php:54 dashboard/includes/options.php:84
+msgid "here"
+msgstr "כאן"
+
+#: dashboard/includes/options.php:61
+msgid "Regenerate MailChimp Lists"
+msgstr "צרו מחדש רשימות MailChimp"
+
+#: dashboard/includes/options.php:78
+msgid "AWeber code:"
+msgstr "קוד AWeber:"
+
+#: dashboard/includes/options.php:86
+msgid "Generate authorization code"
+msgstr "ליצור קוד אישור"
+
+#: dashboard/includes/options.php:87
+msgid " then paste in the authorization code and click authorize button"
+msgstr " לאחר מכן להדביק את קוד האישור ולחץ על כפתור לאשר"
+
+#: dashboard/includes/options.php:93
+msgid "Authorize AWeber"
+msgstr "לאשר AWeber"
+
+#: dashboard/includes/options.php:101
+msgid "Regenerate AWeber Lists"
+msgstr "להתחדש רשימות AWeber"
+
+#: divi-builder.php:159
+msgid "You don't have sufficient permissions to access this page"
+msgstr "אין לך הרשאות מספיקות כדי לגשת לדף זה"
+
+#: divi-builder.php:169
+msgid "Save Settings"
+msgstr "שמור הגדרות"
+
+#: divi-builder.php:170
+msgid "Divi Builder Options"
+msgstr "אפשרויות בונה Divi"
+
+#: divi-builder.php:207
+msgid "Plugin Options"
+msgstr "אפשרויות תוסף"
+
+#: divi-builder.php:240
+msgid "Authorize"
+msgstr "להסמיך"
+
+#: divi-builder.php:242
+msgid "AWeber successfully authorized"
+msgstr "‏AWeber מורשה בהצלחה"
+
+#: divi-builder.php:258
+msgid "please paste valid authorization code"
+msgstr "אנא הדבק את קוד אישור בתוקף"
+
+#: divi-builder.php:262
+msgid "Authorization failed: "
+msgstr "ההרשאה נכשלה: "
+
+#: divi-builder.php:289
+msgid "Error: Please make sure %1$s"
+msgstr "שגיאה: אנא ודא %1$s"
+
+#: divi-builder.php:289
+msgid "MailChimp API key is correct"
+msgstr "מפתח API MailChimp הוא נכון"
+
+#: divi-builder.php:289
+msgid "AWeber is authorized"
+msgstr "‏AWeber מוסמך"
+
+#: divi-builder.php:291
+msgid "Lists have been successfully regenerated"
+msgstr "רשימות כבר מחדש בהצלחה"
+
+#: divi-builder.php:311
+msgid ""
+"Authorization code is invalid. Try regenerating it and paste in the new code."
+msgstr "קוד זיהוי לא תקין. ניסו ליצור ולהדביק קוד חדש."
+
+#: divi-builder.php:335
+msgid "AWeberAPIException."
+msgstr "חריג API AWeber."
+
+#: divi-builder.php:336
+msgid "Type"
+msgstr "סוג"
+
+#: divi-builder.php:337
+msgid "Message"
+msgstr "הודעה"
+
+#: divi-builder.php:338
+msgid "Documentation"
+msgstr "מסמוך"
+
+#: includes/navigation.php:3
+msgid "&laquo; Older Entries"
+msgstr "‏‪&‬laquo‪;‬ רשומות ישנות"
+
+#: includes/navigation.php:7
+msgid "Next Entries &raquo;"
+msgstr "הרשומות הבאות ‪&‬r‪aquo;‬"
+
+#: includes/no-results.php:4
+msgid "No Results Found"
+msgstr "לא נמצאו תוצאות"
+
+#: includes/no-results.php:7
+msgid ""
+"The page you requested could not be found. Try refining your search, or use "
+"the navigation above to locate the post."
+msgstr ""
+"העמוד שביקשתם לא נמצא. נסו להגדיר טוב יותר את החיפוש, או השתמשו בניווט למעלה "
+"כדי למצוא את הפוסט המבוקש."
