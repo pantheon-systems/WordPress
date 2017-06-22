@@ -19,6 +19,9 @@ sitemap.xml.gz
 wp-content/cache/
 wp-content/backups/
 
+# Avoid accidental modification of pantheon.upstream.yml in sites
+# created from this upstream
+pantheon.upstream.yml
 
 # Packages #
 ############
