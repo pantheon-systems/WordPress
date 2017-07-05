@@ -26,7 +26,7 @@ function _pantheon_get_latest_wordpress_version() {
 function _pantheon_wordpress_update_available() {
 	$latest_wp_version = _pantheon_get_latest_wordpress_version();
 
-	if( null === latest_wp_version ){
+	if( null === $latest_wp_version ){
 		return false;
 	}
 
