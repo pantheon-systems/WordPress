@@ -34,7 +34,7 @@ function _pantheon_wordpress_update_available() {
 	include( ABSPATH . WPINC . '/version.php' );
 	
 	// Return true if our version is not the latest
-	return $latest_wp_version > $wp_version;
+	return version_compare( $latest_wp_version, $wp_version, '>' );
 
 }
 
