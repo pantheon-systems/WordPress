@@ -51,7 +51,7 @@ else:
      * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
      *
      * Pantheon sets these values for you also. If you want to shuffle them you
-     * must contact support: https://pantheon.io/docs/getting-support 
+     * must contact support: https://pantheon.io/docs/getting-support
      *
      * @since 2.6.0
      */
@@ -67,7 +67,7 @@ else:
 
     /** A couple extra tweaks to help things run well on Pantheon. **/
     if (isset($_SERVER['HTTP_HOST'])) {
-        // HTTP is still the default scheme for now. 
+        // HTTP is still the default scheme for now.
         $scheme = 'http';
         // If we have detected that the end use is HTTPS, make sure we pass that
         // through here, so <img> tags and the like don't generate mixed-mode
@@ -132,8 +132,9 @@ $table_prefix = 'wp_';
  * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
  * language support.
  */
-define('WPLANG', '');
-
+if ( ! defined( 'WPLANG' ) ) {
+    define('WPLANG', '');
+}
 /**
  * For developers: WordPress debugging mode.
  *
