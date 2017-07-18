@@ -46,9 +46,11 @@ function _pantheon_upstream_update_notice() {
 	$latest_wp_version = _pantheon_get_latest_wordpress_version();
     ?>
     <div class="update-nag">
-	<h3>Please check <a href="https://dashboard.pantheon.io/sites/<?php echo $_ENV['PANTHEON_SITE']; ?>"> to see if a WordPress update is available on the platform.</h3>
-		Your WordPress version of <?php echo $wp_version; ?> is out of date (the current version is <?php echo $latest_wp_version; ?>)<br />
-		If you need help, please see <a href="https://pantheon.io/docs/upstream-updates/">the documentation</a> for details or open a support chat.
+		<h3>
+			"WordPress <?php echo $latest_wp_version; ?> is available! Please update to WordPress <?php echo $latest_wp_version; ?> from <a href="https://dashboard.pantheon.io/sites/<?php echo $_ENV['PANTHEON_SITE']; ?>">your Pantheon dashboard</a>.
+		</h3>
+		For details on applying updates, see <a href="https://pantheon.io/docs/upstream-updates/" target="_blank">the Applying Upstream Updates documentation</a>. <br />
+		If you need help, open a support chat on Pantheon.
 	</div>
     <?php
 }
