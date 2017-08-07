@@ -1,5 +1,5 @@
 <?php
-// Disable WordPress ato updates
+// Disable WordPress auto updates
 if( ! defined('WP_AUTO_UPDATE_CORE')) {
 	define( 'WP_AUTO_UPDATE_CORE', false );
 }
@@ -61,6 +61,15 @@ function _pantheon_register_upstream_update_notice(){
 	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && _pantheon_wordpress_update_available() ){
 		add_action( 'admin_notices', '_pantheon_upstream_update_notice' );
 	}
+}
+
+function _pantheon_disable_wp_updates() {
+	include ABSPATH . WPINC . '/version.php';
+	return (object) array(
+		'updates' => array(),
+		'version_checked' => $wp_version,
+		'last_checked' => time(),
+	);
 }
 
 // Only in Test and Live Environments...
