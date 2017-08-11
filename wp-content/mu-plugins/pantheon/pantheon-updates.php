@@ -5,8 +5,11 @@ if( ! defined('WP_AUTO_UPDATE_CORE')) {
 }
 remove_action( 'wp_maybe_auto_update', 'wp_maybe_auto_update' );
 
-// Remove WordPress core update nag
-add_action('admin_menu','_pantheon_hide_update_nag');
+// Remove the default WordPress core update nag if on Pantheon
+if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ){
+    add_action('admin_menu','_pantheon_hide_update_nag');
+}
+
 function _pantheon_hide_update_nag() {
 	remove_action( 'admin_notices', 'update_nag', 3 );
 }
@@ -58,11 +61,13 @@ function _pantheon_upstream_update_notice() {
 // Register Pantheon specific WordPress update admin notice
 add_action( 'admin_init', '_pantheon_register_upstream_update_notice' );
 function _pantheon_register_upstream_update_notice(){
+    // but only if we are on Pantheon and there is a WordPress update available
 	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && _pantheon_wordpress_update_available() ){
 		add_action( 'admin_notices', '_pantheon_upstream_update_notice' );
 	}
 }
 
+// Return zero updates and current time as last checked time
 function _pantheon_disable_wp_updates() {
 	include ABSPATH . WPINC . '/version.php';
 	return (object) array(
