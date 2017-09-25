@@ -22,6 +22,12 @@ function _pantheon_get_latest_wordpress_version() {
 		return null;
 	}
 
+	// We're only looking for stable releases so return null for unstable versions of WordPress, such as trunk or beta
+	// Stable releases only contain numbers and periods, e.g. 4.9
+	if( 0 === preg_match('/^[\d\.]+$/', $core_updates[0]->current) ){
+		return null;
+	}
+
 	return $core_updates[0]->current;
 }
 
