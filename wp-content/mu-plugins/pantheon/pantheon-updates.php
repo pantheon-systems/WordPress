@@ -15,7 +15,7 @@ function _pantheon_hide_update_nag() {
 function _pantheon_get_latest_wordpress_version() {
 	$core_updates = get_core_updates( array('dismissed' => false) );
 
-	if( ! is_array($core_updates) || empty($core_updates) || ! property_exists($core_updates[0], 'current' ) ){
+	if( ! is_array($core_updates) || empty($core_updates) || ! property_exists($core_updates[0], 'current' ) || false === stripos($core_updates[0]->current, 'src') ){
 		return null;
 	}
 
