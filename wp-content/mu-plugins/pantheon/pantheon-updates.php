@@ -4,7 +4,7 @@ if( ! defined('WP_AUTO_UPDATE_CORE')) {
 	define( 'WP_AUTO_UPDATE_CORE', false );
 }
 
-// Short circuit WordPress checking WordPress.org for updates
+// Short circuit WordPress checking WordPress.org for updates by returning zero updates and current time as last checked time
 function _pantheon_disable_wp_updates() {
 	// include an unmodified $wp_version
 	include( ABSPATH . WPINC . '/version.php' );
@@ -28,7 +28,7 @@ if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ){
     add_action('admin_menu','_pantheon_hide_update_nag');
 }
 
-// Get the latest WordPress version tagged in the Pantheon upstream
+// Get the latest WordPress version tagged in the Pantheon upstream on GitHub
 function _pantheon_get_latest_wordpress_version() {
 	$pantheon_latest_wp_version = get_transient( 'pantheon_latest_wp_version' );
 
@@ -90,16 +90,6 @@ function _pantheon_register_upstream_update_notice(){
 	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && _pantheon_wordpress_update_available() ){
 		add_action( 'admin_notices', '_pantheon_upstream_update_notice' );
 	}
-}
-
-// Return zero updates and current time as last checked time
-function _pantheon_disable_wp_updates() {
-	include ABSPATH . WPINC . '/version.php';
-	return (object) array(
-		'updates' => array(),
-		'version_checked' => $wp_version,
-		'last_checked' => time(),
-	);
 }
 
 // In the Test and Live environments, clear plugin/theme update notifications.
