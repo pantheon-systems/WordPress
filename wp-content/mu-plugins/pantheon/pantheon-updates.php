@@ -50,7 +50,7 @@ function _pantheon_upstream_update_notice() {
     ?>
     <div class="update-nag">
 		<p style="font-size: 14px; font-weight: bold; margin: 0 0 0.5em 0;">
-			WordPress <?php echo $latest_wp_version; ?> is available! Please update from <a href="https://dashboard.pantheon.io/sites/<?php echo $_ENV['PANTHEON_SITE']; ?>">your Pantheon dashboard</a>.
+			WordPress <?php echo $latest_wp_version; ?> is available! Please update from <a href="https://dashboard.pantheon.io/sites/<?php echo $_ENV['PANTHEON_SITE']; ?>" target="_blank">your Pantheon dashboard</a>.
 		</p>
 		For details on applying updates, see the <a href="https://pantheon.io/docs/upstream-updates/" target="_blank">Applying Upstream Updates</a> documentation. <br />
 		If you need help, open a support chat on Pantheon.
