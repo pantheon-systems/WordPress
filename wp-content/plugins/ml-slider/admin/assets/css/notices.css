@@ -1,0 +1,97 @@
+/* CSS for adverts */
+
+.updraft-ad-container {
+    position: relative;
+    padding-right: 150px!important;
+}
+
+.updraft-ad-container > h1 {
+    color: #e1642e;
+    font-weight: 700;
+}
+
+.updraft-ad-container > p {
+    font-size: 110%;
+}
+
+.updraft_notice_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+       -ms-flex-align: center;
+          align-items: center;
+	height: auto;
+	overflow: hidden;
+}
+
+.updraft_advert_content_left {
+	float:none;
+	width:65px;
+}
+
+.updraft_advert_content_right {
+    max-width: 800px;
+	float:none;
+	width:auto;
+    overflow: hidden;
+}
+
+.updraft_advert_bottom {
+	margin: 10px 0;
+	padding: 10px;
+	font-size: 140%;
+	background-color: white;
+	border-color: #E6DB55;
+	border: 1px solid;
+	border-radius: 4px;
+}
+
+.updraft-advert-dismiss {
+    position: absolute;
+    font-size: 13px;
+    top: 5px;
+    right: 10px;
+}
+
+h3.updraft_advert_heading {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}
+
+h4.updraft_advert_heading {
+	margin-top: 2px !important;
+	margin-bottom: 3px !important;
+}
+
+.updraft_center_content {
+	text-align: center;
+	margin-bottom:5px;
+}
+
+.updraft_notice_link {
+	padding-left:5px;
+}
+
+.updraft_text_center {
+	text-align: center;
+}
+
+.updraft_ad_meta {
+    color: #c5c5c5;
+    margin: 0;
+    font-size: 0.9em;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.mega_list strong {
+    font-weight: 700;
+}
+
+@media screen and (min-width: 560px) {
+	.updraft_advert_content_left {
+		float: left;
+	}
+}

@@ -1,0 +1,117 @@
+/*! http://responsiveslides.com v1.53 by @viljamis */
+
+.rslides {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+    margin: 0 !important;
+}
+
+.rslides li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.rslides li:first-child {
+    position: relative;
+    display: block;
+    float: left;
+}
+
+.rslides img {
+    display: block;
+    height: auto;
+    float: left;
+    width: 100%;
+    border: 0;
+}
+/** metaslider custom styles **/
+.rslides_tabs {
+    margin: 0;
+    padding: 7px 0 !important;
+    background: #333;
+    font-size: 18px;
+    list-style: none;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.rslides_tabs li {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    float: none;
+    margin-right: 1px;
+    list-style-type: none;
+}
+
+.rslides_tabs a {
+    text-decoration: none;
+    width: auto;
+    line-height: 20px;
+    padding: 9px 20px;
+    height: auto;
+    background: transparent;
+    display: inline;
+    color: white;
+}
+
+.rslides_tabs a:hover {
+    border: 0;
+    color: white;
+}
+
+.rslides_tabs li:first-child {
+    margin-left: 0;
+}
+
+.rslides_tabs .rslides_here a {
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    font-weight: bold;
+}
+
+.rslides_nav {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    z-index: 9;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: -15px;
+    opacity: 0.7;
+}
+
+.rslides_nav.prev {
+    left: 0px;
+    text-decoration: none;
+}
+
+.rslides_nav.next {
+    right: 0px;
+    text-decoration: none;
+}
+
+.rslides li,
+.rslides .rslides_tabs {
+    border: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    margin: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    list-style-type: none;
+}
