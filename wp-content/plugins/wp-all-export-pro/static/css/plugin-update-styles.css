@@ -1,0 +1,44 @@
+.check-licence-spinner {
+    left: 5px;
+    position: relative;
+    top: 2px;
+    margin-bottom: -2px;
+    width: 16px;
+    height: 16px
+}
+
+.wp-all-export-original-update-row {
+    display: none
+}
+
+.plugin-update-tr.wp-all-export-pro-custom-visible .update-message.pre-shiny-updates, .plugin-update-tr.wp-all-export-pro-custom .update-message.pre-shiny-updates {
+    padding-left: 40px
+}
+
+.plugin-update-tr.wp-all-export-pro-custom-visible .update-message.pre-shiny-updates::before, .plugin-update-tr.wp-all-export-pro-custom .update-message.pre-shiny-updates::before {
+    margin-left: -30px;
+    float: left
+}
+
+.plugin-update-tr.wp-all-export-pro-custom-visible .update-message.pre-shiny-updates p, .plugin-update-tr.wp-all-export-pro-custom .update-message.pre-shiny-updates p {
+    display: inline-block;
+    margin: 0
+}
+
+.plugin-update-tr.wp-all-export-pro-custom-visible .update-message.pre-shiny-updates span, .plugin-update-tr.wp-all-export-pro-custom .update-message.pre-shiny-updates span {
+    display: block
+}
+
+.plugin-update-tr.wp-all-export-pro-custom-visible .update-message.post-shiny-updates p::before, .plugin-update-tr.wp-all-export-pro-custom .update-message.post-shiny-updates p::before {
+    position: absolute
+}
+
+.plugin-update-tr.wp-all-export-pro-custom-visible .update-message.post-shiny-updates p span, .plugin-update-tr.wp-all-export-pro-custom .update-message.post-shiny-updates p span {
+    margin-left: 30px;
+    display: block
+}
+
+.plugins #the-list tr.wp-all-export-pro-has-message td, .plugins #the-list tr.wp-all-export-pro-has-message th {
+    box-shadow: none;
+    -webkit-box-shadow: none
+}
