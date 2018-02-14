@@ -1,4 +1,4 @@
-﻿# WordPress
+# WordPress
 
 This is a WordPress repository configured to run on the [Pantheon platform](https://pantheon.io).
 
@@ -29,3 +29,4 @@ If you would like to keep a separate set of configuration for local development,
 ### 4. Enjoy!
 
 ![alt](http://i.imgur.com/fzIeQBP.png, '')
+
