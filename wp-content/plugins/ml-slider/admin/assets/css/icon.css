@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'metaslider';
+  src:  url('../fonts/metaslider.eot?rmrdbf');
+  src:  url('../fonts/metaslider.eot?rmrdbf#iefix') format('embedded-opentype'),
+    url('../fonts/metaslider.ttf?rmrdbf') format('truetype'),
+    url('../fonts/metaslider.woff?rmrdbf') format('woff'),
+    url('../fonts/metaslider.svg?rmrdbf#metaslider') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#adminmenu .toplevel_page_metaslider div.wp-menu-image,
+#adminmenu .toplevel_page_metaslider-pro div.wp-menu-image {
+    background: none;
+    width: 36px;
+    float: left;
+    text-align: center;
+    height: 100%;
+}
+#adminmenu .toplevel_page_metaslider div.wp-menu-image:before,
+#adminmenu .toplevel_page_metaslider-pro div.wp-menu-image:before {
+    content: "\e900" !important;
+    font-family: "metaslider" !important;
+    speak: none;
+    font-size: 28px;
+    padding: 7px 0;
+    display: inline-block;
+}

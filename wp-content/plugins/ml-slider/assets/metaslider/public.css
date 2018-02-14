@@ -1,0 +1,277 @@
+/**
+ * The following styles will provide an attempt to normalize the sliders
+ */
+
+/* Reset some style. Using body to push specificity */
+body .metaslider .coin-slider,
+body .metaslider .nivoSlider,
+body .metaslider .nivoSlider img,
+body .metaslider .rslides,
+body .metaslider .rslides li,
+body .metaslider .flexslider ul.slides,
+body .metaslider .flexslider .slides li,
+body .metaslider .flexslider .slides ul,
+body .metaslider .flexslider .slides ol,
+body .metaslider .flexslider .slides img,
+body .metaslider .flexslider .flex-direction-nav,
+body .metaslider .flexslider .flex-direction-nav li {
+    border: 0;
+    margin: 0;
+    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    line-height: normal;
+    max-width: none;
+    max-height: none;
+}
+
+.metaslider {
+    position: relative;
+    z-index: 0;
+}
+
+.metaslider .caption {
+    padding: 5px 10px;
+    word-wrap: break-word;
+}
+
+.metaslider .caption-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: black;
+    color: white;
+    opacity: 0.7;
+    margin: 0;
+    display: block;
+    width: 100%;
+    line-height: 1.4em;
+}
+
+.metaslider img {
+    height: auto;
+    padding: 0;
+    margin: 0;
+    -moz-user-select: none;
+}
+
+.metaslider a {
+    outline: none;
+}
+
+.metaslider .theme-default .nivoSlider {
+   -webkit-box-shadow: 0 0 0;
+      -moz-box-shadow: 0 0 0;
+           box-shadow: 0 0 0;
+}
+
+.metaslider.ms-left {
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+.metaslider.ms-right {
+    float: right;
+    margin: 0 0 20px 20px;
+}
+
+.metaslider li:before,
+.metaslider li:after {
+    content: "" !important;
+    display: none !important;
+    bottom: auto !important;
+    margin: 0 !important;
+}
+
+.metaslider .caption-wrap .caption img {
+    width: auto;
+}
+
+.metaslider .slider-wrapper .nivo-directionNav a,
+.metaslider .slider-wrapper .nivo-controlNav a,
+.metaslider .slider-wrapper img {
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    line-height: normal;
+    max-width: none;
+    max-height: none;
+}
+
+.metaslider .slides img {
+	width: 100%;
+	display: block;
+}
+
+/* Flexslider */
+
+.metaslider .flexslider {
+    background: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    border: 0;
+    margin: 0 0 40px 0;
+    max-width: none;
+    max-height: none;
+}
+
+.flex-control-nav {
+	bottom: -30px;
+    line-height: 11px;
+    z-index: 2;
+}
+
+/** move margin from list items to anchors */
+.flex-control-nav li {
+	margin: 0;
+}
+
+.flex-control-nav li a {
+	margin: 0 6px;
+	padding: 0;
+}
+
+.flexslider .slides li {
+    position: relative;
+    height: auto;
+}
+
+/** fix for users with RTL languages */
+.flex-viewport {
+    direction: ltr;
+}
+
+/** add transition effects to firefox **/
+.flex-direction-nav a {
+    -moz-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.flexslider .slides p {
+    margin: 0;
+}
+
+.flex-control-nav {
+	margin: auto;
+}
+
+.metaslider .flexslider.filmstrip {
+	margin-top: 10px;
+}
+
+.metaslider .flexslider.filmstrip .slides li {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.metaslider .flexslider.filmstrip .slides li.flex-active-slide,
+.metaslider .flexslider.filmstrip .slides li:hover,
+.metaslider .flexslider.filmstrip .slides li:focus {
+    opacity: 1.0 !important;
+}
+
+.metaslider .flex-control-thumbs li {
+    width: auto;
+}
+
+.metaslider ol.flex-control-thumbs img,
+#content .metaslider ol.flex-control-thumbs img {
+    margin: 10px 5px 0;
+    width: auto;
+}
+
+.metaslider.nav-hidden .flexslider {
+    margin-bottom: 0;
+}
+
+.metaslider.nav-hidden.add-margin .flexslider {
+    margin-bottom: 40px;
+}
+
+/* Arrow styles to use background images (old style) */
+/* which makes it compatible with the theme builder */
+
+.metaslider .flexslider .flex-direction-nav li a:before {
+    content:none!important;
+}
+.metaslider .flexslider .flex-direction-nav li a {
+    width: 30px;
+    height: 30px;
+    margin: -20px 0 0;
+    box-shadow: none!important;
+    display: block;
+    background-color: transparent;
+    background-image: url('../sliders/flexslider/bg_direction_nav.png');
+    background-repeat:  no-repeat;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    cursor: pointer;
+    text-indent: -9999px;
+    opacity: 0;
+    -webkit-transition: all .3s ease;
+       -moz-transition: opacity .25s ease-in-out;
+            transition: all .3s ease;
+}
+.flex-direction-nav .flex-next {
+    background-position: left 0;
+}
+.flex-direction-nav .flex-next {
+    background-position: right 0;
+    text-align: left;
+    /* Fix for single character text */
+    text-indent: 9999px;
+}
+.metaslider .flexslider:hover .flex-next {
+    opacity: 0.8;
+    right: 5px;
+}
+.metaslider .flexslider:hover .flex-prev {
+    opacity: 0.8;
+    left: 5px;
+
+    /* Fix for single character text */
+    text-indent: -9999px;
+}
+.metaslider .flexslider:hover .flex-next:hover,
+.metaslider .flexslider:hover .flex-prev:hover {
+    opacity: 1;
+}
+.metaslider .flexslider .flex-direction-nav .flex-disabled {
+    cursor: default;
+    pointer-events: none;
+}
+.metaslider .flexslider .flex-control-nav a {
+    box-shadow: none !important;
+}
+.metaslider .flexslider .slides > li {
+    position: relative;
+}
+
+/* Responsive Slides */
+.metaslider .rslides_nav,
+.metaslider .rslides_tabs a {
+    box-shadow: none !important;
+}
+
+.metaslider .rslides_nav:focus,
+.metaslider .rslides_nav:hover {
+    color: #ffffff;
+} 
+
+/* Coin Slider */
+.metaslider .coin-slider {
+
+    /* This keeps the slider from spilling out the container */
+    max-width: 100%;
+    overflow:hidden;
+}
+.metaslider .coin-slider .cs-buttons a,
+.metaslider .coin-slider > a {
+    box-shadow: none !important;
+}
