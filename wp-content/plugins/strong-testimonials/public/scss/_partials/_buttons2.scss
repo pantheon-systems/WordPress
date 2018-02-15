@@ -1,0 +1,44 @@
+.strong-view {
+  &.controls-style-buttons2 {
+    .wpmslider-start,
+    .wpmslider-stop,
+    .wpmslider-next,
+    .wpmslider-prev {
+      font-family: FontAwesome;
+      display: inline-block;
+      background: #C0C0C0;
+      border-radius: 5px;
+      color: #FFF;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 28px;
+      width: 28px;
+      height: 28px;
+      margin: 0 5px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .wpmslider-start,
+    .wpmslider-stop {
+      margin: 0 4px;
+    }
+    .wpmslider-start:before {
+      content: "\f04b";
+    }
+    .wpmslider-stop:before {
+      content: "\f04c";
+    }
+    .wpmslider-prev:before {
+      content: "\f053";
+    }
+    .wpmslider-next:before {
+      content: "\f054";
+    }
+    .wpmslider-start:hover,
+    .wpmslider-stop:hover,
+    .wpmslider-next:hover,
+    .wpmslider-prev:hover {
+      background: #333;
+    }
+  }
+}

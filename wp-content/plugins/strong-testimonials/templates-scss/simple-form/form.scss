@@ -1,0 +1,45 @@
+/**
+ * Strong Testimonials Simple Form template
+ */
+@import "../_partials/structure-form";
+
+.strong-form {
+  /* error indicators */
+  input.error,
+  textarea.error,
+  select.error {
+    background: #F9E5E6;
+    border: 1px solid #E8AAAD;
+    color: #B50007;
+  }
+
+  span.error,
+  label.error {
+    color: #B50007;
+  }
+
+  /* field-wrap is used for checkboxes, radios, star ratings */
+  .field-wrap {
+    display: block;
+    font-weight: 400;
+    border: 1px solid transparent;
+
+    &.error {
+      background: #F9E5E6;
+      border: 1px solid #E8AAAD;
+      color: #B50007;
+
+      .checkbox-label {
+        outline: none;
+      }
+
+      .strong-rating {
+        outline-color: #E8AAAD;
+      }
+    }
+
+    input + label + .required.symbol:after {
+      margin-left: 0;
+    }
+  }
+}

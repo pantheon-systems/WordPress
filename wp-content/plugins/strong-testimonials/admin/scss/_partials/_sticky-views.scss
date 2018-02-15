@@ -1,0 +1,48 @@
+/* --------------------------------------------------
+   Views list table sticky
+   -------------------------------------------------- */
+
+.wp-list-table-wrap {
+  position: relative;
+}
+
+.stickit, .stickit:before {
+  cursor: pointer;
+  content: "\f154";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: #aaa;
+  font-size: 20px;
+  line-height: 1;
+  font-family: dashicons;
+  text-decoration: inherit;
+  font-weight: normal;
+  font-style: normal;
+  vertical-align: top;
+  text-align: center;
+  -webkit-transition: color .1s ease-in;
+  transition: color .1s ease-in;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.stickit {
+  &.stuck:before {
+    content: "\f155";
+    color: #0073aa;
+  }
+  &:hover:before {
+    content: "\f155";
+    color: #0096dd;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+}

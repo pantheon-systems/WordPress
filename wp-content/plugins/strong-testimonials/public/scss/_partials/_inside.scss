@@ -1,0 +1,15 @@
+.strong-view {
+	&.nav-position-inside {
+		&:not(.controls-type-sides) {
+			.wpmslider-controls {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				line-height: 1;
+				padding-bottom: 15px;
+				text-align: center;
+				z-index: 5;
+			}
+		}
+	}
+}

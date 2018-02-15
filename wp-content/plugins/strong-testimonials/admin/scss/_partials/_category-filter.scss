@@ -1,0 +1,58 @@
+/* --------------------------------------------------
+   Category filter
+   -------------------------------------------------- */
+
+// search filter
+.fc-search-wrap {
+  display: none;
+  position: relative;
+}
+
+.fc-search-field {
+  margin: 12px 0 4px 0;
+  width: 100%;
+}
+
+// dim the category count next to the category name
+.cat-count {
+  color: #888;
+}
+
+// copying style from native post category list
+.view-category-list-panel {
+  box-sizing: border-box;
+  min-height: 42px;
+  min-width: 220px;
+  overflow: auto;
+  padding: 0 10px;
+  border: 1px solid #DFDFDF;
+  background-color: #FDFDFD;
+  transition: all 0.2s ease;
+
+  &.short-panel {
+    max-height: 205px;
+  }
+
+  &.tall-panel {
+    max-height: none;
+  }
+}
+
+.view-category-list {
+  margin: 7px 0;
+
+  li {
+    margin-bottom: 0;
+    line-height: 24px;
+
+    label {
+      margin-bottom: 6px;
+      word-wrap: break-word;
+      white-space: nowrap;
+    }
+  }
+
+  ul.children {
+    margin-left: 21px;
+  }
+}

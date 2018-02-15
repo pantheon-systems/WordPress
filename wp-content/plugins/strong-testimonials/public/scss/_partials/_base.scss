@@ -1,0 +1,67 @@
+/* =bxSlider structure
+---------------------------------------------------------*/
+
+.strong-view {
+  .wpmslider-wrapper {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    *zoom: 1;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+  }
+
+  .wpmslider {
+    margin: 0;
+    padding: 0;
+  }
+
+  .wpmslider-viewport {
+    /* fix other elements on the page moving (on Chrome) */
+    -webkit-transform: translatez(0);
+  }
+}
+
+/* =pager
+---------------------------------------------------------*/
+.strong-view {
+  .wpmslider-pager {
+    display: inline-block;
+  }
+  .wpmslider-pager-item {
+    display: inline-block;
+  }
+  .wpmslider-pager-link {
+    text-decoration: none;
+  }
+}
+
+/* =controls
+---------------------------------------------------------*/
+.strong-view {
+  .wpmslider-start,
+  .wpmslider-stop,
+  .wpmslider-next,
+  .wpmslider-prev {
+    z-index: 5;
+  }
+
+  .wpmslider-controls-auto,
+  .wpmslider-controls-direction {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .wpmslider-controls {
+    a {
+      box-shadow: none;
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+}

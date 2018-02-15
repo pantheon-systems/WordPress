@@ -1,0 +1,16 @@
+.strong-view {
+	&.controls-type-sides {
+		.wpmslider-prev {
+			left: 8px;
+		}
+		.wpmslider-next {
+			right: 8px;
+		}
+		.wpmslider-prev,
+		.wpmslider-next {
+			position: absolute;
+			width: auto;
+			top: calc( 50% - 14px );
+		}
+	}
+}

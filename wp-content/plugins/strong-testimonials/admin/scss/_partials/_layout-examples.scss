@@ -1,0 +1,40 @@
+/* --------------------------------------------------
+   Examples
+   -------------------------------------------------- */
+
+.example-container {
+  background: white;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 15px 10px 5px;
+  width: 170px;
+
+  .box {
+    background: #DDD;
+    width: 100%;
+    line-height: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    /* to prevent overflowing margins */
+    display: inline-block;
+    position: relative;
+    /* multi-column properties */
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+
+    span {
+      display: block;
+      margin: 0 auto;
+    }
+
+    &.size2 {
+      height: 45px;
+    }
+
+    &.size3 {
+      height: 60px;
+    }
+  }
+}

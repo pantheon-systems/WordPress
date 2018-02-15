@@ -1,0 +1,41 @@
+.strong-view {
+  &.controls-style-buttons3 {
+    .wpmslider-start,
+    .wpmslider-stop,
+    .wpmslider-next,
+    .wpmslider-prev {
+      font-family: FontAwesome;
+      display: inline-block;
+      color: #999;
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 28px;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .wpmslider-start,
+    .wpmslider-stop {
+      margin: 0 4px;
+    }
+    .wpmslider-start:before {
+      content: "\f144";
+    }
+    .wpmslider-stop:before {
+      content: "\f28b";
+    }
+    .wpmslider-prev:before {
+      content: "\f137";
+    }
+    .wpmslider-next:before {
+      content: "\f138";
+    }
+    .wpmslider-start:hover,
+    .wpmslider-stop:hover,
+    .wpmslider-next:hover,
+    .wpmslider-prev:hover {
+      color: #333;
+    }
+  }
+}
