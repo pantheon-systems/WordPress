@@ -3,7 +3,7 @@ Contributors: matchalabs, DavidAnderson, dnutbourne, kbat82
 Tags: wordpress slideshow,seo,slideshow,slider,widget,wordpress slider,image slider,flexslider,flex slider,nivoslider,nivo slider,responsive,responsive slides,coinslider,coin slider,slideshow,carousel,responsive slider,vertical slides
 Donate link: https://david.dw-perspective.org.uk/donate
 Requires at least: 3.5
-Stable tag: 3.6.7
+Stable tag: 3.6.8
 Tested up to: 4.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -151,9 +151,14 @@ See https://www.metaslider.com/documentation/image-cropping/
 
 == Changelog ==
 
+= 3.6.8 - 2018/Jan/26 =
+
+* FIX: Updates compatibility for various themes (including Genesis)
+
 = 3.6.7 - 2017/Dec/15 =
 
 * FEATURE: Adds back in some instructions on how to display the slideshow
+* TWEAK: Removes unnecessary type attribute that was causing valiation errors
 * TWEAK: Add DocBlock checking with CI for PHP and JS files
 * FIX: Adds compatibility fixes for older WP versions.
 
@@ -621,4 +626,4 @@ More info/Comments: http://www.metaslider.com/coming-soon-meta-slider-2-6-free/
 * Initial version
 
 == Upgrade Notice ==
-* 3.6.7 : Adds back shortcode advice, and compatibility for old WP versions. 3.6 series has three new features, three fixes, various smaller tweaks. A recommended update for all. If you have the paid add-on pack, update that to version 2.7.1 or later at the same time.
+* 3.6.8 : Updates compatibility for various themes (including Genesis)

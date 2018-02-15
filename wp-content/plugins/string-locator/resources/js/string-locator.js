@@ -1,34 +1,27 @@
-var theEditor = document.getElementById( 'code-editor');
+jQuery(document).ready(function ($) {
+	var StringLocator;
+	if ( false !== string_locator.CodeMirror && '' !== string_locator.CodeMirror ) {
+		StringLocator = wp.codeEditor.initialize('code-editor', string_locator.CodeMirror);
 
-if ( theEditor != null ) {
-	var editLine       = theEditor.getAttribute( 'data-editor-goto-line'),
-		editorLanguage = theEditor.getAttribute( 'data-editor-language');
+		function resizeEditor(editor) {
+			console.dir(editor);
+			var setEditorSize = ( Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 177 );
+			editor.setSize(null, parseInt(setEditorSize));
+		}
 
-	function resizeEditor( editor ) {
-		var setEditorSize  = ( Math.max( document.documentElement.clientHeight, window.innerHeight || 0 ) - 177 );
-		editor.setSize( null, parseInt( setEditorSize ) );
+		$(".string-locator-edit-goto").click(function (e) {
+			e.preventDefault();
+			StringLocator.codemirror.scrollIntoView(parseInt($(this).data('goto-line')));
+			StringLocator.codemirror.setCursor(parseInt($(this).data('goto-line') - 1), 0);
+		});
+
+		resizeEditor(StringLocator.codemirror);
+		StringLocator.codemirror.scrollIntoView(parseInt(string_locator.goto_line));
+		StringLocator.codemirror.setCursor(parseInt(string_locator.goto_line - 1), 0);
+	} else {
+		StringLocator = $("#code-editor");
+
+		StringLocator.css( 'width', $(".string-locator-edit-wrap").width() );
+		StringLocator.css( 'height', parseInt( ( Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 177 ) ) );
 	}
-
-	var editor = CodeMirror.fromTextArea( document.getElementById( 'code-editor' ), {
-		lineNumbers: true,
-		mode: editorLanguage,
-		styleActiveLine : true,
-		matchBrackets   : true,
-		indentWithTabs  : true,
-		indentUnit      : 4,
-		theme           : 'twilight'
-	} );
-
-	editor.scrollIntoView( parseInt( editLine ) );
-	editor.setCursor( parseInt( editLine - 1 ), 0 );
-	resizeEditor( editor );
-}
-
-var gotoClick = document.getElementsByClassName( 'string-locator-edit-goto' );
-for( var i = 0; i < gotoClick.length; i++ ) {
-	var click = gotoClick[i];
-	click.onclick = function() {
-		editor.scrollIntoView( parseInt( this.getAttribute( 'data-goto-line' ) ) );
-		editor.setCursor( parseInt( this.getAttribute( 'data-goto-line' ) - 1 ), 0 );
-	}
-}
+});

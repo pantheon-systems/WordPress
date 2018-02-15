@@ -22,37 +22,37 @@ if ( isset( $_GET['restore'] ) ) {
 ?>
 <div class="wrap">
 	<h2>
-		<?php _e( 'String Locator', 'string-locator' ); ?>
+		<?php esc_html_e( 'String Locator', 'string-locator' ); ?>
 	</h2>
 
 	<form action="<?php echo esc_url( $this_url ); ?>" method="post" id="string-locator-search-form">
-		<label for="string-locator-search"><?php _e( 'Search through', 'string-locator' ); ?></label>
+		<label for="string-locator-search"><?php esc_html_e( 'Search through', 'string-locator' ); ?></label>
 		<select name="string-locator-search" id="string-locator-search">
-			<optgroup label="<?php _e( 'Core', 'string-locator' ); ?>">
-				<option value="core"><?php _e( 'The whole WordPress directory', 'string-locator' ); ?></option>
-				<option value="wp-content"><?php _e( 'Everything under wp-content', 'string-locator' ); ?></option>
+			<optgroup label="<?php esc_attr_e( 'Core', 'string-locator' ); ?>">
+				<option value="core"><?php esc_html_e( 'The whole WordPress directory', 'string-locator' ); ?></option>
+				<option value="wp-content"><?php esc_html_e( 'Everything under wp-content', 'string-locator' ); ?></option>
 			</optgroup>
-			<optgroup label="<?php _e( 'Themes', 'string-locator' ); ?>">
+			<optgroup label="<?php esc_attr_e( 'Themes', 'string-locator' ); ?>">
 				<?php echo String_Locator::get_themes_options( $search_location ); ?>
 			</optgroup>
 			<?php if ( String_Locator::has_mu_plugins() ) : ?>
-			<optgroup label="<?php _e( 'Must Use Plugins', 'string-locator' ); ?>">
+			<optgroup label="<?php esc_attr_e( 'Must Use Plugins', 'string-locator' ); ?>">
 				<?php echo String_Locator::get_mu_plugins_options( $search_location ); ?>
 			</optgroup>
 			<?php endif; ?>
-			<optgroup label="<?php _e( 'Plugins', 'string-locator' ); ?>">
+			<optgroup label="<?php esc_attr_e( 'Plugins', 'string-locator' ); ?>">
 				<?php echo String_Locator::get_plugins_options( $search_location ); ?>
 			</optgroup>
 		</select>
 
-		<label for="string-locator-string"><?php _e( 'Search string', 'string-locator' ); ?></label>
+		<label for="string-locator-string"><?php esc_html_e( 'Search string', 'string-locator' ); ?></label>
 		<input type="text" name="string-locator-string" id="string-locator-string" value="<?php echo esc_attr( $search_string ); ?>" />
 
-		<label><input type="checkbox" name="string-locator-regex" id="string-locator-regex"<?php echo ( $search_regex ? ' checked="checked"' : '' ); ?>'> RegEx search</label>
+		<label><input type="checkbox" name="string-locator-regex" id="string-locator-regex"<?php echo ( $search_regex ? ' checked="checked"' : '' ); ?>'> <?php esc_html_e( 'RegEx search', 'string-locator' ); ?></label>
 
 		<p>
-			<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e( 'Search', 'string-locator' ); ?>">
-			<a href="<?php echo esc_url( $this_url . '&restore=true' ); ?>" class="button button-primary"><?php _e( 'Restore last search', 'string-locator' ); ?></a>
+			<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'string-locator' ); ?>">
+			<a href="<?php echo esc_url( $this_url . '&restore=true' ); ?>" class="button button-primary"><?php esc_html_e( 'Restore last search', 'string-locator' ); ?></a>
 		</p>
 	</form>
 

@@ -58,9 +58,13 @@ jQuery(document).ready(function ($) {
             string_locator.ajax_url,
             search_request,
             function ( response ) {
-                console.dir( response)
                 if ( ! response.success ) {
-                    add_notice( string_locator.warning_title, response.data, 'warning' );
+                    if ( false === response.data.continue ) {
+                        throw_error( string_locator.warning_title, response.data.message );
+                        return false;
+                    } else {
+						add_notice( string_locator.warning_title, response.data.message, 'warning' );
+                    }
                 }
 
                 if ( undefined !== response.data.search ) {

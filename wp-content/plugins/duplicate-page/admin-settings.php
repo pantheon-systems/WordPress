@@ -1,6 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="wrap duplicate_page_settings">
-<h1><?php _e('Duplicate Page Settings', 'duplicate-page')?></h1>
+<h1><?php _e('Duplicate Page Settings ', 'duplicate-page')?><a href="http://www.webdesi9.com/product/duplicate-page-pro/" target="_blank" class="button button-primary"><?php _e('Buy PRO', 'duplicate-page')?></a></h1>
+
 <?php $duplicatepageoptions = array();
 $opt = get_option('duplicate_page_options');
 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
@@ -30,7 +31,6 @@ elseif(!empty($msg) && $msg == 2):
   _e( '<div class="error settings-error notice is-dismissible" id="setting-error-settings_updated"> 
 <p><strong>Settings not saved.</strong></p><button class="notice-dismiss" type="button"><span class="screen-reader-text">Dismiss this notice.</span></button></div>', 'duplicate-page');
 endif;
-$duplicate_post_status = array('draft','publish','private','pending');
 ?> 
 <div id="poststuff">
 <div id="post-body" class="metabox-holder columns-2">
@@ -41,12 +41,13 @@ $duplicate_post_status = array('draft','publish','private','pending');
 <tbody>
 <tr>
 <th scope="row"><label for="duplicate_post_status"><?php _e('Duplicate Post Status', 'duplicate-page')?></label></th>
-<td><select id="duplicate_post_status" name="duplicate_post_status">
-    <?php foreach($duplicate_post_status as $val):
-	$optionDisplayVal = ucfirst($val); ?>
-	<option value="<?php echo $val; ?>" <?php echo($opt['duplicate_post_status'] == $val ) ? "selected = 'selected'" : ""; ?>><?php _e($optionDisplayVal, 'duplicate-page')?></option>
-    <?php endforeach; ?>
-    </select>
+<td>
+    <select id="duplicate_post_status" name="duplicate_post_status">
+    	<option value="draft" <?php echo($opt['duplicate_post_status'] == 'draft' ) ? "selected = 'selected'" : ""; ?>><?php _e('Draft', 'duplicate-page')?></option>
+    	<option value="publish" <?php echo($opt['duplicate_post_status'] == 'publish' ) ? "selected = 'selected'" : ""; ?>><?php _e('Publish', 'duplicate-page')?></option>
+    	<option value="private" <?php echo($opt['duplicate_post_status'] == 'private' ) ? "selected = 'selected'" : ""; ?>><?php _e('Private', 'duplicate-page')?></option>
+    	<option value="pending" <?php echo($opt['duplicate_post_status'] == 'pending' ) ? "selected = 'selected'" : ""; ?>><?php _e('Pending', 'duplicate-page')?></option>
+        </select>
     <p><?php _e('Please select any post status you want to assign for duplicate post. <strong>Default:</strong> Draft.', 'duplicate-page')?></p>
 </td>
 </tr>

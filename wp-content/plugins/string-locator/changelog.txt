@@ -1,3 +1,13 @@
+= 2.2.0 =
+* Fixed some lingering potential HTTPS issues.
+* Fixed result previews not cutting the excerpt making them excessively long.
+* Fixed archive file skipping not accounting for letter casing in extensions.
+* Introduced common media types to the file skipping procedure.
+* Added default timeout periods, the plugin will no longer allow indefinite execution to work around http proxies.
+* Added more translatable strings that were missed.
+* Added Must-Use Plugins to individual plugin search.
+* Made changes to the uninstall routine to ensure we remove any related database entries on removal.
+
 = 2.1.2 =
 * Fix for max execution times some times being interpreted as strings and failing when you it should be able to run indefinitely
 * Fix for regex being enabled when you return to the search results, but you hadn't performed a regex search

@@ -59,12 +59,6 @@ body .metaslider .flexslider .flex-direction-nav li {
     outline: none;
 }
 
-.metaslider .theme-default .nivoSlider {
-   -webkit-box-shadow: 0 0 0;
-      -moz-box-shadow: 0 0 0;
-           box-shadow: 0 0 0;
-}
-
 .metaslider.ms-left {
     float: left;
     margin: 0 20px 20px 0;
@@ -87,20 +81,6 @@ body .metaslider .flexslider .flex-direction-nav li {
     width: auto;
 }
 
-.metaslider .slider-wrapper .nivo-directionNav a,
-.metaslider .slider-wrapper .nivo-controlNav a,
-.metaslider .slider-wrapper img {
-    border: 0;
-    box-shadow: none;
-    margin: 0;
-    list-style-type: none;
-    list-style: none;
-    padding: 0;
-    line-height: normal;
-    max-width: none;
-    max-height: none;
-}
-
 .metaslider .slides img {
 	width: 100%;
 	display: block;
@@ -115,49 +95,50 @@ body .metaslider .flexslider .flex-direction-nav li {
     -moz-box-shadow: none;
     -o-box-shadow: none;
     border: 0;
-    margin: 0 0 40px 0;
+    margin: 0 0 40px;
     max-width: none;
     max-height: none;
 }
 
-.flex-control-nav {
-	bottom: -30px;
+.metaslider .flex-control-nav {
+    border: 0;
+    margin: auto;
+    list-style-type: none;
+    list-style: none;
+    padding: 0;
+	bottom: -27px;
     line-height: 11px;
     z-index: 2;
 }
 
 /** move margin from list items to anchors */
-.flex-control-nav li {
+.metaslider .flex-control-nav li {
 	margin: 0;
 }
 
-.flex-control-nav li a {
+.metaslider .flex-control-nav li a {
 	margin: 0 6px;
 	padding: 0;
 }
 
-.flexslider .slides li {
+.metaslider .flexslider .slides li {
     position: relative;
     height: auto;
 }
 
 /** fix for users with RTL languages */
-.flex-viewport {
+.metaslider .flex-viewport {
     direction: ltr;
 }
 
 /** add transition effects to firefox **/
-.flex-direction-nav a {
+.metaslider .flex-direction-nav a {
     -moz-transition: all .3s ease;
     transition: all .3s ease;
 }
 
-.flexslider .slides p {
+.metaslider .flexslider .slides p {
     margin: 0;
-}
-
-.flex-control-nav {
-	margin: auto;
 }
 
 .metaslider .flexslider.filmstrip {
@@ -202,6 +183,7 @@ body .metaslider .flexslider .flex-direction-nav li {
 .metaslider .flexslider .flex-direction-nav li a {
     width: 30px;
     height: 30px;
+    border: 0;
     margin: -20px 0 0;
     box-shadow: none!important;
     display: block;
@@ -218,10 +200,10 @@ body .metaslider .flexslider .flex-direction-nav li {
        -moz-transition: opacity .25s ease-in-out;
             transition: all .3s ease;
 }
-.flex-direction-nav .flex-next {
+.metaslider .flex-direction-nav .flex-next {
     background-position: left 0;
 }
-.flex-direction-nav .flex-next {
+.metaslider .flex-direction-nav .flex-next {
     background-position: right 0;
     text-align: left;
     /* Fix for single character text */
@@ -258,11 +240,38 @@ body .metaslider .flexslider .flex-direction-nav li {
 .metaslider .rslides_tabs a {
     box-shadow: none !important;
 }
+.metaslider .rslides_tabs {
+    margin: 0 0 40px;
+}
 
 .metaslider .rslides_nav:focus,
 .metaslider .rslides_nav:hover {
     color: #ffffff;
 } 
+
+/* Nivo Slider */
+.metaslider .theme-default .nivoSlider {
+   -webkit-box-shadow: 0 0 0;
+      -moz-box-shadow: 0 0 0;
+           box-shadow: 0 0 0;
+}
+
+.metaslider .slider-wrapper .nivo-directionNav a,
+.metaslider .slider-wrapper .nivo-controlNav a,
+.metaslider .slider-wrapper img {
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    line-height: normal;
+    max-width: none;
+    max-height: none;
+}
+.metaslider .slider-wrapper .nivo-controlNav a {
+    transition: none;
+}
 
 /* Coin Slider */
 .metaslider .coin-slider {
