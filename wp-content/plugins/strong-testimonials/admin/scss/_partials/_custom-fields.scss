@@ -1,0 +1,173 @@
+/* --------------------------------------------------
+   Custom fields
+   -------------------------------------------------- */
+
+.fields {
+  display: inline-block;
+  min-width: 350px;
+
+  .field2 {
+    border: 1px solid #DDD;
+    background: #FFF; /* for better dragging */
+    transition: background 0.3s ease, border 0.3s ease;
+
+    &.open {
+      background: #FFF;
+      border-color: #444;
+    }
+
+  }
+
+  .field3 {
+    flex: 20;
+  }
+
+  span.link {
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px 10px 8px;
+    width: calc(100% - 20px);
+  }
+}
+
+.controls2 {
+  > div {
+    display: flex;
+  }
+
+  .icon-wrap {
+    position: relative;
+    top: 1px;
+    color: #999;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &.left {
+    float: left;
+
+    .icon-wrap {
+      margin-right: 5px;
+    }
+  }
+
+  &.right {
+    float: right;
+
+    .icon-wrap {
+      margin-left: 5px;
+    }
+  }
+
+  /* icons */
+  .handle,
+  .delete,
+  .toggle {
+    &:before {
+      font: normal 20px/1 dashicons;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .delete {
+    &:before {
+      content: "\f335";
+    }
+
+    &:hover:before {
+      background: #FF0000;
+      color: #FFF;
+      border-radius: 1px;
+    }
+  }
+
+  .handle {
+    &:before {
+      content: "\f333";
+    }
+
+    &:hover {
+      color: #2ea2cc;
+      cursor: move;
+    }
+  }
+
+  .toggle {
+    &:before {
+      content: "\f140";
+    }
+
+    &:hover:before {
+      color: #2EA2CC;
+    }
+  }
+}
+
+.field-description {
+  padding: 0 5px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #444;
+
+  &:hover {
+    color: #444;
+  }
+}
+
+.field-properties {
+  padding: 5px 10px;
+  border-top: 1px dotted #DDD;
+}
+
+.field-property,
+.field-property-box .flex {
+  display: flex;
+  margin: 5px 0;
+
+  label,
+  .nolabel {
+    flex: 0 1 80px;
+    line-height: 28px;
+  }
+
+  select, input {
+    flex: 3;
+  }
+}
+
+.field2.open .toggle:before {
+  content: "\f142";
+}
+
+.sortable-placeholder {
+  background: lightyellow !important;
+  margin: 0;
+}
+
+.ui-sortable-helper {
+  border: 1px solid #444 !important;
+}
+
+div.help {
+  font-style: italic;
+  padding-bottom: 5px;
+}
+
+#add-field-bar {
+  margin-top: 10px;
+}
+
+@-moz-document url-prefix() {
+  select optgroup {
+    font-style: normal;
+    margin-left: 3px;
+  }
+}
+

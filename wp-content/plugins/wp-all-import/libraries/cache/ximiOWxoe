@@ -1,0 +1,3 @@
+<?php $x0 = $this->xml;
+$v0_0 = $x0->xpath("title[1]");
+echo $this->getValue($v0_0);

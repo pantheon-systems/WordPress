@@ -1,0 +1,31 @@
+/* The String Translation screen
+-----------------------------------------------*/
+
+/* word break */
+.wrap .wpml-st-col-domain, .wpml-st-col-name {
+	word-break: normal;
+}
+
+/* striping */
+#icl_string_translations > tbody > *:nth-child(2n+1) {
+	background-color: #f9f9f9;
+}
+
+/* the languages links under Bulk Actions on the Categories screen */
+#icl_subsubsub {
+	display: block;
+	padding: 5px 8px 8px;
+}
+
+/* the textareas */
+.icl-st-table textarea {
+	font-size: 13px;
+}
+
+/* match the header/footer checkbox to standard post list table */
+.widefat thead td.check-column,
+.widefat thead th.check-column,
+.widefat tfoot td.check-column,
+.widefat tfoot th.check-column {
+    padding: 10px 0 0 2px;
+}

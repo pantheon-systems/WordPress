@@ -1,0 +1,85 @@
+/**
+ * To add Masonry to any template.
+ *
+ * Element sizing for responsive layouts with percentage widths.
+ * 2 columns --> 2 x grid-sizer + 1 x gutter-sizer = 100%
+ * 3 columns --> 3 x grid-sizer + 2 x gutter-sizer = 100%
+ * 4 columns --> 4 x grid-sizer + 3 x gutter-sizer = 100%
+ */
+
+/*----------------------------------------------------------
+ * global tweaks
+ *----------------------------------------------------------*/
+.strong-content.strong-masonry .testimonial {
+	margin-top: 0;
+}
+
+/*----------------------------------------------------------
+ * default: 1 column
+ *----------------------------------------------------------*/
+.strong-masonry .testimonial,
+.strong-masonry .grid-sizer {
+	width: 100%;
+}
+
+.strong-masonry .gutter-sizer {
+	width: 0;
+}
+
+.strong-masonry .testimonial.grid-item--width2 {
+	width: 100%;
+}
+
+/*----------------------------------------------------------
+ * responsive
+ *----------------------------------------------------------*/
+@media only screen and (min-width: 480px) {
+
+	/*----------------------------------------------------------
+	 * 2 columns
+	 *----------------------------------------------------------*/
+	.strong-masonry.columns-2 .testimonial,
+	.strong-masonry.columns-2 .grid-sizer {
+		width: 48.5%;
+	}
+
+	.strong-masonry.columns-2 .gutter-sizer {
+		width: 3%;
+	}
+
+	.strong-masonry.columns-2 .testimonial.grid-item--width2 {
+		width: 97%;
+	}
+
+	/*----------------------------------------------------------
+	 * 3 columns
+	 *----------------------------------------------------------*/
+	.strong-masonry.columns-3 .testimonial,
+	.strong-masonry.columns-3 .grid-sizer {
+		width: 31.33%;
+	}
+
+	.strong-masonry.columns-3 .gutter-sizer {
+		width: 3%;
+	}
+
+	.strong-masonry.columns-3 .testimonial.grid-item--width2 {
+		width: 62.66%;
+	}
+
+	/*----------------------------------------------------------
+	 * 4 columns
+	 *----------------------------------------------------------*/
+	.strong-masonry.columns-4 .testimonial,
+	.strong-masonry.columns-4 .grid-sizer {
+		width: 22.75%;
+	}
+
+	.strong-masonry.columns-4 .gutter-sizer {
+		width: 3%;
+	}
+
+	.strong-masonry.columns-4 .testimonial.grid-item--width2 {
+		width: 45.5%;
+	}
+}

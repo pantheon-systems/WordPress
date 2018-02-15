@@ -1,0 +1,135 @@
+/**
+ * Strong Testimonials Default Form template
+ */
+.strong-form {
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.strong-form .form-field {
+  margin-bottom: 1.5em;
+}
+
+.strong-form .form-field.submit {
+  margin-bottom: 1em;
+  padding: 0;
+}
+
+.strong-form .required.symbol:after {
+  content: '*';
+  color: #FF0000;
+  margin: 0 4px;
+}
+
+.strong-form label {
+  display: inline-block;
+  float: none;
+}
+
+.strong-form input[type="text"],
+.strong-form input[type="email"],
+.strong-form input[type="url"],
+.strong-form input[type="file"],
+.strong-form select,
+.strong-form textarea {
+  box-sizing: border-box;
+  display: block;
+  float: none;
+  width: 100%;
+  margin: 3px 0;
+  padding: 1px 5px;
+}
+
+.strong-form input[type="checkbox"] {
+  margin-right: 0.5em;
+}
+
+.strong-form input[type="checkbox"] + label {
+  font-weight: 400;
+}
+
+.strong-form textarea {
+  height: 12em;
+}
+
+.strong-form span.error,
+.strong-form label.error {
+  display: block;
+}
+
+.strong-form .before {
+  display: block;
+}
+
+.strong-form .after {
+  display: block;
+}
+
+input.captcha {
+  display: block;
+  width: auto;
+}
+
+img.captcha {
+  border: 0;
+}
+
+.wpmtst-captcha {
+  margin-bottom: 1em;
+}
+
+.strong-form label {
+  font-weight: 700;
+}
+
+.strong-form .form-field .after {
+  font-style: italic;
+}
+
+.strong-form input.error,
+.strong-form textarea.error,
+.strong-form select.error {
+  background: #F9E5E6;
+  border: 1px solid #E8AAAD;
+  color: #B50007;
+}
+
+.strong-form span.error,
+.strong-form label.error {
+  color: #B50007;
+}
+
+/* category checklist */
+
+.strong-category-list-panel {
+  margin: 3px 0;
+}
+
+.strong-category-list,
+.strong-category-list ul {
+  list-style-type: none;
+}
+
+.strong-category-list {
+  margin: 0;
+}
+
+.strong-category-list ul {
+  margin-left: 20px;
+}
+
+.strong-category-list li {
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+.strong-category-list input[type="checkbox"] {
+  margin: 0;
+}
+
+.strong-category-list label {
+  font-weight: 400;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+

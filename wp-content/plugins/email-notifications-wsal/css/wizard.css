@@ -1,0 +1,107 @@
+
+.wrap h2.nav-tab-wrapper{
+    border-bottom: 2px solid #0073aa;
+    padding-right: 0;
+    margin-left: 15%;
+    width:70%;
+    position: relative;
+}
+.nav-tab {
+    position: relative;
+    width: 20%;
+    text-align: center;
+    border: none;
+    margin: 0;
+    padding: 10px 0px;
+    background: #f1f1f1;
+    color: #555;
+}
+.nav-tab:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    right: auto;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: -9px;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    border: 2px solid #0073aa;
+    background-color: #f8f8f8;
+    -webkit-transition: background-color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.nav-tab-active, 
+.nav-tab-active:focus, 
+.nav-tab-active:focus:active, 
+.nav-tab-active:hover {
+    border-bottom: none;
+    background: #f1f1f1;
+    color: #000;
+}
+.nav-tab-active:after {
+    background-color: #0073aa;
+}
+.nav-tabs {
+    margin-left: 15%;
+    width:70%;
+}
+.wsal-tab {
+    display: none;
+}
+.wsal-tab th {
+    padding-left: 20px;
+}
+.form-table {
+    margin-top: 20px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+}
+.form-table td {
+    padding: 15px 20px;
+}
+tbody.widefat {
+    background-color: #fff;
+}
+.option {
+    margin-top: 2px;
+}
+span.option-title {
+    display: inline-block;
+    width: 300px;
+}
+input.option-email,
+input.option-name {
+    padding: 4px 4px;
+    font-size: 14px;
+    width: 250px;
+    outline: 0;
+    margin: 0;
+    background-color: #fff;
+}
+.buttons {
+    text-align: right;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+.finish-box {
+    padding: 50px;
+}
+.finish-box h2{
+    color: #555;
+}
+input[type=checkbox] {
+    float: left;
+    margin: 2px 8px 0 0;
+}
+.built-in {
+    margin-top: 6px!important;
+}

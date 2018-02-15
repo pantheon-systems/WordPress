@@ -1,0 +1,142 @@
+/**
+ * Star Ratings
+ *
+ * Pure CSS. No floats or bidi. HTML inputs makes it ideal for use in a form. Simple em-based sizing.
+ *
+ * http://codepen.io/cdillon/pen/vXNbBw
+ *
+ * Based on Pure CSS Star Rating Widget by James Barnett
+ * http://codepen.io/jamesbarnett/pen/vlpkh
+ */
+
+.strong-rating-wrapper {
+}
+
+/* the fieldset */
+.strong-rating {
+  display: inline-block;
+  border: 0;
+  margin: 0;
+  padding: 5px;
+}
+
+.strong-rating:focus {
+  outline: 1px solid #CCC;
+}
+
+/* the stars */
+.strong-rating input[type=radio] {
+  display: none !important;
+}
+
+.strong-rating label:before {
+  font-family: FontAwesome;
+  content: "\f005";
+  display: inline-block;
+  font-size: 1.25em;
+  /*line-height: 1.75;*/
+  line-height: 1;
+  /* use padding not margin */
+  padding: 5px;
+  transition: color 0.3s ease;
+}
+
+.strong-rating label:hover {
+  cursor: pointer;
+}
+
+/* fieldset tweaks */
+
+/* in a form */
+.strong-rating-wrapper.in-form .strong-rating {}
+
+/* in a view */
+.strong-rating-wrapper.in-view .strong-rating {
+  margin: 0;
+  padding: 0;
+}
+
+/* in the post editor */
+.strong-rating-wrapper.in-metabox .strong-rating {
+  padding: 0;
+}
+
+.strong-rating-wrapper.in-metabox .strong-rating > label:before {
+  font-size: 20px;
+  line-height: 27px;
+  padding: 0 5px;
+}
+
+/* the magic */
+
+/* this is how we highlight stars before the checked one (siblings before): */
+
+/* hide the first label which is initially checked */
+/* added bonus of POSTing the default value so no need for isset(...) */
+.strong-rating label[for$="star0"] {
+  display: none !important;
+}
+
+/* and turn all on */
+.strong-rating label:before {
+  color: #FFB900;
+}
+
+/* turn off stars after the one we're on */
+.strong-rating label:hover ~ label:before {
+  color: #DDD;
+}
+/* but use different color if validation error */
+.error .strong-rating label:hover ~ label:before {
+  color: #BBB;
+}
+
+/* turn off stars after the current rating */
+.strong-rating input:checked ~ label:before {
+  color: #DDD;
+}
+/* but use different color if validation error */
+.error .strong-rating input:checked ~ label:before {
+  color: #BBB;
+}
+
+/* turn on the current rating */
+.strong-rating input[type="radio"]:checked + label:before,
+.error .strong-rating input:checked + label:before {
+  color: #FFB900;
+}
+
+/* option to clear rating in post editor */
+.strong-rating-wrapper.in-metabox .strong-rating label[for$="star0"]:before {
+  content: "\f05e";
+  color: #999 !important;
+  position: relative;
+  top: 1px;
+}
+
+.strong-rating-wrapper.in-metabox .strong-rating label[for$="star0"]:hover:before {
+  color: #CD0000 !important;
+}
+
+/* when hovering the entire fieldset: */
+
+/* (1) turn all on */
+.strong-rating:hover input ~ label:before,
+.error .strong-rating:hover input ~ label:before {
+  color: #FFB900;
+}
+
+/* (2) indicate current selection (optional) */
+.strong-rating:hover input:checked + label:before,
+.error .strong-rating:hover input:checked + label:before {
+  color: #FFE39E;
+}
+
+/* (3) then turn off siblings after the hovered star */
+.strong-rating:hover label:hover ~ input:not(:checked) + label:before {
+  color: #DDD;
+}
+/* but use different color if validation error */
+.error .strong-rating:hover label:hover ~ input:not(:checked) + label:before {
+  color: #BBB;
+}

@@ -1,0 +1,214 @@
+/**
+ * Strong Testimonials Bold template
+ */
+/* Clears
+-----------------------------------------------*/
+.clear {
+  clear: both;
+}
+
+/**
+Minimum paragraph width means no short words in skinny space next to image
+in columns or small screens.
+
+This workaround is needed until we can use flexbox properly
+or CSS offers container queries.
+
+Thanks https://css-tricks.com/minimum-paragraph-widths/
+*/
+.maybe-clear {
+  content: "";
+  /* this value seems to work well in both responsive and Masonry */
+  width: 6em;
+  display: block;
+  overflow: hidden;
+}
+
+  /* Base
+-----------------------------------------------*/
+.strong-view.bold {
+  display: block;
+  /* setting a width handles short content */
+  width: 100%;
+}
+.strong-view.bold * {
+  box-sizing: border-box;
+}
+.strong-view.bold .testimonial.t-slide {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.strong-view.bold .testimonial-inner {
+  display: block;
+  /* fill horizontal & vertical space */
+  width: 100%;
+  height: 100%;
+}
+.strong-view.bold .testimonial-image {
+  max-width: 100%;
+}
+.strong-view.bold .testimonial-field-before {
+  margin-right: 0.5em;
+}
+
+.strong-view.slider-container {
+  opacity: 1;
+}
+.strong-view .screen-reader-text {
+  /* copied from Twenty Sixteen theme */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  /* many screen reader and browser combinations announce broken words as they would appear visually */
+  word-wrap: normal !important;
+}
+
+.strong-view.bold {
+  margin-bottom: 1em;
+}
+.strong-view.bold .testimonial {
+  margin-bottom: 1em;
+  text-align: center;
+  width: 100%;
+}
+.strong-view.bold .testimonial-inner {
+  /* custom background color is applied here */
+  padding: 20px;
+  border-radius: 3px;
+}
+.strong-view.bold .testimonial-content p:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+.strong-view.bold .testimonial-content p:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.strong-view.bold .testimonial-image {
+  margin: 10px auto 20px;
+}
+.strong-view.bold .testimonial-image img {
+  border-radius: 3px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+}
+.strong-view.bold .testimonial-image a {
+  text-decoration: none;
+  box-shadow: none;
+}
+.strong-view.bold .testimonial-content {
+  font-size: 2.2em;
+  line-height: 1.4;
+}
+.strong-view.bold .testimonial-client {
+  font-size: 1.2em;
+  margin-top: 1em;
+}
+.strong-view.bold .testimonial-name {
+  font-weight: 700;
+}
+.strong-view.bold .readmore a {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  font-size: 1.2em;
+  padding: 0.5em;
+  display: block;
+}
+.strong-view.bold .readmore-page {
+  font-size: 1.2em;
+  border-radius: 3px;
+  padding: 1em;
+  text-align: center;
+}
+
+/* Pagination
+-----------------------------------------------*/
+/* Simple pagination
+-----------------------------------------------*/
+.strong-view.bold.strong-pager {
+  display: none;
+}
+
+.simplePagerList {
+  /* match .strong-content container */
+  margin: 20px auto;
+  text-align: center;
+}
+
+.strong-view ul.simplePagerNav {
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+}
+.strong-view ul.simplePagerNav li {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.strong-view ul.simplePagerNav li a {
+  margin: 0 0.2em;
+  padding: 0.1em 0.3em;
+  outline: none;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.strong-view ul.simplePagerNav li a:hover {
+  background: #BBB;
+  color: #FFF;
+}
+.strong-view ul.simplePagerNav li.currentPage a {
+  text-decoration: none;
+  background: #999;
+  color: #FFF;
+}
+
+.strong-view.rtl ul.simplePagerNav li {
+  float: right;
+}
+
+/* Standard pagination
+-----------------------------------------------*/
+.strong-view .nav-links {
+  margin: 20px auto;
+  text-align: center;
+}
+.strong-view .nav-links a, .strong-view .nav-links span {
+  display: inline-block;
+  line-height: 1.5;
+  margin: 0 0.2em;
+  padding: 0.1em 0.3em;
+  transition: background 0.2s ease;
+}
+.strong-view .nav-links a.current, .strong-view .nav-links span.current {
+  background: #999;
+  color: #FFF;
+}
+.strong-view .nav-links a {
+  outline: none;
+  text-decoration: none;
+}
+.strong-view .nav-links a:hover,
+.strong-view .nav-links a.prev:hover,
+.strong-view .nav-links a.next:hover,
+.strong-view .nav-links span:hover {
+  background: #BBB;
+  color: #FFF;
+}
+
+/* Slideshow
+-----------------------------------------------*/
+.strong-view.bold.slider-container .strong-content {
+  margin: 0 auto;
+}
+.strong-view.bold.slider-container .testimonial:not(:first-child) {
+  display: none;
+}
+.strong-view.bold.nav-position-inside .testimonial-inner {
+  padding-bottom: 60px;
+}
+.strong-view.bold.controls-type-sides .testimonial-inner {
+  padding-left: 50px;
+  padding-right: 50px;
+}

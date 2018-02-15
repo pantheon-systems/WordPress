@@ -1,0 +1,30 @@
+/* -------------------------------------------------
+   Background options
+   ------------------------------------------------- */
+
+.color-picker-wrap {
+  display: flex;
+
+  > div:first-child {
+    min-width: 80px;
+  }
+}
+
+.background-preview-wrap {
+  background: #FFF;
+  padding: 2em;
+  max-width: 300px;
+}
+
+#background-preview {
+  padding: 1em;
+  text-align: center;
+
+  &.dark {
+    color: #333;
+  }
+
+  &.light {
+    color: #EEE;
+  }
+}
