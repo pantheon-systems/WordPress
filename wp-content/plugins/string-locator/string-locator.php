@@ -3,7 +3,7 @@
  * Plugin Name: String Locator
  * Plugin URI: http://www.clorith.net/wordpress-string-locator/
  * Description: Scan through theme and plugin files looking for text strings
- * Version: 2.2.0
+ * Version: 2.3.0
  * Author: Clorith
  * Author URI: http://www.clorith.net
  * Text Domain: string-locator
@@ -44,7 +44,7 @@ class String_Locator {
 	 * @var int $max_memory_consumption The server-configured max amount of memory a script can use.
 	 */
 	public $string_locator_language = '';
-	public $version = '2.2.0';
+	public $version = '2.3.0';
 	public $notice = array();
 	public $failed_edit = false;
 	private $plugin_url = '';
@@ -403,31 +403,40 @@ class String_Locator {
 
 		if ( ! isset( $file_data[ $filenum ] ) ) {
 			wp_send_json_error(
-				sprintf(
-				/* translators: %d: The numbered reference to a file being searched. */
-					__( 'The file-number, %d, that was sent could not be found.', 'string-locator' ),
-					$filenum
+				array(
+					'continue' => false,
+					'message'  => sprintf(
+						/* translators: %d: The numbered reference to a file being searched. */
+						esc_html__( 'The file-number, %d, that was sent could not be found.', 'string-locator' ),
+						$filenum
+					)
 				)
 			);
 		}
 
 		if ( $this->nearing_execution_limit() ) {
 			wp_send_json_error(
-				sprintf(
-				/* translators: %1$d: The time a PHP file can run, as defined by the server configuration. %2$d: The amount of time used by the PHP file so far. */
-					__( 'The maximum time your server allows a script to run (%1$d) is too low for the plugin to run as intended, at startup %2$d seconds have passed', 'string-locator' ),
-					$this->max_execution_time,
-					$this->nearing_execution_limit()
-				)
+				array(
+					'continue' => false,
+					'message'  => sprintf(
+						/* translators: %1$d: The time a PHP file can run, as defined by the server configuration. %2$d: The amount of time used by the PHP file so far. */
+						esc_html__( 'The maximum time your server allows a script to run (%1$d) is too low for the plugin to run as intended, at startup %2$d seconds have passed', 'string-locator' ),
+						$this->max_execution_time,
+						$this->nearing_execution_limit()
+					)
+				 )
 			);
 		}
 		if ( $this->nearing_memory_limit() ) {
 			wp_send_json_error(
-				sprintf(
-				/* translators: %1$d: Current amount of used system memory resources. %2$d: The maximum available system memory. */
-					__( 'The memory limit is about to be exceeded before the search has started, this could be an early indicator that your site may soon struggle as well, unfortunately this means the plugin is unable to perform any searches. Current memory consumption: %1$d of %2$d bytes', 'string-locator' ),
-					$this->nearing_memory_limit(),
-					$this->max_memory_consumption
+				array(
+					'continue' => false,
+					'message'  => sprintf(
+						/* translators: %1$d: Current amount of used system memory resources. %2$d: The maximum available system memory. */
+						esc_html__( 'The memory limit is about to be exceeded before the search has started, this could be an early indicator that your site may soon struggle as well, unfortunately this means the plugin is unable to perform any searches. Current memory consumption: %1$d of %2$d bytes', 'string-locator' ),
+						$this->nearing_memory_limit(),
+						$this->max_memory_consumption
+					)
 				)
 			);
 		}
@@ -440,9 +449,13 @@ class String_Locator {
 		if ( $is_regex ) {
 			if ( false === @preg_match( $scan_data->search, '' ) ) {
 				wp_send_json_error(
-					sprintf(
-						__( 'Your search string, <strong>%s</strong>, is not a valid pattern, and the search has been aborted.', 'string-locator' ),
-						esc_html( $scan_data->search )
+					array(
+						'continue' => false,
+						'message'  => sprintf(
+							/* translators: %s: The search string used. */
+							__( 'Your search string, <strong>%s</strong>, is not a valid pattern, and the search has been aborted.', 'string-locator' ),
+							esc_html( $scan_data->search )
+						)
 					)
 				);
 			}
@@ -480,7 +493,8 @@ class String_Locator {
 			/*
 			 * Scan the file and look for our string, but only if it's an approved file extension
 			 */
-			if ( ! in_array( $file_type, $this->bad_file_types ) ) {
+			$bad_file_types = apply_filters( 'string_locator_bad_file_types', $this->bad_file_types );
+			if ( ! in_array( $file_type, $bad_file_types ) ) {
 				$search_results = $this->scan_file( $file_data[ $filenum ], $scan_data->search, $file_data[ $filenum ], $scan_data->scan_path->type, '', $is_regex );
 			}
 
@@ -750,99 +764,42 @@ class String_Locator {
 		/**
 		 * String Locator Styles
 		 */
-		wp_register_style( 'string-locator', plugin_dir_url( __FILE__ ) . '/resources/css/string-locator.css', array(), $this->version );
+		wp_enqueue_style( 'string-locator', plugin_dir_url( __FILE__ ) . '/resources/css/string-locator.css', array(), $this->version );
 
-		/**
-		 * String Locator Scripts
-		 */
-		wp_register_script( 'string-locator-search', plugin_dir_url( __FILE__ ) . '/resources/js/string-locator-search.js', array( 'jquery' ), $this->version );
-
-		if ( isset( $_GET['edit-file'] ) ) {
-			$filename = explode( '.', $_GET['edit-file'] );
-			$filext   = end( $filename );
-			switch ( $filext ) {
-				case 'js':
-					$this->string_locator_language = 'javascript';
-					break;
-				case 'php':
-					$this->string_locator_language = 'application/x-httpd-php';
-					break;
-				case 'css':
-					$this->string_locator_language = 'css';
-					break;
-				default:
-					$this->string_locator_language = 'htmlmixed';
-			}
-
+		if ( ! isset( $_GET['edit-file'] ) ) {
 			/**
-			 * CodeMirror Styles
+			 * String Locator Scripts
 			 */
-			wp_register_style( 'codemirror', plugin_dir_url( __FILE__ ) . '/resources/css/codemirror.css', array( 'codemirror-lint' ), $this->version );
-			wp_register_style( 'codemirror-twilight', plugin_dir_url( __FILE__ ) . '/resources/css/codemirror/twilight.css', array( 'codemirror' ), $this->version );
-			wp_register_style( 'codemirror-lint', plugin_dir_url( __FILE__ ) . '/resources/js/codemirror/addon/lint/lint.css', array(), $this->version );
+			wp_enqueue_script( 'string-locator-search', plugin_dir_url( __FILE__ ) . '/resources/js/string-locator-search.js', array( 'jquery' ), $this->version );
 
-			/**
-			 * CodeMirror Scripts
-			 */
-			wp_register_script( 'codemirror-addon-edit-closebrackets', $this->plugin_url . '/resources/js/codemirror/addon/edit/closebrackets.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror-addon-edit-matchbrackets', $this->plugin_url . '/resources/js/codemirror/addon/edit/matchbrackets.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror-addon-selection-active-line', $this->plugin_url . '/resources/js/codemirror/addon/selection/active-line.js', array( 'codemirror' ), $this->version, true );
+			wp_localize_script( 'string-locator-search', 'string_locator', array(
+				'ajax_url'              => admin_url( 'admin-ajax.php' ),
+				'search_nonce'          => wp_create_nonce( 'string-locator-search' ),
+				'search_current_prefix' => __( 'Next file: ', 'string-locator' ),
+				'saving_results_string' => __( 'Saving search results&hellip;', 'string-locator' ),
+				'search_preparing'      => __( 'Preparing search&hellip;', 'string-locator' ),
+				'search_started'        => __( 'Preparations completed, search started&hellip;', 'string-locator' ),
+				'search_error'          => __( 'The above error was returned by your server, for more details please consult your servers error logs.', 'string-locator' ),
+				'search_no_results'     => __( 'Your search was completed, but no results were found..', 'string-locator' ),
+				'warning_title'         => __( 'Warning', 'string-locator' )
+			) );
 
-			wp_register_script( 'codemirror-addon-lint-css', $this->plugin_url . '/resources/js/codemirror/addon/lint/lint.js', array( 'codemirror' ), $this->version, true );
-
-			wp_register_script( 'codemirror-mode-javascript', $this->plugin_url . '/resources/js/codemirror/mode/javascript/javascript.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror-mode-htmlmixed', $this->plugin_url . '/resources/js/codemirror/mode/htmlmixed/htmlmixed.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror-mode-clike', $this->plugin_url . '/resources/js/codemirror/mode/clike/clike.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror-mode-xml', $this->plugin_url . '/resources/js/codemirror/mode/xml/xml.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror-mode-css', $this->plugin_url . '/resources/js/codemirror/mode/css/css.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror-mode-php', $this->plugin_url . '/resources/js/codemirror/mode/php/php.js', array( 'codemirror' ), $this->version, true );
-			wp_register_script( 'codemirror', $this->plugin_url . '/resources/js/codemirror/lib/codemirror.js', array(), $this->version, true );
+		}
+		else {
+			$code_mirror = wp_enqueue_code_editor( array(
+				'file' => $_GET['edit-file']
+			) );
 
 			/**
 			 * String Locator Scripts
 			 */
-			wp_register_script( 'string-locator-editor', $this->plugin_url . '/resources/js/string-locator.js', array( 'codemirror' ), $this->version, true );
+			wp_enqueue_script( 'string-locator-editor', $this->plugin_url . '/resources/js/string-locator.js', array( 'jquery', 'code-editor' ), $this->version, true );
 
-			/**
-			 * CodeMirror Enqueue
-			 */
-			wp_enqueue_style( 'codemirror-twilight' );
-
-			wp_enqueue_script( 'codemirror-addon-edit-closebrackets' );
-			wp_enqueue_script( 'codemirror-addon-edit-matchbrackets' );
-			wp_enqueue_script( 'codemirror-addon-selection-active-line' );
-			wp_enqueue_script( 'codemirror-addon-lint' );
-
-			wp_enqueue_script( 'codemirror-mode-javascript' );
-			wp_enqueue_script( 'codemirror-mode-htmlmixed' );
-			wp_enqueue_script( 'codemirror-mode-clike' );
-			wp_enqueue_script( 'codemirror-mode-xml' );
-			wp_enqueue_script( 'codemirror-mode-css' );
-			wp_enqueue_script( 'codemirror-mode-php' );
-
-			/**
-			 * String Locator Enqueue
-			 */
-			wp_enqueue_script( 'string-locator-editor' );
+			wp_localize_script( 'string-locator-editor', 'string_locator', array(
+				'CodeMirror' => $code_mirror,
+				'goto_line'  => absint( $_GET['string-locator-line'] )
+			) );
 		}
-
-		/**
-		 * String Locator Enqueue
-		 */
-		wp_enqueue_style( 'string-locator' );
-
-		wp_enqueue_script( 'string-locator-search' );
-		wp_localize_script( 'string-locator-search', 'string_locator', array(
-			'ajax_url'              => admin_url( 'admin-ajax.php' ),
-			'search_nonce'          => wp_create_nonce( 'string-locator-search' ),
-			'search_current_prefix' => __( 'Next file: ', 'string-locator' ),
-			'saving_results_string' => __( 'Saving search results&hellip;', 'string-locator' ),
-			'search_preparing'      => __( 'Preparing search&hellip;', 'string-locator' ),
-			'search_started'        => __( 'Preparations completed, search started&hellip;', 'string-locator' ),
-			'search_error'          => __( 'The above error was returned by your server, for more details please consult your servers error logs.', 'string-locator' ),
-			'search_no_results'     => __( 'Your search was completed, but no results were found..', 'string-locator' ),
-			'warning_title'         => __( 'Warning', 'string-locator' )
-		) );
 	}
 
 	/**
@@ -972,7 +929,7 @@ class String_Locator {
 							$this->notice[] = array(
 								'type'    => 'error',
 								'message' => sprintf(
-									__( 'There is an inconsistency in the opening and closing braces, { and }, of your file on line %s', 'string-locator' ),
+									esc_html__( 'There is an inconsistency in the opening and closing braces, { and }, of your file on line %s', 'string-locator' ),
 									'<a href="#" class="string-locator-edit-goto" data-goto-line="' . ( $line + 1 ) . '">' . ( $line + 1 ) . '</a>'
 								)
 							);
@@ -990,7 +947,7 @@ class String_Locator {
 							$this->notice[] = array(
 								'type'    => 'error',
 								'message' => sprintf(
-									__( 'There is an inconsistency in the opening and closing braces, [ and ], of your file on line %s', 'string-locator' ),
+									esc_html__( 'There is an inconsistency in the opening and closing braces, [ and ], of your file on line %s', 'string-locator' ),
 									'<a href="#" class="string-locator-edit-goto" data-goto-line="' . ( $line + 1 ) . '">' . ( $line + 1 ) . '</a>'
 								)
 							);
@@ -1008,7 +965,7 @@ class String_Locator {
 							$this->notice[] = array(
 								'type'    => 'error',
 								'message' => sprintf(
-									__( 'There is an inconsistency in the opening and closing braces, ( and ), of your file on line %s', 'string-locator' ),
+									esc_html__( 'There is an inconsistency in the opening and closing braces, ( and ), of your file on line %s', 'string-locator' ),
 									'<a href="#" class="string-locator-edit-goto" data-goto-line="' . ( $line + 1 ) . '">' . ( $line + 1 ) . '</a>'
 								)
 							);
@@ -1037,18 +994,20 @@ class String_Locator {
 					$header = wp_remote_head( $header['headers']['location'] );
 				}
 
-				if ( in_array( $header['response']['code'], $this->bad_http_codes ) ) {
+				$bad_http_check = apply_filters( 'string_locator_bad_http_codes', $this->bad_http_codes );
+
+				if ( in_array( $header['response']['code'], $bad_http_check ) ) {
 					$this->failed_edit = true;
 					$this->write_file( $path, $original );
 
 					$this->notice[] = array(
 						'type'    => 'error',
-						'message' => __( 'A 500 server error was detected on your site after updating your file. We have restored the previous version of the file for you.', 'string-locator' )
+						'message' => esc_html__( 'A 500 server error was detected on your site after updating your file. We have restored the previous version of the file for you.', 'string-locator' )
 					);
 				} else {
 					$this->notice[] = array(
 						'type'    => 'updated',
-						'message' => __( 'The file has been saved', 'string-locator' )
+						'message' => esc_html__( 'The file has been saved', 'string-locator' )
 					);
 				}
 			}
@@ -1125,7 +1084,7 @@ class String_Locator {
 				printf(
 					'<div class="%s"><p>%s</p></div>',
 					esc_attr( $note['type'] ),
-					esc_html( $note['message'] )
+					$note['message']
 				);
 			}
 		}

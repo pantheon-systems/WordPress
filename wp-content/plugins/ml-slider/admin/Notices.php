@@ -84,7 +84,7 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 				'button_meta' => 'updraftplus',
 				'dismiss_time' => 'updraftplus',
 				'hide_time' => 12,
-				'supported_positions' => array('header', 'dashboard'),
+				'supported_positions' => array('header'),
 				'validity_function' => 'is_updraftplus_installed',
 			),
 			'keyy' => array(
@@ -95,7 +95,7 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 				'button_meta' => 'keyy',
 				'dismiss_time' => 'keyy',
 				'hide_time' => 12,
-				'supported_positions' => array('header', 'dashboard'),
+				'supported_positions' => array('header'),
 				'validity_function' => 'is_keyy_installed',
 			),
 			'updraftcentral' => array(
@@ -106,7 +106,7 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 				'button_meta' => 'updraftcentral',
 				'dismiss_time' => 'updraftcentral',
 				'hide_time' => 12,
-				'supported_positions' => array('header', 'dashboard'),
+				'supported_positions' => array('header'),
 				'validity_function' => 'is_updraftcentral_installed',
 			),
 			'rate_plugin' => array(
@@ -117,7 +117,7 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 				'button_meta' => 'review',
 				'dismiss_time' => 'rate_plugin',
 				'hide_time' => 12,
-				'supported_positions' => array('header', 'dashboard'),
+				'supported_positions' => array('header'),
 			),
 			'lite_survey' => array(
 				'title' => __('Help us to get even better MetaSlider', 'ml-slider'),
@@ -165,7 +165,7 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 				'text' => __('Supercharge & secure your WordPress site with our other top plugins:', 'ml-slider'),
 				'image' => 'metaslider_logo_large.png',
 				'dismiss_time' => 'thankyou',
-				'hide_time' => 24,
+				'hide_time' => 52,
 				'mega' => true,
 				'supported_positions' => array('dashboard'),
 			),
@@ -193,54 +193,55 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
     }
     
 	/**
-	 * Seasonal Notices. Note that if dismissed, they will stay dismissed for 9999 weeks
+	 * Seasonal Notices. Note that if dismissed, they will stay dismissed for 9999 weeks. 
+     * An empty string for 'hide_time' will show "Dismiss" instead of "Dismiss (12 weeks)"
      * Each year the key and dismiss time should be updated
      *
 	 * @return string
 	 */
     protected function seasonal_notices() {
         return array(
-			'blackfriday2017' => array(
+			'blackfriday2018' => array(
 				'title' => __('Black Friday - 50% off the MetaSlider Add-on Pack until November 30th', 'ml-slider'),
 				'text' => __('To benefit, use this discount code:', 'ml-slider').' ',
 				'image' => 'seasonal/black_friday.png',
 				'button_link' => apply_filters('metaslider_hoplink', 'https://www.metaslider.com/upgrade') . '?utm_source=metaslider-plugin-page&utm_medium=banner',
 				'button_meta' => 'ml-slider',
-				'dismiss_time' => 'blackfriday2017',
-				'discount_code' => 'blackfriday2017sale',
-				'valid_from' => '2017-11-20 00:00:00',
-                'valid_to' => '2017-11-30 23:59:59',
-                'hide_time' => __('until next year', 'ml-slider'),
+				'dismiss_time' => 'blackfriday2018',
+				'discount_code' => 'blackfriday2018sale',
+				'valid_from' => '2018-11-20 00:00:00',
+                'valid_to' => '2018-11-30 23:59:59',
+                'hide_time' => '',
 				'supported_positions' => array('header', 'dashboard'),
 			),
-			'christmas2017' => array(
+			'christmas2018' => array(
 				'title' => __('Christmas sale - 50% off the MetaSlider Add-on Pack until December 25th', 'ml-slider'),
 				'text' => __('To benefit, use this discount code:', 'ml-slider').' ',
 				'image' => 'seasonal/christmas.png',
 				'button_link' => apply_filters('metaslider_hoplink', 'https://www.metaslider.com/upgrade') . '?utm_source=metaslider-plugin-page&utm_medium=banner',
 				'button_meta' => 'ml-slider',
-				'dismiss_time' => 'christmas2017',
-				'discount_code' => 'christmas2017sale',
-				'valid_from' => '2017-12-01 00:00:00',
-				'valid_to' => '2017-12-25 23:59:59',
-                'hide_time' => __('until next year', 'ml-slider'),
+				'dismiss_time' => 'christmas2018',
+				'discount_code' => 'christmas2018sale',
+				'valid_from' => '2018-12-01 00:00:00',
+				'valid_to' => '2018-12-25 23:59:59',
+                'hide_time' => '',
 				'supported_positions' => array('header', 'dashboard'),
 			),
-			'newyear2018' => array(
-				'title' => __('Happy New Year - 50% off the MetaSlider Add-on Pack until January 1st', 'ml-slider'),
+			'newyear2019' => array(
+				'title' => __('Happy New Year - 50% off the MetaSlider Add-on Pack until January 14th', 'ml-slider'),
 				'text' => __('To benefit, use this discount code:', 'ml-slider').' ',
 				'image' => 'seasonal/new_year.png',
 				'button_link' => apply_filters('metaslider_hoplink', 'https://www.metaslider.com/upgrade') . '?utm_source=metaslider-plugin-page&utm_medium=banner',
 				'button_meta' => 'ml-slider',
-				'dismiss_time' => 'newyear2018',
-				'discount_code' => 'newyear2018sale',
-				'valid_from' => '2017-12-26 00:00:00',
-				'valid_to' => '2018-01-14 23:59:59',
-                'hide_time' => __('until next year', 'ml-slider'),
+				'dismiss_time' => 'newyear2019',
+				'discount_code' => 'newyear2019sale',
+				'valid_from' => '2018-12-26 00:00:00',
+				'valid_to' => '2019-01-14 23:59:59',
+                'hide_time' => '',
 				'supported_positions' => array('header', 'dashboard'),
 			),
 			'spring2018' => array(
-				'title' => __('Spring sale - 50% off the MetaSlider Add-on Pack until April 31st', 'ml-slider'),
+				'title' => __('Spring sale - 50% off the MetaSlider Add-on Pack until April 30th', 'ml-slider'),
 				'text' => __('To benefit, use this discount code:', 'ml-slider').' ',
 				'image' => 'seasonal/spring.png',
 				'button_link' => apply_filters('metaslider_hoplink', 'https://www.metaslider.com/upgrade') . '?utm_source=metaslider-plugin-page&utm_medium=banner',
@@ -249,7 +250,7 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 				'discount_code' => 'spring2018sale',
 				'valid_from' => '2018-04-01 00:00:00',
 				'valid_to' => '2018-04-30 23:59:59',
-                'hide_time' => __('until next year', 'ml-slider'),
+                'hide_time' => '',
 				'supported_positions' => array('header', 'dashboard'),
 			),
 			'summer2018' => array(
@@ -262,7 +263,7 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 				'discount_code' => 'summer2018sale',
 				'valid_from' => '2018-07-01 00:00:00',
 				'valid_to' => '2018-07-31 23:59:59',
-                'hide_time' => __('until next year', 'ml-slider'),
+                'hide_time' => '',
 				'supported_positions' => array('header', 'dashboard'),
 			)
 		);
@@ -393,9 +394,9 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 	protected function valid_seasonal_notices() {
         $valid = array();
         $time_now = time();
-        // $time_now = strtotime('2017-11-20 00:00:01'); // Black Friday
-        // $time_now = strtotime('2017-12-01 00:00:01'); // XMAS
-        // $time_now = strtotime('2017-12-26 00:00:01'); // NY
+        // $time_now = strtotime('2018-11-20 00:00:01'); // Black Friday
+        // $time_now = strtotime('2018-12-01 00:00:01'); // XMAS
+        // $time_now = strtotime('2018-12-26 00:00:01'); // NY
         // $time_now = strtotime('2018-04-01 00:00:01'); // Spring
         // $time_now = strtotime('2018-07-01 00:00:01'); // Summer
         foreach($this->seasonal_notices() as $ad_identifier => $notice) {
@@ -449,41 +450,40 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
             return true;
         }
 
-        // Disable this for now so that after a dismiss, ads hide for 24 hours
-        // if (get_option("ms_ads_first_seen_on")) {
-        // They have seen ads before which means the delay is over
-        // return true;
-        // }
+        // The delay could be empty, ~2 weeks (initial delay) or ~12 weeks
         $delay = get_option("ms_hide_all_ads_until");
 
-        // Only start the timer if they see a page that has ads
         if (!$this->is_page_with_ads() && !$delay) {
+
+            // Only start the timer if they see a page that can serve ads
             return false;
         }
+
         if (!$delay) {
 
-            // Set the delay for when to see an ad, 2 weeks; returns false
+            // Set the delay for when they will first see an ad, 2 weeks; returns false
             return !update_option("ms_hide_all_ads_until", time() + 2*7*86400);
         } else if ((time() > $delay) && !get_option("ms_ads_first_seen_on")) {
 
-            // Note the time they first saw ads
+            // Serve ads now, and note the time they first saw ads
             update_option("ms_ads_first_seen_on", time());
 
-            // Now that they can see ads, make sure the rate_plugin is shown first
-            // TODO: Enable this next time
-            // $notices = $this->lite_notices();
-            // $this->ads = array('rate_plugin' => $notices['rate_plugin']);
+            // Now that they can see ads, make sure the rate_plugin is shown first.
+            // Since this shows after 2 weeks, it's better timing.
+            $notices = $this->lite_notices();
+            $this->ads = array('rate_plugin' => $notices['rate_plugin']);
             return true;
         } else if (time() < $delay) {
 
-            // This means an ad was dismissed and there's a 24h delay
+            // This means an ad was dismissed and there's a delay
             return false;
         } else if (get_option("ms_ads_first_seen_on")) {
 
-            // This means the delay has elapsed, the 24hr period expired
-            // and there are still ads that haven't been dismissed
+            // This means the initial delay has elapsed, 
+            // and the dismissed period expired
             return true;
         }
+
         // Default to not show an ad, in case there's some error
 		return false;
     }
@@ -662,12 +662,17 @@ class MetaSlider_Notices extends Updraft_Notices_1_0 {
 	 */
 	public function dismiss_ad($ad_identifier, $weeks) {
 
-        // if the time isn't specified it will hide forever (9999 weeks)
-        $weeks = is_int($weeks) ? $weeks : 9999;
+        // If the time isn't specified it will hide "forever" (9999 weeks)
+        // Update 12/18/2017 - will set this an extra week, so that this individual ad will hide, for example, 13 weeks, while ALL ads (minus seasonal) will hide for 12 weeks. This ensures that the user doesn't see the same ad twice. Minor detail.
+        $weeks = is_int($weeks) ? $weeks + 1 : 9999;
+        
         $result = update_option("ms_hide_{$ad_identifier}_ads_until", time() + $weeks*7*86400);
         
-        // Hide all ads for 24 hours
-        update_option("ms_hide_all_ads_until", time() + 1*86400);
+        // Update 12/18/2017 - Hide all ads for 12 weeks (this used to be 24 hours)
+        // This skips over the scenario when a user has seen a seasonal ad within the 2 week grace period. That way we can still show them the "rate plugin" ad after 2 weeks.
+        if (get_option("ms_ads_first_seen_on")) {
+            update_option("ms_hide_all_ads_until", time() + 12*7*86400);
+        }
         
 		return $result ? $result : new WP_Error('update_failed', __('The attempt to update the option failed.', 'ml-slider'), array('status' => 409));
     }

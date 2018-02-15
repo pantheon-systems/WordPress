@@ -14,7 +14,7 @@
 				'name'    => 'WordPress'
 			),
 			/* translators: The WordPress description, used when a core file is opened in the editor. */
-			'description' => __( 'WordPress is web software you can use to create a beautiful website or blog. We like to say that WordPress is both free and priceless at the same time.', 'string-locator' )
+			'description' => esc_html__( 'WordPress is web software you can use to create a beautiful website or blog. We like to say that WordPress is both free and priceless at the same time.', 'string-locator' )
 		);
 	}
 	elseif ( 'theme' == $_GET['file-type'] ) {
@@ -69,9 +69,9 @@
 	<h1>
 		<?php
 			/* translators: Title on the editor page. */
-			_e( 'String Locator - Code Editor', 'string-locator' );
+			esc_html_e( 'String Locator - Code Editor', 'string-locator' );
 		?>
-		<a href="<?php echo esc_url( $this_url . '&restore=true' ); ?>" class="button button-primary"><?php _e( 'Return to search results', 'string-locator' ); ?></a>
+		<a href="<?php echo esc_url( $this_url . '&restore=true' ); ?>" class="button button-primary"><?php esc_html_e( 'Return to search results', 'string-locator' ); ?></a>
 	</h1>
 
 	<form action="<?php echo ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" id="string-locator-edit-form" method="post">
@@ -84,7 +84,7 @@
 				<div class="string-locator-theme-details">
 					<h2><?php echo $details['name']; ?> <small>v. <?php echo $details['version']; ?></small></h2>
 					<p>
-						<?php _e( 'By', 'string-locator' ); ?> <a href="<?php echo $details['author']['uri']; ?>" target="_blank"><?php echo $details['author']['name']; ?></a>
+						<?php esc_html_e( 'By', 'string-locator' ); ?> <a href="<?php echo $details['author']['uri']; ?>" target="_blank"><?php echo $details['author']['name']; ?></a>
 					</p>
 					<p>
 						<?php echo $details['description'] ?>
@@ -96,18 +96,18 @@
 					<p>
 						<label>
 							<input type="checkbox" name="string-locator-smart-edit" checked="checked">
-							<?php _e( 'Enable a smart-scan of your code to help detect bracket mismatches before saving.', 'string-locator' ); ?>
+							<?php esc_html_e( 'Enable a smart-scan of your code to help detect bracket mismatches before saving.', 'string-locator' ); ?>
 						</label>
 					</p>
 
 					<?php if ( isset( $details['parent'] ) && ! $details['parent'] ) { ?>
 					<div class="notice notice-warning inline below-h2">
 						<p>
-							<?php _e( 'It seems you are making direct edits to a theme.', 'string-locator' ); ?>
+							<?php esc_html_e( 'It seems you are making direct edits to a theme.', 'string-locator' ); ?>
 						</p>
 
 						<p>
-							<?php _e( 'When making changes to a theme, it is recommended you make a <a href="https://codex.wordpress.org/Child_Themes">Child Theme</a>.', 'string-locator' ); ?>
+							<?php esc_html_e( 'When making changes to a theme, it is recommended you make a <a href="https://codex.wordpress.org/Child_Themes">Child Theme</a>.', 'string-locator' ); ?>
 						</p>
 					</div>
 
@@ -119,16 +119,16 @@
 					<?php if ( ! stristr( $file, 'wp-content' ) ) { ?>
 						<div class="notice notice-warning inline below-h2">
 							<p>
-								<strong><?php _e( 'Warning:', 'string-locator' ); ?></strong> <?php _e( 'You appear to be editing a Core file.', 'string-locator' ); ?>
+								<strong><?php esc_html_e( 'Warning:', 'string-locator' ); ?></strong> <?php esc_html_e( 'You appear to be editing a Core file.', 'string-locator' ); ?>
 							</p>
 							<p>
-								<?php _e( 'Keep in mind that edits to core files will be lost when WordPress is updated. Please consider <a href="https://make.wordpress.org/core/handbook/">contributing to WordPress core</a> instead.', 'string-locator' ); ?>
+								<?php esc_html_e( 'Keep in mind that edits to core files will be lost when WordPress is updated. Please consider <a href="https://make.wordpress.org/core/handbook/">contributing to WordPress core</a> instead.', 'string-locator' ); ?>
 							</p>
 						</div>
 					<?php } ?>
 
 					<p class="submit">
-						<input type="submit" name="submit" class="button button-primary" value="<?php _e( 'Save changes', 'string-locator' ); ?>">
+						<input type="submit" name="submit" class="button button-primary" value="<?php esc_html_e( 'Save changes', 'string-locator' ); ?>">
 					</p>
 				</div>
 			</div>
@@ -195,7 +195,7 @@
 			<div class="string-locator-details">
 
 				<div class="string-locator-theme-details">
-					<h2><?php _e( 'WordPress Functions', 'string-locator' ); ?></h2>
+					<h2><?php esc_html_e( 'WordPress Functions', 'string-locator' ); ?></h2>
 
 					<?php echo $function_help; ?>
 				</div>

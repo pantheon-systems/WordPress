@@ -219,7 +219,6 @@ class MetaSlider {
      * @return string HTML & Javascrpt
      */
     public function render_public_slides() {
-        $html[] = '<!-- MetaSlider -->';
         $html[] = '<div style="' . $this->get_container_style() . '" class="' . esc_attr($this->get_container_class()) .'">';
         $html[] = '    ' . $this->get_inline_css();
         $html[] = '    <div id="' . $this->get_container_id() . '">';
@@ -227,7 +226,6 @@ class MetaSlider {
         $html[] = '        ' . $this->get_html_after();
         $html[] = '    </div>';
         $html[] = '</div>';
-        $html[] = '<!--// MetaSlider-->';
 
         $slideshow = implode( "\n", $html );
 
@@ -354,7 +352,7 @@ class MetaSlider {
         $javascript = "";
 
         if ( $this->get_setting( 'noConflict' ) == 'true' && $type == 'flex' ) {
-            $javascript = "$('#metaslider_{$this->id}').addClass('flexslider'); // theme/plugin conflict avoidance";
+            $javascript = "$('#metaslider_{$this->id}').addClass('flexslider'); /* theme/plugin conflict avoidance */";
         }
 
         $custom_js = apply_filters( "metaslider_{$type}_slider_javascript_before", $javascript, $this->id );
