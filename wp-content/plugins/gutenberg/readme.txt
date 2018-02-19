@@ -1,8 +1,8 @@
 === Gutenberg ===
 Contributors: matveb, joen, karmatosed
-Requires at least: 4.8
-Tested up to: 4.9.1
-Stable tag: 2.0.0
+Requires at least: 4.9
+Tested up to: 4.9.4
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,13 +79,175 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 
 == Changelog ==
 
+= 2.2.0 =
+
+* Block Nesting is live! It comes with an experimental Columns block. (Note: converting a nested block into a reusable block is disabled on this first version.) Furthermore, this is not a specific implementation for columns alone — any block author can take advantage of defining nested areas.
+* Refined block insertion experience:
+* Introduce block shortcuts on every empty paragraph block. This also temporarily disables the sibling inserter as we work on refining this interaction.
+* Add trailing text area at the bottom of a post to continue writing.
+* Preview saved blocks while hovering on the inserter. Allows users to quickly see what they are inserting before inserting.
+* Enable triggering onChange events within RichText component on every keystroke. This was an enforced limitation that prevented saved post checks from being faithful.
+* Rework undo levels to use history "buffer" and leverage the mechanism to aid in continuous syncing of RichText history records.
+* Collapse the publish sidebar when making edits to a published post automatically.
+* Improve writing flow by triggering isTyping mode as soon as the user clicks on the default text appender.
+* Hide hover effects when typing.
+* Add a confirmation message before reverting a published post to draft.
+* When using the inserter, replace the selected block if it's empty.
+* Display reusable blocks in the "recent blocks" tab.
+* Make sure blue line indicators appear consistently when using dropzones.
+* Ensure that hitting enter at the end of a paragraph creates an empty paragraph when using RichText.
+* Ensure the block settings menu and the block movers are shown when the default block is selected and user is not typing.
+* Deselect individual gallery images when clicking outside the block or selecting another image.
+* Add support for setting a page template.
+* Add support for individual image captions in galleries.
+* Add support for saving a post with Cmd/Ctrl+S shortcuts. This is possible after these RichText changes.
+* Support unwrapped paragraph text via native block deprecation mechanism. (Ensures paragraphs without p tags are correctly interpreted.) Also readdresses code that was applying autop selectively on the server for posts made with gutenberg as it is handled at the block level when needed.
+* Add raw handling (pasting mechanism) for iframes (e.g. Google Maps).
+* Allow WP to make images responsive via class.
+* Drop focus/setFocus props in favor of isSelected prop.
+* New PlainText component for raw content that is styled as editable text. Renamed Editable to RichText for extra clarity and separation.
+* Add RawHTML component, drop support for HTML string block save.
+* Absorb multiple-image uploads in generic image placeholder component and reuse it for galleries.
+* Refactor Default Colors and the ColorPalette component. Moves the default colors to the frontend making the Editor script more reusable without the need of the server-side bootstraping.
+* Reimplement block alignment as a common extension.
+* Use block API functions in reusable block effects.
+* Check for duplication in addGeneratedClassName.
+* Assign default for all allowed blockTypes.
+* Update ToggleControl to pass boolean onChange.
+* Add withSafeTimeout higher-order component.
+* Expose getEditedPostAttribute selector.
+* Move selected block focus to BlockListBlock.
+* Allow themes to disable custom color functionality across blocks.
+* Added slug selector to data modules collection.
+* Defer registration of all core blocks until editor loads. Generally useful for extensibility hooks.
+* Add a subscribe function to the editor data module. Also, separate reducers into multiple stores to avoid unallowed access to the actions.
+* Support multiple stores in data module for the redux dev tools.
+* Expose registered selectors as functions.
+* Remove Popover isOpen prop, render by presence.
+* Fix issue with store persistence and switching to fixed toolbar.
+* Fix issue with formatting toolbar hover.
+* Fix block menu render when multi-selecting.
+* Fix TinyMCE custom buttons width in Classic block.
+* Fix sidebar tab admin theme regression.
+* Fix center alignment on resized images.
+* Fix some float issues.
+* Fix type error when merging blocks.
+* Fix regression when converting gallery from shortcode.
+* Fix unset variable in meta-boxes functions.
+* Fix code error in blocks-control.md.
+* Fix loss of focus when navigating from multi-selection.
+* Fix scrollbars on blank preview loading screen.
+* Fix broken nested lists and Evernote test in pasting functionality.
+* Fix lingering dropzone placeholder at the end of the editor.
+* Fix Button block line break presentation.
+* Fix lingering visual editor classes.
+* Fix codepen embeds width.
+* Fix merging blocks after nested blocks refactoring.
+* Fix Cypress path checks to allow sub-directory.
+* Fix error when pasting image inside caption.
+* Fix some issues when pasting from Word.
+* Fix bug when pasting content with custom styles in a paragraph block.
+* Fix image caption select behaviour.
+* Fix broken nested content caused by overly aggressive cache.
+* Fix issue with comments and pingbacks being set to off on new posts.
+* Fix regression with RichText placeholder whitespace.
+* Fix incorrect directory to load text domain.
+* Fix issue with quote to heading transformation.
+* Fix focus transfer between citation and content.
+* Fix gallery link attribute selector.
+* Attempt to correct Slack's Markdown code block variant.
+* Disable customClassName support on Classic block.
+* Avoid autofocus behavior for blocks without focusable elements.
+* Ignore focus if explicitOriginalTarget is not node (Firefox issue).
+* Extract "edit-post" to its own module — this is preparation work for the eventual template editor in v2 onwards.
+* Remove redundant handling of inserter position, simplifying the implementation for nesting.
+* Prioritize specific block handling over generic shortcode catch-all transform.
+* Avoid running a full-parse when rendering a post, instead only intercepting dynamic blocks to handle their callbacks.
+* Ensure string return value from render_callback.
+* Avoid parameters in memoized selectors getDependants.
+* Guard against falsey block container in WritingFlow.
+* Refactor BlockList to use minimal block UIDs array.
+* Pass selection start as UID in BlockList to prevent unnecessary rerenders.
+* Refactor TableOfContents panel to separate component for performance improvements.
+* Restore new post setup as non-dirtying change. This resolves an issue where saving a new post which has an empty title will set the title as "Auto Draft".
+* Center spinner when images are loading in the gallery block.
+* Use isTypingInBlock to avoid unnecessary block rerenders.
+* Add the i18n messages to the built plugin.
+* General design improvements to the full-post code editor. Also removes the dummy quicktag buttons that were non-functional.
+* Only start multi selection from inside the content.
+* Cache columns layouts configurations.
+* General polish to the Classic block and some quote block style errors.
+* Remove wrapper from image raw transform and added tests.
+* Make sure reusable blocks models exist before initializing.
+* Persist withFocusOutside event for async usage.
+* Pass selected block UID as string on WritingFlow.
+* Add label to range control.
+* Remove throttling inputs on RichText.
+* Replace global hover state with local component state. This reduces excesive dispatching of mouse events.
+* Simplify Editor State initialization using a single action to fix undo/redo initialization.
+* Access state paths directly in selector dependants for getBlock.
+* Refactor insertion point to include rootUID and layout.
+* Set new post status to draft in initialization.
+* Strip comment demarcations in content filtering for the front-end after refactoring work.
+* Improve presentation of List block.
+* Optimize getMultiSelectedBlocks by returning shared array reference in empty multi-selection.
+* Increase maximum number of recent blocks to nine in order to accommodate the current design.
+* Avoid cases of rerendering when the previous or next block updates.
+* Restore missing selectionStart props in BlockList.
+* Improve edit and insert link label display.
+* Extract copy and scroll-into-view logic to separate non-visual components in BlockList.
+* Make sure that styles do not contain duplicates in development mode.
+* Use trivial block count check to determine emptiness.
+* Use proper labels provided by the rest API on taxonomies.
+* Use menu order to order pages in the parent page dropdown.
+* Persist link attribute to fix invalid galleries.
+* Update the Dashicons component with new icons.
+* Use correct label on Featured Image Panel.
+* Small improvement to the meta-box partial page file.
+* Delete unused global import in gutenberg_menu function.
+* Improve serialize persistence action name.
+* Improve logic around replacing the editor in PHP.
+* Improve consistency of tooltips text.
+* Improve sandbox component readme.
+* Improve gutenberg_intercept_* functions.
+* Improve "Add New" button logic.
+* Revert updates giving Meta Boxes' #poststuff div a broader scope.
+* Simplify "New Post" button logic.
+* Simplify scripts registration.
+* Replace focus with isSelected verification on hooks.
+* Automate memoized selector setup clear.
+* Consolidate module build JS, CSS, map inclusion.
+* Remove unused code after WP 4.9.
+* Update deprecated BlockDescription in Subhead.
+* Add doc explaining the deprecated block API. (Handbook.)
+* Add doc for Editable component (now RichText).
+* Document block validation, clarify extensibility validation.
+* JSDoc: prefer @return over @retuns.
+* Integrate dependencies from WordPress packages. Brings wp-scriptsinto gutenberg.
+* Move components in wp.blocks.InspectorControls to wp.components.
+* Add lint:fix ESLint "fix" npm script.
+* Add an eslint --fix Git precommit hook.
+* Add reusable block render tests.
+* Add tests for ContrastChecker component.
+* Add more details about unit testing JavaScript code.
+* Add mention to create-guten-block repo.
+* Add partial test coverage to RichText component.
+* Add first version of repository management doc.
+* Assign preferred JSDoc tags and types.
+* Assign edit-post global as wp.editPost.
+* Assign explicit user for Docker WordPress install in tests.
+* Mention installing docker-compose in local dev setup.
+* Update refx to version 3.x.
+* Update memize and rememo dependencies.
+* Code is Poetry footer to main readme.
+
 = 2.1.0 =
 
 * Iterate on the design of up/down arrows and how focus is managed. This seeks to further reduce the visual and cognitive weight of the up/down movers.
 * Show immediate visual feedback when dragging and dropping images into the editor. (Expands on the previous release work.)
 * Expose state through data module using selectors. This is an important piece of the extensibility puzzle.
 * New button outline and focus styles.
-* ﻿Show original block icon after converting to reusable block. Also hides the generic reusable block from inserters. This moves data logic out of the inserter.
+* Show original block icon after converting to reusable block. Also hides the generic reusable block from inserters. This moves data logic out of the inserter.
 * Introduce a migration function for block versioning.
 * Add HTML handler to dropzone. Allows drag and dropping images from other web pages directly.
 * Trigger typing mode when ENTER or BACKSPACE are pressed. This improves the writing flow but engaging the UI-less mode more frequently.
@@ -93,11 +255,11 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 * Refactor CopyContentButton as a core extension to illustrate how to add functionality to the editor outside of blocks.
 * Allow collapsing/sorting meta-boxes panels.
 * Remove dirty-checking from meta-boxes state, fixes issues with default values and updating certain text fields.
-* Defer registration of all core blocks until editor loads. Improves ability to hook into registerBlockType﻿.
+* Defer registration of all core blocks until editor loads. Improves ability to hook into registerBlockType.
 * Only trigger select block action when block is unselected.
 * Try new markup for Galleries using lists.
 * Try new subheading editorial block.
-* ﻿Reduce sibling inserter initial height.
+* Reduce sibling inserter initial height.
 * Force an update when a new filter is added or removed while using withFilters higher-order component. This improves the rendering flow of filters.
 * Refactor the MediaUploadButton to be agnostic to its rendered UI.
 * Change "size" label to "level" in Heading block settings.
@@ -146,7 +308,7 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 * Replace publish dropdown menu with a sidebar panel.
 * Expand latest post blocks with more querying options — order by and category.
 * Allow dragging multiple images to create a gallery.
-* Improve markdown pasting﻿ (allows lists to be interpreted).
+* Improve markdown pasting (allows lists to be interpreted).
 * Allow pasting copied images directly.
 * Pasting within lists and headings.
 * Improve handling of inline spans.
@@ -155,8 +317,8 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 * Preserve alignment classes during raw transformations (like pasting an old WordPress post).
 * Support shortcode synonyms.
 * Allow continued writing when pressing down arrow at the end of a post.
-* Mobile design: move block controls to the bottom of a block﻿.
-* Allow﻿ deleting reusable blocks globally.
+* Mobile design: move block controls to the bottom of a block.
+* Allow deleting reusable blocks globally.
 * Display description and type on the sidebar. (Also replace BlockDescription component with a property.)
 * New table of contents and document counts design.
 * Add button to copy the full document quickly.
@@ -193,14 +355,14 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 * Updated messages around reusable blocks interactions.
 * Align both the quote and the citation in the visual editor.
 * Exit edit mode when unfocusing a reusable block.
-* Set floated image width (when unresized) in % value﻿.
+* Set floated image width (when unresized) in % value.
 * Add withState higher-order component.
 * Initial introduction of wp.data module.
 * Restrict the state access to the module registering the reducer only.
 * Refactor PostSchedule to make Calendar and Clock available as reusable components.
 * Allow overwriting colors (defaults and theme provided) when consuming ColorPalette component.
 * Switch orientation of popover component only if there is more space for the new position.
-* New ImagePlaceholder﻿ reusable component that handles upload buttons and draggable areas for the block author.
+* New ImagePlaceholder reusable component that handles upload buttons and draggable areas for the block author.
 * Add speak message when a category is added.
 * Announce notices to assertive technologies with speak.
 * Add aria-labels to Code and HTML blocks.
@@ -232,8 +394,8 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 * Hide excerpts panel if not supported by the CPT.
 * Hide Taxonomies panel if no taxonomy is available for the current CPT.
 * Hide several other panels when the CPT doesn't support them.
-* Use _.includes﻿ to find available taxonomies. Mitigates non-schema-conforming taxonomy registrations.
-* Defer﻿ applying filters for component until it is about to be mounted.
+* Use _.includes to find available taxonomies. Mitigates non-schema-conforming taxonomy registrations.
+* Defer applying filters for component until it is about to be mounted.
 * Prevent "Add New" dropdown from overriding other plugin functionality.
 * Improve paragraph block description.
 * Refactor to simplify block toolbar rendering.
@@ -303,7 +465,7 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 * Fix unexpected keyboard navigations behaviour on some nodes.
 * Fix inserter position for floated blocks.
 * Fix bug on empty cover image placeholder used on a saved block.
-* Fix errors when adding duplicate categories﻿.
+* Fix errors when adding duplicate categories.
 * Fix broken custom color bubble in ColorPalette.
 
 = 1.9.1 =
@@ -315,11 +477,11 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 
 = 1.9.0 =
 
-* Introducing reusable global blocks. (Stored in a wp_blocks﻿ post type.)
+* Introducing reusable global blocks. (Stored in a wp_blocks post type.)
 * Add ability to lock down the editor when using templates so edits can happen but blocks can't be removed, moved, nor added.
 * Handle and upgrade deprecated blocks. This allows to migrate attributes without invalidating blocks and an important part of the block API.
 * Drag and drop upload support to gallery block.
-* ﻿Extensibility:
+* Extensibility:
 * Expose packages/hooks public API under wp.hooks.
 * Introduces withFilters higher-order component to make component filtering easier.
 * Introduces getWrapperDisplayName helper function to make debugging React tree easier.
@@ -357,7 +519,7 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 * Fix keyboard trap in the form token component and improve accessibility.
 * Fix React warning when saving reusable blocks.
 * Fix issue with horizontal arrow key closing link dialog in fixed toolbar mode.
-* Fix image resize handlers in RTL mode﻿.
+* Fix image resize handlers in RTL mode.
 * Prevent "Add New" dropdown from overriding other plugin functionality.
 * Split Sass variables file into multiple files.
 * Updated blue links for better contrast.
