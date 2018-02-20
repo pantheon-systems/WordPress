@@ -17,9 +17,53 @@
 <link rel="profile" href="http://gmpg.org/xfn/11">
 
 <?php wp_head(); ?>
+		<?php
+
+		//	THIS BLOCK OF CODE WRITES LINK TAG THAT ADDS THE HREFLANG ATTRIBUTE 
+
+		$host = $_SERVER['SERVER_NAME'];
+		$field = get_field_object('languagetype');
+		$value = $field['value'];
+		//$label = $field['choices'][ $value ];
+		$protocol = $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
+		
+
+			// CHECKS FOR THE URL FROM ADDRESS BAR TO PRINT print $host . '<br>';
+			// GATHERS FIELD OPTIONS CANADIAN AND ENGLISH print $field[0] . '<br>';
+			// RETURNS ENGLISH OR CANADIAN print $value . '<br>';
+			// RETURNS HTTP OR HTTPS print $protocol;
+
+
+		 // THE FIRST IF STATEMENT IS CHECKING FOR THE RADIO BUTTON VALUE OF "CANADIAN" AND THEN IT LOOKS TO SEE IF THE "hreflang" FIELD HAS BEEN POPULATED. IF BOTH OF THESE ARE TRUE THEN THE LINK IS WRITTEN AS CANADIAN AND THEN PULLS THE URL AND ADDS WHATEVER HAS BEEN ENTERED IN 'hreflang' BY THE USER.
+		
+		if ($value === 'Canadian' && get_field('hreflang')) {?>
+			<link rel="alternate" href="<?php echo $protocol . '://' . $host; the_field('hreflang');?>" hreflang="en-ca" />
+		<?php }
+		 // IF ONLY CANADIAN === TRUE THEN WRITE THE URL AS AN EXACT MATCH FOR CANADIAN VERSION.
+		elseif ($value === 'Canadian') {?>
+			<link rel="alternate" href="<?php echo get_permalink();?>" hreflang="en-ca" />
+
+		<?php }
+		 //THIS IS A REPEAT OF ABOVE FOR ENGLISH
+		elseif ($value === 'English' && get_field('hreflang')) {?>
+			<link rel="alternate" href="<?php echo $protocol . '://' . $host; the_field('hreflang');?>" hreflang="en-us" />
+		<?php }
+ 		//THIS GETS PRINTED IF ALL ELSE FAILS
+		else {?>
+			<link rel="alternate" href="<?php echo get_permalink();?>" hreflang="en-us" />
+		<?php }	?>
 </head>
 
 <body <?php body_class(); ?>>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Qiigo Q Tag number -->
+    <div data-qtag-num="<?php the_field('q_tag'); ?>" hidden></div>
+<!-- END Qiigo Q Tag number -->
+
 <div id="page" class="site container">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'underboot' ); ?></a>
 

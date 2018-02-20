@@ -19,8 +19,7 @@
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
-
+<script type="application/javascript" src="https://qiigo.com/global/js/cross-domain-parent-frame2.js"></script>
 <?php wp_footer(); ?>
-
 </body>
 </html>
