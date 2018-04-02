@@ -6,6 +6,43 @@
  *
  * @package underboot
  */
+function pfran_setup() {
+	
+//	register_nav_menus( array(
+//		'primary' => __( 'Main Nav', 'pfran' ),
+//	) );
+	
+	
+
+	
+	
+	
+	
+	
+	add_theme_support( 'html5', array(
+		'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
+	) );
+	
+	add_theme_support( 'title-tag' );
+	
+	add_theme_support( 'post-thumbnails' );
+	
+	wp_register_script( 'site-js', get_template_directory_uri().'/js/site.js', array('jquery'), time(), false);
+	
+	wp_enqueue_script( 'site-js');
+	
+	wp_register_script( 'doubletaptogo-js', get_template_directory_uri().'/js/doubletaptogo.js', array('jquery'), time(), false);
+	
+	wp_enqueue_script( 'doubletaptogo-js');
+	
+	add_filter('widget_text', 'do_shortcode');
+	
+	
+}
+add_action( 'after_setup_theme', 'pfran_setup' );
+add_image_size( 'title_bg', 1400, 192 );
+
+
 
 if ( ! function_exists( 'underboot_setup' ) ) :
 /**

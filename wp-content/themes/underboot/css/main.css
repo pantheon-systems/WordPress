@@ -1,0 +1,162 @@
+/* 
+This Gal's Design Wordpress Framework Stylesheet
+v1.0.2
+Last Updated: 2015-05-01
+Author: Michelle Thompson - http://thisgals.com 
+*/
+
+/** LAYOUT **/
+
+* {
+	box-sizing: border-box;
+}
+
+body,html {
+	overflow: auto !important;
+	line-height: 1.42857;
+	color: #333;
+	background-color: #FFF;
+}
+
+.inner {
+	width:80%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.inner:before,.inner:after {
+	content: " ";
+	display: table;
+}
+
+#site-wrapper {
+	width: 100%;
+	min-height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+
+header nav {
+	height: 100%;
+	display:inline-block;
+}
+
+header nav ul, footer .menu {
+	height: 100%;
+	list-style: outside none none;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+
+header nav ul li, footer .menu li {
+	float: left;
+	position: relative;
+}
+
+header nav ul li ul {
+	width: 100%;
+	height: auto;
+	visibility: hidden;
+	z-index: -1;
+	position: absolute;
+	top: auto;
+	left: 50%;
+	transform: translate3d(-50%, 25px, 0px);
+	-webkit-transform: translate3d(-50%, 25px, 0px);
+	-moz-transform: translate3d(-50%, 25px, 0px);
+	-ms-transform: translate3d(-50%, 25px, 0px);
+	-o-transform: translate3d(-50%, 25px, 0px);
+	border-radius: 3px;
+	box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.075);
+	-webkit-box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.075);
+	-webkit-transition: all 0.25s ease 0s;
+	-o-transition: all 0.25s ease 0s;
+	transition: all 0.25s ease 0s;
+	opacity: 0;
+}
+
+header nav ul li ul > li > a {
+	width: 100%;
+	line-height: 1;
+	padding: 20px;
+}
+
+
+footer {
+	width: 100%;
+	height: auto;
+	position: relative !important;
+	clear: both;
+	z-index: 4;
+}
+
+
+
+footer .menu {
+	float:left;
+}
+
+.entry-header {
+	width: 100%;
+	height: auto;
+	position: relative;
+}
+
+
+/** TYPOGRAPHY **/
+a {
+    transition: all 0.2s ease 0s;
+    -webkit-transition: all 0.2s ease 0s;
+	-o-transition: all 0.2s ease 0s;
+    text-decoration:none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+a.link-button {
+	margin-top: 20px;
+	display: inline-block;
+	padding: 13px 35px;
+	box-shadow: 0px 0px 0px 2px #454545;
+	-webkit-box-shadow: 0px 0px 0px 2px #454545;
+	font-size: 12px;
+	border-radius: 3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+	line-height: 1.1;
+}
+
+
+p {
+	margin: 0px 0px 10px;
+}
+
+/**  COLUMNS **/
+
+.col-10, .col-20, .col-25, .col-30, .col-33, .col-40, .col-50, .col-60, .col-66, .col-70, .col-75, .col-80, .col-90 {
+	float:left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.col-10 {width:10%;}
+.col-20 {width:20%;}
+.col-25 {width:25%;}
+.col-30 {width:30%;}
+.col-33 {width:33.333%;}
+.col-40 {width:40%;}
+.col-50 {width:50%;}
+.col-60 {width:60%;}
+.col-66 {width:66.1818%;}
+.col-70 {width:70%;}
+.col-75 {width:75%;}
+.col-80 {width:80%;}
+.col-90 {width:90%;}
+

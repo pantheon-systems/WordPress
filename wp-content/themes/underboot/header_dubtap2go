@@ -58,23 +58,23 @@
         
         <?php
         
-//TESTING FOR REDIRECTS IN CONFIG FILE FOR SUBDOMAINS//////
-//$array_shift = (explode('.', $_SERVER['HTTP_HOST']));
-//        var_dump( $array_shift);
-//        echo "array_shift<br>";
-//$myurl = htmlspecialchars($_SERVER["REQUEST_URI"]);
-//        var_dump( $myurl);
-//        echo "myurl<br>";
-//$myexp = ( explode ('.', $myurl) );
-//        var_dump( $myexp);
-//        echo "myexp<br>";
-//$my_ref_url = $_SERVER['HTTP_REFERER'];
-//        var_dump($my_ref_url);
-//        echo "my_ref_url<br>";
-//$my_ref_exp =  explode ('/', $my_ref_url);
-//        var_dump($my_ref_exp);
-//        echo "my_ref_exp<br>";
-//TESTING FOR REDIRECTS IN CONFIG FILE FOR SUBDOMAINS//////
+TESTING FOR REDIRECTS IN CONFIG FILE FOR SUBDOMAINS//////
+$array_shift = (explode('.', $_SERVER['HTTP_HOST']));
+        var_dump( $array_shift);
+        echo "array_shift<br>";
+$myurl = htmlspecialchars($_SERVER["REQUEST_URI"]);
+        var_dump( $myurl);
+        echo "myurl<br>";
+$myexp = ( explode ('.', $myurl) );
+        var_dump( $myexp);
+        echo "myexp<br>";
+$my_ref_url = $_SERVER['HTTP_REFERER'];
+        var_dump($my_ref_url);
+        echo "my_ref_url<br>";
+$my_ref_exp =  explode ('/', $my_ref_url);
+        var_dump($my_ref_exp);
+        echo "my_ref_exp<br>";
+TESTING FOR REDIRECTS IN CONFIG FILE FOR SUBDOMAINS//////
 
 
 //	THIS BLOCK OF CODE WRITES LINK TAG THAT ADDS THE HREFLANG ATTRIBUTE 
@@ -209,11 +209,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             </div>
 
                             <div class="buttonwrap col-xs-2">
-                                <div id="menu-toggle">
-									<span></span>
-									<span></span>
-									<span></span>
-								</div>
+                                <button type="button" class="btn" data-toggle="modal" data-target="#navbar-modal" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
                             </div>
                         </div>
                         <!--off logorow-->
@@ -259,11 +260,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
             <div class="buttonwrap col-xs-2">
-                <div id="menu-toggle">
-									<span></span>
-									<span></span>
-									<span></span>
-								</div>
+                <button type="button" class="btn" data-toggle="modal" data-target="#navbar-modal" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
             </div>
         </div>
         <!--off logorow-->
