@@ -1,0 +1,61 @@
+#login {
+    width: 500px;
+}
+
+#return-to-pantheon {
+    margin-bottom: 20px;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+#return-to-pantheon .left {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#return-to-pantheon a{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000000;
+    padding: 5px 10px;
+    background: #F8DD44;
+    color: #000000 !important;
+    text-decoration: none !important;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#return-to-pantheon a:hover {
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    transition: all 0.25s;
+    background: #EFD01B;
+    color: #333333 !important;
+}
+
+  #return-to-pantheon .fist-icon {
+      display: inline-block;
+      width: 12px;
+      margin-right: 5px;
+  }
+
+  @media (max-width: 499px) {
+    #login {
+        width: 320px;
+    }
+    #return-to-pantheon {
+        flex-direction: column;
+    }
+
+    #return-to-pantheon .left {
+        order: 2;
+    }
+
+    #return-to-pantheon .right {
+        margin-bottom: 25px;
+        order: 1;
+    }
+  }
