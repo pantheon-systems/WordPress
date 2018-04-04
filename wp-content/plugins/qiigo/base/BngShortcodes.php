@@ -3,7 +3,12 @@
  * 
  */
 
-session_start();
+
+//if(!isset($_SESSION)) 
+//    { 
+//        session_start(); 
+//    } 
+
 class BngShortcodes
 {
 
@@ -21,6 +26,14 @@ class BngShortcodes
 		$result = '';
 		if(in_array($string, array(
 			'location_code', 'brand_assigned_code',
+			
+			//
+			'location_name',
+			'google_map_embed',
+			'zopim_code',
+			'linkedin_url',
+			//
+
 			'business_license_id', 'formal_business_name',
 			'business_dba', 'address_1', 'address_2', 
 			'city',	'state', 'zip', 'primary_phone',
@@ -35,7 +48,7 @@ class BngShortcodes
 			'button_5_url' 
 		))){
 			$results = get_post_meta($id_post , $string);
-			$result = $results[0];
+			$result = (!empty($results))?$results[0]:'';
 		}else{
 			/*$group = get_post_meta($id_post , 'group_fields');
 

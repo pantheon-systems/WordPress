@@ -6,7 +6,11 @@ if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
 	require_once dirname( __FILE__ ) . '/cmb2/init.php';
 }
 
-session_start();
+//if(!isset($_SESSION)) 
+//    { 
+//        session_start(); 
+//    } 
+
 class BngCustomTypes
 {
 	private $prefix;
@@ -134,6 +138,19 @@ class BngCustomTypes
 				),
 			));
 
+
+		//
+		$cmb_details->add_field(array(
+			'name'			=>	__('Location Name','bitsandgeeks'),
+			'id'			=>	'location_name',
+			'type'			=>	'text',
+			'attributes'	=>	array(
+				'style'			=>	'width:75%',
+				),
+			));
+		//
+
+
 		$cmb_details->add_field(array(
 			'name'			=>	__('Brand Assigned Code','bitsandgeeks'),
 			'id'			=>	'brand_assigned_code',
@@ -243,6 +260,29 @@ class BngCustomTypes
 				),
 			));
 
+
+		//
+		$cmb_details->add_field(array(
+			'name'			=>	__('Embed Google Map','cmb2'),
+			'id'			=>	'google_map_embed',
+			'type'			=>	'wysiwyg',
+			'sanitization_cb' => false,
+			'attributes'	=>	array(
+				'style'			=>	'width:75%',
+				),
+			));
+
+		$cmb_details->add_field(array(
+			'name'			=>	__('ZOPIM','bitsandgeeks'),
+			'id'			=>	'zopim_code',
+			'type'			=>	'text',
+			'attributes'	=>	array(
+				'style'			=>	'width:75%',
+				),
+			));
+		//
+
+
 		$cmb_details->add_field(array(
 			'name'			=>	__('Facebook URL','cmb2'),
 			'id'			=>	'facebook_url',
@@ -269,6 +309,17 @@ class BngCustomTypes
 				'style'			=>	'width:75%',
 				),
 			));
+
+		//
+		$cmb_details->add_field(array(
+			'name'			=>	__('Linkedin URL','cmb2'),
+			'id'			=>	'linkedin_url',
+			'type'			=>	'text',
+			'attributes'	=>	array(
+				'style'			=>	'width:75%',
+				),
+			));
+		//
 
 		$cmb_details->add_field(array(
 			'name'			=>	__('Pinterest URL','cmb2'),
@@ -421,6 +472,11 @@ class BngCustomTypes
 			$post_id = wp_insert_post( $my_post );
 			//Insert Meta key post
 			add_post_meta($post_id, 'location_code', '');
+
+			//
+			add_post_meta($post_id, 'location_name', '');
+			//
+
 			add_post_meta($post_id, 'brand_assigned_code', '');
 			add_post_meta($post_id, 'business_license_id', '');
 			add_post_meta($post_id, 'formal_business_name', '');
@@ -433,9 +489,20 @@ class BngCustomTypes
 			add_post_meta($post_id, 'primary_phone', '');
 			add_post_meta($post_id, 'tracking_phone', '');
 			add_post_meta($post_id, 'fax', '');
+
+			//
+			add_post_meta($post_id, 'google_map_embed', '');
+			add_post_meta($post_id, 'zopim_code', '');
+			//
+
 			add_post_meta($post_id, 'facebook_url', '');
 			add_post_meta($post_id, 'google_url', '');
 			add_post_meta($post_id, 'youtube_url', '');
+
+			//
+			add_post_meta($post_id, 'linkedin_url', '');
+			//
+
 			add_post_meta($post_id, 'pinterest_url', '');
 			add_post_meta($post_id, 'twitter_url', '');
 			add_post_meta($post_id, 'instagram_url', '');
@@ -677,9 +744,11 @@ class BngCustomTypes
 	    global $typenow;
 	    global $pagenow;
 
-	    if( $pagenow == 'edit.php' && ($typenow == 'page' || $typenow == 'post' ) && $_GET['search_location'] ) {
+	    $search_location = (isset($_GET['search_location'])) ? $_GET['search_location'] : "";
+
+	    if( $pagenow == 'edit.php' && ($typenow == 'page' || $typenow == 'post' ) && $search_location ) {
 	        $query->query_vars[ 'meta_key' ] = 'location_post';
-	        $query->query_vars[ 'meta_value' ] = $_GET['search_location'];
+	        $query->query_vars[ 'meta_value' ] = $search_location;
 	        $query->query_vars[ 'meta_compare' ] = 'LIKE';
 	    }
 	}

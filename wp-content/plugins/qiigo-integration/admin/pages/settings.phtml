@@ -1,0 +1,11 @@
+<div class="wrap">
+	<h2>Qiigo Integration - Settings</h2>
+	<form method="post" action="options.php">
+<?php
+	// This prints out all hidden setting fields
+	settings_fields( $this->slug );   
+	do_settings_sections( $this->slug );
+	submit_button(); 
+?>
+	</form>
+</div>

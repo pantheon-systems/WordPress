@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><?=$subject?></title>
+</head>
+<body>
+	<h1>New Lead:</h1>
+	<table>
+<?php
+	foreach($fields as $k => $n) {
+?>
+		<tr>
+			<td style="font-weight:bold"><?=$n?></td>
+			<td><?=urldecode($data[$k])?></td>
+		</tr>
+<?php
+	}
+?>
+	</table>
+</body>
+</html>
