@@ -8,14 +8,15 @@
   * return to Pantheon button?
   *
   * Only if:
-  * "RETURN_TO_PANTHEON_BUTTON" is not false,
-  * we are not on the test or live environments
-  * and we are on a Pantheon subdomain
+  * We are on a Pantheon subdomain and
+  * "RETURN_TO_PANTHEON_BUTTON" is not false
   */
 $show_return_to_pantheon_button = apply_filters( 'show_return_to_pantheon_button', ( 
     ( ! defined('RETURN_TO_PANTHEON_BUTTON') || RETURN_TO_PANTHEON_BUTTON ) &&
-    ! in_array($_ENV['PANTHEON_ENVIRONMENT'], array( 'test', 'live' ) ) &&
-    false !== stripos( get_site_url(), 'pantheonsite.io')
+    (
+        false !== stripos( get_site_url(), 'pantheonsite.io') ||
+        false !== stripos( $_SERVER['HTTP_HOST'], 'pantheonsite.io') 
+     )
 ) );
 
 if( $show_return_to_pantheon_button ){
