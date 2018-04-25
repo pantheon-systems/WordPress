@@ -1,9 +1,9 @@
 === Duplicate Page ===
 Contributors: mndpsingh287
-Tags: Page Duplicate, Post duplicate, duplicate custom posts, duplicate page, duplicate post, duplicate ,custom posts, post, page, duplicate this, duplicate, content duplicate, duplicate content, data duplicate, duplicate data, copy page, clone page,wordpress page duplicate, wordpress post duplicate, Copy post, wordpress page duplicator, wordpress post duplicator, Cloner
+Tags: Page Duplicate, Post duplicate, duplicate custom posts, duplicate page, duplicate post, duplicate ,custom posts, post, page, duplicate this, duplicate, content duplicate, duplicate content, data duplicate, duplicate data, copy page, clone page,wordpress page duplicate, wordpress post duplicate, Copy post, wordpress page duplicator, wordpress post duplicator, Cloner, duplicate post
 Requires at least: 3.4
 Tested up to: 4.9.2
-Stable tag: 2.5
+Stable tag: 2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,10 @@ https://www.youtube.com/watch?v=Fj8BHxvebXs&feature=youtu.be
 = 2.5 (5th Feb, 2018) =
 
 * Translations issue resolve.
+
+= 2.6 (24th March, 2018) =
+
+* Added signup popup and minor fixes.
 
 == Other Notes ==
 

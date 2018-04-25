@@ -1,4 +1,13 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; 
+$current_user = wp_get_current_user();
+$vle_nonce = wp_create_nonce( 'verify-duplicatepage-email' );
+?>
+<script>
+var vle_nonce = "<?php echo $vle_nonce;?>";
+</script>
+<?php
+$this->load_custom_assets();
+?>
 <div class="wrap duplicate_page_settings">
 <h1><?php _e('Duplicate Page Settings ', 'duplicate-page')?><a href="http://www.webdesi9.com/product/duplicate-page-pro/" target="_blank" class="button button-primary"><?php _e('Buy PRO', 'duplicate-page')?></a></h1>
 
@@ -90,4 +99,53 @@ endif;
 </div>
 </div>
 </div>
+<?php ///***** Verify Lokhal Popup Start *****/// 
+//delete_transient( 'duplicatepage_cancel_lk_popup_'.$current_user->ID );
+?>
+<?php if(false === get_option( 'duplicatepage_email_verified_'.$current_user->ID ) && ( false === ( get_transient( 'duplicatepage_cancel_lk_popup_'.$current_user->ID ) ) ) ) { ?>
+<div id="lokhal_verify_email_popup" class="lokhal_verify_email_popup">
+<div class="lokhal_verify_email_popup_overlay"></div>
+<div class="lokhal_verify_email_popup_tbl">
+<div class="lokhal_verify_email_popup_cel">
+<div class="lokhal_verify_email_popup_content">
+<a href="javascript:void(0)" class="lokhal_cancel"> <img src="<?php echo plugins_url( 'images/fm_close_icon.png', __FILE__ ); ?>" class="wp_fm_loader" /></a>
+<div class="popup_inner_lokhal">
+<h3><?php  _e('Welcome to Duplicate Page', 'duplicate-page'); ?></h3>
+<p class="lokhal_desc"><?php  _e('We love making new friends! Subscribe below and we promise to  
+keep you up-to-date with our latest new plugins, updates,
+awesome deals and a few special offers.', 'duplicate-page'); ?></p>
+<form>
+<div class="form_grp">
+<div class="form_twocol">
+<input name="verify_lokhal_fname" id="verify_lokhal_fname" class="regular-text" type="text" value="<?php echo (null == get_option('verify_duplicatepage_fname_'.$current_user->ID)) ? $current_user->user_firstname : get_option('verify_duplicatepage_fname_'.$current_user->ID);?>" placeholder="First Name" />
+</div>
+<div class="form_twocol">
+<input name="verify_lokhal_lname" id="verify_lokhal_lname" class="regular-text" type="text" value="<?php echo (null == 
+get_option('verify_duplicatepage_lname_'.$current_user->ID)) ? $current_user->user_lastname : get_option('verify_duplicatepage_lname_'.$current_user->ID);?>" placeholder="Last Name" />
+</div>
+</div>
+<div class="form_grp">
+<div class="form_onecol">
+<input name="verify_lokhal_email" id="verify_lokhal_email" class="regular-text" type="text" value="<?php echo (null == get_option('duplicatepage_email_address_'.$current_user->ID)) ? $current_user->user_email :  get_option('duplicatepage_email_address_'.$current_user->ID);?>" placeholder="Email Address" />
+</div>
+</div>
+<div class="btn_dv">
+<button class="verify verify_local_email button button-primary "><span class="btn-text">Verify
+          </span>
+          <span class="btn-text-icon">
+            <img src="<?php echo plugins_url( 'images/btn-arrow-icon.png', __FILE__ ); ?>"/>
+          </span></button>
+<button class="lokhal_cancel button">No Thanks</button>
+</div>
+</form>
+</div>
+<div class="fm_bot_links">
+  <a href="http://ikon.digital/terms.html" target="_blank"><?php  _e('Terms of Service', 'duplicate-page'); ?></a>   <a href="http://ikon.digital/privacy.html" target="_blank"><?php  _e('Privacy Policy', 'duplicate-page'); ?></a>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<?php } ///***** Verify Lokhal Popup End *****/// ?>
 </div>

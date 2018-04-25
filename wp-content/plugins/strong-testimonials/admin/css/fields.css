@@ -56,8 +56,18 @@ optgroup option {
 
 #custom-field-list li {
   background: #fff;
-  border: 1px solid #ddd;
   margin: 0;
+  border: 1px solid #DDD;
+  border-top-width: 0;
+}
+
+#custom-field-list li:first-child {
+  border-top-width: 1px;
+}
+
+#custom-field-list li.ui-sortable-helper {
+  border-bottom-width: 1px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 #custom-field-list .custom-field-header {
@@ -160,7 +170,7 @@ optgroup option {
 #wpmtst-custom-fields-form .controls {
   padding: 10px 15px;
   background: #e7f5fa;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #A9D9EB;
 }
 
 #wpmtst-custom-fields-form .controls > span:nth-child(n+2):before {
@@ -184,7 +194,7 @@ optgroup option {
 
 #custom-field-list .field-table th,
 #custom-field-list .field-table td {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #E8E8E8;
   padding: 10px;
 }
 
@@ -212,19 +222,17 @@ optgroup option {
 
 #custom-field-list .field-table td span.help.inline {
   display: inline-block;
-  margin-left: 4px;
 }
 
 #custom-field-list .field-table td span.help:first-of-type {
   margin-top: 5px;
 }
 
-#custom-field-list .field-table td span.help.error {
-  color: #ee0000;
-  padding-left: 6px;
-  border: 1px solid #EE0000;
+#custom-field-list .form-error {
   background: rgba(242, 0, 0, 0.05);
-  font-weight: 700;
+}
+#custom-field-list .form-error-text {
+  color: #EE0000;
 }
 
 #custom-field-list .field-table tr:last-of-type th,

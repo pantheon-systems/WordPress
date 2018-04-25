@@ -48,6 +48,8 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		add_action( 'wp_ajax_AjaxSetIpp', array( $this, 'AjaxSetIpp' ) );
 		add_action( 'wp_ajax_AjaxSearchSite', array( $this, 'AjaxSearchSite' ) );
 		add_action( 'wp_ajax_AjaxSwitchDB', array( $this, 'AjaxSwitchDB' ) );
+		add_action( 'wp_ajax_wsal_download_failed_login_log', array( $this, 'wsal_download_failed_login_log' ) );
+		add_action( 'wp_ajax_wsal_download_404_log', array( $this, 'wsal_download_404_log' ) );
 		add_action( 'all_admin_notices', array( $this, 'AdminNoticesPremium' ) );
 		// Check plugin version for to dismiss the notice only until upgrade.
 		$this->_version = WSAL_VERSION;
@@ -79,7 +81,16 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 						<!-- /.wsal_notice__wrapper -->
 						<div class="wsal_notice__btns">
 							<?php
+							// Buy Now button link.
 							$buy_now = add_query_arg( 'page', 'wsal-auditlog-pricing', admin_url( 'admin.php' ) );
+
+							// If user is not super admin and website is multisite then change the URL.
+							if ( $this->_plugin->IsMultisite() && ! is_super_admin() ) {
+								$buy_now = 'https://www.wpsecurityauditlog.com/pricing/';
+							} elseif ( $this->_plugin->IsMultisite() && is_super_admin() ) {
+								$buy_now = add_query_arg( 'page', 'wsal-auditlog-pricing', network_admin_url( 'admin.php' ) );
+							}
+
 							$more_info = add_query_arg(
 								array(
 									'utm_source' => 'plugin',
@@ -233,6 +244,9 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		endif;
 	}
 
+	/**
+	 * Ajax callback to display meta data inspector.
+	 */
 	public function AjaxInspector() {
 		if ( ! $this->_plugin->settings->CurrentUserCan( 'view' ) ) {
 			die( 'Access Denied.' );
@@ -262,6 +276,9 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		die;
 	}
 
+	/**
+	 * Ajax callback to refrest the view.
+	 */
 	public function AjaxRefresh() {
 		if ( ! $this->_plugin->settings->CurrentUserCan( 'view' ) ) {
 			die( 'Access Denied.' );
@@ -299,6 +316,10 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		die;
 	}
 
+	/**
+	 * Ajax callback to set number of alerts to
+	 * show on a single page.
+	 */
 	public function AjaxSetIpp() {
 		if ( ! $this->_plugin->settings->CurrentUserCan( 'view' ) ) {
 			die( 'Access Denied.' );
@@ -314,6 +335,9 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		die;
 	}
 
+	/**
+	 * Ajax callback to search.
+	 */
 	public function AjaxSearchSite() {
 		if ( ! $this->_plugin->settings->CurrentUserCan( 'view' ) ) {
 			die( 'Access Denied.' );
@@ -340,6 +364,9 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		die( json_encode( array_slice( $grp1 + $grp2, 0, 7 ) ) );
 	}
 
+	/**
+	 * Ajax callback to switch database.
+	 */
 	public function AjaxSwitchDB() {
 		// Filter $_POST array for security.
 		$post_array = filter_input_array( INPUT_POST );
@@ -349,9 +376,120 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		}
 	}
 
+	/**
+	 * Ajax callback to download failed login log.
+	 */
+	public function wsal_download_failed_login_log() {
+		// Get post array through filter.
+		$download_nonce = filter_input( INPUT_POST, 'download_nonce', FILTER_SANITIZE_STRING );
+		$alert_id = filter_input( INPUT_POST, 'alert_id', FILTER_SANITIZE_NUMBER_INT );
+
+		// Verify nonce.
+		if ( ! empty( $download_nonce ) && wp_verify_nonce( $download_nonce,  'wsal-download-failed-logins' ) ) {
+			// Get alert by id.
+			$alert = new WSAL_Models_Occurrence();
+			$alert->id = (int) $alert_id;
+
+			// Get users using alert meta.
+			$users = $alert->GetMetaValue( 'Users', array() );
+
+			// Check if there are any users.
+			if ( ! empty( $users ) && is_array( $users ) ) {
+				// Prepare content.
+				$content = implode( ',', $users );
+				echo esc_html( $content );
+			} else {
+				echo esc_html__( 'No users found.', 'wp-security-audit-log' );
+			}
+		} else {
+			echo esc_html__( 'Nonce verification failed.', 'wp-security-audit-log' );
+		}
+		die();
+	}
+
+	/**
+	 * Ajax callback to download 404 log.
+	 */
+	public function wsal_download_404_log() {
+		// Get post array through filter.
+		$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+		$filename = filter_input( INPUT_POST, 'log_file', FILTER_SANITIZE_STRING );
+		$site_id = filter_input( INPUT_POST, 'site_id', FILTER_SANITIZE_NUMBER_INT );
+
+		// If file name is empty then return error.
+		if ( empty( $filename ) ) {
+			// Nonce verification failed.
+			echo wp_json_encode( array(
+				'success' => false,
+				'message' => esc_html__( 'Log file does not exist.', 'wp-security-audit-log' ),
+			) );
+			die();
+		}
+
+		// Verify nonce.
+		if ( ! empty( $filename ) && ! empty( $nonce ) && wp_verify_nonce( $nonce,  'wsal-download-404-log-' . $filename ) ) {
+			// Set log file path.
+			$uploads_dir   = wp_upload_dir();
+
+			if ( ! $site_id ) {
+				$position = strpos( $filename, '/sites/' );
+
+				if ( $position ) {
+					$filename = substr( $filename, $position );
+				} else {
+					$position = strpos( $filename, '/wp-security-audit-log/' );
+					$filename = substr( $filename, $position );
+				}
+				$log_file_path = trailingslashit( $uploads_dir['basedir'] ) . $filename;
+			} else {
+				$position = strpos( $filename, '/wp-security-audit-log/' );
+				$filename = substr( $filename, $position );
+				$log_file_path = trailingslashit( $uploads_dir['basedir'] ) . $filename;
+			}
+
+			// Request the file.
+			$response = file_get_contents( $log_file_path, true );
+
+			// Check if the response is valid.
+			if ( $response ) {
+				// Return the file body.
+				echo wp_json_encode( array(
+					'success' => true,
+					'filename' => $filename,
+					'file_content' => $response,
+				) );
+			} else {
+				// Request failed.
+				echo wp_json_encode( array(
+					'success' => false,
+					'message' => esc_html__( 'Request to get log file failed.', 'wp-security-audit-log' ),
+				) );
+			}
+		} else {
+			// Nonce verification failed.
+			echo wp_json_encode( array(
+				'success' => false,
+				'message' => esc_html__( 'Nonce verification failed!', 'wp-security-audit-log' ),
+			) );
+		}
+		die();
+	}
+
+	/**
+	 * Method: Render header of the view.
+	 */
 	public function Header() {
 		add_thickbox();
-		wp_enqueue_style( 'darktooltip', $this->_plugin->GetBaseUrl() . '/css/darktooltip.css', array(), '' );
+
+		// Darktooltip styles.
+		wp_enqueue_style(
+			'darktooltip',
+			$this->_plugin->GetBaseUrl() . '/css/darktooltip.css',
+			array(),
+			'0.4.0'
+		);
+
+		// Audit log styles.
 		wp_enqueue_style(
 			'auditlog',
 			$this->_plugin->GetBaseUrl() . '/css/auditlog.css',
@@ -360,10 +498,23 @@ class WSAL_Views_AuditLog extends WSAL_AbstractView {
 		);
 	}
 
+	/**
+	 * Method: Render footer of the view.
+	 */
 	public function Footer() {
 		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'darktooltip', $this->_plugin->GetBaseUrl() . '/js/jquery.darktooltip.js', array( 'jquery' ), '' );
+
+		// Darktooltip js.
+		wp_enqueue_script(
+			'darktooltip', // Identifier.
+			$this->_plugin->GetBaseUrl() . '/js/jquery.darktooltip.js', // Script location.
+			array( 'jquery' ), // Depends on jQuery.
+			'0.4.0' // Script version.
+		);
+
 		wp_enqueue_script( 'suggest' );
+
+		// Audit log script.
 		wp_enqueue_script(
 			'auditlog',
 			$this->_plugin->GetBaseUrl() . '/js/auditlog.js',

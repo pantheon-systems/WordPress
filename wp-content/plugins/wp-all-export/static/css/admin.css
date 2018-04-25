@@ -27,25 +27,35 @@
 	color: #777 !important;
 	cursor: default !important;
 }
-.wpallexport-plugin .wp_all_export_custom_xml_help{
+.wpallexport-plugin .wp_all_export_custom_xml_help,
+.wpallexport-plugin .wp_all_export_scheduling_help
+{
     padding: 15px;
     background: #fff;
     font-size: 12px;
     /*max-height: 600px;*/
     overflow: auto;
 }
-.wpallexport-plugin .wp_all_export_custom_xml_help p{
+.wpallexport-plugin .wp_all_export_custom_xml_help p,
+.wpallexport-plugin .wp_all_export_scheduling_help p
+{
     font-size: 12px;
     padding-left: 11px;
 }
-.wpallexport-plugin .wp_all_export_custom_xml_help ul{
+.wpallexport-plugin .wp_all_export_custom_xml_help ul,
+.wpallexport-plugin .wp_all_export_scheduling_help ul
+{
     list-style: inside;
     padding-left: 12px;
 }
-.wpallexport-plugin .wp_all_export_custom_xml_help h2{
+.wpallexport-plugin .wp_all_export_custom_xml_help h2,
+.wpallexport-plugin .wp_all_export_scheduling_help h2
+{
     margin: 0;
 }
-.wpallexport-plugin .wp_all_export_custom_xml_help h3{
+.wpallexport-plugin .wp_all_export_custom_xml_help h3,
+.wpallexport-plugin .wp_all_export_scheduling_help h3
+{
     color: #40acad;
     cursor: pointer;
     /*font-family: "Open Sans",​​sans-serif;*/
@@ -239,7 +249,9 @@
 }
 	.wpallexport-plugin #available_data .title,
 	.wpallexport-plugin .wp-all-export-edit-column .title,
-    .wpallexport-plugin .wp-all-export-custom-xml-help .title{
+    .wpallexport-plugin .wp-all-export-custom-xml-help .title,
+	.wpallexport-plugin .wp-all-export-scheduling-help .title
+	{
 		font-weight: bold;
 		padding: 12px 8px;
 		color: #464646;
@@ -254,7 +266,9 @@
 		-webkit-border-top-right-radius: 4px;
 		border-top-right-radius: 4px;
 	}
-	.wpallexport-plugin .wp-all-export-custom-xml-help{
+	.wpallexport-plugin .wp-all-export-custom-xml-help,
+	.wpallexport-plugin .wp-all-export-scheduling-help
+	{
 		position: fixed;
 		top: 8%;
 		width: 515px;
@@ -269,7 +283,7 @@
 		
 		position: fixed;
 		top: 8%;
-		width: 715px;
+		width: 850px;
 		z-index: 999999;
 		border: 1px solid #ccc;
 		display: none;
@@ -520,6 +534,7 @@
 	margin-left: 5px;
 	position: relative;
 	top: 4px;
+	background-size: cover;
 }
 .wpallexport-plugin input.datepicker {
 	width: 8em;
@@ -989,7 +1004,7 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 .wpallexport-plugin #footer-upgrade{
 	/*float: left !important;*/
 }
-.wpallexport-plugin .wpallexport-overlay {
+.wpallexport-plugin .wpallexport-overlay, .wpallexport-plugin .wpallexport-super-overlay {
 	display:none; 
 	position:fixed; 
 	z-index:99999; 
@@ -3000,7 +3015,7 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	text-align: center;
 	padding-top: 30px;
 }
-	.wpallexport-plugin #export_finished p{
+	.wpallexport-plugin #export_finished .normal-tab p{
 		color: #777;
 		font-size: 16px;
 	}
@@ -3028,24 +3043,24 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 		height: 255px;
 		margin: 40px 0;
 	}
-	.wpallexport-plugin #export_finished h1{
+	.wpallexport-plugin #export_finished .normal-tab h1{
 		font-size: 48px;
 		color: #46ba69;
 		font-weight: normal;
 	}
-	.wpallexport-plugin #export_finished h3{
+	.wpallexport-plugin #export_finished .normal-tab h3{
 		font-size: 21px;
 		color: #777;
 		font-weight: normal;
 		line-height: 30px;
 	}
-		.wpallexport-plugin #export_finished h3 span{
+		.wpallexport-plugin #export_finished .normal-tab h3 span{
 			color: #000;
 		}
 	.wpallexport-plugin #export_finished hr{
 		margin: 20px 15%;
 	}
-	.wpallexport-plugin #export_finished a{
+	.wpallexport-plugin #export_finished .normal-tab a{
 		color: #40acad;
 		text-decoration: none;
 		margin: 5px 10px;
@@ -3450,6 +3465,7 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 
 .wpallexport-plugin .save_action, 
 .wpallexport-plugin .delete_action,
+.wpallexport-plugin .preview_action,
 .wpallexport-plugin .close_action{
 	-moz-border-radius: 4px;
 	-khtml-border-radius: 4px;
@@ -3467,21 +3483,46 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	bottom: 14px;
 	right: 15px;
 	background: #425f9a;
+	float: right;
+}
+
+.wpallexport-plugin .preview_action{
+	bottom: 14px;
+	background: #40acad;
+	margin-left: 5px;
 }
 
 .wpallexport-plugin .delete_action{
 	left: 110px;
 	bottom: 14px;
 	background: #e14d43;
+	margin-left: 5px;
 }
 
 .wpallexport-plugin .close_action{
+	width: 85px;
 	left: 20px;
 	bottom: 14px;
 	background: url("../img/remove.png") no-repeat scroll 10px 10px #e4e6e6;
 	color: #777 !important;
-	padding: 9px 15px 9px 30px;
+	padding: 9px 25px 9px 30px;
 }
+
+.wpallexport-plugin .save_action.disabled,
+.wpallexport-plugin .delete_action.disabled,
+.wpallexport-plugin .preview_action.disabled,
+.wpallexport-plugin .close_action.disabled{
+	background: #e4e6e6;
+	cursor: default !important;
+	color: #B3B3B3 !important
+}
+
+.wpallexport-plugin .save_action.disabled:focus,
+.wpallexport-plugin .preview_action.disabled:focus
+{
+	outline: none;
+}
+
 .wpallexport-plugin .wpae-custom-field ul li{
 	margin-left: 15px;
 }
@@ -3624,7 +3665,8 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 */	.wpallexport-plugin #pmxi_add_rule{
 		padding: 13px 25px 10px 50px;
 	}
-	.wpallexport-plugin #process_notice{
+	.wpallexport-plugin #process_notice,
+	.wpallexport-plugin #export_finished h3{
 		font-size: 16px;
 	}
 	.wpallexport-plugin .change_file .wpallexport-import-types{
@@ -3691,7 +3733,8 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	.wpallexport-plugin form.confirm input[type="submit"]{
 		padding: 20px 10px 20px 10px;
 	}
-	.wpallexport-plugin #process_notice{
+	.wpallexport-plugin #process_notice,
+	.wpallexport-plugin #export_finished h3{
 		font-size: 14px;
 	}
 	.wpallexport-plugin .export_progress{
@@ -3765,7 +3808,8 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	.wpallexport-plugin form.confirm input[type="submit"]{
 		padding: 20px 10px 20px 10px;
 	}
-	.wpallexport-plugin #process_notice{
+	.wpallexport-plugin #process_notice,
+	.wpallexport-plugin #export_finished h3{
 		font-size: 13px;
 	}
 	.wpallexport-plugin .export_progress{
@@ -3893,7 +3937,7 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 
 #export_finished .tab-content {
 	min-height:300px;
-	width: 800px;
+	width: 870px;
 	display:none;
 	margin-left: auto;
 	margin-right: auto;
@@ -3905,23 +3949,21 @@ a.wpallexport-import-to-format span.wpallexport-import-to-title {
 	display: block;
 }
 
-#export_finished #tab2-content p {
-	margin-top: 0;
-	margin-bottom: 10px;
-	text-align: center;
-}
 
-#export_finished #tab2-content input {
-	text-align: left;
-}
-
-#export_finished #tab2-content code {
-	font-size: 12px;
-}
 
 #export_finished #tab1-content button, #export_finished #tab4-content button {
 	text-shadow: none;
 }
+
+.subscribe-button-text {
+	text-shadow: none!important;
+}
+
+#export_finished #tab2-content .wrap {
+	margin-left: 0;
+	margin-right: 0;
+}
+
 #export_finished button {
 	background-image: none;
 	width:170px;
@@ -4016,3 +4058,144 @@ ol li {
 	margin-top:0 !important;
 }
 /** END GOOGLE MERCHANTS SUCCESS PAGE **/
+
+
+.scheduling_interval_type {
+	width:90px;
+	padding: 10px !important;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	color: #777;
+	position: relative;
+	top: 0;
+	height: auto !important;
+}
+
+.scheduling_interval_duration {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	color: #777;
+	width: 56px;
+	padding: 10px;
+	height: auto !important;
+}
+
+
+/** COMBINE MULTIPLE ELEMENTS INTO ONE **/
+#combine_multiple_fields_data .default_column {
+	display: none;
+}
+
+#combine_multiple_fields_data ul {
+	margin-top: 0;
+}
+
+input label {
+	font-size: 12px;
+}
+.wp-all-export-field-options {
+	margin-left: 20px;
+}
+.wp-all-export-field-options .chosen-container {
+	width: 100% !important;
+}
+.wpallexport-pointer-data.available-data {
+	max-height: 450px;
+}
+.wpallexport-pointer-data .fieldset{
+	width: 170px;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+.ui-autocomplete, .ui-autocomplete:hover,
+.ui-menu-item, .ui-menu-item:hover,
+.ui-menu-item a, .ui-menu-item a:hover,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-focus,
+.ui-menu .ui-menu-item a.ui-state-active,
+.ui-menu .ui-menu-item a
+{ background: #ffffff none no-repeat;
+	padding:0;
+	margin:0;
+	display:block;
+	border:0;border-collapse:collapse;
+}
+
+.ui-menu .ui-menu-item a.ui-corner-all:hover, .ui-menu .ui-menu-item a.ui-corner-all:focus, .ui-menu .ui-menu-item a.ui-corner-all:active {
+	background:#ff8a00!important;
+	color:#000;
+	border-radius:0;
+	padding: 15px;
+}
+.ui-autocomplete {
+	position: absolute;
+	z-index: 1000;
+	cursor: default;
+	padding: 0;
+	margin-top: 2px;
+	list-style: none;
+	background-color: #ffffff;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ui-autocomplete:hover {
+	padding: 0;
+	margin-top: 2px;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ui-autocomplete {
+	border-radius: 0 !important;
+	overflow-x: hidden !important;
+}
+
+.ui-autocomplete > li {
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+	padding-left: 5px !important;
+	border: none !important;
+
+	border-radius: 0 !important;
+	overflow: hidden !important;;
+}
+.ui-autocomplete > li.ui-state-focus {
+	color: #464646;
+	background-color: #f7f7f7;
+}
+.ui-helper-hidden-accessible {
+	display: none;
+}
+
+.wpallexport-plugin .chosen-container-single .chosen-single {
+	height: 41px;
+	line-height: 38px;
+	font-size: 14px;
+	background: none;
+	box-shadow: none;
+	color: #555 !important;
+}
+
+.wpallexport-plugin .chosen-container-single .chosen-single div {
+	top: 9px;
+}
+/** END COMBINE MULTIPLE ELEMENTS INTO ONE **/

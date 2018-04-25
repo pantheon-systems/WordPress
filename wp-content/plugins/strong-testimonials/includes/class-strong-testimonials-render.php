@@ -35,7 +35,7 @@ class Strong_Testimonials_Render {
 	 * Set the defaults for a view.
 	 */
 	public function set_view_defaults() {
-		$this->view_defaults = apply_filters( 'wpmtst_view_default', get_option( 'wpmtst_view_default' ) );
+		$this->view_defaults = wpmtst_get_view_default();
 	}
 
 	/**

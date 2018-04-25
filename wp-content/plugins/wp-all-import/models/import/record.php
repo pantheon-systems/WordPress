@@ -481,21 +481,21 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 														}
 													}
 												}
-												$delimeted_taxonomies = explode( ! empty($this->options['tax_hierarchical_delim'][$tx_name]) ? $this->options['tax_hierarchical_delim'][$tx_name] : ',', $_tx);
+												$delimeted_taxonomies = array_filter(array_filter(explode( ! empty($this->options['tax_hierarchical_delim'][$tx_name]) ? $this->options['tax_hierarchical_delim'][$tx_name] : ',', $_tx)));
 												if ( ! empty($delimeted_taxonomies) ){															
 													foreach ($delimeted_taxonomies as $j => $cc) {																												
 														$is_assign_term = (isset($this->options['tax_hierarchical_assing'][$tx_name][$k])) ? $this->options['tax_hierarchical_assing'][$tx_name][$k] : true;
 														if ( ! empty($this->options['tax_hierarchical_last_level_assign'][$tx_name]) ){
 															$is_assign_term = (count($delimeted_taxonomies) == $j + 1) ? 1 : 0;
 														}
-														$taxonomies[$tx_name][$i][] = wp_all_import_ctx_mapping(array(
-															'name' => $cc,
-															'parent' => (!empty($taxonomies[$tx_name][$i][$iterator[$i] - 1]) and $j) ? $taxonomies[$tx_name][$i][$iterator[$i] - 1] : false,
-															'assign' => $is_assign_term,
-															'is_mapping' => (!empty($this->options['tax_enable_mapping'][$tx_name]) and empty($this->options['tax_logic_mapping'][$tx_name])),
-															'hierarchy_level' => $j + 1, 
-															'max_hierarchy_level' => count($delimeted_taxonomies)
-														), $mapping_rules, $tx_name);															
+                                                        $taxonomies[$tx_name][$i][] = wp_all_import_ctx_mapping(array(
+                                                            'name' => $cc,
+                                                            'parent' => (!empty($taxonomies[$tx_name][$i][$iterator[$i] - 1]) and $j) ? $taxonomies[$tx_name][$i][$iterator[$i] - 1] : false,
+                                                            'assign' => $is_assign_term,
+                                                            'is_mapping' => (!empty($this->options['tax_enable_mapping'][$tx_name]) and empty($this->options['tax_logic_mapping'][$tx_name])),
+                                                            'hierarchy_level' => $j + 1,
+                                                            'max_hierarchy_level' => count($delimeted_taxonomies)
+                                                        ), $mapping_rules, $tx_name);
 														$iterator[$i]++;	
 													}
 												}													
@@ -550,6 +550,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 																		'hierarchy_level' => 1,
 																		'max_hierarchy_level' => 1
 																	), $mapping_rules, $tx_name);
+
                                                                     $taxonomies_hierarchy[$k]['txn_names'][$i][] = $taxonomies[$tx_name][$i][count($taxonomies[$tx_name][$i]) - 1];
 																}																												
 															}
@@ -564,9 +565,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 															'hierarchy_level' => 1,
 															'max_hierarchy_level' => 1
 														), $mapping_rules, $tx_name);
-													}
 
-                                                    $taxonomies_hierarchy[$k]['txn_names'][$i][] = $taxonomies[$tx_name][$i][count($taxonomies[$tx_name][$i]) - 1];
+                                                        $taxonomies_hierarchy[$k]['txn_names'][$i][] = $taxonomies[$tx_name][$i][count($taxonomies[$tx_name][$i]) - 1];
+													}
 												}																														
 											}
 										}
@@ -581,7 +582,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 					}
 				endforeach;
 			endif;			
-			// [/custom taxonomies]													
+			// [/custom taxonomies]												
 
 			// Composing featured images			
 			$image_sections = apply_filters('wp_all_import_image_sections', array( 
@@ -1041,7 +1042,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 
 						if ( ! $postRecord->isEmpty() ) $postRecord->set(array('iteration' => $this->iteration))->update();	
 
-						do_action('pmxi_do_not_update_existing', $post_to_update_id, $this->id, $this->iteration);																																											
+						do_action('pmxi_do_not_update_existing', $post_to_update_id, $this->id, $this->iteration, $xml, $i);
 
 						$skipped++;
 						$logger and call_user_func($logger, sprintf(__('<b>SKIPPED</b>: Previously imported record found for `%s`', 'wp_all_import_plugin'), $articleData['post_title']));
@@ -1662,13 +1663,13 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 												$is_base64_images_allowed = apply_filters("wp_all_import_is_base64_images_allowed", true, $url, $this->id);													
 
 												if ( $bundle_data['type'] == 'images' and base64_encode(base64_decode($url)) == $url and $is_base64_images_allowed ){
-                                                    $image_name = empty($this->options[$option_slug . 'auto_rename_images']) ? md5(time()) . '.jpg' : sanitize_file_name($auto_rename_images_bundle[$slug][$i]) . '.jpg';
+                                                    $image_name = empty($this->options[$option_slug . 'auto_rename_images']) ? md5($url) . '.jpg' : sanitize_file_name($auto_rename_images_bundle[$slug][$i]) . '.jpg';
                                                     $image_name = apply_filters("wp_all_import_image_filename", $image_name, empty($img_titles[$k]) ? '' : $img_titles[$k], empty($img_captions[$k]) ? '' : $img_captions[$k], empty($img_alts[$k]) ? '' : $img_alts[$k], $articleData, $this->id, $img_url);
 
-                                                    // search existing attachment
-                                                    if ($this->options[$option_slug . 'search_existing_images'] or "gallery" == $this->options[$option_slug . 'download_images']){
+                                                    $image_filename = $image_name;
 
-                                                        $image_filename = $image_name;
+                                                    // search existing attachment
+                                                    if ($this->options[$option_slug . 'search_existing_images'] or "gallery" == $this->options[$option_slug . 'download_images']){                                                        
 
                                                         $attch = wp_all_import_get_image_from_gallery($image_name, $targetDir, $bundle_data['type']);
 
@@ -2319,7 +2320,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 								endif;										
 								
 								// associate taxes with post								
-								$this->associate_terms($pid, ( empty($assign_taxes) ? false : $assign_taxes ), $tx_name, $logger, $is_cron);	
+								$this->associate_terms($pid, ( empty($assign_taxes) ? false : $assign_taxes ), $tx_name, $logger, $is_cron, $articleData['post_status']);	
 								
 							}
 							else
@@ -2335,7 +2336,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 									if ( PMXI_Admin_Addons::get_addon('PMWI_Plugin') and strpos($tx_name, "pa_") === 0 ) continue;
 
 									if (!empty($txes[$i]))									
-										$this->associate_terms($pid, $txes[$i], $tx_name, $logger, $is_cron);									
+										$this->associate_terms($pid, $txes[$i], $tx_name, $logger, $is_cron, $articleData['post_status']);									
 								}
 							}
 						}
@@ -2464,6 +2465,18 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 		return $this;
 	}
 
+	private function getRecordTitle($articleData){
+        $title = $articleData['post_title'];
+        switch ($this->options['custom_type']){
+            case 'import_users':
+                $title = $articleData['user_login'];
+                break;
+            default:
+                break;
+        }
+        return $title;
+    }
+
 	public function delete_source($logger = false)
 	{
 		if ($this->options['is_delete_source']) 
@@ -2529,10 +2542,12 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 				$logger and call_user_func($logger, __('Deleting posts from database', 'wp_all_import_plugin'));
 
 				$missing_ids_arr = array_chunk($missing_ids, $this->options['records_per_request']);
-				
+
+                $skipp_from_deletion = array();
+
 				foreach ($missing_ids_arr as $key => $missingPostRecords) {
 
-					if ( ! empty($missingPostRecords) ) { 
+					if ( ! empty($missingPostRecords) ) {
 
 						foreach ( $missingPostRecords as $k => $missingPostRecord ) {
 							
@@ -2540,22 +2555,30 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 							
 							// Instead of deletion, set Custom Field
 							if ($this->options['is_update_missing_cf']){
-                                if ( $this->options['custom_type'] == "import_users" ){
-                                    update_user_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
-                                    $logger and call_user_func($logger, sprintf(__('Instead of deletion user with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
+                                switch ($this->options['custom_type']){
+                                    case 'import_users':
+                                        update_user_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
+                                        $logger and call_user_func($logger, sprintf(__('Instead of deletion user with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
+                                        break;
+                                    case 'taxonomies':
+                                        update_term_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
+                                        $logger and call_user_func($logger, sprintf(__('Instead of deletion taxonomy term with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
+                                        break;
+                                    default:
+                                        update_post_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
+                                        $logger and call_user_func($logger, sprintf(__('Instead of deletion post with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
+                                        break;
                                 }
-                                else{
-									update_post_meta( $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value'] );
-                                    $logger and call_user_func($logger, sprintf(__('Instead of deletion post with ID `%s`, set Custom Field `%s` to value `%s`', 'wp_all_import_plugin'), $missingPostRecord['post_id'], $this->options['update_missing_cf_name'], $this->options['update_missing_cf_value']));
-                                }
+
 								$to_delete = false;
 							}
 
 							// Instead of deletion, change post status to Draft							
 							if ($this->options['set_missing_to_draft']){
-								if ($final_post_type = get_post_type($missingPostRecord['post_id']) and $final_post_type != 'product_variation')
+								if ($final_post_type = get_post_type($missingPostRecord['post_id']) and $final_post_type != 'product_variation' and 'draft' != get_post_status($missingPostRecord['post_id']))
 								{
-									$this->wpdb->update( $this->wpdb->posts, array('post_status' => 'draft'), array('ID' => $missingPostRecord['post_id']) );																	
+									$this->wpdb->update( $this->wpdb->posts, array('post_status' => 'draft'), array('ID' => $missingPostRecord['post_id']) );
+                                    $this->recount_terms($missingPostRecord['post_id'], $final_post_type);
 									$logger and call_user_func($logger, sprintf(__('Instead of deletion, change post with ID `%s` status to Draft', 'wp_all_import_plugin'), $missingPostRecord['post_id']));
 								}								
 								$to_delete = false;
@@ -2564,24 +2587,24 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 							$to_delete = apply_filters('wp_all_import_is_post_to_delete', $to_delete, $missingPostRecord['post_id'], $this);
 
 							if ($to_delete){
-								// Remove attachments										
-								empty($this->options['is_keep_attachments']) and wp_delete_attachments($missingPostRecord['post_id'], true, 'files');						
-								// Remove images										
-								empty($this->options['is_keep_imgs']) and wp_delete_attachments($missingPostRecord['post_id'], true, 'images');																		
-
-								// Clear post's relationships
-								if ( $this->options['custom_type'] != "import_users" ) wp_delete_object_term_relationships($missingPostRecord['post_id'], get_object_taxonomies('' != $this->options['custom_type'] ? $this->options['custom_type'] : 'post'));
-
+                                if ( ! in_array($this->options['custom_type'], array("import_users", "taxonomies")) ){
+                                    // Remove attachments
+                                    empty($this->options['is_keep_attachments']) and wp_delete_attachments($missingPostRecord['post_id'], true, 'files');
+                                    // Remove images
+                                    empty($this->options['is_keep_imgs']) and wp_delete_attachments($missingPostRecord['post_id'], true, 'images');
+                                    // Clear post's relationships
+                                    wp_delete_object_term_relationships($missingPostRecord['post_id'], get_object_taxonomies('' != $this->options['custom_type'] ? $this->options['custom_type'] : 'post'));
+                                }
 							}	
 							else
-							{ 
-
+							{
+                                $skipp_from_deletion[] = $missingPostRecord['post_id'];
 								$postRecord = new PMXI_Post_Record();
 								$postRecord->getBy(array(
 									'post_id' => $missingPostRecord['post_id'],
 									'import_id' => $this->id,
 								));
-								if ( ! $postRecord->isEmpty() )
+                                if ( ! $postRecord->isEmpty() )
                                 {
                                     $is_unlink_missing_posts = apply_filters('wp_all_import_is_unlink_missing_posts', false, $this->id, $missingPostRecord['post_id']);
                                     if ( $is_unlink_missing_posts ){
@@ -2595,32 +2618,43 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                 }
 
 								do_action('pmxi_missing_post', $missingPostRecord['post_id']);
-								
+
 								unset($missingPostRecords[$k]);							
 							}
 						}
 
+                        $ids = array();
+
 						if ( ! empty($missingPostRecords) ){
-							$ids = array();
+
 							foreach ($missingPostRecords as $k => $missingPostRecord) {
 								$ids[] = $missingPostRecord['post_id'];
 							}
 
-							do_action('pmxi_delete_post', $ids, $this);
+                            switch ($this->options['custom_type']){
+                                case 'import_users':
+                                    do_action('pmxi_delete_post', $ids, $this);
+                                    $sql = "delete a,b
+                                      FROM ".$this->wpdb->users." a
+                                      LEFT JOIN ".$this->wpdb->usermeta." b ON ( a.ID = b.user_id )										
+                                      WHERE a.ID IN (" . implode(',', $ids) . ");";
+                                    break;
+                                case 'taxonomies':
+                                    do_action('pmxi_delete_taxonomy_term', $ids, $this);
+                                    foreach ($ids as $term_id){
+                                        wp_delete_term( $term_id, $this->options['taxonomy_type'] );
+                                    }
 
-							if ( $this->options['custom_type'] == "import_users" ){
-								$sql = "delete a,b
-								FROM ".$this->wpdb->users." a
-								LEFT JOIN ".$this->wpdb->usermeta." b ON ( a.ID = b.user_id )										
-								WHERE a.ID IN (" . implode(',', $ids) . ");";
-							}
-							else {
-								$sql = "delete a,b,c
-								FROM ".$this->wpdb->posts." a
-								LEFT JOIN ".$this->wpdb->term_relationships." b ON ( a.ID = b.object_id )
-								LEFT JOIN ".$this->wpdb->postmeta." c ON ( a.ID = c.post_id )				
-								WHERE a.ID IN (" . implode(',', $ids) . ");";
-							}						
+                                    break;
+                                default:
+                                    do_action('pmxi_delete_post', $ids, $this);
+                                    $sql = "delete a,b,c
+                                      FROM ".$this->wpdb->posts." a
+                                      LEFT JOIN ".$this->wpdb->term_relationships." b ON ( a.ID = b.object_id )
+                                      LEFT JOIN ".$this->wpdb->postmeta." c ON ( a.ID = c.post_id )				
+                                      WHERE a.ID IN (" . implode(',', $ids) . ");";
+                                    break;
+                            }
 							
 							$this->wpdb->query( $sql );
 								
@@ -2637,7 +2671,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 					}	
 
 					if ( PMXI_Plugin::is_ajax() and "ajax" == $this->options['import_processing']) break;
-				}	
+				}
+
+                do_action('wp_all_import_skipped_from_deleted', $skipp_from_deletion, $this);
 
 				return (count($missing_ids_arr) > 1 and "ajax" == $this->options['import_processing']) ? false : true; 
 			}
@@ -2686,8 +2722,25 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 		$caps['unfiltered_html'] = true;
 		return $caps;
 	}		
+
+	protected function recount_terms($pid, $post_type){
+
+        $exclude_taxonomies = apply_filters('pmxi_exclude_taxonomies', (class_exists('PMWI_Plugin')) ? array('post_format', 'product_type', 'product_shipping_class') : array('post_format'));
+        $post_taxonomies = array_diff_key(get_taxonomies_by_object_type(array($post_type), 'object'), array_flip($exclude_taxonomies));
+
+        foreach ($post_taxonomies as $ctx){
+            $terms = wp_get_object_terms( $pid, $ctx->name );
+            if ( ! empty($terms) ){
+                if ( ! is_wp_error( $terms ) ) {
+                    foreach ($terms as $term_info) {
+                        $this->wpdb->query(  $this->wpdb->prepare("UPDATE {$this->wpdb->term_taxonomy} SET count = count - 1 WHERE term_taxonomy_id = %d AND count > 0", $term_info->term_taxonomy_id) );
+                    }
+                }
+            }
+        }
+    }
 	
-	protected function associate_terms($pid, $assign_taxes, $tx_name, $logger, $is_cron = false){
+	protected function associate_terms($pid, $assign_taxes, $tx_name, $logger, $is_cron = false, $post_status = 'publish'){
         wp_cache_flush();
 		$terms = wp_get_object_terms( $pid, $tx_name );
 		$term_ids = array();     
@@ -2698,8 +2751,8 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 			if ( ! is_wp_error( $terms ) ) {				
 				foreach ($terms as $term_info) {
 					$term_ids[] = $term_info->term_taxonomy_id;
-					$this->wpdb->query(  $this->wpdb->prepare("UPDATE {$this->wpdb->term_taxonomy} SET count = count - 1 WHERE term_taxonomy_id = %d", $term_info->term_taxonomy_id) );
-				}				
+                    $this->wpdb->query(  $this->wpdb->prepare("UPDATE {$this->wpdb->term_taxonomy} SET count = count - 1 WHERE term_taxonomy_id = %d AND count > 0", $term_info->term_taxonomy_id) );
+                }
 				$in_tt_ids = "'" . implode( "', '", $term_ids ) . "'";
 				$this->wpdb->query( $this->wpdb->prepare( "DELETE FROM {$this->wpdb->term_relationships} WHERE object_id = %d AND term_taxonomy_id IN ($in_tt_ids)", $pid ) );
 			}
@@ -2718,7 +2771,9 @@ class PMXI_Import_Record extends PMXI_Model_Record {
 		{
 			do_action('wp_all_import_associate_term', $pid, $tt, $tx_name);
 			$values[] = $this->wpdb->prepare( "(%d, %d, %d)", $pid, $tt, ++$term_order);
-			$this->wpdb->query( "UPDATE {$this->wpdb->term_taxonomy} SET count = count + 1 WHERE term_taxonomy_id = $tt" );
+            if ( ! in_array($post_status, array('draft'))){
+                $this->wpdb->query( "UPDATE {$this->wpdb->term_taxonomy} SET count = count + 1 WHERE term_taxonomy_id = $tt" );
+            }
 		}    		
 		                					
 

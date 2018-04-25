@@ -12,7 +12,7 @@ function wpmtst_add_field_function() {
 
 	// when adding, leave Name empty so it will be populated from Label
 	$empty_field = array(
-		'name'         => '',
+		'name'         => 'new_field',
 		'name_mutable' => 1,
 		'record_type'  => 'custom',
 		'input_type'   => 'text',

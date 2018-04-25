@@ -1,25 +1,23 @@
-<div><!-- row -->
+<div>
     <div class="email-option-row">
 
-        <div class="email-option-desc"><!-- left box -->
+        <div class="email-option-desc">
 			<?php _e( "To", 'strong-testimonials' ); ?>
         </div>
 
-        <div class="email-option-inputs"><!-- middle box -->
+        <div class="email-option-inputs">
 
-            <div class="email-option">
+            <div class="email-option header">
 
                 <div class="email-option-part">
                     <div class="email-option-label">
-                        <label for="wpmtst-options-sender-name">
-							<?php _e( "Name", 'strong-testimonials' ); ?>
-                        </label>
+                        <?php _e( 'Name', 'strong-testimonials' ); ?>
                     </div>
                 </div>
 
                 <div class="email-option-part">
                     <div class="email-option-label">
-						<?php _e( "Email", 'strong-testimonials' ); ?>
+						<?php _e( 'Email', 'strong-testimonials' ); ?>
                     </div>
                 </div>
 
@@ -33,8 +31,9 @@
 			}
 			?>
 
-            <div class="email-option">
-                <input class="button" type="button" id="add-recipient" value="Add recipient">
+            <div class="email-option footer">
+                <input class="button" type="button" id="add-recipient"
+                       value="<?php esc_attr_e( 'Add recipient', 'strong-testimonials' ); ?>">
             </div>
 
         </div>

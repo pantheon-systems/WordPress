@@ -5,7 +5,15 @@
  * @author Pavel Kulbakin <p.kulbakin@gmail.com>
  */
 class PMXE_Admin_Settings extends PMXE_Controller_Admin {
-	
+
+    /** @var  \Wpae\App\Service\License\LicenseActivator */
+    private $licenseActivator;
+
+    protected function init()
+    {
+        $this->licenseActivator = new \Wpae\App\Service\License\LicenseActivator();
+    }
+
 	public function index() {
 		
 		$this->data['post'] = $post = $this->input->post(PMXE_Plugin::getInstance()->getOption());
@@ -18,16 +26,44 @@ class PMXE_Admin_Settings extends PMXE_Controller_Admin {
 
 				PMXE_Plugin::getInstance()->updateOption($post);
 
-				if (empty($_POST['pmxe_license_activate']) and empty($_POST['pmxe_license_deactivate'])) {
-					$post['license_status'] = $this->check_license();
-					PMXE_Plugin::getInstance()->updateOption($post);
-				}				
-
-				isset( $_POST['pmxe_license_activate'] ) and $this->activate_licenses();
-				
 				wp_redirect(add_query_arg('pmxe_nt', urlencode(__('Settings saved', 'wp_all_export_plugin')), $this->baseUrl)); die();
 			}
 		}
+
+        if ($this->input->post('is_scheduling_license_submitted')) {
+
+            check_admin_referer('edit-license', '_wpnonce_edit-scheduling-license');
+
+            if (!$this->errors->get_error_codes()) { // no validation errors detected
+
+                PMXE_Plugin::getInstance()->updateOption($post);
+                if (empty($_POST['pmxe_scheduling_license_activate']) and empty($_POST['pmxe_scheduling_license_deactivate'])) {
+                    $post['scheduling_license_status'] = $this->check_scheduling_license();
+                    if ($post['scheduling_license_status'] == 'valid') {
+
+                        $this->data['scheduling_license_message'] = __('License activated.', 'wp_all_import_plugin');
+                    }
+
+                    PMXE_Plugin::getInstance()->updateOption($post);
+                    $this->activate_scheduling_licenses();
+
+                }
+            }
+
+            $this->data['post'] = $post = PMXE_Plugin::getInstance()->getOption();
+        }
+
+
+        $post['scheduling_license_status'] = $this->check_scheduling_license();
+        $this->data['is_license_active'] = false;
+        if (!empty($post['license_status']) && $post['license_status'] == 'valid') {
+            $this->data['is_license_active'] = true;
+        }
+
+        $this->data['is_scheduling_license_active'] = false;
+        if (!empty($post['scheduling_license_status']) && $post['scheduling_license_status'] == 'valid') {
+            $this->data['is_scheduling_license_active'] = true;
+        }
 
 		if ($this->input->post('is_templates_submitted')) { // delete templates form
 
@@ -41,8 +77,7 @@ class PMXE_Admin_Settings extends PMXE_Controller_Admin {
 					$tmp_name  = $_FILES['template_file']['tmp_name'];										
 					
 					if(isset($file_name)) 
-					{				
-						
+					{
 						$filename  = stripslashes($file_name);
 						$extension = strtolower(pmxe_getExtension($filename));
 										
@@ -70,7 +105,8 @@ class PMXE_Admin_Settings extends PMXE_Controller_Admin {
                                                 unset($template_data['id']);
                                                 $template->clear()->set($template_data)->insert();
                                             }
-                                            wp_redirect(add_query_arg('pmxe_nt', urlencode(sprintf(_n('%d template imported', '%d templates imported', count($templates_data), 'wp_all_export_plugin'), count($templates_data))), $this->baseUrl)); die();
+                                            wp_redirect(add_query_arg('pmxe_nt', urlencode(sprintf(_n('%d template imported', '%d templates imported', count($templates_data), 'wp_all_export_plugin'), count($templates_data))), $this->baseUrl));
+                                            die();
                                         }
                                     }
 								}
@@ -126,89 +162,17 @@ class PMXE_Admin_Settings extends PMXE_Controller_Admin {
 		PMXE_Plugin::getInstance()->updateOption("dismiss", 1);
 
 		exit('OK');
-	}	
-
-	/*
-	*
-	* Activate licenses for main plugin and all premium addons
-	*
-	*/
-	protected function activate_licenses() {
-
-		// listen for our activate button to be clicked
-		if( isset( $_POST['pmxe_license_activate'] ) ) {			
-
-			// retrieve the license from the database
-			$options = PMXE_Plugin::getInstance()->getOption();
-			
-			$product_name = PMXE_Plugin::getEddName();
-
-			if ( $product_name !== false ){
-				// data to send in our API request
-				$api_params = array( 
-					'edd_action'=> 'activate_license', 
-					'license' 	=> $options['license'], 
-					'item_name' => urlencode( $product_name ) // the name of our product in EDD
-				);								
-				
-				// Call the custom API.
-				$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => false ) );						
-
-				// make sure the response came back okay
-				if ( is_wp_error( $response ) )
-					return false;
-
-				// decode the license data
-				$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-				
-				// $license_data->license will be either "active" or "inactive"
-
-				$options['license_status'] = $license_data->license;
-				
-				PMXE_Plugin::getInstance()->updateOption($options);	
-			}			
-
-		}
-	}	
-
-	/*
-	*
-	* Check plugin's license
-	*
-	*/
-	public static function check_license() {
-
-		global $wp_version;
-
-		$options = PMXE_Plugin::getInstance()->getOption();	
-
-		if (!empty($options['license'])){
-
-			$product_name = PMXE_Plugin::getEddName();
-
-			if ( $product_name !== false ){
-
-				$api_params = array( 
-					'edd_action' => 'check_license', 
-					'license' => $options['license'], 
-					'item_name' => urlencode( $product_name ) 
-				);
-
-				// Call the custom API.
-				$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => false ) );
-
-				if ( is_wp_error( $response ) )
-					return false;
-
-				$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-				return $license_data->license;
-				
-			}
-		}
-
-		return false;
-
 	}
 
+    protected function activate_scheduling_licenses()
+    {
+        return $this->licenseActivator->activateLicense(PMXE_Plugin::getSchedulingName(),\Wpae\App\Service\License\LicenseActivator::CONTEXT_SCHEDULING);
+    }
+
+    public function check_scheduling_license()
+    {
+        $options = PMXE_Plugin::getInstance()->getOption();
+
+        return $this->licenseActivator->checkLicense(PMXE_Plugin::getSchedulingName(), $options, \Wpae\App\Service\License\LicenseActivator::CONTEXT_SCHEDULING);
+    }
 }

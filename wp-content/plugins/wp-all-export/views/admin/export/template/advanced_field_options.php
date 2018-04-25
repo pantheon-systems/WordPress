@@ -53,14 +53,13 @@
 		</select>				
 	</div>
 	<!-- PHP snippet options -->
-	<div class="input php_snipped" style="margin-top:10px;">
+	<div class="input php_snipped" style="margin-top:0;margin-left:24px;">
 		<input type="checkbox" id="coperate_php" name="coperate_php" value="1" class="switcher" style="margin: 2px;"/>
 		<label for="coperate_php"><?php _e("Export the value returned by a PHP function", "wp_all_export_plugin"); ?></label>								
 		<a href="#help" class="wpallexport-help" title="<?php _e('The value of the field chosen for export will be passed to the PHP function.', 'wp_all_export_plugin'); ?>" style="top: 0;">?</a>								
 		<div class="switcher-target-coperate_php" style="margin-top:5px;">
 			<div class="wpallexport-free-edition-notice" style="margin: 15px 0;">
-				<a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=118611&edd_options%5Bprice_id%5D=1&utm_source=wordpress.org&utm_medium=custom-php&utm_campaign=free+wp+all+export+plugin"><?php _e('Upgrade to the Pro edition of WP All Export to use Custom PHP Functions','wp_all_export_plugin');?></a>
-				<p><?php _e('If you already own it, remove the free edition and install the Pro edition.','wp_all_export_plugin');?></p>
+				<a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=118611&edd_options%5Bprice_id%5D=1&utm_source=wordpress.org&utm_medium=custom-php&utm_campaign=free+wp+all+export+plugin"><?php _e('Upgrade to Pro to use Custom PHP Functions','wp_all_export_plugin');?></a>
 			</div>
 			<?php echo "&lt;?php ";?>
 			<input type="text" class="php_code" value="" style="width:50%;" placeholder='your_function_name'/> 
@@ -70,23 +69,6 @@
 				$uploads = wp_upload_dir();
 				$functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';				
 			?>
-
-			<div class="input" style="margin-top: 10px;">
-
-				<h4><?php _e('Function Editor', 'wp_all_export_plugin');?><a href="#help" class="wpallexport-help" title="<?php printf(__("Add functions here for use during your export. You can access this file at %s", "wp_all_export_plugin"), preg_replace("%.*wp-content%", "wp-content", $functions));?>" style="top: 0;">?</a></h4>
-				
-			</div>									
-
-			<textarea id="wp_all_export_code" name="wp_all_export_code"><?php echo "<?php\n\n?>";?></textarea>						
-
-			<div class="input" style="margin-top: 10px;">
-
-				<div class="input" style="display:inline-block; margin-right: 20px;">
-					<input type="button" class="button-primary wp_all_export_save_functions" disabled="disabled" value="<?php _e("Save Functions", 'wp_all_export_plugin'); ?>"/>							
-					<div class="wp_all_export_functions_preloader"></div>
-				</div>						
-				<div class="input wp_all_export_saving_status" style="display:inline-block;"></div>
-			</div>					
 		</div>												
 	</div>				
 </div>

@@ -3,7 +3,7 @@ Contributors: matchalabs, DavidAnderson, dnutbourne, kbat82
 Tags: wordpress slideshow,seo,slideshow,slider,widget,wordpress slider,image slider,flexslider,flex slider,nivoslider,nivo slider,responsive,responsive slides,coinslider,coin slider,slideshow,carousel,responsive slider,vertical slides
 Donate link: https://david.dw-perspective.org.uk/donate
 Requires at least: 3.5
-Stable tag: 3.6.8
+Stable tag: 3.7.2
 Tested up to: 4.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -151,15 +151,31 @@ See https://www.metaslider.com/documentation/image-cropping/
 
 == Changelog ==
 
+= 3.7.2 - 2018/Mar/20 =
+
+* TWEAK: Remove an obsolete admin notice
+* SECURITY: Prevent a non-persistent logged-in XSS attack. The attacker must persuade a logged-in admin-level WP user to click on a malicious link specifically targeted to your site; this can result in his chosen JavaScript being run inside your browser on the MetaSlider page. Hence, the risk is low, but you should certainly update.
+
+= 3.7.1 - 2018/Mar/13 =
+
+* FIX: Updates FlexSlider to remove flash on page load. 
+
+= 3.7.0 - 2018/Feb/26 =
+
+* FEATURE: Allows users to inherit default captions and other data from the image. 
+* FIX: Adds capability filter to pages.
+* TWEAK: Updates to the correct support link.
+
 = 3.6.8 - 2018/Jan/26 =
 
+* FIX: Updates support links to their correct locations
 * FIX: Updates compatibility for various themes (including Genesis)
 
 = 3.6.7 - 2017/Dec/15 =
 
 * FEATURE: Adds back in some instructions on how to display the slideshow
 * TWEAK: Removes unnecessary type attribute that was causing valiation errors
-* TWEAK: Add DocBlock checking with CI for PHP and JS files
+* TWEAK: Adds DocBlock checking with CI for PHP and JS files
 * FIX: Adds compatibility fixes for older WP versions.
 
 = 3.6.6 - 2017/Nov/23 =
@@ -626,4 +642,4 @@ More info/Comments: http://www.metaslider.com/coming-soon-meta-slider-2-6-free/
 * Initial version
 
 == Upgrade Notice ==
-* 3.6.8 : Updates compatibility for various themes (including Genesis)
+* 3.7.2 : Fix non-persistent admin XSS attack (requiring clicking on a targeted, crafted link specific to your site leading to one-time execution of his chosen JavaScript in your browser - so, low risk but you should certainly update)

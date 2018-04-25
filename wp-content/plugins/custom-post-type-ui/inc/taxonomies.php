@@ -179,7 +179,7 @@ function cptui_manage_taxonomies() {
 			 * @param string $value Text to use for the button.
 			 */
 			?>
-			<input type="submit" class="button-secondary" name="cptui_select_taxonomy_submit" value="<?php echo esc_attr( apply_filters( 'cptui_taxonomy_submit_select', esc_attr__( 'Select', 'custom-post-type-ui' ) ) ); ?>" />
+			<input type="submit" class="button-secondary" id="cptui_select_taxonomy_submit" name="cptui_select_taxonomy_submit" value="<?php echo esc_attr( apply_filters( 'cptui_taxonomy_submit_select', esc_attr__( 'Select', 'custom-post-type-ui' ) ) ); ?>" />
 		</form>
 	<?php
 
@@ -1312,6 +1312,7 @@ function cptui_reserved_taxonomies() {
 		'withcomments',
 		'withoutcomments',
 		'year',
+		'output',
 	);
 
 	/**

@@ -2,6 +2,7 @@
 /**
 *	AJAX action for preview export row
 */
+
 function pmxe_wp_ajax_wpae_preview(){
 
 	if ( ! check_ajax_referer( 'wp_all_export_secure', 'security', false )){
@@ -21,7 +22,6 @@ function pmxe_wp_ajax_wpae_preview(){
 	$values = array();
 
 	parse_str($_POST['data'], $values);
-
 
 	if(is_array($values['cc_options'])) {
 
@@ -56,7 +56,7 @@ function pmxe_wp_ajax_wpae_preview(){
 		do_action( 'wpml_switch_language', XmlExportEngine::$exportOptions['wpml_lang'] );
 	}
 
-	if ( in_array(XmlExportEngine::$exportOptions['xml_template_type'], array('custom', 'XmlGoogleMerchants')) ){
+	if (XmlExportEngine::$exportOptions['export_to'] == XmlExportEngine::EXPORT_TYPE_XML && in_array(XmlExportEngine::$exportOptions['xml_template_type'], array('custom', 'XmlGoogleMerchants')) ){
 
 		if ( empty(XmlExportEngine::$exportOptions['custom_xml_template']) )
 		{
@@ -206,13 +206,6 @@ function pmxe_wp_ajax_wpae_preview(){
 			exit( json_encode(array('html' => ob_get_clean())) );
 		}
 
-		$wp_uploads = wp_upload_dir();
-
-		$functions = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
-		if ( @file_exists($functions) ) {
-			require_once $functions;
-		}
-
 		switch ($exportOptions['export_to']) {
 
 			case 'xml':
@@ -222,7 +215,6 @@ function pmxe_wp_ajax_wpae_preview(){
 				try{
 					$xml = XmlCsvExport::export_xml(true);
 				} catch (WpaeMethodNotFoundException $e) {
-
 					// Find the line where the function is
 					$errorMessage = '';
 					$functionName = $e->getMessage();
@@ -239,7 +231,6 @@ function pmxe_wp_ajax_wpae_preview(){
 					echo $error_msg;
 					exit( json_encode(array('html' => ob_get_clean())) );
 				} catch (WpaeInvalidStringException $e) {
-					
 					// Find the line where the function is
 					$errorMessage = '';
 					$functionName = $e->getMessage();
@@ -260,7 +251,6 @@ function pmxe_wp_ajax_wpae_preview(){
 					$error_msg = '<span class="error">'.__($errorMessage, 'wp_all_import_plugin').'</span>';
 					echo $error_msg;
 					exit( json_encode(array('html' => ob_get_clean())) );
-
 				}
 
                 $xml_errors = false;
@@ -336,7 +326,6 @@ function pmxe_wp_ajax_wpae_preview(){
                           echo $error_msg;
                           exit( json_encode(array('html' => ob_get_clean())) );
                         }
-
                     break;
 
                 }

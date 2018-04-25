@@ -129,7 +129,7 @@ class WSAL_Sensors_Menus extends WSAL_AbstractSensor {
 				$item_parent_id = $args['menu-item-parent-id'];
 				$item_name = $old_menu_items[ $menu_item_db_id ]['title'];
 				if ( $old_menu_items[ $menu_item_db_id ]['parent'] != $item_parent_id ) {
-					$parent_name = $old_menu_items[ $item_parent_id ]['title'];
+					$parent_name = isset( $old_menu_items[ $item_parent_id ]['title'] ) ? $old_menu_items[ $item_parent_id ]['title'] : false;
 					$this->EventChangeSubItem( $item_name, $parent_name, $post_array['menu-name'] );
 				}
 			}

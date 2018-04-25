@@ -215,3 +215,87 @@ function WsalDisableByCode( code, nonce ) {
 		}
 	} );
 }
+
+/**
+ * Create and download a temporary file.
+ *
+ * @param {string} filename - File name.
+ * @param {string} text - File content.
+ */
+function download( filename, text ) {
+	// Create temporary element.
+	var element = document.createElement('a');
+	element.setAttribute( 'href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text) );
+	element.setAttribute( 'download', filename );
+
+	// Set the element to not display.
+	element.style.display = 'none';
+	document.body.appendChild( element );
+
+	// Simlate click on the element.
+	element.click();
+
+	// Remove temporary element.
+	document.body.removeChild( element );
+}
+
+/**
+ * Onclick event handler to download 404 log file.
+ *
+ * @param {object} element - Current element.
+ */
+function download_404_log( element ) {
+	download_nonce = jQuery( element ).data( 'nonce-404' ); // Nonce.
+	log_file = jQuery( element ).data( 'log-file' ); // Log file URL.
+	site_id = jQuery( element ).data( 'site-id' ); // Site ID.
+
+	if ( ! download_nonce || ! log_file ) {
+		console.log( 'Something went wrong!' );
+	}
+
+	jQuery.ajax( {
+		type: 'POST',
+		url: ajaxurl,
+		async: true,
+		dataType: 'json',
+		data: {
+			action: 'wsal_download_404_log',
+			nonce: download_nonce,
+			log_file: log_file,
+			site_id: site_id
+		},
+		success: function( data ) {
+			if ( data.success ) {
+				download( data.filename, data.file_content );
+			} else {
+				console.log( data.message );
+			}
+		}
+	} );
+}
+
+/**
+ * Onclick event handler to download failed login log file.
+ *
+ * @param {object} element - Current element.
+ */
+function download_failed_login_log( element ) {
+	nonce = jQuery( element ).data( 'download-nonce' ); // Nonce.
+	alert = jQuery( element ).parent().attr( 'id' ).substring( 5 );
+
+	jQuery.ajax( {
+		type: 'POST',
+		url: ajaxurl,
+		async: true,
+		data: {
+			action: 'wsal_download_failed_login_log',
+			download_nonce: nonce,
+			alert_id: alert
+		},
+		success: function( data ) {
+			data = data.replace( /,/g, '\n' );
+			// Start file download.
+			download( 'failed_logins.log', data );
+		}
+	} );
+}

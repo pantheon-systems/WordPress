@@ -38,7 +38,13 @@
 					<div class="wpallimport-collapsed wpallimport-section">
 						<div class="wpallimport-content-section" style="overflow: hidden; padding-bottom: 0;">
 							<div class="wpallimport-collapsed-header" style="margin-bottom: 15px;">
-								<h3><?php _e('Title & Content', 'wp_all_import_plugin'); ?></h3>
+								<?php if ( $post_type == 'taxonomies' ){ ?>
+									<h3><?php _e('Name & Description', 'wp_all_import_plugin'); ?></h3>
+								<?php } elseif ( $post_type == 'product'){ ?>
+									<h3><?php _e('Title & Description', 'wp_all_import_plugin'); ?></h3>
+								<?php } else { ?>
+									<h3><?php _e('Title & Content', 'wp_all_import_plugin'); ?></h3>
+								<?php } ?>
 							</div>
 							<div class="wpallimport-collapsed-content" style="padding: 0;">				
 								
@@ -53,7 +59,7 @@
 										<div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea">
 
 											<?php wp_editor($post['content'], 'content', array(
-													'teeny' => true,	
+													//'teeny' => true,	
 													'editor_class' => 'wpallimport-plugin-editor',
 													'media_buttons' => false,							
 													'editor_height' => 200)); 
@@ -64,7 +70,12 @@
 
 									<?php if ( post_type_supports( $post_type, 'excerpt' ) ):?>														
 									<div class="template_input">
-										<input type="text" name="post_excerpt" style="width:100%; line-height: 25px;" value="<?php echo esc_attr($post['post_excerpt']) ?>" placeholder="<?php echo ($post_type == 'product' and class_exists('PMWI_Plugin')) ? __('WooCommerce Short Description', 'wp_all_import_plugin') : __('Excerpt', 'wp_all_import_plugin'); ?>"/>
+										<?php if ($post_type == 'product' and class_exists('PMWI_Plugin')): ?>
+											<h3><?php _e('Short Description', 'wp_all_import_plugin'); ?></h3>
+											<input type="text" name="post_excerpt" style="width:100%; line-height: 25px;" value="<?php echo esc_attr($post['post_excerpt']) ?>"/>
+										<?php else: ?>
+											<input type="text" name="post_excerpt" style="width:100%; line-height: 25px;" value="<?php echo esc_attr($post['post_excerpt']) ?>" placeholder="<?php _e('Excerpt', 'wp_all_import_plugin'); ?>"/>
+										<?php endif; ?>
 									</div>
 									<?php endif; ?>						
 															

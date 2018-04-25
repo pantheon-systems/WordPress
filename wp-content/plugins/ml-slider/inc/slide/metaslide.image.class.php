@@ -79,12 +79,18 @@ class MetaImageSlide extends MetaSlide {
         $slide_id = $this->insert_slide($data['id'], $data['type'], $slider_id);
         if (is_wp_error($slide_id)) {
             return $slide_id;
-        }
-
+		}
+		
+        
         // TODO refactor these and investigate why they are needed (legacy?)
         $this->set_slide($slide_id);
         $this->set_slider($slider_id);
         $this->tag_slide_to_slider();
+        
+        // set default inherit values
+        $this->set_field_inherited('caption', true);
+        $this->set_field_inherited('title', true);
+        $this->set_field_inherited('alt', true);
 
         // TODO investigate if this is really needed
         $this->settings['width'] = 0;
@@ -178,10 +184,11 @@ class MetaImageSlide extends MetaSlide {
 
         // get some slide settings
         $thumb       = $this->get_thumb();
-        $slide_label = apply_filters( "metaslider_image_slide_label", __( "Image Slide", "ml-slider" ), $this->slide, $this->settings );
-   
+        $slide_label = apply_filters("metaslider_image_slide_label", __("Image Slide", "ml-slider"), $this->slide, $this->settings);
+        $attachment_id = $this->get_attachment_id();
+
         // slide row HTML
-        $row  = "<tr id='slide-{$this->slide->ID}' class='slide image flex responsive nivo coin'>
+        $row  = "<tr id='slide-{$this->slide->ID}' class='slide image flex responsive nivo coin' data-attachment-id='{$attachment_id}'>
                     <td class='col-1'>
                         <div class='metaslider-ui-controls ui-sortable-handle'>
                         <h4 class='slide-details'>{$slide_label}</h4>";
@@ -197,7 +204,7 @@ class MetaImageSlide extends MetaSlide {
                         }
             $row .= "</div>
                         <div class='metaslider-ui-inner'>
-                            <button class='update-image image-button' data-button-text='" . __("Update slide image", "ml-slider") . "' title='" . __("Update slide image", "ml-slider") . "' data-slide-id='{$this->slide->ID}'>
+                            <button class='update-image image-button' data-button-text='" . __("Update slide image", "ml-slider") . "' title='" . __("Update slide image", "ml-slider") . "' data-slide-id='{$this->slide->ID}' data-attachment-id='{$attachment_id}'>
                                 <div class='thumb' style='background-image: url({$thumb})'></div>
                             </button>
                         </div>
@@ -221,63 +228,81 @@ class MetaImageSlide extends MetaSlide {
      */
     public function get_admin_tabs() {
 
-        $slide_id = absint( $this->slide->ID);
-        $alt = esc_attr( get_post_meta( $slide_id, '_wp_attachment_image_alt', true ) );
-        $url = esc_attr( get_post_meta( $slide_id, 'ml-slider_url', true ) );
-        $title = esc_attr( get_post_meta( $slide_id, 'ml-slider_title', true ) );
-        $target = get_post_meta( $slide_id, 'ml-slider_new_window', true ) ? 'checked=checked' : '';
-        $caption = esc_textarea( $this->slide->post_excerpt );
+        $slide_id = absint($this->slide->ID);
+        $attachment_id = $this->get_attachment_id();
+        $attachment = get_post($attachment_id);
 
-        $general_tab = "<textarea name='attachment[{$slide_id}][post_excerpt]' placeholder='" . __( "Caption", "ml-slider" ) . "'>{$caption}</textarea>
-                        <input class='url' type='text' name='attachment[{$slide_id}][url]' placeholder='" . __( "URL", "ml-slider" ) . "' value='{$url}' />
-                        <div class='new_window'>
-                        <label>" . __( "New Window", "ml-slider" ) . "<input tabindex='0' type='checkbox' name='attachment[{$slide_id}][new_window]' {$target} /></label>
-                        </div>";
+        $url = esc_attr(get_post_meta($slide_id, 'ml-slider_url', true));
+        $target = get_post_meta($slide_id, 'ml-slider_new_window', true) ? 'checked=checked' : '';
+        
+        // TODO: make this DRY
+        // caption
+        $caption = esc_textarea($this->slide->post_excerpt);
+        $image_caption = html_entity_decode($attachment->post_excerpt, ENT_NOQUOTES, 'UTF-8');
+		$inherit_image_caption_check = '';
+		$inherit_image_caption_class = '';
+		if ($this->is_field_inherited('caption')) {
+			$inherit_image_caption_check = 'checked=checked';
+			$inherit_image_caption_class = ' inherit-from-image';
+		}
+        // alt
+        $alt = esc_attr(get_post_meta($slide_id, '_wp_attachment_image_alt', true));
+        $image_alt = esc_attr(get_post_meta($attachment_id, '_wp_attachment_image_alt', true ));
+		$inherit_image_alt_check = ''; 
+		$inherit_image_alt_class = '';
+		if ($this->is_field_inherited('alt')) {
+			$inherit_image_alt_check = 'checked=checked';
+			$inherit_image_alt_class = ' inherit-from-image';	
+		}
+        // title
+        $title = esc_attr(get_post_meta($slide_id, 'ml-slider_title', true));
+		$image_title = esc_attr($attachment->post_title);
+		$inherit_image_title_check = '';
+        $inherit_image_title_class = '';
+		if ($this->is_field_inherited('title')) {
+			$inherit_image_title_check = 'checked=checked';
+			$inherit_image_title_class = ' inherit-from-image';
+		}
 
-        if ( ! $this->is_valid_image() ) {
-            $message = __( "Warning: Image data does not exist. Please re-upload the image.", "ml-slider" );
+        ob_start();
+        include(METASLIDER_PATH . 'admin/views/slides/tabs/general.php');
+        $general_tab = ob_get_clean();
+
+        if (!$this->is_valid_image()) {
+            $message = __("Warning: The image data does not exist. Please re-upload the image.", "ml-slider");
 
             $general_tab = "<div class='warning'>{$message}</div>" . $general_tab;
         }
 
-        $seo_tab = sprintf("<div class='row'><label>%s</label><input tabindex='0' type='text' size='50' name='attachment[%s][title]' value='%s'></div><div class='row'><label>%s</label><input tabindex='0' type='text' size='50' name='attachment[%s][alt]' value='%s'></div>", __("Image Title Text", "ml-slider"), $slide_id, $title, __("Image Alt Text", "ml-slider"), $slide_id, $alt);
+        ob_start();
+        include(METASLIDER_PATH .'admin/views/slides/tabs/seo.php');
+        $seo_tab = ob_get_clean();
 
         $tabs = array(
             'general' => array(
-                'title' => __( "General", "ml-slider" ),
+                'title' => __("General", "ml-slider"),
                 'content' => $general_tab
             ),
             'seo' => array(
-                'title' => __( "SEO", "ml-slider" ),
+                'title' => __("SEO", "ml-slider"),
                 'content' => $seo_tab
             )
         );
 
-        if ( version_compare( get_bloginfo('version'), 3.9, '>=' ) ) {
+        if (version_compare(get_bloginfo('version'), 3.9, '>=')) {
 
-            $crop_position = get_post_meta( $slide_id, 'ml-slider_crop_position', true);
+            $crop_position = get_post_meta($slide_id, 'ml-slider_crop_position', true); 
 
-            if ( ! $crop_position ) {
+            if (!$crop_position) {
                 $crop_position = 'center-center';
             }
 
-            $crop_tab = "<div class='row'><label>" . __( "Crop Position", "ml-slider" ) . "</label></div>
-                        <div class='row'>
-                            <select class='crop_position' name='attachment[{$slide_id}][crop_position]'>
-                                <option value='left-top' " . selected( $crop_position, 'left-top', false ) . ">" . __( "Top Left", "ml-slider" ) . "</option>
-                                <option value='center-top' " . selected( $crop_position, 'center-top', false ) . ">" . __( "Top Center", "ml-slider" ) . "</option>
-                                <option value='right-top' " . selected( $crop_position, 'right-top', false ) . ">" . __( "Top Right", "ml-slider" ) . "</option>
-                                <option value='left-center' " . selected( $crop_position, 'left-center', false ) . ">" . __( "Center Left", "ml-slider" ) . "</option>
-                                <option value='center-center' " . selected( $crop_position, 'center-center', false ) . ">" . __( "Center Center", "ml-slider" ) . "</option>
-                                <option value='right-center' " . selected( $crop_position, 'right-center', false ) . ">" . __( "Center Right", "ml-slider" ) . "</option>
-                                <option value='left-bottom' " . selected( $crop_position, 'left-bottom', false ) . ">" . __( "Bottom Left", "ml-slider" ) . "</option>
-                                <option value='center-bottom' " . selected( $crop_position, 'center-bottom', false ) . ">" . __( "Bottom Center", "ml-slider" ) . "</option>
-                                <option value='right-bottom' " . selected( $crop_position, 'right-bottom', false ) . ">" . __( "Bottom Right", "ml-slider" ) . "</option>
-                            </select>
-                        </div>";
-
+            ob_start();
+            include(METASLIDER_PATH .'admin/views/slides/tabs/crop.php');
+            $crop_tab = ob_get_clean();
+            
             $tabs['crop'] = array(
-                'title' => __( "Crop", "ml-slider" ),
+                'title' => __("Crop", "ml-slider"),
                 'content' => $crop_tab
             );
 
@@ -336,55 +361,73 @@ class MetaImageSlide extends MetaSlide {
             $this->slide->ID,
             $this->settings['width'],
             $this->settings['height'],
-            isset( $this->settings['smartCrop'] ) ? $this->settings['smartCrop'] : 'false',
+            isset($this->settings['smartCrop']) ? $this->settings['smartCrop'] : 'false',
             $this->use_wp_image_editor()
         );
 
         $thumb = $imageHelper->get_image_url();
-
-        if ( $this->detect_self_metaslider_shortcode( $this->slide->post_excerpt ) ) {
-            $caption = str_replace( array( "[metaslider", "[ml-slider" ), "[metaslider-disabled", $this->slide->post_excerpt );
+        $attachment_id = get_post_thumbnail_id($this->slide->ID);
+        $attachment = get_post($attachment_id);	
+		if ($this->is_field_inherited('caption')) {
+			$caption = $attachment->post_excerpt;
         } else {
-            $caption = $this->slide->post_excerpt;
+			$caption = $this->slide->post_excerpt;
+		}
+        if ($this->detect_self_metaslider_shortcode($this->slide->post_excerpt)) {
+            $caption = str_replace(array("[metaslider", "[ml-slider"), "[metaslider-disabled", $this->slide->post_excerpt);
+		}
+
+        if ($this->is_field_inherited('title')) {
+            $title = $attachment->post_title;
+        } else {
+            $title = get_post_meta($this->slide->ID, 'ml-slider_title', true);
         }
+		
+        if ($this->is_field_inherited('alt')) {
+            $alt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
+        } else {
+            $alt = get_post_meta($this->slide->ID, '_wp_attachment_image_alt', true);
+        }
+        
+
 
         // store the slide details
         $slide = array(
             'id' => $this->slide->ID,
-            'url' => __( get_post_meta( $this->slide->ID, 'ml-slider_url', true ) ),
-            'title' => __( get_post_meta( $this->slide->ID, 'ml-slider_title', true ) ),
-            'target' => get_post_meta( $this->slide->ID, 'ml-slider_new_window', true ) ? '_blank' : '_self',
+            'url' => get_post_meta($this->slide->ID, 'ml-slider_url', true),
+            'title' => $title,
+            'target' => get_post_meta($this->slide->ID, 'ml-slider_new_window', true) ? '_blank' : '_self',
             'src' => $thumb,
             'thumb' => $thumb, // backwards compatibility with Vantage
             'width' => $this->settings['width'],
             'height' => $this->settings['height'],
-            'alt' => __( get_post_meta( $this->slide->ID, '_wp_attachment_image_alt', true ) ),
-            'caption' => __( html_entity_decode( do_shortcode( $caption ), ENT_NOQUOTES, 'UTF-8' ) ),
-            'caption_raw' => __( do_shortcode( $caption ) ),
+            'alt' => $alt,
+            'caption' => html_entity_decode(do_shortcode($caption), ENT_NOQUOTES, 'UTF-8'),
+            'caption_raw' => do_shortcode($caption),
             'class' => "slider-{$this->slider->ID} slide-{$this->slide->ID}",
             'rel' => "",
             'data-thumb' => ""
         );
 
         // fix slide URLs
-        if ( strpos( $slide['url'], 'www.' ) === 0 ) {
+        if (strpos($slide['url'], 'www.') === 0) {
             $slide['url'] = 'http://' . $slide['url'];
         }
 
-        $slide = apply_filters( 'metaslider_image_slide_attributes', $slide, $this->slider->ID, $this->settings );
+        $slide = apply_filters('metaslider_image_slide_attributes', $slide, $this->slider->ID, $this->settings);
 
         // return the slide HTML
-        switch ( $this->settings['type'] ) {
+        switch ($this->settings['type']) {
             case "coin":
-                return $this->get_coin_slider_markup( $slide );
+                return $this->get_coin_slider_markup($slide);
             case "flex":
-                return $this->get_flex_slider_markup( $slide );
+                return $this->get_flex_slider_markup($slide);
             case "nivo":
-                return $this->get_nivo_slider_markup( $slide );
+                return $this->get_nivo_slider_markup($slide);
             case "responsive":
-                return $this->get_responsive_slides_markup( $slide );
+                return $this->get_responsive_slides_markup($slide);
             default:
-                return $this->get_flex_slider_markup( $slide );
+                return $this->get_flex_slider_markup($slide);
         }
 
     }
@@ -395,9 +438,9 @@ class MetaImageSlide extends MetaSlide {
      * @param  string $slide html
      * @return string slide html
      */
-    private function get_nivo_slider_markup( $slide ) {
+    private function get_nivo_slider_markup($slide) {
 
-        $attributes = apply_filters( 'metaslider_nivo_slider_image_attributes', array(
+        $attributes = apply_filters('metaslider_nivo_slider_image_attributes', array(
                 'src' => $slide['src'],
                 'height' => $slide['height'],
                 'width' => $slide['width'],
@@ -409,18 +452,18 @@ class MetaImageSlide extends MetaSlide {
                 'class' => $slide['class']
             ), $slide, $this->slider->ID );
 
-        $html = $this->build_image_tag( $attributes );
+        $html = $this->build_image_tag($attributes);
 
-        $anchor_attributes = apply_filters( 'metaslider_nivo_slider_anchor_attributes', array(
+        $anchor_attributes = apply_filters('metaslider_nivo_slider_anchor_attributes', array(
                 'href' => $slide['url'],
                 'target' => $slide['target']
-            ), $slide, $this->slider->ID );
+            ), $slide, $this->slider->ID);
 
-        if ( strlen( $anchor_attributes['href'] ) ) {
-            $html = $this->build_anchor_tag( $anchor_attributes, $html );
+        if (strlen( $anchor_attributes['href'])) {
+            $html = $this->build_anchor_tag($anchor_attributes, $html);
         }
 
-        return apply_filters( 'metaslider_image_nivo_slider_markup', $html, $slide, $this->settings );
+        return apply_filters('metaslider_image_nivo_slider_markup', $html, $slide, $this->settings);
 
     }
 
@@ -611,27 +654,56 @@ class MetaImageSlide extends MetaSlide {
     protected function save( $fields ) {
 
         // update the slide
-        wp_update_post( array(
+        wp_update_post(array(
                 'ID' => $this->slide->ID,
                 'post_excerpt' => $fields['post_excerpt'],
                 'menu_order' => $fields['menu_order']
-            ) );
+            ));
 
         // store the URL as a meta field against the attachment
-        $this->add_or_update_or_delete_meta( $this->slide->ID, 'url', $fields['url'] );
+        $this->add_or_update_or_delete_meta($this->slide->ID, 'url', $fields['url']);
 
-        $this->add_or_update_or_delete_meta( $this->slide->ID, 'title', $fields['title'] );
+        $this->add_or_update_or_delete_meta($this->slide->ID, 'title', $fields['title']); 
 
-        $this->add_or_update_or_delete_meta( $this->slide->ID, 'crop_position', $fields['crop_position'] );
+		$this->add_or_update_or_delete_meta($this->slide->ID, 'crop_position', $fields['crop_position']);
 
-        if ( isset( $fields['alt'] ) ) {
-            update_post_meta( $this->slide->ID, '_wp_attachment_image_alt', $fields['alt'] );
+        // store the inherit custom caption, title and alt settings
+        $this->set_field_inherited('title', isset($fields['inherit_image_title']));
+        $this->set_field_inherited('caption', isset($fields['inherit_image_caption']));
+        $this->set_field_inherited('alt', isset($fields['inherit_image_alt']));
+
+        if (isset($fields['alt'])) {
+            update_post_meta($this->slide->ID, '_wp_attachment_image_alt', $fields['alt']);
         }
 
         // store the 'new window' setting
-        $new_window = isset( $fields['new_window'] ) && $fields['new_window'] == 'on' ? 'true' : 'false';
+        $new_window = isset($fields['new_window']) ? 'true' : 'false'; 
 
-        $this->add_or_update_or_delete_meta( $this->slide->ID, 'new_window', $new_window );
+        $this->add_or_update_or_delete_meta($this->slide->ID, 'new_window', $new_window);
 
     }
+
+    /**
+     * Gets the inheritn parameter of a field
+     * 
+     * @param string $field Field to check
+     * @return bool
+     */
+    private function is_field_inherited($field) {
+        return (bool) get_post_meta($this->slide->ID, 'ml-slider_inherit_image_' . $field, true);
+    }
+
+    /**
+     * Sets the inherit parameter of a field. 
+     * 
+     * @param string $field Field to set
+     * @param bool   $value Value is currently isset($fields['checkbox_parameter'])
+     * @return mixed Returns meta_id if the meta doesn't exist, otherwise returns true on success and false on failure. NOTE: If the meta_value passed to this function is the same as the value that is already in the database, this function returns false.
+     */
+    private function set_field_inherited($field, $value) {
+
+        // TODO eventually I would like to handle errors / successful updates to the database even if just sending it to a log file
+        return update_post_meta($this->slide->ID, 'ml-slider_inherit_image_' . $field, (bool) $value);
+    }
+
 }

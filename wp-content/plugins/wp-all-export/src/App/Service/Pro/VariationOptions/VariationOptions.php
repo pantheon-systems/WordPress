@@ -58,7 +58,7 @@ class VariationOptions extends BasicVariationOptions implements VariationOptions
                             LEFT OUTER JOIN $wpdb->posts r
                             ON o.post_parent = r.ID
                             WHERE r.post_status = 'trash' AND o.post_type = 'product_variation') 
-                            OR ($wpdb->posts.post_type = 'product_variation' AND $wpdb->posts.post_parent IN (
+                            OR ($wpdb->posts.post_type = 'product_variation' AND $wpdb->posts.post_status <> 'trash' AND $wpdb->posts.post_parent IN (
                 SELECT DISTINCT $wpdb->posts.ID
                             FROM $wpdb->posts $join
                             WHERE $where

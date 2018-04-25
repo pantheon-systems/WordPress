@@ -59,7 +59,7 @@ $l10n = array(
 
 				<div class="clear"></div>
 
-				<form class="<?php echo ! $this->isWizard ? 'edit' : 'options' ?> choose-export-options" method="post" enctype="multipart/form-data" autocomplete="off" <?php echo ! $this->isWizard ? 'style="overflow:visible;"' : '' ?>>
+				<form class="<?php echo ! $this->isWizard ? 'edit' : 'options' ?> choose-export-options" method="post" enctype="multipart/form-data" autocomplete="off" <?php echo ! $this->isWizard ? 'style="overflow:visible;"' : '' ?> id="wpae-options-form">
 
 					<input type="hidden" class="hierarhy-output" name="filter_rules_hierarhy" value="<?php echo esc_html($post['filter_rules_hierarhy']);?>"/>
 					
@@ -85,23 +85,24 @@ $l10n = array(
 
 					<?php //\Wpae\Pro\Filtering\FilteringFactory::render_filtering_block( $engine, $this->isWizard, $post ); ?>
 
-					<?php include_once 'options/settings.php'; ?>			
+                    <?php include(__DIR__ . "/../../../src/Scheduling/views/SchedulingOptions.php"); ?>
 
-					<p class="wpallexport-submit-buttons" style="text-align: center;">
-						<?php wp_nonce_field('options', '_wpnonce_options') ?>
-						<input type="hidden" name="is_submitted" value="1" />						
-						
-						<?php if ($this->isWizard): ?>
+                    <?php include_once 'options/settings.php'; ?>
 
-							<a href="<?php echo apply_filters('pmxi_options_back_link', add_query_arg('action', 'template', $this->baseUrl), $this->isWizard); ?>" class="back rad3"><?php _e('Back', 'wp_all_export_plugin') ?></a>							
 
-							<input type="submit" class="button button-primary button-hero wpallexport-large-button" value="<?php _e('Confirm & Run Export', 'wp_all_export_plugin'); ?>" />		
+                    <?php wp_nonce_field('options', '_wpnonce_options') ?>
+                    <input type="hidden" name="is_submitted" value="1" />
 
-						<?php else: ?>		
-							<a href="<?php echo apply_filters('pmxi_options_back_link', remove_query_arg('id', remove_query_arg('action', $this->baseUrl)), $this->isWizard); ?>" class="back rad3"><?php _e('Back to Manage Exports', 'wp_all_export_plugin') ?></a>
-							<input type="submit" class="button button-primary button-hero wpallexport-large-button" value="<?php _e('Save Export Configuration', 'wp_all_export_plugin'); ?>" />
-						<?php endif ?>
-					</p>
+                    <div class="wpallexport-submit-buttons" style="text-align: center; <?php if ($this->isWizard) { ?> height: 60px; <?php } ?> ">
+
+                        <?php if ($this->isWizard): ?>
+                            <a href="<?php echo apply_filters('pmxi_options_back_link', add_query_arg('action', 'template', $this->baseUrl), $this->isWizard); ?>" class="back rad3"><?php _e('Back', 'wp_all_export_plugin') ?></a>
+                            <?php include(__DIR__ . "/../../../src/Scheduling/views/SaveSchedulingButton.php"); ?>
+                        <?php else: ?>
+                            <a href="<?php echo apply_filters('pmxi_options_back_link', remove_query_arg('id', remove_query_arg('action', $this->baseUrl)), $this->isWizard); ?>" class="back rad3"><?php _e('Back to Manage Exports', 'wp_all_export_plugin') ?></a>
+                            <?php include(__DIR__ . "/../../../src/Scheduling/views/SaveSchedulingButton.php"); ?>
+                        <?php endif ?>
+                    </div>
 
 
 				</form>					

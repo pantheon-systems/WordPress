@@ -1,4 +1,14 @@
 <?php
+/**
+ *
+ * Get parent category term ID
+ *
+ * @param $parent
+ * @param $tx_name
+ * @param $txes
+ * @param $key
+ * @return int
+ */
 function pmxi_recursion_taxes($parent, $tx_name, $txes, $key){
 
 	if ( is_array($parent) ){
@@ -24,6 +34,8 @@ function pmxi_recursion_taxes($parent, $tx_name, $txes, $key){
 		else{
 			
 			$parent_id = pmxi_recursion_taxes($parent['parent'], $tx_name, $txes, $key);
+
+            if (empty($parent['name'])) return $parent_id;
 			
 			$term = is_exists_term($parent['name'], $tx_name, (int)$parent_id);				
 

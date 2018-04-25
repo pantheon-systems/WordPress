@@ -53,9 +53,12 @@ class WSAL_Sensors_Request extends WSAL_AbstractSensor {
 
 		$file = $uploads_dir_path . 'Request.log.php';
 
+		$request_method = isset( $server_array['REQUEST_METHOD'] ) ? $server_array['REQUEST_METHOD'] : false;
+		$request_uri = isset( $server_array['REQUEST_URI'] ) ? $server_array['REQUEST_URI'] : false;
+
 		$line = '[' . date( 'Y-m-d H:i:s' ) . '] '
-			. $server_array['REQUEST_METHOD'] . ' '
-			. $server_array['REQUEST_URI'] . ' '
+			. $request_method . ' '
+			. $request_uri . ' '
 			. ( ! empty( $post_array ) ? str_pad( PHP_EOL, 24 ) . json_encode( $post_array ) : '')
 			. ( ! empty( self::$envvars ) ? str_pad( PHP_EOL, 24 ) . json_encode( self::$envvars ) : '')
 			. PHP_EOL;

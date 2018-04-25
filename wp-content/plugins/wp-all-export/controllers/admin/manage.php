@@ -58,17 +58,17 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 			'total' => ceil($list->total() / $perPage),
 			'current' => $pagenum,
 		));
-		
-		PMXE_Plugin::$session->clean_session();		
 
-		$this->render();
+		PMXE_Plugin::$session->clean_session();
+        
+        $this->render();
 	}	
 	
 	/**
 	 * Edit Options
 	 */
 	public function options() {
-		
+
 		// deligate operation to other controller
 		$controller = new PMXE_Admin_Export();
 		$controller->set('isTemplateEdit', true);
@@ -99,13 +99,13 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 
 		$wp_uploads = wp_upload_dir();	
 
-		$this->data['file_path'] = site_url() . '/wp-cron.php?export_hash=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data'; 
+		$this->data['file_path'] = site_url() . '/wp-cron.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data'; 
 
 		$this->data['bundle_url'] = ''; 
 
 		if ( ! empty($item['options']['bundlepath']) )
 		{			
-			$this->data['bundle_url'] = site_url() . '/wp-cron.php?export_hash=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_bundle&t=zip';
+			$this->data['bundle_url'] = site_url() . '/wp-cron.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_bundle&t=zip';
 		}		
 
 		$this->render();
@@ -123,7 +123,7 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 			wp_redirect($this->baseUrl); die();
 		}
 		
-		$this->data['file_path'] = site_url() . '/wp-cron.php?export_hash=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data';
+		$this->data['file_path'] = site_url() . '/wp-cron.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data';
 
 		$this->render();
 	}
@@ -248,7 +248,7 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 	}
 	
 	/**
-	 * Delete an import
+	 * Delete an export
 	 */
 	public function delete() {
 		$id = $this->input->get('id');
@@ -256,13 +256,17 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 		if ( ! $id or $item->getById($id)->isEmpty()) {
 			wp_redirect($this->baseUrl); die();
 		}
-		
+
 		if ($this->input->post('is_confirmed')) {
-			check_admin_referer('delete-export', '_wpnonce_delete-export');					
+			check_admin_referer('delete-export', '_wpnonce_delete-export');
 			$item->delete();
+
+			$scheduling = \Wpae\Scheduling\Scheduling::create();
+			$scheduling->deleteScheduleIfExists($id);
+
 			wp_redirect(add_query_arg('pmxe_nt', urlencode(__('Export deleted', 'wp_all_export_plugin')), $this->baseUrl)); die();
 		}
-		
+
 		$this->render();
 	}
 	
@@ -287,6 +291,9 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 				if ($item->attch_id) wp_delete_attachment($item->attch_id, true);
 
 				$item->delete();
+
+                $scheduling = \Wpae\Scheduling\Scheduling::create();
+                $scheduling->deleteScheduleIfExists($item->id);
 			}			
 			wp_redirect(add_query_arg('pmxe_nt', urlencode(sprintf(__('%d %s deleted', 'wp_all_export_plugin'), $items->count(), _n('export', 'exports', $items->count(), 'wp_all_export_plugin'))), $this->baseUrl)); die();
 		}		

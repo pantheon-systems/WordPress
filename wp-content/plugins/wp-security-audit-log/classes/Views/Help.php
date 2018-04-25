@@ -166,7 +166,21 @@ class WSAL_Views_Help extends WSAL_AbstractView {
 								</li>
 							</ul>
 							<?php
+							// Buy Now button link.
 							$buy_now = add_query_arg( 'page', 'wsal-auditlog-pricing', admin_url( 'admin.php' ) );
+							$buy_now_target = '';
+
+							// If user is not super admin and website is multisite then change the URL.
+							if ( $this->_plugin->IsMultisite() && ! is_super_admin() ) {
+								$buy_now = 'https://www.wpsecurityauditlog.com/pricing/';
+								$buy_now_target = 'target="_blank"';
+							} elseif ( $this->_plugin->IsMultisite() && is_super_admin() ) {
+								$buy_now = add_query_arg( 'page', 'wsal-auditlog-pricing', network_admin_url( 'admin.php' ) );
+							} elseif ( ! $this->_plugin->IsMultisite() && ! current_user_can( 'manage_options' ) ) {
+								$buy_now = 'https://www.wpsecurityauditlog.com/pricing/';
+								$buy_now_target = 'target="_blank"';
+							}
+
 							$more_info = add_query_arg(
 								array(
 									'utm_source' => 'plugin',
@@ -178,7 +192,7 @@ class WSAL_Views_Help extends WSAL_AbstractView {
 							);
 							?>
 							<p>
-								<a class="button-primary wsal-extension-btn" href="<?php echo esc_attr( $buy_now ); ?>"><?php esc_html_e( 'Upgrade to Premium', 'wp-security-audit-log' ); ?></a>
+								<a class="button-primary wsal-extension-btn" href="<?php echo esc_attr( $buy_now ); ?>" <?php echo esc_attr( $buy_now_target ); ?>><?php esc_html_e( 'Upgrade to Premium', 'wp-security-audit-log' ); ?></a>
 								<a class="button-primary wsal-extension-btn" href="<?php echo esc_attr( $more_info ); ?>" target="_blank"><?php esc_html_e( 'More Information', 'wp-security-audit-log' ); ?></a>
 							</p>
 						</div>

@@ -29,7 +29,7 @@
 								<div class="switcher-target-status_xpath">
 									<div class="input">
 										&nbsp;<input type="text" class="smaller-text" name="status_xpath" style="width:190px;" value="<?php echo esc_attr($post['status_xpath']) ?>"/>
-										<a href="#help" class="wpallimport-help" title="<?php _e('The value of presented XPath should be one of the following: (\'publish\', \'draft\', \'trash\').', 'wp_all_import_plugin') ?>" style="position:relative; top:13px; float: right;">?</a>
+										<a href="#help" class="wpallimport-help" title="<?php _e('The value of presented XPath should be one of the following: (\'publish\', \'draft\', \'trash\', \'private\').', 'wp_all_import_plugin') ?>" style="position:relative; top:13px; float: right;">?</a>
 									</div>
 								</div>
 							</div>								

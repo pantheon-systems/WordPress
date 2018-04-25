@@ -40,6 +40,8 @@
 
 			</select>
 
+            <span class="help form-error-text" style="display: none;"><?php _e( 'Select a field type or delete this field.', 'strong-testimonials' ); ?></span>
+
 		<?php else : ?>
 
 			<?php

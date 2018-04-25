@@ -667,7 +667,7 @@ class Strong_Testimonials_Updater {
 			return;
 		}
 
-		$default_view = get_option( 'wpmtst_view_default' );
+		$default_view = wpmtst_get_view_default();
 		$history      = get_option( 'wpmtst_history', array() );
 
 		foreach ( $views as $key => $view ) {

@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin database schema
- * WARNING: 
- * 	dbDelta() doesn't like empty lines in schema string, so don't put them there;
+ * WARNING:
+ *    dbDelta() doesn't like empty lines in schema string, so don't put them there;
  *  WPDB doesn't like NULL values so better not to have them in the tables;
  */
 
@@ -17,31 +17,33 @@ $charset_collate = '';
 // Declare these as global in case schema.php is included from a function.
 global $wpdb, $plugin_queries;
 
-if ( ! empty($wpdb->charset))
-	$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
-if ( ! empty($wpdb->collate))
-	$charset_collate .= " COLLATE $wpdb->collate";
-	
+if (!empty($wpdb->charset)) {
+    $charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+}
+if (!empty($wpdb->collate)) {
+    $charset_collate .= " COLLATE $wpdb->collate";
+}
+
 $table_prefix = PMXI_Plugin::getInstance()->getTablePrefix();
 
 $plugin_queries = <<<SCHEMA
 CREATE TABLE {$table_prefix}templates (
 	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-	options LONGTEXT,	
+	options LONGTEXT,		
 	scheduled VARCHAR(64) NOT NULL DEFAULT '',
 	name VARCHAR(200) NOT NULL DEFAULT '',	
 	title TEXT,
-	content LONGTEXT,
+	content LONGTEXT,	
 	is_keep_linebreaks TINYINT(1) NOT NULL DEFAULT 0,
 	is_leave_html TINYINT(1) NOT NULL DEFAULT 0,
-	fix_characters TINYINT(1) NOT NULL DEFAULT 0,	
+	fix_characters TINYINT(1) NOT NULL DEFAULT 0,		
 	meta LONGTEXT,
 	PRIMARY KEY  (id)
 ) $charset_collate;
 CREATE TABLE {$table_prefix}imports (
 	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 	parent_import_id BIGINT(20) NOT NULL DEFAULT 0,
-	name VARCHAR(255) NOT NULL DEFAULT '',
+	name TEXT,
 	friendly_name VARCHAR(255) NOT NULL DEFAULT '',
 	type VARCHAR(32) NOT NULL DEFAULT '',
 	feed_type ENUM('xml','csv','zip','gz','') NOT NULL DEFAULT '',	
@@ -83,7 +85,7 @@ CREATE TABLE {$table_prefix}posts (
 CREATE TABLE {$table_prefix}files (
 	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 	import_id BIGINT(20) UNSIGNED NOT NULL,
-	name VARCHAR(255) NOT NULL DEFAULT '',
+	name TEXT,
 	path TEXT,
 	registered_on DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 	PRIMARY KEY  (id)

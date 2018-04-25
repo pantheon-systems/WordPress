@@ -388,34 +388,34 @@ class Strong_Testimonials_Defaults {
 		$default_messages = array(
 			'required-field'     => array(
 				'order'       => 1,
-				/* translators: Settings > Forms > Messages tab */
+				/* translators: Settings > Form > Messages tab */
 				'description' => _x( 'Required Field', 'setting description', 'strong-testimonials' ),
-				'text'        => _x( 'Required Field', 'Default message for required notice at top of form.', 'strong-testimonials' ),
+				'text'        => _x( 'Required field', 'Default message for required notice at top of form.', 'strong-testimonials' ),
 				'enabled'     => 1,
 			),
 			'captcha'            => array(
 				'order'       => 2,
-				/* translators: Settings > Forms > Messages tab */
+				/* translators: Settings > Form > Messages tab */
 				'description' => _x( 'Captcha Label', 'description', 'strong-testimonials' ),
 				'text'        => _x( 'Captcha', 'Default label for Captcha field on submission form.', 'strong-testimonials' ),
 			),
 			'form-submit-button' => array(
 				'order'       => 3,
-				/* translators: Settings > Forms > Messages tab */
+				/* translators: Settings > Form > Messages tab */
 				'description' => _x( 'Submit Button', 'description', 'strong-testimonials' ),
 				/* translators: Default label for the Submit button on testimonial form. */
 				'text'        => _x( 'Add Testimonial', 'the Submit button', 'strong-testimonials' ),
 			),
 			'submission-error'   => array(
 				'order'       => 4,
-				/* translators: Settings > Forms > Messages tab */
+				/* translators: Settings > Form > Messages tab */
 				'description' => _x( 'Submission Error', 'description', 'strong-testimonials' ),
 				/* translators: Default message for submission form error. */
 				'text'        => _x( 'There was a problem processing your testimonial.', 'error message', 'strong-testimonials' ),
 			),
 			'submission-success' => array(
 				'order'       => 5,
-				/* translators: Settings > Forms > Messages tab */
+				/* translators: Settings > Form > Messages tab */
 				'description' => _x( 'Submission Success', 'description', 'strong-testimonials' ),
 				/* translators: Default message for submission form success message. */
 				'text'        => _x( 'Thank you! Your testimonial is waiting to be approved.', 'success message', 'strong-testimonials' ),

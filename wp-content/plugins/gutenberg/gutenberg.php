@@ -3,15 +3,15 @@
  * Plugin Name: Gutenberg
  * Plugin URI: https://github.com/WordPress/gutenberg
  * Description: Printing since 1440. This is the development plugin for the new block editor in core.
- * Version: 2.2.0
+ * Version: 2.7.0
  * Author: Gutenberg Team
  *
  * @package gutenberg
  */
 
 ### BEGIN AUTO-GENERATED DEFINES
-define( 'GUTENBERG_VERSION', '2.2.0' );
-define( 'GUTENBERG_GIT_COMMIT', 'ee4bc400d75397983ea4fd6e6fcd5fb4ee4f0d48' );
+define( 'GUTENBERG_VERSION', '2.7.0' );
+define( 'GUTENBERG_GIT_COMMIT', '6f42506c930f8a71ff06a1240da16c9f4045c77d' );
 ### END AUTO-GENERATED DEFINES
 
 gutenberg_pre_init();
@@ -162,6 +162,12 @@ function gutenberg_init( $return, $post ) {
 	add_action( 'admin_enqueue_scripts', 'gutenberg_editor_scripts_and_styles' );
 	add_filter( 'screen_options_show_screen', '__return_false' );
 	add_filter( 'admin_body_class', 'gutenberg_add_admin_body_class' );
+
+	/**
+	 * Remove the emoji script as it is incompatible with both React and any
+	 * contenteditable fields.
+	 */
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 
 	require_once ABSPATH . 'wp-admin/admin-header.php';
 	the_gutenberg_project();
@@ -522,7 +528,7 @@ add_action( 'admin_print_scripts-edit.php', 'gutenberg_replace_default_add_new_b
  *
  * @since 1.5.0
  *
- * @param string $classes Space seperated string of classes being added to the body tag.
+ * @param string $classes Space separated string of classes being added to the body tag.
  * @return string The $classes string, with gutenberg-editor-page appended.
  */
 function gutenberg_add_admin_body_class( $classes ) {

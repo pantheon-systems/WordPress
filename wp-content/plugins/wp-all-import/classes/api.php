@@ -377,6 +377,9 @@ class PMXI_API
 		}
 
 		$uploads   = wp_upload_dir();
+
+		$uploads = apply_filters('wp_all_import_images_uploads_dir', $uploads, false, false, false);
+
 		$targetDir = $uploads['path'];
 		$targetUrl = $uploads['url'];
 		$download_image = true;
@@ -397,6 +400,43 @@ class PMXI_API
 		$image_filepath = $targetDir . '/' . $image_filename;
 
 		$url = str_replace(" ", "%20", trim(pmxi_convert_encoding($img_url)));
+
+		$is_base64_images_allowed = apply_filters("wp_all_import_is_base64_images_allowed", true, $url, false);
+
+		if ( $file_type == 'images' and base64_encode(base64_decode($url)) == $url and $is_base64_images_allowed ){
+
+			$image_name = md5($url) . '.jpg';
+
+			// search existing attachment
+			$attch = wp_all_import_get_image_from_gallery($image_name, $targetDir, $file_type);
+
+			if (empty($attch))
+			{
+				$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: Image %s not found in media gallery.', 'wp_all_import_plugin'), trim($image_name)));
+			}
+			else
+			{
+				$logger and call_user_func($logger, sprintf(__('- Using existing image `%s`...', 'wp_all_import_plugin'), trim($image_name)));
+				return $attch->ID;
+			}
+
+			if ("yes" == $download_images){
+				$img = @imagecreatefromstring(base64_decode($url));
+				if($img)
+				{
+					$image_filename = $image_name;
+					$logger and call_user_func($logger, __('- found base64_encoded image', 'wp_all_import_plugin'));
+					$image_filepath = $targetDir . '/' . $image_filename;
+					imagejpeg($img, $image_filepath);
+					if( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+						$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $image_filepath));
+					} else {
+						$result = true;
+						$download_image = false;
+					}
+				}
+			}
+		}
 
 		// do not download images
 		if ( "yes" != $download_images ){					

@@ -442,17 +442,6 @@ class WSAL_Settings {
 	}
 
 	/**
-	 * Checking if Logging is enabled.
-	 */
-	public function IsLoggingDisabled() {
-		return $this->_plugin->GetGlobalOption( 'disable-logging' );
-	}
-
-	public function SetLoggingDisabled( $disabled ) {
-		return $this->_plugin->SetGlobalOption( 'disable-logging', $disabled );
-	}
-
-	/**
 	 * Checking if the data will be removed.
 	 */
 	public function IsDeleteData() {
@@ -758,9 +747,6 @@ class WSAL_Settings {
 			} // Regex IPV6.
 			elseif ( preg_match( '/^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/', $ip ) ) {
 				return $ip;
-			}
-			if ( ! $this->IsLoggingDisabled ) {
-				error_log( 'Invalid IP in ValidateIP function: ' . $ip );
 			}
 			return false;
 		} else {
@@ -1091,5 +1077,90 @@ class WSAL_Settings {
 			$config = WSAL_Connector_ConnectorFactory::GetConfigArray( $archive_type, $archive_user, $password, $archive_name, $archive_hostname, $archive_baseprefix );
 			$this->_plugin->getConnector( $config )->getAdapter( 'Occurrence' );
 		}
+	}
+
+	/**
+	 * Generate index.php file for each wsal sub-directory
+	 * present in the uploads directory.
+	 *
+	 * @since 3.1.2
+	 */
+	public function generate_index_files() {
+		// Get uploads directory.
+		$uploads_dir = wp_upload_dir();
+		$wsal_uploads_dir = trailingslashit( $uploads_dir['basedir'] . '/wp-security-audit-log/' );
+
+		// If the directory exists then generate index.php file for every sub-directory.
+		if ( ! empty( $wsal_uploads_dir ) && is_dir( $wsal_uploads_dir ) ) {
+			// Generate index.php for the main directory.
+			if ( ! file_exists( $wsal_uploads_dir . '/index.php' ) ) {
+				// Generate index.php file.
+				$this->create_index_file( $wsal_uploads_dir );
+			}
+
+			// Generate .htaccess for the main directory.
+			if ( ! file_exists( $wsal_uploads_dir . '/.htaccess' ) ) {
+				// Generate .htaccess file.
+				$this->create_htaccess_file( $wsal_uploads_dir );
+			}
+
+			// Fetch all files in the uploads directory.
+			$sub_directories = glob( $wsal_uploads_dir . '*', GLOB_BRACE );
+			foreach ( $sub_directories as $sub_dir ) {
+				// index.php file.
+				if ( is_dir( $sub_dir ) && ! file_exists( $sub_dir . '/index.php' ) ) {
+					// Generate index.php file.
+					$this->create_index_file( $sub_dir . '/' );
+				}
+
+				// .htaccess file.
+				if ( is_dir( $sub_dir ) && ! file_exists( $sub_dir . '/.htaccess' ) ) {
+					// Check for failed-logins, users, visitors and don't create file in it.
+					if ( strpos( $sub_dir, 'failed-logins' )
+						|| strpos( $sub_dir, 'users' )
+						|| strpos( $sub_dir, 'visitors' ) ) {
+						continue;
+					}
+					// Generate .htaccess file.
+					$this->create_htaccess_file( $sub_dir . '/' );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Create an index.php file, if none exists, in order to
+	 * avoid directory listing in the specified directory.
+	 *
+	 * @param string $dir_path - Directory Path.
+	 * @return bool
+	 * @since 3.1.2
+	 */
+	final public function create_index_file( $dir_path ) {
+		// Check if index.php file exists.
+		$dir_path = trailingslashit( $dir_path );
+		$result = 0;
+		if ( ! is_file( $dir_path . 'index.php' ) ) {
+			$result = @file_put_contents( $dir_path . 'index.php', '<?php // Silence is golden' );
+		}
+		return ($result > 0);
+	}
+
+	/**
+	 * Create an .htaccess file, if none exists, in order to
+	 * block access to directory listing in the specified directory.
+	 *
+	 * @param string $dir_path - Directory Path.
+	 * @return bool
+	 * @since 3.1.2
+	 */
+	final public function create_htaccess_file( $dir_path ) {
+		// Check if .htaccess file exists.
+		$dir_path = trailingslashit( $dir_path );
+		$result = 0;
+		if ( ! is_file( $dir_path . '.htaccess' ) ) {
+			$result = @file_put_contents( $dir_path . '.htaccess', 'Deny from all' );
+		}
+		return ($result > 0);
 	}
 }

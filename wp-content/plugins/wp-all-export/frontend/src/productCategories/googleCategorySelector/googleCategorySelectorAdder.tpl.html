@@ -1,0 +1,11 @@
+<div style="position: relative" ng-init="visible=false">
+    <input type="text" style="width: 402px; font-size:13px;" placeholder="{{ getPlaceholder() }}"
+           ng-class="{ 'selected-automatically' : !byUser, 'opened' : visible }"
+           ng-model="selectedCategory"
+           ng-change="categoryChanged()"
+           ng-click="categoryClicked()"
+           class="wpae-google-category-input"
+           ng-model-options="{ debounce: 200 }"
+    />
+    <google-category-selector style="position:absolute; z-index: 100; top: 41px; left: 1px;" />
+</div>

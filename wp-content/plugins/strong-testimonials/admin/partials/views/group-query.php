@@ -22,5 +22,6 @@
 		<tr class="then then_slideshow then_not_single then_multiple" style="display: none;">
 			<?php include( 'option-limit.php' ); ?>
 		</tr>
-	</table>
+		<?php // TODO Add hook here ?>
+    </table>
 </div>

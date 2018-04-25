@@ -574,11 +574,15 @@ jQuery(document).ready(function ($) {
         'template': template
       };
       $.get(ajaxurl, data, function (response) {
-        if (response) {
-          var $el = $('#' + response);
-          $el.prop('checked', true).change();
-          var inputName = $el.prop('name');
-          $('input[name=\'' + inputName + '\']').prop('disabled', true).addClass('forced');
+        if (response.success) {
+          var arrayLength, $el, inputName;
+          arrayLength = response.data.length;
+          for (var i = 0; i < arrayLength; i++) {
+            $el = $('#' + response.data[i]);
+            $el.prop('checked', true).change();
+            inputName = $el.prop('name');
+            $('input[name=\'' + inputName + '\']').prop('disabled', true).addClass('forced');
+          }
         }
       });
 

@@ -103,7 +103,7 @@ Thanks https://css-tricks.com/minimum-paragraph-widths/
   padding-bottom: 0;
 }
 .strong-view.default .testimonial-image {
-  margin-top: .25em;
+  margin-top: 0.25em;
   margin-right: 1em;
   margin-bottom: 0.25em;
   float: left;
@@ -280,9 +280,6 @@ Thanks https://css-tricks.com/minimum-paragraph-widths/
 
 /* Option: Image Right
 -----------------------------------------------*/
-.strong-view.default.image-right .strong-content {
-  margin: 20px auto;
-}
 .strong-view.default.image-right .testimonial-image {
   float: right;
   margin-top: .25em;
@@ -290,7 +287,6 @@ Thanks https://css-tricks.com/minimum-paragraph-widths/
   margin-left: 1em;
 }
 .strong-view.default.image-right .testimonial-client {
-  margin-top: 1em;
   text-align: left;
 }
 
@@ -307,9 +303,7 @@ Thanks https://css-tricks.com/minimum-paragraph-widths/
 -----------------------------------------------*/
 .strong-view.default.no-quotes .testimonial-heading {
   background: none;
-  margin-top: 0;
   padding-left: 0;
-  text-align: left;
 }
 
 /* Option: Dark Theme

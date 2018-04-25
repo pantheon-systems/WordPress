@@ -3,8 +3,9 @@
  * Plugin Name: Strong Testimonials
  * Plugin URI: https://strongplugins.com/plugins/strong-testimonials/
  * Description: A full-featured plugin that works right out of the box for beginners and offers advanced features for pros.
+ * Description: Collect and display your testimonials or reviews.
  * Author: Chris Dillon
- * Version: 2.30
+ * Version: 2.30.7
  *
  * Author URI: https://strongplugins.com/
  * Text Domain: strong-testimonials
@@ -34,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPMTST_VERSION', '2.30' );
+define( 'WPMTST_VERSION', '2.30.7' );
 define( 'WPMTST_PLUGIN', plugin_basename( __FILE__ ) ); // strong-testimonials/strong-testimonials.php
 define( 'WPMTST', dirname( WPMTST_PLUGIN ) );           // strong-testimonials
 define( 'STRONGPLUGINS_STORE_URL', 'https://strongplugins.com' );
@@ -205,6 +206,8 @@ final class Strong_Testimonials {
 	 * @return void
 	 */
 	private function includes() {
+		require_once WPMTST_INC . 'class-strong-log.php';
+
 		require_once WPMTST_INC . 'class-strong-testimonials-shortcodes.php';
 		require_once WPMTST_INC . 'class-strong-testimonials-render.php';
 		require_once WPMTST_INC . 'class-strong-view.php';
@@ -220,11 +223,13 @@ final class Strong_Testimonials {
 		require_once WPMTST_INC . 'deprecated.php';
 		require_once WPMTST_INC . 'filters.php';
 		require_once WPMTST_INC . 'functions.php';
+		require_once WPMTST_INC . 'functions-activation.php';
 		require_once WPMTST_INC . 'functions-content.php';
 		require_once WPMTST_INC . 'functions-rating.php';
 		require_once WPMTST_INC . 'functions-image.php';
 		require_once WPMTST_INC . 'functions-template.php';
 		require_once WPMTST_INC . 'functions-template-form.php';
+		require_once WPMTST_INC . 'functions-views.php';
 		require_once WPMTST_INC . 'post-types.php';
 		require_once WPMTST_INC . 'retro.php';
 		require_once WPMTST_INC . 'scripts.php';
@@ -459,7 +464,6 @@ final class Strong_Testimonials {
 	 * @since 2.12.0
 	 */
 	public function set_plugin_data() {
-		//$this->plugin_data = get_plugin_data( __FILE__, false );
 		$this->plugin_data = array(
 			'Version' => WPMTST_VERSION,
 		);

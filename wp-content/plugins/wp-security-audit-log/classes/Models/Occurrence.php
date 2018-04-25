@@ -271,6 +271,16 @@ class WSAL_Models_Occurrence extends WSAL_Models_ActiveRecord {
 	}
 
 	/**
+	 * Finds occurences of the alert 1003.
+	 *
+	 * @param array $args - Query args.
+	 * @return WSAL_Occurrence[]
+	 */
+	public function check_alert_1003( $args = array() ) {
+		return $this->getAdapter()->check_alert_1003( $args );
+	}
+
+	/**
 	 * Gets occurrence by Post_id
 	 *
 	 * @see WSAL_Adapters_MySQL_Occurrence::GetByPostID()

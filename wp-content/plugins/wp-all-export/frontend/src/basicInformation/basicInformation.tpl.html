@@ -1,0 +1,123 @@
+<div class="wpallexport-collapsed wpallexport-section" ng-class="{closed: !basicInformation.open}">
+    <div class="wpallexport-content-section">
+        <div class="wpallexport-collapsed-header disable-jquery" ng-click="basicInformation.open = !basicInformation.open">
+            <h3>Basic Product Information</h3>
+        </div>
+        <div class="wpallexport-collapsed-content" id="basic-product-information" ng-slide-down="basicInformation.open" duration="0.5">
+            <div class="wpallexport-collapsed-content-inner">
+
+                <h4>Item Title</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemTitle" value="productTitle"/>Use the product title</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemTitle" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="basicInformation.itemTitle == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="basicInformation.itemTitleCV" droppable />
+                    </div>
+                </div>
+
+                <div class="input checkbox" ng-if="basicInformation.hasVariations">
+                    <label><input type="checkbox" ng-model="basicInformation.useParentTitleForVariableProducts" value="1" />For variable products, use the parent product title</label>
+                </div>
+
+                <h4>Item Description</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemDescription" value="productDescription"/>Use the product description</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemDescription" value="productShortDescription"/>Use the product short description</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemDescription" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="basicInformation.itemDescription == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input"  ng-model="basicInformation.itemDescriptionCV" droppable />
+                    </div>
+                </div>
+
+                <div class="input checkbox">
+                    <label><input type="checkbox" ng-model="basicInformation.useVariationDescriptionForVariableProducts" value="1" />Use the variation description for variable products</label>
+                </div>
+                <div class="input checkbox inner" ng-slide-down="basicInformation.useVariationDescriptionForVariableProducts" duration="0.2">
+                    <label><input type="checkbox" ng-model="basicInformation.useParentDescirptionIfThereIsNoVariationDescirption" value="1" />If there is no variation description, use the parent product description</label>
+                </div>
+
+                <h4>Link</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemLink" value="productLink"/>Use the product permalink</label>
+                </div>
+
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemLink" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="basicInformation.itemLink == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input"  ng-model="basicInformation.itemLinkCV" droppable />
+                    </div>
+                </div>
+
+                <div class="input checkbox">
+                    <label><input type="checkbox" ng-model="basicInformation.addVariationAttributesToProductUrl" />For variable products, add variation attributes to product URL</label>
+                </div>
+
+                <h4>Main Image Link</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemImageLink" value="useProductFeaturedImage"/>Use product featured image</label>
+                </div>
+
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.itemImageLink" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="basicInformation.itemImageLink == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="basicInformation.itemImageLinkCV" droppable />
+                    </div>
+                </div>
+
+                <div class="input checkbox">
+                    <label><input type="checkbox" ng-model="basicInformation.useVariationImage" />For variable products, use variation image</label>
+                </div>
+
+                <div class="input checkbox inner" ng-slide-down="basicInformation.useVariationImage" duration="0.2">
+                    <label><input type="checkbox" ng-model="basicInformation.useFeaturedImageIfThereIsNoVariationImage" value="1" />If there is no variation image, use the featured image</label>
+                </div>
+
+                <h4>Additional Image Link</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.additionalImageLink" value="productImages"/>Use images from product gallery</label>
+                </div>
+
+                <div class="input">
+                    <label><input type="radio" ng-model="basicInformation.additionalImageLink" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="basicInformation.additionalImageLink == 'customValue'" duration="0.2">
+                        <input type="text"class="wpae-default-input" ng-model="basicInformation.additionalImageLinkCV" droppable />
+                    </div>
+                </div>
+            </div>
+            <div class="wpallexport-collapsed wpallexport-section wpallexport-google-merchants-advanced-options" ng-init="advancedOptionsOpen = false" ng-class="{closed: !advancedOptionsOpen}">
+                <div class="wpallexport-content-section rad0">
+                    <div class="wpallexport-collapsed-header wpallexport-advanced-options-header disable-jquery" ng-click="advancedOptionsOpen = !advancedOptionsOpen">
+                        <h3>Advanced Options</h3>
+                    </div>
+                    <div class="wpallexport-collapsed-content wpallexport-advanced-options-content" ng-slide-down="advancedOptionsOpen" duration="0.5">
+                        <div class="wpallexport-collapsed-content-inner">
+                            <div class="input">
+                                <h4>Item ID</h4>
+                                <div class="input">
+                                    <input type="text" class="wpae-default-input" ng-model="basicInformation.itemId" droppable />
+                                </div>
+                                <h4>Item Condition</h4>
+                                <div class="input">
+                                    <input type="text" class="wpae-default-input" ng-model="basicInformation.condition" droppable />
+                                    <a href="" class="wpae-field-mapping" ng-click="showConditionMappings=true">Field Options...</a>
+                                        <mapping mappings="basicInformation.conditionMappings" show="showConditionMappings" context="condition" />
+                                    <a style="margin-top: 7px;" class="wpallexport-help" tipsy="The condition or state of the item. Google Shopping allows the promotion of quality second-hand items. There are only 3 accepted values: 'new', 'refurbished', and 'used'">?</a>
+                                </div>
+                                <h4>Mobile Link</h4>
+                                <div class="input">
+                                    <input type="text" class="wpae-default-input" ng-model="basicInformation.mobileLink" droppable />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,9 +3,10 @@ Contributors: webdevstudios, pluginize, tw2113, vegasgeek, modemlooper, williams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3084056
 Tags: custom post types, CPT, CMS, post, types, post type, taxonomy, tax, custom, content types, post types
 Requires at least: 4.6
-Tested up to: 4.9.0
-Stable tag: 1.5.6
-License: GPLv2
+Tested up to: 4.9.5
+Stable tag: 1.5.8
+License: GPL-2.0+
+Requires PHP: 5.2
 
 Admin UI for creating custom post types and custom taxonomies for WordPress
 
@@ -13,7 +14,7 @@ Admin UI for creating custom post types and custom taxonomies for WordPress
 
 Custom Post Type UI provides an easy to use interface for registering and managing custom post types and taxonomies for your website.
 
-CPTUI alone does not handle aspects related to the display of post type or taxonomy content. Its goal is simply the registration of both. For help with content display, please check out [Custom Post Type UI Extended](https://pluginize.com/product/custom-post-type-ui-extended/?utm_source=cptui-desription&utm_medium=text&utm_campaign=wporg). CPTUI-Extended provides tools intended to help display content from all registered types in your site.
+While CPTUI helps solve the problem of creating custom post types, displaying the data gleaned from them can be a whole new challenge. That’s why we created [Custom Post Type UI Extended](https://pluginize.com/product/custom-post-type-ui-extended/?utm_source=cptui-desription&utm_medium=text&utm_campaign=wporg). [View our Layouts page](https://pluginize.com/cpt-ui-extended-features/?utm_source=cptui-description-examples&utm_medium=text&utm_campaign=wporg) to see some examples that are available with Custom Post Type UI Extended.
 
 Official development of Custom Post Type UI is on GitHub, with official stable releases published on WordPress.org. The GitHub repo can be found at [https://github.com/WebDevStudios/custom-post-type-ui](https://github.com/WebDevStudios/custom-post-type-ui). Please use the Support tab for potential bugs, issues, or enhancement ideas.
 
@@ -30,9 +31,23 @@ Official development of Custom Post Type UI is on GitHub, with official stable r
 
 == Changelog ==
 
+= 1.5.8 - 2018-04-16 =
+* Fixed: Corrected issue with "Get Code" area regarding post types and "show in menu" field values.
+* Fixed: Add post_format taxonomy support for CPTUI post types that declare post formats support. This primarily addresses issues with previewing changes for existing post type posts with post_format support.
+* Fixed: Add "show_in_nav_menus" settings/output to tools section.
+* Fixed: "Undefined index" notices for show_in_rest and rest_base settings.
+* Updated: Change how we hide submit button when editing exisitng post types or taxes so switching is available if a javascript error occurs.
+* Updated sidebar links for Pluginize products.
+
+= 1.5.7 - 2018-03-07 =
+* Added: "output" added to blacklisted taxonomy slug list.
+* Fixed: Prevent potential fatal error with customized links in plugin list page.
+* Updated: Text at top of help area and readme description to promote available layouts in CPTUI-Extended.
+* Updated: Things have been tested on the latest WordPress. You're in good hands.
+
 = 1.5.6 - 2017-11-09 =
 * Added: Added "custom_css", "customize_changeset", "author", and "post_type" as reserved post_types.
-* Fixed: The "Invalid JSON" error message was receiving the wrong color indicator for for the admin notice.
+* Fixed: The "Invalid JSON" error message was receiving the wrong color indicator for the admin notice.
 
 = 1.5.5 - 2017-07-27 =
 * Fixed: Prevent possible conflicts with .required css selector by prefixing ours.
@@ -110,9 +125,23 @@ Official development of Custom Post Type UI is on GitHub, with official stable r
 
 == Upgrade Notice ==
 
+= 1.5.8 - 2018-04-16 =
+* Fixed: Corrected issue with "Get Code" area regarding post types and "show in menu" field values.
+* Fixed: Add post_format taxonomy support for CPTUI post types that declare post formats support. This primarily addresses issues with previewing changes for existing post type posts with post_format support.
+* Fixed: Add "show_in_nav_menus" settings/output to tools section.
+* Fixed: "Undefined index" notices for show_in_rest and rest_base settings.
+* Updated: Change how we hide submit button when editing exisitng post types or taxes so switching is available if a javascript error occurs.
+* Updated sidebar links for Pluginize products.
+
+= 1.5.7 - 2018-03-07 =
+* Added: "output" added to blacklisted taxonomy slug list.
+* Fixed: Prevent potential fatal error with customized links in plugin list page.
+* Updated: Text at top of help area and readme description to promote available layouts in CPTUI-Extended.
+* Updated: Things have been tested on the latest WordPress. You're in good hands.
+
 = 1.5.6 - 2017-11-09 =
 * Added: Added "custom_css", "customize_changeset", "author", and "post_type" as reserved post_types.
-* Fixed: The "Invalid JSON" error message was receiving the wrong color indicator for for the admin notice.
+* Fixed: The "Invalid JSON" error message was receiving the wrong color indicator for the admin notice.
 
 = 1.5.5 - 2017-07-27 =
 * Fixed: Prevent possible conflicts with .required css selector by prefixing ours.

@@ -48,8 +48,14 @@ class Strong_Plugin_Updater {
 				update_option( 'wpmtst_addons', $addons );
 			}
 
-			$license_key = trim( $addon_info['license']['key'] );
-			$version     = $addon_info['version'];
+			$license_key = '';
+			$version     = '';
+			if ( isset( $addon_info['license']['key'] ) ) {
+				$license_key = trim( $addon_info['license']['key'] );
+			}
+			if ( isset( $addon_info['version'] ) ) {
+				$version = $addon_info['version'];
+			}
 
 			if ( ! $license_key || ! $version ) {
 				return;

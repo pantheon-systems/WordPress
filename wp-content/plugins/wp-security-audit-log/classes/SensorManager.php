@@ -1,8 +1,22 @@
 <?php
 /**
+ * Manager: Sensor
+ *
+ * Sensor manager class file.
+ *
+ * @since 1.0.0
+ * @package Wsal
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
  * Sensor Manager.
  *
- * This Class load all the sensors and initialize them.
+ * This class loads all the sensors and initialize them.
  *
  * @package Wsal
  */
@@ -32,12 +46,22 @@ final class WSAL_SensorManager extends WSAL_AbstractSensor {
 		 */
 		$upload_dir = wp_upload_dir();
 		$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log' . DIRECTORY_SEPARATOR . 'custom-sensors' . DIRECTORY_SEPARATOR;
+
 		// Check directory.
 		if ( is_dir( $uploads_dir_path ) && is_readable( $uploads_dir_path ) ) {
 			foreach ( glob( $uploads_dir_path . '*.php' ) as $file ) {
+				// Include custom sensor file.
 				require_once( $file );
 				$file = substr( $file, 0, -4 );
-				$class = 'WSAL_Sensors_' . str_replace( $uploads_dir_path, '', $file );
+				$sensor = str_replace( $uploads_dir_path, '', $file );
+
+				// Skip if the file is index.php for security.
+				if ( 'index' === $sensor ) {
+					continue;
+				}
+
+				// Generate and initiate custom sensor file.
+				$class = 'WSAL_Sensors_' . $sensor;
 				$this->AddFromClass( $class );
 			}
 		}

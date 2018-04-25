@@ -1,37 +1,52 @@
 <div class="wpallexport-header" style="overflow:hidden; height: 60px; padding-top: 10px; margin-bottom: -20px;">
-	<div class="wpallexport-logo"></div>
-	<div class="wpallexport-title">
-		<p><?php _e('WP All Export', 'wp_all_export_plugin'); ?></p>
-		<h3><?php _e('Manage Exports', 'wp_all_export_plugin'); ?></h3>			
-	</div>	
+    <div class="wpallexport-logo"></div>
+    <div class="wpallexport-title">
+        <p><?php _e('WP All Export', 'wp_all_export_plugin'); ?></p>
+        <h3><?php _e('Manage Exports', 'wp_all_export_plugin'); ?></h3>
+    </div>
 </div>
 
 <h2></h2> <!-- Do not remove -->
 
+<script type="text/javascript">
+    (function ($, ajaxurl, wp_all_export_security) {
+
+        $(document).ready(function () {
+            $('.open_cron_scheduling').click(function () {
+
+                var itemId = $(this).data('itemid');
+                openSchedulingDialog(itemId, $(this), '<?php echo PMXE_ROOT_URL; ?>/static/img/preloader.gif');
+            });
+        });
+    })(jQuery, ajaxurl, wp_all_export_security);
+
+    window.pmxeHasSchedulingSubscription = <?php echo PMXE_Plugin::hasActiveSchedulingLicense() ? 'true' : 'false';  ?>;
+</script>
 <?php if ($this->errors->get_error_codes()): ?>
-	<?php $this->error() ?>
+    <?php $this->error() ?>
 <?php endif ?>
 
 <form method="get">
-	<input type="hidden" name="page" value="<?php echo esc_attr($this->input->get('page')) ?>" />
-	<p class="search-box">
-		<label for="search-input" class="screen-reader-text"><?php _e('Search Exports', 'wp_all_export_plugin') ?>:</label>
-		<input id="search-input" type="text" name="s" value="<?php echo esc_attr($s) ?>" />
-		<input type="submit" class="button" value="<?php _e('Search Exports', 'wp_all_export_plugin') ?>">
-	</p>
+    <input type="hidden" name="page" value="<?php echo esc_attr($this->input->get('page')) ?>"/>
+    <p class="search-box">
+        <label for="search-input" class="screen-reader-text"><?php _e('Search Exports', 'wp_all_export_plugin') ?>
+            :</label>
+        <input id="search-input" type="text" name="s" value="<?php echo esc_attr($s) ?>"/>
+        <input type="submit" class="button" value="<?php _e('Search Exports', 'wp_all_export_plugin') ?>">
+    </p>
 </form>
 
 <?php
 // define the columns to display, the syntax is 'internal name' => 'display name'
 $columns = array(
-	'id'			=> __('ID', 'wp_all_export_plugin'),
-	'name'			=> __('Name', 'wp_all_export_plugin'),	
-	'actions'		=> '',	
-	'data'			=> __('Query', 'wp_all_export_plugin'),
-	//'format'        => __('Format', 'wp_all_export_plugin'),
-	'summary'		=> __('Summary', 'wp_all_export_plugin'),
-	//'registered_on'	=> __('Last Export', 'wp_all_export_plugin'),
-	'info'			=> __('Info & Options', 'wp_all_export_plugin'),	
+    'id' => __('ID', 'wp_all_export_plugin'),
+    'name' => __('Name', 'wp_all_export_plugin'),
+    'actions' => '',
+    'data' => __('Query', 'wp_all_export_plugin'),
+    //'format'        => __('Format', 'wp_all_export_plugin'),
+    'summary' => __('Summary', 'wp_all_export_plugin'),
+    //'registered_on'	=> __('Last Export', 'wp_all_export_plugin'),
+    'info' => __('Info & Options', 'wp_all_export_plugin'),
 );
 
 //if ( ! wp_all_export_is_compatible()) unset($columns['info']);
@@ -40,33 +55,34 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
 
 ?>
 
-<form method="post" id="import-list" action="<?php echo remove_query_arg('pmxe_nt') ?>">	
+<form method="post" id="import-list" action="<?php echo remove_query_arg('pmxe_nt') ?>">
 
-	<input type="hidden" name="action" value="bulk" />
-	<?php wp_nonce_field('bulk-exports', '_wpnonce_bulk-exports') ?>
+    <input type="hidden" name="action" value="bulk"/>
+    <?php wp_nonce_field('bulk-exports', '_wpnonce_bulk-exports') ?>
 
-	<div class="tablenav">
-		<div class="alignleft actions">
-			<select name="bulk-action">
-				<option value="" selected="selected"><?php _e('Bulk Actions', 'wp_all_export_plugin') ?></option>
-				<option value="delete"><?php _e('Delete', 'wp_all_export_plugin') ?></option>
-			</select>
-			<input type="submit" value="<?php esc_attr_e('Apply', 'wp_all_export_plugin') ?>" name="doaction" id="doaction" class="button-secondary action" />
-		</div>
+    <div class="tablenav">
+        <div class="alignleft actions">
+            <select name="bulk-action">
+                <option value="" selected="selected"><?php _e('Bulk Actions', 'wp_all_export_plugin') ?></option>
+                <option value="delete"><?php _e('Delete', 'wp_all_export_plugin') ?></option>
+            </select>
+            <input type="submit" value="<?php esc_attr_e('Apply', 'wp_all_export_plugin') ?>" name="doaction"
+                   id="doaction" class="button-secondary action"/>
+        </div>
 
-		<?php if ($page_links): ?>
-			<div class="tablenav-pages">
-				<?php echo $page_links_html = sprintf(
-					'<span class="displaying-num">' . __('Displaying %s&#8211;%s of %s', 'wp_all_export_plugin') . '</span>%s',
-					number_format_i18n(($pagenum - 1) * $perPage + 1),
-					number_format_i18n(min($pagenum * $perPage, $list->total())),
-					number_format_i18n($list->total()),
-					$page_links
-				) ?>
-			</div>
-		<?php endif ?>
-	</div>
-	<div class="clear"></div>
+        <?php if ($page_links): ?>
+            <div class="tablenav-pages">
+                <?php echo $page_links_html = sprintf(
+                    '<span class="displaying-num">' . __('Displaying %s&#8211;%s of %s', 'wp_all_export_plugin') . '</span>%s',
+                    number_format_i18n(($pagenum - 1) * $perPage + 1),
+                    number_format_i18n(min($pagenum * $perPage, $list->total())),
+                    number_format_i18n($list->total()),
+                    $page_links
+                ) ?>
+            </div>
+        <?php endif ?>
+    </div>
+    <div class="clear"></div>
 
 	<table class="widefat pmxe-admin-exports">
 		<thead>
@@ -159,8 +175,10 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
 								break;							
 							case 'info':
 								?>
-								<td style="min-width: 180px;">									
-									<a href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'scheduling'), $this->baseUrl)?>"><?php _e('Cron Scheduling', 'wp_all_export_plugin'); ?></a> <br>		
+								<td style="min-width: 180px;">
+                                    <a href="#" class="open_cron_scheduling"
+                                       data-itemid="<?php echo $item['id']; ?>"><?php _e('Scheduling Options', 'wp_all_export_plugin'); ?></a>
+                                    <br>
 									<?php									
 										$is_re_import_allowed = true;
 										if ( ! empty($item['options']['ids']) )
@@ -377,3 +395,21 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
 	<a href="http://soflyy.com/" target="_blank" class="wpallexport-created-by"><?php _e('Created by', 'wp_all_export_plugin'); ?> <span></span></a>
 	
 </form>
+<div class="wpallexport-overlay"></div>
+<div class="wpallexport-loader" style="border-radius: 5px; z-index: 999999; display:none; position: fixed;top: 200px;    left: 50%; width: 100px;height: 100px;background-color: #fff; text-align: center;">
+    <img style="margin-top: 45%;" src="<?php echo PMXE_ROOT_URL; ?>/static/img/preloader.gif" />
+</div>
+
+
+<div class="wpallexport-super-overlay"></div>
+
+<fieldset class="optionsset column rad4 wp-all-export-scheduling-help">
+
+    <div class="title">
+        <span style="font-size:1.5em;" class="wpallexport-add-row-title"><?php _e('Automatic Scheduling', 'wp_all_export_plugin'); ?></span>
+    </div>
+
+    <?php
+    include_once __DIR__.'/../../../src/Scheduling/views/SchedulingHelp.php';
+    ?>
+</fieldset>

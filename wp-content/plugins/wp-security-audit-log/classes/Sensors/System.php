@@ -65,25 +65,21 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 		add_action( 'automatic_updates_complete', array( $this, 'WPUpdate' ), 10, 1 );
 		add_filter( 'template_redirect', array( $this, 'Event404' ) );
 
-		$upload_dir     = wp_upload_dir();
+		$upload_dir = wp_upload_dir();
 		$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/';
 		if ( ! $this->CheckDirectory( $uploads_dir_path ) ) {
 			wp_mkdir_p( $uploads_dir_path );
 		}
 
 		// Directory for logged in users log files.
-		$user_upload_dir    = wp_upload_dir();
-		$user_upload_path   = trailingslashit( $user_upload_dir['basedir'] . '/wp-security-audit-log/404s/users/' );
-		if ( ! $this->CheckDirectory( $user_upload_path ) ) {
-			wp_mkdir_p( $user_upload_path );
-		}
+		$user_upload_dir  = wp_upload_dir();
+		$user_upload_path = trailingslashit( $user_upload_dir['basedir'] . '/wp-security-audit-log/404s/users/' );
+		$this->remove_sub_directories( $user_upload_path ); // Remove it.
 
 		// Directory for visitor log files.
-		$visitor_upload_dir    = wp_upload_dir();
-		$visitor_upload_path   = trailingslashit( $visitor_upload_dir['basedir'] . '/wp-security-audit-log/404s/visitors/' );
-		if ( ! $this->CheckDirectory( $visitor_upload_path ) ) {
-			wp_mkdir_p( $visitor_upload_path );
-		}
+		$visitor_upload_dir  = wp_upload_dir();
+		$visitor_upload_path = trailingslashit( $visitor_upload_dir['basedir'] . '/wp-security-audit-log/404s/visitors/' );
+		$this->remove_sub_directories( $visitor_upload_path ); // Remove it.
 
 		// Cron Job 404 log files pruning.
 		add_action( 'log_files_pruning', array( $this, 'LogFilesPruning' ) );
@@ -95,6 +91,33 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 
 		// Update admin email alert.
 		add_action( 'update_option_admin_email', array( $this, 'admin_email_changed' ), 10, 3 );
+	}
+
+	/**
+	 * Check if failed login directory exists then delete all
+	 * files within this directory and remove the directory itself.
+	 *
+	 * @param string $sub_dir - Subdirectory.
+	 */
+	public function remove_sub_directories( $sub_dir ) {
+		// Check if subdirectory exists.
+		if ( is_dir( $sub_dir ) ) {
+			// Get all files inside failed logins folder.
+			$files = glob( $sub_dir . '*', GLOB_BRACE );
+
+			if ( ! empty( $files ) ) {
+				// Unlink each file.
+				foreach ( $files as $file ) {
+					// Check if valid file.
+					if ( is_file( $file ) ) {
+						// Delete the file.
+						unlink( $file );
+					}
+				}
+			}
+			// Remove the directory.
+			rmdir( $sub_dir );
+		}
 	}
 
 	/**
@@ -249,8 +272,8 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 
 		list( $y, $m, $d ) = explode( '-', date( 'Y-m-d' ) );
 
-		$site_id    = ( function_exists( 'get_current_blog_id' ) ? get_current_blog_id() : 0 );
-		$ip         = $this->plugin->settings->GetMainClientIP();
+		$site_id = ( function_exists( 'get_current_blog_id' ) ? get_current_blog_id() : 0 );
+		$ip      = $this->plugin->settings->GetMainClientIP();
 
 		if ( ! is_user_logged_in() ) {
 			$username = 'Website Visitor';
@@ -283,7 +306,7 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 
 			$occ = count( $occ ) ? $occ[0] : null;
 			if ( ! empty( $occ ) ) {
-				// update existing record.
+				// Update existing record.
 				$this->Increment404( $site_id, $username, $ip );
 				$new = ( (int) $occ->GetMetaValue( 'Attempts', 0 ) ) + 1;
 
@@ -612,12 +635,12 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 	public function LogFilesPruning() {
 		if ( $this->plugin->GetGlobalOption( 'purge-404-log', 'off' ) == 'on' ) {
 			$upload_dir = wp_upload_dir();
-			$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/users/';
+			$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/';
 			if ( is_dir( $uploads_dir_path ) ) {
 				if ( $handle = opendir( $uploads_dir_path ) ) {
 					while ( false !== ($entry = readdir( $handle )) ) {
 						if ( '.' != $entry && '..' != $entry ) {
-							if ( file_exists( $uploads_dir_path . $entry ) ) {
+							if ( strpos( $entry, '6007' ) && file_exists( $uploads_dir_path . $entry ) ) {
 								$modified = filemtime( $uploads_dir_path . $entry );
 								if ( $modified < strtotime( '-4 weeks' ) ) {
 									// Delete file.
@@ -632,12 +655,12 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 		}
 		if ( 'on' == $this->plugin->GetGlobalOption( 'purge-visitor-404-log', 'off' ) ) {
 			$upload_dir = wp_upload_dir();
-			$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/visitors/';
+			$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/';
 			if ( is_dir( $uploads_dir_path ) ) {
 				if ( $handle = opendir( $uploads_dir_path ) ) {
 					while ( false !== ( $entry = readdir( $handle ) ) ) {
 						if ( $entry != '.' && $entry != '..' ) {
-							if ( file_exists( $uploads_dir_path . $entry ) ) {
+							if ( strpos( $entry, '6023' ) && file_exists( $uploads_dir_path . $entry ) ) {
 								$modified = filemtime( $uploads_dir_path . $entry );
 								if ( $modified < strtotime( '-4 weeks' ) ) {
 									// Delete file.
@@ -795,22 +818,37 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 
 				// Request URL.
 				$request_uri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
-				$url = site_url() . $request_uri;
+				$url = home_url() . $request_uri;
 
 				// Get option to log referrer.
 				$log_referrer = $this->plugin->GetGlobalOption( 'log-404-referrer' );
 
+				// Check localhost.
+				if ( '127.0.0.1' == $ip || '::1' == $ip ) {
+					$ip = 'localhost';
+				}
+
 				if ( 'on' === $log_referrer ) {
 					// Get the referer.
-					if ( isset( $server_array['HTTP_REFERER'] ) ) {
-						$referrer = filter_input( INPUT_SERVER, 'HTTP_REFERER', FILTER_SANITIZE_URL );
-					}
+					$referrer = ( isset( $server_array['HTTP_REFERER'] ) ) ? $server_array['HTTP_REFERER'] : false;
+
+					// Data to write.
+					$data = '';
+
+					// Append IP if it exists.
+					$data = ( $ip ) ? $ip . ',' : '';
 
 					// Create/Append to the log file.
-					$data = 'Request URL ' . $url . ' Referer ' . $referrer . ',';
+					$data = $data . 'Request URL ' . $url . ',Referer ' . $referrer . ',';
 				} else {
+					// Data to write.
+					$data = '';
+
+					// Append IP if it exists.
+					$data = ( $ip ) ? $ip . ',' : '';
+
 					// Create/Append to the log file.
-					$data = 'Request URL ' . $url . ',';
+					$data = $data . 'Request URL ' . $url . ',';
 				}
 
 				if ( ! is_user_logged_in() ) {
@@ -819,12 +857,9 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 					$username = $username . '_';
 				}
 
-				if ( '127.0.0.1' == $ip || '::1' == $ip ) {
-					$ip = 'localhost';
-				}
 				$upload_dir = wp_upload_dir();
-				$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/users/';
-				$uploads_url = trailingslashit( $upload_dir['baseurl'] ) . 'wp-security-audit-log/404s/users/';
+				$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/';
+				$uploads_url = trailingslashit( $upload_dir['baseurl'] ) . 'wp-security-audit-log/404s/';
 
 				// Check directory.
 				if ( $this->CheckDirectory( $uploads_dir_path ) ) {
@@ -863,32 +898,43 @@ class WSAL_Sensors_System extends WSAL_AbstractSensor {
 
 				// Request URL.
 				$request_uri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
-				$url = site_url() . $request_uri;
+				$url = home_url() . $request_uri;
 
 				// Get option to log referrer.
 				$log_referrer = $this->plugin->GetGlobalOption( 'log-visitor-404-referrer' );
 
-				if ( 'on' === $log_referrer ) {
-					// Get the referer.
-					if ( isset( $server_array['HTTP_REFERER'] ) ) {
-						$referrer = filter_input( INPUT_SERVER, 'HTTP_REFERER', FILTER_SANITIZE_URL );
-					}
-
-					// Create/Append to the log file.
-					$data = 'Request URL ' . $url . ' Referer ' . $referrer . ',';
-				} else {
-					// Create/Append to the log file.
-					$data = 'Request URL ' . $url . ',';
-				}
-
-				$username = '';
-
+				// Check localhost.
 				if ( '127.0.0.1' == $ip || '::1' == $ip ) {
 					$ip = 'localhost';
 				}
+
+				if ( 'on' === $log_referrer ) {
+					// Get the referer.
+					$referrer = ( isset( $server_array['HTTP_REFERER'] ) ) ? $server_array['HTTP_REFERER'] : false;
+
+					// Data to write.
+					$data = '';
+
+					// Append IP if it exists.
+					$data = ( $ip ) ? $ip . ',' : '';
+
+					// Create/Append to the log file.
+					$data = $data . 'Request URL ' . $url . ',Referer ' . $referrer . ',';
+				} else {
+					// Data to write.
+					$data = '';
+
+					// Append IP if it exists.
+					$data = ( $ip ) ? $ip . ',' : '';
+
+					// Create/Append to the log file.
+					$data = $data . 'Request URL ' . $url . ',';
+				}
+
+				$username = '';
 				$upload_dir     = wp_upload_dir();
-				$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/visitors/';
-				$uploads_url     = trailingslashit( $upload_dir['baseurl'] ) . 'wp-security-audit-log/404s/visitors/';
+				$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/404s/';
+				$uploads_url     = trailingslashit( $upload_dir['baseurl'] ) . 'wp-security-audit-log/404s/';
 
 				// Check directory.
 				if ( $this->CheckDirectory( $uploads_dir_path ) ) {

@@ -3,5 +3,5 @@
 
 interface CdataStrategy
 {
-    public function should_cdata_be_applied($field);
+    public function should_cdata_be_applied($field, $hasSnippets = false);
 }

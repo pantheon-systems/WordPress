@@ -60,7 +60,6 @@ class Strong_Testimonials_Order {
 			'jquery-effects-highlight',
 			'jquery-ui-sortable',
 		), null, true );
-		//wp_localize_script( 'wpmtst-admin-order-script', 'ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
 		wp_enqueue_style( 'wpmtst-admin-order-style', WPMTST_ADMIN_URL . '/css/order.css', array(), null );
 

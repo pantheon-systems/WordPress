@@ -97,10 +97,6 @@ msgstr ""
 msgid "If you could spare a minute, we would like to ask you 4 easy questions about how you use MetaSlider. Your voice is important to us!"
 msgstr ""
 
-#: src/admin/Notices.php:189
-msgid "forever"
-msgstr ""
-
 #: src/admin/Notices.php:205
 msgid "Black Friday - 50% off the MetaSlider Add-on Pack until November 30th"
 msgstr ""
@@ -153,115 +149,115 @@ msgstr ""
 msgid "is a highly efficient way to manage, update and backup multiple websites from one place."
 msgstr ""
 
-#: src/admin/Notices.php:537
+#: src/admin/Notices.php:527
 msgid "weeks"
 msgstr ""
 
-#: src/admin/Notices.php:553
+#: src/admin/Notices.php:543
 msgid "Get UpdraftPlus"
 msgstr ""
 
-#: src/admin/Notices.php:554
+#: src/admin/Notices.php:544
 msgid "Get Keyy"
 msgstr ""
 
-#: src/admin/Notices.php:555
+#: src/admin/Notices.php:545
 msgid "Optimize today"
 msgstr ""
 
-#: src/admin/Notices.php:556
+#: src/admin/Notices.php:546
 msgid "Get UpdraftCentral"
 msgstr ""
 
-#: src/admin/Notices.php:557
+#: src/admin/Notices.php:547
 msgid "Let's Start"
 msgstr ""
 
-#: src/admin/Notices.php:558
+#: src/admin/Notices.php:548
 msgid "Review MetaSlider"
 msgstr ""
 
-#: src/admin/Notices.php:559
+#: src/admin/Notices.php:549
 msgid "Find out more"
 msgstr ""
 
-#: src/admin/Notices.php:560
+#: src/admin/Notices.php:550
 msgid "Sign up"
 msgstr ""
 
-#: src/admin/Notices.php:561
+#: src/admin/Notices.php:551
 msgid "Go there"
 msgstr ""
 
-#: src/admin/Notices.php:563
+#: src/admin/Notices.php:553
 msgid "Read more"
 msgstr ""
 
-#: src/admin/Notices.php:577, src/admin/Tour.php:123, src/inc/slide/metaslide.class.php:120, src/inc/slide/metaslide.image.class.php:107, src/ml-slider.php:638, src/ml-slider.php:687
+#: src/admin/Notices.php:567, src/admin/Tour.php:123, src/inc/slide/metaslide.class.php:120, src/inc/slide/metaslide.image.class.php:113, src/ml-slider.php:638, src/ml-slider.php:687
 msgid "The security check failed. Please refresh the page and try again."
 msgstr ""
 
-#: src/admin/Notices.php:583
+#: src/admin/Notices.php:573
 msgid "This item does not exist. Please refresh the page and try again."
 msgstr ""
 
-#: src/admin/Notices.php:596
+#: src/admin/Notices.php:586
 msgid "The option was successfully updated"
 msgstr ""
 
-#: src/admin/Notices.php:653
+#: src/admin/Notices.php:643
 msgid "The requested data does not exist."
 msgstr ""
 
-#: src/admin/Notices.php:677
+#: src/admin/Notices.php:667
 msgid "The attempt to update the option failed."
 msgstr ""
 
-#: src/admin/Pages.php:77, src/inc/slide/metaslide.image.class.php:232
+#: src/admin/Pages.php:69, src/admin/views/slides/tabs/general.php:13
 msgid "URL"
 msgstr ""
 
-#: src/admin/Pages.php:78, src/inc/slide/metaslide.image.class.php:231
+#: src/admin/Pages.php:70, src/admin/views/slides/tabs/general.php:3
 msgid "Caption"
 msgstr ""
 
-#: src/admin/Pages.php:79, src/inc/slide/metaslide.image.class.php:234
+#: src/admin/Pages.php:71
 msgid "New Window"
 msgstr ""
 
-#: src/admin/Pages.php:80
+#: src/admin/Pages.php:72
 msgid "Are you sure?"
 msgstr ""
 
-#: src/admin/Pages.php:81
+#: src/admin/Pages.php:73
 msgid "Undo"
 msgstr ""
 
-#: src/admin/Pages.php:82
+#: src/admin/Pages.php:74
 msgid "Slide restored"
 msgstr ""
 
-#: src/admin/Pages.php:83
+#: src/admin/Pages.php:75
 msgid "Slide deleted"
 msgstr ""
 
-#: src/admin/Pages.php:84
+#: src/admin/Pages.php:76
 msgid "Success"
 msgstr ""
 
-#: src/admin/Pages.php:85
+#: src/admin/Pages.php:77
 msgid "Item was copied to your clipboard"
 msgstr ""
 
-#: src/admin/Pages.php:86
+#: src/admin/Pages.php:78
 msgid "Press to undo"
 msgstr ""
 
-#: src/admin/Pages.php:88
+#: src/admin/Pages.php:80
 msgid "Select replacement image"
 msgstr ""
 
-#: src/admin/Pages.php:96
+#: src/admin/Pages.php:88
 msgid "Caution: This setting is for advanced developers only. If you're unsure, leave it checked."
 msgstr ""
 
@@ -365,7 +361,7 @@ msgstr ""
 msgid "free"
 msgstr ""
 
-#: src/admin/views/pages/upgrade.php:21, src/ml-slider.php:319, src/ml-slider.php:1959
+#: src/admin/views/pages/upgrade.php:21, src/ml-slider.php:319, src/ml-slider.php:1961
 msgid "Add-ons"
 msgstr ""
 
@@ -557,6 +553,86 @@ msgstr ""
 msgid "Logging in with %s is simple. Once users have installed the app onto their smartphone and secured it using a fingerprint or 4-number pin, they just open the app, point it at the moving on-screen barcode and voila!"
 msgstr ""
 
+#: src/admin/views/slides/tabs/crop.php:3
+msgid "Crop Position"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:7
+msgid "Top Left"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:8
+msgid "Top Center"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:9
+msgid "Top Right"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:10
+msgid "Center Left"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:11
+msgid "Center Center"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:12
+msgid "Center Right"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:13
+msgid "Bottom Left"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:14
+msgid "Bottom Center"
+msgstr ""
+
+#: src/admin/views/slides/tabs/crop.php:15
+msgid "Bottom Right"
+msgstr ""
+
+#: src/admin/views/slides/tabs/general.php:5
+msgid "Enable this to inherit the caption from the image"
+msgstr ""
+
+#: src/admin/views/slides/tabs/general.php:6
+msgid "Use the image caption"
+msgstr ""
+
+#: src/admin/views/slides/tabs/general.php:9
+msgid "No default caption set"
+msgstr ""
+
+#: src/admin/views/slides/tabs/general.php:15
+msgid "Open in a new window"
+msgstr ""
+
+#: src/admin/views/slides/tabs/seo.php:5
+msgid "Image Title Text"
+msgstr ""
+
+#: src/admin/views/slides/tabs/seo.php:7
+msgid "Enable this to inherit the image title"
+msgstr ""
+
+#: src/admin/views/slides/tabs/seo.php:8
+msgid "Use the image title"
+msgstr ""
+
+#: src/admin/views/slides/tabs/seo.php:15
+msgid "Image Alt Text"
+msgstr ""
+
+#: src/admin/views/slides/tabs/seo.php:17
+msgid "Enable this to inherit the image alt text"
+msgstr ""
+
+#: src/admin/views/slides/tabs/seo.php:18
+msgid "Use the image alt text"
+msgstr ""
+
 #: src/inc/metaslider.widget.class.php:18
 msgid "MetaSlider"
 msgstr ""
@@ -593,11 +669,11 @@ msgstr ""
 msgid "There was an error while updating the database. Please try again."
 msgstr ""
 
-#: src/inc/slide/metaslide.class.php:347
+#: src/inc/slide/metaslide.class.php:335
 msgid "Delete Slide"
 msgstr ""
 
-#: src/inc/slide/metaslide.class.php:377, src/inc/slide/metaslide.class.php:377, src/inc/slide/metaslide.image.class.php:200, src/inc/slide/metaslide.image.class.php:200
+#: src/inc/slide/metaslide.class.php:366, src/inc/slide/metaslide.class.php:366, src/inc/slide/metaslide.image.class.php:207, src/inc/slide/metaslide.image.class.php:207
 msgid "Update slide image"
 msgstr ""
 
@@ -609,71 +685,23 @@ msgstr ""
 msgid "This isn't an accepted image. Please try again."
 msgstr ""
 
-#: src/inc/slide/metaslide.image.class.php:181
+#: src/inc/slide/metaslide.image.class.php:187
 msgid "Image Slide"
 msgstr ""
 
-#: src/inc/slide/metaslide.image.class.php:238
-msgid "Warning: Image data does not exist. Please re-upload the image."
+#: src/inc/slide/metaslide.image.class.php:272
+msgid "Warning: The image data does not exist. Please re-upload the image."
 msgstr ""
 
-#: src/inc/slide/metaslide.image.class.php:243
-msgid "Image Title Text"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:243
-msgid "Image Alt Text"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:247
+#: src/inc/slide/metaslide.image.class.php:283
 msgid "General"
 msgstr ""
 
-#: src/inc/slide/metaslide.image.class.php:251
+#: src/inc/slide/metaslide.image.class.php:287
 msgid "SEO"
 msgstr ""
 
-#: src/inc/slide/metaslide.image.class.php:264
-msgid "Crop Position"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:267
-msgid "Top Left"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:268
-msgid "Top Center"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:269
-msgid "Top Right"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:270
-msgid "Center Left"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:271
-msgid "Center Center"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:272
-msgid "Center Right"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:273
-msgid "Bottom Left"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:274
-msgid "Bottom Center"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:275
-msgid "Bottom Right"
-msgstr ""
-
-#: src/inc/slide/metaslide.image.class.php:280
+#: src/inc/slide/metaslide.image.class.php:305
 msgid "Crop"
 msgstr ""
 
@@ -1189,12 +1217,12 @@ msgstr ""
 msgid "Take a tour"
 msgstr ""
 
-#: src/ml-slider.php:1960
-msgid "Support"
+#: src/ml-slider.php:1958
+msgid "Premium Support"
 msgstr ""
 
 #: src/ml-slider.php:1962
-msgid "Premium Support"
+msgid "Support"
 msgstr ""
 
 #: src/ml-slider.php:1964, src/ml-slider.php:2042

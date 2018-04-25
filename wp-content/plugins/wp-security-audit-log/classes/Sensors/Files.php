@@ -101,8 +101,9 @@ class WSAL_Sensors_Files extends WSAL_AbstractSensor {
 		$server_array = filter_input_array( INPUT_SERVER );
 
 		$action = isset( $post_array['action'] ) ? $post_array['action'] : '';
-		$is_theme_editor = 'theme-editor.php' == basename( $server_array['SCRIPT_NAME'] );
-		$is_plugin_editor = 'plugin-editor.php' == basename( $server_array['SCRIPT_NAME'] );
+		$script_name = isset( $server_array['SCRIPT_NAME'] ) ? basename( $server_array['SCRIPT_NAME'] ) : false;
+		$is_theme_editor = 'theme-editor.php' == $script_name;
+		$is_plugin_editor = 'plugin-editor.php' == $script_name;
 
 		if ( $is_theme_editor && 'update' === $action ) {
 			$this->plugin->alerts->Trigger(

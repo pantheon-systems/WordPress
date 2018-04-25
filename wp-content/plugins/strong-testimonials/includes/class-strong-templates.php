@@ -27,7 +27,6 @@ class Strong_Templates {
 	 * @return array
 	 */
 	public function find_templates( $type = null ) {
-
 		$search = array(
 			'child_theme'  => array(
 				'source' => __( 'Child Theme', 'strong-testimonials' ),
@@ -67,20 +66,25 @@ class Strong_Templates {
 				$search[ $key ]['order'] = 1;
 			}
 		}
-
+		// Reverse the search order so templates can be overridden.
 		uasort( $search, array( $this, 'sort_array_by_search_order' ) );
 
+		/**
+		 * Search
+		 */
 		$files = array();
 		foreach ( $search as $key => $bases ) {
-			$new_files = $this->scandir_top( $bases['path'], $bases['uri'], $type );
+			$new_files = $this->scandir_top( $key, $bases['path'], $bases['uri'], $type );
+			// Merge (override) templates.
 			if ( is_array( $new_files ) && $new_files ) {
-				//uasort( $new_files, array( $this, 'sort_array_by_name' ) );
-				uasort( $new_files, array( $this, 'sort_array_by_order' ) );
-				$files[ $bases['source'] ] = $new_files;
+				$files = array_merge( $files, $new_files );
 			}
 		}
+		uasort( $files, array( $this, 'sort_array_by_order' ) );
 
-		// Filter the list of found templates
+		/**
+		 * Filter the list of found templates.
+		 */
 		$files = array_filter( apply_filters( 'wpmtst_templates_found', array_filter( $files ) ) );
 
 		return $files;
@@ -92,12 +96,8 @@ class Strong_Templates {
 	 * @return array|bool
 	 */
 	public function get_template_by_name( $name = '' ) {
-		foreach ( $this->templates as $source => $source_templates ) {
-			foreach ( $source_templates as $key => $template ) {
-				if ( $key == $name ) {
-					return $template;
-				}
-			}
+		if ( isset( $this->templates[ $name ] ) ) {
+			return $this->templates[ $name ];
 		}
 
 		return false;
@@ -125,21 +125,20 @@ class Strong_Templates {
 		$types    = (array) $types;
 		$filtered = array();
 
-		foreach ( $this->templates as $source => $source_templates ) {
-			foreach ( $source_templates as $key => $template ) {
-				if ( isset( $template['config']['type'] ) ) {
-					if ( in_array( $template['config']['type'], $types ) ) {
-					$filtered[ $source ][ $key ] = $template;
+		foreach ( $this->templates as $key => $template ) {
+			if ( isset( $template['config']['type'] ) ) {
+				if ( in_array( $template['config']['type'], $types ) ) {
+					$filtered[ $key ] = $template;
 				}
-				} else {
-					$key_parts = explode( ':', $key );
-					$type = $key_parts[1];
-					if ( 'content' == $type ) {
-						$type = 'display';
-					}
-					if ( in_array( $type, $types ) ) {
-						$filtered[ $source ][ $key] = $template;
-					}
+			}
+			else {
+				$key_parts = explode( ':', $key );
+				$type      = $key_parts[1];
+				if ( 'content' == $type ) {
+					$type = 'display';
+				}
+				if ( in_array( $type, $types ) ) {
+					$filtered[ $key ] = $template;
 				}
 			}
 		}
@@ -153,19 +152,14 @@ class Strong_Templates {
 	 * @return array
 	 */
 	public function get_template_keys() {
-		$template_keys = array();
-		foreach ( $this->templates as $source => $source_templates ) {
-			$template_keys = array_merge( $template_keys, array_keys( $source_templates ) );
-		}
-
-		return $template_keys;
+		return array_keys( $this->templates );
 	}
 
 	/**
 	 * Get template attribute.
 	 *
 	 * @param           $atts
-	 * @param string    $part
+	 * @param string $part
 	 * @param bool|true $use_default
 	 *
 	 * @return string
@@ -197,19 +191,15 @@ class Strong_Templates {
 		}
 
 		// Search list of already found template files. Stop at first match.
-
 		$template_info = false;
 		foreach ( $template_search as $template_key ) {
-			foreach ( $this->templates as $source => $source_templates ) {
-				if ( isset( $source_templates[ $template_key ] ) ) {
-					$template_info = $source_templates[ $template_key ];
-					break 2;
-				}
+			if ( isset( $this->templates[ $template_key ] ) ) {
+				$template_info = $this->templates[ $template_key ];
+				break;
 			}
 		}
 
 		// Return the requested part
-
 		if ( $template_info && isset( $template_info[ $part ] ) && $template_info[ $part ] ) {
 			return $template_info[ $part ];
 		}
@@ -218,10 +208,10 @@ class Strong_Templates {
 	}
 
 	/**
-	 * Get template attribute.
+	 * Get template config.
 	 *
 	 * @param           $atts
-	 * @param string    $part
+	 * @param string $part
 	 * @param bool|true $use_default
 	 *
 	 * @return string
@@ -253,19 +243,15 @@ class Strong_Templates {
 		}
 
 		// Search list of already found template files. Stop at first match.
-
 		$template_info = false;
 		foreach ( $template_search as $template_key ) {
-			foreach ( $this->templates as $source => $source_templates ) {
-				if ( isset( $source_templates[ $template_key ] ) ) {
-					$template_info = $source_templates[ $template_key ];
-					break 2;
-				}
+			if ( isset( $this->templates[ $template_key ] ) ) {
+				$template_info = $this->templates[ $template_key ];
+				break;
 			}
 		}
 
 		// Return the requested part (name, template, stylesheet,etc.)
-
 		if ( $template_info && isset( $template_info['config'][ $part ] ) && $template_info['config'][ $part ] ) {
 			return $template_info['config'][ $part ];
 		}
@@ -274,18 +260,19 @@ class Strong_Templates {
 	}
 
 	/**
+	 * @param $source_key
 	 * @param $path
 	 * @param $uri
 	 * @param $type
 	 *
 	 * @return array|bool
 	 */
-	public function scandir_top( $path, $uri, $type ) {
+	public function scandir_top( $source_key, $path, $uri, $type ) {
 		if ( ! is_dir( $path ) ) {
 			return false;
 		}
 
-		$files = array();
+		$files     = array();
 		$templates = scandir( $path );
 		foreach ( $templates as $template ) {
 			if ( '.' == $template[0] ) {
@@ -304,12 +291,13 @@ class Strong_Templates {
 			}
 
 			foreach ( $files_found as $key => $template_files ) {
+				$template_files['source'] = $source_key;
 				if ( isset( $template_files['config']['format_version'] ) && '1.0' == $template_files['config']['format_version'] ) {
 					// Template format version 1 (no config file)
 					$template_name     = basename( $template_files['template'], '.php' );
 					$new_key           = $template . ':' . $template_name;
-						$files[ $new_key ]       = $template_files;
-					}
+					$files[ $new_key ] = $template_files;
+				}
 				else {
 					// Template format version 2 (has config.json)
 					$files[ $template ] = $template_files;
@@ -363,16 +351,18 @@ class Strong_Templates {
 		 * @since 2.30.0
 		 */
 		$config_found = false;
-		if ( file_exists( $path . '/' . $template . '/config.json' ) ) {
-			$files[ $template ]['config'] = (array) json_decode( file_get_contents( $path . '/' . $template . '/config.json' ) );
+		$config       = $path . '/' . $template . '/config.json';
+		if ( file_exists( $config ) ) {
+			$files[ $template ]['config'] = (array) json_decode( file_get_contents( $config ) );
 			$config_found = true;
 		}
+
 
 		/**
 		 * Process the files.
 		 * This creates an array of properties: file paths and config parameters.
 		 */
-		$results = scandir( $path . '/' . $template);
+		$results = scandir( $path . '/' . $template );
 		foreach ( $results as $result ) {
 			if ( '.' == $result[0] ) {
 				continue;
@@ -383,7 +373,7 @@ class Strong_Templates {
 			}
 
 			// If no extensions specified or if extension matches
-			if ( !$extensions || preg_match( '~\.(' . implode( '|', $extensions ) . ')$~', $result ) ) {
+			if ( ! $extensions || preg_match( '~\.(' . implode( '|', $extensions ) . ')$~', $result ) ) {
 
 				$default_config = array(
 					'name'           => '',
@@ -420,7 +410,7 @@ class Strong_Templates {
 						break;
 					default:
 						$key  = '';
-						$base ='';
+						$base = '';
 				}
 
 				if ( $key ) {
@@ -428,47 +418,44 @@ class Strong_Templates {
 				}
 
 				// Convert V1 templates to V2 by creating config array from main template file.
-				if ( 'template' == $key ) {
-					if ( ! $config_found ) {
-						$file_data = get_file_data( $path . '/' . $template . '/' . $result, $tags );
+				if ( 'template' == $key && ! $config_found ) {
+					$file_data = get_file_data( $path . '/' . $template . '/' . $result, $tags );
 
-						// Start config array
-						$config = array(
-							'format_version' => '1.0',
-						);
+					// Start config array
+					$config = array(
+						'format_version' => '1.0',
+					);
 
-						// Store header tags
+					// Store header tags
 					foreach ( $tags as $tag => $label ) {
 
 						if ( 'name' == $tag ) {
-								// Get the template name
+							// Get the template name
 							if ( isset( $file_data['name'] ) && $file_data['name'] ) {
-									$config['name'] = $file_data['name'];
-							}
-							else {
+								$config['name'] = $file_data['name'];
+							} else {
 								// Use the directory name
-									$config['name'] = ucwords( str_replace( array( '_', '-' ), ' ', basename( $path ) ) );
+								$config['name'] = ucwords( str_replace( array( '_', '-' ), ' ', basename( $path ) ) );
 							}
 						}
 						else {
-								$config[ $tag ] = $file_data[ $tag ];
+							$config[ $tag ] = $file_data[ $tag ];
 						}
 
 					}
 
-						// Set the template type
-						if ( 'form.php' == $filename ) {
-							$config['type'] = 'form';
+					// Set the template type
+					if ( 'form.php' == $filename ) {
+						$config['type'] = 'form';
 					}
-						elseif ( 'widget.php' == $filename ) {
-							$config['type'] = 'widget';
+					elseif ( 'widget.php' == $filename ) {
+						$config['type'] = 'widget';
 					}
 
-						$files[ $template ]['config'] = array_merge( $default_config, $config );
+					$files[ $template ]['config'] = array_merge( $default_config, $config );
 				}
-			}
 
-		}
+			}
 		}
 
 		return $files;
@@ -509,6 +496,7 @@ class Strong_Templates {
 			return 0;
 		}
 
+		// `<` returns descending order
 		return ( $a['config']['order'] < $b['config']['order'] ) ? -1 : 1;
 	}
 
@@ -519,14 +507,16 @@ class Strong_Templates {
 	 * @return int
 	 */
 	public function sort_array_by_search_order( $a, $b ) {
-		if ( ! isset( $a['order'] ) || ! isset( $b['order'] ) )
+		if ( ! isset( $a['order'] ) || ! isset( $b['order'] ) ) {
 			return 0;
+		}
 
 		if ( $a['order'] == $b['order'] ) {
 			return 0;
 		}
 
-		return ( $a['order'] < $b['order'] ) ? -1 : 1;
+		// `>` returns ascending order
+		return ( $a['order'] > $b['order'] ) ? -1 : 1;
 	}
 
 	/**
@@ -536,11 +526,13 @@ class Strong_Templates {
 	 * @return int
 	 */
 	public function sort_array_by_order_name( $a, $b ) {
-		if ( ! isset( $a['name'] ) || ! isset( $b['name'] ) )
+		if ( ! isset( $a['name'] ) || ! isset( $b['name'] ) ) {
 			return 0;
+		}
 
-		if ( $a['order'] == $b['order'] )
+		if ( $a['order'] == $b['order'] ) {
 			return strcasecmp( $a['name'], $b['name'] );
+		}
 
 		return ( $a['order'] < $b['order'] ) ? -1 : 1;
 	}

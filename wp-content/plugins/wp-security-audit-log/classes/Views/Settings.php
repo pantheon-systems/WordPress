@@ -151,7 +151,6 @@ class WSAL_Views_Settings extends WSAL_AbstractView {
 		$this->_plugin->settings->SetMainIPFromProxy( isset( $post_array['EnableProxyIpCapture'] ) );
 		$this->_plugin->settings->SetInternalIPsFiltering( isset( $post_array['EnableIpFiltering'] ) );
 		$this->_plugin->settings->SetIncognito( isset( $post_array['Incognito'] ) );
-		$this->_plugin->settings->SetLoggingDisabled( isset( $post_array['Logging'] ) );
 		$this->_plugin->settings->SetDeleteData( isset( $post_array['DeleteData'] ) );
 		$this->_plugin->settings->SetTimezone( $post_array['Timezone'] );
 		$this->_plugin->settings->set_type_username( $post_array['type_username'] );
@@ -463,27 +462,6 @@ class WSAL_Views_Settings extends WSAL_AbstractView {
 									<br/>
 									<span class="description">
 										<?php esc_html_e( 'To manually revert this setting set the value of option wsal-hide-plugin to 0 in the wp_wsal_options table.', 'wp-security-audit-log' ); ?>
-									</span>
-								</fieldset>
-							</td>
-						</tr>
-						<!-- Logging -->
-						<tr>
-							<th><label for="Logging"><?php esc_html_e( 'Logging', 'wp-security-audit-log' ); ?></label></th>
-							<td>
-								<fieldset>
-									<label for="Logging">
-										<span class="f-container">
-											<span class="f-left">
-												<input type="checkbox" name="Logging" value="1" class="switch" id="logging_status"/>
-												<label for="logging_status"></label>
-											</span>
-											<span class="f-right f-text"><span id="logging_status_text"></span></span>
-										</span>
-									</label>
-									<br/>
-									<span class="description">
-										<?php esc_html_e( 'Disable all plugin logging.', 'wp-security-audit-log' ); ?>
 									</span>
 								</fieldset>
 							</td>
@@ -855,27 +833,6 @@ class WSAL_Views_Settings extends WSAL_AbstractView {
 			}
 
 			jQuery( document ).ready( function() {
-				var statusConfig = <?php echo ( $this->_plugin->settings->IsLoggingDisabled() ) ? 1 : 0; ?>;
-				var logging_status = jQuery('#logging_status');
-				var txtNot = jQuery('#logging_status_text');
-
-				function wsalUpdateLoggingStatus(checkbox, label) {
-					if (checkbox.prop('checked')) {
-						label.text('On');
-					} else {
-						label.text('Off');
-					}
-				}
-				// Set On
-				if (statusConfig) {
-					logging_status.prop( 'checked', true );
-				}
-				wsalUpdateLoggingStatus(logging_status, txtNot);
-
-				logging_status.on( 'change', function() {
-					wsalUpdateLoggingStatus( logging_status, txtNot );
-				} );
-
 				// Enable/disable login notification textarea.
 				function wsal_update_login_page_text( checkbox, textarea ) {
 					if ( checkbox.prop( 'checked' ) ) {

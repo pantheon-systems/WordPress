@@ -204,6 +204,7 @@ class Strong_Testimonials_Form {
 
 		$form_errors = array();
 
+		// TODO This use of 'custom' is obsolete. The default form is simply the first one in the array.
 		$form_name = isset( $new_post['form_id'] ) ? $new_post['form_id'] : 'custom';
 		$fields    = wpmtst_get_form_fields( $form_name );
 
@@ -255,7 +256,7 @@ class Strong_Testimonials_Form {
 						break;
 
 					case 'custom':
-						if ( 'email' == $field['input_type'] ) {
+						if ( 'email' == $field['input_type'] && $new_post[ $field['name'] ] ) {
 							if ( is_email( $new_post[ $field['name'] ] ) ) {
 								$testimonial_meta[ $field['name'] ] = sanitize_email( $new_post[ $field['name'] ] );
 							}
@@ -369,7 +370,6 @@ class Strong_Testimonials_Form {
 
 			if ( is_wp_error( $testimonial_id ) ) {
 
-				WPMST()->debug->log( $testimonial_id, __FUNCTION__ );
 				// TODO report errors in admin
 				$form_errors['post'] = $form_options['messages']['submission-error']['text'];
 
@@ -540,6 +540,9 @@ class Strong_Testimonials_Form {
 	 * @param string $form_name
 	 *
 	 * @since 1.7.0
+	 * @since 2.30.6 Using all form fields (Multiple Forms add-on).
+	 *               Adding submit_date.
+	 *               Trimming subject and message strings.
 	 */
 	public function notify_admin( $post, $form_name = 'custom' ) {
 		$form_options = get_option( 'wpmtst_form_options' );
@@ -547,7 +550,8 @@ class Strong_Testimonials_Form {
 			return;
 		}
 
-		$fields = wpmtst_get_form_fields( $form_name );
+		$post['has_image'] = has_post_thumbnail( $post['id'] );
+		$fields = wpmtst_get_all_fields();
 
 		if ( $form_options['sender_site_email'] ) {
 			$sender_email = get_bloginfo( 'admin_email' );
@@ -557,18 +561,20 @@ class Strong_Testimonials_Form {
 		}
 
 		// Subject line
-		$subject = $form_options['email_subject'];
+		$subject = trim( $form_options['email_subject'] );
 		$subject = str_replace( '%BLOGNAME%', get_bloginfo( 'name' ), $subject );
 		$subject = str_replace( '%TITLE%', $post['post_title'], $subject );
 		$subject = str_replace( '%STATUS%', $post['post_status'], $subject );
+		$subject = str_replace( '%SUBMIT_DATE%', $post['submit_date'], $subject );
 		$subject = $this->replace_custom_fields( $subject, $fields, $post );
 
 		// Message text
-		$message = $form_options['email_message'];
+		$message = rtrim( $form_options['email_message'] );
 		$message = str_replace( '%BLOGNAME%', get_bloginfo( 'name' ), $message );
 		$message = str_replace( '%TITLE%', $post['post_title'], $message );
 		$message = str_replace( '%CONTENT%', $post['post_content'], $message );
 		$message = str_replace( '%STATUS%', $post['post_status'], $message );
+		$message = str_replace( '%SUBMIT_DATE%', $post['submit_date'], $message );
 		$message = $this->replace_custom_fields( $message, $fields, $post );
 
 		foreach ( $form_options['recipients'] as $recipient ) {
@@ -621,8 +627,7 @@ class Strong_Testimonials_Form {
 	 */
 	private function replace_custom_fields( $text, $fields, $post ) {
 		foreach ( $fields as $field ) {
-
-			$replace    = '(blank)';
+			$replace    = "({$field['label']} blank)";
 			$post_field = isset( $post[ $field['name'] ] ) ? $post[ $field['name'] ] : false;
 
 			if ( $post_field ) {

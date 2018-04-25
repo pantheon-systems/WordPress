@@ -1128,6 +1128,7 @@
      */
     var clickNextBind = function (e) {
       e.preventDefault()
+      e.stopPropagation()
       if (slider.controls.el.hasClass('disabled')) {
         return
       }
@@ -1147,6 +1148,7 @@
      */
     var clickPrevBind = function (e) {
       e.preventDefault()
+      e.stopPropagation()
       if (slider.controls.el.hasClass('disabled')) {
         return
       }
@@ -1167,6 +1169,7 @@
     var clickStartBind = function (e) {
       el.startAuto()
       e.preventDefault()
+      e.stopPropagation()
     }
 
     /**
@@ -1178,6 +1181,7 @@
     var clickStopBind = function (e) {
       el.stopAuto()
       e.preventDefault()
+      e.stopPropagation()
     }
 
     /**
@@ -1189,6 +1193,7 @@
     var clickPagerBind = function (e) {
       var pagerLink, pagerIndex
       e.preventDefault()
+      e.stopPropagation()
       if (slider.controls.el.hasClass('disabled')) {
         return
       }
@@ -1395,6 +1400,7 @@
       slider.viewport.on('click', '.wpmslider a', function (e) {
         if (slider.viewport.hasClass('click-disabled')) {
           e.preventDefault()
+          e.stopPropagation()
           slider.viewport.removeClass('click-disabled')
         }
       })
@@ -1412,6 +1418,7 @@
 
       if (slider.working) {
         e.preventDefault()
+        e.stopPropagation()
         slider.controls.el.removeClass('disabled')
       }
       else {
@@ -1428,7 +1435,9 @@
 
         if (slider.viewport.get(0).setPointerCapture) {
           slider.pointerId = orig.pointerId
-          slider.viewport.get(0).setPointerCapture(slider.pointerId)
+          if(slider.pointerId === 1){
+            slider.viewport.get(0).setPointerCapture(slider.pointerId);
+          }
         }
         // bind a "touchmove" event to the viewport
         slider.viewport.on('touchmove MSPointerMove pointermove', onTouchMove)
@@ -1477,10 +1486,12 @@
       // x axis swipe
       if ((xMovement * 3) > yMovement && slider.settings.preventDefaultSwipeX) {
         e.preventDefault()
+        e.stopPropagation()
       }
       // y axis swipe
       else if ((yMovement * 3) > xMovement && slider.settings.preventDefaultSwipeY) {
         e.preventDefault()
+        e.stopPropagation()
       }
       if (slider.settings.mode !== 'fade' && slider.settings.oneToOneTouch) {
         // if horizontal, drag along x axis

@@ -580,6 +580,7 @@ final Class XmlCsvExport
 	}
 
 
+		// Add missing ACF headers
 	public static function merge_headers( $file, &$headers )
 	{				
 
@@ -590,7 +591,15 @@ final Class XmlCsvExport
 		fclose($in);		
 
 		$old_headers = array();
+		$sanitized_headers = array();
+        $urldecoded_sanitized_headers = array();
 
+        foreach($headers as $header) {
+            $sanitizedHeaderValue = str_replace("'", "", str_replace('"', "", str_replace(chr(0xEF) . chr(0xBB) . chr(0xBF), "", $header)));
+            $sanitized_headers[] = $sanitizedHeaderValue;
+            $urldecoded_sanitized_headers[] = urldecode($sanitizedHeaderValue);
+
+        }
 		foreach ($clear_old_headers as $i => $header) {
 			$header = str_replace("'", "", str_replace('"', "", str_replace(chr(0xEF).chr(0xBB).chr(0xBF), "", $header)));
 
@@ -604,7 +613,7 @@ final Class XmlCsvExport
 					$new_element_name = $header . '_' . md5($i);
 
 					if ( ! in_array($new_element_name, $old_headers) ) {
-						$old_headers[] = $new_element_name;
+						$old_headers[] = str_replace("'", "", str_replace('"', "", str_replace(chr(0xEF).chr(0xBB).chr(0xBF), "", $new_element_name)));
 						$is_added = true;
 					}
 
@@ -616,13 +625,20 @@ final Class XmlCsvExport
 
 		$is_update_headers = false;
 
-		foreach ($headers as $header) {
+		foreach ($sanitized_headers as $header) {
 			if ( ! in_array(XmlExportEngine::sanitizeFieldName($header), $old_headers)) {
 				$is_update_headers = true;
 				break;
-			}			
-		}		
-		
+			}
+		}
+
+		foreach ($old_headers as $old_header) {
+			if ( ! in_array(XmlExportEngine::sanitizeFieldName($old_header), $urldecoded_sanitized_headers)) {
+				$is_update_headers = true;
+				break;
+			}
+		}
+
 		if ($is_update_headers) {
             $tmp_headers = $headers;
             $headers = $old_headers;
@@ -680,7 +696,7 @@ final Class XmlCsvExport
 			}
 			else {
 				file_put_contents($file_path, ob_get_clean(), FILE_APPEND);
-			}		
+			}
 
 			return $file_path;
 
@@ -840,10 +856,26 @@ final Class XmlCsvExport
 	private static function getCsvWriter()
 	{
 		if(is_null(self::$csvWriter)) {
+
 			$csvStrategy = apply_filters('wp_all_export_csv_strategy', \Wpae\Csv\CsvWriter::CSV_STRATEGY_DEFAULT);
+			$useRcfCompliantLineEndings = apply_filters('wp_all_export_use_csv_compliant_line_endings', false);
+
+			if($useRcfCompliantLineEndings) {
+				\Wpae\Csv\CsvRfcUtils::setDefaultWriteEol(\Wpae\Csv\CsvRfcUtils::EOL_WRITE_RFC);
+			}
+
 			self::$csvWriter = new \Wpae\Csv\CsvWriter($csvStrategy);
 		}
 
 		return self::$csvWriter;
+	}
+
+	private static function isNotProductExport($cpt) {
+
+		if(is_array($cpt)) {
+			return !in_array('product', $cpt);
+		} else {
+			return 'product' !== $cpt;
+		}
 	}
 }

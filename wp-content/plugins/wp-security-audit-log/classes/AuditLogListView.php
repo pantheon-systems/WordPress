@@ -90,12 +90,7 @@ class WSAL_AuditLogListView extends WP_List_Table {
 				<?php foreach ( $items as $item ) { ?>
 					<option
 						value="<?php echo is_string( $item ) ? '' : esc_attr( $item ); ?>"
-						<?php
-						if ( $item == $p ) {
-							echo 'selected="selected"';
-						}
-						?>
-						>
+						<?php echo ( $item == $p ) ? 'selected="selected"' : false; ?>>
 						<?php echo esc_html( $item ); ?>
 					</option>
 				<?php } ?>
@@ -118,12 +113,7 @@ class WSAL_AuditLogListView extends WP_List_Table {
 						<option value="0"><?php esc_html_e( 'All Sites', 'wp-security-audit-log' ); ?></option>
 						<?php foreach ( $this->get_sites() as $info ) { ?>
 							<option value="<?php echo esc_attr( $info->blog_id ); ?>"
-								<?php
-								if ( $info->blog_id == $curr ) {
-									echo 'selected="selected"';
-								}
-								?>
-								>
+								<?php echo ( $info->blog_id == $curr ) ? 'selected="selected"' : false; ?>>
 								<?php echo esc_html( $info->blogname ) . ' (' . esc_html( $info->domain ) . ')'; ?>
 							</option>
 						<?php } ?>
@@ -143,22 +133,10 @@ class WSAL_AuditLogListView extends WP_List_Table {
 			?>
 			<div class="wsal-ssa wsal-db">
 				<select class="wsal-db" onchange="WsalDBChange(value);">
-					<option value="live"
-						<?php
-						if ( 'live' == $selected ) {
-							echo 'selected="selected"';
-						}
-						?>
-						>
+					<option value="live" <?php echo ( 'live' == $selected ) ? 'selected="selected"' : false; ?>>
 						<?php esc_html_e( 'Live Database', 'wp-security-audit-log' ); ?>
 					</option>
-					<option value="archive"
-						<?php
-						if ( 'archive' == $selected ) {
-							echo 'selected="selected"';
-						}
-						?>
-						>
+					<option value="archive" <?php echo ( 'archive' == $selected ) ? 'selected="selected"' : false; ?>>
 						<?php esc_html_e( 'Archive Database', 'wp-security-audit-log' ); ?>
 					</option>
 				</select>
@@ -218,7 +196,7 @@ class WSAL_AuditLogListView extends WP_List_Table {
 		}
 		$cols = array(
 			'type' => __( 'Alert ID', 'wp-security-audit-log' ),
-			'code' => __( 'Type', 'wp-security-audit-log' ),
+			'code' => __( 'Severity', 'wp-security-audit-log' ),
 			'crtd' => __( 'Date', 'wp-security-audit-log' ),
 			'user' => $name_column,
 			'scip' => __( 'Source IP', 'wp-security-audit-log' ),
@@ -237,7 +215,7 @@ class WSAL_AuditLogListView extends WP_List_Table {
 						$cols['type'] = __( 'Alert ID', 'wp-security-audit-log' );
 						break;
 					case 'type':
-						$cols['code'] = __( 'Type', 'wp-security-audit-log' );
+						$cols['code'] = __( 'Severity', 'wp-security-audit-log' );
 						break;
 					case 'date':
 						$cols['crtd'] = __( 'Date', 'wp-security-audit-log' );
@@ -351,13 +329,16 @@ class WSAL_AuditLogListView extends WP_List_Table {
 						)
 					) : '<i>unknown</i>';
 			case 'user':
-				$username   = $item->GetUsername();
-				$type_name  = $this->_plugin->settings->get_type_username();
-				if ( $username && ( $user = get_user_by( 'login', $username ) ) ) {
+				$username   = $item->GetUsername(); // Get username.
+				$type_name  = $this->_plugin->settings->get_type_username(); // Get the data to display.
+				$user = get_user_by( 'login', $username ); // Get user.
+
+				// Check if the username and user exists.
+				if ( $username && $user ) {
 					$image = get_avatar( $user->ID, 32 );
-					if ( 'display_name' == $type_name ) {
+					if ( 'display_name' === $type_name && ! empty( $user->first_name ) ) {
 						$display_name = $user->first_name . ' ' . $user->last_name;
-					} elseif ( 'username' == $type_name ) {
+					} else {
 						$display_name = $user->user_login;
 					}
 
@@ -515,8 +496,13 @@ class WSAL_AuditLogListView extends WP_List_Table {
 					return '';
 				}
 
-			case '%RevisionLink%' == $name:
-				return ' Click <a target="_blank" href="' . esc_url( $value ) . '">here</a> to see the content changes.';
+			case '%RevisionLink%' === $name:
+				$check_value = (string) $value;
+				if ( 'NULL' !== $check_value ) {
+					return ' Click <a target="_blank" href="' . esc_url( $value ) . '">here</a> to see the content changes.';
+				} else {
+					return false;
+				}
 
 			case '%EditorLinkPost%' == $name:
 				return ' <a target="_blank" href="' . esc_url( $value ) . '">View the post</a>';
@@ -548,26 +534,48 @@ class WSAL_AuditLogListView extends WP_List_Table {
 					return '<i>unknown</i>';
 				}
 
-			case '%LinkFile%' == $name:
+			case '%LinkFile%' === $name:
 				if ( 'NULL' != $value ) {
-					return '<a href="' . esc_url( $value ) . '" download>Download the Log file</a>';
+					$site_id  = $this->get_view_site_id(); // Site id for multisite.
+					return '<a href="javascript:;" onclick="download_404_log( this )" data-log-file="' . esc_attr( $value ) . '" data-site-id="' . esc_attr( $site_id ) . '" data-nonce-404="' . esc_attr( wp_create_nonce( 'wsal-download-404-log-' . $value ) ) . '" title="' . esc_html__( 'Download the log file.', 'wp-security-audit-log' ) . '">' . esc_html__( 'Download the log file.', 'wp-security-audit-log' ) . '</a>';
 				} else {
-					return 'Click <a href="' . esc_url( admin_url( 'admin.php?page=wsal-togglealerts#tab-system-activity' ) ) . '">here</a> to log such requests to file';
+					return 'Click <a href="' . esc_url( admin_url( 'admin.php?page=wsal-togglealerts#tab-system-activity' ) ) . '">here</a> to log such requests to file.';
 				}
 
-			case '%LogFileLink%' === $name:
-				if ( ! empty( $value ) && 'on' === $this->_plugin->GetGlobalOption( 'log-visitor-failed-login' ) ) {
-					return '<a href="' . esc_url( $value ) . '" download>Download the Log file</a>';
-				} elseif ( ! empty( $value ) ) {
-					return '<a href="' . esc_url( $value ) . '">Keep a record of the usernames</a>';
+			case '%LogFileLink%' === $name: // Failed login file link.
+				return '';
+
+			case '%Attempts%' === $name: // Failed login attempts.
+				$check_value = (int) $value;
+				if ( 0 === $check_value ) {
+					return '';
+				} else {
+					return $value;
 				}
-				// Failed login file link.
-			case '%LogFileText%' === $name:
-				return esc_html( $value );
-				// Failed login file text.
+
+			case '%LogFileText%' === $name: // Failed login file text.
+				return '<a href="javascript:;" onclick="download_failed_login_log( this )" data-download-nonce="' . esc_attr( wp_create_nonce( 'wsal-download-failed-logins' ) ) . '" title="' . esc_html__( 'Download the log file.', 'wp-security-audit-log' ) . '">' . esc_html__( 'Download the log file.', 'wp-security-audit-log' ) . '</a>';
+
 			case strncmp( $value, 'http://', 7 ) === 0:
 			case strncmp( $value, 'https://', 7 ) === 0:
 				return '<a href="' . esc_html( $value ) . '" title="' . esc_html( $value ) . '" target="_blank">' . esc_html( $value ) . '</a>';
+
+			case '%PostStatus%' === $name:
+				if ( ! empty( $value ) && 'publish' === $value ) {
+					return '<strong>' . esc_html__( 'published', 'wp-security-audit-log' ) . '</strong>';
+				} else {
+					return '<strong>' . esc_html( $value ) . '</strong>';
+				}
+
+			case '%multisite_text%' === $name:
+				if ( $this->is_multisite() && $value ) {
+					$site_info = get_blog_details( $value, true );
+					if ( $site_info ) {
+						return ' on site <a href="' . esc_url( $site_info->siteurl ) . '">' . esc_html( $site_info->blogname ) . '</a>';
+					}
+					return;
+				}
+				return;
 
 			default:
 				return '<strong>' . esc_html( $value ) . '</strong>';

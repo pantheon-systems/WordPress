@@ -132,12 +132,14 @@
     position: relative;
     float: right;
     padding: 0px;
+    padding-left: 5px;
+    margin-right: 0;
     color: #a9a9a9;
-    line-height: 20px;
-    bottom: 22px;
-    right: 0;
+    line-height: 20px; 
+    right: 0; 
+    width: 155px; 
+    text-align: right; 
 }
-
 .rtl .metaslider .left table tr.slide .tabs-content .new_window {
     position: relative;
     float: left;
@@ -146,15 +148,65 @@
 .metaslider .left table tr.slide .tabs-content .new_window input {
     margin-left: 3px
 }
-
 .rtl .metaslider .left table tr.slide .tabs-content .new_window input {
-    margin-right: 3px
+    margin-right: 0px
 }
-
 .metaslider .left table tr.slide .tabs-content .new_window label {
-    width: 120px;
     text-align: right;
     font-size: 11px;
+}
+
+/* small label */
+.metaslider .input-label.right {
+    float: right;
+    color: #a9a9a9;
+    font-size: 11px;
+}
+.metaslider .tabs-content .input-label.right input{
+    margin-right: 0;
+}
+
+/* Caption */
+.metaslider .tabs-content .caption {
+	position: relative;
+}
+.metaslider .tabs-content .caption label {
+}
+
+
+.metaslider .tabs-content .can-inherit textarea,
+.metaslider .tabs-content .can-inherit input[type=text] {
+	display: block;
+}
+
+.metaslider .tabs-content .default {
+	display: none;
+    width: 100%;
+    overflow: hidden;
+    padding: 2px 5px;
+    border: 1px solid #cccccc;
+    background: #eeeeee;
+    line-height: 16px;
+    font-size: 11px;
+}
+.metaslider .tabs-content .caption .default {
+    height: 60px;
+    overflow: auto;
+    margin: 0 0 5px 0;
+    font-size: 12px;
+}
+.metaslider .tabs-content .caption.inherit-from-image textarea {
+	display: none;
+}
+.metaslider .tabs-content .inherit-from-image input[type=text] {
+	display: none;
+}
+.metaslider .tabs-content .inherit-from-image .default {
+	display: block;
+} 
+.metaslider .tabs-content .default .no-content {
+    opacity: 0.3;
+    font-style: italic;
 }
 
 .metaslider tr.radio {
@@ -481,11 +533,8 @@ input[type=radio]:checked + label {
     padding: 5px 10px;
 }
 
-input:-ms-input-placeholder {
-    color: LightGray;
-}
-
-textarea:-ms-input-placeholder {
+.metaslider input::placeholder,
+.metaslider textarea::placeholder {
     color: LightGray;
 }
 
@@ -495,7 +544,8 @@ textarea:-ms-input-placeholder {
 
 .metaslider .tabs-content,
 .metaslider .tabs-content ul,
-.metaslider .tabs-content li {
+.metaslider .tabs-content li,
+.metaslider .tabs-content textarea {
     font-size: 12px;
 }
 
@@ -542,6 +592,10 @@ textarea:-ms-input-placeholder {
 .metaslider .tabs-content .row input[type=text] {
     width: 100%;
 }
+.metaslider .tabs-content .row.has-right-checkbox > input[type=text] {
+	width: calc( 100% - 155px );
+}
+
 
 .metaslider .tabs-content ul {
     margin: 0;
@@ -1028,7 +1082,7 @@ textarea:-ms-input-placeholder {
     padding: 0.5rem;
     max-width: 100px;
     text-overflow: ellipsis;
-    /* overflow: hidden; */
+    overflow: hidden;
     outline: 0;
     float: left;
 }

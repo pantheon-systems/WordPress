@@ -19,6 +19,7 @@
 .code {
   display: inline-block;
   font-family: Consolas, Monaco, monospace;
+  font-size: 13px;
   background: white;
   padding: 4px 8px;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
@@ -31,6 +32,25 @@
   border-radius: 3px;
   color: #1E1800;
   padding: 5px 15px;
+}
+
+.feature-section-sub {
+  margin-top: 2em;
+
+  h3.heading {
+    font-size: 1.2em;
+  }
+
+  ul {
+    font-size: 14px;
+    list-style: square;
+    margin-left: 1em;
+
+    li {
+      margin-left: 1em;
+      text-indent: 4px;
+    }
+  }
 }
 
 /* == Extending WordPress about.css
@@ -47,4 +67,10 @@
 .wp-badge.strong-testimonials {
   background-image: url(../img/strong-testimonials-badge.png);
   background-color: #8224E3;
+}
+
+.feature-section {
+  code {
+    font-size: 13px;
+  }
 }

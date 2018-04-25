@@ -58,7 +58,10 @@
 	if ( ! function_exists('pmxi_getExtensionFromStr')){
 		function pmxi_getExtensionFromStr($str) 
 	    {
-	    	$filetype = wp_check_filetype($str);	              
+	    	$filetype = wp_check_filetype($str);
+            if (empty($filetype['ext'])){
+              $filetype = wp_check_filetype(strtok($str, "?"));
+            }
 	        return ($filetype['ext'] == "unknown") ? "" : $filetype['ext'];
 		}
 	}			

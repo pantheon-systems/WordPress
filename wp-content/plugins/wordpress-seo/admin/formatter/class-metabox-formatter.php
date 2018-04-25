@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin\Formatter
  */
 
@@ -62,6 +64,8 @@ class WPSEO_Metabox_Formatter {
 			'contentAnalysisActive' => $analysis_readability->is_enabled() ? 1 : 0,
 			'keywordAnalysisActive' => $analysis_seo->is_enabled() ? 1 : 0,
 			'intl'                  => $this->get_content_analysis_component_translations(),
+			'reactSnippetPreview'   => defined( 'YOAST_FEATURE_SNIPPET_PREVIEW' ) && YOAST_FEATURE_SNIPPET_PREVIEW,
+
 			/**
 			 * Filter to determine if the markers should be enabled or not.
 			 *
@@ -69,38 +73,63 @@ class WPSEO_Metabox_Formatter {
 			 */
 			'show_markers'          => apply_filters( 'wpseo_enable_assessment_markers', true ),
 			'publish_box'           => array(
-				'labels'   => array(
+				'labels' => array(
 					'content' => array(
 						'na'   => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'Readability: %1$sNot available%2$s', 'wordpress-seo' ),'<strong>', '</strong>' ),
+							__( 'Readability: %1$sNot available%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 						'bad'  => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'Readability: %1$sNeeds improvement%2$s', 'wordpress-seo' ), '<strong>', '</strong>' ),
+							__( 'Readability: %1$sNeeds improvement%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 						'ok'   => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'Readability: %1$sOK%2$s', 'wordpress-seo' ), '<strong>', '</strong>' ),
+							__( 'Readability: %1$sOK%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 						'good' => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'Readability: %1$sGood%2$s', 'wordpress-seo' ), '<strong>', '</strong>' ),
+							__( 'Readability: %1$sGood%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 					),
 					'keyword' => array(
 						'na'   => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'SEO: %1$sNot available%2$s', 'wordpress-seo' ), '<strong>', '</strong>' ),
+							__( 'SEO: %1$sNot available%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 						'bad'  => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'SEO: %1$sNeeds improvement%2$s', 'wordpress-seo' ), '<strong>', '</strong>' ),
+							__( 'SEO: %1$sNeeds improvement%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 						'ok'   => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'SEO: %1$sOK%2$s', 'wordpress-seo' ), '<strong>', '</strong>' ),
+							__( 'SEO: %1$sOK%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 						'good' => sprintf(
 							/* translators: %1$s expands to an opening strong tag, %2$s expands to a closing strong tag. */
-							__( 'SEO: %1$sGood%2$s', 'wordpress-seo' ), '<strong>', '</strong>' ),
+							__( 'SEO: %1$sGood%2$s', 'wordpress-seo' ),
+							'<strong>',
+							'</strong>'
+						),
 					),
 				),
 			),
 			'markdownEnabled'       => $this->is_markdown_enabled(),
+			'analysisHeadingTitle'  => __( 'Analysis', 'wordpress-seo' ),
 		);
 	}
 

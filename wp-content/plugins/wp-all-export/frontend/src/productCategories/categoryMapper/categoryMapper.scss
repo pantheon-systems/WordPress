@@ -1,0 +1,201 @@
+@import "../../common";
+
+.category-mapper {
+
+  user-select: none;
+  position: relative;
+
+  ul {
+    list-style: none;
+  }
+
+  ul li {
+    display: block;
+    position: relative;
+    margin-bottom: 0;
+
+    .with-children {
+      .category {
+        min-height: 36px;
+      }
+    }
+    .without-children {
+      .category{
+        margin-top: 9px;
+        min-height: 18px;
+      }
+    }
+
+    .category-name-container {
+      float:left;
+      position: relative;
+    }
+
+    .line {
+      float:left;
+      border-top: 1px dashed $accent-color;
+      margin-top:24px;
+    }
+
+    .mapping {
+      float:right;
+    }
+
+    .category-icon-container {
+      position: relative;
+    }
+  }
+
+  ul li:after {
+    /* bullets */
+    position: absolute;
+    left: -26px; /*adjust manually*/
+    top: 0;
+  }
+
+  ul li:before {
+    /* lines */
+    content: "";
+    position: absolute;
+    left: 12px; /* adjust manually */
+    height: 100%;
+    width: 1px;
+  }
+
+  ul li:first-child {
+  }
+
+  ul li:first-child:before {
+    /* first li's line */
+    top: 38px; /* moves the line down so that it disappears under the bullet. Adjust manually */
+  }
+
+  ul li:last-child:before {
+    /* last li's line */
+    height: 6px; /* shorten the line so it goes only up to the bullet. Is equal to first-child:before's top */
+  }.category
+
+  ul.icons li {
+    margin-bottom: 40px;
+  }
+
+  .category {
+    border: 1px dashed $accent-color;
+    border-radius: 5px;
+    position: relative;
+    padding: 7px;
+    background-color: #fff;
+    display: inline-block;
+    margin-left: 3px;
+  }
+
+  .mapping {
+    position: relative;
+    width: 400px;
+    background-color: #fff;
+    padding: 5px 5px 5px 0;
+    font-size: 12px;
+  }
+
+  .mapping.gender {
+    padding: 0 !important;
+  }
+
+  .category-title {
+    font-size: 13px !important;
+    font-weight: bold !important;
+    color: #000 !important;
+    text-decoration: none;
+  }
+
+  .children-number {
+    font-size: 12px;
+    color: #7c7c7c;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .plus, .minus {
+    color: $accent-color;
+    font-size: 11px;
+    border: 2px solid;
+    border-radius: 50%;
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 6px;
+    background-color: #fff;
+    margin-top: 2px;
+
+    svg {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 5px;
+      display: block;
+      fill: $accent-color;
+    }
+  }
+
+  .plus {
+    background-color: $accent-color;
+    svg {
+      margin-top: 4px;
+      fill: #fff;
+    }
+
+    &.blank {
+      background-color: #fff;
+    }
+  }
+
+  .vline {
+    border-left: 1px dashed $accent-color;
+    height:12px;
+    width:0;
+    margin-left:10px;
+
+    &.bottom {
+      height: 24px;
+    }
+  }
+
+  .hline {
+    position: absolute;
+    border-bottom: dashed 1px $accent-color;
+    top: 25px;
+    width: 100%;
+  }
+
+  .noborder{
+    border: none;
+  }
+  .dot {
+    border: 2px solid $accent-color;
+    border-radius: 50%;
+    width:3px;
+    height: 3px;
+    background-color: $accent-color;
+    display: block;
+    float: left;
+    margin-top:22px;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  .mask {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    width: 24px;
+    height: 40px;
+
+    &.grey {
+      background-color: #f1f1f1;
+    }
+  }
+}

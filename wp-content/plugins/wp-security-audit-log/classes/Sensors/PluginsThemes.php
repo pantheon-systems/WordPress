@@ -102,7 +102,10 @@ class WSAL_Sensors_PluginsThemes extends WSAL_AbstractSensor {
 			$action = $post_array['action2'];
 		}
 
-		$actype = basename( $server_array['SCRIPT_NAME'], '.php' );
+		$actype = '';
+		if ( isset( $server_array['SCRIPT_NAME'] ) ) {
+			$actype = basename( $server_array['SCRIPT_NAME'], '.php' );
+		}
 		$is_themes = 'themes' == $actype;
 		$is_plugins = 'plugins' == $actype;
 
@@ -455,20 +458,20 @@ class WSAL_Sensors_PluginsThemes extends WSAL_AbstractSensor {
 				|| ! empty( $post->post_title ) ) {
 				// If the plugin modify the post.
 				if ( false !== strpos( $get_array['action'], 'edit' ) ) {
-					$event = $this->GetEventTypeForPostType( $post, 2106, 2107, 2108 );
 					$editor_link = $this->GetEditorLink( $post );
 					$this->plugin->alerts->Trigger(
-						$event, array(
+						2106, array(
 							'PostID'    => $post->ID,
 							'PostType'  => $post->post_type,
 							'PostTitle' => $post->post_title,
+							'PostStatus' => $post->post_status,
+							'PostUrl' => get_permalink( $post->ID ),
 							$editor_link['name'] => $editor_link['value'],
 						)
 					);
 				} else {
-					$event = $this->GetEventTypeForPostType( $post, 5019, 5020, 5021 );
 					$this->plugin->alerts->Trigger(
-						$event, array(
+						5019, array(
 							'PostID'    => $post->ID,
 							'PostType'  => $post->post_type,
 							'PostTitle' => $post->post_title,
@@ -523,9 +526,8 @@ class WSAL_Sensors_PluginsThemes extends WSAL_AbstractSensor {
 			$post = get_post( $post_id );
 			if ( ! in_array( $post->post_type, array( 'attachment', 'revision', 'nav_menu_item', 'customize_changeset', 'custom_css' ) )
 				|| ! empty( $post->post_title ) ) {
-				$event = $this->GetEventTypeForPostType( $post, 5025, 5026, 5027 );
 				$this->plugin->alerts->Trigger(
-					$event, array(
+					5025, array(
 						'PostID'    => $post->ID,
 						'PostType'  => $post->post_type,
 						'PostTitle' => $post->post_title,
@@ -539,9 +541,8 @@ class WSAL_Sensors_PluginsThemes extends WSAL_AbstractSensor {
 			$post = get_post( $post_id );
 			if ( ! in_array( $post->post_type, array( 'attachment', 'revision', 'nav_menu_item', 'customize_changeset', 'custom_css' ) )
 				|| ! empty( $post->post_title ) ) {
-				$event = $this->GetEventTypeForPostType( $post, 5025, 5026, 5027 );
 				$this->plugin->alerts->Trigger(
-					$event, array(
+					5025, array(
 						'PostID'    => $post->ID,
 						'PostType'  => $post->post_type,
 						'PostTitle' => $post->post_title,

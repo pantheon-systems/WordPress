@@ -133,7 +133,7 @@ function wpmtst_view_settings( $action = '', $view_id = null ) {
 		wp_enqueue_script( 'wpmtst-view-category-filter-script' );
 	}
 
-	$default_view = apply_filters( 'wpmtst_view_default', get_option( 'wpmtst_view_default' ) );
+	$default_view = wpmtst_get_view_default();
 
 	if ( 'edit' == $action ) {
 		$view_array = wpmtst_get_view( $view_id );
@@ -285,7 +285,7 @@ function wpmtst_view_edit_form() {
 		} elseif ( isset( $_POST['restore-defaults'] ) ) {
 
 			// Restore defaults
-			$default_view = get_option( 'wpmtst_view_default' );
+			$default_view = wpmtst_get_view_default();
 
 			$view = array(
 				'id'   => $view_id,
@@ -347,7 +347,7 @@ function wpmtst_view_add_form() {
 		if ( isset( $_POST['restore-defaults'] ) ) {
 
 			// Restore defaults
-			$default_view = get_option( 'wpmtst_view_default' );
+			$default_view = wpmtst_get_view_default();
 
 			$view = array(
 				'id'   => $view_id,
@@ -469,7 +469,7 @@ function wpmtst_view_field_inputs( $key, $field, $adding = false ) {
 
 	$all_fields = array(
 		__( 'custom', 'strong-testimonials' )  => $custom_fields,
-		__( 'builtin', 'strong-testimonials' ) => $builtin_fields
+		__( 'built-in', 'strong-testimonials' ) => $builtin_fields
 	);
 
 	$allowed = array( 'custom', 'optional', 'builtin' );

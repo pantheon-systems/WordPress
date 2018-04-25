@@ -39,7 +39,7 @@ function wpmtst_validate_view_name( $name, $view_id ){
 function wpmtst_sanitize_view( $input ) {
 	ksort( $input );
 
-	$default_view = apply_filters( 'wpmtst_view_default', get_option( 'wpmtst_view_default' ) );
+	$default_view = wpmtst_get_view_default();
 
 	$data         = array();
 	$data['mode'] = sanitize_text_field( $input['mode'] );

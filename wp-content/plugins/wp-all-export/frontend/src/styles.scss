@@ -1,0 +1,278 @@
+@import "common";
+
+.slide-toggle{
+  transition: 0.6s ease-in-out;
+  -webkit-transition: 0.6s ease-in-out;
+
+}
+
+#googleMerchants {
+
+  .adjust-price {
+
+    input {
+      border-radius: 5px 0 0 5px !important;
+      border-right:none;
+    }
+
+    select {
+      margin-left:0; width: 50px;
+      border-radius: 0 5px 5px 0 !important;
+      background-position: right 5px top 9px;
+    }
+
+    .tooltip-container {
+      margin-top: 5px;
+    }
+  }
+
+  .adjust-price-link {
+    display: block;
+    margin-top:5px;
+  }
+
+  div.input label{
+    color: #000;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  select {
+    width: 400px;
+    margin:10px 0 10px 0;
+    -webkit-appearance:none;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #777;
+    font-size: 15px;
+    position: relative;
+    padding-left: 9px;
+    cursor: pointer;
+    top: 0;
+    background-image: url(../static/img/ddown.png);
+    background-repeat: no-repeat;
+    background-position: right 9px top 8px;
+  }
+
+  select:focus {
+    outline: none;
+  }
+
+  select.inner {
+    margin-left: 26px;
+  }
+
+  .pointer {
+    cursor:pointer;
+  }
+
+  .wpallexport-collapsed-content{
+    display: block;
+    padding:0;
+  }
+
+  .wpallexport-collapsed-content-inner{
+    padding-top: 5px;
+  }
+
+  .wpallexport-section {
+    display: block;
+  }
+
+  .wpallexport-content-section {
+    padding-bottom: 0;
+    margin-bottom: 10px;
+  }
+
+  .wpallexport-help {
+    position: relative;
+    top: -2px;
+  }
+
+  .wpallexport-collapsed-header:not(.wpallexport-advanced-options-header) {
+    margin-bottom: 15px;
+    padding-left: 24px;
+  }
+
+  .advanced-options {
+    color: $accent-color;
+  }
+
+  div.inner {
+    margin-left: 23px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .input.inner {
+    margin-left: 26px;
+    margin-top:5px;
+  }
+
+  .input.checkbox.inner {
+    margin-left:26px;
+    margin-top:10px;
+  }
+
+  .wpallexport-google-merchants-advanced-options {
+    .wpallexport-advanced-options-header {
+      h3 {
+        color:$accent-color;
+      }
+    }
+    .wpallexport-content-section {
+      border-top: 1px solid #ddd;
+      border-right-style: none;
+      border-bottom-style: none;
+      border-left-style: none;
+      background: #f1f2f2;
+      padding-bottom: 15px;
+      margin: 5px 0 0;
+    }
+    .wpallexport-advanced-options-content {
+      display: block;
+    }
+  }
+
+  .wpallexport-help {
+    color:#fff;
+    font-weight: 900;
+    border-radius: 50%;
+  }
+
+  input.custom-value, select.custom-value {
+    font-size: 12px !important;
+    height: 35px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #000;
+    position: relative;
+    top: 0;
+    width: 250px;
+    margin-left: 1px;
+  }
+
+  input.custom-value {
+    padding-left: 9px;
+    margin-left: 2px;
+  }
+
+  select.custom-value {
+    color: #777;
+  }
+
+  input[type=radio], input[type=checkbox] {
+    margin-right: 8px;
+  }
+
+  .wpallexport-advanced-options-header {
+    padding-left: 25px;
+  }
+
+  .wpallexport-advanced-options-content {
+    input, select{
+      margin-left:0;
+    }
+  }
+
+  .fade.ng-hide {
+    opacity: 0;
+  }
+
+  .fade.ng-hide-remove,
+  .fade.ng-hide-add {
+    display: block !important;
+  }
+
+  .fade.ng-hide-remove {
+    transition: all linear 300ms;
+  }
+
+  .fade.ng-hide-add {
+    transition: all linear 200ms;
+  }
+
+  .wpallexport-advanced-options {
+    padding: 0 0 0 5px;
+  }
+
+  .editable {
+    font-size: 12px !important;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    margin: 10px;
+    width: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    padding: 10px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: #000;
+    position: relative;
+    top: 0;
+    margin-left: 1px;
+  }
+
+  .editable:empty:before {
+    content: attr(placeholder);
+    cursor: text;
+    opacity: 0.7;
+    display: block; /* For Firefox */
+  }
+
+  .select-container {
+    width: 300px;
+    padding: 10px 10px 10px 25px;
+  }
+
+  .chosen-search input {
+    margin: 1px 0;
+    padding: 4px 20px 4px 5px;
+    width: 100%;
+    height: auto;
+    outline: 0;
+    border: 1px solid #aaa;
+    background: #fff url(../static/js/jquery/css/chosen/chosen-sprite.png) no-repeat 100% -20px;
+    font-size: 1em;
+    font-family: sans-serif;
+    line-height: normal;
+    border-radius: 0;
+  }
+
+  input.wpae-default-input {
+    width: 300px;
+    max-width: 300px;
+    padding: 13px;
+    border-radius: 5px;
+  }
+}
+
+.ng-cloak {
+  display: none;
+}
+
+.tooltip-container {
+  display: inline-block;
+}
+
+.wpae-field-mapping {
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #40acad;
+  text-decoration: none;
+  position:static;
+  margin-left: 10px;
+}

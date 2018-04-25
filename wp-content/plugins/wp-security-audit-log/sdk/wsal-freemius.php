@@ -27,22 +27,24 @@ if ( file_exists( dirname( __FILE__ ) . '/freemius/start.php' ) ) {
 		global $wsal_freemius;
 
 		if ( ! isset( $wsal_freemius ) ) {
+			define( 'WP_FS__PRODUCT_94_MULTISITE', true );
 			// Include Freemius SDK.
 			require_once dirname( __FILE__ ) . '/freemius/start.php';
 
 			$wsal_freemius = fs_dynamic_init( array(
-				'id' => '94',
-				'slug' => 'wp-security-audit-log',
-				'type' => 'plugin',
-				'public_key' => 'pk_d602740d3088272d75906045af9fa',
-				'is_premium' => false,
-				'has_addons' => false,
+				'id'             => '94',
+				'slug'           => 'wp-security-audit-log',
+				'type'           => 'plugin',
+				'public_key'     => 'pk_d602740d3088272d75906045af9fa',
+				'is_premium'     => false,
+				'has_addons'     => false,
 				'has_paid_plans' => true,
-				'menu' => array(
-					'slug' => 'wsal-auditlog',
+				'menu'           => array(
+					'slug'    => 'wsal-auditlog',
 					'support' => false,
+					'network' => true,
 				),
-				'live' => true,
+				'live'           => true,
 			) );
 		}
 

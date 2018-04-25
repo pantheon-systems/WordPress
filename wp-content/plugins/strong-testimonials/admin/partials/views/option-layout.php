@@ -80,7 +80,7 @@
             <!-- Column selector -->
             <div class="radio-description options" id="column-count-wrapper">
                 <div>
-                    <label for="view-column-count"><?php _e( 'number of columns', 'strong-testimonials' ); ?></label>
+                    <label for="view-column-count"><?php _e( 'Number of columns', 'strong-testimonials' ); ?></label>
                     <select id="view-column-count" name="view[data][column_count]">
                         <option value="2" <?php selected( $view['column_count'], 2 ); ?>>2</option>
                         <option value="3" <?php selected( $view['column_count'], 3 ); ?>>3</option>

@@ -42,6 +42,16 @@ class WSAL_ViewManager {
 
 		$skip_views = array();
 
+		// Array of views to skip for premium version.
+		if ( wsal_freemius()->is_plan__premium_only( 'starter' ) ) {
+			$skip_views[] = dirname( __FILE__ ) . '/Views/EmailNotifications.php';
+			$skip_views[] = dirname( __FILE__ ) . '/Views/ExternalDB.php';
+			$skip_views[] = dirname( __FILE__ ) . '/Views/Licensing.php';
+			$skip_views[] = dirname( __FILE__ ) . '/Views/LogInUsers.php';
+			$skip_views[] = dirname( __FILE__ ) . '/Views/Reports.php';
+			$skip_views[] = dirname( __FILE__ ) . '/Views/Search.php';
+		}
+
 		// Load views.
 		foreach ( glob( dirname( __FILE__ ) . '/Views/*.php' ) as $file ) {
 			if ( empty( $skip_views ) || ! in_array( $file, $skip_views ) ) {
@@ -140,6 +150,14 @@ class WSAL_ViewManager {
 			foreach ( $this->views as $view ) {
 				if ( $view->IsAccessible() ) {
 					if ( $this->GetClassNameByView( $view->GetSafeViewName() ) ) {
+						continue;
+					}
+
+					if ( ( 'wsal-togglealerts' === $view->GetSafeViewName()
+							|| 'wsal-settings' === $view->GetSafeViewName()
+							|| 'wsal-ext-settings' === $view->GetSafeViewName()
+						)
+						&& ! $this->_plugin->settings->CurrentUserCan( 'edit' ) ) {
 						continue;
 					}
 

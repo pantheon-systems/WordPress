@@ -19,7 +19,6 @@ add_action( 'wpmtst_form_admin', 'wpmtst_form_admin2' );
  * @since 2.28.5 As separate function on custom action.
  */
 function wpmtst_update_custom_fields() {
-
 	$goback = wp_get_referer();
 
 	if ( ! isset( $_POST['wpmtst_form_submitted'] ) ) {
@@ -39,7 +38,6 @@ function wpmtst_update_custom_fields() {
     if ( isset( $_POST['reset'] ) ) {
 
         // Undo changes
-        //$fields = $forms[ $form_id ]['fields'];
 		wpmtst_add_admin_notice( 'changes-cancelled' );
 
     }

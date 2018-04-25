@@ -1,5 +1,5 @@
-<?php		
-	$l10n = array(
+<?php
+$l10n = array(
 		'confirm_and_run'    => __('Confirm & Run Export', 'wp_all_export_plugin'),
 		'save_configuration' => __('Save Export Configuration', 'wp_all_export_plugin')	
 	);

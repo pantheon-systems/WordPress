@@ -12,8 +12,10 @@
 function wpmtst_force_check() {
 	$atts = array( 'template' => $_REQUEST['template'] );
 	$force = WPMST()->templates->get_template_config( $atts, 'force', false );
-	echo $force;
-	wp_die();
+	if ( $force ) {
+		wp_send_json_success( (array) $force );
+	}
+	wp_send_json_error();
 }
 add_action( 'wp_ajax_wpmtst_force_check', 'wpmtst_force_check' );
 

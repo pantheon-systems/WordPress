@@ -9,9 +9,6 @@
 		<p class="inline description tall">
 			<?php _e( 'For advanced users.', 'strong-testimonials' ); ?>
 			<?php _e( 'Separate class names by spaces.', 'strong-testimonials' ); ?>
-			<?php printf( '<a href="%s" target="_blank">%s</a>',
-				esc_url( 'https://strongplugins.com/document/strong-testimonials/custom-css/' ),
-				__( 'Tutorial', 'strong-testimonials' ) ); ?>
 		</p>
 	</div>
 </td>

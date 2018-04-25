@@ -142,8 +142,12 @@ class Strong_View_Slideshow extends Strong_View_Display {
 			$container_class_list[] = $this->atts['class'];
 		}
 
-		$container_data_list = array();
+		$container_data_list = array(
+			'count' => $this->post_count,
+		);
+
 		$content_class_list  = array();
+
 		$post_class_list     = array( 'testimonial' );
 
 		if ( 'excerpt' == $this->atts['content'] ) {

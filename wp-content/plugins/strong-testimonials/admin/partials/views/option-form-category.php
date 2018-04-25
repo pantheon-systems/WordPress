@@ -1,6 +1,6 @@
 <?php /* translators: On the Views admin screen. */ ?>
 <th>
-	<?php _e( 'Assign new submissions to a category', 'strong-testimonials' ); ?>
+	<?php _e( 'Assign to a category', 'strong-testimonials' ); ?>
 </th>
 <?php if ( $cat_count ) : ?>
     <td>

@@ -8,7 +8,8 @@ if (!defined('ABSPATH')) die('No direct access.');
  * @param  string $name name of the plugin 'ml-slider'
  * @return bool|string - will return path, ex. 'ml-slider/ml-slider.php'
  */
-function metaslider_is_plugin_installed($name) {
+function metaslider_plugin_is_installed($name) {
+    if (!function_exists('get_plugins')) include_once(ABSPATH.'wp-admin/includes/plugin.php');
 	foreach (get_plugins() as $plugin => $data) {
 		if ($data['TextDomain'] == $name)
 			return $plugin;
@@ -20,8 +21,8 @@ function metaslider_is_plugin_installed($name) {
  *
  * @return bool
  */
-function metaslider_is_pro_installed() {
-    return (bool) metaslider_is_plugin_installed('ml-slider-pro');
+function metaslider_pro_is_installed() {
+    return (bool) metaslider_plugin_is_installed('ml-slider-pro');
 }
 
 /**
@@ -29,16 +30,16 @@ function metaslider_is_pro_installed() {
  *
  * @return bool
  */
-function metaslider_is_pro_active() {
-    return is_plugin_active(metaslider_is_plugin_installed('ml-slider-pro'));
+function metaslider_pro_is_active() {
+    return is_plugin_active(metaslider_plugin_is_installed('ml-slider-pro'));
 }
 /**
  * Returns true if the user does not have the pro version installed
  *
  * @return bool
  */
-function metaslider_sees_upgrade_page() {
-    return (bool) apply_filters('metaslider_show_upgrade_page', !metaslider_is_pro_installed());
+function metaslider_user_sees_upgrade_page() {
+    return (bool) apply_filters('metaslider_show_upgrade_page', !metaslider_pro_is_installed());
 }
 
 /**
@@ -46,8 +47,8 @@ function metaslider_sees_upgrade_page() {
  *
  * @return bool
  */
-function metaslider_sees_call_to_action() {
-    return (bool) apply_filters('metaslider_show_upgrade_page', !metaslider_is_pro_installed());
+function metaslider_user_sees_call_to_action() {
+    return (bool) apply_filters('metaslider_show_upgrade_page', !metaslider_pro_is_installed());
 }
 
 /**
@@ -57,7 +58,7 @@ function metaslider_sees_call_to_action() {
  * @param  array $plugin Plugin details
  * @return boolean
  */
-function metaslider_sees_notices($plugin) {
+function metaslider_user_sees_notices($plugin) {
 
     // If no slideshows, don't show an ad
     if (!count($plugin->all_meta_sliders())) {
@@ -75,7 +76,7 @@ function metaslider_sees_notices($plugin) {
  * @param  string $page_name Admin page name
  * @return boolean
  */
-function metaslider_is_on_admin_page($page_name = 'admin.php') {
+function metaslider_user_is_on_admin_page($page_name = 'admin.php') {
     global $pagenow;
     return ($pagenow == $page_name);
 }

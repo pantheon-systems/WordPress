@@ -165,24 +165,33 @@ final class XmlExportMediaGallery
         return $data;
 	}
 
-	public static function get_images(  $field = 'image_url', $options = false )
-	{
-		self::init('images', $options);
+    public static function get_images(  $field = 'image_url', $options = false )
+    {
+        self::init('images', $options);
 
-		$data = array();
+        $data = array();
 
-		if ( ! empty(self::$images) )
-		{
-			foreach (self::$images as $image) 
-			{
-				$v = self::get_media( str_replace("image_", "", $field), $image );
+        switch ($field){
 
-				$data[] = $v;
-			}
-		}
+            case 'image_featured':
+                $data[] = empty(self::$featured_image) ? '' : wp_get_attachment_url( self::$featured_image->ID );
+                break;
+            default:
+                if ( ! empty(self::$images) )
+                {
+                    foreach (self::$images as $image)
+                    {
+                        $v = self::get_media( str_replace("image_", "", $field), $image );
 
-		return $data;
-	}
+                        $data[] = $v;
+                    }
+                }
+                break;
+
+        }
+
+        return $data;
+    }
 
 	private static function get_media( $field = 'url', $attachment = false )
 	{
@@ -323,7 +332,10 @@ final class XmlExportMediaGallery
 					}
 				}
 				break;
-
+            case 'image_featured':
+                $templateOptions['is_featured'] = 1;
+                $templateOptions['is_featured_xpath'] = '{'. $element_name .'[1]}';
+                break;
 			case 'attachments':					
 			case 'attachment_url':				
 				$templateOptions['atch_delim'] = '|';

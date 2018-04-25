@@ -9,7 +9,385 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 	public function __construct($data = array()) {
 		parent::__construct($data);		
 		$this->setTable(PMXE_Plugin::getInstance()->getTablePrefix() . 'exports');		
-	}					
+	}				
+	
+	/**
+	 * Import all files matched by path
+	 * @param callable[optional] $logger Method where progress messages are submmitted
+	 * @return PMXI_Import_Record
+	 * @chainable
+	 */
+	public function execute($logger = NULL, $cron = false) {
+
+		$this->fix_template_options();
+
+		$wp_uploads = wp_upload_dir();	
+
+		$this->set(array('processing' => 1))->update(); // lock cron requests			
+
+		wp_reset_postdata();
+
+		XmlExportEngine::$exportOptions  	 = $this->options;
+		XmlExportEngine::$is_user_export 	 = $this->options['is_user_export'];
+		XmlExportEngine::$is_comment_export  = $this->options['is_comment_export'];
+        XmlExportEngine::$is_taxonomy_export = empty($this->options['is_taxonomy_export']) ? false : $this->options['is_taxonomy_export'];
+		XmlExportEngine::$exportID 		 	 = $this->id;
+		XmlExportEngine::$exportRecord 		 = $this;
+        XmlExportEngine::$post_types         = $this->options['cpt'];
+
+        if ( class_exists('SitePress') && ! empty(XmlExportEngine::$exportOptions['wpml_lang'])){
+          do_action( 'wpml_switch_language', XmlExportEngine::$exportOptions['wpml_lang'] );
+        }
+
+        if (empty(XmlExportEngine::$exportOptions['export_variations'])){
+            XmlExportEngine::$exportOptions['export_variations'] = XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_PARENT_AND_VARIATION;
+        }
+        if (empty(XmlExportEngine::$exportOptions['export_variations_title'])){
+            XmlExportEngine::$exportOptions['export_variations_title'] = XmlExportEngine::VARIATION_USE_PARENT_TITLE;
+        }
+
+		if (empty(XmlExportEngine::$exportOptions['xml_template_type'])) XmlExportEngine::$exportOptions['xml_template_type'] = 'simple';
+
+		$filter_args = array(
+			'filter_rules_hierarhy' => $this->options['filter_rules_hierarhy'],
+			'product_matching_mode' => $this->options['product_matching_mode'],
+            'taxonomy_to_export' => empty($this->options['taxonomy_to_export']) ? '' : $this->options['taxonomy_to_export']
+		);
+
+        $filters = \Wpae\Pro\Filtering\FilteringFactory::getFilterEngine();
+        $filters->init($filter_args);
+
+		if ('advanced' == $this->options['export_type']) 
+		{
+			// [ Update where clause]
+			$filters->parse();
+
+			XmlExportEngine::$exportOptions['whereclause'] = $filters->get('queryWhere');
+			XmlExportEngine::$exportOptions['joinclause']  = $filters->get('queryJoin');
+
+			$this->set(array( 'options' => XmlExportEngine::$exportOptions ))->update();
+			// [\ Update where clause]
+			
+			if (XmlExportEngine::$is_user_export)
+			{
+				add_action('pre_user_query', 'wp_all_export_pre_user_query', 10, 1);
+				$exportQuery = eval('return new WP_User_Query(array(' . $this->options['wp_query'] . ', \'offset\' => ' . $this->exported . ', \'number\' => ' . $this->options['records_per_iteration'] . '));');			
+				remove_action('pre_user_query', 'wp_all_export_pre_user_query');
+			}
+			elseif (XmlExportEngine::$is_comment_export)
+			{				
+				add_action('comments_clauses', 'wp_all_export_comments_clauses', 10, 1);
+				$exportQuery = eval('return new WP_Comment_Query(array(' . $this->options['wp_query'] . ', \'offset\' => ' . $this->exported . ', \'number\' => ' . $this->options['records_per_iteration'] . '));');			
+				remove_action('comments_clauses', 'wp_all_export_comments_clauses');
+			}
+			else
+			{		
+				remove_all_actions('parse_query');
+				remove_all_actions('pre_get_posts');
+				remove_all_filters('posts_clauses');			
+
+				add_filter('posts_where', 'wp_all_export_posts_where', 10, 1);
+				add_filter('posts_join', 'wp_all_export_posts_join', 10, 1);
+				$exportQuery = eval('return new WP_Query(array(' . $this->options['wp_query'] . ', \'offset\' => ' . $this->exported . ', \'posts_per_page\' => ' . $this->options['records_per_iteration'] . '));');			
+				remove_filter('posts_join', 'wp_all_export_posts_join');			
+				remove_filter('posts_where', 'wp_all_export_posts_where');		
+			}			
+		}
+		else
+		{
+			// [ Update where clause]
+			$filters->parse();
+
+			XmlExportEngine::$exportOptions['whereclause'] = $filters->get('queryWhere');
+			XmlExportEngine::$exportOptions['joinclause']  = $filters->get('queryJoin');
+
+			$this->set(array( 'options' => XmlExportEngine::$exportOptions ))->update();
+			// [\ Update where clause]
+
+			if ( in_array('users', $this->options['cpt']) or in_array('shop_customer', $this->options['cpt']))
+			{				
+				add_action('pre_user_query', 'wp_all_export_pre_user_query', 10, 1);
+				$exportQuery = new WP_User_Query( array( 'orderby' => 'ID', 'order' => 'ASC', 'number' => $this->options['records_per_iteration'], 'offset' => $this->exported));
+				remove_action('pre_user_query', 'wp_all_export_pre_user_query');
+			}
+			elseif ( in_array('comments', $this->options['cpt']))
+			{				
+				add_action('comments_clauses', 'wp_all_export_comments_clauses', 10, 1);
+				global $wp_version;
+					
+				if ( version_compare($wp_version, '4.2.0', '>=') ) 
+				{
+					$exportQuery = new WP_Comment_Query( array( 'orderby' => 'comment_ID', 'order' => 'ASC', 'number' => $this->options['records_per_iteration'], 'offset' => $this->exported));
+				}
+				else
+				{
+					$exportQuery = get_comments( array( 'orderby' => 'comment_ID', 'order' => 'ASC', 'number' => $this->options['records_per_iteration'], 'offset' => $this->exported));
+				}
+				remove_action('comments_clauses', 'wp_all_export_comments_clauses');
+			}
+            elseif ( in_array('taxonomies', $this->options['cpt']))
+            {
+                add_filter('terms_clauses', 'wp_all_export_terms_clauses', 10, 3);
+                $exportQuery = new WP_Term_Query( array( 'taxonomy' => $this->options['taxonomy_to_export'], 'orderby' => 'term_id', 'order' => 'ASC', 'number' => $this->options['records_per_iteration'], 'offset' => $this->exported, 'hide_empty' => false));
+                $postCount  = count($exportQuery->get_terms());
+                remove_filter('terms_clauses', 'wp_all_export_terms_clauses');
+            }
+			else
+			{				
+				remove_all_actions('parse_query');
+				remove_all_actions('pre_get_posts');
+				remove_all_filters('posts_clauses');			
+				
+				add_filter('posts_where', 'wp_all_export_posts_where', 10, 1);
+				add_filter('posts_join', 'wp_all_export_posts_join', 10, 1);
+				
+				$exportQuery = new WP_Query( array( 'post_type' => $this->options['cpt'], 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'ignore_sticky_posts' => 1, 'offset' => $this->exported, 'posts_per_page' => $this->options['records_per_iteration'] ));
+
+				remove_filter('posts_join', 'wp_all_export_posts_join');			
+				remove_filter('posts_where', 'wp_all_export_posts_where');				
+			}
+		}
+
+		XmlExportEngine::$exportQuery = $exportQuery;
+		$errors = new WP_Error();
+		$engine = new XmlExportEngine($this->options, $errors);	
+
+		$file_path = false;
+
+		$is_secure_import = PMXE_Plugin::getInstance()->getOption('secure');
+
+		if ( $this->exported == 0 )
+		{
+			// create an import for this export			
+			if ( $this->options['export_to'] == 'csv' || ! empty($this->options['xml_template_type']) && ! in_array($this->options['xml_template_type'], array('custom', 'XmlGoogleMerchants')) ) PMXE_Wpallimport::create_an_import( $this );
+
+			// unlink previously generated files
+			$attachment_list = $this->options['attachment_list'];
+			if ( ! empty($attachment_list))
+			{
+				foreach ($attachment_list as $attachment) {
+					if (!is_numeric($attachment))
+					{						
+						@unlink($attachment);
+					}
+				}
+			}
+			$exportOptions = $this->options;
+			$exportOptions['attachment_list'] = array();
+			$this->set(array(				
+				'options' => $exportOptions
+			))->save();				 
+
+			// generate export file name
+			$file_path = wp_all_export_generate_export_file( $this->id ); 						
+
+			if (  ! $is_secure_import )
+			{
+				$wp_filetype = wp_check_filetype(basename($file_path), null );
+				$attachment_data = array(
+				    'guid' => $wp_uploads['baseurl'] . '/' . _wp_relative_upload_path( $file_path ), 
+				    'post_mime_type' => $wp_filetype['type'],
+				    'post_title' => preg_replace('/\.[^.]+$/', '', basename($file_path)),
+				    'post_content' => '',
+				    'post_status' => 'inherit'
+				);		
+
+				if ( empty($this->attch_id) )
+				{
+					$attach_id = wp_insert_attachment( $attachment_data, $file_path );			
+				}					
+				elseif($this->options['creata_a_new_export_file']) {
+					$attach_id = wp_insert_attachment( $attachment_data, $file_path );			
+				}
+				else
+				{
+					$attach_id = $this->attch_id;						
+					$attachment = get_post($attach_id);
+					if ($attachment)
+					{
+						update_attached_file( $attach_id, $file_path );
+						wp_update_attachment_metadata( $attach_id, $attachment_data );	
+					}
+					else
+					{
+						$attach_id = wp_insert_attachment( $attachment_data, $file_path );				
+					}						
+				}				
+
+				$exportOptions = $this->options;
+				if ( ! in_array($attach_id, $exportOptions['attachment_list'])){
+					$exportOptions['attachment_list'][] = $attach_id;	
+				}
+				
+				$this->set(array(
+					'attch_id' => $attach_id,
+					'options' => $exportOptions
+				))->save();				
+
+			}	
+			else 
+			{
+				$exportOptions = $this->options;
+				$exportOptions['filepath'] = $file_path;
+				$this->set(array(
+					'options' => $exportOptions
+				))->save();
+			}
+
+			do_action('pmxe_before_export', $this->id);
+			
+		}
+		else
+		{
+			if (  ! $is_secure_import )
+			{
+				$file_path = str_replace($wp_uploads['baseurl'], $wp_uploads['basedir'], wp_get_attachment_url( $this->attch_id )); 
+			}
+			else
+			{
+				$file_path = wp_all_export_get_absolute_path($this->options['filepath']);
+			}
+		}
+
+		// [ get total founded records ]
+		if (XmlExportEngine::$is_comment_export)
+		{
+			global $wp_version;
+					
+			if ( version_compare($wp_version, '4.2.0', '>=') ) 
+			{
+				$postCount  = count($exportQuery->get_comments());
+				add_action('comments_clauses', 'wp_all_export_comments_clauses', 10, 1);
+				$result = new WP_Comment_Query( array( 'orderby' => 'comment_ID', 'order' => 'ASC', 'number' => 10, 'count' => true));
+				$foundPosts = $result->get_comments();
+				remove_action('comments_clauses', 'wp_all_export_comments_clauses');	
+			}
+			else
+			{
+				$postCount  = count($exportQuery);
+				add_action('comments_clauses', 'wp_all_export_comments_clauses', 10, 1);
+				$foundPosts = get_comments( array( 'orderby' => 'comment_ID', 'order' => 'ASC', 'number' => 10, 'count' => true));			
+				remove_action('comments_clauses', 'wp_all_export_comments_clauses');	
+			}
+		}
+		elseif(XmlExportEngine::$is_taxonomy_export){
+            add_filter('terms_clauses', 'wp_all_export_terms_clauses', 10, 3);
+            $result = new WP_Term_Query( array( 'taxonomy' => $this->options['taxonomy_to_export'], 'orderby' => 'term_id', 'order' => 'ASC', 'count' => true, 'hide_empty' => false));
+            $foundPosts = count($result->get_terms());
+            remove_filter('terms_clauses', 'wp_all_export_terms_clauses');
+        }
+		else
+		{
+			$foundPosts = ( ! XmlExportEngine::$is_user_export ) ? $exportQuery->found_posts : $exportQuery->get_total();
+			$postCount  = ( ! XmlExportEngine::$is_user_export ) ? $exportQuery->post_count : count($exportQuery->get_results());
+		}
+		// [ \get total found records ]
+
+		XmlExportEngine::$exportOptions  = $this->options;
+		
+
+        switch ( $this->options['export_to'] ) {
+
+            case XmlExportEngine::EXPORT_TYPE_XML:
+
+                if($this->options['xml_template_type'] == XmlExportEngine::EXPORT_TYPE_GOOLE_MERCHANTS) {
+                    $googleMerchantsServiceFactory = new \Wpae\App\Service\ExportGoogleMerchantsFactory();
+                    $googleMerchantsService = $googleMerchantsServiceFactory->createService();
+                    $googleMerchantsService->export($cron, $file_path, $this->exported);
+                } else {
+                    XmlCsvExport::export_xml( false, $cron, $file_path, $this->exported );
+                }
+
+                break;
+
+            case XmlExportEngine::EXPORT_TYPE_CSV:
+
+                XmlCsvExport::export_csv( false, $cron, $file_path, $this->exported );
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+        $this->set(array(
+            'exported' => $this->exported + $postCount,
+            'last_activity' => date('Y-m-d H:i:s'),
+            'processing' => 0
+        ))->save();
+
+
+
+		if ( empty($foundPosts) )
+		{
+			$this->set(array(
+				'processing' => 0,
+				'triggered' => 0,
+				'canceled' => 0,
+				'registered_on' => date('Y-m-d H:i:s'),
+				'iteration' => ++$this->iteration
+			))->update();	
+
+			do_action('pmxe_after_export', $this->id, $this);
+		}
+		elseif ( ! $postCount or $foundPosts == $this->exported )
+		{			
+			if ( file_exists($file_path))
+			{							
+				if ( $this->options['export_to'] == 'xml' ) 
+				{
+                    switch( XmlExportEngine::$exportOptions['xml_template_type'] ){
+                        case 'XmlGoogleMerchants':
+                        case 'custom':
+                            require_once PMXE_ROOT_DIR . '/classes/XMLWriter.php';
+                            file_put_contents($file_path, PMXE_XMLWriter::preprocess_xml(XmlExportEngine::$exportOptions['custom_xml_template_footer']), FILE_APPEND);
+                        break;
+                    }
+
+				    if ( ! in_array(XmlExportEngine::$exportOptions['xml_template_type'], array('custom', 'XmlGoogleMerchants')) )
+					{
+						$main_xml_tag = apply_filters('wp_all_export_main_xml_tag', $this->options['main_xml_tag'], $this->id);
+					
+						file_put_contents($file_path, '</'.$main_xml_tag.'>', FILE_APPEND);
+
+						$xml_footer = apply_filters('wp_all_export_xml_footer', '', $this->id);
+
+						if ( ! empty($xml_footer) ) file_put_contents($file_path, $xml_footer, FILE_APPEND);
+					}
+				}
+
+				PMXE_Wpallimport::generateImportTemplate( $this, $file_path, $foundPosts );								    
+
+	            if ($this->options['is_scheduled'] and "" != $this->options['scheduled_email']){
+	                
+	                add_filter( 'wp_mail_content_type', array($this, 'set_html_content_type') );                
+
+	                $headers = 'From: '. get_bloginfo( 'name' ) .' <'. get_bloginfo( 'admin_email' ) .'>' . "\r\n";
+	                
+	                $message = '<p>Export '. $this->options['friendly_name'] .' has been completed. You can find exported file in attachments.</p>';                
+
+	                wp_mail($this->options['scheduled_email'], __("WP All Export", "pmxe_plugin"), $message, $headers, array($file_path));
+
+	                remove_filter( 'wp_mail_content_type', array($this, 'set_html_content_type') );
+	            }
+
+			}	
+
+			$this->set(array(
+				'processing' => 0,
+				'triggered' => 0,
+				'canceled' => 0,				
+				'registered_on' => date('Y-m-d H:i:s'),	
+				'iteration' => ++$this->iteration										
+			))->update();	
+
+			do_action('pmxe_after_export', $this->id, $this);
+		}
+
+		$this->set('registered_on', date('Y-m-d H:i:s'))->save(); // update registered_on to indicated that job has been exectured even if no files are going to be imported by the rest of the method
+		
+		return $this;
+	}
 
     public function set_html_content_type(){
         return 'text/html';

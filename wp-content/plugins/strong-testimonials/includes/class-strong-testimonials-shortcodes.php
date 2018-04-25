@@ -126,28 +126,41 @@ class Strong_Testimonials_Shortcodes {
 	 * @return int
 	 */
 	public function testimonial_count_shortcode( $atts, $content = null ) {
-		$atts = shortcode_atts(
-			array(
-				'category'    => '',
-				'unformatted' => 0,
-			),
-			normalize_empty_atts( $atts )
+		$shortcode = 'testimonial_count';
+		$pairs     = array(
+			'category'    => '',
+			'unformatted' => 0,
 		);
+		$pairs     = apply_filters( "wpmtst_shortcode_defaults__{$shortcode}", $pairs );
+		$atts      = shortcode_atts( $pairs, normalize_empty_atts( $atts ), $shortcode );
 
 		$args = array(
-			'posts_per_page'           => -1,
-			'post_type'                => 'wpm-testimonial',
-			'post_status'              => 'publish',
-			'wpm-testimonial-category' => $atts['category'],
-			'suppress_filters'         => true,
+			'posts_per_page'   => - 1,
+			'post_type'        => 'wpm-testimonial',
+			'post_status'      => 'publish',
+			'suppress_filters' => true,
 		);
-		$posts_array = get_posts( $args );
 
-		if ( $atts['unformatted'] ) {
-			return count( $posts_array );
+		if ( $atts['category'] ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'wpm-testimonial-category',
+					'field'    => 'slug',
+					'terms'    => $atts['category'],
+				)
+			);
+
 		}
 
-		return number_format_i18n( count( $posts_array ) );
+		$args        = apply_filters( 'wpmtst_query_args', $args, $atts );
+		$posts_array = get_posts( $args );
+		$count       = count( $posts_array );
+
+		if ( $atts['unformatted'] ) {
+			return $count;
+		}
+
+		return number_format_i18n( $count );
 	}
 
 	/**

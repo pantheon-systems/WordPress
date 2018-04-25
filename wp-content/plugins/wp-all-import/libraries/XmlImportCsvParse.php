@@ -974,7 +974,7 @@ class PMXI_CsvParser
 
         if ( ! empty($_GET['import_id']) ) $import_id = $_GET['import_id'];        
 
-        $create_new_headers = apply_filters('wp_all_import_auto_create_csv_headers', false, $import_id);
+        $create_new_headers = false;
         $skip_x_rows = apply_filters('wp_all_import_skip_x_csv_rows', false, $import_id);
         $headers = array();
         while ($keys = fgetcsv($res, $l, $d, $e)) {
@@ -1014,6 +1014,7 @@ class PMXI_CsvParser
                     $keys[$key] = ($headers[$value] === 1) ? $value : $value . '_' . $headers[$value];
                 }            
                 $this->headers = $keys;
+                $create_new_headers = apply_filters('wp_all_import_auto_create_csv_headers', $create_new_headers, $import_id);
                 if ($create_new_headers){ 
                     $this->createHeaders('column');      
                     $keys = $buf_keys;

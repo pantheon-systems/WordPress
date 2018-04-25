@@ -1,5 +1,18 @@
 <?php
 
+function pmxe_prepend($string, $orig_filename) {
+	$context = stream_context_create();
+	$orig_file = fopen($orig_filename, 'r', 1, $context);
+
+	$temp_filename = tempnam(sys_get_temp_dir(), 'php_prepend_');
+	file_put_contents($temp_filename, $string);
+	file_put_contents($temp_filename, $orig_file, FILE_APPEND);
+
+	fclose($orig_file);
+	unlink($orig_filename);
+	rename($temp_filename, $orig_filename);
+}
+
 function pmxe_pmxe_after_export($export_id, $export)
 {
 	if ( ! empty(PMXE_Plugin::$session) and PMXE_Plugin::$session->has_session() )
@@ -13,7 +26,7 @@ function pmxe_pmxe_after_export($export_id, $export)
 
         $export->set(
             array(
-                'registered_on' => date('Y-m-d H:i:s'),
+                'registered_on' => current_time( 'mysql', 1 ),
             )
         )->save();
 
@@ -84,7 +97,14 @@ function pmxe_pmxe_after_export($export_id, $export)
             }
             fclose($out);
             @unlink($tmp_file);
-        }	
+        }
+
+		$preCsvHeaders = false;
+		$preCsvHeaders = apply_filters('wp_all_export_pre_csv_headers', $preCsvHeaders, $export->id);
+
+		if($preCsvHeaders) {
+			pmxe_prepend($preCsvHeaders."\n", $filepath);
+		}
 
 		// Split large exports into chunks
 		if ( $export->options['split_large_exports'] and $splitSize < $export->exported )
@@ -106,11 +126,11 @@ function pmxe_pmxe_after_export($export_id, $export)
                             case 'XmlGoogleMerchants':
                             case 'custom':
                                 // Determine XML root element
-    //                            $main_xml_tag   = false;
-    //                            preg_match_all("%<[\w]+[\s|>]{1}%", $export->options['custom_xml_template_header'], $matches);
-    //                            if ( ! empty($matches[0]) ){
-    //                              $main_xml_tag = preg_replace("%[\s|<|>]%","",array_shift($matches[0]));
-    //                            }
+                                $main_xml_tag   = false;
+                                preg_match_all("%<[\w]+[\s|>]{1}%", $export->options['custom_xml_template_header'], $matches);
+                                if ( ! empty($matches[0]) ){
+                                  $main_xml_tag = preg_replace("%[\s|<|>]%","",array_shift($matches[0]));
+                                }
                                 // Determine XML recond element
                                 $record_xml_tag = false;
                                 preg_match_all("%<[\w]+[\s|>]{1}%", $export->options['custom_xml_template_loop'], $matches);
@@ -132,31 +152,42 @@ function pmxe_pmxe_after_export($export_id, $export)
 
                         }
 
+			
 						$records_count = 0;
 						$chunk_records_count = 0;
 						$fileCount = 1;
 
 						$feed = $xml_header;
 
-						$file = new PMXE_Chunk($filepath, array('element' => $record_xml_tag, 'encoding' => 'UTF-8'));
-						// loop through the file until all lines are read				    				    			   			   	    			    			    
-					    while ($xml = $file->read()) {				    	
+						if($export->options['xml_template_type'] == 'custom'){
+							$outputFileTemplate = str_replace(basename($filepath), str_replace('.xml', '', basename($filepath)) . '-{FILE_COUNT_PLACEHOLDER}.xml', $filepath);
+							$exportOptions['split_files_list'] = wp_all_export_break_into_files($record_xml_tag, -1, $splitSize, file_get_contents($filepath), null, $outputFileTemplate);
 
-					    	if ( ! empty($xml) )
-					      	{
-								$records_count++;
-								$chunk_records_count++;
-								$feed .= $xml;								
-							}
+							// Remove first file which just contains the empty data tag
+							@unlink($exportOptions['split_files_list'][0]);
+							array_shift($exportOptions['split_files_list']);
+						}
+					 	else {
+							$file = new PMXE_Chunk($filepath, array('element' => $record_xml_tag, 'encoding' => 'UTF-8'));
+							// loop through the file until all lines are read
+							while ($xml = $file->read()) {
 
-							if ( $chunk_records_count == $splitSize or $records_count == $export->exported ){
-								$feed .= $xml_footer;
-								$outputFile = str_replace(basename($filepath), str_replace('.xml', '', basename($filepath)) . '-' . $fileCount++ . '.xml', $filepath);
-								file_put_contents($outputFile, $feed);
-								if ( ! in_array($outputFile, $exportOptions['split_files_list']))
-						        	$exportOptions['split_files_list'][] = $outputFile;
-								$chunk_records_count = 0;
-								$feed = $xml_header;
+								if ( ! empty($xml) )
+								{
+									$records_count++;
+									$chunk_records_count++;
+									$feed .= $xml;
+								}
+
+								if ( $chunk_records_count == $splitSize or $records_count == $export->exported ){
+									$feed .= "\n".$xml_footer;
+									$outputFile = str_replace(basename($filepath), str_replace('.xml', '', basename($filepath)) . '-' . $fileCount++ . '.xml', $filepath);
+									file_put_contents($outputFile, $feed);
+									if ( ! in_array($outputFile, $exportOptions['split_files_list']))
+										$exportOptions['split_files_list'][] = $outputFile;
+									$chunk_records_count = 0;
+									$feed = $xml_header;
+								}
 							}
 						}
 

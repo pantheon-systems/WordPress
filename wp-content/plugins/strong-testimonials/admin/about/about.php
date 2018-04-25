@@ -1,5 +1,5 @@
 <h2><?php _e( 'Flexible Features. Strong Support.', 'strong-testimonials' ); ?></h2>
-<p class="lead-description"><?php _e( 'The highest-rated free testimonials plugin trusted by more than 40,000 people keeps getting better.', 'strong-testimonials' ); ?></p>
+<p class="lead-description"><?php _e( 'The highest-rated free testimonials plugin trusted by more than 50,000 people keeps getting better.', 'strong-testimonials' ); ?></p>
 <div class="feature-section one-col">
     <div class="col">
         <p><?php _e( 'Your site is unique, right? So are your testimonials. This plugin is designed from the ground up to simplify the process of customizing your testimonials or reviews.', 'strong-testimonials' ); ?></p>

@@ -480,7 +480,9 @@ final class PMXE_Wpallimport
 			else
 			{
 				$element_name = strtolower((!empty($options['cc_name'][$ID])) ? preg_replace('/[^a-z0-9_]/i', '', $options['cc_name'][$ID]) : 'untitled_' . $ID);
-			}			
+			}
+
+			if (empty($element_name)) $element_name = 'undefined' . $ID;
 
 			$element_type = $options['cc_type'][$ID];
 

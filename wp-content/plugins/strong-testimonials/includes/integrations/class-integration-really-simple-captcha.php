@@ -1,7 +1,7 @@
 <?php
 class Strong_Testimonials_Integration_Really_Simple_Captcha extends Strong_Testimonials_Integration_Captcha {
 
-	public function __contruct() {
+	public function __construct() {
 		parent::__construct();
 	}
 

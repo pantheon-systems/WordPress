@@ -109,3 +109,30 @@ function wp_doing_ajax() {
 }
 
 endif;
+
+
+if ( ! function_exists( 'sanitize_hex_color' ) ) :
+
+/**
+ * Sanitizes a hex color.
+ *
+ * Returns either '', a 3 or 6 digit hex color (with #), or nothing.
+ * For sanitizing values without a #, see sanitize_hex_color_no_hash().
+ *
+ * @since 3.4.0
+ *
+ * @param string $color
+ * @return string|void
+ */
+function sanitize_hex_color( $color ) {
+	if ( '' === $color ) {
+		return '';
+	}
+
+	// 3 or 6 hex digits, or the empty string.
+	if ( preg_match('|^#([A-Fa-f0-9]{3}){1,2}$|', $color ) ) {
+		return $color;
+	}
+}
+
+endif;

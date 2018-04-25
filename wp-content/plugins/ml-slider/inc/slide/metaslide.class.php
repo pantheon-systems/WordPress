@@ -266,18 +266,6 @@ class MetaSlide {
         // Set the image to the slide
         set_post_thumbnail($slide_id, $media_id);
 
-        // Check if the post is an image and add some extra info
-        if ('image' == $type) {
-            $alt = get_post_meta($media_id, '_wp_attachment_image_alt', true);
-            add_post_meta($slide_id, '_wp_attachment_image_alt', $alt);
-            $caption = has_excerpt($media_id) ? get_the_excerpt($media_id) : '';
-            
-            // Update the post and caption
-            wp_update_post(array(
-                'ID' => $slide_id,
-                'post_excerpt' => $caption
-            ));
-        }
         $this->add_or_update_or_delete_meta($slide_id, 'type', $type);
         return $slide_id;
     }
@@ -374,7 +362,8 @@ class MetaSlide {
      * @return string The html for the edit button on a slide image
      */
     public function get_update_image_button_html() {
-        return "<button class='update-image alignright' data-button-text='" . __("Update slide image", "ml-slider") . "' title='" . __("Update slide image", "ml-slider") . "' data-slide-id='{$this->slide->ID}'><i><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><polygon points='16 3 21 8 8 21 3 21 3 16 16 3'/></svg></i></button>";
+        $attachment_id = $this->get_attachment_id();
+        return "<button class='update-image alignright' data-button-text='" . __("Update slide image", "ml-slider") . "' title='" . __("Update slide image", "ml-slider") . "' data-slide-id='{$this->slide->ID}' data-attachment-id='{$attachment_id}'><i><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-edit-2'><polygon points='16 3 21 8 8 21 3 21 3 16 16 3'/></svg></i></button>";
     }
 
     /**
@@ -506,6 +495,18 @@ class MetaSlide {
         return false;
     }
 
+    /**
+     * Get the attachment ID
+     *
+     * @return Integer - the attachment ID
+     */
+    public function get_attachment_id() {
+        if ('attachment' == $this->slide->post_type) {
+            return $this->slide->ID;
+        } else {
+            return get_post_thumbnail_id($this->slide->ID);
+        }
+    }
 
     /**
      * Get the thumbnail for the slide

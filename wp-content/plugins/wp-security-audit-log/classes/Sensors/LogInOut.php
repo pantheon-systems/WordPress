@@ -54,10 +54,32 @@ class WSAL_Sensors_LogInOut extends WSAL_AbstractSensor {
 		add_filter( 'wp_login_blocked', array( $this, 'EventLoginBlocked' ), 10, 1 );
 
 		// Directory for logged in users log files.
-		$user_upload_dir    = wp_upload_dir();
-		$user_upload_path   = trailingslashit( $user_upload_dir['basedir'] . '/wp-security-audit-log/failed-logins/' );
-		if ( ! $this->CheckDirectory( $user_upload_path ) ) {
-			wp_mkdir_p( $user_upload_path );
+		$user_upload_dir  = wp_upload_dir();
+		$failed_login_dir = trailingslashit( $user_upload_dir['basedir'] . '/wp-security-audit-log/failed-logins/' );
+
+		/**
+		 * Check if failed login directory exists then
+		 * delete all files within this directory and
+		 * remove the directory itself.
+		 *
+		 * @since 3.1.2
+		 */
+		if ( is_dir( $failed_login_dir ) ) {
+			// Get all files inside failed logins folder.
+			$files = glob( $failed_login_dir . '*', GLOB_BRACE );
+
+			if ( ! empty( $files ) ) {
+				// Unlink each file.
+				foreach ( $files as $file ) {
+					// Check if valid file.
+					if ( is_file( $file ) ) {
+						// Delete the file.
+						unlink( $file );
+					}
+				}
+			}
+			// Remove the directory.
+			rmdir( $failed_login_dir );
 		}
 	}
 
@@ -204,7 +226,7 @@ class WSAL_Sensors_LogInOut extends WSAL_AbstractSensor {
 		// Filter $_POST global array for security.
 		$post_array = filter_input_array( INPUT_POST );
 
-		$username = array_key_exists( 'log', $post_array ) ? $post_array['log'] : $username;
+		$username = isset( $post_array['log'] ) ? $post_array['log'] : $username;
 		$username = sanitize_user( $username );
 		$new_alert_code = 1003;
 		$user = get_user_by( 'login', $username );
@@ -228,7 +250,7 @@ class WSAL_Sensors_LogInOut extends WSAL_AbstractSensor {
 
 		$obj_occurrence = new WSAL_Models_Occurrence();
 
-		if ( 1002 == $new_alert_code ) {
+		if ( 1002 === $new_alert_code ) {
 			if ( ! $this->plugin->alerts->CheckEnableUserRoles( $username, $user_roles ) ) {
 				return;
 			}
@@ -285,40 +307,45 @@ class WSAL_Sensors_LogInOut extends WSAL_AbstractSensor {
 			if ( ! empty( $occ_unknown ) ) {
 				// Update existing record not exists user.
 				$this->IncrementLoginFailure( $ip, $site_id, false );
+
+				// Increase the number of attempts.
 				$new = $occ_unknown->GetMetaValue( 'Attempts', 0 ) + 1;
 
-				if ( 'on' === $this->plugin->GetGlobalOption( 'log-visitor-failed-login' ) ) {
-					$link_file = $this->WriteLog( $new, $username );
-				}
-
+				// If login attempts pass allowed number of attempts then stop increasing the attempts.
 				if ( -1 !== (int) $this->GetVisitorLoginFailureLogLimit()
 					&& $new > $this->GetVisitorLoginFailureLogLimit() ) {
 					$new = $this->GetVisitorLoginFailureLogLimit() . '+';
 				}
 
+				// Update the number of login attempts.
 				$occ_unknown->UpdateMetaValue( 'Attempts', $new );
-				if ( ! empty( $link_file ) && 'on' === $this->plugin->GetGlobalOption( 'log-visitor-failed-login' ) ) {
-					$occ_unknown->UpdateMetaValue( 'LogFileLink', $link_file );
+
+				// Get users from alert.
+				$users = $occ_unknown->GetMetaValue( 'Users' );
+
+				// Update it if username is not already present in the array.
+				if ( ! empty( $users ) && is_array( $users ) && ! in_array( $username, $users, true ) ) {
+					$users[] = $username;
+					$occ_unknown->UpdateMetaValue( 'Users', $users );
 				} else {
-					$link_file = site_url() . '/wp-admin/admin.php?page=wsal-togglealerts#tab-users-profiles---activity';
-					$occ_unknown->UpdateMetaValue( 'LogFileLink', $link_file );
+					// In this case the value doesn't exist so set the value to array.
+					$users = array();
+					$users[] = $username;
 				}
+
 				$occ_unknown->created_on = null;
 				$occ_unknown->Save();
 			} else {
-				$link_file = site_url() . '/wp-admin/admin.php?page=wsal-togglealerts#tab-users-profiles---activity';
-				$log_file_text = ' in a log file';
-				if ( 'on' === $this->plugin->GetGlobalOption( 'log-visitor-failed-login' ) ) {
-					$link_file = $this->WriteLog( 1, $username );
-					$log_file_text = ' with the usernames used during these failed login attempts';
-				}
+				// Make an array of usernames.
+				$users = array( $username );
 
-				// Create a new record not exists user.
+				// Log an alert for a login attempt with unknown username.
 				$this->plugin->alerts->Trigger(
 					$new_alert_code, array(
 						'Attempts' => 1,
-						'LogFileLink' => $link_file,
-						'LogFileText' => $log_file_text,
+						'Users' => $users,
+						'LogFileText' => '',
+						'ClientIP' => $ip,
 					)
 				);
 			}
@@ -361,57 +388,6 @@ class WSAL_Sensors_LogInOut extends WSAL_AbstractSensor {
 				'CurrentUserRoles' => $user_roles,
 			), true
 		);
-	}
-
-	/**
-	 * Write log file.
-	 *
-	 * @param int    $attempts - Number of attempt.
-	 * @param string $username - Username.
-	 * @author Ashar Irfan
-	 * @since  2.6.9
-	 */
-	private function WriteLog( $attempts, $username = '' ) {
-		$name_file = null;
-
-		// Create/Append to the log file.
-		$data = 'Attempts: ' . $attempts . ' — Username: ' . $username;
-
-		$upload_dir = wp_upload_dir();
-		$uploads_dir_path = trailingslashit( $upload_dir['basedir'] ) . 'wp-security-audit-log/failed-logins/';
-		$uploads_url = trailingslashit( $upload_dir['baseurl'] ) . 'wp-security-audit-log/failed-logins/';
-
-		// Check directory.
-		if ( $this->CheckDirectory( $uploads_dir_path ) ) {
-			$filename = 'failed_logins_usernames_' . date( 'Ymd' ) . '.log';
-			$fp = $uploads_dir_path . $filename;
-			$name_file = $uploads_url . $filename;
-			if ( ! $file = fopen( $fp, 'a' ) ) {
-				$i = 1;
-				$file_opened = false;
-				do {
-					$fp2 = substr( $fp, 0, -4 ) . '_' . $i . '.log';
-					if ( ! file_exists( $fp2 ) ) {
-						if ( $file = fopen( $fp2, 'a' ) ) {
-							$file_opened = true;
-							$name_file = $uploads_url . substr( $name_file, 0, -4 ) . '_' . $i . '.log';
-						}
-					} else {
-						$latest_filename = $this->GetLastModified( $uploads_dir_path, $filename );
-						$fp_last = $uploads_dir_path . $latest_filename;
-						if ( $file = fopen( $fp_last, 'a' ) ) {
-							$file_opened = true;
-							$name_file = $uploads_url . $latest_filename;
-						}
-					}
-					$i++;
-				} while ( ! $file_opened );
-			}
-			fwrite( $file, sprintf( "%s\n", $data ) );
-			fclose( $file );
-		}
-
-		return $name_file;
 	}
 
 	/**

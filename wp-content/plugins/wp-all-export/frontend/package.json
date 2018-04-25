@@ -1,0 +1,36 @@
+{
+  "name": "wpae-frontend",
+  "version": "1.0.0",
+  "description": "WordPress All Export Frontend Build Script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ovidiu Maghetiu",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-compress": "^1.3.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-html2js": "^0.3.6",
+    "grunt-ng-annotate": "^2.0.2",
+    "grunt-serve": "^0.1.6",
+    "grunt-contrib-connect": "^1.0.2"
+  },
+  "dependencies": {
+    "@iamadamjowett/angular-click-outside": "^2.10.1",
+    "angucomplete-alt": "^2.5.0",
+    "angular": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "dotjem-angular-tree": "git+https://github.com/dotJEM/angular-tree.git",
+    "grunt-contrib-sass": "^1.0.0",
+    "install": "^0.8.2",
+    "jquery.tipsy": "^1.0.3",
+    "ng-slide-down": "^0.4.2",
+    "npm": "^3.10.9"
+  }
+}

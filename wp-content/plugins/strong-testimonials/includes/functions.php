@@ -459,55 +459,6 @@ function wpmtst_nested_cats( $value, $parent = 0, $level = 0 ) {
 	}
 }
 
-/**
- * @return array|mixed|null|object
- */
-function wpmtst_get_views() {
-	global $wpdb;
-	$wpdb->show_errors();
-	$table_name = $wpdb->prefix . 'strong_views';
-	$results = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY id ASC", ARRAY_A );
-	$wpdb->hide_errors();
-
-	if ( $wpdb->last_error ) {
-		deactivate_plugins( 'strong-testimonials/strong-testimonials.php' );
-		$message = '<p><span style="color: #CD0000;">';
-		$message .= __( 'An error occurred.', 'strong-testimonials' ) . '</span>&nbsp;';
-		$message .= __( 'The plugin has been deactivated.', 'strong-testimonials' ) . '&nbsp;';
-		$message .= sprintf( __( 'Please <a href="%s" target="_blank">open a support ticket</a>.', 'strong-testimonials' ), esc_url( 'https://support.strongplugins.com/new-ticket/' ) ) . '</p>';
-		$message .= '<p>' . sprintf( __( '<a href="%s">Go back to Dashboard</a>', 'strong-testimonials' ), esc_url( admin_url() ) ) . '</p>';
-		wp_die( sprintf( '<div class="error strong-view-error">%s</div>', $message ) );
-	}
-
-	return $results;
-}
-
-/**
- * @param $views
- *
- * @return mixed
- */
-function wpmtst_unserialize_views( $views ) {
-	foreach( $views as $key => $view ) {
-		$views[$key]['data'] = unserialize( $view['value'] );
-	}
-
-	return $views;
-}
-
-/**
- * @param $id
- *
- * @return array
- */
-function wpmtst_get_view( $id ) {
-	global $wpdb;
-	$table_name = $wpdb->prefix . 'strong_views';
-	$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d", (int) $id ), ARRAY_A );
-
-	return $row;
-}
-
 function wpmtst_sort_array_by_name( $a, $b ) {
 	if ( $a['name'] == $b['name'] )
 		return 0;
@@ -734,29 +685,6 @@ function wpmtst_single_template_add_content( $content ) {
 add_filter( 'the_content', 'wpmtst_single_template_add_content' );
 
 /**
- * Find the view for the single template.
- *
- * @return bool|array
- */
-function wpmtst_find_single_template_view() {
-	$views = wpmtst_get_views();
-	/*
-	 * [id] => 1
-     * [name] => TEST
-     * [value] => {serialized_array}
-	 */
-
-	foreach ( $views as $view ) {
-		$view_data = maybe_unserialize( $view['value'] );
-		if ( isset( $view_data['mode'] ) && 'single_template' == $view_data['mode'] ) {
-			return $view_data;
-		}
-	}
-
-	return false;
-}
-
-/**
  * Frequent plugin checks.
  *
  * A combination of an array of frequent plugin names, and core's is_plugin_active functions
@@ -871,26 +799,26 @@ function wpmtst_trim_array( $input ) {
 }
 
 if ( ! function_exists( 'normalize_empty_atts' ) ) {
-/**
- * Normalize empty shortcode attributes.
- *
- * Turns atts into tags - brilliant!
- * Thanks http://wordpress.stackexchange.com/a/123073/32076
- *
- * @param $atts
- *
- * @return mixed
- */
-function normalize_empty_atts( $atts ) {
-    if ( ! empty( $atts ) ) {
-        foreach ( $atts as $attribute => $value ) {
-            if ( is_int( $attribute ) ) {
-                $atts[ strtolower( $value ) ] = true;
-                unset( $atts[ $attribute ] );
+    /**
+     * Normalize empty shortcode attributes.
+     *
+     * Turns atts into tags - brilliant!
+     * Thanks http://wordpress.stackexchange.com/a/123073/32076
+     *
+     * @param $atts
+     *
+     * @return mixed
+     */
+    function normalize_empty_atts( $atts ) {
+        if ( ! empty( $atts ) ) {
+            foreach ( $atts as $attribute => $value ) {
+                if ( is_int( $attribute ) ) {
+                    $atts[ strtolower( $value ) ] = true;
+                    unset( $atts[ $attribute ] );
+                }
             }
         }
-    }
 
-    return $atts;
-}
+        return $atts;
+    }
 }

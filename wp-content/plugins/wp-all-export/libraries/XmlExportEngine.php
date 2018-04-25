@@ -114,11 +114,37 @@ if ( ! class_exists('XmlExportEngine') ){
 				'name'  => 'Status',
 				'type'  => 'status'
 			),
+
 			array(
-				'label' => 'author', 
-				'name'  => 'Author',
+				'label' => 'author',
+				'name'  => 'Author ID',
 				'type'  => 'author'
 			),
+
+			array(
+				'label' => 'author_username',
+				'name'  => 'Author Username',
+				'type'  => 'author_username'
+			),
+
+			array(
+				'label' => 'author_email',
+				'name'  => 'Author Email',
+				'type'  => 'author_email'
+			),
+
+			array(
+				'label' => 'author_first_name',
+				'name'  => 'Author First Name',
+				'type'  => 'author_first_name'
+			),
+
+			array(
+				'label' => 'author_last_name',
+				'name'  => 'Author Last Name',
+				'type'  => 'author_last_name'
+			),
+
 			array(
 				'label' => 'slug', 
 				'name'  => 'Slug',
@@ -259,6 +285,12 @@ if ( ! class_exists('XmlExportEngine') ){
 									'type'  => 'image_alt',
 									'auto'  => 1
 								),
+                                array(
+                                    'name'  => 'Featured',
+                                    'label' => 'featured',
+                                    'type'  => 'image_featured',
+                                    'auto'  => 1
+                                ),
 							)
 						),
 						'attachments' => array(
@@ -544,7 +576,7 @@ if ( ! class_exists('XmlExportEngine') ){
 			$this->available_data['default_fields'] = apply_filters('wp_all_export_default_fields', self::$default_fields);
 			$this->available_data['other_fields']   = apply_filters('wp_all_export_other_fields', $this->other_fields);
 
-			$this->available_data = apply_filters("wp_all_export_available_data", $this->available_data);;
+			$this->available_data = apply_filters("wp_all_export_available_data", $this->available_data);
 
 			return $this->available_data;
 
@@ -845,6 +877,10 @@ if ( ! class_exists('XmlExportEngine') ){
 													break;
 												case 'parent':
 												case 'author':
+												case 'author_username':
+												case 'author_email':
+												case 'author_first_name':
+												case 'author_last_name':
 												case 'status':
 												case 'title':
 												case 'content':
@@ -976,7 +1012,7 @@ if ( ! class_exists('XmlExportEngine') ){
 									if ( $field_type == 'cf' && $field_name == '_thumbnail_id' ) continue;
 									?>
 									<option 
-										value="<?php echo $field_type;?>" 
+										value="<?php echo $field_type;?>"
 										label="<?php echo $field_label;?>" 									
 										options="<?php echo $field_options; ?>"><?php echo $field_name;?></option>
 									<?php								
@@ -1103,7 +1139,7 @@ if ( ! class_exists('XmlExportEngine') ){
 					}			
 				}			
 					
-				if ( ! empty($field_keys)){						
+				if (!empty($field_keys)){
 					$result['custom_xml_template_options'] = $this->get_fields_options( $field_keys );						
 				}
 			}

@@ -6,13 +6,6 @@
 Class MetaSlider_Admin_Pages extends MetaSliderPlugin {
 
     /**
-     * The minimum capability to view the admin page
-     *
-     * @var string $capability
-     */
-    private $capability;
-
-    /**
      * The MetaSlider plugin class
      *
      * @var object $plugin
@@ -33,7 +26,6 @@ Class MetaSlider_Admin_Pages extends MetaSliderPlugin {
      */
     public function __construct($plugin) {
         $this->plugin = $plugin;
-        $this->capability = apply_filters('metaslider_capability', 'edit_others_posts');
         $this->notices = new MetaSlider_Notices($plugin);
         $this->tour = new MetaSlider_Tour($plugin, 'toplevel_page_metaslider');
         add_action('admin_enqueue_scripts', array($this, 'load_icon_css'));
@@ -144,7 +136,9 @@ Class MetaSlider_Admin_Pages extends MetaSliderPlugin {
             return false;
         }
         $this->current_page = $slug;
-        $page = ('' == $parent) ? add_menu_page($title, $title, $this->capability, $slug, array($this, $method)) : add_submenu_page($parent, $title, $title, $this->capability, $slug, array($this, $method));
+        $capability = apply_filters('metaslider_capability', 'edit_others_posts');
+
+        $page = ('' == $parent) ? add_menu_page($title, $title, $capability, $slug, array($this, $method)) : add_submenu_page($parent, $title, $title, $capability, $slug, array($this, $method));
         
         // Load assets on all pages
         add_action('load-' . $page, array($this, 'fix_conflicts'));

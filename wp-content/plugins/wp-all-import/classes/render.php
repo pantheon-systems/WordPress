@@ -52,7 +52,13 @@ if ( ! class_exists('PMXI_Render')){
 				$is_render_collapsed = $ind > 1;			
 				if ($lvl) echo '<div class="csv-tag opening"><span class="csv-tag-name">' . $el->nodeName . '</span>'; echo '</div>';
 				if (1 == $el->childNodes->length and $el->childNodes->item(0) instanceof DOMText) {
-					self::render_csv_text(trim($el->childNodes->item(0)->wholeText), $shorten, $is_render_collapsed);
+					$child = $el->childNodes->item(0);
+					if (!empty($child->wholeText)){
+						self::render_csv_text(trim($child->wholeText), $shorten, $is_render_collapsed);
+					}
+					elseif (is_callable(array($child, 'nodeValue'), true) && !empty($child->nodeValue)){
+						self::render_csv_text(trim($child->nodeValue), $shorten, $is_render_collapsed);
+					}
 				} else {
 					echo '<div class="csv-content' . ($is_render_collapsed ? ' collapsed' : '') . '">';
 					$indexes = array();										
@@ -99,7 +105,8 @@ if ( ! class_exists('PMXI_Render')){
 			echo '<div class="xml-content textonly' . ($is_short ? ' short' : '') . ($is_render_collapsed ? ' collapsed' : '') . ' '. (is_numeric($text) ? 'is_numeric' : '') .'">' . $newtext . $more . '</div>';
 		}
 		public static $option_paths = array();
-		public static function render_xml_elements_for_filtring(DOMElement $el, $path ='', $lvl = 0){			
+		public static function render_xml_elements_for_filtring(DOMElement $el, $originPath ='', $lvl = 0){
+			$path = $originPath;
 			if ("" != $path){ 
 				if ($lvl > 1) $path .= "->" . $el->nodeName; else $path = $el->nodeName; 
 				if (empty(self::$option_paths[$path])) 
@@ -111,7 +118,12 @@ if ( ! class_exists('PMXI_Render')){
 			else $path = $el->nodeName;		
 					
 			foreach ($el->attributes as $attr) {
-				echo '<option value="'.$path .'['. self::$option_paths[$path] .']'. '/@' . $attr->nodeName.'">'. $path .'['. self::$option_paths[$path] .']'. '@' . $attr->nodeName . '</option>';
+				if (empty($originPath)){
+					echo '<option value="@' . $attr->nodeName.'">@' . $attr->nodeName . '</option>';
+				}
+				else{
+					echo '<option value="'.$path .'['. self::$option_paths[$path] .']'. '/@' . $attr->nodeName.'">'. $path .'['. self::$option_paths[$path] .']'. '@' . $attr->nodeName . '</option>';
+				}
 			}
 			if ($el->hasChildNodes()) {
 				foreach ($el->childNodes as $child) {
@@ -123,6 +135,8 @@ if ( ! class_exists('PMXI_Render')){
 
 		public static function render_xml_element(DOMElement $el, $shorten = false, $path = '/', $ind = 1, $lvl = 0)
 		{
+			$render_whole_tree = apply_filters('wp_all_import_is_render_whole_xml_tree', true);
+
 			$path .= $el->nodeName;	
 			$alternativePath = $path;	
 			if ( ! $el->parentNode instanceof DOMDocument and $ind > 0) {
@@ -140,14 +154,22 @@ if ( ! class_exists('PMXI_Render')){
 				}
 				echo '<div class="xml-tag opening">&lt;<span class="xml-tag-name">' . $el->nodeName . '</span>'; self::render_xml_attributes($el, $path . '/'); echo '&gt;</div>';
 				if (1 == $el->childNodes->length and $el->childNodes->item(0) instanceof DOMText) {
-					self::render_xml_text(trim($el->childNodes->item(0)->wholeText), $shorten, $is_render_collapsed);
+					$item = $el->childNodes->item(0);
+					if (!empty($item->wholeText)){
+						self::render_xml_text(trim($item->wholeText), $shorten, $is_render_collapsed);
+					}
+					else{
+						self::render_xml_text(trim($item->nodeValue), $shorten, $is_render_collapsed);
+					}
 				} else {
 					echo '<div class="xml-content' . ($is_render_collapsed ? ' collapsed' : '') . '">';
-					$indexes = array();										
+					$indexes = array();
 					foreach ($el->childNodes as $eli => $child) {
 						if ($child instanceof DOMElement) {
 							empty($indexes[$child->nodeName]) and $indexes[$child->nodeName] = 0; $indexes[$child->nodeName]++;
-							self::render_xml_element($child, $shorten, $path . '/', $indexes[$child->nodeName], $lvl + 1); 
+							if ( $render_whole_tree || $indexes[$child->nodeName] === 1){
+								self::render_xml_element($child, $shorten, $path . '/', $indexes[$child->nodeName], $lvl + 1);
+							}
 						} elseif ($child instanceof DOMCdataSection) {
 							self::render_xml_text(trim($child->wholeText), $shorten, false, true); 
 						} elseif ($child instanceof DOMText) {							

@@ -151,13 +151,17 @@ class WSAL_Sensors_Comments extends WSAL_AbstractSensor {
 						'Date' => $comment->comment_date,
 						'CommentLink' => '<a target="_blank" href="' . $comment_link . '">' . $comment->comment_date . '</a>',
 					);
-					if ( ! username_exists( $comment->comment_author ) ) {
+
+					// Get user data.
+					$user_data = get_user_by( 'email', $comment->comment_author_email );
+
+					if ( ! $user_data ) {
 						// Set the fields.
 						$fields['CommentMsg'] = sprintf( 'A comment was posted in response to the post <strong>%s</strong>. The comment was posted by <strong>%s</strong>', $post->post_title, $this->CheckAuthor( $comment ) );
 						$fields['Username'] = 'Website Visitor';
+						$this->plugin->alerts->Trigger( 2126, $fields );
 					} else {
 						// Get user roles.
-						$user_data = get_user_by( 'login', $comment->comment_author );
 						$user_roles = $user_data->roles;
 
 						// Check if superadmin.
@@ -166,12 +170,11 @@ class WSAL_Sensors_Comments extends WSAL_AbstractSensor {
 						}
 
 						// Set the fields.
-						$fields['Username'] = $comment->comment_author;
+						$fields['Username'] = $user_data->user_login;
 						$fields['CurrentUserRoles'] = $user_roles;
 						$fields['CommentMsg'] = sprintf( 'Posted a comment in response to the post <strong>%s</strong>', $post->post_title );
+						$this->plugin->alerts->Trigger( 2099, $fields );
 					}
-
-					$this->plugin->alerts->Trigger( 2099, $fields );
 				}
 			}
 		}

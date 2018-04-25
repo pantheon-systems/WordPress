@@ -582,7 +582,12 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		// Check if file has been uploaded
 		if (!$chunks || $chunk == $chunks - 1) {
 			// Strip the temp .part suffix off 
-			rename("{$filePath}.part", $filePath); chmod($filePath, 0755);
+			$res = rename("{$filePath}.part", $filePath);
+			if (!$res){
+				@copy("{$filePath}.part", $filePath);
+				@unlink("{$filePath}.part");
+			}
+			chmod($filePath, 0755);
 			delete_transient( self::$upload_transient );
 
 			$errors = new WP_Error;

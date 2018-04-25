@@ -49,14 +49,14 @@ Class MetaSlider_Tour {
 				'next_language' => __('Next', 'ml-slider'),
 				'skip_language' => __('Skip this step', 'ml-slider'),
 				'upgrade_link' => metaslider_get_upgrade_link(),
-				'is_pro' => metaslider_is_pro_active(),
+				'is_pro' => metaslider_pro_is_active(),
 				'step1' => array(
 					'title' => __("Add A Slide", "ml-slider"),
 					'message' => __("Congratulations! Now that you've created a slideshow, click here to add a slide.", "ml-slider")
 				),
 				'step2a' => array(
 					'title' => __("Select Slide Type", "ml-slider"),
-					'message' => metaslider_is_pro_active() ? 'Thanks for activating the Add-on Pack! Premium users can choose from any of these slide types' : __("Premium users that have the Add-on Pack activated can access additional slide types!", "ml-slider")
+					'message' => metaslider_pro_is_active() ? 'Thanks for activating the Add-on Pack! Premium users can choose from any of these slide types' : __("Premium users that have the Add-on Pack activated can access additional slide types!", "ml-slider")
 				),
 				'step2b' => array(
 					'title' => __("Select Media", "ml-slider"),

@@ -4,7 +4,7 @@
  * Plugin URI: http://www.wpsecurityauditlog.com/
  * Description: Identify WordPress security issues before they become a problem. Keep track of everything happening on your WordPress including WordPress users activity. Similar to Windows Event Log and Linux Syslog, WP Security Audit Log generates a security alert for everything that happens on your WordPress blogs and websites. Use the Audit Log Viewer included in the plugin to see all the security alerts.
  * Author: WP White Security
- * Version: 3.0.1
+ * Version: 3.1.6
  * Text Domain: wp-security-audit-log
  * Author URI: http://www.wpsecurityauditlog.com/
  * License: GPL2
@@ -54,7 +54,7 @@ if ( ! function_exists( 'wsal_freemius' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version = '3.0.1';
+		public $version = '3.1.6';
 
 		// Plugin constants.
 		const PLG_CLS_PRFX = 'WSAL_';
@@ -219,6 +219,12 @@ if ( ! function_exists( 'wsal_freemius' ) ) {
 			// Render Login Page Notification.
 			add_filter( 'login_message', array( $this, 'render_login_page_message' ), 10, 1 );
 
+			// Cron job to delete alert 1003 for the last day.
+			add_action( 'wsal_delete_logins', array( $this, 'delete_failed_logins' ) );
+			if ( ! wp_next_scheduled( 'wsal_delete_logins' ) ) {
+				wp_schedule_event( time(), 'daily', 'wsal_delete_logins' );
+			}
+
 			// Register freemius uninstall event.
 			wsal_freemius()->add_action( 'after_uninstall', array( $this, 'wsal_freemius_uninstall_cleanup' ) );
 
@@ -243,6 +249,9 @@ if ( ! function_exists( 'wsal_freemius' ) ) {
 				'br' => array(),
 				'em' => array(),
 				'strong' => array(),
+				'p' => array(
+					'class' => array(),
+				),
 			);
 		}
 
@@ -498,6 +507,9 @@ if ( ! function_exists( 'wsal_freemius' ) ) {
 			if ( $old_version !== $new_version ) {
 				$this->Update( $old_version, $new_version );
 			}
+
+			// Generate index.php for uploads directory.
+			$this->settings->generate_index_files();
 		}
 
 		/**
@@ -562,7 +574,7 @@ if ( ! function_exists( 'wsal_freemius' ) ) {
 			$old_disabled = $this->GetGlobalOption( 'disabled-alerts' );
 			// If old setting is empty disable alert 2099 by default.
 			if ( empty( $old_disabled ) ) {
-				$this->settings->SetDisabledAlerts( array( 2099 ) );
+				$this->settings->SetDisabledAlerts( array( 2099, 2126 ) );
 			}
 
 			$log_404 = $this->GetGlobalOption( 'log-404' );
@@ -918,6 +930,36 @@ if ( ! function_exists( 'wsal_freemius' ) ) {
 		}
 
 		/**
+		 * Clear last day's failed login alert.
+		 */
+		public function delete_failed_logins() {
+			// Set the dates.
+			list( $y, $m, $d ) = explode( '-', date( 'Y-m-d' ) );
+
+			// Site id.
+			$site_id = (function_exists( 'get_current_blog_id' ) ? get_current_blog_id() : 0);
+
+			// New occurrence object.
+			$occurrence = new WSAL_Models_Occurrence();
+			$alerts = $occurrence->check_alert_1003(
+				array(
+					1003,
+					$site_id,
+					mktime( 0, 0, 0, $m, $d - 1, $y ) + 1,
+					mktime( 0, 0, 0, $m, $d, $y ),
+				)
+			);
+
+			// Alerts exists then continue.
+			if ( ! empty( $alerts ) ) {
+				foreach ( $alerts as $alert ) {
+					// Flush the usernames meta data.
+					$alert->UpdateMetaValue( 'Users', array() );
+				}
+			}
+		}
+
+		/**
 		 * Add callback to be called when a cleanup operation is required.
 		 *
 		 * @param callable $hook - Hook name.
@@ -1078,13 +1120,32 @@ if ( ! function_exists( 'wsal_freemius' ) ) {
 
 				// Default message.
 				if ( ! $message ) {
-					$message = wp_kses( __( 'For security and auditing purposes, a record of all of your logged-in actions and changes within the WordPress dashboard will be recorded in an audit log with the <a href="https://www.wpsecurityauditlog.com/" target="_blank">WP Security Audit Log plugin</a>. The audit log also includes the IP address where you accessed this site from.', 'wp-security-audit-log' ), $this->allowed_html_tags );
+					$message = wp_kses( __( '<p class="message">For security and auditing purposes, a record of all of your logged-in actions and changes within the WordPress dashboard will be recorded in an audit log with the <a href="https://www.wpsecurityauditlog.com/" target="_blank">WP Security Audit Log plugin</a>. The audit log also includes the IP address where you accessed this site from.</p>', 'wp-security-audit-log' ), $this->allowed_html_tags );
+				} else {
+					$message = '<p class="message">' . $message . '</p>';
 				}
 			}
+
 			// Return message.
 			return $message;
 		}
 
+		/**
+		 * Error Logger
+		 *
+		 * Logs given input into debug.log file in debug mode.
+		 *
+		 * @param mix $message - Error message.
+		 */
+		function wsal_log( $message ) {
+			if ( WP_DEBUG === true ) {
+				if ( is_array( $message ) || is_object( $message ) ) {
+					error_log( print_r( $message, true ) );
+				} else {
+					error_log( $message );
+				}
+			}
+		}
 	}
 
 	// Profile WSAL load time.

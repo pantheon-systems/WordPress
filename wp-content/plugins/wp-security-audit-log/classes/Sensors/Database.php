@@ -58,7 +58,7 @@ class WSAL_Sensors_Database extends WSAL_AbstractSensor {
 			// Filter $_SERVER array for security.
 			$server_array = filter_input_array( INPUT_SERVER );
 
-			$actype = basename( $server_array['SCRIPT_NAME'], '.php' );
+			$actype = ( isset( $server_array['SCRIPT_NAME'] ) ) ? basename( $server_array['SCRIPT_NAME'], '.php' ) : false;
 			$alert_options = $this->GetActionType( $actype );
 		}
 
@@ -109,7 +109,7 @@ class WSAL_Sensors_Database extends WSAL_AbstractSensor {
 			// Filter $_SERVER array for security.
 			$server_array = filter_input_array( INPUT_SERVER );
 
-			$actype = basename( $server_array['SCRIPT_NAME'], '.php' );
+			$actype = ( isset( $server_array['SCRIPT_NAME'] ) ) ? basename( $server_array['SCRIPT_NAME'], '.php' ) : false;
 			$alert_options = $this->GetActionType( $actype );
 
 			foreach ( $type_queries as $query_type => $table_names ) {

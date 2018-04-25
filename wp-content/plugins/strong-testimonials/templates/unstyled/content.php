@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Unstyled
- * Description: A completely unstyled template for CSS experts. If using this template in a slideshow, you will probably need to add some structural CSS &ndash; use the default template as a guide.
+ * Description: A completely unstyled template for CSS experts.
  */
 ?>
 <?php do_action( 'wpmtst_before_view' ); ?>

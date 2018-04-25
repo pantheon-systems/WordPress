@@ -101,7 +101,15 @@ class WSAL_Sensors_UserProfile extends WSAL_AbstractSensor {
 		// Filter $_POST array for security.
 		$post_array = filter_input_array( INPUT_POST );
 
-		if ( isset( $post_array['_wpnonce'] ) && ! wp_verify_nonce( $post_array['_wpnonce'], 'update-user_' . $user_id ) ) {
+		if ( ! isset( $post_array['changeit'] ) ) {
+			if ( isset( $post_array['_wpnonce'] )
+				&& ! wp_verify_nonce( $post_array['_wpnonce'], 'update-user_' . $user_id ) ) {
+				return false;
+			}
+		} elseif ( isset( $post_array['changeit'] )
+			&& 'Change' === $post_array['changeit']
+			&& isset( $post_array['_wpnonce'] )
+			&& ! wp_verify_nonce( $post_array['_wpnonce'], 'bulk-users' ) ) {
 			return false;
 		}
 
@@ -126,8 +134,17 @@ class WSAL_Sensors_UserProfile extends WSAL_AbstractSensor {
 			}
 			$old_roles = array_diff( $old_roles, $bbpress_roles );
 		}
+
+		// Get roles.
 		$old_role = count( $old_roles ) ? implode( ', ', $old_roles ) : '';
 		$new_role = $role;
+
+		// If multisite, then get its URL.
+		if ( $this->plugin->IsMultisite() ) {
+			$site_id = get_current_blog_id();
+		}
+
+		// Alert if roles are changed.
 		if ( $old_role != $new_role ) {
 			$this->plugin->alerts->TriggerIf(
 				4002, array(
@@ -135,6 +152,7 @@ class WSAL_Sensors_UserProfile extends WSAL_AbstractSensor {
 					'TargetUsername' => $user->user_login,
 					'OldRole' => $old_role,
 					'NewRole' => $new_role,
+					'multisite_text' => $this->plugin->IsMultisite() ? $site_id : false,
 				), array( $this, 'MustNotContainUserChanges' )
 			);
 		}

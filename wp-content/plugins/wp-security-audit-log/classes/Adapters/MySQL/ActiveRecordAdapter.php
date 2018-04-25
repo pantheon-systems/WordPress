@@ -47,10 +47,19 @@ class WSAL_Adapters_MySQL_ActiveRecord implements WSAL_Adapters_ActiveRecordInte
 	/**
 	 * Method: Constructor.
 	 *
-	 * @param array $conn - Connection array.
+	 * @param object $conn - DB connection object.
 	 */
 	public function __construct( $conn ) {
 		$this->connection = $conn;
+	}
+
+	/**
+	 * Method: Get connection.
+	 *
+	 * @return object – DB connection object.
+	 */
+	public function get_connection() {
+		return $this->connection;
 	}
 
 	/**
@@ -143,7 +152,25 @@ class WSAL_Adapters_MySQL_ActiveRecord implements WSAL_Adapters_ActiveRecordInte
 	 */
 	public function Uninstall() {
 		$_wpdb = $this->connection;
-		$_wpdb->query( $this->_GetUninstallQuery() );
+
+		// Check if table exists.
+		if ( $this->table_exists() ) {
+			$_wpdb->query( $this->_GetUninstallQuery() );
+		}
+	}
+
+	/**
+	 * Check if table exists.
+	 *
+	 * @return bool – True if exists, false if not.
+	 */
+	public function table_exists() {
+		$_wpdb = $this->connection;
+
+		// Query table exists.
+		$table_exists_query = 'SHOW TABLES LIKE "' . $this->GetTable() . '"';
+		$result = $_wpdb->query( $table_exists_query );
+		return $result;
 	}
 
 	/**
@@ -431,14 +458,17 @@ class WSAL_Adapters_MySQL_ActiveRecord implements WSAL_Adapters_ActiveRecordInte
 	 * @param timestamp $_end_timestamp - To created_on.
 	 * @param timestamp $_next_date - (Optional) Created on >.
 	 * @param int       $_limit - (Optional) Limit.
+	 * @param string    $_post_types - (Optional) Post types.
+	 * @param string    $_post_statuses - (Optional) Post statuses.
 	 * @return array Report results
 	 */
-	public function GetReporting( $_site_id, $_user_id, $_role_name, $_alert_code, $_start_timestamp, $_end_timestamp, $_next_date = null, $_limit = 0 ) {
+	public function GetReporting( $_site_id, $_user_id, $_role_name, $_alert_code, $_start_timestamp, $_end_timestamp, $_next_date = null, $_limit = 0, $_post_types = '', $_post_statuses = '' ) {
 		global $wpdb;
 		$user_names = $this->GetUserNames( $_user_id );
 
 		$_wpdb = $this->connection;
 		$_wpdb->set_charset( $_wpdb->dbh, 'utf8mb4', 'utf8mb4_general_ci' );
+
 		// Tables.
 		$meta = new WSAL_Adapters_MySQL_Meta( $this->connection );
 		$table_meta = $meta->GetTable(); // Metadata.
@@ -447,40 +477,99 @@ class WSAL_Adapters_MySQL_ActiveRecord implements WSAL_Adapters_ActiveRecordInte
 
 		$condition_date = ! empty( $_next_date ) ? ' AND occ.created_on < ' . $_next_date : '';
 
-		$sql = "SELECT DISTINCT
-			occ.id,
-			occ.alert_id,
-			occ.site_id,
-			occ.created_on,
-			replace(replace(replace((
-				SELECT t1.value FROM $table_meta AS t1 WHERE t1.name = 'CurrentUserRoles' AND t1.occurrence_id = occ.id LIMIT 1), '[', ''), ']', ''), '\\'', '') AS roles,
-			(SELECT replace(t2.value, '\"','') FROM $table_meta as t2 WHERE t2.name = 'ClientIP' AND t2.occurrence_id = occ.id LIMIT 1) AS ip,
-			(SELECT replace(t3.value, '\"', '') FROM $table_meta as t3 WHERE t3.name = 'UserAgent' AND t3.occurrence_id = occ.id LIMIT 1) AS ua,
-			COALESCE(
-				(SELECT replace(t4.value, '\"', '') FROM $table_meta as t4 WHERE t4.name = 'Username' AND t4.occurrence_id = occ.id LIMIT 1),
-				(SELECT replace(t5.value, '\"', '') FROM $table_meta as t5 WHERE t5.name = 'CurrentUserID' AND t5.occurrence_id = occ.id LIMIT 1)
-			) as user_id
-			FROM $table_occ AS occ
-			JOIN $table_meta AS meta ON meta.occurrence_id = occ.id
+		if ( 'null' === $_post_types && 'null' === $_post_statuses ) {
+			$sql = "SELECT DISTINCT
+				occ.id,
+				occ.alert_id,
+				occ.site_id,
+				occ.created_on,
+				replace(replace(replace((SELECT t1.value FROM $table_meta AS t1 WHERE t1.name = 'CurrentUserRoles' AND t1.occurrence_id = occ.id LIMIT 1), '[', ''), ']', ''), '\\'', '') AS roles,
+				(SELECT replace(t2.value, '\"','') FROM $table_meta as t2 WHERE t2.name = 'ClientIP' AND t2.occurrence_id = occ.id LIMIT 1) AS ip,
+				(SELECT replace(t3.value, '\"', '') FROM $table_meta as t3 WHERE t3.name = 'UserAgent' AND t3.occurrence_id = occ.id LIMIT 1) AS ua,
+				COALESCE(
+					(SELECT replace(t4.value, '\"', '') FROM $table_meta as t4 WHERE t4.name = 'Username' AND t4.occurrence_id = occ.id LIMIT 1),
+					(SELECT replace(t5.value, '\"', '') FROM $table_meta as t5 WHERE t5.name = 'CurrentUserID' AND t5.occurrence_id = occ.id LIMIT 1)
+				) as user_id
+				FROM $table_occ AS occ
+				JOIN $table_meta AS meta ON meta.occurrence_id = occ.id
+				WHERE
+					(@siteId is NULL OR find_in_set(occ.site_id, @siteId) > 0)
+					AND (
+						@userId is NULL
+						OR (
+							(meta.name = 'CurrentUserID' AND find_in_set(meta.value, @userId) > 0)
+							OR
+							(meta.name = 'Username' AND replace(meta.value, '\"', '') IN ($user_names))
+						)
+					)
+					AND (
+						@roleName is NULL
+						OR (
+							meta.name = 'CurrentUserRoles'
+							AND
+							replace(replace(replace(meta.value, ']', ''), '[', ''), '\\'', '') REGEXP @roleName
+						)
+					)
+					AND (@alertCode is NULL OR find_in_set(occ.alert_id, @alertCode) > 0)
+					AND (@startTimestamp is NULL OR occ.created_on >= @startTimestamp)
+					AND (@endTimestamp is NULL OR occ.created_on <= @endTimestamp)
+					{$condition_date}
+				ORDER BY
+					created_on DESC
+			";
+		} else {
+			$sql = "SELECT
+				occ.id,
+				occ.alert_id,
+				occ.site_id,
+				occ.created_on,
+				replace(replace(replace((SELECT t1.value FROM $table_meta AS t1 WHERE t1.name = 'CurrentUserRoles' AND t1.occurrence_id = occ.id LIMIT 1), '[', ''), ']', ''), '\\'', '') AS roles,
+				(SELECT replace(t2.value, '\"','') FROM $table_meta as t2 WHERE t2.name = 'ClientIP' AND t2.occurrence_id = occ.id LIMIT 1) AS ip,
+				(SELECT replace(t3.value, '\"', '') FROM $table_meta as t3 WHERE t3.name = 'UserAgent' AND t3.occurrence_id = occ.id LIMIT 1) AS ua,
+				COALESCE(
+					(SELECT replace(t4.value, '\"', '') FROM $table_meta as t4 WHERE t4.name = 'Username' AND t4.occurrence_id = occ.id LIMIT 1),
+					(SELECT replace(t5.value, '\"', '') FROM $table_meta as t5 WHERE t5.name = 'CurrentUserID' AND t5.occurrence_id = occ.id LIMIT 1)
+				) as user_id
+			FROM
+				$table_occ as occ
 			WHERE
 				(@siteId is NULL OR find_in_set(occ.site_id, @siteId) > 0)
-				AND (@userId is NULL OR (
-					(meta.name = 'CurrentUserID' AND find_in_set(meta.value, @userId) > 0)
-				OR (meta.name = 'Username' AND replace(meta.value, '\"', '') IN ($user_names))
-				))
-				AND (@roleName is NULL OR (meta.name = 'CurrentUserRoles'
-				AND replace(replace(replace(meta.value, ']', ''), '[', ''), '\\'', '') REGEXP @roleName
-				))
+				AND (
+					@userId is NULL
+					OR (
+						EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='CurrentUserID' AND find_in_set(meta.value, @userId) > 0)
+						OR
+						EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='Username' AND replace(meta.value, '\"', '') IN ($user_names))
+					)
+				)
+				AND (
+					@roleName is NULL
+					OR
+					EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='CurrentUserRoles' AND replace(replace(replace(meta.value, ']', ''), '[', ''), '\\'', '') REGEXP @roleName)
+				)
 				AND (@alertCode is NULL OR find_in_set(occ.alert_id, @alertCode) > 0)
 				AND (@startTimestamp is NULL OR occ.created_on >= @startTimestamp)
 				AND (@endTimestamp is NULL OR occ.created_on <= @endTimestamp)
+				AND (
+					@postType is NULL
+					OR
+					EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='PostType' AND find_in_set(meta.value, @postType) > 0)
+				)
+				AND (
+					@postStatus is NULL
+					OR
+					EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='PostStatus' AND find_in_set(meta.value, @postStatus) > 0)
+				)
 				{$condition_date}
 			ORDER BY
 				created_on DESC
-		";
+			";
+		}
 
 		$_wpdb->query( "SET @siteId = $_site_id" );
 		$_wpdb->query( "SET @userId = $_user_id" );
+		$_wpdb->query( "SET @postType = $_post_types" );
+		$_wpdb->query( "SET @postStatus = $_post_statuses" );
 		$_wpdb->query( "SET @roleName = $_role_name" );
 		$_wpdb->query( "SET @alertCode = $_alert_code" );
 		$_wpdb->query( "SET @startTimestamp = $_start_timestamp" );
@@ -490,6 +579,7 @@ class WSAL_Adapters_MySQL_ActiveRecord implements WSAL_Adapters_ActiveRecordInte
 			$sql .= " LIMIT {$_limit}";
 		}
 		$results = $_wpdb->get_results( $sql );
+
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $row ) {
 				$sql = "SELECT t6.ID FROM $wpdb->users AS t6 WHERE t6.user_login = \"$row->user_id\"";
@@ -516,6 +606,8 @@ class WSAL_Adapters_MySQL_ActiveRecord implements WSAL_Adapters_ActiveRecordInte
 	public function CheckMatchReportCriteria( $criteria ) {
 		$_site_id = $criteria['siteId'];
 		$_user_id = $criteria['userId'];
+		$_post_types = $criteria['post_types'];
+		$_post_statuses = $criteria['post_statuses'];
 		$_role_name = $criteria['roleName'];
 		$_alert_code = $criteria['alertCode'];
 		$_start_timestamp = $criteria['startTimestamp'];
@@ -532,25 +624,66 @@ class WSAL_Adapters_MySQL_ActiveRecord implements WSAL_Adapters_ActiveRecordInte
 
 		$user_names = $this->GetUserNames( $_user_id );
 
-		$sql = "SELECT COUNT(DISTINCT occ.id) FROM $table_occ AS occ
-			JOIN $table_meta AS meta ON meta.occurrence_id = occ.id
-			WHERE
-				(@siteId is NULL OR find_in_set(occ.site_id, @siteId) > 0)
-				AND (@userId is NULL OR (
-					(meta.name = 'CurrentUserID' AND find_in_set(meta.value, @userId) > 0)
-				OR (meta.name = 'Username' AND replace(meta.value, '\"', '') IN ($user_names))
-				))
-				AND (@roleName is NULL OR (meta.name = 'CurrentUserRoles'
-				AND replace(replace(replace(meta.value, ']', ''), '[', ''), '\\'', '') REGEXP @roleName
-				))
-				AND (@alertCode is NULL OR find_in_set(occ.alert_id, @alertCode) > 0)
-				AND (@startTimestamp is NULL OR occ.created_on >= @startTimestamp)
-				AND (@endTimestamp is NULL OR occ.created_on <= @endTimestamp)
-				AND (@ipAddress is NULL OR (meta.name = 'ClientIP' AND find_in_set(meta.value, @ipAddress) > 0))
-			";
+		if ( 'null' === $_post_types && 'null' === $_post_statuses ) {
+			$sql = "SELECT COUNT(DISTINCT occ.id) FROM $table_occ AS occ
+				JOIN $table_meta AS meta ON meta.occurrence_id = occ.id
+				WHERE
+					(@siteId is NULL OR find_in_set(occ.site_id, @siteId) > 0)
+					AND (@userId is NULL OR (
+						(meta.name = 'CurrentUserID' AND find_in_set(meta.value, @userId) > 0)
+					OR (meta.name = 'Username' AND replace(meta.value, '\"', '') IN ($user_names))
+					))
+					AND (@roleName is NULL OR (meta.name = 'CurrentUserRoles'
+					AND replace(replace(replace(meta.value, ']', ''), '[', ''), '\\'', '') REGEXP @roleName
+					))
+					AND (@alertCode is NULL OR find_in_set(occ.alert_id, @alertCode) > 0)
+					AND (@startTimestamp is NULL OR occ.created_on >= @startTimestamp)
+					AND (@endTimestamp is NULL OR occ.created_on <= @endTimestamp)
+					AND (@ipAddress is NULL OR (meta.name = 'ClientIP' AND find_in_set(meta.value, @ipAddress) > 0))
+				";
+		} else {
+			$sql = "SELECT COUNT(DISTINCT occ.id)
+				FROM $table_occ AS occ
+				WHERE
+					(@siteId is NULL OR find_in_set(occ.site_id, @siteId) > 0)
+					AND (
+						@userId is NULL
+						OR (
+							EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='CurrentUserID' AND find_in_set(meta.value, @userId) > 0)
+							OR
+							EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='Username' AND replace(meta.value, '\"', '') IN ($user_names))
+						)
+					)
+					AND (
+						@roleName is NULL
+						OR
+						EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='CurrentUserRoles' AND replace(replace(replace(meta.value, ']', ''), '[', ''), '\\'', '') REGEXP @roleName)
+					)
+					AND (@alertCode is NULL OR find_in_set(occ.alert_id, @alertCode) > 0)
+					AND (@startTimestamp is NULL OR occ.created_on >= @startTimestamp)
+					AND (@endTimestamp is NULL OR occ.created_on <= @endTimestamp)
+					AND (
+						@ipAddress is NULL
+						OR
+						EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='ClientIP' AND find_in_set(meta.value, @ipAddress) > 0)
+					)
+					AND (
+						@postType is NULL
+						OR
+						EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='PostType' AND find_in_set(meta.value, @postType) > 0)
+					)
+					AND (
+						@postStatus is NULL
+						OR
+						EXISTS(SELECT 1 FROM $table_meta as meta WHERE meta.occurrence_id = occ.id AND meta.name='PostStatus' AND find_in_set(meta.value, @postStatus) > 0)
+					)
+				";
+		}
 
 		$_wpdb->query( "SET @siteId = $_site_id" );
 		$_wpdb->query( "SET @userId = $_user_id" );
+		$_wpdb->query( "SET @postType = $_post_types" );
+		$_wpdb->query( "SET @postStatus = $_post_statuses" );
 		$_wpdb->query( "SET @roleName = $_role_name" );
 		$_wpdb->query( "SET @alertCode = $_alert_code" );
 		$_wpdb->query( "SET @startTimestamp = $_start_timestamp" );

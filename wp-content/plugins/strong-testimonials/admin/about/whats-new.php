@@ -1,6 +1,8 @@
+
 <h2>Now Even Stronger</h2>
 
-<p class="lead-description">Version 2.30 adds highly requested features and fixes one bug.</p>
+<p class="lead-description">Version 2.30 adds highly requested features, improves compatibility and fixes bugs.</p>
+
 <div class="feature-section one-col">
     <div class="col">
         <p>NEW: Option to select the font color in views. Finally!</p>
@@ -12,10 +14,28 @@
         <p>IMPROVED: Simplified slideshow CSS will make adding custom CSS simpler.</p>
         <p>NEW: Option to disable touch swipe navigation to improve slideshow behavior on mobile devices.</p>
         <p>FIXED: An intermittent bug in the slideshow in Chrome.</p>
+
+        <div class="feature-section-sub">
+
+            <h3 class="heading">Point Releases</h3>
+
+            <p>Bug fixes and improved compatibility. <a href="https://wordpress.org/plugins/strong-testimonials/#developers" target="_blank">Read changelog on wordpress.org</a>.</p>
+
+            <ul>
+                <li>Version 2.30.1</li>
+                <li>Version 2.30.2</li>
+                <li>Version 2.30.3</li>
+                <li>Version 2.30.4</li>
+                <li>Version 2.30.5</li>
+                <li>Version 2.30.6</li>
+            </ul>
+
+        </div>
     </div>
 </div>
 
 <p class="lead-description">Version 2.29 improves Captcha options and fixes two bugs.</p>
+
 <div class="feature-section one-col">
     <div class="col">
         <p>NEW: Integration with Google Captcha by BestWebSoft. This allows use of either Invisible reCaptcha and reCatpcha V2, both excellent choices for modern spam warfare.</p>
@@ -29,6 +49,7 @@
 </div>
 
 <p class="lead-description">Version 2.28 improves compatibility and adds some new features.</p>
+
 <div class="feature-section one-col">
     <div class="col">
         <p>NEW: Compatibility settings for sites that use Ajax page loading via theme or plugin.</p>
@@ -39,23 +60,5 @@
         <p>FIXED: Bug where standard pagination failed to include a trailing slash.</p>
         <p>FIXED: Capabilities check in multisite.</p>
         <p>IMPROVED: Many functions were refactored into classes to improve performance and future development.</p>
-    </div>
-</div>
-
-<p class="lead-description">Version 2.27 adds some new features, fixes a few bugs and improves compatibility.</p>
-<div class="feature-section one-col">
-    <div class="col">
-        <p>FIXED: Optional loading of Font Awesome.</p>
-        <p>FIXED: Width on double-digit pagination controls in Modern template.</p>
-        <p>FIXED: Hide slider controls if no slides are present.</p>
-        <p>FIXED: CSS for slider controls in Internet Explorer 11.</p>
-        <p>NEW: Unique user capabilities for workflow control.</p>
-        <p>NEW: Option to set checkbox field on by default.</p>
-        <p>NEW: Option to exclude from Lazy Loading Responsive Images plugin (on by default).</p>
-        <p>NEW: Filters to "Read more" link text and URL.</p>
-        <p>NEW: Filter to form redirect URL.</p>
-        <p>NEW: Filter to skip prerender (for compatibility).</p>
-        <p>NEW: Filters for styles, scripts and script vars.</p>
-        <p>Minor refactoring for improved performance.</p>
     </div>
 </div>

@@ -78,9 +78,34 @@ if ( ! class_exists('XmlExportWooCommerceCoupon') )
 			),
 			array(
 				'label' => 'author', 
-				'name'  => 'Author',
+				'name'  => 'Author ID',
 				'type'  => 'author'
 			),
+
+			array(
+				'label' => 'author_username',
+				'name'  => 'Author Username',
+				'type'  => 'author'
+			),
+
+			array(
+				'label' => 'author_email',
+				'name'  => 'Author Email',
+				'type'  => 'author'
+			),
+
+			array(
+				'label' => 'author_first_name',
+				'name'  => 'Author First Name',
+				'type'  => 'author'
+			),
+
+			array(
+				'label' => 'author_last_name',
+				'name'  => 'Author Last Name',
+				'type'  => 'author'
+			),
+
 			array(
 				'label' => 'slug', 
 				'name'  => 'Slug',

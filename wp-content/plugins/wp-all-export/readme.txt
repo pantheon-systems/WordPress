@@ -1,11 +1,11 @@
 === Export WordPress data to XML/CSV ===
 Contributors: soflyy, wpallimport
 Requires at least: 4.1
-Tested up to: 4.9
-Stable tag: 1.1.5
+Tested up to: 4.9.4
+Stable tag: 1.2.0
 Tags: wordpress csv export, wordpress xml export, xml, csv, datafeed, export, migrate, export csv from wordpress, export xml from wordpress, advanced xml export, advanced csv export, export data, bulk csv export, export custom post type, export woocommerce products, export woocommerce orders, migrate woocommerce, csv export, export csv, xml export, export xml, csv exporter, datafeed
 
-WP All Export is an extremely powerful exporter that makes it easy to export any XML or CSV file from WordPress.
+WP All Export is an extremely powerful exporter that makes it easy to export any XML, CSV, or Excel file from WordPress.
 
 == Description ==
 
@@ -36,7 +36,7 @@ For technical support from the developers, please consider purchasing WP All Exp
 
 	[Read more about WP All Export Pro and Zapier.](https://zapier.com/zapbook/wp-all-export-pro/)
 
-* **Schedule exports to run automatically:** Exports can be configured via cron to run on any schedule you like. You can export new sales every week, recent user sign ups, new affiliate products added to your site, daily product stock reports, etc. Scheduled exports are incredibly powerful and flexible when combined with Zapier.
+* **Schedule exports to run automatically:** Exports can be configured to run on any schedule you like. You can export new sales every week, recent user sign ups, new affiliate products added to your site, daily product stock reports, etc. Scheduled exports are very powerful when combined with Zapier.
 
 * **Add rules to filter data:** WP All Export Pro makes it easy to export the exact posts/products/orders you need. Want to export all WooCommerce orders over $100? Want to export all of the green shirts from your WooCommerce store? Want to export all new posts from 2014, except the ones added by Steve?
 
@@ -51,6 +51,14 @@ For technical support from the developers, please consider purchasing WP All Exp
 * **Guaranteed technical support via e-mail.**
 
 [Upgrade to the Pro edition of WP All Export.](http://www.wpallimport.com/upgrade-to-wp-all-export-pro/?utm_source=wordpress.org&utm_medium=wordpress-dot-org-slash-wpae&utm_campaign=free+wp+all+export+plugin)
+
+= Automatic Scheduling =
+
+A new service from Soflyy, Automatic Scheduling provides a simple interface for setting exports to run on a schedule. The service will make sure that your exports start on time and that they successfully complete without the need to set up individual cron jobs. 
+
+It costs $9/mo and can be used with WP All Export and WP All Import. You can set up as many exports and imports on as many sites as you like.
+
+**What information is shared with Soflyy?** If you set an export to run on a schedule, WP All Export will open an encrypted connection to Soflyy servers. It will send the license key, site URL, ID of the export you want to run, export security key, and times that you want the export to run.
 
 = WordPress CSV Exports =
 
@@ -77,6 +85,35 @@ Either: -
 * Unzip wp-all-export.zip and upload the contents to /wp-content/plugins/, and then activate the plugin from the Plugins page in WordPress
 
 == Changelog ==
+
+= 1.2.0 =
+* new feature: Automatic Scheduling - A new, optional service from Soflyy that makes scheduling exports incredibly easy.
+* improvement: Support migrating users & keeping passwords
+* improvement: Better error reporting for errors in custom functions
+* improvement: Support for WooCommerce Short Description
+* improvement: Better price formatting
+* improvement: Add author information to Available Data
+* improvement: Add Featured Image to Available Data › Media
+* new filter: Disable price formatting - wp_all_export_raw_prices
+* new filter: Called before each order item - wp_all_export_order_item
+* new filter: Use custom CSV writer when default affected by https://bugs.php.net/bug.php?id=43225 - wp_all_export_use_csv_compliant_line_endings
+* new filter: Output content before CSV headers - wp_all_export_pre_csv_headers
+* bugfix: Error thrown when uploads folder is not writable
+* bugfix: Autoloading broken when class names contain "_"
+* bugfix: Error when activating Pro version and Free version
+* bugfix: moment.js causes false positives for virus scanners
+* bugfix: Comment status updated by default and causes problems
+* bugfix: CSV Writer can't handle slash double quote - https://bugs.php.net/bug.php?id=43225
+* bugfix: WPAE prevents Jetpack from connecting to WordPress.com
+* bugfix: Exported Excel files are corrupted in some cases
+* bugfix: Plugin conflicts change the post order
+* bugfix: CSV headers broken when field names contain quotes
+* bugfix: Product visibility broken for old WooCommerce versions
+* bugfix: Preview is broken for date fields
+* bugfix: Custom Export Field values not saved in some cases
+* bugfix: Headers broken when Custom Export Fields contain special characters
+* bugfix: Loading order for styles optimized to reduce conflicts
+* bugfix: Available Data broken when there's more than 500 data elements
 
 = 1.1.5 =
 * improvement: removed autoload=true from wp_options

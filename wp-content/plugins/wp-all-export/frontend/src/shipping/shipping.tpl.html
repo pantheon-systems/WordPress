@@ -1,0 +1,60 @@
+<div class="wpallexport-collapsed wpallexport-section" ng-class="{closed: !shipping.open }">
+    <div class="wpallexport-content-section">
+        <div class="wpallexport-collapsed-header disable-jquery"
+             ng-click="shipping.open = !shipping.open ">
+            <h3>Shipping</h3>
+        </div>
+        <div class="wpallexport-collapsed-content" id="shipping" ng-slide-down="shipping.open" duration="0.5">
+            <div class="wpallexport-collapsed-content-inner">
+                <h4>Shipping Price</h4>
+                <p>
+                    This attribute allows Google to provide a shipping estimate for the product.
+                    This overrides the default shipping price configured in the Google Merchant Center.
+                </p>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="shipping.shippingPrice" droppable />
+                    <a href="" ng-click="shipping.adjustShippingPrice = !shipping.adjustShippingPrice" class="adjust-price-link">
+                        <span ng-if="!shipping.adjustShippingPrice" style="width: 6px; display: inline-block;">+</span>
+                        <span ng-if="shipping.adjustShippingPrice" style="width: 6px; display: inline-block;">-</span>
+                        Adjust Shipping Price</a>
+                    <div ng-slide-down="shipping.adjustShippingPrice" class="adjust-price" duration="0.2" style="margin-top: 5px; ">
+                        <input type="text" style="margin-top: 0; margin-right: 0;" class="wpae-default-input" ng-model="shipping.adjustShippingPriceValue" droppable /><select style="margin-top:5px;" ng-model="shipping.adjustPriceType">
+                        <option value="%">%</option>
+                        <option value="USD">{{currency}}</option>
+                        </select>
+
+                        <div ng-show="shipping.adjustPriceType == '%'" class="tooltip-container">
+                            <a href="#" ng-cloak=""  class="wpallexport-help" style="top:0;"
+                               tipsy="Leave blank or enter in 100% to keep the price as is. Enter in 110% to markup by 10%. Enter in 50% to cut prices in half.">?</a>
+                        </div>
+                        <div ng-show="shipping.adjustPriceType == 'USD'" class="tooltip-container">
+                            <a href="#" style="top:0;" ng-cloak="" class="wpallexport-help" tipsy="Enter a negative number to reduce prices.">?</a>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Length, Width, Height</h4>
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="shipping.dimensions" value="useWooCommerceProductValues"/>Use WooCommerce's product values and convert them to
+                        <select ng-model="shipping.convertTo" style="width: 175px; height: 30px; padding: 0 0 0 8px; margin-left: 5px; margin-top: 5px; ">
+                            <option value="cm">Centimeters (cm)</option>
+                            <option value="inches">Inches (in)</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="shipping.dimensions" value="customValue"/>Custom data</label>
+                    <div ng-slide-down="shipping.dimensions == 'customValue'" duration="0.2" class="input inner">
+                        <input type="text" class="wpae-default-input" ng-model="shipping.dimensionsCV" droppable />
+                    </div>
+                </div>
+
+                <h4>Shipping Label</h4>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="shipping.shippingLabel" droppable />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

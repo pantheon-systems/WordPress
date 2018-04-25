@@ -84,6 +84,13 @@ class WSAL_Sensors_WooCommerce extends WSAL_AbstractSensor {
 	protected $_old_data = null;
 
 	/**
+	 * Old Product Stock Quantity.
+	 *
+	 * @var int
+	 */
+	protected $_old_stock = null;
+
+	/**
 	 * Old Product Stock Status.
 	 *
 	 * @var string
@@ -118,6 +125,95 @@ class WSAL_Sensors_WooCommerce extends WSAL_AbstractSensor {
 
 		add_action( 'create_product_cat', array( $this, 'EventCategoryCreation' ), 10, 1 );
 		/* add_action('edit_product_cat', array($this, 'EventCategoryChanged'), 10, 1); */
+
+		// Detect live change in stock.
+		add_filter( 'woocommerce_order_item_quantity', array( $this, 'set_old_stock' ), 10, 3 );
+		add_action( 'woocommerce_product_set_stock', array( $this, 'product_stock_changed' ), 10, 1 );
+	}
+
+	/**
+	 * Triggered before updating stock quantity on customer order.
+	 *
+	 * @param int           $order_quantity - Order quantity.
+	 * @param WC_Order      $order - Order object.
+	 * @param WC_Order_Item $item - Order item object.
+	 * @return int - Order quantity.
+	 */
+	public function set_old_stock( $order_quantity, $order, $item ) {
+		// Get product from order item.
+		$product = $item->get_product();
+
+		// Get product id.
+		$product_id_with_stock = $product->get_stock_managed_by_id();
+
+		// Get product with stock.
+		$product_with_stock = wc_get_product( $product_id_with_stock );
+
+		// Set stock attributes of the product.
+		$this->_old_stock = $product_with_stock->get_stock_quantity();
+		$this->_old_stock_status = $product_with_stock->get_stock_status();
+
+		// Return original stock quantity.
+		return $order_quantity;
+	}
+
+	/**
+	 * Triggered when stock of a product is changed.
+	 *
+	 * @param WC_Product $product - WooCommerce product object.
+	 */
+	public function product_stock_changed( $product ) {
+		// Return if current screen is admin panel.
+		if ( is_admin() ) {
+			return;
+		}
+
+		$old_stock  = $this->_old_stock; // Get old stock quantity.
+		$new_stock  = $product->get_stock_quantity(); // Get new stock quantity.
+		$old_stock_status = $this->_old_stock_status; // Get old stock status.
+		$new_stock_status = $product->get_stock_status(); // Get new stock status.
+		$product_id = $product->get_id(); // Get product id.
+		$product_title = $product->get_title(); // Get product title.
+
+		// Set post object.
+		$post = new stdClass();
+		$post->ID = $product_id;
+
+		// Set username.
+		$username = '';
+		if ( ! is_user_logged_in() ) {
+			$username = 'Website Visitor';
+		} else {
+			$username = wp_get_current_user()->user_login;
+		}
+
+		// If stock status has changed then trigger the alert.
+		if ( ( $old_stock_status && $new_stock_status ) && ( $old_stock_status !== $new_stock_status ) ) {
+			$editor_link = $this->GetEditorLink( $post );
+			$this->plugin->alerts->Trigger(
+				9018, array(
+					'ProductTitle' => $product_title,
+					'OldStatus' => $this->GetStockStatusName( $old_stock_status ),
+					'NewStatus' => $this->GetStockStatusName( $new_stock_status ),
+					'Username'  => $username,
+					$editor_link['name'] => $editor_link['value'],
+				)
+			);
+		}
+
+		// If stock has changed then trigger the alert.
+		if ( $old_stock !== $new_stock ) {
+			$editor_link = $this->GetEditorLink( $post );
+			$this->plugin->alerts->Trigger(
+				9019, array(
+					'ProductTitle' => $product_title,
+					'OldValue' => ( ! empty( $old_stock ) ? $old_stock : 0 ),
+					'NewValue' => $new_stock,
+					'Username' => $username,
+					$editor_link['name'] => $editor_link['value'],
+				)
+			);
+		}
 	}
 
 	/**
@@ -149,10 +245,11 @@ class WSAL_Sensors_WooCommerce extends WSAL_AbstractSensor {
 			&& ! (isset( $post_array['action'] ) && 'autosave' == $post_array['action'] )
 		) {
 			$post_id = intval( $post_array['post_ID'] );
-			$this->_old_post = get_post( $post_id );
-			$this->_old_link = get_post_permalink( $post_id, false, true );
-			$this->_old_cats = $this->GetProductCategories( $this->_old_post );
-			$this->_old_data = $this->GetProductData( $this->_old_post );
+			$this->_old_post  = get_post( $post_id );
+			$this->_old_link  = get_post_permalink( $post_id, false, true );
+			$this->_old_cats  = $this->GetProductCategories( $this->_old_post );
+			$this->_old_data  = $this->GetProductData( $this->_old_post );
+			$this->_old_stock = get_post_meta( $post_id, '_stock', true );
 			$this->_old_stock_status = get_post_meta( $post_id, '_stock_status', true );
 
 			$old_downloadable_files  = get_post_meta( $post_id, '_downloadable_files', true );
@@ -173,7 +270,7 @@ class WSAL_Sensors_WooCommerce extends WSAL_AbstractSensor {
 	 * @param stdClass $oldpost - The old post.
 	 */
 	public function EventChanged( $post_id, $newpost, $oldpost ) {
-		if ( $this->CheckWooCommerce( $oldpost ) ) {
+		if ( $this->CheckWooCommerce( $oldpost ) && is_admin() ) {
 			$changes = 0 + $this->EventCreation( $oldpost, $newpost );
 			if ( ! $changes ) {
 				// Change Categories.
@@ -1200,12 +1297,48 @@ class WSAL_Sensors_WooCommerce extends WSAL_AbstractSensor {
 	 * @return array $editor_link - Name and value link.
 	 */
 	private function GetEditorLink( $post ) {
+		// Meta value key.
 		$name = 'EditorLinkProduct';
+
+		// Get editor post link URL.
 		$value = get_edit_post_link( $post->ID );
-		$editor_link = array(
-			'name' => $name,
-			'value' => $value,
-		);
+
+		// If the URL is not empty then set values.
+		if ( ! empty( $value ) ) {
+			$editor_link = array(
+				'name' => $name, // Meta key.
+				'value' => $value, // Meta value.
+			);
+		} else {
+			// Get post object.
+			$post = get_post( $post->ID );
+
+			// Set URL action.
+			if ( 'revision' === $post->post_type ) {
+				$action = '';
+			} else {
+				$action = '&action=edit';
+			}
+
+			// Get and check post type object.
+			$post_type_object = get_post_type_object( $post->post_type );
+			if ( ! $post_type_object ) {
+				return;
+			}
+
+			// Set editor link manually.
+			if ( $post_type_object->_edit_link ) {
+				$link = admin_url( sprintf( $post_type_object->_edit_link . $action, $post->ID ) );
+			} else {
+				$link = '';
+			}
+
+			$editor_link = array(
+				'name' => $name, // Meta key.
+				'value' => $link, // Meta value.
+			);
+		}
+
 		return $editor_link;
 	}
 

@@ -6,11 +6,11 @@
  * Plugin Name: MetaSlider
  * Plugin URI:  https://www.metaslider.com
  * Description: Easy to use slideshow plugin. Create SEO optimised responsive slideshows with Nivo Slider, Flex Slider, Coin Slider and Responsive Slides.
- * Version:     3.6.8
+ * Version:     3.7.2
  * Author:      Team Updraft
  * Author URI:  https://www.metaslider.com
  * License:     GPL-2.0+
- * Copyright:   2017 Simba Hosting Ltd
+ * Copyright:   2017- Simba Hosting Ltd
  *
  * Text Domain: ml-slider
  * Domain Path: /languages
@@ -34,7 +34,7 @@ class MetaSliderPlugin {
      *
      * @var string
      */
-    public $version = '3.6.8';
+    public $version = '3.7.2';
 
     /**
      * The lowest tier price for upgrades
@@ -309,13 +309,13 @@ class MetaSliderPlugin {
     * Add the menu pages
     */
     public function register_admin_pages() {
-        if (metaslider_is_pro_active()) {
+        if (metaslider_pro_is_active()) {
             $this->admin->add_page('MetaSlider Pro', 'metaslider');
         } else {
             $this->admin->add_page('MetaSlider');
         }
 
-        if (metaslider_sees_upgrade_page()) {
+        if (metaslider_user_sees_upgrade_page()) {
             $this->admin->add_page(__('Add-ons', 'ml-slider'), 'upgrade', 'metaslider');
         }   
     }
@@ -1258,7 +1258,7 @@ class MetaSliderPlugin {
         // If the id parameter exists, verify and use that. 
         if (isset($_REQUEST['id']) && $id = $_REQUEST['id']) {
             if (in_array(get_post_status(absint($id)), array('publish', 'inherit'))) {
-                $slider_id = $id;
+                $slider_id = (int)$id;
             }
         }
 
@@ -1273,7 +1273,7 @@ class MetaSliderPlugin {
         echo $this->documentation_button();
         echo $this->toggle_layout_button();
         
-        if (metaslider_sees_call_to_action()) {
+        if (metaslider_user_sees_call_to_action()) {
             echo $this->addons_page_button();
             echo $this->upgrade_to_pro_top_button();
         }
@@ -1293,11 +1293,11 @@ class MetaSliderPlugin {
             <h1 class="wp-heading-inline metaslider-title">
                 <img width=50 height=50 src="<?php echo METASLIDER_ADMIN_URL ?>images/metaslider_logo_large.png" alt="MetaSlider">
                 MetaSlider
-                <?php if (metaslider_is_pro_active()) {
+                <?php if (metaslider_pro_is_active()) {
                     echo ' Pro';
                 } ?>
             </h1>
-			<?php if (metaslider_sees_notices($this)) {
+			<?php if (metaslider_user_sees_notices($this)) {
                 echo $this->notices->do_notice(false, 'header', true); 
             } ?>
             <form accept-charset="UTF-8" action="<?php echo admin_url( 'admin-post.php'); ?>" method="post">
@@ -1954,12 +1954,12 @@ class MetaSliderPlugin {
         if (plugin_basename(__FILE__) == $file) {
             $plugin_page = admin_url('admin.php?page=metaslider');
             $meta[] = "<a href='{$plugin_page}' onclick=\"event.preventDefault();var link = jQuery(this);jQuery.post(ajaxurl, {action: 'reset_tour_status', _wpnonce: metaslider_tour_nonce }, function(data) {window.location = link.attr('href');});\">" . __('Take a tour', 'ml-slider') . "</a>";
-            if (metaslider_is_pro_installed()) {
+            if (metaslider_pro_is_installed()) {
+                $meta[] = "<a href='https://www.metaslider.com/support/' target='_blank'>" . __('Premium Support', 'ml-slider') . "</a>";
+            } else {
                 $upgrade_link = apply_filters('metaslider_hoplink', 'https://www.metaslider.com/upgrade/');
                 $meta[] = "<a href='{$upgrade_link}' target='_blank'>" . __('Add-ons', 'ml-slider') . "</a>";
                 $meta[] = "<a href='https://wordpress.org/support/plugin/ml-slider/' target='_blank'>" . __('Support', 'ml-slider') . "</a>";
-            } else {
-                $meta[] = "<a href='https://www.metaslider.com/support/' target='_blank'>" . __('Premium Support', 'ml-slider') . "</a>";
             }
             $meta[] = "<a href='https://www.metaslider.com/documentation/' target='_blank'>" . __('Documentation', 'ml-slider') . "</a>";
             $meta[] = "<a href='https://wordpress.org/support/plugin/ml-slider/reviews#new-post' target='_blank' title='" . __('Leave a review', 'ml-slider') . "'><i class='ml-stars'><svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg><svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg><svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg><svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg><svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg></i></a>";
@@ -1971,7 +1971,7 @@ class MetaSliderPlugin {
     * Adds styles to admin head to allow for stars animation and coloring
     */
     public function add_star_styles() {
-        if (metaslider_is_on_admin_page('plugins.php')) {?>
+        if (metaslider_user_is_on_admin_page('plugins.php')) {?>
             <style>
                 .ml-stars{display:inline-block;color:#ffb900;position:relative;top:3px}
                 .ml-stars svg{fill:#ffb900}
@@ -1985,7 +1985,7 @@ class MetaSliderPlugin {
     * Add nonce to activation pa
     */
     public function add_tour_nonce_to_activation_page() {
-        if (metaslider_is_on_admin_page('plugins.php')) {?>
+        if (metaslider_user_is_on_admin_page('plugins.php')) {?>
             <script>
                 var metaslider_tour_nonce = "<?php echo wp_create_nonce('metaslider_tour_nonce'); ?>";
             </script>

@@ -399,6 +399,40 @@ final class WSAL_AlertManager {
 	}
 
 	/**
+	 * Method: Returns array of alerts by category.
+	 *
+	 * @param string $category - Alerts category.
+	 * @return WSAL_Alert[]
+	 */
+	public function get_alerts_by_category( $category ) {
+		// Categorized alerts array.
+		$alerts = array();
+		foreach ( $this->_alerts as $alert ) {
+			if ( $category === $alert->catg ) {
+				$alerts[ $alert->type ] = $alert;
+			}
+		}
+		return $alerts;
+	}
+
+	/**
+	 * Method: Returns array of alerts by sub-category.
+	 *
+	 * @param string $sub_category - Alerts sub-category.
+	 * @return WSAL_Alert[]
+	 */
+	public function get_alerts_by_sub_category( $sub_category ) {
+		// Sub-categorized alerts array.
+		$alerts = array();
+		foreach ( $this->_alerts as $alert ) {
+			if ( $sub_category === $alert->subcatg ) {
+				$alerts[ $alert->type ] = $alert;
+			}
+		}
+		return $alerts;
+	}
+
+	/**
 	 * Returns all supported alerts.
 	 *
 	 * @return array

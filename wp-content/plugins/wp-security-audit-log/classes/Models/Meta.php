@@ -87,12 +87,12 @@ class WSAL_Models_Meta extends WSAL_Models_ActiveRecord {
 			$this->id = $meta['id'];
 			$this->occurrence_id = $meta['occurrence_id'];
 			$this->name = $meta['name'];
-			$this->value = $value;
+			$this->value = maybe_serialize( $value );
 			$this->saveMeta();
 		} else {
 			$this->occurrence_id = $occurrence_id;
 			$this->name = $name;
-			$this->value = $value;
+			$this->value = maybe_serialize( $value );
 			$this->SaveMeta();
 		}
 	}

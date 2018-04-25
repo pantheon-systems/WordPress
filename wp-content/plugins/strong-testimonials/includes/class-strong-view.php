@@ -62,6 +62,18 @@ class Strong_View {
 		return $this->html;
 	}
 
+	public function nothing_found() {
+		ob_start();
+		?>
+		<p style="color: #CD0000;">
+			<?php _e( 'No testimonials found. Check your view settings.', 'strong-testimonials' ); ?><br>
+            <span style="color: #777; font-size: 0.9em;"><?php _e( '(Only administrators see this message.)', 'strong-testimonials' ); ?></span>
+		</p>
+		<?php
+
+		return apply_filters( 'wpmtst_message_nothing_found', ob_get_clean() );
+	}
+
 	/**
 	 * Process the view.
 	 *

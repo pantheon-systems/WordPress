@@ -39,7 +39,7 @@ $template: default;
   }
 
   .testimonial-image {
-    margin-top: .25em;
+    margin-top: 0.25em;
     margin-right: 1em;
     margin-bottom: 0.25em;
     float: left;
@@ -94,13 +94,16 @@ $template: default;
       .wpmslider-viewport {
         border: 1px solid #E6E6E6;
       }
+
       .testimonial {
         border: 0;
       }
     }
+
     .strong-content {
       margin: 0 auto;
     }
+
     .testimonial:not(:first-child) {
       display: none;
     }
@@ -142,10 +145,6 @@ $template: default;
 /* Option: Image Right
 -----------------------------------------------*/
 .strong-view.#{$template}.image-right {
-  .strong-content {
-    margin: 20px auto;
-  }
-
   .testimonial-image {
     float: right;
     margin-top: .25em;
@@ -154,7 +153,6 @@ $template: default;
   }
 
   .testimonial-client {
-    margin-top: 1em;
     text-align: left;
   }
 }
@@ -176,9 +174,7 @@ $template: default;
 .strong-view.#{$template}.no-quotes {
   .testimonial-heading {
     background: none;
-    margin-top: 0;
     padding-left: 0;
-    text-align: left;
   }
 }
 

@@ -240,6 +240,23 @@ class WSAL_Adapters_MySQL_Occurrence extends WSAL_Adapters_MySQL_ActiveRecord im
 	}
 
 	/**
+	 * Gets occurences of the alert 1003.
+	 *
+	 * @param array $args - User arguments.
+	 * @return WSAL_Occurrence[]
+	 */
+	public function check_alert_1003( $args = array() ) {
+		return self::LoadMultiQuery(
+			'SELECT occurrence.* FROM `' . $this->GetTable() . '` occurrence
+			WHERE (occurrence.alert_id = %d)
+			AND (occurrence.site_id = %d)
+			AND (occurrence.created_on BETWEEN %d AND %d)
+			GROUP BY occurrence.id',
+			$args
+		);
+	}
+
+	/**
 	 * Add conditions to the Query
 	 *
 	 * @param string $query - Query.

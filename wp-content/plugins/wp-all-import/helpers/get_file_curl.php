@@ -10,8 +10,8 @@ if ( ! function_exists('get_file_curl') ):
 
 		if ( ! is_wp_error($response) and ( ! isset($response['response']['code']) or isset($response['response']['code']) and ! in_array($response['response']['code'], array(401, 403, 404))) ) 
 		{
-			$rawdata = wp_remote_retrieve_body( $response );							
-			
+			$rawdata = wp_remote_retrieve_body( $response );
+
 			if (empty($rawdata))
 			{
 				$result = pmxi_curl_download($url, $fullpath, $to_variable);					
@@ -45,19 +45,24 @@ if ( ! function_exists('get_file_curl') ):
 
 		}
 		else
-		{ 						
-			$curl = pmxi_curl_download($url, $fullpath, $to_variable);							
+		{
 
-			if ($curl === false and $iteration === false)
-			{
-				$new_url = wp_all_import_translate_uri($url);
-				return ($new_url !== $url) ? get_file_curl($new_url, $fullpath, $to_variable, true) : ( is_wp_error($response) ? $response : false );								
-			}
+            $use_only_wp_http_api = apply_filters('wp_all_import_use_only_wp_http_api', false);
 
-			return ($curl === false) ? ( is_wp_error($response) ? $response : false ) : $curl;			
+            if ( false == $use_only_wp_http_api ){
+                $curl = pmxi_curl_download($url, $fullpath, $to_variable);
 
+                if ($curl === false and $iteration === false)
+                {
+                    $new_url = wp_all_import_translate_uri($url);
+                    return ($new_url !== $url) ? get_file_curl($new_url, $fullpath, $to_variable, true) : ( is_wp_error($response) ? $response : false );
+                }
+
+                return ($curl === false) ? ( is_wp_error($response) ? $response : false ) : $curl;
+            }
+
+            return $response;
 		}
-		
 	}
 
 endif;
@@ -83,7 +88,11 @@ if ( ! function_exists('pmxi_curl_download') ) {
 			$fp = fopen($fullpath,'w');	    
 		    fwrite($fp, $rawdata);
 		    fclose($fp);			
-		}	    
+		}
+
+        if ( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($fullpath), $fullpath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP)) ){
+            return false;
+        }
 
 	    return ($result == 200) ? (($to_variable) ? $rawdata : true) : false;
 	}

@@ -1,4 +1,4 @@
-<div class="email-option recipient">
+<div class="email-option body recipient">
 
     <div class="email-option-part">
         <div class="email-option-fieldset">
@@ -12,8 +12,7 @@
                        type="text"
                        name="wpmtst_form_options[recipients][<?php echo $key; ?>][admin_name]"
                        value="<?php echo esc_attr( $recipient['admin_name'] ); ?>"
-                       placeholder="<?php _e( '(optional)', 'strong-testimonials' ); ?>"
-                       size="30">
+                       placeholder="<?php _e( '(optional)', 'strong-testimonials' ); ?>">
             </div>
         </div>
     </div>
@@ -47,8 +46,7 @@
                     <input type="email" id="wpmtst-options-admin-email"
                            name="wpmtst_form_options[recipients][<?php echo $key; ?>][admin_email]"
                            value="<?php echo esc_attr( $recipient['admin_email'] ); ?>"
-                           placeholder="<?php _e( 'email address', 'strong-testimonials' ); ?>"
-                           size="30">
+                           placeholder="<?php _e( 'email address', 'strong-testimonials' ); ?>">
                 </div>
             </div>
 
@@ -60,8 +58,7 @@
                     <input type="email"
                            name="wpmtst_form_options[recipients][<?php echo $key; ?>][admin_email]"
                            value="<?php echo esc_attr( $recipient['admin_email'] ); ?>"
-                           placeholder="<?php _e( 'email address', 'strong-testimonials' ); ?>"
-                           size="30">
+                           placeholder="<?php _e( 'email address', 'strong-testimonials' ); ?>">
                 </div>
             </div>
 

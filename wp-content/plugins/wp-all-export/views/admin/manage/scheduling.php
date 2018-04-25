@@ -2,11 +2,6 @@
 	<?php _e('Cron Scheduling', 'wp_all_export_plugin') ?>
 </h2>
 
-<div class="wpallexport-free-edition-notice" style="padding: 20px; margin-left: 0px;">
-	<a class="upgrade_link" target="_blank" href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=118611&edd_options%5Bprice_id%5D=1&utm_source=wordpress.org&utm_medium=cron&utm_campaign=free+wp+all+export+plugin"><?php _e('Upgrade to the Pro edition of WP All Export for Scheduled Exports', 'wp_all_export_plugin');?></a>
-	<p><?php _e('If you already own it, remove the free edition and install the Pro edition.', 'wp_all_export_plugin'); ?></p>
-</div>
-
 <p>
 	<?php _e('To schedule an export, you must create two cron jobs in your web hosting control panel. One cron job will be used to run the Trigger script, the other to run the Execution script.', 'wp_all_export_plugin'); ?>
 </p>
@@ -14,16 +9,16 @@
 <p>
 	<?php _e('Trigger Script URL', 'wp_all_export_plugin');?><br />
 	<small><?php _e('Run the trigger script when you want to update your export. Once per 24 hours is recommended.', 'wp_all_export_plugin'); ?></small><br />
-	<input style='width: 700px;' type='text' value='<?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $id . '&action=trigger'; ?>' disabled="disabled"/>
+	<input style='width: 700px;' type='text' value='<?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $id . '&action=trigger'; ?>' />
 	<br /><br />
 	<?php _e('Execution Script URL', 'wp_all_export_plugin');?><br />
 	<small><?php _e('Run the execution script frequently. Once per two minutes is recommended.','wp_all_export_plugin');?></small><br />
-	<input style='width: 700px;' type='text' value='<?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $id . '&action=processing'; ?>' disabled="disabled"/><br /><br />
+	<input style='width: 700px;' type='text' value='<?php echo site_url() . '/wp-cron.php?export_key=' . $cron_job_key . '&export_id=' . $id . '&action=processing'; ?>' /><br /><br />
 	<?php _e('Export File URL', 'wp_all_export_plugin'); ?><br />	
-	<input style='width: 700px;' type='text' value='<?php echo $file_path; ?>'  disabled="disabled"/><br /><br />
+	<input style='width: 700px;' type='text' value='<?php echo $file_path; ?>' /><br /><br />
 	<?php if (! empty($bundle_url)): ?>			
 		<?php _e('Export Bundle URL', 'wp_all_export_plugin'); ?><br />	
-		<input style='width: 700px;' type='text' value='<?php echo $bundle_url; ?>' disabled="disabled"/><br /><br />
+		<input style='width: 700px;' type='text' value='<?php echo $bundle_url; ?>' /><br /><br />
 	<?php endif; ?>
 </p>
 

@@ -5,7 +5,7 @@
 $our_plugins = array('updraftplus', 'updraftcentral', 'wp-optimize', 'keyy');
 $installed_plugins = array();
 foreach ($our_plugins as $plugin) {
-    $installed_plugins[$plugin] = metaslider_is_plugin_installed($plugin);
+    $installed_plugins[$plugin] = metaslider_plugin_is_installed($plugin);
 }
 // If they have any plugins missing, make room for ads
 $width = (in_array(false, $installed_plugins, true)) ? 'metaslider_half_width' : ''

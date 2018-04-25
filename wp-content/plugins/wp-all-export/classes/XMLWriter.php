@@ -185,6 +185,8 @@ class PMXE_XMLWriter extends XMLWriter
                             $delimiter = uniqid();
                             $node_tpl = preg_replace('%\[(.*)\{'.$key.'\}([^\[]*)\]%', "[$1explode('" . $delimiter . "', '" . implode($delimiter, $v) . "')$2]", $node_tpl);
                             $v = "[explode('" . $delimiter . "', '" . implode($delimiter, $v) . "')]";
+                            $v = str_replace('<','**LT**', $v);
+                            $v = str_replace('>','**GT**', $v);
                         } else {
                             $v = '{' . $v . '}';
                         }

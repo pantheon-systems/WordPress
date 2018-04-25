@@ -35,6 +35,8 @@ function pmxe_pmxe_before_export($export_id)
 		if ( empty($export->parent_id) )
 		{
 			delete_option( 'wp_all_export_queue_' . $export->id );		
-		}		
-	}		
+		}
+
+        delete_option( 'wp_all_export_acf_flexible_' . $export->id );
+    }
 }

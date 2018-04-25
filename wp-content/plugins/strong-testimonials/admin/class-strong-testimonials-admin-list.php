@@ -52,12 +52,12 @@ class Strong_Testimonials_Admin_List {
 			[comments] => <span class="vers comment-grey-bubble" title="Comments"><span class="screen-reader-text">Comments</span></span>
 			[date] => Date
 			[search_exclude] => Search Exclude   // other plugin
-			[thumbnail] => Thumbnail
+			[strong_thumbnail] => Thumbnail
 		)
 		*/
 
 		// 1. remove [thumbnail] (may be re-added in custom field loop) and [date]
-		unset( $columns['thumbnail'], $columns['date'] );
+		unset( $columns['strong_thumbnail'], $columns['date'] );
 
 		if ( $comments ) {
 			unset( $columns['comments'] );
@@ -87,7 +87,7 @@ class Strong_Testimonials_Admin_List {
 				if ( 'post_title' == $field['name'] ) {
 					continue;
 				} elseif ( 'featured_image' == $field['name'] ) {
-					$fields_to_add['thumbnail'] = __( 'Thumbnail', 'strong-testimonials' );
+					$fields_to_add['strong_thumbnail'] = __( 'Thumbnail', 'strong-testimonials' );
 				} elseif ( 'rating' == $field['input_type'] ) {
 					$fields_to_add[ $field['name'] ] = __( 'Rating', 'strong-testimonials' );
 				} else {
@@ -142,7 +142,7 @@ class Strong_Testimonials_Admin_List {
 				echo $post->post_excerpt;
 				break;
 
-			case 'thumbnail' :
+			case 'strong_thumbnail' :
 				echo get_the_post_thumbnail( $post->ID, array( 75, 75 ) );
 				break;
 
@@ -209,7 +209,7 @@ class Strong_Testimonials_Admin_List {
 	 * @return array
 	 */
 	public static function add_thumbnail_column( $columns ) {
-		$columns['thumbnail'] = __( 'Thumbnail', 'strong-testimonials' );
+		$columns['strong_thumbnail'] = __( 'Thumbnail', 'strong-testimonials' );
 
 		return $columns;
 	}
