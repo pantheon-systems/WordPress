@@ -1,0 +1,74 @@
+/**
+ * Grid Layout for any template.
+ */
+
+.strong-grid {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  /* to center items in a less-than-full row: */
+  justify-content: space-around;
+  /* to left-justify items in a less-than-full row: */
+  /*justify-content: space-between;*/
+}
+
+/* specificity required */
+.strong-view .strong-content.strong-grid .testimonial {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 0 20px 0;
+}
+
+.strong-content.strong-grid.columns-2 .testimonial {
+  width: 48%;
+}
+
+.strong-content.strong-grid.columns-3 .testimonial {
+  width: 31%;
+}
+
+.strong-content.strong-grid.columns-4 .testimonial {
+  width: 23%;
+}
+
+.strong-view .strong-content.strong-grid .testimonial-inner {
+  flex: 1 0 auto;
+}
+
+/* either no JavaScript or no Flexbox */
+html.no-js .strong-grid .testimonial,
+.strong-grid.noflex .testimonial {
+  float: left;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+html.no-js .strong-grid .testimonial {
+  float: left;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+/* float the last column */
+.strong-grid.columns-2.noflex .testimonial:nth-of-type(2n+2),
+.strong-grid.columns-3.noflex .testimonial:nth-of-type(3n+3),
+.strong-grid.columns-4.noflex .testimonial:nth-of-type(4n+4) {
+  float: right;
+}
+
+/* responsive */
+@media only screen and (max-width: 480px) {
+  .strong-view .strong-content.strong-grid .testimonial {
+    width: 100%;
+  }
+}

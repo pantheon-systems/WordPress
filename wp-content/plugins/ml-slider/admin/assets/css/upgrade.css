@@ -1,0 +1,172 @@
+@font-face {
+    font-family: 'Interface';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/interface/Interface-Regular.woff2") format("woff2"),
+         url("../fonts/interface/Interface-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Interface';
+    font-style: italic;
+    font-weight: 400;
+    src: url("../fonts/interface/Interface-RegularItalic.woff2") format("woff2"),
+         url("../fonts/interface/Interface-RegularItalic.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Interface';
+    font-style: normal;
+    font-weight: 500;
+    src: url("../fonts/interface/Interface-Medium.woff2") format("woff2"),
+         url("../fonts/interface/Interface-Medium.woff") format("woff");
+}
+
+@font-face {
+    font-family: 'Interface';
+    font-style: italic;
+    font-weight: 500;
+    src: url("../fonts/interface/Interface-MediumItalic.woff2") format("woff2"),
+         url("../fonts/interface/Interface-MediumItalic.woff") format("woff");
+}  
+
+.ms-addon-headers {
+    margin: 1em 0 0.5em;
+}
+
+.metaslider_feat_table th {
+    font-size: 1.1em;
+}
+
+.metaslider_feat_table th span {
+    text-transform: uppercase;
+}
+
+.metaslider_feat_table th img {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto -5px;
+}
+
+/*  COLUMN SETUP  */
+.metaslider_col {
+	display: block;
+	float: left;
+    margin: 1% 0 1% 1%;
+    font-family: Interface, sans-serif;
+}
+
+.metaslider_col:first-child {
+    margin-left: 0;
+}
+
+.metaslider_col .postbox {
+    max-width: 600px;
+}
+
+.metaslider_half_width {
+    width: 48%;
+    max-width: 820px;
+}
+
+.other-plugin-title {
+	text-decoration: none;
+}
+
+/* Added for the Image on Addons tab*/
+img.addons {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: 44px;
+}
+
+.metaslider_feature_cont {
+	width: 54.5%;
+}
+
+.metaslider_plugin_family_cont {
+	width: 44.5%;
+}
+
+.metaslider_feat_table, .metaslider_feat_th, .metaslider_feat_table td {
+	border: 1px solid #e0e0e0;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+.metaslider_installed_status,
+.metaslider_feat_table p {
+    color: #666666;
+    padding: 0 10px;
+    margin: 7px 0 5px;
+    font-size: 16px;
+    line-height: 1.1;
+}
+
+.metaslider_installed_status {
+    padding: 10px;
+    text-align: center;
+}
+
+.metaslider_feat_table h4 {
+    font-size: 1.7em;
+    line-height: 1;
+	margin: 5px 0;
+}
+
+.metaslider_feat_table .dashicons {
+    display: block;
+    margin: auto;
+	width: 25px;
+	height: 25px;
+	font-size: 25px;
+	line-height: 1;
+}
+
+.metaslider_feat_table .dashicons-yes, .metaslider_feat_table .updraft-yes {
+	color: green;
+}
+
+.metaslider_feat_table .dashicons-no-alt, .metaslider_feat_table .updraft-no {
+	color: red;
+}
+
+.metaslider-premium-image {
+    display: none;
+    -webkit-box-align: center;
+       -ms-flex-align: center;
+          align-items: center;
+    -webkit-box-pack: center;
+       -ms-flex-pack: center;
+     justify-content: center;
+    color: #de6826;
+    float: left;
+    padding: 14px 8px;
+    margin: 5px;
+}
+
+
+@media screen and (max-width: 768px) {
+    #wpcontent {
+        padding: 0 10px;
+    }
+	.metaslider_col {
+		margin: 1% 0 !important;
+	}
+	.metaslider_half_width {
+		width: 100% !important;
+    }
+    .metaslider_feat_table h4 {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (min-width: 720px) {
+	.metaslider-premium-image {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+	}
+}

@@ -1,0 +1,121 @@
+= 2.2.0 =
+* Fixed some lingering potential HTTPS issues.
+* Fixed result previews not cutting the excerpt making them excessively long.
+* Fixed archive file skipping not accounting for letter casing in extensions.
+* Introduced common media types to the file skipping procedure.
+* Added default timeout periods, the plugin will no longer allow indefinite execution to work around http proxies.
+* Added more translatable strings that were missed.
+* Added Must-Use Plugins to individual plugin search.
+* Made changes to the uninstall routine to ensure we remove any related database entries on removal.
+
+= 2.1.2 =
+* Fix for max execution times some times being interpreted as strings and failing when you it should be able to run indefinitely
+* Fix for regex being enabled when you return to the search results, but you hadn't performed a regex search
+* Resolved some code issues with functions being called improperly (future proofing)
+
+= 2.1.1 =
+* Improved error messages
+* Add regex pattern validation before performing a search
+* Fixed bug causing some searches to be identified as regex when they are not, leading to errors
+* Fixed a bug that could cause the first file in every search chunk from being ignored
+
+= 2.1.0 =
+* Add support for configurations with infinite execution times
+* Better code handling on RTL sites
+* Exclude archive files, that we can't modify any way, from searches
+* Display file path in the editor to identify which file is being modified
+* Add support for RegEx string searches
+
+= 2.0.3 =
+* Added support for HHVM
+* Improved inline documentation
+
+= 2.0.2 =
+* Fixed max memory indicators on hosts that do not use shorthands
+
+= 2.0.1 =
+* Fixed a bug where heavy sites would not run searches due to incorrect memory consumption calculations
+* Fixed a visual bug when warnings are displayed
+* Added error feedback if high execution times or memory consumption is detected before a search is started
+
+= 2.0.0 =
+* Performance enhancement, now also detects memory consumption to avoid exceeding memory limits
+* Fixed a warning incorrectly being shown saying files cannot be read
+* Better feedback during the search process
+* Fixed a longstanding bug with searching single file plugins
+
+= 1.9.1 =
+* Fixes a regression relating to support for older versions of PHP introduced in 1.9.0
+
+= 1.9.0 =
+* Perform batch searches on the server for as long as possible until we get close to the max execution time.
+* Fix previous searches not clearing if you don't navigate away.
+
+= 1.8.2 =
+* Compatibility fix for certain versions of PHP that would throw notices
+* Reset the search results when you start a new search
+
+= 1.8.1 =
+* Make sure we don't add extra linefeeds to the end of files to prevent sending early headers where files end with the `?>` PHP closing tag
+
+= 1.8.0 =
+* Search everything in $home/wp-content and ignore core files
+* Fix searches containing quotes
+* Search is now AJAX based to prevent max execution time errors for some users
+* Restore previous search also restores the search term and search locations
+* Removed the WordPress list tables, they didn't work too well for our purpose
+* Also search in file names
+
+= 1.7.0 =
+* Tested with WordPress 4.3
+* Made it uses WordPress list tables (because they look nice and I felt adventurous)
+* If the preview text is really long, an excerpt is pulled instead of making a massive text blob
+* Fixed a typo in a query argument
+* Reordered the search result list based on priority
+
+= 1.6.0 =
+* Revert edits if site health degrades as a direct cause of said edit
+
+= 1.5.0 =
+* Return to your search results from the editor, or restore the previous search if you closed the page
+* Multisite support
+* Made marked text more prominent in the editor for readability
+* Fixed rare notice outputs when searching within all plugins/all themes
+* Moved older changelog entries to changelog.txt
+* Updated translation files to use the correct text domain
+
+= 1.4.0 =
+* Added code references for WordPress function calls
+* Added the ability to search recursively from the WordPress root
+* Updated textdomain (translations) to use the actual plugin slug
+
+= 1.3.0 =
+* Added search all for themes and plugins
+* Refactored code
+* Added german translations
+
+= 1.2.1 =
+* Added missing i18n text strings
+* Added capability checks for edit screens
+
+= 1.2.0 =
+* Added custom code editor
+* Syntax highlighting
+* Code validation using Smart-Scan
+* Quick jump links to areas with errors detected
+* Replaced unused admin notice
+* Removed previously used WP Editor checks
+
+= 1.1.1 =
+* Added Spanish translation files added
+* Added Serbian translation files added
+
+= 1.1.0 =
+* Added link to the online editor for themes/plugins from search results
+* Added extra notification text on editor page when referenced by the plugin, makes it easier to find your search string
+* Screenshots and more plugin details added
+* Fixed column width for line number being way too large
+* Add missing inline comments/function references
+
+= 1.0.0 =
+* Initial release

@@ -1,0 +1,44 @@
+.strong-view {
+	&.controls-type-sides {
+		.wpmslider-controls {
+			height: 0;
+		}
+
+		&.pager-style-text,
+		&.pager-style-buttons {
+			.wpmslider-controls {
+				height: auto;
+			}
+		}
+
+		&.nav-position-inside {
+			.wpmslider-controls-direction {
+				display: inline;
+			}
+			.wpmslider-pager {
+				position: absolute;
+				bottom: 0;
+				display: inline-block;
+				padding-bottom: 15px;
+				width: 100%;
+			}
+		}
+
+		&.nav-position-inside {
+			.wpmslider-prev,
+			.wpmslider-next {
+				position: absolute;
+				top: calc(50% - 14px);
+			}
+		}
+
+		&.nav-position-outside {
+			.wpmslider-prev,
+			.wpmslider-next {
+				position: absolute;
+				/* subtract pager height */
+				top: calc(50% - 55px + 14px);
+			}
+		}
+	}
+}

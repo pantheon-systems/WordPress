@@ -1,0 +1,93 @@
+/* -------------------------------------------------
+   Elements
+   ------------------------------------------------- */
+
+.wpmtst2 {
+  max-width: 1200px;
+
+  /* The generic classname `submit` conflicts with an unknown plugin or theme overzealous style. */
+  p.wpmtst-submit {
+    margin-top: 2em;
+  }
+
+  /* views section heading */
+  h3 {
+    background: #FFF;
+    color: $blue;
+    font-weight: 400;
+    border: 1px solid #DDD;
+    border-bottom: 0;
+    padding: 10px 15px;
+    margin-bottom: 0;
+    margin-top: 1.5em;
+  }
+}
+
+.form-table td p.description {
+  margin-top: 0;
+  font-style: italic;
+
+  &.tall {
+    line-height: 32px;
+    margin-top: 0;
+  }
+
+  &.short {
+    line-height: 22px;
+    padding: 5px 0;
+  }
+
+  &.solo {
+    margin-left: 0.3em;
+  }
+
+  &.under-checkbox {
+    margin-left: 22px;
+  }
+}
+
+/* Misc positioning */
+
+.inline {
+  display: inline-block;
+  margin-right: 1em;
+  vertical-align: top;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.inline span,
+.row span {
+  display: inline-block;
+  margin-right: 3px;
+}
+
+.inline-middle {
+  vertical-align: middle;
+}
+
+.tight {
+  margin-right: 0.2em;
+}
+
+.tight:last-child,
+.last {
+  margin-right: 0;
+}
+
+.checkbox,
+.form-table th.checkbox {
+  line-height: 32px;
+}
+
+.field {
+  position: relative;
+
+  & div {
+    display: inline-block;
+    padding: 0.2em 0.3em;
+  }
+}
+

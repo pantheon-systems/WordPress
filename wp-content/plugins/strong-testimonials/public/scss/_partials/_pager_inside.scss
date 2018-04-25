@@ -1,0 +1,17 @@
+.strong-view {
+	&.controls-type-sides {
+		&.nav-position-inside {
+			.wpmslider-controls-direction {
+				display: inline-block;
+			}
+			.wpmslider-pager {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				line-height: 1;
+				padding: 1em 0;
+				z-index: 5;
+			}
+		}
+	}
+}

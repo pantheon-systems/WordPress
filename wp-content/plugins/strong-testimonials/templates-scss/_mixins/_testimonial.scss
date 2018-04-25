@@ -1,0 +1,35 @@
+@mixin no-top-bottom-margin {
+	&:first-child {
+		margin-top: 0;
+	}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+@mixin testimonial {
+	margin: 20px auto;
+	padding: 0;
+	text-align: left;
+	width: 100%;
+	@include no-top-bottom-margin;
+}
+
+@mixin paragraphs {
+	p {
+		&:first-of-type {
+			margin-top: 0;
+			padding-top: 0;
+		}
+		&:last-of-type {
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+	}
+}
+
+@mixin readmore-page {
+	margin-top: 20px;
+	padding: 1em;
+	text-align: center;
+}

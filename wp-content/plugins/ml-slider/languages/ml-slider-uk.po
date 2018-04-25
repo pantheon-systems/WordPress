@@ -1,0 +1,702 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: metaslider\n"
+"POT-Creation-Date: 2015-04-19 14:07+0200\n"
+"PO-Revision-Date: 2015-04-20 16:55+0200\n"
+"Last-Translator: Roman Sulym <sulym.roman@gmail.com>\n"
+"Language-Team: LNU\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../inc/metaslider.widget.class.php:19
+msgid "MetaSlider"
+msgstr "MetaSlider"
+
+#: ../inc/metaslider.widget.class.php:109
+msgid "Title:"
+msgstr "Заголовок:"
+
+#: ../inc/metaslider.widget.class.php:112
+msgid "Select Slider:"
+msgstr "Виберіть слайдер:"
+
+#: ../inc/metaslider.widget.class.php:122 ../ml-slider.php:1793
+msgid "No slideshows found"
+msgstr "Слайд-шоу не знайдено"
+
+#: ../inc/slide/metaslide.class.php:76
+#: ../inc/slide/metaslide.image.class.php:32
+msgid "Security check failed. Refresh page and try again."
+msgstr ""
+"Перевірка безпеки зазнала невдачі. Оновіть сторінку і спробуйте знову."
+
+#: ../inc/slide/metaslide.class.php:121
+msgid "File copy failed. Please check upload directory permissions."
+msgstr ""
+"Не вдалось скопіювати файл. Будь ласка, перевірте права доступу до каталогу."
+
+#: ../inc/slide/metaslide.class.php:286
+msgid "Delete slide"
+msgstr "Видалити слайд"
+
+#: ../inc/slide/metaslide.image.class.php:48
+msgid "Failed to add slide. Slide already exists in slideshow."
+msgstr "Не вдалось додати слайд. Цей слайд вже існує у слайд-шоу."
+
+#: ../inc/slide/metaslide.image.class.php:52
+msgid "Failed to add slide. Slide is not of type 'image'."
+msgstr "Не вдалось додати слайд. Цей слайд не є зображенням."
+
+#: ../inc/slide/metaslide.image.class.php:56
+msgid "Failed to add slide. Slide is not an image."
+msgstr "Не вдалось додати слайд. Цей слайд не є зображенням."
+
+#: ../inc/slide/metaslide.image.class.php:120
+msgid "Image Slide"
+msgstr "Зображення"
+
+#: ../inc/slide/metaslide.image.class.php:155 ../ml-slider.php:471
+msgid "Caption"
+msgstr "Напис"
+
+#: ../inc/slide/metaslide.image.class.php:156 ../ml-slider.php:470
+msgid "URL"
+msgstr "URL"
+
+#: ../inc/slide/metaslide.image.class.php:158 ../ml-slider.php:472
+msgid "New Window"
+msgstr "Нове вікно"
+
+#: ../inc/slide/metaslide.image.class.php:162
+msgid "Warning: Image data does not exist. Please re-upload the image."
+msgstr ""
+"Попередження: файл зображення не існує. Будь ласка, завантажте його "
+"повторно."
+
+#: ../inc/slide/metaslide.image.class.php:167
+msgid "Image Title Text"
+msgstr "Атрибут title"
+
+#: ../inc/slide/metaslide.image.class.php:169
+msgid "Image Alt Text"
+msgstr "Атрибут alt"
+
+#: ../inc/slide/metaslide.image.class.php:174
+msgid "General"
+msgstr "Основне"
+
+#: ../inc/slide/metaslide.image.class.php:178
+msgid "SEO"
+msgstr "SEO"
+
+#: ../inc/slide/metaslide.image.class.php:191
+msgid "Crop Position"
+msgstr "Позиція обтинання"
+
+#: ../inc/slide/metaslide.image.class.php:194
+msgid "Top Left"
+msgstr "Зверху зліва"
+
+#: ../inc/slide/metaslide.image.class.php:195
+msgid "Top Center"
+msgstr "Зверху по центру"
+
+#: ../inc/slide/metaslide.image.class.php:196
+msgid "Top Right"
+msgstr "Зверху справа"
+
+#: ../inc/slide/metaslide.image.class.php:197
+msgid "Center Left"
+msgstr "Посередині зліва"
+
+#: ../inc/slide/metaslide.image.class.php:198
+msgid "Center Center"
+msgstr "Посередині по центру"
+
+#: ../inc/slide/metaslide.image.class.php:199
+msgid "Center Right"
+msgstr "Посередині справа"
+
+#: ../inc/slide/metaslide.image.class.php:200
+msgid "Bottom Left"
+msgstr "Знизу зліва"
+
+#: ../inc/slide/metaslide.image.class.php:201
+msgid "Bottom Center"
+msgstr "Знизу по центру"
+
+#: ../inc/slide/metaslide.image.class.php:202
+msgid "Bottom Right"
+msgstr "Знизу справа"
+
+#: ../inc/slide/metaslide.image.class.php:207
+msgid "Crop"
+msgstr "Обтинання"
+
+#: ../ml-slider.php:288 ../ml-slider.php:289
+msgid "Go Pro!"
+msgstr "PRO версія"
+
+#: ../ml-slider.php:417
+msgid "Documentation"
+msgstr "Документація"
+
+#: ../ml-slider.php:473
+msgid "Are you sure?"
+msgstr "Ви впевнені?"
+
+#: ../ml-slider.php:475
+msgid "Select replacement image"
+msgstr "Виберіть зображення"
+
+#: ../ml-slider.php:480
+msgid ""
+"Caution: This setting is for advanced developers only. If you're unsure, "
+"leave it checked."
+msgstr ""
+"Увага: це налаштування лише для досвідчених розробників. Якщо ви не "
+"впевнені, залишіть його відзначеним. "
+
+#: ../ml-slider.php:543
+msgid "Image"
+msgstr "Зображення"
+
+#: ../ml-slider.php:544
+msgid "Add to slider"
+msgstr "Додати в слайдер"
+
+#: ../ml-slider.php:814
+msgid "New Slider"
+msgstr "Новий слайдер"
+
+#: ../ml-slider.php:1105
+msgid "Switch to Dropdown view"
+msgstr "Режим випадного списку"
+
+#: ../ml-slider.php:1105
+msgid "Dropdown"
+msgstr "Випадний список"
+
+#: ../ml-slider.php:1126
+msgid "New slideshow created. Click 'Add Slide' to get started!"
+msgstr ""
+"Створено нове слайд-шоу. Натисніть кнопку 'Додати слайд', щоб розпочати "
+"роботу!"
+
+#: ../ml-slider.php:1130
+msgid "Switch to Tab view"
+msgstr "Режим вкладок"
+
+#: ../ml-slider.php:1130
+msgid "Tabs"
+msgstr "Вкладки"
+
+#: ../ml-slider.php:1132
+msgid "Select Slider"
+msgstr "Вибрати слайдер"
+
+#: ../ml-slider.php:1151
+msgid "or"
+msgstr "або"
+
+#: ../ml-slider.php:1152
+msgid "Add New Slideshow"
+msgstr "Додати нове слайд-шоу"
+
+#: ../ml-slider.php:1158
+msgid "Create your first slideshow"
+msgstr "Створити Ваше перше слайд-шоу"
+
+#: ../ml-slider.php:1234
+msgid "Slides"
+msgstr "Слайди"
+
+#: ../ml-slider.php:1238 ../ml-slider.php:1239
+msgid "Add Slide"
+msgstr "Додати слайд"
+
+#: ../ml-slider.php:1262
+msgid "Settings"
+msgstr "Налаштування"
+
+#: ../ml-slider.php:1263
+msgid "Save"
+msgstr "Зберегти"
+
+#: ../ml-slider.php:1264
+msgid "Save & Preview"
+msgstr "Зберегти і переглянути"
+
+#: ../ml-slider.php:1277
+msgid "Flex Slider"
+msgstr "Flex Slider"
+
+#: ../ml-slider.php:1278
+msgid "R. Slides"
+msgstr "R. Slides"
+
+#: ../ml-slider.php:1279
+msgid "Nivo Slider"
+msgstr "Nivo Slider"
+
+#: ../ml-slider.php:1280
+msgid "Coin Slider"
+msgstr "Coin Slider"
+
+#: ../ml-slider.php:1291 ../ml-slider.php:1530
+msgid "Width"
+msgstr "Ширина"
+
+#: ../ml-slider.php:1293
+msgid "Slideshow width"
+msgstr "Ширина слайд-шоу"
+
+#: ../ml-slider.php:1294 ../ml-slider.php:1307 ../ml-slider.php:1457
+msgid "px"
+msgstr "пікселів"
+
+#: ../ml-slider.php:1304 ../ml-slider.php:1543
+msgid "Height"
+msgstr "Висота"
+
+#: ../ml-slider.php:1306
+msgid "Slideshow height"
+msgstr "Висота слайд-шоу"
+
+#: ../ml-slider.php:1313
+msgid "Effect"
+msgstr "Ефект"
+
+#: ../ml-slider.php:1315
+msgid "Slide transition effect"
+msgstr "Ефект переходу слайдів"
+
+#: ../ml-slider.php:1317 ../ml-slider.php:1462
+msgid "Random"
+msgstr "Випадково"
+
+#: ../ml-slider.php:1318
+msgid "Swirl"
+msgstr "Вир"
+
+#: ../ml-slider.php:1319
+msgid "Rain"
+msgstr "Дощ"
+
+#: ../ml-slider.php:1320
+msgid "Straight"
+msgstr "Класичний"
+
+#: ../ml-slider.php:1321
+msgid "Slide Down"
+msgstr "Ковзання вниз"
+
+#: ../ml-slider.php:1322
+msgid "Slice Up"
+msgstr "Зсув"
+
+#: ../ml-slider.php:1323
+msgid "Slide Up Left"
+msgstr "Ковзання вверх ліворуч"
+
+#: ../ml-slider.php:1324
+msgid "Slice Up Down"
+msgstr "Зсув вниз"
+
+#: ../ml-slider.php:1325
+msgid "Slide Up Down Left"
+msgstr "Ковзання вниз ліворуч"
+
+#: ../ml-slider.php:1326
+msgid "Fold"
+msgstr "Жалюзі"
+
+#: ../ml-slider.php:1327
+msgid "Fade"
+msgstr "Вицвітання"
+
+#: ../ml-slider.php:1328
+msgid "Slide In Right"
+msgstr "Ковзання праворуч"
+
+#: ../ml-slider.php:1329
+msgid "Slide In Left"
+msgstr "Ковзання ліворуч"
+
+#: ../ml-slider.php:1330
+msgid "Box Random"
+msgstr "Випадкові квадрати"
+
+#: ../ml-slider.php:1331
+msgid "Box Rain"
+msgstr "Мозаїка"
+
+#: ../ml-slider.php:1332
+msgid "Box Rain Reverse"
+msgstr "Зворотня мозаїка"
+
+#: ../ml-slider.php:1333
+msgid "Box Rain Grow Reverse"
+msgstr "Наростаюча мозаїка"
+
+#: ../ml-slider.php:1334
+msgid "Slide"
+msgstr "Ковзання"
+
+#: ../ml-slider.php:1341
+msgid "Theme"
+msgstr "Тема оформлення"
+
+#: ../ml-slider.php:1343
+msgid "Slideshow theme"
+msgstr "Дизайн слайд-шоу"
+
+#: ../ml-slider.php:1345
+msgid "Default"
+msgstr "За замовчуванням"
+
+#: ../ml-slider.php:1346
+msgid "Dark (Nivo)"
+msgstr "Темний (Nivo)"
+
+#: ../ml-slider.php:1347
+msgid "Light (Nivo)"
+msgstr "Світлий (Nivo)"
+
+#: ../ml-slider.php:1348
+msgid "Bar (Nivo)"
+msgstr "Плитка (Nivo)"
+
+#: ../ml-slider.php:1354
+msgid "Arrows"
+msgstr "Стрілки"
+
+#: ../ml-slider.php:1357
+msgid "Show the previous/next arrows"
+msgstr "Показувати стрілки вперед/назад"
+
+#: ../ml-slider.php:1362
+msgid "Navigation"
+msgstr "Навігація"
+
+#: ../ml-slider.php:1365
+msgid "Show the slide navigation bullets"
+msgstr "Показувати мітки навігації"
+
+#: ../ml-slider.php:1367
+msgid "Hidden"
+msgstr "Не показувати"
+
+#: ../ml-slider.php:1368
+msgid "Dots"
+msgstr "Крапки"
+
+#: ../ml-slider.php:1379
+msgid "Title"
+msgstr "Заголовок"
+
+#: ../ml-slider.php:1380
+msgid "Slideshow title"
+msgstr "Заголовок слайд-шоу"
+
+#: ../ml-slider.php:1394
+msgid "Advanced Settings"
+msgstr "Додатково"
+
+#: ../ml-slider.php:1403
+msgid "Stretch"
+msgstr "Розтягнути"
+
+#: ../ml-slider.php:1405
+msgid "100% wide output"
+msgstr "На всю ширину"
+
+#: ../ml-slider.php:1407
+msgid "Stretch the slideshow output to fill it's parent container"
+msgstr "Розтягнути слайд-шоу на всю ширину батьківського елемента"
+
+#: ../ml-slider.php:1412
+msgid "Center align"
+msgstr "Вирівнювати по центру"
+
+#: ../ml-slider.php:1415
+msgid "Center align the slideshow"
+msgstr "Відцентрувати слайд-шоу"
+
+#: ../ml-slider.php:1420
+msgid "Auto play"
+msgstr "Відтворювати автоматично"
+
+#: ../ml-slider.php:1423
+msgid "Transition between slides automatically"
+msgstr "Перехід між слайдами відбувається автоматично"
+
+#: ../ml-slider.php:1428
+msgid "Image Crop"
+msgstr "Обтинання зображень"
+
+#: ../ml-slider.php:1432
+msgid "Smart Crop"
+msgstr "Розумне обтинання зображень"
+
+#: ../ml-slider.php:1433
+msgid "Standard"
+msgstr "Типовий"
+
+#: ../ml-slider.php:1434
+msgid "Disabled"
+msgstr "Відключено"
+
+#: ../ml-slider.php:1435
+msgid "Disabled (Smart Pad)"
+msgstr "Відключено (Smart Pad)"
+
+#: ../ml-slider.php:1437
+msgid ""
+"Smart Crop ensures your responsive slides are cropped to a ratio that "
+"results in a consistent slideshow size"
+msgstr ""
+"Розумне обтинання гарантує, що обтинання слайдів буде виконано таким чином, "
+"щоб розмір слайд-шоу не змінювався"
+
+#: ../ml-slider.php:1442
+msgid "Carousel mode"
+msgstr "Режим каруселі"
+
+#: ../ml-slider.php:1445
+msgid "Display multiple slides at once. Slideshow output will be 100% wide."
+msgstr "Показувати декілька слайдів одночасно. Слайд-шоу матиме ширину 100%"
+
+#: ../ml-slider.php:1453
+msgid "Carousel margin"
+msgstr "Відступ каруселі"
+
+#: ../ml-slider.php:1456
+msgid "Pixel margin between slides in carousel."
+msgstr "Відступ (в пікселях) між слайдами в каруселі"
+
+#: ../ml-slider.php:1465
+msgid "Randomise the order of the slides"
+msgstr "Випадковий порядок слайдів"
+
+#: ../ml-slider.php:1470
+msgid "Hover pause"
+msgstr "Пауза при наведенні курсора"
+
+#: ../ml-slider.php:1473
+msgid ""
+"Pause the slideshow when hovering over slider, then resume when no longer "
+"hovering."
+msgstr ""
+"Зупиняє слайд-шоу при наведенні курсора і відновлює, коли курсор знову "
+"покидає його межі"
+
+#: ../ml-slider.php:1478
+msgid "Reverse"
+msgstr "В зворотньому порядку"
+
+#: ../ml-slider.php:1481
+msgid "Reverse the animation direction"
+msgstr "Змінити порядок слайдів на зворотній"
+
+#: ../ml-slider.php:1491
+msgid "Slide delay"
+msgstr "Затримка показу слайда"
+
+#: ../ml-slider.php:1493
+msgid "How long to display each slide, in milliseconds"
+msgstr "Як довго показувати кожен слайд (в мілісекундах)"
+
+#: ../ml-slider.php:1494 ../ml-slider.php:1507 ../ml-slider.php:1520
+#: ../ml-slider.php:1596 ../ml-slider.php:1622
+msgid "ms"
+msgstr "мс"
+
+#: ../ml-slider.php:1504
+msgid "Animation speed"
+msgstr "Швидкість анімації"
+
+#: ../ml-slider.php:1506
+msgid "Set the speed of animations, in milliseconds"
+msgstr "Задати швидкість анімації (в мілісекундах)"
+
+#: ../ml-slider.php:1517 ../ml-slider.php:1519
+msgid "Number of slices"
+msgstr "Кількість секцій"
+
+#: ../ml-slider.php:1530 ../ml-slider.php:1532 ../ml-slider.php:1543
+#: ../ml-slider.php:1545
+msgid "Number of squares"
+msgstr "Кількість квадратів"
+
+#: ../ml-slider.php:1551
+msgid "Slide direction"
+msgstr "Напрямок відтворення"
+
+#: ../ml-slider.php:1553
+msgid "Select the sliding direction"
+msgstr "Вибрати напрямок відтворення"
+
+#: ../ml-slider.php:1556
+msgid "Horizontal"
+msgstr "Горизонтальний"
+
+#: ../ml-slider.php:1557
+msgid "Vertical"
+msgstr "Вертикальний"
+
+#: ../ml-slider.php:1563
+msgid "Easing"
+msgstr "Згладжування"
+
+#: ../ml-slider.php:1565
+msgid "Animation easing effect"
+msgstr "Анімований ефект згладжування"
+
+#: ../ml-slider.php:1572
+msgid "Previous text"
+msgstr "Попередній текст"
+
+#: ../ml-slider.php:1574
+msgid "Set the text for the 'previous' direction item"
+msgstr "Задати текст для мітки 'назад' (попередній слайд)"
+
+#: ../ml-slider.php:1580
+msgid "Next text"
+msgstr "Наступний текст"
+
+#: ../ml-slider.php:1582
+msgid "Set the text for the 'next' direction item"
+msgstr "Задати текст для мітки 'вперед' (наступний слайд)"
+
+#: ../ml-slider.php:1593
+msgid "Square delay"
+msgstr "Затримка між квадратами"
+
+#: ../ml-slider.php:1595
+msgid "Delay between squares in ms"
+msgstr "Затримка між квадратами в мілісекундах"
+
+#: ../ml-slider.php:1606
+msgid "Opacity"
+msgstr "Прозорість"
+
+#: ../ml-slider.php:1608
+msgid "Opacity of title and navigation"
+msgstr "Прозорість напису і навігації"
+
+#: ../ml-slider.php:1619
+msgid "Caption speed"
+msgstr "Швидкість напису"
+
+#: ../ml-slider.php:1621
+msgid "Set the fade in speed of the caption"
+msgstr "Встановити швидкість вицвітання напису"
+
+#: ../ml-slider.php:1628
+msgid "Developer options"
+msgstr "Опції для розробників"
+
+#: ../ml-slider.php:1633
+msgid "CSS classes"
+msgstr "CSS класи"
+
+#: ../ml-slider.php:1635
+msgid ""
+"Specify any custom CSS Classes you would like to be added to the slider "
+"wrapper"
+msgstr ""
+"Вкажіть будь-які користувацькі CSS класи, які Ви хочете додати в контейнер "
+"слайдера"
+
+#: ../ml-slider.php:1641
+msgid "Print CSS"
+msgstr "Виводити CSS"
+
+#: ../ml-slider.php:1644
+msgid "Uncheck this is you would like to include your own CSS"
+msgstr "Зніміть цю галочку, якщо Ви хочете використовувати свій власний CSS"
+
+#: ../ml-slider.php:1649
+msgid "Print JS"
+msgstr "Виводити JS"
+
+#: ../ml-slider.php:1652
+msgid "Uncheck this is you would like to include your own Javascript"
+msgstr ""
+"Зніміть цю галочку, якщо Ви хочете використовувати свій власний Javascript"
+
+#: ../ml-slider.php:1657
+msgid "No conflict mode"
+msgstr "Безконфліктний режим"
+
+#: ../ml-slider.php:1660
+msgid "Delay adding the flexslider class to the slideshow"
+msgstr "Затримка при додаванні класу flexslider у слайд-шоу"
+
+#: ../ml-slider.php:1674
+msgid "Usage"
+msgstr "Використання"
+
+#: ../ml-slider.php:1677
+msgid "Shortcode"
+msgstr "Шорткод"
+
+#: ../ml-slider.php:1678
+msgid "Template Include"
+msgstr "Включити у шаблон"
+
+#: ../ml-slider.php:1682
+msgid "Copy & paste the shortcode directly into any WordPress post or page."
+msgstr ""
+"Скопіюйте і вставте цей шорткод безпосередньо в будь-яку сторінку чи "
+"публікацію WordPress"
+
+#: ../ml-slider.php:1685
+msgid ""
+"Copy & paste this code into a template file to include the slideshow within "
+"your theme."
+msgstr ""
+"Скопіюйте і вставте цей код у файл шаблону, щоб додати слайд-шоу у Вашу тему"
+
+#: ../ml-slider.php:1721
+msgid "Delete Slider"
+msgstr "Видалити слайдер"
+
+#: ../ml-slider.php:1747
+msgid "Select slideshow to insert into post"
+msgstr "Додати слайд-шоу"
+
+#: ../ml-slider.php:1750
+msgid "Add slider"
+msgstr "Додати слайдер"
+
+#: ../ml-slider.php:1784
+msgid "Insert MetaSlider"
+msgstr "Вставити MetaSlider"
+
+#: ../ml-slider.php:1786
+msgid "Choose slideshow"
+msgstr "Виберіть слайд-шоу"
+
+#: ../ml-slider.php:1791
+msgid "Insert slideshow"
+msgstr "Вставити слайд-шоу"
+
+#: ../ml-slider.php:1810
+msgid "Go Pro"
+msgstr "Отримати Pro версію"
+
+#: ../ml-slider.php:1829
+msgid "Upgrade to Pro $39"
+msgstr "Оновити до Pro версії за $39"

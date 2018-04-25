@@ -1,0 +1,43 @@
+/* -------------------------------------------------
+   Template options
+   ------------------------------------------------- */
+
+ul.radio-list {
+  &.template-list {
+    li {
+      display: flex;
+
+      &.current-selection {
+        .template-description {
+          background: $blue_bg;
+        }
+      }
+
+      > div {
+        &:first-child {
+          flex: 0 0 15%;
+          white-space: nowrap;
+          align-self: center;
+        }
+
+        &:nth-child(2) {
+          flex: 1 1 auto; // magic
+        }
+      }
+    }
+  }
+}
+
+.template-optgroup {
+  font-weight: 600;
+  margin: 15px 10px 10px 0;
+}
+
+.template-description {
+  border-radius: 15px;
+  padding: 0 15px;
+
+  p {
+    margin: 15px 0 15px !important;
+  }
+}

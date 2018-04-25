@@ -1,0 +1,19 @@
+.strong-view {
+  .wpmslider-pager {
+    line-height: 24px;
+    margin: 0 4px;
+    text-align: center;
+  }
+  .wpmslider-pager-link {
+    display: inline-block;
+    &.active {
+      color: #111;
+      font-weight: 700;
+    }
+  }
+  &.pager-style-text {
+    .wpmslider-pager-link {
+      padding: 0 0.3em;
+    }
+  }
+}
