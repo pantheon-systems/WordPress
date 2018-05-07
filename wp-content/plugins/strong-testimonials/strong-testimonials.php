@@ -5,7 +5,7 @@
  * Description: A full-featured plugin that works right out of the box for beginners and offers advanced features for pros.
  * Description: Collect and display your testimonials or reviews.
  * Author: Chris Dillon
- * Version: 2.30.7
+ * Version: 2.30.8
  *
  * Author URI: https://strongplugins.com/
  * Text Domain: strong-testimonials
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WPMTST_VERSION', '2.30.7' );
+define( 'WPMTST_VERSION', '2.30.8' );
 define( 'WPMTST_PLUGIN', plugin_basename( __FILE__ ) ); // strong-testimonials/strong-testimonials.php
 define( 'WPMTST', dirname( WPMTST_PLUGIN ) );           // strong-testimonials
 define( 'STRONGPLUGINS_STORE_URL', 'https://strongplugins.com' );

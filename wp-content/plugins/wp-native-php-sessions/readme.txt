@@ -3,7 +3,7 @@ Contributors: getpantheon, outlandish josh, mpvanwinkle77, danielbachhuber
 Tags: comments, sessions
 Requires at least: 3.0.1
 Tested up to: 4.9
-Stable tag: 0.6.6
+Stable tag: 0.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,9 @@ If you see an error like "Fatal error: session_start(): Failed to initialize sto
 
 
 == Changelog ==
+
+= 0.6.7 (April 26th, 2018) =
+* Disables plugin load when `WP_INSTALLING`, because session table creation breaks installation process.
 
 = 0.6.6 (March 8th, 2018) =
 * Restores session instantiation when WP-CLI is executing, because not doing so causes other problems.

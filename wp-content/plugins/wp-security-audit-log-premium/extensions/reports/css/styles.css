@@ -1,0 +1,74 @@
+/*[ WPSAL Reporting Plugin ]*/
+.wsal-rep-form-wrapper { display: block; clear: both; margin: 20px 0; padding: 0 0; overflow: hidden; min-height: 1px; }
+.wsal-rep-section { clear:both; margin-bottom: 20px; overflow: hidden; }
+.wsal-rep-label-fl { float: left; width: 125px; }
+.wsal-rep-section-fl { float: left; margin-left: 5px; }
+.wsal-rep-section-fl .sub-options{
+    margin-left: 25px;
+}
+.wsal-rep-clear { clear: both; display: block; }
+
+.wsal-rep-section p { margin: 0 0 5px 0;}
+
+.wsal-note{
+    border-left: solid 4px #FFD000;
+    padding: 5px 0 5px 10px;
+}
+
+.wsal-rep-section .select2-container {
+    min-width: 250px !important;
+    max-width: 500px !important;
+}
+
+.wsal-rep-section .label-datepick { margin-top: 5px; }
+.wsal-rep-section .is-datepick {
+    background-color: #fff;
+    background-image: linear-gradient(to bottom, #eee 1%, #fff 15%);
+    border: 1px solid #aaa;
+    padding: 6px 2px;
+    color: #666;
+    font-family: sans-serif;
+    font-size: 100%;
+}
+.wsal-tab {
+    display: none;
+}
+
+.datepick-ctrl { background-color:#fff; }
+.datepick-month-header, .datepick-month-header select, .datepick-month-header input{ height: auto;}
+
+.name-criteria {
+    width: 315px;
+    display: inline-block;
+}
+select.datepick-month-year{ padding: 2px 2px 4px 0; }
+
+.wsal-rb-alert-custom-post-types,
+.wsal-rb-alert-pages,
+.wsal-rb-alert-blog-posts {
+    display: none;
+}
+
+#label-cpts {
+    margin-bottom: 10px;
+}
+
+#s2id_wsal-rep-post-types {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 889px){
+    #wsal-rb-alert-codes-1 + label + div {
+        clear: left; display: block;
+    }
+}
+@media screen and (max-width: 782px){
+    .wsal-rep-section-fl .wsal-rep-clear:first-child{
+        padding-top: 3px;
+    }
+}
+@media screen and (max-width: 680px){
+    #wsal-rb-alert-codes-1 + label + div.select2-container {
+        width: 350px !important;
+    }
+}

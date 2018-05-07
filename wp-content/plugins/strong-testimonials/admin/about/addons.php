@@ -28,4 +28,13 @@
             <a href="https://strongdemos.com/strong-testimonials-properties/?utm_source=plugin&utm_medium=about" target="_blank">Go demo</a>
         </div>
     </div>
+    <div class="col sidebar-block sidebar-news addon assignment">
+        <h3>Assignment</h3>
+        <p>Assign testimonials to any object (posts, pages, media or custom content types) with features designed to simplify your workflow. Works well with portfolio, directory and service business themes.</p>
+        <div class="actions">
+            <a href="https://strongplugins.com/plugins/strong-testimonials-assignment?utm_source=plugin&utm_medium=about" target="_blank">Learn more</a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://strongdemos.com/strong-testimonials-assignment-1/?utm_source=plugin&utm_medium=about" target="_blank">Go demo</a>
+        </div>
+    </div>
 </div>

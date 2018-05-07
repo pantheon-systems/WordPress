@@ -90,7 +90,7 @@ class Strong_Testimonials_Help {
             <p><?php _e( 'For example:', 'strong-testimonials' ); ?></p>
             <ul class="standard">
                 <li><?php _e( 'Create a view to display your testimonials in a list, grid, or slideshow.', 'strong-testimonials' ); ?></li>
-                <li><?php _e( 'Create a view to show a testimonial submission form', 'strong-testimonials.' ); ?></li>
+                <li><?php _e( 'Create a view to show a testimonial submission form', 'strong-testimonials' ); ?></li>
                 <li><?php _e( 'Create a view to append your custom fields to the individual testimonial using your theme single post template.', 'strong-testimonials' ); ?></li>
 				<?php do_action( 'wpmtst_views_intro_list' ); ?>
             </ul>

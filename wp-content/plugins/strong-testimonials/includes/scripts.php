@@ -145,15 +145,23 @@ function wpmtst_scripts() {
 	 */
 	$locale = get_locale();
 	if ( 'en_US' != $locale ) {
+
 		$lang_parts = explode( '_', $locale );
-		$lang_file  = 'js/lib/validate/localization/messages_' . $lang_parts[0] . '.min.js';
-		if ( file_exists( WPMTST_PUBLIC . $lang_file ) ) {
-			wp_register_script( 'wpmtst-validation-lang',
-			                    WPMTST_PUBLIC_URL . $lang_file,
-			                    array( 'wpmtst-validation-plugin' ),
-			                    false,
-			                    true );
+
+		$lang_files = array(
+			'messages_' . $locale . '.min.js',
+			'messages_' . $lang_parts[0] . '.min.js',
+		);
+
+		foreach ( $lang_files as $file ) {
+			$path = WPMTST_PUBLIC . 'js/lib/validate/localization/' . $file;
+			$url  = WPMTST_PUBLIC_URL . 'js/lib/validate/localization/' . $file;
+			if ( file_exists( $path ) ) {
+				wp_register_script( 'wpmtst-validation-lang', $url, array( 'wpmtst-validation-plugin' ), false, true );
+				break;
+			}
 		}
+
 	}
 
 	/**

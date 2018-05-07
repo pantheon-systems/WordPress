@@ -3,7 +3,7 @@
 global $view;
 ?>
 <th>
-    <label for="view-divi_builder"><?php _e( 'Divi Builder', 'strong-testimonials-lucid-theme' ); ?></label>
+    <label for="view-divi_builder"><?php _e( 'Divi Builder', 'strong-testimonials' ); ?></label>
 </th>
 <td>
     <div class="row">

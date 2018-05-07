@@ -1,0 +1,41 @@
+.warn-icon-tri {
+	top: 5px;
+	left: 5px;
+	position: absolute;
+	border-left: 16px solid #FFF;
+	border-right: 16px solid #FFF;
+	border-bottom: 28px solid #C33;
+	height: 3px;
+	width: 4px
+}
+
+.warn-icon-chr {
+	top: 8px;
+	left: 18px;
+	position: absolute;
+	color: #FFF;
+	font: 26px Georgia;
+}
+
+.warn-icon-cir {
+	top: 2px;
+	left: 0px;
+	position: absolute;
+	overflow: hidden;
+	border: 6px solid #FFF;
+	border-radius: 32px;
+	width: 34px;
+	height: 34px;
+}
+
+.warn-wrap {
+	position: relative;
+	color: #A00;
+	font: 14px Arial;
+	padding: 6px 48px;
+}
+
+.warn-wrap a,
+.warn-wrap a:hover {
+	color: #F56;
+}

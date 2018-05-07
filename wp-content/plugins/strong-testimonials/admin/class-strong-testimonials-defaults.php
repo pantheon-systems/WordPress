@@ -313,7 +313,7 @@ class Strong_Testimonials_Defaults {
 				0 => array(
 					'record_type' => 'custom',
 					'name'        => 'client_name',
-					'label'       => __( 'Name', 'strong-testimonials-multiple-forms' ),
+					'label'       => __( 'Name', 'strong-testimonials' ),
 					'input_type'  => 'text',
 					'required'    => 1,
 					'after'       => '',
@@ -322,7 +322,7 @@ class Strong_Testimonials_Defaults {
 				1 => array(
 					'record_type' => 'custom',
 					'name'        => 'email',
-					'label'       => __( 'Email', 'strong-testimonials-multiple-forms' ),
+					'label'       => __( 'Email', 'strong-testimonials' ),
 					'input_type'  => 'email',
 					'required'    => 1,
 					'after'       => '',
@@ -333,7 +333,7 @@ class Strong_Testimonials_Defaults {
 				2 => array(
 					'record_type' => 'post',
 					'name'        => 'post_content',
-					'label'       => __( 'Testimonial', 'strong-testimonials-multiple-forms' ),
+					'label'       => __( 'Testimonial', 'strong-testimonials' ),
 					'input_type'  => 'textarea',
 					'required'    => 1,
 					'after'       => '',
@@ -491,7 +491,7 @@ class Strong_Testimonials_Defaults {
 				),
 				'single_template' => array(
 					'name'        => 'single_template',
-					'label'       => __( 'Single Template', 'strong-testimonials-lucid-theme' ),
+					'label'       => __( 'Single Template', 'strong-testimonials' ),
 					'description' => __( 'When viewing the testimonial using a theme\'s single post template.', 'strong-testimonials' ),
 				),
 			),

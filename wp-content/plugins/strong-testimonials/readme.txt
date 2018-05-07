@@ -3,7 +3,7 @@ Contributors: cdillon27
 Tags: testimonials, testimonial slider, testimonial form, reviews, star ratings
 Requires at least: 3.7
 Tested up to: 4.9.5
-Stable tag: 2.30.7
+Stable tag: 2.30.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -195,6 +195,13 @@ If you prefer not to post your URL publicly, start a private support ticket at [
 
 == Changelog ==
 
+= 2.30.8 - April 26, 2018 =
+* Fix incorrect textdomains.
+* Fix bug in form validation translation files.
+* Remove obsolete German translation.
+* Update translation files.
+* Refactor the submit buttons on settings pages.
+
 = 2.30.7 - April 23, 2018 =
 * Fix bug in front-end controller script.
 
@@ -248,5 +255,5 @@ See changelog.txt for previous versions.
 
 == Upgrade Notice ==
 
-= 2.30.7 =
+= 2.30.8 =
 Better template options. Improved compatibility. Minor bug fixes.

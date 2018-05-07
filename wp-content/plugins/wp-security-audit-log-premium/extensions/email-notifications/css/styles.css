@@ -1,0 +1,453 @@
+#wsal-section-title {
+    clear: both;
+    margin: 7px 0 10px;
+}
+#wsal-section-title #wsal-notif-title {
+    padding: 3px 8px;
+    font-size: 1.7em;
+    line-height: 100%;
+    height: 1.7em;
+    width: 100%;
+    outline: 0;
+    margin: 0;
+    background-color: #fff;
+}
+
+#wsal-top-notif-menu{
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Triggers View */
+#wsal-triggers-view {
+    background: #fff;
+    clear: both;
+    padding: 5px 5px;
+    margin: 15px 0;
+}
+
+#wsal-triggers-view #wsal-sub-heading {
+    border-bottom: solid 1px #ccc;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 8px;
+}
+#wsal-triggers-view #wsal-header-top-bar {
+    clear: both;
+    margin: 10px 0;
+}
+
+.wsal-section {
+    margin: 7px 0;
+    padding: 5px 5px;
+    clear: both;
+}
+
+
+#wsal_content_js .wsal_trigger {
+    background: #F7F7F7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0 0 10px 0;
+    overflow: hidden;
+    min-height: 1px;
+    clear: both;
+    border-bottom: inset 2px #e3e3e3;
+}
+
+#wsal_content_js .wsal_trigger input{
+    float: left;
+    margin: 5px 7px; overflow: hidden;
+    min-height: 1px;
+}
+#wsal_content_js .wsal_trigger div.wsal-fly{
+    float: left;
+    margin: 5px 0 5px 5px; overflow: hidden;
+    min-height: 1px;
+}
+
+#wsal_content_js .wsal_trigger .wsal-s1 { width: 80px; float: left; overflow: hidden; min-height: 1px; margin-left: 7px; margin-right: 5px; margin-top: 4px; }
+#wsal_content_js .wsal_trigger .wsal-s2,
+#wsal_content_js .wsal_trigger .wsal-s3 { width: 120px; float: left; overflow: hidden; min-height: 1px; margin-left: 5px; margin-top: 4px; }
+#wsal_content_js .wsal_trigger .wsal-s2 {width: 153px; margin-right: 8px;}
+
+#wsal_content_js .wsal_trigger .wsal-s4,
+#wsal_content_js .wsal_trigger .wsal-s5,
+#wsal_content_js .wsal_trigger .wsal-s6 {
+    float: left;
+    overflow: hidden;
+    min-height: 1px;
+    margin-left: 5px;
+    margin-top: 4px;
+}
+
+#wsal_content_js .wsal_trigger .wsal-s1 > div,
+#wsal_content_js .wsal_trigger .wsal-s2 > div,
+#wsal_content_js .wsal_trigger .wsal-s3 > div {
+    float: left;
+    margin: 5px 0; overflow: hidden;
+    min-height: 1px;
+}
+
+.wsal-trigger-input{
+    min-width: 150px;
+    width: auto;
+    background-color: #fff;
+    background-image: linear-gradient(to bottom, #eee 1%, #fff 15%);
+    border: 1px solid #aaa;
+    padding: 5px 5px;
+}
+
+#wsal-section-email {}
+#wsal-section-email p { overflow: hidden; min-height: 1px; clear: both; }
+#wsal-section-email p span { float: left; display: block; font-size: 14px; margin-top: 4px;}
+#wsal-section-email p input[type="text"] { float: left; display: block; margin-left: 10px; }
+#wsal-section-email p input[type="submit"] { float: right; display: block;}
+#wsal-section-email input[type="text"]{
+    padding: 5px 5px;
+    font-size: 14px;
+    width: 250px;
+    outline: 0;
+    margin: 0;
+    background-color: #fff;
+}
+
+label.error{
+    margin-left: 10px;
+    font-size: 12px;
+    color: #ff0000 !important;
+}
+
+#wsal-section-title label.error{
+    margin-top: 5px;
+}
+
+#wsal-notif-email-error {
+    float: left;
+    display: block !important;
+    margin-top: 5px;
+    margin-left: 7px;
+}
+
+#wsal_content_js .wsal_trigger div .js_s1 { min-width: 75px !important; }
+#wsal_content_js .wsal_trigger div .js_s2 { min-width: 150px !important; }
+#wsal_content_js .wsal_trigger div .js_s3 { min-width: 115px !important; }
+#wsal_content_js .wsal_trigger div .js_s4 { min-width: 110px !important; }
+#wsal_content_js .wsal_trigger div .js_s5 { min-width: 150px !important; }
+#wsal_content_js .wsal_trigger div .js_s6 { min-width: 150px !important; }
+
+#wsal_content_js .wsal_trigger .dd .wsal_options_dd { width: 185px; float: left; overflow: hidden; min-height: 1px; margin-left: 5px; margin-top: 4px; }
+#wsal_content_js .wsal_trigger .dd .wsal_options_dd > div select { min-width: 180px; }
+
+input.invalid { border: solid 1px #dd3d36; }
+#wsal-error-container {
+    background: #fff;
+    color: #444;
+    border-left: solid 4px #dd3d36;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+#wsal-error-container p {
+    font-family: "Open Sans",sans-serif;
+    font-size: 12px;
+    padding: 10px 0 10px 10px;
+}
+.wrap h2+.updated.below-h2{ margin-right: 20px;}
+.wrap h2+.error.below-h2{ margin-right: 20px;}
+
+#wsal-notif-table tbody .row-actions { visibility: visible !important; }
+
+/*
+* IOS button
+*/
+.f-container { overflow: hidden; min-height: 1px; margin-top: 0;}
+.f-left { float: left;}
+.f-right { float: right;}
+.f-text { margin-left: 10px;}
+#NotificationStatusText { margin-right: 5px; }
+input.switch[type="checkbox"], input.switch[type="radio"] { display: none; }
+input.switch[type="checkbox"] + label, input.switch[type="radio"] + label {
+    background-color: white;
+    border: 1px solid #dfdfdf;
+    border-radius: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    height: 18px;
+    position: relative;
+    transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;
+    vertical-align: middle;
+    width: 38px;
+}
+input.switch[type="checkbox"] + label:after, input.switch[type="radio"] + label:after {
+    background: none repeat scroll 0 0 white;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    content: "";
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: left 0.2s ease-in-out 0s;
+    width: 16px;
+}
+input.switch[type="checkbox"]:checked + label, input.switch[type="radio"]:checked + label {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+    box-shadow: 0 0 0 15.999px #2ecc71 inset;
+    transition: background-color 1.2s ease 0s, border 0.4s ease 0s, box-shadow 0.4s ease 0s;
+}
+input.switch[type="checkbox"]:checked + label:after, input.switch[type="radio"]:checked + label:after {
+    left: 20px;
+}
+input.switch.switch-warning[type="checkbox"]:checked + label, input.switch.switch-warning[type="radio"]:checked + label {
+    background-color: #e67e22;
+    border-color: #e67e22;
+    box-shadow: 0 0 0 16px #e67e22 inset;
+}
+input.switch.switch-danger[type="checkbox"]:checked + label, input.switch.switch-danger[type="radio"]:checked + label {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 16px #e74c3c inset;
+}
+input.switch.switch-info[type="checkbox"]:checked + label, input.switch.switch-info[type="radio"]:checked + label {
+    background-color: #3498db;
+    border-color: #3498db;
+    box-shadow: 0 0 0 16px #3498db inset;
+}
+input.switch[type="checkbox"]:disabled + label, input.switch[type="checkbox"]:disabled:checked + label, input.switch[type="radio"]:disabled + label, input.switch[type="radio"]:disabled:checked + label {
+    background-color: #ecf0f1;
+    border-color: #ecf0f1;
+    box-shadow: none;
+    cursor: default;
+}
+
+/*
+* Notifications table
+*/
+#wsal-notif-table th.column-title span { display: block; margin-top: 0; }
+#wsal-notif-table th.column-title span { display: block; margin-top: 0; }
+#wsal-notif-table thead input[type="checkbox"],
+#wsal-notif-table tfoot input[type="checkbox"] { margin-top: 2px; }
+#wsal-notif-table tbody .column-title strong { margin-top: 0;}
+#wsal-notif-table tbody tr input[type="checkbox"] { margin-left: 8px;}
+#wsal-notif-table tbody td.column-author a:before { content:" "; display:block; margin-top: 4px;}
+#wsal-notif-table tbody th.check-column { border-left: 4px solid #fff; }
+#wsal-notif-table tbody tr.active th.check-column { border-left: 4px solid #2ea2cc; }
+
+/*
+* Search
+*/
+#notification-search-input {
+    color: #444;
+    font-size: 14px;
+    padding: 6px 5px 7px 5px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+#search-submit { padding: 0 10px; height: auto !important;}
+
+/*
+* Date time overrides
+*/
+.datepick-month-header, .datepick-month-header select, .datepick-month-header input { height: auto;}
+
+/*
+* Dropdowns
+* Based on http://red-team-design.com/making-html-dropdowns-not-suck/
+*/
+.custom-dropdown__select{
+    font-size: inherit; /* inherit size from .custom-dropdown */
+    padding: .5em; /* add some space*/
+    margin: 0; /* remove default margins */
+}
+.custom-dropdown__select--default { background-color: #FFF; color: #000; }
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.custom-dropdown__select {
+    padding-right: 2.5em; /* accommodate with the pseudo elements for the dropdown arrow */
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.custom-dropdown::before,
+.custom-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+.custom-dropdown::after { /* Custom dropdown arrow */
+    content: "\25BC";
+    height: 1em;
+    font-size: .625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%; margin-top: -.5em;
+}
+.custom-dropdown::before { /* Custom dropdown arrow cover */
+    width: 2em;
+    right: 0; top: 0; bottom: 0;
+    border-radius: 0 3px 3px 0;
+}
+.custom-dropdown__select[disabled] { color: rgba(0,0,0,.3); }
+.custom-dropdown.custom-dropdown--disabled::after {
+    color: rgba(0,0,0,.1);
+}
+/* default dropdown style */
+.custom-dropdown--default::before {
+    background-clip: padding-box;
+    background-color: #fff;
+    background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+}
+.custom-dropdown--default::after { color: rgba(0,0,0,.4); }
+
+.custom-dropdown__hide {
+    display: none;
+}
+
+/* FF only temporary & ugly fixes */
+/* the "appearance: none" applied on select still shows a dropdown arrow on Firefox */
+/* https://bugzilla.mozilla.org/show_bug.cgi?id=649849 */
+@-moz-document url-prefix() {
+    .custom-dropdown__select { padding-right: .9em }
+    .custom-dropdown--large .custom-dropdown__select { padding-right: 1.3em }
+    .custom-dropdown--small .custom-dropdown__select { padding-right: .5em }
+}
+
+/*[wsal] Webkit overrides */
+@supports (-webkit-appearance: none){
+    span.custom-dropdown {
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        color: #444;
+    }
+    .wsal-trigger-input{ padding: 5px 5px 2px 5px !important; }
+    .wsal_trigger select { padding-top: 0 !important;}
+}
+
+/*
+* Pages
+*/
+.postbox.wsal-helpbox { background: #f9f9f9; }
+.postbox.wsal-helpbox .inside { margin: 0 0; }
+.wsal-helptext { margin: 0 0; font-size: 12px!important; color: #444; font-style: italic;}
+
+/*
+* Custom
+*/
+.wsal-condition-box { margin-bottom: 10px; }
+.wsal-group {  background: #e0e0e0 !important;}
+.wsal-group-darken { background: #e0e0e0 !important; border-bottom: none 0 !important;}
+
+.wsal-tab {
+    display: none;
+}
+.wsal-tab th {
+    padding-left: 20px;
+}
+.form-table {
+    margin-top: 0;
+}
+tbody.widefat {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.built-in {
+    margin-top: 2px;
+}
+.built-in-row {
+    width: 100%;
+}
+span.built-in-title {
+    display: inline-block;
+    width: 50%;
+}
+input.built-in-email {
+    display: inline-block;
+    float: right;
+    padding: 4px 4px;
+    font-size: 14px;
+    width: 45%;
+    outline: 0;
+    margin: 0;
+    background-color: #fff;
+}
+div.no-notifications-msg {
+    margin-left: -10px;
+    margin-bottom: -8px;
+    padding: 1px 12px;
+    border-left: 4px solid #dd3d36;
+}
+div.no-notifications-msg p {
+    margin: .5em 0;
+    padding: 2px;
+}
+
+#email-template tr td input.field {
+    padding: 5px 5px;
+    font-size: 14px;
+    width: 100%;
+    outline: 0;
+    margin: 0;
+    background-color: #fff;
+}
+
+#specific-template {
+    width: 100%;
+    margin-top: 1.33em;
+    border-collapse: collapse;
+}
+#specific-template tr td.left-column {
+    width: 200px;
+}
+#specific-template #email-template tr td input.field {
+    margin-top: 1.33em;
+}
+
+#email-template tr td label.tags,
+#specific-template tr td span.tags {
+    font-style: italic;
+}
+
+#wsal-section-radio {
+    margin-top: 1.33em;
+}
+
+#built-in_16,
+#built-in_17,
+#built-in_18,
+#built-in_19 {
+    vertical-align: top;
+}
+#built-in_16-email,
+#built-in_17-email,
+#built-in_18-email,
+#built-in_19-email {
+    vertical-align: top;
+}
+
+.built-in-title .count {
+    height: 20px;
+    width: 50px;
+}
+
+#built-in_16-count,
+#built-in_17-count,
+#built-in_18-count,
+#built-in_19-count {
+    width: 40px;
+}
+
+.js_s2 option[value="PAGE ID"],
+.js_s2 option[value="CUSTOM POST ID"] {
+    display: none;
+}
