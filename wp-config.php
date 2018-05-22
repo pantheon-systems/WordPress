@@ -80,10 +80,8 @@ else:
     }
     // Don't show deprecations; useful under PHP 5.5
     error_reporting(E_ALL ^ E_DEPRECATED);
-    // Force the use of a safe temp directory when in a container
-    if ( defined( 'PANTHEON_BINDING' ) ):
-        define( 'WP_TEMP_DIR', sprintf( '/srv/bindings/%s/tmp', PANTHEON_BINDING ) );
-    endif;
+    /** Define appropriate location for default tmp directory on Pantheon */
+    define('WP_TEMP_DIR', $_SERVER['HOME'] .'/tmp');
 
     // FS writes aren't permitted in test or live, so we should let WordPress know to disable relevant UI
     if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], array( 'test', 'live' ) ) && ! defined( 'DISALLOW_FILE_MODS' ) ) :
