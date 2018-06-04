@@ -264,3 +264,144 @@ add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
 
 // http://www.wpbeginner.com/wp-tutorials/how-to-remove-the-welcome-panel-in-wordpress-dashboard/
 remove_action('welcome_panel', 'wp_welcome_panel');
+
+//Qiigo forms replacement shortcode after deleting qiigo form routing plugin
+add_action('init', 'qiigo_contact_form_shortcode');
+function qiigo_contact_form_shortcode() {
+    add_shortcode('qiigo_contact_form', 'qiigo_contact_form_code');
+}
+function qiigo_contact_form_code($args, $content){
+   $form_id = ($args['id'])
+  ?>              
+    <script type="text/javascript">
+                var servicedomain="//www.123contactform.com/";
+                
+                /* data-custom-vars parameter added for passing parameters */
+                document.write(decodeURI("%3Cdiv class='qiigoforms-wrapper'%3E%3Cscript defer src='"+servicedomain+"embed/<?php echo $form_id ?>.js' data-role='form' type='text/javascript'%3E%3C/script%3E%3C/div%3E"));
+            </script><?php
+}?>
+
+
+
+
+<?php 
+add_action( 'init', 'codex_custom_init' );
+function codex_custom_init() {
+    $args = [
+      'public' => true,
+      'label'  => 'Test',
+      'supports' => ['custom-fields', 'title', 'editor', 'author', 'thumbnail', 'excerpt']
+    ];
+    register_post_type( 'test', $args );
+}
+
+add_action( 'init', 'wpcodex_add_custom_fileds_support_for_cpt', 11 );
+function wpcodex_add_custom_fileds_support_for_cpt() {
+    add_post_type_support( 'cpt', 'custom-fields' ); // Change cpt to your post type
+}
+
+add_action( 'init', 'bookworm_blog_cpt' );
+
+
+
+
+
+
+function bookworm_blog_cpt() {
+
+register_post_type( 'book', array(
+  'labels' => array(
+    'name' => 'Books',
+    'singular_name' => 'Book',
+   ),
+  'description' => 'Books which we will be discussing on this blog.',
+  'public' => true,
+  'menu_position' => 20,
+  'supports' => array( 'title', 'editor', 'custom-fields' )
+));
+}
+
+
+
+function member_add_meta_box() {
+//this will add the metabox for the member post type
+$screens = array( 'member_post_type' );
+
+foreach ( $screens as $screen ) {
+
+    add_meta_box(
+        'member_sectionid',
+        __( 'Member Details', 'member_textdomain' ),
+        'member_meta_box_callback',
+        $screen
+    );
+ }
+}
+add_action( 'add_meta_boxes', 'member_add_meta_box' );
+
+/**
+ * Prints the box content.
+ *
+ * @param WP_Post $post The object for the current post/page.
+ */
+function member_meta_box_callback( $post ) {
+
+// Add a nonce field so we can check for it later.
+wp_nonce_field( 'member_save_meta_box_data', 'member_meta_box_nonce' );
+
+/*
+ * Use get_post_meta() to retrieve an existing value
+ * from the database and use the value for the form.
+ */
+$value = get_post_meta( $post->ID, '_my_meta_value_key', true );
+
+echo '<label for="member_new_field">';
+_e( 'Phone Number', 'member_textdomain' );
+echo '</label> ';
+echo '<input type="text" id="member_new_field" name="member_new_field" value="' . esc_attr( $value ) . '" size="25" />';
+}
+
+/**
+ * When the post is saved, saves our custom data.
+ *
+ * @param int $post_id The ID of the post being saved.
+ */
+ function member_save_meta_box_data( $post_id ) {
+
+ if ( ! isset( $_POST['member_meta_box_nonce'] ) ) {
+    return;
+ }
+
+ if ( ! wp_verify_nonce( $_POST['member_meta_box_nonce'], 'member_save_meta_box_data' ) ) {
+    return;
+ }
+
+ if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return;
+ }
+
+ // Check the user's permissions.
+ if ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) {
+
+    if ( ! current_user_can( 'edit_page', $post_id ) ) {
+        return;
+    }
+
+ } else {
+
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+ }
+
+ if ( ! isset( $_POST['member_new_field'] ) ) {
+    return;
+ }
+
+ $my_data = sanitize_text_field( $_POST['member_new_field'] );
+
+ update_post_meta( $post_id, '_my_meta_value_key', $my_data );
+}
+add_action( 'save_post', 'member_save_meta_box_data' );
+add_action( 'save_post', 'member_save_meta_box_data' );
+?>

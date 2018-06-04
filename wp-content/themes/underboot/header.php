@@ -9,131 +9,81 @@
  * @package underboot
  */
 
-?>
-    <!DOCTYPE html>
-    <html <?php language_attributes(); ?>>
-
-    <head>
-        <!-- Google Tag Manager -->
-        <script>
-            (function(w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({
-                    'gtm.start': new Date().getTime(),
-                    event: 'gtm.js'
-                });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-XXXXX');
-
-        </script>
-        <!-- End Google Tag Manager -->
-        <meta charset="<?php bloginfo( 'charset' ); ?>">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="profile" href="http://gmpg.org/xfn/11">
-        <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-        <!--[if lt IE 9]>
-	    <script src="<?php echo esc_url( get_template_directory_uri() ); ?>/js/selectivizr-min.js"></script>
-	    <![endif]-->
-	    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-       
-        <?php wp_head(); ?>
-        <?php  //eliminates phone changer error in console: ?> 
-        <script type="text/javascript"><!--
-        vs_account_id      = "";
-            //--></script>    
-            <?php
-        if ( is_user_logged_in() ) {
-            echo "<style>.container-fluid.redcon{top:147px;}</style>";
-        } else {
-            //do nothing
-        }
-        ?>
-        
-        <?php
-        
-//TESTING FOR REDIRECTS IN CONFIG FILE FOR SUBDOMAINS//////
-//$array_shift = (explode('.', $_SERVER['HTTP_HOST']));
-//        var_dump( $array_shift);
-//        echo "array_shift<br>";
-//$myurl = htmlspecialchars($_SERVER["REQUEST_URI"]);
-//        var_dump( $myurl);
-//        echo "myurl<br>";
-//$myexp = ( explode ('.', $myurl) );
-//        var_dump( $myexp);
-//        echo "myexp<br>";
-//$my_ref_url = $_SERVER['HTTP_REFERER'];
-//        var_dump($my_ref_url);
-//        echo "my_ref_url<br>";
-//$my_ref_exp =  explode ('/', $my_ref_url);
-//        var_dump($my_ref_exp);
-//        echo "my_ref_exp<br>";
-//TESTING FOR REDIRECTS IN CONFIG FILE FOR SUBDOMAINS//////
+?><!DOCTYPE html>
+<!-- 
+~~~~~~~~~~********** This a Qiigo template below are instructions for initial set up. **********~~~~~~~~~~~
+#
+# this is the shortcode for 123 contact forms do_shortcode('[qiigo-contact-form id="form number"]');
+#
+#
+#
+#
+#
+#
+#
+#
+~~~~~~~~~~********** This a Qiigo template above are instructions for initial set up. **********~~~~~~~~~~~
+-->
 
 
-//	THIS BLOCK OF CODE WRITES LINK TAG THAT ADDS THE HREFLANG ATTRIBUTE 
+<html <?php language_attributes(); ?>>
+<head>
+<meta charset="<?php bloginfo( 'charset' ); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M83BBD');</script>
+<!-- End Google Tag Manager -->
 
-        //get the qiigo location path variable, supposed to be the same as the location slug:
-		$host = $_SERVER['SERVER_NAME'];
-		$field = get_field_object('languagetype');
-		$value = $field['value'];
-		//$label = $field['choices'][ $value ];
-		$protocol = $_SERVER['HTTPS'] == 'on' ? 'https' : 'http';
-		
+<?php wp_head(); ?>
+</head>
 
-			// CHECKS FOR THE URL FROM ADDRESS BAR TO PRINT print $host . '<br>';
-			// GATHERS FIELD OPTIONS CANADIAN AND ENGLISH print $field[0] . '<br>';
-			// RETURNS ENGLISH OR CANADIAN print $value . '<br>';
-			// RETURNS HTTP OR HTTPS print $protocol;
+<body <?php body_class(); ?>>
 
-
-		 // THE FIRST IF STATEMENT IS CHECKING FOR THE RADIO BUTTON VALUE OF "CANADIAN" AND THEN IT LOOKS TO SEE IF THE "hreflang" FIELD HAS BEEN POPULATED. IF BOTH OF THESE ARE TRUE THEN THE LINK IS WRITTEN AS CANADIAN AND THEN PULLS THE URL AND ADDS WHATEVER HAS BEEN ENTERED IN 'hreflang' BY THE USER.
-		if ($value === 'Canadian' && get_field('hreflang')) {?>
-            <link rel="alternate" href="<?php echo $protocol . '://' . $host; the_field('hreflang');?>" hreflang="en-ca" />
-            <?php }
-		 // IF ONLY CANADIAN === TRUE THEN WRITE THE URL AS AN EXACT MATCH FOR CANADIAN VERSION.
-		elseif ($value === 'Canadian') {?>
-            <link rel="alternate" href="<?php echo get_permalink();?>" hreflang="en-ca" />
-
-            <?php }
-		 //THIS IS A REPEAT OF ABOVE FOR ENGLISH
-		elseif ($value === 'English' && get_field('hreflang')) {?>
-            <link rel="alternate" href="<?php echo $protocol . '://' . $host; the_field('hreflang');?>" hreflang="en-us" />
-            <?php }
- 		//THIS GETS PRINTED IF ALL ELSE FAILS
-		else {?>
-            <link rel="alternate" href="<?php echo get_permalink();?>" hreflang="en-us" />
-            <?php }	?>
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-    </head>
-
-    <body <?php body_class(); ?>>
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M83BBD"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
 
-        <!-- Qiigo Q Tag number -->
-        <div data-qtag-num="<?php the_field('q_tag'); ?>" hidden></div>
-        <!-- END Qiigo Q Tag number -->
+<!-- Qiigo Q Tag number q_tag field is created as a custom field-->
+<div data-qtag-num="<?php //the_field('q_tag'); ?>" hidden></div>
+<!-- END Qiigo Q Tag number -->
 
+<div id="page" class="site container">
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'underboot' ); ?></a>
 
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+			<?php
+			if ( is_front_page() && is_home() ) : ?>
+				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+			<?php else : ?>
+				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+			<?php
+			endif;
 
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModalCTA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
+			$description = get_bloginfo( 'description', 'display' );
+			if ( $description || is_customize_preview() ) : ?>
+				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
+			<?php
+			endif; ?>
+            
+             <button class="btn-cta" data-toggle="modal" data-target="#myModalCTA">
+            	<a href="#" title="Schedule a Free Estimate">Call to Action</a>
+        	</button>        
+            <!-- Modal -->
+            <div class="modal fade" id="myModalCTA" tabindex="-1" role="dialog" 
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close" 
+                               data-dismiss="modal">
                                    <span aria-hidden="true">&times;</span>
                                    <span class="sr-only">Close</span>
                             </button>
@@ -181,6 +131,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </nav>
                             </div>
                         </div>
+                        
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                         	<div class=""><p><?php do_shortcode('[qiigo-contact-form id="Enter 123 contact form number here"]'); ?>Usually a form goes here.</p></div>
+                        </div>  
                     </div>
                 </div>
             </div>
