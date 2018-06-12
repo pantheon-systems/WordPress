@@ -1,0 +1,946 @@
+/*
+Theme Name: underboot
+Theme URI: http://underscores.me/
+Author: Underscores.me
+Author URI: http://underscores.me/
+Description: Description
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: underboot
+Tags:
+*/
+
+/*custom styles that override Bootstrap live here*/
+
+#wpadminbar {
+	/*position:static;*/
+	background:#000FBD;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;	
+	font-size:1.75em;
+	line-height:1.75em;
+	cursor:default;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight:bold;
+}
+/*bootstrap classes consider all screen sizes :) */
+h1 {
+	font-size: xx-large;	
+}
+h2 {
+	font-size:x-large;	
+}
+h3 {
+	font-size:large;	
+}
+/*overwrite type.less margin: 0 0 10px;*/
+p {
+	line-height:1.5em;
+	-webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+ul {
+	margin:0;	
+	padding:0 0 1em 2em;	
+}
+a {
+	color:#96c93d;	
+}
+a:hover {
+	text-decoration:none;
+	color:#b10103;	
+}
+a:active, a:focus {
+	text-decoration:none;
+	color:#000;	
+}
+blockquote {
+	font-style:italic;
+	color:#747474;
+}
+.btn-primary {
+	background-color:#b10103;
+	border-color: transparent;
+}
+.btn-primary a {
+	color:#ffffff;	
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+	background-color:#96c93d;	
+	border-color: transparent;
+	outline:0;
+}
+button.btn {
+	background-color:#96c93d;
+}
+img {
+	max-width:100%;
+	height:auto;
+}
+iframe {
+	max-width:100%;	
+}
+.alignleft {
+	float:left;
+	margin-right:1em;
+}
+.alignright {
+	float:right;
+	margin-left:1em;
+}
+.aligncenter {
+	text-align:center;
+	margin:0 auto;	
+}
+.gallery-item {
+	float:left;	
+	margin:0 4px 4px 0;
+	overflow:hidden;
+	position:relative;
+}
+
+header {
+	background:#f8f8f8;	
+}
+
+.entry-content li {
+	line-height:1.2em;
+	margin-bottom:.5em;	
+}
+.fixthejump {
+	min-height:100px;	
+}
+
+/*why? you misbehaving?*/
+.modal-header button.close {
+	color:#000000 !important;	
+}
+
+
+/*utility nav briefcase and map marker*/
+.glyphicon {
+	margin-right:5px;	
+}
+
+.fa.fa-phone {
+	position:relative;
+	top:3px;
+	color:#6e7072;
+}
+
+@media screen and (min-width: 768px) {
+	/* copied from old website:*/
+	.col_3 {
+		display:inline-block;
+		width:29%;
+		margin:25px 3% 25px 0;
+		vertical-align:top;
+		font-size:.9em;	
+		line-height:1.5em;
+	}
+	
+	#primary {
+		min-height:300px;	
+	}
+	.entry-header {
+		min-height:322px;	
+	}
+	.entry-content li {
+		line-height:1.5em;
+	}
+	.fixthejump {
+		min-height:200px;	
+	}
+	
+}
+@media screen and (min-width: 992px) {
+	#primary {
+		min-height:400px;	
+	}
+}
+
+
+header.site-header.affix {
+	border-bottom:1px solid #e1e1e1;
+}
+
+
+
+/*hamburger button*/
+.navbar-toggle {
+	float:none;	
+	margin:0;
+}
+/*expanded hamburger button*/
+.collapse.in {
+	background:#96c93d;	
+	clear:left;
+	padding:0;
+}
+
+/*get it in real tight for mobile, override bootstrap padding margins*/
+.container.headcon {position:relative;padding:0;}
+header.container {padding:5px 0 0 0;}
+.row.logorow {margin:10px 0;	}
+#phone.col-xs-6, .buttonwrap.col-xs-2 {padding:0;}
+/*default mobile styling*/
+#logo img {
+	max-width:60px;
+	height:auto;	
+	float:left;
+	margin-right:5px;
+}
+#phone {
+	font-family: 'Roboto', sans-serif;
+	float:left;
+}
+#phone span.calltoday, .site-header.affix #phone span.calltoday {
+	color:#757373;	
+	display:none;		
+}
+#phone span.number{
+	color:#96c93d;
+	font-weight:bold;
+}
+#social-media, ul#utility {
+	display:none;
+	visibility:collapse;	
+}
+/*text in the utility nav*/
+.textinline {
+	display:inline;
+	visibility:visible;	
+}
+
+
+
+
+/* ---------- BUMPER MENU MOBILE;  preceeded with .site-header.affix, not a media query: ------------  */
+.site-header.affix {
+	top:0px;
+	left:0px;
+	width:100%;
+	z-index:999;	
+}
+
+
+.site-header.affix #social-media {
+	top:5px;
+	/*right:600px;	*/
+	right:400px;
+}
+
+.site-header.affix #phone span.number {
+	font-size:1em;	
+}
+/*hide text in utility nav, leaving only the icons*/
+.site-header.affix .textinline {
+	display:none;
+	visibility:collapse;	
+}
+.site-header.affix ul#utility {
+	/*position:absolute;
+	top:5px;
+	right:30px;	*/
+	display:none;
+	visibility:collapse;
+}
+
+
+
+
+
+/*Tablet adds Call Today, social, utility nav*/
+@media screen and (min-width: 768px) {
+
+	#logo img {
+		max-width:100%;	
+		margin-top:5px;
+	}
+	#logo.col-sm-2 { /*because logo fills entire space, remove padding to allow it to grow larger on tablet*/
+		padding-right:0;
+		padding-left:0;	
+	}
+	#phone {
+		text-align:right;
+		margin-bottom:45px;
+	}
+	#phone span.calltoday {	
+		display:block;
+		margin-bottom:5px;
+		font-size:.5em;
+		font-weight:normal;		
+	}
+	#phone span.number{
+		font-size:2em;
+	}
+	#social-media {
+		display:block;
+		visibility:visible;
+		position:absolute;
+		top:50px;
+		right:300px;	
+	}
+	ul#utility {
+		display:block;
+		visibility:visible;
+		position:absolute;
+		top:95px;
+		right:0;
+		text-align:right;
+		padding:0;
+	}
+	ul#utility li {
+		list-style-type:none;
+		display:inline;
+	}
+	ul#utility li:first-child {
+		margin-right:25px;
+	}	
+	ul#utility li a {
+		padding:10px;
+		color:#333;	
+	}
+	
+	
+	
+	
+	/*  -----------------  bumper menu tablet desk --------------------- */
+	header.site-header.affix {
+		height:50px;
+	}
+	
+	.site-header.affix .row.logorow { /*tablet bumper does not need 25px margin*/
+		margin:	5px;
+	}
+	.site-header.affix #phone span.calltoday {
+		display:inline;	
+		margin-right:5px;
+	}
+	.site-header.affix #phone {
+		position:relative;
+		/*right:200px;*/
+		right:0;
+		margin-bottom:0;	
+	}
+	.site-header.affix #logo img  {
+		max-height:30px;
+		width:auto;	
+	}
+	.site-header.affix #social {
+		top:5px;
+	}
+		
+}
+
+/*stab myself in the eye. Entirely redo nav in a lightbox ------------------------------ */
+	#navbar-modal .modal-body {
+		background-color:#96c93d;		
+	}
+	#navbar-modal ul.menu {
+		list-style-type:none;	
+		padding:0; /*to get more space on mobile; too much left "margin"*/
+	}
+	#navbar-modal a {
+		color:#fff;	
+		display:block;
+		padding:10px 0;
+	}
+	#navbar-modal ul.dropdown-menu {
+		/* can't do this because mobile touch overrides the default href nature; just wants to expand and collapse. * 
+		position:static;
+		float:none;
+		border:none;
+		-webkit-box-shadow:none;
+		box-shadow:none;*/
+		margin-left:20px; /*mobile dropdowns indented*/
+	}
+	#navbar-modal ul.dropdown-menu a {
+		color:#96c93d;	
+		font-size:1.3em;
+		white-space:normal;	/*have the dropdowns wrap on mobile*/
+		
+	}
+	#navbar-modal ul.menu ul.dropdown-menu a { /*because you want 0 padding on ul.menu, but you want padding in the dropdowns*/
+		padding:10px;
+	}
+
+/*after adding in menus and bootstrap nav walker, the page indicator was blue. make it neutral:*/	
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+	background-color:#888;
+}
+
+
+
+@media screen and (min-width: 768px) {
+	.buttonwrap {
+		display:none;
+		visibility:collapse;	
+	}
+	header {
+		/*to make room for abs pos red nav bar*/
+		padding-bottom:50px;	
+		height:200px; 
+	}
+	/*container for the full width red*/
+	.container-fluid.redcon {
+		background-color:#96c93d;
+		padding-right:0;
+		padding-left:0;	
+		height:50px;
+		position:absolute;
+		top:150px;
+		width:100%;
+		z-index:1000;
+	}
+	/*added functionality in site.js. had to get nav out of the header and out of the bumper so lightbox can lay on top; abs pos makes it look like its in the header*/
+	.container-fluid.redcon.navBumper {
+		position:fixed;
+		top:50px;
+	}
+		
+	.redcon .container {
+		padding-right:0;
+		padding-left:0;	
+		position:relative;
+	}
+	
+	#navbar-modal .modal-sm {
+		width:100% !important;
+		position:absolute; /*this makes the drop-downs come to top*/
+		top:0;
+		left:0;	
+		z-index:99999;
+		margin:0;
+	}
+	#navbar-modal .modal-header {
+		display:none;	
+	}
+	#navbar-modal .modal-body {
+		padding:0;	
+	}
+	#navbar-modal.modal  {
+		display:block !important;
+		width:100%;
+		/*height:100px;*/
+		position:static;
+	}
+	#navbar-modal .modal-content {
+		box-shadow:none;
+		border:none;	
+	}
+	
+	#navbar-modal ul.menu {
+		background-color:#96c93d;
+		line-height:50px;
+	}
+	#navbar-modal ul.menu li {
+		list-style-type:none;
+		float:left;
+		margin-right:15px;
+	}
+	#navbar-modal ul.menu li a {
+		padding:0;/*to overwrite the padding needed for mobile*/
+	}
+	
+	#navbar-modal ul.dropdown-menu {
+		position:absolute;
+		top:46px;
+		left:0;
+		z-index:9999999;
+		overflow:visible !important;
+		margin-left:0px; /*no indent needed for desktop dropdowns*/
+		background-color:#96c93d;
+	}
+		
+	
+	#navbar-modal ul.dropdown-menu li{
+		display:block;
+		width:100%;	
+		margin:5px 0;
+	}
+	
+	#navbar-modal ul.dropdown-menu a {
+		color:#ffffff;
+		white-space:nowrap;/*do not wrap dropdowns on desktop*/	
+	}
+	#navbar-modal ul.dropdown-menu a:hover {
+		color:#96c93d;
+	}
+
+}
+@media screen and (min-width: 992px) {
+	#navbar-modal ul.menu li {
+		margin-right:40px;
+	}
+}
+
+
+
+/* ------------- call to action -------------- */
+.container.ctacon {
+	position:relative;
+	padding:0;
+}
+.cta {
+	background-color:#f8f8f8;
+	text-align:center;
+	z-index:10; /*dropdowns are 1000?*/
+}
+.cta p {
+	display:none;
+	visibility:collapse;	
+}
+.cta button small {
+	display:none;
+	visibility:collapse;	
+}
+.cta .btn-cta, p .btn-cta{
+	background-color:#b10103;
+	padding:10px;
+	border:none;
+	border-radius:0;
+	width:100%;
+	font-size:.75em;
+	box-shadow:none;
+}
+p .btn-cta{
+	border-radius:6px;	
+	margin:20px 0;
+}
+.cta .btn-cta a, p .btn-cta a {
+	color:#fff;	
+}
+.btn-cta:hover, .btn-cta:active, .btn-cta:focus {
+	outline:0;
+	background-color:#96c93d;
+}
+
+
+.modal-header h3 {
+	color:#96c93d;
+	font-size:1em;
+	text-transform:uppercase;
+}
+
+@media screen and (min-width: 768px) {
+	.container.ctacon {
+		height:1px; /*keep in the flow so we can anchor the CTA to the right side of the container*/
+	}
+	.cta {	
+		width:25%; /*because the width of article on page is 75%, or col-sm-8*/
+		position:absolute;
+		top:5em;
+		right:0;
+		padding:20px;
+		border-radius:6px;
+		border:1px solid #b10103;
+		background-color:#f8f8f8;
+		font-family: 'Roboto', sans-serif;	
+		line-height:1.2em;
+	}
+	.cta p {
+		display:block;
+		visibility:visible;	
+	}
+	.cta p.schedule {
+		font-weight:900;
+		font-size:.75em;
+		line-height:1em;
+		margin:0;
+	}
+	.cta p.schedule span {
+		font-size:1.4em;
+		line-height:1.5em;
+		color:#96c93d;
+	}
+	.cta button {
+		/*margin:10px 0;*/
+		line-height:1em;	
+	}
+	.cta button small {
+		display:block;
+		visibility:visible;	
+		font-size:1em;
+		margin-top:5px;
+	}
+	.cta .btn-cta {
+		border-radius:inherit;	
+		width:initial;
+		/*font-size:1em;*/
+		margin:10px 0;
+	}
+	.cta p.serviceareas {
+		font-size:.75em;
+		line-height:1em;
+		margin-top:0;	
+	}	
+	.cta .glyphicon {
+		/*keeps arrow on same line*/
+		display:inherit;
+		top:2px;	
+	}
+	p .btn-cta{
+		max-width:40%;	
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.cta button {
+		/*margin:20px 0;*/	
+		line-height:1em;	
+	}
+	.cta .btn-cta {
+		/*font-size:1.5em;
+		margin:10px 0 20px 0;*/
+		margin:20px 0;
+	}
+	.cta p.serviceareas {
+		font-size:1em;	
+		line-height:1.25em;
+	}
+	.cta p.schedule {
+		font-size:1em;
+		line-height:1.25em;
+	}
+	/*.cta button {
+		margin:20px 0;
+	}*/
+}
+
+
+/* ------------- social ----------------------*/
+#social-media {
+	text-align:right;
+	vertical-align: top;
+}
+#twitter, #facebook, #linkedin, #angieslist, #pinterest, #youtube, #google, #instagram, #homeadvisor {
+	display:inline-block;
+	width:31px;
+	height:31px;
+	padding:0.5em;
+}
+
+#homeadvisor {
+	background:url(images/homeadvisor.png);
+}
+#instagram {
+	background:url(images/instagram.png);
+}
+
+#twitter {
+	background:url(images/twitter.png);
+}
+
+#facebook {
+	background:url(images/facebook.png);
+}
+
+#linkedin {
+	background:url(images/linkedin.png);
+}
+
+#angieslist {
+	background:url(images/angieslist.png);
+}
+#pinterest {
+	background:url(images/pinterest.png);
+}
+#youtube {
+	background:url(images/youtube.png);
+}
+#google {
+	background:url(images/google.png);
+}
+
+
+li form.search-form {
+	display:inline;	
+}
+
+
+/* when we had gray text in the hero:
+@media only screen and (min-width : 768px) {
+	
+	.entry-title, .entry-360 span {
+		font-size:3em;	
+	}
+	.entry-360 span {
+		line-height:1.2em;	
+	}
+
+}*/
+
+@media only screen and (min-width : 992px) {
+	/*desktop nav items breathing room*/
+	nav ul li a{
+		padding:15px; 
+	}
+	/*open up the height of featured image here*/
+	.entry-header-text {
+		padding:6em 0;
+	}
+}
+
+/* ---------------------- home page template only ----------------*/	
+/*note max-width here. slider caption is bumped down, so bump primary down some extra*/
+@media only screen and (max-width : 757px) {
+	/*template with title*/
+	.page-template-t-home-template #primary {
+			padding-top:50px;
+		}
+	/*template with no title*/
+	.page-template-t-home-no-title #primary {
+			padding-top:50px;
+		}	
+	}
+@media only screen and (max-width : 767px) {
+	.home-template #logo {
+		display:none;
+		visibility:collapse;	
+	}
+	.home-template .buttonwrap.col-xs-2 {
+		float:right;	
+		width:20%;	
+	}
+	.home-template .navbar-toggle {
+		float:right;	
+	}
+	.home-template #phone.col-xs-6 {
+		width:75%;
+		float:left;
+		font-size:1.5em;
+		text-align:center;	
+	}
+	.home-template #social-media, .home-template ul#utility {
+		display:block;
+		visibility:visible;	
+	}
+	.home-template .logo2 img {
+		display:block;
+		margin:0 auto
+	}
+	.home-template #social-media {
+		text-align:center;	
+		margin:10px 0;
+	}
+	.home-template #utility {
+		list-style-type:none;
+		margin:5px 0;
+		padding:0;
+		text-align:center;
+	}
+	.home-template #utility li {
+		margin-bottom:10px;	
+	}
+	
+	
+	
+	
+
+	/* ----------- but when it becomes the bumper...  ---------------*/
+	.site-header.affix .home-template .logo2,  .site-header.affix .home-template #social-media, .site-header.affix .home-template ul#utility {
+		display:none !important;
+		visibility:collapse !important;	
+	}
+	.site-header.affix .home-template #logo {
+		display:block;
+		visibility:visible;	
+	}
+
+	.site-header.affix .home-template #phone.col-xs-6 {
+		width:50%;
+		font-size:inherit;	
+	}
+	
+	.site-header.affix .home-template .buttonwrap.col-xs-2{
+		width:10%; /*squeezing this in makes the phone and original logo fall into place, 1 line at top;*/	
+	}
+
+}
+
+
+
+
+
+
+.entry-360 {
+	padding:.5em;
+	width:inherit;
+	text-align:center;
+	background-color:rgba(0, 0, 0, 0.5);
+	border-radius:6px; /*to match the CTA next to it.*/
+}
+.entry-360 span {
+	display:block;
+	font-weight:bold;
+}
+
+.icon-bar {
+	border: 1px solid #fff;
+	width:15px;
+	display:block;
+}
+button.btn .icon-bar:nth-child(3) {
+	margin-top:2px;
+	margin-bottom:2px;
+}
+
+
+/* ------------- contact ------------*/
+/*push content down past the entry-title "contact us" */
+@media only screen and (min-width : 992px) {	
+		.page-template-t-contact .entry-title {
+			margin-bottom:25px;	
+		}
+}
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+table.hours td {
+	padding-right:5px;	
+}
+
+
+
+/* ------------ footer ------------*/
+footer {
+	background-color:#2e2e2e;
+	color:#fff;
+	text-align:center;
+	padding:2.5em 0;
+	font-size:.75em;	
+	line-height:1.5em;
+}
+.row.footerlinks {
+	margin-top:25px;	
+}
+footer a {
+	color:#a1a0a0;	
+}
+footer a:hover, footer a:active, footer a:focus {
+	color:#fff;	
+}
+.footicon, .footicon2 {
+	margin:20px auto;
+	line-height:12px;
+}
+.footicon2 img {
+	padding:5px 0;	
+}
+@media only screen and (min-width : 768px) {
+	.footicon, .footicon2 {
+		float:left;	
+		padding:0 5px;
+		width:70px;
+	}
+}
+@media only screen and (min-width : 992px) {
+	.footicon, .footicon2 {
+		width:initial;
+		margin:0 10px;
+	}
+	.footicon2 img {
+		padding:12px 0;	
+	}
+}
+
+
+
+/* slider*/
+.metaslider .caption {
+	text-align:center;	
+}
+.metaslider .caption-wrap {
+	bottom:initial !important;	
+}
+
+@media only screen and (min-width : 768px) {
+	.caption-wrap .caption {
+		text-align:left;	
+		max-width:75%;
+	}
+	.metaslider .caption-wrap {
+		bottom:0 !important;	
+	}
+
+}
+@media only screen and (min-width : 1200px) {
+	.caption-wrap .caption {
+		line-height:2.2em;
+		font-size:1.5em;
+		text-align:center;
+		max-width:inherit;
+	}
+	/*.metaslider .caption-wrap {
+		bottom:25px !important;
+	}*/
+}
+
+@media only screen and (min-width : 1500px) {
+	.metaslider .caption-wrap {
+		bottom:0 !important;
+	}
+}
+
+
+
+
+.flex-direction-nav .flex-next {
+background-position: 100% 0;
+right: 0 !important;
+}
+
+.flex-direction-nav .flex-prev {
+left: 0 !important;
+}
+
+
+
+/* page featured images */
+@media only screen and (min-width : 768px) {
+	.entry-header {
+		background-size:auto;	
+	}
+}
+
+
+
+
+
+
+
+/* reusable */
+.wp-caption-text {
+	font-size:.75em;
+	line-height:1.1em;	
+	text-align:center;
+	padding-top:5px;
+}
+
+
+
+
+.block-it {
+	display:block;
+	clear:both;	
+	min-height:200px;
+	padding:0 0 20px 0;
+	margin:0 0 20px 0;
+}
+
+
