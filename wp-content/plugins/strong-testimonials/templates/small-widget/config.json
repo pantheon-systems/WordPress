@@ -1,0 +1,30 @@
+{
+  "name": "Small Widget",
+  "description": "Designed for sidebar and footer widgets. Try it with the <code>widget-thumbnail</code> image size.",
+  "type": "display",
+  "order": 30,
+  "scripts": "",
+  "styles": "",
+  "force": "view-layout-normal",
+  "options": [
+    {
+      "name": "image_position",
+      "label": "",
+      "type": "select",
+      "default": "left",
+      "values": [
+        {
+          "value": "left",
+          "class_name": "",
+          "description": "image on left"
+        },
+        {
+          "value": "right",
+          "class_name": "image-right",
+          "description": "image on right"
+        }
+      ]
+    }
+  ],
+  "format_version": "2.0"
+}

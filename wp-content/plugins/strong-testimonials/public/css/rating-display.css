@@ -1,0 +1,90 @@
+/**
+ * Star Ratings - Display Only
+ *
+ * Pure CSS. No floats or bidi. Simple em-based sizing.
+ *
+ * http://codepen.io/cdillon/pen/vXNbBw
+ *
+ * Based on Pure CSS Star Rating Widget by James Barnett
+ * http://codepen.io/jamesbarnett/pen/vlpkh
+ */
+
+.strong-rating-wrapper {}
+
+/* the fieldset */
+.strong-rating {
+	border: none;
+	display: inline-block;
+}
+
+
+/* the stars */
+
+.strong-rating span.star { display: inline-block; }
+
+.strong-rating span.star:before {
+	font-family: FontAwesome;
+	content: "\f005";
+	display: inline-block;
+	font-size: 1.25em;
+	/* use padding not margin */
+	padding: 0 5px;
+	transition: color 0.3s ease;
+}
+.strong-rating span.star:first-child:before {
+	padding-left: 0;
+}
+.strong-rating span.star:last-child:before {
+	padding-right: 0;
+}
+
+.strong-rating span.star:hover { cursor: default; }
+
+
+/* fieldset tweaks */
+
+/* in a form */
+.strong-rating-wrapper.in-form .strong-rating {
+	padding: 0;
+}
+
+/* in a view */
+.strong-rating-wrapper.in-view {
+	display: inline-block;
+}
+.strong-rating-wrapper.in-view .strong-rating {
+	margin: 0;
+	padding: 0;
+}
+
+/* in the post editor */
+.strong-rating-wrapper.in-metabox {
+	display: inline-block;
+}
+
+.strong-rating-wrapper.in-metabox .strong-rating span.star:before {
+	font-size: 20px;
+	line-height: 27px;
+}
+
+.strong-rating-wrapper.in-table-list .strong-rating span.star:before {
+	/* use padding not margin */
+	padding: 1px;
+}
+
+
+/* the magic */
+
+/* this is how we highlight stars before the checked one (siblings before): */
+
+/* hide the first label because our rating may be zero */
+.strong-rating span.star0 { display: none; }
+
+/* and turn all on */
+.strong-rating span.star:before { color: #FFB900; }
+
+/* then turn off stars after the current rating */
+.strong-rating span.current ~ span.star:before { color: #DDD; }
+
+/* and turn on the current rating */
+.strong-rating span.current:before { color: #FFB900; }

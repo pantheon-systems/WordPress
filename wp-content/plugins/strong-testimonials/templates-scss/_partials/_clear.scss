@@ -1,0 +1,22 @@
+/* Clears
+-----------------------------------------------*/
+.clear {
+	clear: both;
+}
+
+/**
+Minimum paragraph width means no short words in skinny space next to image
+in columns or small screens.
+
+This workaround is needed until we can use flexbox properly
+or CSS offers container queries.
+
+Thanks https://css-tricks.com/minimum-paragraph-widths/
+*/
+.maybe-clear {
+	content: "";
+	/* this value seems to work well in both responsive and Masonry */
+	width: 6em;
+	display: block;
+	overflow: hidden;
+}

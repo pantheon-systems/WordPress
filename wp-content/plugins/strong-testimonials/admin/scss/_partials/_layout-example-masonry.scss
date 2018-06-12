@@ -1,0 +1,22 @@
+/* --------------------------------------------------
+   Masonry
+   -------------------------------------------------- */
+
+.view-layout-masonry .example-container {
+  .box {
+    width: 46%;
+  }
+
+  .grid-sizer,
+  &.col-2 .grid-sizer {
+    width: 46%;
+  }
+
+  &.col-3 .grid-sizer {
+    width: 27.5%;
+  }
+
+  &.col-4 .grid-sizer {
+    width: 19.5%;
+  }
+}

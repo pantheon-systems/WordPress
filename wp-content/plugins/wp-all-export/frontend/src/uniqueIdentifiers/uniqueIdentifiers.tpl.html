@@ -1,0 +1,45 @@
+<div class="wpallexport-collapsed wpallexport-section" ng-class="{closed: !uniqueIdentifiers.open}">
+    <div class="wpallexport-content-section">
+        <div class="wpallexport-collapsed-header disable-jquery" ng-click="uniqueIdentifiers.open = !uniqueIdentifiers.open">
+            <h3>Unique Identifiers</h3>
+        </div>
+        <div class="wpallexport-collapsed-content  slide-toggle" id="unique-identifiers" ng-slide-down="uniqueIdentifiers.open" duration="0.5">
+            <div class="wpallexport-collapsed-content-inner">
+                <p>
+                    Unique product identifiers are product codes associated with your products.
+                    Products submitted without unique identifiers are difficult to classify and may not be able to take advantage of all Google shopping features.
+                    <a href="https://support.google.com/merchants/answer/7052112?hl=en&ref_topic=3404778#intro-product-identifiers" target="_blank">Read more about unique product identifiers</a>.
+                </p>
+                <h4>GTIN</h4>
+                <p>
+                    Global Trade Item Numbers include UPC, EAN (in Europe), JAN (in Japan), and ISBN. <a href="https://support.google.com/merchants/answer/6219078" target="_blank">Read how to find your products' GTIN</a>.
+                </p>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="uniqueIdentifiers.gtin" droppable />
+                </div>
+
+                <h4>MPN</h4>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="uniqueIdentifiers.mpn" droppable />
+                </div>
+
+                <h4>Brand</h4>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="uniqueIdentifiers.brand" droppable />
+                </div>
+
+                <h4>Identifier Exists</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="uniqueIdentifiers.identifierExists" value="1" />Set to false if product has no GTIN or MPN</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="uniqueIdentifiers.identifierExists" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="uniqueIdentifiers.identifierExists == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="uniqueIdentifiers.identifierExistsCV" droppable />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

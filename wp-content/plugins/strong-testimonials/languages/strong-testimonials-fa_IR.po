@@ -1,0 +1,1899 @@
+# Copyright (C) 2016 Strong Testimonials
+# This file is distributed under the same license as the Strong Testimonials package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Strong Testimonials 2.2.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/strong-testimonials\n"
+"POT-Creation-Date: 2016-02-08 16:01+0330\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-07-19 10:38-0400\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.2\n"
+"Last-Translator: Chris Dillon <chris@wpmission.com>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: fa\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/EDD_SL_Plugin_Updater.php:185
+msgid "There is a new version of %1$s available. %2$sView version %3$s details%4$s."
+msgstr "نسخه جدیدی از %1$s در دسترس است. %2$s نمایش نسخه %3$s جزییات %4$s."
+
+#: includes/EDD_SL_Plugin_Updater.php:193
+msgid ""
+"There is a new version of %1$s available. %2$sView version %3$s details%4$s or "
+"%5$supdate now%6$s."
+msgstr ""
+"نسخه جدیدی از %1$s در دسترس است. %2$s نمایش نسخه %3$s جزییات %4$s یا %5$s الان "
+"بروزرسانی شود %6$s."
+
+#: includes/EDD_SL_Plugin_Updater.php:336
+msgid "You do not have permission to install plugin updates"
+msgstr "شما اجازه نصب بروزرسانی های افزونه را ندارید."
+
+#: includes/EDD_SL_Plugin_Updater.php:336
+msgid "Error"
+msgstr "خطا"
+
+#: includes/admin/admin.php:215
+msgid "Filter Categories"
+msgstr "صافی دسته بندی ها"
+
+#: includes/admin/admin.php:263
+msgctxt "post editor"
+msgid "Client Details"
+msgstr "جزییات مشتری"
+
+#: includes/admin/admin.php:278
+msgctxt "post editor"
+msgid "To add a photo or logo, use the Featured Image option."
+msgstr "اضافه کردن تصویر یا لوگو، استفاده از گزینه تصویر ویژه."
+
+#: includes/admin/admin.php:335 includes/defaults.php:376
+msgid "Excerpt"
+msgstr "چکیده"
+
+#: includes/admin/admin.php:346 includes/admin/admin.php:468
+msgid "Thumbnail"
+msgstr "بندانگشتی"
+
+#: includes/admin/admin.php:358
+msgid "Category"
+msgstr "دسته بندی"
+
+#: includes/admin/admin.php:360
+msgid "Date"
+msgstr "تاریخ"
+
+#: includes/admin/admin.php:437
+msgid "Y/m/d g:i:s A"
+msgstr ""
+
+#: includes/admin/admin.php:480
+msgid "ID"
+msgstr "آیدی"
+
+#: includes/admin/admin.php:481 includes/admin/settings/email-from.php:12
+#: includes/admin/settings/email-to.php:12 includes/defaults.php:214
+msgid "Name"
+msgstr "نام"
+
+#: includes/admin/admin.php:482
+msgid "Slug"
+msgstr "اسلاگ"
+
+#: includes/admin/admin.php:483
+msgid "Posts"
+msgstr "ارسال ها"
+
+#. translators: %s is the name of the plugin.
+#: includes/admin/admin.php:647
+msgctxt "installation"
+msgid "Unable to load %s"
+msgstr "ناتوان در بارگیری %s"
+
+#. translators: %s is a WordPress version number.
+#: includes/admin/admin.php:650
+msgctxt "installation"
+msgid ""
+"This plugin requires <strong>WordPress %s</strong> or higher so it has been "
+"deactivated."
+msgstr "این افزونه لازم است از <strong>وردپرس %s</strong>  یا بالاتر استفاده کند."
+
+#: includes/admin/admin.php:651
+msgctxt "installation"
+msgid "Please upgrade WordPress and try again."
+msgstr "لطفا وردپرس خود را بروزرسانی کرده و دوباره سعی کنید."
+
+#: includes/admin/admin.php:652
+msgctxt "installation"
+msgid "Back to the WordPress <a href=\"%s\">Plugins page</a>"
+msgstr "برگشت به <a href=\"%s\">صفحه افزونه ها</a> وردپرس"
+
+#: includes/admin/custom-fields.php:25 includes/admin/settings.php:195
+#: includes/admin/views.php:194
+msgid "You do not have sufficient permissions to access this page."
+msgstr "شما مجوز کافی برای دسترسی به این صفحه را ندارید."
+
+#: includes/admin/custom-fields.php:48 includes/admin/views.php:204
+msgid "Changes undone."
+msgstr "تغییرات لغو شد."
+
+#: includes/admin/custom-fields.php:61 includes/admin/views.php:206
+msgid "Defaults restored."
+msgstr "پیشفرض ها بازگردانی شدند."
+
+#: includes/admin/custom-fields.php:109
+msgid "Fields saved."
+msgstr "فیلدها ذخیره شدند."
+
+#. translators: On the Views admin screen.
+#: includes/admin/custom-fields.php:120 includes/admin/settings.php:20
+#: includes/admin/settings.php:21 includes/admin/views/group-fields.php:4
+msgid "Fields"
+msgstr "فیلدها"
+
+#: includes/admin/custom-fields.php:125
+msgid "Fields will appear in this order on the form."
+msgstr "فیلدها در فرم ایجاد شده ظاهر می گردند."
+
+#: includes/admin/custom-fields.php:126
+msgid "Reorder by grabbing the %s icon."
+msgstr "مرتب سازی جعبه ها با گرفتن آیکن %s"
+
+#: includes/admin/custom-fields.php:127
+msgid "Click the field name to expand its options panel."
+msgstr "برای گشودن گزینه های پنل بر روی نام فیلد کلیک کنید."
+
+#: includes/admin/custom-fields.php:128
+msgctxt "link"
+msgid "Full tutorial"
+msgstr "آموزش کامل"
+
+#: includes/admin/custom-fields.php:129
+msgid "More form settings <a href=\"%s\">here</a>."
+msgstr "تنظیمات بیشتر فرم از <a href=\"%s\">اینجا</a>."
+
+#: includes/admin/custom-fields.php:147
+msgid "Add New Field"
+msgstr "اضافه کردن فیلد جدید"
+
+#: includes/admin/custom-fields.php:153 includes/admin/views.php:179
+msgid "Undo Changes"
+msgstr "لغو تغییرات"
+
+#: includes/admin/custom-fields.php:154 includes/admin/views.php:180
+msgid "Restore Defaults"
+msgstr "بازگردانی به پیشفرض"
+
+#: includes/admin/custom-fields.php:208
+msgctxt "noun"
+msgid "Label"
+msgstr "برچسب"
+
+#: includes/admin/custom-fields.php:211
+msgid "This appears on the form."
+msgstr "در فرم ظاهر می شود."
+
+#: includes/admin/custom-fields.php:219
+msgctxt "noun"
+msgid "Name"
+msgstr "نام"
+
+#: includes/admin/custom-fields.php:224
+msgid "Use only lowercase letters, numbers, and underscores."
+msgstr "استفاده از حروف کوچک، اعداد و زیرخط."
+
+#: includes/admin/custom-fields.php:225
+msgid "Cannot be \"name\" or \"date\"."
+msgstr "\"نام\" و يا \"تاريخ\" نمی تواند باشد."
+
+#: includes/admin/custom-fields.php:242
+msgctxt "noun"
+msgid "Type"
+msgstr "نوع"
+
+#: includes/admin/custom-fields.php:267
+msgid "Post Fields"
+msgstr "فیلدهای ارسال"
+
+#. translators: On the Views admin screen.
+#: includes/admin/custom-fields.php:274
+#: includes/admin/views/option-client-section.php:3
+msgid "Custom Fields"
+msgstr "فیلدهای دلخواه"
+
+#: includes/admin/custom-fields.php:285
+msgid "Optional Fields"
+msgstr "فیلدهای اختیاری"
+
+#: includes/admin/custom-fields.php:355
+#: includes/class-strong-views-list-table.php:77
+msgid "Delete"
+msgstr "حذف"
+
+#: includes/admin/custom-fields.php:357
+msgctxt "verb"
+msgid "Close"
+msgstr "بسته"
+
+#: includes/admin/custom-fields.php:381
+msgid "Required"
+msgstr "ضروری"
+
+#: includes/admin/custom-fields.php:398
+msgid "Placeholder"
+msgstr "متن محو شونده"
+
+#: includes/admin/custom-fields.php:408 includes/admin/settings/form.php:105
+msgid "Before"
+msgstr "قبل"
+
+#: includes/admin/custom-fields.php:416 includes/admin/settings/form.php:112
+msgid "After"
+msgstr "بعد"
+
+#: includes/admin/custom-fields.php:437
+msgid "Admin Table"
+msgstr "جدول مدیر"
+
+#: includes/admin/custom-fields.php:442
+msgid "required"
+msgstr "ضروری"
+
+#: includes/admin/guide/guide.php:14
+msgid "Strong Testimonials Guide"
+msgstr "راهنمای قوی توصیفات"
+
+#. translators: In the Guide.
+#: includes/admin/guide/guide.php:18
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+#: includes/admin/guide/guide.php:21
+msgid "Getting Started"
+msgstr "شروع کردن"
+
+#: includes/admin/guide/guide.php:24 includes/admin/guide/views.php:5
+#: includes/admin/settings.php:13 includes/admin/settings.php:14
+#: includes/admin/views.php:240
+msgid "Views"
+msgstr "چشم انداز‌ها"
+
+#: includes/admin/guide/guide.php:27 includes/admin/guide/templates.php:6
+msgid "Templates"
+msgstr "پوسته ها"
+
+#: includes/admin/guide/guide.php:30 includes/admin/guide/translation.php:6
+msgid "Translation"
+msgstr "ترجمه"
+
+#: includes/admin/guide/guide.php:33
+msgid "Page Builders"
+msgstr "صفحه سازها"
+
+#: includes/admin/guide/plugin-sidebar.php:10
+msgid ""
+"Use the <a href=\"%s\" target=\"_blank\">support forum</a> or <a href=\"%s\" "
+"target=\"_blank\">contact me</a>."
+msgstr ""
+"از <a href=\"%s\" target=\"_blank\">انجمن پشتیبانی</a> یا <a href=\"%s\" target="
+"\"_blank\">تماس با من</a> استفاده کنید."
+
+#: includes/admin/guide/plugin-sidebar.php:15
+msgid "Help? Idea? Bug?"
+msgstr "کمک؟ ایده؟ مشکل؟"
+
+#: includes/admin/guide/plugin-sidebar.php:25
+msgid "<a href=\"%s\" target=\"_blank\">How to customize the form</a>"
+msgstr "<a href=\"%s\" target=\"_blank\">چگونه فرم را شخصی سازی کنیم</a>"
+
+#: includes/admin/guide/plugin-sidebar.php:31
+msgid "<a href=\"%s\" target=\"_blank\">See the new demos</a>"
+msgstr "<a href=\"%s\" target=\"_blank\">مشاهده نسخه های نمایشی جدید</a>"
+
+#: includes/admin/guide/plugin-sidebar.php:37
+msgid "<a href=\"%s\" target=\"_blank\">Subscribe to the newsletter</a>"
+msgstr "<a href=\"%s\" target=\"_blank\">اشتراک در خبرنامه</a>"
+
+#: includes/admin/guide/plugin-sidebar.php:42
+msgid "More resources"
+msgstr "منابع بیشتر"
+
+#: includes/admin/guide/plugin-sidebar.php:54
+msgid "Post an honest <a href=\"%s\" target=\"_blank\">review</a> on wordpress.org."
+msgstr ""
+"<a href=\"%s\" target=\"_blank\">نظر</a> خود را صادقانه در وردپرس ارسال کنید."
+
+#: includes/admin/guide/plugin-sidebar.php:59
+msgid ""
+"<a href=\"%s\" target=\"_blank\">Donate</a> to the Theme & Plugin Compatibility "
+"Fund."
+msgstr "<a href=\"%s\" target=\"_blank\">اهدا</a> به صندوق پوسته ها و افزونه."
+
+#: includes/admin/guide/plugin-sidebar.php:64
+msgid "Want to help?"
+msgstr "نیاز به کمک دارید؟"
+
+#: includes/admin/guide/start.php:6
+msgid "How to display your testimonials"
+msgstr "چگونه توصیفاتی خود را نمایش دهید."
+
+#: includes/admin/guide/start.php:8
+msgid "1. Enter any existing testimonials and optional categories."
+msgstr "۱-توصیفات موجود و دسته بندی های انتخابی را وارد کنید."
+
+#: includes/admin/guide/start.php:10
+msgid "2. Create a <b>View</b> to display them in a list or a slideshow."
+msgstr "۲-<b>چشم انداز</b> را بصورت لیست یا اسلایدشو ایجاد کنید."
+
+#: includes/admin/guide/start.php:12
+msgid ""
+"3. Add the View to a page using its <b>shortcode</b> or add it to a sidebar using "
+"the <b>widget</b>."
+msgstr ""
+"۳-برای نمایش در صفحات از <b>کد کوتاه</b> و برای استفاده در نوار ابزار از  "
+"<b>ابزارک</b> استفاده کنید."
+
+#: includes/admin/guide/start.php:14
+msgid "Views provide many features. Learn more on the Views tab or jump right in!"
+msgstr ""
+"چشم اندازها شامل بسیاری از ویژگی هاست. برای اطلاعات بیشتر به تب چشم انداز مراجعه "
+"کنید."
+
+#: includes/admin/guide/start.php:16
+msgid "How to add a testimonial submission form"
+msgstr "چگونه یک فرم تسلیم توصیف اضافه کنید"
+
+#: includes/admin/guide/start.php:18
+msgid ""
+"1. Create a new View and select <b>Form</b> mode. Add it via shortcode or widget."
+msgstr "۱-چشم انداز جدیدی اضافه و حالت <b>فرم</b> را انتخاب کنید."
+
+#: includes/admin/guide/start.php:20
+msgid "2. Go to the <b>Fields</b> screen if you want to customize the form fields."
+msgstr "۲-اگر نیاز به شخصی سازی فیلدهای فرم دارید به قسمت <b>فیلدها</b> بروید."
+
+#: includes/admin/guide/start.php:22
+msgid ""
+"The form has more options like messages and anti-spam on the <b>Settings</b> "
+"screen."
+msgstr ""
+"در قسمت تنظیمات فرم، گزینه های بیشتری همانند پیام و ضد هرزنامه نیز وجود دارد."
+
+#: includes/admin/guide/templates.php:8
+msgid "The <strong>Default</strong> template is a good place to start."
+msgstr "پوسته <strong>پیشفرض</strong> محل خوبی برای شروع است."
+
+#: includes/admin/guide/templates.php:10
+msgid ""
+"The <strong>Simple</strong> template has minimal style and may be the best option "
+"for matching your theme."
+msgstr ""
+"پوسته <strong>ساده</strong> با داشتن استایل مینیمال بهترین گزینه برای تطبیق با "
+"قالب شماست."
+
+#: includes/admin/guide/templates.php:12
+msgid ""
+"The <strong>Widget</strong> template has smaller sizing for use in a sidebar or "
+"other widget area."
+msgstr ""
+"پوسته <strong>ابزارک</strong> دارای اندازه ای کوچک برای استفاده در نوار کناری یا "
+"محیط ابزارک است."
+
+#: includes/admin/guide/templates.php:14
+msgid ""
+"The <strong>Unstyled</strong> template includes no stylesheet and is a good "
+"foundation for theme experts."
+msgstr ""
+"پوسته <strong>بدون استایل شده</strong> شامل هیچ استایلی نمی باشد و مبنای خوبی برای "
+"آشنایان به قالب است."
+
+#: includes/admin/guide/templates.php:16
+msgid "Background colors and layout options are available for all templates."
+msgstr "رنگ پس زمینه و گزینه های لایه برای تمام پوسته ها در دسترس است."
+
+#: includes/admin/guide/templates.php:18
+msgid ""
+"Feel free to ask for help with minor style changes to add to a <a href=\"https://"
+"thethemefoundry.com/blog/wordpress-child-theme/\" target=\"_blank\">child theme</"
+"a> or <a href=\"https://wordpress.org/plugins/so-css/\" target=\"_blank\">custom "
+"CSS</a>."
+msgstr ""
+"راهنمایی رایگان همراه با تغییرات جزئی استایل برای اضافه کردن در <a href=\"https://"
+"thethemefoundry.com/blog/wordpress-child-theme/\" target=\"_blank\">child theme</"
+"a> و <a href=\"https://wordpress.org/plugins/so-css/\" target=\"_blank\">custom "
+"CSS</a>."
+
+#: includes/admin/guide/templates.php:20
+msgid ""
+"New templates will be added occasionally. A premium add-on with a variety of "
+"modern templates will be available soon."
+msgstr ""
+"گهگاه پوسته های جدید اضافه خواهند شد. همچنین افزودنی های غیررایگان  همراه با انواع "
+"پوسته های مدرن بزودی در دسترس قرار خواهند گرفت."
+
+#: includes/admin/guide/templates.php:22
+msgid "New template functions are also available."
+msgstr "توابع جدید پوسته نیز در دسترس هستند."
+
+#: includes/admin/guide/templates.php:24
+msgid ""
+"Visit <a href=\"https://www.wpmission.com/strong-testimonials\" target=\"_blank"
+"\">WP Mission</a> for more information on customizing templates."
+msgstr ""
+"برای اطلاعات بیشتر در مورد شخصی سازی پوسته ها از <a href=\"https://www.wpmission."
+"com/strong-testimonials\" target=\"_blank\">WP Mission</a> دیدن کنید."
+
+#: includes/admin/guide/translation.php:8
+msgid "The plugin is compatible with WPML and Polylang."
+msgstr "افزونه با WPML و Polylang سازگار است."
+
+#: includes/admin/guide/translation.php:10
+msgid "In WPML, three domains are added to the String Translation screen."
+msgstr "در WPML، سه دامنه به رشته صفحه ترجمه اضافه شده است."
+
+#: includes/admin/guide/translation.php:12
+msgid ""
+"In Polylang, the domains are added to the String Translation tab on the Languages "
+"screen."
+msgstr "در Polylang، دامنه ها به زبانه‌ی رشته ترجمه در صفحه زبان ها اضافه شده است."
+
+#: includes/admin/guide/translation.php:35
+msgid ""
+"These domains are updated automatically when your form fields or settings change."
+msgstr "این دامنه ها در صورت تغییر تنظیمات فیلدها بصورت خودکار بروز می شوند."
+
+#: includes/admin/guide/views.php:7
+msgid "A View is simply a group of settings"
+msgstr " تعدادی از تنظیمات ساده چشم انداز"
+
+#: includes/admin/guide/views.php:9
+msgid ""
+"Views can display your testimonials in a <b>list</b>, create a <b>slideshow</b>, "
+"or show the front-end <b>form</b>. They are easy to learn and adjust as they "
+"combine all the features into a single intuitive configuration screen."
+msgstr ""
+"چشم اندازها می تواند توصیفات شما را در <b>لیست</b> یا <b>اسلایدشو</b> به نمایش "
+"بگذارند. همچنین میتوانید برای دریافت توصیفات <b>فرم</b> طراحی کنید. یادگیری این "
+"موارد بسیار آسان و همه این ویژگی ها در صفحه پیکربندی در دسترس است."
+
+#: includes/admin/guide/views.php:11
+msgid "Display Mode - to show one or more testimonials"
+msgstr "حالت نمایش - نمایش یک یا چند توصیف"
+
+#: includes/admin/guide/views.php:13
+msgid "how many to show"
+msgstr "چه تعدادی نشان داده شود"
+
+#: includes/admin/guide/views.php:14
+msgid "which categories to include"
+msgstr "کدام دسته بندی ها را شامل شود"
+
+#: includes/admin/guide/views.php:15
+msgid "the sort order"
+msgstr "مرتب کردن"
+
+#: includes/admin/guide/views.php:16
+msgid "show the full content, the excerpt, or up to a specific length"
+msgstr "نمایش کامل محتوا، چکیده، یا با طول مشخص"
+
+#: includes/admin/guide/views.php:17
+msgid "which fields to include"
+msgstr "شامل کدام فیلدها شود"
+
+#: includes/admin/guide/views.php:18
+msgid "the size of the Featured Image (thumbnail)"
+msgstr "اندازه تصویر ویژه(شاخص)"
+
+#: includes/admin/guide/views.php:19
+msgid "open the full-size image in a lightbox"
+msgstr "باز شدن تصویر با اندازه کامل در لایت باکس"
+
+#: includes/admin/guide/views.php:20
+msgid "pagination"
+msgstr "صفحه بندی"
+
+#: includes/admin/guide/views.php:21
+msgid "a \"Read more\" link to the full post or another page"
+msgstr "لینک «خواندن بیشتر» به پست کامل یا صفحه دیگر"
+
+#: includes/admin/guide/views.php:22
+msgid "choose a template and layout (more coming soon!)"
+msgstr "انتخاب پوسته و لایه (بزودی بیشتر می شود)"
+
+#: includes/admin/guide/views.php:23
+msgid "set the background color"
+msgstr "تنظیم رنگ پس زمینه"
+
+#: includes/admin/guide/views.php:24 includes/admin/guide/views.php:40
+msgid "add custom CSS classes to match your theme"
+msgstr "اضافه کردن CSS سفارشی برای همخوانی با پوسته"
+
+#: includes/admin/guide/views.php:27
+msgid "Slideshow Mode - to rotate through your testimonials"
+msgstr "حالت اسلایدشو - از طریق چرخش توصیفات شما"
+
+#: includes/admin/guide/views.php:29
+msgid "All the options of Display mode (except for pagination) plus:"
+msgstr "تمام گزینه های حالت نمایش (به جز برای صفحه بندی):"
+
+#: includes/admin/guide/views.php:31
+msgid "how long each slide is displayed"
+msgstr "هر اسلاید چه مدت به نمایش در می آید"
+
+#: includes/admin/guide/views.php:32
+msgid "how long the transition effect lasts"
+msgstr "افکت ترنزیشن چه مدت طول می  کشد"
+
+#: includes/admin/guide/views.php:33
+msgid "whether to pause the slideshow when the mouse hovers over it"
+msgstr "آیا زمانی که موس بر روی اسلایدشو قرار می گیرد مکث کند"
+
+#: includes/admin/guide/views.php:36
+msgid "Form Mode - to add a testimonial submission form"
+msgstr "حالت فرم - اضافه کردن فرم ارسال توصیفات"
+
+#: includes/admin/guide/views.php:38
+msgid "assign new testimonials to specific categories"
+msgstr "اختصاص توصیفات جدید به دسته بندی های خاص"
+
+#: includes/admin/guide/views.php:39
+msgid "choose a template"
+msgstr "انتخاب پوسته"
+
+#: includes/admin/guide/welcome.php:5
+msgid "Welcome to Strong Testimonials version 2.0"
+msgstr "به Strong Testimonials نسخه 2.0 خوش آمدید."
+
+#: includes/admin/guide/welcome.php:7
+msgid "What's new"
+msgstr "چه چیزی جدید است"
+
+#: includes/admin/guide/welcome.php:9
+msgid ""
+"The &#91;strong&#93; and &#91;wpmtst&#93; shortcodes and the original widget have "
+"been removed."
+msgstr "شورتکدهای &#91;strong&#93; و  &#91;wpmtst&#93 و  ابزارک اصلی حذف شده اند."
+
+#: includes/admin/guide/welcome.php:11
+msgid "Improved compatibility with WPML & Polylang."
+msgstr "بهبود یافته و سازگار شده با WPML & Polylang."
+
+#: includes/admin/guide/welcome.php:13
+msgid "Improved handling of special characters in the Fields editor."
+msgstr "کاراکترهای ویژه در ویرایشگر فیلدها بهبود یافته است."
+
+#: includes/admin/guide/welcome.php:15
+msgid "Thanks for choosing Strong Testimonials!"
+msgstr "برای انتخاب افزونه توصیفات قوی از شما متشکریم!"
+
+#: includes/admin/pointers.php:51 includes/admin/pointers.php:62
+msgid "New in version %s"
+msgstr "جدید در این نسخه %s"
+
+#: includes/admin/pointers.php:52
+msgid ""
+"Works with multiple lightbox plugins like <a href=\"https://wordpress.org/plugins/"
+"simple-colorbox/\" target=\"_blank\">Simple Colorbox</a> and <a href=\"https://"
+"wordpress.org/plugins/simple-lightbox/\" target=\"_blank\">Simple Lightbox</a>."
+msgstr ""
+"با افزونه های مختلف لایت باکس کار می کند. مانند: <a href=\"https://wordpress.org/"
+"plugins/simple-colorbox/\" target=\"_blank\">Simple Colorbox</a> and <a href="
+"\"https://wordpress.org/plugins/simple-lightbox/\" target=\"_blank\">Simple "
+"Lightbox</a>."
+
+#: includes/admin/pointers.php:63
+msgid ""
+"New link type: Create a link using a field and its label. Great for social media "
+"profiles."
+msgstr ""
+"لینک جدید: ساختن یک لینک با استفاده از یک فیلد و برچسب. برای پروفایلهای شبکه های "
+"اجتماعی عالی است."
+
+#: includes/admin/settings/email-from.php:5
+msgid "From:"
+msgstr "فرم:"
+
+#: includes/admin/settings/email-from.php:15 includes/admin/settings/email-to.php:15
+#: includes/defaults.php:153 includes/defaults.php:223
+msgid "Email"
+msgstr "ایمیل"
+
+#: includes/admin/settings/email-from.php:20 includes/admin/settings/recipient.php:9
+msgid "(optional)"
+msgstr "(اختیاری)"
+
+#: includes/admin/settings/email-from.php:28
+#: includes/admin/settings/recipient.php:18
+msgid "site admin email:"
+msgstr "ایمیل مدیر سایت:"
+
+#: includes/admin/settings/email-from.php:34
+msgid "sender's email"
+msgstr "ارسال کننده ایمیل"
+
+#: includes/admin/settings/email-to.php:5
+msgid "To:"
+msgstr "به:"
+
+#: includes/admin/settings/email.php:3
+msgid "Template tags for Subject and Message:"
+msgstr "پوسته برچسب ها برای موضوع و پیام"
+
+#: includes/admin/settings/email.php:6
+msgid "the site title"
+msgstr "عنوان سایت"
+
+#: includes/admin/settings/email.php:7
+msgid "the testimonial title"
+msgstr "عنوان توصیف"
+
+#: includes/admin/settings/email.php:8
+msgid "the testimonial content"
+msgstr "محتوای توصیف"
+
+#: includes/admin/settings/email.php:9
+msgid "pending or published"
+msgstr "در انتظار یا منتشر شده"
+
+#: includes/admin/settings/email.php:10
+msgid "pattern for custom fields:"
+msgstr "الگو برای فیلدهای سفارشی:"
+
+#: includes/admin/settings/email.php:10
+msgid "for example:"
+msgstr "برای مثال:"
+
+#: includes/admin/settings/email.php:17
+msgid "Subject:"
+msgstr "موضوع:"
+
+#: includes/admin/settings/email.php:25
+msgid "subject line"
+msgstr " خط موضوع"
+
+#: includes/admin/settings/email.php:37
+msgid "Message:"
+msgstr "پیام:"
+
+#: includes/admin/settings/email.php:45
+msgid "message text"
+msgstr "متن پیام"
+
+#: includes/admin/settings/form.php:12
+msgid "Form Labels & Messages"
+msgstr "برچسب فرم و  پیام"
+
+#: includes/admin/settings/form.php:31
+msgctxt "singular"
+msgid "restore default"
+msgstr "بازگردانی به پیشفرض"
+
+#: includes/admin/settings/form.php:37
+msgctxt "multiple"
+msgid "Restore Defaults"
+msgstr "بازگردانی به پیشفرض"
+
+#: includes/admin/settings/form.php:43
+msgctxt "noun"
+msgid "Form Actions"
+msgstr "فعالیت های فرم"
+
+#: includes/admin/settings/form.php:48
+msgid "Post status"
+msgstr "وضعیت ارسال"
+
+#: includes/admin/settings/form.php:55
+msgid "Pending"
+msgstr "در انتظار"
+
+#: includes/admin/settings/form.php:61
+msgid "Published"
+msgstr "منتشر شده"
+
+#: includes/admin/settings/form.php:70
+msgid "Notification"
+msgstr "اعلانیه"
+
+#: includes/admin/settings/form.php:78
+msgid "Send an email upon new testimonial submission"
+msgstr "ارسال ایمیل به محض فرستادن توصیف جدید"
+
+#: includes/admin/settings/form.php:92
+msgid "Form Spam Control"
+msgstr "کنترل فرم هرزنامه"
+
+#: includes/admin/settings/form.php:97
+msgctxt "spam control techniques"
+msgid "Honeypot"
+msgstr "هانی‌پات"
+
+#: includes/admin/settings/form.php:100
+msgid ""
+"These methods are both time-tested and widely used. They can be used "
+"simultaneously for more protection."
+msgstr ""
+"این روشها به صورت گسترده ای مورد استفاده قرار گرفته است. آنها می توانند به صورت "
+"همزمان برای محافظت بیشتر استفاده شود."
+
+#: includes/admin/settings/form.php:107
+msgid ""
+"Traps spambots by adding an extra empty field that is invisible to humans but not "
+"to spambots which tend to fill in every field they find in the form code. Empty "
+"field = human. Not empty = spambot."
+msgstr ""
+"تله رباتها برای شناسایی رباتهای هرزنامه یک فیلد خالی که برای انسان قابل مشاهده "
+"نیست اما برای ربات ها قابل رویت است ایجاد می کند. رباتها تمایل به پر کردن این "
+"فیلدها دارند. اگر فیلد خالی بود=انسان. اگر فیلد خالی نبود=ربات."
+
+#: includes/admin/settings/form.php:114
+msgid "Recommended."
+msgstr "توصیه شده."
+
+#: includes/admin/settings/form.php:114
+msgid ""
+"Traps spambots by using JavaScript to add a new field as soon as the form is "
+"submitted. Since spambots cannot run JavaScript, the new field never gets added. "
+"New field = human. Missing = spambot."
+msgstr ""
+"تله رباتهای هرزنامه برای شناسایی رباتها با استفاده از جاوااسکریپت به محض ارسال شدن "
+"فرم یک فیلد اضافه می کند. از آنجا که رباتها نمی توانند جاوااسکریپت را اجرا کنند، "
+"پس فیلد جدید ایجاد نمی شود. فیلد جدید=انسان. درغیر اینصورت=ربات."
+
+#: includes/admin/settings/form.php:121
+msgid "Captcha"
+msgstr "کد امنیتی"
+
+#: includes/admin/settings/form.php:124
+msgid ""
+"Can be used alongside honeypot methods. Be sure to configure any plugins first, if "
+"necessary."
+msgstr ""
+"می توان در کنار روشهای هانی‌پات استفاده گردد. در صورت لزوم مطمئن شوید هر افزونه "
+"ابتدا پیکربندی شود."
+
+#: includes/admin/settings/form.php:144
+msgctxt "link"
+msgid "settings"
+msgstr "تنظیمات"
+
+#: includes/admin/settings/form.php:146
+msgid "no settings"
+msgstr "بدون تنظیمات"
+
+#: includes/admin/settings/form.php:151
+msgctxt "adjective"
+msgid "inactive"
+msgstr "غیرفعال"
+
+#: includes/admin/settings/form.php:157
+msgid "not installed"
+msgstr "نصب نشده"
+
+#: includes/admin/settings/form.php:158
+msgctxt "link"
+msgid "install plugin"
+msgstr "نصب افزونه"
+
+#: includes/admin/settings/form.php:162
+msgctxt "link"
+msgid "plugin page"
+msgstr "صفحه افزونه"
+
+#: includes/admin/settings/general.php:14
+msgid "Reordering"
+msgstr "مرتب سازی مجدد"
+
+#: includes/admin/settings/general.php:19
+msgid "Enable drag-and-drop reordering in the testimonial list."
+msgstr "فعال کردن مرتب سازی مجدد کشیدن و رها کردن در لیست توصیفات"
+
+#: includes/admin/settings/licenses.php:19
+msgid "Multiple Forms License Key"
+msgstr "کلید مجوز فرم های متعدد"
+
+#: includes/admin/settings/licenses.php:29 includes/admin/settings/licenses.php:39
+msgid "Activate License"
+msgstr "فعال کردن مجوز"
+
+#: includes/admin/settings/licenses.php:33
+msgid "active"
+msgstr "فعال کردن"
+
+#: includes/admin/settings/licenses.php:35
+msgid "Deactivate License"
+msgstr "غیرفعال کردن مجوز"
+
+#: includes/admin/settings/recipient.php:22 includes/admin/settings/recipient.php:29
+msgid "email address"
+msgstr "نشانی ایمیل"
+
+#: includes/admin/settings.php:28 includes/admin/settings.php:29
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: includes/admin/settings.php:35 includes/admin/settings.php:36
+msgctxt "noun"
+msgid "Guide"
+msgstr "راهنما"
+
+#: includes/admin/settings.php:199
+msgid "Testimonial Settings"
+msgstr "تنظیمات توصیف"
+
+#: includes/admin/settings.php:203
+msgid "Settings saved."
+msgstr "تنظیمات ذخیره شد."
+
+#: includes/admin/settings.php:215
+msgctxt "adjective"
+msgid "General"
+msgstr "عمومی"
+
+#: includes/admin/settings.php:216 includes/defaults.php:364
+msgid "Form"
+msgstr "فرم"
+
+#: includes/admin/settings.php:218
+msgid "Licenses"
+msgstr "مجوزها"
+
+#: includes/admin/settings.php:239
+msgid "Save Changes"
+msgstr "ذخیره تغییرات"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/group-extra.php:4
+msgid "Extra"
+msgstr "اضافی"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/group-form.php:4
+msgid "Actions"
+msgstr "فعالیت ها"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/group-general.php:4
+msgid "Options"
+msgstr "گزینه ها"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/group-select.php:4
+msgid "Select"
+msgstr "انتخاب"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/group-style.php:4
+msgid "Style"
+msgstr "سبک(استایل)"
+
+#. translators: This is on the Views admin screen.
+#: includes/admin/views/mode-slideshow.php:5
+#: includes/admin/views/option-timing.php:9
+msgctxt "slideshow setting"
+msgid "Show each for"
+msgstr "نمایش هریک برای"
+
+#: includes/admin/views/mode-slideshow.php:8
+#: includes/admin/views/mode-slideshow.php:15
+#: includes/admin/views/option-timing.php:12
+#: includes/admin/views/option-timing.php:19
+msgctxt "time setting"
+msgid "seconds"
+msgstr "ثانیه"
+
+#: includes/admin/views/mode-slideshow.php:12
+#: includes/admin/views/option-timing.php:16
+msgctxt "slideshow setting"
+msgid "Fade transition for"
+msgstr "محو شدن برای"
+
+#: includes/admin/views/mode-slideshow.php:20
+#: includes/admin/views/option-timing.php:24
+msgctxt "slideshow setting"
+msgid "Pause on hover"
+msgstr "توقف در حالت شناور"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/mode.php:4
+msgid "Mode:"
+msgstr "حالت"
+
+#: includes/admin/views/option-background.php:3
+msgid "Background"
+msgstr "پس زمینه"
+
+#: includes/admin/views/option-background.php:14
+msgid "none"
+msgstr "هیچکدام"
+
+#: includes/admin/views/option-background.php:18
+msgid "single color"
+msgstr "تک رنگ"
+
+#: includes/admin/views/option-background.php:22
+msgid "gradient"
+msgstr "گرادینت"
+
+#: includes/admin/views/option-background.php:26
+msgid "preset"
+msgstr "از پیش تعیین شده"
+
+#: includes/admin/views/option-background.php:51
+msgid "From top"
+msgstr "از بالا"
+
+#: includes/admin/views/option-background.php:59
+msgid "To bottom"
+msgstr "به پایین"
+
+#: includes/admin/views/option-background.php:94
+msgid "dark"
+msgstr "تیره"
+
+#: includes/admin/views/option-background.php:96
+msgid "light"
+msgstr "روشن"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-boilerplate.php:4
+msgid "Option Name"
+msgstr "گزینه نام"
+
+#: includes/admin/views/option-boilerplate.php:11
+msgid "yes"
+msgstr "بله"
+
+#: includes/admin/views/option-boilerplate.php:14
+msgid "no"
+msgstr "خیر"
+
+#: includes/admin/views/option-boilerplate.php:17
+msgid "maybe"
+msgstr "شاید"
+
+#: includes/admin/views/option-boilerplate.php:24
+msgid "Yes"
+msgstr "بله"
+
+#: includes/admin/views/option-boilerplate.php:30
+msgid "No"
+msgstr "خیر"
+
+#: includes/admin/views/option-boilerplate.php:36
+msgid "Maybe"
+msgstr "شاید"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-category.php:4 includes/post-types.php:49
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+#: includes/admin/views/option-category.php:16
+#: includes/admin/views/option-limit.php:11
+msgid "all"
+msgstr "همه"
+
+#: includes/admin/views/option-category.php:17
+msgctxt "verb"
+msgid "select"
+msgstr "انتخاب"
+
+#: includes/admin/views/option-category.php:30
+#: includes/admin/views/option-form-category.php:15
+msgid "No categories found"
+msgstr "دسته بندی پیدا نشد"
+
+#: includes/admin/views/option-classes.php:3
+msgid "CSS Classes"
+msgstr "کلاس های سی‌اس‌اس"
+
+#: includes/admin/views/option-classes.php:9
+msgid "separated by spaces"
+msgstr "با فضای خالی از هم جدا شود"
+
+#: includes/admin/views/option-client-section.php:27
+msgid "Add Field"
+msgstr "اضافه کردن فیلد"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-compat.php:4
+msgid "Compatibility mode"
+msgstr "حالت سازگاری"
+
+#: includes/admin/views/option-compat.php:14
+msgid "off (default)"
+msgstr "خاموش"
+
+#: includes/admin/views/option-compat.php:17
+msgid "on"
+msgstr "روشن"
+
+#: includes/admin/views/option-compat.php:27
+msgid ""
+"Turning this <b>on</b> may help if the form is not working, especially with page "
+"builders and popup makers. "
+msgstr ""
+"اگر فرم کار نکند برای راهنمایی بهتر است <b>روشن</b> باشد. بخصوص با صفحه سازها و "
+"popup makers."
+
+#: includes/admin/views/option-compat.php:30
+msgid ""
+"Required <b>on</b> if using the <a href=\"https://wordpress.org/plugins/popup-"
+"maker/\" target=\"_blank\">Popup Maker</a> plugin."
+msgstr ""
+"ضروریست در صورت استفاده از افزونه  <a href=\"https://wordpress.org/plugins/popup-"
+"maker/\" target=\"_blank\">Popup Maker</a> <b>روشن</b> باشد. "
+"<code>strong_testimonial_view()</code>."
+
+#: includes/admin/views/option-compat.php:36
+msgid ""
+"Turning this <b>on</b> may help if the slideshow is not working, especially with "
+"page builders."
+msgstr ""
+"اگر اسلایدشو کار نکند برای راهنمایی بهتر است <b>روشن</b> باشد. بخصوص با صفحه سازها."
+
+#: includes/admin/views/option-compat.php:39
+msgid ""
+"Required <b>on</b> if using the template function <code>strong_testimonial_view()</"
+"code>."
+msgstr ""
+"ضروریست در صورت استفاده از فانکشن پوسته <b>روشن</b> باشد. "
+"<code>strong_testimonial_view()</code>."
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-content.php:4
+msgid "Content"
+msgstr "محتوا"
+
+#: includes/admin/views/option-content.php:11
+msgctxt "display setting"
+msgid "the full testimonial"
+msgstr "توصیف بصورت کامل"
+
+#: includes/admin/views/option-content.php:14
+msgctxt "display setting"
+msgid "the excerpt"
+msgstr "چکیده"
+
+#: includes/admin/views/option-content.php:17
+msgctxt "display setting"
+msgid "a specific length"
+msgstr "طول مشخص شده"
+
+#: includes/admin/views/option-content.php:28
+msgid "Will break on a space and add an ellipsis."
+msgstr ""
+
+#: includes/admin/views/option-content.php:29
+msgid "Will strip tags like &lt;em&gt; and &lt;strong&gt;."
+msgstr "برچسب ها محروم  خواهند بود مانند &lt;em&gt; و &lt;strong&gt;."
+
+#: includes/admin/views/option-content.php:36
+msgid "Excerpts are hand-crafted summaries of your testimonial."
+msgstr "چکیده ها خلاصه ای دست ساز از توصیف شماست."
+
+#: includes/admin/views/option-content.php:40
+msgid ""
+"You may need to enable them in the post editor like in this <a href=\"%s\" class="
+"\"%s\">screenshot</a>."
+msgstr ""
+"شما ممکن است نیاز به فعال کردن آنها در ویرایشگر متن داشته باشید. مانند  <a href="
+"\"%s\" class=\"%s\">اسکرین شات</a>."
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-form-ajax.php:5
+msgid "Submit form via Ajax"
+msgstr "ارسال فرم از طریق آژاکس"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-form-category.php:3
+msgid "Assign new submissions to a category"
+msgstr "اختصاص به یک دسته بندی"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-form-template-list.php:3
+#: includes/admin/views/option-template-list.php:3
+msgid "Template"
+msgstr "پوسته"
+
+#: includes/admin/views/option-form-template-list.php:19
+#: includes/admin/views/option-template-list.php:19
+#: includes/admin/views/option-template-list.php:42
+msgid "not found"
+msgstr "چیزی پیدا نشد"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-id.php:7 includes/admin/views/option-read-more.php:55
+msgid "&mdash; select &mdash;"
+msgstr "&mdash; انتخاب &mdash;"
+
+#: includes/admin/views/option-id.php:10
+msgid "(untitled)"
+msgstr "(بدون عنوان)"
+
+#: includes/admin/views/option-id.php:16
+msgctxt "to select a testimonial"
+msgid "or enter its ID or slug"
+msgstr "وارد کردن آیدی یا اسلاگ"
+
+#: includes/admin/views/option-layout.php:2
+msgid "Layout"
+msgstr "طرح"
+
+#: includes/admin/views/option-layout.php:14
+msgid "normal"
+msgstr "معمولی"
+
+#: includes/admin/views/option-layout.php:20
+msgid "Masonry"
+msgstr "ترتیبی (معماری)"
+
+#: includes/admin/views/option-layout.php:26
+msgid "columns"
+msgstr "ستونی"
+
+#: includes/admin/views/option-layout.php:32
+msgid "grid"
+msgstr "شبکه ای"
+
+#: includes/admin/views/option-layout.php:42
+msgid "Normal layout."
+msgstr "طرح معمولی"
+
+#: includes/admin/views/option-layout.php:53
+msgid ""
+"A cascading, responsive grid using the jQuery plugin <a href=\"%s\" target=\"_blank"
+"\">Masonry</a>."
+msgstr ""
+"بصورت آبشاری و واکنشگرا با استفاده از افزونه جی کوئری <a href=\"%s\" target="
+"\"_blank\">Masonry</a>."
+
+#: includes/admin/views/option-layout.php:54
+msgid "The universal solution that works well regardless of testimonial lengths."
+msgstr "راه حلی کلی که صرفنظر از طول توصیف بخوبی کار می کند."
+
+#: includes/admin/views/option-layout.php:55
+msgid "Not compatible with pagination."
+msgstr "با صفحه بندی سازگار نیست."
+
+#: includes/admin/views/option-layout.php:71
+msgid ""
+"Using <a href=\"%s\" target=\"_blank\">CSS multi-column</a>. Fill from top to "
+"bottom, then over to next column."
+msgstr ""
+"از <a href=\"%s\" target=\"_blank\">CSS multi-column</a>برای پر کردن از بالا به "
+"پایین، سپس به ستون بعدی استفاده می کند."
+
+#: includes/admin/views/option-layout.php:72
+msgid "Works well with both long and short testimonials."
+msgstr "به خوبی با توصیفات کوتاه و بلند کار می کند."
+
+#: includes/admin/views/option-layout.php:73
+#: includes/admin/views/option-layout.php:92
+msgid "Compatible with pagination."
+msgstr "سازگار با صفحه بندی."
+
+#: includes/admin/views/option-layout.php:89
+msgid ""
+"Using <a href=\"%s\" target=\"_blank\">CSS flexbox</a> with <a href=\"%s\" target="
+"\"_blank\">JavaScript fallback</a> for older browsers."
+msgstr ""
+"استفاده از <a href=\"%s\" target=\"_blank\">CSS flexbox</a> با <a href=\"%s\" "
+"target=\"_blank\">JavaScript fallback</a>  برای مرورگرهای قدیمی."
+
+#: includes/admin/views/option-layout.php:91
+msgid ""
+"Testimonials will be equal height so this works best when they are about the same "
+"length<br>(using the excerpts or setting a length limit)."
+msgstr ""
+"توصیفات ارتفاعی برابر خواهند داشت و زمانی به خوبی کار می کنند که مقدار یکسانی "
+"داشته باشند.<br>(از چکیده یا محدود کننده مقدار استفاده شود)."
+
+#: includes/admin/views/option-layout.php:117
+msgid "number of columns"
+msgstr "تعداد ستون ها"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-limit.php:4
+msgid "Quantity"
+msgstr "مقدار"
+
+#: includes/admin/views/option-limit.php:14
+msgctxt "noun"
+msgid "count"
+msgstr "تعداد"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-more-post.php:7
+msgid "\"Read more\" link to the testimonial"
+msgstr "«بیشتر بخوانید» لینک به توصیفات"
+
+#: includes/admin/views/option-more-post.php:12
+#: includes/admin/views/option-read-more.php:39
+msgid "Link text"
+msgstr "متن لینک"
+
+#: includes/admin/views/option-more-post.php:18
+msgid "Typically used with excerpts and truncated content."
+msgstr "به طور معمول با چکیده و محتوای کوتاه شده استفاده می شود."
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-order.php:4
+msgctxt "noun"
+msgid "Order"
+msgstr "ترتیب"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-pagination.php:5
+msgid "Pagination"
+msgstr "صفحه بندی"
+
+#: includes/admin/views/option-pagination.php:13
+msgctxt "quantity"
+msgid "Per page"
+msgstr "در صفحه"
+
+#: includes/admin/views/option-pagination.php:20
+msgid "Navigation"
+msgstr "ناوبری"
+
+#: includes/admin/views/option-pagination.php:24 includes/l10n.php:103
+#: includes/l10n.php:161
+msgid "before"
+msgstr "قبل"
+
+#. Translators: A form field name on the String Translation screen.
+#: includes/admin/views/option-pagination.php:27 includes/l10n.php:102
+#: includes/l10n.php:160
+msgid "after"
+msgstr "بعد"
+
+#: includes/admin/views/option-pagination.php:30
+msgid "before & after"
+msgstr "قبل و بعد"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-read-more.php:12
+msgid "\"Read more\" link"
+msgstr "لینک «خواندن بیشتر»"
+
+#: includes/admin/views/option-read-more.php:28
+msgid "to the testimonial"
+msgstr "در توصیف"
+
+#: includes/admin/views/option-read-more.php:29
+msgid "to a page"
+msgstr "در صفحه"
+
+#: includes/admin/views/option-read-more.php:62
+msgctxt "to select a target page"
+msgid "or enter its ID or slug"
+msgstr "وارد کردن آیدی یا اسلاگ"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-show.php:3
+msgctxt "verb"
+msgid "Show"
+msgstr "چشم انداز"
+
+#: includes/admin/views/option-show.php:10
+msgid "multiple testimonials"
+msgstr "تمام توصیفات"
+
+#: includes/admin/views/option-show.php:11
+msgid "a single testimonial"
+msgstr "یک توصیف تنها"
+
+#: includes/admin/views/option-template-list.php:57
+msgid "no description"
+msgstr "بدون توضیحات"
+
+#. translators: On the Views admin screen.
+#: includes/admin/views/option-thumbnail.php:5 includes/defaults.php:70
+msgid "Featured Image"
+msgstr "تصویر ویژه"
+
+#: includes/admin/views/option-thumbnail.php:10
+#: includes/admin/views/option-title.php:9
+msgid "not found in Fields"
+msgstr "چیزی در فیلد پیدا نشد"
+
+#: includes/admin/views/option-thumbnail.php:29
+msgid "width"
+msgstr "عرض"
+
+#: includes/admin/views/option-thumbnail.php:35
+msgid "height"
+msgstr "ارتفاع"
+
+#: includes/admin/views/option-thumbnail.php:46
+msgid "Open full-size image in lightbox"
+msgstr "باز شدن تصویر کامل در لایت باکس"
+
+#: includes/admin/views/option-thumbnail.php:55
+msgid "If no Featured image"
+msgstr "اگر تصویر ویژه وجود نداشت"
+
+#: includes/admin/views/option-thumbnail.php:58
+msgid "show nothing"
+msgstr "نمایش هیچ چیز"
+
+#: includes/admin/views/option-thumbnail.php:59
+msgid "show Gravatar"
+msgstr "نمایش گراواتار"
+
+#: includes/admin/views/option-thumbnail.php:60
+msgid "show Gravatar only if found"
+msgstr "اگر گراواتار یافت شد نمایش داده شود"
+
+#: includes/admin/views/option-thumbnail.php:66
+msgid "Gravatar settings"
+msgstr "تنظیمات گراواتار"
+
+#. translators: This is on the Views admin screen.
+#: includes/admin/views/option-timing.php:3
+msgid "Timing"
+msgstr "تنظیم زمان"
+
+#: includes/admin/views/option-title.php:4
+msgid "Title"
+msgstr "عنوان"
+
+#: includes/admin/views.php:126
+msgid "Edit View"
+msgstr "ویرایش چشم انداز"
+
+#: includes/admin/views.php:126
+msgid "Add View"
+msgstr "اضافه کردن چشم انداز"
+
+#: includes/admin/views.php:208
+msgid "View saved."
+msgstr "چشم انداز ذخیره شد."
+
+#: includes/admin/views.php:210
+msgid "View deleted."
+msgstr "چشم انداز حذف شد."
+
+#: includes/admin/views.php:244
+msgid ""
+"A View can display your testimonials, create a slideshow, or show a testimonial "
+"submission form.<br>Add it to a page with a shortcode or add it to a sidebar with "
+"a widget."
+msgstr ""
+"چشم انداز می تواند توصیفات شما را به نمایش بگذارد.<br> اسلایدشو و یا فرم ارسال "
+"توصیف ایجاد کنید. آن را در صفحات به وسیله شورتکد و در نوار کناری به وسیله ابزارک "
+"اضافه کنید."
+
+#: includes/admin/views.php:268
+msgctxt "display order"
+msgid "random"
+msgstr "تصادفی"
+
+#: includes/admin/views.php:269
+msgctxt "display order"
+msgid "menu order"
+msgstr "منوی ترتیب"
+
+#: includes/admin/views.php:270
+msgctxt "display order"
+msgid "newest first"
+msgstr "ابتدا جدیدترین"
+
+#: includes/admin/views.php:271
+msgctxt "display order"
+msgid "oldest first"
+msgstr "ابتدا قدیمی ترین"
+
+#: includes/admin/views.php:379 includes/defaults.php:84
+msgid "text"
+msgstr "متن"
+
+#: includes/admin/views.php:380
+msgid "link with field"
+msgstr "لینک همراه فیلد"
+
+#: includes/admin/views.php:381
+msgid "link"
+msgstr "لینک"
+
+#: includes/admin/views.php:382
+msgid "date"
+msgstr "تاریخ"
+
+#: includes/admin/views.php:519
+msgid "new tab"
+msgstr "زبانه جدید"
+
+#: includes/admin/views.php:538
+msgid "<a href=\"%s\" target=\"_blank\">more about date formats</a>"
+msgstr "<a href=\"%s\" target=\"_blank\">درباره فرمت های تاریخ بیشتر بدانید</a>"
+
+#: includes/captcha.php:34
+msgctxt "Captcha"
+msgid "Input this code:"
+msgstr "کد را وارد کنید:"
+
+#: includes/class-strong-testimonials-list-table.php:149
+msgid "List View"
+msgstr "لیست چشم انداز"
+
+#: includes/class-strong-testimonials-list-table.php:150
+msgid "Excerpt View"
+msgstr "نمایش چکیده"
+
+#: includes/class-strong-testimonials-list-table.php:317
+msgid "No items found."
+msgstr "موردی پیدا نشد."
+
+#: includes/class-strong-testimonials-list-table.php:443
+msgid "Select bulk action"
+msgstr "انتخاب فعالیت حجیم"
+
+#: includes/class-strong-testimonials-list-table.php:445
+msgid "Bulk Actions"
+msgstr "فعالیت های حجیم"
+
+#: includes/class-strong-testimonials-list-table.php:455
+msgid "Apply"
+msgstr "اعمال کردن"
+
+#: includes/class-strong-testimonials-list-table.php:555
+msgid "Filter by date"
+msgstr "صافی به وسیله تاریخ"
+
+#: includes/class-strong-testimonials-list-table.php:557
+msgid "All dates"
+msgstr "تمام تاریخ ها"
+
+#. translators: 1: month name, 2: 4-digit year
+#: includes/class-strong-testimonials-list-table.php:570
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: includes/class-strong-testimonials-list-table.php:617
+msgid "%s pending"
+msgstr "%s درحال انتظار"
+
+#: includes/class-strong-testimonials-list-table.php:696
+#: includes/class-strong-testimonials-list-table.php:1120
+msgid "1 item"
+msgid_plural "%s items"
+msgstr[0] "%s مورد"
+
+#: includes/class-strong-testimonials-list-table.php:715
+msgid "Go to the first page"
+msgstr "برو به اولین صفحه"
+
+#: includes/class-strong-testimonials-list-table.php:722
+msgid "Go to the previous page"
+msgstr "برو به صفحه قبلی"
+
+#: includes/class-strong-testimonials-list-table.php:731
+msgid "Select Page"
+msgstr "انتخاب صفحه"
+
+#: includes/class-strong-testimonials-list-table.php:732
+msgid "Current page"
+msgstr "صفحه چاری"
+
+#: includes/class-strong-testimonials-list-table.php:738
+msgctxt "paging"
+msgid "%1$s of %2$s"
+msgstr "%1$s از %2$s"
+
+#: includes/class-strong-testimonials-list-table.php:742
+msgid "Go to the next page"
+msgstr "برو به صفحه بعدی"
+
+#: includes/class-strong-testimonials-list-table.php:749
+msgid "Go to the last page"
+msgstr "برو به آخرین صفحه"
+
+#: includes/class-strong-testimonials-list-table.php:886
+msgid "Select All"
+msgstr "انتخاب همه"
+
+#: includes/class-strong-views-list-table.php:75
+msgid "Edit"
+msgstr "ویرایش"
+
+#: includes/class-strong-views-list-table.php:76
+msgid "Duplicate"
+msgstr "تکثیر کردن"
+
+#: includes/class-strong-views-list-table.php:77
+msgid "Delete \"%s\"?"
+msgstr "حذف \"%s\"؟"
+
+#: includes/defaults.php:36
+msgid "This field is required."
+msgstr "عنوان فیلد ضروری است."
+
+#: includes/defaults.php:53
+msgid "Testimonial Title"
+msgstr "عنوان توصیف"
+
+#: includes/defaults.php:61
+msgid "Testimonial Content"
+msgstr "محتوای توصیف"
+
+#: includes/defaults.php:88
+msgid "email"
+msgstr "ایمیل"
+
+#: includes/defaults.php:92
+msgid "URL"
+msgstr "لینک"
+
+#: includes/defaults.php:106
+msgid "categories"
+msgstr "دسته بندی ها"
+
+#: includes/defaults.php:107
+msgid "category selector"
+msgstr "انتخابگر دسته بندی"
+
+#: includes/defaults.php:135
+msgid "Default Form"
+msgstr "فرم پیشفرض"
+
+#: includes/defaults.php:144
+msgid "Full Name"
+msgstr "نام کامل"
+
+#: includes/defaults.php:147
+msgid "What is your full name?"
+msgstr "نام کامل شما چیست؟"
+
+#: includes/defaults.php:156
+msgid "What is your email address?"
+msgstr "ایمیل شما چیست؟"
+
+#: includes/defaults.php:161
+msgid "Company Name"
+msgstr "نام شرکت"
+
+#: includes/defaults.php:163
+msgid "What is your company name?"
+msgstr "نام شرکت شما چیست؟"
+
+#: includes/defaults.php:168
+msgid "Company Website"
+msgstr "وبسایت شرکت"
+
+#: includes/defaults.php:170
+msgid "Does your company have a website?"
+msgstr "آیا شرکت شما سایت دارد؟"
+
+#: includes/defaults.php:178
+msgid "Heading"
+msgstr "عنوان"
+
+#: includes/defaults.php:181
+msgid "A headline for your testimonial."
+msgstr "یک تیتر برای توصیف شما."
+
+#: includes/defaults.php:186 includes/defaults.php:234
+msgid "Testimonial"
+msgstr "توصیف"
+
+#: includes/defaults.php:189
+msgid "What do you think about us?"
+msgstr "درباره ما چطور فکر می کنید؟"
+
+#: includes/defaults.php:194
+msgid "Photo"
+msgstr "تصویر"
+
+#: includes/defaults.php:196
+msgid "Would you like to include a photo?"
+msgstr "آیا علاقه‌مند به قرار دادن تصویر هستید؟"
+
+#: includes/defaults.php:205
+msgid "Minimal Form"
+msgstr "فرم مینیمال"
+
+#: includes/defaults.php:263
+msgid "Custom Form"
+msgstr "فرم دلخواه"
+
+#. translators: Settings > Forms > Messages tab
+#. translators: Default message for required field message at top of form.
+#: includes/defaults.php:286 includes/defaults.php:288
+msgid "Required field"
+msgstr "فیلد ضروری"
+
+#. translators: Settings > Forms > Messages tab
+#: includes/defaults.php:293
+msgctxt "description"
+msgid "Captcha label"
+msgstr "برچسب کد امنیتی"
+
+#. translators: Default label for Captcha field on submission form.
+#: includes/defaults.php:295
+msgctxt "strong-testimonials"
+msgid "Captcha"
+msgstr "کد امنیتی"
+
+#. translators: Settings > Forms > Messages tab
+#: includes/defaults.php:300
+msgctxt "description"
+msgid "Submit button"
+msgstr "دکمه ارسال"
+
+#. translators: Default label for the Submit button on testimonial form.
+#: includes/defaults.php:302
+msgctxt "the Submit button"
+msgid "Add Testimonial"
+msgstr "اضافه کردن توصیف"
+
+#. translators: Settings > Forms > Messages tab
+#: includes/defaults.php:307
+msgctxt "description"
+msgid "Submission error"
+msgstr "خطای ارسال"
+
+#. translators: Default message for submission form error.
+#: includes/defaults.php:309
+msgctxt "error message"
+msgid "There was a problem processing your testimonial."
+msgstr "در پردازش توصیف مشکل وجود دارد."
+
+#. translators: Settings > Forms > Messages tab
+#: includes/defaults.php:314
+msgctxt "description"
+msgid "Submission success"
+msgstr "ارسال کامل شد"
+
+#. translators: Default message for submission form success message.
+#: includes/defaults.php:316
+msgctxt "success message"
+msgid "Thank you! Your testimonial is awaiting moderation."
+msgstr "متشکریم! توصیف شما در انتظار مدیریت."
+
+#. translators: Default subject line for new testimonial notification email.
+#: includes/defaults.php:341
+msgid "New testimonial for %BLOGNAME%"
+msgstr "توصیف جدید برای %BLOGNAME%"
+
+#. translators: Default message for new testimonial notification email.
+#: includes/defaults.php:343
+msgid ""
+"New testimonial submission for %BLOGNAME%. This is awaiting action from the "
+"website administrator."
+msgstr "توصیف جدید شما برای %BLOGNAME% ارسال شد و در انتظار اقدام توسط مدیر است."
+
+#: includes/defaults.php:362
+msgid "Display"
+msgstr "نمایش"
+
+#: includes/defaults.php:363
+msgid "Slideshow"
+msgstr "اسلایدشو"
+
+#: includes/defaults.php:369
+msgid "Random"
+msgstr "تصادفی"
+
+#: includes/defaults.php:370
+msgid "Newest first"
+msgstr "ابتدا جدیدترین ها"
+
+#: includes/defaults.php:371
+msgid "Oldest first"
+msgstr "ابتدا قدیمی ها"
+
+#: includes/defaults.php:377
+msgid "Length"
+msgstr "طول"
+
+#: includes/defaults.php:378
+msgid "Entire"
+msgstr "تمامی"
+
+#: includes/defaults.php:433 strong-testimonials.php:537
+msgctxt "link"
+msgid "Read more"
+msgstr "خواندن ادامه"
+
+#. Translators: For string translation in WPML & Polylang plugins.
+#: includes/defaults.php:464
+msgid "Testimonial Form Fields"
+msgstr "فیلدهای فرم توصیف"
+
+#: includes/defaults.php:465
+msgid "Testimonial Form Messages"
+msgstr "پیام فرم توصیف"
+
+#: includes/defaults.php:466
+msgid "Testimonial Notification Options"
+msgstr "گزینه های اعلامیه"
+
+#: includes/form-handler-functions.php:255 includes/form-handler-functions.php:267
+#: includes/form-handler-functions.php:279
+msgid "The Captcha failed. Please try again."
+msgstr "کد امنیتی ناموفق بود. لطفا دوباره سعی کنید."
+
+#: includes/l10n.php:104 includes/l10n.php:162
+msgid "placeholder"
+msgstr "متن محو شونده"
+
+#: includes/l10n.php:105 includes/l10n.php:163
+msgid "label"
+msgstr "برچسب"
+
+#: includes/l10n.php:137 includes/l10n.php:179
+msgid "Email message"
+msgstr "محتوای ایمیل"
+
+#: includes/l10n.php:138 includes/l10n.php:178
+msgid "Email subject"
+msgstr "موضوع ایمیل"
+
+#: includes/post-types.php:8
+msgctxt "post type general name"
+msgid "Testimonials"
+msgstr "توصیفات"
+
+#: includes/post-types.php:9
+msgctxt "admin menu name"
+msgid "Testimonials"
+msgstr "توصیفات"
+
+#: includes/post-types.php:10
+msgctxt "post type singular name"
+msgid "Testimonial"
+msgstr "توصیف"
+
+#: includes/post-types.php:11
+msgctxt "post type"
+msgid "Add New"
+msgstr "اضافه کردن"
+
+#: includes/post-types.php:12
+msgid "Add New Testimonial"
+msgstr "اضافه کردن توصیف جدید"
+
+#: includes/post-types.php:13
+msgid "Edit Testimonial"
+msgstr "ویرایش توصیف"
+
+#: includes/post-types.php:14
+msgid "New Testimonial"
+msgstr "توصیف جدید"
+
+#: includes/post-types.php:15
+msgid "All Testimonials"
+msgstr "تمام توصیفات"
+
+#: includes/post-types.php:16
+msgid "View Testimonial"
+msgstr "مشاهده توصیف"
+
+#: includes/post-types.php:17
+msgid "Search Testimonials"
+msgstr "جستجوی توصیفات"
+
+#: includes/post-types.php:18
+msgid "Nothing Found"
+msgstr "چیزی پیدا نشد"
+
+#: includes/post-types.php:19
+msgid "Nothing found in Trash"
+msgstr "چیزی در زباله‌دان یافت نشد"
+
+#: includes/post-types.php:25
+msgctxt "post type singular label"
+msgid "testimonial"
+msgstr "توصیف"
+
+#: includes/post-types.php:30
+msgctxt "slug"
+msgid "testimonial"
+msgstr "توصیف"
+
+#: includes/post-types.php:47
+msgid "Testimonial Categories"
+msgstr "دسته بندی های توصیف"
+
+#: includes/post-types.php:48
+msgid "Testimonial Category"
+msgstr "دسته بندی توصیف"
+
+#: includes/post-types.php:50
+msgid "All categories"
+msgstr "تمام دسته بندی ها"
+
+#: includes/widget2.php:14
+msgctxt "widget description"
+msgid "Add one of your testimonial views."
+msgstr "اضافه کردن چشم انداز برای توصیف."
+
+#: includes/widget2.php:21
+msgctxt "widget label"
+msgid "Strong Testimonials View"
+msgstr "چشم انداز توصیفات"
+
+#: includes/widget2.php:27
+msgctxt "widget title"
+msgid "Testimonials"
+msgstr "توصیفات"
+
+#: includes/widget2.php:71
+msgid "Title:"
+msgstr "عنوان:"
+
+#: includes/widget2.php:77
+msgid "Content:"
+msgstr "محتوا:"
+
+#: includes/widget2.php:81
+msgid "Automatically add paragraphs to above Content only"
+msgstr "افزودن خودکار پاراگراف به بالای محتوا"
+
+#: includes/widget2.php:85
+msgctxt "widget setting"
+msgid "View:"
+msgstr "چشم انداز:"
+
+#: includes/widget2.php:89
+msgid "&mdash; Select &mdash;"
+msgstr "&mdash; انتخاب &mdash;"
+
+#: strong-testimonials.php:98 strong-testimonials.php:110
+msgid "Cheatin&#8217; huh?"
+msgstr "Cheatin&#8217; huh?"
+
+#: strong-testimonials.php:423
+msgid "light gray gradient"
+msgstr "light gray gradient"
+
+#: strong-testimonials.php:428
+msgid "light blue gradient"
+msgstr "light blue gradient"
+
+#: strong-testimonials.php:433
+msgid "sky blue gradient"
+msgstr "sky blue gradient"
+
+#: strong-testimonials.php:438
+msgid "light latte gradient"
+msgstr "light latte gradient"
+
+#: strong-testimonials.php:443
+msgid "light green mist gradient"
+msgstr "light green mist gradient"
+
+#: strong-testimonials.php:448
+msgid "light plum gradient"
+msgstr "light plum gradient"
+
+#. Plugin Name of the plugin/theme
+msgid "Strong Testimonials"
+msgstr "توصیفات (Strong Testimonials)"
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.wpmission.com/plugins/strong-testimonials/"
+msgstr "https://www.wpmission.com/plugins/strong-testimonials/"
+
+#. Description of the plugin/theme
+msgid ""
+"A full-featured plugin that works right out of the box for beginners and offers "
+"advanced features for pros."
+msgstr ""
+"A full-featured plugin that works right out of the box for beginners and offers "
+"advanced features for pros."
+
+#. Author of the plugin/theme
+msgid "Chris Dillon"
+msgstr "Chris Dillon"
+
+#. Author URI of the plugin/theme
+msgid "https://www.wpmission.com/"
+msgstr "https://www.wpmission.com/"

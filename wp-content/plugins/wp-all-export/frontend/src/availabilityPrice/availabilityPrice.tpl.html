@@ -1,0 +1,137 @@
+<div class="wpallexport-collapsed wpallexport-section" ng-class="{closed: !availabilityPrice.open}">
+    <div class="wpallexport-content-section">
+        <div class="wpallexport-collapsed-header disable-jquery" ng-click="availabilityPrice.open = !availabilityPrice.open">
+            <h3>Availability &amp; Price</h3>
+        </div>
+        <div class="wpallexport-collapsed-content" id="availability-price" ng-slide-down="availabilityPrice.open" duration="0.5">
+            <div class="wpallexport-collapsed-content-inner">
+                <h4>Price</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="availabilityPrice.price" value="useProductPrice" /> Use the product's price</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="availabilityPrice.price" value="customValue" /> Custom data</label>
+
+                    <div class="input inner"  ng-slide-down="availabilityPrice.price == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="availabilityPrice.priceCV" droppable />
+                    </div>
+                </div>
+
+                <div class="input inner">
+                    <a href="" ng-click="availabilityPrice.adjustPrice = !availabilityPrice.adjustPrice" class="adjust-price-link">
+                        <span class="open-indicator" ng-if="availabilityPrice.adjustPrice">-</span>
+                        <span class="open-indicator" ng-if="!availabilityPrice.adjustPrice">+</span> Adjust Price
+                    </a>
+                    <div ng-slide-down="availabilityPrice.adjustPrice" class="adjust-price" duration="0.2">
+                        <div class="input">
+                            <input type="text" class="wpae-default-input" ng-model="availabilityPrice.adjustPriceValue" droppable /><select ng-model="availabilityPrice.adjustPriceType">
+                                <option value="%">%</option>
+                                <option value="USD">{{currency}}</option>
+                            </select>
+
+                            <div ng-show="availabilityPrice.adjustPriceType == '%'" class="tooltip-container">
+                                <a href="#" ng-cloak=""  class="wpallexport-help"
+                                   tipsy="Leave blank or enter in 100% to keep the price as is. Enter in 110% to markup by 10%. Enter in 50% to cut prices in half.">?</a>
+                            </div>
+                            <div ng-show="availabilityPrice.adjustPriceType == 'USD'" class="tooltip-container">
+                                <a href="#" ng-cloak="" class="wpallexport-help"
+                                   tipsy="Enter a negative number to reduce prices.">?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Sale Price</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="availabilityPrice.salePrice" value="useProductSalePrice"/>Use the product's sale price</label>
+                </div>
+                <div class="input">
+                    <div class="input">
+                        <label><input type="radio" ng-model="availabilityPrice.salePrice" value="customValue" />Custom data</label>
+                        <div class="input inner"  ng-slide-down="availabilityPrice.salePrice == 'customValue'" duration="0.2">
+                            <input type="text" class="wpae-default-input" ng-model="availabilityPrice.salePriceCV" droppable/>
+                        </div>
+                    </div>
+                </div>
+                <div class="input inner">
+                    <a href="" ng-click="availabilityPrice.adjustSalePrice = !availabilityPrice.adjustSalePrice" ng-init="availabilityPrice.adjustSalePrice= false" class="adjust-price-link">
+                        <span class="open-indicator" ng-if="availabilityPrice.adjustSalePrice">-</span>
+                        <span class="open-indicator" ng-if="!availabilityPrice.adjustSalePrice">+</span> Adjust Sale Price
+                    </a>
+                    <div ng-slide-down="availabilityPrice.adjustSalePrice" class="adjust-price" duration="0.2">
+                        <div class="input">
+                            <input type="text" class="wpae-default-input" ng-model="availabilityPrice.adjustSalePriceValue" droppable /><select ng-model="availabilityPrice.adjustSalePriceType">
+                                <option value="%">%</option>
+                                <option value="USD">{{currency}}</option>
+                            </select>
+                            <div ng-show="availabilityPrice.adjustSalePriceType == '%'" class="tooltip-container">
+                                <a href="#" ng-cloak=""  class="wpallexport-help"
+                                   tipsy="Leave blank or enter in 100% to keep the price as is. Enter in 110% to markup by 10%. Enter in 50% to cut prices in half.">?</a>
+                            </div>
+                            <div ng-show="availabilityPrice.adjustSalePriceType == 'USD'" class="tooltip-container">
+                                <a href="#" ng-cloak="" class="wpallexport-help"
+                                   tipsy="Enter a negative number to reduce prices.">?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Availability</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="availabilityPrice.availability" value="useWooCommerceStockValues"/>Use WooCommerce stock values</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="availabilityPrice.availability" value="customValue" />Custom data</label>
+                    <div class="input inner"  ng-slide-down="availabilityPrice.availability == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="availabilityPrice.availabilityCV" droppable />
+                    </div>
+                </div>
+            </div>
+            <div class="wpallexport-collapsed wpallexport-section wpallexport-google-merchants-advanced-options" ng-init="advancedOptionsOpen = false" ng-class="{closed: !advancedOptionsOpen} ">
+                <div class="wpallexport-content-section rad0">
+                    <div class="wpallexport-collapsed-header wpallexport-advanced-options-header disable-jquery" ng-click="advancedOptionsOpen = !advancedOptionsOpen">
+                        <h3 class="advanced-options">Advanced Options</h3>
+                    </div>
+                    <div class="wpallexport-collapsed-content wpallexport-advanced-options-content" ng-slide-down="advancedOptionsOpen" duration="0.5">
+                        <div class="wpallexport-collapsed-content-inner">
+                            <div class="input">
+                                <h4>Currency</h4>
+                                <div class="input">
+                                    <div class="select-container" style="padding-left: 0px;">
+                                        <select class="custom-value" chosen ng-model="availabilityPrice.currency">
+                                            <option value="AUD">Australian Dollars (AUD)</option>
+                                            <option value="BRL">Brazilian Reals (BRL)</option>
+                                            <option value="GBP">British Pounds (GBP)</option>
+                                            <option value="CAD">Canadian Dollars (CAD)</option>
+                                            <option value="CZK">Czech Crowns (CZK)</option>
+                                            <option value="DKK">Danish Krone (DKK)</option>
+                                            <option value="EUR">Euros (EUR)</option>
+                                            <option value="INR">Indian Rupees (INR)</option>
+                                            <option value="JPY">Japanese Yen (JPY)</option>
+                                            <option value="MXN">Mexican Pesos (MXN)</option>
+                                            <option value="NZD">New Zealand Dollars (NZD)</option>
+                                            <option value="NOK">Norwegian Krone (NOK)</option>
+                                            <option value="PLN">Polish Złoty (PLN)</option>
+                                            <option value="RUB">Russian Rubles (RUB)</option>
+                                            <option value="SGD">Singapore Dollars (SGD)</option>
+                                            <option value="ZAR">South Africa Rand (ZAR)</option>
+                                            <option value="SEK">Swedish Krona (SEK)</option>
+                                            <option value="TRY">Turkish Lira (TRY)</option>
+                                            <option value="USD">United States Dollars (USD)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <h4>Availability Date</h4>
+                                <div class="input">
+                                    <input type="text" class="wpae-default-input" ng-model="availabilityPrice.availabilityDate" droppable />
+                                </div>
+                                <h4>Sale Price Effective Date</h4>
+                                <div class="input">
+                                    <input type="text" class="wpae-default-input" ng-model="availabilityPrice.salePriceEffectiveDate" droppable />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

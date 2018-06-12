@@ -1,0 +1,111 @@
+/* Client details meta box
+------------------------------------------------*/
+
+#details table {
+  border: none;
+  width: 100%;
+}
+
+#details th {
+  font-weight: 400;
+  text-align: right;
+  vertical-align: top;
+  padding-top: 8px;
+}
+
+#details td {
+  margin: 5px;
+  padding: 5px;
+}
+
+#details tr:first-child td > p:first-child {
+  margin-top: 0;
+}
+
+input[type="text"].custom-input,
+input[type="email"].custom-input,
+input[type="url"].custom-input {
+  width: 100%;
+}
+
+div.checkbox {
+  height: 28px;
+  padding: 3px 0 5px;
+}
+
+div.checkbox input[type="checkbox"] {
+  margin: 1px;
+  padding: 3px 5px;
+}
+
+.input-url,
+.input-nofollow {
+  display: inline-block;
+}
+
+.input-url {
+  width: calc(100% - 210px);
+}
+
+.input-nofollow {
+  float: right;
+}
+
+label.nowrap {
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+label.nowrap code {
+  position: relative;
+  top: -2px;
+}
+
+/* Post Publish Meta Box
+--------------------------------------*/
+.wpmtst-pub-section {
+  padding: 6px 10px 8px;
+}
+
+#submit-timestamp {
+  padding: 2px 0 1px 0;
+}
+
+#submit-timestamp:before {
+  content: "\f175";
+  top: -1px;
+  color: #82878c;
+  font: normal 20px/1 dashicons;
+  display: inline-block;
+  padding: 0 2px 0 0;
+  left: -1px;
+  position: relative;
+  vertical-align: top;
+}
+
+/* Star rating in post editor
+--------------------------------------------------*/
+.edit-rating-box {
+  height: 27px;
+  line-height: 27px;
+}
+
+.wp-core-ui .edit-rating-box button {
+  margin-left: 0;
+}
+
+.edit-rating-box .cancel,
+.edit-rating-box .zero {
+  padding: 0;
+  text-decoration: underline;
+  color: #0073aa;
+}
+
+.rating .inner,
+.edit-rating-buttons-1,
+.edit-rating-buttons-2,
+.edit-rating-success {
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+}

@@ -1,0 +1,50 @@
+  /* Base
+-----------------------------------------------*/
+.strong-view.#{$template} {
+  display: block;
+  /* setting a width handles short content */
+  width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .testimonial {
+    &.t-slide {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .testimonial-inner {
+    display: block;
+    /* fill horizontal & vertical space */
+    width: 100%;
+    height: 100%;
+  }
+
+  .testimonial-image {
+    max-width: 100%;
+  }
+
+  .testimonial-field-before {
+    margin-right: 0.5em;
+  }
+}
+
+.strong-view {
+  &.slider-container {
+    opacity: 1;
+  }
+
+  .screen-reader-text {
+    /* copied from Twenty Sixteen theme */
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    width: 1px;
+    /* many screen reader and browser combinations announce broken words as they would appear visually */
+    word-wrap: normal !important;
+  }
+}

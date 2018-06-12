@@ -1,0 +1,98 @@
+/* -------------------------------------------------
+   Form table
+   ------------------------------------------------- */
+
+.form-table {
+  margin-top: 0;
+  background: #FEFEFE;
+  width: 100% !important;
+  border: 1px solid #DDD;
+
+  &.multiple {
+    width: auto;
+  }
+
+  tr {
+    border: 1px solid #DDD;
+  }
+
+  th,
+  td {
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 400;
+    white-space: nowrap;
+    vertical-align: top;
+    width: 150px;
+    padding: 10px 15px;
+  }
+
+  td {
+    padding: 10px;
+
+    &.valign-middle {
+      vertical-align: middle;
+    }
+
+    &.w1 {
+      width: 185px;
+    }
+
+    &.w2 {
+      width: 300px;
+    }
+  }
+}
+
+tr.subheading {
+  font-weight: 600;
+
+  td {
+    padding: 5px 10px;
+
+    &:first-child {
+      padding-left: 15px;
+    }
+
+    &:last-child {
+      width: 190px;
+    }
+  }
+}
+
+td.divider {
+  border-left: 1px dashed #DDD;
+}
+
+.wpmtst2 .form-table th,
+.wpmtst2 .form-table th label {
+  line-height: 30px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+span.title {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.row,
+.row p {
+  vertical-align: middle;
+  line-height: 32px;
+}
+
+.row.tall,
+.row.tall p {
+  line-height: 40px;
+}
+
+.row.links {
+  margin-top: 10px;
+}
+
+.row:not(:first-child) .row-inner {
+  margin-top: 10px;
+}

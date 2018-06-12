@@ -1,0 +1,67 @@
+<div class="wp-pointer wp-pointer-right" style="width: 450px; display: block; position: absolute; top: -70px; left: -23px;" ng-if="show">
+    <div class="wp-pointer-content">
+        <fieldset>
+            <table cellpadding="0" cellspacing="5" class="cf-form-table" rel="cf_mapping_0">
+                <thead>
+                <tr>
+                    <td>Exported Data</td>
+                    <td>Translated To</td>
+                    <td>&nbsp;</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="form-field" ng-repeat="mapping in mappings">
+                    <td style="width: 50%;">
+                        <input type="text" ng-model="mapping.mapFrom"/>
+                    </td>
+                    <td style="width: 50%;">
+                        <div ng-if="context == 'sizeType'">
+                            <select chosen ng-model="mapping.mapTo" >
+                                <option value="">Please select</option>
+                                <option value="regular">Regular</option>
+                                <option value="petite">Petite</option>
+                                <option value="plus">Plus</option>
+                                <option value="big and tall">Big and tall</option>
+                                <option value="maternity">Maternity</option>
+                            </select>
+                        </div>
+                        <div ng-if="context == 'condition' ">
+                            <select chosen ng-model="mapping.mapTo">
+                                <option value="new">New</option>
+                                <option value="refurbished">Refurbished</option>
+                                <option value="used">Used</option>
+                            </select>
+                        </div>
+                        <div ng-if="context != 'sizeType' && context != 'condition'">
+                            <input type="text" ng-model="mapping.mapTo" />
+                        </div>
+                    </td>
+                    <td class="action remove">
+                        <a href="" ng-click="removeMapping(mapping)" ng-show="$index > 0"
+                           style="right:-10px;"></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <a href="" ng-click="addMapping()" title="Add Another" class="action add-new-key add-new-entry">
+                            Add Another
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="wrap" style="position:relative;">
+                            <a class="save_popup save_mr" href="" ng-click="saveMappings()">Save Rules</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" name="custom_mapping_rules[]" value="">
+        </fieldset>
+        <div class="wp-pointer-buttons"><a class="close" href="" ng-click="close()">Close</a></div>
+    </div>
+    <div class="wp-pointer-arrow">
+        <div class="wp-pointer-arrow-inner"></div>
+    </div>
+</div>

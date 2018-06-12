@@ -1,0 +1,41 @@
+/*-----------------------------------------------
+ Structure
+-----------------------------------------------*/
+
+.clear {
+  clear: both;
+}
+
+.table {
+  display: table;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-cell {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.option-wrap {
+  margin-right: 2em;
+}
+
+.half-width {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 50%;
+  float: left;
+}
+
+optgroup,
+optgroup option {
+  font-family: inherit; // Firefox
+}
+
+.intro {
+  margin-bottom: 2em;
+}
+

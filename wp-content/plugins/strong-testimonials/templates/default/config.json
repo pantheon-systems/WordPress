@@ -1,0 +1,66 @@
+{
+  "name": "Default",
+  "description": "A classic style.",
+  "type": "display",
+  "order": 1,
+  "scripts": "",
+  "styles": "",
+  "force": "",
+  "options": [
+    {
+      "name": "image_position",
+      "label": "",
+      "type": "select",
+      "default": "left",
+      "values": [
+        {
+          "value": "left",
+          "class_name": "",
+          "description": "image on left"
+        },
+        {
+          "value": "right",
+          "class_name": "image-right",
+          "description": "image on right"
+        }
+      ]
+    },
+    {
+      "name": "theme",
+      "label": "",
+      "type": "select",
+      "default": "light",
+      "values": [
+        {
+          "value": "light",
+          "class_name": "",
+          "description": "light theme"
+        },
+        {
+          "value": "dark",
+          "class_name": "dark",
+          "description": "dark theme"
+        }
+      ]
+    },
+    {
+      "name": "quotes",
+      "label": "",
+      "type": "select",
+      "default": "on",
+      "values": [
+        {
+          "value": "on",
+          "class_name": "",
+          "description": "with a quote symbol in the heading"
+        },
+        {
+          "value": "off",
+          "class_name": "no-quotes",
+          "description": "no quote symbol"
+        }
+      ]
+    }
+  ],
+  "format_version": "2.0"
+}

@@ -1,0 +1,376 @@
+#audit-log-viewer .search-box {
+	position: relative;
+	display: block;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.wsal-as-fake-search {
+	// border: 1px solid #ddd;
+	color: #333;
+	display: inline-block;
+	// background: #FFF;
+}
+
+#wsal-as-search-search-input {
+	border: 1px solid #ddd;
+	outline: none;
+	// margin: 0;
+}
+
+#wsal-filters-btn {
+	color: #555;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    -webkit-box-shadow: 0 1px 0 #ccc;
+    box-shadow: 0 1px 0 #ccc;
+    vertical-align: baseline;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 26px;
+    height: 28px;
+    margin: 0;
+    padding: 0 10px 1px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    white-space: nowrap;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#wsal-filters-btn:hover {
+	background: #fafafa;
+    border-color: #999;
+    color: #23282d;
+}
+
+#search-submit {
+	margin-right: 4px;
+}
+
+.wsal-as-filter-popup {
+	display: block;
+	width: 360px;
+	min-height: 140px;
+	max-height: 300px;
+	position: absolute;
+	top: 28px;
+	right: 5px;
+	border: 1px solid #CCC;
+	background: #EEE;
+	padding: 8px;
+	z-index: 99;
+	/*overflow-y: scroll;*/ /* needed for typeahead */
+}
+
+.wsal-as-filter-list {
+	background: #FFF;
+	margin-right: 4px;
+    padding: 1px;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid #ddd;
+}
+
+.wsal-as-fake-search .no-filters {
+	display: none;
+}
+
+.wsal-as-filter-list span {
+	padding: 2px 3px;
+	margin: 2px;
+	border: 1px solid #CCC;
+	background: #EEE;
+	border-radius: 2px;
+	display: inline-block;
+	font-size: 10px;
+}
+
+.wsal-as-filter-list input {
+	background: #EEE;
+	border: none;
+	font-size: 10px;
+	margin: 0;
+	padding: 0;
+	box-shadow: none;
+}
+
+.wsal-as-filter-list input:focus {
+	background: #FFF;
+}
+
+.wsal-as-filter-list span a {
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFF;
+	margin-left: 2px;
+	background: #BBB;
+	border-radius: 25px;
+	height: 14px;
+	display: inline-block;
+	width: 14px;
+	text-align: center;
+	line-height: 12px;
+}
+
+.wsal-as-filter-list span a:hover {
+	background: #FB9;
+}
+
+#wsal-as-filter-fields strong {
+	display: block;
+	border-bottom: 1px dotted #CCC;
+	margin-top: 8px;
+	margin-bottom: 4px;
+	padding-bottom: 2px;
+	font-weight: bold;
+}
+
+#wsal-as-filter-fields div {
+	text-align: right;
+}
+
+#wsal-as-filter-fields div div {
+	text-align: left;
+}
+
+#wsal-as-filter-fields label {
+	float: left;
+	line-height: 26px;
+	text-align: left;
+}
+
+#wsal-as-filter-fields input,
+#wsal-as-filter-fields select,
+#wsal-as-filter-fields textarea {
+	width: 160px;
+}
+
+.wsal-as-filter-popup .no-filters {
+	display: none;
+}
+
+.wsal-as-filter-widget .twitter-typeahead .tt-dropdown-menu {
+	max-width: 200px;
+	margin-top: 2px;
+	padding: 2px 0;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+	box-shadow: 0 5px 10px rgba(0,0,0,.2);
+	cursor: default;
+}
+
+.wsal-as-filter-widget .twitter-typeahead .tt-dropdown-menu p {
+	margin: 0;
+	padding: 1px 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.wsal-as-filter-widget .twitter-typeahead .tt-dropdown-menu p:hover {
+	background: Highlight;
+}
+
+/*.wsal-as-filter-widget .twitter-typeahead .tt-dropdown-menu,*/
+.wsal-as-filter-widget .twitter-typeahead pre {
+	display: none !important;
+}
+
+.wsal-add-button {
+	display: inline-block;
+	width: 25px;
+    height: 25px;
+    float: right;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    color: #444;
+    -webkit-transition: 0.2s all linear;
+    transition: 0.2s all linear;
+}
+
+.wsal-add-button:hover {
+	opacity: 1;
+	-webkit-transition: 0.2s all linear;
+	transition: 0.2s all linear;
+}
+
+.wsal-add-button:focus {
+	outline: 0;
+	border: 0;
+	background: none;
+}
+
+.wsal-add-button[disabled] {
+	opacity: 0.7;
+}
+
+.wsal-add-button:before {
+	width: 25px;
+    height: 25px;
+    line-height: 1.4;
+}
+
+.wsal-save-popup {
+	display: block;
+    width: 220px;
+    min-height: 30px;
+    position: absolute;
+    top: 70px;
+    right: 60px;
+    border: 1px solid #CCC;
+    background: #EEE;
+    padding: 8px;
+    z-index: 99;
+}
+
+#wsal-save-search-name {
+	margin-right: 4px;
+    padding: 4px 5px;
+}
+
+#wsal-save-search-name:focus {
+	outline: none;
+}
+
+.wsal-load-popup {
+	display: block;
+    width: 400px;
+    min-height: 30px;
+    position: absolute;
+    top: 70px;
+    right: 130px;
+    border: 1px solid #CCC;
+    background: #EEE;
+    padding: 8px;
+    text-align: right;
+    z-index: 99;
+}
+
+.wsal-load-popup .close {
+	display: inline-block;
+    text-decoration: none;
+    border-radius: 100%;
+    background: #b1b1b1;
+    color: #fff;
+    width: 19px;
+    height: 19px;
+    text-align: center;
+    line-height: 18px;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.wsal-load-popup .close:hover {
+	background: #8e8e8e;
+}
+
+.saved-result-item {
+	text-align: right;
+    margin-bottom: 8px;
+}
+
+.save-result-name {
+	float: left;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 28px;
+}
+
+.saved-result-item .button {
+	margin-right: 3px;
+}
+
+.saved-result-item .delete-search-result {
+	margin-right: 0;
+}
+
+.wsal-load-result-list {
+	max-height: 140px;
+	overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#clear-search {
+	float: right;
+	margin-bottom: 5px;
+	margin-right: 4px;
+}
+
+#load-search-btn {
+	float: right;
+	margin-right: 4px;
+	margin-bottom: 5px;
+}
+
+#save-search-btn {
+	float: right;
+	margin-right: 4px;
+	margin-bottom: 5px;
+}
+
+#wsal-save-search-error {
+	display: none;
+	margin-top: 10px;
+    color: red;
+    padding: 0 3px;
+}
+
+.show {
+	display: block;
+}
+
+.dark-tooltip.north.small {
+	margin-left: 0;
+	margin-top: 5px;
+}
+
+.dark-tooltip.large {
+	margin-left: 10px;
+	padding: 10px !important;
+	font-size: 14px !important;
+	max-width: 200px !important;
+	-webkit-border-radius: 4px !important;
+	-moz-border-radius: 4px !important;
+	border-radius: 4px !important;
+}
+
+.wsal-save-tooltip {
+	margin-bottom: 0;
+    padding: 0 3px;
+}
+
+.wsal-input-error {
+	display: none;
+    margin-left: 5px;
+    color: red;
+    font-size: 11px;
+}
+
+#wsal-search-help {
+	display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin-right: 5px;
+    border-radius: 5000px;
+    border: 1px solid #0073aa;
+    line-height: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #0073aa;
+}

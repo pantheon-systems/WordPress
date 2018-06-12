@@ -1,0 +1,161 @@
+/**
+ * Strong Testimonials Default Form template
+ */
+.strong-form {
+  margin: 0 auto;
+}
+.strong-form .form-field {
+  margin-bottom: 1.5em;
+}
+.strong-form .form-field.wpmtst-submit {
+  margin-bottom: 0;
+}
+.strong-form .required.symbol:after {
+  content: '*';
+  color: #FF0000;
+  font-size: 1.5em;
+  font-weight: 400;
+  margin: 0 5px;
+  position: relative;
+  top: 5px;
+}
+.strong-form label {
+  display: inline-block;
+  float: none;
+}
+.strong-form input[type="text"],
+.strong-form input[type="email"],
+.strong-form input[type="url"],
+.strong-form input[type="file"],
+.strong-form select,
+.strong-form textarea {
+  box-sizing: border-box;
+  display: block;
+  float: none;
+  width: 100%;
+}
+.strong-form input[type="checkbox"] {
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  transform: scale(1.4);
+  margin-left: 12px;
+  margin-right: 6px;
+}
+.strong-form input[type="checkbox"] + label {
+  font-weight: 400;
+  padding: 5px;
+}
+.strong-form input[type="checkbox"]:focus + label {
+  outline: 1px solid #CCC;
+}
+.strong-form textarea {
+  height: 16em;
+}
+.strong-form span.error,
+.strong-form label.error {
+  display: block;
+}
+.strong-form .before {
+  display: block;
+}
+.strong-form .after {
+  display: block;
+}
+
+.strong-form-inner {
+  padding: 20px;
+}
+
+input.captcha {
+  display: block;
+  width: auto;
+}
+
+img.captcha {
+  border: 0;
+}
+
+.wpmtst-captcha {
+  margin-bottom: 1em;
+}
+
+/* category checklist */
+.strong-form ul.strong-category-list,
+.strong-form ul.strong-category-list ul.children {
+  list-style-type: none;
+}
+.strong-form ul.strong-category-list label,
+.strong-form ul.strong-category-list ul.children label {
+  font-weight: 400;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+.strong-form ul.strong-category-list {
+  margin: 0;
+  padding-left: 0;
+}
+.strong-form ul.strong-category-list ul.children {
+  margin-left: 1.5em;
+  padding-left: 0;
+}
+
+.strong-form {
+  /* error indicators */
+  /* field-wrap is used for checkboxes, radios, star ratings */
+}
+.strong-form label {
+  font-weight: 700;
+}
+.strong-form .form-field .after {
+  font-size: .9em;
+  font-style: italic;
+}
+.strong-form input.error,
+.strong-form textarea.error,
+.strong-form select.error {
+  background: #F9E5E6;
+  border: 1px solid #E8AAAD;
+  color: #B50007;
+}
+.strong-form span.error,
+.strong-form label.error {
+  color: #B50007;
+}
+.strong-form .field-wrap {
+  display: block;
+  font-weight: 400;
+  border: 1px solid transparent;
+}
+.strong-form .field-wrap.error {
+  border-radius: 3px;
+  background: #F9E5E6;
+  border: 1px solid #E8AAAD;
+  color: #B50007;
+}
+.strong-form .field-wrap.error .checkbox-label {
+  outline: none;
+}
+.strong-form .field-wrap.error .strong-rating {
+  outline-color: #E8AAAD;
+}
+.strong-form .field-wrap input + label + .required.symbol:after {
+  margin-left: 0;
+}
+
+/* Dark Theme
+-----------------------------------------------*/
+.strong-form.dark input.error,
+.strong-form.dark textarea.error,
+.strong-form.dark select.error {
+  border: 1px solid #FF6666;
+}
+.strong-form.dark .field-wrap.error {
+  border: 1px solid #FF6666;
+}
+.strong-form.dark .field-wrap.error .checkbox-label {
+  color: #111;
+}
+.strong-form.dark .field-wrap.error .strong-rating {
+  outline-color: #FF6666;
+}

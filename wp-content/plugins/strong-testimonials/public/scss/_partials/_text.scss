@@ -1,0 +1,14 @@
+.strong-view {
+  &.controls-style-text {
+    .wpmslider-start,
+    .wpmslider-stop,
+    .wpmslider-next,
+    .wpmslider-prev {
+      display: inline-block;
+      cursor: pointer;
+      margin: 0 0.5em;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+  }
+}

@@ -1,0 +1,156 @@
+<div class="wpallexport-collapsed wpallexport-section" ng-class="{closed: !advancedAttributes.open }">
+    <div class="wpallexport-content-section">
+        <div class="wpallexport-collapsed-header disable-jquery"
+             ng-click="advancedAttributes.open = !advancedAttributes.open">
+            <h3>Advanced Attributes</h3>
+        </div>
+        <div class="wpallexport-collapsed-content" id="advanced-attributes"
+             ng-slide-down="advancedAttributes.open" duration="0.5">
+            <div class="wpallexport-collapsed-content-inner">
+                <h3 class="inner-title">Product Type</h3>
+                <h4>Multipack</h4>
+                <p>
+                    Multipacks are packages that include several identical products to create a larger unit of sale,
+                    submitted as a single item.
+                    For example, if the product for sale is a 6-pack of soda, the multipack value would be 6.
+                </p>
+                <div class="input">
+                    <label><input type="text" ng-model="advancedAttributes.multipack" class="wpae-default-input" droppable/></label>
+                </div>
+
+                <h4>Adult</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="advancedAttributes.adult" value="no"/>False</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="advancedAttributes.adult" value="yes"/>True</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="advancedAttributes.adult" value="customValue"/>Custom data</label>
+                    <div ng-slide-down="advancedAttributes.adult == 'customValue'" duration="0.2" class="input inner">
+                        <input type="text" class="wpae-default-input" ng-model="advancedAttributes.adultCV" droppable />
+                    </div>
+                </div>
+
+                <h3 class="inner-title">Adwords &amp; Shopping Campaigns</h3>
+                <h4>Adwords Redirect</h4>
+                <p>If provided, make sure that the URL redirects to the same URL as given in the 'link' attribute.</p>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.adwordsRedirect" droppable />
+                </div>
+
+                <h4>Custom Labels</h4>
+                <p>
+                    You can use custom labels to subdivide products in your campaign using any values
+                    of your choosing. For example, you can use custom labels to indicate that products
+                    are seasonal, on clearance, best sellers, etc. (<a href="https://support.google.com/adwords/answer/6275295" target="_blank">Learn more about how to set up Shopping campaigns.</a>)
+                </p>
+                <div style="margin-top:10px;">Custom Label 0</div>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.customLabel0" droppable />
+                    <a href="" class="wpae-field-mapping" ng-click="showCustomLabel0Mappings=true">Field Options...</a>
+                    <div style="position: relative">
+                        <mapping mappings="advancedAttributes.customLabel0Mappings" show="showCustomLabel0Mappings" context="text" />
+                    </div>
+                </div>
+                <div style="margin-top:10px;">Custom Label 1</div>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.customLabel1" droppable />
+                    <a href="" class="wpae-field-mapping" ng-click="showCustomLabel1Mappings=true">Field Options...</a>
+                    <div style="position: relative">
+                        <mapping mappings="advancedAttributes.customLabel1Mappings" show="showCustomLabel1Mappings" context="text" />
+                    </div>
+                </div>
+                <div style="margin-top:10px;">Custom Label 2</div>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.customLabel2" droppable />
+                    <a href="" class="wpae-field-mapping" ng-click="showCustomLabel2Mappings=true">Field Options...</a>
+                    <div style="position: relative">
+                        <mapping mappings="advancedAttributes.customLabel2Mappings" show="showCustomLabel2Mappings" context="text" />
+                    </div>
+                </div>
+                <div style="margin-top:10px;">Custom Label 3</div>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.customLabel3" droppable />
+                    <a href="" class="wpae-field-mapping" ng-click="showCustomLabel3Mappings=true">Field Options...</a>
+                    <div style="position: relative">
+                        <mapping mappings="advancedAttributes.customLabel3Mappings" show="showCustomLabel3Mappings" context="text" />
+                    </div>
+                </div>
+                <div style="margin-top:10px;">Custom Label 4</div>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.customLabel4" droppable />
+                    <a href="" class="wpae-field-mapping" ng-click="showCustomLabel4Mappings=true">Field Options...</a>
+                    <div style="position: relative">
+                        <mapping mappings="advancedAttributes.customLabel4Mappings" show="showCustomLabel4Mappings" context="text" />
+                    </div>
+                </div>
+
+                <hr/>
+
+                <h3 class="inner-title">Unit Prices</h3>
+                <p>
+                    These attributes allow you to submit pricing for products that rely on unit pricing.
+                    The 'unit pricing measure' attribute defines the measure and dimension of an item (e.g. 150g).
+                    The 'unit pricing base measure attribute specifies your preference of the denominator of the unit price (e.g. 100g).
+                </p>
+                <p>
+                    For example, if the 'price' is 3 USD, 'unit pricing measure' is 150g and 'unit pricing base measure' is 100g, the unit price would be '2 USD/200g'.
+                </p>
+
+                <h4>Unit Pricing Measure</h4>
+                <div class="input">
+                    <input type="text" ng-model="advancedAttributes.unitPricingMeasure" class="wpae-default-input" droppable />
+                </div>
+                <h4>Unit Pricing Base Measure</h4>
+                <div class="input">
+                    <input type="text" ng-model="advancedAttributes.unitPricingBaseMeasure" class="wpae-default-input" droppable />
+                    <select style="width: 170px;" ng-model="advancedAttributes.unitPricingBaseMeasureUnit">
+                        <option value="kg">Kilograms (kg)</option>
+                        <option value="g">Ounces (oz)</option>
+                        <option value="lb">Pounds (lb)</option>
+                        <option value="mg">Milligrams (mg)</option>
+                        <option value="g">Grams (g)</option>
+                    </select>
+                </div>
+                <hr/>
+                <h3 class="inner-title">Additional Attributes</h3>
+                <h4>Expiration Date</h4>
+                <p>
+                    This is the date that an item listing will expire. If you do not  provide this attribute, items
+                    will expire and no longer appear in Google Shopping results after 30 days.
+                    <strong>You cannot use thi attribute to extend the expiration period to longer than 30 days.</strong>
+                </p>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.expirationDate" droppable />
+                </div>
+
+                <h4>Energy Efficiency Class</h4>
+                <p>
+                    This attribute allows you to submit the energy label for your applicable products in feeds targeting
+                    European Union countries and switzerland.
+                </p>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.energyEfficiencyClass" droppable />
+                    <a href="" class="wpae-field-mapping" ng-click="showEnergyEfficiencyMappings=true">Field Options...</a>
+                    <div style="position: relative">
+                        <mapping mappings="advancedAttributes.energyEfficiencyClassMappings" show="showEnergyEfficiencyMappings" />
+                    </div>
+                </div>
+                <h4>Promotion ID</h4>
+                <p>
+                    If using Merchant Promotions, the 'promotion id' attribute is used in both your products
+                    feed and your promotions feed to match products to promotions across the two feeds.
+                </p>
+                <div class="input">
+                    <input type="text" class="wpae-default-input" ng-model="advancedAttributes.promotionId" droppable />
+                    <a href="" class="wpae-field-mapping" ng-click="showPromotionIdMappings=true">Field Options...</a>
+                    <div style="position: relative">
+                        <mapping mappings="advancedAttributes.promotionIdMappings" show="showPromotionIdMappings" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

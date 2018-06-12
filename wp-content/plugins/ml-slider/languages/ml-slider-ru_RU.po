@@ -1,0 +1,874 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MetaSlider v3.2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-01-15 17:46:23+0000\n"
+"Last-Translator: admin <info@1245.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#. translators: plugin header field 'Name'
+#: inc/metaslider.widget.class.php:18
+#: ml-slider.php:0
+#@ metaslider
+msgid "MetaSlider"
+msgstr "Мета слайдер"
+
+#: inc/metaslider.widget.class.php:108
+#@ metaslider
+msgid "Title:"
+msgstr "Название:"
+
+#: inc/metaslider.widget.class.php:111
+#@ metaslider
+msgid "Select Slider:"
+msgstr "Выберите слайдер:"
+
+#: inc/metaslider.widget.class.php:121
+#: ml-slider.php:1680
+#@ metaslider
+msgid "No slideshows found"
+msgstr "Не найдено ни одного слайд-шоу"
+
+#: inc/slide/metaslide.class.php:71
+#: inc/slide/metaslide.image.class.php:27
+#@ metaslider
+msgid "Security check failed. Refresh page and try again."
+msgstr "Проверка безопасности не удалась. Обновить страницу и попробуйте еще раз."
+
+#: inc/slide/metaslide.image.class.php:43
+#@ metaslider
+msgid "Failed to add slide. Slide already exists in slideshow."
+msgstr "Добавить слайд не удалось. Такой слайд уже существует в слайд-шоу."
+
+#: inc/slide/metaslide.image.class.php:47
+#@ metaslider
+msgid "Failed to add slide. Slide is not of type 'image'."
+msgstr "Добавить слайд не удалось. Этот слайд не является изображением."
+
+#: inc/slide/metaslide.image.class.php:146
+#: ml-slider.php:466
+#@ metaslider
+msgid "Caption"
+msgstr "Описание"
+
+#: inc/slide/metaslide.image.class.php:149
+#: ml-slider.php:467
+#@ metaslider
+msgid "New Window"
+msgstr "Открывать в новом окне"
+
+#: inc/slide/metaslide.image.class.php:147
+#: ml-slider.php:465
+#@ metaslider
+msgid "URL"
+msgstr "Ссылка (URL)"
+
+#: inc/slide/metaslide.image.class.php:111
+#@ metaslider
+msgid "Image Slide"
+msgstr "Слайд"
+
+#: inc/slide/metaslide.image.class.php:165
+#@ metaslider
+msgid "General"
+msgstr "Основное"
+
+#: inc/slide/metaslide.image.class.php:169
+#@ metaslider
+msgid "SEO"
+msgstr "CEO"
+
+#: inc/slide/metaslide.image.class.php:153
+#@ metaslider
+msgid "Warning: Image data does not exist. Please re-upload the image."
+msgstr "Внимание: данные изображения не существуют. Пожалуйста, загрузить изображение еще раз."
+
+#: inc/slide/metaslide.image.class.php:158
+#@ metaslider
+msgid "Image Title Text"
+msgstr "Title изображния"
+
+#: inc/slide/metaslide.image.class.php:160
+#@ metaslider
+msgid "Image Alt Text"
+msgstr "Alt изображения"
+
+#. translators: plugin header field 'PluginURI'
+#. translators: plugin header field 'AuthorURI'
+#: ml-slider.php:0
+#@ metaslider
+msgid "http://www.metaslider.com"
+msgstr "http://www.metaslider.com"
+
+#. translators: plugin header field 'Description'
+#: ml-slider.php:0
+#@ metaslider
+msgid "Easy to use slideshow plugin. Create SEO optimised responsive slideshows with Nivo Slider, Flex Slider, Coin Slider and Responsive Slides."
+msgstr "Простой в использовании слайд-шоу плагин. Создавайте СЕО-оптимизированные адаптивные слайд-шоу с Nivo Slider, Flex Slider, Coin Slider и Responsive Slides."
+
+#. translators: plugin header field 'Author'
+#: ml-slider.php:0
+#@ metaslider
+msgid "Matcha Labs"
+msgstr "Matcha Labs"
+
+#: ml-slider.php:412
+#@ metaslider
+msgid "Documentation"
+msgstr "Документация"
+
+#: ml-slider.php:468
+#@ metaslider
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+#: ml-slider.php:475
+#@ metaslider
+msgid "Caution: This setting is for advanced developers only. If you're unsure, leave it checked."
+msgstr "Внимание: данная настройка только для опытных пользователей. Если вы не уверены, оставьте её отмеченной."
+
+#: ml-slider.php:538
+#@ metaslider
+msgid "Image"
+msgstr "Изображение"
+
+#: ml-slider.php:539
+#@ metaslider
+msgid "Add to slider"
+msgstr "Добавить в слайдер"
+
+#: ml-slider.php:703
+#@ metaslider
+msgid "New Slider"
+msgstr "Новый слайдер"
+
+#: ml-slider.php:1036
+#@ metaslider
+msgid "New slideshow created. Click 'Add Slide' to get started!"
+msgstr "Новое слайд-шоу создано. Нажмите кнопку \"Добавить слайд\", чтобы начать работу!"
+
+#: ml-slider.php:1061
+#@ metaslider
+msgid "or"
+msgstr "или"
+
+#: ml-slider.php:1062
+#@ metaslider
+msgid "Add New Slideshow"
+msgstr "Добавить новое слайд-шоу"
+
+#: ml-slider.php:1068
+#@ metaslider
+msgid "Create your first slideshow"
+msgstr "Создайте Ваше первое слайд-шоу"
+
+#: ml-slider.php:1130
+#@ metaslider
+msgid "Slides"
+msgstr "Слайды"
+
+#: ml-slider.php:1134
+#: ml-slider.php:1135
+#@ metaslider
+msgid "Add Slide"
+msgstr "Добавить слайд"
+
+#: ml-slider.php:1158
+#@ metaslider
+msgid "Settings"
+msgstr "Настройки"
+
+#: ml-slider.php:1159
+#@ metaslider
+msgid "Save"
+msgstr "Сохранить"
+
+#: ml-slider.php:1160
+#@ metaslider
+msgid "Save & Preview"
+msgstr "Просмотр"
+
+#: ml-slider.php:1173
+#@ metaslider
+msgid "Flex Slider"
+msgstr "Flex Slider"
+
+#: ml-slider.php:1174
+#@ metaslider
+msgid "R. Slides"
+msgstr "R. Slides"
+
+#: ml-slider.php:1175
+#@ metaslider
+msgid "Nivo Slider"
+msgstr "Nivo Slider"
+
+#: ml-slider.php:1176
+#@ metaslider
+msgid "Coin Slider"
+msgstr "Coin Slider"
+
+#: ml-slider.php:1187
+#: ml-slider.php:1425
+#@ metaslider
+msgid "Width"
+msgstr "Ширина"
+
+#: ml-slider.php:1189
+#@ metaslider
+msgid "Slideshow width"
+msgstr "Ширина слайд-шоу"
+
+#: ml-slider.php:1190
+#: ml-slider.php:1203
+#: ml-slider.php:1352
+#@ metaslider
+msgid "px"
+msgstr "пикселей"
+
+#: ml-slider.php:1200
+#: ml-slider.php:1438
+#@ metaslider
+msgid "Height"
+msgstr "Высота"
+
+#: ml-slider.php:1202
+#@ metaslider
+msgid "Slideshow height"
+msgstr "Высота слайд-шоу"
+
+#: ml-slider.php:1209
+#@ metaslider
+msgid "Effect"
+msgstr "Эффект"
+
+#: ml-slider.php:1211
+#@ metaslider
+msgid "Slide transition effect"
+msgstr "Эффект смены слайдов"
+
+#: ml-slider.php:1213
+#: ml-slider.php:1357
+#@ metaslider
+msgid "Random"
+msgstr "Случайно"
+
+#: ml-slider.php:1214
+#@ metaslider
+msgid "Swirl"
+msgstr "Кручение"
+
+#: ml-slider.php:1215
+#@ metaslider
+msgid "Rain"
+msgstr "Дождь"
+
+#: ml-slider.php:1216
+#@ metaslider
+msgid "Straight"
+msgstr "Классический"
+
+#: ml-slider.php:1217
+#@ metaslider
+msgid "Slide Down"
+msgstr "Скольжение вниз"
+
+#: ml-slider.php:1218
+#@ metaslider
+msgid "Slice Up"
+msgstr "Сдвиг"
+
+#: ml-slider.php:1219
+#@ metaslider
+msgid "Slide Up Left"
+msgstr "Скольжение вверх влево"
+
+#: ml-slider.php:1220
+#@ metaslider
+msgid "Slice Up Down"
+msgstr "Сдвиг вниз"
+
+#: ml-slider.php:1221
+#@ metaslider
+msgid "Slide Up Down Left"
+msgstr "Сдвиг влево вниз"
+
+#: ml-slider.php:1222
+#@ metaslider
+msgid "Fold"
+msgstr "Жалюзи"
+
+#: ml-slider.php:1223
+#@ metaslider
+msgid "Fade"
+msgstr "Растворение"
+
+#: ml-slider.php:1224
+#@ metaslider
+msgid "Slide In Right"
+msgstr "Скольжение вправо"
+
+#: ml-slider.php:1225
+#@ metaslider
+msgid "Slide In Left"
+msgstr "Скольжение влево"
+
+#: ml-slider.php:1226
+#@ metaslider
+msgid "Box Random"
+msgstr "Случайные квадраты"
+
+#: ml-slider.php:1227
+#@ metaslider
+msgid "Box Rain"
+msgstr "Мозаика"
+
+#: ml-slider.php:1228
+#@ metaslider
+msgid "Box Rain Reverse"
+msgstr "Обратная мозаика"
+
+#: ml-slider.php:1229
+#@ metaslider
+msgid "Box Rain Grow Reverse"
+msgstr "Возрастающая мозаика"
+
+#: ml-slider.php:1230
+#@ metaslider
+msgid "Slide"
+msgstr "Скольжение"
+
+#: ml-slider.php:1237
+#@ metaslider
+msgid "Theme"
+msgstr "Дизайн"
+
+#: ml-slider.php:1239
+#@ metaslider
+msgid "Slideshow theme"
+msgstr "Дизайн слайд-шоу"
+
+#: ml-slider.php:1241
+#@ metaslider
+msgid "Default"
+msgstr "По умолчанию"
+
+#: ml-slider.php:1242
+#@ metaslider
+msgid "Dark (Nivo)"
+msgstr "Темный (Nivo)"
+
+#: ml-slider.php:1243
+#@ metaslider
+msgid "Light (Nivo)"
+msgstr "Светлый (Nivo)"
+
+#: ml-slider.php:1244
+#@ metaslider
+msgid "Bar (Nivo)"
+msgstr "Плитка (Nivo)"
+
+#: ml-slider.php:1250
+#@ metaslider
+msgid "Arrows"
+msgstr "Стрелочки"
+
+#: ml-slider.php:1253
+#@ metaslider
+msgid "Show the previous/next arrows"
+msgstr "Показывать стрелки вперед/назад"
+
+#: ml-slider.php:1258
+#@ metaslider
+msgid "Navigation"
+msgstr "Навигация"
+
+#: ml-slider.php:1261
+#@ metaslider
+msgid "Show the slide navigation bullets"
+msgstr "Показывать метки навигации"
+
+#: ml-slider.php:1263
+#@ metaslider
+msgid "Hidden"
+msgstr "Не показывать"
+
+#: ml-slider.php:1264
+#@ metaslider
+msgid "Dots"
+msgstr "Точки"
+
+#: ml-slider.php:1275
+#@ metaslider
+msgid "Title"
+msgstr "Название"
+
+#: ml-slider.php:1276
+#@ metaslider
+msgid "Slideshow title"
+msgstr "Название слай-шоу"
+
+#: ml-slider.php:1290
+#@ metaslider
+msgid "Advanced Settings"
+msgstr "Расширенные настройки"
+
+#: ml-slider.php:1299
+#@ metaslider
+msgid "Stretch"
+msgstr "Растянуть"
+
+#: ml-slider.php:1301
+#@ metaslider
+msgid "100% wide output"
+msgstr "Во всю ширину"
+
+#: ml-slider.php:1303
+#@ metaslider
+msgid "Stretch the slideshow output to fill it's parent container"
+msgstr "Растягивает слайд-шоу на всю ширину родительского элемента"
+
+#: ml-slider.php:1308
+#@ metaslider
+msgid "Center align"
+msgstr "Выравнять по центру"
+
+#: ml-slider.php:1311
+#@ metaslider
+msgid "Center align the slideshow"
+msgstr "Центрирует слайд-шоу"
+
+#: ml-slider.php:1316
+#@ metaslider
+msgid "Auto play"
+msgstr "Воспроизводить автоматически"
+
+#: ml-slider.php:1319
+#@ metaslider
+msgid "Transition between slides automatically"
+msgstr "Задержка между сменой слайдов определяется автоматически"
+
+#: ml-slider.php:1332
+#@ metaslider
+msgid "Smart Crop ensures your responsive slides are cropped to a ratio that results in a consistent slideshow size"
+msgstr "Слайды будут обрезаны с определённым соотношением, чтобы размер слайд-шоу не изменялся"
+
+#: ml-slider.php:1337
+#@ metaslider
+msgid "Carousel mode"
+msgstr "Режим карусели"
+
+#: ml-slider.php:1340
+#@ metaslider
+msgid "Display multiple slides at once. Slideshow output will be 100% wide."
+msgstr "Показывать несколько слайдов одновременно. Слайд-шоу будет иметь ширину 100%."
+
+#: ml-slider.php:1348
+#@ metaslider
+msgid "Carousel margin"
+msgstr "Отступ карусели"
+
+#: ml-slider.php:1351
+#@ metaslider
+msgid "Pixel margin between slides in carousel."
+msgstr "Отступ (в пикселях) между слайдами в карусели"
+
+#: ml-slider.php:1360
+#@ metaslider
+msgid "Randomise the order of the slides"
+msgstr "Случайный порядок салйдов"
+
+#: ml-slider.php:1365
+#@ metaslider
+msgid "Hover pause"
+msgstr "Пауза при наведении мыши"
+
+#: ml-slider.php:1368
+#@ metaslider
+msgid "Pause the slideshow when hovering over slider, then resume when no longer hovering."
+msgstr "Останавливает слайд-шоу при наведении на него мышки и снова возобновляет, когда мышка убрана."
+
+#: ml-slider.php:1373
+#@ metaslider
+msgid "Reverse"
+msgstr "В обратном порядке"
+
+#: ml-slider.php:1376
+#@ metaslider
+msgid "Reverse the animation direction"
+msgstr "Изменить порядок слайдов на обратный"
+
+#: ml-slider.php:1386
+#@ metaslider
+msgid "Slide delay"
+msgstr "Время показа слайда"
+
+#: ml-slider.php:1388
+#@ metaslider
+msgid "How long to display each slide, in milliseconds"
+msgstr "Как долго будет показан каждый слайд (в миллисекундах)"
+
+#: ml-slider.php:1389
+#: ml-slider.php:1402
+#: ml-slider.php:1415
+#: ml-slider.php:1491
+#: ml-slider.php:1517
+#@ metaslider
+msgid "ms"
+msgstr "мс"
+
+#: ml-slider.php:1399
+#@ metaslider
+msgid "Animation speed"
+msgstr "Скорость анимации"
+
+#: ml-slider.php:1401
+#@ metaslider
+msgid "Set the speed of animations, in milliseconds"
+msgstr "Устанавливает скорость анимации (в миллисекундах)"
+
+#: ml-slider.php:1412
+#: ml-slider.php:1414
+#@ metaslider
+msgid "Number of slices"
+msgstr "Количество секций"
+
+#: ml-slider.php:1425
+#: ml-slider.php:1427
+#: ml-slider.php:1438
+#: ml-slider.php:1440
+#@ metaslider
+msgid "Number of squares"
+msgstr "Количество квадратов"
+
+#: ml-slider.php:1446
+#@ metaslider
+msgid "Slide direction"
+msgstr "Направление воспроизведения"
+
+#: ml-slider.php:1448
+#@ metaslider
+msgid "Select the sliding direction"
+msgstr "Выбор направления воспроизведения"
+
+#: ml-slider.php:1451
+#@ metaslider
+msgid "Horizontal"
+msgstr "Горизонтально"
+
+#: ml-slider.php:1452
+#@ metaslider
+msgid "Vertical"
+msgstr "Вертикально"
+
+#: ml-slider.php:1458
+#@ metaslider
+msgid "Easing"
+msgstr "Сглаживание"
+
+#: ml-slider.php:1460
+#@ metaslider
+msgid "Animation easing effect"
+msgstr "Анимированный эффект сглаживания"
+
+#: ml-slider.php:1467
+#@ metaslider
+msgid "Previous text"
+msgstr "Текст \"назад\""
+
+#: ml-slider.php:1469
+#@ metaslider
+msgid "Set the text for the 'previous' direction item"
+msgstr "Установить текст для метки \"назад\" (предыдущий слайд)"
+
+#: ml-slider.php:1475
+#@ metaslider
+msgid "Next text"
+msgstr "Текст \"вперед\""
+
+#: ml-slider.php:1477
+#@ metaslider
+msgid "Set the text for the 'next' direction item"
+msgstr "Установить текст для метки \"вперед\" (следующий слайд)"
+
+#: ml-slider.php:1488
+#@ metaslider
+msgid "Square delay"
+msgstr "Задержка между квадратами"
+
+#: ml-slider.php:1490
+#@ metaslider
+msgid "Delay between squares in ms"
+msgstr "Задержка между квадратами (в миллисекундах)"
+
+#: ml-slider.php:1501
+#@ metaslider
+msgid "Opacity"
+msgstr "Прозрачность"
+
+#: ml-slider.php:1503
+#@ metaslider
+msgid "Opacity of title and navigation"
+msgstr "Прозрачность названия и навигации"
+
+#: ml-slider.php:1514
+#@ metaslider
+msgid "Caption speed"
+msgstr "Скорость описания"
+
+#: ml-slider.php:1516
+#@ metaslider
+msgid "Set the fade in speed of the caption"
+msgstr "Установить скорость растворения описания"
+
+#: ml-slider.php:1523
+#@ metaslider
+msgid "Developer options"
+msgstr "Опции для разработчиков"
+
+#: ml-slider.php:1528
+#@ metaslider
+msgid "CSS classes"
+msgstr "CSS классы"
+
+#: ml-slider.php:1530
+#@ metaslider
+msgid "Specify any custom CSS Classes you would like to be added to the slider wrapper"
+msgstr "Укажите любые пользовательские CSS классы, которые вы хотите добавить к контейнеру слайдера"
+
+#: ml-slider.php:1536
+#@ metaslider
+msgid "Print CSS"
+msgstr "Выводить CSS"
+
+#: ml-slider.php:1539
+#@ metaslider
+msgid "Uncheck this is you would like to include your own CSS"
+msgstr "Снимите галочку, если Вы хотите использовать свой собственный CSS"
+
+#: ml-slider.php:1544
+#@ metaslider
+msgid "Print JS"
+msgstr "Выводить JS"
+
+#: ml-slider.php:1547
+#@ metaslider
+msgid "Uncheck this is you would like to include your own Javascript"
+msgstr "Снимите галочку, если Вы хотите использовать свой собственный Javascript"
+
+#: ml-slider.php:1552
+#@ metaslider
+msgid "No conflict mode"
+msgstr "Бесконфликтный режим"
+
+#: ml-slider.php:1555
+#@ metaslider
+msgid "Delay adding the flexslider class to the slideshow"
+msgstr "Задержка при добавлении класса flexslider в слайдшоу"
+
+#: ml-slider.php:1569
+#@ metaslider
+msgid "Usage"
+msgstr "Использование"
+
+#: ml-slider.php:1572
+#@ metaslider
+msgid "Shortcode"
+msgstr "Шорткод"
+
+#: ml-slider.php:1573
+#@ metaslider
+msgid "Template Include"
+msgstr "Вставка в шаблон"
+
+#: ml-slider.php:1577
+#@ metaslider
+msgid "Copy & paste the shortcode directly into any WordPress post or page."
+msgstr "Скопируйте шорткод и вставьте его в любую страницу или запись Вашего сайта"
+
+#: ml-slider.php:1580
+#@ metaslider
+msgid "Copy & paste this code into a template file to include the slideshow within your theme."
+msgstr "Скопируйте этот код и вставьте его в файл шаблона , чтобы добавить слайд-шоу в Вашу тему"
+
+#: ml-slider.php:1614
+#@ metaslider
+msgid "Delete Slider"
+msgstr "Удалить слайдер"
+
+#: ml-slider.php:1634
+#@ metaslider
+msgid "Select slideshow to insert into post"
+msgstr "Выберите слайд-шоу для вставки в запись"
+
+#: ml-slider.php:1637
+#@ metaslider
+msgid "Add slider"
+msgstr "Добавить слайдер"
+
+#: ml-slider.php:1671
+#@ metaslider
+msgid "Insert MetaSlider"
+msgstr "Вставить Мета Слайдер"
+
+#: ml-slider.php:1673
+#@ metaslider
+msgid "Choose slideshow"
+msgstr "Выберите слайдшоу"
+
+#: ml-slider.php:1697
+#@ metaslider
+msgid "Go Pro"
+msgstr "Получить Pro"
+
+#: ml-slider.php:1716
+#@ metaslider
+msgid "Upgrade to Pro $39"
+msgstr "Обновитесь до Pro за $39"
+
+#: inc/slide/metaslide.class.php:116
+#@ metaslider
+msgid "File copy failed. Please check upload directory permissions."
+msgstr "Не удалось скопировать файл. Проверьте права доступа к каталогу."
+
+#: inc/slide/metaslide.class.php:275
+#@ metaslider
+msgid "Delete slide"
+msgstr "Удалить слайд"
+
+#: inc/slide/metaslide.image.class.php:182
+#@ metaslider
+msgid "Crop Position"
+msgstr "Обрезать"
+
+#: inc/slide/metaslide.image.class.php:185
+#@ metaslider
+msgid "Top Left"
+msgstr "Сверху Слева"
+
+#: inc/slide/metaslide.image.class.php:186
+#@ metaslider
+msgid "Top Center"
+msgstr "Сверху Центр"
+
+#: inc/slide/metaslide.image.class.php:187
+#@ metaslider
+msgid "Top Right"
+msgstr "Сверху Справа"
+
+#: inc/slide/metaslide.image.class.php:188
+#@ metaslider
+msgid "Center Left"
+msgstr "Центр Слева"
+
+#: inc/slide/metaslide.image.class.php:189
+#@ metaslider
+msgid "Center Center"
+msgstr "По центру"
+
+#: inc/slide/metaslide.image.class.php:190
+#@ metaslider
+msgid "Center Right"
+msgstr "Центр Справа"
+
+#: inc/slide/metaslide.image.class.php:191
+#@ metaslider
+msgid "Bottom Left"
+msgstr "Снизу Слева"
+
+#: inc/slide/metaslide.image.class.php:192
+#@ metaslider
+msgid "Bottom Center"
+msgstr "Снизу Центр"
+
+#: inc/slide/metaslide.image.class.php:193
+#@ metaslider
+msgid "Bottom Right"
+msgstr "Снизу Справа"
+
+#: inc/slide/metaslide.image.class.php:198
+#@ metaslider
+msgid "Crop"
+msgstr "Обрезать"
+
+#. translators: plugin header field 'Version'
+#: ml-slider.php:0
+#@ metaslider
+msgid "3.2.1"
+msgstr "3.2.1"
+
+#: ml-slider.php:283
+#: ml-slider.php:284
+#@ metaslider
+msgid "Go Pro!"
+msgstr "Купить PRO версию"
+
+#: ml-slider.php:470
+#@ metaslider
+msgid "Select replacement image"
+msgstr "Выбрать изображение"
+
+#: ml-slider.php:1015
+#@ metaslider
+msgid "Switch to Dropdown view"
+msgstr "Режим выпадающего списка"
+
+#: ml-slider.php:1015
+#@ metaslider
+msgid "Dropdown"
+msgstr "Выпадающий список"
+
+#: ml-slider.php:1040
+#@ metaslider
+msgid "Switch to Tab view"
+msgstr "Режим вкладок"
+
+#: ml-slider.php:1040
+#@ metaslider
+msgid "Tabs"
+msgstr "Вкладки"
+
+#: ml-slider.php:1042
+#@ metaslider
+msgid "Select Slider"
+msgstr "Выбрать слайдер"
+
+#: ml-slider.php:1324
+#@ metaslider
+msgid "Image Crop"
+msgstr "Обрезка изображений"
+
+#: ml-slider.php:1328
+#@ metaslider
+msgid "Smart"
+msgstr "Умная"
+
+#: ml-slider.php:1329
+#@ metaslider
+msgid "Standard"
+msgstr "Обычная"
+
+#: ml-slider.php:1330
+#@ metaslider
+msgid "Disabled"
+msgstr "Отключено"
+
+#: ml-slider.php:1678
+#@ metaslider
+msgid "Insert slideshow"
+msgstr "Вставить слайдшоу"
+

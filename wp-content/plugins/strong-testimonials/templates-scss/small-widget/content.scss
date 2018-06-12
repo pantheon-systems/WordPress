@@ -1,0 +1,120 @@
+/**
+ * Strong Testimonials Default Widget template
+ */
+
+$template: small-widget;
+
+@import "../_mixins/testimonial";
+@import "../_partials/clear";
+@import "../_partials/base";
+
+/* Template
+-----------------------------------------------*/
+.strong-view.#{$template} {
+  margin-bottom: 1em;
+
+  .testimonial {
+    margin-bottom: 1em;
+    width: 100%;
+  }
+
+  .testimonial-inner {
+    padding: 10px;
+  }
+
+  .testimonial-heading {
+    margin-bottom: 1em;
+  }
+
+  .testimonial-content {
+    @include paragraphs;
+  }
+
+  .testimonial-image {
+    float: left;
+    margin-top: 0.25em;
+    margin-right: 1em;
+    margin-bottom: .5em;
+  }
+
+  .testimonial-client {
+    margin-top: 1em;
+    clear: both;
+  }
+
+  .testimonial-name {
+    font-weight: 700;
+  }
+
+  .readmore {
+    margin-top: 1em;
+  }
+
+  .readmore-page {
+    border: 1px solid #E6E6E6;
+    padding: 0.5em;
+    text-align: center;
+  }
+}
+
+/* Slideshow
+-----------------------------------------------*/
+.strong-view.#{$template} {
+  &.slider-container {
+    .strong-content {
+      margin: 0 auto;
+    }
+    .testimonial:not(:first-child) {
+      display: none;
+    }
+  }
+
+  &.nav-position-inside {
+    .testimonial-inner {
+      padding-bottom: 48px;
+    }
+  }
+
+  &.controls-type-sides .testimonial-inner {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+/* Responsive
+-----------------------------------------------*/
+@import "../_partials/responsive";
+
+/* RTL
+-----------------------------------------------*/
+@import "../_partials/rtl";
+
+/* Option: Image Right
+-----------------------------------------------*/
+.strong-view.#{$template}.image-right {
+  .testimonial-image {
+    float: right;
+    margin-left: 1em;
+    margin-bottom: 0.1em;
+  }
+}
+
+@media only screen and (max-width: 480px) and (orientation: portrait) {
+  .strong-view.#{$template}.image-right .strong-content .testimonial-image {
+    float: none;
+  }
+}
+
+.strong-view.#{$template}.image-right.rtl {
+  .testimonial,
+  .testimonial-inner,
+  .testimonial-heading {
+    text-align: right;
+  }
+
+  .testimonial-image {
+    float: left;
+    margin-left: 0;
+    margin-right: 1em;
+  }
+}

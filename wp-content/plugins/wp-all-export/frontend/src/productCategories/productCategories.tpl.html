@@ -1,0 +1,61 @@
+<div class="wpallexport-collapsed wpallexport-section" ng-class="{closed: !productCategories.open}">
+    <div class="wpallexport-content-section">
+        <div class="wpallexport-collapsed-header disable-jquery" ng-click="productCategories.open = !productCategories.open">
+            <h3>Product Categories</h3>
+        </div>
+        <div class="wpallexport-collapsed-content" ng-slide-down="productCategories.open" duration="0.5">
+            <div class="wpallexport-collapsed-content-inner">
+                <h4>Product Type</h4>
+                <p>Use this attribute to classify the product using your own categories. The categories here don't need to match Google's list of acceptable product categories.</p>
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="productCategories.productType" value="useWooCommerceProductCategories" />Use WooCommerce's product category
+                    </label>
+                </div>
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="productCategories.productType" value="customValue" />Custom data
+                    </label>
+                    <div class="input inner" ng-slide-down="productCategories.productType == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="productCategories.productTypeCV" droppable />
+                    </div>
+                </div>
+                <h4>Product Category</h4>
+                <p>
+                    Products added to Google Merchant Center must be categorized according to Google's list of product categories. Each product may only be assigned one Google product category. <a href="https://support.google.com/merchants/answer/160081" target="_blank">Read more about Google product categories.</a>
+                </p>
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="productCategories.productCategories" value="mapProductCategories" />Map WooCommerce's product categories to Google's product categories
+                        <a href="#" class="wpallexport-help" style="margin-top:5px; margin-left: 2px;"
+                           tipsy="Products assigned more than one WooCommerce product category and mapped to more than one Google product category will be mapped to the most specific, deepest Google product category selected for that product.">?</a>
+                    </label>
+                </div>
+                <div ng-slide-down="productCategories.productCategories == 'mapProductCategories'" duration="0.5">
+                    <category-mapper mapping="productCategories.cats" />
+                </div>
+
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="productCategories.productCategories" value="useWooCommerceProductCategories" />Use WooCommerce's product categories
+                        <a href="#" class="wpallexport-help" style="margin-top:5px; margin-left: 2px;"
+                        tipsy="Products assigned to more than one WooCommerce product category will only have the most specific, deepest product category exported.">?</a>
+                    </label>
+                    <div ng-slide-down="!productCategories.cats.children.length && productCategories.productCategories == 'useWooCommerceProductCategories'" duration="0.2">
+                        <div ng-include="'productCategories/categoryMapper/noCategoriesNotice.tpl.html'" ng-init="context = 'categories' "></div>
+                    </div>
+                </div>
+
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="productCategories.productCategories" value="customValue" />Custom data
+                    </label>
+                    <div class="input inner" ng-slide-down="productCategories.productCategories == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="productCategories.productCategoriesCV" droppable />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

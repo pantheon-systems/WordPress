@@ -1,0 +1,52 @@
+/* -------------------------------------------------
+   Replace checkboxes with icons
+   ------------------------------------------------- */
+
+input[type=checkbox] {
+  display: none;
+
+  // keep the inherited margins, adjust width if more space is necessary
+  + label {
+    &:before {
+      font-family: FontAwesome;
+      display: inline-block;
+      font-size: 18px;
+      width: 1em;
+      position: relative;
+      top: 1px;
+
+      /* unchecked icon */
+      content: "\f096";
+      color: $blue;
+    }
+
+    &:hover:before {
+      color: $orange;
+    }
+
+  }
+
+  &:checked + label {
+    &:before {
+      /* checked icon */
+      content: "\f14a";
+    }
+
+    &:hover:before {
+      color: $orange;
+    }
+  }
+
+  &:disabled + label {
+    &:before {
+      /* disabled icon */
+      content: "\f146";
+      color: $grayedout;
+    }
+
+    &:hover:before {
+      color: $grayedout;
+    }
+  }
+
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Default Form",
+  "description": "The default form template.",
+  "type": "form",
+  "order": 1,
+  "scripts": "",
+  "styles": "",
+  "force": "",
+  "options": [
+    {
+      "name": "theme",
+      "label": "",
+      "type": "select",
+      "default": "light",
+      "values": [
+        {
+          "value": "light",
+          "class_name": "",
+          "description": "light theme"
+        },
+        {
+          "value": "dark",
+          "class_name": "dark",
+          "description": "dark theme"
+        }
+      ]
+    }
+  ],
+  "format_version": "2.0"
+}

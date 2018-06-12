@@ -1,0 +1,210 @@
+<div class="wpallexport-collapsed wpallexport-section" ng-class="{closed: !detailedInformation.open }">
+    <div class="wpallexport-content-section">
+        <div class="wpallexport-collapsed-header disable-jquery" ng-click="detailedInformation.open = !detailedInformation.open ">
+            <h3>Detailed Product Attributes &amp; Item Grouping</h3>
+        </div>
+        <div class="wpallexport-collapsed-content" id="detailed-product-information" ng-slide-down="detailedInformation.open" duration="0.5">
+            <div class="wpallexport-collapsed-content-inner">
+                <h4>Item Group ID</h4>
+                <p>
+                    For variable products, each variant is exported as a separate product.
+                    Variants that belong to the same group must all have the same Item Group ID
+                    so that Google knows they are related.
+                </p>
+                <div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.setTheGroupId" value="automatically" />Automatically set the item group ID</label>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.setTheGroupId" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="detailedInformation.setTheGroupId == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="detailedInformation.setTheGroupIdCV" droppable />
+                    </div>
+                </div>
+                <h4>Color</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.color" value="selectFromWooCommerceProductAttributes" />Select from WooCommerce product attributes</label>
+                    <div ng-slide-down="detailedInformation.color == 'selectFromWooCommerceProductAttributes'" duration="0.2">
+                        <div class="select-container">
+                            <select autodetect="Color" chosen ng-options="'{' + i.name + '}' as i.name for i in attributes" ng-model="detailedInformation.colorAttribute" class="inner">
+                                <option value="">Leave Blank</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.color" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="detailedInformation.color == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="detailedInformation.colorCV" droppable />
+                    </div>
+                </div>
+
+                <h4>Size</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.size" value="selectFromWooCommerceProductAttributes" />Select from WooCommerce product attributes</label>
+                    <div ng-slide-down="detailedInformation.size == 'selectFromWooCommerceProductAttributes'" duration="0.2">
+                        <div class="select-container">
+                            <select id="sizeAttribute" autodetect="Size" chosen ng-options="'{' + i.name + '}' as i.name for i in attributes" ng-model="detailedInformation.sizeAttribute" class="inner">
+                                <option value="">Leave Blank</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="detailedInformation.size" value="customValue" />Custom data
+                    </label>
+                    <div class="input inner" ng-slide-down="detailedInformation.size== 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="detailedInformation.sizeCV" droppable />
+                    </div>
+                </div>
+
+                <h4>Gender</h4>
+                <div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.gender" value="selectFromWooCommerceProductAttributes" />Select from WooCommerce product attributes</label>
+                    <div class="clear"></div>
+                    <div ng-slide-down="detailedInformation.gender == 'selectFromWooCommerceProductAttributes'" duration="0.2">
+                        <div class="select-container">
+                            <select autodetect="Gender" chosen ng-options="'{' + i.name + '}' as i.name for i in attributes" ng-model="detailedInformation.genderAttribute" class="inner">
+                                <option value="">Leave Blank</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.gender" value="autodetectBasedOnProductTaxonomies"/>Autodetect based on product taxonomies</label>
+                    <div ng-slide-down="detailedInformation.gender == 'autodetectBasedOnProductTaxonomies'" duration="0.2">
+                        <div class="inner">
+                            <div class="input">
+                                <label>
+                                    <input type="radio" ng-model="detailedInformation.genderAutodetect" value="keepBlank"/>Leave gender blank if unable to detect gender
+                                </label>
+                            </div>
+                            <div class="input">
+                                <label>
+                                    <input type="radio" ng-model="detailedInformation.genderAutodetect" value="setToUnisex" />Set gender to unisex if unable to detect gender
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="input">
+                    <label>
+                        <input type="radio" ng-model="detailedInformation.gender" value="selectProductTaxonomies" />Select from WooCommerce product categories</label>
+                    <div ng-slide-down="detailedInformation.gender == 'selectProductTaxonomies'" duration="0.2">
+                        <category-mapper mapping="detailedInformation.genderCats" context="gender" />
+                    </div>
+                </div>
+                <div class="input">
+                    <label><input type="radio" ng-model="detailedInformation.gender" value="customValue" />Custom data</label>
+                    <div class="input inner" ng-slide-down="detailedInformation.gender == 'customValue'" duration="0.2">
+                        <input type="text" class="wpae-default-input" ng-model="detailedInformation.genderCV" droppable />
+                    </div>
+                </div>
+            </div>
+
+            <div class="wpallexport-collapsed wpallexport-section wpallexport-google-merchants-advanced-options" ng-class="{closed: !advancedOptionsOpen}">
+                <div class="wpallexport-content-section rad0">
+                    <div class="wpallexport-collapsed-header wpallexport-advanced-options-header disable-jquery" ng-click="advancedOptionsOpen = !advancedOptionsOpen">
+                        <h3>Advanced Options</h3>
+                    </div>
+                    <div class="wpallexport-collapsed-content wpallexport-advanced-options-content" ng-slide-down="advancedOptionsOpen" duration="0.5">
+                        <div class="wpallexport-collapsed-content-inner">
+                            <h4>Size Type</h4>
+                            <div class="input">
+                                <div style="display: inline-block;">
+                                    <input type="text" class="wpae-default-input" ng-model="detailedInformation.sizeType" droppable />
+                                </div>
+                                <a href="" class="wpae-field-mapping" ng-click="showMappings=true">Field Options...</a>
+                                <div style="position: relative">
+                                    <mapping mappings="detailedInformation.sizeTypeMappings" show="showMappings" context="sizeType" />
+                                </div>
+                            </div>
+                            <h4>Size System</h4>
+                            <div class="input">
+                                <div class="select-container" style="padding-left: 0;">
+                                    <select chosen ng-model="detailedInformation.sizeSystem" class="inner">
+                                        <option value="">Leave Blank</option>
+                                        <option value="US">US</option>
+                                        <option value="UK">UK</option>
+                                        <option value="EU">EU</option>
+                                        <option value="DE">DE</option>
+                                        <option value="FR">FR</option>
+                                        <option value="JP">JP</option>
+                                        <option value="CN">CN (China)</option>
+                                        <option value="IT">IT</option>
+                                        <option value="BR">BR</option>
+                                        <option value="MEX">MEX</option>
+                                        <option value="AU">AU</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <h4>Age Group</h4>
+                            <div class="input">
+                                <label>
+                                    <input type="radio" ng-model="detailedInformation.ageGroup" value="selectFromWooCommerceProductAttributes"/>Select from WooCommerce product attributes
+                                </label>
+                                <div ng-slide-down="detailedInformation.ageGroup == 'selectFromWooCommerceProductAttributes'" duration="0.2">
+                                    <div class="select-container">
+                                        <select chosen ng-options="'{' + i.name + '}' as i.name for i in attributes" ng-model="detailedInformation.ageGroupAttribute" class="inner">
+                                            <option value="">Leave Blank</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label><input type="radio" ng-model="detailedInformation.ageGroup" value="selectFromProductTaxonomies" />Select product taxonomies</label>
+                                <div ng-slide-down="detailedInformation.ageGroup == 'selectFromProductTaxonomies' " duration="0.5" >
+                                    <category-mapper mapping="detailedInformation.ageGroupCats" grey="1" context="ageGroup" />
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label>
+                                    <input type="radio" ng-model="detailedInformation.ageGroup" value="customValue" />Custom data
+                                </label>
+                                <div class="input inner" ng-slide-down="detailedInformation.ageGroup== 'customValue'" duration="0.2">
+                                    <input type="text" class="wpae-default-input" ng-model="detailedInformation.ageGroupCV" droppable />
+                                </div>
+                            </div>
+                            <h4>Material</h4>
+                            <div class="input">
+                                <label><input type="radio" ng-model="detailedInformation.material" value="selectFromWooCommerceProductAttributes" />Select from WooCommerce product attributes</label>
+                                <div ng-slide-down="detailedInformation.material == 'selectFromWooCommerceProductAttributes'" duration="0.2">
+                                    <div class="select-container">
+                                        <select chosen ng-options="'{' + i.name + '}' as i.name for i in attributes" ng-model="detailedInformation.materialAttribute" class="inner">
+                                            <option value="">Leave Blank</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label><input type="radio" ng-model="detailedInformation.material" value="customValue" />Custom data</label>
+                                <div class="input inner" ng-slide-down="detailedInformation.material == 'customValue'" duration="0.2">
+                                <div class="input inner" ng-slide-down="detailedInformation.material == 'customValue'" duration="0.2">
+                                    <input type="text" class="wpae-default-input" ng-model="detailedInformation.materialCV" droppable />
+                                </div>
+                            </div>
+
+                            <h4>Pattern</h4>
+                            <div class="input">
+                                <label><input type="radio" ng-model="detailedInformation.pattern" value="selectFromWooCommerceProductAttributes" />Select from WooCommerce product attributes</label>
+                                <div ng-slide-down="detailedInformation.pattern == 'selectFromWooCommerceProductAttributes'" duration="0.2">
+                                    <div class="select-container">
+                                        <select chosen ng-options="'{' + i.name + '}' as i.name for i in attributes" ng-model="detailedInformation.patternAttribute" class="inner">
+                                            <option value="">Leave Blank</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label><input type="radio" ng-model="detailedInformation.pattern" value="customValue" />Custom data</label>
+                                <div class="input inner" ng-slide-down="detailedInformation.pattern == 'customValue'" duration="0.2">
+                                    <input type="text" class="wpae-default-input"  ng-model="detailedInformation.patternCV" droppable />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="google-category-selector" ng-init="loadCategories()" ng-if="visible" click-outside="closeMe()">
+    <!--<input focus-me-when-enabled ng-disabled="loading" type="text" placeholder="Search..." class="search" ng-model="search" style="margin-bottom:0; margin-top:10px; width:380px; margin-left: 10px;" ng-model="search" ng-model-options="{ debounce: 500 }" />-->
+    <ul class="categories" dx-start-with="categories">
+        <li ng-repeat="category in $dxPrior.children" style="position: relative;">
+            <div class="div-content">
+                <div class="expand-button" ng-click="expand(category);  $event.preventDefault();">
+                    <div ng-if="category.hasChildren > 0" class="chevron">
+                        <svg ng-if="!category.opened" width="10" height="10" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1683 1331l-166 165q-19 19-45 19t-45-19l-531-531-531 531q-19 19-45 19t-45-19l-166-165q-19-19-19-45.5t19-45.5l742-741q19-19 45-19t45 19l742 741q19 19 19 45.5t-19 45.5z"/>
+                        </svg>
+                        <svg ng-if="category.opened" width="10" height="10" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1683 808l-742 741q-19 19-45 19t-45-19l-742-741q-19-19-19-45.5t19-45.5l166-165q19-19 45-19t45 19l531 531 531-531q19-19 45-19t45 19l166 165q19 19 19 45.5t-19 45.5z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div ng-bind-html="category.name | safe" ng-click="select(category)" style="display: inline-block; vertical-align: top; margin-top:2px; margin-left:5px; font-size:14px; width:80%; height: 24px;"></div>
+            </div>
+            <ul dx-connect="category" class="categories" style="margin-left: 25px;" ng-if="category.opened" />
+        </li>
+    </ul>
+    <div style="padding: 0 10px 10px;" ng-if="!hasResults">No results were found for <i><strong>{{search}}</strong></i>.</div>
+</div>

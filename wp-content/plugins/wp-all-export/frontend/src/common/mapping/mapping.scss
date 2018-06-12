@@ -1,0 +1,40 @@
+.wpallexport-mappings {
+  a.add{
+    display:block;
+    background: url('../static/img/add.png') no-repeat;
+    background-position-y: 3px;
+    padding-left:15px;
+    margin-top:10px;
+  }
+
+  a.delete {
+    background: url('../static/img/trash.png') no-repeat;
+    width:19px;
+    height:22px;
+    display: inline-block;
+    position: relative;
+    top:5px;
+  }
+
+  .fade-in-out {
+  }
+
+  .fade-in-out.ng-move,
+  .fade-in-out.ng-enter,
+  .fade-in-out.ng-leave {
+    -webkit-transition:all linear 0.15s;
+    transition:all linear 0.15s;
+  }
+
+  .fade-in-out.ng-leave.ng-leave-active,
+  .fade-in-out.ng-move,
+  .fade-in-out.ng-enter {
+    opacity:0;
+  }
+
+  .fade-in-out.ng-leave,
+  .fade-in-out.ng-move.ng-move-active,
+  .fade-in-out.ng-enter.ng-enter-active {
+    opacity:1;
+  }
+}

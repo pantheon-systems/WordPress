@@ -1,20 +1,29 @@
 # WordPress
 
-This is a WordPress repository configured to run on the [Pantheon platform](https://pantheon.io).
+This README would normally document whatever steps are necessary to get your application up and running.
 
-Pantheon is website platform optimized and configured to run high performance sites with an amazing developer workflow. There is built-in support for features such as Varnish, Redis, Apache Solr, New Relic, Nginx, PHP-FPM, MySQL, PhantomJS and more. 
+### What is this repository for? ###
 
-## Getting Started
+* Quick summary
+* Version
+* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-### 1. Spin-up a site
+### How do I get set up? ###
 
-If you do not yet have a Pantheon account, you can create one for free. Once you've verified your email address, you will be able to add sites from your dashboard. Choose "WordPress" to use this distribution.
+* Summary of set up
+* Configuration
+* Dependencies
+* Database configuration
+* How to run tests
+* Deployment instructions
 
-### 2. Load up the site
+### Contribution guidelines ###
 
-When the spin-up process is complete, you will be redirected to the site's dashboard. Click on the link under the site's name to access the Dev environment.
+* Writing tests
+* Code review
+* Other guidelines
 
-![alt](http://i.imgur.com/2wjCj9j.png?1, '')
+### Who do I talk to? ###
 
 ### 3. Run the WordPress installer
 

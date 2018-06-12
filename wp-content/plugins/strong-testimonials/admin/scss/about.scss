@@ -1,0 +1,76 @@
+/**
+ * About Strong Testimonials page
+ */
+
+//$blue: #3063A5;
+//$gold: #FB8139;
+//$green: #25A383;
+
+/* == Elements
+--------------------------------------------------*/
+
+.highlight {
+  background: #FFFF99;
+  border: 1px solid #EEEE00;
+  display: inline-block;
+  padding: 3px 6px 2px;
+}
+
+.code {
+  display: inline-block;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 13px;
+  background: white;
+  padding: 4px 8px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  max-width: 90%;
+}
+
+.highlight {
+  background: rgba(#FFE587, 0.5);
+  border: 1px solid #FFDC5D;
+  border-radius: 3px;
+  color: #1E1800;
+  padding: 5px 15px;
+}
+
+.feature-section-sub {
+  margin-top: 2em;
+
+  h3.heading {
+    font-size: 1.2em;
+  }
+
+  ul {
+    font-size: 14px;
+    list-style: square;
+    margin-left: 1em;
+
+    li {
+      margin-left: 1em;
+      text-indent: 4px;
+    }
+  }
+}
+
+/* == Extending WordPress about.css
+--------------------------------------------------*/
+
+.about-wrap [class$="-col"] .col {
+  align-self: flex-start;
+}
+
+.wp-badge {
+  color: #FFF;
+}
+
+.wp-badge.strong-testimonials {
+  background-image: url(../img/strong-testimonials-badge.png);
+  background-color: #8224E3;
+}
+
+.feature-section {
+  code {
+    font-size: 13px;
+  }
+}

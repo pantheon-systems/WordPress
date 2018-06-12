@@ -1,0 +1,17 @@
+
+.strong-view.#{$template}.rtl {
+	.testimonial,
+	.testimonial-inner,
+	.testimonial-heading {
+		text-align: right;
+	}
+
+	.testimonial-image {
+		float: right;
+		margin-left: 1em;
+	}
+
+	.testimonial-client {
+		text-align: left;
+	}
+}

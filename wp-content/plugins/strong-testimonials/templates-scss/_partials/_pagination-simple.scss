@@ -1,0 +1,49 @@
+/* Simple pagination
+-----------------------------------------------*/
+.strong-view.#{$template}.strong-pager {
+  display: none;
+}
+
+.simplePagerList {
+  /* match .strong-content container */
+  margin: 20px auto;
+  text-align: center;
+}
+
+.strong-view ul.simplePagerNav {
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+
+  li {
+    display: inline;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      margin: 0 0.2em;
+      padding: 0.1em 0.3em;
+      outline: none;
+      text-decoration: none;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: #BBB;
+        color: #FFF;
+      }
+    }
+
+    &.currentPage a {
+      text-decoration: none;
+      background: #999;
+      color: #FFF;
+    }
+  }
+}
+
+.strong-view.rtl ul.simplePagerNav {
+  li {
+    float: right;
+  }
+}

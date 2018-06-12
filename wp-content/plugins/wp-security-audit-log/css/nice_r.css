@@ -1,0 +1,92 @@
+.nice_r {
+	font: 12px Consolas, "Lucida Console", monospace;
+	cursor: default;
+}
+
+.nice_r a {
+	display: block;
+	text-decoration: none;
+	color: #222;
+	padding: 2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.nice_r a:hover .nice_r_k,
+.nice_r a:hover .nice_r_d,
+.nice_r a:hover .nice_r_d span,
+.nice_r a:hover .nice_r_p,
+.nice_r a:hover .nice_r_a,
+.nice_r a:hover {
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+.nice_r_a {
+	color: #000;
+}
+
+.nice_r_ad {
+	opacity: 0.5;
+}
+
+.nice_r_k {
+	color: #060;
+	font-weight: bold;
+}
+
+.nice_r_d {
+	font-size: 11px;
+	color: #777;
+}
+
+.nice_r_d span {
+	color: #333;
+}
+
+.nice_r_p {
+	color: #000;
+	font-weight: bold;
+}
+
+.nice_r_v {
+	margin-left: 6px;
+	padding-left: 6px;
+	border-left: 1px dotted #CCC;
+	display: none;
+}
+
+.nice_r_ir {
+	font-style: italic;
+}
+
+.nice_r_p.nice_r_t_integer,
+.nice_r_p.nice_r_t_double {
+	color: #F0E;
+}
+
+.nice_r_p.nice_r_t_string {
+	color: #E00;
+}
+
+.nice_r_p.nice_r_t_boolean {
+	color: #00E;
+}
+
+.nice_r_t_comment {
+	color: #080;
+}
+
+.nice_r a.nice_r_c .nice_r_k {
+	color: #909;
+}
+
+.nice_r a.nice_r_c .nice_r_ma {
+	font-weight: normal;
+	color: #777;
+}
+
+.nice_r a.nice_r_c .nice_r_mv {
+	color: #00E;
+}

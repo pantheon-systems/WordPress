@@ -1,0 +1,33 @@
+/* --------------------------------------------------
+   Grid
+   -------------------------------------------------- */
+
+.view-layout-grid .example-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  justify-content: space-between;
+
+  .box {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  &.col-2 .box {
+    width: 47%;
+  }
+
+  &.col-3 .box {
+    width: 29%;
+  }
+
+  &.col-4 .box {
+    width: 21%;
+  }
+}

@@ -1,0 +1,138 @@
+
+/* Settings tab for Form Notification Email
+------------------------------------------------*/
+.match-height {
+  /* match WordPress - divs with text inputs are taller than ones with radio buttons */
+  margin: 0.25em 0 0.5em !important;
+}
+.email-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+}
+.email-container > div {
+  margin-bottom: 2px;
+}
+.email-option-row {
+  display: flex;
+  flex-direction: row;
+  background: #FFF;
+  padding: 0 10px;
+}
+.no-padding {
+  padding: 0;
+}
+.email-option-row.column {
+  flex-direction: column;
+}
+/* row > column 1 */
+.email-option-desc {
+  flex: 0 0 8%;
+  min-width: 80px;
+  padding: 10px 0;
+  font-weight: 600;
+}
+/* row > column 2 */
+.email-option-inputs {
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+.email-option {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+}
+.email-option.header {
+  padding: 10px 0;
+}
+.email-option.body {
+  padding: 10px 0;
+}
+.email-option.footer {
+  padding: 10px 0;
+}
+.email-option-first {
+  margin-top: 10px ;
+}
+.email-option.single {
+}
+.email-option:not(:last-child) {
+  border-bottom: 1px solid #F2F2F2;
+}
+.email-option-part { /* 2 columns */
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.email-option-part:first-child {
+  flex: 0 1 40%;
+  padding-right: 20px;
+}
+.email-option-part input[type="text"],
+.email-option-part input[type="email"],
+input.wide {
+  width: 100%;
+}
+.email-option-label {
+  padding-left: 3px;
+}
+.email-option-fieldset {
+  display: flex;
+  flex-direction: row;
+}
+.email-option-fieldset .controls {
+  flex: 0 0 30px;
+  justify-content: center;
+}
+.email-option-fieldset .controls input[type="radio"] {
+  margin-top: 2px;
+}
+.email-option-fieldset .fields {
+  flex: 1 0 auto;
+}
+.email-option-fieldset .controls,
+.email-option-fieldset .fields {
+  display: flex;
+  height: 30px;
+  align-items: center;
+}
+
+/* delete email recipient */
+.delete-recipient {
+  color: #999;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+.delete-recipient:hover {
+  cursor: pointer;
+  color: #FFF;
+  background: #FF0000;
+  border-radius: 1px;
+}
+
+/* message */
+.email-container textarea {
+  white-space: pre-wrap;
+  width: 100%;
+}
+
+/* template tags */
+.template-tags-help {
+  flex: 2 0 auto;
+  background: #FFFFE0;
+}
+.template-tags-help ul {
+  margin: 0;
+}
+.template-tags-help .title {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+.template-tags-help .content {
+  padding: 10px;
+}
+.template-tags-help ul li {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 1em;
+}

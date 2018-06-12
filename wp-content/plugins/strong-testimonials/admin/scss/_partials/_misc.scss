@@ -1,0 +1,49 @@
+/* -------------------------------------------------
+    Misc.
+   ------------------------------------------------- */
+
+#wpmtst-views-form input[type="submit"] {
+  margin-right: 10px;
+}
+
+td.column-name strong {
+  display: block;
+  margin-bottom: .2em;
+  font-size: 14px;
+}
+
+td.rowspan {
+  border-left: 1px solid #DDD;
+}
+
+// Highlight the manual excerpt creation option in Content group.
+.highlight-on {
+  background: rgba($blue, 0.05);
+  border: 1px solid rgba($blue, 0.1);
+  padding: 0 0.5em;
+}
+
+.subgroup {
+  border: 1px solid #DDD;
+  padding: 0 0.5em;
+}
+
+.subgroup-heading {
+  font-weight: 600;
+}
+
+.subgroup .subgroup-heading + .row-inner {
+  margin-top: 5px;
+}
+
+.subgroup .row-inner {
+  margin-bottom: 10px;
+}
+
+.min-width-1 {
+  min-width: 152px;
+}
+
+.label-not-adjacent {
+  margin-right: 0.3em;
+}

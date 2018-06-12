@@ -1,0 +1,15 @@
+/* -------------------------------------------------
+   Layout options
+   ------------------------------------------------- */
+
+.layout-section {
+  > div {
+    // the examples
+    &:last-child {
+      flex: 0 0 auto;
+      align-self: flex-start;
+      margin-left: 10px;
+      padding: 10px;
+    }
+  }
+}

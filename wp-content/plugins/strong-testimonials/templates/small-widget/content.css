@@ -1,0 +1,175 @@
+/**
+ * Strong Testimonials Default Widget template
+ */
+/* Clears
+-----------------------------------------------*/
+.clear {
+  clear: both;
+}
+
+/**
+Minimum paragraph width means no short words in skinny space next to image
+in columns or small screens.
+
+This workaround is needed until we can use flexbox properly
+or CSS offers container queries.
+
+Thanks https://css-tricks.com/minimum-paragraph-widths/
+*/
+.maybe-clear {
+  content: "";
+  /* this value seems to work well in both responsive and Masonry */
+  width: 6em;
+  display: block;
+  overflow: hidden;
+}
+
+  /* Base
+-----------------------------------------------*/
+.strong-view.small-widget {
+  display: block;
+  /* setting a width handles short content */
+  width: 100%;
+}
+.strong-view.small-widget * {
+  box-sizing: border-box;
+}
+.strong-view.small-widget .testimonial.t-slide {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.strong-view.small-widget .testimonial-inner {
+  display: block;
+  /* fill horizontal & vertical space */
+  width: 100%;
+  height: 100%;
+}
+.strong-view.small-widget .testimonial-image {
+  max-width: 100%;
+}
+.strong-view.small-widget .testimonial-field-before {
+  margin-right: 0.5em;
+}
+
+.strong-view.slider-container {
+  opacity: 1;
+}
+.strong-view .screen-reader-text {
+  /* copied from Twenty Sixteen theme */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  /* many screen reader and browser combinations announce broken words as they would appear visually */
+  word-wrap: normal !important;
+}
+
+/* Template
+-----------------------------------------------*/
+.strong-view.small-widget {
+  margin-bottom: 1em;
+}
+.strong-view.small-widget .testimonial {
+  margin-bottom: 1em;
+  width: 100%;
+}
+.strong-view.small-widget .testimonial-inner {
+  padding: 10px;
+}
+.strong-view.small-widget .testimonial-heading {
+  margin-bottom: 1em;
+}
+.strong-view.small-widget .testimonial-content p:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+.strong-view.small-widget .testimonial-content p:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.strong-view.small-widget .testimonial-image {
+  float: left;
+  margin-top: 0.25em;
+  margin-right: 1em;
+  margin-bottom: .5em;
+}
+.strong-view.small-widget .testimonial-client {
+  margin-top: 1em;
+  clear: both;
+}
+.strong-view.small-widget .testimonial-name {
+  font-weight: 700;
+}
+.strong-view.small-widget .readmore {
+  margin-top: 1em;
+}
+.strong-view.small-widget .readmore-page {
+  border: 1px solid #E6E6E6;
+  padding: 0.5em;
+  text-align: center;
+}
+
+/* Slideshow
+-----------------------------------------------*/
+.strong-view.small-widget.slider-container .strong-content {
+  margin: 0 auto;
+}
+.strong-view.small-widget.slider-container .testimonial:not(:first-child) {
+  display: none;
+}
+.strong-view.small-widget.nav-position-inside .testimonial-inner {
+  padding-bottom: 48px;
+}
+.strong-view.small-widget.controls-type-sides .testimonial-inner {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+/* Responsive
+-----------------------------------------------*/
+@media only screen and (max-width: 320px) {
+  .strong-view.small-widget .testimonial-image {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* RTL
+-----------------------------------------------*/
+.strong-view.small-widget.rtl .testimonial,
+.strong-view.small-widget.rtl .testimonial-inner,
+.strong-view.small-widget.rtl .testimonial-heading {
+  text-align: right;
+}
+.strong-view.small-widget.rtl .testimonial-image {
+  float: right;
+  margin-left: 1em;
+}
+.strong-view.small-widget.rtl .testimonial-client {
+  text-align: left;
+}
+
+/* Option: Image Right
+-----------------------------------------------*/
+.strong-view.small-widget.image-right .testimonial-image {
+  float: right;
+  margin-left: 1em;
+  margin-bottom: 0.1em;
+}
+
+@media only screen and (max-width: 480px) and (orientation: portrait) {
+  .strong-view.small-widget.image-right .strong-content .testimonial-image {
+    float: none;
+  }
+}
+.strong-view.small-widget.image-right.rtl .testimonial,
+.strong-view.small-widget.image-right.rtl .testimonial-inner,
+.strong-view.small-widget.image-right.rtl .testimonial-heading {
+  text-align: right;
+}
+.strong-view.small-widget.image-right.rtl .testimonial-image {
+  float: left;
+  margin-left: 0;
+  margin-right: 1em;
+}

@@ -1,0 +1,141 @@
+/**
+ * Compatibility settings tab
+ */
+
+/**
+ * Basic structure
+ */
+div.row {
+  display: table-row;
+
+  > div {
+    display: table-cell;
+  }
+
+  &:not(:last-child) > div {
+    padding-bottom: 0.5em;
+  }
+
+  p {
+    margin-bottom: 0.5em;
+  }
+
+  &.header {
+    p {
+      margin-bottom: 1em;
+    }
+  }
+}
+
+/**
+ * Elements
+ */
+.wrap.wpmtst {
+  h2 {
+    margin: 2em 0 1em;
+
+    &.nav-tab-wrapper {
+      margin-top: 6px;
+    }
+  }
+}
+
+input {
+  &.element {
+    width: 15em;
+  }
+}
+
+/**
+ * Behavior
+ */
+.hidden {
+  display: none;
+}
+
+// Dependent inputs are initially hidden.
+[data-sub] {
+  display: none;
+}
+
+/**
+ * Common scenarios table
+ */
+div.scenarios {
+  div.row {
+    border: 1px solid #DDD;
+
+    > div {
+      padding: 1em;
+
+      &:first-child {
+        width: 35%;
+        border-right: 1px dotted #DDD;
+      }
+      &:last-child {
+        width: 30%;
+        border-left: 1px dotted #DDD;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      margin: 0;
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+    }
+
+    &.header {
+      > div {
+        font-weight: 600;
+        padding: 0.5em 1em;
+      }
+    }
+
+  }
+}
+
+/**
+ * Settings table
+ */
+div.row {
+
+  &:not(:last-child) > div:nth-child(2) {
+    padding-bottom: 0.5em;
+  }
+
+  > div {
+
+    &:first-child {
+      width: 180px;
+    }
+
+    &.radio-sub {
+      label {
+        text-indent: 24px;
+      }
+    }
+  }
+
+  p {
+    &.about {
+      display: inline-block;
+
+      &.adjacent {
+        margin-left: 0.5em;
+      }
+    }
+
+    &.description {
+      display: inline-block;
+      font-size: 14px;
+    }
+  }
+
+  label.current {
+    font-weight: 600;
+  }
+}
+
+@import "number-spinner.scss";

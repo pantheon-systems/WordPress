@@ -1,0 +1,155 @@
+#audit-log-settings {
+	padding-right: 256px;
+	position: relative;
+}
+
+#audit-log-adverts {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	overflow: hidden;
+}
+
+#audit-log-adverts a {
+	display: block;
+	text-decoration: none;
+	margin: 4px 0;
+}
+
+.sectoken-user,
+.sectoken-role,
+.sectoken-cpts,
+.sectoken-other {
+	display: inline-block;
+	border-width: 1px;
+	border-style: solid;
+	padding: 2px 4px;
+	margin: 2px 0 0 2px;
+	border-radius: 3px;
+	cursor: default;
+}
+.sectoken-other {
+	display: table;
+	border-collapse: separate;
+}
+
+.sectoken-user a,
+.sectoken-role a,
+.sectoken-cpts a,
+.sectoken-other a {
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFF;
+	margin-left: 2px;
+	background: #BBB;
+	border-radius: 25px;
+	height: 14px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 14px;
+	text-align: center;
+	line-height: 12px;
+}
+
+.sectoken-user a:hover,
+.sectoken-role a:hover,
+.sectoken-cpts a:hover,
+.sectoken-other a:hover {
+	background: #FB9;
+}
+
+.sectoken-user { background: #EFF; border-color: #5BE; }
+.sectoken-role { background: #EFE; border-color: #5B5; }
+.sectoken-cpts { background: #EFF; border-color: #5BE; }
+.sectoken-other { background: #FFE; border-color: #ED5; }
+.sectoken-del { background: #FEE; border-color: #EBB; }
+
+.wsal-tab {
+	margin-top: 0px;
+}
+.wsal-tab th {
+	padding-left: 20px;
+}
+.wsal-tab td {
+	padding-left: 20px;
+}
+
+/*
+* IOS button
+*/
+.f-container {
+	overflow: hidden;
+	min-height: 1px;
+	margin-top: 0;
+}
+.f-left {
+	float: left;
+}
+.f-right {
+	float: right;
+}
+.f-text {
+	margin-top: 3px;
+	margin-left: 8px;
+}
+input.switch[type="checkbox"],
+input.switch[type="radio"] {
+	display: none;
+}
+input.switch[type="checkbox"] + label,
+input.switch[type="radio"] + label {
+    background-color: white;
+    border: 1px solid #b4b9be;;
+    border-radius: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    height: 18px;
+    position: relative;
+    transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;
+    vertical-align: middle;
+    width: 38px;
+}
+input.switch[type="checkbox"] + label:after,
+input.switch[type="radio"] + label:after {
+    background: none repeat scroll 0 0 white;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    content: "";
+    height: 16px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: left 0.2s ease-in-out 0s;
+    width: 16px;
+}
+input.switch[type="checkbox"]:checked + label,
+input.switch[type="radio"]:checked + label {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+    box-shadow: 0 0 0 15.999px #2ecc71 inset;
+    transition: background-color 1.2s ease 0s, border 0.4s ease 0s, box-shadow 0.4s ease 0s;
+}
+input.switch[type="checkbox"]:checked + label:after,
+input.switch[type="radio"]:checked + label:after {
+    left: 20px;
+}
+input.switch[type="checkbox"]:disabled + label,
+input.switch[type="checkbox"]:disabled:checked + label,
+input.switch[type="radio"]:disabled + label,
+input.switch[type="radio"]:disabled:checked + label {
+    background-color: #ecf0f1;
+    border-color: #ecf0f1;
+    box-shadow: none;
+    cursor: default;
+}
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.6;
+}
+
+#PruningDate {
+	width: 35px;
+}

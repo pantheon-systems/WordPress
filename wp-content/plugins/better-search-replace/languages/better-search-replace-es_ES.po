@@ -1,0 +1,136 @@
+# Copyright (C) 2014
+# This file is distributed under the same license as the plugin package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Better Search Replace en español\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/plugins/better-search-replace\n"
+"POT-Creation-Date: 2015-01-09 12:49+0100\n"
+"PO-Revision-Date: 2015-01-09 12:59+0100\n"
+"Last-Translator: Eduardo Larequi <elarequi@gmail.com>\n"
+"Language-Team: PNTE <blogs@educacion.navarra.es>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-better-search-replace-admin.php:141
+msgid ""
+"No search string was defined, please enter a URL or string to search for."
+msgstr ""
+"No se ha definido ninguna cadena de búsqueda; por favor, escribe una URL o "
+"cadena que buscar."
+
+#: includes/class-better-search-replace-admin.php:144
+msgid "Please select the tables that you want to update."
+msgstr "Por favor, selecciona las tablas que quieres actualizar."
+
+#: includes/class-better-search-replace-admin.php:153
+#, php-format
+msgid ""
+"<p><strong>DRY RUN:</strong> <strong>%d</strong> tables were searched, "
+"<strong>%d</strong> cells were found that need to be updated, and <strong>"
+"%d</strong> changes were made.</p><p><a href=\"%s\" class=\"thickbox\" title="
+"\"Dry Run Details\">Click here</a> for more details, or click the submit "
+"button below to run the search/replace.</p>"
+msgstr ""
+"<p><strong>EJECUCIÓN EN SECO:</strong> se hn realizado búsquedas en <strong>"
+"%d</strong> tablas, se han encontrado <strong>%d</strong> celdas que deben "
+"ser actualizadas, y se han realizado <strong>%d</strong> cambios.</p><p><a "
+"href=\"%s\" class=\"thickbox\" title=\"Detalles de la ejecución en seco"
+"\">Haz clic aquí</a> para ver más detalles, o haz clic en el botón \"Enviar"
+"\" que tienes a continuación para ejecutar la búsqueda y sustitución.</p>"
+
+#: includes/class-better-search-replace-admin.php:160
+#, php-format
+msgid ""
+"<p>During the search/replace, <strong>%d</strong> tables were searched, with "
+"<strong>%d</strong> cells changed in <strong>%d</strong> updates.</p><p><a "
+"href=\"%s\" class=\"thickbox\" title=\"Search/Replace Details\">Click here</"
+"a> for more details.</p>"
+msgstr ""
+"<p>Durante la búsqueda y sustitución, se han realizado búsquedas en <strong>"
+"%d</strong> tablas, y se han modificado <strong>%d</strong> celdas en "
+"<strong>%d</strong> actualizaciones.</p><p><a href=\"%s\" class=\"thickbox\" "
+"title=\"Detalles sobre la búsqueda y sustitución\">Haz clic aquí</a> para "
+"ver más detalles.</p>"
+
+#: templates/bsr-dashboard.php:17
+msgid "Better Search Replace"
+msgstr "Better Search Replace"
+
+#: templates/bsr-dashboard.php:19
+msgid ""
+"This tool allows you to search and replace text in your database (supports "
+"serialized arrays and objects)."
+msgstr ""
+"Esta herramienta permite buscar y sustituir texto en la base de datos; "
+"soporta matrices y objetos serializados."
+
+#: templates/bsr-dashboard.php:20
+msgid ""
+"To get started, use the form below to enter the text to be replaced and "
+"select the tables to update."
+msgstr ""
+"Para comenzar, utiliza el formulario que tienes a continuación para escribir "
+"el texto que será sustituido y selecciona las tablas que se actualizarán."
+
+#: templates/bsr-dashboard.php:21
+msgid ""
+"<strong>WARNING:</strong> Make sure you backup your database before using "
+"this plugin!"
+msgstr ""
+"<strong>ATENCIÓN:</strong> asegúrate de hacer una copia de seguridad de tu "
+"base de datos antes de utilizar este plugin."
+
+#: templates/bsr-dashboard.php:28
+msgid "Search for"
+msgstr "Buscar"
+
+#: templates/bsr-dashboard.php:33
+msgid "Replace with"
+msgstr "Sustituir con"
+
+#: templates/bsr-dashboard.php:38
+msgid "Select tables"
+msgstr "Seleccionar tablas"
+
+#: templates/bsr-dashboard.php:41
+msgid ""
+"Select multiple tables with Ctrl-Click for Windows or Cmd-Click for Mac."
+msgstr ""
+"Selecciona múltiples tablas con Ctrl+Clic (en Windows) o Cmd+Clic (en Mac)."
+
+#: templates/bsr-dashboard.php:46
+msgid ""
+"Replace GUIDs<a href=\"http://codex.wordpress.org/"
+"Changing_The_Site_URL#Important_GUID_Note\" target=\"_blank\">?</a>"
+msgstr ""
+"¿<a href=\"http://codex.wordpress.org/"
+"Changing_The_Site_URL#Important_GUID_Note\" target=\"_blank\">Quieres "
+"sustituir los GUIDs ?</a>"
+
+#: templates/bsr-dashboard.php:49
+msgid "If left unchecked, all database columns titled 'guid' will be skipped."
+msgstr ""
+"Si no activas esta opción, se omitirán todas las columnas de las bases de "
+"datos tituladas 'guid'."
+
+#: templates/bsr-dashboard.php:54
+msgid "Run as dry run?"
+msgstr "¿Quieres ejecutar \"en seco\"?"
+
+#: templates/bsr-dashboard.php:57
+msgid ""
+"If checked, no changes will be made to the database, allowing you to check "
+"the results beforehand."
+msgstr ""
+"Si activas esta opción, no se realizará ningún cambio en la base de datos, "
+"lo cual te permite verificar los resultados de antemano."

@@ -1,0 +1,327 @@
+/**
+ * Strong Testimonials Default template
+ */
+/* Clears
+-----------------------------------------------*/
+.clear {
+  clear: both;
+}
+
+/**
+Minimum paragraph width means no short words in skinny space next to image
+in columns or small screens.
+
+This workaround is needed until we can use flexbox properly
+or CSS offers container queries.
+
+Thanks https://css-tricks.com/minimum-paragraph-widths/
+*/
+.maybe-clear {
+  content: "";
+  /* this value seems to work well in both responsive and Masonry */
+  width: 6em;
+  display: block;
+  overflow: hidden;
+}
+
+  /* Base
+-----------------------------------------------*/
+.strong-view.default {
+  display: block;
+  /* setting a width handles short content */
+  width: 100%;
+}
+.strong-view.default * {
+  box-sizing: border-box;
+}
+.strong-view.default .testimonial.t-slide {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.strong-view.default .testimonial-inner {
+  display: block;
+  /* fill horizontal & vertical space */
+  width: 100%;
+  height: 100%;
+}
+.strong-view.default .testimonial-image {
+  max-width: 100%;
+}
+.strong-view.default .testimonial-field-before {
+  margin-right: 0.5em;
+}
+
+.strong-view.slider-container {
+  opacity: 1;
+}
+.strong-view .screen-reader-text {
+  /* copied from Twenty Sixteen theme */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+  /* many screen reader and browser combinations announce broken words as they would appear visually */
+  word-wrap: normal !important;
+}
+
+/* Template
+-----------------------------------------------*/
+.strong-view.default .strong-content {
+  margin: 20px auto 0;
+}
+.strong-view.default .testimonial {
+  margin: 20px auto;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+  border: 1px solid #E6E6E6;
+}
+.strong-view.default .testimonial:first-child {
+  margin-top: 0;
+}
+.strong-view.default .testimonial:last-child {
+  margin-bottom: 0;
+}
+.strong-view.default .testimonial-inner {
+  border: 1px solid #FFFFFF;
+  padding: 20px;
+  text-align: left;
+}
+.strong-view.default .testimonial-heading {
+  background: url("img/quotes.png") no-repeat scroll left center transparent;
+  margin-top: 0;
+  padding-left: 40px;
+  text-align: left;
+}
+.strong-view.default .testimonial-content p:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+.strong-view.default .testimonial-content p:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.strong-view.default .testimonial-image {
+  margin-top: 0.25em;
+  margin-right: 1em;
+  margin-bottom: 0.25em;
+  float: left;
+}
+.strong-view.default .testimonial-image img {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #EFEFEF;
+  padding: 6px;
+  margin: 0 auto;
+}
+.strong-view.default .testimonial-image a {
+  text-decoration: none;
+  box-shadow: none;
+}
+.strong-view.default .testimonial-client {
+  margin-top: 1em;
+  text-align: right;
+}
+.strong-view.default .testimonial-name {
+  font-weight: bold;
+}
+.strong-view.default .readmore {
+  margin-top: 1em;
+}
+.strong-view.default .strong-view-footer {
+  margin-bottom: 20px;
+}
+.strong-view.default .readmore-page {
+  margin-top: 20px;
+  padding: 1em;
+  text-align: center;
+  border: 1px solid #E6E6E6;
+}
+
+/* Pagination
+-----------------------------------------------*/
+/* Simple pagination
+-----------------------------------------------*/
+.strong-view.default.strong-pager {
+  display: none;
+}
+
+.simplePagerList {
+  /* match .strong-content container */
+  margin: 20px auto;
+  text-align: center;
+}
+
+.strong-view ul.simplePagerNav {
+  margin: 0 auto;
+  padding: 0;
+  display: inline-block;
+}
+.strong-view ul.simplePagerNav li {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.strong-view ul.simplePagerNav li a {
+  margin: 0 0.2em;
+  padding: 0.1em 0.3em;
+  outline: none;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.strong-view ul.simplePagerNav li a:hover {
+  background: #BBB;
+  color: #FFF;
+}
+.strong-view ul.simplePagerNav li.currentPage a {
+  text-decoration: none;
+  background: #999;
+  color: #FFF;
+}
+
+.strong-view.rtl ul.simplePagerNav li {
+  float: right;
+}
+
+/* Standard pagination
+-----------------------------------------------*/
+.strong-view .nav-links {
+  margin: 20px auto;
+  text-align: center;
+}
+.strong-view .nav-links a, .strong-view .nav-links span {
+  display: inline-block;
+  line-height: 1.5;
+  margin: 0 0.2em;
+  padding: 0.1em 0.3em;
+  transition: background 0.2s ease;
+}
+.strong-view .nav-links a.current, .strong-view .nav-links span.current {
+  background: #999;
+  color: #FFF;
+}
+.strong-view .nav-links a {
+  outline: none;
+  text-decoration: none;
+}
+.strong-view .nav-links a:hover,
+.strong-view .nav-links a.prev:hover,
+.strong-view .nav-links a.next:hover,
+.strong-view .nav-links span:hover {
+  background: #BBB;
+  color: #FFF;
+}
+
+/* Slideshow
+-----------------------------------------------*/
+.strong-view.default.slider-container {
+  /* If vertical or fade slideshow, move border from individual testimonials to viewport. */
+}
+.strong-view.default.slider-container.slider-adaptive:not(.slider-mode-horizontal) .wpmslider-viewport {
+  border: 1px solid #E6E6E6;
+}
+.strong-view.default.slider-container.slider-adaptive:not(.slider-mode-horizontal) .testimonial {
+  border: 0;
+}
+.strong-view.default.slider-container .strong-content {
+  margin: 0 auto;
+}
+.strong-view.default.slider-container .testimonial:not(:first-child) {
+  display: none;
+}
+.strong-view.default.nav-position-inside .testimonial-inner {
+  padding-bottom: 48px;
+}
+.strong-view.default.controls-type-sides .testimonial-inner {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.strong-view.default.slider-stretch .testimonial-inner {
+  /* to force same height for all slides */
+  height: 100%;
+}
+
+/* Responsive
+-----------------------------------------------*/
+@media only screen and (max-width: 320px) {
+  .strong-view.default .testimonial-image {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* Remove quote background image */
+@media only screen and (max-width: 320px) and (orientation: portrait) {
+  .strong-view.default .testimonial-heading {
+    background: none;
+    padding-left: 0;
+  }
+}
+/* RTL
+-----------------------------------------------*/
+.strong-view.default.rtl .testimonial,
+.strong-view.default.rtl .testimonial-inner,
+.strong-view.default.rtl .testimonial-heading {
+  text-align: right;
+}
+.strong-view.default.rtl .testimonial-image {
+  float: right;
+  margin-left: 1em;
+}
+.strong-view.default.rtl .testimonial-client {
+  text-align: left;
+}
+
+.strong-view.default.rtl .testimonial-heading {
+  padding-right: 40px;
+  background-position: right;
+}
+
+/* Option: Image Right
+-----------------------------------------------*/
+.strong-view.default.image-right .testimonial-image {
+  float: right;
+  margin-top: .25em;
+  margin-bottom: 0.25em;
+  margin-left: 1em;
+}
+.strong-view.default.image-right .testimonial-client {
+  text-align: left;
+}
+
+.strong-view.default.image-right.rtl .testimonial-image {
+  float: left;
+  margin-left: 0;
+  margin-right: 1em;
+}
+.strong-view.default.image-right.rtl .testimonial-client {
+  text-align: right;
+}
+
+/* Option: No Quotes
+-----------------------------------------------*/
+.strong-view.default.no-quotes .testimonial-heading {
+  background: none;
+  padding-left: 0;
+}
+
+/* Option: Dark Theme
+-----------------------------------------------*/
+.strong-view.default.dark .testimonial {
+  border: 1px solid #777;
+}
+.strong-view.default.dark .testimonial-inner {
+  border: 1px solid #333;
+}
+.strong-view.default.dark .readmore-page {
+  border: 2px solid #777;
+}
+.strong-view.default.dark ul.simplePagerNav li a:hover {
+  background: #777;
+  color: #FFF;
+}
+.strong-view.default.dark ul.simplePagerNav li.currentPage a {
+  background: #555;
+  color: #FFF;
+}

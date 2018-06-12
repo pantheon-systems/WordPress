@@ -1,0 +1,303 @@
+/**
+ * Audit Log admin CSS
+ *
+ */
+
+.top .wsal-ipp {
+	display: none;
+}
+.top .wsal-ssa select {
+	margin-left: 0;
+}
+
+.wsal-ipp,
+.wsal-ssa {
+	display: inline-block;
+	color: #555;
+	line-height: 30px;
+	font-size: 12px;
+}
+
+.wsal-ipp select {
+	margin-bottom: 6px;
+	width: 56px;
+}
+
+.wsal-ssa input,
+.wsal-ssa select {
+	margin-bottom: 6px;
+	width: 120px;
+	margin-left: 16px;
+}
+
+.column-read,
+.column-more,
+.column-data {
+	width: 70px;
+}
+.column-type {
+	width: 85px;
+}
+.column-code {
+	width: 50px;
+}
+td.code.column-code a{
+	display: block;
+}
+.column-disable {
+	width: 50px;
+}
+
+.column-crtd {
+	width: 125px;
+}
+
+.column-user {
+	width: 160px;
+}
+
+.column-site {
+	width: 160px;
+}
+
+td.column-user {
+	font-size: 75% !important;
+}
+
+.column-user img {
+	float: left;
+	margin-right: 4px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	-ms-border-radius: 50px;
+	border-radius: 50px;
+}
+
+.column-scip {
+	width: 120px;
+}
+
+.more-info {
+	float: right;
+	display: block;
+	width: 16px;
+	height: 16px;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 10px;
+	text-align: center;
+	border-radius: 32px;
+	margin-left: 8px;
+	background: #AAA;
+}
+
+.more-info:hover {
+	color: #FFF;
+	background: #333;
+}
+
+.log-read:after {
+	display: block;
+	width: 16px;
+	height: 16px;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 16px;
+	text-align: center;
+	border-radius: 32px;
+	margin-left: 8px;
+	content:  "\2713";
+	background: #CCC;
+}
+
+.log-read-new:after {
+	background: #290;
+}
+
+.log-type {
+	cursor: help;
+}
+
+.log-type:after {
+	display: block;
+	width: 16px;
+	height: 16px;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 11px;
+	line-height: 17px;
+	background: #CCC;
+	text-align: center;
+	border-radius: 32px;
+	margin-left: 8px;
+}
+
+/* errors */
+.log-type-0:after,
+.log-type-1:after,
+.log-type-4:after,
+.log-type-16:after,
+.log-type-64:after,
+.log-type-256:after,
+.log-type-4096:after,
+.log-type-E_CRITICAL:after {
+	background: #c9302c; content: "!";
+}
+
+/* warnings */
+.log-type-2:after,
+.log-type-32:after,
+.log-type-128:after,
+.log-type-512:after {
+	background: #ec971f; content: "!";
+}
+
+/* notices/strict/deprecation */
+.log-type-8:after,
+.log-type-1024:after,
+.log-type-2048:after,
+.log-type-8192:after,
+.log-type-16384:after,
+.log-type-E_DEBUG:after {
+	background: #ec0; content: "i";
+}
+
+.log-disable .disable {
+	margin-left: 12px;
+}
+
+/* search box */
+.wsal-ssas-dd {
+	position: absolute;
+	border: 1px solid windowframe;
+	background: #FFF;
+	padding: 0;
+	margin: -8px 16px;
+	background: window;
+	color: windowtext;
+	min-width: 140px;
+}
+.wsal-ssas-dd * {
+	cursor: default;
+}
+.wsal-ssas-dd a {
+	padding: 2px 8px;
+	display: block;
+	line-height: normal;
+	text-decoration: none;
+	color: windowtext;
+}
+.wsal-ssas-dd a:hover,
+.wsal-ssas-dd .active {
+	background: highlight;
+	color: highlighttext;
+}
+.wsal-ssas-dd a u {
+	text-decoration: underline;
+}
+.wsal-ssas-dd span {
+	color: #555;
+	font-style: italic;
+	padding: 2px 8px;
+	display: block;
+	line-height: normal;
+}
+.wsal-ssas-dd .allsites {
+	border-bottom: 1px solid windowframe;
+}
+
+.dashicons-dismiss:hover {
+	color:#c00
+}
+.dark-tooltip.small{
+	margin-left: 10px;
+	font-size:13px;
+	padding:5px 10px;
+	max-width:150px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.dark-tooltip.medium{
+	margin-left: -15px;
+	font-size:13px;
+	padding:5px 10px;
+	max-width:150px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.dark-tooltip.west.medium .tip{ border-width: 5px 7px 5px 0; margin-left:-7px; margin-top:-5px;}
+.dark-tooltip ul.confirm{ list-style-type:none;margin-top:5px;display:inline-block;margin:0 auto;}
+.dark-tooltip ul.confirm li{
+	padding:5px 10px;
+	float:left;
+	margin:5px 5px 0 0;
+	min-width:20px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-o-border-radius:3px;
+	border-radius:3px;
+}
+.dark-tooltip.dark ul.confirm li{ background-color:#0085ba;}
+.dark-tooltip.dark ul.confirm li:hover{ background-color:#008ec2; cursor: pointer;}
+.dark-tooltip.dark ul.confirm li:last-child {
+    padding: 0;
+}
+.dark-tooltip.dark ul.confirm li:last-child span {
+	display: inline-block;
+	line-height: 8px;
+	padding: 10px;
+	margin: 0;
+}
+
+/**
+ * Audit Log Admin Notice
+ */
+.wsal_notice__wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: start;
+	-ms-flex-align: start;
+    align-items: flex-start;
+	position: relative;
+	margin: 12px 0;
+}
+
+.wsal_notice__btns {
+	position: absolute;
+	right: 0;
+	text-align: right;
+}
+
+.wsal_notice__btns a {
+	display: block;
+}
+
+.wsal_notice__btns a.buy-now {
+	margin-bottom: 10px;
+}
+
+.wsal_notice__wrapper img {
+	width: 70px;
+	height: 70px;
+	margin-right: 5px;
+}
+
+div.wsal_notice__wrapper p {
+	margin-right: 16px;
+}
+
+.wsal-premium {
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-decoration: none;
+}
+
+.wp-list-table #code {
+	width: 55px;
+}

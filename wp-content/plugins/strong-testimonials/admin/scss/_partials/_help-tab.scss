@@ -1,0 +1,50 @@
+/* --------------------------------------------------
+   help tab
+   -------------------------------------------------- */
+
+span.help-links {
+  display: inline-block;
+  margin-left: 0.4em;
+}
+
+a.open-help-tab {
+  font-weight: 400;
+}
+
+table.wpmtst-help-tab {
+  border-collapse: collapse;
+  margin: 20px 0;
+  width: 100%;
+
+  tr {
+    &:hover {
+      td {
+        background: #FFFFAA;
+      }
+    }
+  }
+
+  th,
+  td {
+    padding: 5px 10px;
+    text-align: center;
+  }
+
+  th {
+    border-bottom: 1px solid #AAA;
+  }
+
+  td {
+    border-bottom: 1px solid #E1E1E1;
+
+    &:first-child {
+      text-align: right;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    &:not(:last-child) {
+      border-right: 1px dotted #E1E1E1;
+    }
+  }
+}
+

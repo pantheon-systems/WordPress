@@ -1,0 +1,80 @@
+/**
+ * Strong Testimonials Default Form template
+ */
+@import "../_partials/structure-form";
+
+.strong-form {
+  label {
+    font-weight: 700;
+  }
+
+  .form-field .after {
+    font-size: .9em;
+    font-style: italic;
+  }
+
+  /* error indicators */
+  input.error,
+  textarea.error,
+  select.error {
+    background: #F9E5E6;
+    border: 1px solid #E8AAAD;
+    color: #B50007;
+  }
+
+  span.error,
+  label.error {
+    color: #B50007;
+  }
+
+  /* field-wrap is used for checkboxes, radios, star ratings */
+  .field-wrap {
+    display: block;
+    font-weight: 400;
+    border: 1px solid transparent;
+
+    &.error {
+      border-radius: 3px;
+      background: #F9E5E6;
+      border: 1px solid #E8AAAD;
+      color: #B50007;
+
+      .checkbox-label {
+        outline: none;
+      }
+
+      .strong-rating {
+        outline-color: #E8AAAD;
+      }
+    }
+
+    input + label + .required.symbol:after {
+      margin-left: 0;
+    }
+  }
+}
+
+/* Dark Theme
+-----------------------------------------------*/
+.strong-form.dark {
+  input.error,
+  textarea.error,
+  select.error {
+    border: 1px solid #FF6666;
+  }
+
+  .field-wrap {
+    &.error {
+      border: 1px solid #FF6666;
+
+      .checkbox-label {
+        color: #111;
+      }
+
+      .strong-rating {
+        outline-color: #FF6666;
+      }
+    }
+  }
+}
+
