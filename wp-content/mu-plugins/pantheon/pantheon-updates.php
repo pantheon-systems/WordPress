@@ -35,7 +35,7 @@ function _pantheon_wordpress_update_available() {
 
 	// include an unmodified $wp_version
 	include( ABSPATH . WPINC . '/version.php' );
-	
+
 	// Return true if our version is not the latest
 	return version_compare( str_replace( '-src', '', $latest_wp_version ), str_replace( '-src', '', $wp_version ), '>' );
 
@@ -79,7 +79,7 @@ function _pantheon_disable_wp_updates() {
 
 // In the Test and Live environments, clear plugin/theme update notifications.
 // Users must check a dev or multidev environment for updates.
-if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], Array('test', 'live') ) ) {
+if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], Array('test', 'live') ) && (php_sapi_name() !== 'cli') ) {
 
 	// Disable Plugin Updates
 	remove_action( 'load-update-core.php', 'wp_update_plugins' );
