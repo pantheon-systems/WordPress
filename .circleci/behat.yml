@@ -1,0 +1,14 @@
+# behat.yml
+default:
+  suites:
+    default:
+      paths:
+        - features
+      contexts:
+        - Behat\MinkExtension\Context\MinkContext
+        - AdminLogIn
+        - ResponseHeader
+  extensions:
+    Behat\MinkExtension:
+      # base_url set by ENV
+      goutte: ~
