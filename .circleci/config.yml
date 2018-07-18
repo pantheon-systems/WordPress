@@ -1,0 +1,58 @@
+test-defaults: &test-defaults
+  docker:
+    - image: quay.io/pantheon-public/terminus-plugin-test:1.x
+  working_directory: ~/work/wp
+  environment:
+    TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+    TERM: dumb
+
+merge-defaults: &merge-defaults
+  docker:
+    - image: quay.io/getpantheon/upstream-update-build:1.x
+  working_directory: ~/work/wp
+  environment:
+    TZ: "/usr/share/zoneinfo/America/Los_Angeles"
+    TERM: dumb
+
+version: 2
+jobs:
+    test:
+        <<: *test-defaults
+        steps:
+            - checkout
+            - run:
+                name: Set up environment
+                command: ./.circleci/set-up-globals.sh
+            - run:
+                name: Prepare
+                command: ./.circleci/prepare.sh
+            - run:
+                name: Test
+                command: ./.circleci/test.sh --strict
+            - run:
+                name: Cleanup
+                command: ./.circleci/cleanup.sh
+            - run:
+                name: Confirm that it is safe to merge
+                command: ./.circleci/confirm-safety.sh
+    merge:
+        <<: *merge-defaults
+        steps:
+            - checkout
+            - run:
+                # https://github.com/pantheon-systems/upstream-update-build/blob/1.x/bin/automerge.sh
+                name: Merge the default branch back to the master branch
+                command: automerge.sh
+
+workflows:
+  version: 2
+  wordpress:
+    jobs:
+      - test
+      - merge:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - default
