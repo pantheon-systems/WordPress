@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Copy to local.test and customize
+circleci \
+  -e CIRCLE_BUILD_NUM=0 \
+  -e TERMINUS_TOKEN=$TERMINUS_TOKEN \
+  -e TERMINUS_SITE=$TERMINUS_SITE \
+  -e TERMINUS_ENV=ci-$CIRCLE_BUILD_NUM \
+  -e TERMINUS_HIDE_UPDATE_MESSAGE=1 \
+  -e WORDPRESS_ADMIN_USERNAME=admin \
+  -e WORDPRESS_ADMIN_PASSWORD=$ADMIN_PASSWORD \
+  build --job test
