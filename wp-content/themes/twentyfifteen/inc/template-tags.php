@@ -97,7 +97,7 @@ function twentyfifteen_entry_meta() {
 		}
 
 		$tags_list = get_the_tag_list( '', _x( ', ', 'Used between list items, there is a space after the comma.', 'twentyfifteen' ) );
-		if ( $tags_list ) {
+		if ( $tags_list && ! is_wp_error( $tags_list ) ) {
 			printf( '<span class="tags-links"><span class="screen-reader-text">%1$s </span>%2$s</span>',
 				_x( 'Tags', 'Used before tag names.', 'twentyfifteen' ),
 				$tags_list
@@ -150,7 +150,7 @@ function twentyfifteen_categorized_blog() {
 		set_transient( 'twentyfifteen_categories', $all_the_cool_cats );
 	}
 
-	if ( $all_the_cool_cats > 1 ) {
+	if ( $all_the_cool_cats > 1 || is_preview() ) {
 		// This blog has more than 1 category so twentyfifteen_categorized_blog should return true.
 		return true;
 	} else {
@@ -240,4 +240,19 @@ function twentyfifteen_excerpt_more( $more ) {
 	return ' &hellip; ' . $link;
 }
 add_filter( 'excerpt_more', 'twentyfifteen_excerpt_more' );
+endif;
+
+if ( ! function_exists( 'twentyfifteen_the_custom_logo' ) ) :
+/**
+ * Displays the optional custom logo.
+ *
+ * Does nothing if the custom logo is not available.
+ *
+ * @since Twenty Fifteen 1.5
+ */
+function twentyfifteen_the_custom_logo() {
+	if ( function_exists( 'the_custom_logo' ) ) {
+		the_custom_logo();
+	}
+}
 endif;
