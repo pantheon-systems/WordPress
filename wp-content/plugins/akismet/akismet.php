@@ -3,12 +3,12 @@
  * @package Akismet
  */
 /*
-Plugin Name: Akismet
-Plugin URI: http://akismet.com/
-Description: Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: 1) Click the "Activate" link to the left of this description, 2) <a href="http://akismet.com/get/">Sign up for an Akismet plan</a> to get an API key, and 3) Go to your Akismet configuration page, and save your API key.
-Version: 3.1.5
+Plugin Name: Akismet Anti-Spam
+Plugin URI: https://akismet.com/
+Description: Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key.
+Version: 4.0.8
 Author: Automattic
-Author URI: http://automattic.com/wordpress-plugins/
+Author URI: https://automattic.com/wordpress-plugins/
 License: GPLv2 or later
 Text Domain: akismet
 */
@@ -37,9 +37,8 @@ if ( !function_exists( 'add_action' ) ) {
 	exit;
 }
 
-define( 'AKISMET_VERSION', '3.1.5' );
-define( 'AKISMET__MINIMUM_WP_VERSION', '3.2' );
-define( 'AKISMET__PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'AKISMET_VERSION', '4.0.8' );
+define( 'AKISMET__MINIMUM_WP_VERSION', '4.0' );
 define( 'AKISMET__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AKISMET_DELETE_LIMIT', 100000 );
 
@@ -48,10 +47,13 @@ register_deactivation_hook( __FILE__, array( 'Akismet', 'plugin_deactivation' ) 
 
 require_once( AKISMET__PLUGIN_DIR . 'class.akismet.php' );
 require_once( AKISMET__PLUGIN_DIR . 'class.akismet-widget.php' );
+require_once( AKISMET__PLUGIN_DIR . 'class.akismet-rest-api.php' );
 
 add_action( 'init', array( 'Akismet', 'init' ) );
 
-if ( is_admin() ) {
+add_action( 'rest_api_init', array( 'Akismet_REST_API', 'init' ) );
+
+if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 	require_once( AKISMET__PLUGIN_DIR . 'class.akismet-admin.php' );
 	add_action( 'init', array( 'Akismet_Admin', 'init' ) );
 }
@@ -59,3 +61,6 @@ if ( is_admin() ) {
 //add wrapper class around deprecated akismet functions that are referenced elsewhere
 require_once( AKISMET__PLUGIN_DIR . 'wrapper.php' );
 
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require_once( AKISMET__PLUGIN_DIR . 'class.akismet-cli.php' );
+}
