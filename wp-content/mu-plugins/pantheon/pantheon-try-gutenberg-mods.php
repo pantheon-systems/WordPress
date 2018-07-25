@@ -27,7 +27,6 @@ function _pantheon_try_gutenberg_append_warning(){
 ?>
 <style type="text/css">
     .try-gutenberg-panel .pantheon-notice {
-        font-size: 16px;
         color: #2C3539;
         border-left: solid 5px #2C3539;
         padding: 1em;
@@ -38,7 +37,7 @@ function _pantheon_try_gutenberg_append_warning(){
 <?php
 printf(
  	/* translators: Link to https://pantheon.io/docs/pantheon-workflow/ */
- 	__( 'We encourage you to test Gutenberg on Pantheon in a safe way. Please remember, like any code change, installing Gutenberg needs to go through <a href="%s">the Pantheon workflow</a>.' ),
+ 	__( '<h3>New to Pantheon?</h3><p>Remember to install Gutenberg in the Dev environment and use <a href="%s">the Pantheon workflow</a> when ready to deploy to Test or Live.</p>' ),
  	__( 'https://pantheon.io/docs/pantheon-workflow/' )
 );
 ?>
