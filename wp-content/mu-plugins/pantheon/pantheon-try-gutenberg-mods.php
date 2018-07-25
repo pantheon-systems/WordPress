@@ -7,7 +7,7 @@
   * We are on a Pantheon subdomain and
   * "RETURN_TO_PANTHEON_BUTTON" is not false
   */
-$mod_try_gutenberg = apply_filters( 'show_pantheon_try_gutenberg_mods', ( ! defined('DISABLE_PANTHEON_TRY_GUTENBERG_MODS') || DISABLE_PANTHEON_TRY_GUTENBERG_MODS ) );
+$mod_try_gutenberg = apply_filters( 'show_pantheon_try_gutenberg_mods', ( ! defined('DISABLE_PANTHEON_TRY_GUTENBERG_MODS') || ! DISABLE_PANTHEON_TRY_GUTENBERG_MODS ) );
 
 function _pantheon_try_gutenberg_host_link(){
 ?>
