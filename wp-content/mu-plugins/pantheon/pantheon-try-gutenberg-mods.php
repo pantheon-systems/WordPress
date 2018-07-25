@@ -41,7 +41,7 @@ function _pantheon_try_gutenberg_append_warning(){
     .try-gutenberg-panel .pantheon-notice {
         color: #2C3539;
         border-left: solid 5px #2C3539;
-        padding: 1em;
+        padding: 0 1em;
         margin: 0.5em 0;
     }
 </style>
