@@ -1,4 +1,14 @@
 <?php
+/**
+  * Should we proceed with adding the
+  * return to Pantheon button?
+  *
+  * Only if:
+  * We are on a Pantheon subdomain and
+  * "RETURN_TO_PANTHEON_BUTTON" is not false
+  */
+$mod_try_gutenberg = apply_filters( 'show_pantheon_try_gutenberg_mods', true);
+
 function _pantheon_try_gutenberg_host_link(){
 ?>
 <style type="text/css">
@@ -21,7 +31,9 @@ printf(
 <?php    
 }
 
-add_action( 'try_gutenberg_after_install_button', '_pantheon_try_gutenberg_host_link');
+if( true === $mod_try_gutenberg ){
+    add_action( 'try_gutenberg_after_install_button', '_pantheon_try_gutenberg_host_link');
+}
 
 function _pantheon_try_gutenberg_append_warning(){
 ?>
@@ -45,6 +57,6 @@ printf(
 <?php    
 }
 
-// if( in_array($_ENV['PANTHEON_ENVIRONMENT'], array('test', 'live') ) ){
+if( true === $mod_try_gutenberg ){
     add_action( 'try_gutenberg_panel', '_pantheon_try_gutenberg_append_warning', 99);
-// }
+}
