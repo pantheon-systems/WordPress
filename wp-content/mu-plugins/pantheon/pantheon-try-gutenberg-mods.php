@@ -8,9 +8,6 @@ function _pantheon_try_gutenberg_host_link(){
     .try-gutenberg-panel .host-link {
         font-weight: bold;
     }
-    .try-gutenberg-action > p:first-of-type {
-        display: none;
-    }
 </style>
 <p>
 <?php
