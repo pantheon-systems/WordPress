@@ -19,7 +19,7 @@ function _pantheon_try_gutenberg_host_link( $learn_more ){
 
     return $style_mods . sprintf(
         /* translators: Link to https://pantheon.io/gutenberg */
-        __( '<a href="%s">Learn more about Gutenberg</a>.' ),
+        __( '<a href="%s">Learn more about Gutenberg on Pantheon</a>.' ),
         __( 'https://pantheon.io/gutenberg' )
     );
 
