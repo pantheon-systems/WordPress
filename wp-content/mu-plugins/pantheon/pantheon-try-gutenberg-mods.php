@@ -1,11 +1,5 @@
 <?php
 /**
- * Should we proceed with adding the
- * Try Gutenberg panel mods?
-*/
-$mod_try_gutenberg = apply_filters( 'show_pantheon_try_gutenberg_mods', ( ! defined('DISABLE_PANTHEON_TRY_GUTENBERG_MODS') || ! DISABLE_PANTHEON_TRY_GUTENBERG_MODS ) );
-
-/**
  * Modify the learn more Gutenberg link
  * to go to the Pantheon Gutenberg page
  * rather than WordPress.org
@@ -30,7 +24,7 @@ function _pantheon_try_gutenberg_host_link( $learn_more ){
  * be adding Pantheon modifications
  * to the Try Gutenberg panel
  */
-if( true === $mod_try_gutenberg ){
+if( ( ! defined('DISABLE_PANTHEON_TRY_GUTENBERG_MODS') || ! DISABLE_PANTHEON_TRY_GUTENBERG_MODS ) ){
     add_filter( 'try_gutenberg_learn_more_link', '_pantheon_try_gutenberg_host_link');
 }
 
@@ -82,6 +76,6 @@ printf(
  * be adding Pantheon modifications
  * to the Try Gutenberg panel
  */
-if( true === $mod_try_gutenberg ){
+if( ( ! defined('DISABLE_PANTHEON_TRY_GUTENBERG_MODS') || ! DISABLE_PANTHEON_TRY_GUTENBERG_MODS ) ){
     add_action( 'try_gutenberg_panel', '_pantheon_try_gutenberg_append_warning', 99);
 }
