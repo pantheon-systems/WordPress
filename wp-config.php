@@ -74,6 +74,7 @@ else:
         // content warnings.
         if (isset($_SERVER['HTTP_USER_AGENT_HTTPS']) && $_SERVER['HTTP_USER_AGENT_HTTPS'] == 'ON') {
             $scheme = 'https';
+            $_SERVER['HTTPS'] = 'on';
         }
         define('WP_HOME', $scheme . '://' . $_SERVER['HTTP_HOST']);
         define('WP_SITEURL', $scheme . '://' . $_SERVER['HTTP_HOST']);
