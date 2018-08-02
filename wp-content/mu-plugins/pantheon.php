@@ -13,5 +13,6 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) :
 require_once( 'pantheon/pantheon-page-cache.php' );
 require_once( 'pantheon/pantheon-updates.php' );
 require_once( 'pantheon/pantheon-login-form-mods.php' );
+require_once( 'pantheon/pantheon-try-gutenberg-mods.php' );
 
 endif; # Ensuring that this is on Pantheon
