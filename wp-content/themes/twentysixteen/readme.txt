@@ -1,11 +1,11 @@
 === Twenty Sixteen ===
 Contributors: the WordPress team
 Requires at least: WordPress 4.4
-Tested up to: WordPress 4.4
-Version: 1.0
+Tested up to: WordPress 5.0-trunk
+Version: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: black, blue, gray, green, white, yellow, dark, light, one-column, two-columns, right-sidebar, fixed-layout, responsive-layout, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
+Tags: one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready, blog
 
 == Description ==
 Twenty Sixteen is a modernized take on an ever-popular WordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Twenty Sixteen will make your WordPress look beautiful everywhere.
@@ -29,7 +29,7 @@ For more information about Twenty Sixteen please go to https://codex.wordpress.o
 
 == Copyright ==
 
-Twenty Sixteen WordPress Theme, Copyright 2014-2015 WordPress.org
+Twenty Sixteen WordPress Theme, Copyright 2014-2018 WordPress.org
 Twenty Sixteen is distributed under the terms of the GNU GPL
 
 This program is free software: you can redistribute it and/or modify
@@ -48,11 +48,43 @@ HTML5 Shiv v3.7.0, Copyright 2014 Alexander Farkas
 Licenses: MIT/GPL2
 Source: https://github.com/aFarkas/html5shiv
 
-Genericons icon font, Copyright 2013-2015 Automattic.com
+Genericons icon font, Copyright 2013-2017 Automattic.com
 License: GNU GPL, Version 2 (or later)
 Source: http://www.genericons.com
 
 Image used in screenshot.png: A photo by Austin Schmid (https://unsplash.com/schmidy/), licensed under Creative Commons Zero(http://creativecommons.org/publicdomain/zero/1.0/)
+
+== Changelog ==
+
+= 1.5 =
+* Released: May 17, 2018
+
+https://codex.wordpress.org/Twenty_Sixteen_Theme_Changelog#Version_1.5
+
+= 1.4 =
+* Released: November 14, 2017
+
+https://codex.wordpress.org/Twenty_Sixteen_Theme_Changelog#Version_1.4
+
+= 1.3 =
+* Released: August 16, 2016
+
+https://codex.wordpress.org/Twenty_Sixteen_Theme_Changelog#Version_1.3
+
+= 1.2 =
+* Released: April 12, 2016
+
+https://codex.wordpress.org/Twenty_Sixteen_Theme_Changelog#Version_1.2
+
+= 1.1 =
+* Released: January 6, 2016
+
+https://codex.wordpress.org/Twenty_Sixteen_Theme_Changelog#Version_1.1
+
+= 1.0 =
+* Released: December 8, 2015
+
+Initial release
 
 == Notes ==
 
