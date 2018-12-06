@@ -6,17 +6,21 @@
  *
  * @package WordPress
  * @subpackage Administration
+ * @output wp-admin/js/nav-menu.js
  */
 
-/* global menus, postboxes, columns, isRtl, navMenuL10n, ajaxurl */
-
-var wpNavMenu;
+/* global menus, postboxes, columns, isRtl, navMenuL10n, ajaxurl, wpNavMenu */
 
 (function($) {
 
 	var api;
 
-	api = wpNavMenu = {
+	/**
+	 * Contains all the functions to handle WordPress navigation menus administration.
+	 *
+	 * @namespace wpNavMenu
+	 */
+	api = window.wpNavMenu = {
 
 		options : {
 			menuItemDepthPerLevel : 30, // Do not use directly. Use depthToPx and pxToDepth instead.
@@ -166,6 +170,8 @@ var wpNavMenu;
 				},
 				/**
 				 * Adds selected menu items to the menu.
+				 *
+				 * @ignore
 				 *
 				 * @param jQuery metabox The metabox jQuery object.
 				 */

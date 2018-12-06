@@ -103,6 +103,9 @@ input#s {
 	background-position: 97% 6px;
 	padding: 4px 28px 4px 10px;
 }
+#respond #wp-comment-cookies-consent {
+	margin: 0 0 0 10px;
+}
 
 /* Assistive text */
 #access a.assistive-text:focus {
@@ -376,6 +379,10 @@ section.recent-posts .other-recent-posts .comments-link > span {
 	margin-right: 0;
 	margin-left: -10px;
 	text-align: left;
+}
+.widget_text ul,
+.widget_text ol {
+	margin: 0 2.5em 1.625em 0;
 }
 
 /* =Comments

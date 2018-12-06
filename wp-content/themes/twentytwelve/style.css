@@ -4,10 +4,10 @@ Theme URI: https://wordpress.org/themes/twentytwelve/
 Author: the WordPress team
 Author URI: https://wordpress.org/
 Description: The 2012 theme for WordPress is a fully responsive theme that looks great on any device. Features include a front page template with its own widgets, an optional display font, styling for post formats on both index and single views, and an optional no-sidebar page template. Make it yours with a custom menu, header image, and background.
-Version: 1.9
+Version: 2.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: light, gray, white, one-column, two-columns, right-sidebar, fluid-layout, responsive-layout, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
+Tags: blog, one-column, two-columns, right-sidebar, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, footer-widgets, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
 Text Domain: twentytwelve
 
 This theme, like WordPress, is licensed under the GPL.
@@ -642,10 +642,18 @@ section[role="banner"] {
 	margin-bottom: 24px;
 	margin-bottom: 1.714285714rem;
 }
-.widget-area .textwidget ul {
+.widget-area .textwidget ul,
+.widget-area .textwidget ol {
 	list-style: disc outside;
 	margin: 0 0 24px;
 	margin: 0 0 1.714285714rem;
+}
+.widget-area .textwidget li > ul,
+.widget-area .textwidget li > ol {
+	margin-bottom: 0;
+}
+.widget-area .textwidget ol {
+	list-style: decimal;
 }
 .widget-area .textwidget li {
 	margin-left: 36px;
@@ -685,6 +693,12 @@ footer[role="contentinfo"] a {
 }
 footer[role="contentinfo"] a:hover {
 	color: #21759b;
+}
+.site-info span[role=separator] {
+	padding: 0 0.3em 0 0.6em;
+}
+.site-info span[role=separator]::before {
+	content: '\002f';
 }
 
 
@@ -1346,6 +1360,12 @@ a.comment-edit-link:hover {
 	line-height: 2;
 	color: #5e5e5e;
 }
+#respond #wp-comment-cookies-consent {
+	margin: 0 10px 0 0;
+}
+#respond .comment-form-cookies-consent label {
+	display: inline;
+}
 .required {
 	color: red;
 }
@@ -1442,7 +1462,32 @@ a.comment-edit-link:hover {
 	display: block;
 	text-align: right;
 }
+.tagcloud ul {
+	list-style-type: none;
+}
 
+.tagcloud ul li {
+	display: inline-block;
+}
+
+.widget-area .widget.widget_tag_cloud li {
+	line-height: 1;
+}
+.template-front-page .widget-area .widget.widget_tag_cloud li {
+	margin: 0;
+}
+
+.widget-area .gallery-columns-2.gallery-size-full .gallery-icon img,
+.widget-area .gallery-columns-3.gallery-size-full .gallery-icon img,
+.widget-area .gallery-columns-4.gallery-size-full .gallery-icon img,
+.widget-area .gallery-columns-5.gallery-size-full .gallery-icon img,
+.widget-area .gallery-columns-6 .gallery-icon img,
+.widget-area .gallery-columns-7 .gallery-icon img,
+.widget-area .gallery-columns-8 .gallery-icon img,
+.widget-area .gallery-columns-9 .gallery-icon img {
+	height: auto;
+	max-width: 80%;
+}
 
 /* =Plugins
 ----------------------------------------------- */
