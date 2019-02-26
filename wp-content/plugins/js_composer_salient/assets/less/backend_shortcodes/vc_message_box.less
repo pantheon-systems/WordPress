@@ -1,0 +1,30 @@
+//====== VARIABLES
+@import "../shortcodes/vc_message_box/vc_message_box_variables.less";
+//==mixins
+@import "../shortcodes/vc_message_box/vc_message_box_mixins.less";
+
+//====== STYLES
+
+/* ================================
+ * Message box
+ * ================================ */
+.wpb_element_wrapper & {
+  @import "../shortcodes/vc_message_box/vc_message_box_2.less";
+
+  //fix backend spaces
+  .vc_message_box p {
+    font-size: 12px;
+    padding: 0;
+    margin: 1em;
+  }
+
+  .vc_message_box {
+    margin: 0;
+    &.vc_message_box-3d {
+      margin-bottom: @message-box-shadow-width-3d + 4;
+    }
+    .messagebox_text {
+      padding: 0;
+    }
+  }
+}

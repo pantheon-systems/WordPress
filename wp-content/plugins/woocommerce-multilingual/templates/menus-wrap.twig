@@ -1,0 +1,59 @@
+<div class="wrap">
+    <h1>{{ strings.title }}</h1>
+    <nav class="wcml-tabs wpml-tabs">
+        <a class="nav-tab {{ menu.products.active }}" href="{{ menu.products.url }}">{{ menu.products.title }}</a>
+        {%  if can_operate_options %}
+            {% for key, taxonomy in menu.taxonomies %}
+                {% if taxonomy.is_translatable %}
+                    <a class="js-tax-tab-{{ key }} nav-tab {{ taxonomy.active }}" href="{{ taxonomy.url }}" title="{{ taxonomy.title }}">
+                    {{ taxonomy.name }}
+                    {% if taxonomy.translated == false %}<i class="otgs-ico-warning"></i>{% endif %}
+                    </a>
+                {% endif %}
+            {% endfor %}
+            {%  if menu.custom_taxonomies.show  %}
+            <a class="nav-tab tax-custom-taxonomies {{ menu.custom_taxonomies.active }}" href="{{ menu.custom_taxonomies.url }}">
+                {{ menu.custom_taxonomies.name }}
+                {% if menu.custom_taxonomies.translated == false %}<i class="otgs-ico-warning"></i>{% endif %}
+            </a>
+            {% endif %}
+            <a class="nav-tab tax-product-attributes {{ menu.attributes.active }}" href="{{ menu.attributes.url }}">
+                {{ menu.attributes.name }}
+                {% if menu.attributes.translated == false %}<i class="otgs-ico-warning"></i>{% endif %}
+            </a>
+            {% if menu.shipping_classes.is_translatable %}
+                <a class="js-tax-tab-product_shipping_class nav-tab {{ menu.shipping_classes.active }}" href="{{ menu.shipping_classes.url }}"
+                   title="{{ menu.shipping_classes.title }}">{{ menu.shipping_classes.name }}
+                   {% if menu.shipping_classes.translated == false %}<i class="otgs-ico-warning"></i>{% endif %}
+                </a>
+            {% endif %}
+        {% endif %}
+
+        {% if can_manage_options %}
+            <a class="nav-tab {{ menu.settings.active }}" href="{{ menu.settings.url }}">{{ menu.settings.name }}</a>
+        {% endif %}
+        {%  if can_operate_options %}
+            <a class="nav-tab {{ menu.multi_currency.active }}" href="{{ menu.multi_currency.url }}">{{ menu.multi_currency.name }}</a>
+            <a class="nav-tab {{ menu.slugs.active }}" href="{{ menu.slugs.url }}">{{ menu.slugs.name }}</a>
+        {% endif %}
+        {% if can_manage_options %}
+            <a class="nav-tab {{ menu.status.active }}" href="{{ menu.status.url }}">{{ menu.status.name }}</a>
+            {% if menu.troubleshooting.active %}
+                <a class="nav-tab troubleshooting {{ menu.troubleshooting.active }}" href="{{ menu.troubleshooting.url }}">{{ menu.troubleshooting.name }}</a>
+            {% endif %}
+        {% endif %}
+    </nav>
+
+    <div class="wcml-wrap">
+    {{ content|raw }}
+    </div>
+
+    <div class="wcml-wrap wcml-notice otgs-is-dismissible">
+        <p>{{ rate.message|raw }}</p>
+        <button class="notice-dismiss hide-rate-block" data-setting="rate-block">
+                <span class="screen-reader-text">{{ rate.hide_text }}</span>
+        </button>
+        {{ rate.nonce|raw }}
+    </div>
+
+</div>

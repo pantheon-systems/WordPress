@@ -1,0 +1,12 @@
+<p>
+	<label for="wpml-language">{{ strings.label }}</label>
+	<select id="wpml-language" name="wpml_language">
+		{% for language in languages %}
+			<option {{ language.code == selected_language ? 'selected="selected"' }}
+							value="{{ language.code }}">
+				{{ language.native_name }}
+			</option>
+		{% endfor %}
+	</select>
+	<input type="hidden" name="wpml-language-nonce" value="{{ nonce }}">
+</p>

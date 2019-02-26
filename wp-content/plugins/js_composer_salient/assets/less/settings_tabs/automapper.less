@@ -1,0 +1,227 @@
+@import "../backend_shortcodes/rows_columns.less";
+@import "../lib/controls.less";
+@import "../lib/backend_controls.less";
+@import "../backend_shortcodes/empty_containers.less";
+@import "../shortcodes/_shortcodes_container.less";
+
+#vc_settings-automapper {
+  .vc_atm-message {
+    padding: 10px;
+  }
+  .vc_automapper-toolbar {
+    margin-bottom: 15px;
+  }
+  .vc_automapper-list {
+    width: 100%;
+    .vc_automapper-item {
+      label {
+        color: #446591;
+      }
+      display: block;
+      margin: 0 0 1px 0;
+      background: #E7E7E7;
+      padding: 10px;
+      .vc_automapper-item-controls {
+        a {
+          display: block;
+          float: right;
+          cursor: pointer;
+          background-image: url('../vc/atm_controls.png');
+          background-repeat: no-repeat;
+          width: 16px;
+          height: 16px;
+          &.vc_automapper-edit-btn {
+            background-position: -16px -32px;
+            margin-right: 5px;
+          }
+          &.vc_automapper-delete-btn {
+          }
+          background-position: -16px -64px;
+        }
+      }
+    }
+  }
+  .vc_add-form-atm {
+    padding: 15px;
+    border: 1px solid #e5e5e5;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    label {
+      font-size: 16px;
+    }
+    .description {
+      display: block;
+    }
+    .vc_wrapper {
+      display: table;
+      margin: 10px 0;
+      .vc_string {
+        display: table-cell;
+        width: 100%;
+        padding: 0;
+        input {
+          .box-sizing(border-box);
+          width: 100%;
+        }
+      }
+      .vc_buttons {
+        width: 190px;
+        margin-left: 10px;
+        display: inline-block;
+        .button {
+          margin-top: -6px;
+        }
+      }
+    }
+  }
+  .vc_edit-form {
+    h4 {
+      margin: 0.5em 0;
+      font-size: 16px;
+      font-weight: normal;
+    }
+    .vc_line {
+      height: 1px;
+      margin: 0;
+      background: #e3e3e3;
+    }
+    .vc_wrapper {
+      padding: 15px;
+      position: relative;
+    }
+    .vc_shortcode-preview {
+      text-align: center;
+      width: 90%;
+      margin: 15px auto;
+      padding: 10px;
+      background: #f2f2f2;
+      border: 1px solid #e3e3e3;
+      color: #8a8a8a;
+      .vc_active {
+        color: #0074A2;
+      }
+    }
+    .vc_field {
+      float: left;
+      padding: 5px;
+      width: 48%;
+      .box-sizing(border-box);
+      label {
+        padding: 0;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 6px;
+        height: 22px;
+        width: 30%;
+        font-weight: bold;
+      }
+      input[type=text], textarea {
+        width: 65%;
+        float: right;
+      }
+      &.vc_is-container {
+        clear: both;
+        float: none;
+        label {
+          margin-left: 30%;
+          width: 65%;
+        }
+      }
+      &.vc_description {
+        float: right;
+        textarea {
+          height: 70px;
+        }
+      }
+    }
+    .vc_add-param {
+      position: absolute;
+      top: 18px;
+      right: 15px;
+    }
+    .vc_params {
+      margin-top: 30px;
+      display: table;
+      width: 100%;
+      .vc_param {
+        .vc_fields {
+          .vc_param-field {
+            display: inline-block;
+            height: auto;
+            vertical-align: top;
+            padding: 3px 6px 3px 8px;
+            .box-sizing(border-box);
+            width: 19%;
+            label {
+              font-weight: bold;
+              padding: 6px 0;
+              display: block;
+            }
+            .description {
+              margin: 6px 0;
+              display: block;
+            }
+            input[type=text], select, textarea {
+              width: 100%;
+            }
+          }
+          // 782 because it is wordpress value
+          @media (max-width: 782px) {
+            .vc_param-field {
+              width: 100%;
+              float: left;
+            }
+          }
+        }
+        &.vc_content {
+          .vc_delete-param {
+            display: none;
+          }
+        }
+      }
+      .vc_sortable-placeholder {
+        height: 30px;
+        background: url(../vc/pattern.gif);
+      }
+    }
+    > .vc_buttons {
+      clear: both;
+      background-color: #F7F7F7;
+      padding: 15px;
+      .vc_atm-delete {
+        float: right;
+        clear: both;
+      }
+    }
+  }
+  // Widget like style
+  .widget {
+    .widget-top {
+      cursor: pointer;
+      .vc_atm-header {
+        display: block;
+        margin: 0;
+        padding: 7px 15px;
+        line-height: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        .user-select(none);
+      }
+    }
+    &.vc_opened {
+      .vc_header-name {
+        width: 245px;
+      }
+      .widget-top {
+        cursor: default;
+        background: #f1f1f1;
+        .toggle-indicator:after { display: none; }
+        .toggle-indicator:before {
+          content: '\f142';
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

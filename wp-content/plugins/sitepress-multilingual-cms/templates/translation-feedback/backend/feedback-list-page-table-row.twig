@@ -1,0 +1,42 @@
+<tr id="wpml-tf-feedback-{{ feedback.get_id }}" data-feedback-id="{{ feedback.get_id }}"
+    class="js-wpml-tf-feedback wpml-tf-feedback hentry{% if feedback.is_pending %} wpml-tf-feedback-pending{% endif %}">
+    <th scope="row" class="check-column">
+        <label class="screen-reader-text" for="cb-select-{{ feedback.get_id }}">{{ strings.select_validation }}</label>
+        <input id="cb-select-{{ feedback.get_id }}" type="checkbox" name="feedback_ids[]"
+               value="{{ feedback.get_id }}"{% if not has_admin_capabilities %} disabled="disabled"{% endif %}>
+    </th>
+    <td class="feedback column-feedback has-row-actions column-primary" data-colname="{{ strings.columns.feedback }}">
+        {% set short_desc = feedback.get_content|length > 50 ? feedback.get_content|slice(0, 50) ~ '...' : feedback.get_content|default('---') %}
+        <a class="js-wpml-tf-open-details row-feedback" href="#">{{ short_desc }}</a>
+
+        <div class="row-actions">
+        {% if is_in_trash and has_admin_capabilities %}
+            <span class="js-wpml-tf-untrash"><a href="#">{{ strings.inline_actions.untrash }}</a></span> |
+            <span class="js-wpml-tf-delete delete"><a href="#" class="submitdelete">{{ strings.inline_actions.delete }}</a></span>
+        {% elseif has_admin_capabilities %}
+            <span class="review"><a class="js-wpml-tf-open-details" href="#">{{ strings.inline_actions.review }}</a></span> |
+            <span class="js-wpml-tf-trash trash"><a href="#" class="submittrash">{{ strings.inline_actions.trash }}</a></span>
+        {% elseif not is_in_trash %}
+            <span class="review"><a class="js-wpml-tf-open-details" href="#">{{ strings.inline_actions.review }}</a></span>
+        {% endif %}
+        </div>
+    </td>
+    <td class="rating column-rating" data-colname="{{ strings.columns.rating }}">
+        {% for i in 1..5 %}
+            <span class="otgs-ico-star{% if i <= feedback.get_rating %} full-star{% endif %}"></span>
+        {% endfor %}
+    </td>
+    <td class="status column-status" data-colname="{{ strings.columns.status }}">
+        {{ feedback.get_text_status }}
+    </td>
+    <td class="document_url column-document" data-colname="{{ strings.columns.document }}">
+        <a href="{{ feedback.get_document_information.get_url }}" target="_blank">{{ feedback.get_document_information.get_title }}</a>
+
+        <div class="row-actions">
+            <a href="{{ feedback.get_document_information.get_url }}" target="_blank">{{ strings.inline_actions.view_post }}</a>
+        </div>
+    </td>
+    <td class="date column-date" data-colname="{{ strings.columns.date }}">
+        {{ feedback.get_date_created|date('d/m/Y') }}
+    </td>
+</tr>

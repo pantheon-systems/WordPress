@@ -1,0 +1,585 @@
+.cs-admin {
+	margin: 10px auto 0 auto;
+	padding-right: 20px;
+	min-width: 960px;
+}
+
+.cs-admin a {
+	text-decoration: none;
+	outline: none;
+	cursor: pointer;
+	box-shadow: none;
+}
+
+.cs-admin input[name='cs-slide-background_type_color'][value='1'] {
+	margin-top: 8px;
+}
+
+.cs-admin .wp-picker-container {
+	display: inline-block;
+}
+
+.cs-admin .cs-style-list {
+	list-style-type: disc;
+	padding-left: 20px;
+}
+
+.cs-admin .cs-close,
+.cs-admin .cs-duplicate {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	cursor: pointer;
+    margin-top: -3px;
+	vertical-align: middle;
+}
+
+.cs-admin .cs-close {
+	background-image: url('../images/close.png');
+    margin-left: 5px;
+}
+
+.cs-admin .cs-duplicate {
+	background-image: url('../images/plus.png');
+    margin-left: 10px;
+}
+
+.cs-admin .cs-button {
+	position: relative;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 5px 14px;
+	border: 1px solid transparent;
+	border-radius: 2px;
+	background-color: transparent;
+	color: inherit;
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+	text-transform: none;
+	white-space: normal;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 13px;
+	line-height: 20px;
+	cursor: pointer;
+	-webkit-transition: all .15s ease;
+	transition: all .15s ease;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-appearance: none;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+.cs-admin .cs-button:hover,.cs-button:focus {
+	outline: 0;
+	text-decoration: none;
+}
+
+.cs-admin .cs-button:active,.cs-button.cs-is-active {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	text-decoration: none;
+}
+
+.cs-admin .cs-button[disabled],
+.cs-admin .cs-button.cs-is-disabled {
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.cs-admin .cs-button.cs-is-default {
+	border-color: #656d78;
+	background-color: #f5f7fa;
+	color: #434a54;
+}
+
+.cs-admin .cs-button.cs-is-default:hover,.cs-button.cs-is-default:focus {
+	border-color: #737c89;
+	background-color: #FFF;
+}
+
+.cs-admin .cs-button.cs-is-default:active,
+.cs-admin .cs-button.cs-is-default.cs-is-active {
+	border-color: #575e67;
+	background-color: #e1e7f0;
+}
+
+.cs-admin .cs-button.cs-is-primary {
+	border-color: #2494be;
+	background-color: #3bafda;
+	color: #FFF;
+}
+
+.cs-admin .cs-button.cs-is-primary:hover,
+.cs-admin .cs-button.cs-is-primary:focus {
+	border-color: #2aa8d7;
+	background-color: #55badf;
+}
+
+.cs-admin .cs-button.cs-is-primary:active,
+.cs-admin .cs-button.cs-is-primary.cs-is-active {
+	border-color: #1f80a4;
+	background-color: #27a2cf;
+}
+
+.cs-admin .cs-button.cs-is-secondary {
+	border-color: #7652d1;
+	background-color: #967adc;
+	color: #FFF;
+}
+
+.cs-admin .cs-button.cs-is-secondary:hover,
+.cs-admin .cs-button.cs-is-secondary:focus {
+	border-color: #896ad7;
+	background-color: #a992e2;
+}
+
+.cs-admin .cs-button.cs-is-secondary:active,
+.cs-admin .cs-button.cs-is-secondary.cs-is-active {
+	border-color: #633acb;
+	background-color: #8362d6;
+}
+
+.cs-admin .cs-button.cs-is-success {
+	border-color: #72a53b;
+	background-color: #8cc152;
+	color: #FFF;
+}
+
+.cs-admin .cs-button.cs-is-success:hover,
+.cs-admin .cs-button.cs-is-success:focus {
+	border-color: #82bc43;
+	background-color: #9bc969;
+}
+
+.cs-admin .cs-button.cs-is-success:active,
+.cs-admin .cs-button.cs-is-success.cs-is-active {
+	border-color: #628e33;
+	background-color: #7db440;
+}
+
+.cs-admin .cs-button.cs-is-warning {
+	border-color: #f4a911;
+	background-color: #f6bb42;
+	color: #FFF;
+}
+
+.cs-admin .cs-button.cs-is-warning:hover,
+.cs-admin .cs-button.cs-is-warning:focus {
+	border-color: #f5b42e;
+	background-color: #f7c65f;
+}
+
+.cs-admin .cs-button.cs-is-warning:active,
+.cs-admin .cs-button.cs-is-warning.cs-is-active {
+	border-color: #dc970a;
+	background-color: #f5b025;
+}
+
+.cs-admin .cs-button.cs-is-danger {
+	border-color: #c42737;
+	background-color: #da4453;
+	color: #FFF;
+}
+
+.cs-admin .cs-button.cs-is-danger:hover,
+.cs-admin .cs-button.cs-is-danger:focus {
+	border-color: #d63344;
+	background-color: #df5e6a;
+}
+
+.cs-admin .cs-button.cs-is-danger:active,
+.cs-admin .cs-button.cs-is-danger.cs-is-active {
+	border-color: #aa2230;
+	background-color: #d52a3c;
+}
+
+.cs-admin .cs-button.cs-is-inverse {
+	border-color: #434a54;
+	background-color: #656d78;
+	color: #FFF;
+}
+
+.cs-admin .cs-button.cs-is-inverse:hover,
+.cs-admin .cs-button.cs-is-inverse:focus {
+	border-color: #515965;
+	background-color: #737c89;
+}
+
+.cs-admin .cs-button.cs-is-inverse:active,
+.cs-admin .cs-button.cs-is-inverse.cs-is-active {
+	border-color: #353b43;
+	background-color: #575e67;
+}
+
+.cs-admin .cs-table {
+	overflow:hidden;
+	border:1px solid #d3d3d3;
+	background:#fefefe;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	width: 100%;
+	border-spacing: 0px;
+	border-collapse: separate;
+	clear: left;
+	position: relative;
+	z-index: 999;
+}
+
+.cs-admin .cs-table th,
+.cs-admin .cs-table td {
+	padding:15px 28px;
+}
+
+.cs-admin .cs-table th {
+	padding-top: 15px;
+	text-shadow: 1px 1px 1px #fff;
+	background: #e8eaeb;
+}
+
+.cs-admin .cs-table td {
+	border-top: 1px solid #e0e0e0;
+	border-right: 1px solid #e0e0e0;
+}
+
+.cs-admin .cs-table td input[type=checkbox] {
+	vertical-align: bottom;
+}
+
+.cs-admin .cs-table td:last-child {
+	border-right: none;
+}
+
+.cs-admin .cs-table tr.odd-row td {
+	background: #f6f6f6;
+}
+
+.cs-admin .cs-table td.first,
+.cs-admin .cs-table th.first {
+	text-align: left;
+}
+
+.cs-admin .cs-table td.last {
+	border-right: none;
+}
+
+.cs-admin .cs-table tr.odd-row td {
+	background: -moz-linear-gradient(100% 25% 90deg, #f6f6f6, #f1f1f1);
+	background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f1f1f1), to(#f6f6f6));
+}
+
+.cs-admin .cs-table th {
+	background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);
+	background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));
+}
+
+.cs-admin .cs-table tr:first-child th.first {
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+}
+
+.cs-admin .cs-table tr:first-child th.last {
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+}
+
+.cs-admin .cs-table tr:last-child td.first {
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+}
+
+.cs-admin .cs-table tr:last-child td.last {
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+}
+
+.cs-admin .cs-table .cs-table-header {
+	text-align: center;
+	font-weight: bold;
+}
+
+.cs-admin .cs-table .cs-name,
+.cs-admin .cs-table .cs-description {
+	width: 25%;
+}
+
+.cs-admin .cs-table .cs-content {
+	width: 50%;
+}
+
+.cs-admin textarea {
+	width: 100%;
+	height: 200px;
+}
+
+.cs-admin #cs-slider-name {
+	width: 100%;
+	padding: 10px;
+}
+
+.cs-admin .cs-message {
+	padding: 15px;
+	border-radius: 4px;
+	border: solid 1px;
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+.cs-admin .cs-message.cs-message-ok {
+	background-color: #dff0d8;
+	border-color: #72a53b;
+	color: #3c763d;
+}
+
+.cs-admin .cs-message.cs-message-error {
+	background-color: #f2dede;
+	border-color: #c42737;
+	color: #a94442;
+}
+
+.cs-admin .cs-message.cs-message-warning {
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-color: #f4a911;
+}
+
+.cs-admin .cs-message.cs-message-wait {
+	color: #444444;
+	background-color: #e6e6e6;
+	border-color: #525252;
+}
+
+#cs-slides {
+	display: none;
+}
+
+.cs-admin .cs-slides .cs-slide-build {
+	border: solid 1px #ddd;
+}
+
+.cs-admin .cs-tabs > ul {
+	width: auto;
+}
+
+.cs-admin .cs-tabs > ul {
+	margin: 0;
+}
+
+.cs-admin .cs-tabs > ul > li {
+	float: left;
+	margin-bottom: 0;
+	padding-right: 20px;
+	margin-right: 20px;
+	border-right: solid 1px #ddd;
+	text-transform: uppercase;
+	font-weight: bold;
+	outline: none;
+	display: block;
+	white-space: nowrap;
+}
+
+.cs-admin .cs-tabs.cs-tabs-border > ul > li {
+	border-top: solid 1px #ddd;
+	margin-right: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.cs-admin .cs-tabs.cs-tabs-border > ul > li:hover,
+.cs-admin .cs-tabs.cs-tabs-border > ul > li.active {
+	background-color: #e9e9e9;
+}
+
+.cs-admin .cs-tabs > ul > li > a {
+	margin-left: 5px;
+}
+
+.cs-admin .cs-tabs.cs-tabs-border > ul > li:first-child {
+	border-left: solid 1px #ddd;
+}
+
+.cs-admin .cs-tabs.cs-tabs-border > ul > li:last-child {
+	border-right: solid 1px #ddd;
+}
+
+.cs-admin .cs-tabs > ul > li:last-child {
+	border-right: none;
+}
+
+.cs-admin .cs-slide-tabs > ul > li,
+.cs-admin .cs-slide-tabs > ul > li > a {
+	cursor: move;
+}
+
+.cs-admin .cs-slide-tabs > ul > li > a > .cs-slide-name-text {
+	cursor: pointer;
+}
+
+.cs-admin .cs-slide-tabs > ul > li.ui-state-disabled,
+.cs-admin .cs-slide-tabs > ul > li.ui-state-disabled a {
+	cursor: pointer;
+}
+
+.cs-admin .cs-icon {
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+}
+
+.cs-admin .cs-icon.icon-settings {
+	background-image: url('../images/settings.png');
+}
+.cs-admin .cs-icon.icon-edit {
+	background-image: url('../images/edit.png');
+}
+
+.cs-admin .cs-slide-build {
+	margin: 0 auto;
+}
+
+.cs-admin .cs-slides-list > .cs-slide,
+.cs-admin .cs-void-slide {
+	display: none;
+}
+
+.cs-admin #cs-slides .cs-slides-list .cs-slide-settings-list form {
+	display: inline;
+}
+
+.cs-admin #cs-slides .cs-slides-list .cs-slide-settings-list .cs-slide-background_type_color-picker-input {
+	display: none !important;
+}
+
+.cs-admin .wp-picker-holder {
+	position: absolute;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area {
+  position: relative;
+  background-color: #fff;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  margin: 0 auto;
+  line-height: 1.5;
+  white-space: nowrap;
+
+  line-height: 1.5;
+  font-size: 14px;
+  color: #000;
+  font-family: 'Verdana', sans-serif;
+
+  /* Default slide background settings: */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area a {
+	color: #0073aa;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area a:hover {
+	color: #0073aa;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area:before,
+.cs-admin .cs-slide .cs-slide-editing-area:after{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.4);
+  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area:after{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
+.cs-admin .cs-slide .cs-elements .cs-elements-actions {
+	text-align: center;
+	z-index: 999;
+	position: relative;
+}
+
+.cs-admin .cs-slide .cs-elements .cs-void-element-settings {
+	display: none;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area .cs-element {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	left: 0;
+	top: 0;
+	cursor: move;
+	font-size: 14px;
+}
+
+.crellyslider ul li * {
+	cursor: auto !important;
+}
+
+.cs-admin .cs-slide .cs-slide-live-preview-area > ul,
+.cs-admin .cs-slide .cs-slide-live-preview-area > ul > li {
+	margin: 0;
+	padding: 0;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area .cs-video-element {
+	min-width: 560px;
+	min-height: 315px;
+	background-color: #000;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area .cs-video-element .cs-avoid-interaction {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.cs-admin .cs-slide .cs-slide-editing-area .cs-element.active {
+	-webkit-box-shadow: 0px 0px 0px 2px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 0px 0px 0px 2px rgba(50, 50, 50, 0.75);
+	box-shadow: 0px 0px 0px 2px rgba(50, 50, 50, 0.75);
+}
+
+.cs-admin .cs-slide .cs-elements .cs-text-element-settings .cs-switch-editor {
+	margin-bottom: 15px;
+	text-align: right;
+}
+
+.cs-admin .cs-slide .cs-elements .cs-text-element-settings .mce-toolbar {
+	display: block !important;
+}

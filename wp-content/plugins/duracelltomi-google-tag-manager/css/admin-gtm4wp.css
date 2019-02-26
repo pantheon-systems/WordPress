@@ -1,0 +1,72 @@
+.tabinfo {
+	display: block;
+	clear: both;
+	margin: 20px 10px;
+}
+
+.gtm4wp-plugin-active {
+	color: #0c0;
+}
+
+.gtm4wp-plugin-not-active {
+	color: #c00;
+}
+
+.adminsubtabs {
+	list-style: none;
+	margin: 16px 0;
+	padding: 0;
+	font-size: 13px;
+	float: left;
+	color: #666;
+}
+
+.adminsubtabs li {
+	display: inline-block;
+	margin: 0;
+	padding: 0 10px;
+	white-space: nowrap;
+	border-right: 1px solid #666;
+}
+
+.adminsubtabs li:last-child {
+	border-right: 0;
+}
+
+.adminsubtabs a {
+	padding: .2em;
+	text-decoration: none;
+}
+
+.adminsubtabs a.subtab-active {
+	color: #000;
+	font-weight: bold;
+}
+
+.gtm4wp-phase-beta,
+.gtm4wp-phase-experimental,
+.gtm4wp-phase-deprecated {
+	display: inline-block;
+	background-color: #f00;
+	color: #fff;
+	font-size: 9px;
+	padding: 2px;
+	margin-left: 5px;
+}
+
+.gtm4wp-phase-beta:before {
+	content: "beta";
+}
+
+.gtm4wp-phase-deprecated {
+	background-color: #ddd;
+	color: #000;
+}
+
+.gtm4wp-phase-experimental:before {
+	content: "experimental";
+}
+
+.gtm4wp-phase-deprecated:before {
+	content: "deprecated";
+}

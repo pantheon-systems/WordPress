@@ -1,0 +1,146 @@
+@stop_standalone_compiling: @vc_grey;
+/* Progress bar
+---------------------------------------------------------- */
+.vc_progress_bar {
+  .vc_single_bar {
+    background: @vc_progress_bar_bg;
+    position: relative;
+    margin-bottom: @vc_margin_bottom_third;
+    .box-shadow(0 1px 2px rgba(0, 0, 0, 0.1) inset);
+    .border-radius(3px);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .vc_label {
+      display: block;
+      padding: 0.5em 1em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vc_bar {
+      display: block;
+      position: absolute;
+      height: 100%;
+      background-color: #e0e0e0;
+      width: 0%;
+      top: 0;
+      left: 0;
+      .border-radius(3px);
+      .wpb_transition(width, 1s, linear);
+
+      &.striped {
+        background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+        -webkit-background-size: 40px 40px;
+        -moz-background-size: 40px 40px;
+        -o-background-size: 40px 40px;
+        background-size: 40px 40px;
+      }
+      &.animated {
+        -webkit-animation: progress-bar-stripes 2s linear infinite;
+        -moz-animation: progress-bar-stripes 2s linear infinite;
+        -ms-animation: progress-bar-stripes 2s linear infinite;
+        -o-animation: progress-bar-stripes 2s linear infinite;
+        animation: progress-bar-stripes 2s linear infinite;
+      }
+    }
+  }
+
+  .make-bar-colors(@name, @background-color, @text-color:#ffffff, @text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25)) {
+    &.vc_progress-bar-color-@{name} {
+      .vc_single_bar .vc_bar {
+        background-color: @background-color;
+      }
+      .vc_single_bar .vc_label {
+        color: @text-color;
+        text-shadow: @text-shadow;
+      }
+    }
+    // allow custom for all
+    .vc_general.vc_single_bar.vc_progress-bar-color-@{name} .vc_bar {
+      background-color: @background-color;
+    }
+    .vc_general.vc_single_bar.vc_progress-bar-color-@{name} .vc_label {
+      color: @text-color;
+      text-shadow: @text-shadow;
+    }
+  }
+
+  // Old-Classic colors
+  .make-bar-colors(~'bar_blue', #0074CC);
+  .make-bar-colors(~'bar_turquoise', #49afcd);
+  .make-bar-colors(~'bar_green', #5bb75b);
+  .make-bar-colors(~'bar_orange', #faa732);
+  .make-bar-colors(~'bar_red', #da4f49);
+  .make-bar-colors(~'bar_black', #414141);
+  // New-Style colors
+  .make-bar-colors(~'blue', @blue);
+  .make-bar-colors(~'turquoise', @turquoise);
+  .make-bar-colors(~'pink', @pink);
+  .make-bar-colors(~'violet', @violet);
+  .make-bar-colors(~'peacoc', @peacoc);
+  .make-bar-colors(~'chino', @chino);
+  .make-bar-colors(~'mulled-wine', @mulled_wine);
+  .make-bar-colors(~'vista_blue', @vista_blue);
+  .make-bar-colors(~'vista-blue', @vista_blue);
+  .make-bar-colors(~'black', @black);
+  .make-bar-colors(~'grey', @grey, #666666);
+  .make-bar-colors(~'orange', @orange);
+  .make-bar-colors(~'sky', @sky);
+  .make-bar-colors(~'green', @green);
+  .make-bar-colors(~'juicy-pink', @juicy_pink);
+  .make-bar-colors(~'sandy-brown', @sandy_brown);
+  .make-bar-colors(~'purple', @purple);
+  .make-bar-colors(~'white', @white, #666666);
+
+}
+
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-moz-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-ms-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}

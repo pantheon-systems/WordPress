@@ -1,0 +1,22 @@
+{%  if position == "header" %}
+<thead>
+{% elseif position == "footer" %}
+<tfoot>
+{% endif %}
+    <tr>
+        <td class="check-column">
+            <input type="checkbox">
+        </td>
+        <th>{{ component }}</th>
+        <th>{{ domain }}</th>
+        <th class="wpml-col-center"><span class="otgs-ico-translated" title="{{ completed_title }}"></span></th>
+        <th class="wpml-col-center"><span class="otgs-ico-needs-update" title="{{ needs_update_title }}"></span></th>
+        {% if 'plugin' == type %}
+        <th></th>
+        {% endif %}
+    </tr>
+{%  if position == "header" %}
+</thead>
+{% elseif position == "footer" %}
+</tfoot>
+{% endif %}

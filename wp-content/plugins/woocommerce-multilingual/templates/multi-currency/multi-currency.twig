@@ -1,0 +1,276 @@
+
+{{ wp_do_action( 'wcml_before_multi_currency_ui' ) }}
+
+
+<form method="post" action="{{ form.action }}" id="wcml_mc_options">
+    {{ form.nonce|raw }}
+    <input type="hidden" id="wcml_save_currency_nonce" value="{{ form.save_currency_nonce }}"/>
+    <input type="hidden" id="del_currency_nonce" value="{{ form.del_currency_nonce }}" />
+    <input type="hidden" id="currencies_list_nonce" value="{{ form.currencies_list_nonce }}" />
+    <input type="hidden" name="action" value="save-mc-options" />
+
+    <div class="wcml-section ">
+        <div class="wcml-section-header">
+            <h3>{{ strings.headers.enable_disable }}</h3>
+        </div>
+        <div class="wcml-section-content wcml-section-content-wide">
+            <p>
+                <input type="checkbox" name="multi_currency" id="multi_currency_independent" value="{{ form.multi_currency_option }}"
+                    {% if multi_currency_on %}checked="checked"{% endif %} {% if mco_disabled %}disabled="disabled"{% endif %} />
+                <label for="multi_currency_independent">
+                    {{ form.label_mco }}
+                    &nbsp;
+                    <a href="{{ form.label_mco_learn_url }}">{{ form.label_mco_learn_txt }}</a>
+                </label>
+            </p>
+
+            {% if wc_currency is empty %}
+            <p>
+                <i class="icon-warning-sign"></i>
+                {{ wc_currency_empty_warn|raw }}
+            </p>
+            {% endif %}
+
+        </div>
+    </div>
+
+    {% if wc_currency %}
+    <div class="wcml-section" id="multi-currency-per-language-details" {% if wcml_settings.enable_multi_currency != form.multi_currency_option %}style="display:none"{% endif %}>
+
+        <div class="wcml-section-header">
+            <h3>{{ strings.headers.currencies }}</h3>
+        </div>
+
+        <div class="wcml-section-content wcml-section-content-wide">
+            <div>
+                <div class="currencies-table-content">
+
+                    <div class="tablenav top clearfix">
+                        <button type="button" class="button-secondary wcml_add_currency alignright js-wcml-dialog-trigger"
+                                data-dialog="wcml_currency_options_" data-content="wcml_currency_options_" data-width="480" data-height="580">
+                            <i class="otgs-ico-add otgs-ico-sm"></i>
+                            {{ strings.add_currency_button }}
+                        </button>
+                    </div>
+                    <input type="hidden" id="update_currency_lang_nonce" value="{{ form.update_currency_lang_nonce }}"/>
+
+                    <table class="widefat currency_table" id="currency-table">
+                        <thead>
+                            <tr>
+                                <th class="wcml-col-currency">{{ strings.currencies_table.head_currency }}</th>
+                                <th class="wcml-col-rate">{{ strings.currencies_table.head_rate }}</th>
+                                <th class="wcml-col-edit"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="wcml-row-currency">
+                                <td class="wcml-col-currency">
+                                    <span class="truncate">{{ attribute(wc_currencies, wc_currency)|raw }}</span>
+                                    <small>{{ positioned_price|raw }}</small>
+                                </td>
+                                <td class="wcml-col-rate"><span class="truncate">{{ strings.currencies_table.default }}</span></td>
+                                <td class="wcml-col-edit">
+                                    <a href="#" title="{{ strings.currencies_table.edit }}" class="edit_currency js-wcml-dialog-trigger hidden" data-height="530" data-width="480">
+                                        <i class="otgs-ico-edit" title="{{ strings.currencies_table.edit }}"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+
+                            {% for code, currency in currencies %}
+                            <tr id="currency_row_{{ code }}" class="wcml-row-currency">
+                                <td class="wcml-col-currency">
+                                    <span class="truncate">{{ attribute(wc_currencies, code)|raw }}</span>
+                                    <small>{{ attribute( currencies_positions, code )|raw }}</small>
+                                </td>
+                                <td class="wcml-col-rate">
+                                    1 {{ wc_currency }} = <span class="rate">{{ currency.rate }}</span> {{ code }}
+                                </td>
+
+                                <td class="wcml-col-edit">
+                                    <a href="#" title="{{ strings.currencies_table.edit }}" class="edit_currency js-wcml-dialog-trigger"
+                                            data-currency="{{ code }}" data-content="wcml_currency_options_{{ code }}"  data-dialog="wcml_currency_options_{{ code }}"
+                                            data-height="530" data-width="480">
+                                        <i class="otgs-ico-edit" title="{{ strings.currencies_table.edit }}"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            <tr class="default_currency">
+                                <td colspan="3">{{ strings.currencies_table.default_currency }}
+                                    <i class="wcml-tip otgs-ico-help" data-tip="{{ strings.currencies_table.default_cur_tip }}"></i>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <div class="currency_wrap">
+                        <div class="currency_inner">
+                            <table class="widefat currency_lang_table" id="currency-lang-table">
+                                <thead>
+                                    <tr>
+                                        <td colspan="{{ active_languages|length }}">{{ strings.currencies_table.help_title }}</td>
+                                    </tr>
+                                    <tr>
+                                        {% for language in active_languages %}
+                                        <th>
+                                            <img src="{{ get_flag_url(language.code) }}" width="18" height="12"/>
+                                        </th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="wcml-row-currency-lang">
+                                        {% for language in active_languages %}
+                                        <td class="currency_languages">
+                                            <ul>
+                                                {% set title_yes = strings.currencies_table.disable_for|format( get_currency_name(wc_currency), language.display_name ) %}
+                                                {% set title_no  = strings.currencies_table.enable_for|format( get_currency_name(wc_currency), language.display_name ) %}
+                                                <li class="on" data-lang="{{ language.code }}">
+                                                    <a class="{% if is_currency_on(wc_currency, language.code) %}otgs-ico-yes{% else %} otgs-ico-no{% endif %}"
+                                                       data-language="{{ language.code }}" data-currency="{{ wc_currency }}" href="#"
+                                                        {% if is_currency_on(wc_currency, language.code) %}
+                                                            title="{{ title_yes }}" data-title-alt="{{ title_no }}"
+                                                        {% else %}
+                                                            title="{{ title_no }}" data-title-alt="{{ title_yes }}"
+                                                        {% endif %}
+                                                    ></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+
+                                    {% for code, currency in currencies %}
+                                    <tr id="currency_row_langs_{{ code }}" class="wcml-row-currency-lang">
+                                        {% for language in active_languages %}
+                                        <td class="currency_languages">
+                                            <ul>
+                                                {% set title_yes = strings.currencies_table.disable_for|format( get_currency_name(code), language.display_name ) %}
+                                                {% set title_no  = strings.currencies_table.enable_for|format( get_currency_name(code), language.display_name ) %}
+                                                <li class="on" data-lang="{{ language.code }}">
+                                                    <a class="{% if is_currency_on(code, language.code) %}otgs-ico-yes{% else %} otgs-ico-no{% endif %}"
+                                                       data-language="{{ language.code }}" data-currency="{{ code }}" href="#"
+                                                       {% if is_currency_on(wc_currency, language.code) %}
+                                                           title="{{ title_yes }}" data-title-alt="{{ title_no }}"
+                                                       {% else %}
+                                                           title="{{ title_no }}" data-title-alt="{{ title_yes }}"
+                                                       {% endif %}
+                                                    ></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+
+                                    <tr class="wcml-row-currency-lang empty-currency-language-row hidden">
+                                        {% for language in active_languages %}
+                                            <td class="currency_languages">
+                                                <ul>
+                                                    <li class="on" data-lang="{{ language.code }}">
+                                                        <a class="otgs-ico-yes"
+                                                           data-language="{{ language.code }}" data-currency="" href="#"
+                                                           title="{{ strings.currencies_table.disable_for|format( '%code%', language.display_name ) }}"
+                                                           data-title-alt="{{ strings.currencies_table.enable_for|format( '%code%', language.display_name ) }}"></a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+
+                                    <tr class="default_currency">
+                                        {% for language in active_languages %}
+                                        <td align="center">
+                                            <select rel="{{ language.code }}">
+                                                <option value="0" {% if get_language_currency(language.code) == 0 %}selected="selected"{% endif %}>{{ strings.currencies_table.keep_currency }}</option>
+                                                {% if is_currency_on(wc_currency, language.code) %}
+                                                <option value="{{ wc_currency }}" {% if get_language_currency(language.code) == wc_currency %}selected="selected"{% endif %}>{{ wc_currency }}</option>
+                                                {% endif %}
+
+                                                {% for code, currency in currencies %}
+                                                {% if is_currency_on(code, language.code) %}
+                                                <option value="{{ code }}" {% if get_language_currency(language.code) == code %}selected="selected"{% endif %}>{{ code }}</option>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <input type="hidden" id="wcml_update_default_currency_nonce" value="{{ form.wpdate_default_cur_nonce }}" />
+
+                        </div>
+                    </div>
+
+                    <table class="widefat currency_delete_table" id="currency-delete-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="currency_default wcml-row-currency-del">
+                                <td class="wcml-col-delete">
+                                    <a title="{{ strings.currencies_table.delete }}" class="delete_currency hidden">
+                                    <i class="otgs-ico-delete" title="{{ strings.currencies_table.delete }}"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            {% for code, currency in currencies %}
+                            <tr id="currency_row_del_{{ code }}" class="wcml-row-currency-del">
+                                <td class="wcml-col-delete">
+                                    <a title="{{ strings.currencies_table.delete }}" class="delete_currency"
+                                        data-currency_name="{{ attribute(wc_currencies, code) }}"
+                                        data-currency_symbol="{{ get_currency_symbol(code) }}"
+                                        data-currency="{{ code }}" href="#">
+                                        <i class="otgs-ico-delete" title="{{ strings.currencies_table.delete }}"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            <tr class="default_currency">
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <ul id="display_custom_prices_select">
+                    <li>
+                        <input type="checkbox" name="display_custom_prices" id="display_custom_prices"
+                           value="1" {% if form.custom_prices_select.checked %} checked="checked"{% endif %}>
+                        <label for="display_custom_prices">{{ form.custom_prices_select.label }}</label>
+                        <i class="otgs-ico-help wcml-tip" data-tip="{{ form.custom_prices_select.tip }}"></i>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+    {% include 'exchange-rates.twig' with exchange_rates %}
+
+    {{ wp_do_action( 'wcml_before_currency_switcher_options' ) }}
+
+    {% include 'currency-switcher-options.twig' %}
+
+    <input type="hidden" id="wcml_warn_message" value="{{ form.navigate_warn }}" />
+    <input type="hidden" id="wcml_warn_disable_language_massage" value="{{ form.cur_lang_warn }}" />
+
+    <p class="wpml-margin-top-sm">
+        <input id="wcml_mc_options_submit" type='submit' value='{{ form.submit }}' class='button-primary'/>
+    </p>
+
+    {% endif %}
+
+</form>

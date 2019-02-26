@@ -1,0 +1,10 @@
+<select  class="wpml-select2-button js-change-translation-priority" id="icl-st-change-translation-priority-selected" disabled="disabled">
+    <option value="">{{ strings.empty_text|e }}</option>
+    {% for translation_priority in translation_priorities %}
+        <option value="{{ translation_priority.name }}">
+            {{ translation_priority.name }}
+        </option>
+    {% endfor %}
+</select>
+
+{{ nonce|raw }}

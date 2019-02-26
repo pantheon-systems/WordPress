@@ -1,0 +1,77 @@
+/* === Upgrade to Premium Landing page === */
+
+#upgrade-to-premium{
+    width: 900px;
+}
+#upgrade-to-premium h1{
+    font-family: 'Raleway',san-serif;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+    color: #808a97;
+}
+
+#upgrade-to-premium h3{
+    font-family: 'Raleway',san-serif;
+    font-size: 20px;
+    line-height: 29px;
+    font-weight: 700;
+    color: #808a97;
+}
+
+#upgrade-to-premium p{
+    font-family: 'Open Sans',san-serif;
+    font-size: 15px;
+    line-height: 29px;
+    font-weight: 400;
+    color: #6a6a6b;
+}
+#upgrade-to-premium p.highlighted{
+    font-family: 'Raleway',san-serif;
+    font-size: 20px;
+    line-height: 27px;
+    color: #808a97;
+    font-weight: 400;
+}
+#upgrade-to-premium ol{
+    counter-reset: item;
+    list-style-type: none;
+    margin-left: 0;
+}
+#upgrade-to-premium li.step{
+    font-family: 'open sans',san-serif;
+    font-size: 15px;
+    color:  #6a6a6b;
+    font-weight: 400;
+    position: relative;
+    padding-left: 50px;
+    line-height: 25px;
+    margin-bottom: 25px;
+}
+#upgrade-to-premium li.step:before{
+    content: counters(item, ".") " ";
+    counter-increment: item;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid #808a97;
+    width: 30px;
+    height: 30px;
+    border-radius: 16px;
+    background-color: #808a97;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    line-height: 27px;
+}
+#upgrade-to-premium li.step img{
+    border: 1px solid #b8b8b8;
+    width: 600px;
+    display: block;
+    margin: 15px 0 25px 0;
+}
+
+#cboxLoadedContent {
+    margin-bottom: 60px!important;
+}

@@ -1,0 +1,78 @@
+/* Video widget
+---------------------------------------------------------- */
+.wpb_video_widget {
+  &.vc_video-el-width {
+    .width( @size ) {
+      &-@{size} .wpb_wrapper {
+        @percent_size: ~"@{size}%"; // string concatenation with number + %
+        width: @percent_size;
+      }
+    }
+    .generate_width(@start: 10, @max: 100, @step: 10) when ( @start <= @max) {
+      .width(@start);
+      .generate_width((@start+@step), @max, @step); // next iteration, will automatically break if @start+@step <= @max
+    }
+    .generate_width();
+  }
+  .wpb_video_wrapper {
+    padding-top: (9 / 16) * 100%;
+    position: relative;
+    width: 100%;
+    > div {
+      padding-top: 0 !important;
+      position: static;
+    }
+  }
+  &.vc_video-aspect-ratio {
+    &-169 {
+      .wpb_video_wrapper {
+        padding-top: (9 / 16) * 100%;
+      }
+    }
+    &-43 {
+      .wpb_video_wrapper {
+        padding-top: (3 / 4) * 100%;
+      }
+    }
+    &-235 {
+      .wpb_video_wrapper {
+        padding-top: (1 / 2.35) * 100%;
+      }
+    }
+  }
+  &.vc_video-align {
+    &-left {
+      .wpb_wrapper {
+        float: left;
+      }
+    }
+    &-center {
+      .wpb_wrapper {
+        margin: 0 auto;
+      }
+    }
+    &-right {
+      .wpb_wrapper {
+        float: right;
+      }
+    }
+  }
+  .wpb_wrapper {
+    position: relative;
+    iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      margin: 0;
+      top: 0;
+      left: 0;
+      .box-sizing(border-box);
+    }
+  }
+}
+
+.wpb_video_wrapper .fluid-width-video-wrapper {
+  padding-top: 0 !important;
+  position: static;
+}

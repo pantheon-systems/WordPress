@@ -1,0 +1,25 @@
+{% set expiration_mode_dropdown %}
+    <select name="expiration_mode" class="js-wpml-tf-trigger-save"{% if disabled %} disabled="disabled"{% endif %}>
+    {% for mode in expiration_modes %}
+        <option value="{{ mode.value }}"{% if mode.selected %} selected="selected"{% endif %}>{{ mode.label }}</option>
+    {% endfor %}
+    </select>
+{% endset %}
+
+{% set delay_quantity_dropdown %}
+    <select name="expiration_delay_quantity" class="js-wpml-tf-trigger-save"{% if disabled %} disabled="disabled"{% endif %}>
+        {% for quantity in expiration_quantities %}
+            <option value="{{ quantity.value }}"{% if quantity.selected %} selected="selected"{% endif %}>{{ quantity.value }}</option>
+        {% endfor %}
+    </select>
+{% endset %}
+
+{% set delay_unit_dropdown %}
+    <select name="expiration_delay_unit" class="js-wpml-tf-trigger-save"{% if disabled %} disabled="disabled"{% endif %}>
+        {% for unit in expiration_units %}
+            <option value="{{ unit.value }}"{% if unit.selected %} selected="selected"{% endif %}>{{ unit.label }}</option>
+        {% endfor %}
+    </select>
+{% endset %}
+
+{{ mode.label|format(expiration_mode_dropdown, delay_quantity_dropdown, delay_unit_dropdown)|raw }}

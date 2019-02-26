@@ -1,0 +1,63 @@
+@vc_round-chart-legend-width: 40%;
+@vc_round-chart-width: 100% - @vc_round-chart-legend-width;
+@vc_line-chart-legend-width: 25%;
+@vc_line-chart-width: 100% - @vc_line-chart-legend-width;
+@vc_chart-legend-font-size: 14px;
+@vc_chart-legend-color-size: 1.3em;
+@vc_chart-legend-gap: 1em;
+@vc_chart-legend-item-gap: 0.3em;
+
+.vc_chart {
+  .vc_chart-legend {
+    font-size: @vc_chart-legend-font-size;
+    margin: 0;
+    padding: 0;
+
+    li {
+      line-height: @vc_chart-legend-color-size;
+      list-style: none;
+      margin: 0 0 @vc_chart-legend-item-gap 0;
+      min-height: @vc_chart-legend-color-size;
+    }
+
+    span {
+      border-radius: 0.3em;
+      display: inline-block;
+      height: @vc_chart-legend-color-size;
+      left: 0;
+      margin-right: 0.5em;
+      vertical-align: middle;
+      width: @vc_chart-legend-color-size;
+    }
+  }
+
+  @media (min-width: @vc_grid-float-breakpoint) {
+    .vc_chart-legend {
+      display: inline-block;
+      vertical-align: middle;
+      width: @vc_round-chart-legend-width;
+
+      li {
+        margin-left: @vc_chart-legend-gap;
+      }
+    }
+
+    // Wrapper around canvas element if chart has legend.
+    // Legend itself is outside of this element (on the right)
+    .vc_chart-with-legend {
+      display: inline-block;
+      vertical-align: middle;
+      width: @vc_round-chart-width;
+    }
+  }
+}
+
+.vc_line-chart {
+  .vc_chart-with-legend {
+    width: @vc_line-chart-width;
+  }
+
+  .vc_chart-legend {
+    width: @vc_line-chart-legend-width;
+  }
+}

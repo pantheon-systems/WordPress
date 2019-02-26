@@ -1,0 +1,58 @@
+/* Tabs
+---------------------------------------------------------- */
+.vc_tab-controls() {
+  .vc_controls-visible;
+  position: relative;
+  height: 23px;
+  margin: 18px 0 2px 0;
+  border: 1px dotted @vc_border_color;
+  border-bottom-width: 0;
+}
+
+.wpb_vc_tabs {
+  > .vc_controls {
+    .vc_tab-controls;
+  }
+  > .wpb_element_wrapper {
+    padding: 0px;
+    background: none;
+    border: none;
+    height: auto;
+
+    .wpb_tabs_holder,
+    .tabs_controls {
+      padding: 0;
+    }
+    .ui-tabs .ui-tabs-nav {
+      position: relative;
+      top: 1px;
+      z-index: 2;
+      border-right: 1px dotted @vc_border_color;
+      li {
+        top: -1px;
+        background: @vc_tab_tag_bg;
+        border: 1px solid transparent;
+        .border-top-radius(@vc_border_radius);
+        margin-right: 3px;
+        padding: 0;
+        a {
+          color: @vc_tab_tag_color;
+          padding: 10px 16px;
+        }
+        &.add_tab_block {
+          padding: 11px;
+          a {
+            padding: 0;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            background: transparent url('../vc/controls.png') no-repeat -16px -16px;
+          }
+        }
+      }
+      li.ui-tabs-active {
+        background: @vc_tab_tag_active_bg;
+      }
+    }
+  }
+}

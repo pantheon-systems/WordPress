@@ -1,0 +1,37 @@
+<div class="wcml-section wc-products-section">
+    <div class="wcml-section-header">
+        <h3>
+            {{ strings.products_missing }}
+        </h3>
+    </div>
+    <div class="wcml-section-content">
+        <ul class="wcml-status-list wcml-plugins-status-list">
+            {% if products is empty %}
+                <li>
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.not_to_trnsl }}
+                </li>
+            {% else %}
+                {% for product in products %}
+                    <li>
+                        <i class="otgs-ico-warning"></i>
+                        <span class="wpml-title-flag">
+                            {{ product.flag|raw }}
+                        </span>
+                        {% if(product.count == 1) %}
+                            {{ strings.miss_trnsl_one|format( product.count, product.display_name ) }}
+                        {% else %}
+                            {{ strings.miss_trnsl_more|format( product.count, product.display_name ) }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+
+                <p>
+                    <a class="button-secondary aligncenter" href="{{ trnsl_link }}">
+                        {{ strings.transl }}
+                    </a>
+                </p>
+            {% endif %}
+        </ul>
+    </div>
+</div>

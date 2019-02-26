@@ -1,0 +1,43 @@
+{% set has_no_message = feedback.get_messages|length == 0 %}
+{% if has_no_message and 'fixed' != feedback.get_status %}
+
+    <div class="wpml-tf-line">
+        <a href="#" class="js-wpml-tf-enable-translator-note">
+            {% set add_note_label = has_admin_capabilities ? strings.add_note_to_translator : strings.add_note_to_admin %}
+            {{ add_note_label }} <span class="otgs-ico-caret-down js-arrow-toggle"></span>
+        </a>
+        <div class="js-wpml-tf-translator-note"{% if has_no_message %} style="display:none;"{% endif %}>
+            <div class="wpml-tf-title">{{ strings.communication }}</div>
+            <div class="wpml-tf-value">
+                <textarea cols="50" rows="5" title="{{ strings.communication }}" class="js-wpml-tf-new-message wpml-tf-new-message"></textarea>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="wpml-tf-line">
+        <div class="wpml-tf-title">{{ strings.communication }}</div>
+        <div class="wpml-tf-value">
+        {% for message in feedback.get_messages|reverse %}
+            <div class="wpml-tf-message {{ message.author_is_current_user ? 'wpml-tf-message-me' : 'wpml-tf-message-recipient' }}">
+                <div class="wpml-tf-message-author">{{ message.get_author_display_label }}</div>
+                <div class="wpml-tf-message-content">{{ message.get_content }}</div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    {% if 'fixed' != feedback.get_status %}
+        {% set textarea_label = has_admin_capabilities ? strings.reply_to_translator_label : strings.reply_to_admin_label %}
+        <div class="wpml-tf-line">
+            <div class="js-wpml-tf-translator-note">
+                <div class="wpml-tf-title">{{ textarea_label }}</div>
+                <div class="wpml-tf-value">
+                    <textarea cols="50" rows="5" title="{{ strings.communication }}" class="js-wpml-tf-new-message wpml-tf-new-message"></textarea>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endif %}

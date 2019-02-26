@@ -1,0 +1,26 @@
+{% if attributes is empty %}
+
+    <p>{{ strings.no_attributes }}</p>
+
+{% else %}
+
+	<div class="wpml-loading-taxonomy"><span class="spinner is-active"></span>{{ strings.loading }}</div>
+	<div class="wpml_taxonomy_loaded wcml_attributes_wrap">
+		<h3 class="wcml-product-attributes-selector">
+			<label>{{ strings.select_label }}</label>
+			<select id="wcml_product_attributes">
+				{% for attribute in attributes %}
+					<option
+							value="pa_{{ attribute.attribute_name }}"
+							{% if attribute.attribute_name == selected_attribute.attribute_name  %}selected="selected"{% endif %}
+							{% if attribute.attribute_name == '' %}disabled="disabled"{% endif %}
+							>
+						{{ attribute.attribute_label }}
+					</option>
+				{% endfor %}
+			</select>
+		</h3>
+		{{ translation_ui|raw }}
+	</div>
+
+{% endif %}

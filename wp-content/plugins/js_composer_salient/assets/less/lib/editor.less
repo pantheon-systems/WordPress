@@ -1,0 +1,51 @@
+@import "../config/variables.less";
+@import "responsive-utilities.less";
+@import "grid.less";
+@import "../modules/vc_buttons.less";
+@import "../modules/vc_modals.less";
+@import "../modules/vc_panels.less";
+@import "../modules/vc_messages.less";
+@import "../modules/vc_preloader.less";
+@import "utils.less";
+@import "../modules/vc_table.less";
+@import "../modules/ui/vc_ui-loaders.less";
+@import "media-gallery.less";
+@import "../../fonts/vc_icons_v2/init.less";
+
+.vc_badge {
+  .badge();
+}
+
+.vc_nav {
+  .nav();
+}
+
+.vc_inappropriate {
+  display: none !important;
+}
+
+.vc_off {
+  .opacity(.7);
+}
+
+@import "vc_pointer.less";
+
+@import "../modules/ui/vc_ui-panel/vc_ui-panel.less";
+@import "../modules/ui/vc_ui-panel-edit-element.less";
+@import "../modules/ui/vc_ui-panel-row-layout.less";
+
+// REMOVE
+@import "resizable_modal.less";
+
+.vc-disable-editor {
+  pointer-events: none;
+  z-index: 0;
+  position: absolute;
+  opacity: 0;
+  left: -10000px;
+}
+
+[dir="rtl"] .vc-disable-editor {
+  right: -10000px;
+  left: auto;
+}

@@ -1,0 +1,50 @@
+{% if not cron_is_on %}
+<div class="notice notice-warning">
+    <p>{{ strings.cronWarning }}</p>
+    <ol class="ol-decimal">
+        {% for tip in strings.cronTips %}
+        <li>{{ tip }}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endif %}
+<form class="js-word-count-report{% if countInProgress %} word-count-in-progress"{% endif %}">
+
+    <button class="start-count alignright button button-small button-secondary"
+            {% if countInProgress or totals.requestedTypes == 0 %} disabled="disabled"{% endif %}>
+        <span class="otgs-ico-refresh"></span> {{ strings.recalculate }}</button>
+    <span class="spinner alignright {% if countInProgress %} is-active{% endif %}"></span>
+
+    <table class="widefat striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{{ strings.contentType }}</th>
+                <th>{{ strings.itemsCount }}</th>
+                <th>{{ strings.wordCount }}</th>
+                <th>{{ strings.estimatedTime }}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for post_type in data.post_types %}
+            {% include 'report-row.twig' with {row:post_type, strings:strings, countInProgress:countInProgress} %}
+        {% endfor %}
+
+        {% for package_kind in data.package_kinds %}
+            {% include 'report-row.twig' with {row:package_kind, strings:strings, countInProgress:countInProgress} %}
+        {% endfor %}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>{{ strings.total }}</th>
+                <th><span class="js-total-completed-items">{{ totals.completedItems }}</span>/{{ totals.countItems }}</th>
+                <th class="js-total-count-words">{{ totals.countWords }}</th>
+                <th>{% include 'estimated-time.twig' with {estimatedTime: totals.estimatedTime, strings:strings} %}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</form>

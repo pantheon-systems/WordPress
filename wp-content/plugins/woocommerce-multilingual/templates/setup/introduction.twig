@@ -1,0 +1,18 @@
+
+<span id="{{ strings.step_id }}">
+<h1>{{ strings.heading }}</h1>
+
+<p>{{ strings.description1 }}</p>
+<div>{{ strings.description2.title }}</div>
+<ul>
+    <li>{{ strings.description2.step1 }}</li>
+    <li>{{ strings.description2.step2 }}</li>
+    <li>{{ strings.description2.step3 }}</li>
+</ul>
+<p>{{ strings.description3|raw }}</p>
+
+<p class="wcml-setup-actions step">
+    <a href="{{ later_url }}" class="setup_later">{{ strings.later }}</a>
+    <a href="{{ continue_url }}" class="button button-primary button-large">{{ strings.continue }}</a>
+</p>
+</span>

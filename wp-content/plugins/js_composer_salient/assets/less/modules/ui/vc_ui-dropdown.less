@@ -1,0 +1,65 @@
+@import 'vc_ui-list-bar.less';
+
+@vcui-dropdown: 1px;
+@vcui-dropdown-font-size: 13px;
+@vc-ui-list-bar-o-bounded-rows-count: 7;
+@vc-ui-list-bar-item-trigger-width: 200px;
+
+.vc_ui-dropdown {
+  position: relative;
+
+  &.vc_active,
+  &.vc_animating {
+    .vc_ui-dropdown-content {
+      display: block;
+    }
+  }
+  .vc_ui-dropdown-trigger {
+
+  }
+  .vc_ui-dropdown-content {
+    box-sizing: content-box;
+    display: none;
+    overflow: hidden;
+    transition-property: height, padding;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+    position: absolute;
+    z-index: 120;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  }
+  // list bar behaviour
+  .vc_ui-list-bar-o-bounded {
+    max-height: (@vc-ui-list-bar-item-padding-vertical * 2 + @vc-ui-list-bar-font-size) * @vc-ui-list-bar-o-bounded-rows-count;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .vc_ui-list-bar-item-trigger {
+    width: @vc-ui-list-bar-item-trigger-width;
+    flex: 1;
+
+    &[disabled] {
+      cursor: not-allowed;
+      background: #f5f5f5;
+      color: #bbbaba;
+    }
+  }
+}
+
+.vc_ui-settings-button {
+  .vc-c-icon-check {
+    display: none;
+  }
+
+  &.vc_done {
+    .vc-c-icon-check {
+      display: inline-block;
+    }
+
+    .vc-c-icon-cog {
+      display: none;
+    }
+  }
+}

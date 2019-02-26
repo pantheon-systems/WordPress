@@ -1,0 +1,161 @@
+@vcui-tabs-line-border: 1px;
+@vcui-tabs-line-border-radius: 5px;
+@vcui-tabs-line-font-size: 14px;
+@vcui-tabs-line-padding-horizontal: 12px;
+@vcui-tabs-line-padding-vertical: 16px;
+@vcui-tabs-line-active-background: #fff;
+@vcui-tabs-line-hover-background: rgba(0, 0, 0, .1);
+@vcui-tabs-line-active-color: #5e5e5e;
+@vcui-tabs-line-transition-duration: .2s;
+@vcui-tabs-line-transition-properties: color, background, border;
+
+@vcui-tabs-line-dropdown-z-index: 1010;
+@vcui-tabs-line-dropdown-max-width: 300px;
+@vcui-tabs-line-dropdown-border-size: 1px;
+@vcui-tabs-line-dropdown-border-color: #dbdbdb;
+@vcui-tabs-line-dropdown-background: #f5f5f5;
+@vcui-tabs-line-dropdown-background-hover: #eaeaea;
+@vcui-tabs-line-dropdown-trigger-color: #5e5e5e;
+@vcui-tabs-line-dropdown-trigger-padding-vertical: 10px;
+@vcui-tabs-line-dropdown-trigger-padding-horizontal: 10px;
+@vcui-tabs-line-dropdown-font-size: 12px;
+@vcui-tabs-line-dropdown-o-bounded-rows-count: 7;
+
+.vc_general.vc_ui-tabs-line {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  > li {
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  > .vc_ui-tabs-line-dropdown-toggle {
+    float: right;
+  }
+  .vc_ui-tabs-line-trigger {
+    box-sizing: border-box;
+    display: block;
+    text-transform: none;
+    border: @vcui-tabs-line-border solid transparent;
+    font-size: @vcui-tabs-line-font-size;
+    font-weight: 400;
+    line-height: 1;
+    background: transparent;
+    color: inherit;
+    text-decoration: none;
+    font-family: inherit;
+    padding: @vcui-tabs-line-padding-vertical @vcui-tabs-line-padding-horizontal;
+    margin: 0;
+    outline: none;
+    transition-property: @vcui-tabs-line-transition-properties;
+    transition-duration: @vcui-tabs-line-transition-duration;
+    transition-timing-function: ease-in-out;
+    border-radius: @vcui-tabs-line-border-radius @vcui-tabs-line-border-radius 0 0;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    text-align: left;
+    &:hover,
+    &:focus {
+      border: @vcui-tabs-line-border solid transparent;
+      background-color: @vcui-tabs-line-hover-background;
+    }
+    &:active {
+      box-shadow: none;
+    }
+  }
+  > .vc_active {
+    > .vc_ui-tabs-line-trigger {
+      background-color: @vcui-tabs-line-active-background;
+      color: @vcui-tabs-line-active-color;
+      cursor: default;
+    }
+  }
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.vc_ui-tabs-line .vc_ui-tabs-line-dropdown-toggle {
+  position: absolute;
+  float: right;
+  visibility: hidden;
+  &.vc_visible {
+    visibility: visible;
+    position: relative;
+  }
+  > .vc_ui-tabs-line-trigger {
+    &::after {
+      content: '. . .';
+      font-weight: 600;
+      display: inline;
+    }
+  }
+  &.vc_active {
+    > .vc_ui-tabs-line-trigger {
+      background-color: @vcui-tabs-line-hover-background;
+      color: inherit;
+      cursor: pointer;
+    }
+  }
+}
+
+.vc_ui-tabs-line .vc_ui-tabs-line-dropdown {
+  position: absolute;
+  z-index: @vcui-tabs-line-dropdown-z-index;
+  top: 100%;
+  right: 0;
+  display: none;
+  overflow: hidden;
+  transition-property: height, padding;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  max-width: @vcui-tabs-line-dropdown-max-width;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  background: @vcui-tabs-line-dropdown-background;
+  border: @vcui-tabs-line-dropdown-border-size solid @vcui-tabs-line-dropdown-border-color;
+  li {
+    margin: 0;
+    padding: 0;
+  }
+  &.vc_active,
+  &.vc_animating {
+    display: block;
+  }
+  .vc_ui-tabs-line-trigger {
+    padding: @vcui-tabs-line-dropdown-trigger-padding-vertical @vcui-tabs-line-dropdown-trigger-padding-horizontal;
+    border-radius: 0;
+    font-size: @vcui-tabs-line-dropdown-font-size;
+    color: @vcui-tabs-line-dropdown-trigger-color;
+    &:hover {
+      background-color: @vcui-tabs-line-dropdown-background-hover;
+    }
+  }
+  .vc_active {
+    .vc_ui-tabs-line-trigger {
+      background-color: @vcui-tabs-line-dropdown-background-hover;
+      cursor: default;
+    }
+  }
+}
+
+// initializing
+.vc_ui-tabs-line {
+  opacity: 1;
+  transition: opacity @vcui-tabs-line-transition-duration ease-in-out;
+  &.vc_initializing {
+    transition: opacity 0ms;
+    opacity: 0;
+    > li:not(:first-child):not(.vc_ui-tabs-line-dropdown-toggle) {
+      position: absolute;
+      visibility: hidden;
+    }
+  }
+}

@@ -1,0 +1,131 @@
+/*********************************************
+      "Test access" dialog
+**********************************************/
+
+#ws_ame_test_access_screen {
+	display: none;
+	background: #fcfcfc;
+}
+
+#ws_ame_test_inputs {
+	//border-bottom: 1px solid #ddd;
+	padding-bottom: 16px;
+}
+
+.ws_ame_test_input {
+	display: block;
+	float: left;
+
+	width: 100%;
+	margin: 2px 0;
+	box-sizing: content-box;
+}
+
+.ws_ame_test_input_name {
+	display: block;
+	float: left;
+	width: 35%;
+	margin-right: 4%;
+
+	text-align: right;
+	padding-top: 6px;
+	line-height: 16px;
+}
+
+.ws_ame_test_input_value {
+	display: block;
+	float: right;
+	width: 60%;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#ws_ame_test_actions {
+	float: left;
+	width: 100%;
+	margin-top: 1em;
+}
+
+#ws_ame_test_button_container {
+	width: 35%;
+	margin-right: 4%;
+	float: left;
+	text-align: right;
+}
+
+#ws_ame_test_progress {
+	display: none;
+	width: 60%;
+	float: right;
+
+	.spinner {
+		float: none;
+		vertical-align: bottom;
+		margin-left: 0;
+		margin-right: 4px;
+	}
+}
+
+#ws_ame_test_access_body {
+	width: 100%;
+	position: relative;
+
+	border: 1px solid #ddd;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#ws_ame_test_frame_container {
+	margin-right: 250px;
+	background: white;
+
+	min-height: 500px;
+	position: relative;
+}
+
+#ws_ame_test_access_frame {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	width: 100%;
+	height: 100%;
+	min-height: 500px;
+
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+#ws_ame_test_access_sidebar {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+
+	width: 250px;
+	padding: 16px 24px;
+
+	background-color: #f3f3f3;
+	border-left: 1px solid #ddd;
+
+	h4:first-of-type {
+		margin-top: 0;
+	}
+}
+
+#ws_ame_test_frame_placeholder {
+	display: block;
+	padding: 16px 24px;
+}
+
+#ws_ame_test_output {
+	display: none;
+}

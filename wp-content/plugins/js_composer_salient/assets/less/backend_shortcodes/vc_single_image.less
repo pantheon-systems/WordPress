@@ -1,0 +1,32 @@
+/* Single Image
+---------------------------------------------------------- */
+.wpb_vc_single_image,
+.wpb_vc_gallery,
+.wpb_vc_images_carousel {
+  .column_edit_trigger {
+    font-size: 11px;
+    line-height: 12px;
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    margin-top: 7px;
+    margin-left: 5px;
+  }
+}
+
+.wpb_vc_single_image {
+  > .wpb_element_wrapper {
+    height: auto;
+  }
+  .attachment-thumbnail {
+    max-width: 32px;
+    background-image: none;
+  }
+  .vc_element-icon {
+    float: left;
+    margin-right: @vc_backend_editor_margin_right;
+  }
+}
+
+.image-exists {
+  display: none !important;
+}

@@ -1,0 +1,274 @@
+.vc_shortcode-edit-form {
+  padding-bottom: 61px;
+  .vc_panel-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.vc_properties-list {
+  // overflow-y: auto;
+  &.vc_properties-list-init {
+    //overflow-y: auto;
+  }
+  //overflow-x: hidden;
+}
+
+.vc_edit-form-tab {
+  padding-top: 5px;
+}
+
+/* Content element Edit screen
+---------------------------------------------------------- */
+@teaser_checkbox_radius: 2px;
+
+.vc_dependent-hidden {
+  display: none !important;
+}
+
+.wpb_element_label, .vc_element_label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.vc_edit_form_elements {
+  .vc_column + .vc_column, .vc_column-with-padding {
+    padding-top: 15px;
+  }
+  .quicktags-toolbar {
+    input {
+      width: auto;
+      padding: 2px 4px;
+    }
+  }
+  input {
+    padding-bottom: 7px;
+  }
+  input.wp-color-picker[type="text"] {
+    width: 90px !important;
+    padding: 4px 3px 3px;
+    height: 24px;
+    float: left;
+    position: relative;
+  }
+  .wp-color-result.wp-picker-open:after {
+    content: "";
+  }
+  input.wp-picker-clear {
+    width: auto;
+  }
+}
+
+/* Select Image / Select Images (multiple)
+---------------------------------------------------------- */
+.wpb_el_type_attach_images .gallery_widget_attached_images_list {
+  cursor: move;
+}
+
+.gallery_widget_img_select,
+.gallery_widget_attached_images_list {
+  margin: 0;
+  li {
+    position: relative;
+    background: #F5F5F5;
+    padding: 0;
+    float: left;
+    margin: 0px 5px 5px 0;
+    height: 80px;
+    width: 80px;
+    line-height: 75px;
+    text-align: center;
+    border: 1px solid #DFDFDF;
+    overflow: hidden;
+    img {
+      max-height: 80px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}
+
+.wpb_el_type_attach_images,
+.wpb_el_type_attach_image {
+  // Add new image square button
+  .gallery_widget_add_images {
+    margin-top: 0;
+    display: block;
+    float: left;
+    height: 80px;
+    width: 80px;
+    background: #F5F5F5;
+    border: 1px solid #DFDFDF;
+    font-size: 0;
+    color: #F5F5F5;
+    position: relative;
+
+    &:hover {
+      color: #C8C8C8;
+      border-color: #C8C8C8;
+      text-decoration: none;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+
+    .vc-composer-icon {
+      font-size: 12px;
+      color: #87D148;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      .translate(-50%, -50%);
+    }
+  }
+  .vc_icon-remove {
+    //background: transparent url(../vc/remove.png) center center no-repeat;
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    .translate(-50%, -50%);
+
+    &:hover {
+      .opacity(0.7);
+    }
+    .vc-composer-icon {
+      font-size: 18px;
+      color: #FF7877;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      .translate(-50%, -50%);
+    }
+  }
+}
+
+.gallery_widget_site_images {
+  display: none;
+}
+
+.wpb_vc_tab,
+.wpb_vc_accordion_tab {
+  display: none;
+}
+
+.vc_hidden-placeholder {
+  display: none;
+}
+
+#TB_overlay {
+  z-index: 1055;
+}
+
+#TB_window {
+  z-index: 1060;
+}
+
+// Color field
+.vc_colored-dropdown {
+  .vc_edit_color_option_variants(~'blue', @blue, #ffffff);
+  .vc_edit_color_option_variants(~'turquoise', @turquoise, #ffffff);
+  .vc_edit_color_option_variants(~'pink', @pink, #ffffff);
+  .vc_edit_color_option_variants(~'violet', @violet, #ffffff);
+  .vc_edit_color_option_variants(~'peacoc', @peacoc, #ffffff);
+  .vc_edit_color_option_variants(~'chino', @chino, #ffffff);
+  .vc_edit_color_option_variants(~'mulled_wine', @mulled_wine, #ffffff);
+  .vc_edit_color_option_variants(~'mulled-wine', @mulled_wine, #ffffff);
+  .vc_edit_color_option_variants(~'vista_blue', @vista_blue, #ffffff);
+  .vc_edit_color_option_variants(~'vista-blue', @vista_blue, #ffffff);
+  .vc_edit_color_option_variants(~'black', @black, #ffffff);
+  .vc_edit_color_option_variants(~'grey', @grey, #666666);
+  .vc_edit_color_option_variants(~'orange', @orange, #ffffff);
+  .vc_edit_color_option_variants(~'sky', @sky, #ffffff);
+  .vc_edit_color_option_variants(~'green', @green, #ffffff);
+  .vc_edit_color_option_variants(~'juicy_pink', @juicy_pink, #ffffff);
+  .vc_edit_color_option_variants(~'juicy-pink', @juicy_pink, #ffffff);
+  .vc_edit_color_option_variants(~'sandy_brown', @sandy_brown, #ffffff);
+  .vc_edit_color_option_variants(~'sandy-brown', @sandy_brown, #ffffff);
+  .vc_edit_color_option_variants(~'purple', @purple, #ffffff);
+  .vc_edit_color_option_variants(~'white', @white, #666666);
+  .vc_edit_color_option_variants(~'custom', @white, #000000);
+}
+
+// Color field extension for progress bar shortcode only
+[data-vc-shortcode="vc_progress_bar"] .vc_colored-dropdown {
+  .vc_edit_color_option_variants(~'bar_blue', #0074CC, #ffffff);
+  .vc_edit_color_option_variants(~'bar_turquoise', #49afcd, #ffffff);
+  .vc_edit_color_option_variants(~'bar_green', #5bb75b, #ffffff);
+  .vc_edit_color_option_variants(~'bar_orange', #faa732, #ffffff);
+  .vc_edit_color_option_variants(~'bar_red', #da4f49, #ffffff);
+  .vc_edit_color_option_variants(~'bar_black', #414141, #ffffff);
+  .vc_edit_color_option_variants(~'bar_grey', #e0e0e0, #ffffff);
+}
+
+option, select {
+  &.btn-primary {
+    &:extend(.wpb_vc_button .btn-primary);
+    border-width: 0;
+  }
+  &.btn-info {
+    &:extend(.wpb_vc_button .btn-info);
+    border-width: 0;
+    text-shadow: none;
+  }
+  &.btn-success {
+    &:extend(.wpb_vc_button .btn-success);
+    border-width: 0;
+  }
+  &.btn-warning {
+    &:extend(.wpb_vc_button .btn-warning);
+    border-width: 0;
+  }
+  &.btn-inverse {
+    &:extend(.wpb_vc_button .btn-inverse);
+    border-width: 0;
+  }
+  &.btn-danger {
+    &:extend(.wpb_vc_button .btn-danger);
+    border-width: 0;
+  }
+}
+
+.vc_shortcode-edit-form-deprecated-message {
+  padding-bottom: 15px;
+  .wpb_element_wrapper .vc_message_box {
+    margin: 0;
+    padding: 0 1em 1em 4em;
+  }
+}
+
+@import "../params/sorted_list.less";
+@import "../params/css_editor.less";
+@import "../params/options_field.less";
+@import "../params/vc_message_color.less";
+@import "../params/colorpicker.less";
+@import "../params/vc_link.less";
+@import "../params/loop.less";
+@import "../params/column_offset.less";
+@import "../params/autocomplete.less";
+@import "../params/param_group.less";
+@import "../params/vc_grid.less";
+@import "../params/vc_grid_element.less";
+@import "../params/iconpicker.less";
+@import "../params/dropdown.less";
+@import "../lib/pixel_icons.less";
+@import "../params/hidden.less";
+@import "../params/gutenberg.less";
+@import "../lib/css3_animations.less";
+
+// Fix link height due to rel noopener
+.has-text-field.vc-link-wrapper #wp-link #search-panel .query-results {
+  top: 215px;
+}
+.vc-link-nofollow {
+  display: none;
+}
+.vc-link-wrapper {
+  .vc-link-nofollow {
+    display: block;
+  }
+}

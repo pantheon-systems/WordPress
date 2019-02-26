@@ -1,0 +1,8 @@
+<h3>{{ strings.title }}</h3>
+<p>{{ strings.body }}</p>
+<ul>
+    {% for job in strings.jobs %}
+        <li>{{ job }}</li>
+    {% endfor %}
+</ul>
+<p>{{ strings.bottom | raw }}</p>

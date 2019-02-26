@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" {{ language_attributes() }}>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{{ title }}</title>
+    {{ wp_print_scripts( 'wcml-setup' ) }}
+    {{ wp_do_action( 'admin_print_styles' ) }}
+    {{ wp_do_action( 'admin_head' ) }}
+</head>
+<body class="wcml-setup wp-core-ui">
+<h1 id="wcml-logo"><a href="https://wpml.org/woocommerce-multilingual"><img
+                src="{{ WCML_PLUGIN_URL }}/res/images/banner-772x120.png"
+                alt="WooCommerce Multilingual"/></a></h1>
+
+{% if has_handler %}
+<form class="wcml-setup-form" method="post">
+    <input type="hidden" name="nonce" value="{{ nonce }}"/>
+    <input type="hidden" name="handle_step" value="{{ step }}"/>
+{% endif %}

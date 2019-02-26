@@ -1,0 +1,16 @@
+.manage-column.column-wpfront-user-role-editor-role-permission-column-key,
+.column-wpfront-user-role-editor-role-permission-column-key {
+    max-width: 15%;
+    text-align: center;
+}
+
+.column-wpfront-user-role-editor-role-permission-column-key img {
+    width: 16px;
+    height: 16px;
+}
+
+@media screen and (max-width:782px) {
+    .column-wpfront-user-role-editor-role-permission-column-key {
+        display: none;
+    }
+}

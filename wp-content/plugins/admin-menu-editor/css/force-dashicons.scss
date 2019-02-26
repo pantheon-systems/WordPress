@@ -1,0 +1,20 @@
+/*
+ Forcibly set menu icons to the selected custom Dashicons.
+
+ Problem:
+ Some plugins use CSS to assign icons to their admin menu items. Users want to change the icons.
+ In many cases, simply changing the icon URL doesn't work because the plugin CSS overrides it.
+
+ Workaround:
+ Add more CSS that overrides the icon styles that were set by other plugins.
+*/
+
+//Artificially increase selector specificity by repeating the ID.
+#adminmenu#adminmenu#adminmenu a.ame-has-custom-dashicon {
+	& > .wp-menu-image::before {
+		font-family: "dashicons", sans-serif !important;
+		font-size: 20px !important;
+	}
+
+	@import '_dashicons';
+}

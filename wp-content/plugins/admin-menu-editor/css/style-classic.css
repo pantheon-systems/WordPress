@@ -1,0 +1,140 @@
+.ws_main_container {
+	padding-bottom: 4px;
+}
+
+.ws_container {
+	border: 1px solid #a9badb;
+	background-color: #bdd3ff;
+}
+
+#ws_menu_editor .ws_active {
+	background-color : #8eb0f1; /* make sure this overrides ws_menu_separator */
+}
+
+#ws_menu_editor.ws_is_actor_view .ws_is_hidden_for_actor.ws_active {
+    background-color : #dadee6;
+}
+
+.ws_menu_separator {
+	background: #F9F9F9 url("../images/menu-arrows.png") no-repeat 4px 8px;
+	border-color: #d9d9d9;
+}
+
+.ws_edit_link {
+	background-image: url('../images/bullet_arrow_down2.png');
+	background-repeat: no-repeat;
+	background-position: center 3px;
+}
+
+a.ws_edit_link:hover {
+	background-color: #ffffd0;
+	background-image: url('../images/bullet_arrow_down2.png');
+}
+
+.ws_edit_link:active {
+	background-repeat: no-repeat;
+	background-position: center 3px;
+}
+
+.ws_edit_link_expanded {
+	background-color: #ffffd0;
+	border-bottom: none;
+	border-color: #ffffd0;
+
+	padding-bottom: 1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+
+	-moz-border-radius-bottomright: 0;
+	-moz-border-radius-bottomleft: 0;
+
+	-webkit-border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+}
+
+
+.ws_editbox {
+	background-color: #ffffd0;
+}
+
+.ws_input_default input, .ws_input_default select {
+	color: gray;
+}
+
+/*
+ * Show/Hide advanced fields
+ */
+
+.ws_toggle_advanced_fields {
+	color: #6087CB;
+	font-size: 0.85em;
+}
+
+.ws_toggle_advanced_fields:visited, .ws_toggle_advanced_fields:active {
+	color: #6087CB;
+}
+
+.ws_toggle_advanced_fields:hover {
+	color: #d54e21;
+	text-decoration: underline;
+}
+
+
+/*
+ * Toolbars
+ */
+
+.ws_button {
+	border: 1px solid #c0c0e0;
+}
+
+a.ws_button:hover {
+	background-color: #d0e0ff;
+	border-color: #9090c0;
+}
+
+/************************************
+           Export and import
+*************************************/
+
+.ui-dialog {
+	background: white;
+	border: 1px solid #c0c0c0;
+}
+
+.ui-dialog-titlebar {
+	background-color: #86A7E3;
+}
+
+.ui-dialog-title {
+	color: white;
+}
+
+.ui-dialog-titlebar-close {
+	background-color: transparent;
+	border-style: none;
+
+	color: white; /* WP default: #666; */
+	cursor: pointer;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 36px;
+	height: 30px;
+	text-align: center;
+}
+
+.ui-dialog-titlebar-close::before {
+	font: normal 20px/30px 'dashicons';
+	content: '\f158';
+
+	vertical-align: top;
+	width: 36px;
+	height: 30px;
+}
+
+.ui-dialog-titlebar-close:hover {
+	background: transparent none;
+	color: #004665;
+}

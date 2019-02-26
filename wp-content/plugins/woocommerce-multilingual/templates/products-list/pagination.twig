@@ -1,0 +1,37 @@
+{% if display %}
+	<div class="tablenav bottom clearfix">
+		<div class="tablenav-pages">
+			<span class="displaying-num">{{ strings.items|format( products_count ) }}</span>
+			<span class="pagination-links">
+				{% if show %}
+					<a class="first-page {% if pn == 1 %} disabled {% endif %}"
+					   href="{{ pagination_first }}"
+					   title="{{ strings.first|e }}">&laquo;</a>
+
+					<a class="prev-page {% if pn == 1 %} disabled {% endif %}"
+					   href="{{ pagination_prev }}"
+					   title="{{ strings.previous|e }}">&lsaquo;</a>
+
+					<span class="paging-input">
+						<label for="current-page-selector" class="screen-reader-text">
+							{{ strings.select }}
+						</label>
+						<input class="current-page" id="current-page-selector"
+							   title="{{ strings.current|e }}"
+							   type="text" name="paged" value="{{ pn }}" size="2">
+						&nbsp;{{ strings.of }}&nbsp;
+						<span	class="total-pages">{{ last }}</span>
+					</span>
+
+					<a class="next-page {% if pn == last %} disabled {% endif %}"
+					   href="{{ pagination_next }}"
+					   title="{{ strings.next|e }}">&rsaquo;</a>
+
+					<a class="last-page {% if pn == last %} disabled {% endif %}"
+					   href="{{ pagination_last }}"
+					   title="{{ strings.last|e }}">&raquo;</a>
+				{% endif %}
+			</span>
+		</div>
+	</div>
+{% endif %}

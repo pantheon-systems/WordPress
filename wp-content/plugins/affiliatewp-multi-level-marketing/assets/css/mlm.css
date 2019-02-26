@@ -1,0 +1,120 @@
+
+/* Tree View Styles */
+#affwp-mlm-sub-affiliates-tree {overflow: auto; max-width: auto; max-height: auto;}
+.affwp-mlm-downline-count {
+	margin-left: 1em;
+    padding: .2em;	
+    font-size: 16px;
+    font-weight: bold;
+}
+#affwp-mlm-sub-affiliates-tree table tr, 
+#affwp-mlm-sub-affiliates-tree table tr td,
+#buddypress #affwp-mlm-sub-affiliates-tree table tr, 
+#buddypress #affwp-mlm-sub-affiliates-tree table tr td {border: 0;} /* Hide Extra Lines */
+#affwp-mlm-sub-affiliates-tree.hide-parent table tr:nth-child(1), 
+#affwp-mlm-sub-affiliates-tree.hide-parent table tr:nth-child(2),
+#affwp-mlm-sub-affiliates-tree.hide-parent table tr:nth-child(3),
+#affwp-mlm-sub-affiliates-tree.hide-parent table tr:nth-child(4) {
+    visibility: hidden!important;
+} /* Hide Parent when disabled in settings */
+
+.google-visualization-orgchart-table {border: 0!important;}
+.google-visualization-orgchart-table * {/*margin-top: .1em!important;*/ padding: 0!important; border-top: 0!important;}
+.google-visualization-orgchart-lineright {border-right: 1px solid #2e4453!important;} /* Vertical Lines */
+.google-visualization-orgchart-lineleft {border-left: 1px solid #2e4453!important;} /* Vertical Lines */
+.google-visualization-orgchart-linebottom {border-bottom: 1px solid #2e4453!important;} /* Horizontal Lines */
+
+#affwp-mlm-sub-affiliates-tree .sub_affiliate_node {
+	height: 68px;
+	padding: 0!important;
+    text-align: center;
+    vertical-align: middle;
+	border: 0;
+}
+
+/* Top Affiliate Node */
+#tree_div > table > tbody > tr:nth-child(2) > td.sub_affiliate_node.google-visualization-orgchart-node-medium {
+	height: 40px;
+}
+
+/* Sub Nodes */
+#affwp-mlm-sub-affiliates-tree .sub_affiliate_node .sub_node {
+	height: 68px;
+	width: 100%;
+	color: #2e4453;
+}
+
+/* Active Affiliates */
+#affwp-mlm-sub-affiliates-tree .sub_affiliate_node .sub_node.active {}
+
+/* Inactive Affiliates */
+#affwp-mlm-sub-affiliates-tree .sub_affiliate_node .sub_node.inactive {opacity: .4;}
+.affwp-mlm-level-wrap {}
+.affwp-mlm-level-count {}
+
+.affwp-mlm-aff {width: 6em!important; display: inline-block; margin: 1em;}
+.affwp-mlm-aff-name {width: 100%; display: block; font-weight: bold; text-align: center;}
+.affwp-mlm-aff-name.name-only{width: auto; text-align: left;}
+.affwp-mlm-aff-avatar a {
+    -moz-box-shadow: none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+}
+.affwp-mlm-aff-avatar img {
+	 width: 6em;
+	 height: 6em;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.affwp-mlm-aff-status {}
+
+ul.affwp-mlm-aff-data-wrap i {font-size: 1.5em;}
+ul.affwp-mlm-aff-data-wrap i.fa-chevron-down {display: block;}
+ul.affwp-mlm-aff-data-wrap ul.affwp-mlm-aff-data {
+	visibility: hidden;
+	position: absolute;  
+    text-align: center;
+	opacity: 0;
+} 
+ul.affwp-mlm-aff-data-wrap:hover ul.affwp-mlm-aff-data {
+	visibility: visible;
+	padding: 1em 0!important;
+	width: 16em;
+	text-align: center;
+    background: #fff;
+    border: 2px solid!important;
+	z-index: 9;
+	opacity: 1;
+  	transition: visibility 0s linear 0s, opacity 1000ms;
+}
+ul.affwp-mlm-aff-data {
+    width: auto;
+    text-align: left;
+    list-style: none!important;
+}
+ul.affwp-mlm-aff-data i {width: 2em; padding: 0 .5em!important; font-size: 1.2em; text-align: center;}
+ul.affwp-mlm-aff-data li {
+    width: 100%;
+    margin-left: 0;
+	text-align: left;
+	list-style: none;
+} 
+ul.affwp-mlm-aff-data li span {display: inline-block; margin: 0; font-size: 1.2em; font-weight: bold;}
+ul.affwp-mlm-aff-data li ul {
+	visibility: hidden;
+    text-align: center;
+	position: absolute;
+	opacity: 0;
+} 
+ul.affwp-mlm-aff-data li:hover ul {
+	visibility: visible;
+	margin: 0;
+	position: relative;
+	opacity: 1;
+  	transition: visibility 0s linear 0s, opacity 1000ms;
+}
+ul.affwp-mlm-aff-data li:hover ul strong, ul.affwp-mlm-aff-data li:hover ul span {display: inline-block;}
+ul.affwp-mlm-aff-data li:hover ul strong {width: 45%; margin-right: 5%; text-align: right;}
+ul.affwp-mlm-aff-data li:hover ul span {width: 45%; text-align: left; vertical-align: top; font-size: 1em; word-wrap: break-word;}

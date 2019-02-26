@@ -1,0 +1,44 @@
+<div class="wcml-section wc-missing-translation-section">
+    <div class="wcml-section-header">
+        <h3>
+            {{ strings.tax_missing }}
+            <i class="otgs-ico-help wcml-tip" data-tip="{{ strings.run_site|e }}"></i>
+        </h3>
+    </div>
+    <div class="wcml-section-content js-tax-translation">
+        <ul class="wcml-status-list wcml-tax-translation-list">
+            {% set no_tax_to_update = true %}
+            {% for taxonomy in taxonomies %}
+			    {% set no_tax_to_update = false %}
+                <li class="js-tax-translation-{{ taxonomy.tax }}">
+                    {% if taxonomy.untranslated %}
+                        {% if taxonomy.fully_trans %}
+                            <i class="otgs-ico-ok"></i>
+                            {{ strings.not_req_trnsl|format( taxonomy.name ) }}
+                        {% else %}
+                            <i class="otgs-ico-warning"></i>
+                            {% if( taxonomy.untranslated == 1) %}
+                                {{ strings.miss_trnsl_one|format( taxonomy.untranslated, taxonomy.name_singular ) }}
+                            {% else %}
+                                {{ strings.miss_trnsl_more|format( taxonomy.untranslated, taxonomy.name ) }}
+                            {% endif %}
+                            <a class="button button-secondary button-small" href="{{ taxonomy.url }}">
+                                {{ strings.trnsl|format( taxonomy.name ) }}
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <i class="otgs-ico-ok"></i>
+                        {{ strings.all_trnsl|format( taxonomy.name ) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+            {% if no_tax_to_update %}
+                <li>
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.not_to_trnsl }}
+                </li>
+            {% endif %}
+        </ul>
+        <span>{{ strings.conf_warning|raw }}</span>
+    </div>
+</div>

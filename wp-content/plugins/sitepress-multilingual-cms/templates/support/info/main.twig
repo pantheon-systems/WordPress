@@ -1,0 +1,7 @@
+<div class="wrap">
+	<h2>{{ title }}</h2>
+
+	{% for block in blocks %}
+		{% include 'block.twig' with block %}
+	{% endfor %}
+</div>

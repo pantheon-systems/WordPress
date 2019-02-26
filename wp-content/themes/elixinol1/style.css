@@ -1,0 +1,114 @@
+/*
+Theme Name: Elixinol1
+Theme URI: https://elixinol.com/
+Description: This is a custom child theme for Salient
+Author: Mayur Mohit
+Author URI: https://elixinol.com/
+Template: salient
+Version: 0.4
+*/
+
+/* Footer Widgets */
+#footer-outer .widget h4 {
+    font-size: 105%;
+}
+
+#footer-widgets a:hover {
+    text-decoration: underline;
+}
+
+#footer-widgets address a {
+    display: block;
+}
+
+#footer-widgets address .office {
+    margin-left: 1.5em;
+    position: relative;
+}
+
+#footer-widgets address .office::before {
+    content: "🏢";
+    position: absolute;
+    left: -1.5em;
+}
+
+#footer-widgets #custom_html-3 a[href^="tel:"]::before {
+    content: "\260e";
+    display: inline-block;
+    margin-right: .5em;
+}
+
+#footer-outer #copyright[data-layout="centered"] .widget {
+    margin-bottom: 3em;
+}
+
+/* Salient WooCommerce */
+
+.nectar-shop-header .widget_wc_aelia_currencyswitcher_widget {
+    display: inline-block;
+    position: absolute;
+    right: 185px;
+    z-index: 10;
+    bottom: 18px;
+}
+
+.entry-summary .widget_wc_aelia_currencyswitcher_widget {
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: super;
+}
+
+.entry-summary .currency_switch_form {
+    display: inline-block;
+}
+
+.woocommerce table.cart td.product-quantity {
+    box-sizing: content-box;
+}
+
+.woocommerce div.product p.price,
+.woocommerce div.product span.price {
+    display: inline-block;
+}
+
+.woocommerce-billing-fields .select2-container,
+.woocommerce-shipping-fields .select2-container {
+    display: block !important;
+}
+
+p#billing_state_field {
+    display: block !important;
+}
+
+@media only screen and (max-width:690px) {
+    .nectar-shop-header .widget_wc_aelia_currencyswitcher_widget {
+        bottom: 55px;
+        width: 100%;
+        position: absolute;
+        right: 0;
+    }
+}
+
+img.sv-wc-payment-gateway-icon.wc-authorize-net-aim-payment-gateway-icon[alt*="discover"] {
+    /* alt attribute contains art as only value or in space-separated list */
+    display: none !important;
+}
+
+.widget_shopping_cart .widget_shopping_cart_content td {
+    color: white;
+}
+
+.container-wrap, .project-title {
+    background-color: #f8f8f8;
+    position: relative;
+    z-index: 10;
+    margin-top: 0;
+    padding-top: 40px;
+    padding-bottom: 0px !important;
+}
+
+/* Zoho SalesIQ Chat Widget */
+
+#zsiq_float #titlediv {
+    display: none !important;
+}

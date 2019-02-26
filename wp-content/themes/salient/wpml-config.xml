@@ -1,0 +1,314 @@
+<wpml-config>
+  <custom-types>
+    <custom-type translate="1">home_slider</custom-type>
+    <custom-type translate="1">nectar_slider</custom-type>
+    <custom-type translate="1">portfolio</custom-type>
+  </custom-types>
+  <taxonomies>
+    <taxonomy translate="1">slider-locations</taxonomy>
+    <taxonomy translate="1">project-type</taxonomy>
+    <taxonomy translate="1">project-attributes</taxonomy>
+  </taxonomies>
+  <custom-fields>
+    <custom-field action="translate">_nectar_header_title</custom-field>
+    <custom-field action="translate">_nectar_header_subtitle</custom-field>
+    <custom-field action="copy-once">_nectar_portfolio_extra_content</custom-field>
+    <custom-field action="translate">_nectar_external_project_url</custom-field>
+    <custom-field action="translate">_nectar_project_excerpt</custom-field>
+    <custom-field action="copy">_nectar_slider_bg_type</custom-field>
+    <custom-field action="copy">_nectar_slider_preview_image</custom-field>
+    <custom-field action="copy">_nectar_slider_image</custom-field>
+    <custom-field action="copy">_nectar_slider_video_texture</custom-field>
+    <custom-field action="copy">_nectar_slider_slide_bg_alignment</custom-field>
+    <custom-field action="copy">_nectar_slider_slide_font_color</custom-field>
+    <custom-field action="translate">_nectar_slider_heading</custom-field>
+    <custom-field action="translate">_nectar_slider_caption</custom-field>
+    <custom-field action="copy">_nectar_slider_caption_background</custom-field>
+    <custom-field action="copy">_nectar_slider_down_arrow</custom-field>
+    <custom-field action="copy">_nectar_slider_link_type</custom-field>
+    <custom-field action="translate">_nectar_slider_button</custom-field>
+    <custom-field action="translate">_nectar_slider_button_url</custom-field>
+    <custom-field action="copy">_nectar_slider_button_style</custom-field>
+    <custom-field action="copy">_nectar_slider_button_color</custom-field>
+    <custom-field action="translate">_nectar_slider_button_2</custom-field>
+    <custom-field action="translate">_nectar_slider_button_url_2</custom-field>
+    <custom-field action="copy">_nectar_slider_button_style_2</custom-field>
+    <custom-field action="copy">_nectar_slider_button_color_2</custom-field>
+    <custom-field action="translate">_nectar_slider_entire_link</custom-field>
+    <custom-field action="copy">_nectar_slider_video_popup</custom-field>
+  </custom-fields>
+  <admin-texts>
+    <key name="salient_redux">
+      <key name="secondary-header-text"/>
+      <key name="footer-copyright-text"/>
+      <key name="cta-text"/>
+      <key name="cta-btn"/>
+      <key name="cta-btn-link"/>
+	    <key name="carousel-title"/>
+      <key name="carousel-link"/>
+      <key name="portfolio-sortable-text"/>
+      <key name="main-portfolio-link"/>
+      <key name="header-account-button-url"/>
+      <key name="recent-posts-title"/>
+      <key name="recent-posts-link"/>
+    </key>
+  </admin-texts>
+    <shortcodes>
+      <shortcode>
+            <tag>nectar_image_with_hotspots</tag>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_hotspot</tag>
+      </shortcode>
+      <shortcode>
+            <tag>text-with-icon</tag>
+      </shortcode>
+      <shortcode>
+            <tag>fancy-ul</tag>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_btn</tag>
+            <attributes>
+                <attribute>text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_icon</tag>
+      </shortcode>
+      <shortcode>
+            <tag>bar</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>split_line_heading</tag>
+      </shortcode>
+      <shortcode>
+            <tag>image_with_animation</tag>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_horizontal_list_item</tag>
+            <attributes>
+                <attribute>col_1_content</attribute>
+                <attribute>col_2_content</attribute>
+                <attribute>col_3_content</attribute>
+                <attribute>col_4_content</attribute>
+                <attribute>cta_1_text</attribute>
+                <attribute>cta_2_text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>heading</tag>
+            <attributes>
+                <attribute>subtitle</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_cta</tag>
+            <attributes>
+                <attribute>link_text</attribute>
+                <attribute>text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_video_lightbox</tag>
+            <attributes>
+                <attribute>link_text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>milestone</tag>
+            <attributes>
+                <attribute>subject</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>team_member</tag>
+            <attributes>
+                <attribute>name</attribute>
+                <attribute>job_position</attribute>
+                <attribute>team_member_bio</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>fancy_box</tag>
+            <attributes>
+                <attribute>link_text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_gradient_text</tag>
+            <attributes>
+                <attribute>text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_animated_title</tag>
+            <attributes>
+                <attribute>text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>toggles</tag>
+      </shortcode>
+      <shortcode>
+            <tag>toggle</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>tabbed_section</tag>
+      </shortcode>
+      <shortcode>
+            <tag>tab</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>testimonial_slider</tag>
+      </shortcode>
+      <shortcode>
+            <tag>testimonial</tag>
+            <attributes>
+                <attribute>name</attribute>
+                <attribute>subtitle</attribute>
+                <attribute>quote</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>clients</tag>
+      </shortcode>
+      <shortcode>
+            <tag>client</tag>
+            <attributes>
+                <attribute>name</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_icon_list</tag>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_icon_list_item</tag>
+            <attributes>
+                <attribute>header</attribute>
+                <attribute>text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>page_submenu</tag>
+      </shortcode>
+      <shortcode>
+            <tag>page_link</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>pricing_table</tag>
+      </shortcode>
+      <shortcode>
+            <tag>pricing_column</tag>
+            <attributes>
+                <attribute>title</attribute>
+                <attribute>price</attribute>
+                <attribute>currency_symbol</attribute>
+                <attribute>interval</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>carousel</tag>
+      </shortcode>
+      <shortcode>
+            <tag>item</tag>
+      </shortcode>
+      <shortcode>
+            <tag>morphing_outline</tag>
+      </shortcode>
+      <shortcode>
+            <tag>nectar_food_menu_item</tag>
+            <attributes>
+                <attribute>item_name</attribute>
+                <attribute>item_price</attribute>
+                <attribute>item_description</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>recent_projects</tag>
+            <attributes>
+                <attribute>heading</attribute>
+                <attribute>page_link_text</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+          <tag>vc_row</tag>
+      </shortcode>
+      <shortcode>
+          <tag>vc_row_inner</tag>
+      </shortcode>
+      <shortcode>
+          <tag>vc_column</tag>
+      </shortcode>
+      <shortcode>
+          <tag>vc_column_inner</tag>
+      </shortcode>
+      <shortcode>
+            <tag>vc_column_text</tag>
+      </shortcode>
+      <shortcode>
+            <tag>vc_text_separator</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>vc_custom_heading</tag>
+            <attributes>
+                <attribute>text</attribute>
+                <attribute encoding="vc_link" type="link">link</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag encoding="base64">vc_raw_html</tag>
+      </shortcode>
+      <shortcode>
+            <tag>vc_pie</tag>
+            <attributes>
+                <attribute>title</attribute>
+                <attribute>label_value</attribute>
+            </attributes>
+      </shortcode>
+      <shortcode>
+            <tag>vc_round_chart</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>vc_gallery</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>vc_widget_sidebar</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>vc_video</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+        </shortcode>
+        <shortcode>
+            <tag>vc_wp_text</tag>
+            <attributes>
+                <attribute>title</attribute>
+            </attributes>
+        </shortcode>
+    </shortcodes>
+</wpml-config>

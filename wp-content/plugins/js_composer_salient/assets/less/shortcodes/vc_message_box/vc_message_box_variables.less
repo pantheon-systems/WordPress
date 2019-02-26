@@ -1,0 +1,170 @@
+//====== VARIABLES
+@message-box-border-radius-rounded: 5px;
+@message-box-border-radius-round: 4em;
+@message-box-shadow-width-3d: 5px;
+@message-box-font-size-base: 1em;
+@message-box-icon-size: 1.7em;
+@message-box-horizontal-padding: 1em;
+@message-box-vertical-padding: 1em;
+@message-box-icon-indent: 4em;
+@message-box-icon-indent-reduced: 3.25em;
+
+//====== COLORS
+// alert types
+//-----------------------------
+// alert-info
+@alert-info: #56b0ee;
+@alert-info-bg: #dff2fe;
+@alert-info-border: #cfebfe;
+@alert-info-text: #5e7f96;
+@alert-info-contrast: #fff;
+// alert-success
+@alert-success: #1bbc9b;
+@alert-success-bg: #e6fdf8;
+@alert-success-border: #cfebfe;
+@alert-success-text: #5e7f96;
+@alert-success-contrast: #fff;
+// alert-warning
+@alert-warning: #fcb53f;
+@alert-warning-bg: #fff4e2;
+@alert-warning-border: #ffeccc;
+@alert-warning-text: #9d8967;
+@alert-warning-contrast: #fff;
+// alert-danger
+@alert-danger: #ff7877;
+@alert-danger-bg: #fdeaea;
+@alert-danger-border: #fedede;
+@alert-danger-text: #a85959;
+@alert-danger-contrast: #fff;
+
+// classic alerts
+// ---------------------------
+// alert-info-classic
+@alert-info-classic: #67CCE0;
+@alert-info-classic-bg: @state-info-bg;
+@alert-info-classic-border: @state-info-border;
+@alert-info-classic-text: @state-info-text;
+@alert-info-classic-contrast: #fff;
+// alert-success-classic
+@alert-success-classic: #9AD36A;
+@alert-success-classic-bg: @state-success-bg;
+@alert-success-classic-border: @state-success-border;
+@alert-success-classic-text: @state-success-text;
+@alert-success-classic-contrast: #fff;
+// alert-warning-classic
+@alert-warning-classic: #F9CF79;
+@alert-warning-classic-bg: @state-warning-bg;
+@alert-warning-classic-border: @state-warning-border;
+@alert-warning-classic-text: @state-warning-text;
+@alert-warning-classic-contrast: #fff;
+// alert-danger-classic
+@alert-danger-classic: #EF8495;
+@alert-danger-classic-bg: @state-danger-bg;
+@alert-danger-classic-border: @state-danger-border;
+@alert-danger-classic-text: @state-danger-text;
+@alert-danger-classic-contrast: #fff;
+
+// color set
+// ---------------------------
+// blue
+@color-blue: @blue;
+@color-blue-bg: lighten(@color-blue, 38%);
+@color-blue-border: darken(@color-blue-bg, 10%);
+@color-blue-text: darken(desaturate(@color-blue, 15%), 20%);
+@color-blue-contrast: #fff;
+// turquoise
+@color-turquoise: @turquoise;
+@color-turquoise-bg: lighten(desaturate(@color-turquoise, 20%), 55%);
+@color-turquoise-border: darken(desaturate(@color-turquoise-bg, 25%), 10%);
+@color-turquoise-text: darken(desaturate(@color-turquoise, 15%), 20%);
+@color-turquoise-contrast: #fff;
+// pink
+@color-pink: @pink;
+@color-pink-bg: lighten(@color-pink, 28%);
+@color-pink-border: darken(@color-pink-bg, 5%);
+@color-pink-text: darken(desaturate(@color-pink, 25%), 20%);
+@color-pink-contrast: #fff;
+// violet
+@color-violet: @violet;
+@color-violet-bg: lighten(@color-violet, 35%);
+@color-violet-border: darken(@color-violet-bg, 10%);
+@color-violet-text: darken(desaturate(@color-violet, 15%), 20%);
+@color-violet-contrast: #fff;
+// peacoc
+@color-peacoc: @peacoc;
+@color-peacoc-bg: lighten(@color-peacoc, 40%);
+@color-peacoc-border: darken(@color-peacoc-bg, 10%);
+@color-peacoc-text: darken(desaturate(@color-peacoc, 15%), 20%);
+@color-peacoc-contrast: #fff;
+// chino
+@color-chino: @chino;
+@color-chino-bg: lighten(@color-chino, 22%);
+@color-chino-border: darken(@color-chino-bg, 10%);
+@color-chino-text: darken(@color-chino, 27%);
+@color-chino-contrast: #fff;
+// mulled_wine
+@color-mulled-wine: @mulled_wine;
+@color-mulled-wine-bg: lighten(@color-mulled-wine, 60%);
+@color-mulled-wine-border: darken(@color-mulled-wine-bg, 10%);
+@color-mulled-wine-text: darken(@color-mulled-wine, 20%);
+@color-mulled-wine-contrast: #fff;
+// vista_blue
+@color-vista-blue: @vista_blue;
+@color-vista-blue-bg: lighten(@color-vista-blue, 28%);
+@color-vista-blue-border: darken(@color-vista-blue-bg, 10%);
+@color-vista-blue-text: darken(desaturate(@color-vista-blue, 15%), 25%);
+@color-vista-blue-contrast: #fff;
+// orange
+@color-orange: @orange;
+@color-orange-bg: lighten(@color-orange, 27%);
+@color-orange-border: darken(@color-orange-bg, 10%);
+@color-orange-text: darken(desaturate(@color-orange, 15%), 25%);
+@color-orange-contrast: #fff;
+// sky
+@color-sky: @sky;
+@color-sky-bg: lighten(@color-sky, 33%);
+@color-sky-border: darken(@color-sky-bg, 10%);
+@color-sky-text: darken(desaturate(@color-sky, 15%), 25%);
+@color-sky-contrast: #fff;
+// green
+@color-green: @green;
+@color-green-bg: lighten(@color-green, 47%);
+@color-green-border: darken(@color-green-bg, 15%);
+@color-green-text: darken(desaturate(@color-green, 15%), 20%);
+@color-green-contrast: #fff;
+// juicy_pink
+@color-juicy-pink: @juicy_pink;
+@color-juicy-pink-bg: lighten(@color-juicy-pink, 35%);
+@color-juicy-pink-border: darken(@color-juicy-pink-bg, 10%);
+@color-juicy-pink-text: darken(desaturate(@color-juicy-pink, 20%), 25%);
+@color-juicy-pink-contrast: #fff;
+// sandy_brown
+@color-sandy-brown: @sandy_brown;
+@color-sandy-brown-bg: lighten(@color-sandy-brown, 27%);
+@color-sandy-brown-border: darken(@color-sandy-brown-bg, 10%);
+@color-sandy-brown-text: darken(desaturate(@color-sandy-brown, 15%), 25%);
+@color-sandy-brown-contrast: #fff;
+// purple
+@color-purple: @purple;
+@color-purple-bg: lighten(@color-purple, 33%);
+@color-purple-border: darken(@color-purple-bg, 10%);
+@color-purple-text: darken(desaturate(@color-purple, 15%), 15%);
+@color-purple-contrast: #fff;
+// black
+@color-black: @black;
+@color-black-bg: lighten(@color-black, 7%);
+@color-black-border: @color-black;
+@color-black-text: @color-black-contrast;
+@color-black-contrast: #fff;
+// grey
+@color-grey: @grey;
+@color-grey-bg: @color-grey;
+@color-grey-border: darken(@color-grey-bg, 10%);
+@color-grey-text: darken(@color-grey, 40%);
+@color-grey-contrast: @color-grey-text;
+// white
+@color-white: @white;
+@color-white-bg: @color-white;
+@color-white-border: darken(@color-white-bg, 10%);
+@color-white-text: @color-white-contrast;
+@color-white-contrast: darken(@color-white, 30%);

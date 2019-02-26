@@ -1,0 +1,1 @@
+<div id="<?php echo $id; ?>" class="block <?php echo $tab . ' ' . $type; ?>" data-tab="<?php echo $tab; ?>" data-priority="<?php echo $priority; ?>" data-render="<?php echo $render ? 1 : 0; ?>">

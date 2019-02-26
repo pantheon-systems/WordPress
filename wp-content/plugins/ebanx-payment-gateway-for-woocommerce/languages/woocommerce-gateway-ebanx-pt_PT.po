@@ -1,0 +1,938 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-06-09 18:25-0300\n"
+"PO-Revision-Date: 2017-06-09 18:25-0300\n"
+"Last-Translator: \n"
+"Language-Team: EBANX\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: assets\n"
+"X-Poedit-SearchPathExcluded-1: bin\n"
+"X-Poedit-SearchPathExcluded-2: travis\n"
+"X-Poedit-SearchPathExcluded-3: languages\n"
+"X-Poedit-SearchPathExcluded-4: includes/ebanx-php\n"
+
+#: gateways/class-wc-ebanx-account-gateway.php:15
+msgid "EBANX - ACCOUNT"
+msgstr ""
+
+#: gateways/class-wc-ebanx-account-gateway.php:18
+msgid "Saldo EBANX"
+msgstr ""
+
+#: gateways/class-wc-ebanx-account-gateway.php:19
+msgid "Pague usando o saldo da sua conta do EBANX."
+msgstr ""
+
+#: gateways/class-wc-ebanx-baloto-gateway.php:15
+msgid "EBANX - Baloto"
+msgstr ""
+
+#: gateways/class-wc-ebanx-baloto-gateway.php:18
+msgid "Baloto"
+msgstr ""
+
+#: gateways/class-wc-ebanx-baloto-gateway.php:19
+msgid "Paga con Baloto."
+msgstr ""
+
+#: gateways/class-wc-ebanx-banking-ticket-gateway.php:15
+msgid "EBANX - Banking Ticket"
+msgstr ""
+
+#: gateways/class-wc-ebanx-banking-ticket-gateway.php:18
+msgid "Boleto EBANX"
+msgstr ""
+
+#: gateways/class-wc-ebanx-banking-ticket-gateway.php:19
+msgid "Pague com boleto bancário."
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-br-gateway.php:14
+msgid "EBANX - Credit Card Brazil"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-br-gateway.php:16
+msgid "Cartão de Crédito"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-br-gateway.php:17
+msgid "Pague com cartão de crédito."
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:47
+msgid "Capture by EBANX"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:89
+#, php-format
+msgid "EBANX: The transaction was captured with the following: %s"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:95
+msgid "EBANX: Transaction Failed"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:99
+msgid "EBANX: Transaction Pending"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:116
+#, php-format
+msgid ""
+"EBANX - Unknown error, enter in contact with Ebanx and inform this error "
+"code: %s."
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:121
+msgid "EBANX - Payment cannot be captured, changing it to Failed."
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:125
+msgid "EBANX - Payment has already been captured, changing it to Processing."
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-gateway.php:129
+msgid "EBANX - Payment cannot be captured, changing it to Pending."
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-mx-gateway.php:15
+msgid "EBANX - Credit Card Mexico"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-mx-gateway.php:17
+msgid "Tarjeta de Crédito"
+msgstr ""
+
+#: gateways/class-wc-ebanx-credit-card-mx-gateway.php:18
+msgid "Pay with credit card."
+msgstr ""
+
+#: gateways/class-wc-ebanx-debit-card-gateway.php:15
+msgid "EBANX - Debit Card"
+msgstr ""
+
+#: gateways/class-wc-ebanx-debit-card-gateway.php:18
+msgid "Tarjeta de Débito"
+msgstr ""
+
+#: gateways/class-wc-ebanx-debit-card-gateway.php:19
+msgid "Paga con tarjeta de débito."
+msgstr ""
+
+#: gateways/class-wc-ebanx-eft-gateway.php:15
+msgid "EBANX - PSE"
+msgstr ""
+
+#: gateways/class-wc-ebanx-eft-gateway.php:18
+msgid "PSE - Pago Seguros en Línea"
+msgstr ""
+
+#: gateways/class-wc-ebanx-eft-gateway.php:19
+msgid "Paga con PSE - Pago Seguros en Línea."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:154
+msgid "Select an option"
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:158
+#: gateways/class-wc-ebanx-global-gateway.php:367
+msgid "CPF - Individuals"
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:159
+#: gateways/class-wc-ebanx-global-gateway.php:368
+msgid "CNPJ - Companies"
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:165
+#: gateways/class-wc-ebanx-gateway.php:185
+msgid "Birth Date"
+msgstr "Data de Nascimento"
+
+#: gateways/class-wc-ebanx-gateway.php:365
+msgid "No reason specified."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:389
+msgid "The payment cannot be refunded because it is not confirmed."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:400
+#, php-format
+msgid "EBANX: Refund requested. %s - Refund ID: %s - Reason: %s."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:409
+msgid "We could not finish processing this refund. Please try again."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:864
+#, php-format
+msgid "Processing response: %s"
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:884
+msgid "EBANX: The payment has failed."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:889
+msgid "EBANX: The payment was opened."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:894
+msgid "EBANX: The order is awaiting payment."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:899
+msgid "EBANX: The transaction was paid."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:994
+#, php-format
+msgid "EBANX: The payment has been updated to: %s."
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:1013
+#, php-format
+msgid "EBANX: Your Refund was confirmed to EBANX - Refund ID: %s"
+msgstr ""
+
+#: gateways/class-wc-ebanx-gateway.php:1016
+#, php-format
+msgid "EBANX: Your Refund was canceled to EBANX - Refund ID: %s"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:65
+msgid "EBANX"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:66
+msgid ""
+"EBANX easy-to-setup checkout allows your business to accept local payments "
+"in Brazil, Mexico, Colombia, Chile & Peru."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:93
+msgid "Days To Expiration must be greater than or equal to 1."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:111
+msgid "Integration"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:113
+msgid ""
+"You can obtain the integration keys in the settings section, logging in to "
+"the <a href=\"https://dashboard.ebanx.com\">EBANX Dashboard."
+"</a>"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:116
+msgid "Sandbox Integration Key"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:120
+msgid "Sandbox Public Integration Key"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:124
+msgid "Live Integration Key"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:128
+msgid "Live Public Integration Key"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:132
+msgid "EBANX Sandbox"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:134
+msgid "Enable Sandbox Mode"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:135
+msgid ""
+"EBANX Sandbox is a testing environment that mimics the live environment. Use "
+"it to make payment requests to see how your ecommerce processes them."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:139
+msgid "Debug Log"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:140
+msgid "Enable Debug Log"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:141
+msgid "Record all errors that occur when executing a transaction."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:146
+msgid "Enable Payment Methods"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:148
+msgid ""
+"Set up payment methods for your checkout. Confirm that method is enabled on "
+"your contract."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:151
+msgid "Brazil"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:168
+msgid "Mexico"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:183
+msgid "Chile"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:196
+msgid "Colombia"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:209
+msgid "Peru"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:222
+msgid "Payment Options"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:226
+msgid "Credit Card"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:231
+msgid "Save Card Data"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:233
+msgid "Enable saving card data"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:234
+msgid ""
+"Allow your customer to save credit card and debit card data for future "
+"purchases."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:240
+msgid "One-Click Payment"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:241
+msgid "Enable one-click-payment"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:242
+msgid ""
+"Allow your customer to complete payments in one-click using credit cards "
+"saved."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:248
+msgid "Enable Auto-Capture"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:249
+msgid "Capture the payment immediately"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:250
+msgid ""
+"Automatically capture payments from your customers, just for credit card. "
+"Otherwise you will need to capture the payment going to: WooCommerce -> "
+"Orders. Not captured payments will be cancelled in 4 days."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:255
+msgid "Maximum nº of Instalments"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:272
+msgid ""
+"Establish the maximum number of instalments in which your customer can pay, "
+"as consented on your contract."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:279
+#, php-format
+msgid "Minimum Instalment (%s)"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:282
+#, php-format
+msgid "The default is %d"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:289
+msgid ""
+"Set the minimum instalment value during checkout. The minimum EBANX allows "
+"for BRL is 20 and MXN is 100, lower values in these currencies will be "
+"ignored."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:295
+msgid "Interest Rates"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:296
+msgid "Enable Interest Rates"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:297
+msgid ""
+"Enable and set a custom interest rate for your customers according to the "
+"number of Instalments you allow the payment."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:304
+msgid "1x Interest Rate in %"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:311
+#: gateways/class-wc-ebanx-global-gateway.php:323
+msgid "eg: 15.7%"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:316
+msgid "x Interest Rate"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:331
+msgid "Cash Payments"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:336
+msgid "Days to Expiration"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:338
+msgid ""
+"Define the maximum number of days on which your customer can complete the "
+"payment of: Boleto, OXXO, Sencilito, PagoEfectivo and SafetyPay."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:358
+msgid "Advanced Options"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:362
+msgid "Enable Checkout for:"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:371
+msgid ""
+"In order to process with the EBANX Plugin in Brazil there a few mandatory "
+"fields such as CPF identification for individuals and CNPJ for companies."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:375
+msgid "Checkout Manager"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:376
+msgid "Use my checkout manager fields"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:379
+msgid ""
+"If you make use of a Checkout Manager, please identify the HTML name "
+"attribute of the fields."
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:383
+msgid "Entity Type Selector"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:386
+msgid "eg: billing_brazil_entity"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:389
+msgid "CPF"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:392
+msgid "eg: billing_brazil_cpf"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:395
+msgid "Birthdate Brazil"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:398
+msgid "eg: billing_brazil_birth_date"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:401
+msgid "CNPJ"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:404
+msgid "eg: billing_brazil_cnpj"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:407
+msgid "RUT"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:410
+msgid "eg: billing_chile_document"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:413
+msgid "Birthdate Chile"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:416
+msgid "eg: billing_chile_birth_date"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:419
+msgid "DNI"
+msgstr ""
+
+#: gateways/class-wc-ebanx-global-gateway.php:422
+msgid "eg: billing_colombia_document"
+msgstr ""
+
+#: gateways/class-wc-ebanx-oxxo-gateway.php:15
+msgid "EBANX - OXXO"
+msgstr ""
+
+#: gateways/class-wc-ebanx-oxxo-gateway.php:18
+msgid "OXXO"
+msgstr ""
+
+#: gateways/class-wc-ebanx-oxxo-gateway.php:19
+msgid "Paga con boleta OXXO."
+msgstr ""
+
+#: gateways/class-wc-ebanx-pagoefectivo-gateway.php:15
+msgid "EBANX - Pagoefectivo"
+msgstr ""
+
+#: gateways/class-wc-ebanx-pagoefectivo-gateway.php:18
+msgid "PagoEfectivo"
+msgstr ""
+
+#: gateways/class-wc-ebanx-pagoefectivo-gateway.php:19
+msgid "Paga con PagoEfectivo."
+msgstr ""
+
+#: gateways/class-wc-ebanx-safetypay-gateway.php:15
+msgid "EBANX - Safetypay"
+msgstr ""
+
+#: gateways/class-wc-ebanx-safetypay-gateway.php:17
+msgid "SafetyPay"
+msgstr ""
+
+#: gateways/class-wc-ebanx-safetypay-gateway.php:18
+msgid "Paga con SafetyPay."
+msgstr ""
+
+#: gateways/class-wc-ebanx-sencillito-gateway.php:15
+msgid "EBANX - Sencillito"
+msgstr ""
+
+#: gateways/class-wc-ebanx-sencillito-gateway.php:18
+msgid "Sencillito"
+msgstr ""
+
+#: gateways/class-wc-ebanx-sencillito-gateway.php:19
+msgid "Paga con Sencillito."
+msgstr ""
+
+#: gateways/class-wc-ebanx-servipag-gateway.php:15
+msgid "EBANX - Servipag"
+msgstr ""
+
+#: gateways/class-wc-ebanx-servipag-gateway.php:18
+msgid "ServiPag"
+msgstr ""
+
+#: gateways/class-wc-ebanx-servipag-gateway.php:19
+msgid "Paga con Servipag."
+msgstr ""
+
+#: gateways/class-wc-ebanx-tef-gateway.php:15
+msgid "EBANX - TEF"
+msgstr ""
+
+#: gateways/class-wc-ebanx-tef-gateway.php:18
+msgid "Débito Online"
+msgstr ""
+
+#: gateways/class-wc-ebanx-tef-gateway.php:19
+msgid ""
+"Selecione o seu banco. A seguir, você será redirecionado para concluir o "
+"pagamento pelo seu internet banking."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:20
+msgid ""
+"EBANX - The Sandbox Mode option is enabled, in this mode, none of your "
+"transactions will be processed."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:85
+#, php-format
+msgid ""
+"EBANX - We are almost there. To start selling, <a href=\"%s\">set your "
+"integration keys.</a>"
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:112
+#, php-format
+msgid ""
+"EBANX - Your <strong>%s Integration Key</strong> is invalid, please <a href="
+"\"%s\">adjust your settings</a>."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:148
+#, php-format
+msgid ""
+"EBANX - Your <strong>%s Public Integration Key</strong> is invalid, please "
+"<a href=\"%s\">adjust your settings</a>."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:174
+#, php-format
+msgid ""
+"EBANX - Could not connect to our servers. Please check if your server can "
+"reach our API (<a href=\"%1$s\">%1$s</a>)."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:201
+#, php-format
+msgid ""
+"EBANX - The minimum PHP version required for this plugin is %1$s. You are "
+"running %2$s."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:209
+msgid "EBANX - It requires WooCommerce to be activated to work."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:215
+#, php-format
+msgid ""
+"EBANX - The minimum WooCommerce version required for this plugin is %1$s. "
+"You are running %2$s."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:223
+#, php-format
+msgid ""
+"EBANX - The minimum WordPress version required for this plugin is %1$s. You "
+"are running %2$s."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:239
+#, php-format
+msgid ""
+"EBANX Gateway - Does not support the Currency you have set on the "
+"WooCommerce settings. To process with the EBANX plugin choose one of the "
+"following: %1$s."
+msgstr ""
+
+#: services/class-wc-ebanx-checker.php:258
+msgid ""
+"EBANX - To improve the site security, we recommend the use of HTTPS protocol "
+"on site pages."
+msgstr ""
+
+#: services/class-wc-ebanx-my-account.php:60
+msgid "View Banking Ticket"
+msgstr "Ver Boleto"
+
+#: services/class-wc-ebanx-one-click.php:143
+msgid "EBANX: Unable to create the payment via one click."
+msgstr ""
+
+#: services/class-wc-ebanx-one-click.php:332
+msgid "Pay with one click"
+msgstr "Pagar com um clique"
+
+#: services/class-wc-ebanx-payment-by-link.php:42
+msgid ""
+"We couldn't create your EBANX order. Could you review your fields and try "
+"again?"
+msgstr ""
+
+#: services/class-wc-ebanx-payment-by-link.php:114
+msgid "EBANX: Your order was created via EBANX."
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:82
+msgid ""
+"Payment links can only be created when the order status is selected as "
+"Pending Payments."
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:96
+#, php-format
+msgid "The selected Country doesn't support the chosen Currency (%s)."
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:109
+msgid "The minimum total amount is $1, please pick a greater value."
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:122
+msgid ""
+"EBANX only support the following Countries: Brazil, Mexico, Peru, Colombia "
+"and Chile. Select one of these to complete your order."
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:134
+msgid ""
+"The customer email is a required field. Please provide a valid customer e-"
+"mail."
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:168
+msgid ""
+"The EBANX account is not available yet as payment method, you will hear "
+"about that soon!"
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:182
+msgid "EBANX does not support the selected payment method."
+msgstr ""
+
+#: services/class-wc-ebanx-payment-validator.php:197
+msgid "The selected payment method is not available on the chosen Country."
+msgstr ""
+
+#: templates/admin-order-details.php:2
+msgid "EBANX Order Details"
+msgstr ""
+
+#: templates/admin-order-details.php:4
+msgid "Dashboard Payment Link"
+msgstr ""
+
+#: templates/admin-order-details.php:9
+msgid "Payment Hash"
+msgstr ""
+
+#: templates/admin-order-details.php:15
+msgid "Customer Payment Link"
+msgstr ""
+
+#: templates/baloto/payment-processing.php:16
+msgid "Payment successfully made using Baloto."
+msgstr ""
+
+#: templates/debit-card/payment-form.php:11
+#: templates/ebanx-credit-card-mx/card-template.php:3
+msgid "Titular de la tarjeta"
+msgstr ""
+
+#: templates/debit-card/payment-form.php:15
+#: templates/ebanx-credit-card-mx/card-template.php:8
+msgid "Número de la tarjeta"
+msgstr ""
+
+#: templates/debit-card/payment-form.php:20
+#: templates/ebanx-credit-card-mx/card-template.php:13
+msgid "Fecha de expiración (MM / AA)"
+msgstr ""
+
+#: templates/debit-card/payment-form.php:21
+#: templates/ebanx-credit-card-br/card-template.php:9
+#: templates/ebanx-credit-card-mx/card-template.php:14
+msgid "MM / AA"
+msgstr ""
+
+#: templates/debit-card/payment-form.php:24
+#: templates/ebanx-credit-card-mx/card-template.php:17
+#: templates/ebanx-credit-card-mx/payment-form.php:31
+msgid "Código de verificación"
+msgstr ""
+
+#: templates/debit-card/payment-form.php:25
+#: templates/ebanx-credit-card-br/card-template.php:13
+#: templates/ebanx-credit-card-br/payment-form.php:33
+#: templates/ebanx-credit-card-mx/card-template.php:18
+#: templates/ebanx-credit-card-mx/payment-form.php:33
+msgid "CVV"
+msgstr ""
+
+#: templates/debit-card/payment-processing.php:16
+#: templates/ebanx-credit-card-mx/payment-processing.php:16
+msgid "Resumo de la compra:"
+msgstr ""
+
+#: templates/debit-card/payment-processing.php:17
+#: templates/ebanx-credit-card-mx/payment-processing.php:17
+msgid "Valor:"
+msgstr ""
+
+#: templates/debit-card/payment-processing.php:18
+#: templates/ebanx-credit-card-mx/payment-processing.php:21
+msgid "Pago realizado en una sola exhibición"
+msgstr ""
+
+#: templates/debit-card/payment-processing.php:19
+#: templates/ebanx-credit-card-mx/payment-processing.php:24
+msgid "Gracias por haber comprado con nosotros."
+msgstr ""
+
+#: templates/ebanx-credit-card-br/card-template.php:3
+msgid "Número do Cartão"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/card-template.php:8
+msgid "Data de validade (MM / AA)"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/card-template.php:12
+#: templates/ebanx-credit-card-br/payment-form.php:31
+msgid "Código de segurança"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/card-template.php:22
+msgid "Salvar este cartão para compras futuras"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/payment-form.php:46
+msgid "Usar um outro cartão"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/payment-processing.php:16
+msgid "Valor a pagar com IOF (0.38%):"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/payment-processing.php:18
+msgid "parcelas de"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/payment-processing.php:20
+msgid "Pagamento à vista"
+msgstr ""
+
+#: templates/ebanx-credit-card-br/payment-processing.php:23
+msgid "Obrigado por ter comprado conosco."
+msgstr ""
+
+#: templates/ebanx-credit-card-mx/card-template.php:27
+msgid "Guarda esta tarjeta para compras futuras."
+msgstr ""
+
+#: templates/ebanx-credit-card-mx/payment-form.php:46
+msgid "Otra tarjeta de crédito"
+msgstr ""
+
+#: templates/ebanx-credit-card-mx/payment-processing.php:19
+msgid "meses sen intereses de"
+msgstr ""
+
+#: templates/eft/payment-failed.php:17 templates/eft/payment-on-hold.php:17
+#: templates/eft/payment-processing.php:17
+#, php-format
+msgid "Payment successfully made using %1$s oxxo in %2$s."
+msgstr ""
+
+#: templates/instalments.php:8
+#, php-format
+msgid "%1$dx of %2$s"
+msgstr "%1$dx de %2$s"
+
+#: templates/instalments.php:9
+msgid "with interest"
+msgstr "com juros"
+
+#: templates/my-account/ebanx-credit-cards.php:3
+msgid "Your saved credit cards"
+msgstr ""
+
+#: templates/my-account/ebanx-credit-cards.php:5
+msgid ""
+"The following credit cards will be listed on the checkout page. To delete a "
+"credit card, just check it and submit."
+msgstr ""
+
+#: templates/my-account/ebanx-credit-cards.php:23
+msgid "Delete cards"
+msgstr ""
+
+#: templates/my-account/ebanx-credit-cards.php:27
+msgid "No credit cards found"
+msgstr ""
+
+#: templates/my-account/ebanx-credit-cards.php:29
+msgid ""
+"To save a credit card, pay an order on checkout using credit card as payment "
+"method."
+msgstr ""
+
+#: templates/one-click/one-click.php:22
+msgid "One-Click Purchase"
+msgstr ""
+
+#: templates/one-click/one-click.php:27
+msgid "Choose Card"
+msgstr ""
+
+#: templates/one-click/one-click.php:39
+msgid "Card Code"
+msgstr ""
+
+#: templates/one-click/one-click.php:47
+msgid "Processing..."
+msgstr "Processando…"
+
+#: templates/one-click/one-click.php:47
+msgid "Pay Now"
+msgstr "Pague Agora"
+
+#: templates/payment-by-link-action.php:6 woocommerce-gateway-ebanx.php:632
+msgid "Create EBANX Payment Link"
+msgstr ""
+
+#: templates/payment-by-link-action.php:7
+msgid ""
+"The order will be created on your site and also sent to EBANX to generate a "
+"payment to your customer pay directly."
+msgstr ""
+
+#: templates/safetypay/payment-failed.php:17
+#: templates/safetypay/payment-on-hold.php:17
+#: templates/safetypay/payment-pending.php:17
+msgid "Payment successfully made using Safetypay."
+msgstr ""
+
+#: templates/servipag/payment-failed.php:17
+#: templates/servipag/payment-on-hold.php:17
+#: templates/servipag/payment-processing.php:17
+msgid "Payment successfully made using Servipag."
+msgstr ""
+
+#: templates/views/html-notice-currency-not-supported.php:15
+#, php-format
+msgid "Currency %s is not supported. Works only with Brazilian Real."
+msgstr ""
+
+#: woocommerce-gateway-ebanx.php:565
+msgid "Settings"
+msgstr ""

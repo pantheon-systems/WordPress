@@ -1,0 +1,41 @@
+.vc_tab-tour-inner-content-settings() {
+  > .wpb_element_wrapper {
+    > .wpb_column_container {
+      &.empty_container {
+        height: 80px;
+        background-position: center center;
+      }
+      .wpb_vc_column_inner {
+        > .vc_controls {
+          background-color: @vc_column_bg;
+        }
+        > .wpb_element_wrapper {
+          background-color: @vc_column_bg;
+          padding: 14px;
+        }
+      }
+      .wpb_vc_row_inner {
+        > .vc_controls {
+          > .column_move {
+            background-color: @vc_column_bg;
+          }
+        }
+      }
+    }
+  }
+}
+
+.wpb_content_element .ui-tabs .ui-tabs-panel.wpb_vc_tab {
+  background-color: @vc_tab_bg;
+  > .vc_controls {
+    .vc_controls-visible;
+    height: 35px;
+    background: transparent;
+    position: relative;
+  }
+  > .bottom-controls {
+    top: auto;
+    display: none;
+  }
+  .vc_tab-tour-inner-content-settings();
+}

@@ -1,0 +1,68 @@
+{% if jobs.completed %}
+
+    {% set css_border = '1px solid #999999;' %}
+    {% set css_border_right = 'border-right:' ~ css_border %}
+    {% set css_border_left = 'border-left:' ~ css_border %}
+    {% set css_border_top = 'border-top:' ~ css_border %}
+    {% set css_border_bottom = 'border-bottom:' ~ css_border %}
+    {% set css_text_center = ' text-align: center;' %}
+    {% set css_vertical_align = ' vertical-align: top;' %}
+    {% set css_column_fixed_width = ' width: 21%;' %}
+
+
+    <p>{{ text|format( site_name, number_of_updates ) }}:</p>
+
+    <table border="0" cellpadding="5" cellspacing="0" width="100%">
+        <tr style="background: #5a5a5a; color: #ffffff; font-size: 12px;">
+            <td style="{{ css_border_right ~ css_border_left ~ css_border_top }}">{{ strings.original_page }}</td>
+            <td style="{{ css_border_right ~ css_border_bottom }}">{{ strings.translation }}</td>
+            <td style="{{ css_border_right ~ css_border_bottom }}">{{ strings.translator }}</td>
+            <td style="{{ css_border_right ~ css_border_bottom ~ css_column_fixed_width }}">{{ strings.date }}</td>
+            <td style="{{ css_border_right ~ css_border_bottom ~ css_column_fixed_width }}">{{ strings.your_deadline }}</td>
+        </tr>
+
+        {% for job in jobs.completed %}
+            <tr style="font-size: 12px;">
+                <td style="{{ css_border_right ~ css_border_left ~ css_border_bottom ~ css_vertical_align }}"><a href="{{ job.original_page.url }}">{{ job.original_page.title }}</a></td>
+                <td style="{{ css_border_right ~ css_border_bottom ~ css_vertical_align }}"><a href="{{ job.translated_page.url }}">{{ job.translated_page.title }}</a></td>
+                <td style="{{ css_border_right ~ css_border_bottom ~ css_vertical_align }}">{{ job.translator }}</td>
+                <td style="{{ css_border_right ~ css_border_bottom ~ css_vertical_align }}">{{ job.completed_date }}</td>
+                <td style="{{ css_border_right ~ css_border_bottom ~ css_vertical_align }} {% if job.overdue %}color: #CC0000;{% endif %}">{{ job.deadline ? job.deadline : strings.undefined }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endif %}
+
+{% if jobs.waiting %}
+
+    <p>{{ strings.jobs_waiting }}:</p>
+
+    <table border="0" cellpadding="5" cellspacing="0" width="100%">
+        <tr style="background: #5a5a5a; color: #ffffff; font-size: 12px;">
+            <td style="{{ css_border_right ~ css_border_left ~ css_border_top }}">{{ strings.translation_languages }}</td>
+            <td style="{{ css_border_right ~ css_border_bottom }}">{{ strings.number_of_pages }}</td>
+            <td style="{{ css_border_right ~ css_border_bottom }}">{{ strings.number_of_strings }}</td>
+            <td style="{{ css_border_right ~ css_border_bottom }}">{{ strings.number_of_words }}</td>
+        </tr>
+
+        {% for job in jobs.waiting %}
+            <tr style="font-size: 12px;">
+                <td style="{{ css_border_right ~ css_border_left ~ css_border_bottom ~ css_vertical_align }}">{{ job.lang_pair }}</td>
+                <td style="{{ css_border_right ~ css_border_bottom ~ css_text_center ~ css_vertical_align }}">{{ job.number_of_pages }}</td>
+                <td style="{{ css_border_right ~ css_border_bottom ~ css_text_center ~ css_vertical_align }}">{{ job.number_of_strings }}</td>
+                <td style="{{ css_border_right ~ css_border_bottom ~ css_text_center ~ css_vertical_align }}">{{ job.number_of_words }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endif %}
+
+<p>{{ improve_quality.title }}</p>
+<ul>
+    {% for option in improve_quality.options %}
+        <li>{{ option.text|format( '<a target="_blank" href="' ~ option.link_url ~ '">' ~ option.link_text ~ '</a>' )|raw }}</li>
+    {% endfor %}
+</ul>

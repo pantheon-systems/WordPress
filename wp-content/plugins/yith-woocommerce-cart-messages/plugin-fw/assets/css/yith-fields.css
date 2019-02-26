@@ -1,0 +1,402 @@
+.yith-plugin-fw span.description {
+    display    : block;
+    margin-top : 5px;
+    font-size  : 12px;
+    color      : #777;
+    font-style : italic;
+    clear      : both;
+}
+
+.yith-plugin-fw span.description.inline {
+    display : inline-block;
+    margin  : 0 0 0 5px;
+}
+
+.yith-disabled {
+    opacity        : 0.3;
+    pointer-events : none;
+}
+
+.yith-plugin-fw-field-wrapper:not(.yith-plugin-fw-title-field-wrapper) {
+    display : block;
+    width   : 100%;
+}
+
+.yith-plugin-fw-field-wrapper span.desc {
+    display : block;
+    width   : 100%;
+}
+
+.yith-plugin-fw-title-field-wrapper h3.title {
+    width : 100%;
+}
+
+.the-metabox .yith-plugin-fw-title-field-wrapper h3.title {
+    float : left;
+}
+
+.yith-plugin-fw input[type=email],
+.yith-plugin-fw input[type=number],
+.yith-plugin-fw input[type=text]:not(.select2-search__field),
+.yith-plugin-fw select,
+.woocommerce .yith-plugin-fw table.form-table input[type=email],
+.woocommerce .yith-plugin-fw table.form-table input[type=number],
+.woocommerce .yith-plugin-fw table.form-table input[type=text]:not(.select2-search__field),
+.woocommerce .yith-plugin-fw table.form-table select {
+    width     : 400px;
+    max-width : 100%;
+    height    : 30px;
+    padding   : 5px;
+}
+
+.woocommerce .yith-plugin-fw table.form-table input[type=text].wp-color-picker,
+.woocommerce .yith-plugin-fw table.form-table input[type=text].yith-plugin-fw-colorpicker,
+.yith-plugin-fw input[type=text].wp-color-picker,
+.yith-plugin-fw input[type=text].yith-plugin-fw-colorpicker {
+    width     : 6em;
+    max-width : none;
+    height    : auto;
+    padding   : 3px 5px;
+}
+
+.woocommerce .yith-plugin-fw table.form-table input[type=text].colorpick,
+.yith-plugin-fw input[type=text].colorpick {
+    width     : 6em;
+    max-width : none;
+    height    : auto;
+    padding   : 6px;
+}
+
+.yith-plugin-fw input.select2-search__field,
+.yith-plugin-fw .select2-container .select2-search--inline .select2-search__field,
+.woocommerce .yith-plugin-fw input.select2-search__field,
+.woocommerce .yith-plugin-fw table.form-table input.select2-search__field {
+    padding : 3px;
+}
+
+.yith-plugin-fw textarea {
+    width     : 400px;
+    max-width : 100%;
+    padding   : 5px;
+}
+
+/* ------------- ICONS ------------- */
+.yit-icons-manager-wrapper {
+    width     : 100%;
+    max-width : 400px;
+}
+
+.yit-icons-manager-text {
+    width : 100%;
+}
+
+.yit-icons-manager-icon-text {
+    width  : calc(100% - 35px) !important;
+    height : 30px;
+    float  : left;
+    margin : 0;
+}
+
+.yit-icons-manager-icon-preview {
+    width        : 30px;
+    height       : 30px;
+    margin-right : 5px;
+    float        : left;
+    padding-top  : 6px;
+    box-sizing   : border-box;
+    text-align   : center;
+    background   : #f1f1f1;
+}
+
+.yit-icons-manager-list-wrapper {
+    margin     : 10px 0;
+    box-shadow : 0 0 0 1px #ddd;
+}
+
+ul.yit-icons-manager-list {
+    width      : 100%;
+    height     : 300px;
+    overflow-y : scroll;
+    margin     : 0;
+}
+
+ul.yit-icons-manager-list li {
+    float       : left;
+    width       : 30px;
+    height      : 30px;
+    padding-top : 6px;
+    box-sizing  : border-box;
+    text-align  : center;
+    background  : #f1f1f1;
+    margin      : 1px;
+    cursor      : pointer;
+}
+
+ul.yit-icons-manager-list li:hover {
+    background : #c5dcf6;
+}
+
+ul.yit-icons-manager-list li.active {
+    background : #d4f0ff;
+}
+
+.yit-icons-manager-action-set-default {
+    margin-bottom : 0;
+}
+
+.yit-icons-manager-default-icon-preview {
+    height       : 100%;
+    display      : inline-block;
+    padding-left : 10px;
+    border-left  : 1px solid #ccc;
+    margin-left  : 10px;
+}
+
+/* ------- Text Array ------- */
+.yith-plugin-fw-text-array-table td {
+    padding : 1px;
+}
+
+.yith-plugin-fw-text-array-table input[type=text],
+.woocommerce table.form-table table.yith-plugin-fw-text-array-table input[type=text] {
+    width : 100%;
+}
+
+/* ------- Image Gallery ------- */
+.yith-plugin-fw .image-gallery ul li {
+    display     : inline-block;
+    width       : 80px;
+    margin-left : 10px;
+    position    : relative;
+}
+
+.yith-plugin-fw .image-gallery ul li img {
+    width  : 80px;
+    border : 1px solid #ccc;
+}
+
+.yith-plugin-fw .image-gallery ul li ul {
+    position : absolute;
+    top      : -6px;
+    right    : -1px;
+    width    : 20px;
+    height   : 20px;
+}
+
+.yith-plugin-fw .image-gallery ul a.delete {
+    background  : url(../images/x.png) no-repeat;
+    width       : 20px;
+    height      : 20px;
+    display     : block;
+    text-indent : -99999px;
+}
+
+/* ------- OnOff ------- */
+.yith-plugin-fw-onoff-container {
+    display : inline-block;
+}
+
+.yith-plugin-fw-onoff-container input {
+    display : none;
+}
+
+.yith-plugin-fw-onoff-container input + span {
+    cursor        : pointer;
+    text-indent   : -9999px;
+    display       : block;
+    width         : 36px;
+    height        : 20px;
+    background    : #a4a4a4;
+    border-radius : 24px;
+    position      : relative;
+    transition    : all 0.3s;
+}
+
+.yith-plugin-fw-onoff-container input + span:before {
+    content       : '';
+    background    : #fff;
+    width         : 16px;
+    height        : 16px;
+    border-radius : 50%;
+    position      : absolute;
+    top           : 2px;
+    left          : 2px;
+    transition    : all 0.3s;
+}
+
+.yith-plugin-fw-onoff-container input:checked + span,
+.yith-plugin-fw-onoff-container input.onoffchecked + span {
+    background : #0073aa;
+}
+
+.yith-plugin-fw-onoff-container input:checked + span:before,
+.yith-plugin-fw-onoff-container input.onoffchecked + span:before {
+    left : 18px;
+}
+
+/* ------- Preview ------- */
+.yith-plugin-fw-preview-field {
+    max-height : 200px;
+}
+
+/* ------- Radio ------- */
+.yith-plugin-fw-radio input[type=radio] {
+    margin : 0 3px 0 0;
+}
+
+.yith-plugin-fw-radio__row {
+    margin-bottom : 8px;
+}
+
+/* ------- Sidebar Layout ------- */
+.yith-plugin-fw-sidebar-layout input[type="radio"] {
+    display : none;
+    width   : 0px;
+}
+
+.yith-plugin-fw-sidebar-layout input[type="radio"]:first-child {
+    margin-right : -2px;
+}
+
+.yith-plugin-fw-sidebar-layout input[type="radio"] + img {
+    border  : 2px solid #fff;
+    padding : 1px;
+}
+
+.yith-plugin-fw-sidebar-layout input[type="radio"] + img:hover {
+    cursor : pointer;
+}
+
+.yith-plugin-fw-sidebar-layout input[checked] + img {
+    border  : 2px solid #f2ad35;
+    padding : 1px;
+}
+
+.yith-plugin-fw-sidebar-layout select {
+    vertical-align : 12px;
+}
+
+.yit-admin-panel-content-wrap .yith-plugin-fw-sidebar-layout label {
+    font-weight : bold;
+    width       : 200px;
+    float       : left;
+    line-height : 23px;
+    margin-left : -230px;
+}
+
+/* ------- Slider ------- */
+.yith-plugin-fw .slider {
+    padding-top : 20px;
+}
+
+.ui-slider .minCaption {
+    position     : absolute;
+    right        : 95%;
+    top          : -6px;
+    margin-right : 11px;
+}
+
+.ui-slider .maxCaption {
+    position    : absolute;
+    left        : 95%;
+    top         : -6px;
+    margin-left : 20px;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    background    : #fff;
+    border        : 0px !important;
+    top           : -12px !important;
+    border-radius : 50%;
+    width         : 27px !important;
+    height        : 27px !important;
+    box-sizing    : border-box;
+    box-shadow    : 0 1px 7px -1px rgba(0, 0, 0, 0.5);
+    font-size     : 13px;
+    padding       : 6px 0;
+    font-weight   : 600;
+    color         : #555;
+    text-align    : center;
+}
+
+.ui-slider.ui-widget-content {
+    background    : #ccc;
+    border        : none !important;
+    height        : 3px !important;
+    border-radius : 3px !important;
+    width         : 90%;
+    margin        : 15px 5% 20px 5%;
+}
+
+.iris-slider-offset.ui-slider.ui-widget-content {
+    background : transparent !important;
+    height     : auto !important;
+}
+
+.ui-slider.ui-widget-content .ui-widget-header {
+    background            : #4b93ff;
+    left                  : 0px !important;
+    -webkit-border-radius : 3px;
+    -moz-border-radius    : 3px;
+    -khtml-border-radius  : 3px;
+    border-radius         : 3px;
+}
+
+/* ------- Select2 ------- */
+.yith-plugin-fw-select2-wrapper {
+    width : 400px;
+}
+
+/* ------- Textarea ------- */
+.yith-plugin-fw-textarea-editor-field-wrapper {
+    max-width : 1000px;
+    clear     : both;
+}
+
+.yith-plugin-fw-textarea-editor-field-wrapper textarea.wp-editor-area,
+.woocommerce table.form-table .yith-plugin-fw-textarea-editor-field-wrapper textarea.wp-editor-area {
+    width : 100%;
+}
+
+/* ------- Buttons ------- */
+.yith-plugin-fw-buttons-field-wrapper {
+    margin-top : 7px;
+}
+
+/* ------- Select Images ------- */
+.yith-plugin-fw-select-images__list {
+    margin    : 0;
+    display   : flex;
+    flex-wrap : wrap;
+}
+
+.yith-plugin-fw-select-images__item {
+    width           : calc(20% - 10px);
+    min-width       : 150px;
+    margin          : 0 10px 10px 0;
+    padding         : 10px;
+    box-sizing      : border-box;
+    cursor          : pointer;
+    transition      : all .3s;
+    border          : 2px solid #eee;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : space-between;
+}
+
+.yith-plugin-fw-select-images__item:hover,
+.yith-plugin-fw-select-images__item.yith-plugin-fw-select-images__item--selected {
+    border-color : #07bcce;
+}
+
+.yith-plugin-fw-select-images__item__label {
+    text-align    : center;
+    font-weight   : 600;
+    margin-bottom : 10px;
+}
+
+.yith-plugin-fw-select-images__item img {
+    display   : block;
+    max-width : 100%;
+    margin    : 0 auto;
+}

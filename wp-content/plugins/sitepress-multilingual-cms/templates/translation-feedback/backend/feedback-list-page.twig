@@ -1,0 +1,70 @@
+<div class="wrap wpml-tf-feedback-list-page">
+    <h1>{{ strings.page_title }}</h1>
+    <h2>{{ strings.page_subtitle }}</h2>
+
+    <input type="hidden" name="ajax_action" value="{{ ajax_action }}">
+    <input type="hidden" name="ajax_nonce" value="{{ ajax_nonce }}">
+
+    <form method="GET">
+
+        <input type="hidden" name="page" value="{{ admin_page_hook }}">
+
+        {% for filter_name, filter_value in current_query.filters if filter_value %}
+            <input type="hidden" name="{{ filter_name }}" value="{{ filter_value }}">
+        {% endfor %}
+
+        {% for sorter_name, sorter_value in current_query.sorters if sorter_value %}
+            <input type="hidden" name="{{ sorter_name }}" value="{{ sorter_value }}">
+        {% endfor %}
+
+        <input type="hidden" name="nonce" value="{{ nonce }}">
+        <input type="submit" class="hidden">
+
+        {% include 'feedback-list-page-filters.twig' with { 'filters': page_filters.all_and_trash } %}
+        {% include 'feedback-list-page-filters.twig' with { 'filters': page_filters.statuses } %}
+        {% include 'feedback-list-page-filters.twig' with { 'filters': page_filters.languages } %}
+
+        {% include 'feedback-list-page-table-nav.twig' with { 'nav_location': 'top' } %}
+
+        <table class="js-wpml-tf-feedback-list-table wpml-tf-feedback-list-table widefat fixed"
+               data-confirm-trash="{{ strings.confirm.trash }}">
+
+            <thead>
+            {% include 'feedback-list-page-table-header.twig' with { 'header_id': 'thead' } %}
+            </thead>
+
+            <tbody>
+            {% if 0 < feedback_collection|length %}
+                {% for feedback in feedback_collection %}
+                    {% include 'feedback-list-page-table-row.twig'
+                        with {
+                            'feedback': feedback,
+                            'strings': strings.row_summary,
+                            'has_admin_capabilities': has_admin_capabilities,
+                            'is_in_trash': is_in_trash
+                        } only
+                    %}
+
+                    {% if not is_in_trash %}
+                        {% include 'feedback-list-page-table-row-details.twig'
+                        with { 'feedback': feedback, 'strings': strings.row_details, 'has_admin_capabilities': has_admin_capabilities } only %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6">{{ strings.no_feedback }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+
+            <tfoot>
+            {% include 'feedback-list-page-table-header.twig'  with { 'header_id': 'tfoot' } %}
+            </tfoot>
+
+        </table>
+
+        {% include 'feedback-list-page-table-nav.twig' with { 'nav_location': 'bottom' } %}
+
+    </form>
+
+</div>

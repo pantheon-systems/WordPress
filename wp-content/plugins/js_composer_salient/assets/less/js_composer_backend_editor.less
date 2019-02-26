@@ -1,0 +1,239 @@
+@import "lib/bootstrap-components.less";
+// must be outputed
+@import "lib/editor.less";
+
+// Here comes panels
+@vc_modal_top_margin: 34px;
+// Elements icons
+@import "lib/elements_icons.less";
+// Add element box
+@import "popups/modal_add_element.less";
+
+// Navigation bar
+//@vc_navbar_sprite_left_position: -60px;
+//@vc_navbar_icon_color: #4F5C64;
+//@vc_navbar_background_color: #FCFCFC;
+//@vc_navbar_icon_btn_color: #F5F5F5;
+//@vc_navbar_border_color: #F5F5F5;
+//@vcui_navbar_logo: '../vc/logo/wpb-logo.svg';
+@import "modules/vc_navbar.less";
+@import "modules/vc_fullscreen.less";
+// Message box shown when post content is empty
+@import "modules/vc_welcome.less";
+
+// Backend switcher
+@import "modules/vc_switcher.less";
+// Edit form for shortcode
+@import "popups/panel_edit_form.less";
+
+// Template library
+@import "popups/panel_template_library";
+
+// Templates editor
+@import "modules/ui/vc_ui-panel-templates.less";
+//Presets
+@import "modules/ui/vc_ui-panel-preset.less";
+// Teaser box for posts wused by Post grid and post carusel
+@import "modules/vc_teaser_box.less";
+#vc_settings-title-container {
+  display: none;
+}
+
+// Backend controls
+@import "lib/controls.less";
+@import "lib/backend_controls.less";
+@import "lib/backend_grid_element_pointers.less";
+@import "lib/vc_pointer.less";
+@import "lib/panel_preview.less";
+// Shortcodes
+@import "backend_shortcodes/rows_columns.less";
+@import "backend_shortcodes/empty_containers.less";
+@import "shortcodes/_shortcodes_container.less";
+@import "backend_shortcodes/content_block.less";
+@import "backend_shortcodes/vc_accordion.less";
+@import "backend_shortcodes/vc_button.less";
+@import "shortcodes/vc_button3.less";
+@import (reference)"shortcodes/vc_icon_element.less";
+@import "backend_shortcodes/vc_button3.less";
+// now let's override some margins and etc
+@import "shortcodes/vc_call_to_action3.less";
+@import "backend_shortcodes/vc_call_to_action3.less";
+// now let's override some margins and etc
+@import "backend_shortcodes/vc_column_text.less";
+@import "backend_shortcodes/vc_cta_button.less";
+@import "backend_shortcodes/vc_empty_space.less";
+@import "backend_shortcodes/vc_facebook.less";
+@import "backend_shortcodes/vc_flickr.less";
+@import "backend_shortcodes/vc_gallery.less";
+@import "backend_shortcodes/vc_gmaps.less";
+@import "backend_shortcodes/vc_googleplus.less";
+@import "backend_shortcodes/vc_images_carousel.less";
+@import "backend_shortcodes/vc_message_box.less";
+@import "backend_shortcodes/vc_tta.less";
+@import "shortcodes/vc_separator.less";
+
+.vc_shortcode-param[data-param_type="iconpicker"] {
+  .vc-icons-selector .selected-icon {
+    line-height: 40px;
+    i.vc_pixel_icon {
+      position: relative;
+      top: 3px;
+    }
+  }
+}
+
+@import "backend_shortcodes/vc_pie.less";
+@import "backend_shortcodes/vc_pinterest.less";
+@import "backend_shortcodes/vc_posts_slider.less";
+@import "backend_shortcodes/vc_progress_bar.less";
+@import "backend_shortcodes/vc_raw_html.less";
+@import "backend_shortcodes/vc_raw_js.less";
+@import "backend_shortcodes/vc_separator.less";
+@import "backend_shortcodes/vc_single_image.less";
+@import "backend_shortcodes/vc_tabs.less";
+@import "backend_shortcodes/vc_tab.less";
+@import "backend_shortcodes/vc_accordion_tab.less";
+@import "backend_shortcodes/vc_teaser_grid.less";
+@import "backend_shortcodes/vc_toggle.less";
+@import "backend_shortcodes/vc_tour.less";
+@import "backend_shortcodes/vc_tweetmeme.less";
+@import "backend_shortcodes/vc_twitter.less";
+@import "backend_shortcodes/vc_video.less";
+@import "backend_shortcodes/vc_widget_sidebar.less";
+@import "backend_shortcodes/vc_wp_widget.less";
+@import "backend_shortcodes/vc_charts.less";
+@import "params/vc_grid_item/vc_gitem_editor.less";
+
+.vc_admin_label {
+  font-size: 11px;
+  font-style: italic;
+  color: #999999;
+  margin-right: 5px;
+  line-height: 1;
+  label {
+    vertical-align: inherit;
+  }
+  &.hidden-label {
+    display: none;
+  }
+}
+
+// Vendors
+@import "vendor/contact_form_7.less";
+@import "vendor/gravity_form.less";
+@import "vendor/layerslider.less";
+@import "vendor/rev_slider.less";
+@import "vendor/jwplayer.less";
+
+@import "lib/vc_font.less";
+
+#wpb_visual_composer {
+  display: none;
+  > .inside {
+    margin: 0;
+    padding: 0;
+  }
+  .vc_navbar {
+    border-bottom: 1px solid @vc_navbar_border_color;
+  }
+}
+
+.vc_hidden-xs {
+  @media (max-width: @screen-xs-max) {
+    .vc_backend-editor-invisibility-settings;
+  }
+  .vc_hidden-xs {
+    > * {
+      .opacity(1) !important;
+    }
+  }
+}
+
+.vc_hidden-sm {
+  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .vc_backend-editor-invisibility-settings;
+  }
+  .vc_hidden-sm {
+    > * {
+      .opacity(1) !important;
+    }
+  }
+}
+
+.vc_hidden-md {
+  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .vc_backend-editor-invisibility-settings;
+  }
+  .vc_hidden-md {
+    > * {
+      .opacity(1) !important;
+    }
+  }
+}
+
+.vc_hidden-lg {
+  @media (min-width: @screen-lg-min) {
+    .vc_backend-editor-invisibility-settings;
+  }
+  .vc_hidden-lg {
+    > * {
+      .opacity(1) !important;
+    }
+  }
+}
+
+#visual_composer_content {
+  margin: 14px 14px 0 14px;
+  line-height: 1.2;
+}
+
+// WP fixes for files.
+#poststuff {
+  h3.vc_modal-title {
+    .vc_heading(16px);
+  }
+  .vc_welcome {
+    h3 {
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+      line-height: 26px;
+      cursor: default;
+    }
+    &.vc_not-empty {
+      margin-top: 0;
+      .vc_buttons {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@import "lib/backend_draganddrop.less";
+
+.vc_panel-heading {
+  .vc_transparent {
+    display: none;
+  }
+}
+
+.vc_loading-shortcodes {
+  #vc_no-content-helper {
+    display: none;
+  }
+}
+
+#wpb_csseditor {
+  border: 1px solid #BABABA;
+}
+
+.vc_button-settings-less {
+  &:active {
+    vertical-align: baseline;
+  }
+}
+
+// fix mobile overlay
+body.mobile.modal-open #wpwrap {
+  position: relative !important;
+}

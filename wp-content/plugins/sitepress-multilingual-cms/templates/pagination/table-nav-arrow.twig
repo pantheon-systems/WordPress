@@ -1,0 +1,15 @@
+{% set arrows = {
+'first-page':     '«',
+'previous-page':  '‹',
+'next-page':      '›',
+'last-page':      '»'
+}
+%}
+
+{% if url %}
+    <a class="{{ class }}" href="{{ url }}">
+        <span class="screen-reader-text">{{ label }}</span><span aria-hidden="true">{{ arrows[ class ] }}</span>
+    </a>
+{% else %}
+    <span class="tablenav-pages-navspan" aria-hidden="true">{{ arrows[ class ] }}</span>
+{% endif %}

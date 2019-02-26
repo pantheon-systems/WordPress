@@ -1,0 +1,159 @@
+/* 1. Buttons
+---------------------------------------------------------- */
+.vc_btn,
+a.vc_btn,
+button.vc_btn {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  &,
+  &:hover,
+  &:focus {
+    border: 1px solid transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+  // @padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius
+  .button-size(@vc_btn_padding_vertical; @vc_btn_padding_horizontal; 100%; 20px; 4px);
+  // Button Sizes
+  // --------------------------------------------------
+
+  &-lg {
+    // line-height: ensure even-numbered height of button next to large input
+    .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
+  }
+  &-sm {
+    // line-height: ensure proper height of button next to small input
+    .button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+  }
+  &-xs {
+    .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+  }
+  //Button design variations
+  &_rounded {
+    //default style
+  }
+  &_square {
+    border-radius: 0;
+  }
+  &_square_outlined {
+    border-radius: 0;
+    background: none !important;
+    &,
+    &:hover,
+    &:focus {
+      border: 2px solid;
+    }
+  }
+  &_round {
+    border-radius: 25px;
+  }
+  &_outlined {
+    background: none !important;
+    &,
+    &:hover,
+    &:focus {
+      border: 2px solid;
+    }
+  }
+  /* Button colors variations */
+  &-blue {
+    .vc_btn_variants(@blue, #ffffff);
+  }
+  &-turquoise {
+    .vc_btn_variants(@turquoise, #ffffff);
+  }
+  &-pink {
+    .vc_btn_variants(@pink, #ffffff);
+  }
+  &-violet {
+    .vc_btn_variants(@violet, #ffffff);
+  }
+  &-peacoc {
+    .vc_btn_variants(@peacoc, #ffffff);
+  }
+  &-chino {
+    .vc_btn_variants(@chino, #ffffff);
+  }
+  &-mulled_wine {
+    .vc_btn_variants(@mulled_wine, #ffffff);
+  }
+  &-vista_blue {
+    .vc_btn_variants(@vista_blue, #ffffff);
+  }
+  &-black {
+    .vc_btn_variants(@black, #ffffff);
+  }
+  &-grey {
+    .vc_btn_variants(@grey, #666666);
+  }
+  &-orange {
+    .vc_btn_variants(@orange, #ffffff);
+  }
+  &-sky {
+    .vc_btn_variants(@sky, #ffffff);
+  }
+  &-green {
+    .vc_btn_variants(@green, #ffffff);
+  }
+  &-juicy_pink {
+    .vc_btn_variants(@juicy_pink, #ffffff);
+  }
+  &-sandy_brown {
+    .vc_btn_variants(@sandy_brown, #ffffff);
+  }
+  &-purple {
+    .vc_btn_variants(@purple, #ffffff);
+  }
+  &-white {
+    .vc_btn_variants(@white, #666666);
+  }
+  &-grace {
+    .vc_btn_variants(@grace, #ffffff);
+  }
+  &-default {
+    .button-variant(@vc_btn_default_color; @vc_btn_default_bg; @btn-default-border);
+  }
+  &-primary {
+    .button-variant(@vc_btn_primary_color; @vc_btn_primary_bg; @btn-primary-border);
+  }
+  // Success appears as green
+  &-success {
+    .button-variant(@btn-success-color; @btn-success-bg; @btn-success-border);
+  }
+  // Info appears as blue-green
+  &-info {
+    .button-variant(@btn-info-color; @btn-info-bg; @btn-info-border);
+  }
+  // Warning appears as orange
+  &-warning {
+    .button-variant(@btn-warning-color; @btn-warning-bg; @btn-warning-border);
+  }
+  // Danger and error appear as red
+  &-danger {
+    .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
+  }
+}
+
+.vc_button-2-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  &.vc_button-2-align-left {
+    display: block;
+    text-align: left;
+  }
+  &.vc_button-2-align-right {
+    display: block;
+    text-align: right;
+  }
+  &.vc_button-2-align-center {
+    display: block;
+    text-align: center;
+  }
+}
+
+@import "../lib/wpb_icon.less";

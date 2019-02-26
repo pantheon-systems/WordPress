@@ -1,0 +1,13 @@
+<div class="wpml-wizard-step wpml-translation-manager-finish-step text-center js-wpml-translation-manager-finish-step">
+
+    <h2>{{ strings.title }}</h2>
+    <p>{{ strings.summary }}</p>
+    <button class="button button-secondary js-send-email" data-user-id="{{ strings.translation_manager_id }}" data-nonce="{{ nonce }}">{{ strings.send_email_text }}</button>
+    <span class="spinner"> </span>
+
+    <div class="otgs-notice inline info js-notice" style="display:none"></div>
+
+    <div class="wpml-wizard-buttons-container">
+        <a href="{{ strings.manage_translators_url }}" class="button wpml-button button-lg">{{ strings.button_text }}</a>
+    </div>
+</div>

@@ -1,0 +1,266 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the amazon-s3-and-cloudfront-assets-pull package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: amazon-s3-and-cloudfront-assets-pull\n"
+"Report-Msgid-Bugs-To: nom@deliciousbrains.com\n"
+"POT-Creation-Date: 2018-09-21 15:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:231
+msgctxt "setup wizard"
+msgid "Next:"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:232
+msgctxt "setup wizard"
+msgid "Back to Previous Step"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:233
+msgctxt "setup wizard"
+msgid "Skip to Settings"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:234
+msgctxt "setup wizard"
+msgid "Save and Complete Set Up"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:235
+msgctxt "validation"
+msgid ""
+"Invalid domain. Domain names can only contain letters, numbers, hyphens (-), "
+"and periods (.)."
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:290
+msgctxt "Show the Assets settings tab"
+msgid "Assets"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:446
+msgid "Getting Started"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:447
+msgid "Get Started"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:452
+msgid "Configuring Your Custom Domain"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:456
+msgid "Creating an HTTPS Certificate"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:460
+msgid "Requesting a Certificate"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:464
+msgid "Email Validation"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:468
+msgid "Certificate Approved"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:472
+msgid "Creating a CloudFront Distribution"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:476
+msgid "Origin Settings"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:480
+msgid "Default Cache Behavior Settings"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:484
+msgid "Distribution Settings"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:488
+msgid "CloudFront Domain"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:492
+msgid "CNAME Setup"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:496
+msgid "CORS Configuration"
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:510
+msgid ""
+"🎉 Woohoo! You've completed your Amazon CloudFront setup. We're checking if "
+"your assets are ready to serve below. If it fails, your DNS likely hasn't "
+"propagated yet and you should check again in a few minutes. Once you get the "
+"green check, you can turn on the Rewrite Asset URLs setting and save to "
+"start serving your assets. If you have page caching on your site, don't "
+"forget to purge the whole cache. "
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:727
+#, php-format
+msgid "Now that you've activated, <a href='%s'>get started with set up</a>."
+msgstr ""
+
+#: classes/amazon-s3-and-cloudfront-assets-pull.php:770
+msgctxt "last checked datetime"
+msgid "Y-m-d H:i:s"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:317
+msgid "deactivate"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:318
+#, php-format
+msgid "You can %s the %s plugin to get rid of this notice."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:337
+#, php-format
+msgid "%s has been disabled as it requires the %s plugin."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:341
+msgid "which is currently disabled."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:343
+msgid "It appears to be installed already."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:345
+msgctxt "Activate plugin"
+msgid "Activate it now."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:352
+#, php-format
+msgid "<a href=\"%s\">Install</a> and activate it."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:363
+#, php-format
+msgid ""
+"%s has been disabled as it requires version %s or later of the %s plugin."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:366
+#, php-format
+msgid "You currently have version %s installed."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:373
+#: classes/as3cf-compatibility-check.php:411
+#, php-format
+msgid "A valid license for %s is required to update."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:382
+msgid "Update to the latest version"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:393
+#, php-format
+msgid ""
+"%1$s has been disabled because it is not a supported addon of the %2$s "
+"plugin."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:402
+#, php-format
+msgid ""
+"%1$s has been disabled because it will not work with the version of the %2$s "
+"plugin installed. %1$s %3$s or later is required."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:405
+#, php-format
+msgid "Update %s to the latest version"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:474
+#, php-format
+msgid "The %s plugin has been deactivated."
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:620
+msgid "a PHP version less than 5.5"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:624
+msgid "no PHP cURL library activated"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:630
+msgid "a cURL version less than 7.16.2"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:645
+msgid "cURL compiled without"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:650
+msgid "the function curl_multi_exec disabled"
+msgstr ""
+
+#: classes/as3cf-compatibility-check.php:668
+msgid ""
+"The official Amazon&nbsp;Web&nbsp;Services SDK requires PHP 5.5+ and cURL "
+"7.16.2+ compiled with OpenSSL and zlib. Your server currently has"
+msgstr ""
+
+#: view/setting/domain.php:34
+#, php-format
+msgid "Assets are serving from %s"
+msgstr ""
+
+#: view/setting/domain.php:53
+#, php-format
+msgid "Assets are not serving from %s"
+msgstr ""
+
+#: view/setting/domain.php:80
+msgid "Invalid character. Letters, numbers, periods and hyphens are allowed."
+msgstr ""
+
+#: view/setting/force-https.php:12
+msgid "Force HTTPS"
+msgstr ""
+
+#: view/setting/force-https.php:14
+msgid ""
+"By default we use HTTPS when the request is HTTPS and regular HTTP when the "
+"request is HTTP, but you may want to force the use of HTTPS always, "
+"regardless of the request."
+msgstr ""
+
+#: view/setting/rewrite-urls.php:13
+msgid "Rewrite Asset URLs"
+msgstr ""
+
+#: view/setting/rewrite-urls.php:16
+msgid "Change the URLs of any enqueued asset files to the following domain."
+msgstr ""
+
+#: view/settings.php:21
+msgid "Save Changes"
+msgstr ""

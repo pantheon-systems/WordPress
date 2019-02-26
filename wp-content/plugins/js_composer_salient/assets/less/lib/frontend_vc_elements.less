@@ -1,0 +1,189 @@
+/**
+ .vc_element html item wraps shortcodes output html.
+*/
+
+.vc_element {
+  display: block;
+  position: relative;
+  > .vc_row.vc_row-no-padding {
+    > .vc_column_container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  &.vc_empty {
+    .vc_empty-element {
+      min-height: 100px;
+      cursor: pointer;
+      position: relative;
+      &:hover {
+        &:after {
+          background-position: bottom center;
+        }
+      }
+      > .vc_element-container {
+        min-height: 100px;
+      }
+    }
+  }
+  &.vc_empty:not(.vc_sorting-over) {
+    .vc_empty-element {
+      &:after {
+        font-family: 'vcpb-plugin-icons' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        content: @vc-c-icon-add_element;
+        color: #fff;
+        font-size: 20px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 0;
+        height: 38px;
+        width: 38px;
+        line-height: 38px;
+        text-align: center;
+        position: absolute;
+        background-color: #C9C9C9;
+        border-radius: 5px;
+      }
+    }
+    > .vc_controls {
+      .control-btn-append {
+        display: none;
+      }
+    }
+  }
+  &.vc_sorting-over {
+    background-image: none;
+  }
+  &.bring-to-front {
+    z-index: 100000;
+  }
+  &.vc_active:not(.vc_tta-panel), &.vc_hold-active {
+    > .vc_controls {
+      visibility: visible;
+      .opacity(0.7);
+    }
+  }
+  &:hover, &.vc_hover, &.vc_hold-hover {
+    > .vc_controls {
+      visibility: visible;
+      .opacity(1);
+    }
+    .wpb_row() {
+      > .wpb_row {
+        > .vc_element {
+          &:before {
+            content: '';
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            outline: 1px dashed @vc_element_hover_border;
+            outline: 1px dashed @vc_element_hover_border_rgba;
+          }
+          &:after {
+            clear: both;
+          }
+        }
+      }
+    }
+    .wpb_row();
+
+    > .vc_section {
+      &:before {
+        content: '';
+        display: block;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: -15px;
+        right: -15px;
+        height: 100%;
+        outline: 1px dashed @vc_element_hover_border;
+        outline: 1px dashed @vc_element_hover_border_rgba;
+      }
+      &:after {
+        clear: both;
+      }
+    }
+  }
+
+  &.vc_empty {
+    &:hover, &.vc_hover, &.vc_hold-hover {
+      > .vc_section {
+        &:before {
+          left: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+  // Element must have min height enough to show placeholder on sorting.
+  .vc_element-container {
+    min-height: @vc_elemnet_container_min_height;
+  }
+  .wpb_accordion_wrapper > :last-child .wpb_accordion_content {
+    margin-bottom: 30px;
+    &.vc_empty-element {
+      margin-bottom: 0px;
+    }
+  }
+  &.vc_vc_separator:last-child {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  &.vc_vc_separator:first-child {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  &.vc_vc_gallery:last-child {
+    padding-bottom: 15px;
+  }
+  &.vc_vc_row {
+    > .vc_row {
+      > .vc_vc_column {
+        > .wpb_column {
+          > .vc_element-container {
+            > .vc_vc_row_inner {
+              .vc_vc_column_inner {
+                margin-bottom: 30px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.vc_element  {
+  .vc_element-container {
+    &.vc_section {
+      &.vc_row-o-full-height {
+        min-height: 100vh;
+      }
+    }
+  }
+}
+
+.wpb_column {
+  > .wpb_wrapper > .vc_element:last-child > .wpb_content_element,
+  > .wpb_wrapper > .vc_element:last-child > .wpb_row {
+    margin-bottom: 0; //remove margin bottom from last content elements in columns
+  }
+}

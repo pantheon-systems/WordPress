@@ -1,0 +1,135 @@
+/* Call to action
+---------------------------------------------------------- */
+.vc_call_to_action {
+  background-color: @vc_call_to_action_2_bg;
+  border: 2px solid @vc_call_to_action_2_bg;
+  padding: 2em;
+  border-radius: 5px;
+  *:last-child {
+    margin-bottom: 0;
+  }
+  &.vc_cta_ {
+    &rounded {
+      //default style
+    }
+    &square {
+      border-radius: 0;
+    }
+    &square_outlined {
+      border-radius: 0;
+      background: none !important;
+    }
+    &round {
+      border-radius: 50px;
+    }
+    &outlined {
+      background: none !important;
+    }
+  }
+  hgroup {
+    h2, h4 {
+      margin: 0;
+      clear: none;
+    }
+    + p {
+      margin-top: 1em;
+    }
+  }
+  &.vc_cta_btn_pos {
+    &_right {
+      .vc_cta_btn {
+        float: right;
+        margin-left: 2em;
+      }
+    }
+    &_left {
+      .vc_cta_btn {
+        float: left;
+        margin-right: 2em;
+      }
+    }
+  }
+}
+
+.wpb_call_to_action {
+  position: relative;
+  background-color: @vc_call_to_action_bg;
+  padding: 20px;
+  padding: @vc_element_margin_bottom;
+  border: 1px solid @vc_call_to_action_border;
+
+  .box-sizing(border-box);
+
+  .wpb_button {
+    margin: 0;
+    .box-sizing(border-box);
+  }
+}
+
+.cta_align_left .wpb_button {
+  float: left;
+}
+
+.cta_align_right .wpb_button {
+  float: right;
+}
+
+.cta_align_left .wpb_button,
+.cta_align_right .wpb_button {
+  max-width: @vc_cta_button_w;
+}
+
+.cta_align_left .wpb_call_text,
+.cta_align_right .wpb_call_text {
+  width: 70%;
+  float: left;
+  clear: none;
+}
+
+.cta_align_left .wpb_call_text {
+  float: right;
+}
+
+.wpb_call_to_action .wpb_call_text,
+#content .wpb_call_to_action .wpb_call_text {
+  margin: 0;
+  padding-top: 0;
+}
+
+.cta_align_bottom {
+  text-align: center;
+
+  .wpb_button {
+    position: static;
+    margin-top: @vc_margin_bottom_gold;
+    display: inline-block;
+  }
+}
+
+.cta_no_button {
+  .wpb_call_text {
+    width: auto;
+    float: none;
+  }
+}
+
+/* Call to action responsive rules
+---------------------------------------------------------- */
+@media (max-width: 600px) {
+  .vc_responsive {
+    .cta_align_left .wpb_button,
+    .cta_align_right .wpb_button {
+      max-width: 70%;
+      width: 70%;
+      float: none;
+      display: block;
+      margin: 3% auto;
+    }
+    .cta_align_left .wpb_call_text,
+    .cta_align_right .wpb_call_text {
+      width: auto;
+      max-width: none;
+      text-align: center;
+    }
+  }
+}

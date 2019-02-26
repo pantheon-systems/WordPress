@@ -1,0 +1,156 @@
+.wpses-container {
+	width: 742px;
+	position: relative;
+	min-height: 950px;
+}
+
+.wpses-header-block {
+	border: 1px solid #ddd;
+	background-color: #fff;
+	padding: 20px;
+	margin: .5em 0 1em 0;
+}
+
+.wpses-issues.notice {
+	padding-bottom: 1em;
+}
+
+.wpses-issues ul {
+	list-style-type: disc;
+	padding-left: 20px;
+}
+
+.wpses-issues p:first-child {
+	margin-top: 0;
+}
+
+.wpses-status p:first-child {
+	margin-top: 0;
+}
+
+.wpses-status form p {
+	margin: 0;
+}
+
+.wpses-status form p.wpses-submit {
+	margin-bottom: 1em;
+}
+
+.wpses-status form p.wpses-activation-warning {
+	font-style: italic;
+	color: #999;
+	margin-bottom: 1em;
+}
+
+.wpses-status form p.wpses-activation-desc {
+	font-size: 13px;
+	color: #999;
+	font-style: italic;
+}
+
+.wpses-status form p.wpses-force-activation-desc {
+	margin-bottom: 1em;
+}
+
+.wpses-sidebar {
+	position: absolute;
+	top: 0;
+	right: -312px;
+	width: 292px;
+}
+
+.wpses-sidebar .wpses-block {
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+
+.wpses-sidebar .wpses-block p {
+	margin-top: 0;
+	line-height: 1.4;
+}
+
+.wpses-sidebar .wpses-banner {
+	background-color: #f7a80d;
+	color: #fff;
+	padding: 50px 20px 14px 20px;
+}
+
+.wpses-sidebar .wpses-banner h4 {
+	font-weight: 300;
+	font-size: 30px;
+	margin: 0;
+	line-height: 1.2;
+}
+
+.wpses-sidebar .wpses-banner h4 small {
+	font-size: 14px;
+	text-transform: uppercase;
+	display: block;
+}
+
+.wpses-sidebar .wpses-banner:before {
+	content: "\f466";
+	display: inline-block;
+	font: normal 80px/1 'dashicons';
+	color: #fff;
+	margin: 0 0 10px -6px;
+}
+
+.wpses-acquisition-notice ul {
+	list-style-type: disc;
+	padding-left: 20px;
+}
+
+.wpses-acquisition-notice p:last-child {
+	margin-bottom: 0;
+}
+
+.wpses-dbi-logo {
+	float: left;
+	margin: 3px 15px 0 0;
+}
+
+.wpses-sidebar .wpses-subscribe {
+	border-top: none;
+}
+
+.wpses-sidebar .wpses-subscribe h2 {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 0.5em;
+	color: #666;
+	font-size: 20px;
+	line-height: 1.2em;
+	float: none;
+}
+
+.wpses-sidebar .wpses-subscribe h3 {
+	font-size: 16px;
+	margin: 0;
+}
+
+.wpses-sidebar .wpses-subscribe p {
+	margin: 0;
+}
+
+.wpses-sidebar .wpses-subscribe .wpses-interesting {
+	margin-bottom: 1em;
+	line-height: 1.4;
+}
+
+.wpses-sidebar .wpses-subscribe input {
+	width: 100%;
+}
+
+.wpses-sidebar .wpses-subscribe .wpses-field {
+	margin-bottom: 0.5em;
+}
+
+@media screen and (max-width: 1252px) {
+	.wpses-sidebar {
+		position: relative;
+		top: auto;
+		right: auto;
+		margin-top: 50px;
+	}
+}

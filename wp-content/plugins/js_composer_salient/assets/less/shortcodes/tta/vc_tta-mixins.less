@@ -1,0 +1,454 @@
+//
+// Mixins
+// =====================
+
+// Make Colors Set
+// ==========================
+.vc_tta-make-colors-set(@selector; @color; @background; @background-border; @border; @text; @contrast; @content) {
+  .@{selector} {
+    // Classic Style
+    // ------------------------
+    &.vc_tta-style-classic {
+      .vc_tta-make-panel-color(
+      @border: @border;
+      @border-active: @background-border;
+      @background: @color;
+      @background-active: @background;
+      @text: @contrast;
+      @text-active: @text;
+      );
+      .vc_tta-make-tabs-color(
+      @border: @border;
+      @border-active: @background-border;
+      @background: @color;
+      @background-active: @background;
+      @text: @contrast;
+      @text-active: @text;
+      );
+    }
+
+    // Modern Style
+    // ------------------------
+    &.vc_tta-style-modern {
+      .vc_tta-make-panel-color(
+      @border: @border;
+      @border-active: @background-border;
+      @background: @color;
+      @background-active: @background;
+      @text: @contrast;
+      @text-active: @text;
+      );
+      .vc_tta-make-tabs-color(
+      @border: @border;
+      @border-active: @background-border;
+      @background: @color;
+      @background-active: @background;
+      @text: @contrast;
+      @text-active: @text;
+      );
+    }
+
+    // Outline Style
+    // ------------------------
+    &.vc_tta-style-outline {
+      .vc_tta-make-panel-color(
+      @text: @color;
+      @text-hover: @contrast;
+      @text-active: @color;
+      @border: @color;
+      @border-active: @color;
+      @background: transparent;
+      @background-active: transparent;
+      @background-hover: @color;
+      );
+      .vc_tta-make-tabs-color(
+      @text: @color;
+      @text-hover: @contrast;
+      @text-active: @color;
+      @border: @color;
+      @border-active: @color;
+      @background: transparent;
+      @background-active: transparent;
+      @background-hover: @color;
+      );
+    }
+
+    // Flat Style
+    // ------------------------
+    &.vc_tta-style-flat {
+      .vc_tta-make-panel-color(
+      @background: darken(@color, 3%);
+      @background-active: @color;
+      @background-hover: darken(@color, 6%);
+      @text: @contrast;
+      @text-active: @contrast;
+      @content-color: @contrast;
+      );
+      .vc_tta-make-tabs-color(
+      @background: darken(@color, 3%);
+      @background-active: @color;
+      @background-hover: darken(@color, 6%);
+      @text: @contrast;
+      @text-active: @contrast;
+      @content-color: @contrast;
+      );
+    }
+  }
+}
+
+// Make Panels Color
+// ==========================
+.vc_tta-make-panel-color( @border:false; @border-active:false; @border-hover: false;
+                    @background: false; @background-active: false; @background-hover: false;
+                    @text: false; @text-active: false; @text-hover: false;
+                    @content-color: false; ) {
+  // Colors For Panels
+  // -------------------------
+  .vc_tta-panel {
+    // Colors For Panel Title
+    // -------------------------
+    .vc_tta-panel-heading {
+      & when not (@border = false) {
+        border-color: @border;
+      }
+      & when not (@background = false) {
+        background-color: @background;
+      }
+
+      &:hover,
+      &:focus {
+        & when not (@border-hover = false) {
+          border-color: @border-hover;
+        }
+        & when (@background-hover = false) and not (@background = false)  {
+          background-color: darken(@background, 3%);
+        }
+        & when not (@background-hover = false) {
+          background-color: @background-hover;
+        }
+      }
+    }
+    .vc_tta-panel-title {
+      > a {
+        & when not (@text = false) {
+          color: @text;
+        }
+        &:hover {
+          & when not (@text-hover = false) {
+            color: @text-hover;
+          }
+        }
+      }
+    }
+    // Active Panel
+    &.vc_active {
+      .vc_tta-panel-heading {
+        & when not (@border-active = false) {
+          border-color: @border-active;
+        }
+        & when not (@background-active = false) {
+          background-color: @background-active;
+        }
+      }
+      .vc_tta-panel-title {
+        > a {
+          & when not (@text-active = false) {
+            color: @text-active;
+          }
+        }
+      }
+    }
+
+    // Colors For Panel Body
+    // -------------------------
+    .vc_tta-panel-body {
+      & when not (@border-active = false) {
+        &,
+        &::before,
+        &::after {
+          border-color: @border-active;
+        }
+      }
+      & when not (@background-active = false) {
+        background-color: @background-active;
+      }
+    }
+  }
+  // Color For Content
+  // ------------------------
+  &:not(.vc_tta-o-no-fill) .vc_tta-panel-body {
+    & when not (@content-color = false) {
+      color: @content-color;
+    }
+  }
+  // Color For Control Icon
+  // ------------------------
+  .vc_tta-controls-icon {
+    &::before,
+    &::after {
+      & when not (@text = false) {
+        border-color: @text;
+      }
+    }
+  }
+  .vc_tta-panel-heading {
+    &:hover,
+    &:focus {
+      .vc_tta-controls-icon {
+        &::before,
+        &::after {
+          & when not (@text-hover = false) {
+            border-color: @text-hover;
+          }
+        }
+      }
+    }
+  }
+  .vc_active .vc_tta-panel-heading {
+    .vc_tta-controls-icon {
+      &::before,
+      &::after {
+        border-color: @text-active;
+      }
+    }
+  }
+}
+
+// Make Tabs Color
+// ==========================
+.vc_tta-make-tabs-color( @border:false; @border-active:false; @border-hover: false;
+                    @background: false; @background-active: false; @background-hover: false;
+                    @text: false; @text-active: false; @text-hover: false;
+                    @content-color: false; ) {
+  // Colors For Tabs
+  // -------------------------
+  .vc_tta-tab {
+    > a {
+      & when not (@border = false) {
+        border-color: @border;
+      }
+      & when not (@background = false) {
+        background-color: @background;
+      }
+      & when not (@text = false) {
+        color: @text;
+      }
+
+      &:hover,
+      &:focus {
+        & when not (@border-hover = false) {
+          border-color: @border-hover;
+        }
+        & when (@background-hover = false) and not (@background = false)  {
+          background-color: darken(@background, 6%);
+        }
+        & when not (@background-hover = false) {
+          background-color: @background-hover;
+        }
+        & when not (@text-hover = false) {
+          color: @text-hover;
+        }
+      }
+    }
+    // Active Tab
+    &.vc_active {
+      > a {
+        & when not (@border-active = false) {
+          border-color: @border-active;
+        }
+        & when not (@background-active = false) {
+          background-color: @background-active;
+        }
+        & when not (@text-active = false) {
+          color: @text-active;
+        }
+      }
+    }
+  }
+  // Colors For Panels When Tabs Active
+  // -------------------------
+  &.vc_tta-tabs {
+    //.vc_non_responsive must be exactly same as @media below
+    .vc_non_responsive &,
+    .vc_tta-o-non-responsive & {
+      .vc_tta-panels {
+        & when not (@border-active = false) {
+          &,
+          &::before,
+          &::after {
+            border-color: @border-active;
+          }
+        }
+        & when not (@background-active = false) {
+          background-color: @background-active;
+        }
+        // Colors For Panel Body
+        // -------------------------
+        .vc_tta-panel-body {
+          border-color: transparent;
+          background-color: transparent;
+        }
+      }
+    }
+    @media (min-width: @vc_tta-breakpoint) {
+      .vc_tta-panels {
+        & when not (@border-active = false) {
+          &,
+          &::before,
+          &::after {
+            border-color: @border-active;
+          }
+        }
+        & when not (@background-active = false) {
+          background-color: @background-active;
+        }
+        // Colors For Panel Body
+        // -------------------------
+        .vc_tta-panel-body {
+          border-color: transparent;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+// Make shape
+// ===============================
+.vc_tta-make-shape(@border-radius) {
+  // for panels
+  .vc_tta-panel-body {
+    min-height: @border-radius * 2;
+  }
+  .vc_tta-panel-body,
+  .vc_tta-panel-heading {
+    border-radius: @border-radius;
+  }
+  // for tabs
+  .vc_tta-tabs-container {
+    margin: @border-radius;
+  }
+  .vc_tta-tab {
+    > a {
+      border-radius: @border-radius;
+    }
+  }
+  // Panels When Tabs Active
+  &.vc_tta-tabs {
+    //.vc_non_responsive must be exactly same as @media below
+    .vc_non_responsive &,
+    .vc_tta-o-non-responsive & {
+      .vc_tta-panels {
+        border-radius: @border-radius;
+      }
+    }
+    @media (min-width: @vc_tta-breakpoint) {
+      .vc_tta-panels {
+        border-radius: @border-radius;
+      }
+    }
+  }
+  &.vc_tta-o-no-fill {
+    .vc_tta-panel-body {
+      border-radius: 0;
+    }
+  }
+  // Fix For Panels With No Fill And Shape Group Option
+  &.vc_tta-o-shape-group.vc_tta-o-no-fill {
+    .vc_tta-panel.vc_active {
+      + .vc_tta-panel:not(:first-child):not(:last-child),
+      + .vc_tta-panel:last-child:not(:first-child) {
+        .vc_tta-panel-heading {
+          border-top-left-radius: @border-radius;
+          border-top-right-radius: @border-radius;
+        }
+      }
+    }
+  }
+}
+
+// Make TTA Spacings
+// ==========================
+.vc_tta-make-spacing(@spacing) {
+  &.vc_tta-spacing-@{spacing} {
+    // Spacing Between Panel Heading And Panel Body
+    // --------------------------------------------------
+    .vc_tta-panel {
+      &:not(:first-child),
+      &.vc_active + .vc_tta-panel {
+        .vc_tta-panel-heading {
+          margin-top: unit(@spacing, px);
+        }
+      }
+      &:not(:last-child),
+      &.vc_active {
+        .vc_tta-panel-heading {
+          margin-bottom: unit(@spacing, px);
+        }
+      }
+    }
+    // Spacing Between Tabs
+    // --------------------------------------------------
+    .vc_tta-tabs-list {
+      padding: 0;
+      margin-top: -(unit(ceil(@spacing / 2), px));
+      margin-bottom: -(unit(floor(@spacing / 2), px));
+      margin-left: -(unit(ceil(@spacing / 2), px));
+      margin-right: -(unit(floor(@spacing / 2), px));
+    }
+    .vc_tta-tab {
+      margin-top: unit(ceil(@spacing / 2), px);
+      margin-bottom: unit(floor(@spacing / 2), px);
+      margin-left: unit(ceil(@spacing / 2), px);
+      margin-right: unit(floor(@spacing / 2), px);
+    }
+  }
+}
+
+// Make TTA Gaps
+// ==========================
+.vc_tta-make-gap(@spacing) {
+  &.vc_tta-gap-@{spacing} {
+    // Spacing Between Panel Heading And Panel Body
+    // --------------------------------------------------
+    .vc_tta-panel {
+      &:not(:first-child),
+      &.vc_active + .vc_tta-panel {
+        .vc_tta-panel-heading {
+          margin-top: unit(@spacing, px);
+        }
+      }
+      &:not(:last-child):not(.vc_active) {
+        .vc_tta-panel-heading {
+          margin-bottom: unit(@spacing, px);
+        }
+      }
+    }
+    // Spacing Between Tabs List And Panels
+    // --------------------------------------------------
+    // top position
+    &.vc_tta-tabs-position-top {
+      .vc_tta-tabs-container {
+        margin-bottom: unit(@spacing, px);
+      }
+    }
+    // bottom position
+    &.vc_tta-tabs-position-bottom {
+      .vc_tta-tabs-container {
+        margin-top: unit(@spacing, px);
+      }
+    }
+    // left position
+    &.vc_tta-tabs-position-left {
+      .vc_tta-tabs-container {
+        margin-right: unit(@spacing, px);
+      }
+    }
+    // right position
+    &.vc_tta-tabs-position-right {
+      .vc_tta-tabs-container {
+        margin-left: unit(@spacing, px);
+      }
+    }
+  }
+}

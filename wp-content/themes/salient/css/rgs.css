@@ -1,0 +1,129 @@
+* { -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; }
+
+/* MAIN CONTAINER */
+.container, .post-area.standard-minimal.full-width-content article.post .inner-wrap	{ margin: 0 auto;  position: relative; }
+
+.container, .post-area.standard-minimal.full-width-content article.post .inner-wrap {
+    max-width: 880px; 
+} 
+
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+
+	html body[data-header-format="left-header"][data-ext-responsive="false"] .container, html body[data-header-format="left-header"][data-ext-responsive="false"] .post-area.standard-minimal.full-width-content article.post .inner-wrap,
+	body[data-header-format="left-header"][data-ext-responsive="false"] .nectar-recent-posts-slider .flickity-page-dots {
+	    max-width: 900px; 
+	} 
+}
+@media only screen and (min-width: 1150px) and (max-width: 1300px) {
+
+	html body[data-header-format="left-header"][data-ext-responsive="false"] .container, html body[data-header-format="left-header"][data-ext-responsive="false"] .post-area.standard-minimal.full-width-content article.post .inner-wrap,
+	body[data-header-format="left-header"][data-ext-responsive="false"] .nectar-recent-posts-slider .flickity-page-dots {
+	    max-width: 800px; 
+	} 
+}
+@media only screen and (min-width: 1000px) and (max-width: 1150px) {
+
+	html body[data-header-format="left-header"][data-ext-responsive="false"] .container, html body[data-header-format="left-header"][data-ext-responsive="false"] .post-area.standard-minimal.full-width-content article.post .inner-wrap,
+	body[data-header-format="left-header"][data-ext-responsive="false"] .nectar-recent-posts-slider .flickity-page-dots {
+	    max-width: 650px; 
+	} 
+}
+
+.row {
+	position: relative;
+}
+
+/* SELF CLEARING FLOATS - CLEARFIX METHOD */
+.row:after, .col:after, .clr:after, .group:after { 
+	content: ""; 
+	display: block; 
+	height: 0; 
+	clear: both; 
+	visibility: hidden; }
+
+
+/* DEFAULT ROW STYLES */
+.row, div.clear { padding-bottom: 24px; } /* set according to preference*/
+			
+								  
+/* DEFAULT COLUMN STYLES */
+.col {
+  position: relative;
+  display: block;
+  float: left;
+  width: 100%; 
+}
+
+@media (min-width: 690px) {
+    .col {
+      margin-right: 2%; 
+     } 
+     
+     .wpb_column {
+     	margin-right: 0px;
+     }
+}
+
+/* RESET MARGINS */
+.col.col_last { margin-right: 0; } 
+.col:last-child { margin-right: 0; } 
+
+
+/* COLUMN WIDTH ON DISPLAYS +690px */
+@media (min-width: 690px) {
+	.span_1 { width: 6.5%; }
+	.span_2 { width: 15.0%; }
+	.span_3 { width: 23.5%; }
+	.span_4 { width: 32.0%; }
+	.span_5 { width: 40.5%; }
+	.span_6 { width: 49.0%; }
+	.span_7 { width: 57.5%; }
+	.span_8 { width: 66.0%; }
+	.span_9 { width: 74.5%; }
+	.span_10 { width: 83.0%; }
+	.span_11 { width: 91.5%; }
+	.span_12 { width: 100%; }
+	
+	/* full width content/no margin columns */
+	.full-width-content.vc_row-fluid .vc_span1, .full-width-content.vc_row-fluid .vc_col-sm-1, .vc_row-fluid[data-column-margin="none"] .vc_span1, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-1 { width: 8.33%; }
+	.full-width-content.vc_row-fluid .vc_span2, .full-width-content.vc_row-fluid .vc_col-sm-2, .vc_row-fluid[data-column-margin="none"] .vc_span2, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-2 { width: 16.66%; }
+	.full-width-content.vc_row-fluid .vc_span3, .full-width-content.vc_row-fluid .vc_col-sm-3, .vc_row-fluid[data-column-margin="none"] .vc_span3, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-3 { width: 25%; }
+	.full-width-content.vc_row-fluid .vc_span4, .full-width-content.vc_row-fluid .vc_col-sm-4, .vc_row-fluid[data-column-margin="none"] .vc_span4, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-4 { width: 33.33%; }
+	.full-width-content.vc_row-fluid .vc_span5, .full-width-content.vc_row-fluid .vc_col-sm-5, .vc_row-fluid[data-column-margin="none"] .vc_span5, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-5 { width: 41.5%; }
+	.full-width-content.vc_row-fluid .vc_span6, .full-width-content.vc_row-fluid .vc_col-sm-6, .vc_row-fluid[data-column-margin="none"] .vc_span6, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-6 { width: 50%; }
+	.full-width-content.vc_row-fluid .vc_span7, .full-width-content.vc_row-fluid .vc_col-sm-7, .vc_row-fluid[data-column-margin="none"] .vc_span7, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-7 { width: 58.3%; }
+	.full-width-content.vc_row-fluid .vc_span8, .full-width-content.vc_row-fluid .vc_col-sm-8, .vc_row-fluid[data-column-margin="none"] .vc_span8, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-8 { width: 66.66%; }
+	.full-width-content.vc_row-fluid .vc_span9, .full-width-content.vc_row-fluid .vc_col-sm-9, .vc_row-fluid[data-column-margin="none"] .vc_span9, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-9 { width: 75%; }
+	.full-width-content.vc_row-fluid .vc_span10, .full-width-content.vc_row-fluid .vc_col-sm-10, .vc_row-fluid[data-column-margin="none"] .vc_span10, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-10 { width: 83.0%; }
+	.full-width-content.vc_row-fluid .vc_span11, .full-width-content.vc_row-fluid .vc_col-sm-11, .vc_row-fluid[data-column-margin="none"] .vc_span11, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-11 { width: 91.5%; }
+	.full-width-content.vc_row-fluid .vc_span12, .full-width-content.vc_row-fluid .vc_col-sm-12, .vc_row-fluid[data-column-margin="none"] .vc_span12, .vc_row-fluid[data-column-margin="none"] .vc_col-sm-12 { width: 100%; }
+
+	.full-width-content.vc_row-fluid .wpb_column, .vc_row-fluid[data-column-margin="none"] .wpb_column { margin-left: 0!important; }
+	.full-width-content.vc_row-fluid .wpb_column .wpb_row, .full-width-content.vc_row-fluid .wpb_column .wpb_wrapper { margin: 0; }
+	
+}
+
+.vc_row-fluid[data-column-margin="none"] {
+	margin-bottom: 0;
+}
+
+/* assist in updating to v9 */
+body #page-header-bg .row { visibility: visible; }
+.wpb_row .row-bg-wrap .row-bg-overlay {display:block; position:absolute; top:0; left:0; width:100%; height:100%; content:' '; z-index:2; backface-visibility: hidden;}
+.wpb_column .column-bg-overlay {
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    content: ' ';
+    display: block;
+    opacity: 0;
+    transition: background-color 0.45s cubic-bezier(0.25, 1, 0.33, 1),opacity 0.45s cubic-bezier(0.25, 1, 0.33, 1);
+    -webkit-transition: background-color 0.45s cubic-bezier(0.25, 1, 0.33, 1),opacity 0.45s cubic-bezier(0.25, 1, 0.33, 1);
+}
+

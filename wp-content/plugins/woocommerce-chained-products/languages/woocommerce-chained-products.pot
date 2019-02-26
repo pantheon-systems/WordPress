@@ -1,0 +1,709 @@
+# Loco Gettext template
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Chained Products 2.8.1\n"
+"Report-Msgid-Bugs-To: https://www.storeapps.org/support/contact-us/\n"
+"POT-Creation-Date: 2018-10-22 05:50+0000\n"
+"POT-Revision-Date: Mon May 21 2018 17:36:51 GMT+0530 (IST)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Ratnakar Dubey <ratnakar.dubey@storeapps.org>\n"
+"Language-Team: StoreApps <support@storeapps.org>, Icegram <hello@icegram.com>"
+"\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: includes/class-cp-admin-welcome.php:36
+msgid "About Chained Products"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:37
+msgid "Welcome to Chained Products"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:116
+#, php-format
+msgid "Welcome to Chained Products %s"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:122
+msgid "Thanks for installing! We hope you enjoy using Chained Products."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:129
+msgid "Create combo!"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:135
+msgid "Docs"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:147
+#: includes/class-wc-admin-chained-products.php:2291
+msgid "Know Chained Products"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:155
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:163
+msgid "FAQ's"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:187
+msgid "Terminologies"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:190
+msgid "Main Product / Chained Parent"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:192
+msgid ""
+"This is the product to which other products will be attached. On adding this "
+"product to cart, all the attached products will be automatically added to "
+"cart or order with price zero."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:195
+msgid ""
+"You can also enable pricing for any individual chained item while "
+"configuring the product."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:201
+msgid "Chained Item / Chained Child"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:203
+msgid ""
+"Products which are attached to any other product are termed as Chained item. "
+"Chained item will always be added automatically to cart when its parent is "
+"added to cart or order."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:207
+#: includes/class-wc-admin-chained-products.php:970
+#: includes/class-wc-admin-chained-products.php:1031
+#: includes/class-wc-admin-chained-products.php:1420
+#: includes/class-wc-admin-chained-products.php:2311
+msgid "Chained Products"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:210
+msgid "What is Chained Products?"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:212
+msgid ""
+"It's a WooCommerce add-on, which allows you to add any other WooCommerce "
+"product to an existing product in such a way that it creates a chain. In any "
+"order, when the main product is availble, all its chained item will also be "
+"present."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:216
+msgid "What's the final result?"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:218
+msgid ""
+"Whenever a product, to which other products are chained, and it will be "
+"added to cart, all the product which are attached to main product will be "
+"added to cart."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:222
+msgid "What's new?"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:226
+msgid ""
+"Now you can enable pricing for any individual chained item while configuring "
+"the chained product."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:228
+msgid ""
+"All those products which are attached to main product, when added to cart, "
+"their price will be removed, i.e. it will be added as price zero"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:234
+msgid "What is possible"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:237
+msgid "Create combos & packs"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:239
+msgid ""
+"A combo product is a collection of multiple product. Generally combos are "
+"created to encourage customer to buy many products."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:242
+msgid ""
+"You can create a separate product & include all those product which you want "
+"in that combos, set a price for this combo. Now, if enabled, the plugin will "
+"also handle inventory for all products of combo."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:246
+msgid "Giveaway a product to all your existing customer"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:248
+msgid ""
+"There can be cases that you want to giveaway a product for free to your "
+"existing customer & also new customer. Chained Products provides you a "
+"setting to add newly added chained items to all existing order which "
+"includes chained parent."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:252
+msgid "Buy 1 Get X"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:254
+msgid ""
+"Since Chained Products allows you to set quantity for chained items, you can "
+"create combo such as: Buy 1 Get 1 Free, Buy 1 Get 2 Free & so on..."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:260
+msgid "Display Chained items info on Product page"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:262
+msgid ""
+"Chained Products provides you a shortcode <b>[chained_products]</b> using "
+"which you can easily display chained items information on product page."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:266
+msgid "Works well with other Product Types"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:268
+msgid ""
+"Chained Products also works with <b>WooCommerce Product Bundles, WooCommerce "
+"Give Products, WooCommerce Composite Products, WooCommerce Mix 'n Match "
+"Products</b>."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:271
+msgid ""
+"You can set a Chained Parent as an item in any of the above product type. "
+"Now, whenever the product will be added to cart or order, chained parent "
+"along with its chained item will also be added to cart or order."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:275
+msgid "Stock Dependency"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:277
+msgid ""
+"Stock Management feature of Chained Products can be very powerful if your "
+"store is selling an assembled item. Though an assembled item is a single "
+"unit but it has many parts & in multiple quantity. You may have inventory "
+"for those individual item also. Chained Products can play very important "
+"role here."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:280
+msgid ""
+"Let's take an example: You are selling Desktop PC. You've created many "
+"Desktop PCs with different configuration. Each configuration individually is "
+"a separate product which is chained to Desktop PC. So, whenever any customer "
+"will order 1 Desktop PC, inventory of its parts will be reduced automatically"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:310
+msgid ""
+"Chained Products shortcode is created to show all chained products on a "
+"product page. Previously when shortcode feature was not available, all "
+"chained products were showing in an additional tab on product's page."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:313
+msgid ""
+"Now the shortcode gives you more flexibility & control on \"How & where to "
+"display chained products\". You can also set whether to show chained "
+"products in list format or grid format, show/hide price & quantity."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:318
+msgid "Possible Usage"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:351
+msgid "Shortcode Attributes"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:356
+msgid "Attributes"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:357
+msgid "Values"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:358
+msgid "Default"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:359
+msgid "Description"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:367
+msgid "show / hide prices of chained products"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:373
+msgid "show / hide quantities of chained products"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:379
+msgid "Display chained products in Grid view / List view"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:383
+msgid "any custom value"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:385
+msgid ""
+"You can add your custom CSS classes here. It'll be applicable on container "
+"which holds chained products. You can add CSS properties to your custom "
+"class in your theme"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:413
+msgid "FAQ / Common Problems"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:418
+msgid "Chained Products' fields are broken"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:419
+msgid ""
+"Make sure you are using latest version of Chained Products. If the issue "
+"still persist, deactivate all plugins except WooCommerce & Chained Products. "
+"Recheck the issue, if the issue still persists, contact us. If the issue "
+"goes away, re-activate other plugins one-by-one & re-checking the fields, to "
+"find out which plugin is conflicting. Inform us about this issue."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:422
+msgid "Chained Products' not visible on product page"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:424
+#, php-format
+msgid ""
+"Re-check product's setting & try to find shortcode %s in description or "
+"short description field. If the shortcode is not available add it manually. "
+"You may also get a notification asking to insert shortcode for chained "
+"products. If so, click the link on notification & save the product. If "
+"shorcode is already available, then remove it, & type it again."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:427
+msgid ""
+"Chained Products' are not loading on product page OR it is showing incorrect "
+"data related to chained items"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:428
+msgid ""
+"First you need to verify that it is not conflicting with any other plugin. "
+"You can follow same steps as mentioned in earlier FAQ which asks to "
+"deactivate all plugins except Chained Products. It can also be related to "
+"themes. To verify this, you can switch to other themes."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:431
+msgid "Unable to increase quantity or add product to cart"
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:432
+msgid ""
+"A Chained parent can be attached with many other products. Manage stocks "
+"might be enabled in those products. If child item is available in limited "
+"quantity, it'll allow you to add main product only upto that limit, even if "
+"main product has sufficient stock."
+msgstr ""
+
+#. WooCommerce support link
+#: includes/class-cp-admin-welcome.php:459
+#, php-format
+msgid ""
+"If you are facing any other issues, please %s from your WooCommerce account."
+msgstr ""
+
+#: includes/class-cp-admin-welcome.php:459
+msgid "submit a ticket"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:120
+msgid "Important - "
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:120
+msgid ""
+"WooCommerce Chained Products plugin is active but it will only work with "
+"WooCommerce 2.5+. "
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:120
+msgid "Please update WooCommerce to the latest version"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:134
+msgid "[New Feature] WooCommerce Chained Products"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:134
+msgid "Now you can configure chained items to be priced individually."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:134
+msgid "Show me how"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:134
+msgid "Dismiss"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:845
+msgctxt "enhanced select"
+msgid "One result is available, press enter to select it."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:846
+msgctxt "enhanced select"
+msgid "%qty% results are available, use up and down arrow keys to navigate."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:847
+msgctxt "enhanced select"
+msgid "No matches found"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:848
+msgctxt "enhanced select"
+msgid "Loading failed"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:849
+msgctxt "enhanced select"
+msgid "Please enter 1 or more characters"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:850
+msgctxt "enhanced select"
+msgid "Please enter %qty% or more characters"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:851
+msgctxt "enhanced select"
+msgid "Please delete 1 character"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:852
+msgctxt "enhanced select"
+msgid "Please delete %qty% characters"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:853
+msgctxt "enhanced select"
+msgid "You can only select 1 item"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:854
+msgctxt "enhanced select"
+msgid "You can only select %qty% items"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:855
+msgctxt "enhanced select"
+msgid "Loading more results&hellip;"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:856
+msgctxt "enhanced select"
+msgid "Searching&hellip;"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:981
+#: includes/class-wc-admin-chained-products.php:994
+#: includes/class-wc-admin-chained-products.php:1036
+#: includes/class-wc-admin-chained-products.php:1040
+#: includes/class-wc-admin-chained-products.php:1424
+#: includes/class-wc-admin-chained-products.php:1427
+msgid "Search for a product..."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1004
+#: includes/class-wc-admin-chained-products.php:1044
+#: includes/class-wc-admin-chained-products.php:1430
+msgid "Qty"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1009
+#: includes/class-wc-admin-chained-products.php:1049
+#: includes/class-wc-admin-chained-products.php:1434
+msgid "Priced Individually"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1018
+#: includes/class-wc-admin-chained-products.php:1053
+#: includes/class-wc-admin-chained-products.php:1437
+msgid "Add Product"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1020
+#: includes/class-wc-admin-chained-products.php:1447
+msgid "Remove Product"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1065
+msgid "Manage stock?"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1067
+msgid "Enable stock management for chained products"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1069
+msgid ""
+"Check to manage stock for products listed in chained products, uncheck "
+"otherwise."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1075
+msgid "Update existing orders?"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1077
+msgid "Update existing orders with above chained products"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1079
+msgid ""
+"Check to update existing orders containing this main product. Existing "
+"orders will be affected."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1082
+msgid "Note: "
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1082
+msgid ""
+"Upating existing orders with chained products will not update the order "
+"total."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1085
+msgid "To show Chained Products on product page click"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1086
+msgid "Insert shortcode in description"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:1840
+#, php-format
+msgid "Chained order item %s was added."
+msgid_plural "Chained order items %s were added."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-wc-admin-chained-products.php:1844
+#, php-format
+msgid "Quantity of chained order item %s was updated."
+msgid_plural "Quantity of chained order items %s were added."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-wc-admin-chained-products.php:1848
+#, php-format
+msgid "Chained order item %s was removed."
+msgid_plural "Chained order items %s were removed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-wc-admin-chained-products.php:2290
+msgid "Chained Product Settings"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2290
+msgid "Settings"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2291
+msgid "About"
+msgstr ""
+
+#. Woocommerce Currency Symbol
+#: includes/class-wc-admin-chained-products.php:2326
+#, php-format
+msgid ""
+"This will show chained item price as %s in cart,cart widget & order received "
+"page."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2329
+msgid ""
+"For chained items having Priced Individually option enabled, the chained "
+"item price will be shown."
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2340
+msgid "Visibility"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2341
+msgid "Show chained items to customers"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2342
+msgid ""
+"This will show chained items in cart, cart widget, checkout & order received "
+"page"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2348
+msgid "Show price"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2349
+msgid "Show chained item price"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2356
+msgid "Housekeeping"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2357
+msgid "Enable housekeeping"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2357
+msgid "(Note: It is recommended to keep this option Enabled)"
+msgstr ""
+
+#: includes/class-wc-admin-chained-products.php:2358
+msgid "Know more about Housekeeping"
+msgstr ""
+
+#: includes/class-wc-chained-products.php:467
+msgid "Included Products"
+msgstr ""
+
+#: includes/class-wc-chained-products.php:468
+msgid ""
+"When you order this product, you get all the following products for free!!"
+msgstr ""
+
+#: includes/class-wc-chained-products.php:868
+msgid "in stock"
+msgstr ""
+
+#: includes/class-wc-chained-products.php:1535
+msgid "Out of stock"
+msgstr ""
+
+#: includes/class-wc-chained-products.php:1535
+msgid " doesn't have sufficient quantity in stock."
+msgstr ""
+
+#. 1: Parent product name 2: Chained item name(s)
+#: includes/class-wc-chained-products.php:1776
+#: includes/class-wc-chained-products.php:1867
+#, php-format
+msgid ""
+"Can not add %1$1s to cart as %2$2s doesn't have sufficient quantity in stock."
+msgstr ""
+
+#. 1: Parent product name 2: Chained item name(s)
+#: includes/class-wc-chained-products.php:1837
+#, php-format
+msgid ""
+"Can not increase quantity of %1$1s because %2$2s doesn't have sufficient "
+"quantity in stock."
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:58
+msgid "Glad you are using"
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:58
+msgid "WooCommerce Chained Products."
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:63
+msgid "Congratulations!"
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:141
+msgid "Remind me after a month"
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:142
+msgid "Never show again"
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:145
+msgid ""
+"If you are having a great experience using our plugin then consider leaving "
+"us a"
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:145
+msgid "5 star review."
+msgstr ""
+
+#: includes/class-wc-cp-admin-notices.php:145
+msgid "Thank you in advance 😊"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Chained Products"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Easily create product bundles and combo packs and boost your sales."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://woocommerce.com/products/chained-products/"
+msgstr ""
+
+#. #-#-#-#-#  woocommerce-chained-products.pot (WooCommerce Chained Products 2.6.0)  #-#-#-#-#
+#. Author of the plugin/theme
+msgid "WooCommerce"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://woocommerce.com/"
+msgstr ""

@@ -1,0 +1,204 @@
+.vc_non_responsive {
+  //If "Disable responsive content elements" is checked in VC Settings
+  .vc_row {
+    .vc_col-sm-1 {
+      .make-xs-column(1);
+    }
+    .vc_col-sm-2 {
+      .make-xs-column(2);
+    }
+    .vc_col-sm-3 {
+      .make-xs-column(3);
+    }
+    .vc_col-sm-4 {
+      .make-xs-column(4);
+    }
+    .vc_col-sm-5 {
+      .make-xs-column(5);
+    }
+    .vc_col-sm-6 {
+      .make-xs-column(6);
+    }
+    .vc_col-sm-7 {
+      .make-xs-column(7);
+    }
+    .vc_col-sm-8 {
+      .make-xs-column(8);
+    }
+    .vc_col-sm-9 {
+      .make-xs-column(9);
+    }
+    .vc_col-sm-10 {
+      .make-xs-column(10);
+    }
+    .vc_col-sm-11 {
+      .make-xs-column(11);
+    }
+    .vc_col-sm-12 {
+      .make-xs-column(12);
+    }
+    .vc_loop-grid-columns(@grid-columns, sm, offset);
+    .vc_hidden-sm {
+      .responsive-invisibility();
+    }
+  }
+}
+
+// fix for flexbox row
+.vc_column_container {
+  width: 100%;
+}
+
+.vc_make-grid-columns() {
+  // Common styles for all sizes of grid columns, widths 1-12
+  .vc_col(@index) when (@index = 1) {
+    // initial
+    @item: ~".vc_col-xs-@{index}, .vc_col-sm-@{index}, .vc_col-md-@{index}, .vc_col-lg-@{index}";
+    .vc_col((@index + 1), @item);
+  }
+  .vc_col(@index, @list) when (@index =< @grid-columns) {
+    // general; "=<" isn't a typo
+    @item: ~".vc_col-xs-@{index}, .vc_col-sm-@{index}, .vc_col-md-@{index}, .vc_col-lg-@{index}";
+    .vc_col((@index + 1), ~"@{list}, @{item}");
+  }
+  .vc_col(@index, @list) when (@index > @grid-columns) {
+    // terminal
+    @{list} {
+      position: relative;
+      // Prevent columns from collapsing when empty
+      min-height: 1px;
+      // Inner gutter via padding
+      padding-left: (@grid-gutter-width / 2);
+      padding-right: (@grid-gutter-width / 2);
+      .box-sizing(border-box);
+    }
+  }
+  .vc_col(1); // kickstart it
+}
+
+.vc_float-grid-columns(@class) {
+  .vc_col(@index) when (@index = 1) {
+    // initial
+    @item: ~".vc_col-@{class}-@{index}";
+    .vc_col((@index + 1), @item);
+  }
+  .vc_col(@index, @list) when (@index =< @grid-columns) {
+    // general
+    @item: ~".vc_col-@{class}-@{index}";
+    .vc_col((@index + 1), ~"@{list}, @{item}");
+  }
+  .vc_col(@index, @list) when (@index > @grid-columns) {
+    // terminal
+    @{list} {
+      float: left;
+    }
+  }
+  .vc_col(1); // kickstart it
+}
+
+.vc_float-grid-columns-rtl(@class) {
+  .vc_col-rtl(@index) when (@index = 1) {
+    // initial
+    @item: ~".rtl .vc_rtl-columns-reverse .vc_col-@{class}-@{index}";
+    .vc_col-rtl((@index + 1), @item);
+  }
+  .vc_col-rtl(@index, @list) when (@index =< @grid-columns) {
+    // general
+    @item: ~".rtl .vc_rtl-columns-reverse .vc_col-@{class}-@{index}";
+    .vc_col-rtl((@index + 1), ~"@{list}, @{item}");
+  }
+  .vc_col-rtl(@index, @list) when (@index > @grid-columns) {
+    // terminal
+    @{list} {
+      float: right;
+    }
+  }
+  .vc_col-rtl(1); // kickstart it
+}
+
+.vc_calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
+  .vc_col-@{class}-@{index} {
+    width: percentage((@index / @grid-columns));
+  }
+}
+
+.vc_calc-grid-column(@index, @class, @type) when (@type = push) and (@index > 0) {
+  .vc_col-@{class}-push-@{index} {
+    left: percentage((@index / @grid-columns));
+  }
+}
+
+.vc_calc-grid-column(@index, @class, @type) when (@type = push) and (@index = 0) {
+  .vc_col-@{class}-push-0 {
+    left: auto;
+  }
+}
+
+.vc_calc-grid-column(@index, @class, @type) when (@type = pull) and (@index > 0) {
+  .vc_col-@{class}-pull-@{index} {
+    right: percentage((@index / @grid-columns));
+  }
+}
+
+.vc_calc-grid-column(@index, @class, @type) when (@type = pull) and (@index = 0) {
+  .vc_col-@{class}-pull-0 {
+    right: auto;
+  }
+}
+
+.vc_calc-grid-column(@index, @class, @type) when (@type = offset) {
+  .vc_col-@{class}-offset-@{index} {
+    margin-left: percentage((@index / @grid-columns));
+  }
+}
+
+// Basic looping in LESS
+.vc_loop-grid-columns(@index, @class, @type) when (@index >= 0) {
+  .vc_calc-grid-column(@index, @class, @type);
+  // next iteration
+  .vc_loop-grid-columns((@index - 1), @class, @type);
+}
+
+// Create grid for specific class
+.vc_make-grid(@class) {
+  .vc_float-grid-columns(@class);
+  .vc_float-grid-columns-rtl(@class);
+  .vc_loop-grid-columns(@grid-columns, @class, width);
+  .vc_loop-grid-columns(@grid-columns, @class, pull);
+  .vc_loop-grid-columns(@grid-columns, @class, push);
+  .vc_loop-grid-columns(@grid-columns, @class, offset);
+}
+
+.vc_row {
+  .make-row();
+}
+
+.vc_make-grid-columns();
+// Extra small grid
+//
+// Columns, offsets, pushes, and pulls for extra small devices like
+// smartphones.
+
+.vc_make-grid(xs);
+
+@media (min-width: @screen-sm-min) {
+  .vc_make-grid(sm);
+}
+
+// Medium grid
+//
+// Columns, offsets, pushes, and pulls for the desktop device range.
+
+@media (min-width: @screen-md-min) {
+  .vc_make-grid(md);
+}
+
+// Large grid
+//
+// Columns, offsets, pushes, and pulls for the large desktop device range.
+
+@media (min-width: @screen-lg-min) {
+  .vc_make-grid(lg);
+}
+
+@import (less) "grid-5-cols.css";

@@ -1,0 +1,30 @@
+{% for key, nonce in nonces %}
+    <input type="hidden" class="{{ key }}" name="{{ key }}" value="{{ nonce }}">
+{% endfor %}
+<div class="wpml-tm-ts-admin-section">
+
+    {{ active_service|raw }}
+
+    {% if false == has_preferred_service and has_services %}
+
+        <div id="wpml-tp-services">
+            {{ services|raw }}
+        </div>
+
+
+        <div class="js-bottom-section">
+            <hr class="wpml-margin-top-base">
+            <p>{{ strings.ts.different }} <a target="_blank" class="wpml-external-link" href="{{ strings.ts.tell_us_url }}">{{ strings.ts.tell_us }}</a></p>
+        </div>
+
+    {% endif %}
+
+    {% if false == has_services %}
+        <div class="warning notice-warning otgs-notice">
+            {% for no_service_message in strings.no_service_found %}
+                <p>{{ no_service_message|format( "<a target='_blank' href='" ~ strings.support_link ~ "'>" ~ strings.wpml_support ~ "</a>" )|raw }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</div>

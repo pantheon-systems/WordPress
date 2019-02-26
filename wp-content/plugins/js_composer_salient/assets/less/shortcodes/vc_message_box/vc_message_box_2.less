@@ -1,0 +1,218 @@
+//====== STYLES
+
+/* ================================
+ * Message box
+ * ================================ */
+.vc_message_box {
+  border: 1px solid transparent;
+  display: block;
+  overflow: hidden;
+  margin: 0 0 @vc_margin_bottom_gold 0;
+  padding: @message-box-vertical-padding @message-box-horizontal-padding @message-box-vertical-padding @message-box-icon-indent;
+  position: relative;
+  font-size: @message-box-font-size-base;
+  .box-sizing(border-box);
+  > p {
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.vc_message_box-icon {
+  bottom: 0;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: normal;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: @message-box-icon-indent;
+  > * {
+    font-size: @message-box-icon-size;
+    line-height: 1;
+    font-weight: normal;
+    font-style: normal;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    .translate(-50%; -50%);
+  }
+  // FontAwesome default icon size fix
+  > .fa {
+    font-size: @message-box-icon-size;
+    line-height: 1;
+  }
+}
+
+// Generating color sets
+//------------------
+
+// blue
+.vc-message-make-colors-set(~'vc_color-blue'; @color-blue-text; @color-blue; @color-blue-border; @color-blue-bg; @color-blue-contrast);
+// turquoise
+.vc-message-make-colors-set(~'vc_color-turquoise'; @color-turquoise-text; @color-turquoise; @color-turquoise-border; @color-turquoise-bg; @color-turquoise-contrast);
+// pink
+.vc-message-make-colors-set(~'vc_color-pink'; @color-pink-text; @color-pink; @color-pink-border; @color-pink-bg; @color-pink-contrast);
+// violet
+.vc-message-make-colors-set(~'vc_color-violet'; @color-violet-text; @color-violet; @color-violet-border; @color-violet-bg; @color-violet-contrast);
+// peacoc
+.vc-message-make-colors-set(~'vc_color-peacoc'; @color-peacoc-text; @color-peacoc; @color-peacoc-border; @color-peacoc-bg; @color-peacoc-contrast);
+// chino
+.vc-message-make-colors-set(~'vc_color-chino'; @color-chino-text; @color-chino; @color-chino-border; @color-chino-bg; @color-chino-contrast);
+// mulled_wine
+.vc-message-make-colors-set(~'vc_color-mulled_wine'; @color-mulled-wine-text; @color-mulled-wine; @color-mulled-wine-border; @color-mulled-wine-bg; @color-mulled-wine-contrast);
+// vista_blue
+.vc-message-make-colors-set(~'vc_color-vista_blue'; @color-vista-blue-text; @color-vista-blue; @color-vista-blue-border; @color-vista-blue-bg; @color-vista-blue-contrast);
+// orange
+.vc-message-make-colors-set(~'vc_color-orange'; @color-orange-text; @color-orange; @color-orange-border; @color-orange-bg; @color-orange-contrast);
+// sky
+.vc-message-make-colors-set(~'vc_color-sky'; @color-sky-text; @color-sky; @color-sky-border; @color-sky-bg; @color-sky-contrast);
+// green
+.vc-message-make-colors-set(~'vc_color-green'; @color-green-text; @color-green; @color-green-border; @color-green-bg; @color-green-contrast);
+// juicy_pink
+.vc-message-make-colors-set(~'vc_color-juicy_pink'; @color-juicy-pink-text; @color-juicy-pink; @color-juicy-pink-border; @color-juicy-pink-bg; @color-juicy-pink-contrast);
+// sandy_brown
+.vc-message-make-colors-set(~'vc_color-sandy_brown'; @color-sandy-brown-text; @color-sandy-brown; @color-sandy-brown-border; @color-sandy-brown-bg; @color-sandy-brown-contrast);
+// purple
+.vc-message-make-colors-set(~'vc_color-purple'; @color-purple-text; @color-purple; @color-purple-border; @color-purple-bg; @color-purple-contrast);
+// black
+.vc-message-make-colors-set(~'vc_color-black'; @color-black-text; @color-black; @color-black-border; @color-black-bg; @color-black-contrast);
+// grey
+.vc-message-make-colors-set(~'vc_color-grey'; @color-grey-text; @color-grey; @color-grey-border; @color-grey-bg; @color-grey-contrast);
+// white
+.vc-message-make-colors-set(~'vc_color-white'; @color-white-text; @color-white; @color-white-border; @color-white-bg; @color-white-contrast);
+
+// Generating message types
+//------------------
+// info
+.vc-message-make-colors-set(~'vc_color-info'; @alert-info-text; @alert-info; @alert-info-border; @alert-info-bg; @alert-info-contrast);
+// success
+.vc-message-make-colors-set(~'vc_color-success'; @alert-success-text; @alert-success; @alert-success-border; @alert-success-bg; @alert-success-contrast);
+// warning
+.vc-message-make-colors-set(~'vc_color-warning'; @alert-warning-text; @alert-warning; @alert-warning-border; @alert-warning-bg; @alert-warning-contrast);
+// danger
+.vc-message-make-colors-set(~'vc_color-danger'; @alert-danger-text; @alert-danger; @alert-danger-border; @alert-danger-bg; @alert-danger-contrast);
+
+// Generating classic message types
+//------------------
+// info-classic
+.vc-message-make-colors-set(~'vc_color-alert-info'; @alert-info-classic-text; @alert-info-classic; @alert-info-classic-border; @alert-info-classic-bg; @alert-info-classic-contrast);
+
+// success-classic
+.vc-message-make-colors-set(~'vc_color-alert-success'; @alert-success-classic-text; @alert-success-classic; @alert-success-classic-border; @alert-success-classic-bg; @alert-success-classic-contrast);
+
+// warning-classic
+.vc-message-make-colors-set(~'vc_color-alert-warning'; @alert-warning-classic-text; @alert-warning-classic; @alert-warning-classic-border; @alert-warning-classic-bg; @alert-warning-classic-contrast);
+
+// danger-classic
+.vc-message-make-colors-set(~'vc_color-alert-danger'; @alert-danger-classic-text; @alert-danger-classic; @alert-danger-classic-border; @alert-danger-classic-bg; @alert-danger-classic-contrast);
+
+// Color Fixes
+//------------------
+// black
+.vc_color-black {
+  // Standard, Classic (Old style), 3d
+  &.vc_message_box {
+    .vc_message_box-icon {
+      color: @color-black-text;
+    }
+  }
+  // Outline (transparent background), Solid icon
+  &.vc_message_box-outline {
+    &,
+    .vc_message_box-icon {
+      color: @color-black;
+    }
+  }
+  // Solid icon
+  &.vc_message_box-solid-icon {
+    color: @color-black;
+  }
+}
+
+// grey
+.vc_color-grey {
+  // Standard, Classic (Old style), 3d
+  &.vc_message_box {
+    .vc_message_box-icon {
+      color: @color-grey-text;
+    }
+  }
+}
+
+// white
+.vc_color-white {
+  // Standard, Classic (Old style), 3d
+  &.vc_message_box {
+    .vc_message_box-icon {
+      color: @color-white-text;
+    }
+  }
+  // Outline (transparent background), Solid icon
+  &.vc_message_box-outline {
+    &,
+    .vc_message_box-icon {
+      color: @color-white;
+    }
+  }
+  // Solid icon
+  &.vc_message_box-solid-icon {
+    color: @color-white;
+  }
+}
+
+// Creating Designs
+//------------------
+// Standard
+.vc_message_box-standard {
+
+}
+
+// Solid
+.vc_message_box-solid {
+
+}
+
+// Outline (transparent background)
+.vc_message_box-outline {
+  border-width: 2px;
+}
+
+// Classic (Old style)
+.vc_message_box-classic {
+
+}
+
+// Solid icon
+.vc_message_box-solid-icon {
+  &:extend(.vc_message_box-outline);
+  .vc_message_box-icon {
+    width: @message-box-icon-indent-reduced;
+  }
+}
+
+// 3d
+.vc_message_box-3d {
+
+}
+
+// Creating Shapes
+//------------------
+// Square
+.vc_message_box-square {
+
+}
+
+// Rounded
+.vc_message_box-rounded {
+  border-radius: @message-box-border-radius-rounded;
+}
+
+// Round
+.vc_message_box-round {
+  border-radius: @message-box-border-radius-round;
+}

@@ -1,0 +1,502 @@
+li[class*="ebanx"] div.payment_box {
+  position: relative;
+  padding-bottom: 45px !important;
+}
+
+li[class*="ebanx"] > label[for*="ebanx"] > img {
+  width: auto;
+  height: auto;
+  max-height: 24px;
+  max-width: none !important;
+}
+
+li[class*="ebanx"] .ebanx-payment-container[class*="ebanx-language-"]:after {
+  content: '';
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+
+  display: block;
+  width: 133px;
+  height: 22px;
+
+  background-image: url(../images/ebanx-paying.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+li[class*="ebanx"] .ebanx-payment-container.ebanx-language-br:after {
+  width: 135px;
+
+  background-image: url(../images/ebanx-pagando.png);
+}
+
+li[class*="ebanx"] .ebanx-payment-container.ebanx-language-es:after {
+  width: 168px;
+
+  background-image: url(../images/ebanx-estas-pagando.png);
+}
+
+li[class*="ebanx"] div.payment_box > p:first-child {
+  margin-bottom: 0 !important;
+}
+
+li[class*="ebanx"] .ebanx-payment-converted-amount {
+  font-size: .9em;
+  margin-top: 20px;
+}
+
+.ebanx-credit-card-label {
+  overflow: hidden;
+}
+
+.ebanx-payment-container:not(:empty) {
+  margin-top: 15px;
+}
+
+li[class*="ebanx"] > label > img {
+  margin-left: 5px;
+}
+
+#shop-isle-checkout-coupon .checkout_coupon .ebanx-form-row-first {
+    width: 100%;
+    margin-left: -200px;
+    padding-left: 200px;
+    margin-right: 0;
+}
+
+#shop-isle-checkout-coupon .checkout_coupon .ebanx-form-row-first input[type="text"] {
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: 2px;
+    font-size: 12px;
+    height: 35px;
+    border: 1px solid #EAEAEA;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: 6px 12px;
+    width: 100%;
+}
+
+.woocommerce #shop-isle-checkout-coupon .ebanx-form-row input[type='submit'] {
+    margin-right: 0;
+    max-width: 195px;
+}
+
+#shop-isle-checkout-coupon .checkout_coupon .ebanx-form-row-last {
+    width: auto;
+}
+
+#payment .payment_methods li .payment_box fieldset .ebanx-form-row {
+    margin-bottom: 1em
+}
+
+#payment .payment_methods li .payment_box fieldset .ebanx-form-row-first select {
+    width: 48%
+}
+
+#payment .payment_methods li .payment_box fieldset .ebanx-form-row-first select:nth-child(2n) {
+    float: right
+}
+
+.ebanx-form-row label {
+    display: block
+}
+
+.ebanx-form-row input,
+.ebanx-form-row select,
+.ebanx-form-row textarea {
+    width: 100%
+}
+
+.ebanx-form-row .button,
+.ebanx-form-row input[type=checkbox],
+.ebanx-form-row input[type=radio] {
+    width: auto
+}
+
+.ebanx-form-row.create-account label {
+    display: inline-block
+}
+
+.ebanx-form-row.woocommerce-validated input.input-text {
+    box-shadow: inset 2px 0 0 #0f834d
+}
+
+.ebanx-form-row.woocommerce-invalid input.input-text {
+    box-shadow: inset 2px 0 0 #e2401c
+}
+
+.ebanx-form-row-last {
+    margin-right: 0!important
+}
+
+.ebanx-form-row-wide {
+    clear: both;
+    width: 100%
+}
+
+.col2-set .ebanx-form-row-first {
+    width: 33.3333333333%;
+    float: left;
+    margin-right: 11.1111111111%
+}
+
+.col2-set .ebanx-form-row-last {
+    width: 55.5555555556%;
+    float: right;
+    margin-right: 0
+}
+
+.ebanx-form-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.ebanx-form-row:not(.ebanx-form-row-first):not(.ebanx-form-row-last):not(.ebanx-form-row-wide) {
+  clear: both;
+}
+
+div.ebanx-form-row {
+  padding: 0 1em;
+}
+
+.woocommerce-order-pay #order_review .payment_methods+.ebanx-form-row {
+    padding: 1em
+}
+
+.page-template-template-fullwidth-php .col2-set .ebanx-form-row-first {
+    width: 45.4545454545%;
+    margin-right: 9.0909090909%
+}
+
+.page-template-template-fullwidth-php .col2-set .ebanx-form-row-last {
+    width: 45.4545454545%;
+    float: right;
+    margin-right: 0
+}
+
+.ebanx-form-row-first {
+    width: 47.0588235294%;
+    float: left;
+    margin-right: 5.8823529412%;
+    clear: both
+}
+
+.ebanx-form-row-last {
+    width: 47.0588235294%;
+    float: right;
+    margin-right: 0
+}
+
+.page-template-template-fullwidth-php .ebanx-form-row-first {
+    width: 47.8260869565%;
+    float: left;
+    margin-right: 4.347826087%
+}
+
+.page-template-template-fullwidth-php .ebanx-form-row-last {
+    width: 47.8260869565%;
+    float: right;
+    margin-right: 0
+}
+
+.woocommerce .ebanx-form-row input[type='submit'] {
+  background: rgba(17, 17, 17, 1);
+  color: #fff;
+  font-family: "Roboto Condensed",sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  padding: 8px 37px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  width: auto;
+  border: none;
+}
+
+.woocommerce .ebanx-form-row input[type='submit']:hover {
+  background: rgba(17, 17, 17, 0.8);
+}
+
+.ebanx-form-row #rememberme {
+  vertical-align: -12px;
+}
+.ebanx-form-row label {
+  font-weight: normal;
+}
+
+.ebanx-form-row textarea {
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: 2px;
+    font-size: 12px;
+    height: 75px;
+    border: 1px solid #EAEAEA;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: 6px 12px;
+}
+.ebanx-form-row.woocommerce-validated input.input-text {
+    box-shadow: none;
+}
+
+.ebanx-form-row .button,
+.ebanx-form-row input[type=checkbox],
+.ebanx-form-row input[type=radio] {
+    float: left;
+    margin-right: 5px;
+}
+
+@media(max-width: 480px) {
+    #shop-isle-checkout-coupon .checkout_coupon .ebanx-form-row-first {
+        margin-left: 0;
+        padding-left: 0;
+    }
+    #shop-isle-checkout-coupon .checkout_coupon .ebanx-form-row-last {
+        width: 100%;
+    }
+    .woocommerce #shop-isle-checkout-coupon .ebanx-form-row input[type='submit'] {
+        margin-right: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+.woocommerce-checkout #payment ul.payment_methods li[class*="ebanx"] > input[type="checkbox"] {
+  margin-right: 1em;
+}
+
+li[class*="ebanx"] .payment_box input[type="checkbox"],
+li[class*="ebanx"] .payment_box input[type="radio"] {
+  width: auto;
+  display: inline-block !important;
+  float: none !important;
+}
+
+li[class*="ebanx"] .payment_box .ebanx-credit-card-label > .input-radio,
+li[class*="ebanx"] .payment_box .ebanx-credit-card-label > .ebanx-credit-card-brand,
+li[class*="ebanx"] .payment_box .ebanx-credit-card-label > .ebanx-credit-card-bin {
+  float: left !important;
+  margin-left: 1px;
+}
+
+.ebanx-credit-card-label > .ebanx-credit-card-bin {
+  margin-top: 0 !important;
+}
+
+.ebanx-label {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  padding: 0 2px;
+}
+
+/* $EBANX BUTTONS */
+
+.woocommerce .ebanx-button {
+  max-width: 100%;
+  display: inline-block;
+  padding-top: .75rem;
+  padding-right: 1rem;
+  padding-bottom: .75rem;
+  padding-left: 1rem;
+  line-height: 1;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  outline: 0;
+  text-shadow: 0 0 1px rgba(0,0,0,.3);
+  transition-property: background-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.woocommerce .ebanx-button--white {
+  font-weight: 600;
+  background: #FFF;
+  border: 1px solid #CCD9E1;
+  border-radius: 2px;
+  color: #6C849F;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.woocommerce .ebanx-button--white:hover {
+  color: #6C849F;
+  background-color: #CCD9E1;
+  border-color: #6C849F;
+}
+
+.woocommerce .ebanx-button--xsmall {
+  padding-top: .625rem;
+  padding-right: .75rem;
+  padding-bottom: .625rem;
+  padding-left: .75rem;
+  font-size: .625rem;
+}
+
+.woocommerce .ebanx-button--small {
+  padding-top: .75rem;
+  padding-right: .875rem;
+  padding-bottom: .75rem;
+  padding-left: .875rem;
+  font-size: .75rem;
+}
+
+.woocommerce .ebanx-button--block {
+  display: block;
+  width: 100%;
+}
+
+.woocommerce .ebanx-button--group > .ebanx-button {
+  display: inline-block;
+}
+
+.woocommerce .ebanx-button--group > .ebanx-button:not(:first-child) {
+  margin-left: 10px;
+}
+
+.woocommerce .ebanx-button--group-two {
+  margin: 20px 0;
+}
+
+.button.banking-ticket__action {
+  width: calc(50% - 10px);
+  display: inline-block;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.button.banking-ticket__action:last-child {
+  margin-left: 20px;
+}
+
+.woocommerce .ebanx-button--group::after {clear: both;}
+
+.woocommerce .ebanx-button--copy {
+  position: relative;
+  margin: 0 !important;
+  transition: all .3s;
+}
+
+.ebanx-button--copy-success {
+  animation: fresh 1.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.ebanx-button--copy-error {
+  animation: copyError .5s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes fresh {
+  0% {
+    transform: scale(1);
+  }
+
+  70% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes copyError {
+  0% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(25px) rotate(2deg);
+  }
+
+  40% {
+    transform: translateX(-25px) rotate(-2deg);
+  }
+
+  60% {
+    transform: translateX(25px) rotate(2deg);
+  }
+
+  80% {
+    transform: translateX(-25px) rotate(-2deg);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* $THANK YOU PAGE */
+
+/* $BOLETO */
+
+.banking-ticket__desc-text {
+  font-size: 11px;
+  margin: 0;
+}
+
+.banking-ticket__desc-text:not(:first-child) {
+  margin-top: 5px;
+}
+
+.banking-ticket__barcode {
+  margin-bottom: 10px;
+}
+
+.banking-ticket__barcode::before,
+.banking-ticket__barcode::after {
+  content: " ";
+  display: table;
+}
+
+.banking-ticket__barcode::after {clear: both;}
+
+.banking-ticket__barcode-code {
+  display: block;
+  letter-spacing: .32px;
+  text-align: center;
+}
+
+.banking-ticket__barcode-copy {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.ebanx-form-row .select2.select2-container {
+  width: 100% !important;
+}
+
+.ebanx-compliance-fields {
+  margin-bottom: 30px;
+}
+
+.ebanx-thank-you-page {}
+
+.ebanx-thank-you-page > p a {
+  display: inline-block;
+}
+
+.ebanx-badges p a {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ebanx-badges p a:hover {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ebanx-badges p a img {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ebanx-compliance-fields .ebanx-form-row {
+    padding-left: 0;
+    padding-right: 0;
+}

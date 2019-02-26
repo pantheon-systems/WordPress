@@ -1,0 +1,46 @@
+[
+    {
+        "name": "ebanx/benjamin",
+        "version": "1.16.0",
+        "version_normalized": "1.16.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ebanx/benjamin.git",
+            "reference": "e3c90b5ba922323fef485e7db64254f1419cb867"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ebanx/benjamin/zipball/e3c90b5ba922323fef485e7db64254f1419cb867",
+            "reference": "e3c90b5ba922323fef485e7db64254f1419cb867",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.2.3",
+            "fzaninotto/faker": "^1.6@dev",
+            "justinrainbow/json-schema": "^5.0@dev",
+            "phpunit/phpunit": "^4.8",
+            "sebastian/phpcpd": "^2.0.4",
+            "vlucas/phpdotenv": "^2.4@dev"
+        },
+        "time": "2019-01-02T18:23:05+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Ebanx\\Benjamin\\": "src/"
+            },
+            "files": [
+                "main.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Business rule provider lib for plugin implementations"
+    }
+]

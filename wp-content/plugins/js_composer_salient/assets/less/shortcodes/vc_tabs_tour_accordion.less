@@ -1,0 +1,200 @@
+// Make sure links dont have outline
+.wpb_content_element .wpb_tabs_nav li,
+.wpb_accordion_section .wpb_accordion_header,
+.wpb_tour_next_prev_nav {
+  a:focus {
+    outline: none;
+  }
+}
+
+/** Tabs/Tour Common **/
+.wpb_content_element {
+  .wpb_tour_tabs_wrapper,
+  .wpb_tabs_nav {
+    padding: 0;
+  }
+
+  .wpb_tabs_nav {
+    margin: 0;
+    padding-left: 0 !important;
+    text-indent: inherit !important;
+    #content & {
+      //#content for twenty ten theme
+      margin: 0;
+    }
+    li {
+      background-color: @vc_tab_bg;
+      white-space: nowrap;
+      padding: 0;
+      .no_bullet_fix();
+
+      &.ui-tabs-active,
+      &:hover {
+        background-color: @vc_tab_bg_active;
+      }
+      &.ui-tabs-active a {
+        cursor: default;
+      }
+    }
+  }
+
+  .wpb_tour_tabs_wrapper {
+    .wpb_ui-tabs-hide {
+      display: none;
+    }
+  }
+}
+
+/** Tabs/Tour/Accordion Common **/
+.wpb_content_element {
+  .wpb_tour_tabs_wrapper .wpb_tabs_nav a,
+  .wpb_accordion_header a {
+    border-bottom: none;
+    text-decoration: none;
+    display: block;
+    padding: 0.5em 1em;
+  }
+  .wpb_accordion_wrapper .wpb_accordion_header,
+  &.wpb_tabs .wpb_tour_tabs_wrapper .wpb_tab {
+    background-color: @vc_tab_bg_active;
+  }
+
+  .wpb_tour_tabs_wrapper .wpb_tab,
+  .wpb_accordion_wrapper .wpb_accordion_content {
+    padding: 1em;
+
+    > .wpb_content_element:last-child,
+    .wpb_row:last-child > div > div.wpb_wrapper .wpb_content_element:last-child {
+      margin-bottom: 0; // remove bottom margin for last content element in the last row
+    }
+  }
+}
+
+/** Tabs **/
+.wpb_tabs {
+  .wpb_tabs_nav {
+    li {
+      float: left;
+      margin: 0 1px 0 0;
+    }
+  }
+}
+
+/** Tour **/
+.wpb_tour {
+  .wpb_tabs_nav {
+    float: left;
+    width: @tour_nav_width;
+    li {
+      margin: 0 0 1px 0;
+      clear: left;
+      width: 100%;
+    }
+    a {
+      width: 100%;
+    }
+  }
+  .wpb_tour_tabs_wrapper .wpb_tab {
+    .box-sizing(border-box);
+    border: none;
+    float: left;
+    width: @tour_slides_width;
+    padding: 0 0 0 @vc_margin_bottom_gold;
+  }
+}
+
+.wpb_tour_next_prev_nav {
+  margin-left: @tour_nav_width;
+  padding-left: @vc_margin_bottom_gold;
+  font-size: @vc_smaller_font;
+
+  a {
+    border-bottom: 1px dotted;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: none;
+    }
+  }
+
+  span {
+    width: 48%;
+    display: inline-block;
+    padding-top: 1em; //10px;
+    float: left;
+
+    &.wpb_next_slide {
+      text-align: right;
+      float: right;
+    }
+  }
+}
+
+/** Accordion **/
+.wpb_accordion {
+  .wpb_accordion_wrapper {
+    .wpb_accordion_header {
+      margin: 0 0 1px 0;
+      padding-top: 0;
+      position: relative;
+
+      text-transform: none;
+      font-weight: inherit;
+      font-size: inherit;
+      font-family: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+
+      a {
+        padding-left: 1em;
+      }
+    }
+
+    .ui-state-default,
+    .ui-state-active {
+      .ui-icon {
+        display: block;
+        width: 16px;
+        height: 16px;
+        background-image: url(../images/toggle_open.png);
+        background-repeat: no-repeat;
+        position: absolute;
+        right: 0.7em;
+        top: 0.7em;
+      }
+    }
+    .ui-state-active .ui-icon {
+      background-image: url(../images/toggle_close.png);
+    }
+  }
+}
+
+/* tabs_tour_accordion responsive rules */
+@media (max-width: @vc_responsive_max_w) {
+  .vc_responsive {
+    .wpb_tour .wpb_tour_tabs_wrapper .wpb_tabs_nav,
+    .wpb_tour .wpb_tab,
+    .wpb_tour_next_prev_nav {
+      width: 100%;
+      float: none;
+      margin-left: 0;
+    }
+    .wpb_tour_next_prev_nav {
+      width: auto;
+      padding: 0 1em;
+    }
+
+    #content .wpb_tour .wpb_tour_tabs_wrapper .wpb_tabs_nav {
+      margin-bottom: 1em;
+    }
+
+    //Tabs + Tour
+    .wpb_tour {
+      .wpb_tab {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
+  }
+}

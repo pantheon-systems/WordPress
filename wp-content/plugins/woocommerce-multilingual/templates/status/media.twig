@@ -1,0 +1,22 @@
+<div class="wcml-section">
+    <div class="wcml-section-header">
+        <h3>
+            {{ strings.heading }}
+            <i class="otgs-ico-help wcml-tip" data-tip="{{ strings.media_tip|e }}"></i>
+        </h3>
+    </div>
+    <div class="wcml-section-content">
+        <ul class="wcml-status-list wcml-plugins-status-list">
+            <li>
+                {%  if media_translation_active %}
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.using_media_translation|raw }}
+                {% else %}
+                    <i class="otgs-ico-warning"></i>
+                    {{ strings.not_using_media_translation|raw }}
+                    <p class="description">{{ strings.why_use_media_translation }}</p>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>

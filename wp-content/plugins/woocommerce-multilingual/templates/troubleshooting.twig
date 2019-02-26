@@ -1,0 +1,105 @@
+<div class="wrap wcml_trblsh">
+    <h2>{{ strings.troubl }}</h2>
+    <div class="wcml_trbl_warning">
+        <h3>{{ strings.backup }}</h3>
+    </div>
+    <div class="trbl_variables_products">
+        <h3>{{ strings.sync }}</h3>
+        <ul>
+            <li>
+                <label>
+                    <input type="checkbox" id="wcml_sync_update_product_count" />
+                    {{ strings.upd_prod_count }}
+                    <span class="var_status">{{ prod_with_variations }}</span>&nbsp;
+                    <span>{{ strings.prod_var }}</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="wcml_sync_product_variations" checked="checked" />
+                    {{ strings.sync_var }}
+                    <span class="var_status">{{ prod_with_variations }}</span>&nbsp;
+                    <span>{{ strings.left }}</span>
+                </label>
+
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="wcml_sync_gallery_images" />
+                    {{ strings.sync_gallery }}
+                    <span class="gallery_status">{{ prod_count }}</span>&nbsp;
+                    <span>{{ strings.left }}</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="wcml_sync_categories" />
+                    {{ strings.sync_cat }}
+                    <span class="cat_status">{{ prod_categories_count }}</span>&nbsp;
+                    <span>{{ strings.left }}</span>
+                </label>
+
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="wcml_duplicate_terms" {% if all_products_taxonomies is empty %}disabled="disabled"{% endif %} />
+                    {{ strings.dup_terms }}
+                    <select id="attr_to_duplicate" {% if all_products_taxonomies is empty %}disabled="disabled"{% endif %} >
+                        {% if all_products_taxonomies is empty %}
+                            <option value="0" >{{ strings.none }}</option>
+                        {% endif %}
+
+                        {% set terms_count = 0 %}
+                        {% for tax in all_products_taxonomies %}
+                            {% if loop.first %}
+                                {% set terms_count = tax.terms_count %}
+                            {% endif %}
+
+                            <option value="{{ tax.tax_key|e }}" rel="{{ tax.terms_count }}">
+                                {{ tax.labels.name|capitalize }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <span class="attr_status">{{ terms_count }}</span>&nbsp;
+                    <span>{{ strings.left }}</span>
+                </label>
+
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" id="wcml_sync_stock" />
+                    {{ strings.sync_stock }}
+                    <span class="stock_status">{{ sync_stock_count }}</span>
+                    <span>{{ strings.left }}</span>
+                </label>
+            </li>
+            <li>
+                <button type="button" class="button-secondary" id="wcml_trbl">{{ strings.start }}</button>
+                <input id="count_prod_variat" type="hidden" value="{{ prod_with_variations }}"/>
+                <input id="count_prod" type="hidden" value="{{ prod_count }}"/>
+                <input id="count_galleries" type="hidden" value="{{ prod_count }}"/>
+                <input id="count_categories" type="hidden" value="{{ prod_categories_count }}"/>
+                <input id="count_terms" type="hidden" value="<{{ terms_count }}"/>
+                <input id="count_stock" type="hidden" value="<{{ sync_stock_count }}"/>
+                <input id="sync_galerry_page" type="hidden" value="0"/>
+                <input id="sync_category_page" type="hidden" value="0"/>
+                <span class="spinner"></span>
+                {{ nonces.trbl_update_count|raw }}
+                {{ nonces.trbl_sync_variations|raw }}
+                {{ nonces.trbl_gallery_images|raw }}
+                {{ nonces.trbl_sync_categories|raw }}
+                {{ nonces.trbl_duplicate_terms|raw }}
+                {{ nonces.trbl_sync_stock|raw }}
+            </li>
+        </ul>
+        {% if product_type_sync_needed %}
+            <h3>{{ strings.delete_terms }}</h3>
+            <div>
+                <button type="button" class="button-secondary" id="wcml_product_type_trbl">{{ strings.start }}</button>
+                <span class="product_type_spinner"></span>
+                <span class="product_type_fix_done" style="display: none">{{ strings.product_type_fix_done }}</span>
+                {{ nonces.trbl_product_type_terms|raw }}
+            </div>
+        {% endif %}
+    </div>
+</div>

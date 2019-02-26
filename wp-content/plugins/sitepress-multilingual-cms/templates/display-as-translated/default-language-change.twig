@@ -1,0 +1,20 @@
+{% if lang_has_changed %}
+    <div class="notice notice-info inline is-dismissible otgs-is-dismissible wpml-default-lang-after-message">
+        <p>
+            {{ after_message }} <a class="wpml-external-link" target="_blank" href="{{ help_link }}">{{ help_text }}</a>
+            <span class="notice-dismiss" ></span>
+        </p>
+    </div>
+{% endif %}
+
+<div style="display: none" class="notice notice-warning otgs-notice-icon inline wpml-default-lang-before-message">
+    <i class="otgs-ico-warning"></i>
+    <div>
+        <p>
+            {{ before_message }} <a class="wpml-external-link" target="_blank" href="{{ help_link }}">{{ help_text }}</a>
+        </p>
+        <p>
+            <label class="wpml-display-block"><input type="checkbox" class="display-as-translated-changing-default-language"> {{ got_it }}</label>
+        </p>
+    </div>
+</div>

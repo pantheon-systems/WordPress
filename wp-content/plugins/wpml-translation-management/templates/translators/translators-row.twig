@@ -1,0 +1,36 @@
+<tr data-user-id="{{ user.ID }}" data-language-pairs="{{ user.language_pairs|json_encode() }}">
+    <td class="column-title">
+        {{ user.display_name }}
+        <div class="row-actions">
+            <span class="edit">
+                <a class="js-edit-languages" title="{{ strings.edit_languages }}">{{ strings.edit_languages }}</a>
+            </span>
+            |
+            <span class="trash">
+                <a class="js-remove-translator" title="{{ strings.remove }}">{{ strings.remove }}</a>
+            </span>
+        </div>
+    </td>
+    <td class="column-email">{{ user.user_email }}</td>
+    {% if strings.ate is defined %}
+        <td class="column-subscription">
+            {% if user.subscription %}
+                {{ strings.yes }}
+            {% else %}
+                {{ strings.no }}
+            {% endif %}
+        </td>
+    {% endif %}
+    <td class="column-languages">
+        {% for from_lang, to_langs in user.language_pairs %}
+            <div>
+                {% include 'language-with-flag.twig' with {'lang' : from_lang } %} &raquo;
+                {% for lang in to_langs -%}
+                    <span>
+                        {%- include 'language-with-flag.twig' -%}
+                    </span>
+                {%- endfor %}
+            </div>
+        {% endfor %}
+    </td>
+</tr>

@@ -1,0 +1,10 @@
+<div id="icl_show_source_top">
+    {% for key, page in pages %}
+        {% set number = key + 1 %}
+        <a href="#" onclick="jQuery('#icl_string_track_frame_wrap iframe').attr('src','{{ page.iframe_url }}'); jQuery('#icl_string_track_url a').html('{{ page.url }}').attr('href', '{{ page.url }}'); return false;">{{ number }}</a><br />
+    {% endfor %}
+</div>
+<div id="icl_string_track_frame_wrap">
+    <iframe onload="iclResizeIframe()" src="{{ pages[0].iframe_url }}" width="10" height="10" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    <div id="icl_string_track_url" class="icl_string_track_url"><a href="{{ pages[0].url }}">{{ pages[0].url }}</a></div>
+</div>

@@ -1,0 +1,86 @@
+/* Image grid
+---------------------------------------------------------- */
+.wpb_image_grid {
+  .wpb_image_grid_ul {
+    margin: 0;
+    padding: 0;
+    > li {
+      .no_bullet_fix();
+    }
+    .isotope-item {
+      list-style: none;
+      margin: 0 1px 1px 0;
+      max-width: 100%;
+      float: left;
+    }
+
+    a {
+      display: block;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/* Gallery
+---------------------------------------------------------- */
+.wpb_gallery {
+  // adjustments for nivo slider default theme
+  .theme-default {
+    .nivoSlider {
+      margin-bottom: 0;
+    }
+    .nivo-controlNav {
+      padding: 10px 0 3px 0;
+    }
+  }
+  // flexslider adjustments
+  .wpb_flexslider {
+    .flex-control-nav {
+      bottom: auto;
+      top: 100%;
+      margin-top: 15px;
+    }
+    .flex-caption {
+      cursor: default;
+    }
+    .flex-direction-nav {
+      a {
+        border: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        &:hover {
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+        }
+        &:before {
+          line-height: 1;
+        }
+      }
+    }
+    .flex-control-paging {
+      z-index: 10;
+    }
+  }
+}
+
+// remove ul & li margins
+#content .wpb_gallery_slides ul.slides,
+.content .wpb_gallery_slides ul.slides,
+.wpb_gallery_slides ul.slides,
+#content .wpb_gallery_slides ul.flex-direction-nav,
+.content .wpb_gallery_slides ul.flex-direction-nav,
+.wpb_gallery_slides ul.flex-direction-nav,
+body .wpb_gallery_slides ul li,
+.wpb_content_element .wpb_gallery_slides ul li {
+  list-style: none;
+  padding: 0;
+  background-image: none;
+  margin: 0;
+}

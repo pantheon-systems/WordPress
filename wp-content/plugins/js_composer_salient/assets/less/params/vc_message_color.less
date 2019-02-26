@@ -1,0 +1,59 @@
+/* Message box (Alert)
+---------------------------------------------------------- */
+.wpb_vc_message {
+  .messagebox_text {
+    padding-left: 24px;
+  }
+  .alert {
+    color: #C09853;
+    background-color: #FCF8E3;
+    border-color: #FBEED5;
+    .messagebox_text {
+      background: url(../vc/alert.png) no-repeat left center;
+    }
+  }
+  .alert-info {
+    color: #3A87AD;
+    background-color: #D9EDF7;
+    border-color: #BCE8F1;
+    .messagebox_text {
+      background: url(../vc/info.png) no-repeat left center;
+    }
+  }
+  .alert-success {
+    color: #468847;
+    background-color: #DFF0D8;
+    border-color: #D6E9C6;
+    .messagebox_text {
+      background: url(../vc/tick.png) no-repeat left center;
+    }
+  }
+  .alert-danger {
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    .messagebox_text {
+      background: url(../vc/exclamation.png) no-repeat left center;
+    }
+  }
+}
+
+.vc_message-type {
+  .alert-success {
+    .alert-variant(@alert-success-bg; @alert-success-border; @alert-success-text);
+  }
+  .alert-info {
+    .alert-variant(@alert-info-bg; @alert-info-border; @alert-info-text);
+  }
+  .alert-warning {
+    .alert-variant(@alert-warning-bg; @alert-warning-border; @alert-warning-text);
+  }
+  .alert-danger {
+    .alert-variant(@alert-danger-bg; @alert-danger-border; @alert-danger-text);
+  }
+
+  .vc_edit_color_option_variants(~'info'; @alert-info-bg; @alert-info-text);
+  .vc_edit_color_option_variants(~'success'; @alert-success-bg; @alert-success-text);
+  .vc_edit_color_option_variants(~'warning'; @alert-warning-bg; @alert-warning-text);
+  .vc_edit_color_option_variants(~'danger'; @alert-danger-bg; @alert-danger-text);
+}

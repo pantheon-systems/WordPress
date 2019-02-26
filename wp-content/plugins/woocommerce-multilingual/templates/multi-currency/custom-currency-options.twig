@@ -1,0 +1,124 @@
+<div class="wcml-dialog hidden" id="wcml_currency_options_{{ args.currency_code }}" title="{{ args.title }}">
+
+    <div class="wcml_currency_options wcml-co-dialog">
+
+        <form id="wcml_currency_options_form_{{ args.currency_code }}" method="post" action="">
+
+            {% if args.currency_code is empty %}
+            <div class="wpml-form-row currency_code">
+                <label for="wcml_currency_options_code_{{ args.currency_code }}">{{ form.select }}</label>
+                <select name="currency_options[code]" id="wcml_currency_options_code_{{ args.currency_code }}">
+                    {% for code, name in args.wc_currencies %}
+                    {% if attribute(args.currencies, code) is null and code != args.default_currency %}
+                    <option value="{{ code }}" {% if code == args.currency_code %}selected="selected"{% endif %} data-symbol="{{ get_currency_symbol(code) }}" >{{ name|raw }} ({{ get_currency_symbol(code)|raw }} )</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            {% else %}
+            <input type="hidden" name="currency_options[code]" value="{{ args.currency_code }}" />
+            {% endif %}
+
+            <div class="wpml-form-row wcml-co-exchange-rate">
+                <label for="wcml_currency_options_rate_{{ args.currency_code }}">{{ form.rate.label }}</label>
+                <div class="wcml-co-set-rate">
+                    1 {{ args.default_currency }} = <input name="currency_options[rate]" size="5" type="number"
+                                                           class="wcml-exchange-rate{% if automatic_rates %} wcml-tip{% endif %}"
+                                                           min="{{ form.rate.min }}" step="{{ form.rate.step }}"  value="{{ args.currency.rate }}" data-message="{{ form.rate.only_numeric }}"
+                                                           id="wcml_currency_options_rate_{{ args.currency_code }}"
+                                                            {% if automatic_rates %}readonly="readonly" data-tip="{{ automatic_rates_tip }}"{% endif %}/>
+                    <span class="this-currency">{{ current_currency }}</span>
+                    <span class="wcml-error" style="display: none">{{ form.number_error }}</span>
+                    {% if args.currency.updated %}
+                    <small>
+                        {{ form.rate.set_on }} <i>{{ form.rate.previous }}</i>
+                    </small>
+                    {% endif %}
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="wpml-form-row wcml-co-preview">
+                <label><strong>{{ form.preview.label }}</strong></label>
+                <p class="wcml-co-preview-value">
+                    {{ form.preview.value|raw }}
+                </p>
+            </div>
+
+            <div class="wpml-form-row">
+                <label for="wcml_currency_options_position_{{ args.currency_code }}">{{ form.position.label }}</label>
+                <select class="currency_option_position" name="currency_options[position]" id="wcml_currency_options_position_{{ args.currency_code }}">
+                    <option value="left" {% if args.currency.position == 'left' %}selected="selected"{% endif %}>{{ form.position.left }}</option>
+                    <option value="right" {% if args.currency.position == 'right' %}selected="selected"{% endif %}>{{ form.position.right }}</option>
+                    <option value="left_space" {% if args.currency.position == 'left_space' %}selected="selected"{% endif %}>{{ form.position.left_space }}</option>
+                    <option value="right_space" {% if args.currency.position == 'right_space' %}selected="selected"{% endif %}>{{ form.position.right_space }}</option>
+                </select>
+            </div>
+
+            <div class="wpml-form-row">
+                <label for="wcml_currency_options_thousand_{{ args.currency_code }}">{{ form.thousand_sep.label }}</label>
+                <select class="currency_option_thousand_sep" name="currency_options[thousand_sep]" id="wcml_currency_options_thousand_{{ args.currency_code }}">
+                    <option value="." {% if args.currency.thousand_sep == '.' %}selected="selected"{% endif %}>.</option>
+                    <option value="," {% if args.currency.thousand_sep == ',' %}selected="selected"{% endif %}>,</option>
+                </select>
+            </div>
+
+            <div class="wpml-form-row">
+                <label for="wcml_currency_options_decimal_{{ args.currency_code }}">{{ form.decimal_sep.label }}</label>
+                <select class="currency_option_decimal_sep" name="currency_options[decimal_sep]" id="wcml_currency_options_decimal_{{ args.currency_code }}">
+                    <option value="." {% if args.currency.decimal_sep == '.' %}selected="selected"{% endif %}>.</option>
+                    <option value="," {% if args.currency.decimal_sep == ',' %}selected="selected"{% endif %}>,</option>
+                </select>
+            </div>
+
+            <div class="wpml-form-row">
+                <label for="wcml_currency_options_decimals_{{ args.currency_code }}">{{ form.num_decimals.label }}</label>
+                <input name="currency_options[num_decimals]" type="number" class="currency_option_decimals"
+                    value="{{ args.currency.num_decimals }}" min="0" step="1" max="5" data-message="{{ form.num_decimals.only_numeric }}" id="wcml_currency_options_numbers_of_decimals_{{ args.currency_code }}"/>
+            </div>
+
+            <hr/>
+
+            <div class="wpml-form-row">
+                <label for="wcml_currency_options_rounding_{{ args.currency_code }}">{{ form.rounding.label }} <i class="wcml-tip otgs-ico-help" data-tip="{{ form.rounding.rounding_tooltip }}"></i></label>
+                <select name="currency_options[rounding]" id="wcml_currency_options_rounding_{{ args.currency_code }}">
+                    <option value="disabled" {% if args.currency.rounding == 'disabled' %}selected="selected"{% endif %}>{{ form.rounding.disabled}}</option>
+                    <option value="up" {% if args.currency.rounding == 'up' %}selected="selected"{% endif %}>{{ form.rounding.up}}</option>
+                    <option value="down" {% if args.currency.rounding == 'down' %}selected="selected"{% endif %}>{{ form.rounding.down}}</option>
+                    <option value="nearest" {% if args.currency.rounding == 'nearest' %}selected="nearest"{% endif %}>{{ form.rounding.nearest}}</option>
+                </select>
+            </div>
+
+            <div class="wpml-form-row">
+                <label for="wcml_currency_options_increment_{{ args.currency_code }}">{{ form.rounding.increment}} <i class="wcml-tip otgs-ico-help" data-tip="{{ form.rounding.increment_tooltip }}"></i></label>
+                <select name="currency_options[rounding_increment]" id="wcml_currency_options_increment_{{ args.currency_code }}">
+                    <option value="1" {% if args.currency.rounding_increment == '1' %}selected="selected"{% endif %}>1</option>
+                    <option value="10" {% if args.currency.rounding_increment == '10' %}selected="selected"{% endif %}>10</option>
+                    <option value="100" {% if args.currency.rounding_increment == '100' %}selected="selected"{% endif %}>100</option>
+                    <option value="1000" {% if args.currency.rounding_increment == '1000' %}selected="selected"{% endif %}>1000</option>
+                </select>
+            </div>
+
+            <div class="wpml-form-row">
+                <label for="wcml_currency_options_subtract_{{ args.currency_code }}">{{ form.autosubtract.label }} <i class="wcml-tip otgs-ico-help" data-tip="{{ form.rounding.autosubtract_tooltip }}"></i></label>
+
+                <input name="currency_options[auto_subtract]" class="abstract_amount"
+                    value="{{ args.currency.auto_subtract }}" type="number" data-message="{{ form.autosbtract.only_numeric }}"
+                    id="wcml_currency_options_subtract_{{ args.currency_code }}"/>
+            </div>
+
+
+            <footer class="wpml-dialog-footer">
+                <input type="button" class="cancel wcml-dialog-close-button wpml-dialog-close-button alignleft"
+                    value="{{ form.cancel }}" data-currency="{{ current_currency }}" data-symbol="{{ get_currency_symbol(current_currency) }}" />&nbsp;
+                <input type="submit" class="wcml-dialog-close-button wpml-dialog-close-button button-primary currency_options_save alignright"
+                    value="{{ form.save }}" data-currency="{{ current_currency }}" data-symbol="{{ get_currency_symbol(current_currency) }}" data-stay="1" />
+            </footer>
+
+        </form>
+
+    </div>
+
+</div>
+

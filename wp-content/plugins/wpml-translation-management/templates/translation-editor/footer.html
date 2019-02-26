@@ -1,0 +1,27 @@
+<div class="wpml-translation-action-buttons-abort">
+	<button class="cancel wpml-dialog-close-button js-dialog-cancel"><%=cancel%></button>
+	<button class="button-secondary wpml-resign-button js-resign"><%=resign%></button>
+</div>
+<div class="wpml-translation-action-buttons-status">
+	<div class="progress-bar js-progress-bar"><div class="progress-bar-text"></div></div>
+	<label><input class="js-translation-complete" name="complete" type="checkbox"/><%=translation_complete%></label>
+
+
+	<label class="otgs-toggle-group">
+		<input type="checkbox" class="js-toggle-translated" id="wpml_tm_toggle_translated">
+		<label for="wpml_tm_toggle_translated" class="otgs-on-off-switch"><%=hide_translated%></label>
+		<span class="otgs-switch__onoff">
+						<span class="otgs-switch__onoff-label">
+							<span class="otgs-switch__onoff-inner"></span>
+							<span class="otgs-switch__onoff-switch"></span>
+						</span>
+					</span>
+	</label>
+</div>
+<div class = "wpml-translation-action-buttons-apply">
+	<span class = "js-saving-message" style = "display:none"><img src="<%=loading_url%>" alt="<%=saving%>" height="16" width="16"/><%=saving%></span>
+	<button class = "button button-primary button-large wpml-dialog-close-button js-save-and-close"><%=save_and_close%></button>
+	<button class = "button button-primary button-large wpml-dialog-close-button js-save"><%=save%></button>
+</div>
+
+

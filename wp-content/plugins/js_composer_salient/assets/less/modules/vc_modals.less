@@ -1,0 +1,88 @@
+/** VC Modal block popup */
+.add_element_size(@counter, @max_width: 1330px) when (@counter >= 0) {
+  .add_element_size((@counter - 1), (@max_width - @vc_add_element_button_width));
+  @media (min-width: @max_width) {
+    .vc_modal-dialog {
+      width: (10px + @vc_add_element_width + @counter * @vc_add_element_button_width);
+    }
+  }
+}
+
+.vc_modal {
+  display: none;
+  overflow: auto;
+  overflow-y: hidden;
+  position: fixed;
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-overflow-scrolling: touch;
+  width: auto !important;
+  margin-left: 0 !important;
+  background-color: transparent !important;
+  z-index: @vc_zindex_modal !important;
+  &.fade .vc_modal-dialog {
+    .translate(0, -25%);
+    .transition-transform(~"0.3s ease-out");
+  }
+  &.in .vc_modal-dialog {
+    .translate(0, 0)
+  }
+  *, & {
+    .box-sizing(border-box);
+  }
+}
+
+.add_element_size(4);
+
+.vc_modal-content {
+  position: relative;
+  background-color: @modal-content-bg;
+  .box-shadow(0 3px 9px rgba(0, 0, 0, .5));
+  background-clip: padding-box;
+  // Remove focus outline from opened modal
+  outline: 0;
+  -webkit-border-radius: @vc_modal_content_radius;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid @vc_modal_content_border_color;
+}
+
+.vc_modal-header {
+  .vc_box-heading;
+}
+
+.vc_modal-title {
+  .modal-title;
+  .vc_heading(16px);
+  cursor: default;
+  border: 0 !important;
+}
+
+.vc_modal-body {
+  .modal-body;
+  overflow-y: auto;
+}
+
+.vc_modal-footer {
+  .modal-footer;
+}
+
+// Default bootstrap classes for modal box
+.modal-open {
+  .modal-open;
+}
+
+.clousus {
+  z-index: @zindex-modal-background;
+}
+
+.modal-backdrop {
+  .modal-backdrop;
+}
+
+// Measure scrollbar width for padding body during modal show/hide
+.modal-scrollbar-measure {
+  .modal-scrollbar-measure;
+}

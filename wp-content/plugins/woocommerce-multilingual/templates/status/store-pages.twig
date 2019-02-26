@@ -1,0 +1,76 @@
+<div class="wcml-section wc-store-pages-section">
+    <div class="wcml-section-header">
+        <h3>
+            {{ strings.store_pages }}
+            <i class="otgs-ico-help wcml-tip" data-tip="{{ strings.pages_trnsl|e }}"></i>
+        </h3>
+    </div>
+    <div class="wcml-section-content">
+        <ul class="wcml-status-list">
+            {% if miss_lang == 'non_exist' %}
+                <li>
+                    <i class="otgs-ico-warning"></i>
+                    {{ strings.not_created }}
+                </li>
+                <li>
+                    <a href="{{ install_link }}">{{ strings.install }}</a>
+                </li>
+            {% elseif miss_lang %}
+                <form method="post" action="{{ request_uri }}">
+                    {{ nonces.create_pages|raw }}
+                    <input type="hidden" name="create_missing_pages" value="1"/>
+
+                    {% if miss_lang.lang is defined %}
+                        <li>
+                            <i class="otgs-ico-warning"></i>
+                            {{ strings.not_exist }}
+                            <ul class="wcml-lang-list">
+                                {% for missed_lang in miss_lang.lang %}
+                                    <li>
+                                        <span class="wpml-title-flag">
+                                            <img src="{{ get_flag_url( missed_lang.code ) }}" alt="{{ missed_lang.english_name|e }}">
+                                        </span>
+                                        {{ missed_lang.display_name|capitalize }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                            <button class="button-secondary aligncenter" type="submit" name="create_pages">
+                                {{ strings.create_transl }}
+                            </button>
+                        </li>
+                    {% endif %}
+
+                    {% if miss_lang.in_progress is defined %}
+                        <li>
+                            <i class="otgs-ico-in-progress"></i>
+                            {{ strings.translated_wpml }}
+                            <ul class="wcml-lang-list">
+                                {% for in_progress_pages in miss_lang.in_progress %}
+                                    <li>
+                                        <span class="wpml-title-flag">{{ in_progress_pages.page }}</span>
+                                        <ul class="wcml-lang-list">
+                                            {% for miss_in_progress in in_progress_pages.lang %}
+                                                <li>
+                                                    <span class="wpml-title-flag">
+                                                        <img src="{{ get_flag_url( miss_in_progress.code ) }}" alt="{{ miss_in_progress.english_name|e }}">
+                                                    </span>
+                                                    {{ miss_in_progress.display_name|capitalize }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                </form>
+            {% else %}
+                <li>
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.translated }}
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

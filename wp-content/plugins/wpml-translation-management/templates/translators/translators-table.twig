@@ -1,0 +1,13 @@
+<table class="widefat striped js-translators-table">
+    <thead>
+    {% include 'table-header.twig' %}
+    </thead>
+    <tfoot>
+    {% include 'table-header.twig' %}
+    </tfoot>
+    <tbody>
+    {% for user in users %}
+        {% include 'translators-row.twig' %}
+    {% endfor %}
+    </tbody>
+</table>

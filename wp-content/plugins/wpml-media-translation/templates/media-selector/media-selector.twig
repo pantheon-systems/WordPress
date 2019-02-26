@@ -1,0 +1,8 @@
+{% for id, file in files %}
+    <label>
+        <span class="wpml-media-selector-zoom{% if file.translated %} translated{% endif %}">
+        <img src="{{ file.thumbnail }}" title="{{ file.name }}" alt="{{ file.name }}"/>
+        </span>
+        <input type="checkbox" name="post[{{ post_id }}][media-translation][]" value="{{ id }}"/>
+    </label>
+{% endfor %}

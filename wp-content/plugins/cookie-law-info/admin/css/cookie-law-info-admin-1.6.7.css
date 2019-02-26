@@ -1,0 +1,294 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ #cli-plugin-migrate {
+	background: #C5E3BF;
+	border: 1px solid #98A148;
+	color: #000;
+	margin: 0 0 20px 0;
+	padding: 10px;
+	display: none;
+}
+
+.vvv_combobox {
+	width: 100%;
+}
+.vvv_textbox {
+	height: 150px;
+	width: 100%;
+}
+.form-table input[type="text"], .vvv_textfield {
+	width:100%;
+	margin-bottom: 5px;
+}
+.cli-plugin-example{
+	display: block;
+}
+#cookielawinfo-accordion h4 {
+	border-bottom: 1px solid #ccc;
+	line-height: 110%;
+	padding: 5px;
+}
+#cookielawinfo-accordion h4 code {
+	padding-left: 40px;
+	background: transparent;
+}
+.cli-help pre {
+	font-weight: bold;
+}
+.cli-help span {
+	margin: 0 0 30px 15px;
+	display: block;
+}
+.cli-plugin-toolbar {
+	height: 40px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.cli-plugin-toolbar .left {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+.cli-plugin-toolbar .left img {
+	vertical-align: text-bottom;
+	margin-right: 10px;
+}
+.cli-plugin-toolbar .right {
+	float: right;
+	margin: 0 10px 0 0;
+	padding: 0;
+}
+.cli-plugin-toolbar.top {
+	margin-bottom: -5px;
+}
+.cli-plugin-toolbar.bottom {
+	margin-top: 12px;
+    background: #f5f5f5;
+    border-top: 1px solid #ddd;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: -15px;
+    padding:15px;
+}
+.cli-plugin-toolbar.top {
+    margin-top:-15px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: -15px;
+    padding:15px;
+}
+#header_on_off_field_warning {
+	margin-left: 30px;
+}
+.warning { /* called by jQuery in admin-ui-controller.js */
+	color: #f00;
+	font-weight: bold;
+}
+.cli-plugin-container {
+	overflow: hidden;
+	width: 100%;
+}
+.cli-plugin-left-col {
+	float: left;
+	padding-bottom: 500em;
+	margin-bottom: -500em;
+}
+.cli-plugin-right-col {
+	float: left;
+	margin-right: -1px; /* For IE */
+	padding-bottom: 500em;
+	margin-bottom: -500em;
+}
+
+.cli-plugin-container.width-50 { width: 50%; }
+.cli-plugin-container.width-60 { width: 60%; }
+.cli-plugin-container.width-70 { width: 70%; }
+.cli-plugin-container.width-80 { width: 80%; }
+.cli-plugin-container.width-90 { width: 90%; }
+.cli-plugin-left-col.width-50, .cli-plugin-right-col.width-50 { width: 50%; }
+.cli-plugin-left-col.width-62, .cli-plugin-right-col.width-62 { width: 62%; } /* Golden Ratio */
+.cli-plugin-left-col.width-38, .cli-plugin-right-col.width-38 { width: 38%; } /* Golden Ratio */
+.cli-plugin-left-col.width-f220, .cli-plugin-right-col.width-f220 { width: 220px; }
+.cli-plugin-container div.pad-5, .cli-plugin-left-col div.pad-5, .cli-plugin-right-col div.pad-5 { padding: 5px; }
+.cli-plugin-container div.pad-10, .cli-plugin-left-col div.pad-10, .cli-plugin-right-col div.pad-10 { padding: 10px; }
+.width-60 { width: 60%; }
+.width-100 { width: 100%; }
+
+.hr-top { border-top: 1px solid #ccc; }
+.hr-bottom { border-bottom: 1px solid #ccc; }
+
+
+
+
+
+table.cli_script_items{
+    position:relative
+}
+table.cli_script_items td,table.cli_script_items th{
+    display:table-cell!important;
+    padding:1em!important;
+    vertical-align:top;
+    line-height:1.75em
+}
+table.wc_emails.wc_emails td,table.cli_script_items.wc_emails td,table.wc_shipping.wc_emails td{
+    vertical-align:middle
+}
+table.cli_script_items tr:nth-child(odd) td{
+    background:#f9f9f9
+}
+table.cli_script_items td.name{
+    font-weight:700
+}
+table.wc_emails .settings,table.cli_script_items .settings,table.wc_shipping .settings{
+    text-align:right
+}
+table.wc_emails .default,table.wc_emails .radio,table.wc_emails .status,table.cli_script_items .default,table.cli_script_items .radio,table.cli_script_items .status,table.wc_shipping .default,table.wc_shipping .radio,table.wc_shipping .status{
+    text-align:center
+}
+table.wc_emails .default .tips,table.wc_emails .radio .tips,table.wc_emails .status .tips,table.cli_script_items .default .tips,table.cli_script_items .radio .tips,table.cli_script_items .status .tips,table.wc_shipping .default .tips,table.wc_shipping .radio .tips,table.wc_shipping .status .tips{
+    margin:0 auto
+}
+table.wc_emails .default input,table.wc_emails .radio input,table.wc_emails .status input,table.cli_script_items .default input,table.cli_script_items .radio input,table.cli_script_items .status input,table.wc_shipping .default input,table.wc_shipping .radio input,table.wc_shipping .status input{
+    margin:0
+}
+table.wc_emails td.sort,table.cli_script_items td.sort,table.wc_shipping td.sort{
+    cursor:move;
+    font-size:15px;
+    text-align:center
+}
+table.wc_emails td.sort::before,table.cli_script_items td.sort::before,table.wc_shipping td.sort::before{
+    content:'\f333';
+    font-family:Dashicons;
+    text-align:center;
+    line-height:1;
+    color:#999;
+    display:block;
+    width:17px;
+    float:left;
+    height:100%;
+    line-height:24px
+}
+table.wc_emails .wc-payment-gateway-method-name,table.cli_script_items .wc-payment-gateway-method-name,table.wc_shipping .wc-payment-gateway-method-name{
+    font-weight:400
+}
+table.wc_emails .wc-email-settings-table-name,table.cli_script_items .wc-email-settings-table-name,table.wc_shipping .wc-email-settings-table-name{
+    font-weight:700
+}
+table.wc_emails .wc-email-settings-table-name span,table.cli_script_items .wc-email-settings-table-name span,table.wc_shipping .wc-email-settings-table-name span{
+    font-weight:400;
+    color:#999;
+    margin:0 0 0 4px!important
+}
+table.wc_emails .wc-payment-gateway-method-toggle-disabled,table.wc_emails .cli-script-items-toggle-enabled,table.cli_script_items .wc-payment-gateway-method-toggle-disabled,table.cli_script_items .cli-script-items-toggle-enabled,table.wc_shipping .wc-payment-gateway-method-toggle-disabled,table.wc_shipping .cli-script-items-toggle-enabled{
+    padding-top:1px;
+    display:block;
+    outline:0;
+    -webkit-box-shadow:none;
+    box-shadow:none
+}
+table.wc_emails .wc-email-settings-table-status,table.cli_script_items .wc-email-settings-table-status,table.wc_shipping .wc-email-settings-table-status{
+    text-align:center;
+    width:1em
+}
+table.wc_emails .wc-email-settings-table-status .tips,table.cli_script_items .wc-email-settings-table-status .tips,table.wc_shipping .wc-email-settings-table-status .tips{
+    margin:0 auto
+}
+.cli-input-toggle{
+    height:16px;
+    width:32px;
+    border:2px solid #935687;
+    background-color:#935687;
+    display:inline-block;
+    text-indent:-9999px;
+    border-radius:10em;
+    position:relative;
+    margin-top:-1px;
+    vertical-align:text-top
+}
+.cli-input-toggle:before{
+    content:"";
+    display:block;
+    width:16px;
+    height:16px;
+    background:#fff;
+    position:absolute;
+    top:0;
+    right:0;
+    border-radius:100%
+}
+.cli-input-toggle.cli-input-toggle--disabled{
+    border-color:#999;
+    background-color:#999
+}
+.cli-input-toggle.cli-input-toggle--disabled:before{
+    right:auto;
+    left:0
+}
+.cli-input-toggle.cli-input-toggle--loading{
+    opacity:.5
+}
+.cookie-law-info-tab-head{ margin-right:20px;}
+.cookie-law-info-tab-container{
+    padding:15px;
+    background: #fff; box-shadow:0px 2px 2px #ccc; float: left; box-sizing:border-box; width:100%; height:auto;
+}
+.cookie-law-info-tab-head .nav-tab-active{ background: #fff; border-bottom: solid 1px #fff; }
+.cookie-law-info-tab-head .nav-tab:focus{ box-shadow:none;}
+.cookie-law-info-tab-content{ display:none; float:left; width:100%; height:auto; }
+.cli_sub_tab_container{float:left; width:100%; height:auto;}
+.cli_sub_tab{ display:inline-block; margin:0px; float:left; width:100%; height:auto;}
+.cli_sub_tab li{ display:inline-block; border-left: solid 1px #ccc; padding:3px 10px; cursor: pointer;}
+.cli_sub_tab_content{ display: none; float:left; width:100%; height:auto; }
+.cli-shortcodes li{margin-bottom:20px; border-bottom: dashed 1px #ccc; padding-bottom:7px; margin-left: 15px;}
+.cli-shortcodes li div{ font-weight: bold; width: 100%; }
+.cli-shortcodes li span{ display: inline-block;}
+.cli-help-links li{ float:left; padding:40px; margin:20px; display: inline-block; text-align: center; box-shadow:1px 1px 5px 1px rgba(0,0,0,.1); width: 185px; height: 245px;}
+.cli-help-links li a{ text-decoration: none; height: 28px !important; margin-top: 20px; }
+.cli-help-links li img{
+    margin-top: 15px;   
+}
+/* copied from bootstrap */
+.cli_sub_tab_container input[type="text"], .cli_sub_tab_container select {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; height: auto !important;
+}
+.cookie-law-info-tab-container .button-primary
+{
+    height:34px;
+}
+.notify_msg{ position:fixed; width:300px; padding:15px; color:#fff; right:60px; top:0px; opacity:0; box-shadow:0px 2px 2px #ccc; border-radius:5px;}
+.cli-indent-15{  }
+.cli-indent-15 th{ padding-left: 15px; }
+.cli_notify_table{ height:60px;}
+.cookie-law-info-form-container{
+    padding:15px;
+    background: #fff; box-shadow:0px 2px 2px #ccc;
+}
+.cli_non_necessary_form label{ width:100%; display: inline-block; font-weight: bold; margin-bottom: 10px; margin-top: 15px;  }
+.cli_non_necessary_form .cli_form_help{ color: #aaa; font-style: italic; font-weight:250; font-size: 12px; }
+.cli_settings_left{ width:63%;float: left; margin-bottom: 25px; }
+.cli_settings_right{ width:33%; float: left; padding-left:25px;}
+.cli_form_help{ color: #aaa; font-style: italic; font-weight:250; font-size: 12px; display: inline-block; width: 100%; }
+.cli_form_er{ color:red; font-style: italic; font-weight:300; font-size: 12px; display: inline-block; width: 100%;}
+.cli_scroll_accept_er{ display: none; }
+
+
+@media screen and (max-width:1210px) {
+    .cli_settings_left{ width:100%;}
+    .cli_settings_right{ padding-left:0px; width:100%;}
+}

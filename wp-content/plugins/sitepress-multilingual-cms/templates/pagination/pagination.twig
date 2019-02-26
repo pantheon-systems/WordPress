@@ -1,0 +1,64 @@
+{% if pagination_model.total_items %}
+
+    <h2 class="screen-reader-text">{{ pagination_model.strings.list_navigation }}</h2>
+
+    <div class="tablenav-pages clearfix">
+
+        <span class="displaying-num">{{ pagination_model.total_items_text }}</span>
+
+        {% if pagination_model.total_items > pagination_model.pagination.get_items_per_page %}
+
+        <span class="pagination-links">
+
+            {% include 'table-nav-arrow.twig'
+            with {
+            'url': pagination_model.pagination.get_first_page_url,
+            'class': 'first-page',
+            'label': pagination_model.strings.first_page,
+            }
+            %}
+
+            {% include 'table-nav-arrow.twig'
+            with {
+            'url': pagination_model.pagination.get_previous_page_url,
+            'class': 'previous-page',
+            'label': pagination_model.strings.previous_page,
+            }
+            %}
+
+            <span class="paging-input">
+                {% if nav_location == 'top' %}
+                    <label for="current-page-selector-{{ nav_location }}" class="screen-reader-text">{{ pagination_model.strings.current_page }}</label>
+                    <input class="current-page" id="current-page-selector-{{ nav_location }}" type="text" name="paged"
+                           value="{{ pagination_model.pagination.get_current_page }}" size="{{ pagination_model.pagination.get_total_pages|length }}" aria-describedby="table-paging">
+                    <span class="tablenav-paging-text"> {{ pagination_model.strings.of }} <span class="total-pages">{{ pagination_model.pagination.get_total_pages }}</span></span>
+                {% else %}
+                    <span class="tablenav-paging-text">{{ pagination_model.pagination.get_current_page }} {{ pagination_model.strings.of }}
+                        <span class="total-pages">{{ pagination_model.pagination.get_total_pages }}</span>
+                    </span>
+                {% endif %}
+            </span>
+
+            {% include 'table-nav-arrow.twig'
+            with {
+            'url': pagination_model.pagination.get_next_page_url,
+            'class': 'next-page',
+            'label': pagination_model.strings.next_page,
+            }
+            %}
+
+
+            {% include 'table-nav-arrow.twig'
+            with {
+            'url': pagination_model.pagination.get_last_page_url,
+            'class': 'last-page',
+            'label': pagination_model.strings.last_page,
+            }
+            %}
+
+        </span>
+
+        {% endif %}
+
+    </div>
+{% endif %}

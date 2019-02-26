@@ -1,0 +1,32 @@
+@vcui-panel-content-padding-horizontal: 18px;
+@vcui-panel-content-padding-vertical: 18px;
+@vcui-panel-content-font-size: 14px;
+@vcui-panel-content-background: #fff;
+@vcui-panel-content-color: #5e5e5e;
+
+.vc_ui-panel-content-container {
+  background: @vcui-panel-content-background;
+  margin: 0;
+  padding: 0;
+  font-size: @vcui-panel-content-font-size;
+  color: @vcui-panel-content-color;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.vc_ui-panel-content {
+  padding: @vcui-panel-content-padding-vertical @vcui-panel-content-padding-horizontal;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.vc_ui-content-hidden {
+  .vc_ui-panel-content {
+    display: none;
+  }
+}

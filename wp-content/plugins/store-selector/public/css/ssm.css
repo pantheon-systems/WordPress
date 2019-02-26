@@ -1,0 +1,195 @@
+@keyframes ssmfadeIn {
+  from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes ssmfadeOut {
+  from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes ssmslideIn {
+  from { transform: translateY(15%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes ssmslideOut {
+  from { transform: translateY(0); }
+    to { transform: translateY(-10%); }
+}
+
+.ssm {
+  font-family: "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.ssm.is-open {
+  display: block;
+}
+
+.ssm__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99998;
+  will-change: transform;
+}
+
+.ssm__container {
+  background-color: #fff;
+  padding: 30px;
+  max-width: 500px;
+  max-height: 100vh;
+  border-radius: 4px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  z-index: 99999;
+  will-change: transform;
+}
+
+.ssm[aria-hidden="false"] .ssm__overlay {
+  animation: ssmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.ssm[aria-hidden="false"] .ssm__container {
+  animation: ssmslideIn .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.ssm[aria-hidden="true"] .ssm__overlay {
+  animation: ssmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.ssm[aria-hidden="true"] .ssm__container {
+  animation: ssmslideOut .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.ssm header h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.25 !important;
+  color: #000 !important;
+  box-sizing: border-box;
+}
+
+.ssm main {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+  color: rgba(0,0,0,.8);
+}
+
+.ssm .site {
+  margin-bottom: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.ssm .site > * {
+  display: inline-block;
+}
+
+.ssm .site img {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  border-radius: 50%;
+  box-shadow: 0px 0px 15px -7px rgb(0, 0, 0);
+}
+
+.ssm .site span {
+  margin-left: 1em;
+}
+
+.ssm footer {
+  text-align: right;
+}
+
+.ssm footer button {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  padding: 0 8px;
+  min-width: 64px;
+  height: 36px;
+  vertical-align: middle;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  color: #2962FF;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 36px;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+}
+
+.ssm footer button::-moz-focus-inner {
+  border: none;
+}
+
+.ssm footer button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #2962FF;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.ssm footer button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  padding: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: currentColor;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1) ;
+  transition: opacity 1s, transform 0.5s;
+}
+
+.ssm footer button:hover::before {
+  opacity: 0.04;
+}
+
+.ssm footer button:focus::before {
+  opacity: 0.12;
+}
+
+.ssm footer button:hover:focus::before {
+  opacity: 0.16;
+}
+
+.ssm footer button:active::after {
+  opacity: 0.16;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0s;
+}
+
+html.ssm-active,
+html.ssm-active body {
+  overflow: hidden;
+}

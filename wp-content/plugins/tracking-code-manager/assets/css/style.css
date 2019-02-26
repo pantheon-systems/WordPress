@@ -1,0 +1,141 @@
+._tcmp {
+    background-color: #efc439;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    padding: 0 2px;
+    line-height: 14px;
+    vertical-align: baseline;
+}
+
+.tcmp-tag {
+    display: inline-block;
+    line-height: 13px;
+    padding: 0 3px;
+    color: white;
+    font-size: 10px;
+    font-weight: normal;
+    width:25px;
+    margin-top:3px;
+    margin-right:5px;
+    text-align:center;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    vertical-align: baseline;
+}
+.tcmp-tag-free {
+    /*background-color: #edb802;*/
+    background-color: #16a765;
+}
+.tcmp-tag-premium {
+    /*background-color: #edb802;*/
+    background-color: #4986e7;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+.tcmp-tag-premium a {
+    color:white;
+    text-decoration:none;
+}
+.tcmp-button {
+    margin-right:5px!important;
+}
+
+.tcmp-textarea {
+    font-family:"Courier New", Courier, mono;
+    font-size:12px;
+    color:#555;
+    background-color:#f8f8f8;
+    width:550px;
+    height:350px;
+}
+
+.tcmp-form {
+    float:left;
+    padding:5px;
+}
+.tcmp-form input, .tcmp-form label {
+    float:left;
+}
+.tcmp-text  {
+    width: 400px;
+}
+.tcmp-label  {
+    width: 150px;
+    margin: 0px;
+    background-color: transparent;
+}
+.tcmp-label-disabled {
+    /*color:#A8A8A8;*/
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+.tcmp-checkbox {
+    margin:0px;
+}
+.tcmp-checkbox:disabled {
+    background-color: #f8f8f8;
+}
+.tcmp-select {
+
+}
+.tcmp-form-newline {
+    clear:both;
+    margin-bottom:5px;
+}
+
+.tcmp-box-error {
+    background: #fff;
+    border-left: 4px solid #dd3d36;
+    margin: 5px 0 15px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    padding: 1px 12px;
+}
+.tcmp-box-warning {
+    background: #fff;
+    border-left: 4px solid #ffba00;
+    margin: 5px 0 15px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    padding: 1px 12px;
+}
+.tcmp-box-success {
+    background: #fff;
+    border-left: 4px solid #7ad03a;
+    margin: 5px 0 15px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    padding: 1px 12px;
+}
+.tcmp-box-info {
+    background: #fff;
+    border-left: 4px solid #00a0d2;
+    margin: 5px 0 15px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    padding: 1px 12px;
+}
+
+table thead {
+    background-color: #fafafa;
+}
+table tr td {
+    vertical-align: middle;
+    border-top: 1px solid #eeeeee;
+}
+table .odd {
+    background-color: white;
+}
+table .even {
+    background-color: #fafafa;
+}
+#tcmp-sidebar li {
+    margin: 0px!important;
+    margin-left: 20px!important;;
+}
+.tcmp-plugin-widget {
+    padding: 10px;
+    border: 2px dashed red;
+}

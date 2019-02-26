@@ -1,0 +1,17 @@
+language: php
+dist: trusty
+sudo: false
+php:
+  - '5.4'
+  - '7.2'
+install:
+  - composer update
+  - composer dump-autoload
+  - cp .env.example .env
+script: composer test-all
+after_script: bash <(curl -s https://codecov.io/bash)
+cache:
+  apt: true
+  directories:
+    - $TRAVIS_BUILD_DIR/vendor
+    - $HOME/.composer/cache

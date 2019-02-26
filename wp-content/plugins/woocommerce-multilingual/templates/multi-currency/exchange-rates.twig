@@ -1,0 +1,127 @@
+<div class="wcml-section" id="online-exchange-rates" {% if multi_currency_on is empty %}style="display:none"{% endif %}>
+
+    <div class="wcml-section-header">
+        <h3>{{ exchange_rates.strings.header }}</h3>
+    </div>
+
+    <div class="wcml-section-content" id="online-exchange-rates-no-currencies" {% if exchange_rates.secondary_currencies %} style="display:none"{% endif %}>
+        <p><i>{{ exchange_rates.strings.no_currencies }}</i></p>
+    </div>
+    <div class="wcml-section-content" {% if exchange_rates.secondary_currencies is empty %} style="display:none"{% endif %}>
+        <p>
+            <input type="checkbox" id="exchange-rates-automatic" name="exchange-rates-automatic" value="1"
+                   {% if exchange_rates.settings.automatic == 1 %}checked="checked"{% endif %} />
+            <label for="exchange-rates-automatic">{{ exchange_rates.strings.enable_automatic }}</label>
+        </p>
+
+        <div id="exchange-rates-online-wrap"
+             class="exchange-rates-online-wrap"{% if exchange_rates.settings.automatic == 0 %} style="display: none;"{% endif %} >
+
+        <div class="wcml-section-content-inner">
+            <p id="update-rates-time">{{ exchange_rates.strings.updated_time|raw }}</p>
+
+            <p>
+                <input type="button" id="update-rates-manually" class="button-secondary"
+                       value="{{ exchange_rates.strings.update }}" />
+                <i class="otgs-ico-help wcml-tip" data-tip="{{ exchange_rates.strings.update_tip }}" style="display: none"></i>
+                <span id="update-rates-spinner" class="spinner" style="float:none;"></span>
+                <input type="hidden" id="update-exchange-rates-nonce" value="{{ exchange_rates.strings.nonce }}"/>
+            </p>
+
+            <p class="notice inline notice-success" id="exchange-rates-success"
+               style="display:none">{{ exchange_rates.strings.updated_success }}</p>
+            <p class="notice inline notice-error" id="exchange-rates-error" style="display:none"></p>
+        </div>
+
+        <div class="wcml-section-content-inner">
+            <h4>{{ exchange_rates.strings.services_label }}</h4>
+            <ul class="exchange-rates-sources">
+
+                {% for id, service in exchange_rates.services %}
+                    <li>
+                        <input type="radio" id="service-{{ id }}" name="exchange-rates-service" value="{{ id }}"
+                               {% if exchange_rates.settings.service == id %}checked="checked"{% endif %} />
+                        <label for="service-{{ id }}">
+                            {{ service.name }}
+                        </label>
+                        <a href="{{ service.url }}" title="{{ exchange_rates.strings.visit_website }}" class="exchange-rate-service-website no-ico" target="_blank">
+                            <span class="dashicons dashicons-external"></span>
+                        </a>
+                        <div class="service-details-wrap" {% if exchange_rates.settings.service != id %} style="display: none;"{% endif %} >
+
+                            {% if service.requires_key %}
+
+                            {{ exchange_rates.strings.key_required }}
+                            <input type="text" name="services[{{ id }}][api-key]"
+                                   value="{{ service.api_key }}"
+                                   placeholder="{{ exchange_rates.strings.key_placeholder }}"
+                                   size="40" />
+
+                            {% endif %}
+                            <p class="notice inline notice-error" {% if 'fixerio' != id %}style="display:none"{% endif %}>
+                                {{ exchange_rates.strings.fixerio_warning }}
+                            </p>
+                            <p class="notice inline notice-error" id="service-error-{{ id }}" {% if service.last_error == false %}style="display:none"{% endif %}>
+                            {% if service.last_error %}
+                                {{service.last_error.text}} <i>({{service.last_error.time}})</i>
+                            {% endif %}
+                            </p>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="wcml-section-content-inner">
+            <h4>{{ exchange_rates.strings.lifting_label }}</h4>
+            <p>{{ exchange_rates.strings.lifting_details1 }}</p>
+            <input type="number" name="lifting_charge" value="{{ settings.lifting_charge }}" step="any" style="width:64px" /> %
+            <p><i>{{ exchange_rates.strings.lifting_details2|format( exchange_rates.services[exchange_rates.settings.service].name ) }}</i></p>
+        </div>
+
+        <div class="wcml-section-content-inner">
+
+            <h4>{{ exchange_rates.strings.frequency }}</h4>
+
+            <ul>
+                <li>
+                    <input type="radio" id="update-frequency-daily" name="update-schedule" value="daily"
+                           {% if exchange_rates.settings.schedule == 'daily' %}checked="checked"{% endif %}/>
+                    <label for="update-frequency-daily">{{ exchange_rates.strings.daily }}</label>
+                </li>
+
+                <li>
+                    <input type="radio" id="update-frequency-weekly" name="update-schedule" value="weekly"
+                           {% if exchange_rates.settings.schedule == 'weekly' %}checked="checked"{% endif %} />
+                    <label for="update-frequency-weekly">{{ exchange_rates.strings.weekly }}</label>
+                    <select name="update-weekly-day"
+                            {% if exchange_rates.settings.schedule != 'weekly' %}disabled{% endif %}>
+                        {% for i in 0..6 %}
+                            <option value="{{ i }}"{% if exchange_rates.settings.week_day == i %} selected="selected"{% endif %}>{{ get_weekday(i) }}</option>
+                        {% endfor %}
+                    </select>
+                </li>
+
+                <li>
+                    <input type="radio" id="update-frequency-monthly" name="update-schedule" value="monthly"
+                           {% if exchange_rates.settings.schedule == 'monthly' %}checked="checked"{% endif %} />
+                    <label for="update-frequency-monthly">{{ exchange_rates.strings.monthly }}</label>
+                    <select name="update-monthly-day"
+                            {% if exchange_rates.settings.schedule != 'monthly' %}disabled{% endif %}>
+                        {% for i in 1..31 %}
+                            <option value="{{ i }}"{% if exchange_rates.settings.month_day == i %} selected="selected"{% endif %}>{{ i }}{% if i == 1 %}st{% elseif i == 2 %}nd{% elseif i == 2 %}rd{% else %}th{% endif %}</option>
+                        {% endfor %}
+                    </select>
+                </li>
+
+                <li>
+                    <input type="radio" id="update-frequency-manual" name="update-schedule" value="manual"
+                           {% if exchange_rates.settings.schedule == 'manual' %}checked="checked"{% endif %} />
+                    <label for="update-frequency-manual">{{ exchange_rates.strings.manually }}</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>

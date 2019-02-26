@@ -1,0 +1,11 @@
+{% if item is iterable %}
+	<ol>
+		{% for key, value in item %}
+			<li>{{ key }}: {% include 'iterable.twig' with {'item': value, 'child': true} %}</li>
+		{% endfor %}
+	</ol>
+{% elseif child %}
+	<span class="child">{{ item }}</span>
+{% else %}
+	{{ item }}
+{% endif %}

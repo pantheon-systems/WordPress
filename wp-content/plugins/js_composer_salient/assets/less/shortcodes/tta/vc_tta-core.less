@@ -1,0 +1,749 @@
+/**
+ * Tabs, Tours, Accordions
+ */
+.vc_tta-container {
+  margin-bottom: @vc_margin_bottom_gold;
+}
+
+/* General Styles for TTA
+ * ========================== */
+.vc_tta.vc_general {
+  font-size: @vc_tta-font-size;
+
+  // Basic Accordions styles
+  // ------------------------
+  .vc_tta-panels-container,
+  .vc_tta-panels {
+    box-sizing: border-box;
+    position: relative;
+  }
+  .vc_tta-panel {
+    display: block;
+  }
+  .vc_tta-panel-heading {
+    border: solid transparent;
+    box-sizing: border-box;
+    -webkit-transition: background .2s ease-in-out;
+    transition: background .2s ease-in-out;
+  }
+  .vc_tta-panel-title {
+    margin: 0;
+    line-height: 1;
+    > a {
+      background: transparent;
+      display: block;
+      padding: @vc_tta-panels-padding-vertical @vc_tta-panels-padding-horizontal;
+      box-sizing: border-box;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      -webkit-transition: color .2s ease-in-out;
+      transition: color .2s ease-in-out;
+      border: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      &:focus,
+      &:hover {
+        text-decoration: none;
+        outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+  }
+  .vc_tta-panel-body {
+    border: solid transparent;
+    box-sizing: content-box;
+    padding: @vc_tta-panes-padding-vertical @vc_tta-panes-padding-horizontal;
+    display: none;
+    overflow: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: padding .2s ease-in-out;
+    transition: padding .2s ease-in-out;
+    // Fix #93887286 elements margins
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+  // Active Panel
+  .vc_tta-panel.vc_active {
+    display: block;
+    .vc_tta-panel-body {
+      display: block;
+    }
+    .vc_tta-panel-title {
+      > a {
+        &:hover {
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  .vc_tta-panel.vc_animating {
+    .vc_tta-panel-body {
+      display: block;
+      min-height: 0;
+    }
+  }
+
+  &.vc_tta-o-all-clickable .vc_tta-panel {
+    .vc_tta-panel-title {
+      > a {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  // Basic Tabs styles
+  // ------------------------
+  .vc_tta-tabs-container {
+    display: block;
+    position: relative;
+    z-index: @vc_tta-tabs-z-index;
+  }
+  .vc_tta-tabs-list {
+    list-style-type: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .vc_tta-tab {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    > a {
+      padding: @vc_tta-tabs-padding-vertical @vc_tta-tabs-padding-horizontal;
+      display: block;
+      box-sizing: border-box;
+      border: solid transparent;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      -webkit-transition: background .2s ease-in-out, color .2s ease-in-out, border .2s ease-in-out;
+      transition: background .2s ease-in-out, color .2s ease-in-out, border .2s ease-in-out;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+    &.vc_active {
+      > a {
+        cursor: default;
+        text-decoration: none;
+        color: inherit;
+        -webkit-transition: background .2s ease-in-out, color .2s ease-in-out;
+        transition: background .2s ease-in-out, color .2s ease-in-out;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        &:hover {
+          cursor: default;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+        }
+        &::before,
+        &::after {
+          display: none;
+          content: '';
+          position: absolute;
+          border-width: inherit;
+          border-color: inherit;
+          border-style: inherit;
+          width: 100vw;
+          height: 200vw;
+        }
+      }
+    }
+  }
+
+  // Icons for TTA headings
+  // ------------------------
+  .vc_tta-icon {
+    font-size: @vc_tta-icon-font-size;
+    line-height: 0;
+    display: inline;
+    &::before {
+      display: inline;
+    }
+  }
+  .vc_tta-title-text:not(:empty) {
+    &:not(:first-child),
+    ~ * {
+      margin-left: @vc_tta-icon-spacing;
+    }
+  }
+  .vc_tta-title-text:empty {
+    display: inline-block;
+  }
+}
+
+/**
+* Icons Adaptations
+* ====================== */
+.vc_tta-icon {
+  &.fa,
+  &.vc_li {
+    vertical-align: middle;
+  }
+}
+
+/* Accordions
+ * ========================== */
+.vc_tta {
+  &.vc_tta-accordion {
+    .vc_tta-tabs-container {
+      display: none;
+    }
+  }
+}
+
+/* Tabs
+ * ========================== */
+.vc_tta {
+  &.vc_tta-tabs {
+    // Hide Tabs before breakpoint
+    .vc_tta-tabs-container {
+      display: none;
+    }
+    //.vc_non_responsive must be exactly same as @media below
+    .vc_non_responsive &,
+    .vc_tta-o-non-responsive & {
+      .vc_tta-tabs-container {
+        display: block;
+      }
+
+      // Hide Panel heading after breakpoint
+      .vc_tta-panel-heading {
+        display: none;
+      }
+    }
+    @media (min-width: @vc_tta-breakpoint) {
+      .vc_tta-tabs-container {
+        display: block;
+      }
+
+      // Hide Panel heading after breakpoint
+      .vc_tta-panel-heading {
+        display: none;
+      }
+    }
+  }
+}
+
+/* Shapes for TTA
+ * ========================== */
+.vc_tta {
+  // Square Shape
+  // ------------------------
+  &.vc_tta-shape-square {
+    .vc_tta-make-shape(0px);
+  }
+  // Rounded Shape
+  // ------------------------
+  &.vc_tta-shape-rounded {
+    .vc_tta-make-shape(@vc_tta-border-radius-rounded);
+  }
+  // Round Shape
+  // ------------------------
+  &.vc_tta-shape-round {
+    .vc_tta-make-shape(@vc_tta-border-radius-round);
+  }
+}
+
+/* Adaptation for Shapes
+ * ========================== */
+// Rounded Shape
+// -----------------------
+.vc_tta-shape-rounded {
+  // active panel for accordion
+  &:not(.vc_tta-o-no-fill) {
+    .vc_tta-panel.vc_active {
+      .vc_tta-panel-heading {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .vc_tta-panel-body {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+  // Fix For Tabs Content Alignment
+  &.vc_tta-tabs {
+    //.vc_non_responsive must be exactly same as @media below
+    .vc_non_responsive &,
+    .vc_tta-o-non-responsive & {
+      .vc_tta-panel-body {
+        &::before,
+        &::after {
+          box-sizing: border-box;
+          content: '';
+          display: none;
+          position: absolute;
+          width: @vc_tta-border-radius-rounded;
+          height: @vc_tta-border-radius-rounded;
+          border-radius: @vc_tta-border-radius-rounded;
+          border-style: inherit;
+          border-width: inherit;
+        }
+      }
+    }
+    @media (min-width: @vc_tta-breakpoint) {
+      .vc_tta-panel-body {
+        &::before,
+        &::after {
+          box-sizing: border-box;
+          content: '';
+          display: none;
+          position: absolute;
+          width: @vc_tta-border-radius-rounded;
+          height: @vc_tta-border-radius-rounded;
+          border-radius: @vc_tta-border-radius-rounded;
+          border-style: inherit;
+          border-width: inherit;
+        }
+      }
+    }
+  }
+  // Fix For Shape Group
+  &.vc_tta-o-shape-group {
+    // For Panels
+    // with filled content
+    &:not(.vc_tta-o-no-fill) {
+      .vc_tta-panel:not(:first-child):not(:last-child) {
+        .vc_tta-panel-heading {
+          border-radius: 0;
+        }
+        .vc_tta-panel-body {
+          border-radius: 0;
+        }
+      }
+      .vc_tta-panel:first-child {
+        &:not(:last-child) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-panel:last-child {
+        &:not(:first-child) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+    }
+    // with transparent content
+    &.vc_tta-o-no-fill {
+      // for panels
+      .vc_tta-panel:not(:first-child):not(:last-child) {
+        &:not(.vc_active) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-radius: 0;
+          }
+        }
+        &.vc_active {
+          .vc_tta-panel-heading {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-panel:first-child {
+        &:not(:last-child):not(.vc_active) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-panel:last-child {
+        &:not(:first-child) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Round Shape
+// -----------------------
+.vc_tta-shape-round {
+  // active panel
+  &:not(.vc_tta-o-no-fill) {
+    .vc_tta-panel.vc_active {
+      .vc_tta-panel-heading {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .vc_tta-panel-body {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+  // Fix For Tabs Content Alignment
+  &.vc_tta-tabs {
+    //.vc_non_responsive must be exactly same as @media below
+    .vc_non_responsive &,
+    .vc_tta-o-non-responsive & {
+      .vc_tta-panel-body {
+        &::before,
+        &::after {
+          box-sizing: border-box;
+          content: '';
+          display: none;
+          position: absolute;
+          width: @vc_tta-border-radius-round;
+          height: @vc_tta-border-radius-round;
+          border-radius: @vc_tta-border-radius-round;
+          border-style: inherit;
+          border-width: inherit;
+        }
+      }
+    }
+    @media (min-width: @vc_tta-breakpoint) {
+      .vc_tta-panel-body {
+        &::before,
+        &::after {
+          box-sizing: border-box;
+          content: '';
+          display: none;
+          position: absolute;
+          width: @vc_tta-border-radius-round;
+          height: @vc_tta-border-radius-round;
+          border-radius: @vc_tta-border-radius-round;
+          border-style: inherit;
+          border-width: inherit;
+        }
+      }
+    }
+  }
+  // Fix For Shape Group
+  &.vc_tta-o-shape-group {
+    // For Panels
+    // with filled content
+    &:not(.vc_tta-o-no-fill) {
+      .vc_tta-panel:not(:first-child):not(:last-child) {
+        .vc_tta-panel-heading {
+          border-radius: 0;
+        }
+        .vc_tta-panel-body {
+          border-radius: 0;
+        }
+      }
+      .vc_tta-panel:first-child {
+        &:not(:last-child) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-panel:last-child {
+        &:not(:first-child) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+    }
+    // with transparent content
+    &.vc_tta-o-no-fill {
+      // for panels
+      .vc_tta-panel:not(:first-child):not(:last-child) {
+        &:not(.vc_active) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-radius: 0;
+          }
+        }
+        &.vc_active {
+          .vc_tta-panel-heading {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-panel:first-child {
+        &:not(:last-child):not(.vc_active) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-panel:last-child {
+        &:not(:first-child) {
+          .vc_tta-panel-heading,
+          .vc_tta-panel-body {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Styles for TTA
+ * ========================== */
+.vc_tta {
+  // Classic Style
+  // ------------------------
+  &.vc_tta-style-classic {
+    // for accordion
+    .vc_tta-panel-body,
+    .vc_tta-panel-heading {
+      border-width: @vc_tta-border-size;
+    }
+    .vc_tta-panel {
+      &:not(:first-child),
+      &.vc_active + .vc_tta-panel {
+        .vc_tta-panel-heading {
+          margin-top: -@vc_tta-border-size;
+        }
+      }
+      &:not(:last-child),
+      &.vc_active {
+        .vc_tta-panel-heading {
+          margin-bottom: -@vc_tta-border-size;
+        }
+      }
+    }
+    // for tabs
+    .vc_tta-tabs-list {
+      padding-left: @vc_tta-border-size;
+      padding-top: @vc_tta-border-size;
+    }
+    .vc_tta-tab {
+      margin-left: -@vc_tta-border-size;
+      margin-top: -@vc_tta-border-size;
+      > a {
+        border-width: @vc_tta-border-size;
+      }
+    }
+    // fix for tabs colors
+    &.vc_tta-tabs {
+      //.vc_non_responsive must be exactly same as @media below
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        .vc_tta-panels {
+          border: @vc_tta-border-size solid transparent;
+        }
+
+        .vc_tta-panel {
+          margin: -@vc_tta-border-size;
+        }
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        .vc_tta-panels {
+          border: @vc_tta-border-size solid transparent;
+        }
+
+        .vc_tta-panel {
+          margin: -@vc_tta-border-size;
+        }
+      }
+    }
+  }
+
+  // Modern Style
+  // ------------------------
+  &.vc_tta-style-modern {
+    // for accordions
+    .vc_tta-panel-body,
+    .vc_tta-panel-heading {
+      border-width: @vc_tta-border-size;
+      #gradient > .vertical(@start-color: rgba(255, 255, 255, .2); @end-color: rgba(255, 255, 255, .01));
+    }
+    .vc_tta-panel {
+      &:not(:first-child),
+      &.vc_active + .vc_tta-panel {
+        .vc_tta-panel-heading {
+          margin-top: -@vc_tta-border-size;
+        }
+      }
+      &:not(:last-child),
+      &.vc_active {
+        .vc_tta-panel-heading {
+          margin-bottom: -@vc_tta-border-size;
+        }
+      }
+    }
+    // for tabs
+    .vc_tta-tabs-list {
+      padding-left: @vc_tta-border-size;
+      padding-top: @vc_tta-border-size;
+    }
+    .vc_tta-tab {
+      margin-left: -@vc_tta-border-size;
+      margin-top: -@vc_tta-border-size;
+      > a {
+        border-width: @vc_tta-border-size;
+        #gradient > .vertical(@start-color: rgba(255, 255, 255, .2); @end-color: rgba(255, 255, 255, .01));
+      }
+      &.vc_active {
+        > a {
+          background-clip: border-box;
+        }
+      }
+    }
+    // fix for tabs colors
+    &.vc_tta-tabs {
+      //.vc_non_responsive must be exactly same as @media below
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        .vc_tta-panels {
+          border: @vc_tta-border-size solid transparent;
+        }
+
+        .vc_tta-panel {
+          margin: -@vc_tta-border-size;
+        }
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        .vc_tta-panels {
+          border: @vc_tta-border-size solid transparent;
+        }
+
+        .vc_tta-panel {
+          margin: -@vc_tta-border-size;
+        }
+      }
+    }
+  }
+
+  // Outline Style
+  // ------------------------
+  &.vc_tta-style-outline {
+    // for accordions
+    .vc_tta-panel-body,
+    .vc_tta-panel-heading {
+      border-width: @vc_tta-border-size-outline;
+    }
+    .vc_tta-panel {
+      &:not(:first-child),
+      &.vc_active + .vc_tta-panel {
+        .vc_tta-panel-heading {
+          margin-top: -@vc_tta-border-size-outline;
+        }
+      }
+      &:not(:last-child),
+      &.vc_active {
+        .vc_tta-panel-heading {
+          margin-bottom: -@vc_tta-border-size-outline;
+        }
+      }
+    }
+    // for tabs
+    .vc_tta-tabs-list {
+      padding-left: @vc_tta-border-size-outline;
+      padding-top: @vc_tta-border-size-outline;
+    }
+    .vc_tta-tab {
+      margin-left: -@vc_tta-border-size-outline;
+      margin-top: -@vc_tta-border-size-outline;
+      > a {
+        border-width: @vc_tta-border-size-outline;
+      }
+    }
+    // Fix for shapes
+    .vc_tta-panel-body {
+      &,
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        &::before,
+        &::after {
+          display: block;
+          top: -@vc_tta-border-size-outline;
+          right: -@vc_tta-border-size-outline;
+          bottom: -@vc_tta-border-size-outline;
+          left: -@vc_tta-border-size-outline;
+        }
+      }
+    }
+
+    // fix for tabs colors
+    &.vc_tta-tabs {
+      //.vc_non_responsive must be exactly same as @media below
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        .vc_tta-panels {
+          border: @vc_tta-border-size-outline solid transparent;
+        }
+
+        .vc_tta-panel {
+          margin: -@vc_tta-border-size-outline;
+        }
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        .vc_tta-panels {
+          border: @vc_tta-border-size-outline solid transparent;
+        }
+
+        .vc_tta-panel {
+          margin: -@vc_tta-border-size-outline;
+        }
+      }
+    }
+    &.vc_tta-pageable {
+      .vc_tta-o-non-responsive & {
+        .vc_tta-panel {
+          margin: 0;
+        }
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        .vc_tta-panel {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  // Flat Style
+  // ------------------------
+  &.vc_tta-style-flat {
+    .vc_tta-panel-body,
+    .vc_tta-panel-heading {
+      border-width: 0;
+    }
+  }
+}
+
+// don't show panel headings on pageable
+// vc_tta-panel-title is container, that has empty a element
+.vc_tta-pageable {
+  .vc_tta-panel-title {
+    display: none;
+  }
+}

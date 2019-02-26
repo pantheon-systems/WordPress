@@ -1,0 +1,113 @@
+// Fixes for theme css to enable correct representation of the page controls.
+@import "config/variables.less";
+
+// Some css fixes for WP themes.
+html.js_active {
+  margin-top: 0 !important;
+}
+
+// Default state for some html objectes for editor
+.vc_no-content-helper {
+  display: none;
+}
+
+.vc_catcher {
+  background-color: #e8ecb8
+}
+
+.vc_empty-placeholder {
+  margin-bottom: 30px;
+}
+
+.vc_hidden-placeholder {
+  display: none !important;
+}
+
+@import "modules/vc_welcome.less";
+@import "vendor/jwplayer.less";
+
+.vc_welcome {
+  display: none;
+}
+
+.vc_controls {
+  display: none;
+}
+
+.compose-mode, .view-mode {
+
+  // Vc element settings
+  @import "lib/frontend_vc_elements.less";
+
+  // Helper information
+  .vc_welcome {
+    display: block;
+  }
+
+  .vc_hidden-xs {
+    @media (max-width: @screen-xs-max) {
+      .vc_frontend-editor-invisibility-settings;
+    }
+    .vc_hidden-xs {
+      .opacity(1);
+    }
+  }
+  .vc_hidden-sm {
+    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+      .vc_frontend-editor-invisibility-settings;
+    }
+    .vc_hidden-sm {
+      .opacity(1);
+    }
+  }
+  .vc_hidden-md {
+    @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+      .vc_frontend-editor-invisibility-settings;
+    }
+    .vc_hidden-md {
+      .opacity(1);
+    }
+  }
+  .vc_hidden-lg {
+    @media (min-width: @screen-lg-min) {
+      .vc_frontend-editor-invisibility-settings;
+    }
+    .vc_hidden-lg {
+      .opacity(1);
+    }
+  }
+  &.vc_non_responsive {
+    .vc_row {
+      .vc_hidden-md {
+        .vc_frontend-editor-invisibility-settings;
+      }
+    }
+  }
+}
+
+.view-mode {
+  .vc_element {
+    &:hover, &.vc_hover, &.vc_hold-hover {
+      > .wpb_row {
+        > .vc_element {
+          &:before {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.compose-mode {
+  // Controls
+  @import "lib/controls.less";
+  @import "lib/controls-fe.less";
+  // Custom shortcodes settings
+  @import "lib/frontend_editor_controls.less";
+  // usefull classes for drag&drop/sorting activity
+  @import "lib/frontend_draganddrop.less";
+  @import "lib/vc_pointer.less";
+}
+
+@import "shortcodes/tta/vc_tta-frontend-editor.less";

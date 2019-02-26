@@ -1,0 +1,1253 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-09-11 11:30+0530\n"
+"PO-Revision-Date: 2018-09-11 11:34+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-cookie-law-info-admin.php:145
+#: admin/class-cookie-law-info-admin.php:146
+#: admin/partials/cookie-law-info-admin_settings.php:38
+#: admin/partials/cookie-law-info-admin_settings1.php:15
+msgid "Cookie Law Settings"
+msgstr "Nastavitve za pi¹kotke zakon"
+
+#: admin/class-cookie-law-info-admin.php:153
+#: admin/class-cookie-law-info-admin.php:154
+#: admin/partials/cookie-law-info-privacy_overview.php:7
+#: admin/partials/cookie-law-info-privacy_overview.php:39
+#: public/views/cookie-law-info_popup_content.php:6
+#: public/views/cookie-law-info_popup_content.php:23
+msgid "Privacy Overview"
+msgstr "Pregled zasebnosti"
+
+#: admin/class-cookie-law-info-admin.php:163
+#: admin/partials/cookie-law-info-admin_settings.php:126
+#: includes/class-cookie-law-info.php:317
+msgid "Settings"
+msgstr "Nastavitve"
+
+#: admin/class-cookie-law-info-admin.php:164
+msgid "Support"
+msgstr "Podpora"
+
+#: admin/class-cookie-law-info-admin.php:184
+#: admin/partials/cookie-law-info-admin_settings.php:4
+msgid "You do not have sufficient permission to perform this operation"
+msgstr "Nimate zadostnih dovoljenj za izvedbo te operacije"
+
+#: admin/class-cookie-law-info-admin.php:202
+#: admin/partials/cookie-law-info-admin_settings.php:20
+#: admin/partials/cookie-law-info-privacy_overview.php:33
+msgid "Settings Updated."
+msgstr "Nastavitve posodobljene."
+
+#: admin/class-cookie-law-info-admin.php:219
+#: admin/partials/cookie-law-info-admin_settings.php:28
+#: admin/partials/cookie-law-info-admin_settings.php:55
+msgid "ERROR MIGRATING SETTINGS (ERROR: 2)"
+msgstr "SELITEV NASTAVITEV NAPAKE (NAPAKA: 2)"
+
+#: admin/class-cookie-law-info-admin.php:417
+#: admin/class-cookie-law-info-admin.php:431
+msgid "Priority: (Numeric - Higher the value, higher the priority)"
+msgstr "Prednostna naloga: (številčno - višjo vrednost, višjo prednost)"
+
+#: admin/class-cookie-law-info-admin.php:453
+msgid "Priority"
+msgstr "Prednost"
+
+#: admin/modules/csv-export/csv-export.php:33
+msgid "Scan & Download"
+msgstr "Skeniranje & Download"
+
+#: admin/modules/csv-export/csv-export.php:53
+#: admin/modules/csv-export/csv-export.php:54
+msgid "Export Cookie"
+msgstr "Izvoz piškotek"
+
+#: admin/modules/csv-export/csv-export.php:86
+#: admin/modules/csv-import/csv-import.php:200
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Nimate dovolj pravic za dostop do te strani."
+
+#: admin/modules/csv-export/views/export_cookies.php:2
+msgid "Export as CSV file"
+msgstr "Izvozi kot CSV"
+
+#: admin/modules/csv-export/views/export_cookies.php:8
+msgid "Export"
+msgstr "Izvoz"
+
+#: admin/modules/csv-import/csv-import.php:70
+msgid "Scan & Import"
+msgstr "Skeniranje & uvoz"
+
+#: admin/modules/csv-import/csv-import.php:148
+#: admin/modules/csv-import/csv-import.php:149
+msgid "Import Cookie"
+msgstr "Uvoz piškotek"
+
+#: admin/modules/csv-import/csv-import.php:366
+#, php-format
+msgid "BEGIN %s"
+msgstr "ZAČETEK %s"
+
+#: admin/modules/csv-import/csv-import.php:371
+#, php-format
+msgid "[Line %1$s] %2$s"
+msgstr "%1$s %2$s"
+
+#: admin/modules/csv-import/views/import_cookies.php:2
+msgid "Import from a CSV file"
+msgstr "Uvoz iz datoteke CSV"
+
+#: admin/modules/csv-import/views/import_cookies.php:12
+#, php-format
+msgid ""
+"Notice: please make the directory %s writable so that you can see the error "
+"log."
+msgstr ""
+"Opomba: naredite imenik%s zapisljiv, tako da si lahko ogledate dnevnik napak."
+
+#: admin/modules/csv-import/views/import_cookies.php:25
+#, php-format
+msgid ", please <a href=\"%s\">check the error log</a>"
+msgstr ", prosimo, <a href=\"%s\">preglejte dnevnik</a>"
+
+#: admin/modules/csv-import/views/import_cookies.php:29
+msgid "Error during file upload."
+msgstr "Med nalaganje datotek je prišlo do napake."
+
+#: admin/modules/csv-import/views/import_cookies.php:32
+msgid "Cannot extract data from uploaded file or no file was uploaded."
+msgstr "Ekstrahiranje podatkov iz prenesene datoteke ali ni bila prenesena."
+
+#: admin/modules/csv-import/views/import_cookies.php:35
+#, php-format
+msgid "No posts was successfully imported%s."
+msgstr "Ni delovnih mest je bila uspešno uvožena %s."
+
+#: admin/modules/csv-import/views/import_cookies.php:38
+#, php-format
+msgid "Some posts were successfully imported but some were not%s."
+msgstr "Nekaj delovnih mest, so bili uspešno uvoženi, vendar nekateri niso %s."
+
+#: admin/modules/csv-import/views/import_cookies.php:41
+msgid "Post import was successful."
+msgstr "Uvoz je bil uspešen!"
+
+#: admin/modules/csv-import/views/import_cookies.php:52
+msgid "CSV file"
+msgstr "CSV datoteka"
+
+#: admin/modules/csv-import/views/import_cookies.php:55
+#, php-format
+msgid "You may want to see <a href=\"%s\">the example of the CSV file</a>."
+msgstr "Morda boste želeli videti <a href=\"%s\">primer datoteke CSV</a>."
+
+#: admin/modules/csv-import/views/import_cookies.php:60
+msgid "Import"
+msgstr "Uvoz"
+
+#: admin/partials/cookie-law-info-admin_settings.php:64
+msgid "Error processing migration request (ERROR: 4)"
+msgstr "Napako med obdelovanjem selitveno zahtevo (napaka: 4)"
+
+#: admin/partials/cookie-law-info-admin_settings.php:93
+msgid "Your Cookie Law Info bar is switched on"
+msgstr "Vaš piškotek prava Info bar vklopljen"
+
+#: admin/partials/cookie-law-info-admin_settings.php:96
+msgid "Your Cookie Law Info bar is switched off"
+msgstr "Vaš piškotek prava Informacijska vrstica izklopljena"
+
+#: admin/partials/cookie-law-info-admin_settings.php:104
+#: admin/partials/cookie-law-info-admin_settings.php:699
+#: admin/views/admin-settings-save-button.php:5
+msgid "Update Settings"
+msgstr "Posodobi nastavitve"
+
+#: admin/partials/cookie-law-info-admin_settings.php:131
+#: admin/views/admin-settings-general.php:11
+msgid "Cookie Bar is currently:"
+msgstr "Piškotek Bar je trenutno:"
+
+#: admin/partials/cookie-law-info-admin_settings.php:133
+#: admin/partials/cookie-law-info-admin_settings.php:142
+#: admin/partials/cookie-law-info-admin_settings.php:150
+#: admin/views/admin-settings-general.php:13
+#: admin/views/admin-settings-general.php:22
+#: admin/views/admin-settings-general.php:30
+msgid "On"
+msgstr "Vklop"
+
+#: admin/partials/cookie-law-info-admin_settings.php:134
+#: admin/partials/cookie-law-info-admin_settings.php:143
+#: admin/partials/cookie-law-info-admin_settings.php:151
+#: admin/views/admin-settings-general.php:14
+#: admin/views/admin-settings-general.php:23
+#: admin/views/admin-settings-general.php:31
+msgid "Off"
+msgstr "Izklop"
+
+#: admin/partials/cookie-law-info-admin_settings.php:140
+#: admin/views/admin-settings-general.php:20
+msgid "Show only for EU Countries ( GeoIP )"
+msgstr "Pokaži le za države članice EU (GeoIP)"
+
+#: admin/partials/cookie-law-info-admin_settings.php:148
+#: admin/views/admin-settings-general.php:28
+msgid "Enable consent logging"
+msgstr "Usposobiti drvarsko delo soglasja"
+
+#: admin/partials/cookie-law-info-admin_settings.php:155
+#: admin/views/admin-settings-general.php:35
+msgid "Cookie Bar will be shown in:"
+msgstr "Piškotek Bar, bo prikazan v:"
+
+#: admin/partials/cookie-law-info-admin_settings.php:160
+#: admin/partials/cookie-law-info-admin_settings.php:163
+#: admin/views/admin-settings-general.php:40
+#: admin/views/admin-settings-general.php:43
+msgid "Header"
+msgstr "Glava"
+
+#: admin/partials/cookie-law-info-admin_settings.php:161
+#: admin/partials/cookie-law-info-admin_settings.php:164
+#: admin/views/admin-settings-general.php:41
+#: admin/views/admin-settings-general.php:44
+msgid "Footer"
+msgstr "Footer"
+
+#: admin/partials/cookie-law-info-admin_settings.php:173
+#: admin/views/admin-settings-general.php:53
+msgid "Fix Cookie Bar to Header?"
+msgstr "Določi piškotek Bar v glavo?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:175
+#: admin/partials/cookie-law-info-admin_settings.php:219
+#: admin/partials/cookie-law-info-admin_settings.php:235
+#: admin/partials/cookie-law-info-admin_settings.php:246
+#: admin/partials/cookie-law-info-admin_settings.php:254
+#: admin/partials/cookie-law-info-admin_settings.php:261
+#: admin/partials/cookie-law-info-admin_settings.php:272
+#: admin/partials/cookie-law-info-admin_settings.php:343
+#: admin/partials/cookie-law-info-admin_settings.php:400
+#: admin/partials/cookie-law-info-admin_settings.php:471
+#: admin/partials/cookie-law-info-admin_settings.php:584
+#: admin/views/admin-settings-buttons.php:66
+#: admin/views/admin-settings-buttons.php:141
+#: admin/views/admin-settings-buttons.php:243
+#: admin/views/admin-settings-general.php:55
+#: admin/views/admin-settings-general.php:99
+#: admin/views/admin-settings-general.php:115
+#: admin/views/admin-settings-general.php:126
+#: admin/views/admin-settings-general.php:134
+#: admin/views/admin-settings-general.php:141
+#: admin/views/admin-settings-general.php:154
+#: admin/views/admin-settings-messagebar.php:37
+msgid "Yes"
+msgstr "Da"
+
+#: admin/partials/cookie-law-info-admin_settings.php:176
+#: admin/partials/cookie-law-info-admin_settings.php:220
+#: admin/partials/cookie-law-info-admin_settings.php:236
+#: admin/partials/cookie-law-info-admin_settings.php:247
+#: admin/partials/cookie-law-info-admin_settings.php:255
+#: admin/partials/cookie-law-info-admin_settings.php:262
+#: admin/partials/cookie-law-info-admin_settings.php:273
+#: admin/partials/cookie-law-info-admin_settings.php:344
+#: admin/partials/cookie-law-info-admin_settings.php:401
+#: admin/partials/cookie-law-info-admin_settings.php:472
+#: admin/partials/cookie-law-info-admin_settings.php:585
+#: admin/views/admin-settings-buttons.php:68
+#: admin/views/admin-settings-buttons.php:142
+#: admin/views/admin-settings-buttons.php:244
+#: admin/views/admin-settings-general.php:56
+#: admin/views/admin-settings-general.php:100
+#: admin/views/admin-settings-general.php:116
+#: admin/views/admin-settings-general.php:127
+#: admin/views/admin-settings-general.php:135
+#: admin/views/admin-settings-general.php:142
+#: admin/views/admin-settings-general.php:155
+#: admin/views/admin-settings-messagebar.php:38
+msgid "No"
+msgstr "Ne"
+
+#: admin/partials/cookie-law-info-admin_settings.php:177
+#: admin/views/admin-settings-general.php:57
+msgid ""
+"If you select \"Header\" then you can optionally stick the cookie bar to the "
+"header. Will not have any effect if you select \"Footer\"."
+msgstr ""
+"Če izberete \"Glava\" potem lahko po želji držijo piškotek bar v glavo. Ne "
+"bo imel nobenega vpliva, če izberete \"Noge\"."
+
+#: admin/partials/cookie-law-info-admin_settings.php:183
+#: admin/views/admin-settings-general.php:63
+msgid "On load"
+msgstr "Na obremenitev"
+
+#: admin/partials/cookie-law-info-admin_settings.php:188
+#: admin/partials/cookie-law-info-admin_settings.php:191
+#: admin/partials/cookie-law-info-admin_settings.php:204
+#: admin/partials/cookie-law-info-admin_settings.php:207
+#: admin/views/admin-settings-general.php:68
+#: admin/views/admin-settings-general.php:71
+#: admin/views/admin-settings-general.php:84
+#: admin/views/admin-settings-general.php:87
+msgid "Animate"
+msgstr "& Animiraj"
+
+#: admin/partials/cookie-law-info-admin_settings.php:189
+#: admin/partials/cookie-law-info-admin_settings.php:192
+#: admin/views/admin-settings-general.php:69
+#: admin/views/admin-settings-general.php:72
+msgid "Sticky"
+msgstr "Lepljiv"
+
+#: admin/partials/cookie-law-info-admin_settings.php:199
+#: admin/views/admin-settings-general.php:79
+msgid "On hide"
+msgstr "Koža"
+
+#: admin/partials/cookie-law-info-admin_settings.php:205
+#: admin/partials/cookie-law-info-admin_settings.php:208
+#: admin/views/admin-settings-general.php:85
+#: admin/views/admin-settings-general.php:88
+msgid "Disappear"
+msgstr "Izginejo"
+
+#: admin/partials/cookie-law-info-admin_settings.php:217
+#: admin/views/admin-settings-general.php:97
+msgid "Auto-hide(Accept) cookie bar after delay?"
+msgstr "Auto-hide(Accept) piškotek vrstico po zamude?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:224
+#: admin/views/admin-settings-general.php:104
+msgid "Milliseconds until hidden"
+msgstr "Milisekund do skrite"
+
+#: admin/partials/cookie-law-info-admin_settings.php:227
+#: admin/views/admin-settings-general.php:107
+msgid "Specify milliseconds (not seconds)"
+msgstr "Določite milisekund (ne sekund)"
+
+#: admin/partials/cookie-law-info-admin_settings.php:227
+#: admin/views/admin-settings-general.php:107
+msgid "seconds"
+msgstr "sekunde"
+
+#: admin/partials/cookie-law-info-admin_settings.php:233
+#: admin/views/admin-settings-general.php:113
+msgid "Auto-hide cookie bar if the user scrolls ( Accept on Scroll )?"
+msgstr ""
+"Samodejno skriti piškotek, če se uporabnik pomika (Sprejmi na drsniku)?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:237
+#: admin/views/admin-settings-general.php:117
+msgid ""
+"As per latest GDPR policies it is required to take an explicit consent for "
+"the cookies. Use this option with discretion especially if you serve EU"
+msgstr ""
+"V skladu z najnovejšimi politikami o BDP je treba piškotke izrecno dovoliti. "
+"To možnost uporabite s presojo, še posebej, če služite EU"
+
+#: admin/partials/cookie-law-info-admin_settings.php:241
+#: admin/views/admin-settings-general.php:121
+msgid "Reload after \"scroll accept\" event?"
+msgstr "Znova naložite dogodek po »drsnem sprejemanju«?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:252
+#: admin/views/admin-settings-general.php:132
+msgid "Reload after Accept button click"
+msgstr "Ponovno naloži, ko klikne gumb Sprejmi"
+
+#: admin/partials/cookie-law-info-admin_settings.php:259
+#: admin/views/admin-settings-general.php:139
+msgid "Reload after Reject button click"
+msgstr "Ponovno naloži po zavrnitvi gumba"
+
+#: admin/partials/cookie-law-info-admin_settings.php:270
+#: admin/views/admin-settings-general.php:152
+msgid "Use Show Again Tab?"
+msgstr "Uporaba pokazati še kartico?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:277
+#: admin/views/admin-settings-general.php:159
+msgid "Tab Position"
+msgstr "Položaj zavihkaCurrent form&apos; s actions"
+
+#: admin/partials/cookie-law-info-admin_settings.php:282
+#: admin/partials/cookie-law-info-admin_settings.php:285
+#: admin/views/admin-settings-general.php:164
+#: admin/views/admin-settings-general.php:167
+msgid "Right"
+msgstr "Desno"
+
+#: admin/partials/cookie-law-info-admin_settings.php:283
+#: admin/partials/cookie-law-info-admin_settings.php:286
+#: admin/views/admin-settings-general.php:165
+#: admin/views/admin-settings-general.php:168
+msgid "Left"
+msgstr "Levo"
+
+#: admin/partials/cookie-law-info-admin_settings.php:293
+#: admin/views/admin-settings-general.php:175
+msgid "From Left Margin"
+msgstr "Levi rob"
+
+#: admin/partials/cookie-law-info-admin_settings.php:296
+#: admin/views/admin-settings-general.php:178
+msgid "Specify"
+msgstr "Navedite"
+
+#: admin/partials/cookie-law-info-admin_settings.php:300
+#: admin/views/admin-settings-general.php:182
+msgid "Show More Text"
+msgstr "Prikaži več besedila"
+
+#: admin/partials/cookie-law-info-admin_settings.php:307
+msgid "Cookie Law Message Bar"
+msgstr "Piškotek pravo sporočilo zasova"
+
+#: admin/partials/cookie-law-info-admin_settings.php:311
+#: admin/views/admin-settings-messagebar.php:5
+msgid "Message"
+msgstr "Sporočilo"
+
+#: admin/partials/cookie-law-info-admin_settings.php:317
+#: admin/views/admin-settings-messagebar.php:11
+msgid "Shortcodes allowed: see settngs section \"Using the Shortcodes\"."
+msgstr "Shortcodes dovoliti: glej oddelek settngs \"Z uporabo Shortcodes\"."
+
+#: admin/partials/cookie-law-info-admin_settings.php:317
+#: admin/views/admin-settings-messagebar.php:11
+msgid ""
+"Examples: \"We use cookies on this website [cookie_accept] to find out how "
+"to delete cookies [cookie_link].\""
+msgstr ""
+"Primeri: \"uporabljamo piškotke na tej spletni strani [cookie_accept] "
+"ugotoviti, kako izbrišete piškotke [cookie_link].\""
+
+#: admin/partials/cookie-law-info-admin_settings.php:321
+#: admin/views/admin-settings-messagebar.php:15
+msgid "Cookie Bar Colour"
+msgstr "Barva piškotka"
+
+#: admin/partials/cookie-law-info-admin_settings.php:331
+#: admin/views/admin-settings-messagebar.php:25
+msgid "Text Colour"
+msgstr "Barva"
+
+#: admin/partials/cookie-law-info-admin_settings.php:340
+#: admin/views/admin-settings-messagebar.php:34
+msgid "Show Border?"
+msgstr "Prikaži okvir"
+
+#: admin/partials/cookie-law-info-admin_settings.php:348
+#: admin/views/admin-settings-messagebar.php:42
+msgid "Border Colour"
+msgstr "Barva obrobe"
+
+#: admin/partials/cookie-law-info-admin_settings.php:356
+#: admin/views/admin-settings-messagebar.php:50
+msgid "Font"
+msgstr "Pisava"
+
+#: admin/partials/cookie-law-info-admin_settings.php:367
+#: admin/partials/cookie-law-info-admin_settings1.php:19
+msgid "Customise Buttons"
+msgstr "Prilagodite gumbi"
+
+#: admin/partials/cookie-law-info-admin_settings.php:370
+msgid "Accept Button"
+msgstr "Sprejeti gumb"
+
+#: admin/partials/cookie-law-info-admin_settings.php:372
+#: admin/views/admin-settings-buttons.php:13
+msgid "Main Button"
+msgstr "Gumb"
+
+#: admin/partials/cookie-law-info-admin_settings.php:373
+#: admin/views/admin-settings-buttons.php:14
+msgid ""
+"This button/link can be customised to either simply close the cookie bar, or "
+"follow a link. You can also customise the colours and styles, and show it as "
+"a link or a button."
+msgstr ""
+"Ta gumb/povezavo lahko meri bodisi preprosto zapreti vrstico piškotek, ali "
+"slediti povezavo. Lahko tudi prilagodite barve in sloge, in prikazati kot "
+"povezavo ali gumb."
+
+#: admin/partials/cookie-law-info-admin_settings.php:376
+#: admin/partials/cookie-law-info-admin_settings.php:443
+#: admin/partials/cookie-law-info-admin_settings.php:515
+#: admin/partials/cookie-law-info-admin_settings.php:560
+msgid "Link Text"
+msgstr "Besedilo povezave"
+
+#: admin/partials/cookie-law-info-admin_settings.php:382
+#: admin/partials/cookie-law-info-admin_settings.php:449
+#: admin/views/admin-settings-buttons.php:48
+#: admin/views/admin-settings-buttons.php:119
+msgid "Action"
+msgstr "Akcije"
+
+#: admin/partials/cookie-law-info-admin_settings.php:390
+#: admin/partials/cookie-law-info-admin_settings.php:461
+#: admin/partials/cookie-law-info-admin_settings.php:566
+msgid "Link URL"
+msgstr "URl povezava"
+
+#: admin/partials/cookie-law-info-admin_settings.php:393
+#: admin/partials/cookie-law-info-admin_settings.php:464
+#: admin/views/admin-settings-buttons.php:59
+#: admin/views/admin-settings-buttons.php:134
+msgid "Button will only link to URL if Action = Open URL"
+msgstr "Gumb se bo povezal samo z URL-jem, če je Action = Open URL"
+
+#: admin/partials/cookie-law-info-admin_settings.php:398
+#: admin/partials/cookie-law-info-admin_settings.php:469
+#: admin/partials/cookie-law-info-admin_settings.php:582
+msgid "Open link in new window?"
+msgstr "Odpri povezavo v novem zavihku"
+
+#: admin/partials/cookie-law-info-admin_settings.php:405
+#: admin/partials/cookie-law-info-admin_settings.php:476
+#: admin/partials/cookie-law-info-admin_settings.php:521
+#: admin/partials/cookie-law-info-admin_settings.php:572
+msgid "Link colour"
+msgstr "Barva"
+
+#: admin/partials/cookie-law-info-admin_settings.php:413
+#: admin/partials/cookie-law-info-admin_settings.php:484
+#: admin/partials/cookie-law-info-admin_settings.php:529
+#: admin/partials/cookie-law-info-admin_settings.php:589
+msgid "Show as button?"
+msgstr "Prikaži kot gumb?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:415
+#: admin/partials/cookie-law-info-admin_settings.php:486
+#: admin/partials/cookie-law-info-admin_settings.php:531
+#: admin/partials/cookie-law-info-admin_settings.php:591
+#: admin/views/admin-settings-buttons.php:33
+#: admin/views/admin-settings-buttons.php:105
+#: admin/views/admin-settings-buttons.php:176
+#: admin/views/admin-settings-buttons.php:221
+msgid "Button"
+msgstr "Gumb"
+
+#: admin/partials/cookie-law-info-admin_settings.php:416
+#: admin/partials/cookie-law-info-admin_settings.php:487
+#: admin/partials/cookie-law-info-admin_settings.php:532
+#: admin/partials/cookie-law-info-admin_settings.php:592
+#: admin/views/admin-settings-buttons.php:35
+#: admin/views/admin-settings-buttons.php:107
+#: admin/views/admin-settings-buttons.php:178
+#: admin/views/admin-settings-buttons.php:223
+msgid "Link"
+msgstr "Povezava"
+
+#: admin/partials/cookie-law-info-admin_settings.php:420
+#: admin/partials/cookie-law-info-admin_settings.php:491
+#: admin/partials/cookie-law-info-admin_settings.php:536
+#: admin/partials/cookie-law-info-admin_settings.php:596
+msgid "Button colour"
+msgstr "Barva gumba"
+
+#: admin/partials/cookie-law-info-admin_settings.php:428
+#: admin/partials/cookie-law-info-admin_settings.php:499
+#: admin/partials/cookie-law-info-admin_settings.php:544
+#: admin/partials/cookie-law-info-admin_settings.php:604
+msgid "Button Size"
+msgstr "Velikost gumba"
+
+#: admin/partials/cookie-law-info-admin_settings.php:439
+#: admin/views/admin-settings-buttons.php:86
+msgid "Reject Button"
+msgstr "Zavrni gumb"
+
+#: admin/partials/cookie-law-info-admin_settings.php:511
+#: admin/views/admin-settings-buttons.php:157
+msgid "Settings Button"
+msgstr "Gumb nastavitve"
+
+#: admin/partials/cookie-law-info-admin_settings.php:556
+#: admin/views/admin-settings-buttons.php:201
+msgid "Read More Link"
+msgstr "Povezava Preberi več"
+
+#: admin/partials/cookie-law-info-admin_settings.php:557
+#: admin/views/admin-settings-buttons.php:202
+msgid ""
+"This button/link can be used to provide a link out to your Privacy & Cookie "
+"Policy. You can customise it any way you like."
+msgstr ""
+"Ta gumb / povezava lahko uporabite za povezavo z vašo Politiko zasebnosti in "
+"piškotkov. Lahko jo prilagodite poljubno, kot želite."
+
+#: admin/partials/cookie-law-info-admin_settings.php:615
+msgid "Using the Shortcodes"
+msgstr "Uporaba kratkih kod"
+
+#: admin/partials/cookie-law-info-admin_settings.php:617
+#: admin/views/admin-settings-help.php:10
+msgid "Cookie bar shortcodes"
+msgstr "Kratke kode piškotkov"
+
+#: admin/partials/cookie-law-info-admin_settings.php:618
+#: admin/views/admin-settings-help.php:11
+msgid ""
+"You can enter the shortcodes in the \"message\" field of the Cookie Law Info "
+"bar. They add nicely formatted buttons and/or links into the cookie bar, "
+"without you having to add any HTML."
+msgstr ""
+"Vnesete lahko kratke kode v polju »sporočilo« v Info Baru za piškotke. V "
+"piškotek dodajo lepo oblikovane gumbe in / ali povezave, ne da bi morali "
+"dodati katerikoli HTML."
+
+#: admin/partials/cookie-law-info-admin_settings.php:619
+msgid "The shortcodes are:"
+msgstr "Kratke kode so:"
+
+#: admin/partials/cookie-law-info-admin_settings.php:621
+#: admin/views/admin-settings-help.php:18
+msgid ""
+"If you just want a standard green \"Accept\" button that closes the header "
+"and nothing more, use this shortcode. It is already styled, you don't need "
+"to customise it."
+msgstr ""
+"Če želite preprost zeleni gumb \"Sprejmi\", ki zapre glavo in nič več, "
+"uporabite to kratko številko. To je že styled, vam ga ni treba prilagajati."
+
+#: admin/partials/cookie-law-info-admin_settings.php:623
+#: admin/views/admin-settings-help.php:22
+msgid ""
+"Alternatively you can add a colour value. Choose from: red, blue, orange, "
+"yellow, green or pink."
+msgstr ""
+"Alternativno lahko dodate barvno vrednost. Izbirate: rdeča, modra, oranžna, "
+"rumena, zelena ali roza."
+
+#: admin/partials/cookie-law-info-admin_settings.php:623
+#: admin/views/admin-settings-help.php:22
+msgid "Careful to use the British spelling of \"colour\" for the attribute."
+msgstr "Previdno uporabljati britanski črkovanje \"barve\" za atribut."
+
+#: admin/partials/cookie-law-info-admin_settings.php:625
+#: admin/views/admin-settings-help.php:26
+msgid "This is the \"main button\" you customise above."
+msgstr "To je \"glavni gumb\" jih prilagodite zgoraj."
+
+#: admin/partials/cookie-law-info-admin_settings.php:627
+#: admin/views/admin-settings-help.php:31
+msgid "This is the cookie settings button rendering shortcode."
+msgstr "To je piškotek nastavitve gumb upodabljanje nezadostnost."
+
+#: admin/partials/cookie-law-info-admin_settings.php:629
+#: admin/views/admin-settings-help.php:35
+msgid "This is the cookie reject button shortcode."
+msgstr "To je piškotek Zavrni gumb nezadostnost."
+
+#: admin/partials/cookie-law-info-admin_settings.php:631
+#: admin/views/admin-settings-help.php:39
+msgid "This is the \"read more\" link you customise above."
+msgstr "To je \"Preberite več\" povezavo, boste prilagodite zgoraj."
+
+#: admin/partials/cookie-law-info-admin_settings.php:634
+#: admin/views/admin-settings-help.php:43
+msgid "Other shortcodes"
+msgstr "Druge kratice"
+
+#: admin/partials/cookie-law-info-admin_settings.php:635
+#: admin/views/admin-settings-help.php:44
+msgid ""
+"These shortcodes can be used in pages and posts on your website. It is not "
+"recommended to use these inside the cookie bar itself."
+msgstr ""
+"Te shortcodes, lahko uporabijo na strani in objav na vaši spletni strani. Ne "
+"priporočamo uporabo teh znotraj piškotek bar sama."
+
+#: admin/partials/cookie-law-info-admin_settings.php:637
+#: admin/views/admin-settings-help.php:50
+msgid ""
+"This prints out a nice table of cookies, in line with the guidance given by "
+"the ICO."
+msgstr ""
+"Natisne to lepo kazalo piškotke, v skladu z napotki, ki jih je mednarodna "
+"organizacija ICO."
+
+#: admin/partials/cookie-law-info-admin_settings.php:637
+#: admin/views/admin-settings-help.php:50
+msgid ""
+"You need to enter the cookies your website uses via the Cookie Law Info menu "
+"in your WordPress dashboard."
+msgstr ""
+"Vpišite piškotke, ki jih vaše spletno mesto uporablja prek menija Info o "
+"piškotkih na vaši nadzorni plošči programa WordPress."
+
+#: admin/partials/cookie-law-info-admin_settings.php:646
+#: admin/views/admin-settings-help.php:61
+msgid "This prints out a nice table of cookies by category."
+msgstr "Natisne to lepo kazalo piškotke po kategoriji."
+
+#: admin/partials/cookie-law-info-admin_settings.php:647
+#: admin/views/admin-settings-help.php:65
+msgid "This prints the settings popup of cookie category."
+msgstr "To natisne nastavitve ljudstvo piškotek kategorije."
+
+#: admin/partials/cookie-law-info-admin_settings.php:648
+#: admin/views/admin-settings-help.php:69
+msgid ""
+"This shortcode will display a normal HTML link which when clicked, will "
+"delete the cookie set by Cookie Law Info (this cookie is used to remember "
+"that the cookie bar is closed)."
+msgstr ""
+"Ta kratka koda bo prikazala običajno povezavo HTML, ki jo bo ob kliku "
+"izbrisal piškotek, ki ga nastavijo Info o piškotkih (ta piškotek se "
+"uporablja za zapomnitev zaprtja piškotka)."
+
+#: admin/partials/cookie-law-info-admin_settings.php:649
+#: admin/views/admin-settings-help.php:73
+msgid ""
+"Add any text you like- useful if you want e.g. another language to English."
+msgstr ""
+"Dodajte besedilo, vas kot-uporabno, če želite, npr. drug jezik v angleški."
+
+#: admin/partials/cookie-law-info-admin_settings.php:655
+#: admin/partials/cookie-law-info-admin_settings1.php:20
+msgid "Advanced"
+msgstr "Dodatno"
+
+#: admin/partials/cookie-law-info-admin_settings.php:657
+#: admin/views/admin-settings-advanced.php:3
+msgid ""
+"Sometimes themes apply settings that clash with plugins. If that happens, "
+"try adjusting these settings."
+msgstr ""
+"Včasih teme uporabiti nastavitve, ki v nasprotju z plugins. Če se to zgodi, "
+"poskusite prilagoditi nastavitve."
+
+#: admin/partials/cookie-law-info-admin_settings.php:671
+#: admin/views/admin-settings-advanced.php:17
+msgid "Reset all values"
+msgstr "Ponastavi vse vrednosti"
+
+#: admin/partials/cookie-law-info-admin_settings.php:673
+#: admin/views/admin-settings-advanced.php:19
+msgid "Delete settings and reset"
+msgstr "Izbrišite nastavitve in ponastavite"
+
+#: admin/partials/cookie-law-info-admin_settings.php:673
+#: admin/views/admin-settings-advanced.php:19
+msgid "Are you sure you want to delete all your settings?"
+msgstr "Ali ste prepričani, da želite izbrisati?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:674
+#: admin/views/admin-settings-advanced.php:20
+msgid "Warning: this will actually delete your current settings."
+msgstr "Opozorilo: to bo dejansko izbrisati trenutne nastavitve."
+
+#: admin/partials/cookie-law-info-admin_settings.php:716
+msgid "Where did my settings go?"
+msgstr "Kam so izginile moje nastavitve?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:717
+msgid "Cookie Law Info version 0.9 has been updated and has new settings."
+msgstr ""
+"Piškotek prava Info različica 0,9 je bil posodobljen in ima nove nastavitve."
+
+#: admin/partials/cookie-law-info-admin_settings.php:717
+msgid "Your previous settings are safe."
+msgstr "Prejšnje nastavitve so varni."
+
+#: admin/partials/cookie-law-info-admin_settings.php:718
+msgid ""
+"You can either copy over your old settings to this version, or use the new "
+"default values."
+msgstr ""
+"V to različico lahko kopirate stare nastavitve ali uporabite nove privzete "
+"vrednosti."
+
+#: admin/partials/cookie-law-info-admin_settings.php:720
+msgid "Would you like to:"
+msgstr "Bi želeli:"
+
+#: admin/partials/cookie-law-info-admin_settings.php:722
+msgid "Use previous settings"
+msgstr "Uporabo prejšnje nastavitve"
+
+#: admin/partials/cookie-law-info-admin_settings.php:723
+msgid "Start afresh with the new version"
+msgstr "Začeti znova z novo različico"
+
+#: admin/partials/cookie-law-info-admin_settings.php:725
+msgid "Are you sure you want to migrate settings?"
+msgstr "Ali ste prepričani, da želite uporabljati nastavitve?"
+
+#: admin/partials/cookie-law-info-admin_settings.php:727
+msgid ""
+"If you want to go back to the previous version you can always download it "
+"again from"
+msgstr "Če želite vrniti na prejšnjo različico lahko vedno prenesete s ponovno"
+
+#: admin/partials/cookie-law-info-admin_settings.php:732
+msgid "Help"
+msgstr "Pomoč"
+
+#: admin/partials/cookie-law-info-admin_settings.php:734
+#: admin/views/admin-settings-help.php:88
+msgid "Help and Support"
+msgstr "Poiščite pomoč in podporo"
+
+#: admin/partials/cookie-law-info-admin_settings.php:735
+#: admin/views/admin-settings-help.php:95
+msgid "Report a Bug"
+msgstr "Poročilo Bug"
+
+#: admin/partials/cookie-law-info-admin_settings.php:736
+#: admin/views/admin-settings-help.php:101
+msgid "Guide"
+msgstr "Vodilo"
+
+#: admin/partials/cookie-law-info-admin_settings.php:737
+#: admin/views/admin-settings-help.php:107
+msgid "About the law"
+msgstr "O zakonu"
+
+#: admin/partials/cookie-law-info-admin_settings1.php:11
+msgid "Settings updated."
+msgstr "Postavke izmenjene."
+
+#: admin/partials/cookie-law-info-admin_settings1.php:12
+msgid "Unable to update Settings."
+msgstr "Ni mogoče posodobiti nastavitve."
+
+#: admin/partials/cookie-law-info-admin_settings1.php:17
+msgid "General"
+msgstr "Splošno"
+
+#: admin/partials/cookie-law-info-admin_settings1.php:18
+msgid "Message Bar"
+msgstr "] Sporočilna vrstica"
+
+#: admin/partials/cookie-law-info-admin_settings1.php:22
+msgid "Licence"
+msgstr "Licenca"
+
+#: admin/partials/cookie-law-info-admin_settings1.php:33
+msgid "Help Guide"
+msgstr "Vodilo"
+
+#: admin/partials/cookie-law-info-privacy_overview.php:59
+msgid "Privacy Overview Title"
+msgstr "Osamljenost pregled naslov"
+
+#: admin/partials/cookie-law-info-privacy_overview.php:65
+#: admin/partials/cookie-law-info-privacy_overview.php:70
+msgid "This will be shown in the settings visible for user on consent screen."
+msgstr "To bo prikazan v nastavitvah vidne za uporabnika na zaslonu soglasja."
+
+#: admin/partials/cookie-law-info-privacy_overview.php:75
+msgid "Save Settings"
+msgstr "Shrani nastavitve"
+
+#: admin/views/admin-settings-buttons.php:17
+#: admin/views/admin-settings-buttons.php:89
+#: admin/views/admin-settings-buttons.php:160
+#: admin/views/admin-settings-buttons.php:205
+msgid "Text"
+msgstr "Text"
+
+#: admin/views/admin-settings-buttons.php:23
+#: admin/views/admin-settings-buttons.php:95
+#: admin/views/admin-settings-buttons.php:166
+#: admin/views/admin-settings-buttons.php:211
+msgid "Text colour"
+msgstr "Text colour"
+
+#: admin/views/admin-settings-buttons.php:31
+#: admin/views/admin-settings-buttons.php:103
+#: admin/views/admin-settings-buttons.php:174
+#: admin/views/admin-settings-buttons.php:219
+msgid "Show as"
+msgstr "Prikaži kot"
+
+#: admin/views/admin-settings-buttons.php:39
+#: admin/views/admin-settings-buttons.php:111
+#: admin/views/admin-settings-buttons.php:182
+#: admin/views/admin-settings-buttons.php:227
+msgid "Background colour"
+msgstr "Background colour"
+
+#: admin/views/admin-settings-buttons.php:56
+#: admin/views/admin-settings-buttons.php:131
+#: admin/views/admin-settings-buttons.php:235
+msgid "URL"
+msgstr ""
+
+#: admin/views/admin-settings-buttons.php:64
+#: admin/views/admin-settings-buttons.php:139
+#: admin/views/admin-settings-buttons.php:241
+msgid "Open URL in new window?"
+msgstr ""
+
+#: admin/views/admin-settings-buttons.php:75
+#: admin/views/admin-settings-buttons.php:146
+#: admin/views/admin-settings-buttons.php:190
+#: admin/views/admin-settings-buttons.php:248
+msgid "Size"
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:374
+#, php-format
+msgid ""
+"The license key for %s has expired. You can reactivate or purchase a license "
+"key from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:385
+#, php-format
+msgid ""
+"The subscription for %s is on-hold. You can reactivate the subscription from "
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:396
+#, php-format
+msgid ""
+"The subscription for %s has been cancelled. You can renew the subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>. A new "
+"license key will be emailed to you after your order has been completed."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:407
+#, php-format
+msgid ""
+"The subscription for %s has expired. You can reactivate the subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:418
+#, php-format
+msgid ""
+"The subscription for %s has been suspended. You can reactivate the "
+"subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
+"a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:429
+#, php-format
+msgid ""
+"The subscription for %s is still pending. You can check on the status of the "
+"subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
+"a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:440
+#, php-format
+msgid ""
+"The subscription for %s has been placed in the trash and will be deleted "
+"soon. You can purchase a new subscription from your account <a href=\"%s\" "
+"target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:451
+#, php-format
+msgid ""
+"A subscription for %s could not be found. You can purchase a subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:462
+#, php-format
+msgid ""
+"A license key for %s could not be found. Maybe you forgot to enter a license "
+"key when setting up %s, or the key was deactivated in your account. You can "
+"reactivate license key at your plugin <a href=\"%s\" target=\"_blank"
+"\">settings page</a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:473
+#, php-format
+msgid ""
+"Download permission for %s has been revoked possibly due to a license key or "
+"subscription expiring. You can reactivate or purchase a license key from "
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:484
+#, php-format
+msgid ""
+"%s has not been activated. Go to the plugin <a href=\"%s\" target=\"_blank"
+"\">settings page</a> and enter the license key and license email to activate "
+"%s."
+msgstr ""
+
+#: admin/wf_api_manager/class-wc-am-plugin-update.php:495
+#, php-format
+msgid ""
+"You changed the subscription for %s, so you will need to enter your new API "
+"License Key in the settings page. The License Key should have arrived in "
+"your email inbox, if not you can get it by logging into your account <a href="
+"\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: admin/wf_api_manager/html/html-wf-activation-window.php:106
+msgid "Licence Activation"
+msgstr ""
+
+#: admin/wf_api_manager/html/html-wf-activation-window.php:110
+msgid "API Licence Key:"
+msgstr "Licenčni ključ API:"
+
+#: admin/wf_api_manager/html/html-wf-activation-window.php:111
+msgid "Licence Key"
+msgstr ""
+
+#: admin/wf_api_manager/html/html-wf-activation-window.php:115
+msgid "Licence Email"
+msgstr ""
+
+#: admin/wf_api_manager/html/html-wf-activation-window.php:119
+msgid "Activate"
+msgstr ""
+
+#: admin/wf_api_manager/html/html-wf-activation-window.php:122
+msgid "Check"
+msgstr ""
+
+#: admin/wf_api_manager/html/html-wf-activation-window.php:132
+msgid "Deactive"
+msgstr ""
+
+#: includes/class-cookie-law-info.php:336
+msgid ""
+"This website uses cookies to improve your experience. We'll assume you're ok "
+"with this, but you can opt-out if you wish.[cookie_button] [cookie_settings] "
+"[cookie_link]"
+msgstr ""
+"Ta spletna stran uporablja piškotke za izboljšanje svojih izkušenj. "
+"Predvidevamo, da ste v redu s tem, vendar lahko onemogočite, če želite. "
+"[Cookie_button] [cookie_settings] [cookie_link]"
+
+#: includes/class-cookie-law-info.php:343
+msgid "Privacy & Cookies Policy"
+msgstr "Zasebnosti & piškotke politike"
+
+#: public/class-cookie-law-info-public.php:161
+msgid "GDPR Cookie Consent"
+msgstr ""
+
+#: public/class-cookie-law-info-public.php:162
+msgid "Cookie List"
+msgstr "Piškotek"
+
+#: public/class-cookie-law-info-public.php:163
+#: public/modules/shortcode/shortcode.php:118
+#: public/modules/shortcode/shortcode.php:191
+msgid "Cookie"
+msgstr "Piškotek"
+
+#: public/class-cookie-law-info-public.php:164
+msgid "Add New"
+msgstr ""
+
+#: public/class-cookie-law-info-public.php:165
+msgid "Add New Cookie Type"
+msgstr "Dodati novo vrsto piškotka"
+
+#: public/class-cookie-law-info-public.php:166
+msgid "Edit Cookie Type"
+msgstr "Vrsta piškotka"
+
+#: public/class-cookie-law-info-public.php:167
+msgid "New Cookie Type"
+msgstr "Vrsta piškotka"
+
+#: public/class-cookie-law-info-public.php:168
+msgid "View Cookie Type"
+msgstr "Vrsta piškotka"
+
+#: public/class-cookie-law-info-public.php:169
+msgid "Search Cookies"
+msgstr ""
+
+#: public/class-cookie-law-info-public.php:170
+msgid "Nothing found"
+msgstr "Nič Najdeno"
+
+#: public/class-cookie-law-info-public.php:171
+msgid "Nothing found in Trash"
+msgstr "Nič ni bilo najdeno v smetnjaku"
+
+#: public/class-cookie-law-info-public.php:208
+#: public/modules/script-blocker/script-blocker.php:125
+msgid "Cookie Category"
+msgstr "Kategorija piškotka"
+
+#: public/modules/script-blocker/classes/class-script-blocker.php:322
+msgid "Google Analytics"
+msgstr ""
+
+#: public/modules/script-blocker/classes/class-script-blocker.php:336
+msgid "Facebook Pixel Code"
+msgstr ""
+
+#: public/modules/script-blocker/classes/class-script-blocker.php:347
+msgid "Google Tag Manager"
+msgstr ""
+
+#: public/modules/script-blocker/classes/class-script-blocker.php:359
+#, php-format
+msgid ""
+"Invalid index found in the thirdparties array. Index should be of type "
+"'string'. Index found: %d."
+msgstr ""
+
+#: public/modules/script-blocker/classes/class-script-blocker.php:644
+msgid "Action is unknown."
+msgstr ""
+
+#: public/modules/script-blocker/script-blocker.php:245
+#: public/modules/script-blocker/script-blocker.php:246
+msgid "Script Blocker"
+msgstr ""
+
+#: public/modules/script-blocker/views/admin_script_blocker.php:8
+msgid "Manage Script Blocking"
+msgstr ""
+
+#: public/modules/script-blocker/views/admin_script_blocker.php:21
+msgid "&nbsp;"
+msgstr ""
+
+#: public/modules/script-blocker/views/admin_script_blocker.php:22
+msgid "Name"
+msgstr ""
+
+#: public/modules/script-blocker/views/admin_script_blocker.php:23
+msgid "Enabled"
+msgstr ""
+
+#: public/modules/script-blocker/views/admin_script_blocker.php:24
+#: public/modules/shortcode/shortcode.php:121
+#: public/modules/shortcode/shortcode.php:194
+msgid "Description"
+msgstr "Opis"
+
+#: public/modules/script-blocker/views/admin_script_blocker.php:25
+msgid "Category"
+msgstr ""
+
+#: public/modules/script-blocker/views/admin_script_blocker.php:26
+msgid "Key"
+msgstr ""
+
+#: public/modules/shortcode/shortcode.php:70
+msgid "Delete Cookies"
+msgstr "Briši piškotke"
+
+#: public/modules/shortcode/shortcode.php:119
+#: public/modules/shortcode/shortcode.php:192
+msgid "Type"
+msgstr "Vrsta"
+
+#: public/modules/shortcode/shortcode.php:120
+#: public/modules/shortcode/shortcode.php:193
+msgid "Duration"
+msgstr "Trajanje"
+
+#: public/modules/visitor-report/classes/class-visitor-history.php:26
+msgid "No Consent History"
+msgstr "Brez zgodovine soglasja"
+
+#: public/modules/visitor-report/classes/class-visitor-history.php:75
+msgid "IP Address"
+msgstr ""
+
+#: public/modules/visitor-report/classes/class-visitor-history.php:76
+msgid "Visited Date"
+msgstr ""
+
+#: public/modules/visitor-report/classes/class-visitor-history.php:77
+msgid "Cookie Details"
+msgstr "Podrobnosti o piškotku"
+
+#: public/modules/visitor-report/classes/class-visitor-history.php:78
+msgid "User ID"
+msgstr ""
+
+#: public/modules/visitor-report/classes/class-visitor-history.php:101
+msgid "Delete"
+msgstr ""
+
+#: public/modules/visitor-report/views/visitor_report.php:9
+msgid "GDPR Consent History"
+msgstr ""
+
+#: public/modules/visitor-report/views/visitor_report.php:11
+msgid "Export Report"
+msgstr ""
+
+#: public/modules/visitor-report/visitor-report.php:132
+msgid "Event Logged Successfully"
+msgstr ""
+
+#: public/modules/visitor-report/visitor-report.php:135
+msgid "Error"
+msgstr ""
+
+#: public/modules/visitor-report/visitor-report.php:141
+msgid "Logging is not enabled"
+msgstr ""
+
+#: public/modules/visitor-report/visitor-report.php:155
+#: public/modules/visitor-report/visitor-report.php:156
+msgid "Consent Report"
+msgstr "Poročilo o privolitvi"
+
+#~ msgid "Cookie Bar will be show in:"
+#~ msgstr "Piškotek Bar bo kažejo v:"
+
+#~ msgid "Auto-hide cookie bar after delay?"
+#~ msgstr "Samodejno skriti piškotek po zamudi?"
+
+#~ msgid "Auto-hide cookie bar if the user scrolls?"
+#~ msgstr "Samodejno skriti piškotek, če se uporabnik pomika?"
+
+#~ msgid "Button will only link to URL if Action = Show URL"
+#~ msgstr "Gumb bo samo povezavo do URL, če dejanje = Prikaži URL"
+
+#~ msgid ""
+#~ "We have moved header and footer scripts of this section to the "
+#~ "corresponding fields of a 'Non-Necessary-Cookie' created under 'Non-"
+#~ "Necessary' category."
+#~ msgstr ""
+#~ "Premaknili smo skice glave in noge v ta razdelek na ustrezna polja "
+#~ "»nepotrebnega piškotka«, ustvarjenega pod kategorijo »Neobvezno«."
+
+#~ msgid ""
+#~ "So now all your Cookies and related scripts can be managed from a single "
+#~ "place."
+#~ msgstr ""
+#~ "Sedaj vse piškotke in sorodnih skripte lahko upravljate iz enega mesta."
+
+#~ msgid "Accept"
+#~ msgstr "Strinjam se"
+
+#~ msgid "Reject"
+#~ msgstr "Zavrni"

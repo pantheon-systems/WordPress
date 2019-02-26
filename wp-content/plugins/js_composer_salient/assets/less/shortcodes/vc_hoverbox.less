@@ -1,0 +1,173 @@
+.vc-hoverbox-wrapper,
+.vc-hoverbox-wrapper * {
+  box-sizing: border-box;
+}
+
+.vc-hoverbox-wrapper {
+  &.vc-hoverbox-shape--rounded {
+    .vc-hoverbox-front,
+    .vc-hoverbox-back {
+      border-radius: 10px;
+    }
+  }
+  &.vc-hoverbox-shape--round {
+    .vc-hoverbox-front,
+    .vc-hoverbox-back {
+      border-radius: 50px;
+    }
+  }
+
+  &.vc-hoverbox-align--center {
+    text-align: center;
+  }
+
+  &.vc-hoverbox-align--left {
+    text-align: left;
+  }
+
+  &.vc-hoverbox-align--right {
+    text-align: right;
+  }
+}
+
+.vc-hoverbox-wrapper {
+  .vc-hoverbox {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+  }
+  &.vc-hoverbox-width--100 {
+    .vc-hoverbox {
+      width: 100%;
+    }
+  }
+  &.vc-hoverbox-width--90 {
+    .vc-hoverbox {
+      width: 90%;
+    }
+  }
+  &.vc-hoverbox-width--80 {
+    .vc-hoverbox {
+      width: 80%;
+    }
+  }
+  &.vc-hoverbox-width--70 {
+    .vc-hoverbox {
+      width: 70%;
+    }
+  }
+  &.vc-hoverbox-width--60 {
+    .vc-hoverbox {
+      width: 60%;
+    }
+  }
+  &.vc-hoverbox-width--50 {
+    .vc-hoverbox {
+      width: 50%;
+    }
+  }
+  &.vc-hoverbox-width--40 {
+    .vc-hoverbox {
+      width: 40%;
+    }
+  }
+  &.vc-hoverbox-width--30 {
+    .vc-hoverbox {
+      width: 30%;
+    }
+  }
+  &.vc-hoverbox-width--20 {
+    .vc-hoverbox {
+      width: 20%;
+    }
+  }
+  &.vc-hoverbox-width--10 {
+    .vc-hoverbox {
+      width: 10%;
+    }
+  }
+}
+
+.vc-hoverbox-inner {
+  width: 100%;
+  display: inline-block;
+  min-height: 250px;
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.vc-hoverbox-block {
+  height: 100%;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform .5s ease-in-out;
+  transform-style: preserve-3d;
+  background-size: cover; // 100% 100%;
+  background-position: center;
+}
+
+.vc-hoverbox-block-inner {
+  flex-shrink: 0;
+  padding: 20px;
+  * {
+    backface-visibility: hidden;
+  }
+}
+
+.vc-hoverbox-front {
+  transform: rotateY(0deg);
+  //background: @background-front;
+  z-index: 1; // fixed backface visibility for animations
+}
+
+.vc-hoverbox-back {
+  transform: rotateY(180deg);
+  //background: @background-back;
+}
+
+.vc-hoverbox {
+  &:hover {
+    .vc-hoverbox-front {
+      transform: rotateY(-180deg);
+    }
+
+    .vc-hoverbox-back {
+      transform: rotateY(0deg);
+    }
+  }
+}
+
+// reverse
+.vc-hoverbox-wrapper {
+  &.vc-hoverbox-direction--reverse {
+    .vc-hoverbox-front {
+      transform: rotateY(180deg);
+    }
+
+    .vc-hoverbox-back {
+      transform: rotateY(0deg);
+      z-index: 2;
+    }
+
+    .vc-hoverbox {
+      &:hover {
+        .vc-hoverbox-front {
+          transform: rotateY(0deg);
+        }
+
+        .vc-hoverbox-back {
+          transform: rotateY(-180deg);
+        }
+      }
+    }
+  }
+}

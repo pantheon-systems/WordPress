@@ -1,0 +1,66 @@
+<div class="otgs-installer-component-setting otgs-ui" data-has-setting="{{ has_setting }}">
+    <span class="spinner otgs-components-report-setting-spinner"></span>
+    <ul>
+        <li>
+            <label for="{{ nonce.action }}{{ nonce.value }}-yes">
+                <input
+                        type="radio"
+                        {% if has_setting and is_repo_allowed %}
+                            checked="checked"
+                        {% endif %}
+                        id="{{ nonce.action }}{{ nonce.value }}-yes"
+                        class="js-otgs-components-report-user-choice"
+                        value="1"
+                        name="otgs-components-report-user-choice"
+                        data-nonce-action="{{ nonce.action }}"
+                        data-nonce-value="{{ nonce.value }}"
+                        data-repo="{{ repo }}"
+                />
+
+                {% if custom_radio_label_yes is defined and custom_radio_label_yes is not null %}
+                    {{ custom_radio_label_yes|raw }}
+                {% else %}
+                    {{ strings.radio_report_yes }}
+                {% endif %}
+            </label>
+        </li>
+        <li>
+            <label for="{{ nonce.action }}{{ nonce.value }}-no">
+                <input
+                        type="radio"
+                        {% if has_setting and not is_repo_allowed %}
+                            checked="checked"
+                        {% endif %}
+                        id="{{ nonce.action }}{{ nonce.value }}-no"
+                        class="js-otgs-components-report-user-choice"
+                        value="0"
+                        name="otgs-components-report-user-choice"
+                        data-nonce-action="{{ nonce.action }}"
+                        data-nonce-value="{{ nonce.value }}"
+                        data-repo="{{ repo }}"
+                />
+
+                {% if custom_radio_label_no is defined and custom_radio_label_no is not null %}
+                    {{ custom_radio_label_no|raw }}
+                {% else %}
+                    {{ strings.radio_report_no }}
+                {% endif %}
+            </label>
+        </li>
+    </ul>
+
+    <p class="otgs-installer-component-privacy-policy">
+        <a
+                href="{{ privacy_policy_url }}"
+                target="_blank"
+                rel="noopener"
+                class="otgs-external-link"
+        >
+            {%- if custom_privacy_policy_text is defined and custom_privacy_policy_text is not null -%}
+                {{- custom_privacy_policy_text|raw -}}
+            {%- else -%}
+                {{- privacy_policy_text -}}
+            {%- endif -%}
+        </a>
+    </p>
+</div>

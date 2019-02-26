@@ -1,0 +1,19 @@
+<div class="wcml-pointer-block" data-selector="{{ selector }}" data-insert-method="{{ insert_method }}" style="display:none;">
+    <a id="wcml-pointer-target-{{ pointer }}" href="javascript:void(0)" class="otgs-ico-wpml wcml-pointer-link"
+        data-wcml-open-pointer="wcml-pointer-{{ pointer }}" title="{{ description.trnsl_title|e }}">{{ description.trnsl_title|e }}</a>
+
+    <div id="wcml-pointer-{{ pointer }}" style="display:none;">
+        <div class="wcml-pointer-inner">
+            <div class="wcml-message-content wcml-table-cell">
+                <p class="wcml-information-paragraph">
+                    {{ description.content|raw }}
+                </p>
+                <p class="wcml-information-link">
+                    <a class="wcml-external-link" href="{{ description.doc_link }}" target="_blank">
+                        {{ description.doc_link_text }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

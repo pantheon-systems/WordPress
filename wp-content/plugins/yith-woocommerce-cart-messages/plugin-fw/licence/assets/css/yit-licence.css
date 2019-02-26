@@ -1,0 +1,441 @@
+/* === Plugins Upgrader === */
+
+.yit-plugin-changelog-wrapper {
+    display: none;
+}
+
+.yit-plugin-changelog-title {
+    text-transform: uppercase;
+}
+
+.yit-plugin-changelog {
+    height     : calc(100% - 15px);
+    width      : calc(100% - 15px);
+    overflow-x : hidden;
+    overflow-y : auto;
+    z-index    : 999;
+    background: #fcfcfc;
+}
+
+/* === Plugins Licence Activation === */
+
+.yit-container.product-licence-activation {
+    font-family: 'Raleway', sans-serif;
+}
+
+.yit-container.product-licence-activation .to-active-wrapper {
+    margin-bottom: 60px;
+    max-width: 900px;
+}
+
+.yit-container.product-licence-activation .to-active-wrapper form.to-active-form {
+    position: relative;
+    border-color: #e1e1e1;
+    border-style: solid;
+    border-width: 0;
+}
+
+.yit-container.product-licence-activation .to-active-wrapper form.to-active-form:first-child {
+    border-top-width: 1px;
+}
+
+.yit-container.product-licence-activation .to-active-wrapper form.to-active-form:last-child {
+    border-bottom-width: 1px;
+}
+
+.yit-container.product-licence-activation .to-active-wrapper table.to-active-table {
+    border-width: 0;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.yit-container.product-licence-activation .message {
+    display: none;
+    line-height: normal;
+    background: #ffffff url(../images/licence-error.png) 15px center no-repeat;
+    padding-left: 65px;
+    padding-right: 15px;
+    width: 150px;
+}
+
+.yit-container.product-licence-activation .message-wrapper {
+    height: 75px;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -250px;
+    border: 1px solid #ff3838;
+}
+
+.yit-container.product-licence-activation .message-wrapper.visible {
+    display: table;
+}
+
+.yit-container.product-licence-activation .message {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.yit-container.product-licence-activation .arrow-left:after,
+.yit-container.product-licence-activation .arrow-left:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.yit-container.product-licence-activation .arrow-left:before {
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-right: 9px solid #ff3838;
+    top: 26px;
+    left: -9px;
+}
+
+.yit-container.product-licence-activation .arrow-left:after {
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #fff;
+    left: -8px;
+    top: 27px;
+}
+
+.yit-container.product-licence-activation h2,
+.yit-container.product-licence-activation h3 {
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.yit-container.product-licence-activation h2 {
+    color: #808a97;
+    font-size: 25px;
+}
+.yit-container.product-licence-activation h3 {
+    color: #313131;
+    font-size: 15px;
+    height: 20px;
+}
+
+.yit-container.product-licence-activation h3.to-active {
+    height: 20px;
+    position: relative;
+    vertical-align: top;
+}
+
+.yit-container.product-licence-activation .spinner{
+    vertical-align: -5px;
+    float: none;
+}
+
+.yit-container.product-licence-activation .spinner.show{
+    visibility: visible;
+}
+
+.yit-container.product-licence-activation .licence-check-section{
+    margin-bottom: 60px;
+}
+
+.yit-container.product-licence-activation span.licence-label {
+    font-weight: 500;
+    color: #606060;
+    margin-bottom: 30px;
+}
+
+.yit-container.product-licence-activation .button-licence {
+    border: 0;
+    font-size: 13px;
+    text-transform: uppercase;
+    background-color: #808a97;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px 7px;
+    -webkit-transition: background-color 0.3s ease;
+    -moz-transition: background-color 0.3s ease;
+    -ms-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+}
+
+.yit-container.product-licence-activation .button-licence:hover {
+    background-color: #4d5c6f;
+}
+
+.yit-container.product-licence-activation .button-licence.clicked {
+    cursor: not-allowed;
+    background-color: #e2e2e2 !important;
+}
+
+.yit-container.product-licence-activation .button-licence.licence-check {
+    font-weight: 400;
+    padding: 12px 19px;
+}
+
+.yit-container.product-licence-activation .button-licence.licence-deactive,
+.yit-container.product-licence-activation .button-licence.licence-renew {
+    text-decoration: none;
+    padding: 7px 12px;
+    font-size: 9px;
+}
+
+.yit-container.product-licence-activation table:not(.expired-table) .button-licence.licence-renew {
+    margin-left: 10px;
+}
+
+.yit-container.product-licence-activation .button-licence.licence-deactive:focus,
+.yit-container.product-licence-activation .button-licence.licence-renew:focus {
+    box-shadow: none;
+}
+
+.yit-container.product-licence-activation table:not(.to-active-table) {
+    width: auto;
+    border: 1px solid #dcdcdc;
+    border-spacing: 0;
+    border-radius: 5px;
+    border-collapse: separate;
+    overflow: hidden;
+}
+
+.yit-container.product-licence-activation table:not(.to-active-table) th {
+    border-bottom: 1px solid #dcdcdc;
+    padding: 0 10px;
+}
+
+.yit-container.product-licence-activation table tbody tr td.product-licence-key {
+    text-transform: lowercase;
+}
+
+.yit-container.product-licence-activation table:not(.to-active-table) td,
+.yit-container.product-licence-activation table:not(.to-active-table) th {
+    border-right: 1px solid #dcdcdc;
+}
+
+.yit-container.product-licence-activation table td:last-child,
+.yit-container.product-licence-activation table th:last-child {
+    border-right: 0;
+}
+
+.yit-container.product-licence-activation table thead tr {
+    background-color: #f6f4f4;
+}
+
+.yit-container.product-licence-activation table tbody tr {
+    background-color: #ffffff;
+}
+
+.yit-container.product-licence-activation table tbody tr:nth-child(2n) {
+    background-color: #f4f4f4;
+}
+
+.yit-container.product-licence-activation table thead tr th {
+    font-size: 11px;
+    color: #313131;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.yit-container.product-licence-activation table thead tr,
+.yit-container.product-licence-activation table tbody tr {
+    line-height: 60px;
+}
+
+.yit-container.product-licence-activation table tbody tr td.product-licence-membership .dashicons-no-alt {
+    color: #b20015;
+}
+
+.yit-container.product-licence-activation table tbody tr td.product-licence-membership .dashicons-yes {
+    color: #1ca800;
+}
+
+.yit-container.product-licence-activation table tbody tr td{
+    text-align: center;
+    line-height: 20px;
+    padding: 10px 5px;
+}
+
+.yit-container.product-licence-activation .button-licence.licence-activation {
+    padding: 12px 18px;
+}
+
+.yit-container.product-licence-activation .to-active-table tr {
+    line-height: 75px;
+}
+
+.yit-container.product-licence-activation .to-active-table tr.product-row {
+    background-color: transparent;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.yit-container.product-licence-activation .to-active-table tr.product-row.error {
+    background-color: #ffdcdc;
+}
+
+.yit-container.product-licence-activation .to-active-table td {
+    padding-right: 12px;
+    width: 33%;
+}
+
+.yit-container.product-licence-activation td.product-name {
+    color: #808a97;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 10px 20px;
+}
+
+.yit-container.product-licence-activation .to-active-table td.product-name {
+    width: 20%;
+}
+
+.yit-container.product-licence-activation .to-active-table td.activate-button {
+    width: 15%;
+    position: relative;
+}
+
+.yit-container.product-licence-activation input[type=text],
+.yit-container.product-licence-activation input[type=email]{
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    border: 1px solid #dcdcdc;
+    padding: 0 15px;
+    border-radius: 3px;
+    height: 41px;
+    width: 100%;
+}
+
+.yit-container.product-licence-activation input[type=text].require,
+.yit-container.product-licence-activation input[type=email].require {
+    border: 1px solid #ff3838;
+}
+
+.yit-container.product-licence-activation input[type=text]:focus,
+.yit-container.product-licence-activation input[type=email]:focus{
+    webkit-box-shadow: 0 0 1px rgba(30,140,190,.8);
+    box-shadow: 0 0 1px rgba(30,140,190,.8);
+}
+
+.yit-container.product-licence-activation input[type=text],
+.yit-container.product-licence-activation input[type=email]{
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.yit-container.product-licence-activation input[type=submit]:focus{
+    outline: 0;
+}
+
+/* Licence FAQ */
+.yit-container.product-licence-activation .activation-faq {
+    background: #ffffff;
+    margin-bottom: 20px;
+    border: 1px solid #dcdcdc;
+    padding: 0 15px;
+    border-radius: 3px;
+}
+
+.yit-container.product-licence-activation .activation-faq h3{
+    color: #808a97;
+}
+
+#yith-licence-notice {
+    margin-left: 0;
+    visibility: hidden;
+    min-height: 38px;
+}
+
+#yith-licence-notice.visible {
+    visibility: visible;
+}
+
+/* === Responsive === */
+
+@media (max-width: 767px) {
+    .yit-container.product-licence-activation .activation-faq {
+        margin-right: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .yit-container.product-licence-activation .activation-faq {
+        margin-right: 5px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .yit-container.product-licence-activation .button-licence.licence-deactive,
+    .yit-container.product-licence-activation .button-licence.licence-renew {
+        margin-bottom: 10px;
+        display: block;
+        margin-left: 0;
+        padding: 5px 7px;
+    }
+
+    .yit-container.product-licence-activation .button-licence.licence-deactive {
+        margin-bottom: 10px;
+    }
+
+    .yit-container.product-licence-activation table:not(.to-active-table) th {
+        line-height: 20px;
+    }
+
+    .yit-container.product-licence-activation table tbody tr td {
+        padding: 5px;
+    }
+
+     .yit-container.product-licence-activation .activation-faq {
+        margin-right: 20px;
+    }
+}
+
+@media (min-width: 980px) and (max-width: 1199px) {
+    .yit-container.product-licence-activation .button-licence.licence-deactive,
+    .yit-container.product-licence-activation .button-licence.licence-renew {
+        display: block;
+        margin-left: 0;
+        padding: 5px 7px;
+    }
+
+    .yit-container.product-licence-activation .button-licence.licence-renew {
+        margin-top: 10px;
+    }
+
+    .yit-container.product-licence-activation table:not(.to-active-table) th {
+        line-height: 20px;
+    }
+
+    .yit-container.product-licence-activation table tbody tr td {
+        padding: 5px;
+    }
+
+    .yit-container.product-licence-activation .activation-faq {
+        width: 75%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .yit-container.product-licence-activation{
+        width: auto;
+    }
+
+    .yit-container.product-licence-activation .activation-faq {
+        width: 50%;
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {}

@@ -1,0 +1,31 @@
+<div class="wcml-section">
+    <div class="wcml-section-header">
+        <h3>
+            {{ strings.mc_missing }}
+        </h3>
+    </div>
+    <div class="wcml-section-content">
+        <ul class="wcml-status-list">
+            <li>
+                {% if not mc_enabled %}
+                    <i>{{ strings.not_enabled }}</i>
+                {% else %}
+                    {% if sec_currencies is empty %}
+                        <i class="otgs-ico-warning"></i>
+                        {{ strings.no_secondary }}
+
+                        <p>
+                            <a class="button-secondary aligncenter" href="{{ add_cur_link }}">
+                                {{ strings.add_cur }}
+                            </a>
+                        </p>
+
+                    {% else %}
+                        <i class="otgs-ico-ok"></i>
+                        {{ strings.sec_currencies|format( sec_currencies ) }}
+                    {% endif %}
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</div>

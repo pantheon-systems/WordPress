@@ -1,0 +1,141 @@
+@vcui-prompt-font-size: 14px;
+@vcui-prompt-background: #f5f5f5;
+@vcui-prompt-border: #dbdbdb;
+@vcui-prompt-color: #5e5e5e;
+@vcui-prompt-padding: 15px;
+@vcui-prompt-size: 16px;
+@vcui-prompt-gap: 18px;
+@vcui-prompt-xs-width: 258px;
+@vcui-prompt-sm-width: 395px;
+
+.vc_ui-prompt {
+  font-size: @vcui-prompt-font-size;
+  box-sizing: content-box;
+  overflow: hidden;
+  transition-property: opacity;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+  position: absolute;
+  z-index: 100;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  background-color: @vcui-prompt-background;
+  color: @vcui-prompt-color;
+  padding: @vcui-prompt-padding;
+  visibility: hidden;
+  opacity: 0;
+  input {
+    box-sizing: border-box;
+  }
+  &.vc_visible {
+    visibility: visible;
+    opacity: 1;
+    overflow-y: auto;
+  }
+}
+
+.vc_media-xs {
+  .vc_ui-prompt {
+    width: @vcui-prompt-xs-width;
+    left: auto;
+    right: 0;
+  }
+}
+
+.vc_media-sm {
+  .vc_ui-prompt {
+    width: @vcui-prompt-sm-width;
+  }
+}
+
+.vc_ui-prompt-controls {
+  float: right;
+  margin-left: 1em;
+  .vc_ui-prompt-close {
+    height: @vcui-prompt-size;
+    width: @vcui-prompt-size;
+    line-height: @vcui-prompt-size;
+    vertical-align: top;
+    position: relative;
+    right: -3px;
+  }
+  .vc_ui-icon-pixel {
+    display: block;
+    line-height: 1;
+  }
+}
+
+.vc_ui-prompt-content {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -@vcui-prompt-gap/2;
+  margin-right: -@vcui-prompt-gap/2;
+}
+
+.vc_ui-prompt-column {
+  padding-left: @vcui-prompt-gap/2;
+  padding-right: @vcui-prompt-gap/2;
+  &:first-child {
+    flex-grow: 1;
+  }
+  .vc_ui-button {
+    .vc-composer-icon {
+      font-weight: bold;
+    }
+  }
+}
+
+// behaviours
+.vc_ui-dropdown {
+  .vc_ui-prompt {
+    position: absolute;
+  }
+  .vc_ui-button {
+    text-transform: none;
+  }
+}
+
+// Presets full width
+.vc_ui-prompt {
+  &.vc_ui-prompt-presets, &.vc_ui-prompt-templates, &.vc_ui-prompt-view-presets {
+    display: none;
+    &.vc_visible {
+      display: block;
+      position: relative;
+      width: calc(~'100% - 30px');
+      left: 0;
+      right: 0;
+      top: 0;
+      margin-bottom: 20px;
+      margin-top: 0;
+      background: #FFF;
+      box-shadow: none;
+    }
+    .vc_ui-prompt-controls {
+      float: none;
+      margin: 0;
+      text-align: right;
+      .vc_ui-control-button {
+        font-size: 30px;
+        height: 40px;
+        width: 40px;
+        color: grey;
+      }
+    }
+  }
+  .vc_ui-control-button {
+    &.vc_hidden {
+      display: none;
+    }
+  }
+}
+
+.vc_ui-notice .vc_message_box.vc_message_box-standard p.messagebox_text {
+  margin: 0;
+  padding: 0;
+}
+
+.vc_ui-notice .vc_message_box.vc_message_box-standard {
+  margin-bottom: 20px;
+}

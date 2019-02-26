@@ -1,0 +1,91 @@
+.media-modal {
+
+  .attachment-details .setting.vc-image-filter-setting {
+    float: none;
+
+    select {
+      max-width: 65%;
+      width: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .attachment-details {
+      .setting.vc-image-filter-setting {
+        .name {
+          display: block;
+        }
+
+        select {
+          max-width: 98%;
+        }
+      }
+    }
+  }
+
+  .attachment-info {
+    @max_w: 100%;
+    @max_h: 250px;
+
+    .thumbnail {
+      max-width: @max_w;
+      max-height: @max_h;
+      width: 100%;
+
+      img {
+        max-width: @max_w;
+        max-height: @max_h;
+      }
+
+      &.loading {
+        &::before {
+          background: url('../images/spinner.gif') no-repeat center;
+          position: absolute;
+          content: '';
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+
+    .uploaded,
+    .file-size {
+      float: left;
+
+      &::after {
+        margin-right: 5px;
+        content: ';';
+      }
+    }
+
+    .edit-attachment,
+    .delete-attachment {
+      display: inline;
+    }
+
+    .delete-attachment {
+      &::before {
+        content: '| ';
+        color: #666;
+      }
+    }
+  }
+
+  &.processing-media {
+    .media-button {
+      &::before {
+        content: '';
+        width: 16px;
+        height: 16px;
+        background: url('../images/spinner.gif');
+        display: inline-block;
+        margin-left: -40px;
+        position: absolute;
+        pointer-events: none;
+        margin-top: 6px;
+      }
+    }
+  }
+}

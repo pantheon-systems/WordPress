@@ -1,0 +1,166 @@
+// TTA
+@import "../shortcodes/tta/vc_tta-variables.less";
+@import "../shortcodes/tta/vc_tta-core.less";
+@import "../shortcodes/tta/vc_tta-options.less";
+@import "../shortcodes/tta/vc_tta-icon-controls.less";
+@import "../shortcodes/tta/vc_tta-mixins.less";
+
+.vc_tta-container {
+  margin: 22px 0 0 0;
+}
+
+.vc_tta-color-backend-accordion-white {
+  .vc_tta-make-panel-color(
+  @background: #fff;
+  @background-active: #fff;
+  @background-hover: darken(#fff, 1%);
+  @text: #6f777d;
+  );
+  .vc_tta-make-tabs-color(
+  @background: #fff;
+  @background-active: #fff;
+  @background-hover: darken(#fff, 1%);
+  @text: #6f777d;
+  );
+}
+
+.vc_tta-color-backend-tabs-white {
+  .vc_tta-make-panel-color(
+  @background :#e6e6e6;
+  @background-active: #fff;
+  @background-hover: darken(#fff, 1%);
+  @text: #6f777d;
+  );
+  .vc_tta-make-tabs-color(
+  @background :#e6e6e6;
+  @background-active: #fff;
+  @background-hover: darken(#fff, 1%);
+  @text: #6f777d;
+  );
+}
+
+// TTA Placeholder
+.vc_placeholder-tta, .vc_placeholder-tta-tab {
+  padding: 0;
+  margin: 0;
+  background: transparent url('../vc/pattern.gif');
+  height: 50px;
+}
+
+.vc_placeholder-tta-tab {
+  display: inline-block;
+}
+
+.vc_tta.vc_general .vc_tta-panel-body {
+  -webkit-transition: none;
+  transition: none;
+}
+
+// ==================
+
+// TTA Containers
+.wpb_vc_tta_tabs, .wpb_vc_tta_pageable, .wpb_vc_tta_tour, .wpb_vc_tta_accordion {
+  > .vc_controls {
+    .vc_tab-controls();
+  }
+  &.vc_shortcodes_container {
+    background: none;
+
+    > .wpb_element_wrapper > .vc_container_for_children {
+      margin: 0;
+      outline: 0;
+    }
+  }
+}
+
+// ==================
+
+// Section
+.wpb_vc_tta_section {
+  background: none;
+  > .wpb_element_wrapper > .vc_tta-panel-body {
+    > .vc_controls {
+      position: relative;
+      height: 45px;
+      margin-top: -12px;
+      .vc_controls-visible;
+    }
+    > .wpb_column_container {
+      margin: 0;
+    }
+    .wpb_vc_column_inner {
+      > .vc_controls {
+        background-color: @vc_column_bg;
+      }
+      > .wpb_element_wrapper {
+        background-color: @vc_column_bg;
+        padding: 14px;
+      }
+    }
+    .wpb_vc_row_inner {
+      > .vc_controls {
+        > .column_move {
+          background-color: @vc_column_bg;
+        }
+      }
+    }
+  }
+}
+
+// ==================
+
+// Tours, Tabs
+.wpb_vc_tta_tabs {
+  .vc_tta-tabs-list li {
+    vertical-align: top; // actually fixes placeholder position
+  }
+  .wpb_vc_tta_section > .wpb_element_wrapper > .vc_tta-panel-body > .vc_controls {
+    margin-top: -5px;
+  }
+  .vc_tta.vc_general .vc_tta-tab > a {
+    padding: 10px 14px;
+  }
+}
+
+.wpb_vc_tta_tabs, .wpb_vc_tta_tour {
+  .vc_tta.vc_general .wpb_vc_tta_section.vc_tta-panel {
+    display: none;
+    &.vc_active {
+      display: block;
+    }
+  }
+}
+
+// Tour
+.wpb_vc_tta_tour {
+  .wpb_vc_tta_section > .wpb_element_wrapper > .vc_tta-panel-body > .vc_controls {
+    height: 48px;
+    margin-top: 0;
+  }
+}
+
+// ==================
+
+// Accordion
+@vc_tta_accordion_add_control_color: #b0b4b8;
+.wpb_vc_tta_accordion {
+  .wpb_vc_tta_section.vc_shortcodes_container {
+    margin: 0;
+  }
+}
+
+.vc_tta-backend-add-control {
+  .vc_tta-title-text {
+    color: @vc_tta_accordion_add_control_color;
+  }
+  .vc_tta-controls-icon-plus {
+    &:before {
+      border-color: @vc_tta_accordion_add_control_color;
+    }
+    &:after {
+      border-color: @vc_tta_accordion_add_control_color;
+    }
+  }
+}
+
+// ==================

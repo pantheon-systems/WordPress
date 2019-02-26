@@ -1,0 +1,32 @@
+.vc_helper {
+  width: auto !important;
+  height: auto !important;
+  .box-sizing(border-box);
+  z-index: 1006;
+  position: absolute;
+  padding: 4px 15px 4px 30px;
+  border: 1px solid @vc_controls_border;
+  background-color: @vc_controls_background;
+  .border-top-radius(3px);
+  .border-bottom-radius(3px);
+  vertical-align: middle;
+  color: #FFFFFF;
+  font-size: 9px;
+  @import '../lib/elements_icons.less';
+  .vc_element-icon {
+    display: inline-block;
+    margin: 0 8px 0 0;
+    vertical-align: middle;
+  }
+  &.vc_helper-vc_row {
+    border: 1px solid #285A85;
+    background-color: #285A85;
+  }
+  &.vc_helper-vc_column {
+    border: 1px solid #F9B418;
+    background-color: #F9B418;
+  }
+  &-tab {
+    width: auto !important;
+  }
+}

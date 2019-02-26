@@ -1,0 +1,59 @@
+<div class="wpml-wizard-step wpml-translation-service-step js-wpml-translation-service-step">
+
+    <div class="js-main-section" >
+        <h2 class="text-center">{{ strings.title }}</h2>
+        <p class="text-center">{{ strings.sub_title }}</p>
+        <div class="js-translation-service-section translation-service-section wpml-margin-top-lg">
+            {{ translation_services_table | raw }}
+        </div>
+
+        <div class="wpml-wizard-buttons-container">
+        <button class="button button-secondary alignright js-skip-translation-services">{{ strings.skip_translation_services }} &raquo;</button>
+        </div>
+
+    </div>
+
+    <div class="js-activate-section" style="display: none">
+
+        <div class="ts-activate-logo text-center">
+        <img class="js-activate-logo" src="">
+        </div>
+        <h2 class="text-center" data-text="{{ strings.activate_title }}"></h2>
+
+        <div class="wpml-wizard-buttons-container-flex">
+            <button class="button button-secondary button-lg-wrap js-connect-account">{{ strings.yes_account_text }}</button>
+            <a href="#" class="button wpml-button button-lg-wrap js-create-account" target="_blank">{{ strings.no_account_text }}</a>
+        </div>
+
+        <div class="wpml-wizard-buttons-container-flex">
+            <button class="button button-secondary js-go-back">&laquo; {{ strings.go_back }}</button>
+        </div>
+
+    </div>
+
+    <div class="js-connect-section" style="display: none;">
+
+        <h2 class="text-center" data-text="{{ strings.connect_site_title }}"></h2>
+        <div class="ts-activate-section-api">
+            <div class="ts-activate-logo">
+                <img class="js-activate-logo" src="">
+            </div>
+            <div class="ts-activate-content">
+                <p class="js-connect-desc" data-text="{{ strings.connect_desc }}"></p>
+                <p><a href="" class="wpml-external-link js-connect-how-to-find" data-text="{{ strings.connect_how_to_find }}" target="_blank"></a></p>
+            </div>
+        </div>
+        <div class="custom_fields_wrapper js-custom-fields-wrapper"></div>
+
+        <span class="notice notice-error inline js-error-message ts-activate-notice" style="display: none"></span>
+
+        <div class="wpml-wizard-buttons-container">
+            <button class="button button-secondary alignleft js-go-back">&laquo; {{ strings.go_back }}</button>
+            <button class="button wpml-button button-lg-wrap alignright js-authenticate">{{ strings.continue }} &raquo;</button>
+        </div>
+
+    </div>
+
+
+
+</div>

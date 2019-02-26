@@ -1,0 +1,115 @@
+.themes .wbc-progress-count {
+    background-color: #1f1f1f;
+    border-radius: 4px;
+    color: #fff !important;
+    left: 100%;
+    padding: 5px;
+    position: absolute;
+    text-align: center;
+    top: -44px;
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+    width: 40px;
+}
+.themes .wbc-progress-count:after {
+    background-color: inherit;
+    bottom: -5px;
+    content: "";
+    height: 10px;
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+    width: 10px;
+}
+
+.themes .wbc-progress-count:after {
+    background-color: inherit;
+    bottom: -5px;
+    content: "";
+    height: 10px;
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+    width: 10px;
+}
+.themes .wbc-progress-back {
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 4px;
+    height: 14px;
+    left: 50%;
+    max-width: 200px;
+    padding: 1px;
+    position: absolute;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 100;
+}
+
+.themes .wbc-progress-bar {
+    border-radius: 4px;
+    height: 100%;
+    position: relative;
+    width: 0%;
+    padding:0 !important;
+}
+
+.wbc_importer h3.theme-name{
+    line-height: 1.3;
+    border:none;
+}
+
+.wbc_importer .theme-actions{
+   opacity: 1 !important;
+}
+
+.wbc_importer .theme-browser .theme .theme-screenshot img{
+    max-width: none !important;
+    width:100% !important;
+}
+.wbc_importer .theme-browser .theme:focus .more-details, 
+.wbc_importer .theme-browser .theme:hover .more-details {
+    opacity: 1;
+}
+
+.wbc_importer .theme-browser .theme .spinner {
+    background-position: right center;
+    font-size: 12px;
+    height: 20px;
+    margin-right: 0;
+    padding-right: 25px;
+    padding-top: 5px;
+    width: auto;
+    visibility: visible;
+    display: none;
+}
+
+.wbc_importer .importer-button{
+    margin-top:0;
+}
+
+.wbc_importer #wbc-importer-reimport{
+    margin-left:4px;
+    display: none;
+}
+
+.wbc_importer .theme-browser .theme:hover #wbc-importer-reimport{
+    display: inline-block;
+}
+
+.wbc-importer-info{
+    background-color: #fff;
+    border-left: 4px solid orange;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    padding: 1px 12px;
+}
