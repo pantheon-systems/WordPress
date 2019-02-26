@@ -1,0 +1,69 @@
+/* @author Tim himself */
+
+.ppom-section-collapse h4 {
+	background: #272e35;
+	color: #fff;
+	text-align: left;
+	/*border-radius: 4px;*/
+	padding: 8px 2px;
+	cursor: pointer;
+	margin-top: 0;
+	margin-bottom: 5px;
+	padding-right: 40px;
+	transition: 0.25s all;
+	position: relative;
+	font-size: 19px;
+	width: 100%;
+}
+.ppom-section-collapse h4.active {
+	margin-bottom: 21px;
+	background: #009640;
+}
+.ppom-section-collapse h4::before {
+	content: attr(data-prefix);
+	font-size: 18px;
+	margin-right: 9px;
+}
+.ppom-section-collapse h4.alignLeft {
+	padding-left: 35px;
+}
+.ppom-section-collapse > div.collapsed-child {
+	display: none;
+	background: #fff;
+	border-radius: 4px;
+	border: 1px solid #cdcdcd;
+	text-align: left;
+	margin-bottom: 9px;
+	float: unset;
+	width: 100%;
+}
+.ppom-section-collapse .arrowDown {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 13.0px 7.5px 0 7.5px;
+	border-color: #272e35 transparent transparent transparent;
+	position: absolute;
+	bottom: 0;
+	left: 40px;
+	transition: 0.25s all;
+	opacity: 0;
+}
+.ppom-section-collapse .active .arrowDown {
+	bottom: -13px;
+	border-color: #009641 transparent transparent transparent;
+	opacity: 1;
+}
+.ppom-section-collapse .collapseIcon {
+	position: absolute;
+	right: 20px;
+	top: 45%;
+	font-size: 25px;
+	font-weight: 300;
+	-ms-transform: translate(0, -50%);
+	    transform: translate(0, -50%);
+}
+.ppom-section-collapse .collapseIcon.alignLeft {
+	right: initial;
+	left: 20px;
+}

@@ -1,0 +1,709 @@
+/* Button 3
+---------------------------------------------------------- */
+
+//========== Variables
+@vc_btn3-border-radius-round: 2em;
+@vc_btn3-border-radius-rounded: 5px;
+@vc_btn3-border-base: 1px;
+@vc_btn3-border-outline: 2px;
+@vc_btn3-shadow-width-xs-3d: 3px;
+@vc_btn3-shadow-width-sm-3d: 4px;
+@vc_btn3-shadow-width-md-3d: 5px;
+@vc_btn3-shadow-width-lg-3d: 5px;
+@vc_btn3-shadow-width-hover: 2px;
+
+@vc_btn3-color-initial: @vc_btn3-color-blue;
+
+// Button xs
+@vc_btn3-xs-padding-horizontal: 12px;
+@vc_btn3-xs-padding-vertical: 8px;
+@vc_btn3-xs-font-size: 11px;
+@vc_btn3-xs-icon-size: 14px;
+// Button sm
+@vc_btn3-sm-padding-horizontal: 16px;
+@vc_btn3-sm-padding-vertical: 11px;
+@vc_btn3-sm-font-size: 12px;
+@vc_btn3-sm-icon-size: 14px;
+// Button md (default)
+@vc_btn3-md-padding-horizontal: 20px;
+@vc_btn3-md-padding-vertical: 14px;
+@vc_btn3-md-font-size: 14px;
+@vc_btn3-md-icon-size: 16px;
+// Button lg
+@vc_btn3-lg-padding-horizontal: 25px;
+@vc_btn3-lg-padding-vertical: 18px;
+@vc_btn3-lg-font-size: 16px;
+@vc_btn3-lg-icon-size: 20px;
+
+//====== COLORS
+
+// color set
+// ---------------------------
+// blue
+@vc_btn3-color-blue: @blue;
+@vc_btn3-color-blue-gradient: lighten(@vc_btn3-color-blue, 7%);
+@vc_btn3-color-blue-gradient-end: lighten(@vc_btn3-color-blue, 2%);
+@vc_btn3-color-blue-text: @vc_btn3-color-blue;
+@vc_btn3-color-blue-contrast: #fff;
+// turquoise
+@vc_btn3-color-turquoise: @turquoise;
+@vc_btn3-color-turquoise-gradient: lighten(@vc_btn3-color-turquoise, 4%);
+@vc_btn3-color-turquoise-gradient-end: lighten(@vc_btn3-color-turquoise, 1%);
+@vc_btn3-color-turquoise-text: @vc_btn3-color-turquoise;
+@vc_btn3-color-turquoise-contrast: #fff;
+// pink
+@vc_btn3-color-pink: @pink;
+@vc_btn3-color-pink-gradient: lighten(@vc_btn3-color-pink, 4%);
+@vc_btn3-color-pink-gradient-end: lighten(@vc_btn3-color-pink, 1%);
+@vc_btn3-color-pink-text: @vc_btn3-color-pink;
+@vc_btn3-color-pink-contrast: #fff;
+// violet
+@vc_btn3-color-violet: @violet;
+@vc_btn3-color-violet-gradient: lighten(@vc_btn3-color-violet, 7%);
+@vc_btn3-color-violet-gradient-end: lighten(@vc_btn3-color-violet, 2%);
+@vc_btn3-color-violet-text: @vc_btn3-color-violet;
+@vc_btn3-color-violet-contrast: #fff;
+// peacoc
+@vc_btn3-color-peacoc: @peacoc;
+@vc_btn3-color-peacoc-gradient: lighten(@vc_btn3-color-peacoc, 9%);
+@vc_btn3-color-peacoc-gradient-end: lighten(@vc_btn3-color-peacoc, 2%);
+@vc_btn3-color-peacoc-text: @vc_btn3-color-peacoc;
+@vc_btn3-color-peacoc-contrast: #fff;
+// chino
+@vc_btn3-color-chino: @chino;
+@vc_btn3-color-chino-gradient: lighten(@vc_btn3-color-chino, 7%);
+@vc_btn3-color-chino-gradient-end: lighten(@vc_btn3-color-chino, 3%);
+@vc_btn3-color-chino-text: @vc_btn3-color-chino;
+@vc_btn3-color-chino-contrast: #fff;
+// mulled_wine
+@vc_btn3-color-mulled-wine: @mulled_wine;
+@vc_btn3-color-mulled-wine-gradient: lighten(@vc_btn3-color-mulled-wine, 8%);
+@vc_btn3-color-mulled-wine-gradient-end: lighten(@vc_btn3-color-mulled-wine, 3%);
+@vc_btn3-color-mulled-wine-text: @vc_btn3-color-mulled-wine;
+@vc_btn3-color-mulled-wine-contrast: #fff;
+// vista_blue
+@vc_btn3-color-vista-blue: @vista_blue;
+@vc_btn3-color-vista-blue-gradient: lighten(@vc_btn3-color-vista-blue, 7%);
+@vc_btn3-color-vista-blue-gradient-end: lighten(@vc_btn3-color-vista-blue, 3%);
+@vc_btn3-color-vista-blue-text: @vc_btn3-color-vista-blue;
+@vc_btn3-color-vista-blue-contrast: #fff;
+// orange
+@vc_btn3-color-orange: @orange;
+@vc_btn3-color-orange-gradient: lighten(@vc_btn3-color-orange, 6%);
+@vc_btn3-color-orange-gradient-end: lighten(@vc_btn3-color-orange, 1%);
+@vc_btn3-color-orange-text: @vc_btn3-color-orange;
+@vc_btn3-color-orange-contrast: #fff;
+// sky
+@vc_btn3-color-sky: @sky;
+@vc_btn3-color-sky-gradient: lighten(@vc_btn3-color-sky, 7%);
+@vc_btn3-color-sky-gradient-end: lighten(@vc_btn3-color-sky, 3%);
+@vc_btn3-color-sky-text: @vc_btn3-color-sky;
+@vc_btn3-color-sky-contrast: #fff;
+// green
+@vc_btn3-color-green: @green;
+@vc_btn3-color-green-gradient: lighten(@vc_btn3-color-green, 7%);
+@vc_btn3-color-green-gradient-end: lighten(@vc_btn3-color-green, 3%);
+@vc_btn3-color-green-text: @vc_btn3-color-green;
+@vc_btn3-color-green-contrast: #fff;
+// juicy_pink
+@vc_btn3-color-juicy-pink: @juicy_pink;
+@vc_btn3-color-juicy-pink-gradient: lighten(@vc_btn3-color-juicy-pink, 5%);
+@vc_btn3-color-juicy-pink-gradient-end: lighten(@vc_btn3-color-juicy-pink, 2%);
+@vc_btn3-color-juicy-pink-text: @vc_btn3-color-juicy-pink;
+@vc_btn3-color-juicy-pink-contrast: #fff;
+// sandy_brown
+@vc_btn3-color-sandy-brown: @sandy_brown;
+@vc_btn3-color-sandy-brown-gradient: lighten(@vc_btn3-color-sandy-brown, 6%);
+@vc_btn3-color-sandy-brown-gradient-end: lighten(@vc_btn3-color-sandy-brown, 3%);
+@vc_btn3-color-sandy-brown-text: @vc_btn3-color-sandy-brown;
+@vc_btn3-color-sandy-brown-contrast: #fff;
+// purple
+@vc_btn3-color-purple: @purple;
+@vc_btn3-color-purple-gradient: lighten(@vc_btn3-color-purple, 6%);
+@vc_btn3-color-purple-gradient-end: lighten(@vc_btn3-color-purple, 1%);
+@vc_btn3-color-purple-text: @vc_btn3-color-purple;
+@vc_btn3-color-purple-contrast: #fff;
+// black
+@vc_btn3-color-black: @black;
+@vc_btn3-color-black-gradient: lighten(@vc_btn3-color-black, 8%);
+@vc_btn3-color-black-gradient-end: lighten(@vc_btn3-color-black, 1%);
+@vc_btn3-color-black-text: @vc_btn3-color-black-contrast;
+@vc_btn3-color-black-contrast: #fff;
+// grey
+@vc_btn3-color-grey: @grey;
+@vc_btn3-color-grey-gradient: lighten(@vc_btn3-color-grey, 3%);
+@vc_btn3-color-grey-gradient-end: lighten(@vc_btn3-color-grey, 1%);
+@vc_btn3-color-grey-text: #666;
+@vc_btn3-color-grey-contrast: @vc_btn3-color-grey-text;
+// white
+@vc_btn3-color-white: @white;
+@vc_btn3-color-white-gradient: darken(@vc_btn3-color-white, 1%);
+@vc_btn3-color-white-gradient-end: darken(@vc_btn3-color-white, 2%);
+@vc_btn3-color-white-text: #666;
+@vc_btn3-color-white-contrast: @vc_btn3-color-white-text;
+
+// Custom colors
+// default
+@vc_btn3-color-default: @vc_btnBackground;
+@vc_btn3-color-default-gradient: @vc_btnBackground;
+@vc_btn3-color-default-gradient-end: @vc_btnBackgroundHighlight;
+@vc_btn3-color-default-text: @vc_btn3-color-default;
+@vc_btn3-color-default-contrast: @grayDark;
+// primary
+@vc_btn3-color-primary: @vc_btnPrimaryBackground;
+@vc_btn3-color-primary-gradient: lighten(@vc_btn3-color-primary, 7%);
+@vc_btn3-color-primary-gradient-end: lighten(@vc_btn3-color-primary, 2%);
+@vc_btn3-color-primary-text: @vc_btn3-color-primary;
+@vc_btn3-color-primary-contrast: @white;
+// info
+@vc_btn3-color-info: @vc_btnInfoBackground;
+@vc_btn3-color-info-gradient: lighten(@vc_btn3-color-info, 7%);
+@vc_btn3-color-info-gradient-end: lighten(@vc_btn3-color-info, 2%);
+@vc_btn3-color-info-text: @vc_btn3-color-info;
+@vc_btn3-color-info-contrast: @white;
+// Success
+@vc_btn3-color-success: @vc_btnSuccessBackground;
+@vc_btn3-color-success-gradient: lighten(@vc_btn3-color-success, 7%);
+@vc_btn3-color-success-gradient-end: lighten(@vc_btn3-color-success, 2%);
+@vc_btn3-color-success-text: @vc_btn3-color-success;
+@vc_btn3-color-success-contrast: #fff;
+// Warning
+@vc_btn3-color-warning: @vc_btnWarningBackground;
+@vc_btn3-color-warning-gradient: lighten(@vc_btn3-color-warning, 7%);
+@vc_btn3-color-warning-gradient-end: lighten(@vc_btn3-color-warning, 2%);
+@vc_btn3-color-warning-text: @vc_btn3-color-warning;
+@vc_btn3-color-warning-contrast: @white;
+// Danger
+@vc_btn3-color-danger: @vc_btnDangerBackground;
+@vc_btn3-color-danger-gradient: lighten(@vc_btn3-color-danger, 7%);
+@vc_btn3-color-danger-gradient-end: lighten(@vc_btn3-color-danger, 2%);
+@vc_btn3-color-danger-text: @vc_btn3-color-danger;
+@vc_btn3-color-danger-contrast: @white;
+// Inverse
+@vc_btn3-color-inverse: @vc_btnInverseBackground;
+@vc_btn3-color-inverse-gradient: lighten(@vc_btn3-color-inverse, 7%);
+@vc_btn3-color-inverse-gradient-end: lighten(@vc_btn3-color-inverse, 2%);
+@vc_btn3-color-inverse-text: @vc_btn3-color-inverse;
+@vc_btn3-color-inverse-contrast: @white;
+
+//========== VC Settings
+.vc_btn3-container {
+  display: block;
+  margin-bottom: @vc_margin_bottom_gold;
+  max-width: 100%;
+  &.vc_btn3-inline {
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+//========== Core
+
+.vc_general.vc_btn3 {
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  background-color: transparent;
+  color: @vc_btn3-color-initial;
+  border: @vc_btn3-border-base solid transparent;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  .user-select(none);
+  text-decoration: none;
+  position: relative;
+  top: 0;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  line-height: normal;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  .make-btn3-size(@vc_btn3-md-font-size, @vc_btn3-md-padding-vertical, @vc_btn3-md-padding-horizontal);
+
+  &:focus,
+  &:active,
+  &.active {
+    outline: 0;
+  }
+
+  &:hover,
+  &:focus {
+    border: @vc_btn3-border-base solid transparent;
+    text-decoration: none;
+    color: darken(@vc_btn3-color-initial, 3%);
+  }
+
+  // icon
+  .vc_btn3-icon {
+    vertical-align: top;
+    height: @vc_btn3-md-font-size;
+    line-height: 1;
+    font-size: @vc_btn3-md-icon-size;
+  }
+  .vc_btn3-icon-inner {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+  }
+
+  // placeholder for icon without text
+  .vc_btn3-placeholder {
+    display: inline-block;
+    vertical-align: top;
+    width: 0;
+  }
+}
+
+// icon positions
+.vc_btn3 {
+  &.vc_btn3-icon-left,
+  &.vc_btn3-icon-right {
+    position: relative;
+    .vc_btn3-icon {
+      display: block;
+      position: absolute;
+      top: 50%;
+      .translate(0; -50%);
+    }
+  }
+
+  &.vc_btn3-icon-left {
+    text-align: left;
+  }
+
+  &.vc_btn3-icon-right {
+    text-align: right;
+    &:not(.vc_btn3-block) {
+      .vc_btn3-icon-inner {
+        -webkit-transform: translate(-75%, -50%);
+        -ms-transform: translate(-75%, -50%);
+        transform: translate(-75%, -50%);
+      }
+    }
+  }
+
+  &.vc_btn3-o-empty {
+    .vc_btn3-icon {
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    &:not(.vc_btn3-block) {
+      .vc_btn3-icon-inner {
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+//========== Styles
+.vc_btn3 {
+  // Classic
+  &.vc_btn3-style-classic {
+    border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) rgba(0, 0, 0, .1);
+  }
+  // Modern
+  &.vc_btn3-style-modern {
+    #gradient > .vertical(@start-color: rgba(255, 255, 255, .2); @end-color: rgba(255, 255, 255, .01));
+  }
+  // Flat (default)
+  &.vc_btn3-style-flat {
+
+  }
+  // Outline
+  &.vc_btn3-style-outline-custom,
+  &.vc_btn3-style-outline {
+    &,
+    &:hover,
+    &:focus {
+      border-width: @vc_btn3-border-outline;
+    }
+  }
+  // 3d
+  &.vc_btn3-style-3d {
+
+  }
+  // Custom
+  &.vc_btn3-style-custom {
+    #gradient > .vertical-three-colors(@start-color: rgba(0, 0, 0, 0); @mid-color: rgba(0, 0, 0, 0.1); @color-stop: 50%; @end-color: rgba(0, 0, 0, 0.1));
+    background-repeat: repeat-x;
+    background-size: 200%;
+    background-position: 0 -100%;
+    &:hover,
+    &:focus {
+      background-position: 0 100%;
+    }
+  }
+}
+
+// block button
+.vc_btn3 {
+  &.vc_btn3-block {
+    display: block;
+    width: 100%;
+    text-align: inherit;
+  }
+}
+
+//========== Shapes
+.vc_btn3 {
+  // Square Shape
+  &.vc_btn3-shape-square {
+    border-radius: 0;
+  }
+  // Rounded Shape
+  &.vc_btn3-shape-rounded {
+    border-radius: @vc_btn3-border-radius-rounded;
+  }
+  // Round Shape
+  &.vc_btn3-shape-round {
+    border-radius: @vc_btn3-border-radius-round;
+  }
+}
+
+// button sizes
+.vc_btn3 {
+  //========== Sizes
+  // XS size
+  &.vc_btn3-size-xs {
+    .make-btn3-size(@vc_btn3-xs-font-size, @vc_btn3-xs-padding-vertical, @vc_btn3-xs-padding-horizontal);
+    .make-btn3-icon-size(@vc_btn3-xs-padding-horizontal, @vc_btn3-xs-icon-size, @vc_btn3-xs-font-size);
+  }
+  // SM size
+  &.vc_btn3-size-sm {
+    .make-btn3-size(@vc_btn3-sm-font-size, @vc_btn3-sm-padding-vertical, @vc_btn3-sm-padding-horizontal);
+    .make-btn3-icon-size(@vc_btn3-sm-padding-horizontal, @vc_btn3-sm-icon-size, @vc_btn3-sm-font-size);
+  }
+  // MD size
+  &.vc_btn3-size-md {
+    .make-btn3-size(@vc_btn3-md-font-size, @vc_btn3-md-padding-vertical, @vc_btn3-md-padding-horizontal);
+    .make-btn3-icon-size(@vc_btn3-md-padding-horizontal, @vc_btn3-md-icon-size, @vc_btn3-md-font-size);
+  }
+  // LG size
+  &.vc_btn3-size-lg {
+    .make-btn3-size(@vc_btn3-lg-font-size, @vc_btn3-lg-padding-vertical, @vc_btn3-lg-padding-horizontal);
+    .make-btn3-icon-size(@vc_btn3-lg-padding-horizontal, @vc_btn3-lg-icon-size, @vc_btn3-lg-font-size);
+  }
+}
+
+// colors
+.vc_btn3 {
+  //========== Colors
+  // Generating color sets
+  //-----------------------------------
+
+  // blue
+  .vc-btn3-make-colors-set(~'vc_btn3-color-blue'; @vc_btn3-color-blue-text; @vc_btn3-color-blue; @vc_btn3-color-blue-gradient-end; @vc_btn3-color-blue-gradient; @vc_btn3-color-blue-contrast);
+  // turquoise
+  .vc-btn3-make-colors-set(~'vc_btn3-color-turquoise'; @vc_btn3-color-turquoise-text; @vc_btn3-color-turquoise; @vc_btn3-color-turquoise-gradient-end; @vc_btn3-color-turquoise-gradient; @vc_btn3-color-turquoise-contrast);
+  // pink
+  .vc-btn3-make-colors-set(~'vc_btn3-color-pink'; @vc_btn3-color-pink-text; @vc_btn3-color-pink; @vc_btn3-color-pink-gradient-end; @vc_btn3-color-pink-gradient; @vc_btn3-color-pink-contrast);
+  // violet
+  .vc-btn3-make-colors-set(~'vc_btn3-color-violet'; @vc_btn3-color-violet-text; @vc_btn3-color-violet; @vc_btn3-color-violet-gradient-end; @vc_btn3-color-violet-gradient; @vc_btn3-color-violet-contrast);
+  // peacoc
+  .vc-btn3-make-colors-set(~'vc_btn3-color-peacoc'; @vc_btn3-color-peacoc-text; @vc_btn3-color-peacoc; @vc_btn3-color-peacoc-gradient-end; @vc_btn3-color-peacoc-gradient; @vc_btn3-color-peacoc-contrast);
+  // chino
+  .vc-btn3-make-colors-set(~'vc_btn3-color-chino'; @vc_btn3-color-chino-text; @vc_btn3-color-chino; @vc_btn3-color-chino-gradient-end; @vc_btn3-color-chino-gradient; @vc_btn3-color-chino-contrast);
+  // mulled_wine
+  .vc-btn3-make-colors-set(~'vc_btn3-color-mulled-wine'; @vc_btn3-color-mulled-wine-text; @vc_btn3-color-mulled-wine; @vc_btn3-color-mulled-wine-gradient-end; @vc_btn3-color-mulled-wine-gradient; @vc_btn3-color-mulled-wine-contrast);
+  // vista_blue
+  .vc-btn3-make-colors-set(~'vc_btn3-color-vista-blue'; @vc_btn3-color-vista-blue-text; @vc_btn3-color-vista-blue; @vc_btn3-color-vista-blue-gradient-end; @vc_btn3-color-vista-blue-gradient; @vc_btn3-color-vista-blue-contrast);
+  // orange
+  .vc-btn3-make-colors-set(~'vc_btn3-color-orange'; @vc_btn3-color-orange-text; @vc_btn3-color-orange; @vc_btn3-color-orange-gradient-end; @vc_btn3-color-orange-gradient; @vc_btn3-color-orange-contrast);
+  // sky
+  .vc-btn3-make-colors-set(~'vc_btn3-color-sky'; @vc_btn3-color-sky-text; @vc_btn3-color-sky; @vc_btn3-color-sky-gradient-end; @vc_btn3-color-sky-gradient; @vc_btn3-color-sky-contrast);
+  // green
+  .vc-btn3-make-colors-set(~'vc_btn3-color-green'; @vc_btn3-color-green-text; @vc_btn3-color-green; @vc_btn3-color-green-gradient-end; @vc_btn3-color-green-gradient; @vc_btn3-color-green-contrast);
+  // juicy_pink
+  .vc-btn3-make-colors-set(~'vc_btn3-color-juicy-pink'; @vc_btn3-color-juicy-pink-text; @vc_btn3-color-juicy-pink; @vc_btn3-color-juicy-pink-gradient-end; @vc_btn3-color-juicy-pink-gradient; @vc_btn3-color-juicy-pink-contrast);
+  // sandy_brown
+  .vc-btn3-make-colors-set(~'vc_btn3-color-sandy-brown'; @vc_btn3-color-sandy-brown-text; @vc_btn3-color-sandy-brown; @vc_btn3-color-sandy-brown-gradient-end; @vc_btn3-color-sandy-brown-gradient; @vc_btn3-color-sandy-brown-contrast);
+  // purple
+  .vc-btn3-make-colors-set(~'vc_btn3-color-purple'; @vc_btn3-color-purple-text; @vc_btn3-color-purple; @vc_btn3-color-purple-gradient-end; @vc_btn3-color-purple-gradient; @vc_btn3-color-purple-contrast);
+  // black
+  .vc-btn3-make-colors-set(~'vc_btn3-color-black'; @vc_btn3-color-black-text; @vc_btn3-color-black; @vc_btn3-color-black-gradient-end; @vc_btn3-color-black-gradient; @vc_btn3-color-black-contrast);
+  // grey
+  .vc-btn3-make-colors-set(~'vc_btn3-color-grey'; @vc_btn3-color-grey-text; @vc_btn3-color-grey; @vc_btn3-color-grey-gradient-end; @vc_btn3-color-grey-gradient; @vc_btn3-color-grey-contrast);
+  // white
+  .vc-btn3-make-colors-set(~'vc_btn3-color-white'; @vc_btn3-color-white-text; @vc_btn3-color-white; @vc_btn3-color-white-gradient-end; @vc_btn3-color-white-gradient; @vc_btn3-color-white-contrast);
+  // custom colors
+  // custom default
+  .vc-btn3-make-colors-set(~'vc_btn3-color-default'; @vc_btn3-color-default-text; @vc_btn3-color-default; @vc_btn3-color-default-gradient-end; @vc_btn3-color-default-gradient; @vc_btn3-color-default-contrast);
+  // custom primary
+  .vc-btn3-make-colors-set(~'vc_btn3-color-primary'; @vc_btn3-color-primary-text; @vc_btn3-color-primary; @vc_btn3-color-primary-gradient-end; @vc_btn3-color-primary-gradient; @vc_btn3-color-primary-contrast);
+  // custom info
+  .vc-btn3-make-colors-set(~'vc_btn3-color-info'; @vc_btn3-color-info-text; @vc_btn3-color-info; @vc_btn3-color-info-gradient-end; @vc_btn3-color-info-gradient; @vc_btn3-color-info-contrast);
+  // custom success
+  .vc-btn3-make-colors-set(~'vc_btn3-color-success'; @vc_btn3-color-success-text; @vc_btn3-color-success; @vc_btn3-color-success-gradient-end; @vc_btn3-color-success-gradient; @vc_btn3-color-success-contrast);
+  // custom warning
+  .vc-btn3-make-colors-set(~'vc_btn3-color-warning'; @vc_btn3-color-warning-text; @vc_btn3-color-warning; @vc_btn3-color-warning-gradient-end; @vc_btn3-color-warning-gradient; @vc_btn3-color-warning-contrast);
+  // custom danger
+  .vc-btn3-make-colors-set(~'vc_btn3-color-danger'; @vc_btn3-color-danger-text; @vc_btn3-color-danger; @vc_btn3-color-danger-gradient-end; @vc_btn3-color-danger-gradient; @vc_btn3-color-danger-contrast);
+  // custom inverse
+  .vc-btn3-make-colors-set(~'vc_btn3-color-inverse'; @vc_btn3-color-inverse-text; @vc_btn3-color-inverse; @vc_btn3-color-inverse-gradient-end; @vc_btn3-color-inverse-gradient; @vc_btn3-color-inverse-contrast);
+
+  // Color Fixes
+  //-----------------------------------
+  // black
+  &.vc_btn3-color-black {
+    &.vc_btn3-style-outline {
+      color: @vc_btn3-color-black;
+    }
+  }
+
+  // grey
+  &.vc_btn3-color-grey {
+    &.vc_btn3-style-outline {
+      color: @vc_btn3-color-grey;
+    }
+  }
+
+  // white
+  &.vc_btn3-color-white {
+    &.vc_btn3-style-outline {
+      color: @vc_btn3-color-white;
+    }
+    &.vc_btn3-style-modern {
+      #gradient > .vertical(@start-color: rgba(0, 0, 0, .01); @end-color: rgba(0, 0, 0, .02));
+    }
+  }
+}
+
+//========== Positions
+.vc_btn3-container {
+  &.vc_btn3-center {
+    text-align: center;
+  }
+  &.vc_btn3-left {
+    text-align: left;
+  }
+  &.vc_btn3-right {
+    text-align: right;
+  }
+
+  // Fix for block button
+  &.vc_btn3-center {
+    .vc_btn3-block {
+      &.vc_btn3-icon-left,
+      &.vc_btn3-icon-right {
+        .vc_btn3-icon {
+          display: inline-block;
+          position: static;
+        }
+        .vc_btn3-icon {
+          -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+          min-width: 1em;
+        }
+      }
+      &.vc_btn3-icon-left:not(.vc_btn3-o-empty) {
+        .vc_btn3-icon {
+          margin-right: .5em;
+        }
+      }
+      &.vc_btn3-icon-right:not(.vc_btn3-o-empty) {
+        .vc_btn3-icon {
+          margin-left: .5em;
+        }
+      }
+      // XS size
+      &.vc_btn3-size-xs {
+        .make-btn3-size(@vc_btn3-xs-font-size, @vc_btn3-xs-padding-vertical, @vc_btn3-xs-padding-horizontal);
+      }
+      // SM size
+      &.vc_btn3-size-sm {
+        .make-btn3-size(@vc_btn3-sm-font-size, @vc_btn3-sm-padding-vertical, @vc_btn3-sm-padding-horizontal);
+      }
+      // MD size
+      &.vc_btn3-size-md {
+        .make-btn3-size(@vc_btn3-md-font-size, @vc_btn3-md-padding-vertical, @vc_btn3-md-padding-horizontal);
+      }
+      // LG size
+      &.vc_btn3-size-lg {
+        .make-btn3-size(@vc_btn3-lg-font-size, @vc_btn3-lg-padding-vertical, @vc_btn3-lg-padding-horizontal);
+      }
+    }
+  }
+  .vc_btn3-block {
+    &.vc_btn3-icon-left,
+    &.vc_btn3-icon-right {
+      text-align: inherit;
+    }
+  }
+}
+
+//========== Mixins
+// Button sizes
+.make-btn3-size(@font-size:false;  @padding-vertical:false; @padding-horizontal:false;) {
+  & when not (@font-size = false) {
+    font-size: @font-size;
+  }
+  & when not (@padding-vertical = false) {
+    padding-top: @padding-vertical;
+    padding-bottom: @padding-vertical;
+  }
+  & when not (@padding-horizontal = false) {
+    padding-left: @padding-horizontal;
+    padding-right: @padding-horizontal;
+  }
+  &.vc_btn3-style-outline-custom,
+  &.vc_btn3-style-outline {
+    & when not (@padding-vertical = false) {
+      padding-top: @padding-vertical - @vc_btn3-border-outline + @vc_btn3-border-base;
+      padding-bottom: @padding-vertical - @vc_btn3-border-outline + @vc_btn3-border-base;
+    }
+    & when not (@padding-horizontal = false) {
+      padding-left: @padding-horizontal - @vc_btn3-border-outline + @vc_btn3-border-base;
+      padding-right: @padding-horizontal - @vc_btn3-border-outline + @vc_btn3-border-base;
+    }
+  }
+}
+
+// Icon sizes
+.make-btn3-icon-size(@padding-horizontal, @icon-size, @line-height) {
+  // indents and padding
+  .vc_btn3-icon {
+    font-size: @icon-size;
+    height: @line-height;
+    line-height: @line-height;
+  }
+  // left icon
+  &.vc_btn3-icon-left:not(.vc_btn3-o-empty) {
+    padding-left: ceil(@padding-horizontal * 2 + @icon-size / 2);
+    .vc_btn3-icon {
+      left: @padding-horizontal;
+    }
+  }
+  // right icon
+  &.vc_btn3-icon-right:not(.vc_btn3-o-empty) {
+    padding-right: ceil(@padding-horizontal * 2 + @icon-size / 2);
+    .vc_btn3-icon {
+      right: @padding-horizontal;
+    }
+  }
+}
+
+// Creating Colors
+.vc-make-btn3-color(@text; @background: false; @border: false; @color-hover: false; @background-hover: false; @border-hover: false; ) {
+  color: @text;
+  & when not (@border = false) {
+    border-color: @border;
+  }
+  & when not (@background = false) {
+    background-color: @background;
+  }
+
+  &:hover,
+  &:focus {
+    & when (@color-hover = false) {
+      color: darken(@text, 3%);
+    }
+    & when not (@color-hover = false) {
+      color: @color-hover;
+    }
+    & when not (@border = false) and (@border-hover = false) {
+      border-color: darken(@border, 6%);
+    }
+    & when not (@border-hover = false) {
+      border-color: @border-hover;
+    }
+    & when not (@background = false) and (@background-hover = false) {
+      background-color: darken(@background, 6%);
+    }
+    & when not (@background-hover = false) {
+      background-color: @background-hover;
+    }
+
+  }
+
+  &:active,
+  &.active {
+    & when (@color-hover = false) {
+      color: darken(@text, 5%);
+    }
+    & when not (@color-hover = false) {
+      color: @color-hover;
+    }
+    & when not (@border = false) and (@border-hover = false) {
+      border-color: darken(@border, 8%);
+    }
+    & when not (@border-hover = false) {
+      border-color: @border-hover;
+    }
+    & when not (@background = false) and (@background-hover = false) {
+      background-color: darken(@background, 8%);
+    }
+    & when not (@background-hover = false) {
+      background-color: @background-hover;
+    }
+
+  }
+}
+
+// make colors set
+.vc-btn3-make-colors-set(@selector; @text; @background; @gradient-end;  @gradient; @contrast-color) {
+  &.@{selector} {
+    // Flat (default)
+    &,
+    &.vc_btn3-style-flat {
+      .vc-make-btn3-color(@text: @contrast-color; @background: @background);
+    }
+    // Outline
+    &.vc_btn3-style-outline {
+      .vc-make-btn3-color(@text; @border: @background; @background: transparent; @color-hover: @contrast-color; @background-hover: @background; @border-hover: @background);
+    }
+    // 3d
+    &.vc_btn3-style-3d {
+      .vc-make-btn3-color(@text: @contrast-color; @background: @background; @background-hover: @background);
+
+      box-shadow: 0 @vc_btn3-shadow-width-md-3d 0 darken(@background, 11%);
+      &:hover,
+      &:focus {
+        top: @vc_btn3-shadow-width-md-3d - @vc_btn3-shadow-width-hover;
+        box-shadow: 0 @vc_btn3-shadow-width-hover 0 darken(@background, 11%);
+      }
+      // XS size
+      &.vc_btn3-size-xs {
+        box-shadow: 0 @vc_btn3-shadow-width-xs-3d 0 darken(@background, 11%);
+        &:hover,
+        &:focus {
+          top: @vc_btn3-shadow-width-xs-3d - @vc_btn3-shadow-width-hover;
+          box-shadow: 0 @vc_btn3-shadow-width-hover 0 darken(@background, 11%);
+        }
+      }
+      // SM size
+      &.vc_btn3-size-sm {
+        box-shadow: 0 @vc_btn3-shadow-width-sm-3d 0 darken(@background, 11%);
+        &:hover,
+        &:focus {
+          top: @vc_btn3-shadow-width-sm-3d - @vc_btn3-shadow-width-hover;
+          box-shadow: 0 @vc_btn3-shadow-width-hover 0 darken(@background, 11%);
+        }
+      }
+      // LG size
+      &.vc_btn3-size-lg {
+        box-shadow: 0 @vc_btn3-shadow-width-lg-3d 0 darken(@background, 11%);
+        &:hover,
+        &:focus {
+          top: @vc_btn3-shadow-width-lg-3d - @vc_btn3-shadow-width-hover;
+          box-shadow: 0 @vc_btn3-shadow-width-hover 0 darken(@background, 11%);
+        }
+      }
+    }
+    // Modern
+    &.vc_btn3-style-modern {
+      .vc-make-btn3-color(@text: @contrast-color; @background: @background; @border: @background);
+    }
+  }
+}

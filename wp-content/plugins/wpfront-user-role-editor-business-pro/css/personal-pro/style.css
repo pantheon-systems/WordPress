@@ -1,0 +1,142 @@
+
+
+div.wrap.import-roles table label.override, div.wrap.import-roles p.override {
+    color: red;
+}
+
+div.wrap.import-roles table label sup {
+    display: none;
+}
+
+div.wrap.import-roles table label.override sup {
+    display: inline-block;
+}
+
+div.wrap.menu-editor table.wp-list-table tr.collapsed,
+div.wrap.menu-editor table.wp-list-table tr.disabled.hide-disabled,
+div.wrap.menu-editor table.wp-list-table tr.hide-deselected {
+    display:none;
+}
+
+div.wrap.menu-editor table.wp-list-table tr.disabled td {
+    opacity: 0.6;
+}
+
+div.wrap.menu-editor table.wp-list-table tr.disabled td.menu-active-status {
+    opacity: 1;
+}
+
+div.wrap.menu-editor table.wp-list-table th.check-column {
+    padding-right: 20px;
+}
+
+div.wrap.menu-editor table.wp-list-table tr.sub-items th.check-column {
+    padding-left: 20px;
+    padding-right: 0px;
+}
+
+div.wrap.menu-editor table.wp-list-table th.expand-column {
+    text-align: right;
+}
+
+div.wrap.menu-editor table.wp-list-table th.expand-column i {
+    color: grey;
+    cursor: pointer;
+}
+
+div.wrap.menu-editor table.wp-list-table th.menu-active-status,
+div.wrap.menu-editor table.wp-list-table td.menu-active-status {
+}
+
+div.wrap.menu-editor table.wp-list-table div.menu-active,
+div.wrap.menu-editor table.wp-list-table div.menu-inactive,
+div.wrap.menu-editor div.tablenav div.menu-active,
+div.wrap.menu-editor div.tablenav div.menu-inactive {
+    display:inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    background-image: url(../../images/green_dot_64x64.png);
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+}
+
+div.wrap.menu-editor table.wp-list-table div.menu-inactive,
+div.wrap.menu-editor div.tablenav div.menu-inactive {
+    background-image: url(../../images/orange_dot_64x64.png);
+}
+
+div.wrap.menu-editor div.tablenav div.menu-active,
+div.wrap.menu-editor div.tablenav div.menu-inactive {
+    width: 12px;
+    height: 12px;
+    background-size: 12px 12px;
+}
+
+div.wrap.menu-editor div.tablenav div {
+    display: inline-block;
+}
+
+div.wrap.menu-editor div.tablenav.top div.helper-area-div {
+    margin-left: 10px;
+}
+
+
+
+div.wrap.ms-list-roles div.role-sites {
+    display: none;
+    margin-top: 5px;
+}
+
+@media screen and (max-width:782px) {
+    div.ms-list-roles table .column-roletype,
+    div.ms-list-roles table .column-blogs {
+        display: none;
+    }
+}
+
+div.wrap.sync-roles table tr.selected {
+    background-color: #ffffdd;
+}
+
+div.wrap.sync-roles #sync-response-container {
+    display: none;
+}
+
+div.wrap.sync-roles #sync-response-container div.sync-info-line {
+    padding: 3px 5px 3px 5px;
+}
+
+div.wrap.sync-roles #sync-response-container div.sync-info-line span,
+div.wrap.sync-roles #sync-response-container div.sync-info-line a {
+    margin-left: 10px;
+}
+
+
+div.wrap.bulk-edit-extended-permissions div.actions.bulkactions {
+    display: none;
+}
+
+div.wrap.bulk-edit-extended-permissions input#delete_all {
+    display: none;
+}
+
+div.wrap.bulk-edit-extended-permissions p.loading-image {
+    text-align: center;
+    display: none;
+}
+
+div.wrap.bulk-edit-extended-permissions #poststuff {
+    display: inline-block;
+    min-width: auto;
+}
+
+div.wrap.bulk-edit-extended-permissions div.sync-info-line {
+    padding: 3px 5px 3px 5px;
+}
+
+div.wrap.bulk-edit-extended-permissions div.update-info-line span,
+div.wrap.bulk-edit-extended-permissions div.update-info-line a {
+    margin-left: 10px;
+}

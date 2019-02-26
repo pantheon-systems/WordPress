@@ -1,0 +1,21 @@
+<tr>
+    <td class="manage-column column-cb check-column">
+        <label class="screen-reader-text" for="cb-select-all-{{ header_id }}">{{ strings.screen_reader.select_all }}</label>
+        <input name="cb-select-all-{{ header_id }}" type="checkbox"{% if not has_admin_capabilities %} disabled="disabled"{% endif %}>
+    </td>
+    <th scope="col" class="{{ columns.feedback.classes }}">
+        <a href="{{ columns.feedback.url }}"><span>{{ strings.table_header.feedback }}</span><span class="sorting-indicator"></span></a>
+    </th>
+    <th scope="col" class="{{ columns.rating.classes }}">
+        <a href="{{ columns.rating.url }}"><span>{{ strings.table_header.rating }}</span><span class="sorting-indicator"></span></a>
+    </th>
+    <th scope="col" class="{{ columns.status.classes }}">
+        <a href="{{ columns.status.url }}"><span>{{ strings.table_header.status }}</span><span class="sorting-indicator"></span></a>
+    </th>
+    <th scope="col" class="{{ columns.document_url.classes }}">
+        <a href="{{ columns.document_url.url }}"><span>{{ strings.table_header.document }}</span><span class="sorting-indicator"></span></a>
+    </th>
+    <th scope="col" class="{{ columns.date.classes }}">
+        <a href="{{ columns.date.url }}"><span>{{ strings.table_header.date }}</span><span class="sorting-indicator"></span></a>
+    </th>
+</tr>

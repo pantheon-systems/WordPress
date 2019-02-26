@@ -1,0 +1,24 @@
+.vc_images_carousel {
+  .vc_carousel-control {
+    border: none;
+  }
+}
+
+.vc_carousel {
+  .vc_carousel-control {
+    text-shadow: none;
+    border: none;
+    .wpb_transition();
+    &:active, &:focus {
+      outline: none;
+    }
+  }
+
+  .vc_carousel-indicators li {
+    width: 5px;
+    height: 5px;
+    margin: 0;
+    border-color: @vc_carousel_arrows_bg;
+    .wpb_transition();
+  }
+}

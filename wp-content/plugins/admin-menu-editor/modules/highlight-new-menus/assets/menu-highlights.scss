@@ -1,0 +1,23 @@
+#adminmenu {
+	$background: #73aa00;
+	$text: #ffe;
+
+	a.ws-nmh-is-new-menu,
+	li.ws-nmh-is-new-menu > a.menu-top,
+	.wp-submenu > li.ws-nmh-is-new-menu {
+		background-color: $background !important;
+	}
+
+	li.ws-nmh-is-new-menu > a {
+		color: $text !important;
+
+		div.wp-menu-image::before {
+			color: rgba($text, 0.6);
+		}
+	}
+
+	.ws-nmh-new-menu-flag {
+		display: none;
+	}
+}
+

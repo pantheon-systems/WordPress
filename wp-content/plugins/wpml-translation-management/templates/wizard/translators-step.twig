@@ -1,0 +1,33 @@
+<div
+        class="wpml-wizard-step wpml-translators-step js-wpml-translators-step"
+        data-nonce="{{ nonce }}"
+        data-active-translation-service-id="{{ active_translation_service_id }}"
+>
+
+    <div class="js-main-section text-center">
+        <h2>{{ strings.title }}</h2>
+        <p>{{ strings.sub_title }}</p>
+        <button class="button wpml-button button-lg js-add-translator wpml-margin-top-base">{{ strings.add_translator }}</button>
+
+    </div>
+
+
+    <div class="js-translators-list" style="display: none">
+        <div class="tablenav top clearfix">
+            <button class="button-secondary alignright js-add-translator"> + {{ strings.add_translator }}</button>
+        </div>
+        {% include 'translators-table.twig' %}
+    </div>
+
+
+    <div class="wpml-wizard-buttons-container">
+        <button class="button button-secondary alignleft js-go-back">&laquo; {{ strings.go_back }}</button>
+        <button class="button wpml-button button-lg alignright js-continue" style="display: none">{{ strings.continue }}
+            &raquo;
+        </button>
+        <button class="button button-secondary alignright js-skip">{{ strings.skip }} &raquo; </button>
+    </div>
+
+    {% include 'add-new-translator-dialog.twig' with { 'dialog': add_translator_dialog } %}
+    {% include 'edit-translator-languages-dialog.twig' with { 'dialog': edit_translator_languages_dialog } %}
+</div>

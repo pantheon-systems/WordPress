@@ -1,0 +1,112 @@
+<div class="wrap">
+    <h1>{{ strings.title }}</h1>
+
+    <nav class="wcml-tabs wpml-tabs" style="display:table;margin-top:30px;">
+        <a class="nav-tab nav-tab-active wcml-required-plugins-tab" href="{{ link_url|e }}" >{{ strings.required }}</a>
+    </nav>
+
+    <div class="wcml-wrap wcml-required-plugins-wrap">
+        <div class="wcml-section">
+            <div class="wcml-section-header">
+                <h3>
+                    {{ strings.plugins }}
+                    <i class="otgs-ico-help wcml-tip"
+                       data-tip="{{ strings.depends }}"></i>
+                </h3>
+            </div>
+            <div class="wcml-section-content wcml-section-content-wide">
+                <ul>
+                    {% if old_wpml %}
+                        <li>
+                            <i class="otgs-ico-warning wpml-multilingual-cms"></i>
+                            {{ strings.old_wpml_link|raw }}
+                            <a href="{{ tracking_link }}"
+                               target="_blank">{{ strings.update_wpml }}</a>
+                        </li>
+                    {% elseif icl_version %}
+                        <li>
+                            <i class="otgs-ico-ok wpml-multilingual-cms"></i>
+                            {{ strings.inst_active|format( strings.wpml )|raw }}
+                        </li>
+                        {% if icl_setup %}
+                            <li>
+                                <i class="otgs-ico-ok wpml-multilingual-cms wpml-setup"></i>
+                                {{ strings.is_setup|format( strings.wpml )|raw }}
+                            </li>
+                        {% else %}
+                            <li>
+                                <i class="otgs-ico-warning wpml-multilingual-cms wpml-setup"></i>
+                                {{ strings.not_setup|format( strings.wpml )|raw }}
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li>
+                            <i class="otgs-ico-warning wpml-multilingual-cms"></i>
+                            {{ strings.wpml_not_inst|raw }}
+                            <a href="{{ install_wpml_link|e }}" target="_blank">{{ strings.get_wpml }}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if media_version %}
+                        <li>
+                            <i class="otgs-ico-ok wpml-media"></i>
+                            {{ strings.inst_active|format( strings.media )|raw }}
+                        </li>
+                    {% else %}
+                        <li>
+                            <i class="otgs-ico-warning wpml-media"></i>
+                            {{ strings.not_inst|format( strings.media )|raw }}
+                            <a href="{{ install_wpml_link|e }}" target="_blank">{{ strings.get_wpml_media }}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if tm_version %}
+                        <li>
+                            <i class="otgs-ico-ok wpml-translation-management"></i>
+                            {{ strings.inst_active|format( strings.tm )|raw }}
+                        </li>
+                    {% else %}
+                        <li>
+                            <i class="otgs-ico-warning wpml-translation-management"></i>
+                            {{ strings.not_inst|format( strings.tm )|raw }}
+                            <a href="{{ install_wpml_link|e }}" target="_blank">{{ strings.get_wpml_tm }}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if st_version %}
+                        <li>
+                            <i class="otgs-ico-ok wpml-string-translation"></i>
+                            {{ strings.inst_active|format( strings.st )|raw }}
+                        </li>
+                    {% else %}
+                        <li>
+                            <i class="otgs-ico-warning wpml-string-translation"></i>
+                            {{ strings.not_inst|format( strings.st )|raw }}
+                            <a href="{{ install_wpml_link|e }}" target="_blank">{{ strings.get_wpml_st }}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if old_wc %}
+                        <li>
+                            <i class="otgs-ico-warning woocommerce"></i>
+                            {{ strings.old_wc|raw }}
+                            <a href="{{ wc_link|e }}" target="_blank">{{ strings.download_wc }}</a>
+                        </li>
+                    {% elseif wc %}
+                        <li>
+                            <i class="otgs-ico-ok woocommerce"></i>
+                            {{ strings.inst_active|format( strings.wc )|raw }}
+                        </li>
+                    {% else %}
+                        <li>
+                            <i class="otgs-ico-warning woocommerce"></i>
+                            {{ strings.not_inst|format( strings.wc )|raw }}
+                            <a href="{{ wc_link|e }}" target="_blank">{{ strings.download_wc }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

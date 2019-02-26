@@ -1,0 +1,55 @@
+<div class="wpml-section">
+    <div class="wpml-section-header">
+        <h3>{{ section_label }}</h3>
+    </div>
+    <div class="wpml-section-content">
+        <input type="hidden" id="{{ nonce_field }}" name="{{ nonce_field }}" value="{{ nonce_value }}">
+        <div class="top">
+            <h3>{{ top_title }}</h3>
+
+            <ul>
+            {% for option in top_options %}
+                <li>
+                    <input {{ not st_active or option.disabled ? 'disabled="disabled"' : '' }} type="radio" {{ option.checked }} name="{{ option.name }}" value="{{ option.value }}" > {{ option.label }}
+
+                    {% if option.message %}
+                        {{ option.message|raw }}
+                    {% endif %}
+
+                    {% if option.sub_options %}
+                        {% include 'automatic-load-check.twig' with option.sub_options %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+
+        </div>
+        {% if st_active %}
+        <div class="bottom">
+            <h3>{{ bottom_tittle }}</h3>
+
+            <ul>
+            {% for option in bottom_options %}
+                <li>
+                    <input {{ option.checked }} {{ option.disabled ? 'disabled="disabled"' : '' }} type="checkbox" name="{{ option.name }}" value="{{ option.value }}" > {{ option.label }}
+
+                {% if option.tooltip %}
+                    <a href="#" class="js-wpml-tooltip-open otgs-ico-help">
+                        {{ option.tooltip }}
+                    </a>
+                {% endif %}
+
+                <li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <input id="wpml-js-theme-plugin-save-option" type="button" class="other-options-save button button-primary" value="{{ button_label }}">
+        <span id="wpml-js-theme-plugin-options-spinner" class="spinner"></span><span class="wpml-ajax-response" id="wpml-js-theme-plugin-options-response"></span>
+    </div>
+</div>
+
+<div class="wpml-scanning-progress" title="{{ scanning_results_title }}">
+    <span style="display: none" class="wpml-scanning-progress-msg">{{ scanning_progress_msg }}</span><div class="spinner"></div>
+    <div class="wpml-scanning-results"></div>
+</div>

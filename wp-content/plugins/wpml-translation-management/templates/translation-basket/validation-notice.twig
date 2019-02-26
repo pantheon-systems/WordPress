@@ -1,0 +1,14 @@
+<div class="otgs-notice error">
+    <h3>{{ strings.title }}</h3>
+    <p>{{ strings.message }}</p>
+
+    <ul class="">
+    {% for document in documents %}
+        <li><strong>{{ document.title }}</strong>: {{ document.error_message }} (<a href="#" class="wpml-tm-invalid-fields-open-dialog" data-fields="{{ document.fields }}" data-page-title="{{ document.title }}">{{ strings.show_fields }}</a>)</li>
+    {% endfor %}
+    </ul>
+
+    <p>{{ strings.message_bottom }}</p>
+    <p><a href="{{ strings.documentation.link }}">{{ strings.documentation.text }}</a></p>
+    <div class="wpml-tm-invalid-fields-dialog"></div>
+</div>

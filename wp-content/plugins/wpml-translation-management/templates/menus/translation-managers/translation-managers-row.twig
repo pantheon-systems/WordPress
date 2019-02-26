@@ -1,0 +1,7 @@
+<li data-user_id="{{ user.ID }}">
+    <a class="translation-manager-link" href="{{ user.edit_link }}" title="{{ strings.edit }}">
+        <span class="translation-manager-avatar">{{ user.avatar|raw }}</span>
+        <span class="translation-manager-name js-translation-manager-name">{{ user.user_login }}</span>
+    </a>
+    <a class="otgs-ico-close js-remove-translation-manager" title="{{ strings.remove }}"></a>
+</li>

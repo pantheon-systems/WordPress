@@ -1,0 +1,72 @@
+<div class="wpml-wizard-step wpml-translation-editor-step js-wpml-translation-editor-step">
+
+    <h2 class="text-center translation-editor-title">{{ strings.title }}</h2>
+
+    <p class="text-center translation-editor-demo">
+        <a
+                target="_blank"
+                rel="nofollow"
+                href="{{ strings.quick_demo_url }}"
+        >
+            {{ strings.summary }} &raquo;
+        </a>
+    </p>
+
+    <table class="translation-editor-table">
+        <thead>
+        <tr>
+            <td class="translation-editor-hidden-cell"></td>
+            {% for option,data in strings.options %}
+                <th>
+                    {{ data.heading }}
+                </th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for feature in strings.features %}
+            <tr>
+                <th scope="row"><span>{{ feature.label }}</span></th>
+                {% for option in strings.options|keys %}
+                    <td>
+                        {% set optionValue = (feature[option] is defined) ? feature[option] : false %}
+                        {% include 'feature-option.twig' with {'value': optionValue} %}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+
+        <tr class="translation-editor-select-row">
+            <td class="translation-editor-hidden-cell"></td>
+
+            {% for option,data in strings.options %}
+                <td>
+                        <span>
+                        <input type="radio"
+                               name="editor-type"
+                               id="editor-type-{{ option }}"
+                               value="{{ editor_types[option] }}"
+                               class="js-{{ option }}-editor"
+                        />
+                        <label for="editor-type-{{ option }}">{{ strings.select }}</label>
+                    </span>
+                    {% if data.extra_template is defined %}
+                        {% include data.extra_template.template with data.extra_template.model %}
+                    {% endif %}
+                </td>
+            {% endfor %}
+
+
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="wpml-wizard-buttons-container">
+        <button class="button button-secondary alignleft js-go-back">&laquo; {{ strings.go_back }}</button>
+        <button class="button wpml-button button-lg alignright js-continue" disabled="disabled">{{ strings.continue }}
+            &raquo;
+        </button>
+    </div>
+
+</div>

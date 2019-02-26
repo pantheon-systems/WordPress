@@ -1,0 +1,34 @@
+.vc_gitem_row {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0px;
+  padding: inherit;
+  box-sizing: border-box;
+  .vc_gitem_row & {
+    margin-bottom: 0px;
+  }
+}
+
+.vc_gitem-zone-a, .vc_gitem-zone-b {
+  .vc_gitem-row-position {
+    &-top {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+    &-middle {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      .translate(0, -50%);
+    }
+    &-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}

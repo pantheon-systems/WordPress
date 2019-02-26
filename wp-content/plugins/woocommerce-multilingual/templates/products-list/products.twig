@@ -1,0 +1,136 @@
+<form method="post" action="{{ request_uri|e }}">
+
+	{% include 'filter.twig' with filter %}
+
+	<table class="widefat fixed wpml-list-table wp-list-table striped" cellspacing="0">
+		<thead>
+			<tr>
+				<th scope="col" class="column-thumb">
+						<span class="wc-image wcml-tip"
+							  data-tip="{{ strings.image|e }}">{{ strings.image }}</span>
+				</th>
+				<th scope="col" class="wpml-col-title {{ filter_urls.product_sorted }}">
+					<a href="{{ filter_urls.product|e }}">
+						<span>{{ strings.product }}</span>
+						<span class="sorting-indicator"></span>
+					</a>
+				</th>
+				<th scope="col" class="wpml-col-languages">
+					{% for language in languages_flags %}
+						<span title="{{ language.name|e }}">
+							<img src="{{ language.flag_url }}"  alt="{{ language.name|e }}"/>
+						</span>
+					{% endfor %}
+				</th>
+				<th scope="col"
+					class="column-categories">{{ strings.categories }}</th>
+				<th scope="col" class="column-product_type">
+						<span class="wc-type wcml-tip"
+							  data-tip="{{ strings.type|e }}">{{ strings.type }}</span>
+				</th>
+				<th scope="col" id="date" class="column-date {{ filter_urls.date_sorted }}">
+					<a href="{{ filter_urls.date|e }}">
+						<span>{{ strings.date }}</span>
+						<span class="sorting-indicator"></span>
+					</a>
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% if data.products is empty %}
+				<tr>
+					<td colspan="6" class="text-center">
+						<strong>{{ strings.no_products }}</strong>
+					</td>
+				</tr>
+			{% else %}
+				{% for product in data.products %}
+					<tr>
+						<td class="thumb column-thumb">
+							<a href="{{ product.edit_post_link|raw }}">
+								<img width="150" height="150" src="{{ product.post_thumbnail }}" class="wp-post-image" >
+							</a>
+						</td>
+						<td class="wpml-col-title  wpml-col-title-flag">
+							{% if product.post_parent != 0 %} &#8212; {% endif %}
+							<strong>
+								{% if not data.slang %}
+									<span class="wpml-title-flag">
+										<img src="{{ product.orig_flag_url }}"/>
+									</span>
+								{% endif %}
+
+								<a href="{{ product.edit_post_link|raw }}" title="{{ product.post_title|striptags  }}">
+									{{ product.post_title }}
+								</a>
+
+								{% if product.post_status == 'draft' %}
+									- <span class="post-state">{{ strings.draft }}</span>
+								{% endif %}
+
+								{% if product.post_status == 'private' %}
+									- <span class="post-state">{{ strings.private }}</span>
+								{% endif %}
+
+								{% if product.post_status == 'pending' %}
+									- <span class="post-state">{{ strings.pending }}</span>
+								{% endif %}
+
+								{% if product.post_status == 'future' %}
+									- <span class="post-state">{{ strings.future }}</span>
+								{% endif %}
+
+								{% if data.search and product.post_parent != 0 %}
+									| <span class="prod_parent_text">
+										{{ strings.parent|format( product.parent_title ) }}
+									</span>
+								{% endif %}
+							</strong>
+
+							<div class="row-actions">
+								<span class="edit">
+									<a href="{{ product.edit_post_link|raw }}"
+									   title="{{ strings.edit_item|e }}">{{ strings.edit }}</a>
+								</span> | <span class="view">
+									<a href="{{ product.view_link|e }}"
+									   title="{{ strings.view_link|format( product.post_title )|e }}" target="_blank">{{ strings.view }}</a>
+								</span>
+							</div>
+
+						</td>
+
+						<td class="wpml-col-languages">
+							{{ product.translation_statuses|raw  }}
+						</td>
+						<td class="column-categories">
+							{% for category in product.categories_list %}
+								<a href="{{ category.href|e }}">{{ category.name }}</a>
+							{% endfor %}
+						</td>
+
+						<td class="column-product_type">
+							<span class="product-type wcml-tip {{ product.icon_class|e }}"
+								  data-tip="{{ product.icon_class|e }}"></span>
+						</td>
+
+						<td class="column-date">
+							{{ product.formated_date }}
+
+							{% if product.post_status == "publish" %}
+								<br>{{ strings.published }}
+							{% else %}
+								<br>{{ strings.modified }}
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+		</tbody>
+	</table>
+
+	<input type="hidden" id="upd_product_nonce" value="{{ nonces.upd_product|e }}" />
+	<input type="hidden" id="get_product_data_nonce" value="{{ nonces.get_product_data|e }}" />
+
+	{% include 'pagination.twig' with pagination %}
+</form>

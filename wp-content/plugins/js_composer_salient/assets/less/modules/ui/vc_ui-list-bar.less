@@ -1,0 +1,72 @@
+@vc-ui-list-bar-border-size: 1px;
+@vc-ui-list-bar-border-color: #dbdbdb;
+@vc-ui-list-bar-background: #f5f5f5;
+@vc-ui-list-bar-background-hover: #eaeaea;
+@vc-ui-list-bar-trigger-color: #5e5e5e;
+@vc-ui-list-bar-item-padding-vertical: 10px;
+@vc-ui-list-bar-item-padding-horizontal: 10px;
+@vc-ui-list-bar-font-size: 13px;
+
+
+// list bar
+.vc_ui-list-bar {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: @vc-ui-list-bar-border-size solid @vc-ui-list-bar-border-color;
+  & + .vc_ui-list-bar {
+    border-top-width: 0;
+  }
+  background: @vc-ui-list-bar-background;
+  font-size: @vc-ui-list-bar-font-size;
+}
+.vc_ui-list-bar-item {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  transition-property: color, background;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+  &:hover {
+    background: @vc-ui-list-bar-background-hover;
+    .vc_ui-list-bar-item-actions {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+.vc_ui-list-bar-item-trigger {
+  font-size: @vc-ui-list-bar-font-size;
+  line-height: 1;
+  text-transform: none;
+  color: @vc-ui-list-bar-trigger-color;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  text-align: left;
+  padding: @vc-ui-list-bar-item-padding-vertical @vc-ui-list-bar-item-padding-horizontal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  cursor: pointer;
+  &:hover {
+    background: transparent;
+  }
+}
+.vc_ui-list-bar-item-actions {
+  padding-left: @vc-ui-list-bar-item-padding-vertical;
+  padding-right: @vc-ui-list-bar-item-padding-vertical;
+  visibility: hidden;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+}
+.vc_ui-list-bar-group {
+
+}

@@ -1,0 +1,1 @@
+!function(n){n(document).ready(function(n){function o(o){pointer=qpprPointer.pointers[o],options=n.extend(pointer.options,{close:function(){n.post(ajaxurl,{pointer:pointer.pointer_id,action:"dismiss-wp-pointer"})}}),n(pointer.target).pointer(options).pointer("open")}o(0)})}(jQuery);

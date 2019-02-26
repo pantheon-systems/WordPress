@@ -1,0 +1,106 @@
+<div id="wpml-translation-feedback-options" class="wpml-section" data-nonce="{{ nonce }}" data-action="{{ action }}">
+    <form>
+        <div class="wpml-section-header">
+            <h3>{{ strings.section_title }}</h3>
+        </div>
+
+        <div class="wpml-settings-group wpml-section-content">
+            <p class="js-wpml-tf-settings-block wpml-tf-form-line">
+                <label for="wpml-tf-enable-translation-feedback">
+                    <input type="checkbox" id="wpml-tf-enable-translation-feedback"
+                           name="enabled" value="{{ module_toggle.value }}" class="js-wpml-tf-trigger-save"
+                           {% if module_toggle.selected %} checked="checked"{% endif %}
+                           data-target=".js-wpml-tf-options-toggle-target">
+                    {{ module_toggle.label }}
+                </label>
+
+                {% include 'options-ui-request-status.twig' %}
+            </p>
+
+            <div class="js-wpml-tf-full-options alignleft" {% if not module_toggle.selected %} style="display:none;"{% endif %}>
+
+                <div class="js-wpml-tf-settings-block wpml-tf-button-mode">
+                    <h4>{{ strings.button_mode_section_title }} {% include 'options-ui-request-status.twig' %}</h4>
+
+                    <ul>
+                        {% for mode in button_modes %}
+                        {% set input_id = 'wpml_tf_button_mode_' ~ mode.value %}
+                        <li>
+                            <label for="{{ input_id }}">
+                                <input type="radio" name="button_mode" id="{{ input_id }}"
+                                       class="js-wpml-tf-trigger-save" value="{{ mode.value }}"
+                                       {% if mode.selected %} checked="checked"{% endif %}>
+                                {% if mode.link %}
+                                    {% set link_before %}<a class="wpml-external-link" href="{{ mode.link }}" target="_blank">{% endset %}
+                                    {{ mode.label|format(link_before, '</a>')|raw }}
+                                {% else %}
+                                    {{ mode.label }}
+                                {% endif %}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="js-wpml-tf-settings-block wpml-tf-icon-style">
+                    <h4>{{ strings.icon_style_section_title }} {% include 'options-ui-request-status.twig' %}</h4>
+
+                    <ul>
+                        {% for style in icon_styles %}
+                            {% set input_id = 'wpml_tf_icon_style_' ~ style.value %}
+                            <li>
+                                <input type="radio" name="icon_style" id="{{ input_id }}"
+                                       class="js-wpml-tf-trigger-save" value="{{ style.value }}"
+                                        {% if style.selected %} checked="checked"{% endif %}>
+                                <label for="{{ input_id }}" class="{{ style.image_class }}"></label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="js-wpml-tf-settings-block wpml-tf-languages-to">
+                    <h4>{{ strings.languages_to_section_title }} {% include 'options-ui-request-status.twig' %}</h4>
+
+                    <ul>
+                        {% for language in languages_to %}
+                        {% set input_id = 'wpml_tf_languages_to_' ~ language.value %}
+                        <li>
+                            <label for="{{ input_id }}">
+                                <input type="checkbox" name="languages_to[]" id="{{ input_id }}"
+                                       class="js-wpml-tf-trigger-save" value="{{ language.value }}"
+                                       {% if language.selected %} checked="checked"{% endif %}>
+                                <img src="{{ language.flag_url }}" alt="{{ language.value }}">
+                                {{ language.label }}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="js-wpml-tf-settings-block wpml-tf-expiration">
+                    <h4>{{ strings.expiration_section_title }} {% include 'options-ui-request-status.twig' %}</h4>
+
+                    <ul>
+                        {% for mode in display_modes %}
+                            {% set input_id = 'wpml_tf_display_mode_' ~ mode.value %}
+                        <li>
+                            <label for="{{ input_id }}">
+                                <input type="radio" name="display_mode" id="{{ input_id }}"
+                                       class="js-wpml-tf-trigger-save" value="{{ mode.value }}"
+                                        {% if mode.selected %} checked="checked"{% endif %}>
+                                {% if mode.value == 'custom' %}
+                                    {% include 'options-ui-custom-expiration.twig' with { 'disabled': not mode.selected } %}
+                                {% else %}
+                                    {{ mode.label }}
+                                {% endif %}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

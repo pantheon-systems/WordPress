@@ -1,0 +1,446 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPSES\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-01 17:02+0100\n"
+"PO-Revision-Date: 2015-06-01 09:37+0100\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: Sylvain Deaure <syl@sylvain-deaure.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Report-msgstr-Bugs-To: \n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Language: fr_FR\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-SearchPath-0: W:\\var\\www\\wp3\\wp-content\\plugins\\wp-ses\n"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:3
+msgid "WP SES Options"
+msgstr "WP SES opcije"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:8
+msgid "Plugin State"
+msgstr "Stanje plugin-a (priključka)"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:8
+msgid "Refresh"
+msgstr "Osvežavanje"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:18
+msgid "Sender Email is set "
+msgstr "Email pošiljaoca je podešen"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:21
+msgid "Sender Email is not set "
+msgstr "Email pošiljaoca nije podešen"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:26
+msgid "Amazon API Keys are valid"
+msgstr "Amazon API ključevi su važeći"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:29
+msgid ""
+"Amazon API Keys are not valid, or you did not finalize youy Amazon SES "
+"registration."
+msgstr ""
+"Amazon API ključevi nisu važeći, ili vi niste dovršili vašu Amazon SES "
+"registraciju."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:34
+msgid "Sender Email has been confirmed."
+msgstr "Email pošiljaoca je potvrđen"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:37
+msgid "Sender Email has not been confirmed yet."
+msgstr "Email pošiljaoca još uvek nije potvrđen."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:43
+msgid "Plugin is active."
+msgstr "Plugin je aktivan"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:45
+msgid ""
+"You can check your sending limits and stats under Dashboard -> SES Stats"
+msgstr ""
+"Možete proveriti vaša ograničenja za slanje i status pod Dashboard (komandna "
+"tabla)->SES Stats"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:50
+msgid "De-activate Plugin"
+msgstr "Deaktivirajte plugin"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:51
+msgid ""
+"If you want to test further, de-activate the plugin here. Outgoing mails "
+"will be delivered by the default wordpress method, but you'll still be able "
+"to test custom SES email delivery."
+msgstr ""
+"Ukoliko želite dalje testiranje, deaktivirajte plugin ovde. Odlazeći mail-"
+"ovi će biti isporučeni uobičajenom wordpress metodom, ali ćete vi i dalje "
+"moći da testirate redovno SES isporučivanje email-ova"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:56
+msgid "Plugin is not active."
+msgstr "Plugin nije aktivan"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:61
+msgid "Activate plugin"
+msgstr "Aktivirajte plugin"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:62
+msgid ""
+"Warning: Activate only if your account is in production mode.<br />One "
+"activated, all outgoing emails will go through Amazon SES and will NOT be "
+"sent to any email while in sandbox."
+msgstr ""
+"Upozorenje: Aktivirajte samo ako je vaš račun na modu produkcije. <br/> "
+"Jedan aktiviran, svi odlazeći email-ovi  će ići preko Amazon SES-a i NEĆE "
+"biti poslati nijednom email-u dok su u sandbox-u."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:70
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:75
+msgid "Sender Email"
+msgstr "Email pošiljaoca"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:71
+msgid "These settings do replace default sender email used by your blog."
+msgstr ""
+"Ova podešavanja zaista zamenjuju uobičajeni email pošiljaoca koji vaš blog "
+"koristi."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:76
+msgid "(Has to be a valid Email)"
+msgstr "(Mora biti važeći email)"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:77
+msgid "Name"
+msgstr "Ime"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:79
+msgid "Return Path"
+msgstr "“Povratna staza”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:80
+msgid ""
+"You can specify a return Email (not required).<br />Delivery Status "
+"notification messages will be sent to this address."
+msgstr ""
+"Možete specifikovati povratni Email (nije obavezno). <br/>Delivery Status "
+"(status isporuke) poruke obaveštenja će biti poslate na ovu adresu."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:83
+msgid "Amazon API Keys"
+msgstr "Amazon API ključevi"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:88
+msgid "Please insert here your API keys given by the Amazon Web Services."
+msgstr ""
+"Molimo ubacite ovde vaše API ključeve koje vam je dao Amazon Web Services."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:90
+msgid "access_key"
+msgstr "“pristupni ključ”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:92
+msgid "secret_key"
+msgstr "“tajni ključ”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:99
+msgid "Save Changes"
+msgstr "Sačuvajte promene"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:105
+msgid "Confirmed senders"
+msgstr "Potvrđeni pošiljaoci"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:106
+msgid "Only confirmed senders are able to send an email via SES"
+msgstr "Samo potvrđeni pošiljaoci mogu poslati email putem SES-a"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:107
+msgid "The following senders are known:"
+msgstr "Poznati su sledeći pošiljaoci:"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:115
+msgid "Email"
+msgstr "Email"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:115
+msgid "Request Id"
+msgstr "Zahtev za identifikacijom"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:115
+msgid "Confirmed"
+msgstr "Potvrđeno"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:130
+msgid "Yes"
+msgstr "Da"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:132
+msgid "No"
+msgstr "Ne"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:146
+msgid "Add the following email: "
+msgstr "Dodajte sledeći email:"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:146
+msgid " to senders."
+msgstr "pošiljaocima."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:149
+msgid "Add this Email"
+msgstr "Dodajte ovaj email"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:154
+msgid "Test Email"
+msgstr "Testirajte Email"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:155
+msgid ""
+"Click on this button to send a test email (via amazon SES) to the sender "
+"email."
+msgstr ""
+"Kliknite na ovo dugme da biste poslali test email (putem amazon SES-a) na "
+"email pošiljaoca."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:161
+msgid "Send Test Email"
+msgstr "Pošaljite test email"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:165
+msgid "Production mode test"
+msgstr "Test modusa produkcije"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:166
+msgid ""
+"Once Amazon did activate your account into production mode, you can begin to "
+"send mail to any address<br />Use the form below to test this before fully "
+"activating the plugin on your blog."
+msgstr ""
+"Kada Amazon jednom aktivira vaš račun u modusu produkcije, možete početi da "
+"šaljete mail-ove na bilo koju adresu<br />Koristite obrazac ispod da biste "
+"ovo testirali pre potpune aktivacije plugin-a na vašem blog-u."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:170
+msgid "Send email to "
+msgstr "Pošaljite email"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:172
+msgid "Subject"
+msgstr "Subjektu"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:174
+msgid "Mail content"
+msgstr "Sadržaj mail-a"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:178
+msgid "Send Full Test Email"
+msgstr "Pošaljite celoviti test email"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/admin.tmpl.php:183
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:102
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:303
+msgid "WP SES is a plugin by"
+msgstr "WP SES je plugin od"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/sdrssw.php:48
+msgid "Subscribe to RSS"
+msgstr "Pretplatite se na RSS"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/sdrssw.php:60
+msgid "Live from Blog Expert..."
+msgstr "Uživo od Blog eskperta..."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/ses-stats.php:11
+msgid ""
+"Amazon API credentials have not been checked.<br />Please go to settings -> "
+"WP SES and setup the plugin"
+msgstr ""
+"Amazon API pristupni ključevi nisu provereni.<br/>Molimo idite na "
+"podešavanja-> WP SES i podesite plugin"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/ses-stats.php:19
+msgid "Error initializing SES. Please check your settings."
+msgstr "Greška u inicijalizaciji SES-a. Molimo proverite vaša podešavanja."
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:3
+msgid "Amazon SES Stats"
+msgstr "Amazon SES Statistika"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:6
+msgid "Sending limits"
+msgstr "Ograničenja u slanju"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:26
+msgid "Max24HourSend"
+msgstr "“Slanje u vremenu od maksimalno 24 časa”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:26
+msgid "Max email quota for 24 hours period"
+msgstr "Maksimalna kvota email-ova za period od 24 časa"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:27
+msgid "MaxSendRate"
+msgstr "“Maksimalna stopa slanja”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:27
+msgid "Max email sending rate par second"
+msgstr "Maksimalna stopa slanja email-ova po sekundi"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:28
+msgid "SentLast24Hours"
+msgstr "“Poslato u poslednja 24 časa”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:28
+msgid "Emails sent for the last 24 hours"
+msgstr "Email-ovi poslati u poslednja 24 časa"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:29
+msgid "SendRemaining"
+msgstr "“Preostalo za slanje”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:29
+msgid "Email sending quota remaining"
+msgstr "Kvota email-ova preostalih za slanje"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:30
+msgid "SendUsage"
+msgstr "“Korišćenje slanja”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:30
+msgid "Usage percentage per 24h"
+msgstr "Procenat korišćenja za 24 časa "
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:34
+msgid "Sending Stats"
+msgstr "Statistika slanja"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:35
+msgid "Last 15 days of email statistics"
+msgstr "Statistika email-ova za poslednjih 15 dana"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:37
+msgid ""
+"Each line contains statistics for a 15 minutes period of sending activity. "
+"<br />Periods without any activity are not shown"
+msgstr ""
+"Svaka linija sadrži statistiku za period od 15 minuta aktivnosti slanja. <br/"
+">Periodi bez ikakve aktivnosti se ne prikazuju"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:70
+msgid "Timestamp"
+msgstr "“Vremenski žig”"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:71
+msgid "DeliveryAttempts"
+msgstr "Pokušaji isporučivanja"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:72
+msgid "Bounces"
+msgstr "Otpremanja"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:73
+msgid "Complaints"
+msgstr "Pritužbe"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:74
+msgid "Rejects"
+msgstr "Odbijanja"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:75
+msgid "Total Ok"
+msgstr "Ukupni br. Ok-a"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/stats.tmpl.php:76
+msgid "Total Errors"
+msgstr "Ukupni br.grešaka"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:121
+msgid "Plugin is activated and functionnal"
+msgstr "Plugin je aktiviran i u funkciji"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:129
+msgid "Plugin de-activated"
+msgstr "Plugin - deaktiviran"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:158
+msgid "Settings updated"
+msgstr "Ažurirana podešavanja"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:192
+msgid ""
+"WP SES - Simple Email Service is not fully activated. Please check it's "
+"config: "
+msgstr ""
+"WP SES - Simple Email Service nije aktiviran u celosti. Molimo, proverite "
+"njegovu konfiguraciju:"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:193
+msgid "Settings &rarr; WP SES"
+msgstr "Podešavanja &rarr; WP SES"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:201
+msgid "WP SES"
+msgstr "WP SES"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:229
+msgid ""
+"A confirmation request has been sent. You will receive at the stated email a "
+"confirmation request from amazon SES. You MUST click on the provided link in "
+"order to confirm your sender Email.<br />SES Answer - "
+msgstr ""
+"Zahtev za potvrdu je poslat. Primićete na navedeni email zahtev za potvrdu "
+"od Amazon SES-a. MORATE da kliknete na dati link kako biste povrdili Email "
+"vašeg pošiljaoca.<br/>SES Odgovor -"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:254
+msgid "SES Error: "
+msgstr "SES Greška:"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:285
+msgid "Got exception: "
+msgstr "Primljeni izuzetak:"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:295
+msgid ""
+"Test message has been sent to your sender Email address.<br />SES Answer - "
+msgstr ""
+"Test poruka je poslata na Email adresu vašeg pošiljaoca.<br/>SES Odgovor -"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:303
+msgid "WP SES - Test Message"
+msgstr "WP SES - Test Poruka"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:303
+msgid ""
+"This is WP SES Test message. It has been sent via Amazon SES Service.\n"
+"All looks fine !\n"
+"\n"
+msgstr ""
+"Ovo je WP SES Test poruka. Poslata je putem Amazon SES Servisa. \n"
+"Sve izgleda dobro ! \n"
+" \n"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:315
+msgid "Test message has been sent.<br />SES Answer - "
+msgstr "Test poruka je poslata.<br/>SES Odgovor -"
+
+#: W:\var\www\wp3\wp-content\plugins\wp-ses/wp-ses.php:365
+msgid ""
+"Another plugin did override wp-mail function. Please de-activate the other "
+"plugin if you want WP SES to work properly."
+msgstr ""
+"Drugi plugin je prebrisao funkciju wp-mail-a. Molimo, deaktivirajte drugi "
+"plugin ako želite da WP SES radi kako treba."
+
+#~ msgid "WP SES Settings"
+#~ msgstr "R&eacute;glages &rarr; WP SES"
+
+#, fuzzy
+#~ msgid "WP SES est un plugin de"
+#~ msgstr "WP SES is a plugin by"

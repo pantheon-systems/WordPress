@@ -1,0 +1,17 @@
+<div id="submitted-basket-notice-dialog" class="otgs-confirmation-dialog" data-redirect-url="{{ redirect_url }}" title="{{ strings.dialog_title }}" style="display: none">
+		<div class="otgs-confirmation-dialog-icon">
+			<span class="otgs-ico-media"></span>
+		</div>
+		<div class="otgs-confirmation-dialog-content">
+			<p>
+				<strong>{{ strings.content_with_media_sent }}</strong>
+                {{ strings.media_texts_translated|raw }}
+			</p>
+			<p>
+                {{ strings.use_different_media|raw }}
+			</p>
+			<p>
+				<a href="{{ learn_more_url }}" class="wpml-external-link" target="_blank">{{ strings.learn_more }}</a>
+			</p>
+		</div>
+</div>

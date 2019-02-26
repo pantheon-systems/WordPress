@@ -1,0 +1,15 @@
+{% if item_status != 'passed' and item.messages is defined %}
+	{% if item.messages|length > 1 %}
+		<ol>
+			{% for message, more_url in item.messages %}
+				<li>
+					{% include 'message.twig' %}
+				</li>
+			{% endfor %}
+		</ol>
+	{% else %}
+		{% for message, more_url in item.messages %}
+			{% include 'message.twig' %}
+		{% endfor %}
+	{% endif %}
+{% endif %}

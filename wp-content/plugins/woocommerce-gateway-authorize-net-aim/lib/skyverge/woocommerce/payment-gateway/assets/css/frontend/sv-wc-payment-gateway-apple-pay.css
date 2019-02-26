@@ -1,0 +1,121 @@
+.sv-wc-apple-pay-button {
+	display: none;
+	width: 100%;
+	height: 44px;
+	margin: 0 0 1em 0;
+}
+
+@supports ( -webkit-appearance: -apple-pay-button ) {
+
+	.sv-wc-apple-pay-button {
+		-webkit-appearance: -apple-pay-button;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-black {
+		-apple-pay-button-style: black;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-white {
+		-apple-pay-button-style: white;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-white-with-line {
+		-apple-pay-button-style: white-outline;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-buy-now {
+		-apple-pay-button-type: buy;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-buy-now > * {
+		display: none;
+	}
+}
+
+@supports not ( -webkit-appearance: -apple-pay-button ) {
+
+	.sv-wc-apple-pay-button {
+		background-size: 100% 60%;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		border-radius: 5px;
+		padding: 0px;
+		box-sizing: border-box;
+		min-width: 100px;
+		min-height: 40px;
+		max-height: 64px;
+		width: 100%;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-black {
+		background-image: -webkit-named-image( apple-pay-logo-white );
+		background-color: black;
+		color: white;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-white,
+	.sv-wc-apple-pay-button.apple-pay-button-white-with-line {
+		background-image: -webkit-named-image( apple-pay-logo-black );
+		background-color: white;
+		color: black;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-white-with-line {
+		border: .5px solid black;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-with-text {
+		--apple-pay-scale: 1; /* (height / 32) */
+		justify-content: center;
+		font-size: 12px;
+		background: none;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-with-text > .text {
+		font-family: -apple-system;
+		font-size: calc( 1em * var( --apple-pay-scale ) );
+		font-weight: 300;
+		align-self: center;
+		margin-right: calc( 2px * var( --apple-pay-scale ) );
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-with-text > .logo {
+		width: calc( 35px * var( --scale ) );
+		height: 100%;
+		background-size: 100% 60%;
+		background-repeat: no-repeat;
+		background-position: 0 50%;
+		margin-left: calc( 2px * var( --apple-pay-scale ) );
+		border: none;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-black .apple-pay-button-with-text > .logo {
+		background-image: -webkit-named-image( apple-pay-logo-white );
+		background-color: black;
+	}
+
+	.sv-wc-apple-pay-button.apple-pay-button-white .apple-pay-button-with-text > .logo,
+	.sv-wc-apple-pay-button.apple-pay-button-white-with-line .apple-pay-button-with-text > .logo {
+		background-image: -webkit-named-image( apple-pay-logo-black );
+		background-color: white;
+	}
+}
+
+.sv-wc-apply-pay-checkout {
+	display: none;
+	max-width: 510px;
+	margin: 0 auto 2em;
+	text-align: center;
+}
+.sv-wc-apply-pay-checkout .sv-wc-apple-pay-button {
+	display: block;
+}
+.sv-wc-apply-pay-checkout .divider {
+	font-size: 1.15em;
+	font-style: italic;
+	text-transform: uppercase;
+}
+.sv-wc-apply-pay-checkout .divider::before,
+.sv-wc-apply-pay-checkout .divider::after {
+	content: "\2014";
+}

@@ -1,0 +1,284 @@
+/* Compatibility */
+
+table.restrictions-form-table {
+	width: 100%;
+}
+
+#restrictions_data .expand_all, #restrictions_data .close_all {
+	margin: 0 6px;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+#restrictions_data .expand_all:before, #restrictions_data .close_all:before {
+	font-family: WooCommerce;
+	speak: none;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	margin-right: .618em;
+	content: "";
+	text-decoration: none;
+	font-size: .8em;
+	color: #999;
+}
+
+.woocommerce_page_wc-settings #restrictions_data .expand_all, .woocommerce_page_wc-settings #restrictions_data .close_all {
+	font-size: 1.1em;
+}
+
+#restrictions_data .expand_all:before {
+	content:"\e035";
+}
+
+#restrictions_data .close_all:before {
+	content:"\e036";
+}
+
+/* Styles */
+
+#restrictions_data .bulk_toggle_wrapper {
+	float: right;
+}
+
+#restrictions_data .bulk_toggle_wrapper.disabled {
+	position: relative;
+}
+
+#restrictions_data .bulk_toggle_wrapper.disabled a {
+	color: #aaa;
+}
+
+#restrictions_data .bulk_toggle_wrapper.disabled span.disabler {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+table.wc_restrictions_overview td.name, table.wc_restrictions_overview th.name {
+	padding: 10px;
+	width: 25%;
+}
+
+table.wc_restrictions_overview td.status, table.wc_restrictions_overview th.status {
+	width: 20%;
+}
+
+table.wc_restrictions_overview td.summary ul {
+	margin: 5px;
+}
+
+table.wc_restrictions_overview td.summary a:before {
+	content: '\e025';
+	font-size: 16px;
+	top: 2px;
+	position: relative;
+	font-family: 'WooCommerce';
+	margin-left: 5px;
+}
+
+table.wc_restrictions_overview td.summary a {
+	visibility: hidden;
+}
+
+table.wc_restrictions_overview td.summary li:hover a {
+	visibility: visible;
+}
+
+#woocommerce-product-data ul.product_data_tabs li.restrictions_tab a:before {
+	content: '\e036';
+	font-family: WooCommerce;
+}
+
+#restrictions_data button.add_restriction {
+	float: left;
+	margin: 0 0 0 6px;
+}
+
+.woocommerce_page_wc-settings #restrictions_data button.add_restriction {
+	font-weight: 700;
+	margin-top: 0.9em;
+}
+
+#restrictions_data, #restrictions_data .options_group {
+	border-bottom: none;
+}
+
+#restrictions_data select.restriction_type {
+	float: left;
+}
+
+#restrictions_data .help_tip {
+	width: 16px;
+	height: 16px;
+}
+
+#restrictions_data .form-field span.woocommerce-help-tip {
+	vertical-align: text-top;
+}
+
+#restrictions_data .form-field span.woocommerce-help-tip:after {
+	line-height: 16px;
+}
+
+.woocommerce_page_wc-settings #restrictions_data .inside {
+	margin-top: 5px;
+}
+
+#restrictions_data .woocommerce_restriction > div p {
+	margin: 0;
+	padding-left: 182px!important;
+	clear: both;
+}
+
+.woocommerce_page_wc-settings #restrictions_data .woocommerce_restriction .woocommerce_restriction_data > p:first-of-type {
+	margin-top: 15px;
+}
+
+.woocommerce_page_wc-settings #restrictions_data.woocommerce_options_panel .woocommerce_restriction p, #woocommerce-product-data #restrictions_data p span.select2 {
+	font-size: 13px;
+}
+
+#restrictions_data .woocommerce_restriction p, #restrictions_data .select2-container .select2-selection--single .select2-selection__rendered {
+	line-height: 30px;
+}
+
+#restrictions_data input, #restrictions_data textarea {
+	font-size: 13px;
+}
+
+#restrictions_data p > input, #restrictions_data p > textarea {
+	padding: 6px 5px;
+}
+
+#restrictions_data .checkbox {
+	float: none;
+	vertical-align: text-top;
+	margin: 0 !important;
+}
+
+#restrictions_data .woocommerce_restriction > div div.description {
+	margin: 20px 0 20px;
+	display: block;
+}
+
+#restrictions_data table.restriction_conditions {
+	padding: 10px 5px 0px 10px;
+	background: #fafafa;
+	border-bottom: 1px solid #eee;
+}
+
+#restrictions_data .restriction_conditions .condition_select {
+	width: 150px;
+}
+
+#restrictions_data .condition_content {
+	float: left;
+	padding-left: 20%;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#restrictions_data .condition_content input {
+	width: 50%;
+	min-width: 100px;
+}
+
+#restrictions_data .condition_content .condition_value input {
+	height: 28px;
+}
+
+#restrictions_data .condition_content textarea {
+	width: 100%;
+}
+
+#restrictions_data .condition_modifier {
+	margin: 0 0 0 -25%;
+	padding-right: 10px;
+	width: 25%;
+	box-sizing: border-box;
+	float: left;
+}
+
+#restrictions_data .condition_remove {
+	width: 25px;
+	vertical-align: top;
+	text-align: left;
+}
+
+#restrictions_data .condition_row_inner {
+	padding-bottom: 10px;
+}
+
+#restrictions_data span.condition_description {
+	font-style: italic;
+}
+
+.woocommerce_restriction_data {
+	padding: 0 15px 15px;
+	background-color: #fdfdfd;
+	border-top: 1px solid #eee;
+}
+
+#restrictions_data span.description {
+	float:left;
+	font-size: 12px;
+	margin-left: 0;
+	width: 80%;
+	line-height: 22px;
+}
+
+#restrictions_data .form_row {
+	display: block;
+	clear:both;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	text-align: right;
+}
+
+#restrictions_data .restriction_form_row {
+	width: 80%;
+}
+
+#restrictions_data .form_row {
+	display: block;
+	clear: both;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	text-align: right;
+}
+
+#restrictions_data span.description code {
+	font-size: 12px;
+}
+
+#restrictions_data label {
+	margin: 0 10px 0 -180px;
+	width: 170px;
+}
+
+#restrictions_data textarea {
+	float: left;
+	width: 80%;
+	margin-bottom: 5px;
+}
+
+#restrictions_data .chosen-container-multi {
+	width: 80%!important;
+}
+
+#restrictions_data .wc-metaboxes {
+	border-bottom: none;
+}
+
+#restrictions_data .wc-metabox:last-of-type {
+	border-bottom: 1px solid #eee;
+}
+
+#restrictions_data .wc-metabox h3 a.delete {
+	margin-right: 0.25em;
+}

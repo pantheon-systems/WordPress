@@ -1,0 +1,21 @@
+<div class="wpml-section wpml-section-cookie wpml-settings" id="cookie">
+    <div class="wpml-section-header">
+        <h3>{{ strings.title }}</h3>
+    </div>
+    <div class="wpml-section-content">
+        <form id="wpml_cookie_form" name="wpml_cookie_form" action="">
+            <input type="hidden" id="{{ nonce_field }}" name="{{ nonce_field }}" value="{{ nonce_value }}">
+            <p>
+                <label>
+                    <input type="checkbox" name="{{ strings.field_name }}" {{ checked }} value="1" />
+                    {{ strings.field_label }}
+                    <a href="#" class="js-wpml-cookie-tooltip-open wpml-ls-tooltip-open otgs-ico-help" data-content="{{ strings.tooltip|e('html_attr') }}"></a>
+                </label>
+            </p>
+            <p class="buttons-wrap">
+                <span id="js-store-frontend-cookie-spinner" class="spinner"></span><span class="icl_ajx_response" id="{{ ajax_response_id }}"></span>
+                <input class="button button-primary" id="{{ strings.button_id }}" name="save" value="{{ strings.button_text }}" type="button" />
+            </p>
+        </form>
+    </div>
+</div>

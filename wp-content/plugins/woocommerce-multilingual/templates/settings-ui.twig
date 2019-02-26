@@ -1,0 +1,162 @@
+<form method="post" action="{{ form.action }}">
+
+    <div class="wcml-section">
+        <div class="wcml-section-header">
+            <h3>
+                {{ form.translation_interface.heading }}
+                <i class="otgs-ico-help wcml-tip" data-tip="{{ form.translation_interface.tip }}"></i>
+            </h3>
+        </div>
+        <div class="wcml-section-content">
+
+            <div id="wcml-translation-interface-dialog-confirm" title="{{ form.translation_interface.heading }}" class="hidden">
+                <p>{{ form.translation_interface.pb_warning }}</p>
+                <input type="hidden" class="ok-button" value="{{ form.translation_interface.pb_warning_ok_button }}" />
+                <input type="hidden" class="cancel-button" value="{{ form.translation_interface.pb_warning_cancel_button }}"/>
+            </div>
+
+            <ul>
+                <li>
+                    <input type="radio" name="trnsl_interface" value="{{ wpml_translation }}"
+                            {% if form.translation_interface.controls_value == wpml_translation %} checked="checked"{% endif %} id="wcml_trsl_interface_wcml" />
+                    <label for="wcml_trsl_interface_wcml">{{ form.translation_interface.wcml.label }}</label>
+                </li>
+                <li>
+                    <input type="radio" name="trnsl_interface" value="{{ native_translation }}"
+                            {% if form.translation_interface.controls_value == native_translation %} checked="checked"{% endif %} id="wcml_trsl_interface_native" />
+                    <label for="wcml_trsl_interface_native">{{ form.translation_interface.native.label|raw }}</label>
+                </li>
+            </ul>
+
+        </div> <!-- .wcml-section-content -->
+
+    </div> <!-- .wcml-section -->
+
+    <div class="wcml-section">
+
+        <div class="wcml-section-header">
+            <h3>
+                {{ form.synchronization.heading }}
+                <i class="otgs-ico-help wcml-tip" data-tip="{{ form.synchronization.tip }}"></i>
+            </h3>
+        </div>
+
+        <div class="wcml-section-content">
+
+            <ul>
+                <li>
+                    <input type="checkbox" name="products_sync_date" value="1"
+                            {% if form.synchronization.sync_date.value == 1 %} checked="checked"{% endif %} id="wcml_products_sync_date" />
+                    <label for="wcml_products_sync_date">{{ form.synchronization.sync_date.label }}</label>
+                </li>
+                <li>
+                    <input type="checkbox" name="products_sync_order" value="1"
+                            {% if form.synchronization.sync_order.value == 1 %} checked="checked"{% endif %} id="wcml_products_sync_order" />
+                    <label for="wcml_products_sync_order">{{ form.synchronization.sync_order.label }}</label>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="wcml-section">
+
+        <div class="wcml-section-header">
+            <h3>
+                {{ form.file_sync.heading }}
+                <i class="otgs-ico-help wcml-tip" data-tip="{{ form.file_sync.tip }}"></i>
+            </h3>
+        </div>
+
+        <div class="wcml-section-content">
+
+            <ul>
+                <li>
+                    <input type="radio" name="wcml_file_path_sync" value="1"
+                            {% if form.file_sync.value == 1 %} checked="checked"{% endif %} id="wcml_file_path_sync_auto" />
+                    <label for="wcml_file_path_sync_auto">{{ form.file_sync.label_same }}</label>
+                </li>
+                <li>
+                    <input type="radio" name="wcml_file_path_sync" value="0"
+                            {% if form.file_sync.value == 0 %} checked="checked"{% endif %} id="wcml_file_path_sync_self" />
+                    <label for="wcml_file_path_sync_self">{{ form.file_sync.label_diff }}</label>
+                </li>
+            </ul>
+
+
+        </div> <!-- .wcml-section-content -->
+
+    </div> <!-- .wcml-section -->
+
+
+    <div class="wcml-section cart-sync-section">
+        <div class="wcml-section-header">
+            <h3>
+                {{ form.cart_sync.heading }}
+                <i class="otgs-ico-help wcml-tip" data-tip="{{ form.cart_sync.tip }}"></i>
+            </h3>
+        </div>
+        <div class="wcml-section-content">
+
+            {% if not form.cart_sync.wpml_cookie_enabled %}
+                <i class="otgs-ico-warning"></i>
+                <strong>{{ form.cart_sync.cookie_not_enabled_message|raw }}</strong>
+            {% endif %}
+
+            <div class="wcml-section-content-inner">
+                <h4>
+                    {{ form.cart_sync.lang_switch.heading }}
+                </h4>
+                <ul>
+                    <li>
+                        <input type="radio" name="cart_sync_lang" value="{{ wcml_cart_sync }}"
+                                {% if form.cart_sync.lang_switch.value == wcml_cart_sync %} checked="checked"{% endif %}
+                                {% if not form.cart_sync.wpml_cookie_enabled %} disabled="disabled"{% endif %}
+                               id="wcml_cart_sync_lang_sync" />
+                        <label for="wcml_cart_sync_lang_sync">{{ form.cart_sync.lang_switch.sync_label|raw }}</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="cart_sync_lang" value="{{ wcml_cart_clear }}"
+                                {% if form.cart_sync.lang_switch.value == wcml_cart_clear %} checked="checked"{% endif %}
+                                {% if not form.cart_sync.wpml_cookie_enabled %} disabled="disabled"{% endif %}
+                               id="wcml_cart_sync_lang_clear" />
+                        <label for="wcml_cart_sync_lang_clear">{{ form.cart_sync.lang_switch.clear_label|raw }}</label>
+                    </li>
+                </ul>
+            </div>
+            <div class="wcml-section-content-inner">
+                <h4>
+                    {{ form.cart_sync.currency_switch.heading }}
+                </h4>
+                <ul>
+                    <li>
+                        <input type="radio" name="cart_sync_currencies" value="{{ wcml_cart_sync }}"
+                                {% if form.cart_sync.currency_switch.value == wcml_cart_sync %} checked="checked"{% endif %}
+                                {% if not form.cart_sync.wpml_cookie_enabled %} disabled="disabled"{% endif %}
+                               id="wcml_cart_sync_curr_sync" />
+                        <label for="wcml_cart_sync_curr_sync">{{ form.cart_sync.currency_switch.sync_label|raw }}</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="cart_sync_currencies" value="{{ wcml_cart_clear }}"
+                                {% if form.cart_sync.currency_switch.value == wcml_cart_clear %} checked="checked"{% endif %}
+                                {% if not form.cart_sync.wpml_cookie_enabled %} disabled="disabled"{% endif %}
+                               id="wcml_cart_sync_curr_clear" />
+                        <label for="wcml_cart_sync_curr_clear">{{ form.cart_sync.currency_switch.clear_label|raw }}</label>
+                    </li>
+                </ul>
+                <p>
+                    {{ form.cart_sync.doc_link|raw }}
+                </p>
+            </div>
+        </div> <!-- .wcml-section-content -->
+
+    </div> <!-- .wcml-section -->
+
+    {{ form.nonce|raw }}
+    <p class="wpml-margin-top-sm">
+        <input type='submit' name="wcml_save_settings" value='{{ form.save_label }}' class='button-primary'/>
+    </p>
+</form>
+<a class="alignright" href="{{ troubleshooting.url }}">{{ troubleshooting.label }}</a>

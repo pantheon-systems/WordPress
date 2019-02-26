@@ -1,0 +1,2094 @@
+/* Admin Menu Editor CSS file */
+
+#ws_menu_editor {
+	min-width: 780px;
+}
+
+.ame-is-free-version #ws_menu_editor {
+	margin-top: 9px;
+}
+
+$mainContainerWidth: 310px;
+$mainContainerBorderWidth: 1px;
+$mainContainerBorderRadius: 0px;
+
+.ws_main_container {
+	margin: 2px;
+	width: $mainContainerWidth;
+	float: left;
+	display:block;
+
+	border: $mainContainerBorderWidth solid #cdd5d5;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+	background-color: #FFFFFF;
+
+	border-radius: $mainContainerBorderRadius;
+	-moz-border-radius: $mainContainerBorderRadius;
+	-webkit-border-radius: $mainContainerBorderRadius;
+}
+
+.ws_box {
+	min-height: 30px;
+	width: 100%;
+	margin: 0;
+}
+
+.ws_basic_container {
+	float: left;
+	display:block;
+}
+
+#ws_menu_box {
+}
+
+#ws_submenu_box {
+}
+
+.ws_dropzone {
+	display: block;
+	box-sizing: border-box;
+
+	margin: 2px 6px;
+	border: 3px none #b4b9be;
+
+	height: 31px;
+}
+
+.ws_dropzone_active,
+.ws_dropzone_hover,
+.ws_top_to_submenu_drop_hover .ws_dropzone {
+	border-style: dashed;
+}
+
+.ws_dropzone_hover,
+.ws_top_to_submenu_drop_hover .ws_dropzone {
+	border-width: 1px;
+}
+
+/*************************************************
+                     Actor UI
+ *************************************************/
+#ws_actor_selector li:after {
+    content: '| ';
+}
+
+#ws_actor_selector li:last-child:after {
+    content: '';
+}
+
+#ws_actor_selector li {
+	a {
+		display: inline-block;
+		text-align: center;
+	}
+
+	a::before {
+		display: block;
+		content: attr(data-text);
+		font-weight: bold;
+
+		height: 1px;
+		overflow: hidden;
+		visibility: hidden;
+		margin-bottom: -1px;
+	}
+}
+
+#ws_actor_selector {
+	margin-top: 6px;
+}
+
+/**
+ * The checkbox that lets the user show/hide a menu for the currently selected actor.
+ */
+#ws_menu_editor .ws_actor_access_checkbox,
+#ws_menu_editor input[type="checkbox"].ws_actor_access_checkbox /* Ensure we override WP defaults. */
+{
+    margin-right: 2px;
+    margin-left: 2px;
+    margin-top: 1px;
+    vertical-align: text-top;
+
+	&:indeterminate:before {
+		content: '\25a0'; //Unicode black square. Another option would be BLACK LARGE SQUARE (U+2B1B).
+		color: #1e8cbe;
+
+		//Large square.
+		//margin: -6px 0 0 -1px;
+		//font: 400 18px/1 dashicons;
+
+		//Smaller square.
+		margin: -3px 0 0 -1px;
+		font: 400 14px/1 dashicons;
+
+		//Even smaller square.
+		//margin: -2px 0 0 -1px;
+		//font: 400 13px/1 dashicons;
+
+		float: left;
+		display: inline-block;
+		vertical-align: middle;
+		width: 16px;
+		-webkit-font-smoothing: antialiased;
+	}
+}
+
+@media screen and (max-width: 782px) {
+	#ws_menu_editor input[type="checkbox"].ws_actor_access_checkbox {
+		&:indeterminate:before {
+			margin: -6px 0 0 1px;
+			font: 400 26px/1 dashicons;
+		}
+	}
+}
+
+/* The checkbox is only visible when viewing the menu configuration for a specific actor. */
+#ws_menu_editor .ws_actor_access_checkbox {
+    display: none;
+}
+
+#ws_menu_editor.ws_is_actor_view .ws_actor_access_checkbox {
+    display: inline-block;
+}
+
+/* Gray-out items inaccessible to the currently selected actor */
+
+.ws_is_actor_view .ws_container.ws_is_hidden_for_actor {
+    background-color: #F9F9F9;
+}
+
+.ws_is_actor_view .ws_is_hidden_for_actor .ws_item_title {
+    color: #777;
+}
+
+/*
+ * The sidebar
+ */
+
+#ws_editor_sidebar {
+	width: auto;
+	padding: 2px;
+}
+
+#ws_menu_editor .ws_main_button {
+	clear: both;
+	display: block;
+	margin: 4px;
+	width: 130px;
+}
+
+#ws_menu_editor #ws_save_menu {
+	margin-bottom: 20px;
+}
+
+#ws_menu_editor #ws_toggle_editor_layout {
+	display: none;
+}
+
+#ws_menu_editor .ws_sidebar_button_separator {
+	display: block;
+	height: 4px;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * Page heading and tabs
+ */
+
+#ws_ame_editor_heading {
+	float: left;
+}
+
+/*
+ * Menu components and widgets
+ */
+
+.ws_container {
+	$itemWidth: 290px;
+	$itemPadding: 3px;
+	$itemBorderWidth: 1px;
+	$itemHorizontalMargin: ($mainContainerWidth - $itemWidth - $itemPadding * 2 - $itemBorderWidth * 2) / 2;
+
+	display: block;
+	width: $itemWidth;
+	
+	padding : $itemPadding;
+	margin: 2px 0 2px $itemHorizontalMargin;
+
+	body.rtl & {
+		margin-right: $itemHorizontalMargin;
+		margin-left: 0;
+	}
+}
+
+.ws_active { }
+
+.ws_menu { }
+.ws_item { }
+
+.ws_menu_separator { }
+
+.ws_submenu {
+	min-height: 2em;
+}
+
+
+.ws_item_head {
+	padding: 0;
+}
+
+.ws_item_title {
+	display: inline-block;
+	padding: 2px;
+	cursor: default;
+
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.ws_edit_link {
+	float: right;
+	margin-right: 0;
+	cursor: pointer;
+	display:block;
+	width: 40px;
+	height: 22px; 
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+
+	text-decoration: none;
+}
+
+.ws_edit_link_expanded { }
+
+
+.ws_menu_drop_hover {
+	background-color: #43b529 !important;
+}
+
+.ws_container.ui-sortable-helper * {
+	cursor: move !important;
+}
+
+.ws_container.ws_sortable_placeholder {
+	outline: 1px dashed #b4b9be;
+	outline-offset: -1px;
+	background: none;
+	border-color: transparent;
+}
+
+/*
+  If you ever want to apply a right-arrow style to the currently selected menu item,
+  you can do it like this. Commented out for now since it doesn't look all that great,
+  but might be useful in the future.
+*/
+/*
+.ws_container {
+	position: relative;
+}
+
+.ws_menu.ws_active::after {
+	content: "";
+	display: block;
+	z-index: 1002;
+
+	border-left: 14px solid #8EB0F1;
+	border-top: 15px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 15px solid rgba(255, 255, 255, 0.1);
+	background: transparent;
+
+	position: absolute;
+	right: -14px;
+	top: -1px;
+
+	width: 0;
+	height: 0;
+}
+*/
+
+/*
+ * A left-arrow style alternative. This one is image-based and doesn't suffer from the finicky sizing issues
+ * of CSS triangles.
+ */
+
+.ws_container {
+	position: relative;
+}
+
+.ws_menu.ws_active::after {
+	//These should match the background image size.
+	$submenuTipHeight: 30px;
+	$submenuTipWidth: 19px;
+
+	content: "";
+	display: block;
+	//z-index: 1002;
+
+	position: absolute;
+	right: -$submenuTipWidth;
+	top: -1px;
+
+	width: $submenuTipWidth;
+	height: $submenuTipHeight;
+	background: transparent url("../images/submenu-tip.png") no-repeat center;
+}
+
+//No arrows for separators and items that are being dragged.
+.ws_container.ws_menu_separator.ws_active::after,
+.ws_container.ui-sortable-helper::after {
+	background-image: none;
+}
+
+/****************************************
+    Per-menu settings fields & panels
+*****************************************/
+
+.ws_editbox {
+	display: block;
+	padding: 4px;
+
+	border-radius: 2px;
+	border-top-right-radius: 0;
+
+	-moz-border-radius: 2px;	
+	-moz-border-radius-topright: 0;
+
+	-webkit-border-radius: 2px;
+	-webkit-border-top-right-radius: 0;
+}
+
+.ws_edit_panel {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.ws_edit_field {
+	margin-bottom: 6px;
+	min-height: 45px;
+
+	//Clear-fix.
+	&:after {
+		visibility: hidden;
+		display: block;
+		height: 0;
+		font-size: 0;
+
+		content: " ";
+		clear: both;
+	}
+}
+
+.ws_edit_field-custom {
+	margin-top: 10px;
+}
+
+.ws_edit_field.ws_no_field_caption {
+	margin-top: 10px;
+	padding-left: 1px;
+	height: 25px;
+	min-height: 25px;
+}
+
+/*
+ * Group headings
+ */
+.ws_edit_field.ws_field_group_heading {
+	//display: none;
+	height: 1px;
+	min-height: 0;
+	padding-top: 0;
+
+	background: #ccc;
+	margin: 8px -4px 5px;
+
+	& span {
+		display: none;
+		font-weight: bold;
+	}
+}
+
+/* The reset-to-default button */
+.ws_reset_button {
+	display: block;
+	float: right;
+	
+	margin-left: 4px;
+	margin-top: 2px;
+	margin-right: 6px;
+	cursor: pointer;
+
+	width: 16px;
+	height: 16px;
+	vertical-align: top;
+
+	background: url("../images/pencil_delete_gray.png") no-repeat center;
+}
+
+.ws_reset_button:hover {
+	background-image: url("../images/pencil_delete.png");
+}
+
+.ws_input_default input,
+.ws_input_default select,
+.ws_input_default .ws_color_scheme_display {
+	color: gray;
+}
+
+/* No reset button for fields set to the default value and fields without a default value */
+.ws_input_default  .ws_reset_button,
+.ws_has_no_default .ws_reset_button {
+	visibility: hidden;
+}
+
+/* The input box in each field editor */
+$basicInputWidth: 254px;
+#ws_menu_editor .ws_editbox input[type="text"], 
+#ws_menu_editor .ws_editbox select {
+	display: block;
+	float: left;
+	width: $basicInputWidth;
+	height: 25px;
+
+	font-size: 12px;
+	line-height: 17px;
+
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+#ws_menu_editor .ws_edit_field label {
+	display: block;
+	float: left;
+}
+
+#ws_menu_editor .ws_edit_field-custom input[type="checkbox"] {
+	margin-top: 0;
+}
+
+#ws_menu_editor input[type="text"].ws_field_value {
+	min-height: 25px;
+}
+
+/* Dropdown button for combo-box fields */
+#ws_menu_editor .ws_dropdown_button,
+#ws_menu_access_editor .ws_dropdown_button
+{
+	box-sizing: border-box;
+	width: 20px;
+	height: 25px;
+	
+	margin: 1px 1px 1px 0;
+	padding: 0;
+	
+	text-align: center;
+	font-size: 9px !important;
+	line-height: 25px;
+	
+	border-color: #dfdfdf;
+	box-shadow: none;
+	
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-bottomleft: 0;
+	
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+}
+
+#ws_menu_access_editor .ws_dropdown_button {
+	display: inline-block;
+	height: 27px;
+}
+
+#ws_menu_editor .ws_dropdown_button {
+	display: block;
+	float: left;
+}
+
+/* 
+The appearance and size of combo-box fields need to be changed
+to accommodate the drop-down button.
+*/
+#ws_menu_editor .ws_has_dropdown input.ws_field_value,
+#ws_menu_access_editor input.ws_has_dropdown
+{
+	margin-right: 0;
+	border-right: 0;
+	
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+
+	-moz-border-radius-topright: 0;
+	-moz-border-radius-bottomright: 0;
+
+	-webkit-border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+}
+
+#ws_menu_access_editor input.ws_has_dropdown {
+	width: 90%;
+	box-sizing: border-box;
+	height: 27px;
+}
+
+#ws_menu_editor .ws_has_dropdown input.ws_field_value {
+	width: 234px;
+}
+
+/* Unlike others, this field is just a single checkbox, so it has a smaller height */
+#ws_menu_editor .ws_edit_field-custom {
+	height: 16px;
+}
+
+/*
+ * "Show/hide advanced fields" 
+ */
+.ws_toggle_container {
+	text-align: right;
+	margin-right: 27px;
+}
+
+.ws_toggle_advanced_fields {
+	color: #6087CB;
+	text-decoration: none;
+	font-size: 0.85em;
+}
+
+.ws_toggle_advanced_fields:visited, .ws_toggle_advanced_fields:active {
+	color: #6087CB;
+}
+
+.ws_toggle_advanced_fields:hover {
+	color: #d54e21;
+	text-decoration: underline;
+}
+
+/************************************
+            Menu flags
+*************************************/
+
+.ws_flag_container {
+	float: right;
+	margin-right: 4px;
+	padding-top: 2px;
+}
+
+.ws_flag {
+	display: block;
+	float: right;
+	width: 16px;
+	height: 16px;
+	margin-left: 4px;
+	background-repeat: no-repeat;
+}
+
+/* user-created items */
+.ws_custom_flag {
+	background-image: url('../images/page-add.png');
+}
+
+/* unused items - those that are in the default menu but not in the custom one */
+.ws_unused_flag {
+	background-image: url('../images/new-menu-badge.png');
+	width: 31px;
+}
+
+/* hidden items */
+.ws_hidden_flag {
+	background-image: url('../images/page-invisible.png');
+}
+
+/* items with custom permissions for the selected actor */
+.ws_custom_actor_permissions_flag {
+	font: 16px/1 'dashicons';
+}
+.ws_custom_actor_permissions_flag::before {
+	/*content: "\f160";*/ /* padlock */
+	content: "\f110"; /* human silhouette */
+	color: black;
+
+	filter: alpha(opacity=25); /*IE 5-7*/
+	opacity: 0.25;
+}
+
+/* Hidden from everyone except the current user and Super Admin. */
+.ws_hidden_from_others_flag {
+	background-image: url('../images/font-awesome/eye-slash.png');
+}
+
+/* Item visibility can't be determined because it depends on a meta capability. */
+.ws_uncertain_meta_cap_flag::before {
+	font: 16px/1 'dashicons';
+	content: "\f348";
+	color: black;
+
+	filter: alpha(opacity=25); /*IE 5-7*/
+	opacity: 0.25;
+}
+
+/* These classes could be used to apply different styles to items depending on their flags */
+.ws_custom { }
+.ws_hidden { }
+.ws_unused { }
+
+
+/************************************
+            Toolbars
+*************************************/
+
+.ws_toolbar {
+	display: block;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	width: 100%;
+	padding: 6px 6px 0 6px;
+	//height: 34px;
+}
+
+.ws_button_container {
+	//padding-left: 6px;
+	//padding-top: 6px;
+}
+
+.ws_button {
+	display: block;
+	margin-right: 3px;
+	margin-bottom: 4px;
+
+	padding: 4px;
+	float: left;
+
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+
+	width: 16px;
+	height: 16px;
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+
+	img {
+		vertical-align: top;
+	}
+}
+
+a.ws_button:hover {
+	background-color: #d0e0ff;
+	border-color: #9090c0;
+}
+
+//Disabled button state.
+.ws_button.ws_button_disabled {
+	border-color: #ccc;
+}
+a.ws_button.ws_button_disabled:hover {
+	background-color: white;
+	border: 1px solid #ccc;
+}
+.ws_button_disabled img {
+	filter: grayscale(1);
+	-webkit-filter: grayscale(1);
+	opacity: 0.65;
+}
+
+.ws_separator {
+	float: left;
+	width: 5px;
+}
+
+/************************************
+       Capability selector
+*************************************/
+
+select.ws_dropdown {
+	width: 252px;
+	height: 20em;
+	
+	z-index: 1002;
+	position: absolute;
+	display: none;
+	
+	font-family : "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	font-size: 12px;
+}
+
+$dropdownOptionPaddingTop: 3px;
+select.ws_dropdown option {
+	font-family : "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+	font-size: 12px;
+	padding: $dropdownOptionPaddingTop;
+}
+
+select.ws_dropdown optgroup option {
+	padding-left: 10px;
+}
+
+/************************************
+           Tabs (small)
+ ************************************
+ Tabbed navigation for dropdowns and small dialogs.
+ */
+
+$activeToolTabBackground: #FDFDFD;
+
+.ws_tool_tab_nav {
+	list-style: outside none none;
+	padding: 0;
+	margin: 0 0 0 6px;
+
+	li {
+		display: inline-block;
+
+		border: 1px solid transparent;
+		border-bottom-width: 0;
+		padding: 3px 5px 5px;
+		line-height: 1.35em;
+
+		margin-bottom: 0;
+	}
+
+	li.ui-tabs-active {
+		border-color: #dfdfdf;
+		border-bottom-color: $activeToolTabBackground;
+		background: #FDFDFD none;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	li.ui-tabs-active a {
+		color: #32373C;
+	}
+}
+
+.ws_tool_tab {
+	border-top: 1px solid #DFDFDF;
+	margin-top: -1px;
+	background-color: $activeToolTabBackground;
+
+	//Suggestion: Use 12px inner padding like in post editor boxes.
+}
+
+/************************************
+           Icon selector
+*************************************/
+
+#ws_icon_selector {
+	border: 1px solid silver;
+	border-radius: 3px;
+	background-color: white;
+
+	width: 216px;
+	padding: 4px 0 0 0;
+    position: absolute;
+}
+
+#ws_icon_selector.ws_with_more_icons {
+    width: 570px;
+}
+
+#ws_icon_selector .ws_icon_extra {
+    display: none;
+}
+
+#ws_icon_selector.ws_with_more_icons .ws_icon_extra {
+    display: inline-block;
+}
+
+
+#ws_icon_selector .ws_icon_option {
+	float: left;
+	height: 30px;
+
+	margin: 2px;
+	cursor: pointer;
+	border: 1px solid #bbb;
+	border-radius: 3px;
+
+	/* Gradients and colours cribbed from WP 3.5.1 button styles */
+	background: #f3f3f3;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#f4f4f4));
+	background-image: -webkit-linear-gradient(top, #fefefe, #f4f4f4);
+	background-image:    -moz-linear-gradient(top, #fefefe, #f4f4f4);
+	background-image:      -o-linear-gradient(top, #fefefe, #f4f4f4);
+	background-image:   linear-gradient(to bottom, #fefefe, #f4f4f4);
+}
+
+#ws_icon_selector .ws_icon_option:hover {
+	/* Gradients and colours cribbed from WP 3.5.1 button styles */
+	border-color: #999;
+	background: #f3f3f3;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f3f3f3));
+	background-image: -webkit-linear-gradient(top, #fff, #f3f3f3);
+	background-image:    -moz-linear-gradient(top, #fff, #f3f3f3);
+	background-image:     -ms-linear-gradient(top, #fff, #f3f3f3);
+	background-image:      -o-linear-gradient(top, #fff, #f3f3f3);
+	background-image:   linear-gradient(to bottom, #fff, #f3f3f3);
+}
+
+#ws_icon_selector .ws_icon_option.ws_selected_icon {
+	border-color: green;
+	background-color: #deffca;
+	background-image: none;
+}
+
+#ws_icon_selector .icon16 {
+	float: none;
+	margin: 0;
+}
+
+#ws_icon_selector .ws_icon_option .ws_icon_image.dashicons {
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+}
+
+#ws_icon_selector .ws_icon_option img {
+	display: inline-block;
+	margin: 0;
+	padding: 7px;
+
+	width: 16px;
+	height: 16px;
+}
+
+#ws_menu_editor .ws_edit_field-icon_url input.ws_field_value {
+	width: 220px;
+	margin-right: 5px;
+}
+
+/* The icon button that displays the pop-up icon selector. */
+#ws_menu_editor .ws_select_icon {
+	margin: 0;
+	padding: 0;
+	position: relative;
+
+    box-sizing: border-box;
+    height: 25px;
+}
+
+/* Current icon node (CSS class version, for the built-in WP icon sprites) */
+.ws_select_icon .icon16 {
+	margin: 0;
+	float: none;
+	padding: 3px;
+
+	/*
+	The default .icon16 style has a 6px padding which would normally make it too large
+	to fit in the button. We can't change the padding without making the background-position
+	look wrong, so lets offset the icon so that it fits.
+	*/
+	position: relative;
+	top: -3px;
+	left: -3px;
+}
+
+/* Current icon node (image version) */
+.ws_select_icon img {
+	margin: 0;
+	padding: 4px;
+	width: 16px;
+	height: 16px;
+}
+
+#ws_icon_selector {
+	$tabTopPadding: 4px;
+	$tabHorizontalPadding: 4px;
+
+	.ws_tool_tab_nav {
+		display: inline-block;
+		margin-top: 2px;
+
+		li {
+			padding: 4px 10px 11px;
+		}
+
+		position: relative;
+	}
+
+	.ws_tool_tab {
+		padding: $tabTopPadding $tabHorizontalPadding 2px;
+		max-height: 324px;
+		overflow-y: auto;
+	}
+}
+
+/* MP6 admin style compatibility */
+#ws_icon_selector .ws_icon_option .icon16::before {
+	margin: 0;
+	padding: 0;
+}
+.ws_select_icon .icon16::before {
+	padding: 0;
+	margin: 1px 0 0 2px;
+}
+
+#ws_choose_icon_from_media {
+	margin: 2px;
+}
+
+/************************************
+      Embedded page selector
+*************************************/
+
+#ws_embedded_page_selector {
+	width: 254px;
+	padding: 6px 0 0 0;
+
+	border: 1px solid silver;
+	border-radius: 3px;
+	background-color: white;
+
+	box-sizing: border-box;
+	position: absolute;
+}
+
+.ws_page_selector_tab_nav {
+	list-style: outside none none;
+	padding: 0;
+	margin: 0 0 0 6px;
+}
+
+.ws_page_selector_tab_nav li {
+	display: inline-block;
+
+	border: 1px solid transparent;
+	border-bottom-width: 0;
+	padding: 3px 5px 5px;
+	line-height: 1.35em;
+
+	margin-bottom: 0;
+}
+
+.ws_page_selector_tab_nav a {
+	text-decoration: none;
+}
+
+.ws_page_selector_tab_nav li.ui-tabs-active {
+	border-color: #dfdfdf;
+	background-color: #FDFDFD;
+	border-bottom-color: #FDFDFD;
+}
+
+.ws_page_selector_tab_nav li.ui-tabs-active a {
+	color: #32373C;
+}
+
+.ws_page_selector_tab {
+	border-top: 1px solid #DFDFDF;
+	padding: 12px; /* The same padding as post editor boxes. */
+	margin-top: -1px;
+	background-color: #FDFDFD;
+
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+#ws_current_site_pages {
+	width: 100%;
+	min-height: 150px;
+	max-height: 300px;
+
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#ws_embedded_page_selector input {
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+#ws_custom_embedded_page_tab p:first-child {
+	margin-top: 0;
+}
+
+/*
+ Make the "Page" field look editable. It is read-only because the user can't change it directly (they have to use
+ the dropdown), but we don't want it to be greyed-out.
+*/
+#ws_menu_editor .ws_edit_field-embedded_page_id input.ws_field_value {
+	background-color: white;
+}
+
+
+/************************************
+           Menu color picker
+*************************************/
+
+#ws-ame-menu-color-settings {
+    background: white;
+    display: none;
+}
+
+#ame-menu-color-list {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.ame-menu-color-column {
+    min-width: 460px;
+}
+
+.ame-menu-color-name {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 2px;
+
+    line-height: 1.3;
+    font-size: 14px;
+    font-weight: 600;
+
+    min-width: 180px;
+}
+
+.ame-color-option {
+    padding: 10px 0;
+
+	.wp-picker-container {
+		display: inline-block;
+	}
+}
+
+.ame-advanced-menu-color {
+    display: none;
+}
+
+#ws-ame-apply-colors-to-all {
+	display: block;
+	float: left;
+	margin-left: 5px;
+}
+
+/* Color presets */
+#ame-color-preset-container {
+	padding: 0 8px 8px 8px;
+
+	margin-left: -8px;
+	margin-right: -8px;
+	margin-bottom: 4px;
+
+	border-bottom: 1px solid #eee;
+}
+
+#ame-menu-color-presets {
+	width: 290px;
+	margin-right: 5px;
+}
+
+#ws-ame-save-color-preset {
+	/*margin-right: 5px;*/
+}
+
+a#ws-ame-delete-color-preset {
+	color: #A00;
+	text-decoration: none;
+}
+a#ws-ame-delete-color-preset:hover {
+	color: #F00;
+}
+
+/* Color scheme display in the editor widget. */
+
+$colorFieldWidth: 190px;
+$colorFieldRightMargin: 5px;
+
+.ws_color_scheme_display {
+	$colorFieldHeight: 26px;
+
+    display: inline-block;
+	box-sizing: border-box;
+    height: $colorFieldHeight;
+    width: $colorFieldWidth;
+
+    margin-right: $colorFieldRightMargin;
+    padding: 2px 4px;
+
+	font-size: 12px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+
+	line-height: $colorFieldHeight - 6px;
+}
+
+.ws_open_color_editor {
+	width: $basicInputWidth - $colorFieldWidth - $colorFieldRightMargin - 1px;
+}
+
+.ws_color_display_item {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+
+    margin-right: 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.ws_color_display_item:last-child {
+    margin-right: 0;
+}
+
+/************************************
+           Export and import
+*************************************/
+
+#export_dialog, #import_dialog {
+	display: none;
+}
+
+.ui-widget-overlay {
+	background-color: black;
+	position: fixed;
+	left: 0;
+	top: 0;
+	opacity: 0.70;
+	-moz-opacity: 0.70;
+	filter: alpha(opacity=70);
+
+    width: 100%;
+    height: 100%;
+}
+
+.ui-front {
+    z-index: 10000;
+}
+
+.ui-dialog {
+	background: white;
+	border: 1px solid #c0c0c0;
+
+	padding: 0;
+	
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+	.ui-dialog-content {
+		padding: 8px 8px 8px 8px;
+		font-size: 1.1em;
+	}
+}
+
+.ui-dialog-titlebar {
+	display: block;
+	height: 22px;
+	margin: 0;
+	padding: 4px 4px 4px 8px;
+	
+	background-color: #86A7E3;
+	font-size: 1.0em;
+	line-height: 22px;
+
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+
+    border-bottom: 1px solid #809fd9;
+}
+
+.ui-dialog-title {
+	color: white;
+	font-weight: bold;
+}
+
+.ui-dialog-titlebar-close {
+	background: #86A7E3 url(../images/x.png) no-repeat center;
+	width: 22px;
+	height: 22px;
+	display: block;
+	float: right;
+	color: white;
+	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.ui-dialog-titlebar-close:hover {
+	/*background-image: url(../images/x-light.png);*/
+	background-color: #a6c2f5;
+}
+
+.ui-icon-closethick {
+	
+}
+
+#export_dialog .ws_dialog_panel {
+	height: 50px;
+}
+
+#import_dialog .ws_dialog_panel {
+	height: 64px;
+}
+
+.ws_dialog_buttons {
+	/*height: 30px;*/
+	text-align: right;
+	margin-top: 20px;
+    margin-bottom: 1px;
+    clear: both;
+}
+
+.ws_dialog_buttons .button-primary {
+	display: block;
+	float: left;
+	margin-top: 0;
+}
+
+.ws_dialog_buttons .button {
+	margin-top: 0;
+}
+
+.ws_dialog_buttons.ame-vertical-button-list {
+    text-align: left;
+}
+
+.ws_dialog_buttons.ame-vertical-button-list .button-primary {
+    float: none;
+}
+
+.ws_dialog_buttons.ame-vertical-button-list .button {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.ws_dialog_buttons.ame-vertical-button-list .button:last-child {
+    margin-bottom: 0;
+}
+
+#import_file_selector {
+	display: block;
+	width: 286px;
+
+	margin: 6px auto 12px;
+}
+
+#ws_start_import {
+	min-width: 100px;
+}
+
+#import_complete_notice {
+	text-align: center;
+	font-size: large;
+	padding-top: 25px;
+}
+
+#ws_import_error_response {
+	width: 100%;
+}
+
+.ws_dont_show_again {
+    display: inline-block;
+    margin-top: 1em;
+}
+
+/************************************
+        Menu access editor
+*************************************/
+
+/* The launch button */
+$accessLevelInputWidth: 190px;
+$accessLevelRightMargin: 5px;
+#ws_menu_editor .ws_edit_field-access_level input.ws_field_value
+{
+	width: $accessLevelInputWidth;
+	margin-right: $accessLevelRightMargin;
+}
+
+.ws_launch_access_editor {
+	min-width: 40px;
+	width: $basicInputWidth - $accessLevelRightMargin - $accessLevelInputWidth - 1px;
+}
+
+#ws_menu_access_editor {
+	width: 400px;
+	display: none;
+}
+
+.ws_dialog_subpanel {
+	margin-bottom: 1em;
+}
+
+#ws_menu_access_editor .ws_column_access,
+#ws_menu_access_editor .ws_ext_action_check_column {
+	text-align: center;
+	width: 1em;
+	padding-right: 0;
+}
+
+#ws_menu_access_editor .ws_column_access input,
+#ws_menu_access_editor .ws_ext_action_check_column input {
+	margin-right: 0;
+}
+
+#ws_menu_access_editor .ws_column_role {
+	white-space: nowrap;
+}
+
+#ws_role_table_body_container {
+	/*max-height: 400px;
+	overflow: auto;*/
+	overflow: hidden;
+	margin-right: -1px;
+}
+
+.ws_role_table_body {
+	margin-top: 2px;
+	max-width: 354px;
+}
+
+.ws_has_separate_header .ws_role_table_header {
+	border-bottom: none;
+
+	-moz-border-radius-bottomleft: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-left-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.ws_has_separate_header .ws_role_table_body {
+	border-top: none;
+	margin-top: 0;
+
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.ws_role_id {
+	display: none;
+}
+
+#ws_extra_capability {
+	width: 100%;
+}
+
+#ws_role_access_container {
+	position: relative;
+	max-height: 430px;
+	overflow: auto;
+}
+
+#ws_role_access_overlay {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+
+	line-height: 100%;
+
+	background: white;
+	filter: alpha(opacity=60);
+	opacity: 0.6;
+	-moz-opacity:0.6;
+}
+
+#ws_role_access_overlay_content {
+	position: absolute;
+	width: 50%;
+	left: 22%;
+	top: 30%;
+
+	background: white;
+	padding: 8px;
+
+	border: 2px solid silver;
+	border-radius: 5px;
+	color: #555;
+}
+
+#ws_menu_access_editor div.error {
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 5px;
+}
+
+#ws_hardcoded_role_error {
+	display: none;
+}
+
+/*--------------------------------------------*
+        The CPT/taxonomy permissions panel
+ *--------------------------------------------*/
+
+/*
+ * When there are CPT/taxonomy permissions available, the appearance of the role list changes a bit.
+ */
+.ws_has_extended_permissions {
+	//The role name column also functions as a select button.
+	.ws_role_table_body .ws_column_role {
+		cursor: pointer;
+	}
+
+	.ws_role_table_body .ws_column_selected_role_tip {
+		display: table-cell;
+	}
+
+	.ws_role_table_body tr:hover {
+		background: #EAF2FA;
+	}
+
+	.ws_role_table_body {
+		td {
+			border-top: 1px solid #f1f1f1;
+		}
+		tr:first-child td {
+			border-top-width: 0;
+		}
+	}
+
+	/* The role or actor whose CPT/taxonomy permissions are currently expanded. */
+	.ws_role_table_body tr.ws_cpt_selected_role {
+		background-color: #dddddd;
+
+		.ws_column_role {
+			font-weight: bold;
+		}
+
+		.ws_cpt_selected_role_tip {
+			visibility: visible;
+		}
+
+		td {
+			color: #222;
+		}
+	}
+}
+
+#ws_ext_permissions_container {
+	float: left;
+	width: 352px;
+	padding: 0 9px 0 0;
+}
+
+$extendedPanelLeftPadding: 15px;
+
+#ws_ext_permissions_container_caption {
+	padding-left: $extendedPanelLeftPadding;
+	max-width: 352px;
+	position: relative;
+	white-space: nowrap;
+}
+
+#ws_ext_permissions_container .ws_ext_permissions_table {
+	margin-top: 2px;
+
+	tr td:first-child {
+		padding-left: $extendedPanelLeftPadding;
+	}
+
+	.ws_ext_group_title {
+		padding-bottom: 0;
+		font-weight: bold;
+	}
+
+	.ws_ext_action_check_column,
+	.ws_ext_action_name_column {
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
+
+	tr.ws_ext_padding_row td {
+		padding: 0 0 0 0;
+		height: 1px;
+	}
+
+	.ws_same_as_required_cap {
+		text-decoration: underline;
+	}
+
+	.ws_ext_has_custom_setting {
+		label.ws_ext_action_name::after {
+			content: " *";
+		}
+	}
+}
+
+#ws_ext_permissions_container {
+	//Toggle between readable names and capabilities.
+	//The default is to show readable names (toggle = off), and the alternative is to show capabilities (toggle = on).
+	#ws_ext_toggle_capability_names {
+		cursor: pointer;
+		position: absolute;
+		right: 0;
+		color: #0073aa;
+	}
+
+	&.ws_ext_readable_names_enabled #ws_ext_toggle_capability_names {
+		color: #b4b9be;
+	}
+
+	//State: Show capabilities.
+	.ws_ext_readable_name {
+		display: none;
+	}
+	.ws_ext_capability {
+		display: inline;
+	}
+
+	//State: Show readable names. This is the plugin default.
+	&.ws_ext_readable_names_enabled {
+		.ws_ext_readable_name {
+			display: inline;
+		}
+		.ws_ext_capability {
+			display: none;
+		}
+	}
+}
+
+//The taxonomy table doesn't have capability groups (they're not needed - there are only 4 taxonomy permissions),
+//so its first row needs a bit of extra padding to align vertically with the first role.
+#ws_ext_permissions_container #ws_taxonomy_permissions_table {
+	tr:first-child td {
+		padding-top: 8px;
+	}
+}
+
+/* The "selected role" indicator. */
+.ws_cpt_selected_role_tip {
+	display: block;
+	visibility: hidden;
+
+	box-sizing: border-box;
+	width: 26px;
+	height: 26px;
+
+	position: absolute;
+	right: 0;
+
+	//border: 1px solid #E5E5E5;
+	background: white;
+
+	transform: translate(1px, 0) rotate(-45deg);
+	transform-origin: top right;
+}
+
+.ws_role_table_body .ws_column_selected_role_tip {
+	display: none;
+
+	padding: 0;
+	width: 40px;
+	height: 100%;
+	text-align: right;
+	overflow: visible;
+
+	position: relative;
+
+	cursor: pointer;
+}
+
+.ws_ame_breadcrumb_separator {
+	color: #999;
+}
+
+//The "additional permissions available" notification for individual menu items.
+#ws_menu_editor .ws_ext_permissions_indicator {
+	$indicatorSize: 16px;
+
+	font-size: $indicatorSize;
+	height: $indicatorSize;
+	width: $indicatorSize;
+
+	//Only show when an actor is selected.
+	visibility: hidden;
+
+	vertical-align: bottom;
+	cursor: pointer;
+	color: #4aa100; //Derived from the border-color of an .updated notice. Lab color space, reduced lightness.
+}
+
+#ws_menu_editor.ws_is_actor_view .ws_ext_permissions_indicator {
+	visibility: visible;
+}
+
+/************************************
+        Visible users dialog
+*************************************/
+
+$userSelectionPanelWidth: 350px;
+$userSelectionPanelHeight: 400px;
+$userSelectionPanelPadding: 10px;
+
+#ws_visible_users_dialog {
+	$userDialogPadding: 8px;
+	background: white;
+	padding: $userDialogPadding;
+}
+
+#ws_user_selection_panels {
+	min-width: $userSelectionPanelWidth * 2 + $userSelectionPanelPadding;
+	
+	.ws_user_selection_panel {
+		display: block;
+		float: left;
+		position: relative;
+
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+
+		width: $userSelectionPanelWidth;
+		height: $userSelectionPanelHeight;
+
+		border: 1px solid #e5e5e5;
+		margin-right: 10px;
+		padding: 10px;
+	}
+
+	#ws_user_selection_target_panel {
+		margin-right: 0;
+	}
+
+	#ws_available_user_query {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		width: 100%;
+		max-height: 28px;
+	}
+
+	.ws_user_list_wrapper {
+		position: absolute;
+		$userListTop: 50px;
+
+		top: $userListTop;
+		left: $userSelectionPanelPadding;
+		right: $userSelectionPanelPadding;
+
+		//width: $userSelectionPanelWidth - 2 * $userSelectionPanelPadding - 2px;
+		height: $userSelectionPanelHeight - $userListTop - $userSelectionPanelPadding - 2px;
+
+		overflow-x: auto;
+		overflow-y: auto; //Allow scrolling.
+	}
+
+	.ws_user_selection_list {
+		min-height: 20px;
+
+		//No borders. The panels themselves already have borders.
+		border-width: 0;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+
+		.ws_user_action_column {
+			width: 20px;
+			text-align: center;
+
+			padding-top: 9px;
+			padding-bottom: 0;
+		}
+
+		.ws_user_action_button {
+			cursor: pointer;
+			color: #b4b9be;
+		}
+
+		.ws_user_username_column {
+			padding-left: 0;
+		}
+
+		.ws_user_display_name_column {
+			white-space: nowrap;
+		}
+	}
+
+	#ws_available_users {
+		tr {
+			cursor: pointer;
+		}
+
+		tr:hover, tr.ws_user_best_match {
+			background-color: #eaf2fa;
+		}
+
+		//The "add user" button.
+		tr:hover .ws_user_action_button {
+			color: #7ad03a;
+		}
+	}
+
+	#ws_selected_users {
+		//The "remove from list" button.
+		.ws_user_action_button::before {
+			content: "\f158";
+		}
+		.ws_user_action_button:hover {
+			color: #dd3d36;
+		}
+		.ws_user_action_column {
+			padding-left: 6px;
+		}
+
+		.ws_user_display_name_column {
+			display: none;
+		}
+
+		//You can't deselect the current user. It always stays in the visible actor list.
+		tr.ws_user_must_be_selected {
+			.ws_user_action_button {
+				display: none;
+			}
+		}
+
+		td {
+			//padding-bottom: 8px;
+		}
+		tr:not(:first-child) td {
+			//padding-top: 0;
+		}
+
+	}
+
+	#ws_selected_users_caption {
+		font-size: 14px;
+		line-height: 1.4em;
+		padding: 7px 10px;
+
+		color: #555;
+		font-weight: 600;
+	}
+
+	&::after {
+		display: block;
+		height: 1px;
+		visibility: hidden;
+		content: ' ';
+		clear: both;;
+	}
+}
+
+#ws_loading_users_indicator {
+	position: absolute;
+	right: $userSelectionPanelPadding;
+	bottom: $userSelectionPanelPadding;
+
+	margin-right: 0;
+	margin-bottom: 0;
+}
+
+
+
+/************************************
+        Menu deletion error
+*************************************/
+
+#ws-ame-menu-deletion-error {
+    max-width: 400px;
+}
+
+
+
+
+/************************************
+        Tooltips and hints
+*************************************/
+
+.ws_tooltip_trigger, .ws_field_tooltip_trigger {
+	cursor: pointer;
+}
+
+.ws_tooltip_content_list {
+	list-style: disc;
+	margin-left: 1em;
+	margin-bottom: 0;
+}
+
+.ws_tooltip_node {
+	font-size: 13px;
+	line-height: 1.3;
+	border-radius: 3px;
+	max-width: 300px;
+}
+
+.ws_field_tooltip_trigger .dashicons {
+	font-size: 16px;
+	height: 16px;
+	vertical-align: bottom;
+}
+
+.ws_field_tooltip_trigger {
+	color: #a1a1a1;
+}
+
+//Tooltips on the settings page.
+#ws_plugin_settings_form .ws_tooltip_trigger .dashicons {
+	font-size: 18px;
+}
+
+//And in other boxes.
+.ws_ame_custom_postbox .ws_tooltip_trigger .dashicons {
+	font-size: 18px;
+	height: 18px;
+	vertical-align: bottom;
+}
+
+.ws_wide_tooltip {
+	max-width: 450px;
+}
+
+.ws_hint {
+	background: #FFFFE0;
+	border: 1px solid #E6DB55;
+
+	margin-bottom: 0.5em;
+	border-radius: 3px;
+	position: relative;
+	padding-right: 20px;
+}
+
+.ws_hint_close {
+	border: 1px solid #E6DB55;
+	border-right: none;
+	border-top: none;
+	color: #dcc500;
+	font-weight: bold;
+	cursor: pointer;
+
+	width: 18px;
+	text-align: center;
+	border-radius: 3px;
+
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.ws_hint_close:hover {
+	background-color: #ffef4c;
+	border-color: #e0b900;
+	color: black;
+}
+
+.ws_hint_content {
+	padding: 0.4em 0 0.4em 0.4em;
+}
+
+.ws_hint_content ul {
+	list-style: disc;
+	list-style-position: inside;
+	margin-left: 0.5em;
+}
+
+.ws_ame_doc_box, .ws_ame_custom_postbox {
+	.hndle {
+		cursor: default !important;
+	}
+
+	.inside {
+		margin-bottom: 0;
+	}
+
+	ul {
+		list-style: disc outside;
+		margin-left: 1em;
+	}
+
+	li > ul {
+		margin-top: 6px;
+	}
+
+	.button-link .toggle-indicator::before {
+		margin-top: 4px;
+		width: 20px;
+		-webkit-border-radius: 50%;
+		border-radius: 50%;
+		text-indent: -1px;
+
+		content: "\f142";
+		display: inline-block;
+		font: normal 20px/1 dashicons;
+
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-decoration: none !important;
+	}
+
+	&.closed .button-link .toggle-indicator::before {
+		content: "\f140";
+	}
+}
+
+.ws_basic_container .ws_ame_custom_postbox {
+	//Match .ws_main_container's horizontal margins for proper alignment.
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.ws_ame_custom_postbox .ame-tutorial-list {
+	margin: 0;
+
+	a {
+		text-decoration: none;
+		display: block;
+		padding: 4px;
+	}
+
+	ul {
+		margin-left: 1em;
+	}
+
+	li {
+		display: block;
+		margin: 0;
+		list-style: none;
+	}
+}
+
+/************************************
+      Copy Permissions dialog
+*************************************/
+#ws-ame-copy-permissions-dialog select {
+	min-width: 280px;
+}
+
+/*********************************************
+      Capability suggestions and preview
+**********************************************/
+
+#ws_capability_suggestions {
+	padding: 4px;
+	width: 350px;
+
+	border: 1px solid #cdd5d5;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+	background: #fff;
+
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+
+	#ws_previewed_caps {
+		margin-top: 0;
+		margin-bottom: 6px;
+	}
+
+	td, th {
+		//For consistency, padding should match the capability dropdown.
+		padding-top: $dropdownOptionPaddingTop;
+		padding-bottom: $dropdownOptionPaddingTop;
+	}
+
+	tr.ws_preview_has_access .ws_ame_role_name{
+		background-color: lightgreen;
+	}
+
+	.ws_ame_suggested_capability {
+		cursor: pointer;
+
+		&:hover {
+			background-color: #d0f2d0;
+		}
+	}
+}
+
+/*********************************************
+      Settings page stuff
+**********************************************/
+
+#ws_plugin_settings_form figure {
+	margin-left: 0;
+	margin-top: 0;
+	margin-bottom: 1em;
+}
+
+.ame-available-add-ons {
+	tr:first-of-type td {
+		margin-top: 0;
+		padding-top: 0;
+	}
+
+	td {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.ame-add-on-heading {
+		padding-left: 0;
+	}
+}
+
+.ame-add-on-name {
+	font-weight: 600;
+}
+
+.ame-add-on-details-link::after {
+	/*content: " \f504";
+	font-family: dashicons, sans-serif;*/
+}
+
+/*********************************************
+      Miscellaneous
+**********************************************/
+
+#ws_sidebar_pro_ad {
+    min-width: 225px;
+
+	margin-top: 5px;
+	margin-left: 3px;
+
+	position: fixed;
+	right: 20px;
+	bottom: 40px;
+	z-index: 100;
+}
+
+
+.test-wrap {
+    background-color: #444444;
+    padding: 30px;
+}
+
+.test-container {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.test-header {
+    background-color: #67d6ff;
+    padding: 6px;
+
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.test-content {
+    padding: 8px;
+}
+
+@import "test-access-screen";

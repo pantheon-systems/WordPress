@@ -1,0 +1,45 @@
+/*** Pie chart **/
+.vc_pie_chart {
+  z-index: 0;
+  text-align: center;
+  .opacity(0);
+
+  &.vc_ready {
+    .opacity(1);
+  }
+
+  .vc_pie_wrapper {
+    position: relative;
+    margin: 0 auto;
+  }
+
+  canvas {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vc_pie_chart_value {
+    font-size: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
+}
+
+.vc_pie_chart_back {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border: 6px solid @vc_btnBackground;
+  border-radius: 999px;
+  border-radius: 50%;
+  .opacity(0.3);
+  .box-sizing(border-box);
+}

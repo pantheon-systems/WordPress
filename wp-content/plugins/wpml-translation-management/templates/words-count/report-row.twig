@@ -1,0 +1,12 @@
+<tr class="{{ row.status }}{% if row.isRequested %} is-requested{% endif %}{% if row.needsRefresh %} needs-refresh{% endif %}"
+    {% if row.needsRefresh %} title="{{ strings.needsRefresh }}"{% endif %}>
+    <td class="word-count-checkbox">
+        <input type="checkbox" class="requested-type"
+               data-group="{{ row.group }}" data-type="{{ row.type }}"
+               {% if row.isRequested %} checked="checked"{% endif %}
+               {% if countInProgress %} disabled="disabled"{% endif %}"></td>
+    <td>{{ row.typeLabel }}</td>
+    <td><span class="js-row-completed-items">{{ row.completedItems }}</span>/{{ row.countItems }}</td>
+    <td class="js-row-count-words">{{ row.countWords }}</td>
+    <td class="word-count-status">{% include 'estimated-time.twig' with {estimatedTime: row.estimatedTime, strings:strings} %}</td>
+</tr>

@@ -1,0 +1,52 @@
+// Loaders
+@vc_ui-wp-spinner-svg-src: '../vc/loaders/spinner.svg';
+@vc_ui-wp-spinner-light-svg-src: '../vc/loaders/spinner-light.svg';
+@vc_ui-wp-spinner-animation-duration: 1.08s;
+@vc_ui-wp-spinner-base-size: 16px;
+
+.vc_ui-wp-spinner {
+  margin: 0;
+  padding: 0;
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  opacity: .7;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    height: @vc_ui-wp-spinner-base-size;
+    width: @vc_ui-wp-spinner-base-size;
+    background: transparent url(@vc_ui-wp-spinner-light-svg-src) 50% 50% no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: vc_ui-wp-spinner-animation @vc_ui-wp-spinner-animation-duration linear infinite;
+  }
+
+  &.vc_ui-wp-spinner-lg {
+    &::before {
+      height: @vc_ui-wp-spinner-base-size * 2;
+      width: @vc_ui-wp-spinner-base-size * 2;
+    }
+  }
+  &.vc_ui-wp-spinner-dark {
+    &::before {
+      background-image: url(@vc_ui-wp-spinner-svg-src);
+    }
+  }
+}
+
+
+@keyframes vc_ui-wp-spinner-animation {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

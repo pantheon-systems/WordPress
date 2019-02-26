@@ -1,0 +1,62 @@
+{% if display %}
+	<div class="tablenav top clearfix wcml-product-translation-filtering">
+		<div class="alignleft">
+			<select class="wcml_translation_status_lang">
+				<option value="all" {% if not slang %} selected="selected" {% endif %}>{{ strings.all_lang }}</option>
+				{% for language in active_languages %}
+					<option	value="{{ language.code|e }}" {% if slang == language.code  %} selected="selected" {% endif %} >
+						{{ language.display_name }}
+					</option>
+				{% endfor %}
+			</select>
+
+			<select class="wcml_product_category">
+				<option value="0">{{ strings.all_cats }}</option>
+				{% for category in categories %}
+					<option value="{{ category.term_taxonomy_id|e }}" {% if category_from_filter == category.term_taxonomy_id %} selected="selected" {% endif %}>
+						{{ category.name }}
+					</option>
+				{% endfor %}
+			</select>
+
+			<select class="wcml_translation_status">
+				<option value="all">{{ strings.all_trnsl_stats }}</option>
+				<option value="not" {% if trst == 'not' %} selected="selected" {% endif %}>
+					{{ strings.not_trnsl }}
+				</option>
+				<option value="need_update" {% if trst == 'need_update' %} selected="selected" {% endif %}>
+					{{ strings.need_upd }}
+				</option>
+				<option value="in_progress" {% if trst == 'in_progress' %} selected="selected" {% endif %}>
+					{{ strings.in_progress }}
+				</option>
+				<option value="complete" {% if trst == 'complete' %} selected="selected" {% endif %}>
+					{{ strings.complete }}
+				</option>
+			</select>
+
+			<select class="wcml_product_status">
+				<option value="all">{{ strings.all_stats }}</option>
+				{% for status in all_statuses %}
+					<option value="{{ status|e }}" {% if st == status %} selected="selected" {% endif %}>
+						{{ status|capitalize }}
+					</option>
+				{% endfor %}
+			</select>
+
+			<button type="button" value="filter" class="button-secondary wcml_search">{{ strings.filter }}</button>
+			{% if search %}
+				<button type="button" value="reset" class="button-secondary wcml_reset_search">
+					{{ strings.reset }}
+				</button>
+			{% endif %}
+		</div>
+
+		<div class="alignright">
+			<input type="search" class="wcml_product_name" placeholder="{{ strings.search|e }}" value="{{ search_text }}"/>
+			<input type="hidden" value="{{ products_admin_url }}" class="wcml_products_admin_url"/>
+			<input type="hidden" value="{{ pagination_url }}" class="wcml_pagination_url"/>
+			<button type="button" value="search" class="button-secondary wcml_search_by_title">{{ strings.search }}</button>
+		</div>
+	</div>
+{% endif %}

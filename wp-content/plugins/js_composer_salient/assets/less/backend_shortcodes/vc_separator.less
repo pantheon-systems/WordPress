@@ -1,0 +1,39 @@
+/* Separator element
+---------------------------------------------------------- */
+.wpb_vc_separator,
+.wpb_vc_text_separator {
+  > .wpb_element_wrapper {
+    background-image: url(../vc/separator.gif);
+    background-repeat: repeat-x;
+    background-position: center center;
+    padding: 0;
+    height: 31px;
+    min-height: 31px;
+  }
+
+  .textfield {
+    position: relative;
+    background-color: #FFFFFF;
+    font-size: 11px;
+
+    display: inline-block;
+    position: relative;
+    top: 6px;
+    padding: 0px 10px;
+  }
+  .separator_align_center {
+    text-align: center;
+  }
+  .separator_align_right {
+    text-align: right;
+    .textfield {
+      margin-right: 10px;
+    }
+  }
+  .separator_align_left {
+    text-align: left;
+    .textfield {
+      margin-left: 10px;
+    }
+  }
+}

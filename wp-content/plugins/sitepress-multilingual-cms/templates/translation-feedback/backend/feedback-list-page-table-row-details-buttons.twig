@@ -1,0 +1,29 @@
+<div class="submit wpml-tf-inline-edit-buttons">
+    <div class="alignleft">
+        <button type="button" class="js-wpml-tf-cancel wpml-tf-cancel button">{{ strings.cancel_button }}</button>
+        {% if has_admin_capabilities %}
+        <button type="button" class="js-wpml-tf-trash wpml-tf-trash button">{{ strings.trash_button }}</button>
+        {% endif %}
+    </div>
+
+    <div class="alignright">
+        {% if 'fixed' != feedback.get_status %}
+            {% if has_admin_capabilities %}
+                <button type="button" class="js-wpml-tf-translation-fixed button">{{ strings.translation_fixed_button }}</button>
+            {% else %}
+                <input type="checkbox" class="js-wpml-tf-translation-fixed-checkbox"
+                       value="1" id="translation_fixed_{{ feedback.get_id }}">
+                <label for="translation_fixed_{{ feedback.get_id }}">{{ strings.translation_fixed_button }}</label>
+            {% endif %}
+        {% endif %}
+
+        {% if feedback.get_next_status %}
+            <button type="button" class="js-wpml-tf-send wpml-tf-send button button-primary" value="{{ feedback.get_next_status.value }}">
+                {{ feedback.get_next_status.label }}
+            </button>
+        {% endif %}
+
+    </div>
+
+    <br class="clear">
+</div>

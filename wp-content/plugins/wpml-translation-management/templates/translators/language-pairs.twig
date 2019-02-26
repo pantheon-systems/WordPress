@@ -1,0 +1,30 @@
+<div class="js-language-pairs"></div>
+
+<div class="wpml-form-row">
+    <button class="button-secondary js-add-lang-pair">+ {{ dialog.strings.add_lang_pair_text }}</button>
+</div>
+
+<div class="js-select-languages" style="width: 600px;display: none">
+    <div class="wpml-form-row">
+        <span class="languages-from-label">{{ dialog.strings.from }}:</span>
+        <select name="from-language[]" class="js-from-language-select">
+            <option value="0">{{ dialog.strings.choose_language }}</option>
+            {% for lang in dialog.source_languages.get_codes() %}
+                {% set lang_details = dialog.source_languages.get( lang ) %}
+                <option value="{{ lang_details.get_code() }}">{{ lang_details.get_display_name() }}</option>
+            {% endfor %}
+        </select>
+        <i class="otgs-ico-delete js-delete-language-pair"></i>
+    </div>
+    <div class="languages-to js-to-languages" style="display: none;">
+        <span class="languages-to-label">{{ dialog.strings.to }}:</span>
+        <div>
+            {% for lang in dialog.languages.get_codes() %}
+                <label>
+                    <input type="checkbox" name="to-language[]" value="{{ lang }}"/>
+                    {% include 'language-with-flag.twig' with {'lang' : lang, 'languages' : dialog.languages} %}
+                </label>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="js-wpml-active-service-wrapper">
+    <div class="js-ts-refreshing-message ts-refreshing-message" style="display:none">
+        <p><span class="spinner is-active"></span>{{ strings.refreshing_ts_message }}</p>
+    </div>
+    <div class="ts-active-service js-ts-active-service">
+        <input type="hidden" class="active-service-title" value="{{ strings.modal_title }}">
+        <input type="hidden" class="active-service-header" value="{{ strings.modal_header }}">
+        <input type="hidden" class="active-service-tip" value="{{ strings.modal_tip|format( "<a target='_blank' href='" ~ active_service.get_url ~ "'>" ~ active_service.get_name ~ "</a>" ) }}">
+        <input type="hidden" class="js-needs-info-refresh" value="{{ needs_info_refresh }}">
+        <input type="hidden" class="js-ts-refresh-nonce" value="{{ nonces['refresh_ts_info'] }}">
+        <div class="ts-admin-section-leftcol">
+            <h3>{{ strings.title }}</h3>
+            <div class="service-logo"><img src="{{ active_service.get_logo_url }}" alt="{{ active_service.get_name }}"/></div>
+            <p>
+                <button data-id="{{ active_service.get_id }}"  class="button-secondary js-deactivate-service">{{ strings.deactivate }}</button>
+            </p>
+        </div>
+
+        <div class="ts-admin-section-rightcol">
+
+            {% if active_service.get_has_language_pairs and active_service.get_custom_fields_data %}
+                <div class="refresh-language-pairs-section">
+                    <div class="spinner"></div>
+                    <div class="wpml_ajax_response"></div>
+                    <a class="button-secondary js-refresh-language-pairs" data-nonce="{{ nonces['wpml-tp-refresh-language-pairs'] }}">
+                        {{ strings.refresh_language_pairs }}
+                    </a>
+                </div>
+            {% endif %}
+
+            <h3>{{ active_service.get_name }}</h3>
+            <p>{{ active_service.get_description|raw }}</p>
+
+            <p><a target="_blank" href="{{ active_service.get_doc_url }}">{{ strings.documentation }}</a></p>
+
+            {% if 1 == active_service.get_requires_authentication %}
+                <div class="ts-authentication notice notice-warning inline clearfix">
+
+                    {% if active_service.get_custom_fields_data %}
+                        <p>{{ strings.authentication.is_authorized }}</p>
+                        <p class="notice-action-link"><button data-id="{{ active_service.get_id }}" data-custom-fields="{{ active_service.get_custom_fields | json_encode }}" class="js-invalidate-service button-primary">{{ strings.authentication.de_authorize_button }}</button></p>
+                    {% else %}
+                        <p>{{ strings.authentication.description|format( active_service.get_name, '<a target="_blank" href="' ~ active_service.get_doc_url ~ '">' ~ strings.documentation_lower ~ '</a>' )|raw }}</p>
+                        <p class="notice-action-link"><button class="js-authenticate-service button-primary" data-id="{{ active_service.get_id }}" data-custom-fields="{{ active_service.get_custom_fields | json_encode }}">{{ strings.authentication.authenticate_button }}</button></p>
+                    {% endif %}
+
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>

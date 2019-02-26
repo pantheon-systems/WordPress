@@ -1,0 +1,174 @@
+.vc_box_border_variants(@selector, @color) {
+  .vc_box_outline.vc_box_border@{selector},
+  .vc_box_outline_circle.vc_box_border@{selector} {
+    border-color: @color;
+  }
+  .vc_box_border.vc_box_border@{selector},
+  .vc_box_border_circle.vc_box_border@{selector} {
+    background-color: @color;
+  }
+}
+
+.wpb_single_image {
+  a {
+    border: none;
+    outline: none;
+  }
+  img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: top;
+    &.vc_img-placeholder {
+      width: 100%;
+    }
+  }
+  .vc_single_image-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 100%;
+    &.vc_box_ {
+      &rounded, &rounded img {
+        border-radius: 4px;
+        .box-shadow(none);
+      }
+      &outline,
+      &outline_circle {
+        border-radius: 0;
+        .box-shadow(none);
+        padding: 6px;
+        border: 1px solid @grey;
+        img {
+          border-radius: 0;
+          .box-shadow(none);
+          border: 1px solid @grey;
+        }
+      }
+      &border,
+      &border_circle {
+        border-radius: 0;
+        .box-shadow(none);
+        padding: 6px;
+        border: none;
+        img {
+          border-radius: 0;
+          .box-shadow(none);
+          border: none;
+        }
+      }
+      &shadow,
+      &shadow_border,
+      &shadow_border_circle,
+      &shadow_circle {
+        border-radius: 0;
+        .box-shadow(0 0px 5px rgba(0, 0, 0, 0.1));
+        img {
+          border-radius: 0;
+          .box-shadow(0 0px 5px rgba(0, 0, 0, 0.1));
+        }
+      }
+      &shadow_border,
+      &shadow_border_circle {
+        padding: 6px;
+      }
+      &shadow_3d {
+        border-radius: 0;
+        .box-shadow(none);
+        margin-bottom: 15px;
+        img {
+          border-radius: 0;
+          .box-shadow(none);
+        }
+      }
+      &circle,
+      &outline_circle,
+      &border_circle,
+      &shadow_circle,
+      &shadow_border_circle {
+        border-radius: 50%;
+        .box-shadow(none);
+        overflow: hidden;
+        img {
+          border-radius: 50%;
+          .box-shadow(none);
+          overflow: hidden;
+        }
+      }
+      &shadow_circle, &shadow_border_circle {
+        .box-shadow(0 0px 5px rgba(0, 0, 0, 0.1));
+        img {
+          .box-shadow(0 0px 5px rgba(0, 0, 0, 0.1));
+        }
+      }
+    }
+  }
+  &.vc_align_center {
+    text-align: center;
+  }
+  &.vc_align_right {
+    text-align: right;
+  }
+  &.vc_align_left {
+    text-align: left;
+  }
+
+  .vc_box_shadow_3d {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    max-width: 100%;
+    &:after,
+    &:before {
+      content: "";
+      position: absolute;
+      .box-shadow(0 15px 10px rgba(0, 0, 0, 0.6));
+      left: 5px;
+      right: 50%;
+      bottom: 8px;
+      height: 30%;
+      z-index: -1;
+      border-radius: inherit;
+      .transform-origin(0 0);
+      -webkit-transform: skewY(-6deg);
+      -ms-transform: skewY(-6deg);
+      transform: skewY(-6deg);
+    }
+    &:after {
+      left: 50%;
+      right: 5px;
+      -webkit-transform: skewY(6deg);
+      -ms-transform: skewY(6deg);
+      transform: skewY(6deg);
+      .transform-origin(100% 0);
+    }
+  }
+
+  .vc_figure {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .vc_figure-caption {
+    margin-top: .2em;
+    font-size: .8em;
+  }
+
+  .vc_box_border_variants(_blue, @blue);
+  .vc_box_border_variants(_turquoise, @turquoise);
+  .vc_box_border_variants(_pink, @pink);
+  .vc_box_border_variants(_violet, @violet);
+  .vc_box_border_variants(_peacoc, @peacoc);
+  .vc_box_border_variants(_chino, @chino);
+  .vc_box_border_variants(_mulled_wine, @mulled_wine);
+  .vc_box_border_variants(_vista_blue, @vista_blue);
+  .vc_box_border_variants(_black, @black);
+  .vc_box_border_variants(_grey, @grey);
+  .vc_box_border_variants(_orange, @orange);
+  .vc_box_border_variants(_sky, @sky);
+  .vc_box_border_variants(_green, @green);
+  .vc_box_border_variants(_juicy_pink, @juicy_pink);
+  .vc_box_border_variants(_sandy_brown, @sandy_brown);
+  .vc_box_border_variants(_purple, @purple);
+  .vc_box_border_variants(_white, @white);
+}

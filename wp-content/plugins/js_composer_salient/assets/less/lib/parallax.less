@@ -1,0 +1,50 @@
+/**
+ * Parallax
+ */
+
+.vc_parallax {
+  position: relative;
+  overflow: hidden;
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+  .vc_parallax-inner {
+    pointer-events: none; // disables video clickability
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: inherit;
+    background-size: cover;
+    z-index: 0;
+    background-position: 50% 0%;
+  }
+}
+
+.vc_parallax-inner {
+  iframe {
+    max-width: 1000%;
+  }
+}
+
+.vc_video-bg-container {
+  position: relative;
+}
+
+.vc_video-bg {
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; // disables video clickability
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+
+  iframe {
+    max-width: 1000%;
+  }
+}

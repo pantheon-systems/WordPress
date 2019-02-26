@@ -1,0 +1,24 @@
+<div class="js-translation-managers wpml-section" data-nonce="{{ nonce }}" data-current-user-id="{{ user_id }}">
+    <h3>{{ strings.title }}</h3>
+
+    <div class="translation-managers-radios js-translation-managers-radios">
+        <input type="radio" id="existing-user-manager" name="user-manager" value="existing" />
+        <label class="button-secondary" for="existing-user-manager">{{ strings.existing_user }}</label>
+
+        <input type="radio" id="new-user-manager" name="user-manager" value="new" />
+        <label class="button-secondary" for="new-user-manager">{{ strings.new_user }}</label>
+    </div>
+
+    {% include 'existing-user-section.twig' %}
+    {% include 'new-user-section.twig' %}
+
+    <span class="notice notice-error inline js-error-message" style="display: none"></span>
+
+    <ul class="js-translation-managers-list translation-managers-list" style="display:none;">
+            {% for user in translation_managers %}
+                {% include 'translation-managers-row.twig' %}
+            {% endfor %}
+    </ul>
+
+    <div class="js-no-translation-managers notice notice-warning inline" style="display:none;"><p>{{ strings.no_users }}</p></div>
+</div>

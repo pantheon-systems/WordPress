@@ -1,0 +1,8 @@
+<tr>
+    <th scope="col" class="manage-column sortable"><a><span>{{ strings.columns.name }}</span><span class="sorting-indicator"></span></a></th>
+    <th scope="col" class="manage-column sortable"><a><span>{{ strings.columns.email }}</span><span class="sorting-indicator"></span></a></th>
+    {% if strings['ate'] %}
+        <th scope="col" class="manage-column">{{ strings.columns.subscription }}</th>
+    {% endif %}
+    <th scope="col" class="manage-column">{{ strings.columns.language_pairs }}</th>
+</tr>

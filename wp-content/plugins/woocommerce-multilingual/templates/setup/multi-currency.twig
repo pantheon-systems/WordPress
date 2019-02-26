@@ -1,0 +1,15 @@
+<span id="{{ strings.step_id }}">
+<h1>{{ strings.heading }}</h1>
+
+<p>{{ strings.description }}</p>
+
+<p>
+    <label>
+        <input type="checkbox" value="1" name="enabled" {% if multi_currency_on %}checked="checked"{% endif %} />&nbsp;{{ strings.label_mco }}
+    </label>
+</p>
+
+<p class="wcml-setup-actions step">
+    <a href="{{ continue_url }}" class="button button-large button-primary submit">{{ strings.continue }}</a>
+</p>
+</span>

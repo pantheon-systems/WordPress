@@ -1,0 +1,50 @@
+<form id="posts-filter" method="get">
+    <input type="hidden" name="page" value="wpml-media"/>
+    <input type="hidden" name="sm" value="media-translation"/>
+    {{ nonce|raw }}
+    <label for="filter-by-date" class="screen-reader-text">{{ strings.filter_by_date }}</label>
+    <select id="filter-by-date" name="m">
+        <option {% if( selected_month == 0 ) %}selected="selected"{% endif %}
+                value="0">{{ strings.all_dates }}</option>
+        {% for month in months %}
+            <option {% if( selected_month == month.id ) %}selected="selected"{% endif %}
+                    value="{{ month.id }}">{{ month.label }}</option>
+        {% endfor %}
+    </select>
+    {{ strings.in }}
+    <label for="filter-by-language" class="screen-reader-text">{{ strings.filter_by_language }}</label>
+    <select id="filter-by-language" name="slang">
+        <option value="">{{ strings.any_language }}</option>
+        {% for code, language in languages %}
+            <option {% if( from_language == code ) %}selected="selected"{% endif %}
+                    value="{{ code }}">{{ language.name }}</option>
+        {% endfor %}
+    </select>
+    {{ strings.to }}
+    <select id="filter-by-language" name="tlang">
+        <option value="">{{ strings.any_language }}</option>
+        {% for code, language in languages %}
+            <option {% if( to_language == code ) %}selected="selected"{% endif %}
+                    value="{{ code }}">{{ language.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="filter-by-translation-status" class="screen-reader-text">{{ strings.filter_by_status }}</label>
+    <select id="filter-by-translation-status" name="status">
+        <option {% if( selected_status|length == 0 ) %}selected="selected"{% endif %}
+                value="">{{ strings.status_all }}</option>
+        <option {% if( selected_status == statuses.not_translated and selected_status|length > 0 ) %}selected="selected"{% endif %}
+                value="{{ statuses.not_translated }}">{{ strings.status_not }}</option>
+        <option {% if( selected_status == statuses.in_progress and selected_status|length > 0 ) %}selected="selected"{% endif %}
+                value="{{ statuses.in_progress }}">{{ strings.status_in_progress }}</option>
+        <option {% if( selected_status == statuses.translated ) %}selected="selected"{% endif %}
+                value="{{ statuses.translated }}">{{ strings.status_translated }}</option>
+        <option {% if( selected_status == statuses.needs_translation ) %}selected="selected"{% endif %}
+                value="{{ statuses.needs_translation }}">{{ strings.status_needs_translation }}</option>
+    </select>
+
+    <label class="screen-reader-text" for="media-search-input">{{ strings.search_media }}</label>
+    <input size="25" type="search" id="media-search-input" placeholder="{{ strings.search_placeholder }}" name="s"
+           value="{{ search }}">
+    <input type="submit" class="button action" value="{{ strings.search_button_label }}">
+</form>

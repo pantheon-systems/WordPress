@@ -1,0 +1,63 @@
+<script type="text/html" id="vcl-options-field-input">
+    <div class="vc_row">
+        <div class="vc_col-sm-12">
+            <label class="wpb_element_label">{{ label }}</label>
+            <input type="text" name="{{ name }}" value="{{ value[0] }}">
+
+            <div class="descr"><i>{{ description }}</i></div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="vcl-options-field-select">
+    <div class="vc_row">
+        <div class="vc_col-sm-12">
+            <label class="wpb_element_label">{{ label }}</label>
+            <select name="{{ name }}">
+                <# _.each(options, function(option) { #>
+                    <# if(_.isArray(option)) { #>
+                        <option value="{{ option[0] }}"
+                                {{ value[0]===option[0] ?
+                        ' selected="true"' : '' }}>{{ option[1] }}</option>
+                        <# } else { #>
+                            <option value="{{ option }}"
+                                    {{ value[0]===option ?
+                            ' selected="true"' : '' }}>{{ option }}</option>
+                            <# } #>
+                                <# }); #>
+            </select>
+
+            <div class="descr"><i>{{ description }}</i></div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="vcl-options-field-checkbox">
+    <div class="vc_row">
+        <div class="vc_col-sm-12">
+            <label class="wpb_element_label">{{ label }}</label>
+
+            <div class="vc_options-checkboxes">
+                <# _.each(options, function(option) { #>
+                    <label><input type="checkbox" name="{{ name }}" value="{{ option[0] }}" {{ _.indexOf(value,
+                                  option[0])> -1 ? ' checked="true"' : '' }}> {{ option[1] }}</label>
+                    <# }); #>
+            </div>
+            <div class="descr"><i>{{ description }}</i></div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="vcl-options-field-boolean">
+    <div class="vc_row">
+        <div class="vc_col-sm-12">
+            <label class="wpb_element_label">{{ label }}</label>
+
+            <div class="vc_options-checkbox">
+                <label><input type="checkbox" name="{{ name }}" value="true" {{ value[0] === 'true' ? ' checked="true"' :
+                    '' }}> <?php _e('Yes', 'js_composer') ?></label>
+            </div>
+            <div class="descr"><i>{{ description }}</i></div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="vcl-options-field-separator">
+    <h4>{{label}}</h4>
+</script>

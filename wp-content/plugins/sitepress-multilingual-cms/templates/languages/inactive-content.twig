@@ -1,0 +1,33 @@
+<div class="wpml-section-content-inner">
+    <h4>{{ strings.title }}</h4>
+    <table class="widefat inactive-content-table">
+        <thead>
+            <tr>
+                <th>{{ strings.language }}</th>
+                {% for type in content.get_content_types %}
+                    {% for slug in type %}
+                        <th>{{ slug }}</th>
+                    {% endfor %}
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for language, counts in content.get_language_counts_rows %}
+            <tr>
+                <th>{{ language }}</th>
+                {% for count in counts %}
+                    <td>{{ count }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>{{ strings.total }}</th>
+                {% for count in content.get_total_counts %}
+                    <td>{{ count }}</td>
+                {% endfor %}
+            </tr>
+        </tfoot>
+    </table>
+</div>

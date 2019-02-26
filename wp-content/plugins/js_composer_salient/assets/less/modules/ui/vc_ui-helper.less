@@ -1,0 +1,16 @@
+// Helpers
+@vcui-help-block-color: #929292;
+
+.vc_ui-help-block {
+  color: @vcui-help-block-color;
+  font-style: italic;
+  a {
+    font-weight: 600;
+    color: darken(@vcui-help-block-color, 5%);
+    text-decoration: none;
+    border: none;
+    &:hover {
+      color: darken(@vcui-help-block-color, 15%);
+    }
+  }
+}

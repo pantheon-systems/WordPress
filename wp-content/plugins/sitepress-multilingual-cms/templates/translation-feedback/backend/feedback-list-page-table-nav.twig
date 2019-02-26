@@ -1,0 +1,74 @@
+<div class="tablenav {{ nav_location }}">
+
+    <div class="alignleft actions js-wpml-tf-bulkactions">
+        <label for="bulk-action-selector-{{ nav_location }}" class="screen-reader-text">{{ strings.bulk_actions.select }}</label>
+        <select name="bulk_action{{ nav_location == 'bottom' ? '2' : '' }}" id="bulk-action-selector-{{ nav_location }}"
+                {% if not has_admin_capabilities %} disabled="disabled"{% endif %}>
+            {% for action, label in strings.bulk_actions.options %}
+            <option value="{{ action }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" class="button action" value="{{ strings.bulk_actions.apply_button }}"
+                {% if not has_admin_capabilities %} disabled="disabled"{% endif %}>
+    </div>
+
+    <h2 class="screen-reader-text">{{ strings.pagination.list_navigation }}</h2>
+
+    <div class="tablenav-pages">
+
+        <span class="displaying-num">{{ pagination.total_items }}</span>
+        <span class="pagination-links">
+
+            {% include 'feedback-list-page-table-nav-arrow.twig'
+                with {
+                    'url': pagination.first_page,
+                    'class': 'first-page',
+                    'label': strings.pagination.first_page,
+                }
+            %}
+
+            {% include 'feedback-list-page-table-nav-arrow.twig'
+                with {
+                    'url': pagination.previous_page,
+                    'class': 'previous-page',
+                    'label': strings.pagination.previous_page,
+                }
+            %}
+
+            <span class="paging-input">
+                {% if nav_location == 'top' %}
+                    <label for="current-page-selector-{{ nav_location }}" class="screen-reader-text">{{ strings.pagination.current_page }}</label>
+                    <input class="current-page" id="current-page-selector-{{ nav_location }}" type="text" name="paged"
+                           value="{{ pagination.current_page }}" size="{{ pagination.total_pages|length }}" aria-describedby="table-paging">
+                    <span class="tablenav-paging-text"> {{ strings.pagination.of }} <span class="total-pages">{{ pagination.total_pages }}</span></span>
+                {% else %}
+                    <span class="tablenav-paging-text">{{ pagination.current_page }} {{ strings.pagination.of }}
+                        <span class="total-pages">{{ pagination.total_pages }}</span>
+                    </span>
+                {% endif %}
+            </span>
+
+            {% include 'feedback-list-page-table-nav-arrow.twig'
+                with {
+                    'url': pagination.next_page,
+                    'class': 'next-page',
+                    'label': strings.pagination.next_page,
+                }
+            %}
+
+
+            {% include 'feedback-list-page-table-nav-arrow.twig'
+                with {
+                    'url': pagination.last_page,
+                    'class': 'last-page',
+                    'label': strings.pagination.last_page,
+                }
+            %}
+
+        </span>
+
+    </div>
+
+    <br class="clear">
+
+</div>

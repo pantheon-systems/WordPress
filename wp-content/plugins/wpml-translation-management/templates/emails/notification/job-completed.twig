@@ -1,0 +1,10 @@
+<p>{{ message|raw }}</p>
+<p>{{ deadline_status }}</p>
+<p>
+    <a href="{{ translation_jobs_url }}">{{ view_jobs_text }}</a>
+</p>
+
+{% if overdue_job %}
+    <p>{{ needs_help.title }}</p>
+    <p><a target="_blank" href="{{ needs_help.translators_link }}">{{ needs_help.translators_text }}</a> {{ needs_help.options_or }} <a target="_blank" href="{{ needs_help.translation_services_link }}">{{ needs_help.translation_services_text }}</a></p>
+{% endif %}

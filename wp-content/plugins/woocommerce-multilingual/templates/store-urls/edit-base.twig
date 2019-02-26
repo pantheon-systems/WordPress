@@ -1,0 +1,34 @@
+<div class="wcml-dialog hidden" id="wcml-edit-base-slug-{{ original_base|e }}-{{ language|e }}" title="{{ data.label_name }}">
+    <form class="wcml-slug-dialog" >
+
+        <h3 class="wpml-header-original">{{ strings.orig }}:
+				<span class="wpml-title-flag">
+					<img src="{{ orig_flag_url }}" alt="{{ orig_display_name|e }}"/>
+				</span>
+            <strong>{{ orig_display_name }}</strong>
+        </h3>
+
+        <h3 class="wpml-header-translation">{{ strings.trnsl_to }}:
+				<span class="wpml-title-flag">
+					<img src="{{ trnsl_flag_url }}" alt="{{ trnsl_display_name|e }}"/>
+				</span>
+            <strong>{{ trnsl_display_name }}</strong>
+        </h3>
+
+        <div class="wpml-form-row">
+            <input readonly id="base-original" class="original_value" value="{{ data.original_base_value }}"
+                   type="text">
+
+            <input id="base-translation"
+                   class="translated_value"
+                   name="base_translation" value="{{ data.translated_base_value }}" type="text"/>
+        </div>
+
+        <footer class="wpml-dialog-footer">
+            <input type="button" class="cancel wcml-dialog-close-button wpml-dialog-close-button wcml_cancel_base alignleft"
+                   value="{{ strings.cancel|e }}" />
+            <input type="submit" class="wcml-dialog-close-button wpml-dialog-close-button button-primary wcml_save_base alignright"
+                   value="{{ strings.save|e }}" data-base="{{ original_base|e }}" data-language="{{ language|e }}"/>
+        </footer>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+@import "../vc_ui-button.less";
+@import "../vc_ui-icon-pixel.less";
+
+@vcui-panel-footer-padding-horizontal: 18px;
+@vcui-panel-footer-padding-vertical: 18px;
+@vcui-panel-footer-font-size: 14px;
+@vcui-panel-footer-background: #f6f6f6;
+@vcui-panel-footer-button-group-space: 6px;
+@vcui-panel-footer-button-fw: 140px;
+
+.vc_ui-panel-footer-container {
+  padding: @vcui-panel-footer-padding-vertical  @vcui-panel-footer-padding-horizontal;
+  background: @vcui-panel-footer-background;
+  margin: 0;
+  font-size: @vcui-panel-footer-font-size;
+}
+
+.vc_ui-panel-footer {
+
+  // button behavior
+  .vc_ui-button-group {
+    margin: -@vcui-panel-footer-button-group-space/2;
+    box-sizing: border-box;
+    .vc_ui-button,
+    .vc_ui-button-message {
+      margin: @vcui-panel-footer-button-group-space/2;
+    }
+  }
+  .vc_ui-button-fw {
+    min-width: @vcui-panel-footer-button-fw;
+
+    .vc-c-icon-check {
+      font-weight: bold;
+    }
+  }
+}

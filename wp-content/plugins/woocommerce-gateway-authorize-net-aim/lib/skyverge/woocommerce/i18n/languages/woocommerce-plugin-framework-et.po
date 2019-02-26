@@ -1,0 +1,1536 @@
+# Copyright (C) 2015
+# This file is distributed under the same license as the  package.
+# Translators:
+# Illimar Tambek <illimar.tambek@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: WC Plugin Framework\n"
+"Report-Msgid-Bugs-To: https://support.woocommerce.com/hc/\n"
+"POT-Creation-Date: 2017-03-27 11:59-0700\n"
+"PO-Revision-Date: 2017-03-27 11:59-0700\n"
+"Last-Translator: Illimar Tambek <illimar.tambek@gmail.com>\n"
+"Language-Team: Estonian (http://www.transifex.com/projects/p/wc-plugin-"
+"framework/language/et/)\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#. translators: this is an action that dismisses a message
+#: class-sv-wc-admin-notice-handler.php:238
+msgid "Dismiss"
+msgstr "Loobu"
+
+#: class-sv-wc-framework-bootstrap.php:268
+msgid ""
+"The following plugin is disabled because it is out of date and incompatible "
+"with newer plugins on your site:"
+msgid_plural ""
+"The following plugins are disabled because they are out of date and "
+"incompatible with newer plugins on your site:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: class-sv-wc-framework-bootstrap.php:282
+msgid ""
+"To resolve this, please %1$supdate%2$s (recommended) %3$sor%4$s "
+"%5$sdeactivate%6$s the above plugin, or %7$sdeactivate the following%8$s:"
+msgid_plural ""
+"To resolve this, please %1$supdate%2$s (recommended) %3$sor%4$s "
+"%5$sdeactivate%6$s the above plugins, or %7$sdeactivate the following%8$s:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: class-sv-wc-framework-bootstrap.php:303
+msgid ""
+"The following plugins are inactive because they require a newer version of "
+"WooCommerce:"
+msgstr ""
+"Järgnevad pluginad ei ole aktiivsed, kuna vajavad korrektselt töötamiseks "
+"uuemat WooCommerce'i versiooni:"
+
+#: class-sv-wc-framework-bootstrap.php:303
+msgid ""
+"The following plugin is inactive because it requires a newer version of "
+"WooCommerce:"
+msgstr ""
+"Järgnev plugin ei ole aktiivne, kuna vajab korrektselt töötamiseks uuemat "
+"WooCommerce'i versiooni:"
+
+#. translators: Placeholders: %1$s - plugin name, %2$s - WooCommerce version
+#. number
+#: class-sv-wc-framework-bootstrap.php:308
+msgid "%1$s requires WooCommerce %2$s or newer"
+msgstr "%1$s vajab WooCommerce'i versiooni %2$s või uuemat"
+
+#. translators: Placeholders: %1$s - <a> tag, %2$s - </a> tag
+#: class-sv-wc-framework-bootstrap.php:312
+msgid "Please %1$supdate WooCommerce%2$s"
+msgstr "Palun %1$suuenda WooCommerce'i%2$s"
+
+#: class-sv-wc-plugin-compatibility.php:255
+msgid "WooCommerce"
+msgstr ""
+
+#. translators: Placeholders: %s - plugin name
+#: class-sv-wc-plugin.php:168
+msgid "You cannot clone instances of %s."
+msgstr "﻿%s eksemplari ei saa kloonida."
+
+#. translators: Placeholders: %s - plugin name
+#: class-sv-wc-plugin.php:178
+msgid "You cannot unserialize instances of %s."
+msgstr "%s eksemplari ei saa deserialiseerida (unserialize)."
+
+#. translators: Placeholders: %1$s - plugin name, %2$s - a PHP
+#. extension/comma-separated list of PHP extensions
+#: class-sv-wc-plugin.php:385
+msgid ""
+"%1$s requires the %2$s PHP extension to function. Contact your host or "
+"server administrator to install and configure the missing extension."
+msgid_plural ""
+"%1$s requires the following PHP extensions to function: %2$s. Contact your "
+"host or server administrator to install and configure the missing extensions."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: Placeholders: %1$s - plugin name, %2$s - a PHP
+#. function/comma-separated list of PHP functions
+#: class-sv-wc-plugin.php:408
+msgid ""
+"%1$s requires the %2$s PHP function to exist.  Contact your host or server "
+"administrator to install and configure the missing function."
+msgid_plural ""
+"%1$s requires the following PHP functions to exist: %2$s.  Contact your host "
+"or server administrator to install and configure the missing functions."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: Placeholders: %s - plugin name
+#: class-sv-wc-plugin.php:433
+msgid ""
+"%s may behave unexpectedly because the following PHP configuration settings "
+"are required:"
+msgstr ""
+
+#: class-sv-wc-plugin.php:447
+msgid "%s or higher"
+msgstr ""
+
+#: class-sv-wc-plugin.php:457
+msgid ""
+"Please contact your hosting provider or server administrator to configure "
+"these settings."
+msgstr ""
+
+#. translators: Docs as in Documentation
+#: class-sv-wc-plugin.php:487
+msgid "Docs"
+msgstr "Dokumentatsioon"
+
+#: class-sv-wc-plugin.php:680
+msgid "%1$s - A minimum of %2$s is required."
+msgstr ""
+
+#: class-sv-wc-plugin.php:689
+msgid "Set as %1$s - %2$s is required."
+msgstr ""
+
+#: class-sv-wc-plugin.php:926
+msgid "Configure"
+msgstr "Seadista"
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:85
+msgid "Are you sure you want to remove this token?"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:95
+msgid "Invalid token data"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:413
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-user-handler.php:290
+msgid "(%s)"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:442
+msgid "Default"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:477
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:510
+msgid "Token ID"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:482
+msgid "Card Type"
+msgstr "Kaardi tüüp"
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:487
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:523
+msgid "Last Four"
+msgstr "Viimased 4 numbrit"
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:494
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:311
+msgid "Expiration (MM/YY)"
+msgstr "Aegub (KK/AA)"
+
+#. translators: e-check account type, HTML form field label
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:515
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:417
+msgid "Account Type"
+msgstr "Konto tüüp"
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:518
+msgid "Checking"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:519
+msgid "Savings"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:619
+msgid "Refresh"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:621
+msgid "Add New"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:624
+msgid "Save"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-payment-token-editor.php:646
+msgid "Remove"
+msgstr ""
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-user-handler.php:209
+msgid "%s Payment Tokens"
+msgstr "%s maksevahendid"
+
+#: payment-gateway/admin/class-sv-wc-payment-gateway-admin-user-handler.php:287
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:602
+msgid "Customer ID"
+msgstr "Kliendi ID"
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:32
+msgid "This section contains configuration settings for this gateway."
+msgstr ""
+
+#. translators: environment as in a software environment (test/production)
+#: payment-gateway/admin/views/html-admin-gateway-status.php:52
+#: payment-gateway/class-sv-wc-payment-gateway.php:876
+msgid "Environment"
+msgstr "Keskkond"
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:53
+msgid "The transaction environment for this gateway."
+msgstr ""
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:60
+msgid "Tokenization Enabled"
+msgstr ""
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:61
+msgid "Displays whether or not tokenization is enabled for this gateway."
+msgstr ""
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:74
+#: payment-gateway/class-sv-wc-payment-gateway.php:806
+msgid "Debug Mode"
+msgstr "Veaotsingu režiim"
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:75
+msgid "Displays whether or not debug logging is enabled for this gateway."
+msgstr ""
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:78
+msgid "Display at Checkout & Log"
+msgstr ""
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:80
+msgid "Display at Checkout"
+msgstr ""
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:82
+#: payment-gateway/class-sv-wc-payment-gateway.php:814
+msgid "Save to Log"
+msgstr "Salvesta logifaili"
+
+#: payment-gateway/admin/views/html-admin-gateway-status.php:84
+#: payment-gateway/class-sv-wc-payment-gateway.php:812
+msgid "Off"
+msgstr "Välja lülitatud"
+
+#: payment-gateway/admin/views/html-user-payment-token-editor-token.php:43
+msgid "-- Select an option --"
+msgstr ""
+
+#: payment-gateway/admin/views/html-user-payment-token-editor.php:59
+msgid "No saved payment tokens"
+msgstr ""
+
+#: payment-gateway/admin/views/html-user-profile-field-customer-id.php:30
+msgid "The gateway customer ID for the user. Only edit this if necessary."
+msgstr ""
+"Kasutajale makseviisi poolt määratud kliendi tunnus. Muuda seda ainult siis, "
+"kui tõesti vajalik."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:95
+msgid "An error occurred, please try again or try an alternate form of payment"
+msgstr "Esines viga, palun proovi uuesti või kasuta teistsugust makseviisi"
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:96
+msgid ""
+"We cannot process your order with the payment information that you provided. "
+"Please use a different payment account or an alternate payment method."
+msgstr ""
+"Me ei saa sinu tellimust antud makseinfo alusel töödelda. Palun kasuta teist "
+"maksekontot või teistsugust makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:97
+msgid ""
+"This order is being placed on hold for review. Please contact us to complete "
+"the transaction."
+msgstr ""
+"Tellimus on pandud ülevaatuseks ootele. Tehingu sooritamiseks võta palun "
+"meiega ühendust."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:102
+msgid ""
+"This order is being placed on hold for review due to an incorrect card "
+"verification number.  You may contact the store to complete the transaction."
+msgstr ""
+"Tellimus pandi ootele, kuna kaardi turvakood oli vale. Tehingu "
+"lõpuleviimiseks võid poega ühendust võtta."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:103
+msgid "The card verification number is invalid, please try again."
+msgstr "Kaardi turvakood on vale, palun proovi uuesti."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:104
+msgid "Please enter your card verification number and try again."
+msgstr "Palun sisesta oma kaardi turvakood ja proovi uuesti."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:107
+msgid ""
+"That card type is not accepted, please use an alternate card or other form "
+"of payment."
+msgstr ""
+"Sellist tüüpi kaarti ei võeta vastu, palun proovi mõnda teist kaarti või "
+"teistsugust makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:108
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:112
+msgid ""
+"The card type is invalid or does not correlate with the credit card number.  "
+"Please try again or use an alternate card or other form of payment."
+msgstr ""
+"Kaardi tüüp on vigane või ei vasta kaardi numbrile. Palun proovi uuesti, "
+"proovi mõnda teist kaarti või teistsugust makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:109
+msgid "Please select the card type and try again."
+msgstr "Palun vali kaardi tüüp ja proovi uuesti."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:113
+msgid "The card number is invalid, please re-enter and try again."
+msgstr "Kaardi number on vigane, palun sisesta uuesti ja proovi veelkord."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:114
+msgid "Please enter your card number and try again."
+msgstr "Palun sisesta oma kaardi number ja proovi uuesti."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:117
+msgid "The card expiration date is invalid, please re-enter and try again."
+msgstr ""
+"Kaardi aegumiskuupäev on vale, palun sisesta uuesti ja proovi veelkord."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:118
+msgid "The card expiration month is invalid, please re-enter and try again."
+msgstr "Kaardi aegumise kuu on vale, palun sisesta uuesti ja proovi veelkord."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:119
+msgid "The card expiration year is invalid, please re-enter and try again."
+msgstr ""
+"Kaardi aegumise aasta on vale, palun sisesta uuesti ja proovi veelkord."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:120
+msgid "Please enter your card expiration date and try again."
+msgstr "Palun sisesta oma kaardi aegumiskuupäev ja proovi uuesti."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:123
+msgid "The bank routing number is invalid, please re-enter and try again."
+msgstr ""
+"Panga suunakood ei ole korrektne, palun sisesta uuesti ja proovi veelkord."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:124
+msgid "The bank account number is invalid, please re-enter and try again."
+msgstr ""
+"Pangakonto number ei ole korrektne, palun sisesta uuesti ja proovi veelkord."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:127
+msgid ""
+"The provided card is expired, please use an alternate card or other form of "
+"payment."
+msgstr ""
+"Antud kaart on aegunud, palun kasuta mõnda teist kaarti või teistsugust "
+"makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:128
+msgid ""
+"The provided card was declined, please use an alternate card or other form "
+"of payment."
+msgstr ""
+"Antud kaart klükati tagasi, palun kasuta mõnda teist kaarti või teistsugust "
+"makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:129
+msgid ""
+"Insufficient funds in account, please use an alternate card or other form of "
+"payment."
+msgstr ""
+"Kontol pole piisavalt vahendeid, palun kasuta mõnda teist kaarti või "
+"teistsugust makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:130
+msgid ""
+"The card is inactivate or not authorized for card-not-present transactions, "
+"please use an alternate card or other form of payment."
+msgstr ""
+"Antud kaart ei ole aktiveeritud või ei ole sellega internetimaksed lubatud. "
+"Palun kasuta mõnda teist kaarti või teistsugust makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:131
+msgid ""
+"The credit limit for the card has been reached, please use an alternate card "
+"or other form of payment."
+msgstr ""
+"Kaardi krediitilimiit on ära kasutatud, palun kasuta mõnda teist kaarti või "
+"teistsugust makseviisi."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:132
+msgid ""
+"The card verification number does not match. Please re-enter and try again."
+msgstr "Kaardi turvakood ei klapi. Palun sisesta uuesti ja proovi veelkord."
+
+#: payment-gateway/api/class-sv-wc-payment-gateway-api-response-message-helper.php:133
+msgid ""
+"The provided address does not match the billing address for cardholder. "
+"Please verify the address and try again."
+msgstr ""
+"Antud aadress ei kattu kaardi omaniku aadressiga. Palun kontrolli, et "
+"sisestaid õige aadressi ning proovi uuesti."
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:99
+msgid ""
+"Payment error, please try another payment method or contact us to complete "
+"your transaction."
+msgstr ""
+"Viga maksega, palun proovi teistsugust makseviisi või võta meiega ühendust."
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:199
+#: payment-gateway/class-sv-wc-payment-gateway.php:410
+msgid "Card expiration date is invalid"
+msgstr "Kaardi aegumiskuupäev ei ole korrektne"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:223
+#: payment-gateway/class-sv-wc-payment-gateway.php:403
+msgid "Card number is missing"
+msgstr "Kaardi number on puudu"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:229
+#: payment-gateway/class-sv-wc-payment-gateway.php:406
+msgid "Card number is invalid (wrong length)"
+msgstr "Kaardi number ei ole korrektne (pikkus on vale)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:234
+#: payment-gateway/class-sv-wc-payment-gateway.php:405
+msgid "Card number is invalid (only digits allowed)"
+msgstr "Kaardi number ei ole korrektne (lubatud on ainult numbrid)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:239
+#: payment-gateway/class-sv-wc-payment-gateway.php:404
+msgid "Card number is invalid"
+msgstr "Kaardi number ei ole korrektne"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:266
+#: payment-gateway/class-sv-wc-payment-gateway.php:408
+msgid "Card security code is invalid (only digits are allowed)"
+msgstr "Kaardi turvakood ei ole korrektne (lubatud on ainult numbrid)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:272
+#: payment-gateway/class-sv-wc-payment-gateway.php:409
+msgid "Card security code is invalid (must be 3 or 4 digits)"
+msgstr "Kaardi turvakood ei ole korrektne (peab olema 3 või 4 numbrit)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:278
+#: payment-gateway/class-sv-wc-payment-gateway.php:407
+msgid "Card security code is missing"
+msgstr "Kaardi turvakood on puudu"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:305
+#: payment-gateway/class-sv-wc-payment-gateway.php:419
+msgid "Routing Number is missing"
+msgstr "Suunakood on puudu"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:312
+#: payment-gateway/class-sv-wc-payment-gateway.php:420
+msgid "Routing Number is invalid (only digits are allowed)"
+msgstr "Suunakood ei ole korrektne (lubatud on ainult numbrid)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:318
+#: payment-gateway/class-sv-wc-payment-gateway.php:421
+msgid "Routing number is invalid (must be 9 digits)"
+msgstr "Suunakood ei ole korrektne (peab olemas 9 numbrit)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:327
+#: payment-gateway/class-sv-wc-payment-gateway.php:416
+msgid "Account Number is missing"
+msgstr "Konto number on puudu"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:334
+#: payment-gateway/class-sv-wc-payment-gateway.php:417
+msgid "Account Number is invalid (only digits are allowed)"
+msgstr "Konto number ei ole korrektne (lubatud on ainult numbrid)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:340
+#: payment-gateway/class-sv-wc-payment-gateway.php:418
+msgid "Account number is invalid (must be between 5 and 17 digits)"
+msgstr "Konto number ei ole korrektne (peab olemas 5-17 numbrit)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:347
+#: payment-gateway/class-sv-wc-payment-gateway.php:415
+msgid "Drivers license number is invalid"
+msgstr "Juhiloa number ei ole korrektne"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:353
+#: payment-gateway/class-sv-wc-payment-gateway.php:411
+msgid "Check Number is invalid (only digits are allowed)"
+msgstr "Tšeki number ei ole korrektne (lubatud on ainult numbrid)"
+
+#. translators: Placeholders: %1$s - payment method title, %2$s - payment
+#. account type (savings/checking) (may or may not be available), %3$s - last
+#. four digits of the account
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:603
+msgid "%1$s Check Transaction Approved: %2$s account ending in %3$s"
+msgstr "%1$s: tšeki tehing vastu võetud: %2$s konto, lõpeb numbritega %3$s"
+
+#. translators: Placeholders: %s - check number
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:608
+msgid "Check number %s"
+msgstr "Tšeki number %s"
+
+#. translators: Placeholders: %s - transaction ID
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:613
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:688
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:694
+#: payment-gateway/class-sv-wc-payment-gateway.php:1303
+#: payment-gateway/class-sv-wc-payment-gateway.php:1613
+#: payment-gateway/class-sv-wc-payment-gateway.php:1834
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:313
+msgid "(Transaction ID %s)"
+msgstr "(Tehingu ID %s)"
+
+#. translators: Placeholders: %1$s - payment method title, %2$s - environment
+#. ("Test"), %3$s - transaction type (authorization/charge), %4$s - card type
+#. (mastercard, visa, ...), %5$s - last four digits of the card, %6$s - expiry
+#. date
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:676
+msgid "%1$s %2$s %3$s Approved: %4$s ending in %5$s (expires %6$s)"
+msgstr "%1$s %2$s: %3$s kinnitatud: %4$s lõpeb numbritega %5$s (aegub %6$s)"
+
+#. translators: Placeholders: %s - failure message
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:750
+msgid "Tokenization Request Failed: %s"
+msgstr "Maksevahendi salvestamise päring ebaõnnestus: %s"
+
+#. translators: Placeholders: %1$s - payment method title, %2$s - failure
+#. message
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:761
+msgid "%1$s Tokenization Request Failed: %2$s"
+msgstr "%1$s: maksevahendi salvestamise päring ebaõnnestus: %2$s"
+
+#. translators: This is a message describing that the transaction in question
+#. only performed a credit card authorization and did not capture any funds.
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:782
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:330
+msgid "Authorization only transaction"
+msgstr "Autoriseerimise tehing"
+
+#. translators: Placeholders: %s - failure message. Payment method as in a
+#. specific credit card, e-check or bank account
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:1141
+msgid "Oops, adding your new payment method failed: %s"
+msgstr "Oih, sinu maksevahendi lisamine ebaõnnestus: %s"
+
+#. translators: Payment method as in a specific credit card. Placeholders: %1$s
+#. - card type (visa, mastercard, ...), %2$s - last four digits of the card,
+#. %3$s - card expiry date
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:1193
+msgid "Nice! New payment method added: %1$s ending in %2$s (expires %3$s)"
+msgstr ""
+"Lahe! Uus maksevahend lisatud: %1$s, lõpeb numbritega %2$s (aegub %3$s)"
+
+#. translators: Payment method as in a specific e-check account. Placeholders:
+#. %1$s - account type (checking/savings), %2$s - last four digits of the
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:1203
+msgid "Nice! New payment method added: %1$s account ending in %2$s"
+msgstr "Lahe! Uus maksevahend lisatud: %1$s konto, lõpeb numbritega %2$s"
+
+#. translators: Payment method as in a specific credit card, e-check or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:1210
+msgid "Nice! New payment method added."
+msgstr "Lahe! Uus maksevahend lisatud."
+
+#. translators: Placeholders: %1$s - site title, %2$s - customer email. Payment
+#. method as in a specific credit card, e-check or bank account
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:1317
+msgid "%1$s - Add Payment Method for %2$s"
+msgstr "%1$s - Lisa maksevahend kliendile %2$s"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:184
+msgid "PayPal"
+msgstr "PayPal"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:185
+msgid "Checking Account"
+msgstr "Tšekikonto"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:186
+msgid "Savings Account"
+msgstr "Hoiuarve"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:187
+msgid "Credit / Debit Card"
+msgstr "Deebet- või krediitkaart"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:188
+msgid "Bank Account"
+msgstr "Pangakonto"
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:273
+msgid "Thank you for your order, please click the button below to pay."
+msgstr "Aitäh tellimuse eest. Palun kliki maksmiseks alloleval nupul."
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:274
+msgid ""
+"Thank you for your order. We are now redirecting you to complete payment."
+msgstr "Aitäh tellimuse eest. Makse teostamiseks suunatakse sind nüüd edasi."
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:275
+msgid "Pay Now"
+msgstr "Maksa"
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:276
+msgid "Cancel Order"
+msgstr "Tühista tellimus"
+
+#. translators: Placeholders: %1$s - transaction request type such as IPN or
+#. Redirect-back, %2$s - the error message
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:411
+msgid "Could not find order %s"
+msgstr ""
+
+#. translators: Placeholders: %s - payment gateway title (such as
+#. Authorize.net, Braintree, etc)
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:420
+msgid "%s duplicate transaction received"
+msgstr "%s: duplikaattehing"
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:423
+msgid "Order %s is already paid for."
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:558
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:603
+msgid "%1$s ending in %2$s"
+msgstr ""
+
+#. translators: Placeholders: %s - expiry date
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:565
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:659
+msgid "(expires %s)"
+msgstr "(aegub %s)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:611
+msgid "(check number %s)"
+msgstr "(tšeki number %s)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:673
+msgid "Transaction"
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:674
+msgid "Approved"
+msgstr ""
+
+#. translators: Payment method as in a specific credit card, e-check or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:119
+msgid "Are you sure you want to delete this payment method?"
+msgstr "Oled sa kindel, et soovid selle maksevahendi kustutada?"
+
+#. translators: Payment method as in a specific credit card, eCheck or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:254
+msgid "You do not have any saved payment methods."
+msgstr "Sul ei ole salvestatud maksevahendeid."
+
+#. translators: Payment method as in a specific credit card, eCheck or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:291
+msgid "My Payment Methods"
+msgstr "Minu maksevahendid."
+
+#. translators: Payment method as in a specific credit card, e-check or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:299
+msgid "Add New Payment Method"
+msgstr "Lisa uus maksevahend"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:385
+msgid "Method"
+msgstr "Maksevahend"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:386
+msgid "Expires"
+msgstr "Aegub"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:420
+msgid "Credit/Debit Cards"
+msgstr "Deebet- ja krediitkaardid"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:426
+msgid "Bank Accounts"
+msgstr "Pangakontod"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:473
+msgid "N/A"
+msgstr "-"
+
+#. translators: Set a payment method as the default option
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:593
+msgid "Make Default"
+msgstr "Määra vaikimisi valikuks"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:604
+msgid "Delete"
+msgstr "Kustuta"
+
+#. translators: %s - last four digits of a card/account
+#. translators: Placeholders: %s - last four digits of card/account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:655
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:652
+msgid "ending in %s"
+msgstr "lõpeb numbritega %s"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:661
+msgid "(default)"
+msgstr "(vaikimisi)"
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:702
+msgid "Oops, you took too long, please try again."
+msgstr "Oih, sul läks liiga kaua aega - palun proovi uuesti."
+
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:715
+msgid "There was an error with your request, please try again."
+msgstr "Sinu päringuga esines viga, palun proovi uuesti."
+
+#. translators: Payment method as in a specific credit card, e-check or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:728
+msgid "Error removing payment method"
+msgstr "Viga maksevahendi eemaldamisel"
+
+#. translators: Payment method as in a specific credit card, e-check or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:733
+msgid "Payment method deleted."
+msgstr "Maksevahend kustutatud."
+
+#. translators: Payment method as in a specific credit card, e-check or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-my-payment-methods.php:743
+msgid "Default payment method updated."
+msgstr "Vaikimisi maksevahend muudetud."
+
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:293
+msgid "Card Number"
+msgstr "Kaardi number"
+
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:314
+msgid "MM / YY"
+msgstr "KK / AA"
+
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:332
+msgid "Card Security Code"
+msgstr "Kaardi turvakood"
+
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:335
+msgid "CSC"
+msgstr "Turvakood"
+
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:374
+msgid "Where do I find this?"
+msgstr "Kust ma selle leian?"
+
+#. translators: e-check routing number, HTML form field label,
+#. https:en.wikipedia.org/wiki/Routing_transit_number
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:380
+msgid "Routing Number"
+msgstr "Suunakood"
+
+#. translators: e-check account number, HTML form field label
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:399
+msgid "Account Number"
+msgstr "Kontonumber"
+
+#. translators: Test mode refers to the current software environment
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:464
+msgid "TEST MODE ENABLED"
+msgstr "TESTREŽIIM SISSE LÜLITATUD"
+
+#. translators: Payment method as in a specific credit card, eCheck or bank
+#. account
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:567
+msgid "Manage Payment Methods"
+msgstr "Halda maksevahendeid"
+
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:695
+msgid "Use a new card"
+msgstr "Kasuta uut kaarti"
+
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:695
+msgid "Use a new bank account"
+msgstr "Kasuta uut pangakontot"
+
+#. translators: account as in customer's account on the eCommerce site
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:757
+msgid "Securely Save to Account"
+msgstr "Salvesta turvaliselt oma kontole"
+
+#. translators: Placeholders: %s - plugin name
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:425
+msgid ""
+"%s: WooCommerce is not being forced over SSL; your customer's payment data "
+"may be at risk."
+msgstr ""
+"%s: WooCommerce'i ei sunnita SSLi kasutama; sinu klientide andmed võivad "
+"olla ohus."
+
+#. translators: Placeholders: %1$s - plugin name, %2$s - a
+#. currency/comma-separated list of currencies, %3$s - <a> tag, %4$s - </a> tag
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:482
+msgid ""
+"%1$s accepts payment in %2$s only. %3$sConfigure%4$s WooCommerce to accept "
+"%2$s to enable this gateway for checkout."
+msgid_plural ""
+"%1$s accepts payment in one of %2$s only. %3$sConfigure%4$s WooCommerce to "
+"accept one of %2$s to enable this gateway for checkout."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - <a> tag, %3$s - </a> tag
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:526
+msgid ""
+"%1$s is inactive for subscription transactions. Please %2$senable "
+"tokenization%3$s to activate %1$s for Subscriptions."
+msgstr ""
+"%1$s ei ole korduvtellimuste jaoks kasutatav. Palun %2$slülita "
+"maksevahendite salvestamine%3$s sisse, et aktiveerida %1$s Korduvellimuste "
+"(Subscriptions) jaoks."
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - <a> tag, %3$s - </a> tag
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:544
+msgid ""
+"%1$s is inactive for pre-order transactions. Please %2$senable tokenization"
+"%3$s to activate %1$s for Pre-Orders."
+msgstr ""
+"%1$s ei ole eeltellimuste maksete jaoks kasutatav. Palun %2$slülita "
+"maksevahendite salvestamine%3$s sisse, et aktiveerida %1$s Eeltellimuste "
+"(Pre-Orders) jaoks."
+
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:580
+msgid ""
+"You must enable tokenization for this gateway in order to support automatic "
+"renewal payments with the WooCommerce Subscriptions extension."
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:581
+msgid "Inactive"
+msgstr ""
+
+#. translators: verb, as in "Capture credit card charge". 		 Used when an
+#. amount has been pre-authorized before, but funds have not yet been captured
+#. (taken) from the card. 		 Capturing the charge will take the money from the
+#. credit card and put it in the merchant's pockets.
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:725
+#: payment-gateway/class-sv-wc-payment-gateway-plugin.php:794
+msgid "Capture Charge"
+msgstr "Teosta makse"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:412
+msgid "Check Number is missing"
+msgstr "Tšeki number on puudu"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:413
+msgid "Drivers license state is missing"
+msgstr "Juhiloa osariik on puudu"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:414
+msgid "Drivers license number is missing"
+msgstr "Juhiloa number on puudu"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:590
+msgid "Continue"
+msgstr "Jätka"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:590
+msgid "Place order"
+msgstr "Esita tellimus"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:622
+msgid "Thank you for your order."
+msgstr "Aitäh tellimuse eest."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:711
+msgid "Credit Card"
+msgstr "Krediitkaart"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:713
+msgid "eCheck"
+msgstr "E-tšekk"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:731
+msgid "Pay securely using your credit card."
+msgstr "Maksa turvaliselt oma krediitkaardiga."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:733
+msgid "Pay securely using your checking account."
+msgstr "Maksa turvaliselt oma tšekikontoga."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:752
+msgid "Enable / Disable"
+msgstr "Luba / Keela"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:753
+msgid "Enable this gateway"
+msgstr "Lülita see makseviis sisse"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:759
+msgid "Title"
+msgstr "Nimetus"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:761
+msgid "Payment method title that the customer will see during checkout."
+msgstr "Kliendile kassas nähtav makseviisi nimetus."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:766
+msgid "Description"
+msgstr "Kirjeldus"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:768
+msgid "Payment method description that the customer will see during checkout."
+msgstr "Kliendile kassas nähtav makseviisi kirjeldus."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:797
+msgid "Detailed Decline Messages"
+msgstr "Täpsemad maksest keeldumise teated"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:799
+msgid ""
+"Check to enable detailed decline messages to the customer during checkout "
+"when possible, rather than a generic decline message."
+msgstr ""
+"Lülita see valik sisse, kui soovid klientidele üldise maksest keeldumise "
+"teate asemel näidata võimaluse korral täpsemaid põhjusi."
+
+#. translators: Placeholders: %1$s - <a> tag, %2$s - </a> tag
+#: payment-gateway/class-sv-wc-payment-gateway.php:809
+msgid ""
+"Show Detailed Error Messages and API requests/responses on the checkout page "
+"and/or save them to the %1$sdebug log%2$s"
+msgstr ""
+"Näita üksikasjalikke veateateud ja API päringuid/vastuseid kassas ja/või "
+"salvesta need %1$slogifaili%2$s"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:813
+msgid "Show on Checkout Page"
+msgstr "Näita kassas"
+
+#. translators: show debugging information on both checkout page and in the log
+#: payment-gateway/class-sv-wc-payment-gateway.php:816
+msgid "Both"
+msgstr "Mõlemad"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:879
+msgid "Select the gateway environment to use for transactions."
+msgstr "Vali makseviisi tehingute teostamise keskkond."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:927
+msgid "Connection Settings"
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:933
+msgid "Share connection settings"
+msgstr "Jaga ühenduse andmeid"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:935
+msgid "Use connection/authentication settings from other gateway"
+msgstr "Kasuta teise makseviisi ühenduse/autentimise seadeid"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:938
+msgid "Disabled because the other gateway is using these settings"
+msgstr "Ei saa muuta, kuna teine makseviis kasutab neid seadeid"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:955
+msgid "Card Verification (CSC)"
+msgstr "Kaardi turvakood (CSC)"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:956
+msgid "Display the Card Security Code (CV2) field on checkout"
+msgstr "Näita kassas kaardi turvakoodi (CV2) välja"
+
+#. translators: Placeholders: %1$s - site title, %2$s - order number
+#: payment-gateway/class-sv-wc-payment-gateway.php:1256
+msgid "%1$s - Order %2$s"
+msgstr "%1$s - Tellimus %2$s"
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - transaction amount. Definitions:
+#. Capture, as in capture funds from a credit card.
+#: payment-gateway/class-sv-wc-payment-gateway.php:1296
+msgid "%1$s Capture of %2$s Approved"
+msgstr "%1$s: tasumine summas %2$s kinnitatud"
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - transaction amount, %3$s -
+#. transaction status message. Definitions: Capture, as in capture funds from a
+#. credit card.
+#: payment-gateway/class-sv-wc-payment-gateway.php:1324
+msgid "%1$s Capture Failed: %2$s - %3$s"
+msgstr "%1$s: tasumine ebaõnnestus: %2$s - %3$s"
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - failure message. Definitions:
+#. "capture" as in capturing funds from a credit card.
+#: payment-gateway/class-sv-wc-payment-gateway.php:1340
+msgid "%1$s Capture Failed: %2$s"
+msgstr "%1$s: makse teostamine ebaõnnestus: %2$s"
+
+#. translators: Placeholders: %1$s - site title, %2$s - order number.
+#. Definitions: Capture as in capture funds from a credit card.
+#: payment-gateway/class-sv-wc-payment-gateway.php:1379
+msgid "%1$s - Capture for Order %2$s"
+msgstr "%1$s - Tasumine tellimuse %2$s eest"
+
+#. translators: Placeholders: %1$s - site title, %2$s - order number
+#: payment-gateway/class-sv-wc-payment-gateway.php:1543
+msgid "%1$s - Refund for Order %2$s"
+msgstr "%1$s - Tagasimakse tellimuse %2$s eest"
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - a monetary amount
+#: payment-gateway/class-sv-wc-payment-gateway.php:1606
+msgid "%1$s Refund in the amount of %2$s approved."
+msgstr "%1$s: tagasimakse summas %2$s kinnitatud."
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - error code, %3$s - error message
+#: payment-gateway/class-sv-wc-payment-gateway.php:1633
+msgid "%1$s Refund Failed: %2$s - %3$s"
+msgstr "%1$s: tagasimakse ebaõnnestus: %2$s - %3$s"
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - error message
+#: payment-gateway/class-sv-wc-payment-gateway.php:1641
+msgid "%1$s Refund Failed: %2$s"
+msgstr "%1$s: tagasimakse ebaõnnestus: %2$s"
+
+#. translators: Placeholders: %s - payment gateway title (such as
+#. Authorize.net, Braintree, etc)
+#: payment-gateway/class-sv-wc-payment-gateway.php:1661
+msgid "%s Order completely refunded."
+msgstr "%s: tellimus täielikult tagasi makstud."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:1714
+msgid ""
+"Oops, you cannot partially void this order. Please use the full order amount."
+msgstr ""
+"Oih, sa ei saa seda tellimust osaliselt tühistada. Palun kasuta tellimuse "
+"täissummat."
+
+#. translators: Placeholders: %1$s - payment gateway title, %2$s - error code,
+#. %3$s - error message. Void as in to void an order.
+#: payment-gateway/class-sv-wc-payment-gateway.php:1798
+msgid "%1$s Void Failed: %2$s - %3$s"
+msgstr "%1$s: tühistamine ebaõnnestus: %2$s - %3$s"
+
+#. translators: Placeholders: %1$s - payment gateway title, %2$s - error
+#. message. Void as in to void an order.
+#: payment-gateway/class-sv-wc-payment-gateway.php:1806
+msgid "%1$s Void Failed: %2$s"
+msgstr "%1$s: tühistamine ebaõnnestus: %2$s"
+
+#. translators: Placeholders: %1$s - payment gateway title, %2$s - a monetary
+#. amount. Void as in to void an order.
+#: payment-gateway/class-sv-wc-payment-gateway.php:1827
+msgid "%1$s Void in the amount of %2$s approved."
+msgstr "%1$s: tühistamine summas %2$s kinnitatud."
+
+#. translators: Placeholders: %1$s - status code, %2$s - status message
+#. translators: Placeholders: %1$s - payment request response status code, %2$s
+#. - payment request response status message
+#: payment-gateway/class-sv-wc-payment-gateway.php:1922
+#: payment-gateway/payment-tokens/class-sv-wc-payment-gateway-payment-tokens-handler.php:144
+msgid "Status code %1$s: %2$s"
+msgstr "Staatuse kood %1$s: %2$s"
+
+#. translators: Placeholders: %s - status code
+#. translators: Placeholders: %s - payment request response status code
+#: payment-gateway/class-sv-wc-payment-gateway.php:1925
+#: payment-gateway/payment-tokens/class-sv-wc-payment-gateway-payment-tokens-handler.php:147
+msgid "Status code: %s"
+msgstr "Staatuse kood: %s"
+
+#. translators: Placeholders; %s - status message
+#. translators: Placeholders: %s - payment request response status message
+#: payment-gateway/class-sv-wc-payment-gateway.php:1928
+#: payment-gateway/payment-tokens/class-sv-wc-payment-gateway-payment-tokens-handler.php:150
+msgid "Status message: %s"
+msgstr "Staatuse teade: %s"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:1933
+#: payment-gateway/payment-tokens/class-sv-wc-payment-gateway-payment-tokens-handler.php:157
+msgid "Transaction ID %s"
+msgstr "Tehingu ID %s"
+
+#. translators: Placeholders: %1$s - payment gateway title, %2$s - message
+#. (probably reason for the transaction being held for review)
+#: payment-gateway/class-sv-wc-payment-gateway.php:2044
+msgid "%1$s Transaction Held for Review (%2$s)"
+msgstr "%1$s: tehning pandi ülevaatuseks ootele (%2$s)"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2075
+msgid ""
+"Your order has been received and is being reviewed. Thank you for your "
+"business."
+msgstr ""
+"Sinu tellimus on vastu võetud ja on ülevaatamisel. Täname koostöö eest."
+
+#. translators: Placeholders: %1$s - payment gateway title, %2$s - error
+#. message; e.g. Order Note: [Payment method] Payment failed [error]
+#: payment-gateway/class-sv-wc-payment-gateway.php:2120
+msgid "%1$s Payment Failed (%2$s)"
+msgstr "%1$s: makse ebaõnnestus (%2$s)"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2137
+msgid ""
+"An error occurred, please try again or try an alternate form of payment."
+msgstr "Esines viga, palun proovi uuesti või kasuta teistsugust makseviisi."
+
+#. translators: Placeholders: %1$s - payment gateway title, %2$s -
+#. message/error
+#: payment-gateway/class-sv-wc-payment-gateway.php:2154
+msgid "%1$s Transaction Cancelled (%2$s)"
+msgstr "%1$s: tehing tühistatud (%2$s)"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2386
+msgid "Transaction Type"
+msgstr "Tehingu tüüp"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2388
+msgid ""
+"Select how transactions should be processed. Charge submits all transactions "
+"for settlement, Authorization simply authorizes the order total for capture "
+"later."
+msgstr ""
+"Vali, kuidas peaks tehinguid töötlema. \"Makse\" saadab kõik tehingud "
+"koheselt tasumisele, \"Autoriseerimine\" lihtsalt autoriseerib tellimuse "
+"summa hilisemaks tasumiseks."
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2399
+msgid "Charge Virtual-Only Orders"
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2401
+msgid ""
+"If the order contains exclusively virtual items, enable this to immediately "
+"charge, rather than authorize, the transaction."
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2571
+msgid "Accepted Card Types"
+msgstr "Vastuvõetavad kaardid"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2573
+msgid "Select which card types you accept."
+msgstr "Vali, millist tüüpi kaarte soovid vastu võtta."
+
+#. translators:
+#. http:www.cybersource.com/products/payment_security/payment_tokenization/ and
+#. https:en.wikipedia.org/wiki/Tokenization_(data_security)
+#: payment-gateway/class-sv-wc-payment-gateway.php:2661
+msgid "Tokenization"
+msgstr "Maksevahendite salvestamine"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2662
+msgid ""
+"Allow customers to securely save their payment details for future checkout."
+msgstr ""
+"Võimalda klientidel oma makseandmeid edaspidisteks tehinguteks turvaliselt "
+"talletada."
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:240
+msgid "Pre-Order Tokenization attempt failed (%s)"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:267
+msgid "%s - Pre-Order Release Payment for Order %s"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:271
+msgid "Payment token missing/invalid."
+msgstr "Maksevahend on puudu või vigane."
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:296
+msgid "%s %s Pre-Order Release Payment Approved: %s ending in %s (expires %s)"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:307
+msgid "%s eCheck Pre-Order Release Payment Approved: %s ending in %s"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-pre-orders.php:349
+msgid "Pre-Order Release Payment Failed: %s"
+msgstr "Eeltellimuse väljastamise makse ebaõnnestus: %s"
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:216
+msgid "Subscription Renewal: payment token is missing/invalid."
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:242
+msgid "%1$s - Subscription Renewal Order %2$s"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:438
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:957
+msgid "Via %s ending in %s"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:465
+msgid "Subscriptions"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:535
+msgid ""
+"This payment method is tied to a subscription and cannot be deleted. Please "
+"switch the subscription to another method first."
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:545
+msgid "View Subscription"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:598
+msgid "Payment Token"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:626
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:631
+msgid "%s is required."
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:786
+msgid "%s0 Subscription Renewal Approved"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:834
+msgid "%s Check Subscription Renewal Payment Approved: %s account ending in %s"
+msgstr ""
+
+#: payment-gateway/payment-tokens/class-sv-wc-payment-gateway-payment-tokens-handler.php:152
+msgid "Unknown Error"
+msgstr "Esines tundmatu viga"
+
+#. translators: Placeholders: %1$s - payment gateway title (such as
+#. Authorize.net, Braintree, etc), %2$s - payment method name (mastercard, bank
+#. account, etc), %3$s - last four digits of the card/account, %4$s -
+#. card/account expiry date
+#: payment-gateway/payment-tokens/class-sv-wc-payment-gateway-payment-tokens-handler.php:746
+msgid "%1$s Payment Method Saved: %2$s ending in %3$s (expires %4$s)"
+msgstr ""
+"%1$s: maksevahend salvestatud: %2$s lõpeb numbritega in %3$s (aegub %4$s)"
+
+#. translators: Placeholders: %1$s - payment gateway title (such as CyberSouce,
+#. NETbilling, etc), %2$s - account type (checking/savings - may or may not be
+#. available), %3$s - last four digits of the account
+#: payment-gateway/payment-tokens/class-sv-wc-payment-gateway-payment-tokens-handler.php:757
+msgid "%1$s eCheck Payment Method Saved: %2$s account ending in %3$s"
+msgstr ""
+"%1$s: e-tšeki maksevahend salvestatud: %2$s konto, lõpeb numbritega %3$s"
+
+#: utilities/class-sv-wp-background-job-handler.php:571
+msgid "Job data key \"%s\" not set"
+msgstr ""
+
+#: utilities/class-sv-wp-background-job-handler.php:575
+msgid "Job data key \"%s\" is not an array"
+msgstr ""
+
+#: utilities/class-sv-wp-background-job-handler.php:787
+msgid "Every %d Minutes"
+msgstr ""
+
+#: class-sv-wc-plugin.php:492
+msgctxt "noun"
+msgid "Support"
+msgstr "Kasutajatugi"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:678
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:675
+msgctxt "noun, software environment"
+msgid "Test"
+msgstr "test"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:679
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:578
+#: payment-gateway/class-sv-wc-payment-gateway.php:2392
+msgctxt "credit card transaction type"
+msgid "Authorization"
+msgstr "Autoriseerimine"
+
+#: payment-gateway/class-sv-wc-payment-gateway-direct.php:679
+#: payment-gateway/class-sv-wc-payment-gateway-hosted.php:580
+#: payment-gateway/class-sv-wc-payment-gateway.php:2391
+msgctxt "noun, credit card transaction type"
+msgid "Charge"
+msgstr "Makse"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:197
+msgctxt "payment method type"
+msgid "Account"
+msgstr "Konto"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:232
+#: payment-gateway/class-sv-wc-payment-gateway.php:2598
+msgctxt "credit card type"
+msgid "Visa"
+msgstr "Visa"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:236
+#: payment-gateway/class-sv-wc-payment-gateway.php:2599
+msgctxt "credit card type"
+msgid "MasterCard"
+msgstr "MasterCard"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:240
+#: payment-gateway/class-sv-wc-payment-gateway.php:2600
+msgctxt "credit card type"
+msgid "American Express"
+msgstr "American Express"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:244
+msgctxt "credit card type"
+msgid "Diners Club"
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:248
+#: payment-gateway/class-sv-wc-payment-gateway.php:2601
+msgctxt "credit card type"
+msgid "Discover"
+msgstr "Discover"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:252
+#: payment-gateway/class-sv-wc-payment-gateway.php:2603
+msgctxt "credit card type"
+msgid "JCB"
+msgstr "JCB"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:256
+msgctxt "credit card type"
+msgid "CarteBleue"
+msgstr "CarteBleue"
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:260
+msgctxt "credit card type"
+msgid "Maestro"
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway-helper.php:264
+msgctxt "credit card type"
+msgid "Laser"
+msgstr ""
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:2602
+msgctxt "credit card type"
+msgid "Diners"
+msgstr "Diners"
+
+#. translators: http:www.investopedia.com/terms/c/checkingaccount.asp
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:425
+msgctxt "account type"
+msgid "Checking"
+msgstr "Tšekikonto"
+
+#. translators: http:www.investopedia.com/terms/s/savingsaccount.asp
+#: payment-gateway/class-sv-wc-payment-gateway-payment-form.php:427
+msgctxt "account type"
+msgid "Savings"
+msgstr "Hoiuarve"
+
+#: payment-gateway/class-sv-wc-payment-gateway.php:1901
+msgctxt "hash before order number"
+msgid "#"
+msgstr "#"
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:495
+msgctxt "hash before order number"
+msgid "#%s"
+msgstr ""
+
+#. translators: https:www.skyverge.com/for-translators-environments/
+#: payment-gateway/class-sv-wc-payment-gateway.php:3182
+msgctxt "software environment"
+msgid "Production"
+msgstr "Töö/avalik"
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:824
+msgctxt "woocommerce-plugin-framework"
+msgid ""
+"%s %s Subscription Renewal Payment Approved: %s ending in %s (expires %s)"
+msgstr ""
+
+#: payment-gateway/integrations/class-sv-wc-payment-gateway-integration-subscriptions.php:857
+msgctxt "woocommerce-plugin-framework"
+msgid "%s Renewal Payment Failed (%s)"
+msgstr ""
+
+#~ msgid ""
+#~ "The following plugins are inactive because they require a newer version "
+#~ "to function properly:"
+#~ msgstr ""
+#~ "Järgnevad pluginad ei ole aktiivsed ja vajavad toimimiseks uuendamist:"
+
+#~ msgid ""
+#~ "The following plugin is inactive because it requires a newer version to "
+#~ "function properly:"
+#~ msgstr "Järgnev plugin ei ole aktiivne ja vajab toimimiseks uuendamist:"
+
+#~ msgid ""
+#~ "To reactivate these plugins, please %1$supdate now (recommended)%2$s "
+#~ "%3$sor%4$s %5$sdeactivate the following%6$s:"
+#~ msgstr ""
+#~ "Et neid pluginaid taas sisse lülitada, %1$suuenda palun kohe "
+#~ "(soovitatud)%2$s %3$svõi%4$s %5$slülita järgnevad välja%6$s:"
+
+#~ msgid ""
+#~ "To reactivate this plugin, please %1$supdate now (recommended)%2$s %3$sor"
+#~ "%4$s %5$sdeactivate the following%6$s:"
+#~ msgstr ""
+#~ "Et see plugin taas sisse lülitada, %1$suuenda palun kohe (soovitatud)%2$s "
+#~ "%3$svõi%4$s %5$slülita järgnevad välja%6$s:"
+
+#~ msgid "%s Customer Details"
+#~ msgstr "%s: kliendi andmed"
+
+#~ msgid "Customer ID (%s)"
+#~ msgstr "Kliendi ID (%s)"
+
+#~ msgid ""
+#~ "The gateway customer ID for the user in the %s environment. Only edit "
+#~ "this if necessary."
+#~ msgstr ""
+#~ "Kasutajale makseviisi poolt määratud kliendi tunnus %s keskkonnas. Muuda "
+#~ "seda ainult siis, kui tõesti vajalik."
+
+#~ msgid "Payment Tokens"
+#~ msgstr "Maksevahendid"
+
+#~ msgid "This customer has no saved payment tokens"
+#~ msgstr "Sel kliendil ei ole salvestatud maksevahendeid"
+
+#~ msgid "Default card"
+#~ msgstr "Vaikimisi kaart"
+
+#~ msgid "Add a Payment Token"
+#~ msgstr "Lisa maksevahend"
+
+#~ msgid "Token"
+#~ msgstr "Vahend"
+
+#~ msgid "Expiry Date (01/%s)"
+#~ msgstr "Aegumiskuupäev (01/%s)"
+
+#~ msgid ""
+#~ "Are you sure you wish to do this? Change will not be finalized until you "
+#~ "click \"Update\""
+#~ msgstr ""
+#~ "Oled kindel, et soovid seda teha? Muudatust ei rakendata enne kui klikid "
+#~ "\"Uuenda\""
+
+#~ msgid "%s Subscription Renewal Approved"
+#~ msgstr "Korduvtellimus summas %s uuendus kinnitatud"
+
+#~ msgid "Subscription Renewal: Payment Token or User ID is missing/invalid."
+#~ msgstr ""
+#~ "Korduvtellimuse uuendus: maksevahend või kasutajatunnus on puudu või "
+#~ "vigane."
+
+#~ msgid ""
+#~ "%1$s %2$s Subscription Renewal Payment Approved: %3$s ending in %4$s "
+#~ "(expires %5$s)"
+#~ msgstr ""
+#~ "%1$s: %2$s korduvtellimuse uuendamise makse kinnitatud: %3$s lõpeb "
+#~ "numbritega %4$s (aegub %5$s)"
+
+#~ msgid ""
+#~ "%1$s Check Subscription Renewal Payment Approved: %2$s account ending in "
+#~ "%3$s"
+#~ msgstr ""
+#~ "%1$s: tšekiga tasutav korduvtellimuse uuendamise makse kinnitatud: %2$s "
+#~ "konto, lõpeb numbritega %3$s"
+
+#~ msgid "Via %1$s ending in %2$s"
+#~ msgstr "%1$s, lõpeb numbritega %2$s"
+
+#~ msgid "%1$s Pre-Order Tokenization attempt failed (%2$s)"
+#~ msgstr ""
+#~ "%1$s: eeltellimuse maksevahendi salvestamise katse ebaõnnestus (%2$s)"
+
+#~ msgid "%1$s - Pre-Order Release Payment for Order %2$s"
+#~ msgstr "%1$s - Eeltellimuse väljastamise makse tellimuse %2$s eest"
+
+#~ msgid ""
+#~ "%1$s %2$s Pre-Order Release Payment Approved: %3$s ending in %4$s "
+#~ "(expires %5$s)"
+#~ msgstr ""
+#~ "%1$s: %2$s eeltellimuse väljastamise makse vastu kinnitatud: %3$s lõpeb "
+#~ "numbritega %4$s (aegub %5$s)"
+
+#~ msgid "%1$s eCheck Pre-Order Release Payment Approved: %2$s ending in %3$s"
+#~ msgstr ""
+#~ "%1$s: e-tšeki eeltellimuse väljastamise makse kinnitatud: %2$s lõpeb "
+#~ "numbritega %3$s"
+
+#~ msgid "IPN processing error: %s duplicate transaction received"
+#~ msgstr "IPN töötlemise viga: %s duplikaattehing"
+
+#~ msgid "%1$s %2$s Transaction Approved: %3$s ending in %4$s"
+#~ msgstr "%1$s: %2$s tehing kinnitatud: %3$s lõpeb numbritega %4$s"
+
+#~ msgid "%1$s %2$s Transaction Approved"
+#~ msgstr "%1$s: %2$s tehing kinnitatud"
+
+#~ msgctxt "Supports capture charge"
+#~ msgid "Capture Charge"
+#~ msgstr "Makse "

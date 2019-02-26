@@ -1,0 +1,38 @@
+{
+    "name": "ebanx/benjamin",
+    "description": "Business rule provider lib for plugin implementations",
+    "type": "library",
+    "license": "Apache-2.0",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "fzaninotto/Faker": "^1.6@dev",
+        "justinrainbow/json-schema": "^5.0@dev",
+        "vlucas/phpdotenv": "^2.4@dev",
+        "sebastian/phpcpd": "^2.0.4",
+        "friendsofphp/php-cs-fixer": "^2.2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ebanx\\Benjamin\\": "src/"
+        },
+        "files": ["main.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-only": "phpunit --filter",
+        "dup-check": "phpcpd src && phpcpd tests",
+        "test-all": "composer test && composer style-check && composer dup-check",
+        "style-check" : "php-cs-fixer fix --dry-run --verbose --diff ./",
+        "style-fix" : "php-cs-fixer fix --verbose ./"
+    }
+}

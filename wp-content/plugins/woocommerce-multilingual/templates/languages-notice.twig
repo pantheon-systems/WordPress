@@ -1,0 +1,17 @@
+<div id="wcml_translations_message" class="message error">
+    <p>{{ strings.trnsl_available|raw }}</p>
+
+    <p>
+        {% if is_multisite %}
+            <a href="{{ nonces.debug_action|raw }}" class="button-primary">
+                {{ strings.update_trnsl }}
+            </a>
+        {% else %}
+            <a href="{{ nonces.upgrade_translations|raw }}" class="button-primary">
+                {{ strings.update_trnsl }}
+            </a>
+        {% endif %}
+        <a href="" class="button">{{ strings.hide }}</a>
+        <input type="hidden" id="wcml_hide_languages_notice" value="{{ nonces.hide_notice|raw }}" />
+    </p>
+</div>

@@ -1,0 +1,121 @@
+<tr id="wpml-tf-feedback-details-{{ feedback.get_id }}"  data-feedback-id="{{ feedback.get_id }}"
+    class="js-wpml-tf-feedback-details wpml-tf-feedback-details" style="display:none;">
+    <td colspan="6">
+
+        <div class="js-wpml-tf-feedback-details-error notice notice-error inline" style="display:none;"></div>
+
+        <h4>{{ strings.title }} {% include 'options-ui-request-status.twig' %}</h4>
+
+        <fieldset class="wpml-tf-inline-edit-col-left">
+            <div class="wpml-tf-inline-edit-col">
+
+                <div class="wpml-tf-line">
+                    <div class="wpml-tf-title">{{ strings.translation }}</div>
+                    <div class="wpml-tf-value">
+                        <img src="{{ feedback.get_document_flag_url }}">
+                        <a href="{{ feedback.get_document_information.get_url }}" target="_blank">
+                            <span class="wpml-semibold">{{ feedback.get_document_information.get_title }}</span>
+                        </a>
+                        <a href="{{ feedback.get_document_information.get_edit_url }}" type="button" class="button button-small button-secondary">{{ strings.edit_translation }}</a>
+                    </div>
+                </div>
+
+                <div class="wpml-tf-line">
+                    <div class="wpml-tf-title">{{ strings.original_post }}</div>
+                    <div class="wpml-tf-value">
+                        <img src="{{ feedback.get_source_document_flag_url }}">
+                        <a href="{{ feedback.get_document_information.get_source_url }}" target="_blank">
+                            {{ feedback.get_document_information.get_source_title }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="wpml-tf-line">
+                    <div class="wpml-tf-title">{{ strings.rating }}</div>
+                    <div class="wpml-tf-value">
+                    {% for i in 1..5 %}
+                        <span class="otgs-ico-star{% if i <= feedback.get_rating %} full-star{% endif %}"></span>
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <div class="wpml-tf-line">
+                    <div class="wpml-tf-title">{{ strings.feedback }}</div>
+                    <div class="wpml-tf-value">
+                        <div class="js-wpml-tf-readonly-feedback">
+                            {{- feedback.get_content -}}
+                        </div>
+                        <textarea class="js-wpml-tf-edit-feedback wpml-tf-value" cols="60" rows="5" style="display:none;">
+                            {{- feedback.get_content -}}
+                        </textarea>
+                        {% if has_admin_capabilities and 'pending' == feedback.get_status %}
+                            <a class="js-wpml-tf-enable-edit-feedback wpml-tf-enable-edit-feedback">{{ strings.edit_feedback }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+
+        <fieldset class="wpml-tf-inline-edit-col-right">
+            <div class="wpml-tf-inline-edit-col">
+
+                <div class="wpml-tf-line">
+                    <div class="wpml-tf-title">{{ strings.status }}</div>
+                    <div class="wpml-tf-value">
+                        {% set icon_classes = {
+                                'pending': 'otgs-ico-new',
+                                'translator_replied': 'otgs-ico-chat',
+                                'admin_replied': 'otgs-ico-chat',
+                                'sent_to_translator': 'otgs-ico-sent',
+                                'sent_to_ts_api': 'otgs-ico-sent',
+                                'sent_to_ts_manual': 'otgs-ico-sent',
+                                'sent_to_ts_email': 'otgs-ico-mail',
+                                'fixed': 'otgs-ico-translated'
+                            }
+                        %}
+                        <span class="{{ icon_classes[ feedback.get_status ] }} wpml-tf-status-ico"></span>
+                        <span class="wpml-semibold">{{ feedback.get_text_status }}</span>
+                        {% if 'sent_to_ts_api' == feedback.get_status %}
+                            <a class="js-wpml-tf-refresh-status otgs-ico-refresh"
+                               title="{{ strings.refresh_status }}"></a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="wpml-tf-line">
+                    <div class="wpml-tf-title">{{ strings.translated_by }}</div>
+                    <div class="wpml-tf-value"> <span class="wpml-semibold">{{ feedback.get_translator_name }}</span></div>
+                </div>
+
+                {% if feedback.is_local_translation %}
+                    {% include 'feedback-list-page-table-row-details-reviewer.twig'
+                        with {
+                            'feedback': feedback,
+                            'strings': strings,
+                            'has_admin_capabilities': has_admin_capabilities
+                        } only
+                    %}
+
+                    {% include 'feedback-list-page-table-row-details-messages.twig'
+                        with {
+                            'feedback': feedback,
+                            'strings': strings,
+                            'has_admin_capabilities': has_admin_capabilities
+                        } only
+                    %}
+                {% else %}
+                    {% include 'feedback-list-page-table-row-details-tp.twig'
+                        with { 'feedback': feedback, 'strings': strings } only
+                    %}
+                {% endif %}
+
+            </div>
+        </fieldset>
+
+        {% include 'feedback-list-page-table-row-details-buttons.twig'
+            with { 'feedback': feedback, 'strings': strings, 'has_admin_capabilities': has_admin_capabilities } only
+        %}
+
+    </td>
+</tr>

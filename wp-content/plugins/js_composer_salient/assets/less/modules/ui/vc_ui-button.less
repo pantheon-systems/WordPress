@@ -1,0 +1,274 @@
+@vcui-button-border: 1px;
+@vcui-button-transition-duration: .2s;
+@vcui-button-transition-properties: color, background, border, opacity, transform;
+@vcui-button-shape-rounded-radius: 3px;
+@vcui-control-button-opacity: .8;
+
+// sizes
+// md size (default)
+@vcui-button-size-md-vertical: 14px;
+@vcui-button-size-md-horizontal: 21px;
+@vcui-button-size-md-font-size: 14px;
+@vcui-button-size-md-line-height: 1.4;
+@vcui-button-message-size-md-horizontal: 8px;
+
+// sm size
+@vcui-button-size-sm-vertical: 8px;
+@vcui-button-size-sm-horizontal: 21px;
+@vcui-button-size-sm-font-size: 14px;
+@vcui-button-size-sm-line-height: 1.4;
+@vcui-button-message-size-md-horizontal: 8px;
+
+// States
+// State default
+@vcui-button-default-color: #fff;
+@vcui-button-default-background: #bcbcbc;
+@vcui-button-message-default-color: darken(@vcui-button-default-background, 10%);
+// State success
+@vcui-button-success-color: #fff;
+@vcui-button-success-background: #7bcd2d;
+@vcui-button-message-success-color: darken(desaturate(@vcui-button-success-background, 20%), 10%);
+// State danger
+@vcui-button-danger-color: #fff;
+@vcui-button-danger-background: #ff7877;
+@vcui-button-message-danger-color: darken(desaturate(@vcui-button-danger-background, 20%), 10%);
+// State action
+@vcui-button-action-color: #fff;
+@vcui-button-action-background: #0473aa;
+@vcui-button-message-action-color: darken(desaturate(@vcui-button-action-background, 10%), 5%);
+// State info
+@vcui-button-info-color: #fff;
+@vcui-button-info-background: #00aeee;
+@vcui-button-message-info-color: darken(desaturate(@vcui-button-info-background, 20%), 10%);
+// State warning
+@vcui-button-warning-color: #fff;
+@vcui-button-warning-background: #feb710;
+@vcui-button-message-warning-color: darken(desaturate(@vcui-button-warning-background, 20%), 10%);
+
+
+// State disabled
+@vcui-button-disabled-color: #F3F3F3;
+@vcui-button-disabled-background: #D8D8D8;
+@vcui-button-message-disabled-color: darken(desaturate(@vcui-button-disabled-background, 10%), 5%);
+
+// ui button
+.vc_general.vc_ui-button {
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background: transparent;
+  border: @vcui-button-border solid transparent;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  user-select: none;
+  text-decoration: none;
+  position: relative;
+  transition-property: @vcui-button-transition-properties;
+  transition-duration: @vcui-button-transition-duration;
+  transition-timing-function: ease-in-out;
+  outline: none;
+  font-weight: 400;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  #vc_ui-button > .make-size(
+  @padding-vertical: @vcui-button-size-md-vertical;
+  @padding-horizontal: @vcui-button-size-md-horizontal;
+  @font-size: @vcui-button-size-md-font-size;
+  );
+
+  &:hover,
+  &:focus {
+    border: @vcui-button-border solid transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.vc_ui-button {
+  // shapes
+  #vc_ui-button > .make-shape(~'vc_ui-button-shape-rounded'; @vcui-button-shape-rounded-radius);
+  // states
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-default';
+  @text: @vcui-button-default-color;
+  @background: @vcui-button-default-background;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-success';
+  @text: @vcui-button-success-color;
+  @background: @vcui-button-success-background;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-danger';
+  @text: @vcui-button-danger-color;
+  @background: @vcui-button-danger-background;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-action';
+  @text: @vcui-button-action-color;
+  @background: @vcui-button-action-background;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-info';
+  @text: @vcui-button-info-color;
+  @background: @vcui-button-info-background;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-success';
+  @text: @vcui-button-success-color;
+  @background: @vcui-button-success-background;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-warning';
+  @text: @vcui-button-warning-color;
+  @background: @vcui-button-warning-background;
+  );
+  &[disabled]:not(.vc_ui-button-undisabled) {
+    color: @vcui-button-disabled-color;
+    background-color: @vcui-button-disabled-background;
+    cursor: not-allowed;
+    &:hover,
+    &:focus {
+      background-color: @vcui-button-disabled-background;
+    }
+  }
+}
+
+//sizes
+.vc_general.vc_ui-button {
+  &.vc_ui-button-size-sm {
+    #vc_ui-button > .make-size(
+    @padding-vertical: @vcui-button-size-sm-vertical;
+    @padding-horizontal: @vcui-button-size-sm-horizontal;
+    @font-size: @vcui-button-size-sm-font-size;
+    );
+  }
+}
+
+// ui button message
+.vc_ui-button-message {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: @vcui-button-size-md-font-size;
+  // states
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-message-default';
+  @text: @vcui-button-message-default-color;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-message-success';
+  @text: @vcui-button-message-success-color;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-message-danger';
+  @text: @vcui-button-message-danger-color;
+  );
+  #vc_ui-button > .make-state(
+  ~'vc_ui-button-message-action';
+  @text: @vcui-button-message-action-color;
+  );
+}
+
+
+// control button
+.vc_general.vc_ui-control-button {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  border: none;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  user-select: none;
+  text-decoration: none;
+  transition-property: @vcui-button-transition-properties;
+  transition-duration: @vcui-button-transition-duration;
+  transition-timing-function: ease-in-out;
+  opacity: @vcui-control-button-opacity;
+  outline: none;
+  &:hover,
+  &:focus {
+    opacity: 1;
+    background-color: transparent;
+  }
+  &:active {
+    box-shadow: none;
+  }
+
+  &[disabled] {
+    opacity: @vcui-control-button-opacity;
+    cursor: default;
+  }
+  // pixel icon behaviour
+  .vc_ui-icon-pixel {
+    vertical-align: top;
+  }
+}
+
+
+
+
+
+
+
+
+
+// MIXINS
+#vc_ui-button {
+  // make size
+  .make-size(@padding-vertical: false; @padding-horizontal: false; @font-size: false; @line-height: false) {
+    & when not (@padding-vertical = false) {
+      padding-top: @padding-vertical;
+      padding-bottom: @padding-vertical;
+    }
+    & when not (@padding-horizontal = false) {
+      padding-left: @padding-horizontal;
+      padding-right: @padding-horizontal;
+    }
+    & when not (@font-size = false) {
+      font-size: @font-size;
+    }
+    & when not (@line-height = false) {
+      font-size: @line-height;
+    }
+  }
+
+  // make shape
+  .make-shape(@selector; @border-radius) {
+    &.@{selector} {
+      border-radius: @border-radius;
+    }
+  }
+
+  // make state
+  .make-state(@selector; @text: false; @background: false; @border: false) {
+    &.@{selector} {
+      & when not (@text = false) {
+        color: @text;
+      }
+      & when not (@background = false) {
+        background-color: @background;
+        &:hover,
+        &:focus {
+          & when (lightness(@background) > 70%) {
+            background-color: darken(@background, 5%);
+          }
+          & when not (lightness(@background) > 70%) {
+            background-color: darken(@background, 3%);
+          }
+        }
+      }
+      & when not (@border = false) {
+        border-color: @border;
+      }
+    }
+  }
+}
+

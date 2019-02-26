@@ -1,0 +1,13 @@
+<p>{{ strings.title }}</p>
+{% for lang_pair in lang_pairs %}
+	<p>{{ lang_pair.title }}</p>
+    <ul style="margin-top: -20px">
+		{% for element in lang_pair.elements %}
+			{% if element.type == 'post' %}
+				<li><a href="{{ element.original_link }}">{{ element.original_text }}</a>: <a href="{{ element.start_translating_link }}">{{ strings.start_translating_text }}</a></li>
+			{% else %}
+				<li>{{ strings.strings_text }}: <a href="{{ strings.strings_link }}">{{ strings.take }}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+{% endfor %}

@@ -1,0 +1,14 @@
+{% if products %}
+    <h2 class="widget-title">{{ title }}</h2>
+    <ul class="wcml_removed_cart_items">
+        {% for product in products %}
+            <li rel="{{ product.id }}" >
+                <a href="{{ product.url|raw }}">
+                    {{ product.title|raw }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="" class="wcml_removed_cart_items_clear">{{ clear }}</a>
+    <input type="hidden" id="wcml_clear_removed_items_nonce" value="{{ nonce|raw }}" />
+{% endif %}

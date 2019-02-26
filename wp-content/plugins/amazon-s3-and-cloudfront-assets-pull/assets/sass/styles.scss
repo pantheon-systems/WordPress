@@ -1,0 +1,212 @@
+$as3cf-aqua: #ade7b5;
+
+body.as3cf-pro {
+	[id="tab-assets_pull"] {
+
+		a:focus {
+			box-shadow: none;
+		}
+
+		.as3cf-main-settings {
+			display: block;
+		}
+
+		.as3cf-assets-pull-domain {
+			margin-top: 1em;
+		}
+
+		.as3cf-assets-pull-domain-container {
+			margin-top: .5em;
+
+			input {
+				width: 100%;
+				line-height: 1.8em;
+				font-size: 1.2em;
+				padding: 0.2em 0.6em;
+			}
+			.as3cf-defined-in-config {
+				margin-bottom: -100%;
+				position: relative;
+				top: 1px;
+			}
+		}
+
+		.assets-logo {
+			background: #0769ad;
+			width: 100px;
+			padding: 50px;
+		}
+
+		.as3cf-settings-form-actions {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 2em;
+		}
+		.as3cf-wizard-control-row {
+			padding-top: .25em;
+			padding-bottom: .25em;
+		}
+	}
+
+	[data-as3cf-copy] {
+		box-shadow: inset 0 0 0 1px $as3cf-aqua;
+		background-color: rgba( $as3cf-aqua, 0.25 );
+	}
+
+	.as3cf-click-to-copy {
+		[data-as3cf-copy] {
+			cursor: copy;
+			transition: background-color .25s ease;
+			&:hover {
+				background-color: $as3cf-aqua;
+			}
+		}
+		.as3cf-click-to-copy-show {
+			display: block !important;
+		}
+	}
+
+	.as3cf-wizard-control-row-primary {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-between;
+	}
+
+	.as3cf-wizard-step {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+			transition: max-width 1s;
+			cursor: zoom-in;
+		}
+		ul {
+			list-style: disc;
+			margin-left: 1.4em;
+		}
+	}
+
+	.as3cf-wizard-step-body {
+		min-height: 300px;
+	}
+
+	.as3cf-image-frame {
+		display: none;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		cursor: zoom-out;
+		background-color: rgba( #000, .70 );
+		overflow-x: auto;
+		padding: 50px;
+
+		img {
+			max-width: 100%;
+			margin: auto;
+		}
+
+		&.active {
+			position: fixed;
+			display: flex !important;
+			align-content: center;
+			justify-content: center;
+			opacity: 1;
+			z-index: 99999;
+		}
+	}
+
+	.as3cf-wizard-controls {
+		padding-top: 1em;
+		border-top: 1px solid #CCC;
+		margin-top: 1em;
+	}
+
+	.as3cf-wizard-step-overview {
+		.as3cf-wizard-controls {
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+
+	.as3cf-wizard-control-row-secondary {
+		text-align: right;
+	}
+
+	.as3cfap-pull-right {
+		float: right;
+	}
+
+	.as3cf-verify-domain {
+		padding: .5em 0;
+
+		.last-checked,
+		.check-result,
+		.checking-domain {
+			display: none;
+		}
+		.last-checked-at p {
+			// Use same margin as form style for consistency with main settings
+			margin-top: 4px;
+			margin-bottom: 0;
+		}
+		.check-result-status {
+			font-weight: bold;
+		}
+		&.checking {
+			.checking-domain { display: block; }
+			.check-first,
+			.last-checked { display: none !important; }
+		}
+		&.has-checked {
+			.last-checked { display: block; }
+			.check-first { display: none; }
+
+			&[check-result="1"] .check-result.success {
+				display: block;
+			}
+			&[check-result="0"] .check-result.fail {
+				display: block;
+			}
+ 		}
+		.check-result.fail .error {
+			margin-top: 0;
+		}
+		.check-result-icon {
+			vertical-align: middle;
+			&.icon-success svg {
+				fill: #8dcc96; // need to use alt aqua for size
+			}
+			&.icon-fail svg {
+				fill: #dc3232;
+			}
+		}
+		.check-result-icon svg {
+			width: 1em;
+			height: 1em;
+		}
+		.spinner {
+			float: none;
+			width: 16px;
+			height: 16px;
+			margin: 0 .5em;
+			background-size: 15px 15px;
+		}
+	}
+}
+
+/**
+ * Assets Pull tab
+ */
+
+#tab-assets_pull .as3cf-assets-pull-rewrite-urls-container td {
+	padding-top: 5px;
+}

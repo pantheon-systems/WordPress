@@ -1,0 +1,85 @@
+/* bootstrap reference bug */
+@import (reference)"../../config/variables.less";
+@import (reference)"../../lib/grid.less";
+
+/* / bootstrap reference bug */
+
+@vc_media-xs-width: 350px;
+@vc_media-sm-width: 700px;
+@vc_media-md-width: 1050px;
+@vc_media-lg-width: 1000px;
+
+.vc_ui-flex-row {
+  &.vc_row {
+    display: flex;
+    flex-wrap: wrap;
+    &::before,
+    &::after {
+      width: 0;
+    }
+  }
+  [class*=vc_col] {
+    width: 100%;
+  }
+}
+
+
+.vc_make-media-grid(xs);
+.vc_make-media-grid(sm);
+.vc_make-media-grid(md);
+.vc_make-media-grid(lg);
+
+.vc_float-media-grid-columns(@class) {
+  // initial
+  .vc_col(@index) when (@index = 1) {
+    @item: ~".vc_media-@{class} .vc_col-@{class}-@{index}";
+    .vc_col((@index + 1), @item);
+  }
+
+  // general
+  .vc_col(@index, @list) when (@index =< @grid-columns) {
+    @item: ~".vc_media-@{class} .vc_col-@{class}-@{index}";
+    .vc_col((@index + 1), ~"@{list}, @{item}");
+  }
+
+  // terminal
+  .vc_col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      float: left;
+    }
+  }
+  .vc_col(1); // kickstart it
+}
+
+.vc_float-media-grid-columns-rtl(@class) {
+  // initial
+  .vc_col-rtl(@index) when (@index = 1) {
+    @item: ~".rtl .vc_rtl-columns-reverse .vc_media-@{class} .vc_col-@{class}-@{index}";
+    .vc_col-rtl((@index + 1), @item);
+  }
+
+  // general
+  .vc_col-rtl(@index, @list) when (@index =< @grid-columns) {
+    @item: ~".rtl .vc_rtl-columns-reverse .vc_media-@{class} .vc_col-@{class}-@{index}";
+    .vc_col-rtl((@index + 1), ~"@{list}, @{item}");
+  }
+
+  // terminal
+  .vc_col-rtl(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      float: right;
+    }
+  }
+  .vc_col-rtl(1); // kickstart it
+}
+
+.vc_make-media-grid(@class) {
+  .vc_float-media-grid-columns(@class);
+  .vc_float-media-grid-columns-rtl(@class);
+  .vc_media-@{class} {
+    .vc_loop-grid-columns(@grid-columns, @class, width);
+    .vc_loop-grid-columns(@grid-columns, @class, pull);
+    .vc_loop-grid-columns(@grid-columns, @class, push);
+    .vc_loop-grid-columns(@grid-columns, @class, offset);
+  }
+}

@@ -1,0 +1,261 @@
+@vc_panel-width: 700px;
+
+.vc_input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+
+  .vc_form-control {
+    display: table-cell;
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .vc_input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: middle;
+    display: table-cell;
+  }
+}
+
+.vc_panel {
+  .panel;
+  width: @vc_panel-width;
+  position: fixed;
+  z-index: 100000;
+  top: 74px;
+  left: 50%;
+  // height: auto !important;
+  min-height: 150px;
+  .panel-body {
+    padding: 0;
+  }
+  display: none;
+  border-color: #DDDDDD;
+}
+
+.vc_panel-body {
+  .panel-body;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &.vc_with-tabs {
+    margin-top: 50px;
+  }
+}
+
+.vc_panel-heading {
+  .vc_box-heading;
+  cursor: move;
+}
+
+.vc_panel-footer {
+  .panel-footer;
+  box-sizing: border-box;
+  .vc_btn-default {
+    &:hover {
+      border-color: #CCC;
+    }
+    &:focus {
+      background-color: #FFF; // TODO: check
+    }
+  }
+}
+
+.vc_panel-title {
+  .panel-title;
+  .vc_heading(16px);
+  border: 0 !important;
+}
+
+.vc_properties-list {
+  //padding: 10px 16px;
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px 6px;
+    margin: 0;
+  }
+  input,
+  select {
+    font-size: 1em;
+  }
+  select {
+    height: auto;
+  }
+  input[type="checkbox"] {
+    width: auto;
+    margin-left: 5px;
+    margin-right: 2px;
+    display: inline-block;
+    &:nth-child(2) {
+      margin-left: 0;
+    }
+  }
+}
+
+.vc_panel-tabs {
+  > .vc_edit-form-tabs-menu {
+    margin: 38px 0 10px;
+    // margin-top 38px comes from panel-heading.OuterHeight
+    padding-left: 10px;
+    display: block;
+    position: absolute;
+    top: 0; // fixes firefox bug!
+    left: 0;
+    right: 0;
+    background-color: #e6e6e6;
+    .vc_edit-form-tab-control {
+      display: list-item;
+      list-style: none;
+      float: left;
+      position: relative;
+      top: 0;
+      margin: 9px 2px 0 0; // see border-bottom-width: 0
+      border: 1px solid transparent;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-width: 0;
+      padding: 0;
+      white-space: nowrap;
+      font-weight: normal;
+      .transition(background-color 0.5s ease-out);
+      color: #949494;
+      .vc_edit-form-link {
+        color: #949494;
+        float: left;
+        padding: 11px 15px;
+        text-decoration: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 12px;
+        &:focus {
+          .box-shadow(none);
+        }
+      }
+      &.vc_active {
+        background: #ffffff;
+        font-weight: normal;
+        color: #595959;
+        a {
+          color: #595959;
+        }
+      }
+      &.vc_tab-color-animated {
+        background-color: #d7d7d7;
+      }
+    }
+    > :first-child {
+      margin-left: 6px;
+    }
+  }
+  > .vc_edit-form-tab {
+    display: none;
+    &.vc_active {
+      display: block;
+    }
+  }
+}
+
+.vc_panel-tabs {
+  > .vc_panel-tabs-menu {
+    margin: 38px 0 10px;
+    // margin-top 38px comes from panel-heading.OuterHeight
+    padding-left: 10px;
+    display: block;
+    position: absolute;
+    top: 0; // fixes firefox bug!
+    left: 0;
+    right: 0;
+    background-color: #e6e6e6;
+    .vc_panel-tabs-control {
+      display: list-item;
+      list-style: none;
+      float: left;
+      position: relative;
+      top: 0;
+      margin: 9px 2px 0 0; // see border-bottom-width: 0
+      border: 1px solid transparent;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-width: 0;
+      padding: 0;
+      white-space: nowrap;
+      font-weight: normal;
+      .transition(background-color 0.5s ease-out);
+      color: #949494;
+      .vc_panel-tabs-link {
+        color: #949494;
+        float: left;
+        padding: 11px 15px;
+        text-decoration: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 12px;
+        &:focus {
+          .box-shadow(none);
+        }
+      }
+      &.vc_active {
+        background: #ffffff;
+        font-weight: normal;
+        color: #595959;
+        a {
+          color: #595959;
+        }
+      }
+      &.vc_panel-tabs-color-animated {
+        background-color: #d7d7d7;
+      }
+    }
+    > :first-child {
+      margin-left: 6px;
+    }
+  }
+  > .vc_panel-tab {
+    display: none;
+    padding: 10px 15px;
+    &.vc_active {
+      display: block;
+    }
+  }
+}
+
+.vc_panel-opacity {
+  height: 38px !important;
+  overflow: hidden !important;
+  min-height: 0; // fixes min-height problem in frontend
+  &.vc_shortcode-edit-form {
+    padding-bottom: 0;
+  }
+  .vc_panel-footer, .vc_panel-body {
+    display: none;
+  }
+}
+
+.vc_description {
+  color: #999999;
+  display: block;
+  font-style: italic;
+  line-height: 20px;
+  margin-top: 8px;
+  clear: both;
+}
+
+.vc_google_fonts_form_field-preview-wrapper {
+  margin-top: 10px;
+}
+
+.vc_google_fonts_form_field-preview-container {
+  > span {
+    font-size: 20px;
+  }
+}

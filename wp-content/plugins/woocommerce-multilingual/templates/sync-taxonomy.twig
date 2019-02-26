@@ -1,0 +1,46 @@
+<div class="icl_tt_main_bottom" style="display: none;">
+    <br/>
+    {% if attribute_taxonomies %}
+        <form id="wcml_tt_sync_variations" method="post">
+            <input type="hidden" name="action" value="wcml_sync_product_variations" />
+            <input type="hidden" id="warn_title" value="{{ strings.untranstaled_warn }}" />
+            <input type="hidden" name="taxonomy" value="{{ taxonomy }}" />
+            {{ nonces.sync_product_variations|raw }}
+            <input type="hidden" name="last_post_id" value="" />
+            <input type="hidden" name="languages_processed" value="0" />
+            <div id="wcml_tt_sync_assignment" style="{{ display|e }}" >
+                <p>
+                    <input class="button-secondary" type="submit" value="{{ strings.sync_update|e }}" />
+                    <img src="{{ loader_url|e }}" alt="loading" height="16" width="16" class="wcml_tt_spinner" />
+                </p>
+                <span class="errors icl_error_text"></span>
+            </div>
+            <div class="wcml_tt_sycn_preview"></div>
+        </form>
+
+        <div id="wcml_tt_sync_desc" style="{{ display_attr|e }}">
+            <p>{{ strings.auto_generate }}</p>
+            {% if vars_to_create is not empty %}
+                <p>
+                    {{ strings.vars_to_create|format( vars_to_create ) }}
+                </p>
+            {% endif %}
+        </div>
+    {% else %}
+        <form id="wcml_tt_sync_assignment" style="{{ display_tax|e }}" data-sync="{% if display_tax %}0{% else %}1{% endif %}">
+            <input type="hidden" name="taxonomy" value="{{ taxonomy }}"/>
+            {{ nonces.sync_taxonomies|raw }}
+            <p>
+                <input class="button-secondary" type="submit" value="{{ strings.sync_in_cont|format( tax_name )|e }}"/>
+                <img src="{{ loader_url|e }}" alt="loading" height="16" width="16" class="wcml_tt_spinner"/>
+            </p>
+            <span class="errors icl_error_text"></span>
+        </form>
+        <div id="wcml_tt_sync_preview"></div>
+
+
+        <p id="wcml_tt_sync_desc" style="{{ display_tax|e }}">
+            {{ strings.auto_apply|format( tax_singular_name )|raw }}
+        </p>
+    {% endif %}
+</div>

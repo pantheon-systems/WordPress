@@ -1,0 +1,47 @@
+<div class="wcml-section">
+    <div class="wcml-section-header">
+        <h3>
+            {{ strings.status }}
+            <i class="otgs-ico-help wcml-tip" data-tip="{{ strings.depends|e }}"></i>
+        </h3>
+    </div>
+    <div class="wcml-section-content">
+        <ul class="wcml-status-list wcml-plugins-status-list">
+            {% if icl_version %}
+                <li>
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.inst_active|format( strings.wpml )|raw }}
+                </li>
+                {% if icl_setup %}
+                    <li>
+                        <i class="otgs-ico-ok"></i>
+                        {{ strings.is_setup|format( strings.wpml )|raw }}
+                    </li>
+                {% else %}
+                    <li>
+                        <i class="otgs-ico-warning"></i>
+                        {{ strings.not_setup|format( strings.wpml )|raw }}
+                    </li>
+                {% endif %}
+            {% endif %}
+            {% if tm_version %}
+                <li>
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.inst_active|format( strings.tm )|raw }}
+                </li>
+            {% endif %}
+            {% if st_version %}
+                <li>
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.inst_active|format( strings.st )|raw }}
+                </li>
+            {% endif %}
+            {% if wc %}
+                <li>
+                    <i class="otgs-ico-ok"></i>
+                    {{ strings.inst_active|format( strings.wc )|raw }}
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

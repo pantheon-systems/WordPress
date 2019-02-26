@@ -1,0 +1,16 @@
+<div class="wpml-section" id="translation-notifications-sec-3">
+    <div class="wpml-section-header">
+
+        <h4>{{ title }}</h4>
+    </div>
+    <div class="wpml-section-content">
+        <ul>
+            {% for setting in settings %}
+                <li>
+                    <input {{ setting.checked }} name="{{ setting.name }}" type="radio" value="{{ setting.value }}"/>
+                    <label>{{ setting.label }}</label>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

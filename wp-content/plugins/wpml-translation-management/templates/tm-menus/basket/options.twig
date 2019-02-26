@@ -1,0 +1,71 @@
+<form method="post" id="translation-jobs-translators-form" name="translation-jobs-translators" action="">
+
+    <h3 class="wpml-tm-section-header">{{ strings.heading_basket_name }}</h3>
+
+    <p>
+        <input type="hidden" name="icl_tm_action" value="send_all_jobs"/>
+        <label for="basket_name">{{ strings.batch_name_label }}</label>
+        <input id="basket_name"
+               name="basket_name"
+               type="text"
+               value="{{ basket_name_placeholder }}"
+               maxlength="{{ basket_name_max_length }}"
+               placeholder="{{ basket_name_placeholder }}">
+		<a
+			class="js-wpml-popover-tooltip js-otgs-popover-tooltip otgs-ico-help"
+			data-tippy-zIndex="999999"
+			title="{{ strings.batch_name_desc }}"
+		> </a>
+    </p>
+
+    <p>
+        <label for="basket-deadline">{{ strings.batch_deadline_label }}</label>
+        <input id="basket-deadline" name="basket-deadline" type="text" value="{{ deadline_estimation_date }}">
+		<a
+			class="js-wpml-popover-tooltip js-otgs-popover-tooltip otgs-ico-help"
+			data-tippy-zIndex="999999"
+			title="{{ strings.batch_deadline_tooltip|raw }}"
+		> </a>
+        <span class="spinner"> </span>
+    </p>
+
+    <h3 class="wpml-tm-section-header">{{ strings.heading_translators }}</h3>
+
+    <table class="widefat striped wpml-margin-bottom-sm" id="icl-translation-translators" cellspacing="0">
+        <thead>
+        <tr>
+            <th class="column-language-pair" scope="col">{{ strings.column_language }}</th>
+            <th class="column-translator" scope="col">{{ strings.column_translator }}</th>
+        </tr>
+        </thead>
+        {% if target_languages %}
+        <tbody>
+            {% for key, lang in target_languages %}
+            <tr>
+                <td class="column-language-pair" >{{ source_language_flag|raw }} {{ source_language.display_name }} &raquo; {{ lang.flag|raw }} {{ lang.display_name }}</td>
+                <td class="column-translator" >
+                    {{ dropdowns_translators[ lang.code ]|raw }}
+                    {% if translation_service_enabled == false %}
+						<a
+							class="js-wpml-popover-tooltip js-otgs-popover-tooltip otgs-ico-help"
+							data-tippy-zIndex="999999"
+							title="{{ strings.pro_translation_tip }}{{ pro_translation_link }}"
+						> </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+
+    {{ extra_basket_fields|raw }}
+
+    {% for name, nonce in nonces %}
+    <input type="hidden" id="{{ name }}" name="{{ name }}" value="{{ nonce }}" />
+    {% endfor %}
+
+    <div class="text-center wpml-margin-top-lg">
+        <input type="submit" class="button-primary button-lg" name="send-all-jobs-for-translation" value="{{ strings.button_send_all }}">
+    </div>
+</form>

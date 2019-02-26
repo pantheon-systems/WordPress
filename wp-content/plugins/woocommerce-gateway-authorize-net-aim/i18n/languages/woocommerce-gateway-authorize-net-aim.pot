@@ -1,0 +1,324 @@
+# Copyright (C) 2018 SkyVerge
+# This file is distributed under the GNU General Public License v3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Authorize.Net AIM Gateway 3.13.0\n"
+"Report-Msgid-Bugs-To: "
+"https://woocommerce.com/my-account/marketplace-ticket-form/\n"
+"POT-Creation-Date: 2014-06-15 22:41:25+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/api/class-wc-authorize-net-aim-api-request.php:323
+msgid "Fee"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-request.php:324
+msgid "Order Fee"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-request.php:359
+msgid "Order Taxes"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-request.php:382
+msgid "Order Shipping"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-response-message-helper.php:153
+msgid "Oops, sorry! A temporary error occurred. Please try again in 5 minutes."
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-response-message-helper.php:157
+msgid ""
+"This transaction was authorized successfully, but could not be settled. "
+"Please contact us."
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-response-message-helper.php:161
+msgid ""
+"The name and/or bank account type does not match. Please re-enter and try "
+"again."
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-response.php:134
+#: includes/api/class-wc-authorize-net-aim-api-response.php:150
+msgid "N/A"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-response.php:328
+msgid "Message Code: %s - %s"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-response.php:337
+msgid "Error Code: %s - %s"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api.php:344
+#: includes/api/emulation/class-wc-authorize-net-aim-emulation-api.php:240
+msgid "HTTP %s: %s"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api.php:363
+msgid "Code: %s, Message: %s"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api.php:367
+msgid ""
+"Test request detected -- please disable test mode in your Authorize.Net "
+"control panel and use a separate Authorize.Net test account for testing."
+msgstr ""
+
+#: includes/api/emulation/class-wc-authorize-net-aim-emulation-api-response.php:89
+msgid "Could not parse direct response."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:64
+msgid "Authorize.Net AIM"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:65
+msgid ""
+"Allow customers to securely pay using their credit cards with Authorize.Net "
+"AIM."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:80
+#: includes/class-wc-gateway-authorize-net-aim-echeck.php:57
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:80
+msgid "Production"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:80
+#: includes/class-wc-gateway-authorize-net-aim-echeck.php:57
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:81
+msgid "Test"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:116
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:131
+msgid "Accept.js"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:119
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:134
+msgid ""
+"Enable Accept.js to minimize PCI compliance and send credit card details "
+"directly to Authorize.Net"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:121
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:136
+msgid ""
+"You must obtain a Client Key to use Accept.js at checkout. %1$sLearn more "
+"&raquo;%2$s"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:125
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:140
+msgid "Client Key"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:221
+msgid "An error occurred, please try again or try an alternate form of payment."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:430
+#. translators: Placeholders: %1$s - <strong> tag, %2$s - </strong> tag
+msgid ""
+"%1$sPossible fraud detected based on your Authorize.Net Fraud Filter "
+"configuration.%2$s Please review the transaction from your merchant account "
+"before processing."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:436
+#. translators: Placeholders: %s - an AVS result code, such as "A"
+msgid "AVS Result: %s"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:441
+#. translators: Placeholders: %s - a CSC result code, such as "N"
+msgid "CSC Result: %s"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-credit-card.php:473
+msgid "%s Refund error - order is missing credit card last four."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-echeck.php:50
+msgid "Authorize.Net AIM eCheck"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-echeck.php:51
+msgid ""
+"Allow customers to securely pay using their checking accounts with "
+"Authorize.Net AIM."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:68
+msgid "Authorize.Net AIM Emulation"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:69
+msgid ""
+"Allow customers to securely pay using their credit cards via a payment "
+"processor that supports Authorize.Net AIM Emulation."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:100
+msgid "Payment Gateway URL"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:103
+msgid ""
+"The URL to post transaction requests to. Your payment processor should "
+"provide this to you."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:108
+#: includes/class-wc-gateway-authorize-net-aim.php:68
+msgid "API Login ID"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:111
+#: includes/class-wc-gateway-authorize-net-aim.php:71
+msgid "Your Authorize.Net API Login ID"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:115
+#: includes/class-wc-gateway-authorize-net-aim.php:75
+msgid "API Transaction Key"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:118
+#: includes/class-wc-gateway-authorize-net-aim.php:78
+msgid "Your Authorize.Net API Transaction Key"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:122
+msgid "Test Payment Gateway URL"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:125
+msgid ""
+"The test URL to post transaction requests to. Your payment processor should "
+"provide this to you."
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:130
+#: includes/class-wc-gateway-authorize-net-aim.php:82
+msgid "Test API Login ID"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:133
+#: includes/class-wc-gateway-authorize-net-aim.php:85
+msgid "Your test Authorize.Net API Login ID"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:137
+#: includes/class-wc-gateway-authorize-net-aim.php:89
+msgid "Test API Transaction Key"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim-emulation.php:140
+#: includes/class-wc-gateway-authorize-net-aim.php:92
+msgid "Your test Authorize.Net API Transaction Key"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WooCommerce Authorize.Net AIM Gateway"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:305
+msgid "Province"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:310
+msgid "Island"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:314
+msgid "State"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:319
+msgid "County"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:325
+msgid "District"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:329
+msgid "Region"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:360
+msgid "Disable Emulation Gateway"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:361
+msgid "Enable Emulation Gateway"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:383
+msgid "Configure Emulator"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:387
+msgid "Configure eChecks"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:391
+msgid "Configure Credit Cards"
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:449
+msgid "%s: A valid Client Key is required to use Accept.js at checkout."
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:451
+msgid "%s: SSL is required to use Accept.js at checkout."
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:466
+msgid "Authorize.Net AIM Emulation Gateway is now enabled."
+msgstr ""
+
+#: woocommerce-gateway-authorize-net-aim.php:467
+msgid "Authorize.Net AIM Emulation Gateway is now disabled."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.woocommerce.com/products/authorize-net-aim/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Accept Credit Cards and eChecks via Authorize.Net AIM in your WooCommerce "
+"store"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "SkyVerge"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.woocommerce.com"
+msgstr ""
+
+#: includes/api/class-wc-authorize-net-aim-api-request.php:163
+#: includes/api/class-wc-authorize-net-aim-api-request.php:186
+#: includes/api/class-wc-authorize-net-aim-api-request.php:216
+msgctxt "hash before the order number"
+msgid "#"
+msgstr ""
+
+#: includes/class-wc-gateway-authorize-net-aim.php:122
+msgctxt "Order description"
+msgid "%s - Order %s"
+msgstr ""

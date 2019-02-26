@@ -1,0 +1,63 @@
+/* Tour
+---------------------------------------------------------- */
+.wpb_vc_tour {
+  > .vc_controls {
+    .vc_tab-controls;
+  }
+  > .wpb_element_wrapper {
+    padding: 0px;
+    background: none;
+    border: none;
+    height: auto;
+    .wpb_tabs_holder,
+    .tabs_controls {
+      padding: 0;
+    }
+    .ui-tabs .ui-tabs-nav {
+      float: left;
+      width: 30%;
+      position: relative;
+      left: 1px;
+      z-index: 2;
+      li {
+        float: none;
+        background: @vc_tab_tag_bg;
+        border: 1px solid transparent;
+        .border-left-radius(@vc_border_radius);
+        padding: 0;
+        margin: 0;
+        a {
+          float: none;
+          display: block;
+          color: @vc_tab_tag_color;
+          padding: 10px 16px;
+          margin: 0 0 2px;
+        }
+        &.add_tab_block {
+          padding: 11px;
+          a {
+            padding: 0;
+            width: 100%;
+            height: 16px;
+            display: block;
+            background: transparent url('../vc/controls.png') no-repeat -16px -16px;
+          }
+        }
+      }
+      li.ui-tabs-active {
+        background: @vc_tab_tag_active_bg;
+      }
+    }
+    .wpb_vc_tab {
+      float: right;
+      width: 70%;
+      > .vc_controls {
+        position: relative;
+      }
+    }
+    .ui-tabs .ui-tabs-nav li,
+    .wpb_vc_tab {
+      .box-sizing(border-box);
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<div class="js-translators wpml-section" data-nonce="{{ nonce }}">
+    <h2>{{ strings.title }}</h2>
+	{% if strings.ate is defined %}
+		<div id="ate-controls" data-status-only class="wpml-tm-ate-activation{% if not all_users_have_subscriptions %} inline notice notice-warning otgs-notice otgs-notice-warning{% endif %}">
+            <p>{{ strings.ate|raw }}</p>
+		</div>
+	{% endif %}
+    <div class="js-translators-list">
+        <div class="tablenav top clearfix">
+            <button
+                    class="button-secondary alignright js-add-translator"
+                    {% if not can_add_translators %} disabled {% endif %}
+            > + {{ strings.add_translator }}</button>
+        </div>
+        {% if can_add_translators %}
+            {% include 'translators-table.twig' %}
+        {% else %}
+            <div class="notice notice-warning inline">
+                <p>{{ strings.no_capability }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    {% include 'add-new-translator-dialog.twig' with { 'dialog': add_translator_dialog } %}
+    {% include 'edit-translator-languages-dialog.twig' with { 'dialog': edit_translator_languages_dialog } %}
+</div>

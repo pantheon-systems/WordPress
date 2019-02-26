@@ -1,0 +1,56 @@
+@import "backend_shortcodes/rows_columns.less";
+@import "modules/vc_placeholder.less";
+
+.vc_param_group-controls {
+  .vc_controls {
+    background-color: #fff;
+    height: 20px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .vc_control {
+    &.column_toggle {
+      .vc_icon {
+        background-position: -16px -114px;
+      }
+      .vc-c-icon-arrow_drop_down {
+        &:extend(.vc-c-icon-arrow_drop_up all);
+      }
+    }
+  }
+}
+
+.vc_param_group-collapsed {
+  margin-bottom: 15px;
+
+  .vc_control.column_toggle .vc_icon {
+    background-position: -16px -96px;
+  }
+
+  & > .wpb_element_wrapper {
+    display: none;
+  }
+}
+
+.vc_hidden-label {
+  display: none;
+}
+
+.vc_param-group-admin-labels {
+  color: #999999;
+  font-style: italic;
+  line-height: 24px;
+  float: left;
+  margin-left: 1em;
+
+  label {
+    cursor: default;
+    vertical-align: inherit;
+  }
+}
+
+.vc_param_group-wrapper {
+  margin: 14px -14px;
+  padding: 0;
+}

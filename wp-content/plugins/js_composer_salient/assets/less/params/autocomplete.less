@@ -1,0 +1,100 @@
+.vc_autocomplete-field {
+  clear: both;
+  .vc_autocomplete {
+    margin: 0;
+    background: #ffffff;
+    border: 1px solid #dfdfdf;
+    padding: 2px;
+    cursor: text;
+    min-height: 24px;
+    li {
+      margin-bottom: 0;
+      &.vc_data {
+        background: #0b4b81;
+        color: #ffffff;
+        border: 1px solid #0b4b81;
+      }
+      &.vc_autocomplete-label {
+        border-radius: 2px;
+        padding: 0 0 0 8px;
+        margin: 1px;
+        position: relative;
+        cursor: pointer;
+        a {
+          color: #fff
+        }
+        .vc_label {
+          display: inline-block;
+          line-height: 18px;
+          font-size: 11px;
+          padding: 0 6px 0 5px;
+        }
+        .vc_autocomplete-remove {
+          color: #aec4d8;
+          display: block;
+          cursor: pointer;
+          position: absolute;
+          top: 5px;
+          right: 7px;
+          width: 9px;
+          height: 9px;
+          line-height: 9px;
+          font-size: 18px;
+          text-align: center;
+          &:hover {
+            color: #ffffff;
+          }
+        }
+      }
+      &.vc_autocomplete-input {
+        padding: 0 3px;
+        box-sizing: border-box;
+        .ui-helper-hidden-accessible {
+          left: 0;
+        }
+        input {
+          width: 100%;
+          border: 0;
+          padding: 5px 0;
+          margin: 0;
+          &:focus {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+          }
+        }
+      }
+      &.vc_autocomplete-clear {
+        clear: both;
+        float: none;
+      }
+    }
+  }
+}
+
+.vc_ui-auotocomplete {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.wpb_el_type_checkbox {
+  .wpb_vc_param_value.filter.checkbox {
+    float: none; // fix for class .filter added from param rendering.
+  }
+}
+
+.vc_autocomplete-inline {
+  > li.vc_data.vc_autocomplete-label {
+    display: block;
+    padding: 0 20px 0 8px;
+    width: auto;
+    float: left;
+  }
+
+  > .vc_autocomplete-input {
+    display: block;
+    float: none;
+    overflow: hidden;
+    min-width: 200px;
+    width: auto;
+  }
+}

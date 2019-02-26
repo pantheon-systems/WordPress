@@ -1,0 +1,97 @@
+// Preview template behaviour
+@grid-preview-max-width: 400px;
+
+.vc_ui-template-preview {
+  .vc_welcome {
+    display: none;
+  }
+  .wpb_vc_tta_tabs,
+  .wpb_vc_tta_pageable,
+  .wpb_vc_tta_tour,
+  .wpb_vc_tta_accordion,
+  .wpb_vc_tta_section .vc_tta-panel-body {
+    .vc_controls {
+      display: none;
+    }
+  }
+
+  .postbox {
+    border-color: transparent;
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+
+  .vc_ui-templates-preview-design-helper {
+    position: relative;
+    height: auto;
+    .vc_row_color, .vc_row_image {
+      float: right;
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      display: block;
+      margin-right: 3px;
+      border-radius: 8px;
+      background-size: cover;
+    }
+  }
+
+  .wpb_vc_column_inner > .vc_controls:last-child {
+    display: none;
+  }
+
+  // Fix for grid row
+  .vc_gitem-content {
+    padding-top: 10px;
+    > .vc_row {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: flex-start;
+      align-content: flex-start;
+
+      &::before,
+      &::after {
+        width: 0;
+      }
+
+      .vc_gitem-add-c-left,
+      .vc_gitem-add-c-right,
+      .vc_gitem-add-c-top,
+      .vc_gitem-add-c-bottom {
+        &:empty {
+          display: none;
+        }
+      }
+
+      .vc_gitem-ab-zone,
+      .vc_gitem-add-c-left,
+      .vc_gitem-add-c-right,
+      .vc_gitem-add-c-top,
+      .vc_gitem-add-c-bottom {
+        width: 50%;
+        max-width: @grid-preview-max-width;
+      }
+
+      .vc_gitem-add-c-top,
+      .vc_gitem-add-c-bottom {
+          margin-left: 0;
+      }
+    }
+  }
+}
+
+.vc_general-template-preview {
+  height: auto;
+  #wpbody-content {
+    padding-bottom: 0;
+  }
+  #wpbody {
+    padding: 0;
+  }
+
+  // don't show wp update message in preview
+  #update-nag, .update-nag {
+    display: none;
+  }
+}

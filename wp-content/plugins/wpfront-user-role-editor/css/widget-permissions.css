@@ -1,0 +1,19 @@
+p span.user-restriction-container {
+    display: inline-block;
+}
+
+p span.user-restriction-container label {
+    font-style: normal;
+    float: left;
+    width: 50%;
+}
+
+p span.user-restriction-container span.roles-container {
+    display: inline-block;
+    width: 100%;
+    margin-top: 3px;
+}
+
+p span.user-restriction-container span.roles-container.hidden {
+    display: none;
+}

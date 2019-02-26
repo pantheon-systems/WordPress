@@ -1,0 +1,32 @@
+<div id="batch-media-translation-wrap" class="batch-media-translation-wrap notice otgs-notice notice-info otgs-is-dismissible" style="display: none">
+    <span class="notice-dismiss js-close"><span class="screen-reader-text">{{ strings.close }}</span></span>
+    <form id="batch-media-translation-form" method="post" action="">
+        <input type="hidden" name="action" value="wpml_media_scan_prepare" />
+        <div class="usage" style="display: none">
+            <p>{{ strings.was_replaced }}</p>
+            <ul class="batch-media-translation-post-list"></ul>
+            <p>{{ strings.other_posts }}</p>
+        </div>
+        <div class="no-usage" style="display: none">
+            <p>{{ strings.without_usage }}</p>
+        </div>
+        <div class="batch-media-translation-action-wrap">
+        <ul class="batch-media-translation-action-list">
+            <li>
+                <label>
+                    <input type="radio" name="global-scan-scope" value="0" checked/>{{ strings.scan_for_this_media }}
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="global-scan-scope" value="1"/>{{ strings.scan_for_all_media }}
+                </label>
+            </li>
+        </ul>
+        <p class="text-right">
+            <input type="submit" class="button-primary" value="{{ strings.button_label }}"/>
+        </p>
+        </div>
+    </form>
+    <p class="status"></p>
+</div>

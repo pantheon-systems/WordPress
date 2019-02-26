@@ -1,0 +1,57 @@
+/************************************
+        Screen meta buttons
+        for WP 3.7 and below
+*************************************/
+
+/* All buttons */
+.custom-screen-meta-link-wrap {
+    float: right;
+    height: 22px;
+    padding: 0;
+    margin: 0 0 0 6px;
+    font-family: sans-serif;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+    background: #e3e3e3;
+
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    background-image: -ms-linear-gradient(bottom, #dfdfdf, #f1f1f1); /* IE10 */
+    background-image: -moz-linear-gradient(bottom, #dfdfdf, #f1f1f1); /* Firefox */
+    background-image: -o-linear-gradient(bottom, #dfdfdf, #f1f1f1); /* Opera */
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#dfdfdf), to(#f1f1f1)); /* old Webkit */
+    background-image: -webkit-linear-gradient(bottom, #dfdfdf, #f1f1f1); /* new Webkit */
+    background-image: linear-gradient(bottom, #dfdfdf, #f1f1f1); /* proposed W3C Markup */
+}
+
+#screen-meta .custom-screen-meta-link-wrap a.custom-screen-meta-link,
+#screen-meta-links .custom-screen-meta-link-wrap a.custom-screen-meta-link
+{
+    background-image: none;
+    padding: 0 6px 0 6px;
+}
+
+#screen-meta-links a.custom-screen-meta-link::after {
+    display: none;
+}
+
+/* "Upgrade to Pro" */
+#ws-pro-version-notice {
+    background: #00C31F none;
+}
+
+#ws-pro-version-notice a.show-settings {
+    font-weight: bold;
+    color: #DEFFD8;
+    text-shadow: none;
+}
+
+#ws-pro-version-notice a.show-settings:hover {
+    color: white;
+}

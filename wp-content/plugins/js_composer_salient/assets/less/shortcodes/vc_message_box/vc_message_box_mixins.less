@@ -1,0 +1,45 @@
+//====== MIXINS
+
+// Creating Colors
+.vc-make-message-color(@text; @icon: @text; @border: false; @background: false) {
+  color: @text;
+  & when not (@border = false) {
+    border-color: @border;
+  }
+  & when not (@background = false) {
+    background-color: @background;
+  }
+  .vc_message_box-icon {
+    color: @icon;
+  }
+}
+
+// make colors set
+.vc-message-make-colors-set(@selector; @text; @icon; @border; @background; @contrast-color) {
+  &.@{selector} {
+    // Standard, Classic (Old style), 3d
+    &.vc_message_box {
+      .vc-make-message-color(@text; @icon; @border: @border; @background: @background);
+    }
+    // Solid
+    &.vc_message_box-solid {
+      .vc-make-message-color(@contrast-color; @border: transparent; @background: @icon);
+    }
+    // Outline (transparent background), Solid icon
+    &.vc_message_box-outline,
+    &.vc_message_box-solid-icon {
+      .vc-make-message-color(@text; @icon; @border: @icon; @background: transparent);
+    }
+    // Solid icon
+    &.vc_message_box-solid-icon {
+      .vc_message_box-icon {
+        color: @contrast-color;
+        background-color: @icon;
+      }
+    }
+    // 3d
+    &.vc_message_box-3d {
+      box-shadow: 0 @message-box-shadow-width-3d 0 darken(@border, 10%);
+    }
+  }
+}

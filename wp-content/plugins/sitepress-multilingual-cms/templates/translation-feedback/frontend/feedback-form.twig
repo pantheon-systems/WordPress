@@ -1,0 +1,51 @@
+<div class="js-wpml-tf-feedback-form wpml-tf-feedback-form"
+     data-dialog-title="{{ strings.dialog_title }}" style="display: none;">
+
+    <div class="wpml-tf-thank-you-rating">{{ strings.thank_you_rating }}</div>
+    <div class="wpml-tf-thank-you-comment">{{ strings.thank_you_comment }}</div>
+
+    <header class="wpml-tf-header">
+        {{ strings.translated_from }} <span class="wpml-tf-document-language">
+            <img src="{{ flag_url }}"> <a href="{{ source_url }}" target="_blank">{{ language_name }}</a></span>
+    </header>
+
+    <div style="display:none">
+        <label  for="wpml-tf-honeypot-field">{{ strings.honeypot_label }}</label>
+        <textarea name="more_comment" id="wpml-tf-honeypot-field" cols="100%" rows="10"></textarea>
+    </div>
+
+    <fieldset class="wpml-tf-rating">
+        <div class="wpml-tf-before-rating">{{ strings.please_rate }}</div>
+        <div class="wpml-tf-after-rating">{{ strings.your_rating }}</div>
+        <div class="wpml-tf-rating-stars">
+            <input type="radio" id="wpml-tf-5-star" name="wpml-tf-rating" value="5" />
+            <label class="full otgs-ico-star" for="wpml-tf-5-star" title="{{ strings.star5_title }}"></label>
+            <input type="radio" id="wpml-tf-4-star" name="wpml-tf-rating" value="4" />
+            <label class="full otgs-ico-star" for="wpml-tf-4-star" title="{{ strings.star4_title }}"></label>
+            <input type="radio" id="wpml-tf-3-star" name="wpml-tf-rating" value="3" />
+            <label class="full otgs-ico-star" for="wpml-tf-3-star" title="{{ strings.star3_title }}"></label>
+            <input type="radio" id="wpml-tf-2-star" name="wpml-tf-rating" value="2" />
+            <label class="full otgs-ico-star" for="wpml-tf-2-star" title="{{ strings.star2_title }}"></label>
+            <input type="radio" id="wpml-tf-1-star" name="wpml-tf-rating" value="1" />
+            <label class="full otgs-ico-star" for="wpml-tf-1-star" title="{{ strings.star1_title }}"></label>
+        </div>
+        <div class="js-wpml-tf-change-rating wpml-tf-change-rating">
+            <a href="#">{{ strings.change_rating }}</a>
+        </div>
+    </fieldset>
+
+    <fieldset class="wpml-tf-poor-rating">
+        <div class="wpml-tf-poor-rating-header">
+            {{ strings.error_examples }}
+        </div>
+
+        <textarea class="wpml-tf-comment" name="wpml-tf-comment"></textarea>
+        <input type="button" disabled="disabled"
+               class="js-wpml-tf-comment-button wpml-tf-comment-button" value="{{ strings.send_button }}">
+    </fieldset>
+
+    <input type="hidden" name="document_id" value="{{ document_id }}">
+    <input type="hidden" name="document_type" value="{{ document_type }}">
+    <input type="hidden" name="action" value="{{ action }}">
+    <input type="hidden" name="nonce" value="{{ nonce }}">
+</div>

@@ -1,0 +1,98 @@
+.vc_grid-element-constructor {
+  position: relative;
+  // Move to admin controls
+  .vc_t-grid-controls {
+    display: block;
+    line-height: 0;
+  }
+  .vc_t-grid-control {
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .vc_t-grid-controls-row {
+    .vc_t-grid-control {
+      border: 1px solid #CCC;
+    }
+  }
+  .vc_t-grid-controls-col {
+    text-align: center;
+  }
+
+  // Modal
+  .vc_grid-element-modal {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    display: block;
+    padding: 10px;
+    background: #FFF;
+    border: 1px solid #CCC;
+  }
+  .vc_grid-element-title {
+    font-size: 18px;
+  }
+  .vc_grid-element-modal-controls {
+    position: absolute;
+    padding: 10px;
+    right: 0;
+    top: 0;
+  }
+  .vc_grid-element-modal-body {
+
+  }
+  // Row
+  .vc_gitem-row {
+    margin-bottom: 6px;
+  }
+  // Col
+  .vc_gitem-col {
+    > .vc_gitem-wrapper {
+      background: #f5f5f5;
+      > .vc_gitem-content {
+        margin: 0 10px;
+        border: 1px solid #CCC;
+        min-height: 20px;
+      }
+    }
+  }
+  // Modal
+}
+
+.vc_t-grid-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background: transparent url('../vc/controls.png') no-repeat -16px 0px;
+  font-size: 0;
+  line-height: 0;
+  &-move {
+    background-position: -16px 0;
+  }
+  &-add {
+    background-position: -16px -16px;
+  }
+  &-edit {
+    background-position: -16px -32px;
+  }
+  &-destroy {
+    background-position: -16px -64px;
+  }
+}
+
+.vc_grid-element-shortcode {
+  border: 1px solid #CCC;
+  padding: 2px;
+}
+
+.vc_gitem-row, .vc_gitem-col {
+  border: 0;
+}
+
+.vc_grid-item_css-editor-featured-image-size {
+  display: none;
+  .vc_visible {
+    display: block;
+  }
+}

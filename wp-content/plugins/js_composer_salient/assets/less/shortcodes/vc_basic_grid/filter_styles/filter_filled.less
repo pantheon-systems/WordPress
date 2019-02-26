@@ -1,0 +1,88 @@
+.vc_grid_filter_filled_color_variants(@selector, @active_background_color, @inactive_background_color, @active_text_color, @inactive_text_color) {
+  &.vc_grid-filter-color-@{selector} {
+    > .vc_grid-filter-item {
+      background-color: @inactive_background_color;
+      > span {
+        color: @inactive_text_color;
+      }
+      &:hover, &.vc_active {
+        background-color: @active_background_color;
+        > span {
+          color: @active_text_color;
+        }
+      }
+    }
+  }
+}
+
+&.vc_grid-filter-filled, &.vc_grid-filter-filled-rounded {
+
+  .vc_grid_filter_filled_color_variants(~'blue', @blue, lighten(@blue, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'turquoise', @turquoise, darken(@turquoise, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'pink', @pink, lighten(@pink, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'violet', @violet, lighten(@violet, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'peacoc', @peacoc, lighten(@peacoc, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'chino', @chino, lighten(@chino, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'mulled_wine', @mulled_wine, lighten(@mulled_wine, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'vista_blue', @vista_blue, lighten(@vista_blue, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'black', @black, lighten(@black, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'grey', @grey, darken(@grey, 10%), #666666, #666666);
+  .vc_grid_filter_filled_color_variants(~'orange', @orange, lighten(@orange, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'sky', @sky, lighten(@sky, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'green', @green, lighten(@green, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'juicy_pink', @juicy_pink, lighten(@juicy_pink, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'sandy_brown', @sandy_brown, lighten(@sandy_brown, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'purple', @purple, lighten(@purple, 10%), @white, @white);
+  .vc_grid_filter_filled_color_variants(~'white', @white, darken(@white, 10%), #666666, #666666);
+
+  > .vc_grid-filter-item {
+    margin: 0;
+    border: 1px solid transparent;
+    border-collapse: collapse;
+    padding: 3px 7px;
+
+    > span {
+      color: #FFFFFF;
+    }
+    &:nth-child(n+2) {
+      border-left: none;
+      margin-left: 1px;
+      border-top: none;
+      margin-top: 1px;
+    }
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      border-top: 0;
+    }
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+  }
+}
+
+&.vc_grid-filter-filled-rounded {
+  > .vc_grid-filter-item {
+    &:first-child {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-top: 0;
+    }
+    &:last-child {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+  }
+}
+&.vc_grid-filter-filled-rounded-all {
+  > .vc_grid-filter-item {
+      border-radius: 3px !important;
+    }
+}
+&.vc_grid-filter-filled-round-all {
+  > .vc_grid-filter-item {
+      border-radius: 30px !important;
+    }
+}

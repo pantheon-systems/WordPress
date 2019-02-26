@@ -1,0 +1,32 @@
+{
+  "name": "iris",
+  "title": "Iris Color Picker",
+  "description": "A(n awesome) Color Picker. Used by WordPress.",
+  "version": "1.0.4",
+  "homepage": "https://github.com/Automattic/Iris",
+  "docs": "http://automattic.github.com/Iris/",
+  "bugs": "https://github.com/Automattic/Iris/issues",
+  "author": {
+    "name": "Matt Wiebe",
+    "email": "wiebe@automattic.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Automattic/Iris.git"
+  },
+  "licenses": [
+    {
+      "type": "GPLv2",
+      "url": "https://github.com/Automattic/Iris/blob/master/LICENSE-GPL"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">= 1.8.3",
+    "ui.core": ">= 1.9.2",
+    "ui.widget": ">= 1.9.2",
+    "ui.mouse": ">= 1.9.2",
+    "ui.draggable": ">= 1.9.2",
+    "ui.slider": ">= 1.9.2"
+  },
+  "keywords": ["ui", "color", "colorpicker", "widget"]
+}
