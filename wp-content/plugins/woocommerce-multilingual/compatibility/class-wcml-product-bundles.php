@@ -777,7 +777,10 @@ class WCML_Product_Bundles {
 	}
 
 	public function is_bundle_product( $product_id ){
-		if ( 'bundle' === WooCommerce_Functions_Wrapper::get_product_type( $product_id ) ) {
+
+		$product = wc_get_product( $product_id );
+
+		if ( $product && 'bundle' === $product->get_type() ) {
 			return true;
 		}
 
@@ -787,7 +790,9 @@ class WCML_Product_Bundles {
 	// #wcml-2241
 	public function upgrade_bundles_items_relationships() {
 
-		if ( ! get_option( 'wcml_upgrade_bundles_items_relationships' ) ) {
+		$table_exists = $this->wpdb->get_var( "SHOW TABLES LIKE '{$this->wpdb->prefix}woocommerce_bundled_items'" );
+
+		if ( $table_exists && ! get_option( 'wcml_upgrade_bundles_items_relationships' ) ) {
 
 			$bundled_items    = $this->wpdb->get_results( "SELECT bundled_item_id, bundle_id, product_id FROM {$this->wpdb->prefix}woocommerce_bundled_items" );
 			$active_languages = $this->sitepress->get_active_languages();

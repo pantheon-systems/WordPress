@@ -140,15 +140,8 @@ class WCML_Languages_Upgrader{
             $version = WC_VERSION;
         }
 
-        if( version_compare( $version, '2.5.0', '<') ){
-            $repo = 'https://github.com/woothemes/woocommerce-language-packs/raw/v';
-            return $repo . $version . '/packages/' . $locale . '.zip';
-
-        }else{
-            $repo = 'https://downloads.wordpress.org/translation/plugin/woocommerce/';
-            return $repo . $version . '/' . $locale . '.zip';
-        }
-
+        $repo = 'https://downloads.wordpress.org/translation/plugin/woocommerce/';
+        return $repo . $version . '/' . $locale . '.zip';
     }
 
     /*
@@ -287,7 +280,7 @@ class WCML_Languages_Upgrader{
 
     public function load_js(){
 
-        wp_register_script( 'wcml-lang-notice', WCML_PLUGIN_URL . '/res/js/languages_notice' . WCML_JS_MIN . '.js', array( 'jquery' ), WCML_VERSION );
+        wp_register_script( 'wcml-lang-notice', WCML_PLUGIN_URL . '/res/js/languages_notice' . WCML_JS_MIN . '.js', array( 'jquery' ), WCML_VERSION, true );
         wp_enqueue_script( 'wcml-lang-notice');
 
         wp_localize_script( 'wcml-lang-notice', 'wcml_language_upgrade_notices',

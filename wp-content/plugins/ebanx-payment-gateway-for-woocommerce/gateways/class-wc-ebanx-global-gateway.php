@@ -4,9 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-notice.php';
-require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-constants.php';
-require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-helper.php';
+if ( ! defined( 'IS_TEST' ) ) {
+	require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-notice.php';
+	require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-constants.php';
+	require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-helper.php';
+}
 
 /**
  * Class WC_EBANX_Global_Gateway
@@ -359,7 +361,7 @@ final class WC_EBANX_Global_Gateway extends WC_Payment_Gateway {
 							'desc_tip'    => true,
 						),
 					);
-
+// phpcs:disable -- test inconsistency on travis
 				if ( in_array( strtoupper( $currency_code ), WC_EBANX_Constants::$credit_card_currencies ) ) {
 					$interest_rates_array[] = array(
 						"{$country_abbr}_min_instalment_value_$currency_code" => array(
@@ -393,7 +395,7 @@ final class WC_EBANX_Global_Gateway extends WC_Payment_Gateway {
 						),
 					);
 				}
-
+// phpcs:enaable
 				return $interest_rates_array;
 			}, array_keys( WC_EBANX_Constants::$credit_card_countries )
 		);

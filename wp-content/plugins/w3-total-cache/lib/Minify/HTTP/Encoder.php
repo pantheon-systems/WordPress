@@ -201,6 +201,21 @@ class HTTP_Encoder {
             return array('', '');
         }
         $ae = $_SERVER['HTTP_ACCEPT_ENCODING'];
+        // brotli checks (quick)
+        if (0 === strpos($ae, 'br,')
+            || strpos($ae, ', br') === strlen($ae) - 4
+        ) {
+        	if (function_exists('brotli_compress'))
+            	return array('br', 'br');
+        }
+        // brotli checks (slow)
+        if (preg_match(
+                '@(?:^|,)\\s*((?:x-)?br)\\s*(?:$|,|;\\s*q=(?:0\\.|1))@'
+                ,$ae
+                ,$m)) {
+	        if (function_exists('brotli_compress'))
+                return array('br', $m[1]);
+        }
         // gzip checks (quick)
         if (0 === strpos($ae, 'gzip,')             // most browsers
             || 0 === strpos($ae, 'deflate, gzip,') // opera
@@ -250,7 +265,9 @@ class HTTP_Encoder {
         {
             return false;
         }
-        if ($this->_encodeMethod[0] === 'deflate') {
+        if ($this->_encodeMethod[0] === 'br') {
+            $encoded = brotli_compress($this->_content);
+        } elseif ($this->_encodeMethod[0] === 'deflate') {
             $encoded = gzdeflate($this->_content, $compressionLevel);
         } elseif ($this->_encodeMethod[0] === 'gzip') {
             $encoded = gzencode($this->_content, $compressionLevel);

@@ -105,18 +105,19 @@ class URE_Grant_Roles {
             return;
         }
         
-        $primary_role = array_shift(array_values($user->roles));    // Get the 1st element from the roles array
+        $roles_list = array_values( $user->roles );
+        $primary_role = array_shift( $roles_list );    // Get the 1st element from the roles array
         $lib = URE_Lib::get_instance();
-        $bbpress = $lib->get('bbpress');
-        if (empty($bbpress)) {
+        $bbpress = $lib->get( 'bbpress' );
+        if ( empty( $bbpress ) ) {
             $bbp_roles = array();
         } else {
-            $bbp_roles = $bbpress->extract_bbp_roles($user->roles);
+            $bbp_roles = $bbpress->extract_bbp_roles( $user->roles );
         }
         $user->remove_all_caps();
-        $roles = array_merge(array($primary_role), $bbp_roles, $roles);
-        foreach($roles as $role) {
-            $user->add_role($role);
+        $roles = array_merge(array( $primary_role ), $bbp_roles, $roles );
+        foreach( $roles as $role ) {
+            $user->add_role( $role );
         }
         
     }

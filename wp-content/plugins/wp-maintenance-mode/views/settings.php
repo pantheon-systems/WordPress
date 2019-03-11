@@ -295,7 +295,7 @@
                                     <td id="subscribers_wrap">
                                         <?php
                                         $subscribers_no = wpmm_count_where('wpmm_subscribers', 'id_subscriber');
-                                        echo sprintf(__('You have %d subscriber(s)', $this->plugin_slug), $subscribers_no);
+										echo sprintf(_nx('You have %d subscriber', 'You have %s subscribers', $subscribers_no, 'settings page', $this->plugin_slug), $subscribers_no);
 
                                         if ($subscribers_no > 0) {
                                             ?>
@@ -425,6 +425,16 @@
                                             <option value="1" <?php selected($this->plugin_settings['modules']['ga_status'], 1); ?>><?php _e('Yes', $this->plugin_slug); ?></option>
                                             <option value="0" <?php selected($this->plugin_settings['modules']['ga_status'], 0); ?>><?php _e('No', $this->plugin_slug); ?></option>
                                         </select>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[modules][ga_anonymize_ip]"><?php _e('Enable IP anonymization?', $this->plugin_slug); ?></label></th>
+                                    <td>
+                                        <select name="options[modules][ga_anonymize_ip]">
+                                            <option value="1" <?php selected($this->plugin_settings['modules']['ga_anonymize_ip'], 1); ?>><?php _e('Yes', $this->plugin_slug); ?></option>
+                                            <option value="0" <?php selected($this->plugin_settings['modules']['ga_anonymize_ip'], 0); ?>><?php _e('No', $this->plugin_slug); ?></option>
+                                        </select>
+										<p class="description"><?php _e(sprintf('Read about IP anonymization on <a href="%s" rel="noreferrer" target="_blank">Google Analytics</a> docs.', 'https://support.google.com/analytics/answer/2763052'), $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">
@@ -646,6 +656,16 @@
                                         <input type="text" value="<?php echo esc_attr(stripslashes($this->plugin_settings['gdpr']['policy_page_link'])); ?>" name="options[gdpr][policy_page_link]" />
                                         <p class="description"><?php echo $this->get_policy_link_message(); ?></p>
                                         <p class="description">REMEMBER: In order to make the privacy policy page accessible you need to add it in General -> Exclude.</p>
+                                    </td>
+                                </tr>
+                                <tr valign="top">
+                                    <th scope="row"><label for="options[gdpr][policy_page_target]"><?php _e('P. Policy link target', $this->plugin_slug); ?></label></th>
+                                    <td>
+                                        <select name="options[gdpr][policy_page_target]">
+                                            <option value="1" <?php selected($this->plugin_settings['gdpr']['policy_page_target'], 1); ?>><?php _e('New page', $this->plugin_slug); ?></option>
+                                            <option value="0" <?php selected($this->plugin_settings['gdpr']['policy_page_target'], 0); ?>><?php _e('Same page', $this->plugin_slug); ?></option>
+                                        </select>
+                                        <p class="description"><?php _e('Choose how the link will open.', $this->plugin_slug); ?></p>
                                     </td>
                                 </tr>
                                 <tr valign="top">

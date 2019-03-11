@@ -5,7 +5,7 @@ Plugin URI: https://yithemes.com/themes/plugins/yith-woocommerce-cart-messages
 Description: <code><strong>YITH WooCommerce Cart Messages</strong></code> allows making your offers clearly visible by showing users a message at the very moment they pay the utmost attention, on the cart page. It's perfect to increase the total amount of every purchase. <a href="https://yithemes.com/" target="_blank">Get more plugins for your e-commerce shop on <strong>YITH</strong></a>.
 Author: YITH
 Text Domain: yith-woocommerce-cart-messages
-Version: 1.3.5
+Version: 1.3.7
 Author URI: https://yithemes.com/
 WC requires at least: 3.0.0
 WC tested up to: 3.5.0
@@ -57,7 +57,7 @@ register_activation_hook( __FILE__, 'yith_plugin_registration_hook' );
 if ( defined( 'YITH_YWCM_VERSION' ) ) {
 	return;
 }else{
-    define( 'YITH_YWCM_VERSION', '1.3.5' );
+    define( 'YITH_YWCM_VERSION', '1.3.7' );
 }
 
 if ( ! defined( 'YITH_YWCM_SUFFIX' ) ) {

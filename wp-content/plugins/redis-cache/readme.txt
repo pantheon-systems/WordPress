@@ -3,8 +3,8 @@ Contributors: tillkruess
 Donate link: https://www.paypal.me/tillkruss
 Tags: redis, predis, phpredis, hhvm, pecl, caching, cache, object cache, performance, replication, clustering
 Requires at least: 3.3
-Tested up to: 4.9
-Stable tag: 1.3.8
+Tested up to: 5.1
+Stable tag: 1.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -95,6 +95,10 @@ To adjust the configuration, define any of the following constants in your `wp-c
 
     Set to `true` to disable the object cache at runtime.
 
+  * `WP_REDIS_IGBINARY` (default: _not set_)
+
+    Set to `true` to enable the [igbinary](https://github.com/igbinary/igbinary) serializer.
+
 
 == Replication & Clustering ==
 
@@ -170,6 +174,21 @@ The following commands are supported:
 
 
 == Changelog ==
+
+= 1.4.1 =
+
+  * Fixed potential fatal error related to `wp_suspend_cache_addition()`
+
+= 1.4.0 =
+
+  * Added support for igbinary
+  * Added support for `wp_suspend_cache_addition()`
+
+= 1.3.9 =
+
+  * Fixed `WP_REDIS_SHARDS` not showing up in server list
+  * Fixed `WP_REDIS_SHARDS` not working when using PECL extension
+  * Removed `WP_REDIS_SCHEME` and `WP_REDIS_PATH` leftovers
 
 = 1.3.8 =
 
@@ -304,7 +323,15 @@ The following commands are supported:
 
 == Upgrade Notice ==
 
-= 1.3.7 =
+= 1.4.0 =
+
+This update adds support for igbinary and `wp_suspend_cache_addition()`.
+
+= 1.3.9 =
+
+This update contains fixes for sharding.
+
+= 1.3.8 =
 
 This update contains a critical fix for Predis.
 

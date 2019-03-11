@@ -77,11 +77,11 @@ class WCML_WC_Strings {
 		}
 
 		if ( $product && is_object( $product ) ) {
-			$product_id = WooCommerce_Functions_Wrapper::get_product_id( $product );
+			$product_id = $product->get_id();
 		} elseif ( is_numeric( $product_obj ) ) {
 			$product_id = $product_obj;
 		} elseif ( $product_obj ) {
-			$product_id = WooCommerce_Functions_Wrapper::get_product_id( $product_obj );
+			$product_id = $product_obj->get_id();
 		}
 
 		$name = $this->woocommerce_wpml->attributes->filter_attribute_name( $name, $product_id, true );
@@ -158,7 +158,7 @@ class WCML_WC_Strings {
 	function translated_checkout_product_title( $title, $product ) {
 
 		if ( $product ) {
-			$tr_product_id = apply_filters( 'translate_object_id', WooCommerce_Functions_Wrapper::get_product_id( $product ), 'product', true, $this->current_language );
+			$tr_product_id = apply_filters( 'translate_object_id', $product->get_id(), 'product', true, $this->current_language );
 			$title         = get_the_title( $tr_product_id );
 		}
 

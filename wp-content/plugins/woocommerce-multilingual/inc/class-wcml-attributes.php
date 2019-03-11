@@ -2,25 +2,33 @@
 
 class WCML_Attributes{
 
-    /** @var woocommerce_wpml */
-    private $woocommerce_wpml;
-    /** @var Sitepress */
-    private $sitepress;
-    /** @var wpdb */
-    private $wpdb;
+	/** @var woocommerce_wpml */
+	private $woocommerce_wpml;
+	/** @var Sitepress */
+	private $sitepress;
+	/** @var WPML_Post_Translation */
+	private $post_translations;
+	/** @var WPML_Term_Translation */
+	private $term_translations;
+	/** @var wpdb */
+	private $wpdb;
 
-    /**
-     * WCML_Attributes constructor.
-     *
-     * @param woocommerce_wpml $woocommerce_wpml
-     * @param SitePress $sitepress
-     * @param wpdb $wpdb
-     */
-    public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, wpdb $wpdb ){
-        $this->woocommerce_wpml = $woocommerce_wpml;
-        $this->sitepress = $sitepress;
-        $this->wpdb = $wpdb;
-    }
+	/**
+	 * WCML_Attributes constructor.
+	 *
+	 * @param woocommerce_wpml $woocommerce_wpml
+	 * @param SitePress $sitepress
+	 * @param WPML_Post_Translation $post_translations
+	 * @param WPML_Term_Translation $term_translations
+	 * @param wpdb $wpdb
+	 */
+	public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress, WPML_Post_Translation $post_translations, WPML_Term_Translation $term_translations, wpdb $wpdb ) {
+		$this->woocommerce_wpml  = $woocommerce_wpml;
+		$this->sitepress         = $sitepress;
+		$this->post_translations = $post_translations;
+		$this->term_translations = $term_translations;
+		$this->wpdb              = $wpdb;
+	}
 
     public function add_hooks(){
 
@@ -34,14 +42,7 @@ class WCML_Attributes{
             $this->icl_custom_tax_sync_options();
         }
 
-        add_action( 'woocommerce_before_attribute_delete', array( $this, 'refresh_taxonomy_translations_cache' ), 10, 3 );
-
-        $deprecated_wc = $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WC_VERSION' ), '3.0.0', '<' );
-        if ( $deprecated_wc ) {
-            add_filter( 'woocommerce_get_product_attributes', array( $this, 'filter_adding_to_cart_product_attributes_names' ) );
-        }else{
-            add_filter( 'woocommerce_product_get_attributes', array( $this, 'filter_adding_to_cart_product_attributes_names' ) );
-        }
+        add_filter( 'woocommerce_product_get_attributes', array( $this, 'filter_adding_to_cart_product_attributes_names' ) );
 
 	    if ( $this->woocommerce_wpml->products->is_product_display_as_translated_post_type() ) {
 		    add_filter( 'woocommerce_available_variation', array(
@@ -72,19 +73,6 @@ class WCML_Attributes{
                 $this->set_attribute_readonly_config( $_GET[ 'edit' ], $_POST );
             }
         }
-
-    }
-
-    /*
-     * This creates the terms translation cache so the translations can be deleted via the 'delete_term' hook
-     * after the original term was deleted and getting the translations directly from the db is not possible
-     */
-    public function refresh_taxonomy_translations_cache( $attribute_id, $attribute_name, $taxonomy ){
-
-	    $terms = get_terms( $taxonomy, 'orderby=name&hide_empty=0' );
-	    foreach ( $terms as $term ) {
-		    $trid = $this->sitepress->get_element_trid( $term->term_taxonomy_id, 'tax_' . $taxonomy );
-	    }
 
     }
 
@@ -140,8 +128,7 @@ class WCML_Attributes{
         $terms = $this->get_attribute_terms( $attribute );
 
         foreach( $terms as $term ){
-            $term_language_details = $this->sitepress->get_element_language_details( $term->term_id, 'tax_'.$attribute );
-            if( $term_language_details && $term_language_details->source_language_code ){
+            if( $this->term_translations->get_source_lang_code( $term->term_id ) ){
                 wp_delete_term( $term->term_id, $attribute );
             }
         }
@@ -152,8 +139,7 @@ class WCML_Attributes{
         $terms = $this->get_attribute_terms( $attribute );
 
         foreach( $terms as $term ){
-            $term_language_details = $this->sitepress->get_element_language_details( $term->term_id, 'tax_'.$attribute );
-            if( $term_language_details && is_null( $term_language_details->source_language_code ) ){
+            if( is_null( $this->term_translations->get_source_lang_code( $term->term_id ) ) ){
                 $variations = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT post_id FROM {$this->wpdb->postmeta} WHERE meta_key=%s AND meta_value = %s",  'attribute_'.$attribute, $term->slug ) );
 
                 foreach( $variations as $variation ){
@@ -175,8 +161,7 @@ class WCML_Attributes{
         $terms = $this->get_attribute_terms( $attribute );
         $cleared_products = array();
         foreach( $terms as $term ) {
-            $term_language_details = $this->sitepress->get_element_language_details( $term->term_id, 'tax_'.$attribute );
-            if( $term_language_details && is_null( $term_language_details->source_language_code ) ){
+            if( is_null( $this->term_translations->get_source_lang_code( $term->term_id ) ) ){
                 $args = array(
                     'tax_query' => array(
                         array(
@@ -532,7 +517,7 @@ class WCML_Attributes{
     function filter_dropdown_variation_attribute_options_args( $args ){
 
         if( isset( $args['attribute'] ) && isset( $args['product'] ) ){
-            $args['attribute'] = $this->filter_attribute_name( $args['attribute'],  WooCommerce_Functions_Wrapper::get_product_id( $args['product'] ) );
+            $args['attribute'] = $this->filter_attribute_name( $args['attribute'],  $args['product']->get_id() );
 
             if( $this->woocommerce_wpml->products->is_product_display_as_translated_post_type() ){
 	            foreach( $args[ 'options' ] as $key => $attribute_value ){
@@ -715,14 +700,12 @@ class WCML_Attributes{
 	public function set_translation_status_as_needs_update( $meta_id, $object_id, $meta_key ) {
 		if ( $meta_key === '_product_attributes' ) {
 
-			$status_helper               = wpml_get_post_status_helper();
-			$translation_element_factory = new WPML_Translation_Element_Factory( $this->sitepress );
-			$post_element                = $translation_element_factory->create_post( $object_id );
+			if ( null === $this->post_translations->get_source_lang_code( $object_id ) ) {
+				$status_helper = wpml_get_post_status_helper();
 
-			if ( null === $post_element->get_source_language_code() ) {
-				foreach ( $post_element->get_translations() as $translation ) {
-					if ( null !== $translation->get_source_language_code() ) {
-						$status_helper->set_update_status( $translation->get_id(), 1 );
+				foreach ( $this->post_translations->get_element_translations( $object_id ) as $translation ) {
+					if ( null !== $this->post_translations->get_source_lang_code( $translation ) ) {
+						$status_helper->set_update_status( $translation, 1 );
 					}
 				}
 			}

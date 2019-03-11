@@ -126,10 +126,6 @@ class WC_EBANX_Payment_By_Link {
 				'amount'              => self::$order->get_total(),
 				'maxInstalments'      => get_post_meta( self::$order->id, '_ebanx_instalments', true ),
 				'manualReview'        => 'yes' === self::$configs->settings['manual_review_enabled'],
-				'userValues'          => [
-					1 => 'from_woocommerce',
-					3 => 'version=' . WC_EBANX::get_plugin_version(),
-				],
 			]
 		);
 

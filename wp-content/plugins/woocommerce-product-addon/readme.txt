@@ -1,10 +1,10 @@
-=== WooCommerce Product Addons ===
+=== WooCommerce PPOM ===
 Contributors: nmedia
-Tags: woocommerce, pesonalized products, woocommerce variations, woocommerce product variations, woocommerce extra fields, woocommerce extra options, woocommerce personalized product, woocommerce t-shirt design, woocommerce product fields, woocommerce plugin, woocommerce addons, woocommerce product addons
+Tags: woocommerce, woocommerce pesonalized products, woocommerce custom fields, variations, woocommerce product variations, woocommerce extra fields, woocommerce extra options, woocommerce personalized product, woocommerce t-shirt design, woocommerce product fields, woocommerce plugin, woocommerce addons, woocommerce product addons
 Donate link: http://www.najeebmedia.com/donate
 Requires at least: 3.5
-Tested up to: 4.9
-Stable tag: 15.4.1
+Tested up to: 5.0
+Stable tag: 16.9
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.6
@@ -83,6 +83,58 @@ Drag & Drop input fields with many options. Prices can also be added with option
 9. Attach inputs to bulk products
 
 == Changelog ==
+= 16.9 February 27, 2019 =
+* Bug fixed: [Image PopUp not working in legacy view, it's fixed](https://wordpress.org/support/topic/image-option/)
+* Bug fixed: [Title and Description is set to same size in last update, now fixed](https://wordpress.org/support/topic/title-vs-description/)
+* Tweaks: Translation updated for "only if" to "Nur wenn", Thanks Danial
+* Tweaks: [Some strings translations added](https://clients.najeebmedia.com/forums/topic/translate-text/)
+= 16.8.1 February 25, 2019 =
+* Bug fixed: [Screen options and Product Data tabs were not working due to last update, it is fixed](https://wordpress.org/support/topic/product-data-tabs-not-working-3/)
+= 16.8 February 13, 2019 =
+* Tweaks: PPOM Settings menu was not translating, fixed.
+* Bug fixed: [Tooltip issue fixed](https://clients.najeebmedia.com/forums/topic/html-displaying-in-tooltip-text/)
+* Bug fixed: Admin css not loaded when used with RTL languages
+= 16.7 February 12, 2019 =
+* Bug fixed: [JS error fixed causing issue to show/calculate prices on product page on some sites](https://wordpress.org/support/topic/javascript-error-in-ppom-addon/)
+= 16.6 February 6, 2019 =
+* Bug fxed: Variation quantities issue fixed with variable products.
+* Tweaks: Scroll for collapse disabled
+* Tweaks: Bootrap PopUps is now repaced with custom built script to remove conflicts
+* Tweaks: Bootrap tooltip (popper) is replaced with custom built popup to reduce overload
+* Feature: [Now Download File button will not be shown to client, it will be only visible to admin.](https://clients.najeebmedia.com/forums/topic/an-unnecessary-download-file-button-after-paying-and-return-to-seller-site/)
+= 16.5 January 22, 2019 =
+* Bug fixed: [Images prices were not added to cart, it's fixed now](https://wordpress.org/support/topic/price-not-change-when-atc/)
+* Bug fixed: [PPOM meta by categories was not working, it is fixed now](https://wordpress.org/support/topic/not-applying-to-categories/)
+= 16.4 January 16, 2019 =
+* Feature: [Palette now have option to be selected multiple](https://clients.najeebmedia.com/forums/topic/multiple-selection-for-color-palettes-on-frontend/)
+* Feature: Queries optimized for fast page loading.
+* Feature: Now option price can be removed from price table by client
+* Bug [fixed: Function not found error with latest WC/WP updates fixed](https://wordpress.org/support/topic/doesnt-work-with-latest-update-2/)
+= 16.3 January 4, 2019 =
+* Feature: [Filter added to change 'Select Options' text on shop page](https://wordpress.org/support/topic/change-select-options-button-text/)
+* Bug fixed: [Validation quantities field validation issue fixed](https://clients.najeebmedia.com/forums/topic/variations-quantity-as-required-field-not-working/)
+= 16.2 December 31, 2018 =
+* Bug fixed: [Options were not translating on cart page with WPML, it is fixed now](https://wordpress.org/support/topic/multilingual-cart-issue/)
+* Bug fixed: [Order again were not working, it is fixed now](https://clients.najeebmedia.com/forums/topic/when-customers-reorder-using-the-reorder-order-button/)
+= 16.1 December 29, 2018 =
+* Bug fixed: [Upload image from backend was not working, it is fixed](https://clients.najeebmedia.com/forums/topic/file-input-image-upload-not-working/)
+= 16.0 December 20, 2018 =
+* Feature: Now Multi Meta can be sortable Thanks @Chris Hearn for providing script
+* Feature: Awesome Admin Panel
+* Feature: Now PPOM Meta can be applied from Product Page on Frontend Using Admin Bar :):)
+* Feature: Ajax Validation will now have nice UI for errors
+* Feature: [Deprecated hook woocommerce_new_order_item is replaced with woocommerce_checkout_create_order_line_item](https://stackoverflow.com/questions/29666820/woocommerce-which-hook-to-replace-deprecated-woocommerce-add-order-item-meta)
+* Feature: [Image cropper input preview and confirm button is removed](https://clients.najeebmedia.com/forums/topic/image-cropper-issue/#post-10136)
+* Bug fixed: [Package price decimal place issue fixed](https://clients.najeebmedia.com/forums/topic/woocommerce-package-price-decimal-point/#post-10137)
+* Bug fixed: [Price checking when JS disabled now validate](https://clients.najeebmedia.com/forums/topic/javascript-disabled-ppom-inputs-with-additional-costs-not-added-to-total-cost/)
+* Bug fixed: Tooltip hover sometime not work, it is fixed
+* Bug fixed: File Upload Security increased with more filters
+* Bug fixed: [Negative option price now has better display](https://wordpress.org/support/topic/better-display-of-negative-numbers/)
+* Tweaks: HTML attribute issue fixed
+= 15.5 December 8, 2018 =
+* Feature: [Hide Price Row when it is zero](https://clients.najeebmedia.com/forums/topic/hide-options-totals-when-quantity-0/)
+* Bug Fixed: Cart total was not correct when Variation Quantities used with Price Matrix, it's resolved.
+* Bug fixed: [Variation Quantities price not calcuated correct if base price included, it was multiplying options with validation quantities](https://wordpress.org/support/topic/total-price-on-single-product-page-is-not-equal-to-carts-total/)
 = 15.4.1 November 28, 2018 =
 * Bug fixed: [Textarea input has product description as default value](https://wordpress.org/support/topic/woocommerce-product-descriptions-show-in-order-form/)
 = 15.4 November 26, 2018 =

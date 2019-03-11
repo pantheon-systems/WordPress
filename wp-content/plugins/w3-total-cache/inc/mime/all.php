@@ -562,6 +562,7 @@ return array(
 	'wbmp' => 'image/vnd.wap.wbmp',
 	'wbs' => 'application/vnd.criticaltools.wbs+xml',
 	'wbxml' => 'application/vnd.wap.wbxml',
+	'webm' => 'video/webm',
 	'webp' => 'image/webp',
 	'wm' => 'video/x-ms-wm',
 	'wma' => 'audio/x-ms-wma',

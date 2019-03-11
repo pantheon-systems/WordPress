@@ -143,4 +143,17 @@ class WC_EBANX_Api_Controller {
 
 		echo $ebanx->getTicketHtml( $hash ); // phpcs:ignore WordPress.XSS.EscapeOutput
 	}
+
+	/**
+	 * Get list of plugin check
+	 *
+	 * @return void
+	 */
+	public function plugin_check() {
+		$list = WC_EBANX_Helper::plugin_check( $this->config );
+
+		echo json_encode(
+			$list
+		);
+	}
 }

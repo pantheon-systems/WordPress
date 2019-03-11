@@ -78,7 +78,7 @@ class WCML_Pip{
             $the_order = WC()->order_factory->get_order( $pip_order_id );
 
             if( $the_order ){
-                $currency = WooCommerce_Functions_Wrapper::get_order_currency( $the_order );
+                $currency = $the_order->get_currency();
 
                 if( !$currency && isset( $_COOKIE[ '_wcml_order_currency' ] ) ){
                     $currency =  $_COOKIE[ '_wcml_order_currency' ];

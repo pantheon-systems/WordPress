@@ -64,7 +64,7 @@ class URE_Assign_Role {
     private function get_thorougly_where_condition() {
         global $wpdb;
 
-        $usermeta = $this->lib->get_usermeta_table_name();
+        $usermeta = $wpdb->usermeta;
         $id = get_current_blog_id();
         $blog_prefix = $wpdb->get_blog_prefix($id);
         $where = "WHERE NOT EXISTS (SELECT user_id from {$usermeta} ".
@@ -81,7 +81,7 @@ class URE_Assign_Role {
     private function get_quick_query_part2() {
         global $wpdb;
 
-        $usermeta = $this->lib->get_usermeta_table_name();
+        $usermeta = $wpdb->usermeta;
         $id = get_current_blog_id();
         $blog_prefix = $wpdb->get_blog_prefix($id);
         $query = "FROM {$usermeta} usermeta ".
@@ -102,7 +102,7 @@ class URE_Assign_Role {
             $query = "SELECT COUNT(DISTINCT usermeta.user_id) {$part2}";
         } else {
             $where = $this->get_thorougly_where_condition();
-            $query = "SELECT count(ID) from {$wpdb->users} users {$where}";
+            $query = "SELECT count(ID) FROM {$wpdb->users} users {$where}";
         }
         
         return $query;
@@ -126,7 +126,7 @@ class URE_Assign_Role {
     // end of count_users_without_role()
         
     
-    public function get_users_without_role($new_role='') {        
+    public function get_users_without_role() {        
         global $wpdb;
         
         $top_limit = self::MAX_USERS_TO_PROCESS;

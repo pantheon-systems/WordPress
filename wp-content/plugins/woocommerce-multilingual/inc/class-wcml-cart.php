@@ -67,12 +67,6 @@ class WCML_Cart {
 
 			$this->localize_flat_rates_shipping_classes();
 		}
-
-		add_filter( 'woocommerce_cart_needs_payment', array(
-			$this,
-			'use_cart_contents_total_for_needs_payment'
-		), 10, 2 );
-
 	}
 
 	public function is_clean_cart_enabled() {
@@ -82,8 +76,13 @@ class WCML_Cart {
 
 		if (
 			$wpml_cookies_enabled &&
-			( $cart_sync_settings['currency_switch'] === $this->sitepress->get_wp_api()->constant( 'WCML_CART_CLEAR' ) ||
-			  $cart_sync_settings['lang_switch'] === $this->sitepress->get_wp_api()->constant( 'WCML_CART_CLEAR' ) )
+			(
+				(
+					$this->woocommerce_wpml->settings['enable_multi_currency'] === $this->sitepress->get_wp_api()->constant( 'WCML_MULTI_CURRENCIES_INDEPENDENT' ) &&
+					$cart_sync_settings['currency_switch'] === $this->sitepress->get_wp_api()->constant( 'WCML_CART_CLEAR' )
+				) ||
+				$cart_sync_settings['lang_switch'] === $this->sitepress->get_wp_api()->constant( 'WCML_CART_CLEAR' )
+			)
 		) {
 			return true;
 		}
@@ -213,12 +212,13 @@ class WCML_Cart {
 				  closeOnEscape: false,
 				  dialogClass: "otgs-ui-dialog wcml-cart-dialog",
 				  create: function () {
-					  jQuery('#jquery-ui-style-css').attr('disabled', 'disabled');
+
 				  },
-				  open: function (event, ui) {
-					  jQuery(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
-					  repositionDialog();
-				  },
+					open: function (event, ui) {
+						jQuery(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+						jQuery('#jquery-ui-style-css').attr('disabled', 'disabled');
+						repositionDialog();
+					},
 				  close: function (event, ui) {
 					  jQuery('#jquery-ui-style-css').removeAttr('disabled');
 				  },
@@ -288,18 +288,7 @@ class WCML_Cart {
 			$tr_product_id = apply_filters( 'translate_object_id', $cart_item['product_id'], 'product', false, $current_language );
 			//translate custom attr labels in cart object
 
-			if ( version_compare( WC_VERSION, '3.0.0', '<' ) && isset( $cart_item['data']->product_attributes ) ) {
-				foreach ( $cart_item['data']->product_attributes as $attr_key => $product_attribute ) {
-					if ( isset( $product_attribute['is_taxonomy'] ) && ! $product_attribute['is_taxonomy'] ) {
-						$cart->cart_contents[ $key ]['data']->product_attributes[ $attr_key ]['name'] = $this->woocommerce_wpml->strings->translated_attribute_label(
-							$product_attribute['name'],
-							$product_attribute['name'],
-							$tr_product_id );
-					}
-				}
-			}
-
-			//translate custom attr value in cart object
+            //translate custom attr value in cart object
 			if ( isset( $cart_item['variation'] ) && is_array( $cart_item['variation'] ) ) {
 				foreach ( $cart_item['variation'] as $attr_key => $attribute ) {
 					$cart->cart_contents[ $key ]['variation'][ $attr_key ] = $this->get_cart_attribute_translation(
@@ -329,21 +318,13 @@ class WCML_Cart {
 				if ( ! is_null( $tr_variation_id ) ) {
 					$cart->cart_contents[ $key ]['product_id']   = intval( $tr_product_id );
 					$cart->cart_contents[ $key ]['variation_id'] = intval( $tr_variation_id );
-					if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.7', '<' ) ) {
-						$cart->cart_contents[ $key ]['data']->id = intval( $tr_product_id );
-					} else {
-						$cart->cart_contents[ $key ]['data']->set_id( intval( $tr_product_id ) );
-					}
+					$cart->cart_contents[ $key ]['data']->set_id( intval( $tr_product_id ) );
 					$cart->cart_contents[ $key ]['data']->post = get_post( $tr_product_id );
 				}
 			} else {
 				if ( ! is_null( $tr_product_id ) ) {
 					$cart->cart_contents[ $key ]['product_id'] = intval( $tr_product_id );
-					if ( defined( 'WC_VERSION' ) && version_compare( WC_VERSION, '2.7', '<' ) ) {
-						$cart->cart_contents[ $key ]['data']->id = intval( $tr_product_id );
-					} else {
-						$cart->cart_contents[ $key ]['data']->set_id( intval( $tr_product_id ) );
-					}
+					$cart->cart_contents[ $key ]['data']->set_id( intval( $tr_product_id ) );
 					$cart->cart_contents[ $key ]['data']->post = get_post( $tr_product_id );
 				}
 			}
@@ -390,7 +371,7 @@ class WCML_Cart {
 	 *
 	 * @return array
 	 */
-	public function validate_cart_item_data( array $item_data, WC_Product $product ) {
+	public function validate_cart_item_data( array $item_data, $product ) {
 
 		if( $item_data['attributes'] ){
 
@@ -496,18 +477,22 @@ class WCML_Cart {
 	public function translate_cart_contents( $item ) {
 
 		// translate the product id and product data
-		$item['product_id'] = apply_filters( 'translate_object_id', $item['product_id'], 'product', true );
+		$translated_product_id = apply_filters( 'translate_object_id', $item['product_id'], 'product', true );
+		if( $item['product_id'] !== $translated_product_id ){
+			$item['product_id'] = $translated_product_id;
+		}
+
 		if ( $item['variation_id'] ) {
-			$item['variation_id'] = apply_filters( 'translate_object_id', $item['variation_id'], 'product_variation', true );
+			$translated_variation_id = apply_filters( 'translate_object_id', $item['variation_id'], 'product_variation', true );
+
+			if( $item['variation_id'] !== $translated_variation_id ){
+				$item['variation_id'] = $translated_variation_id;
+			}
 		}
 
-		$item_product_title = $item['variation_id'] ? get_the_title( $item['variation_id'] ) : get_the_title( $item['product_id'] );
-
-		if ( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WC_VERSION' ), '3.0.0', '>=' ) ) {
-			$item['data']->set_name( $item_product_title );
-		} else {
-			$item['data']->post->post_title = $item_product_title;
-		}
+		$item_product_title = $item['variation_id'] ? get_the_title( $translated_variation_id ) : get_the_title( $translated_product_id );
+		$item['data']->set_name( $item_product_title );
+		$item['data_hash'] = $this->get_data_cart_hash( $item );
 
 		return $item;
 	}
@@ -638,23 +623,6 @@ class WCML_Cart {
 	}
 
 	/**
-	 * @param bool $needs
-	 * @param WC_Cart $cart
-	 *
-	 * @return bool
-	 */
-	public function use_cart_contents_total_for_needs_payment( $needs, $cart ) {
-
-		if ( version_compare( WC()->version, '3.2', '<' ) ) {
-			$needs = ( isset( $cart->cart_contents_total ) && $cart->cart_contents_total > 0 )
-			         || ( isset( $cart->total ) && $cart->total > 0 )
-			         || isset( $cart->recurring_carts );
-		}
-
-		return $needs;
-	}
-
-	/**
 	 * @param string $permalink
 	 * @param array $cart_item
 	 *
@@ -667,6 +635,41 @@ class WCML_Cart {
 		}
 
 		return $permalink;
+	}
+
+	/**
+	 * @param $currency
+	 *
+	 * @return float
+	 */
+	public function get_cart_total_in_currency( $currency ){
+
+		$client_currency = $this->woocommerce_wpml->multi_currency->get_client_currency();
+		$cart_total = 0;
+		$cart_items = WC()->cart->get_cart_contents();
+
+		//items total
+		foreach( $cart_items as $item ){
+			$cart_total += $this->woocommerce_wpml->multi_currency->prices->get_product_price_in_currency( $item['product_id'], $currency ) * $item['quantity'];
+		}
+
+		$cart_total += $this->woocommerce_wpml->multi_currency->prices->convert_price_amount_by_currencies( WC()->cart->get_shipping_total(), $client_currency, $currency );
+
+		$cart_total = $this->woocommerce_wpml->multi_currency->prices->apply_rounding_rules( $cart_total, $currency );
+
+		return $cart_total;
+	}
+
+	/**
+	 * @param string $currency
+	 *
+	 * @return string
+     */
+	public function get_formatted_cart_total_in_currency( $currency ){
+
+		$cart_total = $this->woocommerce_wpml->multi_currency->prices->formatted_price( $this->get_cart_total_in_currency( $currency ), $currency );
+
+		return $cart_total;
 	}
 
 }

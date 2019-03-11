@@ -1,0 +1,7 @@
+<div class="wrap otgs-installer-support-link">
+    {% if not hide_title %}
+    <h2>{{ title }}</h2>
+    {% endif %}
+
+    <p>{{ content|format( '<a href="'~link.url~'">'~link.text~'</a>' )|raw }}</p>
+</div>

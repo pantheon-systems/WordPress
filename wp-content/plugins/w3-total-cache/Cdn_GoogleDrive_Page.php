@@ -13,7 +13,7 @@ class Cdn_GoogleDrive_Page {
 
 		wp_localize_script( 'w3tc_cdn_google_drive',
 			'w3tc_cdn_google_drive_url',
-			GOOGLE_DRIVE_AUTHORIZE_URL . '?return_url=' . urlencode( $return_url ) );
+			W3TC_GOOGLE_DRIVE_AUTHORIZE_URL . '?return_url=' . urlencode( $return_url ) );
 
 		// it's return from google oauth
 		if ( isset( $_GET['oa_client_id'] ) ) {

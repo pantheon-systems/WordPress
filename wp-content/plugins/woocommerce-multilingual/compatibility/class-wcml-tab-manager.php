@@ -54,10 +54,7 @@ class WCML_Tab_Manager {
 		add_action( 'wcml_after_duplicate_product', array( $this, 'duplicate_product_tabs' ) , 10, 2 );
 
 		add_filter( 'wc_tab_manager_tab_id', array( $this, 'wc_tab_manager_tab_id' ), 10, 1 );
-
-		if ( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WCML_VERSION' ), '3.7.2', '>' ) ) {
-			add_filter( 'option_wpml_config_files_arr', array( $this, 'make__product_tabs_not_translatable_by_default' ), 0 );
-		}
+		add_filter( 'option_wpml_config_files_arr', array( $this, 'make__product_tabs_not_translatable_by_default' ), 0 );
 
 		if ( is_admin() ) {
 

@@ -25,6 +25,7 @@ if ( !defined( 'W3TC' ) )
 		<select id="cdn_ftp_type" name="cdn__ftp__type" <?php Util_Ui::sealing_disabled( 'cdn.' ) ?>>
 			<option value=""<?php selected( $this->_config->get_string( 'cdn.ftp.type' ), '' ); ?>><?php _e( 'Plain FTP', 'w3-total-cache' ); ?></option>
 			<option value="ftps"<?php selected( $this->_config->get_string( 'cdn.ftp.type' ), 'ftps' ); ?>><?php _e( 'SSL-FTP connection (FTPS)', 'w3-total-cache' ); ?></option>
+			<option value="sftp"<?php selected( $this->_config->get_string( 'cdn.ftp.type' ), 'sftp' ); echo function_exists( 'ssh2_connect' ) ? '' : ' disabled'; ?>><?php _e( 'FTP over SSH (SFTP)', 'w3-total-cache' ); ?></option>
 		</select>
 	</td>
 </tr>
@@ -62,10 +63,30 @@ if ( !defined( 'W3TC' ) )
 	</td>
 </tr>
 <tr>
+	<th colspan="2">
+		<?php $this->checkbox( 'cdn.ftp.default_keys', !function_exists( 'ssh2_connect' ) ) ?> <?php _e( 'Use default <acronym title="Secure Shell">SSH</acronym> public/private key files', 'w3-total-cache' ); ?></label><br />
+		<span class="description"><?php _e( 'Enable this option if you don\'t have special public/private key files.', 'w3-total-cache' ); ?></span>
+	</th>
+</tr>
+<tr>
+	<th><label for="cdn_ftp_pubkey"><?php _e( '<acronym title="Secure File Transfer Protocol">SFTP</acronym> public key:', 'w3-total-cache' ); ?></label></th>
+	<td>
+		<input id="cdn_ftp_pubkey" class="w3tc-ignore-change" type="text"
+			<?php Util_Ui::sealing_disabled( 'cdn.' ) ?> name="cdn__ftp__pubkey" value="<?php echo esc_attr( $this->_config->get_string( 'cdn.ftp.pubkey' ) ); ?>" size="30" <?php echo function_exists( 'ssh2_connect' ) ? '' : 'disabled'; ?> />
+	</td>
+</tr>
+<tr>
+	<th><label for="cdn_ftp_privkey"><?php _e( '<acronym title="Secure File Transfer Protocol">SFTP</acronym> private key:', 'w3-total-cache' ); ?></label></th>
+	<td>
+		<input id="cdn_ftp_privkey" class="w3tc-ignore-change" type="text"
+			<?php Util_Ui::sealing_disabled( 'cdn.' ) ?> name="cdn__ftp__privkey" value="<?php echo esc_attr( $this->_config->get_string( 'cdn.ftp.privkey' ) ); ?>" size="30" <?php echo function_exists( 'ssh2_connect' ) ? '' : 'disabled'; ?> />
+	</td>
+</tr>
+<tr>
 	<th><?php _e( 'Replace site\'s hostname with:', 'w3-total-cache' ); ?></th>
 	<td>
 		<?php $cnames = $this->_config->get_array( 'cdn.ftp.domain' ); include W3TC_INC_DIR . '/options/cdn/common/cnames.php'; ?>
-		<br /><span class="description"><?php _e( 'Enter the hostname or CNAME(s) of your <acronym title="File Transfer Protocol">FTP</acronym> server configured above, these values will replace your site\'s hostname in the <acronym title="Hypertext Markup Language">HTML</acronym>.', 'w3-total-cache' ); ?></span>
+		<br /><span class="description"><?php _e( 'Enter the hostname or <acronym title="Canonical Name">CNAME</acronym>(s) of your <acronym title="File Transfer Protocol">FTP</acronym> server configured above, these values will replace your site\'s hostname in the <acronym title="Hypertext Markup Language">HTML</acronym>.', 'w3-total-cache' ); ?></span>
 	</td>
 </tr>
 <tr>

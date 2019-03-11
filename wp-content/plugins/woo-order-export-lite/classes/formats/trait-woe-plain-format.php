@@ -4,12 +4,12 @@
 trait WOE_Order_Export_Plain_Format {
 
 
-	private function multiplicate_fields(&$row, $type, $field_values, $fields) {
+	private function multiplicate_fields( &$row, $type, $field_values, $fields ) {
 		$multiplied_fields = array();
 
-		$group_by_item = $this->duplicate_settings[$type]['group_by'];
+		$group_by_item = $this->duplicate_settings[ $type ]['group_by'];
 //		$multiply_count = $repeat ? $this->duplicate_settings[$type]['max_cols'] : 1;
-		$multiply_count = $this->duplicate_settings[$type]['max_cols'];
+		$multiply_count = $this->duplicate_settings[ $type ]['max_cols'];
 
 		if ( $group_by_item == 'product' ) {
 			$index = 1;
@@ -23,7 +23,8 @@ trait WOE_Order_Export_Plain_Format {
 					$key        = $label_data['parent_key'] ? $label_data['parent_key'] : $original_key;
 
 					if ( isset( $item[ str_replace( 'plain_' . $type . '_', '', $key ) ] ) ) {
-						$multiplied_fields[ $original_key . '_' . $index ] = $item[ str_replace( 'plain_' . $type . '_', '',
+						$multiplied_fields[ $original_key . '_' . $index ] = $item[ str_replace( 'plain_' . $type . '_',
+							'',
 							$key ) ];
 					} else {
 						$multiplied_fields[ $original_key . '_' . $index ] = '';
@@ -51,8 +52,9 @@ trait WOE_Order_Export_Plain_Format {
 						break;
 					}
 
-					if ( isset( $item[ str_replace( 'plain_' . $type .'_', '', $key ) ] ) ) {
-						$multiplied_fields[ $original_key . '_' . $index ] = $item[ str_replace( 'plain_' . $type . '_', '',
+					if ( isset( $item[ str_replace( 'plain_' . $type . '_', '', $key ) ] ) ) {
+						$multiplied_fields[ $original_key . '_' . $index ] = $item[ str_replace( 'plain_' . $type . '_',
+							'',
 							$key ) ];
 					} else {
 						$multiplied_fields[ $original_key . '_' . $index ] = '';
@@ -77,37 +79,38 @@ trait WOE_Order_Export_Plain_Format {
 	 */
 	protected function add_nested_rows_as_columns( $row, $repeat_as_cols ) {
 		$new_row = array();
-		
-		foreach( $repeat_as_cols as $type) {
-			$nested_rows[$type] = self::get_array_from_array( $row, $type );
-			$field_group[$type] = array();
-		}	
-		$mask = "#^plain_(products|coupons)_#";
+
+		foreach ( $repeat_as_cols as $type ) {
+			$nested_rows[ $type ] = self::get_array_from_array( $row, $type );
+			$field_group[ $type ] = array();
+		}
+		$mask                  = "#^plain_(products|coupons)_#";
 		$current_field_segment = "";
-		
+
 		foreach ( $this->labels['order']->get_labels() as $label_data ) {
 			$original_key = $label_data['key'];
 			$key          = $label_data['parent_key'] ? $label_data['parent_key'] : $original_key;
-			if (  !isset( $row[ $key ] ) ) {
+			if ( ! isset( $row[ $key ] ) ) {
 				continue;
 			}
-			
+
 			$previous_field_segment = $current_field_segment;
-			
-			if ( preg_match($mask,$key, $m) AND in_array($m[1], $repeat_as_cols) ) {
-				$type = $m[1];
-				$field_group[$type][] = $original_key;
-				$current_field_segment = $type;
+
+			if ( preg_match( $mask, $key, $m ) AND in_array( $m[1], $repeat_as_cols ) ) {
+				$type                   = $m[1];
+				$field_group[ $type ][] = $original_key;
+				$current_field_segment  = $type;
 			} else {
-				$current_field_segment   = 'order';
+				$current_field_segment = 'order';
 			}
 
-			if ( $previous_field_segment!= $current_field_segment AND in_array($previous_field_segment,$repeat_as_cols) ) {
+			if ( $previous_field_segment != $current_field_segment AND in_array( $previous_field_segment,
+					$repeat_as_cols ) ) {
 				$type = $previous_field_segment;
-				if( $field_group[$type] ) {
-					$this->multiplicate_fields( $new_row, $type, $nested_rows[$type], $field_group[$type] );
-					$field_group[$type] = array();
-				}	
+				if ( $field_group[ $type ] ) {
+					$this->multiplicate_fields( $new_row, $type, $nested_rows[ $type ], $field_group[ $type ] );
+					$field_group[ $type ] = array();
+				}
 			}
 
 			//just copy as is 
@@ -117,12 +120,13 @@ trait WOE_Order_Export_Plain_Format {
 		}
 
 		//final clean up 
-		foreach($repeat_as_cols as $type) {
-			if ( ! empty($field_group[$type]) ) {
-				$this->multiplicate_fields( $new_row, $type, $nested_rows[$type], $field_group[$type] );
+		foreach ( $repeat_as_cols as $type ) {
+			if ( ! empty( $field_group[ $type ] ) ) {
+				$this->multiplicate_fields( $new_row, $type, $nested_rows[ $type ], $field_group[ $type ] );
 			}
-			unset($new_row[$type]);
-		}	
+			unset( $new_row[ $type ] );
+		}
+
 		return $new_row;
 	}
 
@@ -137,12 +141,16 @@ trait WOE_Order_Export_Plain_Format {
 		$combinations = array();
 
 		$p_combinations = array();
+		$p_field_ids    = array();
 		if ( $repeat_products ) {
 			foreach ( self::get_array_from_array( $row, 'products' ) as $products_fields_item ) {
 				$result_tmp = array();
 				foreach ( $products_fields_item as $field_name => $products_field_value ) {
-					if ( isset($this->labels['products']->$field_name ) ) // label must be assigned!
+					if ( isset( $this->labels['products']->$field_name ) ) // label must be assigned!
+					{
 						$result_tmp[ 'plain_products_' . $field_name ] = $products_field_value;
+						$p_field_ids[]                                 = 'plain_products_' . $field_name;
+					}
 				}
 
 				$p_combinations[] = $result_tmp;
@@ -150,12 +158,16 @@ trait WOE_Order_Export_Plain_Format {
 		}
 
 		$c_combinations = array();
+		$c_field_ids    = array();
 		if ( $repeat_coupons ) {
 			foreach ( self::get_array_from_array( $row, 'coupons' ) as $coupons_fields_item ) {
 				$result_tmp = array();
 				foreach ( $coupons_fields_item as $field_name => $coupons_field_value ) {
-					if ( isset($this->labels['coupons']->$field_name ) ) // label must be assigned!
+					if ( isset( $this->labels['coupons']->$field_name ) ) // label must be assigned!
+					{
 						$result_tmp[ 'plain_coupons_' . $field_name ] = $coupons_field_value;
+						$c_fields_id[]                                = 'plain_coupons_' . $field_name;
+					}
 				}
 
 				$c_combinations[] = $result_tmp;
@@ -195,20 +207,33 @@ trait WOE_Order_Export_Plain_Format {
 		}
 
 		if ( empty( $combinations ) ) {
-			return array($row);
+			return array( $row );
+		}
+
+		// exclude product and coupon fields from first row when item rows start from new line
+		// to prevent empty extra delimiters in output csv
+		if ( $item_rows_start_from_new_line ) {
+			foreach ( $p_field_ids as $key ) {
+				unset( $row[ $key ] );
+			}
+
+			foreach ( $c_field_ids as $key ) {
+				unset( $row[ $key ] );
+			}
 		}
 
 		$new_rows = array();
 		foreach ( $combinations as $num_index => $combination ) {
-			if($item_rows_start_from_new_line) {
+			if ( $item_rows_start_from_new_line ) {
 				$new_row = ( $num_index == 0 ) ? $row : array();
 			} elseif ( $num_index == 0 OR $populate_non_products ) {
 				$new_row = $row; // 1st -- as is 
 			} else { //must adjust positions for 2nd , 3rd,... rows
-				foreach($row as $k=>$v)
-					$new_row[$k] = "";
+				foreach ( $row as $k => $v ) {
+					$new_row[ $k ] = "";
+				}
 			}
-			
+
 			foreach ( $combination as $field_name => $field_value ) {
 				$new_row[ $field_name ] = $field_value;
 				foreach ( $this->labels['order']->get_childs( $field_name ) as $label_order_data_1 ) {
@@ -220,23 +245,24 @@ trait WOE_Order_Export_Plain_Format {
 
 		return $new_rows;
 	}
-	
+
 	private function merge_nested_rows_to_one_record( $row, $type ) {
-		$line_delimiter = $this->convert_literals( $this->duplicate_settings[$type]['line_delimiter'] );
+		$line_delimiter = $this->convert_literals( $this->duplicate_settings[ $type ]['line_delimiter'] );
 
 		$merged_values = array();
-		foreach($row[$type] as $line) {
-			foreach($line as $k=>$v) {
+		foreach ( $row[ $type ] as $line ) {
+			foreach ( $line as $k => $v ) {
 				$plain_key = "plain_{$type}_{$k}";
-				if( !isset($merged_values[$plain_key]) ) {
-					$merged_values[$plain_key] = true;
-					$row[$plain_key] = $v;
-				}	
-				else	
-					$row[$plain_key] .= $line_delimiter . $v;
+				if ( ! isset( $merged_values[ $plain_key ] ) ) {
+					$merged_values[ $plain_key ] = true;
+					$row[ $plain_key ]           = $v;
+				} else {
+					$row[ $plain_key ] .= $line_delimiter . $v;
+				}
 			}
 		}
-		unset($row[$type]);
+		unset( $row[ $type ] );
+
 		return $row;
 	}
 }

@@ -49,6 +49,12 @@ abstract class ameMenu {
 				if ( ($compared === 0) && isset($arr['format']['is_normalized']) ) {
 					$is_normalized = $arr['format']['is_normalized'];
 				}
+			} else if ( isset($arr['format'], $arr['format']['name']) ) {
+				//This is not an admin menu configuration. It's something else with a "format" header.
+				throw new InvalidMenuException(sprintf(
+					'Unknown menu configuration format: "%s".',
+					esc_html($arr['format']['name'])
+				));
 			} else {
 				return self::load_menu_40($arr);
 			}
@@ -169,6 +175,7 @@ abstract class ameMenu {
 	 * @static
 	 * @param array $arr
 	 * @return array
+	 * @throws InvalidMenuException
 	 */
 	private static function load_menu_40($arr) {
 		//This is *very* basic and might need to be improved.
@@ -176,7 +183,7 @@ abstract class ameMenu {
 		return self::load_array($menu, true);
 	}
 
-	private static function add_format_header($menu) {
+	public static function add_format_header($menu) {
 		if ( !isset($menu['format']) || !is_array($menu['format']) ) {
 			$menu['format'] = array();
 		}

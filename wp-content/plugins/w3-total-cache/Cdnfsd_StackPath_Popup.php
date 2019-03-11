@@ -32,7 +32,7 @@ class Cdnfsd_StackPath_Popup {
 
 	private function render_intro( $details ) {
 		$config = Dispatcher::config();
-		$url_obtain_key = STACKPATH_AUTHORIZE_URL;
+		$url_obtain_key = W3TC_STACKPATH_AUTHORIZE_URL;
 
 		include  W3TC_DIR . '/Cdnfsd_StackPath_Popup_View_Intro.php';
 		exit();

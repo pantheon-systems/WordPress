@@ -31,37 +31,31 @@ class AmeActorSelector {
 
 	private visibleUsers: string[] = [];
 	private subscribers: SelectedActorChangedCallback[] = [];
-	private actorManager: AmeActorManager;
-	private currentUserLogin: string;
-	private isProVersion: boolean = false;
+	private readonly actorManager: AmeActorManagerInterface;
+	private readonly currentUserLogin: string;
+	private readonly isProVersion: boolean = false;
 	private ajaxParams: SaveVisibleActorAjaxParams;
+	private readonly allOptionEnabled: boolean = true;
 
-	private cachedVisibleActors: AmeBaseActor[] = null;
+	private cachedVisibleActors: IAmeActor[] = null;
 
 	private selectorNode;
 
-	constructor(actorManager: AmeActorManager, isProVersion?: boolean, currentUserLogin?: string, visibleUsers?: string[], ajaxParams?: SaveVisibleActorAjaxParams) {
+	constructor(
+		actorManager: AmeActorManagerInterface,
+		isProVersion?: boolean,
+		allOptionEnabled: boolean = true
+	) {
 		this.actorManager = actorManager;
 
-		if (typeof currentUserLogin !== 'undefined') {
-			this.currentUserLogin = currentUserLogin;
-		} else {
-			this.currentUserLogin = wsAmeActorSelectorData.currentUserLogin;
-		}
-		if (typeof visibleUsers !== 'undefined') {
-			this.visibleUsers = visibleUsers;
-		} else {
-			this.visibleUsers = wsAmeActorSelectorData.visibleUsers;
-		}
 		if (typeof isProVersion !== 'undefined') {
 			this.isProVersion = isProVersion;
 		}
+		this.allOptionEnabled = allOptionEnabled;
 
-		if (ajaxParams) {
-			this.ajaxParams = ajaxParams;
-		} else {
-			this.ajaxParams = wsAmeActorSelectorData;
-		}
+		this.currentUserLogin = wsAmeActorSelectorData.currentUserLogin;
+		this.visibleUsers = wsAmeActorSelectorData.visibleUsers;
+		this.ajaxParams = wsAmeActorSelectorData;
 
 		//Discard any users that don't exist / were not loaded by the actor manager.
 		const _ = AmeActorSelector._;
@@ -104,6 +98,7 @@ class AmeActorSelector {
 				currentUserLogin: this.currentUserLogin,
 				users: this.actorManager.getUsers(),
 				visibleUsers: this.visibleUsers,
+				actorManager: this.actorManager,
 
 				save: (userDetails, selectedUsers) => {
 					this.actorManager.addUsers(userDetails);
@@ -130,7 +125,7 @@ class AmeActorSelector {
 		this.highlightSelectedActor();
 
 		if (actorId !== null) {
-			this.selectedDisplayName = this.actorManager.getActor(actorId).displayName;
+			this.selectedDisplayName = this.actorManager.getActor(actorId).getDisplayName();
 		} else {
 			this.selectedDisplayName = 'All';
 		}
@@ -168,7 +163,9 @@ class AmeActorSelector {
 
 		//Build the list of available actors.
 		actorSelector.empty();
-		actorSelector.append('<li><a href="#" class="current ws_actor_option ws_no_actor" data-text="All">All</a></li>');
+		if (this.allOptionEnabled) {
+			actorSelector.append('<li><a href="#" class="current ws_actor_option ws_no_actor" data-text="All">All</a></li>');
+		}
 
 		const visibleActors = this.getVisibleActors();
 		for (let i = 0; i < visibleActors.length; i++) {
@@ -178,13 +175,13 @@ class AmeActorSelector {
 			actorSelector.append(
 				$('<li></li>').append(
 					$('<a></a>')
-						.attr('href', '#' + actor.id)
+						.attr('href', '#' + actor.getId())
 						.attr('data-text', name)
 						.text(name)
 						.addClass('ws_actor_option')
 				)
 			);
-			isSelectedActorVisible = (actor.id === this.selectedActor) || isSelectedActorVisible;
+			isSelectedActorVisible = (actor.getId() === this.selectedActor) || isSelectedActorVisible;
 		}
 
 		if (this.isProVersion) {
@@ -204,15 +201,25 @@ class AmeActorSelector {
 			actorSelector.show();
 		}
 
-		//If the selected actor is no longer on the list, select "All" instead.
+		//If the selected actor is no longer on the list, select the first available option instead.
 		if ((this.selectedActor !== null) && !isSelectedActorVisible) {
-			this.setSelectedActor(null);
+			if (this.allOptionEnabled) {
+				this.setSelectedActor(null);
+			} else {
+				const availableActors = this.getVisibleActors();
+				this.setSelectedActor(AmeActorSelector._.first(availableActors).getId());
+			}
 		}
 
 		this.highlightSelectedActor();
 	}
 
-	getVisibleActors(): AmeBaseActor[] {
+	repopulate() {
+		this.cachedVisibleActors = null;
+		this.populateActorSelector();
+	}
+
+	getVisibleActors(): IAmeActor[] {
 		if (this.cachedVisibleActors) {
 			return this.cachedVisibleActors;
 		}
@@ -257,17 +264,18 @@ class AmeActorSelector {
 		);
 	}
 
-	getCurrentUserActor(): AmeUser {
+	getCurrentUserActor(): IAmeUser {
 		return this.actorManager.getUser(this.currentUserLogin);
 	}
 
-	getNiceName(actor: AmeBaseActor): string {
-		let name = actor.displayName;
-		if (actor instanceof AmeUser) {
-			if (actor.userLogin === this.currentUserLogin) {
-				name = 'Current user (' + actor.userLogin + ')';
+	getNiceName(actor: IAmeActor): string {
+		let name = actor.getDisplayName();
+		if (actor.hasOwnProperty('userLogin')) {
+			const user = actor as IAmeUser;
+			if (user.userLogin === this.currentUserLogin) {
+				name = 'Current user (' + user.userLogin + ')';
 			} else {
-				name = actor.displayName + ' (' + actor.userLogin + ')';
+				name = user.getDisplayName() + ' (' + user.userLogin + ')';
 			}
 		}
 		return name;

@@ -1,6 +1,7 @@
 #w3tc-dashboard-widgets.metabox-holder {
     background-color: #FFF;
     margin:0;padding:0;
+    display: flex;
 }
 #w3tc-dashboard-widgets .hndle {
     height: 36px;
@@ -21,7 +22,12 @@
     margin-right: 200px;
     border: none;
     background-color: #fff;
+    flex-grow: 1;
 }
+#w3tc-dashboard-widgets #postbox-container-right {
+	float: none;
+}
+
 #w3tc-dashboard-widgets .handlediv {
     display: none;
 }

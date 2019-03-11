@@ -15,9 +15,7 @@
         jQuery('.otgs_wp_installer_table').on('submit', '.otgsi_site_key_form', otgs_wp_installer.save_site_key);
         jQuery('.otgs_wp_installer_table').on('submit', '.otgsi_downloads_form', otgs_wp_installer.download_downloads);
         jQuery('.otgs_wp_installer_table').on('change', '.otgsi_downloads_form :checkbox[name="downloads[]"]', otgs_wp_installer.update_downloads_form);
-        
-        jQuery('.installer-dismiss-nag').click(otgs_wp_installer.dismiss_nag);
-        
+
         jQuery('.otgs_wp_installer_table').on('click', '.installer_expand_button', otgs_wp_installer.toggle_subpackages);
 
         otgs_wp_installer.scroll_to_repository();
@@ -104,15 +102,15 @@
         
         jQuery.ajax({url: ajaxurl, type: 'POST', dataType:'json', data: data, success: 
             function(ret){
-                if(!ret.error){                    
+                if(!ret.data.error){
                     otgs_wp_installer.saved_site_key();
                 }else{
-                    otgs_wp_installer.show_error(thisf.find('[name=repository_id]').val(), ret.error);
+                    otgs_wp_installer.show_error(thisf.find('[name=repository_id]').val(), ret.data.error);
                     thisf.find('input').removeAttr('disabled');        
                 }
                 
-                if(typeof ret.debug != 'undefined'){
-                    thisf.append('<textarea style="width:100%" rows="20">' + ret.debug + '</textarea>');
+                if(typeof ret.data.debug != 'undefined'){
+                    thisf.append('<textarea style="width:100%" rows="20">' + ret.data.debug + '</textarea>');
                 }
                 
                 spinner.remove();
@@ -379,21 +377,6 @@
 
     },
 
-    dismiss_nag: function(){
-
-        var thisa = jQuery(this);
-
-        data = {action: 'installer_dismiss_nag', repository: jQuery(this).data('repository')}
-
-        jQuery.ajax({url: ajaxurl, type: 'POST', dataType:'json', data: data, success:
-            function(ret){
-                thisa.closest('.otgs-is-dismissible').remove();
-            }
-        });
-
-        return false;
-    },
-    
     toggle_subpackages: function(){
         var list = jQuery(this).closest('td').find('.otgs_wp_installer_subtable');
         

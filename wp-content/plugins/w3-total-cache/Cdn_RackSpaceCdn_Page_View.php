@@ -38,7 +38,7 @@ if ( !defined( 'W3TC' ) )
 	</td>
 </tr>
 <tr>
-	<th><label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> host (CNAME target):', 'w3-total-cache' ); ?></label></th>
+	<th><label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> host (<acronym title="Canonical Name">CNAME</acronym> target):', 'w3-total-cache' ); ?></label></th>
 	<td class="w3tc_config_value_text">
 		<?php echo $access_url_full ?>
 	</td>
@@ -63,7 +63,7 @@ if ( !defined( 'W3TC' ) )
 		<?php $cnames = $config->get_array( 'cdn.rackspace_cdn.domains' ); include W3TC_INC_DIR . '/options/cdn/common/cnames-readonly.php'; ?>
 		<input name="w3tc_cdn_rackspace_cdn_domains_reload"
                 class="w3tc-button-save button" type="submit"
-				value="<?php _e( 'Reload CNAMEs from RackSpace', 'w3-total-cache' ); ?>" />
+				value="<?php _e( 'Reload C<acronym title="Canonical Name">CNAME</acronym>s from RackSpace', 'w3-total-cache' ); ?>" />
         <br />
         <span class="description">
         	<?php _e( 'Hostname(s) mapped to <acronym title="Content Delivery Network">CDN</acronym> host, this value will replace your site\'s hostname in the <acronym title="Hypertext Markup Language">HTML</acronym>. You can manage them from RackSpace management console and load here afterwards.', 'w3-total-cache' ); ?>

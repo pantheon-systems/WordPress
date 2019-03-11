@@ -18,14 +18,6 @@ if ( ! defined( 'WPINC' ) ) {
         	</div>
             <ul class="cli-shortcodes">
             	<li>
-            		<div style="font-weight: bold;">[cookie_accept]</div>
-            		<span><?php _e('If you just want a standard green "Accept" button that closes the header and nothing more, use this shortcode. It is already styled, you don\'t need to customise it.', 'cookie-law-info'); ?></span>
-            	</li>
-            	<li>
-            		<div style="font-weight: bold;">[cookie_accept colour="red"]</div>
-            		<?php _e('Alternatively you can add a colour value. Choose from: red, blue, orange, yellow, green or pink.', 'cookie-law-info'); ?><br /><em><?php _e('Careful to use the British spelling of "colour" for the attribute.', 'cookie-law-info'); ?></em>
-            	</li>
-            	<li>
             	<div style="font-weight: bold;">[cookie_button]</div>
             	<?php _e('This is the "main button" you customise above.', 'cookie-law-info'); ?>
             	</li>
@@ -37,6 +29,34 @@ if ( ! defined( 'WPINC' ) ) {
             	<li><div style="font-weight: bold;">[cookie_link]</div>
             		<?php _e('This is the "read more" link you customise above.', 'cookie-law-info'); ?>
             	</li>
+
+                <li><div style="font-weight: bold;"><?php _e("Setup margin for above buttons");?></div>
+                    Eg: [cookie_button margin="10px"]
+<pre>
+    margin: 5%;                 /* All sides: 5% margin */
+
+    margin: 10px;               /* All sides: 10px margin */
+
+    margin: 1.6em 20px;         /* top and bottom: 1.6em margin */
+                                /* left and right: 20px margin  */
+
+    margin: 10px 3% -1em;       /* top:            10px margin */
+                                /* left and right: 3% margin   */
+                                /* bottom:         -1em margin */
+
+    margin: 10px 3px 30px 5px;  /* top:    10px margin */
+                                /* right:  3px margin  */ 
+                                /* bottom: 30px margin */
+                                /* left:   5px margin  */
+
+    margin: 2em auto;           /* top and bottom: 2em margin   */
+                                /* Box is horizontally centered */
+
+    margin: auto;               /* top and bottom: 0 margin     */
+                                /* Box is horizontally centered */
+</pre>
+                </li>
+
             	</ul>
             	<div style="font-size: 14px;">
         	        <h3 style="margin-bottom:5px; margin-top:25px;"><?php _e('Other shortcodes', 'cookie-law-info'); ?></h3>
@@ -50,9 +70,13 @@ if ( ! defined( 'WPINC' ) ) {
                 	<div style="font-weight: bold;">
                 		[cookie_audit style="winter"] <br />
         		        [cookie_audit not_shown_message="No records found"] <br />
-        		        [cookie_audit style="winter" not_shown_message="Not found"]
+        		        [cookie_audit style="winter" not_shown_message="Not found"]<br />
+                        [cookie_audit columns="cookie,description"] <br />
+                        [cookie_audit heading="The below list details the cookies used in our website."]
                 	</div>
-                	Styles included:	simple, classic, modern, rounded, elegant, winter. Default is classic.
+                	<?php _e('Styles included','cookie-law-info'); ?>:	simple, classic, modern, rounded, elegant, winter. Default is classic.
+                    <br />
+                    <?php _e('Columns available','cookie-law-info'); ?>: cookie, description, type, duration.  <?php _e('Will print all columns by default.','cookie-law-info'); ?>
             	</li>
                 <li>
                 	<div style="font-weight: bold;">[delete_cookies]</div>

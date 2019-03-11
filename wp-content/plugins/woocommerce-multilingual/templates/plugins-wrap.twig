@@ -47,19 +47,6 @@
                         </li>
                     {% endif %}
 
-                    {% if media_version %}
-                        <li>
-                            <i class="otgs-ico-ok wpml-media"></i>
-                            {{ strings.inst_active|format( strings.media )|raw }}
-                        </li>
-                    {% else %}
-                        <li>
-                            <i class="otgs-ico-warning wpml-media"></i>
-                            {{ strings.not_inst|format( strings.media )|raw }}
-                            <a href="{{ install_wpml_link|e }}" target="_blank">{{ strings.get_wpml_media }}</a>
-                        </li>
-                    {% endif %}
-
                     {% if tm_version %}
                         <li>
                             <i class="otgs-ico-ok wpml-translation-management"></i>

@@ -161,8 +161,9 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                 // delete all subscribers
                 $wpdb->query("DELETE FROM {$wpdb->prefix}wpmm_subscribers");
-
-                wp_send_json_success(sprintf(__('You have %d subscriber(s)', $this->plugin_slug), 0));
+		
+				$message = sprintf(_nx('You have %d subscriber', 'You have %s subscribers', 0, 'ajax response',$this->plugin_slug), 0);		
+                wp_send_json_success($message);
             } catch (Exception $ex) {
                 wp_send_json_error($ex->getMessage());
             }
@@ -372,6 +373,7 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
 
                         // GOOGLE ANALYTICS
                         $_POST['options']['modules']['ga_status'] = (int) $_POST['options']['modules']['ga_status'];
+						$_POST['options']['modules']['ga_anonymize_ip'] = (int) $_POST['options']['modules']['ga_anonymize_ip'];
                         $_POST['options']['modules']['ga_code'] = wpmm_sanitize_ga_code($_POST['options']['modules']['ga_code']);
 
                         $_POST['options']['modules']['custom_css'] = $custom_css;
@@ -426,8 +428,9 @@ if (!class_exists('WP_Maintenance_Mode_Admin')) {
                         $_POST['options']['gdpr']['status'] = (int)$_POST['options']['gdpr']['status'];
                         $_POST['options']['gdpr']['policy_page_label'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_label']);
                         $_POST['options']['gdpr']['policy_page_link'] = sanitize_text_field($_POST['options']['gdpr']['policy_page_link']);
-                        $_POST['options']['gdpr']['contact_form_tail'] = sanitize_text_field($_POST['options']['gdpr']['contact_form_tail']);
-                        $_POST['options']['gdpr']['subscribe_form_tail'] = sanitize_text_field($_POST['options']['gdpr']['subscribe_form_tail']);
+						$_POST['options']['gdpr']['policy_page_target'] = (int) $_POST['options']['gdpr']['policy_page_target'];
+                        $_POST['options']['gdpr']['contact_form_tail'] = wp_kses($_POST['options']['gdpr']['contact_form_tail'], wpmm_gdpr_textarea_allowed_html());
+                        $_POST['options']['gdpr']['subscribe_form_tail'] = wp_kses($_POST['options']['gdpr']['subscribe_form_tail'], wpmm_gdpr_textarea_allowed_html());
                 }
 
                 $this->plugin_settings[$tab] = $_POST['options'][$tab];

@@ -342,12 +342,18 @@ class W3TotalCache_Command extends \WP_CLI_Command {
 
 	/**
 	 * Purges URL's from cdn and varnish if enabled
+	 * 
+	 * @param array $args List if files to be purged, absolute path or relative to wordpress installation path
 	 */
 	function cdn_purge( $args = array() ) {
 		$purgeitems = array();
 		foreach ( $args as $file ) {
 			$cdncommon = Dispatcher::component( 'Cdn_Core' );
-			$local_path = WP_ROOT . $file;
+			if (file_exists($file)) {
+				$local_path = $file;
+			} else {
+				$local_path = ABSPATH . $file;
+			}
 			$remote_path = $file;
 			$purgeitems[] = $cdncommon->build_file_descriptor( $local_path, $remote_path );
 		}

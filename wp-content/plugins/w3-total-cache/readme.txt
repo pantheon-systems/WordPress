@@ -2,8 +2,8 @@
 Contributors: fredericktownes
 Tags: seo, cache, caching, compression, maxcdn, nginx, varnish, redis, new relic, aws, amazon web services, s3, cloudfront, rackspace, cloudflare, azure, apache
 Requires at least: 3.2
-Tested up to: 4.9.5
-Stable tag: 0.9.7
+Tested up to: 5.0.3
+Stable tag: 0.9.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,13 +11,13 @@ Search Engine (SEO) &amp; Performance Optimization (WPO) via caching. Integrated
 
 == Description ==
 
-W3 Total Cache improves the SEO and user experience of your site by increasing website performance, reducing download times via features like content delivery network (CDN) integration.
+W3 Total Cache improves the SEO and user experience of your site by increasing website performance, reducing load times via features like content delivery network (CDN) integration and the latest best practices.
 
-The **only** web host agnostic WordPress Performance Optimization (WPO) framework recommended by countless web developers and web hosts. Trusted by numerous companies like: AT&T, stevesouders.com, mattcutts.com, mashable.com, smashingmagazine.com, makeuseof.com, kiss925.com, pearsonified.com, lockergnome.com, johnchow.com, ilovetypography.com, webdesignerdepot.com, css-tricks.com and tens of thousands of others.
+The **only** web host agnostic Web Performance Optimization (WPO) framework for WordPress trusted by millions of publishers, web developers, and web hosts worldwide for more than a decade.
 
 An inside look:
 
-http://www.youtube.com/watch?v=rkmrQP8S5KY
+https://youtu.be/7AsNSSrZq4Y
 
 *BENEFITS*
 
@@ -108,19 +108,6 @@ Great question. W3 Total Cache uses several open source tools to attempt to comb
 A good rule of thumb is to try auto mode, work with a developer to identify the code that is not compatible and start with combine only mode (the safest optimization) and increase the optimization to the point just before functionality (JavaScript) or user interface / layout (CSS) breaks in your site.
 
 We're always working to make this more simple and straight forward in future releases, but this is not an undertaking we can realize on our own. When you find a plugin, theme or file that is not compatible with minification reach out to the developer and ask them either to provide a minified version with their distribution or otherwise make sure their code is minification-friendly.
-
-= Who do you recommend as a CDN (Content Delivery Network) provider? =
-
-That depends on how you use your site and where most of your readers read your site (regionally). Here's a short list:
-
-* [MaxCDN](https://www.maxcdn.com/), [Discount Coupon Code](http://tracking.maxcdn.com/c/15753/3982/378?u=https%3A%2F%2Fsecure.maxcdn.com%2F%3Fpackage%3Dstarter%26coupon%3Dw3tc)
-* [Amazon Cloudfront](https://aws.amazon.com/cloudfront/)
-* [CloudFlare](https://www.cloudflare.com/features-cdn/)
-* [Verizon Digital Media Services (formerly EdgeCast)](https://www.verizondigitalmedia.com/)
-* [MediaTemple TrueSpeed (formerly ProCDN)](https://mediatemple.net/services/truespeed-cdn/)
-* [Rackspace Cloud Files](https://www.rackspace.com/cloud/files)
-* [Limelight Networks](https://www.limelight.com/)
-* [Akamai / Cotendo](https://www.akamai.com/)
 
 = What about comments? Does the plugin slow down the rate at which comments appear? =
 
@@ -282,6 +269,43 @@ It's quite difficult to recall all of the innovators that have shared their thou
 Please reach out to all of these people and support their projects if you're so inclined.
 
 == Changelog ==
+
+= 0.9.7.2 =
+* Fixed fatal error during media file upload with CDN module active
+* Fixed removal of empty values, JSON encoded string in attribute, trailing quote at end of tag, and the handling of anchors in HTML minify 
+* Fixed undefined index warning
+* Fixed fatal error when purging CDN using full site delivery
+
+= 0.9.7.1 =
+* Fixed undefined variable notice
+* Fixed "No such file or directory" warning
+* Fixed writing to PHP error log rather than WordPress debug log
+* Fixed default referrer policy should be "no-referrer-when-downgrade"
+* Fixed php_flag error related to browser cache, using ini_set instead
+* Fixed CloudFlare IPv6 check undefined offset
+* Fixed Undefined constant WP_ROOT
+* Fixed frame-ancestors being overwritten by frame-src
+* Fixed missing semicolon in nginx configuration
+* Fixed HTTP/2 URLs handling for browser cache and CDN modules
+* Fixed display of CDN debug information
+* Fixed CSS Minification with Google Fonts when included via "Include external files/libraries" and non-latin character-sets are loaded
+* Fixed media query string not updating when all caches were purged
+* Fixed double slash with ABSPATH if file exists
+* Fixed setting max-age and expires header simultaneously
+* Fixed SASL detection for PECL Memcached
+* Fixed handling of manually entered objects to be purged on CDN
+* Fixed query string handling in Nginx
+* Improved error handling with Cloudfront
+* Improved page cache logging
+* Improved multi-tenant support for memory-based caching engines
+* Improved CSS minification
+* Improved purge behavior for changed media objects when using CDN
+* Improved compatibility with sitemap plugins
+* Added support for Memcached for Nginx
+* Added support for caching webm files
+* Added Brotli HTTP compression support
+* Added StackPath full site delivery support
+* Added _wc_session_ to the list of ignored query stems for improved WooCommerce compatibility
 
 = 0.9.7 =
 * Fixed minified files not being hosted by CDN when enabled if "host minified files" is disabled

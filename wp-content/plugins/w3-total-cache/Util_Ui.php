@@ -184,21 +184,21 @@ class Util_Ui {
 		$b2_id = 'w3tc_default_save_and_flush_' . $id;
 
 ?>
-        <p class="submit">
-            <?php echo Util_Ui::nonce_field( 'w3tc' ); ?>
-            <input type="submit" id="<?php echo $b1_id ?>"
-                name="w3tc_save_options"
-                class="w3tc-button-save button-primary"
-                value="<?php _e( 'Save all settings', 'w3-total-cache' ); ?>" />
-            <?php echo $extra ?>
-            <?php if ( !is_network_admin() ): ?>
-            <input type="submit" id="<?php echo $b2_id ?>"
-                name="w3tc_default_save_and_flush" style="float: right"
-                class="w3tc-button-save button-primary"
-                value="<?php _e( 'Save Settings & Purge Caches', 'w3-total-cache' ); ?>" />
-            <?php endif ?>
-        </p>
-        <?php
+		<p class="submit">
+			<?php echo Util_Ui::nonce_field( 'w3tc' ); ?>
+			<input type="submit" id="<?php echo $b1_id ?>"
+				name="w3tc_save_options"
+				class="w3tc-button-save button-primary"
+				value="<?php _e( 'Save all settings', 'w3-total-cache' ); ?>" />
+			<?php echo $extra ?>
+			<?php if ( !is_network_admin() ): ?>
+			<input type="submit" id="<?php echo $b2_id ?>"
+				name="w3tc_default_save_and_flush" style="float: right"
+				class="w3tc-button-save button-primary"
+				value="<?php _e( 'Save Settings & Purge Caches', 'w3-total-cache' ); ?>" />
+			<?php endif ?>
+		</p>
+		<?php
 	}
 
 	static public function sealing_disabled( $key ) {
@@ -304,6 +304,21 @@ class Util_Ui {
 	}
 
 	/**
+	 * Returns an input text element
+	 *
+	 * @param string  $id
+	 * @param string  $name
+	 * @param string  $value
+	 * @param bool    $disabled
+	 * @param int     $size
+	 */
+	static public function r_hidden( $id, $name, $value ) {
+		return '<input type="hidden" id="' . esc_attr( $id ) .
+			'" name="' . esc_attr( $name ) .
+			'" value="' . esc_attr( $value ) . '" />';
+	}
+
+	/**
 	 * Echos an input text element
 	 *
 	 * @param string  $id
@@ -313,9 +328,7 @@ class Util_Ui {
 	 * @param int     $size
 	 */
 	static public function hidden( $id, $name, $value ) {
-		echo '<input type="hidden" id="' . esc_attr( $id ) .
-			'" name="' . esc_attr( $name ) .
-			'" value="' . esc_attr( $value ) . '" />';
+		echo self::r_hidden( $id, $name, $value );
 	}
 
 	/**
@@ -472,10 +485,10 @@ class Util_Ui {
 	 * @param bool    $disabled
 	 */
 	static public function textarea( $id, $name, $value, $disabled = false ) {?>
-        <textarea class="enabled" id="<?php echo esc_attr( $id )?>"
-            name="<?php echo esc_attr( $name )?>" rows="5" cols=25 style="width: 100%"
-            <?php disabled( $disabled ) ?>><?php echo esc_textarea( $value )?></textarea>
-    <?php
+		<textarea class="enabled" id="<?php echo esc_attr( $id )?>"
+			name="<?php echo esc_attr( $name )?>" rows="5" cols=25 style="width: 100%"
+			<?php disabled( $disabled ) ?>><?php echo esc_textarea( $value )?></textarea>
+	<?php
 	}
 
 	/**
@@ -855,9 +868,9 @@ class Util_Ui {
 
 
 	/*
-     * Converts configuration key returned in http _GET/_POST
-     * to configuration key
-     */
+	 * Converts configuration key returned in http _GET/_POST
+	 * to configuration key
+	 */
 	static public function config_key_from_http_name( $http_key ) {
 		$a = explode( '___', $http_key );
 		if ( count( $a ) == 2 ) {

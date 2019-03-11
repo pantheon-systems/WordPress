@@ -71,8 +71,12 @@ class WCML_Troubleshooting_UI extends WPML_Templates_Factory {
 		);
 
 		foreach( $all_products_taxonomies as $key => $taxonomy ){
-			$all_products_taxonomies[ $key ]->terms_count = wp_count_terms( $key );
-			$all_products_taxonomies[ $key ]->tax_key = $key;
+			if( is_taxonomy_translated( $key ) ) {
+				$all_products_taxonomies[ $key ]->terms_count = wp_count_terms( $key );
+				$all_products_taxonomies[ $key ]->tax_key     = $key;
+			}else{
+				unset( $all_products_taxonomies[$key]);
+			}
 		}
 
 		return $all_products_taxonomies;

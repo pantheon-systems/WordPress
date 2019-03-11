@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: WP SES
-  Version: 0.8.1
+  Version: 0.8.2
   Plugin URI: https://wordpress.org/plugins/wp-ses/
   Description: Uses Amazon SES for sending all site email
   Author: Delicious Brains Inc

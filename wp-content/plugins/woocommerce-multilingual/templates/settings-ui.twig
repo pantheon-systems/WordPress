@@ -1,37 +1,38 @@
 <form method="post" action="{{ form.action }}">
 
-    <div class="wcml-section">
-        <div class="wcml-section-header">
-            <h3>
-                {{ form.translation_interface.heading }}
-                <i class="otgs-ico-help wcml-tip" data-tip="{{ form.translation_interface.tip }}"></i>
-            </h3>
-        </div>
-        <div class="wcml-section-content">
-
-            <div id="wcml-translation-interface-dialog-confirm" title="{{ form.translation_interface.heading }}" class="hidden">
-                <p>{{ form.translation_interface.pb_warning }}</p>
-                <input type="hidden" class="ok-button" value="{{ form.translation_interface.pb_warning_ok_button }}" />
-                <input type="hidden" class="cancel-button" value="{{ form.translation_interface.pb_warning_cancel_button }}"/>
+    {% if form.translation_interface %}
+        <div class="wcml-section">
+            <div class="wcml-section-header">
+                <h3>
+                    {{ form.translation_interface.heading }}
+                    <i class="otgs-ico-help wcml-tip" data-tip="{{ form.translation_interface.tip }}"></i>
+                </h3>
             </div>
+            <div class="wcml-section-content">
 
-            <ul>
-                <li>
-                    <input type="radio" name="trnsl_interface" value="{{ wpml_translation }}"
-                            {% if form.translation_interface.controls_value == wpml_translation %} checked="checked"{% endif %} id="wcml_trsl_interface_wcml" />
-                    <label for="wcml_trsl_interface_wcml">{{ form.translation_interface.wcml.label }}</label>
-                </li>
-                <li>
-                    <input type="radio" name="trnsl_interface" value="{{ native_translation }}"
-                            {% if form.translation_interface.controls_value == native_translation %} checked="checked"{% endif %} id="wcml_trsl_interface_native" />
-                    <label for="wcml_trsl_interface_native">{{ form.translation_interface.native.label|raw }}</label>
-                </li>
-            </ul>
+                <div id="wcml-translation-interface-dialog-confirm" title="{{ form.translation_interface.heading }}" class="hidden">
+                    <p>{{ form.translation_interface.pb_warning }}</p>
+                    <input type="hidden" class="ok-button" value="{{ form.translation_interface.pb_warning_ok_button }}" />
+                    <input type="hidden" class="cancel-button" value="{{ form.translation_interface.pb_warning_cancel_button }}"/>
+                </div>
 
-        </div> <!-- .wcml-section-content -->
+                <ul>
+                    <li>
+                        <input type="radio" name="trnsl_interface" value="{{ wpml_translation }}"
+                                {% if form.translation_interface.controls_value == wpml_translation %} checked="checked"{% endif %} id="wcml_trsl_interface_wcml" />
+                        <label for="wcml_trsl_interface_wcml">{{ form.translation_interface.wcml.label }}</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="trnsl_interface" value="{{ native_translation }}"
+                                {% if form.translation_interface.controls_value == native_translation %} checked="checked"{% endif %} id="wcml_trsl_interface_native" />
+                        <label for="wcml_trsl_interface_native">{{ form.translation_interface.native.label|raw }}</label>
+                    </li>
+                </ul>
 
-    </div> <!-- .wcml-section -->
+            </div> <!-- .wcml-section-content -->
 
+        </div> <!-- .wcml-section -->
+    {% endif %}
     <div class="wcml-section">
 
         <div class="wcml-section-header">

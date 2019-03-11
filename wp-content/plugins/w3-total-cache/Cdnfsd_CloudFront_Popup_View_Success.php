@@ -11,7 +11,7 @@ if ( !defined( 'W3TC' ) )
 
         <div style="text-align: center">
             Pull Zone <?php echo $details['name'] ?> was successfully configured.<br />
-            Next, update the domain DNS records
+            Next, update the domain <acronym title="Domain Name System">DNS</acronym> records
             <strong><?php echo $details['home_domain'] ?></strong> and add <acronym title="Canonical Name">CNAME</acronym> alias to
             <strong><?php echo $details['dns_cname_target'] ?></strong> to enable caching.
 

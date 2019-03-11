@@ -147,17 +147,20 @@ if ( ! function_exists('nm_get_order_id') ) {
 function ppom_get_product_id( $product ) {
 		
 	$product_id = '';
-	if ( version_compare( WC_VERSION, '2.7', '<' ) ) {  
+	if ( version_compare( WOOCOMMERCE_VERSION, '2.7', '<' ) ) {  
 	
 		// vesion less then 2.7
-		$product_id = $product -> ID;
+		$product_id = isset($product->id) ? $product->id : $product->ID;
 	} else {
 		
-		if( $product->get_type() == 'variation' ) {
-			$product_id = $product->get_parent_id();
-		}else {
+		if( is_a($product, 'WC_Product') ) {
 
-			$product_id = $product -> get_id();
+			if( $product->get_type() == 'variation' ) {
+				$product_id = $product->get_parent_id();
+			}else {
+
+				$product_id = $product -> get_id();
+			}
 		}
 	}
 
@@ -200,9 +203,11 @@ function ppom_get_product_price( $product ) {
 function ppom_make_meta_data( $cart_item, $context="cart" ){
 	
 	if( ! isset($cart_item['ppom']['fields']) ) return $cart_item;
-		
+	
+	$ppom_meta_ids = '';	
 	// removing id field
-	if (isset( $cart_item ['ppom'] ['fields']['id'] )) {
+	if ( !empty( $cart_item ['ppom'] ['fields']['id'] )) {
+		$ppom_meta_ids = $cart_item ['ppom'] ['fields']['id'];
 		unset( $cart_item ['ppom'] ['fields']['id']);
 	}
 	
@@ -212,12 +217,10 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
 		
 		// if no value
 		if( $value == '' ) continue;
+		$product_id = ppom_get_product_id($cart_item['data']);
+		// $cart_item['data'] ->post_type == 'product' ? $cart_item['data']->get_id() : $cart_item['data']->get_parent_id();
+		$field_meta = ppom_get_field_meta_by_dataname( $product_id, $key, $ppom_meta_ids);
 		
-		
-		$product_id = $cart_item['data'] ->post_type == 'product' ? $cart_item['data']->get_id() : $cart_item['data']->get_parent_id();
-		$field_meta = ppom_get_field_meta_by_dataname( $product_id, $key );
-		
-		// ppom_pa($field_meta);
 		// If field deleted while it's in cart
 		if( empty($field_meta) ) continue;
 		
@@ -241,7 +244,7 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
 						$total_qty += $qty;	
 					}
 				}
-				$qty_values[] = __('Total','ppom').' = '.$total_qty;
+				$qty_values[] = __('Total',"ppom").' = '.$total_qty;
 				$meta_data = array('name'=>$field_title, 'value'=>implode(",",$qty_values));
 				// A placeholder key to handle qunantity display in item meta data under myaccount
 				$ppom_meta['ppom_has_quantities'] = $total_qty;
@@ -364,7 +367,7 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
 				
 				$product = new WC_Product($product_id);
 				$options_filter	 = ppom_convert_options_to_key_val($field_meta['options'], $field_meta, $product);
-			
+				
 				foreach($options_filter as $option_key => $option) {
 	                    
                     $option_value = stripslashes($option['raw']);
@@ -405,7 +408,6 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
 				break;
 		}
 		
-		
 		// Getting option price if field have
 		$option_price = ppom_get_field_option_price( $field_meta, $value );
 		if( $option_price != 0 ) {
@@ -418,7 +420,7 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
 	
 	
 	// ppom_pa($ppom_meta);
-	return apply_filters('ppom_meta_data', $ppom_meta, $cart_item);
+	return apply_filters('ppom_meta_data', $ppom_meta, $cart_item, $context);
 }
 
 /**
@@ -474,9 +476,10 @@ function ppom_get_editing_tools( $editing_tools ){
  **/
 function ppom_has_posted_field_value( $posted_fields, $field ) {
 	
-	$has_value = false;
+	$has_value	= false;
 	
-	$data_name = $field['data_name'];
+	$data_name	= $field['data_name'];
+	$type		= $field['type'] ;
 	
 	if( !empty($posted_fields) ) {
 		foreach($posted_fields as $field_key => $value){
@@ -484,9 +487,38 @@ function ppom_has_posted_field_value( $posted_fields, $field ) {
 			
 			if( $field_key == $data_name) {
 				
-				if( $value != '' ) {
-					$has_value = true;
+				
+				switch( $type ) {
+					
+					case 'quantities':
+						$quantities_field = $value;
+						$quantity = 0;
+						foreach($quantities_field as $option => $qty) {
+							$quantity += intval($qty);
+						}
+						
+						if( $quantity > 0 ) {
+							$has_value = true;
+						}
+						
+					break;
+
+					case 'fonts':
+
+						if (isset($value['font']) && $value['font'] != '') {
+							$has_value = true;
+						}
+						
+					break;
+					
+					default:
+						if( $value != '' ) {
+							$has_value = true;
+						}
+					break;
+						
 				}
+				
 				
 				if( $has_value ) break;
 			}
@@ -521,10 +553,12 @@ function ppom_settings_link($links) {
 	
 	$quote_url = "https://najeebmedia.com/get-quote/";
 	$ppom_setting_url = admin_url( 'admin.php?page=ppom');
+	$video_url = 'https://najeebmedia.com/wordpress-plugin/woocommerce-personalized-product-option/#ppom-quick-video';
 	
 	$ppom_links = array();
-	$ppom_links[] = sprintf(__('<a href="%s">Add Fields</a>', 'ppom'), esc_url($ppom_setting_url) );
-	$ppom_links[] = sprintf(__('<a href="%s">Request for Customized Solution</a>', 'ppom'), esc_url($quote_url) );
+	$ppom_links[] = sprintf(__('<a href="%s">Add Fields</a>', "ppom"), esc_url($ppom_setting_url) );
+	$ppom_links[] = sprintf(__('<a href="%s" target="_blank">Quick Video Guide</a>', "ppom"), esc_url($video_url) );
+	$ppom_links[] = sprintf(__('<a href="%s">Customized Solution</a>', "ppom"), esc_url($quote_url) );
 	
 	foreach($ppom_links as $link) {
 		
@@ -534,41 +568,23 @@ function ppom_settings_link($links) {
   	return $links;
 }
 
-// check if product has meta Returns Meta ID if true otherwise null
-function ppom_has_product_meta( $product_id ) {
-	
-	$ppom_meta_id = get_post_meta ( $product_id, PPOM_PRODUCT_META_KEY, true );
-	
-	if( $ppom_meta_id == 0 || $ppom_meta_id == 'None' ) {
-	
-		$ppom_meta_id = null;
-	}
-	
-	if( $ppom_meta_id == null ) {
-		
-		if($meta_found = ppom_has_category_meta( $product_id ) ){
-    		
-    		/**
-    		 * checking product against categories
-    		 * @since 6.4
-    		 */
-    		$ppom_meta_id = $meta_found;
-    	}
-	}
-	
-	return $ppom_meta_id;
-}
-
 // Get field type by data_name
-function ppom_get_field_meta_by_dataname( $product_id, $data_name ) {
+function ppom_get_field_meta_by_dataname( $product_id, $data_name, $ppom_id=null ) {
 	
 	$ppom		= new PPOM_Meta( $product_id );
-	if( ! $ppom->fields ) return '';
 	
-	$data_name = apply_filters('ppom_get_field_by_dataname_dataname', $data_name, $product_id);
+	$ppom_fields= $ppom->fields;
+	
+	if( !empty($ppom_id) ) {
+		$ppom_fields = $ppom->get_fields_by_id($ppom_id);
+	}
+	
+	if( ! $ppom_fields ) return '';
+	
+	$data_name = apply_filters('ppom_get_field_by_dataname_dataname', $data_name, $ppom_id);
 	
 	$field_meta = '';
-	foreach($ppom->fields as $field) {
+	foreach($ppom_fields as $field) {
 	
 		if( ! ppom_is_field_visible($field) ) continue;
 		
@@ -629,45 +645,7 @@ function ppom_load_bootstrap_css() {
 	return apply_filters('ppom_bootstrap_css', $return);
 }
 
-function ppom_has_category_meta( $product_id ) {
-		
-	$p_categories = get_the_terms($product_id, 'product_cat');
-	$meta_found = false;
-	 if($p_categories){
-	 	
-	 	global $wpdb;
-		$ppom_table = $wpdb->prefix . PPOM_TABLE_META;
-		
-		$qry = "SELECT * FROM {$ppom_table}";
-		$qry .= " WHERE productmeta_categories != ''";
-		$meta_with_cats = $wpdb->get_results ( $qry );
-		
-		
-		foreach($meta_with_cats as $meta_cats){
-			
-			if( $meta_found )	//if we found any meta so dont need to loop again
-				continue;
-			
-			if( $meta_cats->productmeta_categories == 'All' ) {
-				$meta_found = $meta_cats->productmeta_id;
-			}else{
-				//making array of meta cats
-				$meta_cat_array = explode("\n", $meta_cats->productmeta_categories);
-				
-				//Now iterating the p_categories to check it's slug in meta cats
-				foreach($p_categories as $cat) {
-					
-					if( in_array($cat->slug, $meta_cat_array) ) {
-						$meta_found = $meta_cats->productmeta_id;
-					}
-				}
-			}
 
-		}
-	 }
-	 
-	 return $meta_found;
-}
 
 function ppom_convert_options_to_key_val($options, $meta, $product) {
 	
@@ -682,6 +660,8 @@ function ppom_convert_options_to_key_val($options, $meta, $product) {
 	foreach($options as $option) {
 		
 		if( isset($option['option']) ) {
+			
+			$option = ppom_translation_options($option);
 			
 			$option_price_without_tax	= '';
 			$option_label	= $option['option'];
@@ -707,7 +687,7 @@ function ppom_convert_options_to_key_val($options, $meta, $product) {
 				if(strpos($option_price,'%') !== false){
 					$option_price = ppom_get_amount_after_percentage($product->get_price(), $option_price);
 					// check if price is fixed and taxable
-					if(isset($meta['onetime']) && $meta['onetime'] == 'on' && $meta['onetime_taxable'] == 'on') {
+					if(isset($meta['onetime']) && $meta['onetime'] == 'on' && isset($meta['onetime_taxable']) && $meta['onetime_taxable'] == 'on') {
 						$option_price_without_tax = $option_price;
 						$option_price = ppom_get_price_including_tax($option_price, $product);
 					}
@@ -717,7 +697,7 @@ function ppom_convert_options_to_key_val($options, $meta, $product) {
 				} else {
 					
 					// check if price is fixed and taxable
-					if(isset($meta['onetime']) && $meta['onetime'] == 'on' && $meta['onetime_taxable'] == 'on') {
+					if(isset($meta['onetime']) && $meta['onetime'] == 'on' && isset($meta['onetime_taxable']) && $meta['onetime_taxable'] == 'on') {
 						$option_price_without_tax = $option_price;
 						$option_price = ppom_get_price_including_tax($option_price, $product);
 					}
@@ -918,9 +898,16 @@ function ppom_generate_html_for_files( $file_names, $input_type, $item ) {
 			$order_html .= '<tr><td><a href="'.esc_url($ppom_file_url).'">';
 			$order_html .= '<img class="img-thumbnail" style="width:'.esc_attr(ppom_get_thumbs_size()).'" src="'.esc_url($ppom_file_thumb_url).'">';
 			$order_html .= '</a></td>';
-			$order_html .= '<td><a class="button" href="'.esc_url($ppom_file_url).'">';
-			$order_html .= __('Download File', 'ppom');
-			$order_html .= '</a></td></tr>';
+			
+			
+			// Requested by Kevin, hiding downloading file button after order on thank you page
+			// @since version 16.6
+			if( is_admin() ) {
+				$order_html .= '<td><a class="button" href="'.esc_url($ppom_file_url).'">';
+				$order_html .= __('Download File', "ppom");
+				$order_html .= '</a></td>';
+			}
+			$order_html .= '</tr>';
 			
 			if( $input_type == 'cropper' ) {
 				
@@ -929,9 +916,16 @@ function ppom_generate_html_for_files( $file_names, $input_type, $item ) {
 					$order_html .= '<tr><td><a href="'.esc_url($cropped_url).'">';
 					$order_html .= '<img style="width:'.esc_attr(ppom_get_thumbs_size()).'" class="img-thumbnail" src="'.esc_url($cropped_url).'">';
 					$order_html .= '</a></td>';
-					$order_html .= '<td><a class="button" href="'.esc_url($cropped_url).'">';
-					$order_html .= __('Cropped', 'ppom');
-					$order_html .= '</a></td></tr>';
+					
+					// Requested by Kevin, hiding downloading file button after order on thank you page
+					// @since version 16.6
+					if( is_admin() ) {
+						$order_html .= '<td><a class="button" href="'.esc_url($cropped_url).'">';
+						$order_html .= __('Cropped', "ppom");
+						$order_html .= '</a></td>';
+					}
+					$order_html .= '</tr>';
+					
 			} elseif( file_exists($file_edit_path) ) {
 				
 				$edit_file_name = ppom_file_get_name($file_name, $item->get_product_id());
@@ -941,7 +935,7 @@ function ppom_generate_html_for_files( $file_names, $input_type, $item ) {
 				$order_html .= '<img style="width:'.esc_attr(ppom_get_thumbs_size()).'" class="img-thumbnail" src="'.esc_url($edit_thumb_url).'">';
 				$order_html .= '</a></td>';
 				$order_html .= '<td><a class="button" href="'.esc_url($edit_url).'">';
-				$order_html .= __('Edited', 'ppom');
+				$order_html .= __('Edited', "ppom");
 				$order_html .= '</a></td></tr>';
 			}
 	}
@@ -996,41 +990,76 @@ function ppom_get_field_option_price( $field_meta, $option_label ) {
 }
 
 // Getting field option price by ID
-function ppom_get_field_option_price_by_id( $option, $product ) {
+function ppom_get_field_option_price_by_id( $option, $product, $ppom_meta_ids ) {
 	
 	$data_name = isset($option['data_name']) ? $option['data_name'] : '';
 	$option_id = isset($option['option_id']) ? $option['option_id'] : '';
 	
-	$field_meta = ppom_get_field_meta_by_dataname( ppom_get_product_id($product), $data_name );
+	// soon we will remove this product param
+	$product_id = null;
+	$field_meta = ppom_get_field_meta_by_dataname($product_id , $data_name, $ppom_meta_ids );
 	
 	if( empty($field_meta) ) return 0;
 	
-	if( ! isset( $field_meta['options']) || $field_meta['type'] == 'bulkquantity' || $field_meta['type'] == 'cropper' ) return 0;
+	$field_type = isset($field_meta['type']) ? $field_meta['type'] : '';
+	
+	if( $field_type == 'bulkquantity' || $field_type == 'cropper' ) return 0;
 	
 	$option_price = 0;
-	foreach( $field_meta['options'] as $option ) {
+	
+	switch( $field_type ) {
 		
-		if( $option['id'] == $option_id && isset($option['price']) && $option['price'] != '' ) {
+		case 'image':
 			
-			if(strpos($option['price'],'%') !== false){
-					$option_price = ppom_get_amount_after_percentage($product->get_price(), $option['price']);
-			}else {
-				// For currency switcher
-				$option_price = apply_filters('ppom_option_price', $option['price']);
+			if( isset( $field_meta['images']) ) {
+				foreach( $field_meta['images'] as $option ) {
+				
+					$image_id	= $field_meta['data_name'].'-'.$option['id'];
+					if( $image_id == $option_id && isset($option['price']) && $option['price'] != '' ) {
+						
+						if(strpos($option['price'],'%') !== false){
+								$option_price = ppom_get_amount_after_percentage($product->get_price(), $option['price']);
+						}else {
+							// For currency switcher
+							$option_price = apply_filters('ppom_option_price', $option['price']);
+						}
+					}
+				}
 			}
-		}
+		break;
+		
+		default:
+			
+			if( isset( $field_meta['options']) ) {
+				foreach( $field_meta['options'] as $option ) {
+			
+					if( $option['id'] == $option_id && isset($option['price']) && $option['price'] != '' ) {
+						
+						if(strpos($option['price'],'%') !== false){
+								$option_price = ppom_get_amount_after_percentage($product->get_price(), $option['price']);
+						}else {
+							// For currency switcher
+							$option_price = apply_filters('ppom_option_price', $option['price']);
+						}
+					}
+				}
+			}
+		break;
 	}
+	
 	
 	return apply_filters("ppom_field_option_price_by_id", wc_format_decimal($option_price), $field_meta, $option_id, $product);
 }
 
 // Getting field option weight by ID
-function ppom_get_field_option_weight_by_id( $option, $product_id ) {
+function ppom_get_field_option_weight_by_id( $option, $ppom_meta_ids ) {
 	
 	$data_name = isset($option['data_name']) ? $option['data_name'] : '';
 	$option_id = isset($option['option_id']) ? $option['option_id'] : '';
 	
-	$field_meta = ppom_get_field_meta_by_dataname( $product_id, $data_name );
+	// soon we will remove this product param
+	$product_id = null;
+	$field_meta = ppom_get_field_meta_by_dataname( $product_id, $data_name, $ppom_meta_ids );
 	
 	if( empty($field_meta) ) return 0;
 	
@@ -1045,7 +1074,7 @@ function ppom_get_field_option_weight_by_id( $option, $product_id ) {
 		}
 	}
 	
-	return apply_filters("ppom_field_option_weight_by_id", wc_format_decimal($option_weight), $field_meta, $option_id, $product_id);
+	return apply_filters("ppom_field_option_weight_by_id", wc_format_decimal($option_weight), $field_meta, $option_id, $ppom_meta_ids);
 }
 
 // check if PPOM PRO is installed
@@ -1137,7 +1166,8 @@ function ppom_price( $price ) {
 	$price_format			= get_woocommerce_price_format();
 	$negative       		= $price < 0;
 	
-	$wc_price = number_format( $price,$decimals, $decimal_separator, $thousand_separator );
+	// $wc_price = number_format( $price,$decimals, $decimal_separator, $thousand_separator );
+	$wc_price = number_format( abs($price), $decimals, $decimal_separator, $thousand_separator );
 	$formatted_price = ( $negative ? '-' : '' ) . sprintf( $price_format, get_woocommerce_currency_symbol(), $wc_price );
 	return apply_filters('ppom_woocommerce_price', $formatted_price);
 }
@@ -1189,4 +1219,49 @@ function ppom_get_date_formats() {
 				);
 				
 	return apply_filters('ppom_date_formats', $formats);
+}
+
+// Security: checking if attached fields have price
+function ppom_is_price_attached_with_fields( $fields_posted ) {
+	
+	
+	$is_price_attached = false;
+	
+	$option_price = 0;
+	$ppom_id = $fields_posted['id'];
+	foreach($fields_posted as $data_name => $value) {
+		
+		// soon prodcut_id will be removed
+		$product_id = null;
+		$field_meta = ppom_get_field_meta_by_dataname($product_id, $data_name, $ppom_id);
+		$field_type	= isset($field_meta['type']) ? $field_meta['type'] : '';
+		
+		switch( $field_type ) {
+			
+			case 'checkbox':
+				if( is_array($value) ) {
+					foreach($value as $cb_value) {
+						$option_price 	+= ppom_get_field_option_price($field_meta, $cb_value);
+					}
+				}
+			break;
+			
+			default:
+				$option_price 	+= ppom_get_field_option_price($field_meta, $value);
+				break;
+		}
+	}
+	
+	if($option_price > 0) {
+		$is_price_attached = true;
+	}
+	
+	// If price matrix attached
+	if( isset($_POST['ppom']['ppom_pricematrix']) ) {
+		$is_price_attached = true;
+	}
+	
+	// exit;
+	
+	return apply_filters('ppom_option_price_attached', $is_price_attached, $fields_posted, $product_id);
 }

@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="inner-panel" style="">
                     <img src="<?php echo plugins_url(basename(plugin_dir_path(WF_ProdImpExpCsv_FILE))) . '/images/video.png'; ?>"/>
                     <h3><?php _e('How-to-setup', 'wf_csv_import_export'); ?></h3>
-                    <p style=""><?php _e('Get to know about our produt in 3 minutes with this video', 'wf_csv_import_export'); ?></p>
+                    <p style=""><?php _e('Get to know about our product in 3 minutes with this video', 'wf_csv_import_export'); ?></p>
                     <a href="https://www.webtoffee.com/setting-up-product-import-export-plugin-for-woocommerce/" target="_blank" class="button button-primary">
                         <?php _e('Setup Guide', 'wf_csv_import_export'); ?></a>
                 </div>

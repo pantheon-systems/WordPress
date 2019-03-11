@@ -69,28 +69,36 @@
 
 <div class="cli_gopro_block" style="margin-top: 43px;">
     <p style="text-align: center;">
-        <a href="https://www.webtoffee.com/product/gdpr-cookie-consent/" target="_blank" class="cli-button cli-button-go-pro"><?php echo __('Upgrade to GDPR Pro','cookie-law-info'); ?></a>
-    </p>
-    <p>
-        <br/>
-        <ul class="cli_premium_features">
-            <li><?php echo __('Manage list of cookies ( Name, CookieID, Description, Duration, Type, Category, Header Script, Footer Script).','cookie-law-info'); ?></li>
-            <li><?php echo __('Manage Cookie Categories.','cookie-law-info'); ?></li>
-            <li><?php echo __('Scan and auto block scripts - Google Analytics, FB Pixel, Google tag manager.','cookie-law-info'); ?></li>
-            <li><?php echo __("Location based exclusion of cookie notice for EU countries.","cookie-law-info"); ?></li>
-            <li><?php echo __("Provide the users with the granular control over the cookies/scipts used by the website.","cookie-law-info"); ?></li>
-            <li><?php echo __("Optionally log users' consent and export into a CSV file.","cookie-law-info"); ?></li>
-            <li><?php echo __("Customize the privacy overview in the cookie settings popup.","cookie-law-info"); ?></li>
-            <li><?php echo __("Export/import cookies and related information via CSV file.","cookie-law-info"); ?></li>
-            <li><?php echo __("Scan and import/export the cookies in the homepage.","cookie-law-info"); ?></li>
-            <li><?php echo __('Allow to display cookie settings popup where site visitors can opt-in or give consent to cookie categories.','cookie-law-info'); ?></li>
-            <li><?php echo __('Customisable to look just like your own website\'s style: customise the colours, styles and fonts.','cookie-law-info'); ?></li>
-            <li><?php echo __('Put the cookie bar in either the header or the footer.','cookie-law-info'); ?></li>
+            <ul style="font-weight: bold; color:#666; list-style: none; background:#f8f8f8; padding:20px; margin:0px 15px; font-size: 15px; line-height: 26px;">
+                <li style=""><?php echo __('30 Day Money Back Guarantee','cookie-law-info'); ?></li>
+                <li style=""><?php echo __('Fast and Superior Support','cookie-law-info'); ?></li>
+                <li style=""><?php echo __('10X Powerful with GDPR Cookie Consent Features That Every Site Needs','cookie-law-info'); ?></li>
+                <li style="padding-top:5px;">
+                   <p style="text-align: left;">
+                    <a href="https://www.webtoffee.com/product/gdpr-cookie-consent/" target="_blank" class="cli-button cli-button-go-pro"><?php echo __('Upgrade to Premium','cookie-law-info'); ?></a>
+                </p>
+                </li>
+            </ul>
+
+            <ul class="cli_premium_features">
+            <li><?php echo __('Automatic Cookie Scanner','cookie-law-info'); ?></li>
+            <li><?php echo __('Auto block scripts - Google Analytics, Facebook Pixel, Google Tag Manager, Hotjar Analytics, Google Publisher Tag, Youtube embed, Vimeo embed, Google maps, Addthis widget, Sharethis widget, Twitter widget, Soundcloud embed, Slideshare embed, Linkedin widget, Instagram embed, Pinterest widget','cookie-law-info'); ?></li>
+            <li><?php echo __('Location based exclusion of cookie notice for EU countries','cookie-law-info'); ?></li>
+            <li><?php echo __('Granular control over the cookies/scipts used by the website','cookie-law-info'); ?></li>
+            <li><?php echo __('User consent audit logs','cookie-law-info'); ?></li>
+            <li><?php echo __('Customized privacy overview','cookie-law-info'); ?></li>
+            <li><?php echo __('Cookie bar preview in admin settings page','cookie-law-info'); ?></li>
+            <li><?php echo __('Advanced support for cache plugins','cookie-law-info'); ?></li>
+            <li><?php echo __('Cookie bar theme customizer for banner/ widgets/ popup','cookie-law-info'); ?></li>
+
+
+            
+            
         </ul>
         <br/>
     </p>
     <p style="text-align: center;">
-        <a href="http://cookielawinfo.com/user-guide/" target="_blank" class="cli-button cli-button-documentation" style=" color: #555 !important;"><?php echo __('Documentation','cookie-law-info'); ?></a>
+        <a href="https://www.webtoffee.com/category/documentation/gdpr-cookie-consent/" target="_blank" class="cli-button cli-button-documentation" style=" color: #555 !important;"><?php echo __('Documentation','cookie-law-info'); ?></a>
     </p>
 </div>
 

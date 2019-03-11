@@ -55,7 +55,11 @@ class Minify_Controller_Files extends Minify_Controller_Base {
                 continue;
             }
             if (0 === strpos($file, '//')) {
-                $file = $_SERVER['DOCUMENT_ROOT'] . substr($file, 1);
+            	if ( is_file( ABSPATH . substr($file, 1) ) ) {
+		            $file = ABSPATH . substr( $file, 1 );
+	            } else {
+		            $file = $_SERVER['DOCUMENT_ROOT'] . substr( $file, 1 );
+	            }
             }
             $realPath = realpath($file);
             if (is_file($realPath)) {

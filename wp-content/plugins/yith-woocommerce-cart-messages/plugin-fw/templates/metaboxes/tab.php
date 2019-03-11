@@ -20,11 +20,11 @@ do_action( 'yit_before_metaboxes_tab' ) ?>
     <ul class="metaboxes-tabs clearfix"<?php if ( count( $tabs ) <= 1 ) : ?> style="display:none;"<?php endif; ?>>
         <?php
         $i = 0;
-        foreach ( $tabs as $tab ) :
+        foreach ( $tabs as $key=>$tab ) :
             if ( !isset( $tab[ 'fields' ] ) || empty( $tab[ 'fields' ] ) ) {
                 continue;
             }
-            $anchor_id = 'yith-plugin-fw-metabox-tab-' . urldecode( sanitize_title( $tab[ 'label' ] ) ) . '-anchor';
+            $anchor_id = 'yith-plugin-fw-metabox-tab-' . urldecode( $key ) . '-anchor';
 
             // parse deps for the tab visibility
             if ( isset( $tab[ 'deps' ] ) ) {
@@ -38,30 +38,30 @@ do_action( 'yit_before_metaboxes_tab' ) ?>
             }
             ?>
         <li id="<?php echo $anchor_id ?>" <?php if ( !$i ) : ?>class="tabs"<?php endif ?> <?php echo yith_field_deps_data( $tab ); ?>>
-            <a href="#<?php echo urldecode( sanitize_title( $tab[ 'label' ] ) ) ?>"><?php echo $tab[ 'label' ] ?></a></li><?php
+            <a href="#<?php echo urldecode( $key ) ?>"><?php echo $tab[ 'label' ] ?></a></li><?php
             $i++;
         endforeach;
         ?>
     </ul>
     <?php do_action( 'yit_after_metaboxes_labels' ) ?>
     <?php if ( isset( $tab[ 'label' ] ) ) : ?>
-        <?php do_action( 'yit_before_metabox_option_' . urldecode( sanitize_title( $tab[ 'label' ] ) ) ); ?>
+        <?php do_action( 'yit_before_metabox_option_' . urldecode( $key ) ); ?>
     <?php endif ?>
 
     <?php
     // Use nonce for verification
     wp_nonce_field( 'metaboxes-fields-nonce', 'yit_metaboxes_nonce' );
     ?>
-    <?php foreach ( $tabs as $tab ) :
+    <?php foreach ( $tabs as $key=> $tab ) :
 
         ?>
-        <div class="tabs-panel" id="<?php echo urldecode( sanitize_title( $tab[ 'label' ] ) ) ?>">
+        <div class="tabs-panel" id="<?php echo urldecode( $key ) ?>">
             <?php
             if ( !isset( $tab[ 'fields' ] ) ) {
                 continue;
             }
 
-            $tab[ 'fields' ] = apply_filters( 'yit_metabox_' . sanitize_title( $tab[ 'label' ] ) . '_tab_fields', $tab[ 'fields' ] );
+            $tab[ 'fields' ] = apply_filters( 'yit_metabox_' . $key . '_tab_fields', $tab[ 'fields' ] );
 
             foreach ( $tab[ 'fields' ] as $id_tab => $field ) :
                 $field_name = $field[ 'name' ];

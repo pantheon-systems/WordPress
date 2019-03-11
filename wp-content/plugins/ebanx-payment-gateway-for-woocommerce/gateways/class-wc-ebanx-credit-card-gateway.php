@@ -321,7 +321,6 @@ abstract class WC_EBANX_Credit_Card_Gateway extends WC_EBANX_New_Gateway {
 	public function process_payment( $order_id ) {// phpcs:disable
 		$has_instalments = ( WC_EBANX_Request::has( 'ebanx_billing_instalments' ) || WC_EBANX_Request::has( 'ebanx-credit-card-installments' ) );
 		$order = wc_get_order($order_id);
-		$currency = strtoupper( $order->get_order_currency() );
 		$country_abbr = trim(strtolower(get_post_meta($order_id, '_billing_country', true)));
 		$this->ebanx_gateway = $this->ebanx->creditCard( $this->get_credit_card_config( $country_abbr ) );
 
@@ -332,14 +331,10 @@ abstract class WC_EBANX_Credit_Card_Gateway extends WC_EBANX_New_Gateway {
 			$instalment_term = self::get_instalment_term( $this->ebanx_gateway->getPaymentTermsForCountryAndValue( $country, $total_price ), $instalments);
 
 			$total_price = $instalment_term->baseAmount;
-			if ( ! in_array( $currency, Currency::globalCurrencies() ) ) {
-				$total_price = $instalment_term->localAmountWithTax;
-			}
 
 			$total_price *= $instalment_term->instalmentNumber;
 			update_post_meta( $order_id, '_order_total', $total_price );
 		}
-
 		return parent::process_payment( $order_id );
 	}// phpcs:enable
 

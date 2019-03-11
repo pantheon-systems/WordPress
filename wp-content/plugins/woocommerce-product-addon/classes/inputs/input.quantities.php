@@ -23,6 +23,7 @@ class NM_Quantities_wooproduct extends PPOM_Inputs{
 		
 		$this -> title 		= __ ( 'Variation Quantity', 'ppom' );
 		$this -> desc		= __ ( 'regular select-box input', 'ppom' );
+		$this -> icon		= __ ( '<i class="fa fa-list-ol" aria-hidden="true"></i>', 'ppom' );
 		$this -> settings	= self::get_settings();
 		
 	}
@@ -32,101 +33,97 @@ class NM_Quantities_wooproduct extends PPOM_Inputs{
 	
 	private function get_settings(){
 		
-		$how_link = '<a href="https://najeebmedia.com/2016/09/29/add-quantity-fields-variations-woocommerce/" target="_blank">How to use?</a>';
+		$how_link = '<a href="https://najeebmedia.com/2016/09/29/add-quantity-fields-variations-woocommerce/" target="_blank">Example</a>';
 		return array (
-						'title' => array (
-								'type' => 'text',
-								'title' => __ ( 'Title', 'ppom' ),
-								'desc' => __ ( 'It will be shown as field label. '.$how_link, 'ppom' ) 
-						),
-						'data_name' => array (
-								'type' => 'text',
-								'title' => __ ( 'Data name', 'ppom' ),
-								'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', 'ppom' ) 
-						),
-						'description' => array (
-								'type' => 'textarea',
-								'title' => __ ( 'Description', 'ppom' ),
-								'desc' => __ ( 'Small description, it will be diplay near name title.', 'ppom' ) 
-						),
-						'desc_tooltip' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
-								'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
-						),
-						'error_message' => array (
-								'type' => 'text',
-								'title' => __ ( 'Error message', 'ppom' ),
-								'desc' => __ ( 'Insert the error message for validation.', "ppom" ) 
-						),
-						
-						'options' => array (
-								'type' => 'paired-quantity',
-								'title' => __ ( 'Add options', "ppom" ),
-								'desc' => __ ( 'Type option with price (optionally)', "ppom" )
-						),
-						
-						/*'onetime' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Fixed Fee', "ppom" ),
-								'desc' => __ ( 'Add one time fee to cart total.', "ppom" ) 
-						),*/
-						
-						'use_productprice' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Include Product Price?', "ppom" ),
-								'desc' => __ ( 'It will also add product base price in sum.', 'ppom' ) 
-						),
-				
-						
-						'required' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Required', 'ppom' ),
-								'desc' => __ ( 'Select this if it must be required.', 'ppom' ) 
-						),
-						
-						'horizontal' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Horizontal Layout', 'ppom' ),
-								'desc' => __ ( 'Check to enable horizontal layout for variations.', 'ppom' ) 
-						),
-						
-						'class' => array (
-								'type' => 'text',
-								'title' => __ ( 'Class', 'ppom' ),
-								'desc' => __ ( 'Insert an additional class(es) (separateb by comma) for more personalization.', 'ppom' ) 
-						),
-						'width' => array (
-								'type' => 'select',
-								'title' => __ ( 'Width', 'ppom' ),
-								'desc' => __ ( 'Select width column', 'ppom'),
-								'options'	=> ppom_get_input_cols(),
-								'default'	=> 12,
-						),
-						'visibility' => array (
-								'type' => 'select',
-								'title' => __ ( 'Visibility', 'ppom' ),
-								'desc' => __ ( 'Set field visibility based on user.', 'ppom'),
-								'options'	=> ppom_field_visibility_options(),
-								'default'	=> 'everyone',
-						),
-						'visibility_role' => array (
-								'type' => 'text',
-								'title' => __ ( 'User Roles', 'ppom' ),
-								'desc' => __ ( 'Role separated by comma.', 'ppom'),
-								'hidden' => true,
-						),
-						'logic' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Enable Conditions', 'ppom' ),
-								'desc' => __ ( 'Tick it to turn conditional logic to work below', 'ppom' )
-						),
-						'conditions' => array (
-								'type' => 'html-conditions',
-								'title' => __ ( 'Conditions', 'ppom' ),
-								'desc' => __ ( 'Tick it to turn conditional logic to work below', 'ppom' )
-						),
-				);
+			'title' => array (
+					'type' => 'text',
+					'title' => __ ( 'Title', 'ppom' ),
+					'desc' => __ ( 'It will be shown as field label. See example for usage.', 'ppom' ),
+					'link' => __ ( '<a target="_blank" href="'.esc_url($how_link).'">Help</a>', 'ppom' ),
+			),
+			'data_name' => array (
+					'type' => 'text',
+					'title' => __ ( 'Data name', 'ppom' ),
+					'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', 'ppom' ) 
+			),
+			'description' => array (
+					'type' => 'textarea',
+					'title' => __ ( 'Description', 'ppom' ),
+					'desc' => __ ( 'Small description, it will be display near name title.', 'ppom' ) 
+			),
+			'error_message' => array (
+					'type' => 'text',
+					'title' => __ ( 'Error message', 'ppom' ),
+					'desc' => __ ( 'Insert the error message for validation.', "ppom" ) 
+			),
+			'options' => array (
+					'type' => 'paired-quantity',
+					'title' => __ ( 'Add options', "ppom" ),
+					'desc' => __ ( 'Type option with price (optionally)', "ppom" )
+			),
+			
+			/*'onetime' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Fixed Fee', "ppom" ),
+					'desc' => __ ( 'Add one time fee to cart total.', "ppom" ) 
+			),*/
+
+			'class' => array (
+					'type' => 'text',
+					'title' => __ ( 'Class', 'ppom' ),
+					'desc' => __ ( 'Insert an additional class(es) (separateb by comma) for more personalization.', 'ppom' ) 
+			),
+			'width' => array (
+					'type' => 'select',
+					'title' => __ ( 'Width', 'ppom' ),
+					'desc' => __ ( 'Select width column', "ppom"),
+					'options'	=> ppom_get_input_cols(),
+					'default'	=> 12,
+			),
+			'visibility' => array (
+					'type' => 'select',
+					'title' => __ ( 'Visibility', 'ppom' ),
+					'desc' => __ ( 'Set field visibility based on user.', "ppom"),
+					'options'	=> ppom_field_visibility_options(),
+					'default'	=> 'everyone',
+			),
+			'visibility_role' => array (
+					'type' => 'text',
+					'title' => __ ( 'User Roles', 'ppom' ),
+					'desc' => __ ( 'Role separated by comma.', "ppom"),
+					'hidden' => true,
+			),
+			'desc_tooltip' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
+					'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
+			),
+			'required' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Required', 'ppom' ),
+					'desc' => __ ( 'Select this if it must be required.', 'ppom' ) 
+			),
+			'use_productprice' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Include Product Price?', "ppom" ),
+					'desc' => __ ( 'It will also add product base price in sum.', 'ppom' ) 
+			),
+			'horizontal' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Horizontal Layout', 'ppom' ),
+					'desc' => __ ( 'Check to enable horizontal layout for variations.', 'ppom' ) 
+			),
+			'logic' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Enable Conditions', 'ppom' ),
+					'desc' => __ ( 'Tick it to turn conditional logic to work below', 'ppom' )
+			),
+			'conditions' => array (
+					'type' => 'html-conditions',
+					'title' => __ ( 'Conditions', 'ppom' ),
+					'desc' => __ ( 'Tick it to turn conditional logic to work below', 'ppom' )
+			),
+		);
 	}
 	
 	
@@ -141,7 +138,7 @@ class NM_Quantities_wooproduct extends PPOM_Inputs{
 		<div class="nm-horizontal-layout">
 			<table class="shop_table cart sizes-input">
 			    <tr>
-			        <th><?php _e('Options', 'ppom');?></th>
+			        <th><?php _e('Options', "ppom");?></th>
 	            <?php foreach($options as $opt){ ?>
                 	<th>
             			<label class="quantities-lable"> <?php echo stripslashes(trim($opt['option'])); ?>
@@ -155,7 +152,7 @@ class NM_Quantities_wooproduct extends PPOM_Inputs{
 	            <?php } ?>
 			    </tr>
 			    <tr>
-			        <th><?php _e('Quantity', 'ppom');?></th>
+			        <th><?php _e('Quantity', "ppom");?></th>
 	            <?php foreach($options as $opt){ ?>
                 	<td>
                 		<?php
@@ -184,8 +181,8 @@ class NM_Quantities_wooproduct extends PPOM_Inputs{
 		<?php } else { ?>
 			<table class="shop_table cart sizes-input">
 			    <tr>
-			        <th><?php _e('Options', 'ppom');?></th>
-			        <th><?php _e('Quantity', 'ppom');?></th>
+			        <th><?php _e('Options', "ppom");?></th>
+			        <th><?php _e('Quantity', "ppom");?></th>
 			    </tr>
 	            <?php foreach($options as $opt){ ?>
 				    <tr>
@@ -222,14 +219,14 @@ class NM_Quantities_wooproduct extends PPOM_Inputs{
 		
 		<div id="display-total-price">
 			<span style="display:none;font-weight:700" class="ppom-total-option-price">
-				<?php echo __("Options Total: ", 'ppom'); printf(__(get_woocommerce_price_format(), 'ppom'), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
+				<?php echo __("Options Total: ", "ppom"); printf(__(get_woocommerce_price_format(), "ppom"), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
 			</span><br>
 			<span style="display:none;font-weight:700" class="ppom-total-price">
-				<?php echo __("Product Total: ", 'ppom'); printf(__(get_woocommerce_price_format(), 'ppom'), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
+				<?php echo __("Product Total: ", "ppom"); printf(__(get_woocommerce_price_format(), "ppom"), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
 			</span>
 			<span style="display:none;font-weight:700" class="ppom-grand-total-price">
 			<hr style="margin: 0">
-				<?php echo __("Grand Total: ", 'ppom'); printf(__(get_woocommerce_price_format(), 'ppom'), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
+				<?php echo __("Grand Total: ", "ppom"); printf(__(get_woocommerce_price_format(), "ppom"), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
 			</span>
 		</div>
 		

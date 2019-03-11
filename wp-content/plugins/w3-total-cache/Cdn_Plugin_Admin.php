@@ -15,13 +15,13 @@ class Cdn_Plugin_Admin {
 			add_filter( 'w3tc_errors', array( $admin_notes, 'w3tc_errors' ) );
 
 			if ( $c->get_boolean( 'cdn.admin.media_library' ) &&
-			 	$c->get_boolean( 'cdn.uploads.enable' ) ) {
+				$c->get_boolean( 'cdn.uploads.enable' ) ) {
 
-		        add_filter( 'wp_get_attachment_url',
-		        	array( $this, 'wp_get_attachment_url' ), 0 );
+				add_filter( 'wp_get_attachment_url',
+					array( $this, 'wp_get_attachment_url' ), 0 );
 
-		        add_filter( 'attachment_link',
-		        	array( $this, 'wp_get_attachment_url' ), 0 );
+				add_filter( 'attachment_link',
+					array( $this, 'wp_get_attachment_url' ), 0 );
 			}
 		}
 
@@ -113,6 +113,31 @@ class Cdn_Plugin_Admin {
 			add_action( 'w3tc_ajax_cdn_stackpath_widgetdata', array(
 					'\W3TC\Cdn_StackPath_Widget',
 					'w3tc_ajax_cdn_stackpath_widgetdata' ) );
+		} elseif ( $cdn_engine == 'stackpath2' ) {
+			add_action( 'admin_print_scripts-performance_page_w3tc_cdn', array(
+					'\W3TC\Cdn_StackPath2_Page',
+					'admin_print_scripts_w3tc_cdn' ) );
+			add_action( 'w3tc_ajax', array(
+					'\W3TC\Cdn_StackPath2_Popup',
+					'w3tc_ajax' ) );
+			add_action( 'w3tc_settings_cdn_boxarea_configuration', array(
+					'\W3TC\Cdn_StackPath2_Page',
+					'w3tc_settings_cdn_boxarea_configuration'
+				) );
+			add_action( 'admin_init_w3tc_dashboard', array(
+					'\W3TC\Cdn_StackPath2_Widget',
+					'admin_init_w3tc_dashboard' ) );
+			add_action( 'w3tc_ajax_cdn_stackpath2_widgetdata', array(
+					'\W3TC\Cdn_StackPath2_Widget',
+					'w3tc_ajax_cdn_stackpath2_widgetdata' ) );
+		} else {
+			// default cdn widget
+			add_action( 'admin_init_w3tc_dashboard', array(
+					'\W3TC\Cdn_StackPath2_Widget',
+					'admin_init_w3tc_dashboard' ) );
+			add_action( 'w3tc_ajax_cdn_stackpath2_widgetdata', array(
+					'\W3TC\Cdn_StackPath2_Widget',
+					'w3tc_ajax_cdn_stackpath2_widgetdata' ) );
 		}
 
 		add_action( 'w3tc_settings_general_boxarea_cdn', array(
@@ -173,8 +198,12 @@ class Cdn_Plugin_Admin {
 			'label' => __( 'RackSpace CDN', 'w3-total-cache' ),
 			'optgroup' => $optgroup_pull
 		);
+		$engine_values['stackpath2'] = array(
+			'label' => __( 'StackPath (recommended)', 'w3-total-cache' ),
+			'optgroup' => $optgroup_pull
+		);
 		$engine_values['stackpath'] = array(
-			'label' => __( 'StackPath', 'w3-total-cache' ),
+			'label' => __( 'StackPath SecureCDN (Legacy)', 'w3-total-cache' ),
 			'optgroup' => $optgroup_pull
 		);
 		$engine_values['edgecast'] = array(
@@ -230,7 +259,7 @@ class Cdn_Plugin_Admin {
 	 * @param 	string   $url	the local url to modify
 	 * @return 	string
 	 */
-    function wp_get_attachment_url( $url ) {
+	function wp_get_attachment_url( $url ) {
 		if ( defined( 'WP_ADMIN' ) ) {
 			$url = trim( $url );
 
@@ -252,6 +281,6 @@ class Cdn_Plugin_Admin {
 			}
 		}
 
-        return $url;
-    }
+		return $url;
+	}
 }

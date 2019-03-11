@@ -2,13 +2,13 @@
 
 class Translation_Service_Info {
 
-	function __construct() {
+	public function add_hooks() {
 
 		add_action( 'installer_fetched_subscription_data', array( $this, 'save_info' ), 10, 2 );
 
 	}
 
-	function save_info( $data, $repository_id ) {
+	public function save_info( $data, $repository_id ) {
 
 		$ts_info = isset( WP_Installer()->settings['repositories'][ $repository_id ]['ts_info'] ) ?
 			WP_Installer()->settings['repositories'][ $repository_id ]['ts_info'] : false;
@@ -37,4 +37,3 @@ class Translation_Service_Info {
 
 }
 
-new Translation_Service_Info();

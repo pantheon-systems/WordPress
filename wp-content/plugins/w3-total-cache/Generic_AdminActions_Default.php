@@ -3,6 +3,11 @@ namespace W3TC;
 
 
 
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RecursiveRegexIterator;
+use RegexIterator;
+
 define( 'W3TC_PLUGIN_TOTALCACHE_REGEXP_COOKIEDOMAIN', '~define\s*\(\s*[\'"]COOKIE_DOMAIN[\'"]\s*,.*?\)~is' );
 
 class Generic_AdminActions_Default {
@@ -256,55 +261,62 @@ class Generic_AdminActions_Default {
 				$config->set( 'pgcache.enabled', false );
 				$data['response_errors'][] = 'fancy_permalinks_disabled_pgcache';
 			}
-
-			if ( !Util_Environment::is_w3tc_pro( $this->_config ) )
-				delete_transient( 'w3tc_license_status' );
 		}
 
 		/**
 		 * Minify tab
 		 */
-		if ( $this->_page == 'w3tc_minify' && !$this->_config->get_boolean( 'minify.auto' ) ) {
-			$js_groups = array();
-			$css_groups = array();
+		if ( $this->_page == 'w3tc_minify' ) {
+			if ( ( $this->_config->get_boolean( 'minify.js.http2push' ) && ! $config->get_boolean( 'minify.js.http2push' ) ) ||
+			     ( $this->_config->get_boolean( 'minify.css.http2push' ) && ! $config->get_boolean( 'minify.css.http2push' ) ) ) {
+				if ( $config->get_string( 'pgcache.engine' ) == 'file_generic' ) {
+					$cache_dir = Util_Environment::cache_blog_dir( 'page_enhanced' );
+					$this->_deleteAllHtaccessFiles( $cache_dir );
+				}
+			}
 
-			$js_files = Util_Request::get_array( 'js_files' );
-			$css_files = Util_Request::get_array( 'css_files' );
+			if ( !$this->_config->get_boolean( 'minify.auto' ) ) {
+				$js_groups = array();
+				$css_groups = array();
 
-			foreach ( $js_files as $theme => $templates ) {
-				foreach ( $templates as $template => $locations ) {
-					foreach ( (array) $locations as $location => $types ) {
-						foreach ( (array) $types as $files ) {
-							foreach ( (array) $files as $file ) {
-								if ( !empty( $file ) ) {
-									$js_groups[$theme][$template][$location]['files'][] = Util_Environment::normalize_file_minify( $file );
+				$js_files = Util_Request::get_array( 'js_files' );
+				$css_files = Util_Request::get_array( 'css_files' );
+
+				foreach ( $js_files as $theme => $templates ) {
+					foreach ( $templates as $template => $locations ) {
+						foreach ( (array) $locations as $location => $types ) {
+							foreach ( (array) $types as $files ) {
+								foreach ( (array) $files as $file ) {
+									if ( !empty( $file ) ) {
+										$js_groups[$theme][$template][$location]['files'][] = Util_Environment::normalize_file_minify( $file );
+									}
 								}
 							}
 						}
 					}
 				}
-			}
 
-			foreach ( $css_files as $theme => $templates ) {
-				foreach ( $templates as $template => $locations ) {
-					foreach ( (array) $locations as $location => $files ) {
-						foreach ( (array) $files as $file ) {
-							if ( !empty( $file ) ) {
-								$css_groups[$theme][$template][$location]['files'][] = Util_Environment::normalize_file_minify( $file );
+				foreach ( $css_files as $theme => $templates ) {
+					foreach ( $templates as $template => $locations ) {
+						foreach ( (array) $locations as $location => $files ) {
+							foreach ( (array) $files as $file ) {
+								if ( !empty( $file ) ) {
+									$css_groups[$theme][$template][$location]['files'][] = Util_Environment::normalize_file_minify( $file );
+								}
 							}
 						}
 					}
 				}
+
+				$config->set( 'minify.js.groups', $js_groups );
+				$config->set( 'minify.css.groups', $css_groups );
+
+				$js_theme = Util_Request::get_string( 'js_theme' );
+				$css_theme = Util_Request::get_string( 'css_theme' );
+
+				$data['response_query_string']['js_theme'] = $js_theme;
+				$data['response_query_string']['css_theme'] = $css_theme;
 			}
-
-			$config->set( 'minify.js.groups', $js_groups );
-			$config->set( 'minify.css.groups', $css_groups );
-
-			$js_theme = Util_Request::get_string( 'js_theme' );
-			$css_theme = Util_Request::get_string( 'css_theme' );
-
-			$data['response_query_string']['js_theme'] = $js_theme;
-			$data['response_query_string']['css_theme'] = $css_theme;
 		}
 
 		/**
@@ -592,6 +604,9 @@ class Generic_AdminActions_Default {
 
 				$config->set( 'cdn.stackpath.domain', $cdn_domains );
 				break;
+			case 'stackpath2':
+				$config->set( 'cdn.stackpath2.domain', $cdn_domains );
+				break;
 			}
 		}
 
@@ -664,6 +679,32 @@ class Generic_AdminActions_Default {
 			'errors' => $data['response_errors'],
 			'notes' => $data['response_notes']
 		);
+	}
+
+	private function _deleteAllHtaccessFiles($dir) {
+		if ( ! is_dir( $dir ) ) {
+			return;
+		}
+
+		$handle = opendir( $dir );
+		if ( $handle === false ) {
+			return;
+		}
+
+		while ( false !== ( $file = readdir( $handle ) ) ) {
+			if ( $file == '.' || $file == '..' ) {
+				continue;
+			}
+
+			if ( is_dir( $file ) ) {
+				$this->_deleteAllHtaccessFiles( $file );
+				continue;
+			} else if ( $file === '.htaccess' ) {
+				@unlink( $file );
+			}
+		}
+
+		closedir( $handle );
 	}
 
 	/**

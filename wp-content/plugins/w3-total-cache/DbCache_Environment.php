@@ -20,10 +20,12 @@ class DbCache_Environment {
 	public function fix_on_wpadmin_request( $config, $force_all_checks ) {
 		$exs = new Util_Environment_Exceptions();
 		try {
-			if ( $config->get_boolean( 'dbcache.enabled' ) )
+			if ( $config->get_boolean( 'dbcache.enabled' ) ||
+					Util_Environment::is_dbcluster() ) {
 				$this->create_addin();
-			else
+			} else {
 				$this->delete_addin();
+			}
 		} catch ( Util_WpFile_FilesystemOperationException $ex ) {
 			$exs->push( $ex );
 		}

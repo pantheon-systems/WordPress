@@ -293,7 +293,8 @@ Util_Ui::postbox_header( __( 'Purge Policy: ', 'w3-total-cache' ) . implode( ', 
 				</td>
 			</tr>
 			<?php
-if ( $this->_config->get_string( 'pgcache.engine' ) == 'memcached' ) {
+if ( $this->_config->get_string( 'pgcache.engine' ) == 'memcached' ||
+	$this->_config->get_string( 'pgcache.engine' ) == 'nginx_memcached' ) {
 	$module = 'pgcache';
 	include W3TC_INC_DIR . '/options/parts/memcached.php';
 } elseif ( $this->_config->get_string( 'pgcache.engine' ) == 'redis' ) {
@@ -393,7 +394,9 @@ if ( $this->_config->get_string( 'pgcache.engine' ) == 'memcached' ) {
 					<span class="description">
 						<?php
 echo sprintf(
-	__( 'Always ignore the specified pages / directories. Supports regular expressions (See <a href="%s">FAQ</a>)', 'w3-total-cache' ),           network_admin_url( 'admin.php?page=w3tc_faq#q82' )
+	__( 'Always ignore the specified pages / directories. Supports regular expressions (See <a href="%s"><acronym title="Frequently Asked Questions">FAQ</acronym></a>)',
+	'w3-total-cache' ),
+	'https://github.com/W3EDGE/w3-total-cache/wiki/FAQ:-Usage#which-textareas-for-file-entries-support-regular-expressions'
 ); ?>
 					</span>
 				</td>
@@ -440,7 +443,7 @@ echo sprintf(
 					<textarea id="pgcache_accept_files" name="pgcache__accept__files"
 						<?php Util_Ui::sealing_disabled( 'pgcache.' ) ?>
 						cols="40" rows="5"><?php echo esc_textarea( implode( "\r\n", $this->_config->get_array( 'pgcache.accept.files' ) ) ); ?></textarea><br />
-					<span class="description"><?php echo sprintf( __( 'Cache the specified pages / directories even if listed in the "never cache the following pages" field. Supports regular expression (See <a href="%s">FAQ</a>)', 'w3-total-cache' ), network_admin_url( 'admin.php?page=w3tc_faq#q82' ) ); ?></span>
+					<span class="description"><?php echo sprintf( __( 'Cache the specified pages / directories even if listed in the "never cache the following pages" field. Supports regular expression (See <a href="%s"><acronym title="Frequently Asked Questions">FAQ</acronym></a>)', 'w3-total-cache' ), network_admin_url( 'admin.php?page=w3tc_faq' ) ); ?></span>
 				</td>
 			</tr>
 			<?php if ( substr( $permalink_structure, -1 ) == '/' ): ?>
@@ -468,7 +471,7 @@ echo sprintf(
 				<th><label><?php Util_Ui::e_config_label( 'pgcache.cache.nginx_handle_xml' ) ?></label></th>
 				<td>
 					<?php $this->checkbox( 'pgcache.cache.nginx_handle_xml' ) ?> <?php Util_Ui::e_config_label( 'pgcache.cache.nginx_handle_xml' ) ?></label><br />
-					<span class="description"><?php _e( 'Return correct Content-Type header for XML files (e.g., feeds and sitemaps). Slows down cache engine.', 'w3-total-cache' ); ?></span>
+					<span class="description"><?php _e( 'Return correct Content-Type header for <acronym title="Extensible Markup Language">XML</acronym> files (e.g., feeds and sitemaps). Slows down cache engine.', 'w3-total-cache' ); ?></span>
 				</td>
 			</tr>
 			<?php endif; ?>

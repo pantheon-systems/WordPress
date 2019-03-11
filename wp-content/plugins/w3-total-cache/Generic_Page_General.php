@@ -52,6 +52,7 @@ class Generic_Page_General extends Base_Page_Settings {
 		$licensing_visible = ( ( !Util_Environment::is_wpmu() || is_network_admin() ) &&
 			!ini_get( 'w3tc.license_key' ) &&
 			get_transient( 'w3tc_license_status' ) != 'host_valid' );
+		$is_pro = Util_Environment::is_w3tc_pro( $this->_config );
 
 		$custom_areas = apply_filters( "w3tc_settings_general_anchors", array() );
 		include W3TC_INC_DIR . '/options/general.php';

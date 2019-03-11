@@ -68,7 +68,8 @@ if ( $this->_config->get_string( 'dbcache.engine' ) == 'memcached' ) {
                     <textarea id="dbcache_reject_uri" name="dbcache__reject__uri"
                         <?php Util_Ui::sealing_disabled( 'dbcache.' ) ?> cols="40" rows="5"><?php echo esc_textarea( implode( "\r\n", $this->_config->get_array( 'dbcache.reject.uri' ) ) ); ?></textarea><br />
 						<span class="description">
-							<?php echo sprintf( __( 'Always ignore the specified pages / directories. Supports regular expressions (See <a href="%s">FAQ</a>).', 'w3-total-cache' ), network_admin_url( 'admin.php?page=w3tc_faq#q82' ) ); ?>
+							<?php echo sprintf( __( 'Always ignore the specified pages / directories. Supports regular expressions (See <a href="%s"><acronym title="Frequently Asked Questions">FAQ</acronym></a>).', 'w3-total-cache' ),
+							'https://api.w3-edge.com/v1/redirects/faq/usage/regexp-support' ); ?>
 						</span>
                 </td>
             </tr>

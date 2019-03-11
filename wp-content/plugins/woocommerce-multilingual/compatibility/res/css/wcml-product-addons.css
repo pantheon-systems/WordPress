@@ -1,0 +1,34 @@
+.wc-pao-addon-option-row .wcml-option-prices:not(.hidden) {
+    align-self: center;
+    justify-self: center;
+    grid-column: 13/14;
+}
+.wc-pao-addon-option-row .wcml-option-prices:not(.hidden) + .wc-pao-addon-content-remove {
+    grid-column: 14/15;
+}
+
+.wcml-dialog-product-addons .wpml-form-row label {
+    text-align: start;
+    width: 30px;
+    margin: 4px 15px;
+}
+.wcml-dialog-product-addons .wpml-form-row input {
+    margin: 4px 10px;
+}
+
+.wcml-dialog-product-addons {
+    min-width: 300px;
+    max-width: 90%;
+}
+.wcml-dialog-product-addons .wcml-dialog-container {
+    padding-bottom: 20px !important;
+}
+.wcml-dialog-product-addons .wpml-form-row.default-price span {
+    display: inline-block;
+    margin: 0 14px 9px;
+    font-size: 1.3em;
+}
+
+.wc-pao-addon-adjust-price-settings .wcml-option-prices {
+    margin-inline-start: 10px;
+}

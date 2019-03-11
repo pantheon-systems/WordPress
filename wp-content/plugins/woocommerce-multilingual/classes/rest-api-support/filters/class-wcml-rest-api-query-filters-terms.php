@@ -37,7 +37,7 @@ class WCML_REST_API_Query_Filters_Terms{
 			$active_languages = $this->sitepress->get_active_languages();
 
 			if ( 'all' === $data['lang'] ) {
-				remove_filter( 'terms_clauses', array( $this->sitepress, 'terms_clauses' ), 10, 4 );
+				remove_filter( 'terms_clauses', array( $this->sitepress, 'terms_clauses' ), 10 );
 				remove_filter( 'get_term', array( $this->sitepress, 'get_term_adjust_id' ), 1, 1 );
 			} elseif ( ! isset( $active_languages[ $data['lang'] ] ) ) {
 				throw new WCML_REST_Invalid_Language_Exception( $data['lang'] );

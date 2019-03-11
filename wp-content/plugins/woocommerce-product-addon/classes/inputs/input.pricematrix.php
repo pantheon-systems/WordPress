@@ -24,97 +24,94 @@ class NM_PriceMatrix_wooproduct extends PPOM_Inputs{
 		
 		$this -> title 		= __ ( 'Price Matrix', "ppom" );
 		$this -> desc		= __ ( 'Price/Quantity', "ppom" );
+		$this -> icon		= __ ( '<i class="fa fa-usd" aria-hidden="true"></i>', 'ppom' );
 		$this -> settings	= self::get_settings();
 		
 	}
-	
-	
-	
 	
 	private function get_settings(){
 		
 		$matrix_detail = 'https://najeebmedia.com/2014/04/23/woocommerce-personalized-product-with-best-price-handling-ever-with-fixed-and-price-matrix/';
 		
 		return array (
-				
-						'title' => array (
-								'type' => 'text',
-								'title' => __ ( 'Title', "ppom" ),
-								'desc' => __ ( 'It will as section heading wrapped in h2', "ppom" )
-						),
-						'data_name' => array (
-								'type' => 'text',
-								'title' => __ ( 'Data name', "ppom" ),
-								'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', "ppom" )
-						),
-						'description' => array (
-								'type' => 'textarea',
-								'title' => __ ( 'Description', "ppom" ),
-								'desc' => __ ( 'Type description, it will be diplay under section heading.', "ppom" )
-						),
-						'desc_tooltip' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
-								'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
-						),
-						'discount' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Apply as discount', "ppom" ),
-						),
-						'discount_type' => array (
-								'type' => 'select',
-								'title' => __ ( 'Discount On?', "ppom" ),
-								'options'	=> array(
-													'both'	=> "Base & Option",
-													'base'	=> "Only Base"),
-						),
-						'visibility' => array (
-								'type' => 'select',
-								'title' => __ ( 'Visibility', 'ppom' ),
-								'desc' => __ ( 'Set field visibility based on user.', 'ppom'),
-								'options'	=> ppom_field_visibility_options(),
-								'default'	=> 'everyone',
-						),
-						'visibility_role' => array (
-								'type' => 'text',
-								'title' => __ ( 'User Roles', 'ppom' ),
-								'desc' => __ ( 'Role separated by comma.', 'ppom'),
-								'hidden' => true,
-						),
-						'options' => array (
-								'type' => 'paired',
-								'title' => __ ( 'Price matrix', "ppom" ),
-								'desc' => __ ( 'Type quantity range with price. <a target="_blank" href="'.$matrix_detail.'">More Detail</a>', "ppom" )
-						),
-						'qty_step' => array (
-								'type' => 'text',
-								'title' => __ ( 'Quantity Step', "ppom" ),
-								'desc' => __ ( 'Quantity step e.g: 3', "ppom" )
-						),
-						'show_slider' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Enable Quantity Slider', "ppom" ),
-								'desc' => __ ( 'It will display Range slider for quantity under matrix', "ppom" ) 
-						),
-						'show_price_per_unit' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Show price per unit?', "ppom" ),
-								'desc' => __ ( 'It will calculate price against per unit and show along total', "ppom" ) 
-						),
-						'logic' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Enable Conditions', "ppom" ),
-								'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
-						),
-						'conditions' => array (
-								'type' => 'html-conditions',
-								'title' => __ ( 'Conditions', "ppom" ),
-								'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
-						),
-						
-						
-						
-				);
+			'title' => array (
+					'type' => 'text',
+					'title' => __ ( 'Title', "ppom" ),
+					'desc' => __ ( 'It will as section heading wrapped in h2', "ppom" )
+			),
+			'data_name' => array (
+					'type' => 'text',
+					'title' => __ ( 'Data name', "ppom" ),
+					'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', "ppom" )
+			),
+			'description' => array (
+					'type' => 'textarea',
+					'title' => __ ( 'Description', "ppom" ),
+					'desc' => __ ( 'Type description, it will be display under section heading.', "ppom" )
+			),
+			'discount_type' => array (
+					'type' => 'select',
+					'title' => __ ( 'Discount On?', "ppom" ),
+					'desc' => __ ( 'Select discount option.', "ppom" ),
+					'options'	=> array(
+										'both'	=> "Base & Option",
+										'base'	=> "Only Base"),
+			),
+			'options' => array (
+					'type' => 'paired',
+					'title' => __ ( 'Price matrix', "ppom" ),
+					'desc' => __ ( 'Type quantity range with price.', "ppom" ),
+					'link' => __ ( '<a target="_blank" href="'.$matrix_detail.'">More Detail</a>', 'ppom' ) 
+			),
+			'qty_step' => array (
+					'type' => 'text',
+					'title' => __ ( 'Quantity Step', "ppom" ),
+					'desc' => __ ( 'Quantity step e.g: 3', "ppom" )
+			),
+			'visibility' => array (
+					'type' => 'select',
+					'title' => __ ( 'Visibility', 'ppom' ),
+					'desc' => __ ( 'Set field visibility based on user.', "ppom"),
+					'options'	=> ppom_field_visibility_options(),
+					'default'	=> 'everyone',
+			),
+			'visibility_role' => array (
+					'type' => 'text',
+					'title' => __ ( 'User Roles', 'ppom' ),
+					'desc' => __ ( 'Role separated by comma.', "ppom"),
+					'hidden' => true,
+			),
+			'desc_tooltip' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
+					'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
+			),
+			'discount' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Apply as discount', "ppom" ),
+					'desc' => __ ( 'Check for Apply as discount', 'ppom' )
+			),
+			'show_slider' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Enable Quantity Slider', "ppom" ),
+					'desc' => __ ( 'It will display Range slider for quantity under matrix', "ppom" ) 
+			),
+			'show_price_per_unit' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Show price per unit?', "ppom" ),
+					'desc' => __ ( 'It will calculate price against per unit and show along total', "ppom" ) 
+			),
+			'logic' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Enable Conditions', "ppom" ),
+					'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
+			),
+			'conditions' => array (
+					'type' => 'html-conditions',
+					'title' => __ ( 'Conditions', "ppom" ),
+					'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
+			),	
+		);
 	}
 	
 	

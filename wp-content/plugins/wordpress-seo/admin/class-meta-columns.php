@@ -75,7 +75,7 @@ class WPSEO_Meta_Columns {
 		$added_columns['wpseo-metadesc'] = __( 'Meta Desc.', 'wordpress-seo' );
 
 		if ( $this->analysis_seo->is_enabled() ) {
-			$added_columns['wpseo-focuskw'] = __( 'Focus KW', 'wordpress-seo' );
+			$added_columns['wpseo-focuskw'] = __( 'Keyphrase', 'wordpress-seo' );
 		}
 
 		return array_merge( $columns, $added_columns );
@@ -727,7 +727,7 @@ class WPSEO_Meta_Columns {
 			$title = $rank->get_label();
 		}
 
-		return '<div aria-hidden="true" title="' . esc_attr( $title ) . '" class="wpseo-score-icon ' . esc_attr( $rank->get_css_class() ) . '"></div><span class="screen-reader-text">' . $title . '</span>';
+		return '<div aria-hidden="true" title="' . esc_attr( $title ) . '" class="wpseo-score-icon ' . esc_attr( $rank->get_css_class() ) . '"></div><span class="screen-reader-text wpseo-score-text">' . $title . '</span>';
 	}
 
 	/**

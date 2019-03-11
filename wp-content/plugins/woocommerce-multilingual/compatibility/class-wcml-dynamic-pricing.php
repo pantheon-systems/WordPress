@@ -87,7 +87,7 @@ class WCML_Dynamic_Pricing {
 	 * @return bool|WP_Error
 	 */
 	function woocommerce_dynamic_pricing_is_applied_to( $process_discounts, $_product, $module_id, $obj, $cat_ids ) {
-		if ( $cat_ids && ( ! empty( $obj->available_rulesets ) || ! empty( $obj->adjustment_sets ) ) ) {
+		if ( $_product && $cat_ids && ( ! empty( $obj->available_rulesets ) || ! empty( $obj->adjustment_sets ) ) ) {
 
 			if ( ! is_array( $cat_ids ) ) {
 				$cat_ids = array( $cat_ids );
@@ -97,7 +97,7 @@ class WCML_Dynamic_Pricing {
 				$cat_ids[$i] = apply_filters( 'translate_object_id', $cat_id, 'product_cat', true );
 			}
 
-			$process_discounts = is_object_in_term( WooCommerce_Functions_Wrapper::get_product_id( $_product ), 'product_cat', $cat_ids );
+			$process_discounts = is_object_in_term( $_product->get_id(), 'product_cat', $cat_ids );
 		}
 
 		return $process_discounts;

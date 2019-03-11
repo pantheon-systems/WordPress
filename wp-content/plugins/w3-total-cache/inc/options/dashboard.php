@@ -36,7 +36,7 @@ echo implode( " $string ", apply_filters( 'w3tc_dashboard_actions', array() ) ) 
     <div id="w3tc-dashboard-widgets" class="clearfix widefat metabox-holder">
         <?php $screen = get_current_screen();
 ?>
-        <div id="postbox-container-left" style="float: left;">
+        <div id="postbox-container-left">
             <div class="content">
             <div id="dashboard-text" style="display:inline-block;">
                 <h1><?php _e( 'Dashboard', 'w3-total-cache' )?></h1>

@@ -14,28 +14,31 @@ if ( ! defined( 'ABSPATH' ) ) {
         ?>
     </div>
     <div class="pipe-premium-features">
-    <center><a href="https://www.webtoffee.com/product/product-import-export-woocommerce/" target="_blank" class="button button-primary button-go-pro"><?php _e('Upgrade to Premium Version', 'wf_csv_import_export'); ?></a></center>
-    <span>
-        <ul>
-            <li><?php _e('Export simple, group, external and variation products.', 'wf_csv_import_export');?></li>
-            <li><?php _e('Import simple, group, external and variation products.', 'wf_csv_import_export');?></li>
+        <ul style="font-weight: bold; color:#666; list-style: none; background:#f8f8f8; padding:20px; margin:20px 15px; font-size: 15px; line-height: 26px;">
+                <li style=""><?php echo __('30 Day Money Back Guarantee','cookie-law-info'); ?></li>
+                <li style=""><?php echo __('Fast and Superior Support','cookie-law-info'); ?></li>
+                <li style="">
+                    <a href="https://www.webtoffee.com/product/product-import-export-woocommerce/" target="_blank" class="button button-primary button-go-pro"><?php _e('Upgrade to Premium', 'wf_csv_import_export'); ?></a>
+                </li>
+            </ul>
+            <span>
+        <ul class="ticked-list">
+            <li><?php _e('Export/Import simple, group, external and variation products.', 'wf_csv_import_export');?></li>
             <li><?php _e('Export products by category.', 'wf_csv_import_export');?></li>
+            <li><?php _e('Import/Export product reviews.', 'wf_csv_import_export');?></li>
             <li><?php _e('Various filter options for exporting products.', 'wf_csv_import_export');?> </li>
-            <li><?php _e('Map and transform fields while importing products.', 'wf_csv_import_export');?></li>
-            <li><?php _e('Change values while importing products using evaluation fields.', 'wf_csv_import_export');?></li>
+            <li><?php _e('Map and transform fields during import.', 'wf_csv_import_export');?></li>
+            <li><?php _e('Manipulate/evaluate data during import.', 'wf_csv_import_export');?></li>
             <li><?php _e('Choice to update or skip existing imported products.', 'wf_csv_import_export');?></li>
-            <li><?php _e('WPML supported. French and German support out of the box.', 'wf_csv_import_export');?></li>
+            <li><?php _e('WPML support for simple products.', 'wf_csv_import_export');?></li>
             <li><?php _e('Import/Export file via FTP.', 'wf_csv_import_export');?></li>
             <li><?php _e('Import from URL.', 'wf_csv_import_export');?></li>
             <li><?php _e('Automatic scheduled import and export.', 'wf_csv_import_export');?></li>
             <li><?php _e('Supports product reviews export and import.', 'wf_csv_import_export');?></li>
-            <li><?php _e('30 Days Money Back Guarantee.', 'wf_csv_import_export');?></li>
-            <li><?php _e('More frequent plugin updates.', 'wf_csv_import_export');?></li>
-            <li><?php _e('Excellent Support for setting it up!', 'wf_csv_import_export');?></li>
+            <li><?php _e('Third party plugin customization support.', 'wf_csv_import_export');?></li>            
         </ul>
     </span>
     <center> 
-        <a href="http://productimportexport.webtoffee.com/" target="_blank" class="button button-doc-demo"><?php _e('Live Demo', 'wf_csv_import_export'); ?></a> 
         <a href="https://www.webtoffee.com/category/documentation/product-import-export-plugin-for-woocommerce/" target="_blank" class="button button-doc-demo"><?php _e('Documentation', 'wf_csv_import_export'); ?></a></center>
     </div>
     

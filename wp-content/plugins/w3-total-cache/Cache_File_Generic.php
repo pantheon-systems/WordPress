@@ -209,6 +209,11 @@ class Cache_File_Generic extends Cache_File {
 		if ( !file_exists( $path ) )
 			return true;
 
+		$dir = dirname( $path );
+		if ( file_exists( $dir . DIRECTORY_SEPARATOR . '.htaccess' ) ) {
+			@unlink( $dir . DIRECTORY_SEPARATOR . '.htaccess' );
+		}
+
 		$old_entry_path = $path . '_old';
 		if ( ! @rename( $path, $old_entry_path ) ) {
 			// if we can delete old entry - do second attempt to store in old-entry file

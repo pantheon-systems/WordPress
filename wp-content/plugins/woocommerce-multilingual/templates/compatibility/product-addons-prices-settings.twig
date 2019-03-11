@@ -1,0 +1,22 @@
+<table>
+    <tr class="wcml_custom_prices hidden">
+        <th><label>{{ strings.label }}</label></th>
+        <td>
+            <fieldset>
+            <label for="wcml_custom_prices_auto">
+                <input type="radio" name="_wcml_custom_prices" id="wcml_custom_prices_auto" value="0" class="wcml_custom_prices_input" {% if not custom_prices_on %}checked="checked"{% endif %} />
+                {{ strings.auto }}
+            </label>
+
+            <br>
+
+            <label for="wcml_custom_prices_manually">
+                <input type="radio" name="_wcml_custom_prices" value="1" id="wcml_custom_prices_manually" class="wcml_custom_prices_input" {% if custom_prices_on %}checked="checked"{% endif %} />
+                {{ strings.manually }}
+            </label>
+
+            <input type="hidden" name="_wcml_custom_prices_nonce" value="{{ nonce }}"/>
+            </fieldset>
+        </td>
+    </tr>
+</table>

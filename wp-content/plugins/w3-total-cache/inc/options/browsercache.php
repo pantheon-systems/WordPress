@@ -5,7 +5,7 @@ if ( !defined( 'W3TC' ) )
 	die();
 
 $security_session_values = array(
-	'' => 'Leave as is',
+	'' => 'Default',
 	'on' => 'Enable',
 	'off' => 'Disable'
 );
@@ -32,7 +32,6 @@ $security_session_values = array(
         <?php Util_Ui::postbox_header( __( 'General', 'w3-total-cache' ), '', 'general' ); ?>
         <p><?php _e( 'Specify global browser cache policy.', 'w3-total-cache' ) ?></p>
         <table class="form-table">
-            <?php if ( !Util_Environment::is_nginx() ): ?>
             <tr>
                 <th colspan="2">
                     <label>
@@ -42,7 +41,6 @@ $security_session_values = array(
                     <br /><span class="description"><?php _e( 'Set the Last-Modified header to enable 304 Not Modified response.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
-            <?php endif; ?>
             <tr>
                 <th colspan="2">
                     <label>
@@ -84,6 +82,15 @@ $security_session_values = array(
             </tr>
             <tr>
                 <th colspan="2">
+                    <label><input id="browsercache_brotli" type="checkbox"
+                        <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?>
+                        <?php if ( !function_exists( 'brotli_compress' ) ) echo 'disabled="disabled"' ?>
+                        name="compression"<?php checked( $browsercache_brotli, true ); ?> value="1" /> <?php _e( 'Enable <acronym title="Hypertext Transfer Protocol">HTTP</acronym> (brotli) compression', 'w3-total-cache' ); ?></label>
+                    <br /><span class="description"><?php _e( 'Reduce the download time for text-based files.', 'w3-total-cache' ); ?></span>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2">
                     <label><input id="browsercache_replace" type="checkbox"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?>
                         name="replace" value="1"<?php checked( $browsercache_replace, true ); ?> /> <?php _e( 'Prevent caching of objects after settings change', 'w3-total-cache' ); ?></label>
@@ -95,7 +102,7 @@ $security_session_values = array(
                     <label><input id="browsercache_querystring" type="checkbox"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?>
                         name="querystring" value="1"<?php checked( $browsercache_querystring, true ); ?> /> <?php _e( 'Remove query strings from static resources', 'w3-total-cache' ); ?></label>
-                    <br /><span class="description"><?php _e( 'Resources with a "?" in the URL are not cached by some proxy caching servers.', 'w3-total-cache' ); ?></span>
+                    <br /><span class="description"><?php _e( 'Resources with a "?" in the <acronym title="Uniform Resource Locator">URL</acronym> are not cached by some proxy caching servers.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
             <tr>
@@ -150,14 +157,12 @@ Util_Ui::config_item( array(
         <p><?php _e( 'Specify browser cache policy for Cascading Style Sheets and JavaScript files.', 'w3-total-cache' ); ?></p>
 
         <table class="form-table">
-            <?php if ( !Util_Environment::is_nginx() ): ?>
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.cssjs.last_modified' ) ?> <?php Util_Ui::e_config_label( 'browsercache.cssjs.last_modified' ) ?></label>
                     <br /><span class="description"><?php _e( 'Set the Last-Modified header to enable 304 Not Modified response.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
-            <?php endif; ?>
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.cssjs.expires' ) ?> <?php Util_Ui::e_config_label( 'browsercache.cssjs.expires' ) ?></label>
@@ -188,14 +193,20 @@ Util_Ui::config_item( array(
                     <select id="browsercache_cssjs_cache_policy"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?>
                         name="browsercache__cssjs__cache__policy">
-                        <?php $value = $this->_config->get_string( 'browsercache.cssjs.cache.policy' ); ?>
+                        <?php
+                        $value = $this->_config->get_string( 'browsercache.cssjs.cache.policy' );
+                        $cssjs_expires = $this->_config->get_boolean( 'browsercache.cssjs.expires' );
+                        ?>
                         <option value="cache"<?php selected( $value, 'cache' ); ?>>cache ("public")</option>
-                        <option value="cache_public_maxage"<?php selected( $value, 'cache_public_maxage' ); ?>><?php _e( 'cache with max-age ("public, max-age=EXPIRES_SECONDS")', 'w3-total-cache' ); ?></option>
-                        <option value="cache_validation"<?php selected( $value, 'cache_validation' ); ?>><?php _e( 'cache with validation ("public, must-revalidate, proxy-revalidate"', 'w3-total-cache' ); ?></option>
-                        <option value="cache_maxage"<?php selected( $value, 'cache_maxage' ); ?>><?php _e( 'cache with max-age and validation ("max-age=EXPIRES_SECONDS, public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
+                        <option value="cache_public_maxage"<?php selected( $value, 'cache_public_maxage' ); disabled( $is_nginx && $cssjs_expires ); ?>><?php _e( 'cache with max-age ("public, max-age=EXPIRES_SECONDS")', 'w3-total-cache' ); ?></option>
+                        <option value="cache_validation"<?php selected( $value, 'cache_validation' ); ?>><?php _e( 'cache with validation ("public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
+                        <option value="cache_maxage"<?php selected( $value, 'cache_maxage' ); disabled( $is_nginx && $cssjs_expires ); ?>><?php _e( 'cache with max-age and validation ("max-age=EXPIRES_SECONDS, public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
                         <option value="cache_noproxy"<?php selected( $value, 'cache_noproxy' ); ?>><?php _e( 'cache without proxy ("private, must-revalidate")', 'w3-total-cache' ); ?></option>
-                        <option value="no_cache"<?php selected( $value, 'no_cache' ); ?>><?php _e( 'no-cache ("max-age=0, private, no-store, no-cache, must-revalidate"', 'w3-total-cache' ); ?></option>
+                        <option value="no_cache"<?php selected( $value, 'no_cache' ); ?>><?php _e( 'no-cache ("max-age=0, private, no-store, no-cache, must-revalidate")', 'w3-total-cache' ); ?></option>
                     </select>
+	                <?php if ( $is_nginx && $cssjs_expires ) : ?>
+		                <br /><span class="description"><?php _e( 'The Expires header already sets the max-age.', 'w3-total-cache' ); ?></span>
+	                <?php endif; ?>
                 </td>
             </tr>
             <tr>
@@ -218,6 +229,12 @@ Util_Ui::config_item( array(
             </tr>
             <tr>
                 <th colspan="2">
+                    <?php $this->checkbox( 'browsercache.cssjs.brotli', !function_exists( 'brotli_compress' ) ) ?> <?php Util_Ui::e_config_label( 'browsercache.cssjs.brotli' ) ?>  </label>
+                    <br /><span class="description"><?php _e( 'Reduce the download time for text-based files.', 'w3-total-cache' ); ?></span>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2">
                     <?php $this->checkbox( 'browsercache.cssjs.replace' ) ?> <?php Util_Ui::e_config_label( 'browsercache.cssjs.replace' ) ?></label>
                     <br /><span class="description"><?php _e( 'Whenever settings are changed, a new query string will be generated and appended to objects allowing the new policy to be applied.', 'w3-total-cache' ); ?></span>
                 </th>
@@ -225,7 +242,7 @@ Util_Ui::config_item( array(
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.cssjs.querystring' ) ?> <?php _e( 'Remove query strings from static resources', 'w3-total-cache' ); ?></label>
-                    <br /><span class="description"><?php _e( 'Resources with a "?" in the URL are not cached by some proxy caching servers.', 'w3-total-cache' ); ?></span>
+                    <br /><span class="description"><?php _e( 'Resources with a "?" in the <acronym title="Uniform Resource Locator">URL</acronym> are not cached by some proxy caching servers.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
             <tr>
@@ -243,14 +260,12 @@ Util_Ui::config_item( array(
         <p><?php _e( 'Specify browser cache policy for posts, pages, feeds and text-based files.', 'w3-total-cache' ); ?></p>
 
         <table class="form-table">
-            <?php if ( !Util_Environment::is_nginx() ): ?>
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.html.last_modified' ) ?> <?php Util_Ui::e_config_label( 'browsercache.html.last_modified' ) ?></label>
                     <br /><span class="description"><?php _e( 'Set the Last-Modified header to enable 304 Not Modified response.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
-            <?php endif; ?>
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.html.expires' ) ?> <?php Util_Ui::e_config_label( 'browsercache.html.expires' ) ?></label>
@@ -281,14 +296,20 @@ Util_Ui::config_item( array(
                 <td>
                     <select id="browsercache_html_cache_policy" name="browsercache__html__cache__policy"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?>>
-                        <?php $value = $this->_config->get_string( 'browsercache.html.cache.policy' ); ?>
+                        <?php
+                        $value = $this->_config->get_string( 'browsercache.html.cache.policy' );
+                        $html_expires = $this->_config->get_boolean( 'browsercache.html.expires' );
+                        ?>
                         <option value="cache"<?php selected( $value, 'cache' ); ?>>cache ("public")</option>
-                        <option value="cache_public_maxage"<?php selected( $value, 'cache_public_maxage' ); ?>><?php _e( 'cache with max-age ("public, max-age=EXPIRES_SECONDS")', 'w3-total-cache' ); ?></option>
+                        <option value="cache_public_maxage"<?php selected( $value, 'cache_public_maxage' ); disabled( $is_nginx && $html_expires ); ?>><?php _e( 'cache with max-age ("public, max-age=EXPIRES_SECONDS")', 'w3-total-cache' ); ?></option>
                         <option value="cache_validation"<?php selected( $value, 'cache_validation' ); ?>><?php _e( 'cache with validation ("public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
-                        <option value="cache_maxage"<?php selected( $value, 'cache_maxage' ); ?>><?php _e( 'cache with max-age and validation ("max-age=EXPIRES_SECONDS, public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
+                        <option value="cache_maxage"<?php selected( $value, 'cache_maxage' ); disabled( $is_nginx && $html_expires ); ?>><?php _e( 'cache with max-age and validation ("max-age=EXPIRES_SECONDS, public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
                         <option value="cache_noproxy"<?php selected( $value, 'cache_noproxy' ); ?>><?php _e( 'cache without proxy ("private, must-revalidate")', 'w3-total-cache' ); ?></option>
                         <option value="no_cache"<?php selected( $value, 'no_cache' ); ?>><?php _e( 'no-cache ("max-age=0, private, no-store, no-cache, must-revalidate")', 'w3-total-cache' ); ?></option>
                     </select>
+	                <?php if ( $is_nginx && $html_expires ) : ?>
+		                <br /><span class="description"><?php _e( 'The Expires header already sets the max-age.', 'w3-total-cache' ); ?></span>
+	                <?php endif; ?>
                 </td>
             </tr>
             <tr>
@@ -309,6 +330,12 @@ Util_Ui::config_item( array(
                     <br /><span class="description"><?php _e( 'Reduce the download time for text-based files.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
+            <tr>
+                <th colspan="2">
+                    <?php $this->checkbox( 'browsercache.html.brotli', !function_exists( 'brotli_compress' ) ) ?> <?php Util_Ui::e_config_label( 'browsercache.html.brotli' ) ?></label>
+                    <br /><span class="description"><?php _e( 'Reduce the download time for text-based files.', 'w3-total-cache' ); ?></span>
+                </th>
+            </tr>
         </table>
 
         <?php Util_Ui::button_config_save( 'browsercache_html_xml' ); ?>
@@ -316,14 +343,12 @@ Util_Ui::config_item( array(
 
         <?php Util_Ui::postbox_header( __( 'Media &amp; Other Files', 'w3-total-cache' ), '', 'media' ); ?>
         <table class="form-table">
-            <?php if ( !Util_Environment::is_nginx() ): ?>
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.other.last_modified' ) ?> <?php Util_Ui::e_config_label( 'browsercache.other.last_modified' ) ?></label>
                     <br /><span class="description"><?php _e( 'Set the Last-Modified header to enable 304 Not Modified response.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
-            <?php endif; ?>
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.other.expires' ) ?> <?php Util_Ui::e_config_label( 'browsercache.other.expires' ) ?></label>
@@ -354,14 +379,20 @@ Util_Ui::config_item( array(
                     <select id="browsercache_other_cache_policy"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?>
                         name="browsercache__other__cache__policy">
-                        <?php $value = $this->_config->get_string( 'browsercache.other.cache.policy' ); ?>
+                        <?php
+                        $value = $this->_config->get_string( 'browsercache.other.cache.policy' );
+                        $other_expires = $this->_config->get_string( 'browsercache.other.expires' );
+                        ?>
                         <option value="cache"<?php selected( $value, 'cache' ); ?>><?php _e( 'cache ("public")' ); ?></option>
-                        <option value="cache_public_maxage"<?php selected( $value, 'cache_public_maxage' ); ?>><?php _e( 'cache with max-age ("public, max-age=EXPIRES_SECONDS")', 'w3-total-cache' ); ?></option>
+                        <option value="cache_public_maxage"<?php selected( $value, 'cache_public_maxage' ); disabled( $is_nginx && $other_expires ); ?>><?php _e( 'cache with max-age ("public, max-age=EXPIRES_SECONDS")', 'w3-total-cache' ); ?></option>
                         <option value="cache_validation"<?php selected( $value, 'cache_validation' ); ?>><?php _e( 'cache with validation ("public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
-                        <option value="cache_maxage"<?php selected( $value, 'cache_maxage' ); ?>><?php _e( 'cache with max-age and validation ("max-age=EXPIRES_SECONDS, public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
+                        <option value="cache_maxage"<?php selected( $value, 'cache_maxage' ); disabled( $is_nginx && $other_expires ); ?>><?php _e( 'cache with max-age and validation ("max-age=EXPIRES_SECONDS, public, must-revalidate, proxy-revalidate")', 'w3-total-cache' ); ?></option>
                         <option value="cache_noproxy"<?php selected( $value, 'cache_noproxy' ); ?>><?php _e( 'cache without proxy ("private, must-revalidate")', 'w3-total-cache' ); ?></option>
                         <option value="no_cache"<?php selected( $value, 'no_cache' ); ?>><?php _e( 'no-cache ("max-age=0, private, no-store, no-cache, must-revalidate")', 'w3-total-cache' ); ?></option>
                     </select>
+	                <?php if ( $is_nginx && $other_expires ) : ?>
+		                <br /><span class="description"><?php _e( 'The Expires header already sets the max-age.', 'w3-total-cache' ); ?></span>
+	                <?php endif; ?>
                 </td>
             </tr>
             <tr>
@@ -384,6 +415,12 @@ Util_Ui::config_item( array(
             </tr>
             <tr>
                 <th colspan="2">
+                    <?php $this->checkbox( 'browsercache.other.brotli', !function_exists( 'brotli_compress' ) ) ?> <?php Util_Ui::e_config_label( 'browsercache.other.brotli' ) ?>
+                    <br /><span class="description"><?php _e( 'Reduce the download time for text-based files.', 'w3-total-cache' ); ?></span>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2">
                     <?php $this->checkbox( 'browsercache.other.replace' ) ?> <?php Util_Ui::e_config_label( 'browsercache.other.replace' ) ?></label>
                     <br /><span class="description"><?php _e( 'Whenever settings are changed, a new query string will be generated and appended to objects allowing the new policy to be applied.', 'w3-total-cache' ); ?></span>
                 </th>
@@ -391,7 +428,7 @@ Util_Ui::config_item( array(
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.other.querystring' ) ?> <?php _e( 'Remove query strings from static resources', 'w3-total-cache' ); ?></label>
-                    <br /><span class="description"><?php _e( 'Resources with a "?" in the URL are not cached by some proxy caching servers.', 'w3-total-cache' ); ?></span>
+                    <br /><span class="description"><?php _e( 'Resources with a "?" in the <acronym title="Uniform Resource Locator">URL</acronym> are not cached by some proxy caching servers.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
             <tr>
@@ -407,13 +444,15 @@ Util_Ui::config_item( array(
 
         <?php Util_Ui::postbox_header( __( 'Security Headers', 'w3-total-cache' ), '', 'security' ); ?>
         <p><?php _e( '<acronym title="Hypertext Transfer Protocol">HTTP</acronym> security headers provide another layer of protection for your website by helping to mitigate attacks and security vulnerabilities.', 'w3-total-cache' ); ?></p>
+        <p><a onclick="w3tc_csp_reference()" href="javascript:void(0);">Quick Reference Chart</a></p>
+
         <table class="form-table">
 			<?php
 			Util_Ui::config_item( array(
 					'key' => 'browsercache.security.session.use_only_cookies',
 					'control' => 'selectbox',
 					'selectbox_values' => $security_session_values,
-					'description' => __( 'This setting prevents attacks that are caused by passing session IDs in URLs.',
+					'description' => __( 'This setting prevents attacks that are caused by passing session IDs in <acronym title="Uniform Resource Locator">URL</acronym>s.',
 						'w3-total-cache' )
 				) );
 			?>
@@ -438,7 +477,7 @@ Util_Ui::config_item( array(
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.hsts' ) ?> <?php Util_Ui::e_config_label( 'browsercache.hsts' ) ?></label>
-                    <br /><span class="description"><?php _e( '<acronym title="Hypertext Transfer Protocol">HTTP</acronym> Strict-Transport-Security (HSTS) enforces secure (<acronym title="Hypertext Transfer Protocol">HTTP</acronym> over <acronym title="Secure Sockets Layer">SSL</acronym>/<acronym title="Transport Layer Security">TLS</acronym>) connections to the server. This can help mitigate adverse effects caused by bugs and session leaks through cookies and links. It also helps defend against man-in-the-middle attacks.  If there are <acronym title="Secure Sockets Layer">SSL</acronym> negotiation warnings then users will not be permitted to ignore them.', 'w3-total-cache' ); ?></span>
+                    <br /><span class="description"><?php _e( '<acronym title="Hypertext Transfer Protocol">HTTP</acronym> Strict-Transport-Security (<acronym title="HTTP Strict Transport Security">HSTS</acronym>) enforces secure (<acronym title="Hypertext Transfer Protocol">HTTP</acronym> over <acronym title="Secure Sockets Layer">SSL</acronym>/<acronym title="Transport Layer Security">TLS</acronym>) connections to the server. This can help mitigate adverse effects caused by bugs and session leaks through cookies and links. It also helps defend against man-in-the-middle attacks.  If there are <acronym title="Secure Sockets Layer">SSL</acronym> negotiation warnings then users will not be permitted to ignore them.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
             <tr>
@@ -485,7 +524,7 @@ Util_Ui::config_item( array(
             <tr>
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.security.xss' ) ?> <?php Util_Ui::e_config_label( 'browsercache.security.xss' ) ?></label>
-                    <br /><span class="description"><?php _e( 'This header enables the Cross-Site Scripting (XSS) filter. It helps to stop malicious scripts from being injected into your website. Although this is already built into and enabled by default in most browsers today it is made available here to enforce its reactivation if it was disabled within the user\'s browser.', 'w3-total-cache' ); ?></span>
+                    <br /><span class="description"><?php _e( 'This header enables the <acronym title="Cross-Site Scripting">XSS</acronym> filter. It helps to stop malicious scripts from being injected into your website. Although this is already built into and enabled by default in most browsers today it is made available here to enforce its reactivation if it was disabled within the user\'s browser.', 'w3-total-cache' ); ?></span>
                 </th>
             </tr>
             <tr>
@@ -558,7 +597,7 @@ Util_Ui::config_item( array(
                 <td>
                     <input id="browsercache_security_pkp_report_url" type="text" name="browsercache__security__pkp__report__url"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?> value="<?php echo esc_attr( $this->_config->get_string( 'browsercache.security.pkp.report.url' ) ); ?>" size="50" placeholder="Enter URL" />
-                    <div><i><?php _e( 'This optional field can be used to specify a URL that clients will send reports to if pin validation failures occur. The report is sent as a POST request with a JSON body.' ); ?></i></div>
+                    <div><i><?php _e( 'This optional field can be used to specify a <acronym title="Uniform Resource Locator">URL</acronym> that clients will send reports to if pin validation failures occur. The report is sent as a POST request with a JSON body.' ); ?></i></div>
                 </td>
             </tr>
             <tr>
@@ -591,13 +630,14 @@ Util_Ui::config_item( array(
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?>
                         name="browsercache__security__referrer__policy__directive">
                         <?php $value = $this->_config->get_string( 'browsercache.security.referrer.policy.directive' ); ?>
-                        <option value="0"<?php selected( $value, '0' ); ?>><?php _e( '""', 'w3-total-cache' ); ?></option>
+                        <option value="0"<?php selected( $value, '0' ); ?>><?php _e( 'Not Set', 'w3-total-cache' ); ?></option>
                         <option value="no-referrer"<?php selected( $value, 'no-referrer' ); ?>><?php _e( 'no-referrer', 'w3-total-cache' ); ?></option>
                         <option value="no-referrer-when-downgrade"<?php selected( $value, 'no-referrer-when-downgrade' ); ?>><?php _e( 'no-referrer-when-downgrade', 'w3-total-cache' ); ?></option>
                         <option value="same-origin"<?php selected( $value, 'same-origin' ); ?>><?php _e( 'same-origin', 'w3-total-cache' ); ?></option>
                         <option value="origin"<?php selected( $value, 'origin' ); ?>><?php _e( 'origin', 'w3-total-cache' ); ?></option>
                         <option value="strict-origin"<?php selected( $value, 'strict-origin' ); ?>><?php _e( 'strict-origin', 'w3-total-cache' ); ?></option>
                         <option value="origin-when-cross-origin"<?php selected( $value, 'origin-when-cross-origin' ); ?>><?php _e( 'origin-when-cross-origin', 'w3-total-cache' ); ?></option>
+                        <option value="strict-origin-when-cross-origin"<?php selected( $value, 'strict-origin-when-cross-origin' ); ?>><?php _e( 'strict-origin-when-cross-origin', 'w3-total-cache' ); ?></option>
                         <option value="unsafe-url"<?php selected( $value, 'unsafe-url' ); ?>><?php _e( 'unsafe-url', 'w3-total-cache' ); ?></option>
                     </select>
                     <div id="browsercache_security_referrer_policy_directive_description"></div>
@@ -607,7 +647,6 @@ Util_Ui::config_item( array(
                 <th colspan="2">
                     <?php $this->checkbox( 'browsercache.security.csp' ) ?> <?php Util_Ui::e_config_label( 'browsercache.security.csp' ) ?></label>
                     <br /><span class="description"><?php _e( 'The Content Security Policy (<acronym title="Content Security Policy">CSP</acronym>) header reduces the risk of <acronym title="Cross-Site Scripting">XSS</acronym> attacks by allowing you to define where resources can be retrieved from, preventing browsers from loading data from any other locations. This makes it harder for an attacker to inject malicious code into your site.' ); ?></span>
-                    <p><a onclick="w3tc_csp_reference()" href="javascript:void(0);">Quick Reference Chart</a></p>
                 </th>
             </tr>
             <tr>
@@ -617,7 +656,7 @@ Util_Ui::config_item( array(
                 <td>
                     <input id="browsercache_security_csp_base" type="text" name="browsercache__security__csp__base"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?> value="<?php echo esc_attr( $this->_config->get_string( 'browsercache.security.csp.base' ) ); ?>" size="50" placeholder="Example: 'self' 'unsafe-inline' *.domain.com" />
-                    <div><i><?php _e( 'Restricts the URLs which can be used in a document\'s &lt;base&gt; element.' ); ?></i></div>
+                    <div><i><?php _e( 'Restricts the <acronym title="Uniform Resource Locator">URL</acronym>s which can be used in a document\'s &lt;base&gt; element.' ); ?></i></div>
                 </td>
             </tr>
             <tr>
@@ -697,7 +736,7 @@ Util_Ui::config_item( array(
                 <td>
                     <input id="browsercache_security_csp_style" type="text" name="browsercache__security__csp__style"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?> value="<?php echo esc_attr( $this->_config->get_string( 'browsercache.security.csp.style' ) ); ?>" size="50" placeholder="Example: 'self' 'unsafe-inline' *.domain.com" />
-                    <div><i><?php _e( 'Specifies valid sources for CSS stylesheets.' ); ?></i></div>
+                    <div><i><?php _e( 'Specifies valid sources for <acronym title="Cascading Style Sheet">CSS</acronym> stylesheets.' ); ?></i></div>
                 </td>
             </tr>
             <tr>
@@ -707,7 +746,7 @@ Util_Ui::config_item( array(
                 <td>
                     <input id="browsercache_security_csp_form" type="text" name="browsercache__security__csp__form"
                         <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?> value="<?php echo esc_attr( $this->_config->get_string( 'browsercache.security.csp.form' ) ); ?>" size="50" placeholder="Example: 'self' 'unsafe-inline' *.domain.com" />
-                    <div><i><?php _e( 'Restricts the URLs which can be used as the target of form submissions from a given context.' ); ?></i></div>
+                    <div><i><?php _e( 'Restricts the <acronym title="Uniform Resource Locator">URL</acronym>s which can be used as the target of form submissions from a given context.' ); ?></i></div>
                 </td>
             </tr>
             <tr>
@@ -716,7 +755,7 @@ Util_Ui::config_item( array(
                 </th>
                 <td>
                     <input id="browsercache_security_csp_frame_ancestors" type="text" name="browsercache__security__csp__frame__ancestors"
-                        <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?> value="<?php echo esc_attr( $this->_config->get_string( 'browsercache.security.csp.frame' ) ); ?>" size="50" placeholder="Example: 'none'" />
+                        <?php Util_Ui::sealing_disabled( 'browsercache.' ) ?> value="<?php echo esc_attr( $this->_config->get_string( 'browsercache.security.csp.frame.ancestors' ) ); ?>" size="50" placeholder="Example: 'none'" />
                     <div><i><?php _e( 'Specifies valid parents that may embed a page using &lt;frame&gt;, &lt;iframe&gt;, &lt;object&gt;, &lt;embed&gt;, or &lt;applet&gt;.' ); ?></i></div>
                 </td>
             </tr>

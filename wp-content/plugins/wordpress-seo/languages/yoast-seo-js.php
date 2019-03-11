@@ -2,6 +2,45 @@
 /* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
 $generated_i18n_strings = array(
 	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:111
+	__( 'Good job!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:115
+	__( 'very easy', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:118
+	__( 'easy', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:121
+	__( 'fairly easy', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:124
+	__( 'ok', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:127
+	__( 'fairly difficult', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:128
+	__( 'Try to make shorter sentences to improve readability', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:131
+	__( 'difficult', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:132
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:136
+	__( 'Try to make shorter sentences, using less difficult words to improve readability', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:135
+	__( 'very difficult', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:149
+	/* Translators: %1$s expands to a link on yoast.com,
+	   %2$s to the anchor end tag,
+	   %3$s expands to the numeric Flesch reading ease score,
+	   %4$s to the easiness of reading,
+	   %5$s expands to a call to action based on the score */
+	__( '%1$sFlesch Reading Ease%2$s: The copy scores %3$s in the test, which is considered %4$s to read. %5$s', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:162
 	/* Translators: %1$s and %5$s expand to a link on yoast.com,
 	   %2$s to the anchor end tag,
 	   %7$s expands to the anchor end tag and a full stop,
@@ -9,37 +48,6 @@ $generated_i18n_strings = array(
 	   %4$s to the easiness of reading,
 	   %6$s expands to a call to action based on the score */
 	__( '%1$sFlesch Reading Ease%2$s: The copy scores %3$s in the test, which is considered %4$s to read. %5$s%6$s%7$s', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:112
-	__( 'Good job!', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:115
-	__( 'very easy', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:123
-	__( 'easy', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:131
-	__( 'fairly easy', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:139
-	__( 'ok', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:147
-	__( 'fairly difficult', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:148
-	__( 'Try to make shorter sentences to improve readability', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:156
-	__( 'difficult', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:157
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:165
-	__( 'Try to make shorter sentences, using less difficult words to improve readability', 'wordpress-seo' ),
-
-	// Reference: node_modules/yoastseo/src/assessments/readability/fleschReadingEaseAssessment.js:164
-	__( 'very difficult', 'wordpress-seo' ),
 
 	// Reference: node_modules/yoastseo/src/assessments/readability/paragraphTooLongAssessment.js:87
 	/* Translators:  %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag */
@@ -89,13 +97,13 @@ $generated_i18n_strings = array(
 	   %5$s expands to the recommended maximum percentage. */
 	__( '%1$sSentence length%2$s: %3$s of the sentences contain more than %4$s words, which is more than the recommended maximum of %5$s. %6$sTry to shorten the sentences%2$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:214
-	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:256
+	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:183
+	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:225
 	/* Translators: %1$s expands to a link to https://yoa.st/headings, %2$s expands to the link closing tag. */
 	__( '%1$sSubheading distribution%2$s: Great job!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:228
-	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:239
+	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:197
+	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:208
 	/* Translators: %1$s and %5$s expand to a link on yoast.com, %3$d to the number of text sections
 	   not separated by subheadings, %4$d expands to the recommended number of words following a
 	   subheading, %2$s expands to the link closing tag.
@@ -105,11 +113,11 @@ $generated_i18n_strings = array(
 	   subheading, %2$s expands to the link closing tag. */
 	_n_noop( '%1$sSubheading distribution%2$s: %3$d section of your text is longer than %4$d words and is not separated by any subheadings. %5$sAdd subheadings to improve readability%2$s.', '%1$sSubheading distribution%2$s: %3$d sections of your text are longer than %4$d words and are not separated by any subheadings. %5$sAdd subheadings to improve readability%2$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:247
+	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:216
 	/* Translators: %1$s and %3$s expand to a link to https://yoa.st/headings, %2$s expands to the link closing tag. */
 	__( '%1$sSubheading distribution%2$s: You are not using any subheadings, although your text is rather long. %3$sTry and add some subheadings%2$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:264
+	// Reference: node_modules/yoastseo/src/assessments/readability/subheadingDistributionTooLongAssessment.js:233
 	/* Translators: %1$s expands to a link to https://yoa.st/headings, %2$s expands to the link closing tag. */
 	__( '%1$sSubheading distribution%2$s: You are not using any subheadings, but your text is short enough and probably doesn\'t need them.', 'wordpress-seo' ),
 
@@ -193,35 +201,50 @@ $generated_i18n_strings = array(
 	/* Translators: %1$s expands to links to Yoast.com articles, %2$s expands to the anchor end tag */
 	__( '%1$sKeyphrase distribution%2$s: Good job!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:119
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:141
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sKeyphrase length%3$s: %2$sSet a keyphrase in order to calculate your SEO score%3$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:126
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:148
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sKeyphrase length%3$s: No focus keyphrase was set for this page. %2$sSet a keyphrase in order to calculate your SEO score%3$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:135
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:157
 	/* Translators: %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag. */
 	__( '%1$sKeyphrase length%2$s: Good job!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:148
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:170
 	__( '%3$sKeyphrase length%5$s: The keyphrase is %1$d words long. That\'s more than the recommended maximum of %2$d words. %4$sMake it shorter%5$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:160
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeyphraseLengthAssessment.js:182
 	__( '%3$sKeyphrase length%5$s: The keyphrase is %1$d words long. That\'s way more than the recommended maximum of %2$d words. %4$sMake it shorter%5$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:240
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:289
 	__( '%3$sKeyphrase density%5$s: %1$s. This is too low; the keyphrase was found %2$d times. %4$sFocus on your keyphrase%5$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:253
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:302
 	_n_noop( '%3$sKeyphrase density%5$s: %1$s. This is too low; the keyphrase was found %2$d time. %4$sFocus on your keyphrase%5$s!', '%3$sKeyphrase density%5$s: %1$s. This is too low; the keyphrase was found %2$d times. %4$sFocus on your keyphrase%5$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:279
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:328
 	_n_noop( '%4$sKeyphrase density%6$s: %1$s. This is over the advised %3$s maximum; the keyphrase was found %2$d time. %5$sDon\'t overoptimize%6$s!', '%4$sKeyphrase density%6$s: %1$s. This is over the advised %3$s maximum; the keyphrase was found %2$d times. %5$sDon\'t overoptimize%6$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:293
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:342
 	_n_noop( '%4$sKeyphrase density%6$s: %1$s. This is way over the advised %3$s maximum; the keyphrase was found %2$d time. %5$sDon\'t overoptimize%6$s!', '%4$sKeyphrase density%6$s: %1$s. This is way over the advised %3$s maximum; the keyphrase was found %2$d times. %5$sDon\'t overoptimize%6$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:365
+	__( '%1$sKeyphrase density%2$s: The focus keyphrase was found 0 times. That\'s less than the recommended minimum of %3$d times for a text of this length. %4$sFocus on your keyphrase%2$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:378
+	_n_noop( '%1$sKeyphrase density%2$s: The focus keyphrase was found %5$d time. That\'s less than the recommended minimum of %3$d times for a text of this length. %4$sFocus on your keyphrase%2$s!', '%1$sKeyphrase density%2$s: The focus keyphrase was found %5$d times. That\'s less than the recommended minimum of %3$d times for a text of this length. %4$sFocus on your keyphrase%2$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:390
+	_n_noop( '%1$sKeyphrase density%2$s: The focus keyphrase was found %3$d time. This is great!', '%1$sKeyphrase density%2$s: The focus keyphrase was found %3$d times. This is great!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:403
+	_n_noop( '%1$sKeyphrase density%2$s: The focus keyphrase was found %5$d time. That\'s more than the recommended maximum of %3$d times for a text of this length. %4$sDon\'t overoptimize%2$s!', '%1$sKeyphrase density%2$s: The focus keyphrase was found %5$d times. That\'s more than the recommended maximum of %3$d times for a text of this length. %4$sDon\'t overoptimize%2$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/KeywordDensityAssessment.js:416
+	_n_noop( '%1$sKeyphrase density%2$s: The focus keyphrase was found %5$d time. That\'s way more than the recommended maximum of %3$d times for a text of this length. %4$sDon\'t overoptimize%2$s!', '%1$sKeyphrase density%2$s: The focus keyphrase was found %5$d times. That\'s way more than the recommended maximum of %3$d times for a text of this length. %4$sDon\'t overoptimize%2$s!', 'wordpress-seo' ),
 
 	// Reference: node_modules/yoastseo/src/assessments/seo/MetaDescriptionKeywordAssessment.js:112
 	/* Translators: %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag. */
@@ -233,59 +256,82 @@ $generated_i18n_strings = array(
 	// Reference: node_modules/yoastseo/src/assessments/seo/MetaDescriptionKeywordAssessment.js:140
 	__( '%1$sKeyphrase in meta description%2$s: The meta description has been specified, but it does not contain the keyphrase. %3$sFix that%4$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/metaDescriptionLengthAssessment.js:158
+	// Reference: node_modules/yoastseo/src/assessments/seo/MetaDescriptionLengthAssessment.js:158
 	/* Translators:  %1$s and %2$s expand to a links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sMeta description length%3$s:  No meta description has been specified. Search engines will display copy from the page instead. %2$sMake sure to write one%3$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/metaDescriptionLengthAssessment.js:166
+	// Reference: node_modules/yoastseo/src/assessments/seo/MetaDescriptionLengthAssessment.js:166
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag,
 	   %4$d expands to the number of characters in the meta description, %5$d expands to
 	   the total available number of characters in the meta description */
 	__( '%1$sMeta description length%3$s: The meta description is too short (under %4$d characters). Up to %5$d characters are available. %2$sUse the space%3$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/metaDescriptionLengthAssessment.js:173
+	// Reference: node_modules/yoastseo/src/assessments/seo/MetaDescriptionLengthAssessment.js:173
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag,
 	   %4$d expands to	the total available number of characters in the meta description */
 	__( '%1$sMeta description length%3$s: The meta description is over %4$d characters. To ensure the entire description will be visible, %2$syou should reduce the length%3$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/metaDescriptionLengthAssessment.js:179
+	// Reference: node_modules/yoastseo/src/assessments/seo/MetaDescriptionLengthAssessment.js:179
 	/* Translators:  %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag */
 	__( '%1$sMeta description length%2$s: Well done!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/outboundLinksAssessment.js:147
+	// Reference: node_modules/yoastseo/src/assessments/seo/OutboundLinksAssessment.js:152
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sOutbound links%3$s: No outbound links appear in this page. %2$sAdd some%3$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/outboundLinksAssessment.js:153
+	// Reference: node_modules/yoastseo/src/assessments/seo/OutboundLinksAssessment.js:158
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sOutbound links%3$s: All outbound links on this page are nofollowed. %2$sAdd some normal links%3$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/outboundLinksAssessment.js:159
+	// Reference: node_modules/yoastseo/src/assessments/seo/OutboundLinksAssessment.js:164
 	/* Translators: %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag */
 	__( '%1$sOutbound links%2$s: Good job!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/outboundLinksAssessment.js:165
+	// Reference: node_modules/yoastseo/src/assessments/seo/OutboundLinksAssessment.js:170
 	/* Translators: %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag */
 	__( '%1$sOutbound links%2$s: There are both nofollowed and normal outbound links on this page. Good job!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/pageTitleWidthAssessment.js:150
+	// Reference: node_modules/yoastseo/src/assessments/seo/PageTitleWidthAssessment.js:150
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sSEO title width%3$s: The SEO title is too short. %2$sUse the space to add keyphrase variations or create compelling call-to-action copy%3$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/pageTitleWidthAssessment.js:156
+	// Reference: node_modules/yoastseo/src/assessments/seo/PageTitleWidthAssessment.js:156
 	/* Translators:  %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag */
 	__( '%1$sSEO title width%2$s: Good job!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/pageTitleWidthAssessment.js:162
+	// Reference: node_modules/yoastseo/src/assessments/seo/PageTitleWidthAssessment.js:162
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sSEO title width%3$s: The SEO title wider than the viewable limit. %2$sTry to make it shorter%3$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/pageTitleWidthAssessment.js:167
+	// Reference: node_modules/yoastseo/src/assessments/seo/PageTitleWidthAssessment.js:167
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sSEO title width%3$s: %2$sPlease create an SEO title%3$s.', 'wordpress-seo' ),
 
+	// Reference: node_modules/yoastseo/src/assessments/seo/SingleH1Assessment.js:137
+	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
+	__( '%1$sSingle title%3$s: H1s should only be used as your main title. Find all H1s in your text that aren\'t your main title and %2$schange them to a lower heading level%3$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment.js:261
+	// Reference: node_modules/yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment.js:298
+	/* Translators: %1$s and %2$s expand to a link on yoast.com, %3$s expands to the anchor end tag. */
+	__( '%1$sKeyphrase in subheading%3$s: %2$sUse more keyphrases or synonyms in your higher-level subheadings%3$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment.js:270
+	/* Translators: %1$s and %2$s expand to a link on yoast.com, %3$s expands to the anchor end tag. */
+	__( '%1$sKeyphrase in subheading%3$s: More than 75%% of your higher-level subheadings reflect the topic of your copy. That\'s too much. %2$sDon\'t over-optimize%3$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment.js:280
+	/* Translators: %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag,
+	   %3$d expands to the number of subheadings containing the keyphrase. */
+	__( '%1$sKeyphrase in subheading%2$s: Your higher-level subheading reflects the topic of your copy. Good job!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/SubHeadingsKeywordAssessment.js:290
+	/* Translators: %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag,
+	   %3$d expands to the number of subheadings containing the keyphrase. */
+	_n_noop( '%1$sKeyphrase in subheading%2$s: %3$s of your higher-level subheadings reflects the topic of your copy. Good job!', '%1$sKeyphrase in subheading%2$s: %3$s of your higher-level subheadings reflect the topic of your copy. Good job!', 'wordpress-seo' ),
+
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:34
-	// Reference: node_modules/yoastseo/src/assessments/seo/textLengthAssessment.js:144
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:115
 	/* Translators: %1$d expands to the number of words in the text,
 	   %2$s expands to a link on yoast.com, %3$s expands to the anchor end tag */
 	_n_noop( '%2$sText length%3$s: The text contains %1$d word. Good job!', '%2$sText length%3$s: The text contains %1$d words. Good job!', 'wordpress-seo' ),
@@ -294,9 +340,10 @@ $generated_i18n_strings = array(
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:59
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:74
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:89
-	// Reference: node_modules/yoastseo/src/assessments/seo/textLengthAssessment.js:151
-	// Reference: node_modules/yoastseo/src/assessments/seo/textLengthAssessment.js:163
-	// Reference: node_modules/yoastseo/src/assessments/seo/textLengthAssessment.js:175
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:131
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:147
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:161
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:175
 	/* Translators: %1$d expands to the number of words in the text,
 	   %2$s expands to a link on yoast.com, %4$d expands to the anchor end tag.
 	   Translators: %1$d expands to the number of words in the text,
@@ -304,7 +351,7 @@ $generated_i18n_strings = array(
 	_n_noop( '%2$sText length%4$s: The text contains %1$d word.', '%2$sText length%4$s: The text contains %1$d words.', 'wordpress-seo' ),
 
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:49
-	// Reference: node_modules/yoastseo/src/assessments/seo/textLengthAssessment.js:156
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:152
 	/* Translators: The preceding sentence is "Text length: The text contains x words.",
 	   %3$s expands to a link on yoast.com,
 	   %4$s expands to the anchor end tag,
@@ -313,7 +360,8 @@ $generated_i18n_strings = array(
 
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:64
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:79
-	// Reference: node_modules/yoastseo/src/assessments/seo/textLengthAssessment.js:168
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:166
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:180
 	/* Translators: The preceding sentence is "Text length: The text contains x words.",
 	   %3$s expands to a link on yoast.com,
 	   %4$s expands to the anchor end tag,
@@ -321,7 +369,7 @@ $generated_i18n_strings = array(
 	_n_noop( 'This is below the recommended minimum of %5$d word. %3$sAdd more content%4$s.', 'This is below the recommended minimum of %5$d words. %3$sAdd more content%4$s.', 'wordpress-seo' ),
 
 	// Reference: node_modules/yoastseo/src/assessments/seo/taxonomyTextLengthAssessment.js:94
-	// Reference: node_modules/yoastseo/src/assessments/seo/textLengthAssessment.js:180
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextLengthAssessment.js:136
 	/* Translators: The preceding sentence is "Text length: The text contains x words.",
 	   %3$s expands to a link on yoast.com,
 	   %4$s expands to the anchor end tag,
@@ -332,19 +380,46 @@ $generated_i18n_strings = array(
 	/* Translators:  %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sLink keyphrase%3$s: You\'re linking to another page with the words you want this page to rank for. %2$sDon\'t do that%3$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/textImagesAssessment.js:124
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:145
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:249
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sImage alt attributes%3$s: No images appear on this page. %2$sAdd some%3$s!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/textImagesAssessment.js:134
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:155
 	/* Translators:  %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag */
 	__( '%1$sImage alt attributes%2$s: Some images on this page contain alt attributes with words from your keyphrase! Good job!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/textImagesAssessment.js:144
-	// Reference: node_modules/yoastseo/src/assessments/seo/textImagesAssessment.js:154
-	// Reference: node_modules/yoastseo/src/assessments/seo/textImagesAssessment.js:164
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:165
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:175
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:185
 	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sImage alt attributes%3$s: Images on this page do not have alt attributes with words from your keyphrase. %2$sFix that%3$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:259
+	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
+	__( '%1$sImage alt attributes%3$s: Images on this page have alt attributes, but you have not set your keyphrase. %2$sFix that%3$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:269
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:315
+	/* Translators: %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
+	__( '%1$sImage alt attributes%3$s: Images on this page do not have alt attributes that reflect the topic of your text. %2$sAdd your keyphrase or synonyms to the alt tags of relevant images%3$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:281
+	/* Translators: %1$d expands to the number of images containing an alt attribute with the keyword,
+	   * %2$d expands to the total number of images, %3$s and %4$s expand to links on yoast.com,
+	   * %5$s expands to the anchor end tag. */
+	_n_noop( '%3$sImage alt attributes%5$s: Out of %2$d images on this page, only %1$d has an alt attribute that reflects the topic of your text. %4$sAdd your keyphrase or synonyms to the alt tags of more relevant images%5$s!', '%3$sImage alt attributes%5$s: Out of %2$d images on this page, only %1$d have alt attributes that reflect the topic of your text. %4$sAdd your keyphrase or synonyms to the alt tags of more relevant images%5$s!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:295
+	/* Translators: %1$s expands to a link on yoast.com,
+	   * %2$s expands to the anchor end tag. */
+	__( '%1$sImage alt attributes%2$s: Good job!', 'wordpress-seo' ),
+
+	// Reference: node_modules/yoastseo/src/assessments/seo/TextImagesAssessment.js:306
+	/* Translators: %1$d expands to the number of images containing an alt attribute with the keyword,
+	   * %2$d expands to the total number of images, %3$s and %4$s expand to a link on yoast.com,
+	   * %5$s expands to the anchor end tag. */
+	__( '%3$sImage alt attributes%5$s: Out of %2$d images on this page, %1$d have alt attributes with words from your keyphrase or synonyms. That\'s a bit much. %4$sOnly include the keyphrase or its synonyms when it really fits the image%5$s.', 'wordpress-seo' ),
 
 	// Reference: node_modules/yoastseo/src/assessments/seo/TitleKeywordAssessment.js:138
 	/* Translators: %1$s expands to a link on yoast.com,
@@ -380,7 +455,7 @@ $generated_i18n_strings = array(
 	/* Translators:  %1$s expands to a link on yoast.com, %2$s expands to the anchor end tag */
 	__( '%1$sKeyphrase in slug%2$s: More than half of your keyphrase appears in the slug. That\'s great!', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/assessments/seo/urlLengthAssessment.js:132
+	// Reference: node_modules/yoastseo/src/assessments/seo/UrlLengthAssessment.js:132
 	/* Translators:  %1$s and %2$s expand to links on yoast.com, %3$s expands to the anchor end tag */
 	__( '%1$sSlug too long%3$s: the slug for this page is a bit long. %2$sShorten it%3$s!', 'wordpress-seo' ),
 
@@ -392,15 +467,15 @@ $generated_i18n_strings = array(
 	/* Translators: %1$s expands to the name of the assessment. */
 	__( 'An error occurred in the \'%1$s\' assessment', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/bundledPlugins/previouslyUsedKeywords.js:91
+	// Reference: node_modules/yoastseo/src/bundledPlugins/previouslyUsedKeywords.js:98
 	__( '%1$sPreviously used keyphrase%2$s: You\'ve not used this keyphrase before, very good.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/bundledPlugins/previouslyUsedKeywords.js:100
+	// Reference: node_modules/yoastseo/src/bundledPlugins/previouslyUsedKeywords.js:107
 	/* Translators: %1$s and %2$s expand to an admin link where the keyword is already used. %3$s and %4$s
 	   expand to links on yoast.com, %4$s expands to the anchor end tag. */
 	__( '%3$sPreviously used keyphrase%5$s: You\'ve used this keyphrase %1$sonce before%2$s. %4$sDo not use your keyphrase more than once%5$s.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/bundledPlugins/previouslyUsedKeywords.js:110
+	// Reference: node_modules/yoastseo/src/bundledPlugins/previouslyUsedKeywords.js:117
 	/* Translators: %1$s and $3$s expand to the admin search page for the keyword, %2$d expands to the number
 	   of times this keyword has been used before, %4$s and %5$s expand to links to yoast.com, %6$s expands to
 	   the anchor end tag */
@@ -448,49 +523,49 @@ $generated_i18n_strings = array(
 	// Reference: node_modules/yoastseo/src/renderers/AssessorPresenter.js:363
 	__( 'Remove marks in the text', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:395
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:399
 	__( 'Edit snippet', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:396
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:400
 	__( 'SEO title', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:397
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:401
 	__( 'Slug', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:398
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:402
 	__( 'Meta description', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:399
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:403
 	__( 'Close snippet editor', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:400
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:404
 	__( 'Snippet preview', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:401
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:405
 	__( 'SEO title preview:', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:402
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:406
 	__( 'Slug preview:', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:403
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:407
 	__( 'Meta description preview:', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:404
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:408
 	__( 'You can click on each element in the preview to jump to the Snippet Editor.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:405
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:409
 	__( 'Desktop preview', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:406
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:410
 	__( 'Mobile preview', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:407
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:411
 	__( 'Scroll to see the preview content.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:616
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:620
 	__( 'Please provide an SEO title by editing the snippet below.', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoastseo/src/snippetPreview.js:694
+	// Reference: node_modules/yoastseo/src/snippetPreview.js:698
 	__( 'Please provide a meta description by editing the snippet below.', 'wordpress-seo' )
 );
 /* THIS IS THE END OF THE GENERATED FILE */

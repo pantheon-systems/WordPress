@@ -405,11 +405,15 @@ class Cdn_AdminActions {
 			$config['docroot'] = Util_Environment::document_root();
 
 		if ( $result ) {
-			if ( $engine == 'google_drive' || $engine == 'highwinds' ||
+			if ( $engine == 'google_drive' ||
+				$engine == 'highwinds' ||
 				$engine == 'limelight' ||
-				$engine == 'maxcdn' || $engine == 'stackpath' ||
+				$engine == 'maxcdn' ||
+				$engine == 'stackpath' ||
+				$engine == 'stackpath2' ||
 				$engine == 'rackspace_cdn' ||
-				$engine == 'rscf' || $engine == 's3_compatible' ) {
+				$engine == 'rscf' ||
+				$engine == 's3_compatible' ) {
 				// those use already stored w3tc config
 				$w3_cdn = Dispatcher::component( 'Cdn_Core' )->get_cdn();
 			} else {
@@ -536,7 +540,7 @@ class Cdn_AdminActions {
 				$state->save();
 			}
 		} catch ( \Exception $ex ) {}
-		Util_Environment::redirect( MAXCDN_AUTHORIZE_URL );
+		Util_Environment::redirect( W3TC_MAXCDN_AUTHORIZE_URL );
 	}
 
 	function w3tc_cdn_maxcdn_signup() {
@@ -545,6 +549,6 @@ class Cdn_AdminActions {
 			$state->set( 'track.maxcdn_signup', time() );
 			$state->save();
 		} catch ( \Exception $ex ) {}
-		Util_Environment::redirect( MAXCDN_SIGNUP_URL );
+		Util_Environment::redirect( W3TC_MAXCDN_SIGNUP_URL );
 	}
 }

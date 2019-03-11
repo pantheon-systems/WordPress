@@ -2,7 +2,7 @@
 Contributors: deliciousbrains, bradt, SylvainDeaure
 Tags: email,ses,amazon,webservice,deliverability,newsletter,autoresponder,mail,wp_mail,smtp,service
 Requires at least: 3.0.0
-Tested up to: 4.9.1
+Tested up to: 5.0
 Requires PHP: 5.5+
 Stable tag: trunk
 
@@ -10,7 +10,10 @@ WP SES sends all outgoing WordPress emails through Amazon Simple Email Service (
 
 == Description ==
 
-WP SES sends all outgoing WordPress emails through Amazon Simple Email Service (SES) instead of local wp_mail function.
+The WP SES plugin has been acquired by [Delicious Brains Inc](https://deliciousbrains.com/?utm_campaign=WP%2BOffload%2BSES&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting). Big improvements are on the way, but for now we’ve just tidied up the UI a bit.
+
+WP SES sends all outgoing WordPress emails through Amazon Simple Email Service (SES) instead of the local `wp_mail()` function.
+
 This ensures high email deliverability, email traffic statistics and a powerful managed infrastructure.
 
 Multisite features are so far experimental.
@@ -21,7 +24,7 @@ Current features are:
 * Validation of Amazon API credentials
 * Request confirmation for sender emails
 * Test message within Amazon Sandbox mode
-* Full integration as seamless replacement for wp_mail internal function
+* Full integration as seamless replacement for `wp_mail()` internal function
 * Dashboard panel with quota and statistics
 * Ability to customize return path for delivery failure notifications
 * Custom Reply-To and From headers
@@ -31,23 +34,21 @@ Current features are:
 * File logging feature (may be verbose and insecure, do not use as is in production for a long period of time)
 * English, French, Spanish, Serbo-Croatian translations (fell free to send your mo/po files to support more languages)
 
-**PRO UPGRADE - Coming Soon**
+**PRO Version with Email Support and More Features**
 
-The WP SES plugin has been acquired by [Delicious Brains Inc](https://deliciousbrains.com/?utm_campaign=WP%2BOffload%2BSES&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting). Big improvements are on the way, but for now we've just tidied up the UI a bit.
-
-We're working on a pro upgrade that will have the following features:
+Get email open and click tracking for all your Amazon SES emails with the following features and more:
 
 * Track email opens and link clicks
-* Track email addresses that have bounced or received complaints
 * Log sent emails and failures
 * Queue email to handle rate limits and retry failures
-* Customizing email templates
 * Step-by-step setup wizard encouraging best practices
 * Email support
 
-We've learned a ton iterating on [our Amazon S3 plugin](https://deliciousbrains.com/wp-offload-s3/?utm_campaign=WP%2BOffload%2BSES&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting) over the last couple of years and will be applying all that knowlege and experience in building this plugin.
+[Compare pro vs free →](https://deliciousbrains.com/wp-offload-ses/upgrade/?utm_campaign=WP%2BOffload%2BSES&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blistingee%2Bplugin%2Blisting)
 
-Get notified when the pro upgrade launches by [subscribing to the email list](https://deliciousbrains.com/email-subscribe/7/?utm_campaign=WP%2BOffload%2BSES&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting).
+See the video below or visit the [web site](http://deliciousbrains.com/wp-offload-ses/?utm_campaign=WP%2BOffload%2BSES&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blistingee%2Bplugin%2Blisting) to learn more about the pro version.
+
+https://www.youtube.com/watch?v=gUH3fMlrU10&rel=0
 
 == Installation ==
 
@@ -117,7 +118,7 @@ Once you get the test email working, you can send AWS a request to increase the 
 
 = Where can I get support for the plugin? =
 
-Please use [the plugin's support forum](https://wordpress.org/support/plugin/wp-ses).
+If you upgrade to [WP Offload SES](https://deliciousbrains.com/wp-offload-ses/upgrade/?utm_campaign=WP%2BOffload%2BSES&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blistingee%2Bplugin%2Blisting), we will gladly provide you with email support. We take pride in delivering exceptional customer support. We do not provide email support for the free version.
 
 = What are the minimum requirements? =
 
@@ -200,11 +201,31 @@ Yes, please do! It's easy.
 1. Click on WP SES
 1. Translate!
 
+= I installed WP SES on my WP install and was able to get everything tested and the test emails work great. The only thing is I can’t get it to intercept the emails my contact form sends. They end up going through the normal SMTP route and not SES. This is the function for the mail: mail($to, $subject, $message, $header); =
+
+Looks like your contact form uses the PHP `mail()` function instead of the WordPress `wp_mail()` function, so WP SES won’t be able to send the mail.
+
+Please ask the plugin developer to change it to the following:
+
+`wp_mail($to,$subject,$message,$header);`
+
+= I used my ID and secret and repeatedly put them into WP SES, but it didn’t work, I also generated a new ID and secret too, but to no avail it still didn’t work. =
+
+Did you use these keys before with another service (like S3), and if so, did they work with that service?
+
+Did you sign up for the Amazon SES service?
+
+Then, please inspectthe error message you get when trying to verify a sender address (at the top of the screen). This message should explain what is wrong with your keys (bad authentication, no SES subscription , etc.).
+Amazon also requires that your server time is close enough to Amazon’s server time, so that might be worth checking as well.
+
 == Screenshots ==
 
 1. Settings screen
 
 == Changelog ==
+
+= 0.8.2 - 2019-01-09 =
+* Add discount for launch of WP Offload SES
 
 = 0.8.1 - 2018-06-06 =
 * Added dismissable admin notice that WP SES will soon require PHP 5.5+

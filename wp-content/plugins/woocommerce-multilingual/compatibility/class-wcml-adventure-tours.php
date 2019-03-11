@@ -262,7 +262,7 @@ class WCML_Adventure_tours{
         global $pagenow;
 
         if( $pagenow == 'post.php' || $pagenow == 'post-new.php' ){
-            wp_register_script( 'wcml-adventure-tours', WCML_PLUGIN_URL . '/compatibility/res/js/wcml-adventure-tours.js', array( 'jquery' ), WCML_VERSION );
+			wp_register_script( 'wcml-adventure-tours', WCML_PLUGIN_URL . '/compatibility/res/js/wcml-adventure-tours.js', array( 'jquery' ), WCML_VERSION, true );
             wp_enqueue_script( 'wcml-adventure-tours' );
         }
     }

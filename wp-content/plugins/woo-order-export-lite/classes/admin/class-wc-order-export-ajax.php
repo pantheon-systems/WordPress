@@ -9,9 +9,22 @@ class WC_Order_Export_Ajax {
 	var $_wp_using_ext_object_cache_previous;
 
 	public function save_settings() {
+
 		$settings = WC_Order_Export_Manage::make_new_settings( $_POST );
-		$id       = WC_Order_Export_Manage::save_export_settings( $_POST['mode'], $_POST['id'], $settings );
+/*
+		array_walk_recursive($settings, function(&$_value, $_key) {
+		    if ($_key !== 'custom_php_code'  AND $_key !== 'email_body') {
+			$_value = esc_attr($_value);
+		    }
+		});
+*/
+		$id       = WC_Order_Export_Manage::save_export_settings( $_POST['mode'], (int)$_POST['id'], $settings );
 		echo json_encode( array( 'id' => $id ) );
+	}
+
+	public function reset_profile() {
+		$id       = WC_Order_Export_Manage::save_export_settings( $_POST['mode'], $_POST['id'], array() );
+		wp_send_json_success();
 	}
 
 	public function validate_url_key() {
@@ -54,12 +67,13 @@ class WC_Order_Export_Ajax {
 	}
 
 	public function save_settings_tab() {
-		WC_Order_Export_Admin::save_main_settings();
+            WC_Order_Export_Admin::save_main_settings();
 	}
 
 	public function get_products() {
 		$main_settings = WC_Order_Export_Admin::load_main_settings();
-		echo json_encode( WC_Order_Export_Data_Extractor_UI::get_products_like( $_REQUEST['q'], $main_settings['autocomplete_products_max'] ) );
+		echo json_encode( WC_Order_Export_Data_Extractor_UI::get_products_like( $_REQUEST['q'],
+			$main_settings['autocomplete_products_max'] ) );
 	}
 
 	public function get_users() {

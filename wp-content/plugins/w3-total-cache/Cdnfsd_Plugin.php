@@ -36,16 +36,16 @@ class Cdnfsd_Plugin {
 		add_action( 'w3tc_flush_post', array(
 				'\W3TC\Cdnfsd_CacheFlush',
 				'w3tc_flush_post'
-			), 3000, 1 );
+			), 3000, 2 );
 		add_action( 'w3tc_flushable_posts', '__return_true', 3000 );
 		add_action( 'w3tc_flush_posts', array(
 				'\W3TC\Cdnfsd_CacheFlush',
 				'w3tc_flush_all'
-			), 3000 );
+			), 3000, 1 );
 		add_action( 'w3tc_flush_url', array(
 				'\W3TC\Cdnfsd_CacheFlush',
 				'w3tc_flush_url'
-			), 3000, 1 );
+			), 3000, 2 );
 		add_filter( 'w3tc_flush_execute_delayed_operations', array(
 				'\W3TC\Cdnfsd_CacheFlush',
 				'w3tc_flush_execute_delayed_operations'

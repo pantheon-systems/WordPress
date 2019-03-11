@@ -13,59 +13,89 @@ if ( ! defined( 'WPINC' ) ) {
 	<div class="cli_sub_tab_container">		
 		<div class="cli_sub_tab_content" data-id="cookie-bar" style="display:block;">
 			<h3><?php _e('Cookie Bar','cookie-law-info');?></h3>
+			
 			<table class="form-table">
 			    <tr valign="top">
-			        <th scope="row"><label for="is_on_field"><?php _e('Cookie Bar is currently:', 'cookie-law-info'); ?></label></th>
+			        <th scope="row" style="width:250px;"><label for="is_on_field"><?php _e('Cookie Bar is currently:', 'cookie-law-info'); ?></label></th>
 			        <td>
 			            <input type="radio" id="is_on_field_yes" name="is_on_field" class="styled cli_bar_on" value="true" <?php echo ( $the_options['is_on'] == true ) ? ' checked="checked"' : ''; ?> /><?php _e('On', 'cookie-law-info'); ?>
 			            <input type="radio" id="is_on_field_no" name="is_on_field" class="styled" value="false" <?php echo ( $the_options['is_on'] == false ) ? ' checked="checked" ' : ''; ?> /><?php _e('Off', 'cookie-law-info'); ?>
 			        </td>
 			    </tr>
 			    <tr valign="top">
-			        <th scope="row"><label for="notify_position_vertical_field"><?php _e('Cookie Bar will be shown in:', 'cookie-law-info'); ?></label></th>
+			        <th scope="row"><label for="cookie_bar_as_field"><?php _e('Cookie bar as', 'cookie-law-info'); ?></label></th>
 			        <td>
-			            <select name="notify_position_vertical_field" class="vvv_combobox cli_form_toggle" cli_frm_tgl-target="cli_bar_pos">
-			                <?php
-			                if ($the_options['notify_position_vertical'] == "top") 
-			                {
-			                    echo '<option value="top" selected="selected">' . __('Header', 'cookie-law-info') . '</option>';
-			                    echo '<option value="bottom">' . __('Footer', 'cookie-law-info') . '</option>';
-			                } else {
-			                    echo '<option value="top">' . __('Header', 'cookie-law-info') . '</option>';
-			                    echo '<option value="bottom" selected="selected">' . __('Footer', 'cookie-law-info') . '</option>';
-			                }
-			                ?>
+			            <select name="cookie_bar_as_field" class="vvv_combobox cli_form_toggle" cli_frm_tgl-target="cli_bar_type">
+			            	<?php
+			            	$cookie_bar_as=$the_options['cookie_bar_as'];
+			            	?>
+			                <option value="banner" <?php echo $cookie_bar_as=='banner' ? 'selected' : ''; ?>>
+			                <?php _e('Banner', 'cookie-law-info'); ?>
+			            	</option>
+			                <option value="popup" <?php echo $cookie_bar_as=='popup' ? 'selected' : ''; ?>>
+			                <?php _e('Popup', 'cookie-law-info'); ?>
+			            	</option>
+			                <option value="widget" <?php echo $cookie_bar_as=='widget' ? 'selected' : ''; ?>>
+			                <?php _e('Widget', 'cookie-law-info'); ?>
+			            	</option>
 			            </select>
 			        </td>
 			    </tr>
-			    <!-- header_fix code here -->
-			    <tr valign="top" cli_frm_tgl-id="cli_bar_pos" cli_frm_tgl-val="top">
-			        <th scope="row"><label for="header_fix_field"><?php _e('Fix Cookie Bar to Header?', 'cookie-law-info'); ?></label></th>
-			        <td>
-			            <input type="radio" id="header_fix_field_yes" name="header_fix_field" class="styled" value="true" <?php echo ( $the_options['header_fix'] == true ) ? ' checked="checked"' : ''; ?> /> <?php _e('Yes', 'cookie-law-info'); ?>
-			            <input type="radio" id="iheader_fix_field_no" name="header_fix_field" class="styled" value="false" <?php echo ( $the_options['header_fix'] == false ) ? ' checked="checked"' : ''; ?> /> <?php _e('No', 'cookie-law-info'); ?>
-			            <span class="cli_form_help"><?php _e('If you select "Header" then you can optionally stick the cookie bar to the header. Will not have any effect if you select "Footer".', 'cookie-law-info'); ?></span>
-			        </td>
-			    </tr>
-			    <!-- /header_fix -->
+			    <tr valign="top" cli_frm_tgl-id="cli_bar_type" cli_frm_tgl-val="widget">
+				    <th scope="row"><label for="widget_position_field"><?php _e('Position', 'cookie-law-info'); ?></label></th>
+				    <td>
+				        <select name="widget_position_field" id="widget_position_field" class="vvv_combobox">
+			                <option value="left">Left</option>
+			                <option value="right">Right</option>
+			            </select>
+				    </td>
+				</tr>
 
-			    <tr valign="top">
-			        <th scope="row"><label for="as_popup_field"><?php _e('Cookie Bar as popup:', 'cookie-law-info'); ?></label></th>
-			        <td>
-			            <input type="radio" id="as_popup_field_yes" name="as_popup_field" class="styled cli_form_toggle" cli_frm_tgl-target="cli_bar_popup" value="true" <?php echo ( $the_options['as_popup'] == true ) ? ' checked="checked"' : ''; ?> /> <?php _e('Yes', 'cookie-law-info'); ?>
-			            <input type="radio" id="as_popup_field_no" name="as_popup_field" class="styled cli_form_toggle" cli_frm_tgl-target="cli_bar_popup" value="false" <?php echo ( $the_options['as_popup'] == false ) ? ' checked="checked"' : ''; ?> /> <?php _e('No', 'cookie-law-info'); ?>
-			        </td>
-			    </tr>
+			    <tr valign="top" cli_frm_tgl-id="cli_bar_type" cli_frm_tgl-val="popup">
+				    <th scope="row"><label for="popup_overlay_field"><?php _e('Add overlay?', 'cookie-law-info'); ?></label></th>
+				    <td>
+				        <input type="radio" id="popup_overlay_field_yes" name="popup_overlay_field" class="styled" value="true" <?php echo ( $the_options['popup_overlay'] == true ) ? ' checked="checked"' : ''; ?> /> <?php _e('Yes', 'cookie-law-info'); ?>
+				        <input type="radio" id="popup_overlay_field_no" name="popup_overlay_field" class="styled" value="false" <?php echo ( $the_options['popup_overlay'] == false ) ? ' checked="checked"' : ''; ?> /> <?php _e('No', 'cookie-law-info'); ?>
+				        <span class="cli_form_help"><?php _e('When the popup is active, an overlay will block the user from browsing the site.', 'cookie-law-info'); ?></span>
+				        <span class="cli_form_er cli_scroll_accept_er"><?php _e('`Accept on scroll` will not work along with this option.', 'cookie-law-info'); ?></span>
+				    </td>
+				</tr>
 
-			    <tr valign="top" cli_frm_tgl-id="cli_bar_popup" cli_frm_tgl-val="true">
-			        <th scope="row"><label for="popup_overlay_field"><?php _e('Add overlay?', 'cookie-law-info'); ?></label></th>
-			        <td>
-			            <input type="radio" id="popup_overlay_field_yes" name="popup_overlay_field" class="styled" value="true" <?php echo ( $the_options['popup_overlay'] == true ) ? ' checked="checked"' : ''; ?> /> <?php _e('Yes', 'cookie-law-info'); ?>
-			            <input type="radio" id="popup_overlay_field_no" name="popup_overlay_field" class="styled" value="false" <?php echo ( $the_options['popup_overlay'] == false ) ? ' checked="checked"' : ''; ?> /> <?php _e('No', 'cookie-law-info'); ?>
-			            <span class="cli_form_help"><?php _e('When the popup is active, an overlay will block the user from browsing the site.', 'cookie-law-info'); ?></span>
-			            <span class="cli_form_er cli_scroll_accept_er"><?php _e('`Accept on scroll` will not work along with this option.', 'cookie-law-info'); ?></span>
-			        </td>
-			    </tr>
+			    <tr valign="top" cli_frm_tgl-id="cli_bar_type" cli_frm_tgl-val="banner" cli_frm_tgl-lvl="1">
+				    <th scope="row"><label for="notify_position_vertical_field"><?php _e('Cookie Bar will be shown in:', 'cookie-law-info'); ?></label></th>
+				    <td>
+				        <select name="notify_position_vertical_field" class="vvv_combobox cli_form_toggle" cli_frm_tgl-target="cli_bar_pos">
+				            <?php
+				            if ($the_options['notify_position_vertical'] == "top") 
+				            {
+				                echo '<option value="top" selected="selected">' . __('Header', 'cookie-law-info') . '</option>';
+				                echo '<option value="bottom">' . __('Footer', 'cookie-law-info') . '</option>';
+				            } else {
+				                echo '<option value="top">' . __('Header', 'cookie-law-info') . '</option>';
+				                echo '<option value="bottom" selected="selected">' . __('Footer', 'cookie-law-info') . '</option>';
+				            }
+				            ?>
+				        </select>
+				    </td>
+				</tr>
+				<!-- header_fix code here -->
+				<tr valign="top" cli_frm_tgl-id="cli_bar_type" cli_frm_tgl-val="banner" cli_frm_tgl-lvl="1">
+					<td colspan="2" style="padding: 0px;">
+					<table>
+						<tr valign="top" cli_frm_tgl-id="cli_bar_pos" cli_frm_tgl-val="top" cli_frm_tgl-lvl="2">
+						    <th scope="row" style="width:250px;">
+						    	<label for="header_fix_field"><?php _e('Fix Cookie Bar to Header?', 'cookie-law-info'); ?></label></th>
+						    <td>
+						        <input type="radio" id="header_fix_field_yes" name="header_fix_field" class="styled" value="true" <?php echo ( $the_options['header_fix'] == true ) ? ' checked="checked"' : ''; ?> /> <?php _e('Yes', 'cookie-law-info'); ?>
+						        <input type="radio" id="iheader_fix_field_no" name="header_fix_field" class="styled" value="false" <?php echo ( $the_options['header_fix'] == false ) ? ' checked="checked"' : ''; ?> /> <?php _e('No', 'cookie-law-info'); ?>
+						        <span class="cli_form_help"><?php _e('If you select "Header" then you can optionally stick the cookie bar to the header. Will not have any effect if you select "Footer".', 'cookie-law-info'); ?></span>
+						    </td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+				<!-- /header_fix -->
+
 			    <tr valign="top">
 			        <th scope="row"><label for="notify_animate_show_field"><?php _e('On load', 'cookie-law-info'); ?></label></th>
 			        <td>
@@ -126,6 +156,9 @@ if ( ! defined( 'WPINC' ) ) {
 			        </td>
 			    </tr>
 			</table>
+
+
+
 		</div>
 		<div class="cli_sub_tab_content" data-id="show-again">
 			<h3><?php _e('Show Again Tab','cookie-law-info');?></h3>
@@ -137,7 +170,8 @@ if ( ! defined( 'WPINC' ) ) {
 			            <input type="radio" id="showagain_tab_field_no" name="showagain_tab_field" class="styled" value="false" <?php echo ( $the_options['showagain_tab'] == false ) ? ' checked="checked" ' : ''; ?> /> <?php _e('No', 'cookie-law-info'); ?>
 			        </td>
 			    </tr>
-			    <tr valign="top">
+			    
+			    <tr valign="top" cli_frm_tgl-id="cli_bar_type" cli_frm_tgl-val="banner" cli_frm_tgl-lvl="0">
 			        <th scope="row"><label for="notify_position_horizontal_field"><?php _e('Tab Position', 'cookie-law-info'); ?></label></th>
 			        <td>
 			            <select name="notify_position_horizontal_field" class="vvv_combobox">
@@ -153,6 +187,30 @@ if ( ! defined( 'WPINC' ) ) {
 			            </select>
 			        </td>
 			    </tr>
+
+			    <tr valign="top" cli_frm_tgl-id="cli_bar_type" cli_frm_tgl-val="popup" cli_frm_tgl-lvl="0">
+			        <th scope="row"><label for="popup_showagain_position_field"><?php _e('Tab Position', 'cookie-law-info'); ?></label></th>
+			        <td>
+			            <select name="popup_showagain_position_field" class="vvv_combobox">
+			            	<?php
+			            	$pp_sa_pos=$the_options['popup_showagain_position'];
+			            	?>
+			                <option value="bottom-right" <?php echo $pp_sa_pos=='bottom-right' ? 'selected' : ''; ?>>
+			                	<?php _e('Bottom Right', 'cookie-law-info') ?>
+			                </option>
+			                <option value="bottom-left" <?php echo $pp_sa_pos=='bottom-left' ? 'selected' : ''; ?>>
+			                	<?php _e('Bottom Left', 'cookie-law-info') ?>			                		
+			                </option>
+			                <option value="top-right" <?php echo $pp_sa_pos=='top-right' ? 'selected' : ''; ?>>
+			                	<?php _e('Top Right', 'cookie-law-info') ?>
+			                </option>
+			                <option value="top-left" <?php echo $pp_sa_pos=='top-left' ? 'selected' : ''; ?>>
+			                	<?php _e('Top Left', 'cookie-law-info') ?>
+			                </option>
+			            </select>
+			        </td>
+			    </tr>
+
 			    <tr valign="top">
 			        <th scope="row"><label for="showagain_x_position_field"><?php _e('From Left Margin', 'cookie-law-info'); ?></label></th>
 			        <td>

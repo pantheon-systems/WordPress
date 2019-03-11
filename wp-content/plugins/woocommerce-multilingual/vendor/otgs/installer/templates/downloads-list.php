@@ -32,7 +32,7 @@
                                             'repository_id' => $repository_id
                                         );
                                     ?>
-                                    <input type="checkbox" name="downloads[]" value="<?php echo base64_encode(json_encode($download_data)); ?>" <?php 
+                                    <input type="checkbox" name="downloads[]" value="<?php echo base64_encode(json_encode($download_data)); ?>" data-slug="<?php echo $download['slug'] ?>" <?php
                                         if( $this->plugin_is_installed($download['name'], $download['slug'], $download['version'] )
                                             && ! $this->plugin_is_embedded_version( $download['name'], $download['slug'] )
                                                 || WP_Installer()->dependencies->cant_download( $repository_id ) ): ?>disabled="disabled"<?php endif; ?> />&nbsp;

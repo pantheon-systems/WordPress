@@ -30,7 +30,12 @@
                 error_fields       = new Array(),
                 product_row        = form.find( '.product-row' ),
                 licence_activation = $( '.licence-activation' ),
-                spinner            = $( '#products-to-active' ).find( '.spinner' );
+                spinner            = $( '#products-to-active' ).find( '.spinner' ),
+                is_mail            = function( val ){
+                    /* https://stackoverflow.com/questions/2855865/jquery-validate-e-mail-address-regex */
+                    var re = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+                    return re.test( val );
+                };
 
             /* Init Input Fields */
             message.empty();
@@ -41,10 +46,18 @@
             spinner.addClass( 'show' );
             t.add( licence_activation ).prop( "disabled", true ).addClass( 'clicked' );
 
-            if ( '' === email_val ) {
+            if ( '' === email_val || ! is_mail( email_val ) ) {
                 error = true;
-                error_fields[ error_fields.length ] = licence_message.email;
                 email.addClass( 'require' );
+
+                if( '' === email_val ){
+                    error_fields[ error_fields.length ] = licence_message.email;
+                }
+
+                else {
+                    error_fields[ error_fields.length ] = licence_message.email;
+                }
+
             }
 
             if ( '' === licence_key_val ) {
@@ -56,7 +69,7 @@
             if ( false === error ) {
                 jQuery.ajax( {
                                  type   : 'POST',
-                                 url    : ajaxurl,
+                                 url    : typeof ajaxurl != 'undefined' ? ajaxurl : yith_ajax.url,
                                  data   : data,
                                  success: function ( response ) {
 
@@ -157,23 +170,25 @@
                                  },
                                  success: function ( response ) {
                                      message.css( 'maxWidth', activated_table.width() );
-                                     if ( false == response.activated && typeof response.error == 'undefined' ) {
-                                         $( '.product-licence-activation' ).empty().replaceWith( response.template );
-                                         licence_api();
-                                     }
-
-                                     if ( false == response.activated && typeof response.error != 'undefined' ) {
-                                         message.find( 'p.yith-licence-notice-message' ).html( response.error );
-                                         message.removeClass( 'notice-success' ).addClass( 'notice-error visible' );
-                                         t.add( renew ).add( deactive ).add( renew ).prop( "disabled", false ).removeClass( 'clicked' );
-                                         $( '#activated-products' ).find( '.spinner' ).removeClass( 'show' );
-                                     }
-
-                                     else if ( false == response ) {
+                                     if ( false == response ) {
                                          message.find( 'p.yith-licence-notice-message' ).html( licence_message.server );
                                          message.removeClass( 'notice-success' ).addClass( 'notice-error visible' );
                                          t.add( renew ).add( deactive ).add( renew ).prop( "disabled", false ).removeClass( 'clicked' );
                                          $( '#activated-products' ).find( '.spinner' ).removeClass( 'show' );
+                                     }
+
+                                     else {
+                                         if ( false == response.activated ) {
+                                             $( '.product-licence-activation' ).empty().replaceWith( response.template );
+                                             licence_api();
+                                         }
+
+                                         if ( typeof response.error != 'undefined' ) {
+                                             message.find( 'p.yith-licence-notice-message' ).html( response.error );
+                                             message.removeClass( 'notice-success' ).addClass( 'notice-error visible' );
+                                             t.add( renew ).add( deactive ).add( renew ).prop( "disabled", false ).removeClass( 'clicked' );
+                                             $( '#activated-products' ).find( '.spinner' ).removeClass( 'show' );
+                                         }
                                      }
                                  }
                              } );

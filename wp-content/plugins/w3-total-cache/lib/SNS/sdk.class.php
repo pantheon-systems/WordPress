@@ -1382,6 +1382,22 @@ class CFRuntime
 						}
 					}
 					break;
+
+				case 'br':
+					if (strpos($headers['_info']['url'], 'monitoring.') !== false)
+					{
+						// CloudWatchWatch incorrectly does nothing when they say br.
+						continue;
+					}
+					else
+					{
+						// Everyone else uses br correctly.
+						if (($uncompressed = brotli_uncompress($body)) !== false)
+						{
+							$body = $uncompressed;
+						}
+					}
+					break;
 			}
 		}
 

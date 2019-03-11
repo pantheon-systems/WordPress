@@ -306,7 +306,7 @@ class CdnEngine_S3_Cf extends CdnEngine_S3 {
 
 				foreach ( $_domains as $_domain ) {
 					if ( !in_array( $_domain, $cnames ) ) {
-						$error = sprintf( 'Domain name %s is not in distribution CNAME list.', $_domain );
+						$error = sprintf( 'Domain name %s is not in distribution <acronym title="Canonical Name">CNAME</acronym> list.', $_domain );
 
 						return false;
 					}

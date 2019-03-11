@@ -334,13 +334,24 @@
     .otgs-installer-keepuptodate small {
         -webkit-margin-start: 25px;
         -moz-margin-start: 25px;
-        margin-start: 25px;
+        margin-inline-start: 25px;
     }
 }
 
 .otgs-installer-component-setting .spinner.otgs-components-report-setting-spinner {
     float: right;
 }
+.rtl .otgs-installer-component-setting .spinner.otgs-components-report-setting-spinner {
+    float: left;
+}
 .otgs-installer-component-privacy-policy {
     margin-top: 30px;
+}
+
+.otgs-external-link:after {
+    font-family: dashicons!important;
+    content: "\A0\F504";
+    vertical-align: baseline;
+    line-height: 1;
+    display: inline-block;
 }

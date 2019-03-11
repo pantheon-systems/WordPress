@@ -21,9 +21,9 @@ class Generic_WidgetServices {
 	static public function admin_init_w3tc_dashboard() {
 		$o = new Generic_WidgetServices();
 
-		add_action( 'w3tc_widget_setup', array( $o, 'wp_dashboard_setup' ), 3 );
+		add_action( 'w3tc_widget_setup', array( $o, 'wp_dashboard_setup' ), 5000 );
 		add_action( 'w3tc_network_dashboard_setup',
-			array( $o, 'wp_dashboard_setup' ), 3 );
+			array( $o, 'wp_dashboard_setup' ), 5000 );
 	}
 
 	function wp_dashboard_setup() {
@@ -42,14 +42,14 @@ class Generic_WidgetServices {
 		$v = get_site_option( 'w3tc_generic_widgetservices' );
 		try {
 			$v = json_decode( $v, true );
-			if ( isset( $v['items'] ) && isset( $v['expires'] ) && 
+			if ( isset( $v['items'] ) && isset( $v['expires'] ) &&
 				$v['expires'] > time() )
 				return $v['items'];
 		} catch ( \Exception $e ) {
 		}
 
 
-		$result = wp_remote_request( W3TC_SUPPORT_SERVICES_URL, 
+		$result = wp_remote_request( W3TC_SUPPORT_SERVICES_URL,
 			array( 'method' => 'GET' ) );
 
 		if ( is_wp_error( $result ) )
@@ -60,10 +60,10 @@ class Generic_WidgetServices {
 		if ( is_null( $response_json ) || !isset( $response_json['items'] ) )
 			return null;
 
-		update_site_option( 'w3tc_generic_widgetservices', 
+		update_site_option( 'w3tc_generic_widgetservices',
 			json_encode( array(
-				'items' => $response_json['items'],
-				'expires' => time() + 3600 * 24 * 7 
+				'content' => $response_json,
+				'expires' => time() + 3600 * 24 * 7
 			) ) );
 
 		return $response_json['items'];

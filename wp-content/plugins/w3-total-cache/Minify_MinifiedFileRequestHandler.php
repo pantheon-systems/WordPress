@@ -54,6 +54,15 @@ class Minify_MinifiedFileRequestHandler {
 			if ( ! $cache->store( basename( $file ), array( 'content' => 'content ok' ) ) ) {
 				echo 'error storing';
 			} else {
+				if ( ( function_exists( 'brotli_compress' ) &&
+				       $this->_config->get_boolean( 'browsercache.enabled' ) &&
+				       $this->_config->get_boolean( 'browsercache.cssjs.brotli' ) ) )
+					if ( !$cache->store( basename( $file ) . '_br',
+						array( 'content' => brotli_compress( 'content ok' ) ) ) ) {
+						echo 'error storing';
+						exit();
+					}
+
 				if ( ( function_exists( 'gzencode' ) &&
 						$this->_config->get_boolean( 'browsercache.enabled' ) &&
 						$this->_config->get_boolean( 'browsercache.cssjs.compression' ) ) )
@@ -134,7 +143,8 @@ class Minify_MinifiedFileRequestHandler {
 				'encodeOutput' => ( $browsercache &&
 					!defined( 'W3TC_PAGECACHE_OUTPUT_COMPRESSION_OFF' ) &&
 					!$quiet &&
-					$this->_config->get_boolean( 'browsercache.cssjs.compression' ) ),
+                    ( $this->_config->get_boolean( 'browsercache.cssjs.compression' ) ||
+                    $this->_config->get_boolean( 'browsercache.cssjs.brotli' ) ) ),
 				'bubbleCssImports' => ( $this->_config->get_string( 'minify.css.imports' ) == 'bubble' ),
 				'processCssImports' => ( $this->_config->get_string( 'minify.css.imports' ) == 'process' ),
 				'cacheHeaders' => array(
@@ -593,7 +603,11 @@ class Minify_MinifiedFileRequestHandler {
 				Util_File::mkdir_from_safe( dirname( $cache_path ), W3TC_CACHE_DIR );
 			}
 
-			Util_Http::download( $url, $cache_path );
+			// google-fonts (most used for external inclusion)
+			// doesnt return full content (unicode-range) for simple useragents
+			Util_Http::download( $url, $cache_path,
+				array( 'user-agent' =>
+					'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92' ) );
 		}
 
 		return file_exists( $cache_path ) ? $this->_get_minify_source( $cache_path, $url ) : false;

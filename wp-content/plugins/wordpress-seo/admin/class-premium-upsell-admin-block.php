@@ -9,10 +9,19 @@
  * Class WPSEO_Premium_Upsell_Admin_Block
  */
 class WPSEO_Premium_Upsell_Admin_Block {
-	/** @var string Hook to display the block on. */
+
+	/**
+	 * Hook to display the block on.
+	 *
+	 * @var string
+	 */
 	protected $hook;
 
-	/** @var string Identifier to use in the dismissal functionality. */
+	/**
+	 * Identifier to use in the dismissal functionality.
+	 *
+	 * @var string
+	 */
 	protected $identifier = 'premium_upsell_admin_block';
 
 	/**
@@ -60,13 +69,15 @@ class WPSEO_Premium_Upsell_Admin_Block {
 		$dismiss_msg = sprintf( __( 'Dismiss %s upgrade notice', 'wordpress-seo' ), 'Yoast SEO Premium' );
 
 		/* translators: %s expands to Yoast SEO Premium */
-		$button_text = sprintf( __( 'Get %s', 'wordpress-seo' ), 'Yoast SEO Premium' );
+		$button_text  = esc_html( sprintf( __( 'Get %s', 'wordpress-seo' ), 'Yoast SEO Premium' ) );
+		$button_text .= '<span class="screen-reader-text">' . esc_html__( '(Opens in a new browser tab)', 'wordpress-seo' ) . '</span>' .
+			'<span aria-hidden="true" class="yoast-button-upsell__caret"></span>';
 
 		$upgrade_button = sprintf(
-			'<a id="wpseo-%1$s-popup-button" class="yoast-button-upsell" href="%2$s" target="_blank" rel="noreferrer noopener">%3$s</a>',
+			'<a id="wpseo-%1$s-popup-button" class="yoast-button-upsell" href="%2$s" target="_blank">%3$s</a>',
 			$this->identifier,
-			$url,
-			esc_html( $button_text )
+			esc_url( $url ),
+			$button_text
 		);
 
 		echo '<div class="' . esc_attr( $class ) . '">';
@@ -87,7 +98,7 @@ class WPSEO_Premium_Upsell_Admin_Block {
 		'</h2>';
 		echo '<ul class="' . esc_attr( $class . '--motivation' ) . '">' . $arguments_html . '</ul>';
 
-		echo '<p><a href="' . esc_url( $url ) . '" target="_blank">' . $upgrade_button . '</a><br />';
+		echo '<p>' . $upgrade_button . '</p>';
 		echo '</div>';
 
 		echo '</div>';

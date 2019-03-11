@@ -3854,7 +3854,20 @@ class nusoap_server extends nusoap_base {
 		// uncompress if necessary
 		if (isset($this->headers['content-encoding']) && $this->headers['content-encoding'] != '') {
 			$this->debug('got content encoding: ' . $this->headers['content-encoding']);
-			if ($this->headers['content-encoding'] == 'deflate' || $this->headers['content-encoding'] == 'gzip') {
+			if ($this->headers['content-encoding'] == 'br') {
+				// if decoding works, use it. else assume data wasn't brotli compressed
+				if (function_exists('brotli_uncompress')) {
+					if ($this->headers['content-encoding'] == 'deflate' && $debrdata = @brotli_uncompress($data)) {
+						$data = $debrdata;
+					} else {
+						$this->fault('SOAP-ENV:Client', 'Errors occurred when trying to decode the data');
+						return;
+					}
+				} else {
+					$this->fault('SOAP-ENV:Client', 'This Server does not support compressed data');
+					return;
+				}
+			} elseif ($this->headers['content-encoding'] == 'deflate' || $this->headers['content-encoding'] == 'gzip') {
 		    	// if decoding works, use it. else assume data wasn't gzencoded
 				if (function_exists('gzuncompress')) {
 					if ($this->headers['content-encoding'] == 'deflate' && $degzdata = @gzuncompress($data)) {
@@ -4182,7 +4195,19 @@ class nusoap_server extends nusoap_base {
 		// NOTE: there is no way to know whether the Web server will also compress
 		// this data.
 		if (strlen($payload) > 1024 && isset($this->headers) && isset($this->headers['accept-encoding'])) {	
-			if (strstr($this->headers['accept-encoding'], 'gzip')) {
+			if (strstr($this->headers['accept-encoding'], 'br')) {
+				if (function_exists('brotli_compress')) {
+					if (isset($this->debug_flag) && $this->debug_flag) {
+						$payload .= "<!-- Content being brotli compressed -->";
+					}
+					$this->outgoing_headers[] = "Content-Encoding: br";
+					$payload = brotli_compress($payload);
+				} else {
+					if (isset($this->debug_flag) && $this->debug_flag) {
+						$payload .= "<!-- Content will not be brotli compressed: no brotli_compress -->";
+					}
+				}
+			} elseif (strstr($this->headers['accept-encoding'], 'gzip')) {
 				if (function_exists('gzencode')) {
 					if (isset($this->debug_flag) && $this->debug_flag) {
 						$payload .= "<!-- Content being gzipped -->";

@@ -128,7 +128,8 @@ $keys = array(
 		'default' => array(
 			'gdsr_',
 			'wp_rg_',
-			'_wp_session_'
+			'_wp_session_',
+			'_wc_session_'
 		)
 	),
 	'dbcache.reject.uri' => array(
@@ -979,9 +980,13 @@ $keys = array(
 		'type' => 'boolean',
 		'default' => false
 	),
+	'cdn.flush_manually' => array(
+		'type' => 'boolean',
+		'default' => false
+	),
 	'cdn.engine' => array(
 		'type' => 'string',
-		'default' => 'maxcdn'
+		'default' => 'stackpath2'
 	),
 	'cdn.uploads.enable' => array(
 		'type' => 'boolean',
@@ -1094,6 +1099,18 @@ $keys = array(
 	'cdn.ftp.ssl' => array(
 		'type' => 'string',
 		'default' => 'auto'
+	),
+	'cdn.ftp.default_keys' => array(
+		'type' => 'boolean',
+		'default' => true
+	),
+	'cdn.ftp.pubkey' => array(
+		'type' => 'string',
+		'default' => ''
+	),
+	'cdn.ftp.privkey' => array(
+		'type' => 'string',
+		'default' => ''
 	),
 
 	'cdn.google_drive.client_id' => array(
@@ -1433,6 +1450,34 @@ $keys = array(
 		'type' => 'integer',
 		'default' => 0
 	),
+	'cdn.stackpath2.client_id' => array(
+		'type' => 'string',
+		'default' => ''
+	),
+	'cdn.stackpath2.client_secret' => array(
+		'type' => 'string',
+		'default' => ''
+	),
+	'cdn.stackpath2.stack_id' => array(
+		'type' => 'string',
+		'default' => ''
+	),
+	'cdn.stackpath2.site_id' => array(
+		'type' => 'string',
+		'default' => 0
+	),
+	'cdn.stackpath2.site_root_domain' => array(
+		'type' => 'string',
+		'default' => 0
+	),
+	'cdn.stackpath2.domain' => array(
+		'type' => 'array',
+		'default' => array()
+	),
+	'cdn.stackpath2.ssl' => array(
+		'type' => 'string',
+		'default' => 'auto'
+	),
 	'cdn.reject.admins' => array(
 		'type' => 'boolean',
 		'default' => false
@@ -1517,6 +1562,34 @@ $keys = array(
 		'type' => 'integer',
 		'default' => 0
 	),
+	'cdnfsd.stackpath2.client_id' => array(
+		'type' => 'string',
+		'default' => ''
+	),
+	'cdnfsd.stackpath2.client_secret' => array(
+		'type' => 'string',
+		'default' => ''
+	),
+	'cdnfsd.stackpath2.stack_id' => array(
+		'type' => 'string',
+		'default' => ''
+	),
+	'cdnfsd.stackpath2.site_id' => array(
+		'type' => 'string',
+		'default' => 0
+	),
+	'cdnfsd.stackpath2.site_root_domain' => array(
+		'type' => 'string',
+		'default' => 0
+	),
+	'cdnfsd.stackpath2.domain' => array(
+		'type' => 'array',
+		'default' => array()
+	),
+	'cdnfsd.stackpath2.ssl' => array(
+		'type' => 'string',
+		'default' => 'auto'
+	),
 
 	'varnish.configuration_overloaded' => array(
 		'type' => 'boolean',
@@ -1555,7 +1628,7 @@ $keys = array(
 		'type' => 'array',
 		'default' => array(
 			'robots\.txt',
-			'[a-z0-9_\-]*sitemap[a-z0-9_\-]*\.(xml|xsl|html)(\.gz)?'
+			'[a-z0-9_\-]*sitemap[a-z0-9_\.\-]*\.(xml|xsl|html)(\.gz)?'
 		)
 	),
 	'browsercache.cssjs.last_modified' => array(
@@ -1565,6 +1638,10 @@ $keys = array(
 	'browsercache.cssjs.compression' => array(
 		'type' => 'boolean',
 		'default' => true
+	),
+	'browsercache.cssjs.brotli' => array(
+		'type' => 'boolean',
+		'default' => false
 	),
 	'browsercache.cssjs.expires' => array(
 		'type' => 'boolean',
@@ -1606,6 +1683,10 @@ $keys = array(
 		'type' => 'boolean',
 		'default' => true
 	),
+	'browsercache.html.brotli' => array(
+		'type' => 'boolean',
+		'default' => false
+	),
 	'browsercache.html.last_modified' => array(
 		'type' => 'boolean',
 		'default' => true
@@ -1645,6 +1726,10 @@ $keys = array(
 	'browsercache.other.compression' => array(
 		'type' => 'boolean',
 		'default' => true
+	),
+	'browsercache.other.brotli' => array(
+		'type' => 'boolean',
+		'default' => false
 	),
 	'browsercache.other.expires' => array(
 		'type' => 'boolean',
@@ -1754,14 +1839,14 @@ $keys = array(
 		'type' => 'string',
 		'default' => '0'
 	),
-    'browsercache.security.referrer.policy' => array(
-        'type' => 'boolean',
-        'default' => 'false'
-    ),
-    'browsercache.security.referrer.policy.directive' => array(
-        'type' => 'string',
-        'default' => '0'
-    ),
+	'browsercache.security.referrer.policy' => array(
+		'type' => 'boolean',
+		'default' => 'false'
+	),
+	'browsercache.security.referrer.policy.directive' => array(
+		'type' => 'string',
+		'default' => 'no-referrer-when-downgrade'
+	),
 	'browsercache.security.csp' => array(
 		'type' => 'boolean',
 		'default' => false
@@ -1836,63 +1921,136 @@ $keys = array(
 	'mobile.rgroups' => array(
 		'type' => 'array',
 		'default' => array(
-			'high' => array(
+			'tablets' => array(
 				'theme' => '',
 				'enabled' => false,
 				'redirect' => '',
 				'agents' => array(
-					'android',
-					'mobi',
-					'bada',
-					'incognito',
+					'a1-32ab0',
+					'a210',
+					'a211',
+					'b6000-h',
+					'b8000-h',
+					'bnrv200',
+					'bntv400',
+					'darwin',
+					'gt-n8005',
+					'gt-p3105',
+					'gt-p6810',
+					'gt-p7510',
+					'hmj37',
+					'hp-tablet',
+					'hp\sslate',
+					'hp\sslatebook',
+					'ht7s3',
+					'ideatab_a1107',
+					'ideataba2109a',
+					'ideos\ss7',
+					'imm76d',
+					'ipad',
+					'k00f',
+					'kfjwi',
+					'kfot',
+					'kftt',
 					'kindle',
-					'maemo',
-					'opera\ mini',
-					's8000',
-					'series60',
-					'ucbrowser',
-					'ucweb',
-					'webmate',
-					'webos'
+					'l-06c',
+					'lg-f200k',
+					'lg-f200l',
+					'lg-f200s',
+					'm470bsa',
+					'm470bse',
+					'maxwell',
+					'me173x',
+					'mediapad',
+					'midc497',
+					'msi\senjoy\s10\splus',
+					'mz601',
+					'mz616',
+					'nexus',
+					'nookcolor',
+					'pg09410',
+					'pg41200',
+					'pmp5570c',
+					'pmp5588c',
+					'pocketbook',
+					'qmv7a',
+					'sgp311',
+					'sgpt12',
+					'shv-e230k',
+					'shw-m305w',
+					'shw-m380w',
+					'sm-p605',
+					'smarttab',
+					'sonysgp321',
+					'sph-p500',
+					'surfpad',
+					'tab07-200',
+					'tab10-201',
+					'tab465euk',
+					'tab474',
+					'tablet',
+					'tegranote',
+					'tf700t',
+					'thinkpad',
+					'viewpad',
+					'voltaire'
 				)
 			),
-			'low' => array(
+			'phones' => array(
 				'theme' => '',
 				'enabled' => false,
 				'redirect' => '',
 				'agents' => array(
-					'2\.0\ mmp',
+					'(android|bb\d+|meego).+mobile',
 					'240x320',
+					'2.0\ mmp',
+					'\bppc\b',
+					'acer\ s100',
 					'alcatel',
 					'amoi',
+					'archos5',
 					'asus',
-					'au\-mic',
+					'au-mic',
 					'audiovox',
 					'avantgo',
+					'bada',
 					'benq',
 					'bird',
 					'blackberry',
 					'blazer',
 					'cdm',
 					'cellphone',
+					'cupcake',
 					'danger',
 					'ddipocket',
 					'docomo',
+					'docomo\ ht-03a',
 					'dopod',
-					'elaine/3\.0',
+					'dream',
+					'elaine/3.0',
 					'ericsson',
 					'eudoraweb',
 					'fly',
+					'froyo',
+					'googlebot-mobile',
 					'haier',
 					'hiptop',
-					'hp\.ipaq',
+					'hp.ipaq',
 					'htc',
+					'htc\ hero',
+					'htc\ magic',
+					'htc_dream',
+					'htc_magic',
 					'huawei',
-					'i\-mobile',
+					'i-mobile',
 					'iemobile',
 					'iemobile/7',
+					'iemobile/7.0',
 					'iemobile/9',
-					'j\-phone',
+					'incognito',
+					'iphone',
+					'ipod',
+					'j-phone',
 					'kddi',
 					'konka',
 					'kwc',
@@ -1900,27 +2058,34 @@ $keys = array(
 					'lenovo',
 					'lg',
 					'lg/u990',
+					'lg-gw620',
 					'lge\ vx',
+					'liquid\ build',
+					'maemo',
 					'midp',
-					'midp\-2\.0',
+					'midp-2.0',
 					'mmef20',
 					'mmp',
 					'mobilephone',
-					'mot\-v',
+					'mot-mb200',
+					'mot-mb300',
+					'mot-v',
 					'motorola',
-					'msie\ 10\.0',
+					'msie\ 10.0',
 					'netfront',
 					'newgen',
 					'newt',
+					'nexus\ 7',
+					'nexus\ one',
 					'nintendo\ ds',
 					'nintendo\ wii',
 					'nitro',
 					'nokia',
 					'novarra',
-					'o2',
 					'openweb',
+					'opera\ mini',
 					'opera\ mobi',
-					'opera\.mobi',
+					'opera.mobi',
 					'p160u',
 					'palm',
 					'panasonic',
@@ -1932,40 +2097,52 @@ $keys = array(
 					'playbook',
 					'playstation\ portable',
 					'portalmmm',
-					'\bppc\b',
 					'proxinet',
 					'psp',
 					'qtek',
+					's8000',
 					'sagem',
 					'samsung',
+					'samsung-s8000',
 					'sanyo',
 					'sch',
-					'sch\-i800',
+					'sch-i800',
 					'sec',
 					'sendo',
+					'series60.*webkit',
+					'series60/5.0',
 					'sgh',
 					'sharp',
-					'sharp\-tq\-gx10',
+					'sharp-tq-gx10',
 					'small',
 					'smartphone',
 					'softbank',
 					'sonyericsson',
+					'sonyericssone10',
+					'sonyericssonu20',
+					'sonyericssonx10',
 					'sph',
 					'symbian',
 					'symbian\ os',
 					'symbianos',
+					't-mobile\ mytouch\ 3g',
+					't-mobile\ opal',
+					'tattoo',
 					'toshiba',
+					'touch',
 					'treo',
-					'ts21i\-10',
-					'up\.browser',
-					'up\.link',
+					'ts21i-10',
+					'up.browser',
+					'up.link',
 					'uts',
 					'vertu',
 					'vodafone',
 					'wap',
+					'webmate',
+					'webos',
 					'willcome',
 					'windows\ ce',
-					'windows\.ce',
+					'windows.ce',
 					'winwap',
 					'xda',
 					'xoom',
@@ -2109,8 +2286,7 @@ $keys = array(
 		'type' => 'array',
 		'default' => array(
 			'newrelic' => 'w3-total-cache/Extension_NewRelic_Plugin.php',
-			'fragmentcache' => 'w3-total-cache/Extension_FragmentCache_Plugin.php',
-			'swarmify' => 'w3-total-cache/Extension_Swarmify_Plugin.php'
+			'fragmentcache' => 'w3-total-cache/Extension_FragmentCache_Plugin.php'
 		)
 	),
 	'extensions.active_frontend' => array(

@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YITH Plugin Starter 1.0.0 Plugin FW\n"
 "Report-Msgid-Bugs-To: Your Inspiration Themes <plugins@yithemes.com>\n"
-"POT-Creation-Date: 2018-10-23 15:44+0200\n"
-"PO-Revision-Date: 2018-10-23 15:55+0200\n"
+"POT-Creation-Date: 2019-02-04 16:06+0100\n"
+"PO-Revision-Date: 2019-02-04 16:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: YIThemes <plugins@yithemes.com>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
 "_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
 "esc_html_x:1,2c\n"
@@ -277,16 +277,16 @@ msgstr "Perderai tutti i cambiamenti effettuati se lasci questa pagina."
 msgid "Plugin Settings"
 msgstr "Impostazioni plugin"
 
-#: lib/yit-plugin-panel.php:335 lib/yit-plugin-panel.php:338
+#: lib/yit-plugin-panel.php:339 lib/yit-plugin-panel.php:342
 msgid "How to install premium version"
 msgstr "Come installare la versione premium"
 
-#: lib/yit-plugin-panel.php:389 lib/yit-plugin-subpanel.php:156
+#: lib/yit-plugin-panel.php:393 lib/yit-plugin-subpanel.php:156
 #: templates/panel/woocommerce/woocommerce-form.php:11
 msgid "Save Changes"
 msgstr "Salva modifiche"
 
-#: lib/yit-plugin-panel.php:392 lib/yit-plugin-subpanel.php:159
+#: lib/yit-plugin-panel.php:396 lib/yit-plugin-subpanel.php:159
 #: templates/panel/woocommerce/woocommerce-form.php:14
 msgid ""
 "If you continue with this action, you will reset all options in this page."
@@ -294,53 +294,53 @@ msgstr ""
 "Se prosegui con questa azione, tutte le opzioni di questa pagina saranno "
 "reimpostate."
 
-#: lib/yit-plugin-panel.php:394 lib/yit-plugin-subpanel.php:161
+#: lib/yit-plugin-panel.php:398 lib/yit-plugin-subpanel.php:161
 msgid "Reset to default"
 msgstr "Ripristina configurazione predefinita"
 
-#: lib/yit-plugin-panel.php:395 lib/yit-plugin-subpanel.php:162
+#: lib/yit-plugin-panel.php:399 lib/yit-plugin-subpanel.php:162
 #: templates/panel/woocommerce/woocommerce-form.php:18
 msgid "Are you sure?"
 msgstr "Sei sicuro?"
 
-#: lib/yit-plugin-panel.php:529
+#: lib/yit-plugin-panel.php:533
 msgid ""
 "The element you have entered already exists. Please, enter another name."
 msgstr "L'elemento inserito esiste già. Per favore, inserisci un altro nome."
 
-#: lib/yit-plugin-panel.php:530
+#: lib/yit-plugin-panel.php:534
 msgid "Settings saved"
 msgstr "Impostazioni salvate"
 
-#: lib/yit-plugin-panel.php:531
+#: lib/yit-plugin-panel.php:535
 msgid "Settings reset"
 msgstr "Impostazioni azzerate"
 
-#: lib/yit-plugin-panel.php:532
+#: lib/yit-plugin-panel.php:536
 msgid "Element deleted correctly."
 msgstr "Elemento rimosso correttamente."
 
-#: lib/yit-plugin-panel.php:533 lib/yit-plugin-panel.php:534
+#: lib/yit-plugin-panel.php:537 lib/yit-plugin-panel.php:538
 msgid "Element updated correctly."
 msgstr "Elemento aggiornato correttamente."
 
-#: lib/yit-plugin-panel.php:535
+#: lib/yit-plugin-panel.php:539
 msgid "Database imported correctly."
 msgstr "Database importato correttamente."
 
-#: lib/yit-plugin-panel.php:536
+#: lib/yit-plugin-panel.php:540
 msgid "An error has occurred during import. Please try again."
 msgstr "Si è verificato un errore durante l'importazione. Prova di nuovo."
 
-#: lib/yit-plugin-panel.php:537
+#: lib/yit-plugin-panel.php:541
 msgid "The added file is not valid."
 msgstr "Il file aggiunto non è valido."
 
-#: lib/yit-plugin-panel.php:538
+#: lib/yit-plugin-panel.php:542
 msgid "Sorry, import is disabled."
 msgstr "Ci dispiace, l'importazione è disabilitata."
 
-#: lib/yit-plugin-panel.php:539
+#: lib/yit-plugin-panel.php:543
 msgid "Sorting successful."
 msgstr "Ordinamento effettuato con successo."
 
@@ -395,42 +395,60 @@ msgstr ""
 msgid "An unexpected error occurred, please try again later. Thanks!"
 msgstr "Si è verificato un errore inaspettato, riprova più tardi. Grazie!"
 
-#: lib/yit-upgrade.php:190
+#: lib/yit-upgrade.php:196
 msgid "There is a new version of %plugin_name% available."
 msgstr "Una nuova versione di %plugin_name% è disponibile."
 
-#: lib/yit-upgrade.php:191
+#: lib/yit-upgrade.php:197
 msgid "View version %latest% details."
 msgstr "Visualizza i dettagli della versione %latest%."
 
-#: lib/yit-upgrade.php:192
+#: lib/yit-upgrade.php:198
 msgid "Automatic update is unavailable for this plugin,"
 msgstr "L'aggiornamento automatico non è disponibile per questo plugin,"
 
-#: lib/yit-upgrade.php:193
+#: lib/yit-upgrade.php:199
 msgid ""
 "please <a href=\"%activate_link%\">activate</a> your copy of %plugin_name%."
 msgstr ""
 "per favore, <a href=\"%activate_link%\">attiva</a> la tua copia di "
 "%plugin_name%."
 
-#: lib/yit-upgrade.php:194
+#: lib/yit-upgrade.php:200
 msgid "Update now."
 msgstr "Aggiorna adesso."
 
-#: lib/yit-upgrade.php:295
+#: lib/yit-upgrade.php:201
+msgid ""
+"<br/><b>Please note:</b> You are using a higher version than the latest "
+"available one. </em>Please, make sure you've downloaded the latest version "
+"of <em>%1$s</em> from the only <a href=\"https://yithemes.com\" target="
+"\"_blank\">YITH official website</a>, specifically, from your <a href="
+"\"https://yithemes.com/my-account/recent-downloads/\" target=\"_blank"
+"\">Downloads page</a>. This is the only way to be sure the version you are "
+"using is 100% malware-free."
+msgstr ""
+
+#: lib/yit-upgrade.php:303
+#, fuzzy
+#| msgid "You have to activate the plugin to benefit from automatic updates."
+msgctxt "[Update Plugin Message: License not enabled]"
+msgid "You have to activate the plugin to benefit from automatic updates."
+msgstr "Devi attivare il plugin per usufruire degli update automatici."
+
+#: lib/yit-upgrade.php:325
 msgid "YITH Repository"
 msgstr "Repository YITH"
 
-#: lib/yit-upgrade.php:329
+#: lib/yit-upgrade.php:359
 msgid "Invalid URL Provided."
 msgstr "L'URL inserito non è valido."
 
-#: lib/yit-upgrade.php:342
+#: lib/yit-upgrade.php:372
 msgid "Could not create Temporary file."
 msgstr "Non è stato possibile creare il file temporaneo."
 
-#: lib/yit-upgrade.php:502
+#: lib/yit-upgrade.php:547
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox "
@@ -441,7 +459,7 @@ msgstr ""
 "yit-changelog-button\" title=\"%3$s\">Visualizza i dettagli della versione "
 "%4$s</a>."
 
-#: lib/yit-upgrade.php:504
+#: lib/yit-upgrade.php:551
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox "
@@ -454,7 +472,7 @@ msgstr ""
 "%4$s</a>. <em>Per poter usufruire degli aggiornamenti automatici è "
 "necessario attivare il plugin su un solo sito.</em>"
 
-#: lib/yit-upgrade.php:506
+#: lib/yit-upgrade.php:555
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox "
@@ -469,7 +487,7 @@ msgstr ""
 "plugin, per piacere <a href=\"%5$s\" title=\"License activation\">attiva</a> "
 "la tua copia di %6s.</em>"
 
-#: lib/yit-upgrade.php:508
+#: lib/yit-upgrade.php:559
 #, php-format
 msgid ""
 "There is a new version of %1$s available. <a href=\"%2$s\" class=\"thickbox "
@@ -480,99 +498,118 @@ msgstr ""
 "yit-changelog-button\" title=\"%3$s\">Visualizza i dettagli della versione "
 "%4$s</a> oppure <a href=\"%5$s\">aggiorna adesso</a>."
 
-#: lib/yit-upgrade.php:581
+#: lib/yit-upgrade.php:563
+#, php-format
+msgid ""
+"<br/><b>Please note:</b> You are using a higher version than the latest "
+"available one. </em>Please, make sure you've downloaded the latest version "
+"of <em>%1$s</em> from the only <a href=\"https://yithemes.com\" target="
+"\"_blank\">YITH official website</a>, specifically, from your <a href="
+"\"https://yithemes.com/my-account/recent-downloads/\" target=\"_blank"
+"\">Downloads page</a>. This is the only way to be sure the version you are "
+"using is 100%% malware-free."
+msgstr ""
+
+#: lib/yit-upgrade.php:635
 msgid "You can't update the plugins for this site."
 msgstr "Non è possibile aggiornare i plugin per questo sito."
 
-#: lib/yit-upgrade.php:585
+#: lib/yit-upgrade.php:639
 msgid ""
 "You do not have sufficient permissions to update the plugins for this site."
 msgstr ""
 "Non sei in possesso delle autorizzazioni necessarie per aggiornare i plugin "
 "in questo sito."
 
-#: lib/yit-upgrade.php:592
+#: lib/yit-upgrade.php:646
 msgid "Update Plugin"
 msgstr "Aggiorna plugin"
 
-#: licence/lib/yit-licence.php:186
+#: lib/yith-dashboard.php:40
+msgid "New YITH products"
+msgstr ""
+
+#: lib/yith-dashboard.php:41
+msgid "News from the YITH Blog"
+msgstr ""
+
+#: lib/yith-gutenberg.php:134
+msgctxt "[gutenberg]: Category Name"
+msgid "YITH"
+msgstr ""
+
+#: licence/lib/yit-licence.php:180
 #, php-format
 msgctxt "%s = field name"
-msgid "%s field cannot be empty"
-msgstr "Il campo %s non può essere vuoto"
+msgid "Please, insert a valid %s"
+msgstr "Per favore, inserisci una %s valida"
 
-#: licence/lib/yit-licence.php:187
+#: licence/lib/yit-licence.php:181
 #, php-format
-msgid "%s and %s fields cannot be empty"
-msgstr "I campi %s e %s non possono essere vuoti"
+msgid "Please, insert a valid %s and a valid %s"
+msgstr "Per favore, inserire una %s valida ed una %s valida"
 
-#: licence/lib/yit-licence.php:188
+#: licence/lib/yit-licence.php:182
 msgid "Unable to contact the remote server, please try again later. Thanks!"
 msgstr "Impossibile contattare il server remoto, prova più tardi. Grazie!"
 
-#: licence/lib/yit-licence.php:189
-#: licence/templates/panel/activation/activation-panel.php:92
-#: licence/templates/panel/activation/activation-panel.php:170
-#: licence/templates/panel/activation/activation-panel.php:201
-msgid "Email"
-msgstr "Email"
+#: licence/lib/yit-licence.php:183
+msgid "email address"
+msgstr "email"
 
-#: licence/lib/yit-licence.php:190
-#: licence/templates/panel/activation/activation-panel.php:93
-#: licence/templates/panel/activation/activation-panel.php:171
-#: licence/templates/panel/activation/activation-panel.php:202
-msgid "License Key"
-msgstr "Chiave di licenza"
+#: licence/lib/yit-licence.php:184
+msgid "license key"
+msgstr "chiave di licenza"
 
-#: licence/lib/yit-licence.php:191
+#: licence/lib/yit-licence.php:185
 msgid "Are you sure you want to deactivate the license for current site?"
 msgstr "Sei sicuro di voler disattivare la licenza per questo sito?"
 
-#: licence/lib/yit-licence.php:685
+#: licence/lib/yit-licence.php:730
 msgid "Invalid Request"
 msgstr "Richiesta non valida"
 
-#: licence/lib/yit-licence.php:686
+#: licence/lib/yit-licence.php:731
 msgid "Invalid license key"
 msgstr "Chiave di licenza non valida"
 
-#: licence/lib/yit-licence.php:687
+#: licence/lib/yit-licence.php:732
 msgid "Software has been deactivated"
 msgstr "Il software è stato disattivato"
 
-#: licence/lib/yit-licence.php:688
+#: licence/lib/yit-licence.php:733
 msgid "Maximum number of activations exceeded"
 msgstr "Hai raggiunto il numero massimo di attivazioni"
 
-#: licence/lib/yit-licence.php:689
+#: licence/lib/yit-licence.php:734
 msgid "Invalid instance ID"
 msgstr "Istanza ID non valida"
 
-#: licence/lib/yit-licence.php:690
+#: licence/lib/yit-licence.php:735
 msgid "Invalid security key"
 msgstr "Chiave di sicurezza non valida"
 
-#: licence/lib/yit-licence.php:691
+#: licence/lib/yit-licence.php:736
 msgid "License key has expired"
 msgstr "La chiave di licenza è scaduta"
 
-#: licence/lib/yit-licence.php:692
+#: licence/lib/yit-licence.php:737
 msgid "License key has been banned"
 msgstr "La chiave di licenza è stata bloccata"
 
-#: licence/lib/yit-licence.php:693
+#: licence/lib/yit-licence.php:738
 msgid "Current product is not included in your YITH Club Subscription key"
 msgstr "Questo prodotto non è incluso nella tua licenze YITH Club Subscription"
 
-#: licence/lib/yit-licence.php:694
+#: licence/lib/yit-licence.php:739
 msgid "Great"
 msgstr "Grande!"
 
-#: licence/lib/yit-licence.php:694
+#: licence/lib/yit-licence.php:739
 msgid "License successfully activated"
 msgstr "Licenza attivata con successo"
 
-#: licence/lib/yit-licence.php:695
+#: licence/lib/yit-licence.php:740
 msgid "License key deactivated for website"
 msgstr "Chiave di licenza disattivata per il sito web"
 
@@ -581,6 +618,48 @@ msgstr "Chiave di licenza disattivata per il sito web"
 #: licence/lib/yit-theme-licence.php:109 licence/lib/yit-theme-licence.php:110
 msgid "License Activation"
 msgstr "Attivazione licenza"
+
+#: licence/lib/yit-plugin-licence.php:142
+msgctxt ""
+"[Part of]: Warning! You didn't set license key for the following products:"
+"[Plugins List] which means you're missing out on updates and support. Enter "
+"your license key, please."
+msgid "Warning!"
+msgstr ""
+
+#: licence/lib/yit-plugin-licence.php:142
+msgctxt ""
+"[Part of]: Warning! You didn't set license key for the following products:"
+"[Plugins List] which means you're missing out on updates and support. Enter "
+"your license key, please."
+msgid "You didn't set license key for the following products"
+msgstr ""
+
+#: licence/lib/yit-plugin-licence.php:145
+msgctxt ""
+"[Part of]: Warning! You didn't set license key for the following products:"
+"[Plugins List] which means you're missing out on updates and support. Enter "
+"your license key, please."
+msgid "which means you're missing out on updates and support"
+msgstr ""
+
+#: licence/lib/yit-plugin-licence.php:147
+#, fuzzy
+#| msgid "license key"
+msgctxt ""
+"[Part of]: Warning! You didn't set license key for the following products:"
+"[Plugins List] which means you're missing out on updates and support. Enter "
+"your license key, please."
+msgid "Enter your license key"
+msgstr "chiave di licenza"
+
+#: licence/lib/yit-plugin-licence.php:148
+msgctxt ""
+"[Part of]: Warning! You didn't set license key for the following products:"
+"[Plugins List] which means you're missing out on updates and support. Enter "
+"your license key, please."
+msgid "please"
+msgstr ""
 
 #: licence/lib/yit-theme-licence.php:117 licence/lib/yit-theme-licence.php:118
 #, php-format
@@ -623,82 +702,103 @@ msgstr ""
 msgid "YITH License Activation"
 msgstr "Attivazione licenza YITH"
 
-#: licence/templates/panel/activation/activation-panel.php:28
-msgid ""
-"Have you updated your licenses? Have you asked for an extension? Update "
-"information concerning your products."
-msgstr ""
-"Hai aggiornato la tua licenza? Hai richiesto un'estensione? Aggiorna le "
-"informazioni dei tuoi prodotti."
+#: licence/templates/panel/activation/activation-panel.php:27
+#, fuzzy
+#| msgid "License key has expired"
+msgid "License expiry date"
+msgstr "La chiave di licenza è scaduta"
 
 #: licence/templates/panel/activation/activation-panel.php:30
-msgid "Update license information"
-msgstr "Aggiorna informazioni licenza"
+msgid ""
+"If you have renewed your product license key and the expiry date does not "
+"appear up-to-date, please, click on the button <em>Check Expiry Date</em> "
+"below and it will update."
+msgstr ""
 
-#: licence/templates/panel/activation/activation-panel.php:43
+#: licence/templates/panel/activation/activation-panel.php:33
+msgid "Check expiry date"
+msgstr ""
+
+#: licence/templates/panel/activation/activation-panel.php:47
 msgid "Product to activate"
 msgid_plural "Products to activate"
 msgstr[0] "Prodotto da attivare"
 msgstr[1] "Prodotti da attivare"
 
-#: licence/templates/panel/activation/activation-panel.php:65
+#: licence/templates/panel/activation/activation-panel.php:50
+msgid "Are you having issues with the license activation?"
+msgstr ""
+
+#: licence/templates/panel/activation/activation-panel.php:50
+msgid "Read this article"
+msgstr ""
+
+#: licence/templates/panel/activation/activation-panel.php:70
 msgid "Activate"
 msgstr "Attiva"
 
-#: licence/templates/panel/activation/activation-panel.php:84
+#: licence/templates/panel/activation/activation-panel.php:89
 msgid "Activated"
 msgstr "Attivato"
 
-#: licence/templates/panel/activation/activation-panel.php:90
-#: licence/templates/panel/activation/activation-panel.php:168
-#: licence/templates/panel/activation/activation-panel.php:198
+#: licence/templates/panel/activation/activation-panel.php:95
+#: licence/templates/panel/activation/activation-panel.php:173
+#: licence/templates/panel/activation/activation-panel.php:203
 msgid "Product Name"
 msgstr "Nome prodotto"
 
-#: licence/templates/panel/activation/activation-panel.php:96
-#: licence/templates/panel/activation/activation-panel.php:205
+#: licence/templates/panel/activation/activation-panel.php:97
+#: licence/templates/panel/activation/activation-panel.php:175
+#: licence/templates/panel/activation/activation-panel.php:206
+msgid "Email"
+msgstr "Email"
+
+#: licence/templates/panel/activation/activation-panel.php:98
+#: licence/templates/panel/activation/activation-panel.php:176
+#: licence/templates/panel/activation/activation-panel.php:207
+msgid "License Key"
+msgstr "Chiave di licenza"
+
+#: licence/templates/panel/activation/activation-panel.php:101
+#: licence/templates/panel/activation/activation-panel.php:210
 msgid "Expires"
 msgstr "Scadenza"
 
-#: licence/templates/panel/activation/activation-panel.php:99
+#: licence/templates/panel/activation/activation-panel.php:104
 msgid "Remaining"
 msgstr "Tempo rimanente"
 
-#: licence/templates/panel/activation/activation-panel.php:101
+#: licence/templates/panel/activation/activation-panel.php:106
 msgid "Club Subscription"
 msgstr "Club Subscription"
 
-#: licence/templates/panel/activation/activation-panel.php:105
-msgid "License Actions"
-msgstr "Azioni licenza"
-
-#: licence/templates/panel/activation/activation-panel.php:130
+#: licence/templates/panel/activation/activation-panel.php:135
 #, php-format
 msgid "%1s out of %2s"
 msgstr "%1s di %2s"
 
-#: licence/templates/panel/activation/activation-panel.php:146
+#: licence/templates/panel/activation/activation-panel.php:151
 msgid "Deactivate"
 msgstr "Disattiva"
 
-#: licence/templates/panel/activation/activation-panel.php:151
-#: licence/templates/panel/activation/activation-panel.php:208
+#: licence/templates/panel/activation/activation-panel.php:156
+#: licence/templates/panel/activation/activation-panel.php:213
 msgid "Renew"
 msgstr "Rinnova"
 
-#: licence/templates/panel/activation/activation-panel.php:164
+#: licence/templates/panel/activation/activation-panel.php:169
 msgid "Banned"
 msgstr "Bloccato"
 
-#: licence/templates/panel/activation/activation-panel.php:194
+#: licence/templates/panel/activation/activation-panel.php:199
 msgid "Expired"
 msgstr "Non più valido"
 
-#: licence/templates/panel/activation/activation-panel.php:230
+#: licence/templates/panel/activation/activation-panel.php:235
 msgid "Order again"
 msgstr "Acquista di nuovo"
 
-#: licence/templates/panel/activation/activation-panel.php:232
+#: licence/templates/panel/activation/activation-panel.php:237
 msgid "Renew license"
 msgstr "Rinnova la licenza"
 
@@ -821,34 +921,54 @@ msgstr "(Default: <i %s></i> )"
 msgid "Reset Defaults"
 msgstr "Ripristina impostazioni iniziali"
 
-#: yit-plugin.php:77
+#: yit-plugin.php:83
 msgctxt "Plugin Row Meta"
 msgid "Live Demo"
 msgstr "Live Demo"
 
-#: yit-plugin.php:82
+#: yit-plugin.php:88
 msgctxt "Plugin Row Meta"
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: yit-plugin.php:87
+#: yit-plugin.php:93
 msgctxt "Plugin Row Meta"
 msgid "Support"
 msgstr "Assistenza"
 
-#: yit-plugin.php:92
+#: yit-plugin.php:98
 msgctxt "Plugin Row Meta"
 msgid "Premium version"
 msgstr "Versione premium"
 
-#: yit-plugin.php:187
+#: yit-plugin.php:193
 msgctxt "Action links"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: yit-plugin.php:191
+#: yit-plugin.php:197
 msgid "License"
 msgstr "Chiave di licenza"
+
+#~ msgid ""
+#~ "Have you updated your licenses? Have you asked for an extension? Update "
+#~ "information concerning your products."
+#~ msgstr ""
+#~ "Hai aggiornato la tua licenza? Hai richiesto un'estensione? Aggiorna le "
+#~ "informazioni dei tuoi prodotti."
+
+#~ msgid "Update license information"
+#~ msgstr "Aggiorna informazioni licenza"
+
+#~ msgid "License Actions"
+#~ msgstr "Azioni licenza"
+
+#~ msgctxt "%s = field name"
+#~ msgid "%s field cannot be empty"
+#~ msgstr "Il campo %s non può essere vuoto"
+
+#~ msgid "%s and %s fields cannot be empty"
+#~ msgstr "I campi %s e %s non possono essere vuoti"
 
 #~ msgid "Hide sidebar"
 #~ msgstr "Nascondi barra laterale"

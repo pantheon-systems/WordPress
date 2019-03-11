@@ -50,7 +50,8 @@ function bind_events() {
         var data = {
             'cf_name': jQuery( this ).val(),
             method: "get_order_custom_fields_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
         var val_op = jQuery( '#custom_fields_compare' ).val();
         jQuery( '#text_custom_fields' ).val( '' );
@@ -141,7 +142,8 @@ function bind_events() {
         var data = {
             'attr': jQuery( this ).val(),
             method: "get_products_attributes_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         var val_op = jQuery( '#attributes_compare' ).val();
@@ -221,7 +223,8 @@ function bind_events() {
         var data = {
             'item': window.atob(selected64),
             method: "get_products_itemmeta_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         var val_op = jQuery( '#itemmeta_compare' ).val();
@@ -300,7 +303,8 @@ function bind_events() {
         var data = {
             'tax': jQuery( this ).val(),
             method: "get_products_taxonomies_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         jQuery.post( ajaxurl, data, function( response ) {
@@ -373,7 +377,8 @@ function bind_events() {
         var data = {
             'cf_name': jQuery( this ).val(),
             method: "get_product_custom_fields_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         var val_op = jQuery( '#product_custom_fields_compare' ).val();
@@ -500,7 +505,7 @@ function bind_events() {
         }
         else {
             var json = makeJsonVar(jQuery( '#export_job_settings' ));
-            var data = "json="+ json +"&action=order_exporter&method=get_used_custom_order_meta";
+            var data = "json="+ json +"&action=order_exporter&method=get_used_custom_order_meta&woe_nonce=" + woe_nonce;
 
             jQuery.post( ajaxurl, data, function( response ) {
                 if ( response ) {
@@ -535,8 +540,8 @@ function bind_events() {
         else {
 //            jQuery('#modal-manage-products').html(jQuery('#TB_ajaxContent').html());
             var data = jQuery( '#export_job_settings' ).serialize(),
-                data_products = data + "&action=order_exporter&method=get_used_custom_products_meta&mode=" + mode + "&id=" + job_id,
-                data_order_items = data + "&action=order_exporter&method=get_used_custom_order_items_meta&mode=" + mode + "&id=" + job_id;
+                data_products = data + "&action=order_exporter&method=get_used_custom_products_meta&mode=" + mode + "&id=" + job_id + '&woe_nonce=' + woe_nonce;
+                data_order_items = data + "&action=order_exporter&method=get_used_custom_order_items_meta&mode=" + mode + "&id=" + job_id + '&woe_nonce='+ woe_nonce;
 
             jQuery.post( ajaxurl, data_products, function( response ) {
                 if ( response ) {
@@ -575,7 +580,7 @@ function bind_events() {
         }
         else {
             var data = jQuery( '#export_job_settings' ).serialize()
-            data = data + "&action=order_exporter&method=get_used_custom_coupons_meta";
+            data = data + "&action=order_exporter&method=get_used_custom_coupons_meta&woe_nonce=" + woe_nonce;
 
             jQuery.post( ajaxurl, data, function( response ) {
                 if ( response ) {
@@ -628,7 +633,8 @@ function bind_events() {
         var data = {
             'item': jQuery( this ).val(),
             method: "get_order_shipping_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         jQuery.post( ajaxurl, data, function( response ) {
@@ -687,7 +693,8 @@ function bind_events() {
         var data = {
             'item': jQuery( this ).val(),
             method: "get_order_billing_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         jQuery.post( ajaxurl, data, function( response ) {
@@ -747,7 +754,8 @@ function bind_events() {
         var data = {
             'item_type': jQuery( this ).val(),
             method: "get_order_item_names",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         jQuery.post( ajaxurl, data, function( response ) {
@@ -806,7 +814,8 @@ function bind_events() {
         var data = {
             'meta_key': jQuery( this ).val(),
             method: "get_order_item_meta_key_values",
-            action: "order_exporter"
+            action: "order_exporter",
+            woe_nonce: woe_nonce,
         };
 
         jQuery.post( ajaxurl, data, function( response ) {
@@ -868,7 +877,8 @@ function bind_events_users() {
 		var data = {
 			'cf_name': jQuery( this ).val(),
 			method: "get_user_custom_fields_values",
-			action: "order_exporter"
+			action: "order_exporter",
+                        woe_nonce: woe_nonce,
 		};
 		var val_op = jQuery( '#select_user_custom_fields' ).val();
 		jQuery( '#text_user_custom_fields' ).val( '' );
@@ -1538,6 +1548,7 @@ jQuery( document ).ready( function ($) {
 				'method': 'reorder_jobs',
 				'new_jobs_order': $( "#the-list" ).sortable( "toArray", {attribute: 'data-job_id'} ),
 				'tab_name': $tab_name,
+                                woe_nonce: woe_nonce,
 			},
 			error: function ( response ) {},
 			dataType: 'json',

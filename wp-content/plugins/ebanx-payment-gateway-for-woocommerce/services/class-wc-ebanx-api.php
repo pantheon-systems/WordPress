@@ -37,6 +37,7 @@ class WC_EBANX_Api {
 		$this->configs = $configs;
 		$this->currency = is_null( $currency ) ? strtoupper( get_woocommerce_currency() ) : $currency;
 		$this->ebanx   = EBANX( $this->get_config( $currency ), $this->get_credit_card_config( 'br' ) );
+		$this->ebanx->setSource( 'WooCommerce', WC_EBANX::get_plugin_version() );
 	}
 
 	/**
@@ -54,10 +55,6 @@ class WC_EBANX_Api {
 				'baseCurrency'          => $this->currency,
 				'notificationUrl'       => esc_url( home_url( '/' ) ),
 				'redirectUrl'           => esc_url( home_url( '/' ) ),
-				'userValues'            => [
-					1 => 'from_woocommerce',
-					3 => 'version=' . WC_EBANX::get_plugin_version(),
-				],
 			)
 		);
 	}

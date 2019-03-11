@@ -174,7 +174,7 @@ if ( ! $multisite ) {
 ?>
         <?php esc_html_e( 'Other default roles for new registered user: ', 'user-role-editor' ); ?>
         <div id="other_default_roles">
-            <?php $lib->show_other_default_roles(); ?>
+            <?php self::show_other_default_roles(); ?>
         </div>
 <?php 
     if ( $multisite ) {
@@ -228,13 +228,14 @@ if ( ! $multisite ) {
 ?>
     <div id="ure_tabs-5">        
         <?php  
-            $tools = new URE_Tools();            
-            $tools->show($tabs_index[5]);
+            URE_Tools::show( $tabs_index[5] );
         ?>                          
     </div> <!-- ure_tabs-5 -->
     
     <div id="ure_tabs-6">
-        <?php $lib->about(); ?>
+        <?php 
+            $lib->about();
+        ?>
     </div> <!-- ure_tabs-6 -->
     </div> <!-- ure_tabs -->
 </div>

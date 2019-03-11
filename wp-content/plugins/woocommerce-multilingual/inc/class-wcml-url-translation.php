@@ -178,29 +178,7 @@ class WCML_Url_Translation {
 		}
 
 		$slug = $this->get_woocommerce_product_base();
-
-		if ( version_compare( WPML_ST_VERSION, '2.2.6', '>' ) ) {
-
-			// Use new API for WPML ST > 2.2.6
-			do_action( 'wpml_activate_slug_translation', 'product', $slug );
-
-		} else {
-
-			// force_product_slug_translation_on
-			$iclsettings = $this->sitepress->get_settings();
-			if ( empty( $iclsettings['posts_slug_translation']['on'] ) || empty( $iclsettings['posts_slug_translation']['types']['product'] ) ) {
-				$iclsettings['posts_slug_translation']['on']               = 1;
-				$iclsettings['posts_slug_translation']['types']['product'] = 1;
-				$this->sitepress->save_settings( $iclsettings );
-			}
-
-			$string = icl_get_string_id( $slug, $this->url_strings_context(), $this->url_string_name( 'product' ) );
-			if ( ! $string ) {
-				do_action( 'wpml_register_single_string', $this->url_strings_context(), $this->url_string_name( 'product' ), trim( $slug, '/' ) );
-			}
-
-		}
-
+		do_action( 'wpml_activate_slug_translation', 'product', $slug );
 	}
 
 	function get_woocommerce_product_base() {
@@ -486,16 +464,15 @@ class WCML_Url_Translation {
 			$taxonomy_obj = get_taxonomy( $taxonomy );
 
 			if ( isset( $taxonomy_obj->rewrite['slug'] ) ) {
-				$exp  = explode( '/', trim( $taxonomy_obj->rewrite['slug'], '/' ) );
-				$slug = join( '/', array_slice( $exp, 0, count( $exp ) - 1 ) );
-
+				$exp            = explode( '/', trim( $taxonomy_obj->rewrite['slug'], '/' ) );
+				$slug           = join( '/', array_slice( $exp, 0, count( $exp ) - 1 ) );
 				$attribute_slug = preg_replace( "#^$slug/#", '', $taxonomy_obj->rewrite['slug'] );
-			}
 
-			if ( isset( $slug ) ) {
-				$string_language = $this->woocommerce_wpml->strings->get_string_language( $slug, $this->url_strings_context(), $this->url_string_name( 'attribute' ) );
+				$current_language        = $this->sitepress->get_current_language();
+				$slug_language           = $this->woocommerce_wpml->strings->get_string_language( $slug, $this->url_strings_context(), $this->url_string_name( 'attribute' ) );
+				$attribute_slug_language = $this->woocommerce_wpml->strings->get_string_language( $attribute_slug, $this->url_strings_context(), $this->url_string_name( 'attribute_slug', $attribute_slug ) );
 
-				if ( $this->sitepress->get_current_language() != $string_language ) {
+				if ( $current_language !== $attribute_slug_language || $current_language !== $slug_language ) {
 
 					$slug_translation = apply_filters( 'wpml_translate_single_string', $slug, $this->url_strings_context(), $this->url_string_name( 'attribute' ) );
 
@@ -516,7 +493,7 @@ class WCML_Url_Translation {
 
 						$slug_match  = addslashes( ltrim( $attribute_slug, '/' ) );
 						$pattern     = "#(^|\/)" . $slug_match . "/(.*)#";
-						$replacement = '$1'.$attribute_slug_translation . '/$2';
+						$replacement = '$1' . $attribute_slug_translation . '/$2';
 
 						$value = $this->replace_bases_in_rewrite_rules( $value, $pattern, $pattern, $replacement );
 
@@ -776,10 +753,15 @@ class WCML_Url_Translation {
 				break;
 
 			default:
-				$endpoints      = WC()->query->query_vars;
-				$slug           = isset( $endpoints[ $base ] ) ? $endpoints[ $base ] : false;
+				if ( class_exists( 'WPML_Endpoints_Support' ) ) {
+					$slug = $base;
+				} else {
+					$endpoints = WC()->query->query_vars;
+					$slug      = isset( $endpoints[ $base ] ) ? $endpoints[ $base ] : false;
+				}
+
 				$return['name'] = sprintf( __( 'Endpoint: %s', 'woocommerce-multilingual' ), $base );
-				$string_id      = icl_get_string_id( $slug, 'WooCommerce Endpoints', $base );
+				$string_id      = icl_get_string_id( $slug, $this->get_endpoint_string_context(), $base );
 				break;
 		}
 
@@ -802,15 +784,29 @@ class WCML_Url_Translation {
 		return $return;
 
 	}
+	
+	private function get_endpoint_string_context(){
+		
+		return class_exists( 'WPML_Endpoints_Support' ) ? WPML_Endpoints_Support::STRING_CONTEXT : 'WooCommerce Endpoints';
+		
+	}
 
-	function get_source_slug_language( $base ) {
+	/**
+	 * @param string $base
+	 *
+	 * @return string
+	 */
+	public function get_source_slug_language( $base ) {
 
 		if ( $base == 'shop' ) {
-			$source_language = $this->sitepress->get_language_for_element( get_option( 'woocommerce_shop_page_id' ), 'post_page' );
+			$source_language = $this->sitepress->get_language_for_element( wc_get_page_id( 'shop' ), 'post_page' );
 		} elseif ( in_array( $base, array( 'product', 'product_cat', 'product_tag', 'attribute' ) ) ) {
 			$source_language = $this->woocommerce_wpml->strings->get_string_language( $base, $this->url_strings_context(), $this->url_string_name( $base ) );
+		} elseif ( strpos( $base, 'attribute_slug-' ) === 0 ) {
+			$slug = preg_replace( '#^attribute_slug-#', '', $base );
+			$source_language = $this->woocommerce_wpml->strings->get_string_language( $base, $this->url_strings_context(), $this->url_string_name( 'attribute_slug', $slug ) );
 		} else {
-			$source_language = $this->woocommerce_wpml->strings->get_string_language( $base, 'WooCommerce Endpoints', $base );
+			$source_language = $this->woocommerce_wpml->strings->get_string_language( $base, $this->get_endpoint_string_context(), $base );
 		}
 
 		return $source_language;
@@ -829,7 +825,7 @@ class WCML_Url_Translation {
 		$language            = $_POST['language'];
 
 		if ( $original_base == 'shop' ) {
-			$original_shop_id   = get_option( 'woocommerce_shop_page_id' );
+			$original_shop_id   = wc_get_page_id( 'shop' );
 			$translated_shop_id = apply_filters( 'translate_object_id', $original_shop_id, 'page', false, $language );
 
 			if ( ! is_null( $translated_shop_id ) ) {
@@ -848,12 +844,15 @@ class WCML_Url_Translation {
 				do_action( 'wpml_register_single_string', $this->url_strings_context(), $this->url_string_name( 'attribute_slug', $slug ), $slug );
 				$string_id = icl_get_string_id( $original_base_value, $this->url_strings_context(), $this->url_string_name( 'attribute_slug', $slug ) );
 			} else {
-				$string_id = icl_get_string_id( $original_base_value, 'WooCommerce Endpoints', $original_base );
+				$string_id = icl_get_string_id( $original_base_value, $this->get_endpoint_string_context(), $original_base );
 				if ( ! $string_id && function_exists( 'icl_register_string' ) ) {
-					$string_id = icl_register_string( 'WooCommerce Endpoints', $original_base, $original_base_value );
+					$string_id = icl_register_string( $this->get_endpoint_string_context(), $original_base, $original_base_value );
 				}
-				$this->woocommerce_wpml->endpoints->add_endpoints();
-				$this->woocommerce_wpml->endpoints->flush_rules_for_endpoints_translations();
+
+				if( method_exists( $this->woocommerce_wpml->endpoints, 'add_endpoints' ) ){
+					$this->woocommerce_wpml->endpoints->add_endpoints();
+					$this->woocommerce_wpml->endpoints->flush_rules_for_endpoints_translations();
+				}
 			}
 
 			icl_add_string_translation( $string_id, $language, $base_translation, ICL_STRING_TRANSLATION_COMPLETE );
@@ -924,13 +923,7 @@ class WCML_Url_Translation {
 			$product_slug = $this->woocommerce_wpml->strings->product_permalink_slug();
 		}
 
-		if ( version_compare( WPML_ST_VERSION, '2.3', '>=' ) ) {
-			$translated_slug = apply_filters( 'wpml_get_translated_slug', $product_slug, 'product', $language );
-		} elseif ( apply_filters( 'wpml_slug_translation_available', false ) ) {
-			$translated_slug = apply_filters( 'wpml_get_translated_slug', 'product', $language );
-		} else {
-			$translated_slug = apply_filters( 'wpml_translate_single_string', $product_slug, $this->url_strings_context(), $this->url_string_name( 'product' ) );
-		}
+		$translated_slug = apply_filters( 'wpml_get_translated_slug', $product_slug, 'product', $language );
 
 		return $translated_slug;
 	}

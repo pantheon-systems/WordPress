@@ -31,9 +31,6 @@ class WCML_Terms{
 		add_action( 'updated_woocommerce_term_meta', array( $this, 'sync_term_order' ), 100, 4 );
 
 		add_filter( 'wp_get_object_terms', array( $this->sitepress, 'get_terms_filter' ) );
-
-		add_action( 'icl_save_term_translation', array( $this, 'save_wc_term_meta' ), 100, 4 );
-
 		add_action( 'created_term', array( $this, 'translated_terms_status_update' ), 10, 3 );
 		add_action( 'edit_term', array( $this, 'translated_terms_status_update' ), 10, 3 );
 		add_action( 'wp_ajax_wcml_update_term_translated_warnings', array(
@@ -57,6 +54,8 @@ class WCML_Terms{
 
 			add_filter( 'pre_option_default_product_cat', array( $this, 'pre_option_default_product_cat' ) );
 			add_filter( 'update_option_default_product_cat', array( $this, 'update_option_default_product_cat' ), 1, 2 );
+		}else{
+			add_action( 'update_term_meta', array( $this, 'update_category_count_meta' ), 10, 4 );
 		}
 
 		add_action( 'delete_term', array( $this, 'wcml_delete_term' ), 10, 4 );
@@ -79,32 +78,6 @@ class WCML_Terms{
 	        WCML_Resources::load_taxonomy_translation_scripts();
         }
         
-    }
-            
-    function save_wc_term_meta($original_tax, $result){
-
-
-        // WooCommerce before termmeta table migration
-        $wc_before_term_meta = get_option( 'db_version' ) < 34370;
-
-        // backwards compatibility - before the termmeta table was added
-        if( $wc_before_term_meta ){
-
-            $term_wc_meta = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM {$this->wpdb->woocommerce_termmeta} WHERE woocommerce_term_id=%s", $original_tax->term_id));
-            foreach ( $term_wc_meta as $wc_meta ){
-                $wc_original_metakey = $wc_meta->meta_key;
-                $wc_original_metavalue = $wc_meta->meta_value;
-                update_woocommerce_term_meta($result['term_id'], $wc_original_metakey, $wc_original_metavalue);
-            }
-        // End of backwards compatibility - before the termmeta table was added
-        }else{
-
-            $term_wc_meta = get_term_meta( $original_tax->term_id, false, true );
-            foreach ( $term_wc_meta as $key => $values ) {
-                update_term_meta( $result['term_id'], $key, maybe_unserialize( array_pop( $values ) ) );
-            }
-
-        }
     }
 
     function show_term_translation_screen_notices(){
@@ -1018,6 +991,24 @@ class WCML_Terms{
 			if ( isset( $wcml_settings ) ) {
 				$this->woocommerce_wpml->update_settings( $wcml_settings );
 			}
+		}
+	}
+
+	public function update_category_count_meta( $meta_id, $object_id, $meta_key, $meta_value ) {
+
+		if ( 'product_count_product_cat' === $meta_key ) {
+			remove_action( 'update_term_meta', array( $this, 'update_category_count_meta' ), 10, 4 );
+
+			$trid         = $this->sitepress->get_element_trid( $object_id, 'tax_product_cat' );
+			$translations = $this->sitepress->get_element_translations( $trid, 'tax_product_cat' );
+
+			foreach ( $translations as $translation ) {
+				if ( $translation->element_id !== $object_id ) {
+					update_term_meta( $translation->element_id, $meta_key, $meta_value, '' );
+				}
+			}
+
+			add_action( 'update_term_meta', array( $this, 'update_category_count_meta' ), 10, 4 );
 		}
 	}
 

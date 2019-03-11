@@ -30,7 +30,7 @@ class User_Role_Editor {
     
     
     public static function get_instance() {
-        if (self::$instance===null) {        
+        if ( self::$instance===null ) {
             self::$instance = new User_Role_Editor();
         }
         
@@ -641,17 +641,43 @@ class User_Role_Editor {
             wp_die(esc_html__('Insufficient permissions to work with User Role Editor', 'user-role-editor'));
         }
 
-        $this->lib->editor();
+        $editor = URE_Editor::get_instance();
+        $editor->show();
     }
     // end of edit_roles()
 	
+    
+    /**
+     * Create backup record for the WordPress user roles
+     * Run once on URE activation
+     * 
+     * @global wpdb $wpdb
+     * @global WP_Roles $wp_roles
+     * @return type
+     */        
+    protected function backup_wp_roles() {
+        global $wpdb;
+
+        $site_id = get_current_blog_id();
+        $backup_roles_key = $wpdb->get_blog_prefix($site_id) .'backup_user_roles';
+        // check if backup user roles record exists already
+        $result = get_option($backup_roles_key, false);        
+        if (!empty($result)) {
+            return;
+        }
+        
+        $wp_roles = wp_roles();
+        update_option($backup_roles_key, $wp_roles->roles, false);
+
+    }
+    // end of backup_wp_roles()    
 
     /**
      *  execute on plugin activation
      */
     function setup() {
 
-        $this->lib->backup_wp_roles();
+        $this->backup_wp_roles();
         URE_Own_Capabilities::init_caps();
         
         $task_queue = URE_Task_Queue::get_instance();
@@ -661,10 +687,32 @@ class User_Role_Editor {
     // end of setup()
             
     
+    protected function get_ure_page_url() {
+
+        $page_url = URE_WP_ADMIN_URL . URE_PARENT . '?page=users-' . URE_PLUGIN_FILE;
+        $object = $this->lib->get_request_var('object', 'get');
+        $user_id = (int) $this->lib->get_request_var('user_id', 'get', 'int');
+        if ($object=='user' && $user_id>0) {
+            $page_url .= '&object=user&user_id='. $user_id;
+        }
+        
+        return $page_url;
+    }
+    // end of get_ure_page_url()
+    
+    
     protected function load_main_page_js() {
         
         $confirm_role_update = $this->lib->get_option('ure_confirm_role_update', 1);        
-        $page_url = $this->lib->get_ure_page_url();
+        $page_url = $this->get_ure_page_url();
+        
+        $multisite = $this->lib->get('multisite');
+        if ( !( $multisite && $this->lib->is_super_admin() ) ) {
+            $do_not_revoke_from_admin = true;
+        } else {
+            // do not limit SuperAdmin for multi-site        
+            $do_not_revoke_from_admin = false;
+        }
         
         wp_enqueue_script('jquery-ui-dialog', '', array('jquery-ui-core', 'jquery-ui-button', 'jquery'));
         wp_enqueue_script('jquery-ui-selectable', '', array('jquery-ui-core', 'jquery'));
@@ -675,6 +723,7 @@ class User_Role_Editor {
             'network_admin' => is_network_admin() ? 1 : 0,
             'page_url' => $page_url,
             'is_multisite' => is_multisite() ? 1 : 0,
+            'do_not_revoke_from_admin' => $do_not_revoke_from_admin ? 1 : 0,
             'confirm_role_update' => $confirm_role_update ? 1 : 0,
             'confirm_title' => esc_html__('Confirm', 'user-role-editor'),
             'yes_label' => esc_html__('Yes', 'user-role-editor'),
@@ -710,7 +759,7 @@ class User_Role_Editor {
     
     protected function load_settings_js() {
     
-        $page_url = $this->lib->get_ure_page_url();
+        $page_url = $this->get_ure_page_url();
         
         wp_enqueue_script('jquery-ui-tabs', '', array('jquery-ui-core', 'jquery'));
         wp_enqueue_script('jquery-ui-dialog', '', array('jquery-ui-core', 'jquery'));
@@ -762,7 +811,7 @@ class User_Role_Editor {
     
     public function ure_ajax() {
                 
-        $ajax_processor = new URE_Ajax_Processor($this->lib);
+        $ajax_processor = new URE_Ajax_Processor();
         $ajax_processor->dispatch();
         
     }

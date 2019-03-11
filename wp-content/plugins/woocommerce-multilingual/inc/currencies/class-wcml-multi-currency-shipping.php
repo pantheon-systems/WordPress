@@ -19,15 +19,10 @@ class WCML_Multi_Currency_Shipping{
     public function add_hooks(){
 
         // shipping method cost settings
-        if( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WC_VERSION' ), '2.6.0', '>=' ) ) {
-            $rates = $this->wpdb->get_results( "SELECT * FROM {$this->wpdb->prefix}woocommerce_shipping_zone_methods WHERE method_id IN('flat_rate', 'local_pickup', 'free_shipping')" );
-            foreach ( $rates as $method ) {
-                $option_name = sprintf( 'woocommerce_%s_%d_settings', $method->method_id, $method->instance_id );
-                add_filter( 'option_' . $option_name, array($this, 'convert_shipping_method_cost_settings') );
-            }
-        }else{
-            // Before WooCommerce 2.6
-            new WCML_Multi_Currency_Shipping_Legacy();
+        $rates = $this->wpdb->get_results( "SELECT * FROM {$this->wpdb->prefix}woocommerce_shipping_zone_methods WHERE method_id IN('flat_rate', 'local_pickup', 'free_shipping')" );
+        foreach ( $rates as $method ) {
+            $option_name = sprintf( 'woocommerce_%s_%d_settings', $method->method_id, $method->instance_id );
+            add_filter( 'option_' . $option_name, array($this, 'convert_shipping_method_cost_settings') );
         }
 
         // Used for table rate shipping compatibility class

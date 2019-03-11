@@ -268,13 +268,13 @@ class Generic_Plugin_Admin {
 
 ?>
             <script type="text/javascript">
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			})(window,document,'script','https://api.w3-edge.com/v1/analytics','w3tc_ga');
 
-            ga('create', '<?php echo $profile ?>', 'auto');
-            ga('set', {
+            w3tc_ga('create', '<?php echo $profile ?>', 'auto');
+            w3tc_ga('set', {
                 'dimension1': 'w3-total-cache',
                 'dimension2': '<?php echo W3TC_VERSION ?>',
                 'dimension3': '<?php global $wp_version; echo $wp_version; ?>',
@@ -286,7 +286,7 @@ class Generic_Plugin_Admin {
                 'page': '<?php echo $page ?>'
             });
 
-            ga('send', 'pageview');
+            w3tc_ga('send', 'pageview');
 
             </script>
             <?php

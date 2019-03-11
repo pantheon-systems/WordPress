@@ -214,8 +214,18 @@ if (!class_exists('WPFront_User_Role_Editor_Add_Edit')) {
                 $deprecated = array_key_exists($key, WPFront_User_Role_Editor::$DEPRECATED_CAPABILITIES);
                 $other = array_key_exists($key, WPFront_User_Role_Editor::$OTHER_CAPABILITIES);
 
+                //network caps check
+                $caps = array();
+                foreach ($value as $cap) {
+                    if(strpos($cap, 'manage_network_') === 0) {
+                        continue;
+                    }
+                    
+                    $caps[] = $cap;
+                }
+                
                 $caps_group[$key] = (OBJECT) array(
-                            'caps' => $value,
+                            'caps' => $caps,
                             'display_name' => $this->__($key),
                             'deprecated' => $deprecated,
                             'disabled' => !$this->is_editable, //!$this->is_editable || $deprecated, - to enable levels; for author drop down

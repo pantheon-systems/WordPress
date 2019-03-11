@@ -37,7 +37,6 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 			'strings' => array(
 				'image' => __( 'Image', 'woocommerce-multilingual' ),
 				'product' => __( 'Product', 'woocommerce-multilingual' ),
-				'type' => __( 'Type', 'woocommerce-multilingual' ),
 				'date' => __( 'Date', 'woocommerce-multilingual' ),
 				'categories' => __( 'Categories', 'woocommerce-multilingual' ),
 				'no_products' => __( 'No products found', 'woocommerce-multilingual' ),
@@ -116,6 +115,10 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 			)
 		);
 
+		if ( $this->is_show_type_column() ) {
+			$model['strings']['type'] = __( 'Type', 'woocommerce-multilingual' );
+		}
+
 		return $model;
 	}
 
@@ -183,13 +186,15 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 
 			$products[ $key ]->categories_list = $this->get_categories_list( $product->ID, $this->get_cat_url() );
 
-			$prod = wc_get_product( $product->ID );
-			$products[ $key ]->icon_class = WooCommerce_Functions_Wrapper::get_product_type( $product->ID );
+			if ( $this->is_show_type_column() ) {
+				$prod                         = wc_get_product( $product->ID );
+				$products[ $key ]->icon_class = $prod->get_type();
 
-			if ( $prod->is_virtual() ) {
-				$products[ $key ]->icon_class = 'virtual';
-			} else if ( $prod->is_downloadable() ) {
-				$products[ $key ]->icon_class = 'downloadable';
+				if ( $prod->is_virtual() ) {
+					$products[ $key ]->icon_class = 'virtual';
+				} else if ( $prod->is_downloadable() ) {
+					$products[ $key ]->icon_class = 'downloadable';
+				}
 			}
 
 			if ( $product->post_status == "publish" ) {
@@ -201,6 +206,15 @@ class WCML_Products_UI extends WPML_Templates_Factory {
 		}
 
 		return array( 'products' => $products, 'products_count' => $products_info[ 'products_count' ] );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function is_show_type_column() {
+
+		return $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WC_VERSION' ), '3.4.0', '<' ) ||
+		       apply_filters( 'wcml_show_type_column', false );
 	}
 
 	public function get_product_info_from_self_edit_mode(){

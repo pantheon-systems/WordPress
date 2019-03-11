@@ -9,9 +9,9 @@ Util_Ui::config_overloading_button( array(
 		'key' => 'cdn.configuration_overloaded'
 	) );
 ?>
-<p><?php _e( 'Host static files with your content delivery network provider to reduce page load time.', 'w3-total-cache' ); ?>
+<p><?php w3tc_e( 'cdn.general.header', 'Host static files with your <acronym title="Content Delivery Network">CDN</acronym> to reduce page load time.' ); ?>
 <?php if ( !$cdn_enabled ): ?>
-<?php printf( __( ' If you do not have a <acronym title="Content Delivery Network">CDN</acronym> provider try MaxCDN. <a href="%s" target="_blank">Sign up and save 25&#37;</a>.', 'w3-total-cache' ), wp_nonce_url( Util_Ui::admin_url( 'admin.php?page=w3tc_dashboard&w3tc_cdn_maxcdn_signup' ), 'w3tc' ) ); ?>
+<?php printf( __( ' If you do not have a <acronym title="Content Delivery Network">CDN</acronym> provider try StackPath. <a href="%s" target="_blank">Sign up now to enjoy a special offer!</a>.', 'w3-total-cache' ), wp_nonce_url( Util_Ui::admin_url( 'admin.php?page=w3tc_dashboard&w3tc_cdn_maxcdn_signup' ), 'w3tc' ) ); ?>
 <?php endif ?>
 </p>
 <table class="form-table">
@@ -20,7 +20,7 @@ Util_Ui::config_item( array(
 		'key' => 'cdn.enabled',
 		'control' => 'checkbox',
 		'checkbox_label' => __( 'Enable', 'w3-total-cache' ),
-		'description' => __( 'Theme files, media library attachments, <acronym title="Cascading Style Sheet">CSS</acronym>, <acronym title="JavaScript">JS</acronym> files etc will appear to load instantly for site visitors.',
+		'description' => __( 'Theme files, media library attachments, <acronym title="Cascading Style Sheet">CSS</acronym>, <acronym title="JavaScript">JS</acronym> files etc will quickly for site visitors.',
 			'w3-total-cache' )
 	) );
 

@@ -50,8 +50,7 @@ class Util_Installed {
 				$r = false;
 			else {
 				$o = new \Memcached();
-				$r = ( method_exists( $o, 'setSaslAuthData' ) &&
-					ini_get( 'memcached.use_sasl' ) );
+				$r = method_exists( $o, 'setSaslAuthData' );
 			}
 		}
 
@@ -62,6 +61,12 @@ class Util_Installed {
 
 	static public function memcached() {
 		return class_exists( 'Memcache' ) || class_exists( 'Memcached' );
+	}
+
+
+
+	static public function memcached_memcached() {
+		return class_exists( 'Memcached' );
 	}
 
 
@@ -81,8 +86,7 @@ class Util_Installed {
 				$r = false;
 			else {
 				$o = new \Memcached();
-				$r = ( method_exists( $o, 'setSaslAuthData' ) &&
-					ini_get( 'memcached.use_sasl' ) );
+				$r = method_exists( $o, 'setSaslAuthData' );
 			}
 		}
 

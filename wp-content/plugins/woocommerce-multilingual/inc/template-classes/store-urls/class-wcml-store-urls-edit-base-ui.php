@@ -52,7 +52,7 @@ class WCML_Store_URLs_Edit_Base_UI extends WPML_Templates_Factory {
 		$args = array();
 
 		if( $this->base == 'shop' ){
-			$original_shop_id = get_option('woocommerce_shop_page_id' );
+			$original_shop_id = wc_get_page_id( 'shop' );
 			$translated_base = apply_filters( 'translate_object_id',$original_shop_id , 'page', false, $this->language );
 			if( !is_null($translated_base)){
 				$args['translated_base_value'] = urldecode(get_post($translated_base)->post_name);

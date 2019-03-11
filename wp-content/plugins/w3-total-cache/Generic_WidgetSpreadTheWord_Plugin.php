@@ -25,11 +25,11 @@ class Generic_WidgetSpreadTheWord_Plugin {
 		add_action( 'w3tc_widget_setup', array(
 				$this,
 				'wp_dashboard_setup'
-			) );
+			), 4000 );
 		add_action( 'w3tc_network_dashboard_setup', array(
 				$this,
 				'wp_dashboard_setup'
-			) );
+			), 4000 );
 
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_w3tc_link_support', array( $this, 'action_widget_link_support' ) );

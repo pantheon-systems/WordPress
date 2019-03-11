@@ -26,7 +26,8 @@ class WCML_Upgrade{
         '4.2.11',
 	    '4.3.0',
         '4.3.4',
-        '4.3.5'
+        '4.3.5',
+        '4.4.1'
     );
     
     function __construct(){
@@ -724,6 +725,25 @@ class WCML_Upgrade{
 			$not_existing_items = $wpdb->get_col( "SELECT m.`meta_id` FROM {$wpdb->prefix}woocommerce_bundled_itemmeta AS m LEFT JOIN {$wpdb->prefix}woocommerce_bundled_items as i ON m.meta_value = i.bundled_item_id WHERE m.`meta_key` LIKE 'translation_item_id_of_%' AND i.`bundled_item_id` IS NULL" );
 			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}woocommerce_bundled_itemmeta WHERE `meta_id` IN ( %s )", join( ',', $not_existing_items ) ) );
 		}
+
+	}
+
+	private function upgrade_4_4_1() {
+        global $sitepress,$woocommerce_wpml;
+
+        if( !$woocommerce_wpml->is_wpml_prior_4_2() ){
+
+	        $wcml_settings = get_option( '_wcml_settings' );
+	        $tm_settings = $sitepress->get_setting( 'translation-management', array() );
+
+	        if( $wcml_settings['trnsl_interface'] ){
+		        $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ][ 'product' ] = false;
+            }else{
+		        $tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ][ 'product' ] = true;
+            }
+
+	        $sitepress->set_setting( 'translation-management', $tm_settings, true );
+        }
 
 	}
 
