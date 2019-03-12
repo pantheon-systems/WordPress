@@ -1,15 +1,15 @@
 === DuracellTomi's Google Tag Manager for WordPress ===
 Contributors: duracelltomi
 Donate link: https://gtm4wp.com/
-Tags: google tag manager, tag manager, gtm, google, adwords, google adwords, google ads, adwords remarketing, google ads remarketing, remarketing, google analytics, analytics, facebook ads, facebook remarketing, facebook pixel, google optimize
+Tags: google tag manager, tag manager, gtm, google, adwords, google adwords, google ads, adwords remarketing, google ads remarketing, remarketing, google analytics, analytics, facebook ads, facebook remarketing, facebook pixel, google optimize, personalisation
 Requires at least: 3.4.0
 Requires PHP: 5.6
-Tested up to: 4.9.8
-Stable tag: 1.9
+Tested up to: 5.0.3
+Stable tag: 1.9.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
-The first Google Tag Manager plugin for WordPress with business goals in mind. Includes full support for Google Optimize as well.
+Advanced measurement/advertising tag management and site personalisation for WordPress with Google Tag Manager and Google Optimize
 
 == Description ==
 
@@ -257,6 +257,23 @@ If you or your social plugin inserts the Facebook buttons using IFRAMEs (like So
 6. Scroll tracking
 
 == Changelog ==
+
+= 1.9.2 =
+
+* Fixed: possible PHP warning if geo data or weather data feature is turned on
+
+= 1.9.1 =
+
+* Fixed: handle out of quota cases with ipstack queries properly
+* Fixed: proper YouTube tracking for WordPress sites and WordPress multisites installed in a subdirectory
+* Fixed: properly detect client IP address and also properly escape this data while using it
+* Fixed: WooCommerce checkout steps after page load did not include products in the cart
+* Fixed: checkout step events for payment mode and shipping type not always fired
+* Fixed: the CMD on Mac will be treated just like the Ctrl key on Windows while processing the product click event in the WooCommerce integration (thy for luzinis)
+* Fixed: add currencyCode to every ecommerce action in WooCommerce integration
+* Fixed: better WooCommere Quick View integration
+* Fixed: possible cross site scripting vulnerability if site search tracking was enabled due to not properly escaped referrer url tracking
+* Changed: code cleanup in WooCommerce integration
 
 = 1.9 =
 
@@ -563,6 +580,14 @@ Please report all bugs found in my plugin using the [contact form on my website]
 * First beta release
 
 == Upgrade Notice ==
+
+= 1.9.2 =
+
+Fixed possible PHP warning if geo data or weather data feature is turned on
+
+= 1.9.1 =
+
+Bugfix version
 
 = 1.9 =
 

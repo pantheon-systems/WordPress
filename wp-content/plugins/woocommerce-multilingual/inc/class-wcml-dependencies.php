@@ -2,10 +2,10 @@
 
 class WCML_Dependencies {
 
-	const MIN_WPML = '3.4';
-	const MIN_WPML_TM = '1.9';
-	const MIN_WPML_ST = '2.0';
-	const MIN_WOOCOMMERCE = '2.1';
+	const MIN_WPML = '4.0.0';
+	const MIN_WPML_TM = '2.6';
+	const MIN_WPML_ST = '2.8';
+	const MIN_WOOCOMMERCE = '3.3.0';
 
 	private $missing = array();
 	private $err_message = '';
@@ -219,33 +219,6 @@ class WCML_Dependencies {
 		$message .= ' | ';
 		$message .= '<a href="' . admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=mcsetup#icl_custom_posts_sync_options' ) . '">' . __( 'Configure products slug translation', 'woocommerce-multilingual' ) . '</a>';
 
-
-		// Check if translated shop pages have the same slug (only 1.x)
-		$allsame = true;
-		if ( version_compare( WOOCOMMERCE_VERSION, "2.0.0" ) >= 0 ) {
-		} else {
-			$shop_page_id = get_option( 'woocommerce_shop_page_id', false );
-			if ( ! empty( $shop_page_id ) ) {
-				$slug      = @get_post( $shop_page_id )->post_name;
-				$languages = $sitepress->get_active_languages();
-				if ( sizeof( $languages ) < 2 ) {
-					return;
-				}
-				foreach ( $languages as $language ) {
-					if ( $language['code'] != $sitepress->get_default_language() ) {
-						$translated_shop_page_id = apply_filters( 'translate_object_id', $shop_page_id, 'page', false, $language['code'] );
-						if ( ! empty( $translated_shop_page_id ) ) {
-							$translated_slug = get_post( $translated_shop_page_id )->post_name;
-							if ( ! empty( $translated_slug ) && $translated_slug != $slug ) {
-								$allsame = false;
-								break;
-							}
-						}
-					}
-				}
-			}
-		}
-
 		// Check if slug translation is enabled
 		$compatible          = true;
 		$permalink_structure = get_option( 'permalink_structure' );
@@ -256,12 +229,6 @@ class WCML_Dependencies {
 			$compatible = false;
 		}
 
-		// display messages
-		if ( ! $allsame ) {
-			$this->err_message = '<div class="message error"><p>' . printf( __( 'If you want different slugs for shop pages (%s/%s), you need to disable the shop prefix for products in <a href="%s">WooCommerce Settings</a>', 'woocommerce-multilingual' ),
-					$slug, $translated_slug, admin_url( "admin.php?page=woocommerce_settings&tab=pages" ) ) . '</p></div>';
-			add_action( 'admin_notices', array( $this, 'plugin_notice_message' ) );
-		}
 
 		if ( ! $compatible && ( $pagenow == 'options-permalink.php' || ( isset( $_GET['page'] ) && $_GET['page'] == 'wpml-wcml' ) ) ) {
 			$this->err_message = '<div class="message error"><p>' . $message . '    </p></div>';

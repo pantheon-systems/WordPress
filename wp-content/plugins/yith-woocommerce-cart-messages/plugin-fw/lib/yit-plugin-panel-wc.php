@@ -325,7 +325,7 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 do_action( 'yit_panel_wc_after_update' );
 
             } elseif ( isset( $_REQUEST[ 'yit-action' ] ) && $_REQUEST[ 'yit-action' ] == 'wc-options-reset'
-                && isset( $_POST[ 'yith_wc_reset_options_nonce' ] ) && wp_verify_nonce( $_POST[ 'yith_wc_reset_options_nonce' ], 'yith_wc_reset_options_' . $this->settings[ 'page' ] )
+                       && isset( $_POST[ 'yith_wc_reset_options_nonce' ] ) && wp_verify_nonce( $_POST[ 'yith_wc_reset_options_nonce' ], 'yith_wc_reset_options_' . $this->settings[ 'page' ] )
             ) {
 
                 do_action( 'yit_panel_wc_before_reset' );
@@ -551,7 +551,12 @@ if ( !class_exists( 'YIT_Plugin_Panel_WooCommerce' ) ) {
                 $field[ 'id' ]      = isset( $field[ 'id' ] ) ? $field[ 'id' ] : '';
                 $field[ 'name' ]    = $field[ 'id' ];
                 $field[ 'default' ] = isset( $field[ 'default' ] ) ? $field[ 'default' ] : '';
-                $field[ 'value' ]   = WC_Admin_Settings::get_option( $field[ 'id' ], $field[ 'default' ] );
+
+                $value = apply_filters( 'yith_plugin_fw_wc_panel_pre_field_value', null, $field );
+                if ( is_null( $value ) ) {
+                    $value = WC_Admin_Settings::get_option( $field[ 'id' ], $field[ 'default' ] );
+                }
+                $field[ 'value' ] = $value;
 
                 require( YIT_CORE_PLUGIN_TEMPLATE_PATH . '/panel/woocommerce/woocommerce-option-row.php' );
             }

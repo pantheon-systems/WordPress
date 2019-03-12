@@ -6,8 +6,8 @@ Author: Designmodo
 Author URI: https://designmodo.com/
 Tags: maintenance mode, admin, administration, unavailable, coming soon, multisite, landing page, under construction, contact form, subscribe, countdown
 Requires at least: 3.5
-Tested up to: 4.9.7
-Stable tag: 2.2.1
+Tested up to: 5.1.0
+Stable tag: 2.2.3
 Requires PHP: 5.6
 License: GPL-2.0+
 
@@ -76,6 +76,18 @@ WP Maintenance Mode can be unstable due the cache plugins, we recommend to deact
 If you change your login url, please add the new slug (url: http://domain.com/newlogin, then you should add: newlogin) to Exclude list from plugin settings -> General Tab.
 
 == Changelog ==
+
+= 2.2.3 (20/02/2019) =
+* bump "Tested up to" version to 5.1.0
+* replace "wpmu_new_blog" action with "wp_initialize_site" action for WP 5.1.0 users because the first one is deprecated in the new version
+* small improvement to "check_exclude" method from "WP_Maintenance_Mode" class
+
+= 2.2.2 (27/11/2018) =
+* Google Analytics module: migrate from analytics.js to gtag.js + add ip anonymization [#178](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/178)
+* GDPR module: accept links inside texareas + add policy link target [#188](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/188)
+* add charset meta tag [#200](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/200)
+* fix PHP Notice:  Undefined index: HTTP_USER_AGENT
+* add plural and single form translation for subscribers number (settings page)
 
 = 2.2.1 (13/07/2018) =
 * replace create_function; solves [#186](https://github.com/Designmodocom/WP-Maintenance-Mode/issues/186) issue and [ticket](https://wordpress.org/support/topic/create_function-deprecated-in-php-7-2-8/) (thanks @ [George Jipa](https://github.com/georgejipa))
@@ -192,7 +204,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 = 2.0.0 (01/09/2014) =
 * Changed design and functionality, new features
-* Changed multisite behaviour: now you can activate maintenance individually (each blog from the network has it's own maintenance settings) 
+* Changed multisite behavior: now you can activate maintenance individually (each blog from the network has it's own maintenance settings) 
 * Removed actions: `wm_header`, `wm_footer`, `wm_content`
 * Removed filters: `wm_header` 
 * Removed [loginform] shortcode
@@ -207,7 +219,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 - `wpmm_backtime` - can be used to change the backtime from page header
 - `wpmm_meta_robots` - can be used to change `Robots Meta Tag` option (from General)
 - `wpmm_text` - can be used to change `Text` option (from Design > Content)
-- `wpmm_scripts` - can be used to embed new javascripts files
+- `wpmm_scripts` - can be used to embed new javascript files
 - `wpmm_styles` - can be used to embed new css files
 - `wpmm_search_bots` - if you have `Bypass for Search Bots` option (from General) activated, it can be used to add new bots (useragents)
 * Removed themes and now we have a "Design" & "Modules" tabs, where the look and functionality of the maintenance page can be changed as you need
@@ -216,7 +228,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 * Switch to new owner, contributor
 
 = 1.8.11 (07/25/2013) =
-* Fixes for php notices in scrict mode
+* Fixes for php notices in strict mode
 * Alternative for check url, if curl is not installed
 
 = 1.8.10 (07/18/2013) =
@@ -266,7 +278,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 * Fix for include JS in frontend to use countdown
 * Small mini fix for a php notice
 * Add charset on spalsh page for strange databases
-* Enhanced default exclude adresses
+* Enhanced default exclude addresses
 * Add shortcode `[loginform]` for easy use a login form in splash page
 * Test with WordPress 3.5
  
@@ -287,8 +299,8 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 = 1.8.0 =
 * Include all scripts in backend via function
 * Update datepicker and countdown js
-* Supportet IP as exclude for see the frontend
-* Add support for flish cache od WP Super Cache and W3 Total Cache plugins
+* Supported IP as exclude for see the frontend
+* Add support for flush cache of WP Super Cache and W3 Total Cache plugins
 * Fix for changes in WP 3.3 Multisite
 
 = 1.7.1 (12/05/2011) =
@@ -314,7 +326,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 * Bugfix: new check for files for different themes; hope this fix the server errors
 * Bugfix: fix add default settings
 * Maintenance: different changes on the syntax
-* Feature: add check for Super Admin on WP Multisite; has allways the rights for access
+* Feature: add check for Super Admin on WP Multisite; has always the rights for access
 * Feature: now it is possible to exclude feed from maintenance mode
 * Maintenance: check with 3.0.4 and 3.1-RC2
 * Maintenance: update language file: .pot, de_DE
@@ -330,7 +342,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 
 = 1.6.5 (09/16/2010) =
 * add new design "Chemistry" by [elmastudio.de](http://www.elmastudio.de/ "elmastudio.de")
-* changes for include methods od class for preview
+* changes for include methods of class for preview
 * changes the possibility for include of language specific flash files
 
 = 1.6.4 (09/13/2010) =
@@ -379,17 +391,17 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 = 1.5.4 (02/23/2010) =
 * add time for countdown
 * changes for WP 3.0
-* changees on rights to see frontend
+* changes on rights to see frontend
 
 = 1.5.3 (01/05/2010) =
 * Fix for JavaScript with WordPress 2.9
 * Add new custom fields for fronted: title, header, heading
 * Fix for setting userrole to see frontend
-* Change laguage files
+* Change language files
 
 = 1.5.2 (01/04/2010) =
 * add user-role setting
-* correctly the de_DE language file
+* corrected the de_DE language file
 
 = 1.5.1 (10/04/2009) =
 * add small fix
@@ -399,7 +411,7 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 * add countdown
 * change options
 * change default options
-* add field for own adress to excerpt of the maintenance mode
+* add field for own address to excerpt of the maintenance mode
 * etc.
 
 = 1.4.9 (07/09/2009) =
@@ -417,12 +429,12 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 = v1.4.6 (24/08/2009) =
 * add design "Animate (Flash)" by [Sebastian Schmiedel](http://www.cayou-media.de/ "Sebastian Schmiedel")
 * add new hook for add content `wm_content` to include flash on content
-* add frensh language files
+* add french language files
 
 = v1.4.5 (19/08/2009) =
 * fix html string in text on frontend
 * add design "Paint" by [Marvin Labod](http://bugeyes.de/ "Marvin Labod")
-* add turkey language files
+* add turkish language files
 
 = v1.4.4 (18/08/2009) =
 * add design "Chastely" by [Florian Andreas Vogelmaier](http://fv-web.de/ "Florian Andreas Vogelmaier")
@@ -442,6 +454,6 @@ If you change your login url, please add the new slug (url: http://domain.com/ne
 * small html-fix
 
 = v1.4 (06/08/2009) =
-* complety new code
+* completely new code
 * options menu
 * new designs by [David Hellmann](http://www.davidhellmann.com/ "David Hellmann")

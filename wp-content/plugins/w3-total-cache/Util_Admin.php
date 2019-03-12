@@ -761,16 +761,6 @@ class Util_Admin {
 	}
 
 
-	static public function make_track_call( $params ) {
-		wp_remote_post( W3TC_TRACK_URL, array(
-				'timeout' => 45,
-				'redirection' => 5,
-				'blocking' => false,
-				'headers' => array(),
-				'body' => array_merge( $params, array( 'id' => md5( home_url() ) ) )
-			) );
-	}
-
 	/**
 	 * Returns current WordPress page
 	 *

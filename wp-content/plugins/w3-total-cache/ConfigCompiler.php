@@ -396,15 +396,6 @@ class ConfigCompiler {
 		}
 
 		//
-		// changes in 0.9.5.3
-		//
-		if ( version_compare( $file_data['version'], '0.9.5.3', '<' ) ) {
-			if ( !isset( $file_data['extensions.active']['swarmify'] ) ) {
-				$file_data['extensions.active']['swarmify'] = 'w3-total-cache/Extension_Swarmify_Plugin.php';
-			}
-		}
-
-		//
 		// changes in 0.9.5.4
 		//
 		if ( isset( $file_data['cdn.engine'] ) ) {

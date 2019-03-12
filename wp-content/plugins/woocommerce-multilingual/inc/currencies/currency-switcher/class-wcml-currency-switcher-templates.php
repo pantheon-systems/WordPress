@@ -417,7 +417,7 @@ class WCML_Currency_Switcher_Templates {
 	    $this->enqueued_templates[] = $slug;
 
 	    foreach ( $template->get_scripts() as $k => $url ) {
-		    wp_enqueue_script( $template->get_resource_handler( $k ), $url, array(), WCML_VERSION );
+			wp_enqueue_script( $template->get_resource_handler( $k ), $url, array(), WCML_VERSION, true );
 	    }
 
 	    foreach ( $template->get_styles() as $k => $url ) {

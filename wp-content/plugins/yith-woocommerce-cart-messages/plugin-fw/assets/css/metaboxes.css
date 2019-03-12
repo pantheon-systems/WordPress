@@ -631,7 +631,23 @@
     float        : right;
     margin-right : 20px;
     margin-top   : 5px;
-  z-index: 9999 !important;
-  position: absolute;
-  right: 0;
+    z-index      : 9999 !important;
+    position     : absolute;
+    right        : 0;
+}
+
+/*-----------------------
+* Colorpicker - fix issues in combination with third-party themes or plugin (Basel, VC Addons, ...)
+*/
+.metaboxes-tab .the-metabox.colorpicker {
+    display     : block;
+    width       : auto;
+    height      : auto;
+    overflow    : visible;
+    top         : auto;
+    left        : auto;
+    background  : transparent;
+    position    : static;
+    z-index     : 1;
+    font-family : inherit;
 }

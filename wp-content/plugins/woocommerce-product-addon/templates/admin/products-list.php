@@ -20,15 +20,15 @@ $ppom_attached = get_posts($ppom_attached_params);
 if( count($ppom_attached) > 0):
 ?>
 
-<h3><?php _e('Already Attached', 'ppom');?></h3>
+<h3><?php _e('Already Attached', "ppom");?></h3>
 <table id="ppom-already-attached-table" class="ppom-table table table-striped">
 <thead>
     <tr>
         <th>
-            <strong><?php _e('Product Title', 'ppom')?></strong>
+            <strong><?php _e('Product Title', "ppom")?></strong>
         </th>
         <th>
-            <strong><?php _e('PPOM Fields', 'ppom')?></strong>
+            <strong><?php _e('PPOM Fields', "ppom")?></strong>
         </th>
     </tr>
 </thead>
@@ -60,15 +60,15 @@ if( count($ppom_attached) > 0):
 endif;
 ?>
 
-<h3><?php _e('Attach', 'ppom');?></h3>
+<h3><?php _e('Attach', "ppom");?></h3>
 <table id="ppom-product-table" class="ppom-table table table-striped">
 <thead>
     <tr>
         <th>
-            <strong><?php _e('Product Title', 'ppom')?></strong>
+            <strong><?php _e('Product Title', "ppom")?></strong>
         </th>
         <th>
-            <strong><?php _e('PPOM Fields', 'ppom')?></strong>
+            <strong><?php _e('PPOM Fields', "ppom")?></strong>
         </th>
     </tr>
 </thead>

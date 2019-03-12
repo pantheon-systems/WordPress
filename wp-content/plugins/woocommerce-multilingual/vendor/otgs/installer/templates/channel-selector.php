@@ -48,11 +48,11 @@
             <button class="button-primary js-proceed"><?php _e("Switch", 'installer') ?></button>
         </p>
         <p>
-            <?php _e("Plugins will be updated to their most advanced version in the channel that you selected.", 'installer') ?>
+            <?php _e( 'The plugins will update to the most recent version in the channel that you selected.', 'installer') ?>
         </p>
         <label>
             <input type="checkbox" value="1" class="js-remember"/>
-                &nbsp;<?php _e("Remember my preference.", 'installer') ?><br />
+                &nbsp;<?php _e( 'Remember my preference.', 'installer') ?><br />
         </label>
     </div>
     <?php endif; ?>

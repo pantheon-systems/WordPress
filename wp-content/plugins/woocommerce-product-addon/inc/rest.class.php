@@ -126,7 +126,7 @@ class PPOM_Rest {
         $response_info = array();
         if( $product_id == '' ) {
             $response_info = array('status'=>'no_product',
-                                    'message' => __('No Product Found', 'ppom')
+                                    'message' => __('No Product Found', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -136,7 +136,7 @@ class PPOM_Rest {
         if( ! $ppom->is_exists ) {
             
             $response_info = array('status'=>'no_meta',
-                                    'message' => __('No Meta Found', 'ppom')
+                                    'message' => __('No Meta Found', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -147,7 +147,7 @@ class PPOM_Rest {
         $ppom_fields = $this->filter_required_keys_only($ppom_fields);
         
         $response_info = array('status'=>'success',
-                            'message' => __("Meta found {$meta_id}", 'ppom'),
+                            'message' => __("Meta found {$meta_id}", "ppom"),
                             'meta_id'   => intval($meta_id),
                             'product_id'=> $product_id,
                             'ppom_fields' => $ppom_fields,
@@ -174,14 +174,14 @@ class PPOM_Rest {
         
         if( empty($all_data['fields']) ) {
             $response_info = array('status'=>'no_fields',
-                                    'message' => __('No fields to save', 'ppom')
+                                    'message' => __('No fields to save', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
         
         if( empty($secretkey) || ! $this->is_secret_key_valid($secretkey) ) {
             $response_info = array('status'=>'key_not_valid',
-                                    'message' => __('Secret key is not valid', 'ppom')
+                                    'message' => __('Secret key is not valid', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -189,7 +189,7 @@ class PPOM_Rest {
         $response_info = array();
         if( $product_id == '' ) {
             $response_info = array('status'=>'no_product',
-                                    'message' => __('No Product Found', 'ppom')
+                                    'message' => __('No Product Found', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -197,7 +197,7 @@ class PPOM_Rest {
         
         $product_id = intval( $product_id );
 	    $ppom		= new PPOM_Meta( $product_id );
-        $ppom_settings = $ppom->settings;
+        $ppom_settings = $ppom->ppom_settings;
         
         $ppom_fields = json_decode( stripslashes($all_data['fields']), true );
         
@@ -235,14 +235,14 @@ class PPOM_Rest {
         
         if( empty($all_data['fields']) ) {
             $response_info = array('status'=>'no_fields',
-                                    'message' => __('No fields to save', 'ppom')
+                                    'message' => __('No fields to save', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
         
         if( empty($secretkey) || ! $this->is_secret_key_valid($secretkey) ) {
             $response_info = array('status'=>'key_not_valid',
-                                    'message' => __('Secret key is not valid', 'ppom')
+                                    'message' => __('Secret key is not valid', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -250,14 +250,14 @@ class PPOM_Rest {
         $response_info = array();
         if( $product_id == '' ) {
             $response_info = array('status'=>'no_product',
-                                    'message' => __('No Product Found', 'ppom')
+                                    'message' => __('No Product Found', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
             
         $product_id = intval( $product_id );
 	    $ppom		= new PPOM_Meta( $product_id );
-        $ppom_settings = $ppom->settings;
+        $ppom_settings = $ppom->ppom_settings;
         
         $delete_fields = json_decode( stripslashes($all_data['fields']) );
         
@@ -484,7 +484,7 @@ class PPOM_Rest {
         $response_info = array();
         if( !$order) {
             $response_info = array('status'=>'no_order',
-                                    'message' => __('No Order Found', 'ppom')
+                                    'message' => __('No Order Found', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -493,7 +493,7 @@ class PPOM_Rest {
         $item_product_meta = $this->get_order_item_meta($order_id);
         
         $response_info = array('status'=>'success',
-                            'message' => __("Order found {$order_id}", 'ppom'),
+                            'message' => __("Order found {$order_id}", "ppom"),
                             'order_items_meta' => $item_product_meta,
                             );
         
@@ -522,21 +522,21 @@ class PPOM_Rest {
         $response_info = array();
         if( !$order) {
             $response_info = array('status'=>'no_order',
-                                    'message' => __('No Order Found', 'ppom')
+                                    'message' => __('No Order Found', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
         
         if( empty($all_data['fields']) ) {
             $response_info = array( 'status'=>'no_fields',
-                                    'message' => __('No meta found to save', 'ppom')
+                                    'message' => __('No meta found to save', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
         
         if( empty($secretkey) || ! $this->is_secret_key_valid($secretkey) ) {
             $response_info = array('status'=>'key_not_valid',
-                                    'message' => __('Secret key is not valid', 'ppom')
+                                    'message' => __('Secret key is not valid', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -549,7 +549,7 @@ class PPOM_Rest {
                 
         if( empty($order_item_meta) ) {
             $response_info = array('status'=>'fields_not_valid',
-                                    'message' => __('Submitted fields are in valid format.', 'ppom')
+                                    'message' => __('Submitted fields are in valid format.', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -590,7 +590,7 @@ class PPOM_Rest {
         $item_product_meta = $this->get_order_item_meta( $order_id );
         
         $response_info = array('status'=>'success',
-                            'message' => __("Order updated {$order_id}", 'ppom'),
+                            'message' => __("Order updated {$order_id}", "ppom"),
                             'order_items_meta' => $item_product_meta,
                             );
         
@@ -619,21 +619,21 @@ class PPOM_Rest {
         $response_info = array();
         if( !$order) {
             $response_info = array('status'=>'no_order',
-                                    'message' => __('No Order Found', 'ppom')
+                                    'message' => __('No Order Found', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
         
         if( empty($all_data['fields']) ) {
             $response_info = array('status'=>'no_fields',
-                                    'message' => __('No fields to delete', 'ppom')
+                                    'message' => __('No fields to delete', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
         
         if( empty($secretkey) || ! $this->is_secret_key_valid($secretkey) ) {
             $response_info = array('status'=>'key_not_valid',
-                                    'message' => __('Secret key is not valid', 'ppom')
+                                    'message' => __('Secret key is not valid', "ppom")
                                     );
             return new WP_REST_Response( $response_info );
         }
@@ -667,7 +667,7 @@ class PPOM_Rest {
         $item_product_meta = $this->get_order_item_meta( $order_id );
         
         $response_info = array('status'=>'success',
-                            'message' => __("Order updated {$order_id}", 'ppom'),
+                            'message' => __("Order updated {$order_id}", "ppom"),
                             'order_items_meta' => $item_product_meta,
                             );
         

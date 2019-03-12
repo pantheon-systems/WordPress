@@ -161,6 +161,16 @@ if ( ! defined( 'WPINC' ) ) {
         <div class="cli_sub_tab_content" data-id="read-more-button">
             <h3><?php _e('Read More Link', 'cookie-law-info'); ?> <code>[cookie_link]</code></h3>
             <p><?php _e('This button/link can be used to provide a link out to your Privacy & Cookie Policy. You can customise it any way you like.', 'cookie-law-info'); ?></p>
+            <?php
+            if(Cookie_Law_Info_Admin::module_exists('cli-policy-generator'))
+            {
+            ?>
+            <p><?php _e('Click', 'cookie-law-info'); ?> <a href="<?php echo admin_url('edit.php?post_type='.CLI_POST_TYPE.'&page=cookie-law-info-policy-generator'); ?>"><?php _e('here', 'cookie-law-info'); ?></a> <?php _e(' to generate content for Cookie Policy page.', 'cookie-law-info'); ?>
+            </p>
+            <?php
+            }
+            ?>
+
             <table class="form-table">
                 <tr valign="top">
                     <th scope="row"><label for="button_2_text_field"><?php _e('Text', 'cookie-law-info'); ?></label></th>
@@ -242,6 +252,13 @@ if ( ! defined( 'WPINC' ) ) {
                             }
                         }
                         ?>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row"><label for="button_2_new_win_field"><?php _e('Minimize Cookie Bar in this page/URL?', 'cookie-law-info'); ?></label></th>
+                    <td>
+                        <input type="radio" id="button_2_hidebar_field_yes" name="button_2_hidebar_field" class="styled" value="true" <?php echo ( $the_options['button_2_hidebar'] == true ) ? ' checked="checked"' : ''; ?> /> <?php _e('Yes', 'cookie-law-info'); ?>
+                               <input type="radio" id="button_2_hidebar_field_no" name="button_2_hidebar_field" class="styled" value="false" <?php echo ( $the_options['button_2_hidebar'] == false ) ? ' checked="checked"' : ''; ?> /> <?php _e('No', 'cookie-law-info'); ?>
                     </td>
                 </tr>
                 <tr valign="top">

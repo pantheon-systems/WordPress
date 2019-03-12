@@ -13,6 +13,11 @@ namespace W3TC;
  *   common.hide_note_no_zlib
  *   common.hide_note_zlib_output_compression
  *   common.show_note.nginx_restart_required
+ *   common.hide_note_php_version_56
+ *   license.status
+ *   license.next_check - time of next check
+ *   license.terms - accepted/declined/''
+ *   license.community_terms - accepted/declined/'' (master)
  *   minify.error.file
  *   minify.error.last
  *   minify.error.notification.last
@@ -31,6 +36,7 @@ namespace W3TC;
  *   cdn.google_drive.access_token
  *   cdn.rackspace_cf.access_state
  *   cdn.rackspace_cdn.access_state
+ *   cdn.stackpath2.access_token
  *   cdn.show_note_theme_changed
  *   cdn.show_note_wp_upgraded
  *   cdn.show_note_cdn_upload

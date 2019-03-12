@@ -37,9 +37,15 @@ include_once( 'lib/yit-pointers.php');
 include_once( 'lib/yit-icons.php');
 include_once( 'lib/yit-assets.php');
 include_once( 'lib/yit-debug.php');
+include_once( 'lib/yith-dashboard.php' );
 include_once( 'lib/privacy/yit-privacy.php' );
 include_once( 'lib/privacy/yit-privacy-plugin-abstract.php' );
-include_once ( 'lib/promo/yith-promo.php' );
+include_once( 'lib/promo/yith-promo.php' );
+
+/* === Gutenberg Support === */
+if( class_exists( 'WP_Block_Type_Registry' ) ){
+	include_once( 'lib/yith-gutenberg.php' );
+}
 
 // load from theme folder...
 load_textdomain( 'yith-plugin-fw', get_template_directory() . '/core/plugin-fw/yith-plugin-fw-' . apply_filters( 'plugin_locale', get_locale(), 'yith-plugin-fw' ) . '.mo' )

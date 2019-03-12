@@ -18,7 +18,7 @@ if ( !function_exists( 'wp_editor' ) ) :
 else:
     extract( $field );
 
-    $editor_args = array(
+    $editor_args = wp_parse_args( $field, array(
         'wpautop'       => true, // use wpautop?
         'media_buttons' => true, // show insert/upload button(s)
         'textarea_name' => $name, // set the textarea name to something different, square brackets [] can be used here
@@ -30,7 +30,7 @@ else:
         'dfw'           => false, // replace the default fullscreen with DFW (needs specific DOM elements and css)
         'tinymce'       => true, // load TinyMCE, can be used to pass settings directly to TinyMCE using an array()
         'quicktags'     => true // load Quicktags, can be used to pass settings directly to Quicktags using an array()
-    );
+    ) );
     ?>
     <div class="editor" <?php echo $custom_attributes ?>
         <?php if ( isset( $data ) ) echo yith_plugin_fw_html_data_to_string( $data ); ?>><?php wp_editor( $value, $id, $editor_args ); ?></div>

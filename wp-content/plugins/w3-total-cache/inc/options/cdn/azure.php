@@ -46,7 +46,7 @@ if ( !defined( 'W3TC' ) )
 		    <?php echo esc_attr( $cdn_azure_user ); ?>.blob.core.windows.net
 		<?php else: ?>
 		    &lt;account name&gt;.blob.core.windows.net
-		<?php endif; ?> <?php _e( 'or CNAME:', 'w3-total-cache' ); ?>
+		<?php endif; ?> <?php _e( 'or <acronym title="Canonical Name">CNAME</acronym>:', 'w3-total-cache' ); ?>
 		<?php $cnames = $this->_config->get_array( 'cdn.azure.cname' ); include W3TC_INC_DIR . '/options/cdn/common/cnames.php'; ?>
 	</td>
 </tr>

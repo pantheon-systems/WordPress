@@ -16,6 +16,7 @@ class AmeReflectionCallable {
 	 * AmeReflectionCallable constructor.
 	 *
 	 * @param callable $callback
+	 * @throws ReflectionException
 	 */
 	public function __construct($callback) {
 		$this->callback = $callback;
@@ -25,6 +26,7 @@ class AmeReflectionCallable {
 	/**
 	 * @param callable $callback
 	 * @return ReflectionFunctionAbstract
+	 * @throws ReflectionException
 	 */
 	private function getReflectionFunction($callback) {
 		//Closure or a simple function name.

@@ -84,7 +84,17 @@ if ( !defined( 'W3TC' ) )
             <?php else: ?>
             <span style="background-color: #FFFF00"><?php _e( 'Not installed', 'w3-total-cache' ); ?></span>
             <?php endif; ?>
-            <span class="w3tc-self-test-hint"><?php _e( '(required for compression support)', 'w3-total-cache' ); ?></span>
+            <span class="w3tc-self-test-hint"><?php _e( '(required for gzip compression support)', 'w3-total-cache' ); ?></span>
+        </li>
+
+        <li>
+            brotli extension:
+            <?php if ( function_exists( 'brotli_compress' ) ): ?>
+            <span style="background-color: #33cc33"><?php _e( 'Installed', 'w3-total-cache' ); ?></span>
+            <?php else: ?>
+            <span style="background-color: #FFFF00"><?php _e( 'Not installed', 'w3-total-cache' ); ?></span>
+            <?php endif; ?>
+            <span class="w3tc-self-test-hint"><?php _e( '(required for brotli compression support)', 'w3-total-cache' ); ?></span>
         </li>
 
         <li>
@@ -190,6 +200,16 @@ if ( !defined( 'W3TC' ) )
             <?php else: ?>
             <span style="background-color: #FFFF00"><?php _e( 'Not available', 'w3-total-cache' ); ?></span>
             <?php endif; ?>
+        </li>
+
+        <li>
+            SSH2 extension:
+            <?php if ( function_exists( 'ssh2_connect' ) ): ?>
+                <span style="background-color: #33cc33"><?php _e( 'Installed', 'w3-total-cache' ); ?></span>
+            <?php else: ?>
+                <span style="background-color: #FFFF00"><?php _e( 'Not installed', 'w3-total-cache' ); ?></span>
+            <?php endif; ?>
+            <span class="w3tc-self-test-hint"><?php _e( '(required for Self-hosted (<acronym title="File Transfer Protocol">FTP</acronym>) <acronym title="Content Delivery Network">CDN</acronym> <acronym title="Secure File Transfer Protocol">SFTP</acronym> support)', 'w3-total-cache' ); ?></span>
         </li>
 
         <?php

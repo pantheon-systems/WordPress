@@ -124,7 +124,8 @@ if ( !$upload_blogfiles_enabled )
 				<th<?php if ( $cdn_mirror ): ?> colspan="2"<?php endif; ?>>
 					<?php $this->checkbox( 'cdn.custom.enable' ) ?> <?php Util_Ui::e_config_label( 'cdn.custom.enable' ) ?></label><br />
 					<span class="description">
-						<?php echo sprintf( __( 'If checked, any file names or paths specified in the "custom file list" field below will be hosted with the <acronym title="Content Delivery Network">CDN</acronym>. Supports masks (See <a href="%s">FAQ</a>)', 'w3-total-cache' ), network_admin_url( 'admin.php?page=w3tc_faq#q82' ) ); ?>
+						<?php echo sprintf( __( 'If checked, any file names or paths specified in the "custom file list" field below will be hosted with the <acronym title="Content Delivery Network">CDN</acronym>.', 'w3-total-cache' ),
+					 	'https://api.w3-edge.com/v1/redirects/faq/usage/regexp-support' ); ?>
 					</span>
 				</th>
 				<?php if ( ! $cdn_mirror ): ?>
@@ -143,6 +144,7 @@ if ( !$upload_blogfiles_enabled )
 				</th>
 			</tr>
 			<?php endif; ?>
+
 			<?php if ( $cdn_supports_header ): ?>
 			<tr>
 				<th colspan="2">
@@ -159,10 +161,14 @@ if ( !$upload_blogfiles_enabled )
 		<?php Util_Ui::postbox_header( __( 'Configuration: Objects', 'w3-total-cache' ), '', 'configuration' ); ?>
 		<table class="form-table">
 			<?php
-if ( $cdn_engine == 'google_drive' || $cdn_engine == 'highwinds' ||
+if ( $cdn_engine == 'google_drive' ||
+	$cdn_engine == 'highwinds' ||
 	$cdn_engine == 'limelight' ||
-	$cdn_engine == 'maxcdn' || $cdn_engine == 'rackspace_cdn' ||
-	$cdn_engine == 'rscf' || $cdn_engine == 'stackpath' ) {
+	$cdn_engine == 'maxcdn' ||
+	$cdn_engine == 'rackspace_cdn' ||
+	$cdn_engine == 'rscf' ||
+	$cdn_engine == 'stackpath' ||
+	$cdn_engine == 'stackpath2' ) {
 	do_action( 'w3tc_settings_cdn_boxarea_configuration' );
 } else if ( Cdn_Util::is_engine( $cdn_engine ) ) {
 		include W3TC_INC_DIR . '/options/cdn/' . $cdn_engine . '.php';
@@ -177,6 +183,15 @@ if ( $cdn_engine == 'google_drive' || $cdn_engine == 'highwinds' ||
 
 		<?php Util_Ui::postbox_header( __( 'Advanced', 'w3-total-cache' ), '', 'advanced' ); ?>
 		<table class="form-table">
+
+			<tr>
+				<th colspan="2">
+					<?php $this->checkbox( 'cdn.flush_manually' ) ?>
+					<?php _e( 'Only purge <acronym title="Content Delivery Network">CDN</acronym> manually', 'w3-total-cache' ) ?></label><br />
+					<span class="description"><?php _e( 'Purge <acronym title="Content Delivery Network">CDN</acronym> only if explicit purge button is clicked.', 'w3-total-cache' ) ?></span>
+				</th>
+			</tr>
+
 			<tr>
 				<th colspan="2">
 					<?php $this->checkbox( 'cdn.reject.ssl' ) ?> <?php Util_Ui::e_config_label( 'cdn.reject.ssl' ) ?></label><br />
@@ -184,17 +199,17 @@ if ( $cdn_engine == 'google_drive' || $cdn_engine == 'highwinds' ||
 				</th>
 			</tr>
 			<tr>
- 				<th colspan="2">
- 					<?php $this->checkbox( 'cdn.admin.media_library' ) ?> <?php Util_Ui::e_config_label( 'cdn.admin.media_library' ) ?></label><br />
+				 <th colspan="2">
+					 <?php $this->checkbox( 'cdn.admin.media_library' ) ?> <?php Util_Ui::e_config_label( 'cdn.admin.media_library' ) ?></label><br />
 					<span class="description">All Media Library content will use <acronym title="Content Delivery Network">CDN</acronym> links on administration pages.</span>
 				</th>
- 			</tr>
+			 </tr>
 			<tr>
- 				<th colspan="2">
- 					<?php $this->checkbox( 'cdn.cors_header' ) ?> Add <acronym title="Access-Control-Allow-Origin">CORS</acronym> header</label><br />
+				 <th colspan="2">
+					 <?php $this->checkbox( 'cdn.cors_header' ) ?> Add <acronym title="Access-Control-Allow-Origin">CORS</acronym> header</label><br />
 					<span class="description">Add <acronym title="Access-Control-Allow-Origin">CORS</acronym> headers to allow cross-domain assets usage.</span>
 				</th>
- 			</tr>
+			 </tr>
 
 			<tr>
 				<th colspan="2">
@@ -218,7 +233,7 @@ if ( $cdn_engine == 'google_drive' || $cdn_engine == 'highwinds' ||
 					<textarea id="cdn_reject_uri" name="cdn__reject__uri"
 						<?php Util_Ui::sealing_disabled( 'cdn.' ) ?>
 							  cols="40" rows="5"><?php echo esc_textarea( implode( "\r\n", $this->_config->get_array( 'cdn.reject.uri' ) ) ); ?></textarea><br />
-					<span class="description"><?php echo sprintf( __( 'Always ignore the specified pages / directories. Supports regular expression (See <a href="%s">FAQ</a>' ), network_admin_url( 'admin.php?page=w3tc_faq#q82' ) ) ?></span>
+					<span class="description"><?php echo sprintf( __( 'Always ignore the specified pages / directories. Supports regular expression (See <a href="%s"><acronym title="Frequently Asked Questions">FAQ</acronym></a>)' ), network_admin_url( 'admin.php?page=w3tc_faq' ) ) ?></span>
 				</td>
 			</tr>
 			<tr>

@@ -24,7 +24,7 @@
 				// Collapse icon left or right
 				collapseIconsAlign: 'right',
 				// Scroll to opened accordion element
-				scroll: true
+				scroll: false
 			}, actionOrSettings);
 		}
 		// actions

@@ -63,13 +63,8 @@ class WCML_Compatibility {
 
 		//Product Bundle
 		if ( class_exists( 'WC_Product_Bundle' ) && function_exists( 'WC_PB' ) ) {
-			if ( version_compare( WC_PB()->version, '5.0.0', '<' ) ) {
-				$this->product_bundles = new WCML_Product_Bundles_Legacy( $this->sitepress, $this->woocommerce_wpml, $this->tp );
-				$this->product_bundles->add_hooks();
-			} else {
-				$product_bundle_items  = new WCML_WC_Product_Bundles_Items();
-				$this->product_bundles = new WCML_Product_Bundles( $this->sitepress, $this->woocommerce_wpml, $product_bundle_items, $this->wpdb );
-			}
+			$product_bundle_items  = new WCML_WC_Product_Bundles_Items();
+			$this->product_bundles = new WCML_Product_Bundles( $this->sitepress, $this->woocommerce_wpml, $product_bundle_items, $this->wpdb );
 		}
 
 		// WooCommerce Variation Swatches and Photos
@@ -78,8 +73,8 @@ class WCML_Compatibility {
 		}
 
 		// Product Add-ons
-		if ( class_exists( 'Product_Addon_Display' ) ) {
-			$this->product_addons = new WCML_Product_Addons( $this->sitepress, $this->woocommerce_wpml->settings['enable_multi_currency'] );
+		if ( defined( 'WC_PRODUCT_ADDONS_VERSION' ) || class_exists( 'Product_Addon_Display' ) ) {
+			$this->product_addons = new WCML_Product_Addons( $this->sitepress, $this->woocommerce_wpml );
 			$this->product_addons->add_hooks();
 		}
 
@@ -95,7 +90,8 @@ class WCML_Compatibility {
 
 		//Gravity Forms
 		if ( class_exists( 'GFForms' ) ) {
-			$this->gravityforms = new WCML_gravityforms();
+			$this->gravityforms = new WCML_gravityforms( $this->sitepress, $this->woocommerce_wpml );
+			$this->gravityforms->add_hooks();
 		}
 
 		//Sensei WooThemes
@@ -161,11 +157,6 @@ class WCML_Compatibility {
 			$this->wc_checkout_addons = new WCML_Checkout_Addons();
 		}
 
-		// woocommerce checkout addons
-		if ( wp_get_theme() == 'Flatsome' ) {
-			$this->flatsome = new WCML_Flatsome();
-		}
-
 		if ( class_exists( 'WC_Mix_and_Match' ) ) {
 			$this->mix_and_match_products = new WCML_Mix_and_Match_Products();
 		}
@@ -180,8 +171,13 @@ class WCML_Compatibility {
 			$this->adventure_tours->add_hooks();
 		}
 
+		// flatsome theme
+		if ( wp_get_theme()->get( 'Name' ) === 'Flatsome' ) {
+			$this->flatsome = new WCML_Flatsome();
+		}
+
 		//Aurum Theme
-		if ( wp_get_theme() == 'Aurum' ) {
+		if ( wp_get_theme()->get( 'Name' ) === 'Aurum' ) {
 			new WCML_Aurum();
 		}
 
@@ -257,6 +253,18 @@ class WCML_Compatibility {
 		if ( class_exists( 'LiteSpeed_Cache' ) ) {
 			$this->litespeed_cache = new WCML_LiteSpeed_Cache();
 			$this->litespeed_cache->add_hooks();
+		}
+
+		// WpFastest Cache
+		if ( class_exists( 'WpFastestCache' ) ) {
+			$this->wpfastestcache = new WCML_WpFastest_Cache();
+			$this->wpfastestcache->add_hooks();
+		}
+
+		// WooCommerce Product Type Column
+		if ( class_exists( 'WC_Product_Type_Column' ) ) {
+			$this->wc_type_column = new WCML_WC_Product_Type_Column();
+			$this->wc_type_column->add_hooks();
 		}
 
 	}

@@ -9,7 +9,7 @@ class Cdn_Highwinds_Widget {
 		add_action( 'admin_print_scripts',
 			array( $o, 'admin_print_scripts' ) );
 		add_action( 'w3tc_widget_setup',
-			array( $o, 'w3tc_widget_setup' ) );
+			array( $o, 'w3tc_widget_setup' ), 2000 );
 	}
 
 

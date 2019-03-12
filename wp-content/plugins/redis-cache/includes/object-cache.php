@@ -3,7 +3,7 @@
 Plugin Name: Redis Object Cache Drop-In
 Plugin URI: http://wordpress.org/plugins/redis-cache/
 Description: A persistent object cache backend powered by Redis. Supports Predis, PhpRedis, HHVM, replication, clustering and WP-CLI.
-Version: 1.3.8
+Version: 1.4.1
 Author: Till Krüss
 Author URI: https://till.im/
 License: GPLv3
@@ -424,7 +424,7 @@ class WP_Object_Cache
                 $this->redis_client = sprintf('PhpRedis (v%s)', phpversion('redis'));
 
                 if (defined('WP_REDIS_SHARDS')) {
-                    $this->redis = new RedisArray(array_values(WP_REDIS_CLUSTER));
+                    $this->redis = new RedisArray(array_values(WP_REDIS_SHARDS));
                 } elseif (defined('WP_REDIS_CLUSTER')) {
                     $this->redis = new RedisCluster(null, array_values(WP_REDIS_CLUSTER));
                 } else {
@@ -581,6 +581,14 @@ class WP_Object_Cache
      */
     protected function add_or_replace($add, $key, $value, $group = 'default', $expiration = 0)
     {
+        $cache_addition_suspended = function_exists('wp_suspend_cache_addition')
+            ? wp_suspend_cache_addition()
+            : false;
+
+        if ( $add && $cache_addition_suspended ) {
+            return false;
+        }
+
         $result = true;
         $derived_key = $this->build_key($key, $group);
 
@@ -1111,6 +1119,10 @@ class WP_Object_Cache
      */
     protected function maybe_unserialize($original)
     {
+        if (defined('WP_REDIS_IGBINARY') && WP_REDIS_IGBINARY) {
+            return igbinary_unserialize($original);
+        }
+
         // don't attempt to unserialize data that wasn't serialized going in
         if ($this->is_serialized($original)) {
             return @unserialize($original);
@@ -1126,6 +1138,10 @@ class WP_Object_Cache
      */
     protected function maybe_serialize($data)
     {
+        if (defined('WP_REDIS_IGBINARY') && WP_REDIS_IGBINARY) {
+            return igbinary_serialize($data);
+        }
+
         if (is_array($data) || is_object($data)) {
             return serialize($data);
         }

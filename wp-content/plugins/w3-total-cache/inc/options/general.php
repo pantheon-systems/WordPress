@@ -90,6 +90,12 @@ Util_Ui::config_item( array(
 				'label' => __( 'Memcached', 'w3-total-cache' ),
 				'optgroup' => 2
 			),
+			'nginx_memcached' => array(
+				'disabled' => !Util_Installed::memcached_memcached() || !$is_pro,
+				'label' => __( 'Nginx + Memcached', 'w3-total-cache' ) .
+					( $is_pro ? '' : ' (available after upgrade)' ),
+				'optgroup' => 2
+			),
 			'redis' => array(
 				'disabled' => !Util_Installed::redis(),
 				'label' => __( 'Redis', 'w3-total-cache' ),
@@ -120,7 +126,7 @@ Util_Ui::config_overloading_button( array(
 		'key' => 'minify.configuration_overloaded'
 	) );
 ?>
-        <p><?php _e( 'Reduce load time by decreasing the size and number of <acronym title="Cascading Style Sheet">CSS</acronym> and <acronym title="JavaScript">JS</acronym> files. Automatically remove unncessary data from <acronym title="Cascading Style Sheet">CSS</acronym>, <acronym title="JavaScript">JS</acronym>, feed, page and post <acronym title="Hypertext Markup Language">HTML</acronym>.', 'w3-total-cache' ); ?></p>
+        <p><?php w3tc_e( 'minify.general.header', 'Reduce load time by decreasing the size and number of <acronym title="Cascading Style Sheet">CSS</acronym> and <acronym title="JavaScript">JS</acronym> files. Automatically remove unncessary data from <acronym title="Cascading Style Sheet">CSS</acronym>, <acronym title="JavaScript">JS</acronym>, feed, page and post <acronym title="Hypertext Markup Language">HTML</acronym>.' ) ?></p>
 
         <table class="form-table">
             <?php
@@ -290,8 +296,7 @@ Util_Ui::config_overloading_button( array(
         <p>
         	<?php
 echo sprintf(
-	__( 'A reverse proxy adds scale to an server by handling requests before WordPress does. Purge settings are set on the <a href="%s">Page Cache settings</a> page and <a href="%s">Browser Cache settings</a> are set on the browser cache settings page.',
-		'w3-total-cache' ),
+	w3tc_er( 'reverseproxy.general.header', 'A reverse proxy adds scale to an server by handling requests before WordPress does. Purge settings are set on the <a href="%s">Page Cache settings</a> page and <a href="%s">Browser Cache settings</a> are set on the browser cache settings page.' ),
 	self_admin_url( 'admin.php?page=w3tc_pgcache' ),
 	self_admin_url( 'admin.php?page=w3tc_browsercache' ) );
 ?>
@@ -321,7 +326,7 @@ Util_Ui::button_config_save( 'general_varnish',
 ?>
         <?php Util_Ui::postbox_footer(); ?>
 
-        <?php if ( Util_Environment::is_w3tc_pro() ): ?>
+        <?php if ( $is_pro ): ?>
         <?php Util_Ui::postbox_header( 'Message Bus', '', 'amazon_sns' ); ?>
         <p>
             Allows policy management to be shared between a dynamic pool of servers. For example, each server in a pool to use opcode caching (which is not a shared resource) and purging is then syncronized between any number of servers in real-time; each server therefore behaves identically even though resources are not shared.
@@ -395,7 +400,7 @@ foreach ( $custom_areas as $area )
                             <input id="plugin_license_key_verify" type="button" class="button" value="<?php _e( 'Verify license key', 'w3-total-cache' ) ?>"/>
                             <span class="w3tc_license_verification"></span>
                             <br />
-                            <span class="description"><?php printf( __( 'Please enter the license key provided you received after %s.', 'w3-total-cache' ), '<a class="button-buy-plugin" href="' . EDD_W3EDGE_STORE_URL_PLUGIN .'">' . __( 'upgrading', 'w3-total-cache' ) . '</a>' )?></span>
+                            <span class="description"><?php printf( __( 'Please enter the license key provided after %s.', 'w3-total-cache' ), '<a class="button-buy-plugin" href="#">' . __( 'upgrading', 'w3-total-cache' ) . '</a>' )?></span>
                         </td>
                     </tr>
 
@@ -511,7 +516,7 @@ Util_Ui::config_item( array(
                     <?php if ( Util_Environment::is_w3tc_pro() ): ?>
                     <?php $this->checkbox_debug( 'cluster.messagebus.debug' ) ?> <?php Util_Ui::e_config_label( 'cluster.messagebus.debug' ) ?></label><br />
                     <?php endif; ?>
-                    <span class="description"><?php _e( 'If selected, detailed caching information will be appear at the end of each page in a <acronym title="Hypertext Markup Language">HTML</acronym> comment. View a page\'s source code to review.', 'w3-total-cache' ); ?></span>
+                    <span class="description"><?php _e( 'If selected, detailed caching information will appear at the end of each page in a <acronym title="Hypertext Markup Language">HTML</acronym> comment. View a page\'s source code to review.', 'w3-total-cache' ); ?></span>
                 </td>
             </tr>
         </table>

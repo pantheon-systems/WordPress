@@ -7,7 +7,7 @@
  * http://www.gnu.org/licenses/gpl-3.0.txt
  */
 .plugin-option tr {
-    border-bottom : 1px solid #ccc;
+    border-bottom : 1px solid #ebebeb;
 }
 
 .plugin-option .yit_options,
@@ -18,11 +18,10 @@
 .plugin-option .yit-options .option,
 .plugin-option .yit_options .option {
     width : 600px;
-    float : left;
 }
 
 .plugin-option .form-table > tbody > tr > td {
-    padding : 25px 10px;
+    padding : 25px 15px;
 }
 
 .ie8 .yit_options select,
@@ -410,6 +409,7 @@
 
 #wpwrap h2.nav-tab-wrapper, #wpbody-content h2.nav-tab-wrapper {
     border-bottom : 1px solid #ccc;
+    margin-right: 15px;
 }
 
 /* === YIT FRAMEWORK === */
@@ -422,6 +422,7 @@
 /* === Panel Content and Container === */
 .yit-admin-panel-container {
     position : relative;
+    margin-right: 15px;
 }
 
 .yit-admin-panel-content-wrap {

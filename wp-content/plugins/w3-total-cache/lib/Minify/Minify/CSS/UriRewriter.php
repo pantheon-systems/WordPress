@@ -413,7 +413,7 @@ class Minify_CSS_UriRewriter {
                     $parse_url = @parse_url(self::$_prependPath);
 
                     if ($parse_url && isset($parse_url['host'])) {
-                        $scheme = $parse_url['scheme'];
+                        $scheme = array_key_exists('scheme', $parse_url) ? $parse_url['scheme'] : '';
                         $host = $parse_url['host'];
                         $port = (isset($parse_url['port']) && $parse_url['port'] != 80 ? ':' . (int) $parse_url['port'] : '');
                         $path = (!empty($parse_url['path']) ? $parse_url['path'] : '/');

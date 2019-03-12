@@ -13,17 +13,17 @@ class Cache_Memcached extends Cache_Base {
 	private $_memcache = null;
 
 	/*
-     * Used for faster flushing
-     *
-     * @var integer $_key_version
-     */
+	 * Used for faster flushing
+	 *
+	 * @var integer $_key_version
+	 */
 	private $_key_version = array();
 
 	/*
-     * Configuration used to reinitialize persistent object
-     *
-     * @var integer $_key_version
-     */
+	 * Configuration used to reinitialize persistent object
+	 *
+	 * @var integer $_key_version
+	 */
 	private $_config = null;
 
 	/**
@@ -77,10 +77,10 @@ class Cache_Memcached extends Cache_Base {
 		}
 
 		if ( isset( $config['username'] ) && !empty( $config['username'] ) &&
-			method_exists( $this->_memcache, 'setSaslAuthData' ) &&
-			ini_get( 'memcached.use_sasl' ) )
+			method_exists( $this->_memcache, 'setSaslAuthData' ) ) {
 			$this->_memcache->setSaslAuthData( $config['username'],
 				$config['password'] );
+		}
 
 		// when disabled - no extra requests are made to obtain key version,
 		// but flush operations not supported as a result
@@ -397,7 +397,9 @@ class Cache_Memcached extends Cache_Base {
 
 	public function get_item_key( $name ) {
 		// memcached doesn't survive spaces in a key
-		$key = sprintf( 'w3tc_%s_%d_%s_%s', $this->_host, $this->_blog_id, $this->_module, md5( $name ) );
+		$key = sprintf( 'w3tc_%d_%s_%d_%s_%s',
+			$this->_instance_id, $this->_host, $this->_blog_id,
+			$this->_module, md5( $name ) );
 		return $key;
 	}
 }

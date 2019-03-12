@@ -1,5 +1,31 @@
 CHANGES LOG (full version).
 ===========================
+= [4.50] 20.02.2019 =
+* Update: General code restructure and optimization.
+* Update: URE_Base_Lib::get_blog_ids() returns null, if it's called under WordPress single site (not multisite).
+* Update: URE_Editor::prepare_capabilities_to_save() : "Invalid argument supplied for foreach()" warning was excluded in case there was no valid data structures initialization.
+* Update: 'administrator' role protection was enhanced. URE always does not allow to revoke capability from 'administrator' role. That was possible earlier after the 'administrator' role update.
+
+= [4.49] 15.01.2019 =
+* Update: Selected role ID was added to "Delete role" confirmation dialog.
+* Update: Method URE_Base_Lib::get_short_list_str() was enhanced.
+* Update: Method URE_Base_Lib::get_blog_ids() was made public.
+* Update: Method URE_Lib::get_usermeta_table_name() was excluded.
+* Fix: PHP warning "Undefined index:'unexisted role ID'" was fixed at URE_Lib::roles_text() (wp-content/plugins/user-role-editor/includes/classes/lib.php:360).
+* Fix: Bug was fixed with incorrect usage of transient for option "Show deprecated capabilities".
+
+= [4.48] 03.01.2019 =
+* Update: Multisite: Sites list is not requested from the database on every page opened in order to reduce server load.
+* Update: URE plugin version update routine is called now at the wp-admin backend only.
+* Update: Direct access to URE_Lib::bbpress property was excluded as a preparation to future code enhancements. 
+
+= [4.47] 12.11.2018 =
+* Fix: "Users->User Role Editor": Capabilities view was not refreshed properly for new selected role in case "Granted Only" filter was turned ON before other role selection.
+* Update: Unused code was removed from user-role-editor/includes/classes/bbpress.php
+* Update: Prevent sudden revoke role 'administrator' from a user(s) during capability with the same ID ('administrator') deletion from roles.
+* Update: Adding custom capability with ID 'administrator' was prohibited.
+* Update: Marked as compatible with WordPress version 5.0
+
 = [4.46] 20.09.2018
 * Update: "Users" page, "Without role" button: underlying SQL queries were replaced with more robust versions (about 10 times faster).
   It is critical for sites with large quant of users.New query does not take into account though some cases with incorrect users data (usually imported from the external sources).

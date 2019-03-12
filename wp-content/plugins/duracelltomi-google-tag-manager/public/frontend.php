@@ -49,6 +49,72 @@ function gtm4wp_is_assoc($arr) {
 	return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
+/**
+ * Original copyright:
+ * By Grant Burton @ BURTONTECH.COM (11-30-2008): IP-Proxy-Cluster Fix
+ *
+ * Code improved by Thomas Geiger
+ */
+function gtm4wp_ip_is_private( $ip ) {
+	$int_ip = ip2long($ip);
+	if ( !empty($ip) && $int_ip!=-1 && $int_ip!==false ) {
+		$private_ips = array (
+			array('0.0.0.0',      '2.255.255.255'),
+			array('10.0.0.0',     '10.255.255.255'),
+			array('127.0.0.0',    '127.255.255.255'),
+			array('169.254.0.0',  '169.254.255.255'),
+			array('172.16.0.0',   '172.31.255.255'),
+			array('192.0.2.0',    '192.0.2.255'),
+			array('192.168.0.0',  '192.168.255.255'),
+			array('255.255.255.0','255.255.255.255')
+		);
+
+		foreach ($private_ips as $private_ip) {
+			$min_int_ip = ip2long( $private_ip[0] );
+			$max_int_ip = ip2long( $private_ip[1] );
+			if ( ($int_ip >= $min) && ($int_ip <= $max) ) {
+				return true;
+			}
+		}
+
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
+ * Original copyright:
+ * By Grant Burton @ BURTONTECH.COM
+ *
+ * Code improved by Thomas Geiger
+ */
+function gtm4wp_get_user_ip() {
+	if ( !empty($_SERVER["HTTP_CLIENT_IP"]) && !gtm4wp_ip_is_private($_SERVER["HTTP_CLIENT_IP"]) ) {
+		return $_SERVER["HTTP_CLIENT_IP"];
+	}
+
+	if ( !empty($_SERVER["HTTP_X_FORWARDED_FOR"]) ) {
+		foreach (explode(",",$_SERVER["HTTP_X_FORWARDED_FOR"]) as $ip) {
+			if ( !gtm4wp_ip_is_private(trim($ip)) ) {
+				return $ip;
+			}
+		}
+	}
+
+	if ( !empty($_SERVER["HTTP_X_FORWARDED"]) && !gtm4wp_ip_is_private($_SERVER["HTTP_X_FORWARDED"]) ) {
+		return $_SERVER["HTTP_X_FORWARDED"];
+	} elseif ( !empty($_SERVER["HTTP_X_CLUSTER_CLIENT_IP"]) && !gtm4wp_ip_is_private($_SERVER["HTTP_X_CLUSTER_CLIENT_IP"]) ) {
+		return $_SERVER["HTTP_X_CLUSTER_CLIENT_IP"];
+	} elseif ( !empty($_SERVER["HTTP_FORWARDED_FOR"]) && !gtm4wp_ip_is_private($_SERVER["HTTP_FORWARDED_FOR"]) ) {
+		return $_SERVER["HTTP_FORWARDED_FOR"];
+	} elseif ( !empty($_SERVER["HTTP_FORWARDED"]) && !gtm4wp_ip_is_private($_SERVER["HTTP_FORWARDED"]) ) {
+		return $_SERVER["HTTP_FORWARDED"];
+	} else {
+		return $_SERVER["REMOTE_ADDR"];
+	}
+}
+
 if ( !function_exists( "getallheaders") ) {
 	function getallheaders() {
 		$headers = array();
@@ -121,17 +187,7 @@ function gtm4wp_add_basic_datalayer_data( $dataLayer ) {
 	}
 
 	if ( $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_VISITOR_IP ] ) {
-		if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-			//check ip from shared internet
-			$ip = $_SERVER['HTTP_CLIENT_IP'];
-		} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-			//to check ip is passed from proxy
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		} else {
-			$ip = $_SERVER['REMOTE_ADDR'];
-		}
-
-		$dataLayer["visitorIP"] = $ip;
+		$dataLayer["visitorIP"] = esc_js( gtm4wp_get_user_ip() );
 	}
 
 	if ( $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_POSTTITLE ] ) {
@@ -254,7 +310,15 @@ function gtm4wp_add_basic_datalayer_data( $dataLayer ) {
 
 	if ( is_search() ) {
 		$dataLayer["siteSearchTerm"] = get_search_query();
-		$dataLayer["siteSearchFrom"] = ( isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : "" );
+		$dataLayer["siteSearchFrom"] = "";
+		if ( !empty($_SERVER["HTTP_REFERER"]) ) {
+			$referer_url_parts = explode("?", $_SERVER["HTTP_REFERER"]);
+			if ( count( $referer_url_parts ) > 1 ) {
+				$dataLayer["siteSearchFrom"] = $referer_url_parts[0] . "?" . rawurlencode( $referer_url_parts[1] );
+			} else {
+				$dataLayer["siteSearchFrom"] = $referer_url_parts[0];
+			}
+		}
 		$dataLayer["siteSearchResults"] = $wp_query->post_count;
 	}
 
@@ -457,13 +521,11 @@ function gtm4wp_add_basic_datalayer_data( $dataLayer ) {
 			$dataLayer[ "geoLongitude" ]   = __( "(no geo data available)", 'duracelltomi-google-tag-manager' );
 		}
 
-		$gtm4wp_sessionid = array_key_exists( "gtm4wp_sessionid", $_COOKIE ) ? $_COOKIE[ "gtm4wp_sessionid" ] : "";
-		// this is needed so that nobody can do a hack by editing our cookie
-		$gtm4wp_sessionid = str_replace( "'", "", trim( basename( $gtm4wp_sessionid ) ) );
+		$client_ip = gtm4wp_get_user_ip();
 
-		if ( "" !== $gtm4wp_sessionid ) {
+		if ( "" !== $client_ip ) {
 			if ( $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_WEATHER ] ) {
-				$weatherdata = get_transient( 'gtm4wp-weatherdata-'.$gtm4wp_sessionid );
+				$weatherdata = get_transient( 'gtm4wp-weatherdata-' . esc_attr( $client_ip ) );
 
 				if ( false !== $weatherdata ) {
 					$dataLayer[ "weatherCategory" ]    = $weatherdata->weather[0]->main;
@@ -475,26 +537,28 @@ function gtm4wp_add_basic_datalayer_data( $dataLayer ) {
 					$dataLayer[ "weatherFullWeatherData" ] = $weatherdata;
 					$dataLayer[ "weatherDataStatus" ]  = "Read from cache";
 				} else {
-					$dataLayer[ "weatherDataStatus" ]  = "GTM4WP session active but no weather data in cache (" . $gtm4wp_sessionid . ")";
+					$dataLayer[ "weatherDataStatus" ]  = "No weather data in cache (" . esc_attr( $client_ip ) . ")";
 				}
 			}
 
 			if ( $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_MISCGEO ] ) {
-				$geodata = get_transient( 'gtm4wp-geodata-'.$gtm4wp_sessionid );
+				$geodata = get_transient( 'gtm4wp-geodata-' . esc_attr( $client_ip ) );
 
 				if ( false !== $geodata ) {
-					$dataLayer[ "geoCountryCode" ] = $geodata->country_code;
-					$dataLayer[ "geoCountryName" ] = $geodata->country_name;
-					$dataLayer[ "geoRegionCode" ]  = $geodata->region_code;
-					$dataLayer[ "geoRegionName" ]  = $geodata->region_name;
-					$dataLayer[ "geoCity" ]        = $geodata->city;
-					$dataLayer[ "geoZipcode" ]     = $geodata->zip;
-					$dataLayer[ "geoLatitude" ]    = $geodata->latitude;
-					$dataLayer[ "geoLongitude" ]   = $geodata->longitude;
 					$dataLayer[ "geoFullGeoData" ] = $geodata;
+
+					if ( isset( $geodata->latitude ) ) {
+						$dataLayer[ "geoCountryCode" ] = $geodata->country_code;
+						$dataLayer[ "geoCountryName" ] = $geodata->country_name;
+						$dataLayer[ "geoRegionCode" ]  = $geodata->region_code;
+						$dataLayer[ "geoRegionName" ]  = $geodata->region_name;
+						$dataLayer[ "geoCity" ]        = $geodata->city;
+						$dataLayer[ "geoZipcode" ]     = $geodata->zip;
+						$dataLayer[ "geoLatitude" ]    = $geodata->latitude;
+						$dataLayer[ "geoLongitude" ]   = $geodata->longitude;
+					}
 				}
 			}
-
 		}
 	}
 
@@ -505,28 +569,20 @@ function gtm4wp_wp_loaded() {
 	global $gtm4wp_options;
 
 	if ( $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_WEATHER ] || $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_MISCGEO ] ) {
-		$gtm4wp_sessionid = array_key_exists( "gtm4wp_sessionid", $_COOKIE ) ? $_COOKIE[ "gtm4wp_sessionid" ] : "";
-		// this is needed so that nobody can do a hack by editing our cookie
-		$gtm4wp_sessionid = str_replace( "'", "", trim( basename( $gtm4wp_sessionid ) ) );
-
-		if ( "" === $gtm4wp_sessionid ) {
-			$gtm4wp_sessionid = substr( md5( date( "Ymd_His" ).rand() ), 0, 20 );
-			setcookie( "gtm4wp_sessionid", $gtm4wp_sessionid, time()+(60*60*24*365*2) );
-		}
-
-		$geodata = get_transient( 'gtm4wp-geodata-'.$gtm4wp_sessionid );
+		$client_ip = gtm4wp_get_user_ip();
+		$geodata   = get_transient( 'gtm4wp-geodata-' . esc_attr( $client_ip ) );
 
 		if ( false === $geodata ) {
-			$gtm4wp_geodata = @wp_remote_get( sprintf( 'http://api.ipstack.com/%s?access_key=%s&format=1', $_SERVER['REMOTE_ADDR'], $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_MISCGEOAPI ] ) );
+			$gtm4wp_geodata = @wp_remote_get( sprintf( 'http://api.ipstack.com/%s?access_key=%s&format=1', urlencode( $client_ip ), $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_MISCGEOAPI ] ) );
 
 			if ( is_array( $gtm4wp_geodata ) && ( 200 == $gtm4wp_geodata[ "response" ][ "code" ] ) ) {
 				$gtm4wp_geodata = @json_decode( $gtm4wp_geodata[ "body" ] );
 
 				if ( is_object( $gtm4wp_geodata ) ) {
-					set_transient( 'gtm4wp-geodata-'.$gtm4wp_sessionid, $gtm4wp_geodata, 60 * 60 );
+					set_transient( 'gtm4wp-geodata-' . esc_attr( $client_ip ), $gtm4wp_geodata, 60 * 60 );
 
-					$weatherdata = get_transient( 'gtm4wp-weatherdata-'.$gtm4wp_sessionid );
-					if ( false === $weatherdata) {
+					$weatherdata = get_transient( 'gtm4wp-weatherdata-' . esc_attr( $client_ip ) );
+					if ( false === $weatherdata && isset( $gtm4wp_geodata->latitude ) ) {
 
 						$weatherdata = wp_remote_get( 'http://api.openweathermap.org/data/2.5/weather?appid=' . $gtm4wp_options[ GTM4WP_OPTION_INCLUDE_WEATHEROWMAPI ] . '&lat=' . $gtm4wp_geodata->latitude . '&lon=' . $gtm4wp_geodata->longitude . '&units=' . ($gtm4wp_options[ GTM4WP_OPTION_INCLUDE_WEATHERUNITS ] == 0 ? 'metric' : 'imperial') );
 
@@ -534,7 +590,7 @@ function gtm4wp_wp_loaded() {
 							$weatherdata = @json_decode( $weatherdata[ "body" ] );
 
 							if ( is_object( $weatherdata ) ) {
-								set_transient( 'gtm4wp-weatherdata-'.$gtm4wp_sessionid, $weatherdata, 60 * 60 );
+								set_transient( 'gtm4wp-weatherdata-' . esc_attr( $client_ip ), $weatherdata, 60 * 60 );
 								setcookie( "gtm4wp_last_weatherstatus", "Weather data loaded." );
 							} else {
 								setcookie( "gtm4wp_last_weatherstatus", "Openweathermap.org did not return processable data: " . var_dump( $weatherdata, true ) );
@@ -548,13 +604,13 @@ function gtm4wp_wp_loaded() {
 						}
 					}
 				} else {
-					setcookie( "gtm4wp_last_weatherstatus", "freegeoip.net did not return lat-lng data: " . var_dump( $gtm4wp_geodata, true ) );
+					setcookie( "gtm4wp_last_weatherstatus", "ipstack.com did not return lat-lng data: " . var_dump( $gtm4wp_geodata, true ) );
 				}
 			} else {
 				if ( is_wp_error( $gtm4wp_geodata ) ) {
-					setcookie( "gtm4wp_last_weatherstatus", "freegeoip.net request error: " . $gtm4wp_geodata->get_error_message() );
+					setcookie( "gtm4wp_last_weatherstatus", "ipstack.com request error: " . $gtm4wp_geodata->get_error_message() );
 				} else {
-					setcookie( "gtm4wp_last_weatherstatus", "freegeoip.net returned status code: " . $gtm4wp_geodata[ "response" ][ "code" ] );
+					setcookie( "gtm4wp_last_weatherstatus", "ipstack.com returned status code: " . $gtm4wp_geodata[ "response" ][ "code" ] );
 				}
 			}
 		}
@@ -748,7 +804,7 @@ function gtm4wp_wp_header_begin( $echo = true ) {
 			add_filter( GTM4WP_WPFILTER_COMPILE_REMARKTING, "gtm4wp_filter_visitor_keys" );
 			$gtm4wp_remarketing_tags = (array) apply_filters( GTM4WP_WPFILTER_COMPILE_REMARKTING, $gtm4wp_datalayer_data );
 
-			$_gtm_header_content .= 'var google_tag_params = ';
+			$_gtm_header_content .= "\nvar google_tag_params = ";
 			$_gtm_header_content .= json_encode( $gtm4wp_remarketing_tags );
 			$_gtm_header_content .= ';';
 			$gtm4wp_datalayer_data["google_tag_params"] = "-~-window.google_tag_params-~-";

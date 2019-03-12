@@ -1,4 +1,3 @@
-
 jQuery( function($){
 
     WCML_Multi_Currency = {
@@ -31,6 +30,9 @@ jQuery( function($){
                 $(document).on('change','.currency_option_decimal_sep', WCML_Multi_Currency.price_preview);
                 $(document).on('change','.currency_option_decimals', WCML_Multi_Currency.price_preview);
                 $(document).on('change','.currency_code select', WCML_Multi_Currency.price_preview);
+                $(document).on('change','.wcml-gateways-enabled', WCML_Multi_Currency.display_gateways);
+                $(document).on('change','#wcml_currency_options_gateway_code_paypal', WCML_Multi_Currency.preset_paypal_email);
+                $(document).on('change','#wcml_currency_options_gateway_code_stripe', WCML_Multi_Currency.preset_stripe_settings);
 
                 $(document).on('keypress', '.currency_option_decimals', function (event) {
                     // 8 for backspace, 0 for null values, 48-57 for 0-9 numbers
@@ -81,10 +83,18 @@ jQuery( function($){
         select_currency: function(){
             var parent = $(this).closest('.wcml_currency_options');
             var close_button = parent.find('.wcml-dialog-close-button');
+            var previous_currency = parent.find('.this-currency').text();
+            var gateways = parent.find('.wcml-gateways-switcher');
+            var gateways_currency_select = parent.find('.wcml-gateways select[name*="[currency]"] option[value="'+previous_currency+'"]');
+            var gateway_new_label_text = gateways.find('label.otgs-on-off-switch').text().replace( previous_currency, $(this).val() );
+
             close_button.attr('data-currency', $(this).val());
             close_button.attr('data-symbol', $(this).find('option:selected').attr('data-symbol'));
-            parent.find('.this-currency').html( $(this).val() );
 
+            parent.find('.this-currency').html( $(this).val() );
+            gateways.find('label.otgs-on-off-switch').text( gateway_new_label_text );
+            gateways_currency_select.val( $(this).val() );
+            gateways_currency_select.html( $(this).val() );
         },
 
         delete_currency: function(e){
@@ -122,7 +132,7 @@ jQuery( function($){
                 success: function(response) {
                     $('#currency_row_' + currency).remove();
                     $('#currency_row_langs_' + currency).remove();
-                    $('#currency_row_del_' + currency).remove();
+                    $('#wcml-row-currency-actions-' + currency).remove();
 
                     $('#wcml_currencies_order .wcml_currencies_order_'+ currency).remove();
 
@@ -186,12 +196,6 @@ jQuery( function($){
                         var tr = $('#currency-table tr.wcml-row-currency:last').clone();
                         tr.attr('id', 'currency_row_' + currency);
 
-                        var edit_link = tr.find('.wcml-col-edit a');
-                        edit_link.attr('data-content', 'wcml_currency_options_' + currency);
-                        edit_link.attr('data-currency', currency);
-                        edit_link.data('dialog', 'wcml_currency_options_' + currency);
-                        edit_link.removeClass('hidden');
-
                         $('#currency-table').find('tr.default_currency').before( tr );
 
                         var tr = $('.empty-currency-language-row').clone();
@@ -213,20 +217,32 @@ jQuery( function($){
                         //add to orders list
                         $('#wcml_currencies_order').append('<li class="wcml_currencies_order_'+currency+' ui-sortable-handle" cur="'+currency+'">'+response.currency_name_formatted+'</li>');
 
-                        var tr = $('#currency-delete-table tr.wcml-row-currency-del:last').clone();
-                        tr.attr('id', 'currency_row_del_' + currency);
 
-                        var del_link = tr.find('.delete_currency');
+                        var settings_row = $('#currency-settings-table tr.wcml-row-currencies-actions:last').clone();
+                        settings_row.attr('id', 'wcml-row-currency-actions-' + currency);
+
+                        var edit_link = settings_row.find('.wcml-col-edit a');
+                        edit_link.attr('data-content', 'wcml_currency_options_' + currency);
+                        edit_link.attr('data-currency', currency);
+                        edit_link.data('dialog', 'wcml_currency_options_' + currency);
+                        edit_link.removeClass('hidden');
+
+                        var del_link = settings_row.find('.delete_currency');
                         del_link.removeClass('hidden');
                         del_link.attr('data-currency', currency);
                         del_link.attr('data-currency_name', response.currency_name);
                         del_link.attr('data-currency_symbol', response.currency_symbol);
-                        $('#currency-delete-table').find('tr.default_currency').before( tr );
+                        $('#currency-settings-table').find('tr.default_currency').before( settings_row );
 
                     }
 
                     $('#currency_row_' + currency + ' .wcml-col-currency').html(response.currency_name_formatted);
                     $('#currency_row_' + currency + ' .wcml-col-rate').html(response.currency_meta_info);
+
+                    var gateways_switcher = $('#wcml_currency_options_' + currency).find('.wcml-gateways-switcher');
+                    if( 0 == gateways_switcher.length ){
+                        gateways_switcher = $('#wcml_currency_options_').find('.wcml-gateways-switcher').clone();
+                    }
 
                     $('#wcml_currency_options_' + currency).remove();
                     $('#wcml_mc_options').before(response.currency_options);
@@ -237,8 +253,17 @@ jQuery( function($){
                         $('#online-exchange-rates-no-currencies').hide();
                         $('#online-exchange-rates-no-currencies').next().show();
                     }
-                }
 
+                    var currency_options_dialog = $('#wcml_currency_options_' + currency);
+                    var is_gateway_switcher_checked = currency_options_dialog.find('.wcml-gateways-switcher input[type="checkbox"]:checked').length > 0;
+                    currency_options_dialog.find('.wcml-gateways-switcher').remove();
+                    currency_options_dialog.find('.wcml-gateways').before(gateways_switcher);
+                    if( is_gateway_switcher_checked ){
+                        currency_options_dialog.find('.wcml-gateways-switcher input[type="checkbox"]').attr('checked', 'checked');
+                    }else{
+                        currency_options_dialog.find('.wcml-gateways-switcher input[type="checkbox"]').removeAttr('checked');
+                    }
+                }
             })
 
             return false;
@@ -508,6 +533,40 @@ jQuery( function($){
             parent.find('.wcml-co-preview-value').html( preview );
 
             return false;
+
+        },
+
+        display_gateways: function(){
+
+            if ($(this).attr('checked') == 'checked') {
+                $('.wcml-gateways').slideDown();
+                WCML_Tooltip.init();
+            } else {
+                $('.wcml-gateways').slideUp();
+            }
+        },
+
+        preset_paypal_email: function(){
+
+            var paypal_value_input = $('input[name="currency_options[gateways_settings][paypal][value]"]');
+            var paypal_warning = $('.paypal-gateway-warning');
+
+            paypal_value_input.val( $(this).find(":selected").data('email') );
+
+            if(  $(this).find(":selected").data('is-valid') ){
+                paypal_warning.hide();
+                paypal_value_input.removeAttr('readonly');
+            }else{
+                paypal_warning.show();
+                paypal_value_input.val('');
+                paypal_value_input.attr('readonly','readonly');
+            }
+        },
+
+        preset_stripe_settings: function(){
+
+            $('input[name="currency_options[gateways_settings][stripe][publishable_key]"]').val( $(this).find(":selected").data('publishable-key') );
+            $('input[name="currency_options[gateways_settings][stripe][secret_key]"]').val( $(this).find(":selected").data('secret-key') );
 
         },
 

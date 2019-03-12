@@ -25,7 +25,7 @@ class WCML_REST_API {
 	 * @return int
 	 * Returns the version number of the API used for the current request
 	 */
-	public function get_api_request_version(){
+	public static function get_api_request_version(){
 		$version = 0;
 		$rest_prefix = trailingslashit( rest_get_url_prefix() );
 		if( preg_match( "@" . $rest_prefix . "wc/v([0-9]+)/@", $_SERVER['REQUEST_URI'], $matches ) ){

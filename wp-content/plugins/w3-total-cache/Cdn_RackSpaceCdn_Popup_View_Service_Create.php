@@ -58,7 +58,7 @@ if ( isset( $details['error_message'] ) )
             </tr>
             <tr class="w3tc_cdn_rackspace_cname_http"
                 style="<?php echo $details['cname_http_style'] ?>">
-                <th style="white-space: nowrap">Primary CNAME:</td>
+                <th style="white-space: nowrap">Primary <acronym title="Canonical Name">CNAME</acronym>:</td>
                 <td>
                     <input name="cname_http" type="text" class="w3tc-ignore-change"
                         style="width: 200px"
@@ -71,7 +71,7 @@ if ( isset( $details['error_message'] ) )
             </tr>
             <tr class="w3tc_cdn_rackspace_cname_https"
                 style="<?php echo $details['cname_https_style'] ?>">
-                <th style="white-space: nowrap">Primary CNAME:</td>
+                <th style="white-space: nowrap">Primary <acronym title="Canonical Name">CNAME</acronym>:</td>
                 <td>
                     <input name="cname_https_prefix" type="text" class="w3tc-ignore-change"
                         style="width: 100px"

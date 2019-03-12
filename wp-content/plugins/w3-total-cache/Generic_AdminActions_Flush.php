@@ -120,7 +120,7 @@ class Generic_AdminActions_Flush {
 	 * @return void
 	 */
 	function w3tc_flush_pgcache() {
-		w3tc_flush_posts();
+		w3tc_flush_posts( array( 'ui_action' => 'flush_button' ) );
 
 		$state_note = Dispatcher::config_state_note();
 		$state_note->set( 'common.show_note.flush_posts_needed', false );
@@ -214,7 +214,7 @@ class Generic_AdminActions_Flush {
 
 	/*
 	 * Flush varnish cache
-     */
+	 */
 	function w3tc_flush_varnish() {
 		$this->flush_varnish();
 
@@ -225,9 +225,9 @@ class Generic_AdminActions_Flush {
 
 	/*
 	 * Flush CDN mirror
-     */
+	 */
 	function w3tc_flush_cdn() {
-		$this->flush_cdn();
+		$this->flush_cdn( array( 'ui_action' => 'flush_button' ) );
 
 		Util_Admin::redirect( array(
 				'w3tc_note' => 'flush_cdn'
@@ -242,7 +242,7 @@ class Generic_AdminActions_Flush {
 	 */
 	function w3tc_flush_post() {
 		$post_id = Util_Request::get_integer( 'post_id' );
-		w3tc_flush_post( $post_id );
+		w3tc_flush_post( $post_id, array( 'ui_action' => 'flush_button' ) );
 
 		Util_Admin::redirect( array(
 				'w3tc_note' => 'pgcache_purge_post'
@@ -368,9 +368,9 @@ class Generic_AdminActions_Flush {
 	/**
 	 * Flush CDN mirror
 	 */
-	function flush_cdn() {
+	function flush_cdn( $extras = array() ) {
 		$cacheflush = Dispatcher::component( 'CacheFlush' );
-		$cacheflush->cdn_purge_all();
+		$cacheflush->cdn_purge_all( $extras );
 	}
 
 

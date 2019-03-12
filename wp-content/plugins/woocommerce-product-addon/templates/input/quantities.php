@@ -18,7 +18,7 @@ if (isset($args['horizontal_layout']) && $args['horizontal_layout'] == 'on') { ?
 	<table class="table table-bordered table-hover">
        <thead> 
 	    <tr>
-	       <th><?php _e('Options', 'ppom');?></th>
+	       <th><?php _e('Options', "ppom");?></th>
         <?php foreach($options as $opt){ ?>
         	<th>
     			<label class="quantities-lable"> <?php echo stripslashes(trim($opt['option'])); ?>
@@ -34,12 +34,14 @@ if (isset($args['horizontal_layout']) && $args['horizontal_layout'] == 'on') { ?
 	    </thead>
 	    
 	    <tr>
-	        <th><?php _e('Quantity', 'ppom');?></th>
+	        <th><?php _e('Quantity', "ppom");?></th>
         <?php foreach($options as $opt){ ?>
         	<td>
         		<?php
         		
-        			$the_price = !empty($opt['price']) ? $opt['price'] : $product->get_price();
+        			$product_price	= $product->get_type() == 'simple' ? $product->get_price() : '';
+        			$the_price		= !empty($opt['price']) ? $opt['price'] : $product_price;
+        			$usebaseprice	= !empty($opt['price']) ? 'no' : 'yes';
         			
         			$min = (isset($opt['min']) ? $opt['min'] : 0 );
         			$max = (isset($opt['max']) ? $opt['max'] : 10000 );
@@ -62,6 +64,7 @@ if (isset($args['horizontal_layout']) && $args['horizontal_layout'] == 'on') { ?
     				$input_html	.= 'data-label="'.esc_attr($label).'" ';
     				$input_html	.= 'data-includeprice="'.esc_attr($args['include_productprice']).'" ';
     				$input_html	.= 'name="'.esc_attr($name).'" type="number" class="ppom-quantity" ';
+    				$input_html	.= 'data-usebase_price="'.esc_attr($usebaseprice).'" ';
     				$input_html	.= 'value="'.esc_attr($selected_val).'" data-price="'.esc_attr($the_price).'">';          
     				
     				echo $input_html;
@@ -75,8 +78,8 @@ if (isset($args['horizontal_layout']) && $args['horizontal_layout'] == 'on') { ?
 	<table class="table table-bordered table-hover">
 	    <thead>
     	    <tr>
-    	        <th><?php _e('Options', 'ppom');?></th>
-    	        <th><?php _e('Quantity', 'ppom');?></th>
+    	        <th><?php _e('Options', "ppom");?></th>
+    	        <th><?php _e('Quantity', "ppom");?></th>
     	    </tr>
     	</thead>
         <?php foreach($options as $opt){ ?>
@@ -94,7 +97,11 @@ if (isset($args['horizontal_layout']) && $args['horizontal_layout'] == 'on') { ?
                 		<?php
 	            			$min	= (isset($opt['min']) ? $opt['min'] : 0 );
 	            			$max	= (isset($opt['max']) ? $opt['max'] : 10000 );
-	            			$the_price = !empty($opt['price']) ? $opt['price'] : $product->get_price();
+	            			
+	            			$product_price = $product->get_type() == 'simple' ? $product->get_price() : '';
+        					$the_price = !empty($opt['price']) ? $opt['price'] : $product_price;
+        					$usebaseprice	= !empty($opt['price']) ? 'no' : 'yes';
+        				
 	            			$label  = $opt['option'];
 	            			$name	= $args['name'].'['.$label.']';
 	            			
@@ -114,6 +121,7 @@ if (isset($args['horizontal_layout']) && $args['horizontal_layout'] == 'on') { ?
             				$input_html	.= 'data-label="'.esc_attr($label).'" ';
             				$input_html	.= 'data-includeprice="'.esc_attr($args['include_productprice']).'" ';
             				$input_html	.= 'name="'.esc_attr($name).'" type="number" class="ppom-quantity" ';
+            				$input_html	.= 'data-usebase_price="'.esc_attr($usebaseprice).'" ';
             				$input_html	.= 'value="'.esc_attr($selected_val).'" placeholder="0" data-price="'.esc_attr($the_price).'">';
             				
             				echo $input_html;
@@ -127,13 +135,13 @@ if (isset($args['horizontal_layout']) && $args['horizontal_layout'] == 'on') { ?
 
 <div id="display-total-price">
 	<span style="display:none;font-weight:700" class="ppom-total-option-price">
-		<?php echo __("Options Total: ", 'ppom'); printf(__(get_woocommerce_price_format(), 'ppom'), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
+		<?php echo __("Options Total: ", "ppom"); printf(__(get_woocommerce_price_format(), "ppom"), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
 	</span><br>
 	<span style="display:none;font-weight:700" class="ppom-total-price">
-		<?php echo __("Product Total: ", 'ppom'); printf(__(get_woocommerce_price_format(), 'ppom'), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
+		<?php echo __("Product Total: ", "ppom"); printf(__(get_woocommerce_price_format(), "ppom"), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
 	</span>
 	<span style="display:none;font-weight:700" class="ppom-grand-total-price">
 	<hr style="margin: 0">
-		<?php echo __("Grand Total: ", 'ppom'); printf(__(get_woocommerce_price_format(), 'ppom'), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
+		<?php echo __("Grand Total: ", "ppom"); printf(__(get_woocommerce_price_format(), "ppom"), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');?>
 	</span>
 </div>

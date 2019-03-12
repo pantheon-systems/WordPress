@@ -70,7 +70,7 @@ jQuery('#w3tc_cookiegroup_add').click(function() {
 	}
 });
 
-jQuery('.w3tc_cookiegroup_delete').live('click', function() {
+	jQuery('.w3tc_cookiegroup_delete').on('click', function () {
 	if (confirm('Are you sure want to delete this group?')) {
 		jQuery(this).parents('#cookiegroups li').remove();
 		w3tc_cookiegroups_clear();

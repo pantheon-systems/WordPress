@@ -13,10 +13,10 @@ Util_Ui::config_overloading_button( array(
 ?>
 
 <?php if ( !$new_relic_installed ): ?>
-    <p><?php echo sprintf( __( '
-        New Relic may not be installed or not active on this server. %s. Visit %s for installation instructions.', 'w3-total-cache' )
-		, '<a href="' . esc_attr( NEWRELIC_SIGNUP_URL ) . '" target="_blank">' . __( 'Sign up for a (free) account', 'w3-total-cache' ) . '</a>'
-		, '<a href="https://newrelic.com/docs/php/new-relic-for-php" target="_blank">New Relic</a>' )
+    <p><?php echo sprintf(
+		w3tc_er( 'newrelic.general.header', 'New Relic may not be installed or not active on this server. <a href="%s" target="_blank">Sign up for a (free) account</a>. Visit <a href="%s" target="_blank">New Relic</a> for installation instructions.' ),
+		esc_url( W3TC_NEWRELIC_SIGNUP_URL ),
+		esc_url( 'https://newrelic.com/docs/php/new-relic-for-php' ) )
 ?>
     </p>
 <?php endif; ?>

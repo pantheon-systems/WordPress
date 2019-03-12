@@ -5,38 +5,43 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 define( 'W3TC', true );
-define( 'W3TC_VERSION', '0.9.7' );
+define( 'W3TC_VERSION', '0.9.7.2' );
 define( 'W3TC_POWERED_BY', 'W3 Total Cache' );
 define( 'W3TC_EMAIL', 'w3tc@w3-edge.com' );
 define( 'W3TC_TEXT_DOMAIN', 'w3-total-cache' );
-define( 'W3TC_LINK_URL', 'https://www.w3-edge.com/wordpress-plugins/' );
+define( 'W3TC_LINK_URL', 'https://api.w3-edge.com/v1/redirects/product-index' );
 define( 'W3TC_LINK_NAME', 'W3 EDGE, Optimization Products for WordPress' );
-define( 'W3TC_FEED_URL', 'http://feeds.feedburner.com/W3TOTALCACHE' );
-define( 'W3TC_NEWS_FEED_URL', 'http://feeds.feedburner.com/W3EDGE' );
-define( 'W3TC_README_URL', 'http://plugins.svn.wordpress.org/w3-total-cache/trunk/readme.txt' );
-define( 'W3TC_SUPPORT_US_PRODUCT_URL', 'https://www.w3-edge.com/products/w3-total-cache/' );
-define( 'W3TC_SUPPORT_US_RATE_URL', 'https://wordpress.org/support/plugin/w3-total-cache/reviews/#new-post' );
+define( 'W3TC_FEED_URL', 'https://api.w3-edge.com/v1/redirects/product-rss' );
+define( 'W3TC_NEWS_FEED_URL', 'https://api.w3-edge.com/v1/redirects/company-rss' );
+define( 'W3TC_README_URL', 'https://api.w3-edge.com/v1/redirects/product-readme' );
+define( 'W3TC_SUPPORT_US_PRODUCT_URL', 'https://api.w3-edge.com/v1/redirects/product-directory' );
+define( 'W3TC_SUPPORT_US_RATE_URL', 'https://api.w3-edge.com/v1/redirects/support-ratings' );
 define( 'W3TC_SUPPORT_US_TWEET', 'YES! I optimized the user experience of my website with the W3 Total Cache #WordPress #plugin by @w3edge! http://bit.ly/TeSBL3' );
 define( 'W3TC_EDGE_TIMEOUT', 7 * 24 * 60 * 60 );
-define( 'W3TC_SUPPORT_REQUEST_URL', 'https://www.w3-edge.com/w3tc-support/extra' );
-define( 'W3TC_SUPPORT_SERVICES_URL', 'https://www.w3-edge.com/w3tc/premium-widget.json' );
-define( 'W3TC_FAQ_URL', 'https://github.com/Auctollo/w3-total-cache-public/wiki/FAQ' );
-define( 'W3TC_TRACK_URL', 'https://www.w3-edge.com/w3tc/track/' );
-define( 'W3TC_MAILLINGLIST_SIGNUP_URL', 'https://www.w3-edge.com/w3tc/emailsignup/' );
-define( 'NEWRELIC_SIGNUP_URL', 'http://bit.ly/w3tc-partner-newrelic-signup' );
-define( 'MAXCDN_SIGNUP_URL', 'http://bit.ly/w3tc-cdn-maxcdn-create-account' );
-define( 'MAXCDN_AUTHORIZE_URL', 'http://bit.ly/w3tc-cdn-maxcdn-authorize' );
-define( 'NETDNA_AUTHORIZE_URL', 'https://cp.netdna.com/i/w3tc' );
-define( 'STACKPATH_SIGNUP_URL', 'http://bit.ly/w3tc-cdn-stackpath-create-account' );
-define( 'STACKPATH_AUTHORIZE_URL', 'http://bit.ly/w3tc-cdn-stackpath-authorize' );
-define( 'GOOGLE_DRIVE_AUTHORIZE_URL', 'https://www.w3-edge.com/w3tcoa/google-drive/' );
+define( 'W3TC_SUPPORT_REQUEST_URL', 'https://api.w3-edge.com/v1/support-request' );
+define( 'W3TC_SUPPORT_SERVICES_URL', 'https://api.w3-edge.com/v1/support-serviceinventory' );
+define( 'W3TC_FAQ_URL', 'https://api.w3-edge.com/v1/redirects/faq' );
+define( 'W3TC_TERMS_URL', 'https://api.w3-edge.com/v1/redirects/policies-terms' );
+define( 'W3TC_TERMS_ACCEPT_URL', 'https://api.w3-edge.com/v1/redirects/policies-privacy' );
+define( 'W3TC_MAILLINGLIST_SIGNUP_URL', 'https://api.w3-edge.com/v1/signup-newsletter' );
+define( 'W3TC_NEWRELIC_SIGNUP_URL', 'https://api.w3-edge.com/v1/redirects/newrelic/signup' );
+define( 'W3TC_MAXCDN_SIGNUP_URL', 'https://api.w3-edge.com/v1/redirects/maxcdn/signup' );
+define( 'W3TC_MAXCDN_AUTHORIZE_URL', 'https://api.w3-edge.com/v1/redirects/maxcdn/authorize' );
+define( 'W3TC_STACKPATH_SIGNUP_URL', 'https://api.w3-edge.com/v1/redirects/stackpath/signup' );
+define( 'W3TC_STACKPATH_AUTHORIZE_URL', 'https://api.w3-edge.com/v1/redirects/stackpath/authorize' );
+define( 'W3TC_STACKPATH2_AUTHORIZE_URL', 'https://api.w3-edge.com/v1/redirects/stackpath2/authorize' );
+define( 'W3TC_GOOGLE_DRIVE_AUTHORIZE_URL', 'https://api.w3-edge.com/v1/googledrive/authorize' );
 
 // this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
-if ( !defined( 'EDD_W3EDGE_STORE_URL' ) ) define( 'EDD_W3EDGE_STORE_URL', 'https://www.w3-edge.com/' );
-if ( !defined( 'EDD_W3EDGE_STORE_URL_PLUGIN' ) ) define( 'EDD_W3EDGE_STORE_URL_PLUGIN', 'https://www.w3-edge.com/?w3tc_buy_pro_plugin' );
+if ( !defined( 'W3TC_LICENSE_API_URL' ) ) {
+	define( 'W3TC_LICENSE_API_URL', 'https://www.w3-edge.com/' );
+}
+if ( !defined( 'W3TC_PURCHASE_URL' ) ) {
+	define( 'W3TC_PURCHASE_URL', 'https://www.w3-edge.com/checkout/' );
+}
 
 // the name of your product. This should match the download name in EDD exactly
-define( 'EDD_W3EDGE_W3TC_NAME', 'W3 Total Cache Pro: Annual Subscription' );
+define( 'W3TC_PURCHASE_PRODUCT_NAME', 'W3 Total Cache Pro: Annual Subscription' );
 
 define( 'W3TC_WIN', ( strtoupper( substr( PHP_OS, 0, 3 ) ) === 'WIN' ) );
 
@@ -558,29 +563,29 @@ function w3tc_opcache_flush_file( $file, $http = false ) {
  */
 if ( defined( 'W3TC_CONFIG_HIDE' ) && W3TC_CONFIG_HIDE ) {
 	class W3_Config {
-	    public function __construct( $master = false, $blog_id = null ) {
-	    }
+		public function __construct( $master = false, $blog_id = null ) {
+		}
 
 		public function get_string( $key, $default = '', $trim = true ) {
 			return '';
 		}
 
-    	public function get_integer( $key, $default = 0 ) {
+		public function get_integer( $key, $default = 0 ) {
 			return 0;
-    	}
+		}
 
 		public function get_boolean( $key, $default = false ) {
 			return false;
-    	}
+		}
 	}
 } else {
 	class W3_Config extends \W3TC\Config {
-	    public function __construct( $master = false, $blog_id = null ) {
-	    	if ( $master )
-	    		$blog_id = 0;
+		public function __construct( $master = false, $blog_id = null ) {
+			if ( $master )
+				$blog_id = 0;
 
-	        return parent::__construct($blog_id);
-	    }
+			return parent::__construct($blog_id);
+		}
 	}
 }
 
@@ -589,35 +594,75 @@ if ( defined( 'W3TC_CONFIG_HIDE' ) && W3TC_CONFIG_HIDE ) {
  */
 class W3_ConfigWriter {
 	public function __construct( $p1 = 0, $p2 = 0 ) {
-    }
-    public function set( $p1 = 0, $p2 = 0 ) {
-    }
-    public function save( $p1 = 0, $p2 = 0 ) {
-    }
-    public function refresh_w3tc() {
-    }
+	}
+	public function set( $p1 = 0, $p2 = 0 ) {
+	}
+	public function save( $p1 = 0, $p2 = 0 ) {
+	}
+	public function refresh_w3tc() {
+	}
 }
 
 /**
 Deprecated. Retained for 3rd parties that use it. see w3tc_config()
 */
 function w3_instance( $class ) {
-    $legacy_class_name = null;
+	$legacy_class_name = null;
 
-    if ( $class == 'W3_Config' ) {
-    	if ( defined( 'W3TC_CONFIG_HIDE' ) && W3TC_CONFIG_HIDE )
-    		return new W3_Config();
+	if ( $class == 'W3_Config' ) {
+		if ( defined( 'W3TC_CONFIG_HIDE' ) && W3TC_CONFIG_HIDE )
+			return new W3_Config();
 
-       	$legacy_class_name = 'Config';
-    }
-    elseif ( $class == 'W3_ObjectCacheBridge' )
-        $legacy_class_name = 'ObjectCache_WpObjectCache';
-    elseif ( $class == 'W3_PgCache' )
-        $legacy_class_name = 'PgCache_ContentGrabber';
-    elseif ( $class == 'W3_Redirect' )
-        $legacy_class_name = 'Mobile_Redirect';
-    else
-    	return null;
+		   $legacy_class_name = 'Config';
+	}
+	elseif ( $class == 'W3_ObjectCacheBridge' )
+		$legacy_class_name = 'ObjectCache_WpObjectCache';
+	elseif ( $class == 'W3_PgCache' )
+		$legacy_class_name = 'PgCache_ContentGrabber';
+	elseif ( $class == 'W3_Redirect' )
+		$legacy_class_name = 'Mobile_Redirect';
+	else
+		return null;
 
-    return \W3TC\Dispatcher::component( $legacy_class_name );
+	return \W3TC\Dispatcher::component( $legacy_class_name );
+}
+
+
+
+function w3tc_e( $key, $default_value ) {
+	echo w3tc_er( $key, $default_value);
+}
+
+
+
+function w3tc_er( $key, $default_value ) {
+	$v = get_site_option( 'w3tc_generic_widgetservices' );
+	try {
+		$v = json_decode( $v, true );
+		if ( !isset( $v['content'] ) ) {
+			return $default_value;
+		}
+
+		$v = $v['content'];
+	} catch ( \Exception $e ) {
+		return $default_value;
+	}
+
+	global $w3tc_locale;
+	if ( null === $w3tc_locale ) {
+		if ( function_exists( 'get_user_locale' ) ) {
+			$w3tc_locale = get_user_locale();
+		} else {
+			$w3tc_locale = '';
+		}
+	}
+
+	if ( isset( $v["ui_strings.$w3tc_locale"][$key] ) ) {
+		return $v["ui_strings.$w3tc_locale"][$key];
+	}
+	if ( isset( $v["ui_strings"][$key] ) ) {
+		return $v["ui_strings"][$key];
+	}
+
+	return $default_value;
 }

@@ -134,13 +134,17 @@
 }
 
 .yit-container.product-licence-activation .licence-check-section{
-    margin-bottom: 60px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 10px;
+    max-width: 670px;
 }
 
 .yit-container.product-licence-activation span.licence-label {
     font-weight: 500;
     color: #606060;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .yit-container.product-licence-activation .button-licence {
@@ -212,6 +216,11 @@
 .yit-container.product-licence-activation table:not(.to-active-table) td,
 .yit-container.product-licence-activation table:not(.to-active-table) th {
     border-right: 1px solid #dcdcdc;
+}
+
+.yit-container.product-licence-activation table:not(.to-active-table) th{
+    color: #808a97;
+    font-weight: bold;
 }
 
 .yit-container.product-licence-activation table td:last-child,
@@ -354,10 +363,21 @@
     margin-left: 0;
     visibility: hidden;
     min-height: 38px;
+    max-width: 660px;
 }
 
 #yith-licence-notice.visible {
     visibility: visible;
+}
+
+#yith-licence-issue-how-to{
+    margin: 20px 10px 20px 0;
+    font-weight: 500;
+    color: #606060;
+}
+
+#yith-licence-actions span.dashicons{
+    line-height: 60px;
 }
 
 /* === Responsive === */

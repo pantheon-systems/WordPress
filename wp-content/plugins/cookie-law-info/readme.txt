@@ -3,8 +3,8 @@ Contributors: webtoffee,markwt
 Donate link: https://www.webtoffee.com/plugins/ 
 Tags: eu cookie law, GDPR, cookie law, cookie consent, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
-Tested up to: 4.9.8
-Stable tag: 1.7.0
+Tested up to: 5.1.0
+Stable tag: 1.7.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,25 +54,25 @@ Features:
 
 = GDPR Cookie Consent Premium Version Features =
 &#9989; Manage list of cookies ( Name, CookieID, Description, Duration, Type, Category, Header Script, Footer Script).  
-&#9989;Manage Cookie Categories.  
-&#9989;Scan and auto block scripts - Google Analytics, FB Pixel, Google tag manager.  
-&#9989;Location based exclusion of cookie notice for EU countries.  
-&#9989;Provide the users with the granular control over the cookies/scipts used by the website.  
-&#9989;Optionally log users' consent and export into a CSV file.  
-&#9989;Customize the privacy overview in the cookie settings popup.  
-&#9989;Export/import cookies and related information via CSV file.  
-&#9989;Scan and import/export the cookies  
-&#9989;Allow to display cookie cettings popup where site visitors can opt-in or give consent to cookie categories.  
-&#9989;Customisable to look just like your own website’s style: customise the colours, styles and fonts.  
-&#9989;Put the cookie bar in either the header or the footer.  
-&#9989;Cookie bar preview in admin settings  
-&#9989;(Optional) accept cookie policy if the user scrolls.  
-&#9989;(Optional) automatically close the cookie bar after a delay (delay is configurable).  
-&#9989;(Optional) cookie bar can be permanently dismissed or accessible through a “show again” tab.  
-&#9989;(Optional) “show again” tab is fully customisable including position shown on page and styles.  
-&#9989;“Cookie Audit” shortcode to construct a nicely-styled ‘Privacy & Cookie Policy’.  
-&#9989;WPML compatible  
-&#9989;qTranslate support  
+&#9989; Manage Cookie Categories.  
+&#9989; Scan and auto block scripts - Google Analytics, FB Pixel, Google tag manager.  
+&#9989; Location based exclusion of cookie notice for EU countries.  
+&#9989; Provide the users with the granular control over the cookies/scipts used by the website.  
+&#9989; Optionally log users' consent and export into a CSV file.  
+&#9989; Customize the privacy overview in the cookie settings popup.  
+&#9989; Export/import cookies and related information via CSV file.  
+&#9989; Scan and import/export the cookies  
+&#9989; Allow to display cookie cettings popup where site visitors can opt-in or give consent to cookie categories.  
+&#9989; Customisable to look just like your own website’s style: customise the colours, styles and fonts.  
+&#9989; Put the cookie bar in either the header or the footer.  
+&#9989; Cookie bar preview in admin settings  
+&#9989; (Optional) accept cookie policy if the user scrolls.  
+&#9989; (Optional) automatically close the cookie bar after a delay (delay is configurable).  
+&#9989; (Optional) cookie bar can be permanently dismissed or accessible through a “show again” tab.  
+&#9989; (Optional) “show again” tab is fully customisable including position shown on page and styles.  
+&#9989; “Cookie Audit” shortcode to construct a nicely-styled ‘Privacy & Cookie Policy’.  
+&#9989; WPML compatible  
+&#9989; qTranslate support  
 
 For complete list of features and details, Please visit <a rel="nofollow" href="https://www.webtoffee.com/product/gdpr-cookie-consent/">GDPR Cookie Consent Premium Plugin</a> for more details
 
@@ -171,6 +171,36 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.7.5 =
+
+* Defaulted the minimize cookie bar option for Read more link to disabled state.
+* The cookie message bar has been defaulted to include Reject option in addition to Accept.
+
+= 1.7.4 =
+
+* Cookie policy generator
+* Added a shortcode [user_consent_state]
+* Updated shortcode [cookie_audit] with option to configure columns
+* Margin option added in all button shortcodes
+* Introduced an option to hide cookie bar on policy page
+* Tested ok with WP 5.1
+
+= 1.7.3 =
+
+* Translation updated - Danish, French, German
+* Readme updates
+* Minor UI changes
+
+= 1.7.2 =
+
+* Tested ok with Wordpress version 5.0.2
+* Compatibility added for Pixelyoursite plugin
+
+
+= 1.7.1 =
+
+* Cookie notice as `Widget` option added
 
 = 1.7.0 =
 
@@ -338,6 +368,7 @@ See http://cookielawinfo.com for more information on what is required.
 
 == Upgrade Notice ==
 
-= 1.7.0 =
+= 1.7.5 =
 
-* Bug: submenu sorting issue for custom user roles
+* Defaulted the minimize cookie bar option for Read more link to disabled state.
+* The cookie message bar has been defaulted to include Reject option in addition to Accept.

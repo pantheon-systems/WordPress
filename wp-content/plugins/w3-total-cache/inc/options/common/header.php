@@ -5,19 +5,20 @@ if ( !defined( 'W3TC' ) )
 	die();
 
 $config = Dispatcher::config();
+$state = Dispatcher::config_state();
 $page = Util_Admin::get_current_page();
 $licensing_visible = ( ( !Util_Environment::is_wpmu() || is_network_admin() ) &&
 	!ini_get( 'w3tc.license_key' ) &&
-	get_transient( 'w3tc_license_status' ) != 'host_valid' );
+	$state->get_string( 'license.status' ) != 'host_valid' );
 ?>
 
 <?php do_action( 'w3tc-dashboard-head' ) ?>
 <div class="wrap" id="w3tc">
-    <h2 class="logo"><?php _e( 'W3 Total Cache <span>by W3 EDGE <sup>&reg;</sup></span>', 'w3-total-cache' ); ?></h2>
+	<h2 class="logo"><?php _e( 'W3 Total Cache <span>by W3 EDGE <sup>&reg;</sup></span>', 'w3-total-cache' ); ?></h2>
 <?php if ( !Util_Environment::is_w3tc_pro( $config ) ): ?>
-    <?php include W3TC_INC_OPTIONS_DIR . '/edd/buy.php' ?>
+	<?php include W3TC_INC_OPTIONS_DIR . '/edd/buy.php' ?>
 <?php endif ?>
-    <?php
+	<?php
 	switch ( $page ) {
 	case 'w3tc_general':
 		$anchors = array(
@@ -35,7 +36,7 @@ $licensing_visible = ( ( !Util_Environment::is_wpmu() || is_network_admin() ) &&
 				array( 'id' => 'cdn', 'text' => __( '<abbr title="Content Delivery Network">CDN</abbr>', 'w3-total-cache' ) ),
 				array( 'id' => 'reverse_proxy', 'text' => __( 'Reverse Proxy', 'w3-total-cache' ) ) ) );
 		if ( Util_Environment::is_w3tc_pro() )
-			$anchors[] = array( 'id' => 'amazon_sns', 'text' => __( 'Amazon <abbr title="Simple Notification Service">SNS</abbr>', 'w3-total-cache' ) );
+			$anchors[] = array( 'id' => 'amazon_sns', 'text' => __( 'Message Bus', 'w3-total-cache' ) );
 		$anchors[] = array( 'id' => 'monitoring', 'text' => __( 'Monitoring', 'w3-total-cache' ) );
 		if ( $licensing_visible )
 			array( 'id' => 'licensing', 'text' => __( 'Licensing', 'w3-total-cache' ) );
@@ -53,104 +54,121 @@ $licensing_visible = ( ( !Util_Environment::is_wpmu() || is_network_admin() ) &&
 		$links[] = '<a href="#" class="button-self-test">Compatibility Test</a>';
 
 ?>
-                <p id="w3tc-options-menu">
-                    <?php echo implode( ' | ', $links ); ?>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					<?php echo implode( ' | ', $links ); ?>
+				</p>
+	<?php
 		break;
 ?>
-    <?php
+	<?php
 	case 'w3tc_pgcache':
 ?>
-                <p id="w3tc-options-menu">
-                    Jump to:
-                    <a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
-                    <a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
-                    <a href="#mirrors"><?php _e( 'Mirrors', 'w3-total-cache' ); ?></a> |
-                    <a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a> |
-                    <a href="#cache_preload"><?php _e( 'Cache Preload', 'w3-total-cache' ); ?></a> |
-                    <a href="#purge_policy"><?php _e( 'Purge Policy', 'w3-total-cache' ); ?></a> |
-                    <a href="#notes"><?php _e( 'Note(s)', 'w3-total-cache' ); ?></a>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					Jump to:
+					<a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
+					<a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
+					<a href="#mirrors"><?php _e( 'Mirrors', 'w3-total-cache' ); ?></a> |
+					<a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a> |
+					<a href="#cache_preload"><?php _e( 'Cache Preload', 'w3-total-cache' ); ?></a> |
+					<a href="#purge_policy"><?php _e( 'Purge Policy', 'w3-total-cache' ); ?></a> |
+					<a href="#notes"><?php _e( 'Note(s)', 'w3-total-cache' ); ?></a>
+				</p>
+	<?php
 		break;
 ?>
-    <?php
+	<?php
 	case 'w3tc_minify':
 ?>
-                <p id="w3tc-options-menu">
-                    <?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
-                    <a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
-                    <a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
-                    <a href="#html_xml"><?php _e( '<acronym title="Hypertext Markup Language">HTML</acronym> &amp; <acronym title="eXtensible Markup Language">XML</acronym>', 'w3-total-cache' ); ?></a> |
-                    <a href="#js"><?php _e( '<acronym title="JavaScript">JS</acronym>', 'w3-total-cache' ); ?></a> |
-                    <a href="#css"><?php _e( '<acronym title="Cascading Style Sheet">CSS</acronym>', 'w3-total-cache' ); ?></a> |
-                    <a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a> |
-                    <a href="#notes"><?php _e( 'Note(s)', 'w3-total-cache' ); ?></a>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					<?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
+					<a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
+					<a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
+					<a href="#html_xml"><?php _e( '<acronym title="Hypertext Markup Language">HTML</acronym> &amp; <acronym title="eXtensible Markup Language">XML</acronym>', 'w3-total-cache' ); ?></a> |
+					<a href="#js"><?php _e( '<acronym title="JavaScript">JS</acronym>', 'w3-total-cache' ); ?></a> |
+					<a href="#css"><?php _e( '<acronym title="Cascading Style Sheet">CSS</acronym>', 'w3-total-cache' ); ?></a> |
+					<a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a> |
+					<a href="#notes"><?php _e( 'Note(s)', 'w3-total-cache' ); ?></a>
+				</p>
+	<?php
 		break;
 ?>
-    <?php
+	<?php
 	case 'w3tc_dbcache':
 ?>
-                <p id="w3tc-options-menu">
-                    <?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
-                    <a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
-                    <a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
-                    <a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					<?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
+					<a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
+					<a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
+					<a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a>
+				</p>
+	<?php
 		break;
 ?>
-    <?php
+	<?php
 	case 'w3tc_objectcache':
 ?>
-                <p id="w3tc-options-menu">
-                    <?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
-                    <a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
-                    <a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					<?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
+					<a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
+					<a href="#advanced"><?php _e( 'Advanced', 'w3-total-cache' ); ?></a>
+				</p>
+	<?php
 		break;
 ?>
-    <?php
+	<?php
 	case 'w3tc_browsercache':
 ?>
-                <p id="w3tc-options-menu">
-                    <?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
-                    <a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
-                    <a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
-                    <a href="#css_js"><?php _e( '<acronym title="Cascading Style Sheet">CSS</acronym> &amp; <acronym title="JavaScript">JS</acronym>', 'w3-total-cache' ); ?></a> |
-                    <a href="#html_xml"><?php _e( '<acronym title="Hypertext Markup Language">HTML</acronym> &amp; <acronym title="eXtensible Markup Language">XML</acronym>', 'w3-total-cache' ); ?></a> |
-                    <a href="#media"><?php _e( 'Media', 'w3-total-cache' ); ?></a> |
-                    <a href="#security"><?php _e( 'Security Headers', 'w3-total-cache' ); ?></a>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					<?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
+					<a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
+					<a href="#general"><?php _e( 'General', 'w3-total-cache' ); ?></a> |
+					<a href="#css_js"><?php _e( '<acronym title="Cascading Style Sheet">CSS</acronym> &amp; <acronym title="JavaScript">JS</acronym>', 'w3-total-cache' ); ?></a> |
+					<a href="#html_xml"><?php _e( '<acronym title="Hypertext Markup Language">HTML</acronym> &amp; <acronym title="eXtensible Markup Language">XML</acronym>', 'w3-total-cache' ); ?></a> |
+					<a href="#media"><?php _e( 'Media', 'w3-total-cache' ); ?></a> |
+					<a href="#security"><?php _e( 'Security Headers', 'w3-total-cache' ); ?></a>
+				</p>
+	<?php
 		break;
 ?>
-    <?php
+	<?php
 	case 'w3tc_mobile':
 ?>
-                <p id="w3tc-options-menu">
-                    <?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
-                    <a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
-                    <a href="#manage"><?php _e( 'Manage User Agent Groups', 'w3-total-cache' ); ?></a>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					<?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
+					<a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
+					<a href="#manage"><?php _e( 'Manage User Agent Groups', 'w3-total-cache' ); ?></a>
+				</p>
+	<?php
 		break;
 ?>
-    <?php
+	<?php
 	case 'w3tc_referrer':
 ?>
-                <p id="w3tc-options-menu">
-                    <?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
-                    <a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
-                    <a href="#manage"><?php _e( 'Manage Referrer Groups', 'w3-total-cache' ); ?></a>
-                </p>
-    <?php
+				<p id="w3tc-options-menu">
+					<?php _e( 'Jump to: ', 'w3-total-cache' ); ?>
+					<a href="#toplevel_page_w3tc_general"><?php _e( 'Main Menu', 'w3-total-cache' ); ?></a> |
+					<a href="#manage"><?php _e( 'Manage Referrer Groups', 'w3-total-cache' ); ?></a>
+				</p>
+	<?php
 		break;
+
+	case 'w3tc_install':
 ?>
-    <?php
+			<p id="w3tc-options-menu">
+				Jump to:
+				<a href="#initial"><?php _e( 'Initial Installation', 'w3-total-cache' ); ?></a> |
+				<?php if ( count( $rewrite_rules_descriptors ) ): ?>
+					<a href="#rules"><?php _e( 'Rewrite Rules', 'w3-total-cache' ); ?></a> |
+				<?php endif ?>
+				<?php if ( count( $other_areas ) ): ?>
+			        <a href="#other"><?php _e( 'Other', 'w3-total-cache' ); ?></a> |
+				<?php endif ?>
+				<a href="#additional"><?php _e( 'Services', 'w3-total-cache' ); ?></a> |
+				<a href="#modules"><?php _e( '<acronym title="Hypertext Preprocessor">PHP</acronym> Modules', 'w3-total-cache' ); ?></a>
+			</p>
+<?php
+	break;
+?>
+	<?php
 	}
 ?>

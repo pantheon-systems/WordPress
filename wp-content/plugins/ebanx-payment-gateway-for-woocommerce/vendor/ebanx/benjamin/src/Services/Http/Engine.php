@@ -1,6 +1,8 @@
 <?php
 namespace Ebanx\Benjamin\Services\Http;
 
+use Ebanx\Benjamin\Facade;
+
 class Engine
 {
     /**
@@ -14,6 +16,11 @@ class Engine
     private $curlInfo;
 
     /**
+     * @var array;
+     */
+    private $userAgentInfo = [];
+
+    /**
      * @param String $method
      * @param String $url
      * @param array|object|boolean $data
@@ -24,6 +31,7 @@ class Engine
     private function sendRequest($method, $url, $data = false)
     {
         $curlHandler = curl_init();
+        curl_setopt($curlHandler, CURLOPT_HTTPHEADER, $this->formatUserAgentInfo());
 
         if ($method === 'POST') {
             curl_setopt($curlHandler, CURLOPT_POST, 1);
@@ -97,5 +105,22 @@ class Engine
     public function getInfo()
     {
         return $this->curlInfo;
+    }
+
+    public function addUserAgentInfo($userValue)
+    {
+        array_push($this->userAgentInfo, $userValue);
+    }
+
+    public function getUserAgentInfo()
+    {
+        return $this->userAgentInfo;
+    }
+
+    private function formatUserAgentInfo()
+    {
+        $formattedUserAgentInfo = ['X-Ebanx-Client-User-Agent: SDK-PHP/' . Facade::VERSION . ' ' . join(' ', $this->userAgentInfo)];
+        $this->userAgentInfo = $formattedUserAgentInfo;
+        return $formattedUserAgentInfo;
     }
 }

@@ -309,7 +309,14 @@ class Minify0_Minify {
                     throw $e;
                 }
                 self::$_cache->store($cacheId, $content);
-                if (function_exists('gzencode') && self::$_options['encodeMethod'] && self::$_options['encodeOutput']) {
+                if (function_exists('brotli_compress') && self::$_options['encodeMethod'] === 'br' && self::$_options['encodeOutput']) {
+                    $compressed = $content;
+                    $compressed['content'] = brotli_compress($content['content']);
+
+                    self::$_cache->store($cacheId . '_' . self::$_options['encodeMethod'],
+                        $compressed);
+                }
+                if (function_exists('gzencode') && self::$_options['encodeMethod'] && self::$_options['encodeMethod'] !== 'br' && self::$_options['encodeOutput']) {
                     $compressed = $content;
                     $compressed['content'] = gzencode($content['content'],
                         self::$_options['encodeLevel']);
@@ -339,6 +346,10 @@ class Minify0_Minify {
 
                 case 'deflate':
                     $content['content'] = gzdeflate($content['content'], self::$_options['encodeLevel']);
+                    break;
+
+                case 'br':
+                    $content['content'] = brotli_compress($content['content']);
                     break;
             }
             // still need to encode

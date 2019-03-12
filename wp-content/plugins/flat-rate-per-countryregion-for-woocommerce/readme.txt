@@ -1,11 +1,11 @@
 === Flat Rate per State/Country/Region for WooCommerce ===
-Contributors: webdados, wonderm00n
+Contributors: webdados
 Tags: woocommerce, shipping, delivery, ecommerce, e-commerce, country, countries, region, continent, continents, world, states, state, districts, webdados
 Author URI: https://www.webdados.pt
 Plugin URI: https://www.webdados.pt/produtos-e-servicos/internet/desenvolvimento-wordpress/flat-rate-per-countryregion-woocommerce-wordpress/
 Requires at least: 4.7
-Tested up to: 5.0-alpha-42610
-Stable tag: 2.5.2
+Tested up to: 5.0.1
+Stable tag: 2.5.3.1
 
 This plugin allows you to set a flat delivery rate per States, Countries or World Regions on WooCommerce.
 
@@ -18,6 +18,10 @@ A simple example of this plugin usage is to set a value for delivery in a specif
 You can create groups for states, countries and world regions and specify delivery rates for them.
 
 For each group you can choose either to apply the shipping fee for the whole order or multiply it per each item. You can also set a total order value from which the shipping will be free.
+
+= Are you already issuing automatic invoices on your WooCommerce store? =
+
+If not, get to know our new plugin: [Invoicing with InvoiceXpress for WooCommerce](https://wordpress.org/plugins/woo-billing-with-invoicexpress/)
 
 = Features: =
 
@@ -60,6 +64,14 @@ Because of the way the WooCommerce Multilingual plugin registers the Shipping Me
 No other question is frequent. Ask us something ;-)
 
 == Changelog ==
+
+= 2.5.3.1 =
+* readme.txt small fix
+
+= 2.5.3 =
+* Tested with WooCommerce 3.5.2
+* Bumped `WC tested up` tag
+* Bumped `Requires at least` tag
 
 = 2.5.2 =
 * Bumped `WC tested up to` tag

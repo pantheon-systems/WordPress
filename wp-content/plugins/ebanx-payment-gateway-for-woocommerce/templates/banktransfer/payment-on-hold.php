@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<br>
 
 	<div class="ebanx-button--group ebanx-button--group-two">
-		<a href="<?php echo esc_attr( $url_pdf ); ?>" target="_blank" class="button bank_transfer__action">Salvar em PDF</a>
 		<?php if ( wp_is_mobile() ) : ?>
 			<a href="<?php echo esc_attr( $url_mobile ); ?>" target="_blank" class="button bank_transfer__action">Ver instruções</a>
 		<?php else : ?>
@@ -28,9 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php endif; ?>
 	</div>
 
-	<?php if ( ! wp_is_mobile() ) : ?>
-		<iframe id="ebanx-banktransfer-frame" src="<?php echo esc_attr( $url_iframe ); ?>" style="width: 100%; border: 1px solid black; height: 1000px"></iframe>
-	<?php endif; ?>
+	<iframe id="ebanx-banktransfer-frame" src="<?php echo esc_attr( $url_iframe ); ?>" style="width: 100%; border: 1px solid black; height: 1000px"></iframe>
 
 	<?php // phpcs:disable ?>
 	<script type="text/javascript" src="https://print.ebanx.com/assets/sources/fingerprint/fingerprint2.min.js"></script>

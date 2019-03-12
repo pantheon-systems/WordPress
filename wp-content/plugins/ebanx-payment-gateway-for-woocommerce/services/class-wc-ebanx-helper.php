@@ -4,9 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once WC_EBANX_GATEWAYS_DIR . 'class-wc-ebanx-global-gateway.php';
-require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-constants.php';
-require_once WC_EBANX_VENDOR_DIR . 'autoload.php';
+if ( ! defined( 'IS_TEST' ) ) {
+	require_once WC_EBANX_GATEWAYS_DIR . 'class-wc-ebanx-global-gateway.php';
+	require_once WC_EBANX_SERVICES_DIR . 'class-wc-ebanx-constants.php';
+	require_once WC_EBANX_VENDOR_DIR . 'autoload.php';
+}
 
 use RuntimeException as RuntimeException;
 use Ebanx\Benjamin\Services\Gateways\CreditCard;
@@ -160,4 +162,66 @@ abstract class WC_EBANX_Helper {
 		return $configs->get_setting_or_default( 'add_iof_to_local_amount_enabled', 'yes' ) === 'yes';
 	}
 
+	/**
+	 * @param WC_EBANX_Global_Gateway $configs
+	 *
+	 * @return array
+	 */
+	public static function plugin_check( WC_EBANX_Global_Gateway $configs ) {
+		global $wpdb;
+
+		$all_plugins   = get_plugins();
+		$list          = [];
+		$list['php']   = phpversion();
+		$list['mysql'] = $wpdb->db_version();
+
+		$list['plugins'] = [];
+		foreach ( $all_plugins as $plugin ) {
+			$list['plugins'][ $plugin['Name'] ] = $plugin['Version'];
+		}
+
+		$list['configs']                             = [];
+		$list['configs']['save_card_data']           = self::get_config_value( 'save_card_data', $configs->settings );
+		$list['configs']['one_click']                = self::get_config_value( 'one_click', $configs->settings );
+		$list['configs']['capture_enabled']          = self::get_config_value( 'capture_enabled', $configs->settings );
+		$list['configs']['manual_review_enabled']    = self::get_config_value( 'manual_review_enabled', $configs->settings );
+		$list['configs']['due_date_days']            = self::get_config_value( 'due_date_days', $configs->settings );
+		$list['configs']['checkout_manager_enabled'] = self::get_config_value( 'checkout_manager_enabled', $configs->settings );
+		$list['configs']['show_local_amount']        = self::get_config_value( 'show_local_amount', $configs->settings );
+		$list['configs']['show_exchange_rate']       = self::get_config_value( 'show_exchange_rate', $configs->settings );
+		$list['configs']['add_iof']                  = self::get_config_value( 'add_iof_to_local_amount_enabled', $configs->settings );
+
+		$list = self::create_country_config( 'ar', $configs, $list );
+		$list = self::create_country_config( 'br', $configs, $list );
+		$list = self::create_country_config( 'co', $configs, $list );
+		$list = self::create_country_config( 'mx', $configs, $list );
+
+		return $list;
+	}
+
+	/**
+	 * Create list by country
+	 *
+	 * @param string $country
+	 * @param object $configs
+	 * @param array  $list
+	 *
+	 * @return array
+	 */
+	private static function create_country_config( $country, $configs, $list ) {
+		$list['configs'][ $country ]['interest_rates_enabled']   = self::get_config_value( "{$country}_interest_rates_enabled", $configs->settings );
+		$list['configs'][ $country ]['credit_card_instalments']  = self::get_config_value( "{$country}_credit_card_instalments", $configs->settings );
+		$list['configs'][ $country ]['min_instalment_value_brl'] = self::get_config_value( "{$country}_br_min_instalment_value_brl", $configs->settings );
+		return $list;
+	}
+
+	/**
+	 * @param string $index
+	 * @param array  $config
+	 *
+	 * @return string
+	 */
+	private static function get_config_value( $index, $config ) {
+		return array_key_exists( $index, $config ) ? $config[ $index ] : '';
+	}
 }

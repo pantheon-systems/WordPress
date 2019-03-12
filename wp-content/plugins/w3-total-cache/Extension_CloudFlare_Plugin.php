@@ -321,7 +321,6 @@ class Extension_CloudFlare_Plugin {
 			return 0;
 
 		$left_piece = $pieces[0];
-		$right_piece = $pieces[1];
 
 		// Extract out the main IP pieces
 		$ip_pieces = explode( "::", $left_piece, 2 );
@@ -338,7 +337,6 @@ class Extension_CloudFlare_Plugin {
 		}
 
 		// Check to see if the last IP block (part after ::) is set
-		$last_piece = "";
 		$size = count( $main_ip_pieces );
 		if ( trim( $last_ip_piece ) != "" ) {
 			$last_piece = str_pad( $last_ip_piece, 4, "0", STR_PAD_LEFT );
@@ -373,7 +371,6 @@ class Extension_CloudFlare_Plugin {
 	private function ipv6_in_range( $ip, $range_ip ) {
 		$pieces = explode( "/", $range_ip, 2 );
 		$left_piece = $pieces[0];
-		$right_piece = $pieces[1];
 
 		// Extract out the main IP pieces
 		$ip_pieces = explode( "::", $left_piece, 2 );

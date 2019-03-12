@@ -22,7 +22,7 @@ class UsageStatistics_Widget {
 		add_action( 'w3tc_widget_setup', array(
 				$this,
 				'w3tc_widget_setup'
-			), 300 );
+			), 1000 );
 		add_action( 'w3tc_ajax_ustats_get', array( $this, 'w3tc_ajax_ustats_get' ) );
 	}
 

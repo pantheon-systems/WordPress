@@ -18,7 +18,6 @@ class URE_Base_Lib {
     protected $options = array(); // plugin options data
     protected $multisite = false;
     protected $active_for_network = false;
-    protected $blog_ids = null;
     protected $main_blog_id = 0;
 
     
@@ -40,8 +39,7 @@ class URE_Base_Lib {
 
         $this->multisite = function_exists('is_multisite') && is_multisite();
         if ($this->multisite) {
-            $this->blog_ids = $this->get_blog_ids();
-            // get Id of 1st (main) blog
+            // get Id of the 1st (main) blog
             $this->main_blog_id = $this->get_main_site();
         }
 
@@ -55,6 +53,7 @@ class URE_Base_Lib {
         
         if (!property_exists($this, $property_name)) {
             syslog(LOG_ERR, 'Lib class does not have such property '. $property_name);
+            return null;
         }
         
         return $this->$property_name;
@@ -76,30 +75,11 @@ class URE_Base_Lib {
     public function get_main_site() {
         global $current_site;
         
-        return $current_site->blog_id;
+        $blog_id = is_object($current_site) ? $current_site->blog_id : null;
+        
+        return $blog_id;
     }
     // end of get_main_site()
-
-
-
-    /**
-     * Returns the array of multi-site WP sites/blogs IDs for the current network
-     * @global wpdb $wpdb
-     * @return array
-     */
-    protected function get_blog_ids() {
-        global $wpdb;
-
-        $network = get_current_site();        
-        $query = $wpdb->prepare(
-                    "SELECT blog_id FROM {$wpdb->blogs}
-                        WHERE site_id=%d ORDER BY blog_id ASC",
-                        array($network->id));
-        $blog_ids = $wpdb->get_col($query);
-
-        return $blog_ids;
-    }
-    // end of get_blog_ids()
 
     
     /**
@@ -121,7 +101,7 @@ class URE_Base_Lib {
 
         if ($message) {
             if ($error_style) {
-                echo '<div id="message" class="error" >';
+                echo '<div id="message" class="error">';
             } else {
                 echo '<div id="message" class="updated fade">';
             }
@@ -129,6 +109,7 @@ class URE_Base_Lib {
         }
     }
     // end of show_message()
+    
 
     /**
      * Returns value by name from GET/POST/REQUEST. Minimal type checking is provided
@@ -183,6 +164,7 @@ class URE_Base_Lib {
     }
     // end of get_request_var()
 
+    
     /**
      * returns option value for option with name in $option_name
      */
@@ -276,8 +258,12 @@ class URE_Base_Lib {
      */
     public function get_short_list_str($full_list, $items_count=3) {
      
+        if (empty($full_list) || !is_array($full_list)) {
+            return '...';
+        }
+        
         $short_list = array(); $i = 0;
-        foreach($full_list as $key=>$item) {            
+        foreach($full_list as $item) {            
             if ($i>=$items_count) {
                 break;
             }
@@ -287,7 +273,7 @@ class URE_Base_Lib {
         
         $str = implode(', ', $short_list);
         if ($items_count<count($full_list)) {
-            $str .= '...';
+            $str .= ', ...';
         }
         
         return $str;
@@ -326,6 +312,30 @@ class URE_Base_Lib {
     
     
     /**
+     * Returns the array of multi-site WP sites/blogs IDs for the current network
+     * @global wpdb $wpdb
+     * @return array
+     */
+    public function get_blog_ids() {
+        global $wpdb;
+
+        if (!$this->multisite) {
+            return null;
+        }
+        
+        $network = get_current_site();        
+        $query = $wpdb->prepare(
+                    "SELECT blog_id FROM {$wpdb->blogs}
+                        WHERE site_id=%d ORDER BY blog_id ASC",
+                        array( $network->id ) );
+        $blog_ids = $wpdb->get_col( $query );
+
+        return $blog_ids;
+    }
+    // end of get_blog_ids()
+    
+    
+    /**
      * Private clone method to prevent cloning of the instance of the
      * *Singleton* instance.
      *
@@ -348,4 +358,4 @@ class URE_Base_Lib {
     // end of __wakeup()
 
 }
-// end of Garvs_WP_Lib class
+// end of URE_Base_Lib class

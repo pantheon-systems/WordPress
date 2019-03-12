@@ -24,172 +24,160 @@ class NM_File_wooproduct extends PPOM_Inputs{
 		
 		$this -> title 		= __ ( 'File Input', "ppom" );
 		$this -> desc		= __ ( 'regular file input', "ppom" );
+		$this -> icon		= __ ( '<i class="fa fa-file" aria-hidden="true"></i>', 'ppom' );
 		$this -> settings	= self::get_settings();
 		
 	}
 	
-	
-	
-	
 	private function get_settings(){
 		
 		return array (
-						'title' => array (
-						'type' => 'text',
-						'title' => __ ( 'Title', "ppom" ),
-						'desc' => __ ( 'It will be shown as field label', "ppom" ) 
-				),
-				'data_name' => array (
-						'type' => 'text',
-						'title' => __ ( 'Data name', "ppom" ),
-						'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', "ppom" ) 
-				),
-				'description' => array (
-						'type' => 'textarea',
-						'title' => __ ( 'Description', "ppom" ),
-						'desc' => __ ( 'Small description, it will be diplay near name title.', "ppom" ) 
-				),
-				'desc_tooltip' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
-								'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
-						),
-				'error_message' => array (
-						'type' => 'text',
-						'title' => __ ( 'Error message', "ppom" ),
-						'desc' => __ ( 'Insert the error message for validation.', "ppom" ) 
-				),
-				
-				'file_cost' => array (
-						'type' => 'text',
-						'title' => __ ( 'File cost/price', "ppom" ),
-						'desc' => __ ( 'This will be added into cart', "ppom" )
-				),
-				'onetime' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Fixed Fee', "ppom" ),
-								'desc' => __ ( 'Add one time fee to cart total.', "ppom" ) 
-						),
-				'onetime_taxable' => array (
-								'type' => 'checkbox',
-								'title' => __ ( 'Fee Taxable?', "ppom" ),
-								'desc' => __ ( 'Calculate Tax for Fixed Fee', "ppom" ) 
-				),
-				
-				'required' => array (
-						'type' => 'checkbox',
-						'title' => __ ( 'Required', "ppom" ),
-						'desc' => __ ( 'Select this if it must be required.', "ppom" ) 
-				),
-				
-				'class' => array (
-						'type' => 'text',
-						'title' => __ ( 'Class', "ppom" ),
-						'desc' => __ ( 'Insert an additional class(es) (separateb by comma) for more personalization.', "ppom" ) 
-				),
-				
-				'width' => array (
-						'type' => 'select',
-						'title' => __ ( 'Width', 'ppom' ),
-						'desc' => __ ( 'Type field width in % e.g: 50%', 'ppom'),
-						'options'	=> ppom_get_input_cols(),
-						'default'	=> 12,
-				),
-				'visibility' => array (
-						'type' => 'select',
-						'title' => __ ( 'Visibility', 'ppom' ),
-						'desc' => __ ( 'Set field visibility based on user.', 'ppom'),
-						'options'	=> ppom_field_visibility_options(),
-						'default'	=> 'everyone',
-				),
-				'visibility_role' => array (
-						'type' => 'text',
-						'title' => __ ( 'User Roles', 'ppom' ),
-						'desc' => __ ( 'Role separated by comma.', 'ppom'),
-						'hidden' => true,
-				),
-				
-				'button_label_select' => array (
-						'type' => 'text',
-						'title' => __ ( 'Button label (select files)', "ppom" ),
-						'desc' => __ ( 'Type button label e.g: Select Photos', "ppom" ) 
-				),
-				
-				
-				'button_class' => array (
-						'type' => 'text',
-						'title' => __ ( 'Button class', "ppom" ),
-						'desc' => __ ( 'Type class for both (select, upload) buttons', "ppom" ) 
-				),
-				
-				'files_allowed' => array (
-						'type' => 'text',
-						'title' => __ ( 'Files allowed', "ppom" ),
-						'desc' => __ ( 'Type number of files allowed per upload by user, e.g: 3', "ppom" ) 
-				),
-				'file_types' => array (
-						'type' => 'text',
-						'title' => __ ( 'File types', "ppom" ),
-						'desc' => __ ( 'File types allowed seperated by comma, e.g: jpg,pdf,zip', "ppom" ),
-						'default' => 'jpg,pdf,zip',
-				),
-				
-				'file_size' => array (
-						'type' => 'text',
-						'title' => __ ( 'File size', "ppom" ),
-						'desc' => __ ( 'Type size with units in kb|mb per file uploaded by user, e.g: 3mb', "ppom" ),
-						'default' => '1mb',
-				),
-				
-				'photo_editing' => array (
-						'type' => 'checkbox',
-						'title' => __ ( 'Enable photo editing', "ppom" ),
-						'desc' => __ ( 'Allow users to edit photos by Aviary API, make sure that Aviary API Key is set in previous tab.', "ppom" ) 
-				),
-				
-				'editing_tools' => array (
-						'type' => 'checkbox',
-						'title' => __ ( 'Editing Options', "ppom" ),
-						'desc' => __ ( 'Select editing options', "ppom" ),
-						'options' => array (
-								'enhance' => 'Enhancements',
-								'effects' => 'Filters',
-								'frames' => 'Frames',
-								'stickers' => 'Stickers',
-								'orientation' => 'Orientation',
-								'focus' => 'Focus',
-								'resize' => 'Resize',
-								'crop' => 'Crop',
-								'warmth' => 'Warmth',
-								'brightness' => 'Brightness',
-								'contrast' => 'Contrast',
-								'saturation' => 'Saturation',
-								'sharpness' => 'Sharpness',
-								'colorsplash' => 'Colorsplash',
-								'draw' => 'Draw',
-								'text' => 'Text',
-								'redeye' => 'Red-Eye',
-								'whiten' => 'Whiten teeth',
-								'blemish' => 'Remove skin blemishes' 
-						) 
-				),
-				// 'language_opt' => array (
-				// 		'type' => 'select',
-				// 		'title' => __ ( 'Select Language', "ppom" ),
-				// 		'desc' => __ ( 'Select language for uploader alerts and messages.', "ppom" ),
-				// 		'options' => ppom_get_plupload_languages(), 
-				// ),				
-				'logic' => array (
-						'type' => 'checkbox',
-						'title' => __ ( 'Enable Conditions', "ppom" ),
-						'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
-				),
-				'conditions' => array (
-						'type' => 'html-conditions',
-						'title' => __ ( 'Conditions', "ppom" ),
-						'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
-				),
-			);
+			'title' => array (
+					'type' => 'text',
+					'title' => __ ( 'Title', "ppom" ),
+					'desc' => __ ( 'It will be shown as field label', "ppom" ) 
+			),
+			'data_name' => array (
+					'type' => 'text',
+					'title' => __ ( 'Data name', "ppom" ),
+					'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', "ppom" ) 
+			),
+			'description' => array (
+					'type' => 'textarea',
+					'title' => __ ( 'Description', "ppom" ),
+					'desc' => __ ( 'Small description, it will be display near name title.', "ppom" ) 
+			),
+			'error_message' => array (
+					'type' => 'text',
+					'title' => __ ( 'Error message', "ppom" ),
+					'desc' => __ ( 'Insert the error message for validation.', "ppom" ) 
+			),
+			'file_cost' => array (
+					'type' => 'text',
+					'title' => __ ( 'File cost/price', "ppom" ),
+					'desc' => __ ( 'This will be added into cart', "ppom" )
+			),
+			'class' => array (
+					'type' => 'text',
+					'title' => __ ( 'Class', "ppom" ),
+					'desc' => __ ( 'Insert an additional class(es) (separateb by comma) for more personalization.', "ppom" ) 
+			),
+			'width' => array (
+					'type' => 'select',
+					'title' => __ ( 'Width', 'ppom' ),
+					'desc' => __ ( 'Select width column.', "ppom"),
+					'options'	=> ppom_get_input_cols(),
+					'default'	=> 12,
+			),
+			'button_label_select' => array (
+					'type' => 'text',
+					'title' => __ ( 'Button label (select files)', "ppom" ),
+					'desc' => __ ( 'Type button label e.g: Select Photos', "ppom" ) 
+			),
+			'button_class' => array (
+					'type' => 'text',
+					'title' => __ ( 'Button class', "ppom" ),
+					'desc' => __ ( 'Type class for both (select, upload) buttons', "ppom" ) 
+			),			
+			'files_allowed' => array (
+					'type' => 'text',
+					'title' => __ ( 'Files allowed', "ppom" ),
+					'desc' => __ ( 'Type number of files allowed per upload by user, e.g: 3', "ppom" ) 
+			),
+			'file_types' => array (
+					'type' => 'text',
+					'title' => __ ( 'File types', "ppom" ),
+					'desc' => __ ( 'File types allowed seperated by comma, e.g: jpg,pdf,zip', "ppom" ),
+					'default' => 'jpg,pdf,zip',
+			),
+			'file_size' => array (
+					'type' => 'text',
+					'title' => __ ( 'File size', "ppom" ),
+					'desc' => __ ( 'Type size with units in kb|mb per file uploaded by user, e.g: 3mb', "ppom" ),
+					'default' => '1mb',
+			),
+			// 'language_opt' => array (
+			// 		'type' => 'select',
+			// 		'title' => __ ( 'Select Language', "ppom" ),
+			// 		'desc' => __ ( 'Select language for uploader alerts and messages.', "ppom" ),
+			// 		'options' => ppom_get_plupload_languages(), 
+			// ),
+
+			'visibility' => array (
+					'type' => 'select',
+					'title' => __ ( 'Visibility', 'ppom' ),
+					'desc' => __ ( 'Set field visibility based on user.', "ppom"),
+					'options'	=> ppom_field_visibility_options(),
+					'default'	=> 'everyone',
+			),
+			'visibility_role' => array (
+					'type' => 'text',
+					'title' => __ ( 'User Roles', 'ppom' ),
+					'desc' => __ ( 'Role separated by comma.', "ppom"),
+					'hidden' => true,
+			),
+			'desc_tooltip' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
+					'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
+			),
+			'required' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Required', "ppom" ),
+					'desc' => __ ( 'Select this if it must be required.', "ppom" ) 
+			),
+			'onetime' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Fixed Fee', "ppom" ),
+					'desc' => __ ( 'Add one time fee to cart total.', "ppom" ) 
+			),
+			'onetime_taxable' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Fee Taxable?', "ppom" ),
+					'desc' => __ ( 'Calculate Tax for Fixed Fee', "ppom" ) 
+			),	
+			// 'photo_editing' => array (
+			// 		'type' => 'checkbox',
+			// 		'title' => __ ( 'Enable photo editing', "ppom" ),
+			// 		'desc' => __ ( 'Allow users to edit photos by Aviary API, make sure that Aviary API Key is set in previous tab.', "ppom" ) 
+			// ),
+			// 'editing_tools' => array (
+			// 		'type' => 'checkbox',
+			// 		'title' => __ ( 'Editing Options', "ppom" ),
+			// 		'desc' => __ ( 'Select editing options', "ppom" ),
+			// 		'options' => array (
+			// 				'enhance' => 'Enhancements',
+			// 				'effects' => 'Filters',
+			// 				'frames' => 'Frames',
+			// 				'stickers' => 'Stickers',
+			// 				'orientation' => 'Orientation',
+			// 				'focus' => 'Focus',
+			// 				'resize' => 'Resize',
+			// 				'crop' => 'Crop',
+			// 				'warmth' => 'Warmth',
+			// 				'brightness' => 'Brightness',
+			// 				'contrast' => 'Contrast',
+			// 				'saturation' => 'Saturation',
+			// 				'sharpness' => 'Sharpness',
+			// 				'colorsplash' => 'Colorsplash',
+			// 				'draw' => 'Draw',
+			// 				'text' => 'Text',
+			// 				'redeye' => 'Red-Eye',
+			// 				'whiten' => 'Whiten teeth',
+			// 				'blemish' => 'Remove skin blemishes' 
+			// 		) 
+			// ),
+			'logic' => array (
+					'type' => 'checkbox',
+					'title' => __ ( 'Enable Conditions', "ppom" ),
+					'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
+			),
+			'conditions' => array (
+					'type' => 'html-conditions',
+					'title' => __ ( 'Conditions', "ppom" ),
+					'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
+			),
+		);
 	}
 	
 	

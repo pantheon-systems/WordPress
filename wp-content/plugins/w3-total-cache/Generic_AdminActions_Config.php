@@ -160,13 +160,16 @@ class Generic_AdminActions_Config {
 		$support = Util_Request::get_string( 'support' );
 		$tweeted = Util_Request::get_boolean( 'tweeted' );
 		$signmeup = Util_Request::get_boolean( 'signmeup' );
-		$track_usage = Util_Request::get_boolean( 'track_usage' );
+		$accept_terms = Util_Request::get_boolean( 'accept_terms' );
 		$this->_config->set( 'common.support', $support );
 		$this->_config->set( 'common.tweeted', $tweeted );
-		if ( $track_usage )
+
+		$state_master = Dispatcher::config_state_master();
+		if ( $accept_terms ) {
 			$this->_config->set( 'common.track_usage', true );
-		else
-			$this->_config->set( 'common.track_usage', false );
+			$state_master->set( 'license.community_terms', 'accept' );
+		}
+		$state_master->save();
 
 		if ( $signmeup ) {
 			if ( Util_Environment::is_w3tc_pro( $this->_config ) )

@@ -184,7 +184,9 @@ class Cache_Base {
 	 * @return string
 	 */
 	protected function _get_key_version_key( $group = '' ) {
-		return sprintf( 'w3tc_%d_%s_%s_%d_key_version', $this->_blog_id, $this->_module, $group, $this->_instance_id );
+		return sprintf( 'w3tc_%d_%d_%s_%s_key_version',
+			$this->_instance_id, $this->_blog_id,
+			$this->_module, $group );
 	}
 
 	/**
@@ -194,7 +196,9 @@ class Cache_Base {
 	 * @return string
 	 */
 	public function get_item_key( $name ) {
-		$key = sprintf( 'w3tc_%s_%d_%s_%s', $this->_host, $this->_blog_id, $this->_module, $name );
+		$key = sprintf( 'w3tc_%d_%s_%d_%s_%s',
+			$this->_instance_id, $this->_host, $this->_blog_id,
+			$this->_module, $name );
 		return $key;
 	}
 

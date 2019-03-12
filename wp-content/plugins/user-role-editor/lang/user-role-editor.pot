@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: User Role Editor 4.19.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-24 10:33+0700\n"
+"POT-Creation-Date: 2018-11-12 09:17+0700\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vladimir Garagulya <vladimir@shinephp.com>\n"
 "Language-Team: https://www.role-editor.com <support@role-editor.com>\n"
@@ -88,34 +88,38 @@ msgstr ""
 msgid "Error: this capability is used internally by WordPress"
 msgstr ""
 
-#: ../includes/classes/capability.php:72 ../includes/classes/capability.php:179
+#: ../includes/classes/capability.php:54
+msgid "Error: this word is used by WordPress as a role ID"
+msgstr ""
+
+#: ../includes/classes/capability.php:79 ../includes/classes/capability.php:190
 #: ../includes/classes/lib.php:1161 ../includes/classes/lib.php:1405
 #: ../includes/classes/lib.php:1520 ../includes/classes/lib.php:1567
 #: ../includes/classes/user-role-editor.php:641
 msgid "Insufficient permissions to work with User Role Editor"
 msgstr ""
 
-#: ../includes/classes/capability.php:94
+#: ../includes/classes/capability.php:101
 #, php-format
 msgid "Capability %s was added successfully"
 msgstr ""
 
-#: ../includes/classes/capability.php:96
+#: ../includes/classes/capability.php:103
 #, php-format
 msgid "Capability %s exists already"
 msgstr ""
 
-#: ../includes/classes/capability.php:186
-#: ../includes/classes/capability.php:191
+#: ../includes/classes/capability.php:197
+#: ../includes/classes/capability.php:202
 msgid "There are no capabilities available for deletion!"
 msgstr ""
 
-#: ../includes/classes/capability.php:197
+#: ../includes/classes/capability.php:208
 #, php-format
 msgid "Capability %s was removed successfully"
 msgstr ""
 
-#: ../includes/classes/capability.php:200
+#: ../includes/classes/capability.php:211
 msgid "capabilities were removed successfully"
 msgstr ""
 

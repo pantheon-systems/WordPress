@@ -19,9 +19,16 @@ class WCML_Install{
                     $woocommerce_wpml->settings['wc_admin_options_saved'] = 1;
                 }
 
-                if ( ! isset( $woocommerce_wpml->settings['trnsl_interface'] ) ) {
-                    $woocommerce_wpml->settings['trnsl_interface'] = 1;
+                if( $woocommerce_wpml->is_wpml_prior_4_2() ){
+	                if ( ! isset( $woocommerce_wpml->settings['trnsl_interface'] ) ) {
+		                $woocommerce_wpml->settings['trnsl_interface'] = 1;
+	                }
+                }else{
+                	global $iclTranslationManagement;
+	                $iclTranslationManagement->settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ][ 'product' ] = false;
+	                $iclTranslationManagement->save_settings();
                 }
+
 
                 if ( ! isset( $woocommerce_wpml->settings['products_sync_date'] ) ) {
                     $woocommerce_wpml->settings['products_sync_date'] = 1;

@@ -63,11 +63,11 @@ var W3tc_Lightbox = {
 			if (typeof ga != 'undefined') {
 				var w3tc_action = this.options.url.match(/w3tc_action=([^&]+)/);
 				if (w3tc_action && w3tc_action[1])
-					ga('send', 'pageview', 'overlays/' + w3tc_action[1]);
+					w3tc_ga('send', 'pageview', 'overlays/' + w3tc_action[1]);
 				else {
 					var w3tc_action = this.options.url.match(/&(w3tc_[^&]+)&/);
 					if (w3tc_action && w3tc_action[1])
-						ga('send', 'pageview', 'overlays/' + w3tc_action[1]);
+						w3tc_ga('send', 'pageview', 'overlays/' + w3tc_action[1]);
 				}
 			}
 		}

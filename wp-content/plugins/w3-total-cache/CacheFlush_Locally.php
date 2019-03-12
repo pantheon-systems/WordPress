@@ -103,13 +103,18 @@ class CacheFlush_Locally {
 	/**
 	 * Purge CDN mirror cache
 	 */
-	function cdn_purge_all() {
-		do_action( 'w3tc_cdn_purge_all' );
-		$cdn_core = Dispatcher::component( 'Cdn_Core' );
-		$cdn = $cdn_core->get_cdn();
-		$results = array();
-		$v = $cdn->purge_all( $results );
-		do_action( 'w3tc_cdn_purge_all_after' );
+	function cdn_purge_all( $extras = array() ) {
+		$do_flush = apply_filters( 'w3tc_preflush_cdn_all', true, $extras );
+
+		$v = false;
+		if ( $do_flush ) {
+			do_action( 'w3tc_cdn_purge_all' );
+			$cdn_core = Dispatcher::component( 'Cdn_Core' );
+			$cdn = $cdn_core->get_cdn();
+			$results = array();
+			$v = $cdn->purge_all( $results );
+			do_action( 'w3tc_cdn_purge_all_after' );
+		}
 
 		return $v;
 	}
@@ -159,7 +164,7 @@ class CacheFlush_Locally {
 	function flush_post( $post_id, $extras = null ) {
 		$do_flush = apply_filters( 'w3tc_preflush_post', true, $extras );
 		if ( $do_flush )
-			do_action( 'w3tc_flush_post', $post_id );
+			do_action( 'w3tc_flush_post', $post_id, $extras );
 	}
 
 	/**
@@ -219,7 +224,7 @@ class CacheFlush_Locally {
 	function flush_url( $url, $extras = null ) {
 		$do_flush = apply_filters( 'w3tc_preflush_url', true, $extras );
 		if ( $do_flush )
-			do_action( 'w3tc_flush_url', $url );
+			do_action( 'w3tc_flush_url', $url, $extras );
 	}
 
 	/**

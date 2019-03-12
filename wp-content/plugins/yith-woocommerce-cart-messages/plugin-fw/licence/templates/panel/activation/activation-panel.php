@@ -22,15 +22,19 @@ $debug                         = isset( $_REQUEST[ 'yith-license-debug' ] ) ? $_
 
 <div class="yit-container product-licence-activation">
     <h2><?php _e( 'YITH License Activation', 'yith-plugin-fw' ) ?></h2>
-
+	<?php if ( !empty( $activated_products ) ) : ?>
     <div class="licence-check-section">
+        <h3><?php _e( 'License expiry date', 'yith-plugin-fw' ); ?></h3>
         <form method="post" id="licence-check-update" action="<?php echo admin_url( 'admin-ajax.php' ) ?>">
-            <span class="licence-label" style="display: block;"><?php _e( 'Have you updated your licenses? Have you asked for an extension? Update information concerning your products.', 'yith-plugin-fw' ); ?></span>
+            <span class="licence-label" style="display: block;">
+                <?php _e( 'If you have renewed your product license key and the expiry date does not appear up-to-date, please, click on the button <em>Check Expiry Date</em> below and it will update.', 'yith-plugin-fw' ); ?>
+            </span>
             <input type="hidden" name="action" value="yith_update_licence_information-<?php echo $this->get_product_type(); ?>"/>
-            <input type="submit" name="submit" value="<?php _e( 'Update license information', 'yith-plugin-fw' ) ?>" class="button-licence licence-check"/>
+            <input type="submit" name="submit" value="<?php _e( 'Check expiry date', 'yith-plugin-fw' ) ?>" class="button-licence licence-check"/>
             <div class="spinner"></div>
         </form>
     </div>
+    <?php endif; ?>
 
     <div id="yith-licence-notice" class="<?php echo $notice_class ?>">
         <p class="yith-licence-notice-message"><?php echo $notice ?></p>
@@ -43,6 +47,7 @@ $debug                         = isset( $_REQUEST[ 'yith-license-debug' ] ) ? $_
             <?php echo _n( 'Product to activate', 'Products to activate', $to_activate_check, 'yith-plugin-fw' ) ?>
             <span class="spinner"></span>
         </h3>
+        <p id="yith-licence-issue-how-to"><?php printf( '%s <a href="%s" target="_blank">%s</a>.', __( 'Are you having issues with the license activation?', 'yith-plugin-fw' ), '//support.yithemes.com/hc/en-us/articles/360012568594-License-activation-issues', __( 'Read this article', '[Part of]: Are you having issues with the license activation? Read this article', 'yith-plugin-fw' ) )?></p>
         <div class="to-active-wrapper">
             <?php foreach ( $to_active_products as $init => $info ) : ?>
                 <form class="to-active-form" method="post" id="<?php echo $info[ 'product_id' ] ?>" action="<?php echo admin_url( 'admin-ajax.php' ) ?>">
@@ -56,7 +61,7 @@ $debug                         = isset( $_REQUEST[ 'yith-license-debug' ] ) ? $_
                                 <?php echo $this->display_product_name( $info[ 'Name' ] ) ?>
                             </td>
                             <td>
-                                <input type="email" name="email" placeholder="Your email on yithemes.com" value="" class="user-email"/>
+                                <input type="text" name="email" placeholder="Your email on yithemes.com" value="" class="user-email"/>
                             </td>
                             <td>
                                 <input type="text" name="licence_key" placeholder="License Key" value="" class="licence-key"/>
@@ -102,7 +107,7 @@ $debug                         = isset( $_REQUEST[ 'yith-license-debug' ] ) ? $_
                     <?php endif; ?>
                 <?php endif; ?>
 
-                <th><?php _e( 'License Actions', 'yith-plugin-fw' ) ?></th>
+                <th id="yith-licence-actions"><span class="dashicons dashicons-admin-generic"></span></th>
             </tr>
             </thead>
             <tbody>

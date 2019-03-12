@@ -11,7 +11,7 @@ if ( isset( $details['error_message'] ) )
 ?>
     <div class="metabox-holder">
         <?php Util_Ui::postbox_header(
-	__( 'Your CloudFront Account credentials', 'w3-total-cache' ) ); ?>
+	__( 'Your <acronym title="Amazon Web Services">AWS</acronym> CloudFront Account Credentials', 'w3-total-cache' ) ); ?>
         <table class="form-table">
             <tr>
                 <td>Access Key:</td>

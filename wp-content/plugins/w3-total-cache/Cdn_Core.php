@@ -266,7 +266,7 @@ class Cdn_Core {
 
 		$return = $cdn->purge( $files, $results );
 
-		if ( !$return && $queue_failed ) {
+		if ( !$return ) {
 			foreach ( $results as $result ) {
 				if ( $result['result'] != W3TC_CDN_RESULT_OK ) {
 					$this->queue_add( $result['local_path'], $result['remote_path'], W3TC_CDN_COMMAND_PURGE, $result['error'] );
@@ -584,6 +584,24 @@ class Cdn_Core {
 				);
 				break;
 
+				case 'stackpath2':
+					$state = Dispatcher::config_state();
+
+					$engine_config = array(
+						'client_id' => $c->get_string( 'cdn.stackpath2.client_id' ),
+						'client_secret' => $c->get_string( 'cdn.stackpath2.client_secret' ),
+						'stack_id' => $c->get_string( 'cdn.stackpath2.stack_id' ),
+						'site_root_domain' => $c->get_string( 'cdn.stackpath2.site_root_domain' ),
+						'domain' => $c->get_array( 'cdn.stackpath2.domain' ),
+						'ssl' => $c->get_string( 'cdn.stackpath2.ssl' ),
+						'access_token' => $state->get_string( 'cdn.stackpath2.access_token' ),
+						'on_new_access_token' => array(
+							$this,
+							'on_stackpath2_new_access_token'
+						)
+					);
+					break;
+
 			}
 
 			$engine_config = array_merge( $engine_config, array(
@@ -628,6 +646,12 @@ class Cdn_Core {
 	public function on_rackspace_cf_new_access_state( $access_state ) {
 		$state = Dispatcher::config_state();
 		$state->set( 'cdn.rackspace_cf.access_state', $access_state );
+		$state->save();
+	}
+
+	public function on_stackpath2_new_access_token( $access_token ) {
+		$state = Dispatcher::config_state();
+		$state->set( 'cdn.stackpath2.access_token', $access_token );
 		$state->save();
 	}
 

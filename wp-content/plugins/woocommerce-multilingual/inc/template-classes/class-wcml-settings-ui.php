@@ -27,24 +27,6 @@ class WCML_Settings_UI extends WPML_Templates_Factory {
             'form' => array(
                 'action' => $_SERVER['REQUEST_URI'],
 
-                'translation_interface' => array(
-                    'heading'   => __('Product Translation Interface','woocommerce-multilingual'),
-                    'tip'       => __( 'The recommended way is using the WPML Translation Editor. It is streamlined for making the translation process much easier while also providing a much better integration with various WooCommerce extensions.',
-                        'woocommerce-multilingual' ),
-                    'wcml'      => array(
-                        'label' => __('WPML Translation Editor', 'woocommerce-multilingual'),
-
-                    ),
-                    'native'    => array(
-                        'label' => __('Native WooCommerce product editing screen' , 'woocommerce-multilingual'),
-
-                    ),
-                    'controls_value' => $this->woocommerce_wpml->settings['trnsl_interface'],
-                    'pb_warning' => __("If you are using a page builder to design WooCommerce products, you should only use WPML's Translation Editor.", 'woocommerce-multilingual'),
-                    'pb_warning_ok_button' => __('OK (translate with the WordPress editor)', 'woocommerce-multilingual'),
-                    'pb_warning_cancel_button' => __('Cancel (stay with the Translation Editor)', 'woocommerce-multilingual'),
-                ),
-
                 'synchronization' => array(
                     'heading'   => __('Products Synchronization', 'woocommerce-multilingual'),
                     'tip'       => __( 'Configure specific product properties that should be synced to translations.', 'woocommerce-multilingual' ),
@@ -109,6 +91,26 @@ class WCML_Settings_UI extends WPML_Templates_Factory {
                 'label' => __( 'Troubleshooting', 'woocommerce-multilingual' )
             )
         );
+
+	    if( $this->woocommerce_wpml->is_wpml_prior_4_2() ){
+	        $model['form']['translation_interface'] = array(
+			    'heading'   => __('Product Translation Interface','woocommerce-multilingual'),
+			    'tip'       => __( 'The recommended way is using the WPML Translation Editor. It is streamlined for making the translation process much easier while also providing a much better integration with various WooCommerce extensions.',
+				    'woocommerce-multilingual' ),
+			    'wcml'      => array(
+				    'label' => __('WPML Translation Editor', 'woocommerce-multilingual'),
+
+			    ),
+			    'native'    => array(
+				    'label' => __('Native WooCommerce product editing screen' , 'woocommerce-multilingual'),
+
+			    ),
+			    'controls_value' => $this->woocommerce_wpml->settings['trnsl_interface'],
+			    'pb_warning' => __("If you are using a page builder to design WooCommerce products, you should only use WPML's Translation Editor.", 'woocommerce-multilingual'),
+			    'pb_warning_ok_button' => __('OK (translate with the WordPress editor)', 'woocommerce-multilingual'),
+			    'pb_warning_cancel_button' => __('Cancel (stay with the Translation Editor)', 'woocommerce-multilingual'),
+		    );
+	    }
 
         return $model;
 

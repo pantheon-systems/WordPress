@@ -38,7 +38,7 @@ if ( !defined( 'W3TC' ) )
 	</td>
 </tr>
 <tr>
-	<th><label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> host (CNAME target):', 'w3-total-cache' ); ?></label></th>
+	<th><label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> host (<acronym title="Canonical Name">CNAME</acronym> target):', 'w3-total-cache' ); ?></label></th>
 	<td class="w3tc_config_value_text">
 		http: <?php echo $cdn_host_http ?><br />
 		https: <?php echo $cdn_host_https ?>

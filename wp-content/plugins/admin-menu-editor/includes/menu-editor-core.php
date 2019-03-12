@@ -1,24 +1,5 @@
 <?php
 
-//Can't have two different versions of the plugin active at the same time. It would be incredibly buggy.
-if (class_exists('WPMenuEditor')){
-	trigger_error(
-		'Another version of Admin Menu Editor is already active. Please deactivate it before activating this one.', 
-		E_USER_ERROR
-	);
-}
-
-$thisDirectory = dirname(__FILE__);
-require $thisDirectory . '/shadow_plugin_framework.php';
-require $thisDirectory . '/role-utils.php';
-require $thisDirectory . '/ame-utils.php';
-require $thisDirectory . '/menu-item.php';
-require $thisDirectory . '/menu.php';
-require $thisDirectory . '/auto-versioning.php';
-require $thisDirectory . '/../ajax-wrapper/AjaxWrapper.php';
-require $thisDirectory . '/module.php';
-require $thisDirectory . '/persistent-module.php';
-
 class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	const WPML_CONTEXT = 'admin-menu-editor menu texts';
 
@@ -116,6 +97,11 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	private $current_tab = '';
 
 	/**
+	 * @var ameModule[] List of modules that were loaded for the current request.
+	 */
+	private $loaded_modules = array();
+
+	/**
 	 * @var array List of capabilities that are used in the default admin menu. Used to detect meta capabilities.
 	 */
 	private $caps_used_in_menu = array();
@@ -198,7 +184,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		self::$admin_heading_tag = version_compare($GLOBALS['wp_version'], '4.3', '<') ? 'h2' : 'h1';
 
 		$this->settings_link = (is_network_admin() ? 'settings.php' : 'options-general.php') . '?page=menu_editor';
-		
+
 		$this->magic_hooks = true;
 		//Run our hooks last (almost). Priority is less than PHP_INT_MAX mostly for defensive programming purposes.
 		//Old PHP versions have known bugs related to large array keys, and WP might have undiscovered edge cases.
@@ -255,7 +241,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			'admin.php?page=WPCW_showPage_UserProgess'             => true,
 			'admin.php?page=WPCW_showPage_UserProgess_quizAnswers' => true,
 		);
-		
+
 		//AJAXify screen options
 		add_action('wp_ajax_ws_ame_save_screen_options', array($this,'ajax_save_screen_options'));
 
@@ -320,7 +306,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		add_action('admin_menu_editor-display_footer', array($this, 'display_settings_page_footer'));
 
 	}
-	
+
 	function init_finish() {
 		parent::init_finish();
 		$should_save_options = false;
@@ -375,7 +361,8 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			/** @noinspection PhpIncludeInspection */
 			include ($module['path']);
 			if ( !empty($module['className']) ) {
-				new $module['className']($this);
+				$instance = new $module['className']($this);
+				$this->loaded_modules[] = $instance;
 			}
 		}
 
@@ -390,9 +377,16 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$this->tabs['settings'] = 'Settings';
 	}
 
+	/**
+	 * @return ameModule[]
+	 */
+	public function get_loaded_modules() {
+		return $this->loaded_modules;
+	}
+
   /**
    * Import settings from a different version of the plugin.
-   * 
+   *
    * @return bool True if settings were imported successfully, False otherwise
    */
 	function import_settings(){
@@ -431,9 +425,9 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		if ( $reset_requested && $this->current_user_can_edit_menu() ){
 			$this->set_custom_menu(null);
 		}
-		
+
 		//The menu editor is only visible to users with the manage_options privilege.
-		//Or, if the plugin is installed in mu-plugins, only to the site administrator(s). 
+		//Or, if the plugin is installed in mu-plugins, only to the site administrator(s).
 		if ( $this->current_user_can_edit_menu() ){
 			$this->log_security_note('Current user can edit the admin menu.');
 
@@ -450,9 +444,9 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			$page = add_submenu_page(
 				$parent_slug,
 				apply_filters('admin_menu_editor-self_page_title', 'Menu Editor') . $tab_title,
-				apply_filters('admin_menu_editor-self_menu_title', 'Menu Editor'), 
+				apply_filters('admin_menu_editor-self_menu_title', 'Menu Editor'),
 				apply_filters('admin_menu_editor-capability', 'manage_options'),
-				'menu_editor', 
+				'menu_editor',
 				array($this, 'page_menu_editor')
 			);
 			//Output our JS & CSS on that page only
@@ -1216,6 +1210,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	 *
 	 * @param array|null $custom_menu
 	 * @param string|null $config_id Supported values: 'network-admin', 'global' or 'site'
+	 * @throws InvalidMenuException
 	 */
 	function set_custom_menu($custom_menu, $config_id = null) {
 		if ( $config_id === null ) {
@@ -1343,7 +1338,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
 	/**
 	 * Determine if the current user may use the menu editor.
-	 * 
+	 *
 	 * @return bool
 	 */
 	public function current_user_can_edit_menu(){
@@ -1393,15 +1388,15 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			$this->save_options();
 		}
 	}
-	
+
 	/**
 	 * Apply the custom page title, if any.
 	 *
 	 * This is a callback for the "admin_title" filter. It will change the browser window/tab
 	 * title (i.e. <title>), but not the title displayed on the admin page itself.
-	 * 
+	 *
 	 * @param string $admin_title The current admin title (full).
-	 * @param string $title The current page title. 
+	 * @param string $title The current page title.
 	 * @return string New admin title.
 	 */
 	function hook_admin_title($admin_title, $title){
@@ -1745,7 +1740,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
   /**
    * Generate WP-compatible $menu and $submenu arrays from a custom menu tree.
-   * 
+   *
    * Side-effects: This function executes several filters that may modify global state.
    * Specifically, IFrame-handling callbacks in 'extras.php' will add add new hooks
    * and other menu-related structures.
@@ -1764,7 +1759,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$new_menu = array();
 		$new_submenu = array();
 		$this->title_lookups = array();
-		
+
 		//Prepare the top menu
 		$first_nonseparator_found = false;
 		foreach ($tree as $topmenu){
@@ -1782,7 +1777,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 			if ( empty($topmenu['separator']) ) {
 				$this->title_lookups[$topmenu['file']] = !empty($topmenu['page_title']) ? $topmenu['page_title'] : $topmenu['menu_title'];
 			}
-				
+
 			//Prepare the submenu of this menu
 			$new_items = array();
 			if( !empty($topmenu['items']) ){
@@ -2199,7 +2194,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 		$item['access_level'] = $capability;
 		return $item;
 	}
-	
+
   /**
    * Output the menu editor page
    *
@@ -2865,15 +2860,15 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	/**
 	 * Create a virtual 'super_admin' capability that only super admins have.
 	 * This function accomplishes that by by filtering 'user_has_cap' calls.
-	 * 
+	 *
 	 * @param array $allcaps All capabilities belonging to the current user, cap => true/false.
 	 * @param array $required_caps The required capabilities.
 	 * @param array $args The capability passed to current_user_can, the current user's ID, and other args.
 	 * @return array Filtered version of $allcaps
 	 */
 	function hook_user_has_cap($allcaps, /** @noinspection PhpUnusedParameterInspection */ $required_caps, $args){
-		//Be careful not to overwrite a super_admin cap added by other plugins 
-		//For example, Advanced Access Manager also adds this capability. 
+		//Be careful not to overwrite a super_admin cap added by other plugins
+		//For example, Advanced Access Manager also adds this capability.
 		if ( is_array($allcaps) && !isset($allcaps['super_admin']) ){
 			$user_id = intval($args[1]);
 			if ( $user_id != 0 ) {
@@ -2885,19 +2880,19 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
 	/**
 	 * AJAX callback for saving screen options (whether to show or to hide advanced menu options).
-	 * 
-	 * Handles the 'ws_ame_save_screen_options' action. The new option value 
+	 *
+	 * Handles the 'ws_ame_save_screen_options' action. The new option value
 	 * is read from $_POST['hide_advanced_settings'].
-	 * 
+	 *
 	 * @return void
 	 */
 	function ajax_save_screen_options(){
 		if (!$this->current_user_can_edit_menu() || !check_ajax_referer('ws_ame_save_screen_options', false, false)){
 			die( $this->json_encode( array(
-				'error' => "You're not allowed to do that!" 
+				'error' => "You're not allowed to do that!"
 			 )));
 		}
-		
+
 		$this->options['hide_advanced_settings'] = !empty($this->post['hide_advanced_settings']);
 		$this->options['show_extra_icons'] = !empty($this->post['show_extra_icons']);
 		$this->save_options();
@@ -3362,7 +3357,7 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 
 		//Only display the notice on the Menu Editor (Pro) page.
 		$display_notice = $display_notice && isset($this->get['page']) && ($this->get['page'] == 'menu_editor');
-		
+
 		//Let the user override this completely (useful for client sites).
 		if ( $display_notice && file_exists(dirname($this->plugin_file) . '/never-display-surveys.txt') ) {
 			$display_notice = false;
@@ -3494,6 +3489,18 @@ class WPMenuEditor extends MenuEd_ShadowPluginFramework {
 	 */
 	public function set_plugin_option($name, $value) {
 		$this->options[$name] = $value;
+		$this->save_options();
+	}
+
+	/**
+	 * Update multiple plugin configuration values. Saves immediately.
+	 *
+	 * @param array $options An dictionary of key => value pairs.
+	 */
+	public function set_many_plugin_options($options) {
+		foreach($options as $key => $value) {
+			$this->options[$key] = $value;
+		}
 		$this->save_options();
 	}
 
@@ -4236,27 +4243,36 @@ class ameMenuTemplateBuilder {
 		$this->templates = array();
 		$this->blacklist = $blacklist;
 
-		//At this point, the menu might not be sorted yet, especially if other plugins have made changes to it.
-		//We need to know the relative order of menus to insert new items in the right place.
-		ksort($menu, SORT_NUMERIC);
+		if ( !empty($menu) ) {
+			//At this point, the menu might not be sorted yet, especially if other plugins have made changes to it.
+			//We need to know the relative order of menus to insert new items in the right place.
+			ksort($menu, SORT_NUMERIC);
 
-		foreach($menu as $pos => $item){
-			$this->addItem($item, $pos);
+			foreach($menu as $pos => $item){
+				$this->addItem($item, $pos);
+			}
 		}
 
-		foreach($submenu as $parent => $items){
-			//Skip sub-menus attached to non-existent parents. This should theoretically never happen,
-			//but a buggy plugin can cause such a situation.
-			if ( !isset($this->parentNames[$parent]) ) {
-				continue;
-			}
+		if ( !empty($submenu) ) {
+			foreach($submenu as $parent => $items){
+				//Skip NULL's and empty arrays.
+				if ( empty($items) ) {
+					continue;
+				}
 
-			ksort($items, SORT_NUMERIC);
-			$this->previousItemId = '';
-			$this->wasPreviousItemSeparated = false;
+				//Skip sub-menus attached to non-existent parents. This should theoretically never happen,
+				//but a buggy plugin can cause such a situation.
+				if ( !isset($this->parentNames[$parent]) ) {
+					continue;
+				}
 
-			foreach($items as $pos => $item) {
-				$this->addItem($item, $pos, $parent);
+				ksort($items, SORT_NUMERIC);
+				$this->previousItemId = '';
+				$this->wasPreviousItemSeparated = false;
+
+				foreach($items as $pos => $item) {
+					$this->addItem($item, $pos, $parent);
+				}
 			}
 		}
 

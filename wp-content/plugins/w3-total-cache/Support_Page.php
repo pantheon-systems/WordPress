@@ -70,6 +70,10 @@ class Support_Page {
 				if ( $p != 'page' && $p != '_wpnonce' && $p != 'done' )
 					$postprocess_url .= '&' . urlencode( $p ) . '=' . urlencode( $v );
 			}
+
+			// terms accepted as a part of form
+			Licensing_Core::terms_accept();
+
 			include  W3TC_DIR . '/Support_Page_View_DoneContent.php';
 		} else
 			include  W3TC_DIR . '/Support_Page_View_PageContent.php';

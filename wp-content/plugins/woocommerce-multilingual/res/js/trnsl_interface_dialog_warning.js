@@ -23,10 +23,11 @@ jQuery(document).ready(function ($) {
                     closeOnEscape: false,
                     dialogClass: "otgs-ui-dialog",
                     create: function () {
-                        jQuery('#jquery-ui-style-css').attr('disabled', 'disabled');
+
                     },
                     open: function (event, ui) {
                         jQuery(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+						jQuery('#jquery-ui-style-css').attr('disabled', 'disabled');
                     },
                     close: function (event, ui) {
                         jQuery('#jquery-ui-style-css').removeAttr('disabled');

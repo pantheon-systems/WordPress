@@ -271,10 +271,10 @@ function w3tc_security_headers() {
 		{
 			browsercache_security_hsts_directive:
 			{
-				maxage: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using HTTPS. This only affects the site\'s main domain.',
-				maxagepre: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using HTTPS with a request to be included in Chrome\'s HSTS preload list - a list of sites that are hardcoded into Chrome as being HTTPS only. This only affects the site\'s main domain.',
-				maxageinc: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using HTTPS. This affects the site\'s subdomains as well.',
-				maxageincpre: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using HTTPS with a request to be included in Chrome\'s HSTS preload list - a list of sites that are hardcoded into Chrome as being HTTPS only. This affects the site\'s subdomains as well.'
+				maxage: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using <acronym title="HyperText Transfer Protocol over SSL">HTTPS</acronym>. This only affects the site\'s main domain.',
+				maxagepre: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using <acronym title="HyperText Transfer Protocol over SSL">HTTPS</acronym> with a request to be included in Chrome\'s HSTS preload list - a list of sites that are hardcoded into Chrome as being <acronym title="HyperText Transfer Protocol over SSL">https</acronym> only. This only affects the site\'s main domain.',
+				maxageinc: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using <acronym title="HyperText Transfer Protocol over SSL">HTTPS</acronym>. This affects the site\'s subdomains as well.',
+				maxageincpre: 'The time, in seconds (as defined under the "Expires Header Lifetime" box of "Media & Other Files"), that the browser should remember that this site is only to be accessed using <acronym title="HyperText Transfer Protocol over SSL">HTTPS</acronym> with a request to be included in Chrome\'s HSTS preload list - a list of sites that are hardcoded into Chrome as being <acronym title="HyperText Transfer Protocol over SSL">https</acronym> only. This affects the site\'s subdomains as well.'
 			},
 			browsercache_security_xfo_directive:
 			{
@@ -286,7 +286,7 @@ function w3tc_security_headers() {
 			{
 				0: "Disables XSS filtering.",
 				1: "Enables XSS filtering (usually default in browsers). If a cross-site scripting attack is detected, the browser will sanitize the page (remove the unsafe parts).",
-				block: "Enables XSS filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected."
+				block: "Enables <acronym title='Cross-Site Scripting'>XSS</acronym> filtering. Rather than sanitizing the page, the browser will prevent rendering of the page if an attack is detected."
 			},
 			browsercache_security_pkp_extra:
 			{
@@ -295,8 +295,8 @@ function w3tc_security_headers() {
 			},
 			browsercache_security_pkp_report_only:
 			{
-				0: 'This instructs the browser to enforce the HPKP policy.',
-				1: 'This sets up HPKP without enforcement allowing you to use pinning to test its impact without the risk of a failed connection caused by your site being unreachable or HPKP being misconfigured.'
+				0: 'This instructs the browser to enforce the <acronym title="HTTP Public Key Pinning">HPKP</acronym> policy.',
+				1: 'This sets up <acronym title="HTTP Public Key Pinning">HPKP</acronym> without enforcement allowing you to use pinning to test its impact without the risk of a failed connection caused by your site being unreachable or <acronym title="HTTP Public Key Pinning">HPKP</acronym> being misconfigured.'
 			}
 		};
 
@@ -327,8 +327,9 @@ function w3tc_csp_reference() {
 		id: 'w3tc-overlay',
 		close: '',
 		width: 890,
-		height: 660,
-		content: '<div id="w3tc_csp"></div>'
+		height: 460,
+		url: ajaxurl + '?action=w3tc_ajax&_wpnonce=' + w3tc_nonce +
+    		'&w3tc_action=browsercache_quick_reference',
 	});
 	jQuery('div#overlay,.lightbox-content').click(function() {
 		W3tc_Lightbox.close();
@@ -374,7 +375,7 @@ jQuery(function() {
 
 	// pagecache page
 	w3tc_input_enable('#pgcache_reject_roles input[type=checkbox]', jQuery('#pgcache__reject__logged_roles:checked').size());
-	jQuery('#pgcache__reject__logged_roles').live('click', function(){
+	jQuery('#pgcache__reject__logged_roles').on('click', function () {
 		w3tc_input_enable('#pgcache_reject_roles input[type=checkbox]', jQuery('#pgcache__reject__logged_roles:checked').size());
 	});
 
@@ -405,6 +406,9 @@ jQuery(function() {
 	w3tc_toggle2('browsercache_compression',
 		['browsercache__cssjs__compression', 'browsercache__html__compression',
 			'browsercache__other__compression']);
+	w3tc_toggle2('browsercache_brotli',
+		['browsercache__cssjs__brotli', 'browsercache__html__brotli',
+			'browsercache__other__brotli']);
 	w3tc_toggle2('browsercache_replace',
 		['browsercache__cssjs__replace', 'browsercache__other__replace']);
 	w3tc_toggle2('browsercache_querystring',
@@ -434,7 +438,7 @@ jQuery(function() {
 		w3tc_input_enable('.css_enabled', jQuery(this).is(':checked'));
 	});
 
-	jQuery('.js_file_verify,.css_file_verify').live('click', function() {
+	jQuery('.js_file_verify,.css_file_verify').on('click', function () {
 		var file = jQuery(this).parents('li').find(':text').val();
 		if (file == '') {
 			alert('Empty URI');
@@ -449,19 +453,19 @@ jQuery(function() {
 		}
 	});
 
-	jQuery('.js_file_template').live('change', function() {
+	jQuery('.js_file_template').on('change', function () {
 		jQuery(this).parents('li').find(':text').attr('name', 'js_files[' + jQuery('#js_themes').val() + '][' + jQuery(this).val() + '][' + jQuery(this).parents('li').find('.js_file_location').val() + '][]');
 	});
 
-	jQuery('.css_file_template').live('change', function() {
+	jQuery('.css_file_template').on('change', function () {
 		jQuery(this).parents('li').find(':text').attr('name', 'css_files[' + jQuery('#css_themes').val() + '][' + jQuery(this).val() + '][include][]');
 	});
 
-	jQuery('.js_file_location').live('change', function() {
+	jQuery('.js_file_location').on('change', function () {
 		jQuery(this).parents('li').find(':text').attr('name', 'js_files[' + jQuery('#js_themes').val() + '][' + jQuery(this).parents('li').find('.js_file_template').val() + '][' + jQuery(this).val() + '][]');
 	});
 
-	jQuery('.js_file_delete').live('click', function() {
+	jQuery('.js_file_delete').on('click', function () {
 		var parent = jQuery(this).parents('li');
 		if (parent.find('input[type=text]').val() == '' || confirm('Are you sure you want to remove this JS file?')) {
 			parent.remove();
@@ -472,7 +476,7 @@ jQuery(function() {
 		return false;
 	});
 
-	jQuery('.css_file_delete').live('click', function() {
+	jQuery('.css_file_delete').on('click', function () {
 		var parent = jQuery(this).parents('li');
 		if (parent.find('input[type=text]').val() == '' || confirm('Are you sure you want to remove this CSS file?')) {
 			parent.remove();
@@ -595,7 +599,7 @@ jQuery(function() {
 	});
 
 	w3tc_input_enable('#cdn_reject_roles input[type=checkbox]', jQuery('#cdn__reject__logged_roles:checked').size());
-	jQuery('#cdn__reject__logged_roles').live('click', function() {
+	jQuery('#cdn__reject__logged_roles').on('click', function () {
 		w3tc_input_enable('#cdn_reject_roles input[type=checkbox]', jQuery('#cdn__reject__logged_roles:checked').size());
 	});
 
@@ -654,7 +658,10 @@ jQuery(function() {
 					'config[user]': jQuery('#cdn_ftp_user').val(),
 					'config[path]': jQuery('#cdn_ftp_path').val(),
 					'config[pass]': jQuery('#cdn_ftp_pass').val(),
-					'config[pasv]': jQuery('#cdn_ftp_pasv:checked').size()
+					'config[pasv]': jQuery('#cdn_ftp_pasv:checked').size(),
+					'config[default_keys]': jQuery('#cdn__ftp__default_keys:checked').size(),
+					'config[pubkey]': jQuery('#cdn_ftp_pubkey').val(),
+					'config[privkey]': jQuery('#cdn_ftp_privkey').val()
 				});
 
 				if (cnames.length) {
@@ -837,7 +844,7 @@ jQuery(function() {
 		});
 	});
 
-	jQuery('#cdn_create_container').live('click', function() {
+	jQuery('#cdn_create_container').on('click', function () {
 		var me = jQuery(this);
 		var metadata = me.metadata();
 		var cnames = w3tc_cdn_get_cnames();
@@ -1049,7 +1056,7 @@ jQuery(function() {
 		jQuery(this).trigger("size_change");
 	});
 
-	jQuery('.cdn_cname_delete').live('click', function() {
+	jQuery('.cdn_cname_delete').on('click', function () {
 		var p = jQuery(this).parent();
 		if (p.find('input[type=text]').val() == '' || confirm('Are you sure you want to remove this CNAME?')) {
 			p.remove();
@@ -1171,7 +1178,7 @@ jQuery(function() {
 		}
 	});
 
-	jQuery('.mobile_delete').live('click', function() {
+	jQuery('.mobile_delete').on('click', function () {
 		if (confirm('Are you sure want to delete this group?')) {
 			jQuery(this).parents('#mobile_groups li').remove();
 			w3tc_mobile_groups_clear();
@@ -1273,7 +1280,7 @@ jQuery(function() {
 		}
 	});
 
-	jQuery('.referrer_delete').live('click', function() {
+	jQuery('.referrer_delete').on('click', function () {
 		if (confirm('Are you sure want to delete this group?')) {
 			jQuery(this).parents('#referrer_groups li').remove();
 			w3tc_referrer_groups_clear();
@@ -1383,7 +1390,7 @@ jQuery(function() {
 	});
 
 	// check for unsaved changes
-	jQuery('#w3tc input,#w3tc select,#w3tc textarea').live('change', function() {
+	jQuery('#w3tc input,#w3tc select,#w3tc textarea').on('change', function () {
 		var ignore = false;
 		jQuery(this).parents().andSelf().each(function() {
 			if (jQuery(this).hasClass('w3tc-ignore-change') || jQuery(this).hasClass('lightbox')) {
@@ -1452,25 +1459,25 @@ jQuery(function() {
 			var id = jQuery(this).attr('id');
 			var text = jQuery(this).text();
 			if (id)
-				ga('send', 'event', 'w3tc_error', id, text);
+				w3tc_ga('send', 'event', 'w3tc_error', id, text);
 		});
 		jQuery('.w3tc_note').each(function() {
 			var id = jQuery(this).attr('id');
 			var text = jQuery(this).text();
 			if (id)
-				ga('send', 'event', 'w3tc_note', id, text);
+				w3tc_ga('send', 'event', 'w3tc_note', id, text);
 		});
 
 		jQuery('body').on('click', 'a', function() {
 			var url = jQuery(this).attr('href');
 			if (url)
-				ga('send', 'event', 'anchor', 'click', url, {useBeacon: true});
+				w3tc_ga('send', 'event', 'anchor', 'click', url, {useBeacon: true});
 		});
 
 		jQuery('body').on('click', 'input[type="button"]', function() {
 			var name = jQuery(this).attr('name');
 			if (name)
-				ga('send', 'event', 'button', 'click', name, {useBeacon: true});
+				w3tc_ga('send', 'event', 'button', 'click', name, {useBeacon: true});
 		});
 		jQuery('body').on('click', 'input[type="submit"]', function() {
 			var name = jQuery(this).attr('name');
@@ -1479,7 +1486,7 @@ jQuery(function() {
 				id = name;
 
 			if (name)
-				ga('send', 'event', 'button', id, name, {useBeacon: true});
+				w3tc_ga('send', 'event', 'button', id, name, {useBeacon: true});
 		});
 
 		jQuery('body').on('click', 'input[type="checkbox"]', function() {
@@ -1487,7 +1494,7 @@ jQuery(function() {
 			var action = jQuery(this).is(':checked') ? 'check' : 'uncheck';
 
 			if (name)
-				ga('send', 'event', 'checkbox', action, name);
+				w3tc_ga('send', 'event', 'checkbox', action, name);
 		});
 
 		jQuery('body').on('change', 'select', function() {
@@ -1495,8 +1502,7 @@ jQuery(function() {
 			var value = jQuery(this).val();
 
 			if (name && value)
-				ga('send', 'event', 'select', value, name);
+				w3tc_ga('send', 'event', 'select', value, name);
 		});
 	}
 });
-

@@ -29,8 +29,17 @@ class WCML_Translation_Editor{
         add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'lock_variable_fields' ), 10 );
 
         if( is_admin() ){
-            add_filter( 'wpml_use_tm_editor', array( $this, 'force_woocommerce_native_editor'), 100 );
-            add_action( 'wpml_pre_status_icon_display', array( $this, 'force_remove_wpml_translation_editor_links'), 100 );
+
+            add_filter( 'wpml_use_tm_editor', array( $this, 'force_woocommerce_native_editor_for_wcml_products_screen' ), 100 );
+
+            if( $this->woocommerce_wpml->is_wpml_prior_4_2() ) {
+		        add_filter( 'wpml_use_tm_editor', array( $this, 'force_woocommerce_native_editor' ), 100 );
+		        add_action( 'wpml_pre_status_icon_display', array(
+			        $this,
+			        'force_remove_wpml_translation_editor_links'
+		        ), 100 );
+	        }
+
             add_action( 'wp_ajax_wcml_editor_auto_slug', array( $this, 'auto_generate_slug' ) );
 
             add_action('wpml_doc_translation_method_below', array( $this, 'wpml_translation_editor_override_notice') );
@@ -100,7 +109,7 @@ class WCML_Translation_Editor{
         }
 
         $post_type = get_post_type( $post->ID );
-        $checkout_page_id = get_option( 'woocommerce_checkout_page_id' );
+        $checkout_page_id = wc_get_page_id( 'checkout' );
 
 	    if ( $post_type === 'product' || is_page( $checkout_page_id ) ){
             $output = '';
@@ -141,7 +150,7 @@ class WCML_Translation_Editor{
 
     public function add_languages_column( $columns ){
 
-	    if ( array_key_exists( 'icl_translations', $columns ) || ( version_compare( WOOCOMMERCE_VERSION, '2.3', '<' ) ) ){
+	    if ( array_key_exists( 'icl_translations', $columns ) ){
             return $columns;
         }
         $active_languages = $this->sitepress->get_active_languages();
@@ -262,8 +271,6 @@ class WCML_Translation_Editor{
                     if ( !$this->woocommerce_wpml->settings['trnsl_interface'] ) {
                         $use_tm_editor = 0;
                     }
-                } elseif ( $current_screen->id === 'woocommerce_page_wpml-wcml' ) {
-                    $use_tm_editor = 1;
                 }
             }
             
@@ -271,6 +278,24 @@ class WCML_Translation_Editor{
 
         return $use_tm_editor;
     }
+
+    /**
+     * @param $use_tm_editor
+     * @return int
+     */
+    public function force_woocommerce_native_editor_for_wcml_products_screen( $use_tm_editor ){
+
+        if( function_exists('get_current_screen') ) {
+            $current_screen = get_current_screen();
+            if ( $current_screen->id === 'woocommerce_page_wpml-wcml' ) {
+                    $use_tm_editor = 1;
+            }
+        }
+
+        return $use_tm_editor;
+    }
+
+
 
     /**
      * Removes the translation editor links when the WooCommerce native products editor is used in WCML

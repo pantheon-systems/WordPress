@@ -183,6 +183,11 @@ class Cdnfsd_CloudFront_Api {
 		$response = wp_remote_request( $url, $request );
 
 		// handle response
+		if ( is_wp_error( $response ) ) {
+			throw new \Exception( 'Failed to reach CloudFront: ' .
+				implode( '; ', $response->get_error_messages() ) );
+		}
+
 		if ( substr( $response['body'], 0, 5 ) != '<?xml' )
 			throw new \Exception( 'Unexpected non-xml response from service received' );
 

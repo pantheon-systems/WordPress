@@ -1,0 +1,29 @@
+<div class="wcml-option-prices js-wcml-option-prices {% if not custom_prices_on %}hidden{% endif %}">
+    <button type="button" class="button-secondary js-wcml-dialog-trigger" data-dialog="{{ dialog_id }}" data-content="{{ dialog_id }}" data-width="350"  data-class="wcml-dialog-product-addons">
+        <i class="otgs-ico-edit"></i>
+    </button>
+
+    <div class="wcml-dialog hidden" id="{{ dialog_id }}" title="{{ strings.dialog_title }}">
+
+        <p>{{ strings.description | raw }}</p>
+
+        <div class="wpml-form-row default-price">
+            <label>{{ default_currency }}</label>
+            <span><strong>{{ option_details.price }}</strong></span>
+        </div>
+
+        {% for code, currency in active_currencies %}
+            {% set price_key = [ 'price_', code|upper]|join %}
+            <div class="wpml-form-row">
+                <label>{{ code }}</label>
+                <input type="text" name="_product_addon_prices[{{ addon_id }}][{{ price_key }}][{{ option_id }}]" value="{{ option_details[price_key] }}" placeholder="0" class="wc_input_price" />
+            </div>
+        {% endfor %}
+
+        <footer class="wpml-dialog-footer">
+            <input type="button" class="cancel wcml-dialog-close-button wpml-dialog-close-button alignleft" value="{{ strings.cancel }}" />&nbsp;
+            <input type="button" class="button-primary wcml_product_addons_apply_prices alignright" data-dialog="{{ dialog_id }}" value="{{ strings.apply }}"/>
+        </footer>
+
+    </div>
+</div>

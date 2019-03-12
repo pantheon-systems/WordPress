@@ -112,6 +112,7 @@ class BrowserCache_Environment {
 		unset( $other_compression['avi'] );
 		unset( $other_compression['divx'] );
 		unset( $other_compression['gif'] );
+		unset( $other_compression['br'] );
 		unset( $other_compression['gz|gzip'] );
 		unset( $other_compression['jpg|jpeg|jpe'] );
 		unset( $other_compression['mid|midi'] );
@@ -286,6 +287,42 @@ class BrowserCache_Environment {
 			$rules .= "</IfModule>\n";
 		}
 
+		$cssjs_brotli = $config->get_boolean( 'browsercache.cssjs.brotli' );
+		$html_brotli = $config->get_boolean( 'browsercache.html.brotli' );
+		$other_brotli = $config->get_boolean( 'browsercache.other.brotli' );
+
+		if ( $cssjs_brotli || $html_brotli || $other_brotli ) {
+			$brotli_types = array();
+
+			if ( $cssjs_brotli ) {
+				$brotli_types = array_merge( $brotli_types, $cssjs_types );
+			}
+
+			if ( $html_brotli ) {
+				$brotli_types = array_merge( $brotli_types, $html_types );
+			}
+
+			if ( $other_brotli ) {
+				$brotli_types = array_merge( $brotli_types,
+					$other_compression_types );
+			}
+
+			$rules .= "<IfModule mod_brotli.c>\n";
+			if ( version_compare( Util_Environment::get_server_version(), '2.3.7', '>=' ) ) {
+				$rules .= "    <IfModule mod_filter.c>\n";
+			}
+			$rules .= "        AddOutputFilterByType BROTLI_COMPRESS " . implode( ' ', $brotli_types ) . "\n";
+			$rules .= "    <IfModule mod_mime.c>\n";
+			$rules .= "        # BROTLI_COMPRESS by extension\n";
+			$rules .= "        AddOutputFilter BROTLI_COMPRESS js css htm html xml\n";
+			$rules .= "    </IfModule>\n";
+
+			if ( version_compare( Util_Environment::get_server_version(), '2.3.7', '>=' ) ) {
+				$rules .= "    </IfModule>\n";
+			}
+			$rules .= "</IfModule>\n";
+		}
+
 		$cssjs_compression = $config->get_boolean( 'browsercache.cssjs.compression' );
 		$html_compression = $config->get_boolean( 'browsercache.html.compression' );
 		$other_compression = $config->get_boolean( 'browsercache.other.compression' );
@@ -333,35 +370,6 @@ class BrowserCache_Environment {
 		foreach ( $mime_types2 as $type => $extensions )
 			$rules .= $this->_rules_cache_generate_apache_for_type( $config,
 				$extensions, $type );
-
-		$sec = '';
-		$v = $config->get_string( 'browsercache.security.session.cookie_httponly' );
-		if ( !empty( $v ) ) {
-			$sec .= '    php_flag session.cookie_httponly ' .
-				( $v == 'on' ? 'on' : 'off' ) . "\n";
-		}
-		$v = $config->get_string( 'browsercache.security.session.cookie_secure' );
-		if ( !empty( $v ) ) {
-			$sec .= '    php_flag session.cookie_secure ' .
-				( $v == 'on' ? 'on' : 'off' ) . "\n";
-		}
-		$v = $config->get_string( 'browsercache.security.session.use_only_cookies' );
-		if ( !empty( $v ) ) {
-			$sec .= '    php_flag session.use_only_cookies ' .
-				( $v == 'on' ? 'on' : 'off' ) . "\n";
-		}
-
-		if ( !empty( $sec ) ) {
-			$rules .= "<IfModule mod_php5.c>\n";
-			$rules .= $sec;
-			$rules .= "</IfModule>\n";
-			$rules .= "<IfModule mod_php7.c>\n";
-			$rules .= $sec;
-			$rules .= "</IfModule>\n";
-			$rules .= "<IfModule mod_suphp.c>\n";
-			$rules .= $sec;
-			$rules .= "</IfModule>\n";
-		}
 
 		if ( $config->get_boolean( 'browsercache.hsts' ) ||
 			 $config->get_boolean( 'browsercache.security.xfo' )  ||
@@ -623,6 +631,36 @@ class BrowserCache_Environment {
 
 		}
 
+		$cssjs_brotli = $config->get_boolean( 'browsercache.cssjs.brotli' );
+		$html_brotli = $config->get_boolean( 'browsercache.html.brotli' );
+		$other_brotli = $config->get_boolean( 'browsercache.other.brotli' );
+
+		if ( $cssjs_brotli || $html_brotli || $other_brotli ) {
+			$brotli_types = array();
+
+			if ( $cssjs_brotli ) {
+				$brotli_types = array_merge( $brotli_types, $cssjs_types );
+			}
+
+			if ( $html_brotli ) {
+				$brotli_types = array_merge( $brotli_types, $html_types );
+			}
+
+			if ( $other_brotli ) {
+				$brotli_types = array_merge( $brotli_types,
+					$other_compression_types );
+			}
+
+			unset( $brotli_types['html|htm'] );
+
+			// some nginx cant handle values longer than 47 chars
+			unset( $brotli_types['odp'] );
+
+			$rules .= "brotli on;\n";
+			$rules .= "brotli_types " .
+			          implode( ' ', array_unique( $brotli_types ) ) . ";\n";
+		}
+
 		$cssjs_compression = $config->get_boolean( 'browsercache.cssjs.compression' );
 		$html_compression = $config->get_boolean( 'browsercache.html.compression' );
 		$other_compression = $config->get_boolean( 'browsercache.other.compression' );
@@ -668,28 +706,11 @@ class BrowserCache_Environment {
 			}
 		}
 
-		foreach ( $mime_types as $type => $extensions )
-			$this->_rules_cache_generate_nginx_for_type( $config, $rules,
-				$extensions, $type );
-
-		$sec = '';
-		$v = $config->get_string( 'browsercache.security.session.cookie_httponly' );
-		if ( !empty( $v ) ) {
-			$sec .= 'session.cookie_httponly=' .
-				( $v == 'on' ? "on" : "off" ) . "\n";
-		}
-		$v = $config->get_string( 'browsercache.security.session.cookie_secure' );
-		if ( !empty( $v ) ) {
-			$sec .= 'session.cookie_secure=' .
-				( $v == 'on' ? "on" : "off" ) . "\n";
-		}
-		$v = $config->get_string( 'browsercache.security.session.use_only_cookies' );
-		if ( !empty( $v ) ) {
-			$sec .= 'session.use_only_cookies=' .
-				( $v == 'on' ? "on" : "off" ) . "\n";
-		}
-		if ( !empty( $sec ) ) {
-			$rules .= "fastcgi_param PHP_FLAG \"$sec\";";
+		foreach ( $mime_types as $type => $extensions ) {
+			if ( $type != 'other_compression' ) {
+				$this->_rules_cache_generate_nginx_for_type( $config, $rules,
+					$extensions, $type );
+			}
 		}
 
 		if ( $config->get_boolean( 'browsercache.hsts' ) ||
@@ -842,7 +863,12 @@ class BrowserCache_Environment {
 
 				case 'cache_public_maxage':
 					$add_header_rules .= "    add_header Pragma \"public\";\n";
-					$add_header_rules .= "    add_header Cache-Control \"max-age=" . $lifetime . ", public\";\n";
+
+					if ( $expires ) {
+						$add_header_rules .= "    add_header Cache-Control \"public\";\n";
+					} else {
+						$add_header_rules .= "    add_header Cache-Control \"max-age=" . $lifetime . ", public\";\n";
+					}
 					break;
 
 				case 'cache_validation':
@@ -857,7 +883,12 @@ class BrowserCache_Environment {
 
 				case 'cache_maxage':
 					$add_header_rules .= "    add_header Pragma \"public\";\n";
-					$add_header_rules .= "    add_header Cache-Control \"max-age=" . $lifetime . ", public, must-revalidate, proxy-revalidate\";\n";
+
+					if ( $expires ) {
+						$add_header_rules .= "    add_header Cache-Control \"public, must-revalidate, proxy-revalidate\";\n";
+					} else {
+						$add_header_rules .= "    add_header Cache-Control \"max-age=" . $lifetime . ", public, must-revalidate, proxy-revalidate\";\n";
+					}
 					break;
 
 				case 'no_cache':

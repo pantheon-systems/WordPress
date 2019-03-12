@@ -1,14 +1,14 @@
 <?php
 /*
    Plugin Name: Authorize.net Payment Gateway For WooCommerce
-   Description: Extends WooCommerce to Process Payments with Authorize.net gateway. GDPR compatible.
-   Version: 4.3
+   Description: Extends WooCommerce to Process Payments with Authorize.net gateway. HMAC-SHA512 Compatible version.
+   Version: 5.0
    Plugin URI: http://www.indatos.com?source=woocomautho
    Author: Ishan Verma 
    Author URI: https://twitter.com/justishan
    License: Under GPL2
    WC requires at least: 3.0.0
-   WC tested up to: 3.4.5
+   WC tested up to: 3.5.3
 */
 
 add_action('plugins_loaded', 'woocommerce_tech_autho_init', 0);
@@ -44,7 +44,7 @@ function woocommerce_tech_autho_init() {
          $this->mode             = $this->settings['working_mode'];
          $this->transaction_mode = $this->settings['transaction_mode'];
          $this->transaction_key  = $this->settings['transaction_key'];
-         $this->hash_key         = $this->settings['hash_key'];
+         $this->signature_key    = $this->settings['signature_key'];
          $this->success_message  = $this->settings['success_message'];
          $this->failed_message   = $this->settings['failed_message'];
          $this->liveurl          = 'https://secure2.authorize.net/gateway/transact.dll';
@@ -111,10 +111,11 @@ function woocommerce_tech_autho_init() {
                   'title'        => __('Transaction Key', 'tech'),
                   'type'         => 'password',
                   'description'  =>  __('API Transaction Key', 'tech')),
-            'hash_key' => array(
-                  'title'        => __('MD5 Hash Key', 'tech'),
+            'signature_key' => array(
+                  'title'        => __('Signature Key', 'tech'),
                   'type'         => 'password',
-                  'description'  =>  __('MD5 Hash Key is required to validate the response from Authorize.net. Refer: <a href="http://www.indatos.com/developer-documentation/md5-hash-security-feature-authorize-net/?ref=auth-sim" target="_blank">MD5 Security Feature</a> for help. Use Max 8 Characters.', 'tech')),
+                  'description'  =>  __('Signature Key is required to validate the response from Authorize.net. 
+                  Paste 128 character key as it is. Refer to generate signature key<a href="https://support.authorize.net/s/article/What-is-a-Signature-Key">https://support.authorize.net/s/article/What-is-a-Signature-Key</a>. NOTE: make sure when you copy and paste signature there is no whitespace before after.', 'tech')),
             'success_message' => array(
                   'title'        => __('Transaction Success Message', 'tech'),
                   'type'         => 'textarea',
@@ -146,7 +147,10 @@ function woocommerce_tech_autho_init() {
       public function admin_options()
       {
          echo '<h3>'.__('Authorize.net Payment Gateway (Basic)', 'tech').'</h3>';
-         echo '<p>'.__('Authorize.net is most popular payment gateway for online payment processing. For any support connect with Tech Support team on <a href="http://www.indatos.com/?ref=plugin-sim">Our Site</a> For GDPR details, contact support.').'</p><p style="background:#6f14f1; color:#fff; padding:20px; font-size:14px;">Limited Period Discount. <a href="https://www.indatos.com/products/authorize-net-woocommerce-plugin-certified-solution/?utm=sim" style="text-decoration:none; color:#fff; font-weight:500; border:1px solid #fff; padding: 5px;"> Download Now! Authorize.net Certified Version <strike> $49.00 </strike> $19.60 </a></p>';
+         echo '<p>'.__('Authorize.net is most popular payment gateway for online payment processing. For any support connect with Tech Support team on <a href="http://www.indatos.com/?ref=plugin-sim">Our Site</a> For GDPR details, contact support.').'</p><p style="background:#6f14f1; color:#fff; padding:20px; font-size:14px;">Limited Period Discount. <a href="https://www.indatos.com/products/authorize-net-woocommerce-plugin-certified-solution/?utm=sim" style="text-decoration:none; color:#fff; font-weight:500; border:1px solid #fff; padding: 5px;"> Download Now! Authorize.net Certified Version <strike> $49.00 </strike> $19.60 </a></p>
+         <p><a href="https://www.indatos.com/wordpress-support/woocommerce-authorize-net-notification-form/">Fill in this to receive priority notification on updates for this plugin(optional).</a></p>
+         <p>Thanks for your patience and support, HMAC-SHA512 update was hell of an update :) <a href="https://www.paypal.me/indatos">You can buy me a beer! Cheers!</a> </p>
+         ';
          echo '<table class="form-table">';
          $this->generate_settings_html();
          echo '</table>';
@@ -202,11 +206,52 @@ function woocommerce_tech_autho_init() {
             $this->msg['class']     = 'error';
             $this->msg['message']   = $this->failed_message;
             $order                  = new WC_Order($_POST['x_invoice_num']);
-            $hash_key               = ($this->hash_key != '') ? $this->hash_key : '';
-            if ( $_POST['x_response_code'] != '' &&  ($_POST['x_MD5_Hash'] ==  strtoupper(md5( $hash_key . $this->login . $_POST['x_trans_id'] .  $_POST['x_amount']))) ){
+            $signatureKey           = ($this->signature_key != '') ? $this->signature_key : '';
+			 
+			 
+			
+		
+			
+            $hashData = implode('^', [
+                         $_POST['x_trans_id'],
+                         $_POST['x_test_request'],
+                         $_POST['x_response_code'],
+                         $_POST['x_auth_code'],
+                         $_POST['x_cvv2_resp_code'],
+                         $_POST['x_cavv_response'],
+                         $_POST['x_avs_code'],
+                         $_POST['x_method'],
+                         $_POST['x_account_number'],
+                         $_POST['x_amount'],
+                         $_POST['x_company'],
+                         $_POST['x_first_name'],
+                         $_POST['x_last_name'],
+                         $_POST['x_address'],
+                         $_POST['x_city'],
+                         $_POST['x_state'],
+                         $_POST['x_zip'],
+                         $_POST['x_country'],
+                         $_POST['x_phone'],
+                         $_POST['x_fax'],
+                         $_POST['x_email'],
+                         $_POST['x_ship_to_company'],
+                         $_POST['x_ship_to_first_name'],
+                         $_POST['x_ship_to_last_name'],
+                         $_POST['x_ship_to_address'],
+                         $_POST['x_ship_to_city'],
+                         $_POST['x_ship_to_state'],
+                         $_POST['x_ship_to_zip'],
+                         $_POST['x_ship_to_country'],
+                         $_POST['x_invoice_num'],
+                     ]);
+			 
+            $digest = strtoupper(HASH_HMAC('sha512',"^".$hashData."^",hex2bin($signatureKey)));
+            
+			 
+            if ( $_POST['x_response_code'] != '' &&  ( strtoupper($_POST['x_SHA2_Hash']) ==  $digest ) ){
                try{                  
                   $amount           = $_POST['x_amount'];
-                  $hash             = $_POST['x_MD5_Hash'];
+                  $hash             = $_POST['x_SHA2_Hash'];
                   $transauthorised  = false;
                      
                   if ( $order->get_status() != 'completed'){
@@ -248,7 +293,7 @@ function woocommerce_tech_autho_init() {
                }
 
             }else{
-               $order->add_order_note('MD5 hash did not matched for this transaction. Please check documentation to set MD5 String. <a href="http://www.indatos.com/developer-documentation/md5-hash-security-feature-authorize-net/?ref=auth-sim">MD5 String Doc.</a>. Or <a href="http://www.indatos.com/wordpress-support/">contact plugin support</a> for help.');
+               $order->add_order_note('SHA hash did not matched for this transaction. Please contact support <a href="http://www.indatos.com/wordpress-support/">contact plugin support</a> for help.');
             }
             $redirect_url = $order->get_checkout_order_received_url();
             $this->web_redirect( $redirect_url); exit;
@@ -279,17 +324,21 @@ function woocommerce_tech_autho_init() {
       {
          global $woocommerce;
          
-         $order      = new WC_Order($order_id);
-         $timeStamp  = time();
-         $order_total = $order->get_total();
-
-         if( phpversion() >= '5.1.2' ) { 
-            $fingerprint = hash_hmac("md5", $this->login . "^" . $order_id . "^" . $timeStamp . "^" . $order->order_total . "^", $this->transaction_key); }
-         else { 
-            $fingerprint = bin2hex(mhash(MHASH_MD5,  $this->login . "^" . $order_id . "^" . $timeStamp . "^" . $order_total . "^", $this->transaction_key)); 
-         }
-          $relay_url = get_site_url().'/wc-api/'.get_class( $this );
+         $order         = new WC_Order($order_id);
+         $timeStamp     = time();
+         $order_total   = $order->get_total();
+         $signatureKey  = ($this->signature_key != '') ? $this->signature_key : '';
          
+      
+         $hash_d        = hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
+                           $this->login,      
+                           $order_id,  
+                           $timeStamp, 
+                           $order_total      
+                           ), hex2bin($signatureKey));
+         
+         
+         $relay_url = get_site_url().'/wc-api/'.get_class( $this );
          $authorize_args = array(
             
             'x_login'                  => $this->login,
@@ -298,7 +347,7 @@ function woocommerce_tech_autho_init() {
             'x_relay_response'         => "TRUE",
             'x_relay_url'              => $relay_url,
             'x_fp_sequence'            => $order_id,
-            'x_fp_hash'                => $fingerprint,
+            'x_fp_hash'                => $hash_d,
             'x_show_form'              => 'PAYMENT_FORM',
             'x_version'                => '3.1',
             'x_fp_timestamp'           => $timeStamp,
@@ -358,7 +407,7 @@ function woocommerce_tech_autho_init() {
                . '<script type="text/javascript">
                   jQuery(function(){
                      jQuery("body").block({
-                           message: "<img src=\"'.$woocommerce->plugin_url().'/assets/images/ajax-loader.gif\" alt=\"Redirecting…\" style=\"float:left; margin-right: 10px;\" />'.__('Thank you for your order. We are now redirecting you to Authorize.net to make payment.', 'tech').'",
+                           message: "<img src=\"'.$woocommerce->plugin_url().'/assets/images/wpspin-2x.gif\" alt=\"Redirecting…\" style=\"float:left; margin-right: 10px;\" />'.__('Thank you for your order. We are now redirecting you to Authorize.net to make payment.', 'tech').'",
                            overlayCSS:
                         {
                            background:       "#ccc",

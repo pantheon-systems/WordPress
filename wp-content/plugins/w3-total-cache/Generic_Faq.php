@@ -5,21 +5,19 @@ class Generic_Faq {
 	static public function sections() {
 		// name => column where to show
 		return array(
-			'General' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-General',
-			'Usage' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Usage',
-			'Compatibility' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Compatibility',
-			'Minification' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Minification',
-			'CDN' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-CDN',
-			'Browser Cache' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Browser-Cache',
-			'Errors / Debugging' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Debugging',
-			'Requirements' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Requirements',
-			'Developers' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Developers',
-			'Extensions' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Extensions',
-			'Installation' => 'https://github.com/Auctollo/w3-total-cache/wiki/FAQ%3A-Installation'
+			'General' => 'https://api.w3-edge.com/v1/faq/general',
+			'Usage' => 'https://api.w3-edge.com/v1/faq/usage',
+			'Compatibility' => 'https://api.w3-edge.com/v1/faq/compatibility',
+			'Minification' => 'https://api.w3-edge.com/v1/faq/minification',
+			'CDN' => 'https://api.w3-edge.com/v1/faq/cdn',
+			'Browser Cache' => 'https://api.w3-edge.com/v1/faq/browser-cache',
+			'Errors / Debugging' => 'https://api.w3-edge.com/v1/faq/errors-debugging',
+			'Requirements' => 'https://api.w3-edge.com/v1/faq/requirements',
+			'Developers' => 'https://api.w3-edge.com/v1/faq/developers',
+			'Extensions' => 'https://api.w3-edge.com/v1/faq/extensions',
+			'Installation' => 'https://api.w3-edge.com/v1/faq/installation'
 		);
 	}
-
-
 
 	/**
 	 * Returns list of questions for section

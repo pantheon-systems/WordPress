@@ -42,7 +42,6 @@ class WCML_Store_Pages{
         if(!is_admin()){
             add_filter('pre_get_posts', array($this, 'shop_page_query'), 9);
             add_filter('icl_ls_languages', array($this, 'translate_ls_shop_url'));
-            add_filter('parse_request', array($this, 'adjust_shop_page'));
         }
         
         add_filter( 'woocommerce_create_page_id', array( $this, 'check_store_page_id'), 10 ,3 );
@@ -283,24 +282,6 @@ class WCML_Store_Pages{
         return $languages;
     }
 
-    function adjust_shop_page($q) {
-
-	    $is_wc_prior_3_3 = $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'WC_VERSION' ), '3.3', '<' );
-
-        if ( $is_wc_prior_3_3 && $this->sitepress->get_default_language() != $this->sitepress->get_current_language() ) {
-            if (!empty($q->query_vars['pagename'])) {
-                $shop_page = get_post( wc_get_page_id('shop') );
-                // we should explode by / for children page
-                $query_var_page = explode('/',$q->query_vars['pagename']);
-                if (isset($shop_page->post_name) && ( ( $shop_page->post_name == $query_var_page[count($query_var_page)-1]) || (  $shop_page->post_name == strtolower($query_var_page[count($query_var_page)-1]) ) ) ) {
-                    unset($q->query_vars['page']);
-                    unset($q->query_vars['pagename']);
-                    $q->query_vars['post_type'] = 'product';
-                }
-            }
-        }
-    }
-
     function create_missing_store_pages_with_redirect(){
         $this->create_missing_store_pages();
 
@@ -343,7 +324,7 @@ class WCML_Store_Pages{
 	            $this->switch_lang( $mis_lang );
 
                 foreach ($check_pages as $page) {
-                    $orig_id = get_option($page);
+                    $orig_id = wc_get_page_id( $page );
                     $trid = $this->sitepress->get_element_trid($orig_id,'post_page');
                     $translations = $this->sitepress->get_element_translations($trid,'post_page',true);
 
@@ -351,16 +332,16 @@ class WCML_Store_Pages{
                         $orig_page = get_post($orig_id);
 
                         switch( $page ){
-                            case 'woocommerce_shop_page_id':
+                            case 'shop':
                                 $page_title = $mis_lang !== 'en'  ?  __( 'Shop', 'woocommerce-multilingual') : 'Shop';
                                 break;
-                            case 'woocommerce_cart_page_id':
+                            case 'cart':
                                 $page_title = $mis_lang !== 'en'  ?  __( 'Cart', 'woocommerce-multilingual') : 'Cart';
                                 break;
-                            case 'woocommerce_checkout_page_id':
+                            case 'checkout':
                                 $page_title = $mis_lang !== 'en'  ?  __( 'Checkout', 'woocommerce-multilingual') : 'Checkout';
                                 break;
-                            case 'woocommerce_myaccount_page_id':
+                            case 'myaccount':
                                 $page_title = $mis_lang !== 'en'  ?  __( 'My Account', 'woocommerce-multilingual') : 'My Account';
                                 break;
                             default:
@@ -381,7 +362,7 @@ class WCML_Store_Pages{
                         $new_page_id = wp_insert_post($args);
 
                         if( isset($translations[$mis_lang]->element_id) && get_post_status($translations[$mis_lang]->element_id) == 'trash' && $mis_lang == $default_language){
-                            update_option($page, $new_page_id);
+                            update_option( 'woocommerce_'.$page.'_page_id', $new_page_id);
                         }                        
                         
                         if( isset($translations[$mis_lang]->element_id) &&  !is_null($translations[$mis_lang]->element_id)){
@@ -399,13 +380,9 @@ class WCML_Store_Pages{
 
     private function switch_lang( $lang_code = false ){
 
-    	$st_prior_2_6 = version_compare( $this->sitepress->get_wp_api()->constant( 'WPML_ST_VERSION' ), '2.6.0', '<' );
+	    $is_mo_loading_disabled = WPML_Theme_Localization_Type::USE_ST_AND_NO_MO_FILES === $this->sitepress->get_setting('theme_localization_type' );
 
-    	if( !$st_prior_2_6 ){
-		    $is_mo_loading_disabled = WPML_Theme_Localization_Type::USE_ST_AND_NO_MO_FILES === $this->sitepress->get_setting('theme_localization_type' );
-	    }
-
-    	if( $st_prior_2_6 || !$is_mo_loading_disabled  ){
+    	if( !$is_mo_loading_disabled  ){
 		    $this->woocommerce_wpml->locale->switch_locale( $lang_code );
 	    }else{
 		    $this->sitepress->switch_lang( $lang_code );
@@ -424,7 +401,7 @@ class WCML_Store_Pages{
         $pages_in_progress = array();
 
         foreach ($check_pages as $page) {
-            $page_id = get_option($page);
+            $page_id = wc_get_page_id( $page );
             $page_obj = get_post($page_id);
                 if(!$page_id || !$page_obj || $page_obj->post_status != 'publish' ){
                     return 'non_exist';
@@ -436,7 +413,7 @@ class WCML_Store_Pages{
         $missing_lang_codes = array();
 
             foreach ($check_pages as $page) {
-                $store_page_id = get_option($page);
+                $store_page_id = wc_get_page_id( $page );
                 $trid = $this->sitepress->get_element_trid($store_page_id,'post_page');
                 $translations = $this->sitepress->get_element_translations($trid,'post_page',true);
                 $pages_in_progress_miss_lang = '';
@@ -488,16 +465,22 @@ class WCML_Store_Pages{
      * Filters WooCommerce checkout link.
      */
     function get_checkout_page_url(){
-        return get_permalink(apply_filters( 'translate_object_id',get_option('woocommerce_checkout_page_id'), 'page', true));
+        return get_permalink(apply_filters( 'translate_object_id', wc_get_page_id( 'checkout' ), 'page', true));
     }
             
     function get_wc_pages(){
-        return apply_filters('wcml_wc_installed_pages', array(
+	    $pages = apply_filters('wcml_wc_installed_pages', array(
             'woocommerce_shop_page_id',
             'woocommerce_cart_page_id',
             'woocommerce_checkout_page_id',
             'woocommerce_myaccount_page_id'
         ));
+
+	    foreach ( $pages as &$page ) {
+		    $page = preg_replace( '/(woocommerce_)(.*)(_page_id)/', "$2", $page );
+	    }
+
+	    return $pages;
     }
 
     function after_set_default_language( $code, $previous_code ){
@@ -507,11 +490,10 @@ class WCML_Store_Pages{
         $pages = $this->get_wc_pages();
 
         foreach( $pages as $page ){
-
-            if( $page_id = get_option($page) ){
+            if( $page_id = wc_get_page_id( $page ) ){
                 $trnsl_id = apply_filters( 'translate_object_id', $page_id, 'page', false, $code );
                 if( !is_null( $trnsl_id ) ){
-                    $wpdb->update( $wpdb->options, array( 'option_value' => $trnsl_id ), array( 'option_name' => $page ) );
+                    $wpdb->update( $wpdb->options, array( 'option_value' => $trnsl_id ), array( 'option_name' => 'woocommerce_'.$page.'_page_id' ) );
                 }
             }
 
@@ -597,7 +579,7 @@ class WCML_Store_Pages{
 		    $pages = $this->get_wc_pages();
 		    $current_page_id = get_the_ID();
 		    foreach( $pages as $page ){
-			    $page_id = get_option( $page );
+			    $page_id = wc_get_page_id( $page );
 			    if( $page_id && $page_id === $current_page_id ){
 				    $is_shop_page = true;
 				    break;

@@ -43,7 +43,7 @@
             var plugin = registered[ init ];
             for ( var headers in plugin ) {
 
-                if ( headers == 'slug' || version_compare( plugin[ headers ].Version, plugin[ headers ].Latest, '>=' ) ) {
+                if ( headers == 'slug' || version_compare( plugin[ headers ].Version, plugin[ headers ].Latest, '=' ) ) {
                     continue;
                 }
 
@@ -60,7 +60,7 @@
 
                 var html = '<tr class="plugin-update-tr">' +
                            '<td colspan="3" class="plugin-update colspanchange">' +
-                           '<div class="update-message">' + localize.strings.new_version.replace( '%plugin_name%', name ) +
+                           '<div class="update-message notice inline notice-warning notice-alt">' + localize.strings.new_version.replace( '%plugin_name%', name ) +
                            '<a class="thickbox open-plugin-details-modal" href="' + localize.details_url[ init ] + '">' + localize.strings.latest.replace( '%latest%', plugin[ headers ].Latest ) + '</a>';
 
                 if ( typeof activated[ init ] == "undefined" ) {
@@ -71,6 +71,10 @@
                 } else {
                     html = html +
                            '. <a href="' + localize.update_url[ init ] + '">' + localize.strings.update_now + '</a>';
+                }
+
+                if( version_compare( plugin[ headers ].Version, plugin[ headers ].Latest, '>' ) ){
+                    html = html + localize.strings.version_issue.replace( '%plugin_name%', name )
                 }
 
                 html = html +

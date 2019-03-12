@@ -62,27 +62,27 @@ class WCML_Multi_Currency_UI extends WPML_Templates_Factory {
         $exchange_rates_ui = new WCML_Exchange_Rates_UI( $this->woocommerce_wpml );
 
         $model = array(
-            'strings' => array(
-                'headers' => array(
-                    'enable_disable'    => __( 'Enable/disable', 'woocommerce-multilingual' ),
-                    'currencies'        => __( 'Currencies', 'woocommerce-multilingual' ),
-                ),
-                'add_currency_button'   => __( 'Add currency', 'woocommerce-multilingual' ),
-                'currencies_table' => array(
-                    'head_currency'     => __('Currency', 'woocommerce-multilingual'),
-                    'head_rate'         => __('Rate', 'woocommerce-multilingual'),
-                    'default'           => __( 'default', 'woocommerce-multilingual' ),
-                    'edit'              => __( 'Edit', 'woocommerce-multilingual' ),
-                    'default_currency'  => __( 'Default currency', 'woocommerce-multilingual' ),
-                    'default_cur_tip'   => __( 'Switch to this currency when switching language in the front-end', 'woocommerce-multilingual' ),
-                    'keep_currency'     => __( 'Keep', 'woocommerce-multilingual' ),
-                    'delete'            => __( 'Delete', 'woocommerce-multilingual' ),
-                    'help_title'        => __( 'Currencies to display for each language', 'woocommerce-multilingual' ),
-                    'enable_for'        => __('Enable %s for %s', 'woocommerce-multilingual'),
-                    'disable_for'       => __('Disable %s for %s', 'woocommerce-multilingual')
-                )
-
-            ),
+	        'strings' => array(
+		        'headers'             => array(
+			        'enable_disable' => __( 'Enable/disable', 'woocommerce-multilingual' ),
+			        'currencies'     => __( 'Currencies', 'woocommerce-multilingual' ),
+		        ),
+		        'add_currency_button' => __( 'Add currency', 'woocommerce-multilingual' ),
+		        'currencies_table'    => array(
+			        'head_currency'    => __( 'Currency', 'woocommerce-multilingual' ),
+			        'head_rate'        => __( 'Rate', 'woocommerce-multilingual' ),
+			        'default'          => __( 'default', 'woocommerce-multilingual' ),
+			        'edit'             => __( 'Edit', 'woocommerce-multilingual' ),
+			        'default_currency' => __( 'Default currency', 'woocommerce-multilingual' ),
+			        'default_cur_tip'  => __( 'Switch to this currency when switching language in the front-end', 'woocommerce-multilingual' ),
+			        'keep_currency'    => __( 'Keep', 'woocommerce-multilingual' ),
+			        'delete'           => __( 'Delete', 'woocommerce-multilingual' ),
+			        'help_title'       => __( 'Currencies to display for each language', 'woocommerce-multilingual' ),
+			        'enable_for'       => __( 'Enable %s for %s', 'woocommerce-multilingual' ),
+			        'disable_for'      => __( 'Disable %s for %s', 'woocommerce-multilingual' )
+		        ),
+		        'settings'            => __( 'Settings', 'woocommerce-multilingual' )
+	        ),
             'currencies'            => $this->currencies,
             'currencies_positions'  => $currencies_positions,
             'wc_currency'           => $this->wc_currency,
@@ -265,11 +265,11 @@ class WCML_Multi_Currency_UI extends WPML_Templates_Factory {
             $args['currency_name'] 		= $args['wc_currencies'][$args['currency_code']];
             $args['currency_symbol'] 	= get_woocommerce_currency_symbol( $args['currency_code'] );
             $args['currency']			= $currency;
-            $args['title'] = sprintf( __( 'Update settings for %s', 'woocommerce-multilingual' ), $args['currency_name'] . ' (' . $args['currency_symbol'] . ')' );
+            $args['title'] = sprintf( __( 'Currency settings for %s', 'woocommerce-multilingual' ), $args['currency_name'] . ' (' . $args['currency_symbol'] . ')' );
 
             $args['current_currency'] = $args['currency_code'];
 
-            new WCML_Custom_Currency_Options($args, $this->woocommerce_wpml);
+            new WCML_Custom_Currency_Options( $args, $this->woocommerce_wpml );
 
         }
 

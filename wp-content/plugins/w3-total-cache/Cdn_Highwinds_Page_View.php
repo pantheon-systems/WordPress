@@ -21,7 +21,7 @@ $hash_code = $config->get_string( 'cdn.highwinds.host.hash_code' );
 
 <?php if ( !empty( $hash_code ) ): ?>
 <tr>
-	<th><label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> host (CNAME target):', 'w3-total-cache' ); ?></label></th>
+	<th><label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> host (<acronym title="Canonical Name">CNAME</acronym> target):', 'w3-total-cache' ); ?></label></th>
 	<td class="w3tc_config_value_text">
 		cds.<?php echo $config->get_string( 'cdn.highwinds.host.hash_code' ) ?>.hwcdn.net
 	</td>
@@ -42,7 +42,7 @@ $hash_code = $config->get_string( 'cdn.highwinds.host.hash_code' );
     <td>
 		<?php $cnames = $config->get_array( 'cdn.highwinds.host.domains' ); include W3TC_INC_DIR . '/options/cdn/common/cnames-readonly.php'; ?>
 		<input class="w3tc_cdn_highwinds_configure_cnames_form button" type="button"
-				value="<?php _e( 'Configure CNAMEs', 'w3-total-cache' ); ?>" />
+				value="<?php _e( 'Configure <acronym title="Canonical Name">CNAME</acronym>s', 'w3-total-cache' ); ?>" />
         <br />
         <span class="description"><?php _e( 'Hostname provided by your <acronym title="Content Delivery Network">CDN</acronym> provider, this value will replace your site\'s hostname in the <acronym title="Hypertext Markup Language">HTML</acronym>.', 'w3-total-cache' ); ?></span>
     </td>

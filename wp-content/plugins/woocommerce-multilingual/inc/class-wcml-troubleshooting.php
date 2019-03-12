@@ -209,40 +209,42 @@ class WCML_Troubleshooting{
 
         $attr = isset($_POST['attr'])?$_POST['attr']:false;
 
-        $terms = get_terms($attr,'hide_empty=0');
-        $i = 0;
-        $languages = $this->sitepress->get_active_languages();
-        foreach($terms as $term){
-            foreach($languages as $language){
-                $tr_id = apply_filters( 'translate_object_id',$term->term_id, $attr, false, $language['code']);
+	    if ( $attr ) {
+		    $terms     = get_terms( $attr, 'hide_empty=0' );
+		    $i         = 0;
+		    $languages = $this->sitepress->get_active_languages();
+		    foreach ( $terms as $term ) {
+			    foreach ( $languages as $language ) {
+				    $tr_id = apply_filters( 'translate_object_id', $term->term_id, $attr, false, $language['code'] );
 
-                if(is_null($tr_id)){
-                    $term_args = array();
-                    // hierarchy - parents
-                    if ( is_taxonomy_hierarchical( $attr ) ) {
-                        // fix hierarchy
-                        if ( $term->parent ) {
-                            $original_parent_translated = apply_filters( 'translate_object_id', $term->parent, $attr, false, $language['code'] );
-                            if ( $original_parent_translated ) {
-                                $term_args[ 'parent' ] = $original_parent_translated;
-                            }
-                        }
-                    }
+				    if ( is_null( $tr_id ) ) {
+					    $term_args = array();
+					    // hierarchy - parents
+					    if ( is_taxonomy_hierarchical( $attr ) ) {
+						    // fix hierarchy
+						    if ( $term->parent ) {
+							    $original_parent_translated = apply_filters( 'translate_object_id', $term->parent, $attr, false, $language['code'] );
+							    if ( $original_parent_translated ) {
+								    $term_args['parent'] = $original_parent_translated;
+							    }
+						    }
+					    }
 
-                    $term_name = $term->name;
-                    $slug = $term->name.'-'.$language['code'];
-                    $slug = WPML_Terms_Translations::term_unique_slug( $slug, $attr, $language['code'] );
-                    $term_args[ 'slug' ] = $slug;
+					    $term_name         = $term->name;
+					    $slug              = $term->name . '-' . $language['code'];
+					    $slug              = WPML_Terms_Translations::term_unique_slug( $slug, $attr, $language['code'] );
+					    $term_args['slug'] = $slug;
 
-                    $new_term = wp_insert_term( $term_name , $attr, $term_args );
-                    if ( $new_term && !is_wp_error( $new_term ) ) {
-                        $tt_id = $this->sitepress->get_element_trid( $term->term_taxonomy_id, 'tax_' . $attr );
-                        $this->sitepress->set_element_language_details( $new_term[ 'term_taxonomy_id' ], 'tax_' . $attr, $tt_id, $language['code'] );
-                    }
-                }
-            }
+					    $new_term = wp_insert_term( $term_name, $attr, $term_args );
+					    if ( $new_term && ! is_wp_error( $new_term ) ) {
+						    $tt_id = $this->sitepress->get_element_trid( $term->term_taxonomy_id, 'tax_' . $attr );
+						    $this->sitepress->set_element_language_details( $new_term['term_taxonomy_id'], 'tax_' . $attr, $tt_id, $language['code'] );
+					    }
+				    }
+			    }
 
-        }
+		    }
+	    }
 
         wp_send_json_success();
     }

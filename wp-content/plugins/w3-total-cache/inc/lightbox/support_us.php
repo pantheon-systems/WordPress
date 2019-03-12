@@ -4,6 +4,8 @@ namespace W3TC;
 if ( !defined( 'W3TC' ) )
 	die();
 
+$state_master = Dispatcher::config_state_master();
+
 ?>
 <div id="w3tc-support-us">
     <div class="w3tc-overlay-logo"></div>
@@ -85,13 +87,15 @@ echo Util_Ui::hidden(
                 <input id="email" name="email" type="text" class="form-control w3tc-size" value="<?php esc_attr_e( $email ) ?>"></label><br />
             <input type="checkbox" name="signmeup" id="signmeup" class="css-checkbox" value="1" checked="checked" /><label for="signmeup" class="css-label"> <?php _e( 'Yes, sign me up.', 'w3-total-cache' ) ?> </label>
             </p>
-            <p>
-            <input type="checkbox" name="track_usage" id="track_usage" class="css-checkbox" value="1"
-                checked="checked" />
-            <label for="track_usage" class="css-label">
-                <?php _e( 'Anonymously track usage to improve product quality.', 'w3-total-cache' ) ?>
-            </label>
-            </p>
+			<?php if ( $state_master->get( 'license.community_terms' ) !=  'accept' ): ?>
+	            <p>
+	            <input type="checkbox" name="accept_terms" id="accept_terms" class="css-checkbox" value="1"
+	                />
+	            <label for="accept_terms" class="css-label">
+	                <?php sprintf( _e( 'Please review the latest <a href="%s" target="blank">terms of use and privacy policy</a>, and accept them.', 'w3-total-cache' ), W3TC_TERMS_URL ) ?>
+	            </label>
+	            </p>
+			<?php endif ?>
     </div>
     <div class="w3tc_overlay_footer">
         <p>

@@ -92,9 +92,9 @@ class CacheFlush {
 	/**
 	 * Purge CDN mirror cache
 	 */
-	function cdn_purge_all() {
+	function cdn_purge_all( $extras = array() ) {
 		if ( $this->_config->get_boolean( 'cdn.enabled' ) )
-			return $this->_executor->cdn_purge_all();
+			return $this->_executor->cdn_purge_all( $extras );
 
 		return false;
 	}

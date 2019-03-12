@@ -10,11 +10,9 @@ class WCML_Exchange_Rates_Currencylayer extends WCML_Exchange_Rate_Service {
 	private $url = 'https://currencylayer.com/';
 	private $api_url = 'http://apilayer.net/api/live?access_key=%s&source=%s&currencies=%s&amount=1';
 
-	protected $api_key = '';
-	protected $requires_key = true;
-
 	public function __construct() {
 		parent::__construct( $this->id, $this->name, $this->api_url, $this->url );
+		$this->requires_key = true;
 	}
 
 	/**

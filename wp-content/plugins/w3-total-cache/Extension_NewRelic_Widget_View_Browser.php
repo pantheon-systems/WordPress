@@ -7,7 +7,7 @@ if ( !defined( 'W3TC' ) )
 ?>
 <?php _e( 'Metrics are not available for browser applications', 'w3-total-cache' )?>
 <p>
-    <a href="<?php echo esc_attr( NEWRELIC_SIGNUP_URL ); ?>" target="_blank">
+    <a href="<?php echo esc_attr( W3TC_NEWRELIC_SIGNUP_URL ); ?>" target="_blank">
         <?php _e( 'Upgrade your New Relic account to enable more metrics.', 'w3-total-cache' )?>
     </a>
 </p>

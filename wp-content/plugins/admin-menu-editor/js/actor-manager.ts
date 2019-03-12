@@ -12,7 +12,17 @@ interface CapabilityMap {
 	[capabilityName: string] : boolean;
 }
 
-abstract class AmeBaseActor {
+interface IAmeActor {
+	getId(): string;
+	getDisplayName(): string;
+}
+
+interface IAmeUser extends IAmeActor {
+	userLogin: string;
+	isSuperAdmin: boolean;
+}
+
+abstract class AmeBaseActor implements IAmeActor {
 	public id: string;
 	public displayName: string = '[Error: No displayName set]';
 	public capabilities: CapabilityMap;
@@ -20,7 +30,7 @@ abstract class AmeBaseActor {
 
 	groupActors: string[] = [];
 
-	constructor(id: string, displayName: string, capabilities: CapabilityMap, metaCapabilities: CapabilityMap = {}) {
+	protected constructor(id: string, displayName: string, capabilities: CapabilityMap, metaCapabilities: CapabilityMap = {}) {
 		this.id = id;
 		this.displayName = displayName;
 		this.capabilities = capabilities;
@@ -68,6 +78,14 @@ abstract class AmeBaseActor {
 	toString(): string {
 		return this.displayName + ' [' + this.id + ']';
 	}
+
+	getId(): string {
+		return this.id;
+	}
+
+	getDisplayName(): string {
+		return this.displayName;
+	}
 }
 
 class AmeRole extends AmeBaseActor {
@@ -100,7 +118,7 @@ interface AmeUserPropertyMap {
 	avatar_html?: string;
 }
 
-class AmeUser extends AmeBaseActor {
+class AmeUser extends AmeBaseActor implements IAmeUser {
 	userLogin: string;
 	userId: number = 0;
 	roles: string[];
@@ -175,7 +193,7 @@ interface AmeCapabilitySuggestion {
 	capability: string;
 }
 
-class AmeActorManager {
+class AmeActorManager implements AmeActorManagerInterface {
 	private static _ = wsAmeLodash;
 
 	private roles: {[roleId: string] : AmeRole} = {};
@@ -183,7 +201,7 @@ class AmeActorManager {
 	private grantedCapabilities: AmeGrantedCapabilityMap = {};
 
 	public readonly isMultisite: boolean = false;
-	private superAdmin: AmeSuperAdmin;
+	private readonly superAdmin: AmeSuperAdmin;
 	private exclusiveSuperAdminCapabilities = {};
 
 	private tagMetaCaps = {};
@@ -233,6 +251,7 @@ class AmeActorManager {
 		}
 	}
 
+	// noinspection JSUnusedGlobalSymbols
 	actorCanAccess(
 		actorId: string,
 		grantAccess: {[actorId: string] : boolean},
@@ -619,6 +638,23 @@ class AmeActorManager {
 	public getSuggestedCapabilities(): AmeCapabilitySuggestion[] {
 		return this.suggestedCapabilities;
 	}
+
+	createUserFromProperties(properties: AmeUserPropertyMap): IAmeUser {
+		return AmeUser.createFromProperties(properties);
+	}
+}
+
+interface AmeActorManagerInterface {
+	getUsers(): AmeDictionary<IAmeUser>;
+	getUser(login: string): IAmeUser;
+	addUsers(newUsers: IAmeUser[]);
+	createUserFromProperties(properties: AmeUserPropertyMap): IAmeUser;
+
+	getRoles(): AmeDictionary<IAmeActor>;
+	getSuperAdmin(): IAmeActor;
+
+	getActor(actorId): IAmeActor;
+	actorExists(actorId: string): boolean;
 }
 
 if (typeof wsAmeActorData !== 'undefined') {

@@ -10,7 +10,7 @@ echo $notify_html;
 <div class="cli-modal-backdrop cli-fade cli-settings-overlay"></div>
 <div class="cli-modal-backdrop cli-fade cli-popupbar-overlay"></div>
 <script type="text/javascript">
-  //<![CDATA[
+  /* <![CDATA[ */
   cli_cookiebar_settings='<?php echo Cookie_Law_Info::get_json_settings(); ?>';
-  //]]>
+  /* ]]> */
 </script>

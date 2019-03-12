@@ -30,16 +30,64 @@ class BrowserCache_Plugin {
 				0, 2 );
 		}
 
-		if ( $this->can_ob() ) {
+		$url_uniqualize_enabled = $this->url_uniqualize_enabled();
+
+		if ( $this->url_clean_enabled() || $url_uniqualize_enabled ) {
 			$this->browsercache_rewrite =
 				$this->_config->get_boolean( 'browsercache.rewrite' );
-			Util_Bus::add_ob_callback( 'browsercache', array( $this, 'ob_callback' ) );
 
-			// modify CDN urls too
+			// modify CDN urls
 			add_filter( 'w3tc_cdn_url',
-				array( $this, 'w3tc_cdn_url' ),
-				0, 3 );
+				array( $this, 'w3tc_cdn_url' ), 0, 3 );
+
+			if ( $url_uniqualize_enabled ) {
+				add_action( 'w3tc_flush_all',
+					array( $this, 'w3tc_flush_all' ), 1050, 1 );
+			}
+
+
+			if ( $this->can_ob() ) {
+				Util_Bus::add_ob_callback( 'browsercache',
+					array( $this, 'ob_callback' ) );
+			}
 		}
+
+        $v = $this->_config->get_string( 'browsercache.security.session.cookie_httponly' );
+        if ( !empty( $v ) ) {
+            @ini_set( 'session.cookie_httponly', $v == 'on' ? '1': '0' );
+        }
+        $v = $this->_config->get_string( 'browsercache.security.session.cookie_secure' );
+        if ( !empty( $v ) ) {
+            @ini_set( 'session.cookie_secure', $v == 'on' ? '1': '0' );
+        }
+        $v = $this->_config->get_string( 'browsercache.security.session.use_only_cookies' );
+        if ( !empty( $v ) ) {
+            @ini_set( 'session.use_only_cookies', $v == 'on' ? '1': '0' );
+        }
+
+		add_filter( 'w3tc_minify_http2_preload_url',
+			array( $this, 'w3tc_minify_http2_preload_url' ), 4000 );
+	}
+
+	private function url_clean_enabled() {
+		return
+			$this->_config->get_boolean( 'browsercache.cssjs.querystring' ) ||
+			$this->_config->get_boolean( 'browsercache.html.querystring' ) ||
+			$this->_config->get_boolean( 'browsercache.other.querystring' );
+	}
+
+	private function url_uniqualize_enabled() {
+		return $this->_config->get_boolean( 'browsercache.cssjs.replace' ) ||
+			$this->_config->get_boolean( 'browsercache.html.replace' ) ||
+			$this->_config->get_boolean( 'browsercache.other.replace' );
+	}
+
+	public function w3tc_flush_all( $extras = array() ) {
+		if ( isset( $extras['only'] ) && $extras['only'] != 'browsercache' )
+			return;
+
+		update_option( 'w3tc_browsercache_flush_timestamp',
+			rand( 10000, 99999 ) . '' );
 	}
 
 	/**
@@ -48,18 +96,6 @@ class BrowserCache_Plugin {
 	 * @return boolean
 	 */
 	function can_ob() {
-		/**
-		 * Replace feature should be enabled
-		 */
-		if ( !$this->_config->get_boolean( 'browsercache.cssjs.replace' ) &&
-			!$this->_config->get_boolean( 'browsercache.html.replace' ) &&
-			!$this->_config->get_boolean( 'browsercache.other.replace' ) &&
-			!$this->_config->get_boolean( 'browsercache.cssjs.querystring' ) &&
-			!$this->_config->get_boolean( 'browsercache.html.querystring' ) &&
-			!$this->_config->get_boolean( 'browsercache.other.querystring' )) {
-			return false;
-		}
-
 		/**
 		 * Skip if admin
 		 */
@@ -153,6 +189,36 @@ class BrowserCache_Plugin {
 		if ( $attr != 'w3tc_load_js(' )
 			return $attr . '=' . $quote . $url . $quote;
 		return sprintf( '%s\'%s\'', $attr, $url );
+	}
+
+	/**
+	 * Mutate http/2 header links
+	 */
+	public function w3tc_minify_http2_preload_url( $data ) {
+		if ( isset( $data['browsercache_processed'] ) ) {
+			return $data;
+		}
+
+		$data['browsercache_processed'] = '*';
+		$url = $data['result_link'];
+
+		// decouple extension
+		$matches = array();
+		if ( !preg_match( '/\.([a-zA-Z0-9]+)($|[\?])/', $url, $matches ) ) {
+			return $data;
+		}
+		$extension = $matches[1];
+
+		$ops = $this->_get_url_mutation_operations( $url, $extension );
+		if ( is_null( $ops ) ) {
+			return $data;
+		}
+
+		$mutate_by_querystring = !$this->browsercache_rewrite;
+
+		$url = $this->mutate_url( $url, $ops, $mutate_by_querystring );
+		$data['result_link'] = $url;
+		return $data;
 	}
 
 	/**

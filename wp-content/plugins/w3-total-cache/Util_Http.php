@@ -61,12 +61,12 @@ class Util_Http {
 	 * @param string  $file
 	 * @return boolean
 	 */
-	static public function download( $url, $file ) {
+	static public function download( $url, $file, $args = array() ) {
 		if ( strpos( $url, '//' ) === 0 ) {
 			$url = ( Util_Environment::is_https() ? 'https:' : 'http:' ) . $url;
 		}
 
-		$response = self::get( $url );
+		$response = self::get( $url, $args );
 
 		if ( !is_wp_error( $response ) && $response['response']['code'] == 200 ) {
 			return @file_put_contents( $file, $response['body'] );

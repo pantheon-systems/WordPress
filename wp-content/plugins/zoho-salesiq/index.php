@@ -6,8 +6,8 @@ ob_start();
 Plugin Name: Zoho SalesIQ
 Plugin URI: http://wordpress.org/plugins/zoho-salesiq/
 Description: Convert Website Visitors into Customers
-Author: SalesIQ Team
-Version: 1.0.7
+Author: Zoho SalesIQ Team
+Version: 1.0.8
 Author URI: http://zoho.com/salesiq
 */
 

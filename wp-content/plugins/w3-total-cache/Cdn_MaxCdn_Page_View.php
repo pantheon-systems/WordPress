@@ -9,9 +9,9 @@ if ( !defined( 'W3TC' ) )
     <tr>
         <th style="width: 300px;"><label><?php _e( 'Create account:', 'w3-total-cache' )?></label></th>
         <td>
-            <a href="<?php esc_attr_e( wp_nonce_url( Util_Ui::admin_url( 'admin.php?page=w3tc_dashboard&w3tc_cdn_maxcdn_signup' ), 'w3tc' ) )?>" target="_blank" id="netdna-maxcdn-create-account" class="button-primary"><?php _e( 'Sign Up Now and Save 25%', 'w3-total-cache' ) ?></a>
+            <a href="<?php esc_attr_e( wp_nonce_url( Util_Ui::admin_url( 'admin.php?page=w3tc_dashboard&w3tc_cdn_maxcdn_signup' ), 'w3tc' ) )?>" target="_blank" id="netdna-maxcdn-create-account" class="button-primary"><?php w3tc_e( 'cdn.maxcdn.signUpAndSave', 'Sign Up Now and save!' ) ?></a>
             <br />
-            <span class="description"><?php _e( 'MaxCDN is a service that lets you speed up your site even more with W3 Total Cache. 100% Money Back Guarantee (30 Days)!', 'w3-total-cache' )?></span>
+            <span class="description"><?php w3tc_e( 'cdn.maxcdn.signUpAndSave.description', 'MaxCDN is a service that lets you speed up your site even more with W3 Total Cache. Sign up now to recieve a special offer!' ) ?></span>
         </td>
     </tr>
 <?php endif ?>
@@ -43,13 +43,13 @@ if ( !defined( 'W3TC' ) )
 <?php if ( !is_null( $http_domain ) ): ?>
 <tr>
 	<th>
-		<label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> HTTP CNAME:', 'w3-total-cache' ); ?></label>
+		<label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> <acronym title="Hypertext Transfer Protocol">HTTP</acronym> <acronym title="Canonical Name">CNAME</acronym>:', 'w3-total-cache' ); ?></label>
 	</th>
 	<td class="w3tc_config_value_text">
 		<?php echo htmlspecialchars( $http_domain ) ?><br />
 		<span class="description">
 			This website domain has to be CNAME pointing to this
-			<acronym title="Content Delivery Network">CDN</acronym> domain for HTTP requests
+			<acronym title="Content Delivery Network">CDN</acronym> domain for <acronym title="Hypertext Transfer Protocol">HTTP</acronym> requests
 		</span>
 	</td>
 </tr>
@@ -57,13 +57,13 @@ if ( !defined( 'W3TC' ) )
 <?php if ( !is_null( $https_domain ) ): ?>
 <tr>
 	<th>
-		<label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> HTTPS CNAME:', 'w3-total-cache' ); ?></label>
+		<label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> <acronym title="Hypertext Transfer Protocol">HTTP</acronym>S <acronym title="Canonical Name">CNAME</acronym>:', 'w3-total-cache' ); ?></label>
 	</th>
 	<td class="w3tc_config_value_text">
 		<?php echo htmlspecialchars( $https_domain ) ?><br />
 		<span class="description">
-			This website domain has to be CNAME pointing to this
-			<acronym title="Content Delivery Network">CDN</acronym> domain for HTTPS requests
+			This website domain has to be <acronym title="Canonical Name">CNAME</acronym> pointing to this
+			<acronym title="Content Delivery Network">CDN</acronym> domain for <acronym title="HyperText Transfer Protocol over SSL">HTTPS</acronym> requests
 		</span>
 	</td>
 </tr>
@@ -74,8 +74,8 @@ if ( !defined( 'W3TC' ) )
 	<td>
 		<select id="cdn_maxcdn_ssl" name="cdn__maxcdn__ssl" <?php Util_Ui::sealing_disabled( 'cdn.' ) ?>>
 			<option value="auto"<?php selected( $config->get_string( 'cdn.maxcdn.ssl' ), 'auto' ); ?>><?php _e( 'Auto (determine connection type automatically)', 'w3-total-cache' )?></option>
-			<option value="enabled"<?php selected( $config->get_string( 'cdn.maxcdn.ssl' ), 'enabled' ); ?>><?php _e( 'Enabled (always use SSL)', 'w3-total-cache' )?></option>
-			<option value="disabled"<?php selected( $config->get_string( 'cdn.maxcdn.ssl' ), 'disabled' ); ?>><?php _e( 'Disabled (always use HTTP)', 'w3-total-cache' )?></option>
+			<option value="enabled"<?php selected( $config->get_string( 'cdn.maxcdn.ssl' ), 'enabled' ); ?>><?php _e( 'Enabled (always use <acronym title="Secure Sockets Layer">SSL</acronym>)', 'w3-total-cache' )?></option>
+			<option value="disabled"<?php selected( $config->get_string( 'cdn.maxcdn.ssl' ), 'disabled' ); ?>><?php _e( 'Disabled (always use <acronym title="Hypertext Transfer Protocol">HTTP</acronym>)', 'w3-total-cache' )?></option>
 		</select>
         <br /><span class="description"><?php _e( 'Some <acronym title="Content Delivery Network">CDN</acronym> providers may or may not support <acronym title="Secure Sockets Layer">SSL</acronym>, contact your vendor for more information.', 'w3-total-cache' )?></span>
 	</td>

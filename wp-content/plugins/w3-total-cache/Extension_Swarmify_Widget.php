@@ -10,9 +10,10 @@ class Extension_Swarmify_Widget {
 		$o = new Extension_Swarmify_Widget();
 		$o->_config = Dispatcher::config();
 
-		add_action( 'w3tc_widget_setup', array( $o, 'wp_dashboard_setup' ), 150 );
+		add_action( 'w3tc_widget_setup',
+			array( $o, 'wp_dashboard_setup' ), 9000 );
 		add_action( 'w3tc_network_dashboard_setup',
-			array( $o, 'wp_dashboard_setup' ), 150 );
+			array( $o, 'wp_dashboard_setup' ), 9500 );
 
 		wp_enqueue_style( 'w3tc-widget-swarmify',
 			plugins_url( 'Extension_Swarmify_Widget_View.css', W3TC_FILE ),

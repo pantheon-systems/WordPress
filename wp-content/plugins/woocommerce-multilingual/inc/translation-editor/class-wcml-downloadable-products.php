@@ -69,7 +69,7 @@ class WCML_Downloadable_Products{
         $wcml_js_min = $this->sitepress->get_wp_api()->constant( 'WCML_JS_MIN' );
 
         wp_register_style( 'wpml-wcml-files', $wcml_plugin_url . '/res/css/wcml-files.css', null, $wcml_version );
-        wp_register_script( 'wcml-scripts-files', $wcml_plugin_url . '/res/js/files' . $wcml_js_min . '.js', array( 'jquery' ), $wcml_version );
+        wp_register_script( 'wcml-scripts-files', $wcml_plugin_url . '/res/js/files' . $wcml_js_min . '.js', array( 'jquery' ), $wcml_version, true );
 
         wp_enqueue_style('wpml-wcml-files');
         wp_enqueue_script('wcml-scripts-files');

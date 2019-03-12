@@ -401,7 +401,6 @@ if ( !function_exists( 'yit_string' ) ) {
     }
 }
 
-
 if ( !function_exists( 'yit_pagination' ) ) {
     /**
      * Print pagination
@@ -597,7 +596,6 @@ if ( !function_exists( 'yit_get_excluded_categories' ) ) {
         return $query;
     }
 }
-
 
 if ( !function_exists( 'yit_add_extra_theme_headers' ) ) {
     add_filter( 'extra_theme_headers', 'yit_add_extra_theme_headers' );
@@ -891,7 +889,6 @@ if ( !function_exists( 'yit_wpml_object_id' ) ) {
 
 }
 
-
 if ( !function_exists( 'yith_get_formatted_price' ) ) {
     /**
      * Format the price with a currency symbol.
@@ -1062,6 +1059,7 @@ if ( !function_exists( 'yith_plugin_fw_html_data_to_string' ) ) {
             return $html_data;
     }
 }
+
 if ( !function_exists( 'yith_plugin_fw_get_icon' ) ) {
     function yith_plugin_fw_get_icon( $icon = '', $args = array() ) {
         return YIT_Icons()->get_icon( $icon, $args );
@@ -1070,10 +1068,9 @@ if ( !function_exists( 'yith_plugin_fw_get_icon' ) ) {
 
 if ( !function_exists( 'yith_plugin_fw_is_true' ) ) {
     function yith_plugin_fw_is_true( $value ) {
-        return true === $value || 1 === $value || '1' === $value || 'yes' === $value;
+        return true === $value || 1 === $value || '1' === $value || 'yes' === $value || 'true' === $value;
     }
 }
-
 
 if ( !function_exists( 'yith_plugin_fw_enqueue_enhanced_select' ) ) {
     function yith_plugin_fw_enqueue_enhanced_select() {
@@ -1160,4 +1157,85 @@ if ( !function_exists( 'yith_plugin_fw_is_panel' ) ) {
 
         return $screen instanceof WP_Screen && strpos( $screen->id, $panel_screen_id ) !== false;
     }
+}
+
+if( ! function_exists( 'yith_plugin_fw_force_regenerate_plugin_update_transient' ) ){
+	/**
+	 * Delete the update plugins transient
+	 *
+	 * @return void
+	 *
+	 * @since  1.0
+	 * @see    update_plugins transient and pre_set_site_transient_update_plugins hooks
+	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
+	 */
+	function yith_plugin_fw_force_regenerate_plugin_update_transient() {
+		delete_site_transient( 'update_plugins' );
+	}
+}
+
+/* === Gutenberg Support === */
+
+if( ! function_exists( 'yith_plugin_fw_is_gutenberg_enabled' ) ){
+	function yith_plugin_fw_is_gutenberg_enabled(){
+		return function_exists( 'YITH_Gutenberg' );
+	}
+}
+
+if( ! function_exists( 'yith_plugin_fw_gutenberg_add_blocks' ) ){
+	/**
+	 * Add new blocks to Gutenberg
+	 *
+	 * @param $blocks string|array new blocks
+	 * @return bool true if add a new blocks, false otherwise
+	 *
+	 * @author Andrea Grillo <andrea.grillo@yithemes.com>
+	 */
+	function yith_plugin_fw_gutenberg_add_blocks( $blocks ){
+		$added = false;
+		if( yith_plugin_fw_is_gutenberg_enabled() ) {
+			// ADD Blocks
+			$added = YITH_Gutenberg()->add_blocks( $blocks );
+
+			//ADD Blocks arguments
+			if( $added ){
+				YITH_Gutenberg()->set_block_args( $blocks );
+			}
+		}
+
+		return $added;
+	}
+}
+
+if( ! function_exists( 'yith_plugin_fw_gutenberg_get_registered_blocks' ) ){
+	/**
+	 * Return an array with the registered blocks
+	 *
+	 * @return array
+	 */
+	function yith_plugin_fw_gutenberg_get_registered_blocks(){
+		return yith_plugin_fw_is_gutenberg_enabled() ? YITH_Gutenberg()->get_registered_blocks() : array();
+	}
+}
+
+if( ! function_exists( 'yith_plugin_fw_gutenberg_get_to_register_blocks' ) ){
+	/**
+	 * Return an array with the blocks to register
+	 *
+	 * @return array
+	 */
+	function yith_plugin_fw_gutenberg_get_to_register_blocks(){
+		return yith_plugin_fw_is_gutenberg_enabled() ? YITH_Gutenberg()->get_to_register_blocks() : array();
+	}
+}
+
+if( ! function_exists( 'yith_plugin_fw_get_default_logo' ) ){
+	/**
+	 * Get the default SVG logo
+	 *
+	 * @return string default logo image url
+	 */
+	function yith_plugin_fw_get_default_logo(){
+		return YIT_CORE_PLUGIN_URL . '/assets/images/yith-icon.svg';
+	}
 }

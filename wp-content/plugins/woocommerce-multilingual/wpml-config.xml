@@ -12,7 +12,7 @@
 		<custom-field action="copy">_featured</custom-field>
 		<custom-field action="copy">_manage_stock</custom-field>
 		<custom-field action="copy">_sku</custom-field>
-		<custom-field action="copy">_stock</custom-field>
+		<custom-field action="ignore">_stock</custom-field>
 		<custom-field action="copy">_stock_status</custom-field>
 		<custom-field action="copy">_sold_individually</custom-field>
 		<custom-field action="copy">_subscription_length</custom-field>
@@ -64,6 +64,7 @@
 		<custom-field action="ignore">_product_attributes</custom-field>
 		<custom-field action="translate">_children</custom-field>
 		<custom-field action="copy">_subscription_limit</custom-field>
+		<custom-field action="copy">_low_stock_amount</custom-field>
 	</custom-fields>
 	<custom-types>
 		<custom-type translate="1">product</custom-type>

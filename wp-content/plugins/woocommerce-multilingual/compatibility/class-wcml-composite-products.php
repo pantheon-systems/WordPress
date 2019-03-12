@@ -34,6 +34,8 @@ class WCML_Composite_Products extends WCML_Compatibility_Helper{
 		add_filter( 'wcml_cart_contents', array($this, 'wpml_composites_compat'), 11, 4 );
 		add_filter( 'woocommerce_composite_component_options_query_args', array($this, 'wpml_composites_transients_cache_per_language'), 10, 3 );
 		add_action( 'wcml_before_sync_product', array( $this, 'sync_composite_data_across_translations'), 10, 2 );
+		add_filter( 'raw_woocommerce_price', array( $this, 'apply_rounding_rules' ) );
+
 
 		if( is_admin() ){		
 
@@ -259,7 +261,7 @@ class WCML_Composite_Products extends WCML_Compatibility_Helper{
 		return $data;
 	}
 
-    function components_update( $original_product_id, $product_id, $data, $language ){
+	function components_update( $original_product_id, $product_id, $data, $language ){
 
 		$composite_data = $this->get_composite_data( $original_product_id );
 
@@ -458,8 +460,17 @@ class WCML_Composite_Products extends WCML_Compatibility_Helper{
 	function load_assets( ){
 		global $pagenow;
 
-		if( ( $pagenow == 'post.php' && isset( $_GET[ 'post' ] ) && WooCommerce_Functions_Wrapper::get_product_type( $_GET[ 'post' ] ) === 'composite' ) || $pagenow == 'post-new.php' ){
-			wp_register_script( 'wcml-composite-js', WCML_PLUGIN_URL . '/compatibility/res/js/wcml-composite.js', array( 'jquery' ), WCML_VERSION );
+		$is_composite_edit_page = false;
+
+		if( $pagenow == 'post.php' && isset( $_GET[ 'post' ] ) ){
+			$wc_product = wc_get_product( $_GET[ 'post' ] );
+			if( $wc_product && $wc_product->get_type() === 'composite' ){
+				$is_composite_edit_page = true;
+			}
+		}
+
+		if( $is_composite_edit_page || $pagenow == 'post-new.php' ){
+			wp_register_script( 'wcml-composite-js', WCML_PLUGIN_URL . '/compatibility/res/js/wcml-composite.js', array( 'jquery' ), WCML_VERSION, true );
 			wp_enqueue_script( 'wcml-composite-js' );
 
 		}
@@ -554,6 +565,14 @@ class WCML_Composite_Products extends WCML_Compatibility_Helper{
 		$fields[] = '_bto_scenario_data';
 
 		return $fields;
+	}
+
+	public function apply_rounding_rules( $price ) {
+		if ( wcml_is_multi_currency_on() ) {
+			$price = $this->woocommerce_wpml->multi_currency->prices->apply_rounding_rules( $price );
+		}
+
+		return $price;
 	}
 
 }

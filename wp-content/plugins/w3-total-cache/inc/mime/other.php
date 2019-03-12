@@ -24,6 +24,7 @@ return array(
 	'mp3|m4a' => 'audio/mpeg',
 	'mp4|m4v' => 'video/mp4',
 	'mpeg|mpg|mpe' => 'video/mpeg',
+	'webm' => 'video/webm',
 	'mpp' => 'application/vnd.ms-project',
 	'otf' => 'application/x-font-otf',
 	'_otf' => 'application/vnd.ms-opentype',

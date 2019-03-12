@@ -1290,7 +1290,7 @@ if ( ! function_exists( 'woocommerce_catalog_ordering' ) ) {
 		if ( ! wc_get_loop_prop( 'is_paginated' ) || ! woocommerce_products_will_display() ) {
 			return;
 		}
-		$show_default_orderby    = 'menu_order' === apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+		$show_default_orderby    = 'menu_order' === apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
 		$catalog_orderby_options = apply_filters( 'woocommerce_catalog_orderby', array(
 			'menu_order' => __( 'Default sorting', 'woocommerce' ),
 			'popularity' => __( 'Sort by popularity', 'woocommerce' ),
@@ -1396,15 +1396,26 @@ function wc_get_gallery_image_html( $attachment_id, $main_image = false ) {
 	$full_size         = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
 	$thumbnail_src     = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
 	$full_src          = wp_get_attachment_image_src( $attachment_id, $full_size );
-	$image             = wp_get_attachment_image( $attachment_id, $image_size, false, array(
-		'title'                   => get_post_field( 'post_title', $attachment_id ),
-		'data-caption'            => get_post_field( 'post_excerpt', $attachment_id ),
-		'data-src'                => $full_src[0],
-		'data-large_image'        => $full_src[0],
-		'data-large_image_width'  => $full_src[1],
-		'data-large_image_height' => $full_src[2],
-		'class'                   => $main_image ? 'wp-post-image' : '',
-	) );
+	$image             = wp_get_attachment_image(
+		$attachment_id,
+		$image_size,
+		false,
+		apply_filters(
+			'woocommerce_gallery_image_html_attachment_image_params',
+			array(
+				'title'                   => _wp_specialchars( get_post_field( 'post_title', $attachment_id ), ENT_QUOTES, 'UTF-8', true ),
+				'data-caption'            => _wp_specialchars( get_post_field( 'post_excerpt', $attachment_id ), ENT_QUOTES, 'UTF-8', true ),
+				'data-src'                => esc_url( $full_src[0] ),
+				'data-large_image'        => esc_url( $full_src[0] ),
+				'data-large_image_width'  => esc_attr( $full_src[1] ),
+				'data-large_image_height' => esc_attr( $full_src[2] ),
+				'class'                   => esc_attr( $main_image ? 'wp-post-image' : '' ),
+			),
+			$attachment_id,
+			$image_size,
+			$main_image
+		)
+	);
 
 	return '<div data-thumb="' . esc_url( $thumbnail_src[0] ) . '" class="woocommerce-product-gallery__image"><a href="' . esc_url( $full_src[0] ) . '">' . $image . '</a></div>';
 }
@@ -2623,7 +2634,7 @@ if ( ! function_exists( 'woocommerce_form_field' ) ) {
 
 				break;
 			case 'radio':
-				$label_id = current( array_keys( $args['options'] ) );
+				$label_id .= '_' . current( array_keys( $args['options'] ) );
 
 				if ( ! empty( $args['options'] ) ) {
 					foreach ( $args['options'] as $option_key => $option_text ) {

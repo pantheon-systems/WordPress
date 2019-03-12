@@ -24,10 +24,12 @@
 				</th>
 				<th scope="col"
 					class="column-categories">{{ strings.categories }}</th>
-				<th scope="col" class="column-product_type">
-						<span class="wc-type wcml-tip"
-							  data-tip="{{ strings.type|e }}">{{ strings.type }}</span>
-				</th>
+				{% if ( strings.type ) %}
+					<th scope="col" class="column-product_type">
+							<span class="wc-type wcml-tip"
+								  data-tip="{{ strings.type|e }}">{{ strings.type }}</span>
+					</th>
+				{% endif %}
 				<th scope="col" id="date" class="column-date {{ filter_urls.date_sorted }}">
 					<a href="{{ filter_urls.date|e }}">
 						<span>{{ strings.date }}</span>
@@ -108,11 +110,12 @@
 								<a href="{{ category.href|e }}">{{ category.name }}</a>
 							{% endfor %}
 						</td>
-
-						<td class="column-product_type">
-							<span class="product-type wcml-tip {{ product.icon_class|e }}"
-								  data-tip="{{ product.icon_class|e }}"></span>
-						</td>
+						{% if ( strings.type ) %}
+							<td class="column-product_type">
+								<span class="product-type wcml-tip {{ product.icon_class|e }}"
+									  data-tip="{{ product.icon_class|e }}"></span>
+							</td>
+						{% endif %}
 
 						<td class="column-date">
 							{{ product.formated_date }}

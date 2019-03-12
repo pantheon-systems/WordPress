@@ -49,14 +49,17 @@ class OTGS_Installer_WP_Share_Local_Components_Setting_Hooks {
 	public function render_local_components_setting( array $args ) {
 		$params = $this->validate_arguments( $args );
 
-		if ( (bool) $params['use_styles'] ) {
-			wp_enqueue_style( OTGS_Installer_WP_Components_Setting_Resources::HANDLES_OTGS_INSTALLER_UI );
-			wp_enqueue_script( OTGS_Installer_WP_Components_Setting_Resources::HANDLES_OTGS_INSTALLER_UI );
-		}
-
 		$template = self::TEMPLATE_CHECKBOX;
 		if ( (bool) $params['use_radio'] ) {
 			$template = self::TEMPLATE_RADIO;
+		}
+
+		if ( (bool) $params['use_styles'] ) {
+			wp_enqueue_style( OTGS_Installer_WP_Components_Setting_Resources::HANDLES_OTGS_INSTALLER_UI );
+
+			if(!(bool) $params['use_radio']) {
+				wp_enqueue_style('otgsSwitcher');
+			}
 		}
 
 		echo $this->template_service->show( $this->get_model( $params ), $template );
@@ -93,9 +96,9 @@ class OTGS_Installer_WP_Share_Local_Components_Setting_Hooks {
 			'strings'                    => array(
 				'heading'                 => __( 'Reporting to', 'installer' ),
 				'report_to'               => __( 'Report to', 'installer' ),
-				'radio_report_yes'        => __( 'Send theme and plugins info, in order to get faster support and compatibility alerts',
+				'radio_report_yes'        => __( 'Send theme and plugins information, in order to get faster support and compatibility alerts',
 				                                 'installer' ),
-				'radio_report_no'         => __( "Don't send this information and skip compatibility notes",
+				'radio_report_no'         => __( "Don't send this information and skip compatibility alerts",
 				                                 'installer' ),
 				'which_theme_and_plugins' => __( 'which theme and plugins you are using.', 'installer' ),
 			),

@@ -218,8 +218,7 @@ class Cookie_Law_Info_Public {
 	*/
 	public function cookielawinfo_inject_cli_script() 
 	{
-	  $the_options = Cookie_Law_Info::get_settings();;
-
+	  $the_options = Cookie_Law_Info::get_settings();
 	  	if ( $the_options['is_on'] == true )
 	  	{ 
 	        // Output the HTML in the footer:
@@ -234,11 +233,11 @@ class Cookie_Law_Info_Public {
 		    ($head!="" ? '<h5 class="cli_messagebar_head">'.$head.'</h5>' : '')
 		    .'<span>' . $str . '</span></div>';
 		    
-		    if($the_options['showagain_tab'] === true) 
-		    {
+		    //if($the_options['showagain_tab'] === true) 
+		    //{
 		    	$show_again=__($the_options["showagain_text"],'cookie-law-info');
-		      	$notify_html .= '<div id="' . $this->cookielawinfo_remove_hash( $the_options["showagain_div_id"] ) . '"><span id="cookie_hdr_showagain">'.$show_again.'</span></div>';
-		    }
+		      	$notify_html .= '<div id="' . $this->cookielawinfo_remove_hash( $the_options["showagain_div_id"] ) . '" style="display:none;"><span id="cookie_hdr_showagain">'.$show_again.'</span></div>';
+		    //}
 		    global $wp_query;
 		    $current_obj = get_queried_object();
 		    $post_slug ='';

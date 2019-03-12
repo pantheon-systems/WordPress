@@ -24,24 +24,25 @@ class Licensing_Plugin_Admin {
 		add_action( 'w3tc_message_action_licensing_upgrade',
 			array( $this, 'w3tc_message_action_licensing_upgrade' ) );
 
-		if ( !Util_Environment::is_w3tc_pro( $this->_config ) )
-			add_filter( 'w3tc_admin_bar_menu', array( $this, 'w3tc_admin_bar_menu' ) );
+		add_filter( 'w3tc_admin_bar_menu', array( $this, 'w3tc_admin_bar_menu' ) );
 	}
 
 
 
 	public function w3tc_admin_bar_menu( $menu_items ) {
-		$menu_items['00020.licensing'] = array(
-			'id' => 'w3tc_overlay_upgrade',
-			'parent' => 'w3tc',
-			'title' => __(
-				'<span style="color: red; background: none;">Upgrade Performance</span>',
-				'w3-total-cache'
-			),
-			'href' => wp_nonce_url( network_admin_url(
-					'admin.php?page=w3tc_dashboard&amp;' .
-					'w3tc_message_action=licensing_upgrade' ), 'w3tc' )
-		);
+		if ( !Util_Environment::is_w3tc_pro( $this->_config ) ) {
+			$menu_items['00020.licensing'] = array(
+				'id' => 'w3tc_overlay_upgrade',
+				'parent' => 'w3tc',
+				'title' => __(
+					'<span style="color: red; background: none;">Upgrade Performance</span>',
+					'w3-total-cache'
+				),
+				'href' => wp_nonce_url( network_admin_url(
+						'admin.php?page=w3tc_dashboard&amp;' .
+						'w3tc_message_action=licensing_upgrade' ), 'w3tc' )
+			);
+		}
 
 		if ( defined( 'W3TC_DEBUG' ) && W3TC_DEBUG ) {
 			$menu_items['90040.licensing'] = array(
@@ -63,13 +64,13 @@ class Licensing_Plugin_Admin {
 
 	public function admin_head_licensing_upgrade() {
 ?>
-        <script type="text/javascript">
-        jQuery(function() {
-	        w3tc_lightbox_upgrade(w3tc_nonce);
-	        jQuery('#w3tc-license-instruction').show();
-	    });
-       	</script>
-    	<?php
+		<script type="text/javascript">
+		jQuery(function() {
+			w3tc_lightbox_upgrade(w3tc_nonce);
+			jQuery('#w3tc-license-instruction').show();
+		});
+		   </script>
+		<?php
 	}
 
 	/**
@@ -79,25 +80,33 @@ class Licensing_Plugin_Admin {
 	 * @param Config  $old_config
 	 */
 	function possible_state_change( $config, $old_config ) {
+		$changed = false;
+
 		if ( $old_config->get_string( 'plugin.license_key' ) !='' &&  $config->get_string( 'plugin.license_key' ) == '' ) {
 			$result = Licensing_Core::deactivate_license( $old_config->get_string( 'plugin.license_key' ) );
 			if ( $result ) {
 				$this->site_inactivated = true;
 			}
-			delete_transient( 'w3tc_license_status' );
+			$changed = true;
 		} elseif ( $old_config->get_string( 'plugin.license_key' ) =='' &&  $config->get_string( 'plugin.license_key' ) != '' ) {
 			$result = Licensing_Core::activate_license( $config->get_string( 'plugin.license_key' ), W3TC_VERSION );
 			if ( $result ) {
 				$this->site_activated = true;
 				$config->set( 'common.track_usage', true );
 			}
-			delete_transient( 'w3tc_license_status' );
+			$changed = true;
 		} elseif ( $old_config->get_string( 'plugin.license_key' ) != $config->get_string( 'plugin.license_key' ) ) {
 			$result = Licensing_Core::activate_license( $config->get_string( 'plugin.license_key' ), W3TC_VERSION );
 			if ( $result ) {
 				$this->site_activated = true;
 			}
-			delete_transient( 'w3tc_license_status' );
+			$changed = true;
+		}
+
+		if ( $changed ) {
+			$state = Dispatcher::config_state();
+			$state->set( 'license.next_check', 0 );
+			$state->save();
 		}
 	}
 
@@ -108,8 +117,12 @@ class Licensing_Plugin_Admin {
 		$capability = apply_filters( 'w3tc_capability_admin_notices',
 			'manage_options' );
 
+		$this->maybe_update_license_status();
+
 		if ( current_user_can( $capability ) ) {
 			if ( is_admin() && Util_Admin::is_w3tc_admin_page() ) {
+				add_filter( 'w3tc_notes', array( $this, 'w3tc_notes' ) );
+
 				/**
 				 * Only admin can see W3TC notices and errors
 				 */
@@ -140,16 +153,12 @@ class Licensing_Plugin_Admin {
 	 */
 	function admin_notices() {
 		$message = '';
-		$status = get_transient( 'w3tc_license_status' );
-		$set_transient = false;
-		if ( !$status ) {
-			$status = $this->update_license_status();
-			$set_transient = true;
-			$transient_timeout = 3600 * 24 * 5;
-		}
 
+		$state = Dispatcher::config_state();
+		$status = $state->get_string( 'license.status' );
 
-		if ( $status == 'no_key' ) {
+		if ( defined( 'W3TC_PRO' ) ) {
+		} elseif ( $status == 'no_key' ) {
 		} elseif ( $this->_status_is( $status, 'inactive.expired' ) ) {
 			$message = sprintf( __( 'The W3 Total Cache license key has expired. Please renew it: %s', 'w3-total-cache' ),
 				'<input type="button" class="button-primary button-buy-plugin {nonce: \''. wp_create_nonce( 'w3tc' ).'\'}" value="'.__( 'Renew', 'w3-total-cache' ) . '" />' );
@@ -170,11 +179,6 @@ class Licensing_Plugin_Admin {
 		} elseif ( $this->_status_is( $status, 'active' ) ) {
 		} else {
 			$message = __( 'The W3 Total Cache license key can\'t be verified.', 'w3-total-cache' );
-			$transient_timeout = 60;
-		}
-
-		if ( $set_transient ) {
-			set_transient( 'w3tc_license_status', $status, $transient_timeout );
 		}
 
 		if ( $message )
@@ -192,13 +196,75 @@ class Licensing_Plugin_Admin {
 		}
 	}
 
+
+
+	function w3tc_notes( $notes ) {
+		$terms = '';
+		$state_master = Dispatcher::config_state_master();
+
+		if ( defined( 'W3TC_PRO' ) ) {
+			$terms = 'accept';
+		} elseif ( !Util_Environment::is_w3tc_pro( $this->_config ) ) {
+			$terms = $state_master->get_string( 'license.community_terms' );
+
+			$buttons = sprintf( '<br /><br />%s&nbsp;%s',
+				Util_Ui::button_link( __( 'Accept', 'w3-total-cache' ),
+					Util_Ui::url( array(
+						'w3tc_licensing_terms_accept' => 'y' ) ) ),
+				Util_Ui::button_link( __( 'Decline', 'w3-total-cache' ),
+					Util_Ui::url( array(
+						'w3tc_licensing_terms_decline' => 'y' ) ) ) );
+		} else {
+			$state = Dispatcher::config_state();
+			$terms = $state->get_string( 'license.terms' );
+
+			$return_url = self_admin_url( Util_Ui::url( array(
+				'w3tc_licensing_terms_refresh' => 'y' ) ) );
+
+			$buttons =
+				sprintf( '<form method="post" action="%s">', W3TC_TERMS_ACCEPT_URL ) .
+				Util_Ui::r_hidden( 'return_url', 'return_url', $return_url ) .
+				Util_Ui::r_hidden( 'license_key', 'license_key', $this->get_license_key() ) .
+				Util_Ui::r_hidden( 'home_url', 'home_url', home_url() ) .
+				'<input type="submit" class="button" name="answer" value="Accept" />&nbsp;' .
+				'<input type="submit" class="button" name="answer" value="Decline" />' .
+				'</form>';
+		}
+
+		if ( $terms != 'accept' && $terms != 'decline' && $terms != 'postpone' ) {
+			if ( $state_master->get_integer( 'common.install' ) < 1542029724 ) {
+				/* installed before 2018-11-12 */
+				$notes['licensing_terms'] = sprintf(
+					__( 'Our terms of use and privacy policies have been updated. Please <a href="%s" target="blank">review</a> and accept them.', 'w3-total-cache' ),
+						W3TC_TERMS_URL ) .
+					$buttons;
+			} else {
+				$notes['licensing_terms'] = sprintf(
+					__( 'Thanks for using W3 Total Cache! Please review the latest <a href="%s" target="blank">terms of use and privacy policy</a>, and accept them.', 'w3-total-cache' ),
+						W3TC_TERMS_URL ) .
+					$buttons;
+			}
+		}
+
+		return $notes;
+	}
+
+
+
 	/**
 	 *
 	 *
 	 * @return string
 	 */
-	function update_license_status() {
+	private function maybe_update_license_status() {
+		$state = Dispatcher::config_state();
+		if ( time() < $state->get_integer( 'license.next_check' ) ) {
+			return;
+		}
+
+		$check_timeout = 3600 * 24 * 5;
 		$status = '';
+		$terms = '';
 		$license_key = $this->get_license_key();
 
 		$old_plugin_type = $this->_config->get_string( 'plugin.type' );
@@ -209,6 +275,7 @@ class Licensing_Plugin_Admin {
 
 			if ( $license ) {
 				$status = $license->license_status;
+				$terms = $license->license_terms;
 				if ( $this->_status_is( $status, 'active' ) ) {
 					$plugin_type = 'pro';
 				} elseif ( $this->_status_is( $status, 'inactive.by_rooturi' ) &&
@@ -223,6 +290,19 @@ class Licensing_Plugin_Admin {
 			$status = 'no_key';
 		}
 
+		if ( $status == 'no_key' ) {
+		} elseif ( $this->_status_is( $status, 'invalid' ) ) {
+		} elseif ( $this->_status_is( $status, 'inactive' ) ) {
+		} elseif ( $this->_status_is( $status, 'active' ) ) {
+		} else {
+			$check_timeout = 60;
+		}
+
+		$state->set( 'license.status', $status );
+		$state->set( 'license.next_check', time() + $check_timeout );
+		$state->set( 'license.terms', $terms );
+		$state->save();
+
 		if ( $old_plugin_type != $plugin_type ) {
 			try {
 				$this->_config->set( 'plugin.type', $plugin_type );
@@ -233,17 +313,16 @@ class Licensing_Plugin_Admin {
 		return $status;
 	}
 
-	/**
-	 *
-	 *
-	 * @return string
-	 */
+
+
 	function get_license_key() {
 		$license_key = $this->_config->get_string( 'plugin.license_key', '' );
 		if ( $license_key == '' )
 			$license_key = ini_get( 'w3tc.license_key' );
 		return $license_key;
 	}
+
+
 
 	function action_verify_plugin_license_key() {
 		$license = Util_Request::get_string( 'license_key', '' );

@@ -35,7 +35,7 @@ class WCML_Custom_Prices{
     }
 
     public function get_product_custom_prices( $product_id, $currency = false ){
-        global $wpdb, $sitepress;
+        global $wpdb;
 
         if( empty( $currency ) ){
             $currency = $this->woocommerce_wpml->multi_currency->get_client_currency();
@@ -51,19 +51,7 @@ class WCML_Custom_Prices{
 	    $cache_custom_prices = wp_cache_get( $cache_key, $cache_group, false, $cache_found );
 	    if( $cache_found ) return $cache_custom_prices;
 
-
-	    $original_product_id = $product_id;
-        $post_type = get_post_type($product_id);
-        $product_translations = $sitepress->get_element_translations($sitepress->get_element_trid($product_id, 'post_'.$post_type), 'post_'.$post_type);
-        foreach($product_translations as $translation){
-            if( $translation->original ){
-                $original_product_id = $translation->element_id;
-                break;
-            }
-        }
-
-        $product_meta = get_post_custom($original_product_id);
-
+        $product_meta = get_post_custom( $this->woocommerce_wpml->products->get_original_product_id( $product_id ) );
         $custom_prices = false;
 
         if( !empty( $product_meta['_wcml_custom_prices_status'][0] ) ){
@@ -309,7 +297,7 @@ class WCML_Custom_Prices{
 
     private function load_custom_prices_js_css(){
         wp_register_style( 'wpml-wcml-prices', WCML_PLUGIN_URL . '/res/css/wcml-prices.css', null, WCML_VERSION );
-        wp_register_script( 'wcml-tm-scripts-prices', WCML_PLUGIN_URL . '/res/js/prices' . WCML_JS_MIN . '.js', array( 'jquery' ), WCML_VERSION );
+        wp_register_script( 'wcml-tm-scripts-prices', WCML_PLUGIN_URL . '/res/js/prices' . WCML_JS_MIN . '.js', array( 'jquery' ), WCML_VERSION, true );
 
         wp_enqueue_style('wpml-wcml-prices');
         wp_enqueue_script('wcml-tm-scripts-prices');
@@ -408,14 +396,17 @@ class WCML_Custom_Prices{
                     $date_to = isset( $_POST[ '_custom_sale_price_dates_to' ][ $code ] ) ? strtotime( $_POST[ '_custom_sale_price_dates_to' ][ $code ] ) : '';
                     $schedule = $_POST[ '_wcml_schedule' ][ $code ];
 
-                    $custom_prices = apply_filters( 'wcml_update_custom_prices_values',
-                        array( '_regular_price' => $regular_price,
-                            '_sale_price' => $sale_price,
-                            '_wcml_schedule' => $schedule,
-                            '_sale_price_dates_from' => $date_from,
-                            '_sale_price_dates_to' => $date_to ),
-                        $code
-                    );
+	                $custom_prices = apply_filters( 'wcml_update_custom_prices_values',
+		                array(
+			                '_regular_price'         => $regular_price,
+			                '_sale_price'            => $sale_price,
+			                '_wcml_schedule'         => $schedule,
+			                '_sale_price_dates_from' => $date_from,
+			                '_sale_price_dates_to'   => $date_to
+		                ),
+		                $code,
+		                $post_id
+	                );
                     $product_price = $this->update_custom_prices( $post_id, $custom_prices , $code );
 
                     do_action( 'wcml_after_save_custom_prices', $post_id, $product_price, $custom_prices, $code );

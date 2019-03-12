@@ -505,6 +505,10 @@ msgstr "غير متاح"
 msgid "Not detected"
 msgstr "لم يتم الاكتشاف"
 
+#: ../inc/lightbox/self_test.php:202
+msgid "(required for Self-hosted (<acronym title=\"File Transfer Protocol\">FTP</acronym>) <acronym title=\"Content Delivery Network\">CDN</acronym> <acronym title=\"Secure File Transfer Protocol\">SFTP</acronym> support)"
+msgstr ""
+
 #: inc/lightbox/self_test.php:213
 msgid "(required for disk enhanced Page Cache and Browser Cache)"
 msgstr ""
@@ -968,7 +972,7 @@ msgid "cache with max-age (\"public, max-age=EXPIRES_SECONDS\")"
 msgstr ""
 
 #: inc/options/browsercache.php:166
-msgid "cache with validation (\"public, must-revalidate, proxy-revalidate\""
+msgid "cache with validation (\"public, must-revalidate, proxy-revalidate\")"
 msgstr ""
 
 #: inc/options/browsercache.php:167 inc/options/browsercache.php:257
@@ -984,7 +988,7 @@ msgid "cache without proxy (\"private, must-revalidate\")"
 msgstr ""
 
 #: inc/options/browsercache.php:169
-msgid "no-cache (\"max-age=0, private, no-store, no-cache, must-revalidate\""
+msgid "no-cache (\"max-age=0, private, no-store, no-cache, must-revalidate\")"
 msgstr ""
 
 #: inc/options/browsercache.php:211
@@ -2211,7 +2215,7 @@ msgstr ""
 
 #: inc/options/general.php:758
 msgid ""
-"If selected, detailed caching information will be appear at the end of each "
+"If selected, detailed caching information will appear at the end of each "
 "page in a <acronym title=\"Hypertext Markup Language\">HTML</acronym> "
 "comment. View a page's source code to review."
 msgstr ""
@@ -3690,6 +3694,22 @@ msgid ""
 "Some <acronym>CDN</acronym> providers may or may not support <acronym title="
 "\"Secure Sockets Layer\">SSL</acronym>, contact your vendor for more "
 "information."
+msgstr ""
+
+#: inc/options/cdn/ftp.php:67
+msgid "Use default <acronym title=\"Secure Shell\">SSH</acronym> public/private key files"
+msgstr ""
+
+#: inc/options/cdn/ftp.php:68
+msgid "Enable this option if you don't have special public/private key files."
+msgstr ""
+
+#: inc/options/cdn/ftp.php:72
+msgid "<acronym title=\"Secure File Transfer Protocol\">SFTP</acronym> public key:"
+msgstr ""
+
+#: inc/options/cdn/ftp.php:79
+msgid "<acronym title=\"Secure File Transfer Protocol\">SFTP</acronym> private key:"
 msgstr ""
 
 #: inc/options/cdn/akamai.php:55 inc/options/cdn/att.php:28

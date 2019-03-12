@@ -16,7 +16,7 @@
  * Plugin Name:       GDPR Cookie Consent
  * Plugin URI:        https://www.webtoffee.com/product/gdpr-cookie-consent/
  * Description:       A simple way to show your website complies with the EU Cookie Law / GDPR.
- * Version:           1.7.0
+ * Version:           1.7.5
  * Author:            WebToffee
  * Author URI:        http://cookielawinfo.com/
  * License:           GPLv3
@@ -63,7 +63,7 @@ define ( 'CLI_POST_TYPE','cookielawinfo');
  * Currently plugin version.
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'CLI_VERSION', '1.7.0' );
+define( 'CLI_VERSION', '1.7.5' );
 
 
 /**
@@ -120,7 +120,7 @@ function uninstall_cookie_law_info()
             {
                 delete_post_meta( $post->ID, "_cli_cookie_type", $custom["_cli_cookie_type"][0] );
             }
-            if ( isset ( $custom["_cli_cookie_duration"][0] ) ) 
+            if(isset( $custom["_cli_cookie_duration"][0] ) ) 
             {
                 delete_post_meta( $post->ID, "_cli_cookie_duration", $custom["_cli_cookie_duration"][0] );
             }               

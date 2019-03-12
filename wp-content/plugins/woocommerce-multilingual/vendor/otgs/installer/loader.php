@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 //It should only be loaded on the admin side
-if ( ! ( defined( 'DOING_CRON' ) && DOING_CRON ) && ! is_admin() ) {
+if ( ! ( defined( 'DOING_CRON' ) && DOING_CRON ) && ! is_admin() && ! ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 	if ( ! function_exists( 'WP_Installer_Setup' ) ) {
 		function WP_Installer_Setup() {
 		}
@@ -22,7 +22,7 @@ $wp_installer_instance = dirname( __FILE__ ) . '/installer.php';
 global $wp_installer_instances;
 $wp_installer_instances[ $wp_installer_instance ] = array(
 	'bootfile' => $wp_installer_instance,
-	'version'  => '1.8.21'
+	'version'  => '1.9.0'
 );
 
 
@@ -85,15 +85,13 @@ if ( ! function_exists( 'wpml_installer_instance_delegator' ) ) {
 		global $wp_installer_instances;
 
 		// version based election
-		foreach ( $wp_installer_instances as $instance ) {
+		foreach ( $wp_installer_instances as $instance_key => $instance ) {
+			$wp_installer_instances[ $instance_key ]['delegated'] = false;
 
-			if ( ! isset( $delegate ) ) {
+			if ( ! isset( $delegate ) || version_compare( $instance['version'], $delegate['version'], '>' ) ) {
 				$delegate = $instance;
-				continue;
-			}
 
-			if ( version_compare( $instance['version'], $delegate['version'], '>' ) ) {
-				$delegate = $instance;
+				$wp_installer_instances[ $instance_key ]['delegated'] = true;
 			}
 		}
 
@@ -123,7 +121,7 @@ if ( ! function_exists( 'wpml_installer_instance_delegator' ) ) {
 		include_once $delegate['bootfile'];
 
 		// set configuration
-		if ( strpos( realpath( $delegate['bootfile'] ), realpath( TEMPLATEPATH ) ) === 0 ) {
+		if ( strpos( realpath( $delegate['bootfile'] ), (string) realpath( TEMPLATEPATH ) ) === 0 ) {
 			$delegate['args']['in_theme_folder'] = dirname( ltrim( str_replace( realpath( TEMPLATEPATH ), '', realpath( $delegate['bootfile'] ) ), '\\/' ) );
 		}
 		if ( isset( $delegate['args'] ) && is_array( $delegate['args'] ) ) {

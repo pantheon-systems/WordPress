@@ -10,7 +10,7 @@ if ( !empty( $details['error_message'] ) )
 	echo '<div class="error">' . $details['error_message'] . '</div>';
 ?>
     <div class="metabox-holder">
-        <?php Util_Ui::postbox_header( __( 'CNAMEs to use', 'w3-total-cache' ) ); ?>
+        <?php Util_Ui::postbox_header( __( '<acronym title="Canonical Name">CNAME</acronym>s to use', 'w3-total-cache' ) ); ?>
         <?php $cname_class = 'w3tc-ignore-change'; include W3TC_INC_DIR . '/options/cdn/common/cnames.php'; ?>
         <br />
         <span class="description"><?php _e( 'Enter hostname mapped to <acronym title="Content Delivery Network">CDN</acronym> host, this value will replace your site\'s hostname in the <acronym title="Hypertext Markup Language">HTML</acronym>.', 'w3-total-cache' ); ?></span>

@@ -86,40 +86,26 @@ class woocommerce_wpml {
 
     }
 
-    private function load_rest_api(){
+    private function load_rest_api() {
 	    global $sitepress, $wpdb, $wpml_query_filter, $wpml_post_translations;
 
 	    $WCML_REST_API = new WCML_REST_API();
 
-	    if ( class_exists( 'WooCommerce' ) && defined( 'WC_VERSION' ) && ! is_null( $sitepress ) ) {
-		    if ( version_compare( WC_VERSION, '2.6', '>=' ) && $WCML_REST_API->is_rest_api_request() ) {
-			    $wcml_rest_api_query_filters_products = new WCML_REST_API_Query_Filters_Products( $wpml_query_filter );
-			    $wcml_rest_api_query_filters_orders   = new WCML_REST_API_Query_Filters_Orders( $wpdb );
-			    $wcml_rest_api_query_filters_terms    = new WCML_REST_API_Query_Filters_Terms( $sitepress );
-			    if( 1 === $WCML_REST_API->get_api_request_version() ) {
-				    $wcml_rest_api_support = new WCML_REST_API_Support_V1(
-					    $this,
-					    $sitepress,
-					    $wcml_rest_api_query_filters_products,
-					    $wcml_rest_api_query_filters_orders,
-					    $wcml_rest_api_query_filters_terms,
-					    $wpml_post_translations
-				    );
-			    }else{
-				    $wcml_rest_api_support = new WCML_REST_API_Support(
-					    $this,
-					    $sitepress,
-					    $wpdb,
-					    $wcml_rest_api_query_filters_products,
-					    $wcml_rest_api_query_filters_orders,
-					    $wcml_rest_api_query_filters_terms,
-					    $wpml_post_translations
-				    );
-			    }
-			    $wcml_rest_api_support->add_hooks();
-		    } else {
-			    new WCML_WooCommerce_Rest_API_Support( $this, $sitepress );
-		    }
+	    if ( class_exists( 'WooCommerce' ) && defined( 'WC_VERSION' ) && ! is_null( $sitepress ) && $WCML_REST_API->is_rest_api_request() ) {
+		    $wcml_rest_api_query_filters_products = new WCML_REST_API_Query_Filters_Products( $wpml_query_filter );
+		    $wcml_rest_api_query_filters_orders   = new WCML_REST_API_Query_Filters_Orders( $wpdb );
+		    $wcml_rest_api_query_filters_terms    = new WCML_REST_API_Query_Filters_Terms( $sitepress );
+
+		    $wcml_rest_api_support = new WCML_REST_API_Support(
+			    $this,
+			    $sitepress,
+			    $wcml_rest_api_query_filters_products,
+			    $wcml_rest_api_query_filters_orders,
+			    $wcml_rest_api_query_filters_terms,
+			    $wpml_post_translations
+		    );
+
+		    $wcml_rest_api_support->add_hooks();
 	    }
     }
 
@@ -133,7 +119,7 @@ class woocommerce_wpml {
 	}
 
     public function init(){
-        global $sitepress, $wpdb, $woocommerce, $wpml_url_converter;
+        global $sitepress, $wpdb, $woocommerce, $wpml_url_converter, $wpml_post_translations, $wpml_term_translations;
 
         $this->load_rest_api();
 
@@ -198,10 +184,10 @@ class woocommerce_wpml {
 	        $wcml_pointers->add_hooks();
         }
 
-        $this->sync_product_data    = new WCML_Synchronize_Product_Data( $this, $sitepress, $wpdb );
+        $this->sync_product_data    = new WCML_Synchronize_Product_Data( $this, $sitepress, $wpml_post_translations, $wpdb );
         $this->sync_product_data->add_hooks();
         $this->duplicate_product    = new WCML_WC_Admin_Duplicate_Product( $this, $sitepress, $wpdb );
-        $this->products             = new WCML_Products( $this, $sitepress, $wpdb );
+        $this->products             = new WCML_Products( $this, $sitepress, $wpml_post_translations, $wpdb );
         $this->products->add_hooks();
         $this->store                = new WCML_Store_Pages ($this, $sitepress ) ;
 	    $this->store->add_hooks();
@@ -211,7 +197,7 @@ class woocommerce_wpml {
 		$this->emails->add_hooks();
         $this->terms                = new WCML_Terms( $this, $sitepress, $wpdb );
         $this->terms->add_hooks();
-		$this->attributes           = new WCML_Attributes( $this, $sitepress, $wpdb );
+		$this->attributes           = new WCML_Attributes( $this, $sitepress, $wpml_post_translations, $wpml_term_translations, $wpdb );
         $this->attributes->add_hooks();
         $this->orders               = new WCML_Orders( $this, $sitepress );
         $this->shipping             = new WCML_WC_Shipping( $sitepress );
@@ -219,7 +205,8 @@ class woocommerce_wpml {
         $this->gateways             = new WCML_WC_Gateways( $this, $sitepress );
         $this->url_translation      = new WCML_Url_Translation ( $this, $sitepress, $wpdb );
 	    $this->url_translation->set_up();
-	    $this->endpoints            = new WCML_Endpoints( $this );
+	    $this->endpoints            = new WCML_Endpoints( $this, $sitepress, $wpdb );
+	    $this->endpoints->add_hooks();
         $this->requests             = new WCML_Requests;
         $this->cart                 = new WCML_Cart( $this, $sitepress, $woocommerce );
         $this->cart->add_hooks();
@@ -236,7 +223,7 @@ class woocommerce_wpml {
         $this->wcml_products_screen->init();
         $this->cart_sync_warnings = new WCML_Cart_Sync_Warnings( $this, $sitepress );
         $this->cart_sync_warnings->add_hooks();
-	    $this->comments = new WCML_Comments( $this, $sitepress );
+	    $this->comments = new WCML_Comments( $this, $sitepress, $wpml_post_translations );
 	    $this->comments->add_hooks();
 
 	    $payment_method_filter = new WCML_Payment_Method_Filter();
@@ -244,8 +231,6 @@ class woocommerce_wpml {
 
 	    $wcml_ajax_setup = new WCML_Ajax_Setup( $sitepress );
 	    $wcml_ajax_setup->add_hooks();
-        new WCML_Fix_Copied_Custom_Fields_WPML353();
-
         WCML_Install::initialize( $this, $sitepress );
 
         WCML_Resources::set_up_resources( $this, $sitepress );
@@ -399,5 +384,10 @@ class woocommerce_wpml {
 	 */
 	public function js_min_suffix(){
 		return WCML_JS_MIN;
+	}
+
+	public function is_wpml_prior_4_2(){
+		global $sitepress;
+		return $sitepress->get_wp_api()->version_compare( $sitepress->get_wp_api()->constant( 'ICL_SITEPRESS_VERSION' ), '4.2.0', '<' ) || $sitepress->get_wp_api()->version_compare( $sitepress->get_wp_api()->constant( 'WPML_TM_VERSION' ), '2.8.0', '<' );
 	}
 }

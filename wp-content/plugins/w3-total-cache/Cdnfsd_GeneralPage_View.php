@@ -5,9 +5,9 @@ if ( !defined( 'W3TC' ) )
 	die();
 
 ?>
-<p><?php _e( 'Host whole website with your full site content delivery network provider to reduce page load time.', 'w3-total-cache' ); ?>
+<p><?php w3tc_e( 'cdnfsd.general.header', 'Host the entire website with your compatible <acronym title="Content Delivery Network">CDN</acronym> provider to reduce page load time.' ) ?>
 <?php if ( !$cdnfsd_enabled ): ?>
-<?php printf( __( ' If you do not have a <acronym title="Content Delivery Network">CDN</acronym> provider try MaxCDN. <a href="%s" target="_blank">Sign up and save 25&#37;</a>.', 'w3-total-cache' ), wp_nonce_url( Util_Ui::admin_url( 'admin.php?page=w3tc_dashboard&w3tc_cdn_maxcdn_signup' ), 'w3tc' ) ); ?>
+<?php printf( __( ' If you do not have a <acronym title="Content Delivery Network">CDN</acronym> provider try StackPath. <a href="%s" target="_blank">Sign up now to enjoy a special offer!</a>.', 'w3-total-cache' ), wp_nonce_url( Util_Ui::admin_url( 'admin.php?page=w3tc_dashboard&w3tc_cdn_maxcdn_signup' ), 'w3tc' ) ); ?>
 <?php endif ?>
 </p>
 <table class="form-table">
@@ -18,7 +18,7 @@ Util_Ui::config_item( array(
 		'control' => 'checkbox',
 		'checkbox_label' => __( 'Enable', 'w3-total-cache' ),
 		'disabled' => ( $is_pro ? null : true ),
-		'description' => __( 'Whole website will appear to load instantly for site visitors.',
+		'description' => __( 'The entire website will load quickly for site visitors.',
 			'w3-total-cache' ) .
 			( $is_pro ? '' : __( ' <strong>Available after upgrade.</strong>', 'w3-total-cache' ) )
 	) );

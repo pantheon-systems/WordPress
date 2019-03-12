@@ -102,12 +102,7 @@ class WCML_Coupons {
 	 */
 	public function is_valid_for_product( $valid, $product, $object, $values ) {
 
-		if ( version_compare( WC()->version, '3.0', '<' ) ) {
-			$product_id = $product->is_type( 'variation' ) ? $product->parent->id : $product->id;
-		} else {
-			$product_id = $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id();
-		}
-
+		$product_id = $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id();
 		$translated_product_id = apply_filters( 'translate_object_id', $product_id, 'product', false, $this->sitepress->get_current_language() );
 
 		if ( $translated_product_id && $product_id !== $translated_product_id ) {

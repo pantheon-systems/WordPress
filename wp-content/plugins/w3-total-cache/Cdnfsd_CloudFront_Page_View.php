@@ -40,14 +40,14 @@ _e( 'Specify account credentials:',
 			<?php if ( $authorized ): ?>
 			<tr>
 				<th>
-					<label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> CNAME:', 'w3-total-cache' ); ?></label>
+					<label><?php _e( '<acronym title="Content Delivery Network">CDN</acronym> <acronym title="Canonical Name">CNAME</acronym>:', 'w3-total-cache' ); ?></label>
 				</th>
 				<td class="w3tc_config_value_text">
 					<?php
 echo $config->get_string( 'cdnfsd.cloudfront.distribution_domain' )
 ?><br />
 					<span class="description">
-						This website domain has to be CNAME pointing to this
+						The website domain has to be a CNAME pointing to this
 						<acronym title="Content Delivery Network">CDN</acronym> domain
 					</span>
 				</td>

@@ -14,13 +14,13 @@ class Extension_CloudFlare_Widget {
 		add_action( 'w3tc_widget_setup', array(
 				$this,
 				'w3tc_widget_setup'
-			) );
+			), 10000 );
 	}
 
 
 
 	function w3tc_widget_setup() {
-		Util_Widget::add( 'w3tc_cloudflare', 
+		Util_Widget::add( 'w3tc_cloudflare',
 			'<div class="w3tc_cloudflare_widget_logo"></div>',
 			array( $this, 'widget_form' ),
 			Util_Ui::admin_url( 'admin.php?page=w3tc_general#cloudflare' ),
@@ -51,7 +51,7 @@ class Extension_CloudFlare_Widget {
 		} catch ( \Exception $e ) {
 			$stats = null;
 		}
-		
+
 		include  W3TC_DIR . '/Extension_CloudFlare_Widget_View.php';
 	}
 
