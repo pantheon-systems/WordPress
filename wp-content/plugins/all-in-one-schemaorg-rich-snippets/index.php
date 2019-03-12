@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: All In One Schema Rich Snippets
+Plugin Name: Schema - All In One Schema Rich Snippets
 Plugin URI: https://www.brainstormforce.com
 Author: Brainstorm Force
 Author URI: https://www.brainstormforce.com
-Description: Welcome to the All In One Schema Rich Snippet! You can now easily add schema markup on various pages and posts of your website. Implement schema types such as Review, Events, Recipes, Article, Products, Services etc.
-Version: 1.5.5
+Description: Welcome to the Schema - All In One Schema Rich Snippets! You can now easily add schema markup on various pages and posts of your website. Implement schema types such as Review, Events, Recipes, Article, Products, Services etc.
+Version: 1.5.6
 Text Domain: rich-snippets
 License: GPL2
 */
-/*  Copyright 2013 All in One Rich Snippets (email : info@bsf.io)
+/*  Copyright 2013 Schema - All In One Schema Rich Snippets (email : info@bsf.io)
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
     published by the Free Software Foundation.

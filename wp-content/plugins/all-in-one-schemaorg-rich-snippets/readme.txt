@@ -1,10 +1,10 @@
-=== All In One Schema Rich Snippets ===
+=== Schema - All In One Schema Rich Snippets ===
 Contributors: brainstormforce
 Donate link: https://www.paypal.me/BrainstormForce
 Tags: schema markup, structured data, rich snippets, schema.org, Microdata, schema
 Requires at least: 3.7
 Tested up to: 5.1
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Boost CTR. Improve SEO & Rankings. Supports most of the content type. Works perfectly with Google, Bing, Yahoo & Facebook.
@@ -80,124 +80,129 @@ Review, Event, People, Product, Recipe, Software Application, Video, Articles et
 
 == Changelog ==
 
+= 1.5.6 =
+- Improvement: Updated plugin name - `All In One Schema Rich Snippets` to `Schema - All In One Schema Rich Snippets`.
+- Improvement: Updated product availability strings according to the Google requirement.
+- Improvement: Added alt tag to the publisher image for SEMrush plugin compatibility.
+
 = 1.5.5 =
-* Fix: Schema markup displayed before the post content or hidden when page content is built using a page builder plugin.
+- Fix: Schema markup displayed before the post content or hidden when page content is built using a page builder plugin.
 
 = 1.5.4 =
-* Improvement: Dashboard UI Updated.
-* Fix: Removed publisher logo width-height meta tags.
-* Fix: Removed default border CSS for images in frontend.
+- Improvement: Dashboard UI Updated.
+- Fix: Removed publisher logo width-height meta tags.
+- Fix: Removed default border CSS for images in frontend.
 
 = 1.5.3 =
-* Improvement: Updated schema exiting action and enqueue files function.
+- Improvement: Updated schema exiting action and enqueue files function.
 
 = 1.5.2 =
-* Fix: Frontend Summary box structure validation issue.
-* Fix: Editor object undefined issue lead js issue in the page.
+- Fix: Frontend Summary box structure validation issue.
+- Fix: Editor object undefined issue lead js issue in the page.
 
 = 1.5.1 =
-* Fix: Plugin outputting extra output causing Ajax calls to break after last update.
+- Fix: Plugin outputting extra output causing Ajax calls to break after last update.
 
 = 1.5.0 =
-* Improvement: Improved overall the security of the plugin by using sanitization and escaping the attributes wherever possible, checking nounce and user capabilities before any actions are performed.
-* Fix: XSS Vulnerability in the settings page, Thanks for the report Neven Biruski (DefenseCode).
-* Fix: Missing closing div tag in the generated schema markup breaking style for some themes.
-* Fix: Load the external scripts without protocol to prevent it from breaking on https sites.
+- Improvement: Improved overall the security of the plugin by using sanitization and escaping the attributes wherever possible, checking nounce and user capabilities before any actions are performed.
+- Fix: XSS Vulnerability in the settings page, Thanks for the report Neven Biruski (DefenseCode).
+- Fix: Missing closing div tag in the generated schema markup breaking style for some themes.
+- Fix: Load the external scripts without protocol to prevent it from breaking on https sites.
 
 = 1.4.4 =
-* Fix: PHP fatal error to older version of PHP
+- Fix: PHP fatal error to older version of PHP
 
 = 1.4.3 =
-* Fix: WooCommerce Support Added
+- Fix: WooCommerce Support Added
 
 = 1.4.2 =
-* Improvement: Added company/organization and address in people schema. 
-* Improvement: Added nutrition & ingredients in recipe schema. 
-* Improvement: Added software image & operating system in software application schema. 
-* Improvement: Added video description in software application schema. 
-* Improvement: Added author, publisher - organization and publisher logo in article schema. 
-* Improvement: Added provider location, provider location image, and telephone in service schema. 
-* Improvement: Changes admin bar test rich snippet redirect link to the structured data testing tool.
-* Fix: removed all error in schema according to structured data testing tool.
+- Improvement: Added company/organization and address in people schema. 
+- Improvement: Added nutrition & ingredients in recipe schema. 
+- Improvement: Added software image & operating system in software application schema. 
+- Improvement: Added video description in software application schema. 
+- Improvement: Added author, publisher - organization and publisher logo in article schema. 
+- Improvement: Added provider location, provider location image, and telephone in service schema. 
+- Improvement: Changes admin bar test rich snippet redirect link to the structured data testing tool.
+- Fix: removed all error in schema according to structured data testing tool.
 
 = 1.4.1 =
-* Fix: Compatibility fix WordPress 4.7.
+- Fix: Compatibility fix WordPress 4.7.
 
 = 1.4.0 =
-* Added new service schema
-* Minor CSS fixes
+- Added new service schema
+- Minor CSS fixes
 
 = 1.3.0 =
-* Improvement: Updated markup data to meet Google Structured data guidelines
-* Fixed: WordPress 4.4 compatibility
-* Fixed: Admin UI on small screens
+- Improvement: Updated markup data to meet Google Structured data guidelines
+- Fixed: WordPress 4.4 compatibility
+- Fixed: Admin UI on small screens
 
 = 1.2.0 =
-* Improvement: WordPress 4.0 compatibility
-* Fixed: Colorpicker breaking other plugins colorpicker settings.
+- Improvement: WordPress 4.0 compatibility
+- Fixed: Colorpicker breaking other plugins colorpicker settings.
 
 = 1.1.9 =
-* Fixed: Image uploading in meta issue resolved.
-* Fixed: Compatibility with WordPress 3.9
+- Fixed: Image uploading in meta issue resolved.
+- Fixed: Compatibility with WordPress 3.9
 
 = 1.1.8 =
-* Fixed: CSS and JS now loads on the page / post where rich snippets are configured.
+- Fixed: CSS and JS now loads on the page / post where rich snippets are configured.
 
 = 1.1.7 =
-* Improvement: Added "Test Rich Snippets" menu in admin bar for testing rich snippets in Google Webmasters Tools
-* Fixed: retina.js issue resolved
-* Removed unnecessary code
+- Improvement: Added "Test Rich Snippets" menu in admin bar for testing rich snippets in Google Webmasters Tools
+- Fixed: retina.js issue resolved
+- Removed unnecessary code
 
 = 1.1.6 =
-* Improvement: Compatibility with WordPres 3.8
-* Fixed: Admin CSS breaking tabs in WP 3.8
-* Added - reference post url field in "contact developers" form on settings page
+- Improvement: Compatibility with WordPres 3.8
+- Fixed: Admin CSS breaking tabs in WP 3.8
+- Added - reference post url field in "contact developers" form on settings page
 
 = 1.1.5 =
-* Improvement: Replaced rating 'count' with 'votes' on products - as directed by Google
-* Fixed: Article snippet not displaying accurate when snippet title is blank
-* Fixed: Recipe string 'Published on' can be changed.
+- Improvement: Replaced rating 'count' with 'votes' on products - as directed by Google
+- Fixed: Article snippet not displaying accurate when snippet title is blank
+- Fixed: Recipe string 'Published on' can be changed.
 
 = 1.1.4 =
-* Fixed:  Illegal string offset `user_rating` Warning
+- Fixed:  Illegal string offset `user_rating` Warning
 
 = 1.1.3 =
-* Improvement : Network Activation
+- Improvement : Network Activation
 
 = 1.1.2 =
-* Fixed: Edit media functionality.
+- Fixed: Edit media functionality.
 
 = 1.1.1 =
-* Added: Article type
-* Added: Compatibility with WooThemes Plugins and themes
-* Added: New Media Manager for uploading images in metabox
+- Added: Article type
+- Added: Compatibility with WooThemes Plugins and themes
+- Added: New Media Manager for uploading images in metabox
 
 = 1.1.0 =
-* Added: Admin options
-* Fixed: Ratings on recipe, products and software application
-* Improvement: Admin options for customizing everything
-* Improvement: New snippet box design with responsive layout
+- Added: Admin options
+- Fixed: Ratings on recipe, products and software application
+- Improvement: Admin options for customizing everything
+- Improvement: New snippet box design with responsive layout
 
 = 1.0.4 =
-* Fixed: Rating on Comments
-* Fixed: On deleting any deactivated plugin
-* Fixed: Error message comming on commenting
-* Fixed: On post save draft
+- Fixed: Rating on Comments
+- Fixed: On deleting any deactivated plugin
+- Fixed: Error message comming on commenting
+- Fixed: On post save draft
 
 = 1.0.3 =
-* Clean up the code
-* Fixed: Plugin activation error
-* Fixed: Error on editing theme and plugin files.
-* Removed : Breadcrumbs
+- Clean up the code
+- Fixed: Plugin activation error
+- Fixed: Error on editing theme and plugin files.
+- Removed : Breadcrumbs
 
 = 1.0.2 =
-* Added: RDFa Breadcrumbs Plugin is now a part of All in One Schema.org Rich Snippets !
-* Added: Star rating and review for recipe
-* Fized: Recipe type
-* Fixed: Post update error
+- Added: RDFa Breadcrumbs Plugin is now a part of All in One Schema.org Rich Snippets !
+- Added: Star rating and review for recipe
+- Fized: Recipe type
+- Fixed: Post update error
 
 = 1.0.1 =
-* Minor Bugs Fixes
+- Minor Bugs Fixes
 
 = 1.0 =
-* Initial Release.
+- Initial Release.

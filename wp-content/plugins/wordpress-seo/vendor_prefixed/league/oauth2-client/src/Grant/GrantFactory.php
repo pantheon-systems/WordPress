@@ -61,7 +61,7 @@ class GrantFactory
     {
         // PascalCase the grant. E.g: 'authorization_code' becomes 'AuthorizationCode'
         $class = \str_replace(' ', '', \ucwords(\str_replace(['-', '_'], ' ', $name)));
-        $class = 'YoastSEO_Vendor\\League\\OAuth2\\Client\\Grant\\' . $class;
+        $class = 'League\\OAuth2\\Client\\Grant\\' . $class;
         $this->checkGrant($class);
         return $this->setGrant($name, new $class());
     }

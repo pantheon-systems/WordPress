@@ -388,14 +388,21 @@ function display_rich_snippet($content) {
 		$product_price = get_post_meta($post->ID, '_bsf_product_price', true);
 		$product_cur = get_post_meta($post->ID, '_bsf_product_cur', true);
 		$product_status = get_post_meta($post->ID, '_bsf_product_status', true);
-		if(trim($product_status) == "out_of_stock")
+		if(trim($product_status) == "out_of_stock"){
+			$product_status = 'OutOfStock';
 			$availability = "Out of Stock";
-		else if(trim($product_status) == "in_stock")
+		}
+		else if(trim($product_status) == "in_stock"){
+			$product_status = 'InStock';
 			$availability = "Available in Stock";
-		else if(trim($product_status) == "instore_only")
+		}
+		else if(trim($product_status) == "instore_only"){
+			$product_status = 'InStoreOnly';
 			$availability = "Available in Store Only";
-		else if(trim($product_status) == "preorder")
+		}
+		else if(trim($product_status) == "preorder"){
 			$availability = "Pre-Order Only";
+		}
 		if(trim($product_image) != "")
 		{
 			$product .= '<div class="snippet-image"><img width="180" src="'.esc_url($product_image ).'" itemprop="image" alt="product image" /></div>';
@@ -821,7 +828,7 @@ function display_rich_snippet($content) {
 						$article .= '<div class="snippet-label-img">'.esc_attr( stripslashes(  $args_article['article_publisher_logo'] ) ).'</div>';
 
 					$article .= '<div class="snippet-data-img publisher-logo" itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">';
-					$article .= '<img width="180" src="'.esc_url( $article_publisher_logo ).'"/>';
+					$article .= '<img width="180" src="'.esc_url( $article_publisher_logo ).'" alt="'.esc_attr( $article_publisher ).'" />';
 					$article .=	'<meta itemprop="url" content="'.esc_attr( $article_publisher_logo ).'">';
 					$article .=	'</div>';
 				}

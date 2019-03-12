@@ -7,11 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit285ce5245c749f6f79d48f1d93594eb5
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
-        array (
-            'Psr\\Log\\' => 8,
-            'Psr\\Container\\' => 14,
-        ),
         'C' => 
         array (
             'Composer\\Installers\\' => 20,
@@ -19,14 +14,6 @@ class ComposerStaticInit285ce5245c749f6f79d48f1d93594eb5
     );
 
     public static $prefixDirsPsr4 = array (
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
-        'Psr\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
@@ -39,27 +26,6 @@ class ComposerStaticInit285ce5245c749f6f79d48f1d93594eb5
             'xrstf\\Composer52' => 
             array (
                 0 => __DIR__ . '/..' . '/xrstf/composer-php52/lib',
-            ),
-        ),
-        'T' => 
-        array (
-            'Task' => 
-            array (
-                0 => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib',
-            ),
-        ),
-        'R' => 
-        array (
-            'Ruckusing' => 
-            array (
-                0 => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib',
-            ),
-        ),
-        'P' => 
-        array (
-            'Pimple' => 
-            array (
-                0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
         ),
     );
@@ -154,69 +120,6 @@ class ComposerStaticInit285ce5245c749f6f79d48f1d93594eb5
         'Composer\\Installers\\YawikInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/YawikInstaller.php',
         'Composer\\Installers\\ZendInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZendInstaller.php',
         'Composer\\Installers\\ZikulaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ZikulaInstaller.php',
-        'IdiormMethodMissingException' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
-        'IdiormResultSet' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
-        'IdiormString' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
-        'IdiormStringException' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
-        'ORM' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
-        'Pimple\\Container' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Container.php',
-        'Pimple\\Exception\\ExpectedInvokableException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/ExpectedInvokableException.php',
-        'Pimple\\Exception\\FrozenServiceException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/FrozenServiceException.php',
-        'Pimple\\Exception\\InvalidServiceIdentifierException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/InvalidServiceIdentifierException.php',
-        'Pimple\\Exception\\UnknownIdentifierException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/UnknownIdentifierException.php',
-        'Pimple\\Psr11\\Container' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Psr11/Container.php',
-        'Pimple\\Psr11\\ServiceLocator' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Psr11/ServiceLocator.php',
-        'Pimple\\ServiceIterator' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/ServiceIterator.php',
-        'Pimple\\ServiceProviderInterface' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/ServiceProviderInterface.php',
-        'Pimple\\Tests\\Fixtures\\Invokable' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Fixtures/Invokable.php',
-        'Pimple\\Tests\\Fixtures\\NonInvokable' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Fixtures/NonInvokable.php',
-        'Pimple\\Tests\\Fixtures\\PimpleServiceProvider' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Fixtures/PimpleServiceProvider.php',
-        'Pimple\\Tests\\Fixtures\\Service' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Fixtures/Service.php',
-        'Pimple\\Tests\\PimpleServiceProviderInterfaceTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/PimpleServiceProviderInterfaceTest.php',
-        'Pimple\\Tests\\PimpleTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/PimpleTest.php',
-        'Pimple\\Tests\\Psr11\\ContainerTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Psr11/ContainerTest.php',
-        'Pimple\\Tests\\Psr11\\ServiceLocatorTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Psr11/ServiceLocatorTest.php',
-        'Pimple\\Tests\\ServiceIteratorTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/ServiceIteratorTest.php',
-        'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
-        'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
-        'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
-        'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
-        'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
-        'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
-        'Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareInterface.php',
-        'Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareTrait.php',
-        'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
-        'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
-        'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
-        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-        'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-        'Ruckusing_Adapter_Base' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/Base.php',
-        'Ruckusing_Adapter_ColumnDefinition' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/ColumnDefinition.php',
-        'Ruckusing_Adapter_Interface' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/Interface.php',
-        'Ruckusing_Adapter_MySQL_Base' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/MySQL/Base.php',
-        'Ruckusing_Adapter_MySQL_TableDefinition' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/MySQL/TableDefinition.php',
-        'Ruckusing_Adapter_PgSQL_Base' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/PgSQL/Base.php',
-        'Ruckusing_Adapter_PgSQL_TableDefinition' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/PgSQL/TableDefinition.php',
-        'Ruckusing_Adapter_Sqlite3_Base' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/Sqlite3/Base.php',
-        'Ruckusing_Adapter_Sqlite3_TableDefinition' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/Sqlite3/TableDefinition.php',
-        'Ruckusing_Adapter_TableDefinition' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Adapter/TableDefinition.php',
-        'Ruckusing_BaseMigration' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Migration/Base.php',
-        'Ruckusing_Exception' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Exception.php',
-        'Ruckusing_FrameworkRunner' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/FrameworkRunner.php',
-        'Ruckusing_Migration_Base' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Migration/Base.php',
-        'Ruckusing_Task_Base' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Task/Base.php',
-        'Ruckusing_Task_Interface' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Task/Interface.php',
-        'Ruckusing_Task_Manager' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Task/Manager.php',
-        'Ruckusing_Util_Logger' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Util/Logger.php',
-        'Ruckusing_Util_Migrator' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Util/Migrator.php',
-        'Ruckusing_Util_Naming' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Ruckusing/Util/Naming.php',
-        'Task_Db_Generate' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Task/Db/Generate.php',
-        'Task_Db_Migrate' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Task/Db/Migrate.php',
-        'Task_Db_Schema' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Task/Db/Schema.php',
-        'Task_Db_Setup' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Task/Db/Setup.php',
-        'Task_Db_Status' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Task/Db/Status.php',
-        'Task_Db_Version' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Task/Db/Version.php',
-        'Task_Hello_World' => __DIR__ . '/..' . '/ruckusing/ruckusing-migrations/lib/Task/Hello/World.php',
         'WPSEO_Abstract_Capability_Manager' => __DIR__ . '/../..' . '/admin/capabilities/class-abstract-capability-manager.php',
         'WPSEO_Abstract_Post_Filter' => __DIR__ . '/../..' . '/admin/filters/class-abstract-post-filter.php',
         'WPSEO_Abstract_Role_Manager' => __DIR__ . '/../..' . '/admin/roles/class-abstract-role-manager.php',
@@ -433,6 +336,10 @@ class ComposerStaticInit285ce5245c749f6f79d48f1d93594eb5
         'WPSEO_Metabox_Tab' => __DIR__ . '/../..' . '/admin/metabox/interface-metabox-tab.php',
         'WPSEO_Metabox_Tab_Section' => __DIR__ . '/../..' . '/admin/metabox/class-metabox-tab-section.php',
         'WPSEO_Multiple_Keywords_Modal' => __DIR__ . '/../..' . '/admin/class-multiple-keywords-modal.php',
+        'WPSEO_MyYoast_Api_Request' => __DIR__ . '/../..' . '/inc/class-myyoast-api-request.php',
+        'WPSEO_MyYoast_Authentication_Exception' => __DIR__ . '/../..' . '/inc/exceptions/class-myyoast-authentication-exception.php',
+        'WPSEO_MyYoast_Bad_Request_Exception' => __DIR__ . '/../..' . '/inc/exceptions/class-myyoast-bad-request-exception.php',
+        'WPSEO_MyYoast_Invalid_JSON_Exception' => __DIR__ . '/../..' . '/inc/exceptions/class-myyoast-invalid-json-exception.php',
         'WPSEO_MyYoast_Proxy' => __DIR__ . '/../..' . '/admin/class-my-yoast-proxy.php',
         'WPSEO_Network_Admin_Menu' => __DIR__ . '/../..' . '/admin/menu/class-network-admin-menu.php',
         'WPSEO_Notification_Handler' => __DIR__ . '/../..' . '/admin/notifiers/interface-notification-handler.php',
@@ -481,7 +388,7 @@ class ComposerStaticInit285ce5245c749f6f79d48f1d93594eb5
         'WPSEO_Recalculate_Scores' => __DIR__ . '/../..' . '/admin/class-recalculate-scores.php',
         'WPSEO_Recalculate_Scores_Ajax' => __DIR__ . '/../..' . '/admin/ajax/class-recalculate-scores-ajax.php',
         'WPSEO_Recalculate_Terms' => __DIR__ . '/../..' . '/admin/recalculate/class-recalculate-terms.php',
-        'WPSEO_Recalibration_Beta' => __DIR__ . '/../..' . '/admin/class-recalibration-beta.php',
+        'WPSEO_Recalibration_Beta' => __DIR__ . '/../..' . '/deprecated/class-recalibration-beta.php',
         'WPSEO_Recalibration_Beta_Notification' => __DIR__ . '/../..' . '/deprecated/class-recalibration-beta-notification.php',
         'WPSEO_Register_Capabilities' => __DIR__ . '/../..' . '/admin/capabilities/class-register-capabilities.php',
         'WPSEO_Register_Roles' => __DIR__ . '/../..' . '/admin/roles/class-register-roles.php',
@@ -725,6 +632,7 @@ class ComposerStaticInit285ce5245c749f6f79d48f1d93594eb5
         'Yoast\\WP\\Free\\Models\\Primary_Term' => __DIR__ . '/../..' . '/src/models/primary-term.php',
         'Yoast\\WP\\Free\\Models\\SEO_Meta' => __DIR__ . '/../..' . '/src/models/seo-meta.php',
         'Yoast\\WP\\Free\\ORMWrapper' => __DIR__ . '/../..' . '/src/yoast-orm-wrapper.php',
+        'Yoast\\WP\\Free\\Oauth\\Client' => __DIR__ . '/../..' . '/src/oauth/client.php',
         'Yoast\\WP\\Free\\Watchers\\Indexable_Author_Watcher' => __DIR__ . '/../..' . '/src/watchers/indexable-author-watcher.php',
         'Yoast\\WP\\Free\\Watchers\\Indexable_Post_Watcher' => __DIR__ . '/../..' . '/src/watchers/indexable-post-watcher.php',
         'Yoast\\WP\\Free\\Watchers\\Indexable_Term_Watcher' => __DIR__ . '/../..' . '/src/watchers/indexable-term-watcher.php',
