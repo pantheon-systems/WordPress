@@ -34,7 +34,7 @@ add_action( 'nectar_hook_after_body_open', 'elixinol1_after_body_open' );
  * Fix issue with mobile menu breaking
  * @author Mayur Mohit
  */
-add_filter( 'wc_cart_fragments_params', 'elixinol1_cart_fragments_params', 20);
+add_filter( 'woocommerce_get_script_data', 'elixinol1_cart_fragments_params', 20);
 function elixinol1_cart_fragments_params( $params ) {
 	if ( false === $params ) {
 		$params = array( 'wc_ajax_url' => '/' );
