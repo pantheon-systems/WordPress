@@ -16,28 +16,27 @@
 class URE_Ajax_Processor {
 
     protected $lib = null;
-    protected $action = null;    
-    protected $debug = null;
-
+    protected $action = null;
     
-    public function __construct( ) {
+
+    public function __construct($lib) {
         
-        $this->lib = URE_Lib::get_instance();
-        $this->debug = ( defined('WP_PHP_UNIT_TEST') && WP_PHP_UNIT_TEST==true );
+        $this->lib = $lib;
         
     }
     // end of __construct()
     
     
     protected function get_action() {
-        $action = $this->lib->get_request_var( 'sub_action', 'post' );
+        $action = filter_input(INPUT_POST, 'sub_action', FILTER_SANITIZE_STRING);
         if (empty($action)) {
-            $action = $this->lib->get_request_var( 'sub_action', 'get' );
+            $action = filter_input(INPUT_GET, 'sub_action', FILTER_SANITIZE_STRING);
         }
-                
+        
+        $this->action = $action;
+        
         return $action;
     }
-    // end of get_action()
     
     
     protected function get_required_cap() {
@@ -53,31 +52,22 @@ class URE_Ajax_Processor {
     // end of get_required_cap()
     
     
-    protected function valid_nonce() {
+    protected function ajax_check_permissions() {
         
-        if ( !isset($_REQUEST['wp_nonce']) || !wp_verify_nonce( $_REQUEST['wp_nonce'], 'user-role-editor' ) ) {
+        if (!wp_verify_nonce($_REQUEST['wp_nonce'], 'user-role-editor')) {
             echo json_encode(array('result'=>'error', 'message'=>'URE: Wrong or expired request'));
-            return false;
-        } else {
-            return true;
+            die;
         }
-        
-    }
-    // end of check_nonce()
-    
-    
-    protected function user_can() {
         
         $capability = $this->get_required_cap();                
-        if ( !current_user_can( $capability ) ) {
-            echo json_encode( array('result'=>'error', 'message'=>'URE: Insufficient permissions') );
-            return false;
-        } else {
-            return true;
+        if (!current_user_can($capability)) {
+            echo json_encode(array('result'=>'error', 'message'=>'URE: Insufficient permissions'));
+            die;
         }
+        
     }
-    // end of check_user_cap()
-            
+    // end of ajax_check_permissions()
+    
     
     protected function get_caps_to_remove() {
     
@@ -90,8 +80,9 @@ class URE_Ajax_Processor {
     
                 
     protected function get_users_without_role() {
+        global $wp_roles;
         
-        $new_role = $this->lib->get_request_var( 'new_role', 'post' );
+        $new_role = filter_input(INPUT_POST, 'new_role', FILTER_SANITIZE_STRING);
         if (empty($new_role)) {
             $answer = array('result'=>'error', 'message'=>'Provide new role');
             return $answer;
@@ -102,14 +93,17 @@ class URE_Ajax_Processor {
             $assign_role->create_no_rights_role();
         }        
         
-        $wp_roles = wp_roles();        
+        if (!isset($wp_roles)) {
+            $wp_roles = new WP_Roles();
+        }
         if (!isset($wp_roles->roles[$new_role])) {
             $answer = array('result'=>'error', 'message'=>'Selected new role does not exist');
             return $answer;
         }
                 
-        $users = $assign_role->get_users_without_role();        
-        $answer = array( 'result'=>'success', 'users'=>$users, 'new_role'=>$new_role, 'message'=>'success' );
+        $users = $assign_role->get_users_without_role($new_role);
+        
+        $answer = array('result'=>'success', 'users'=>$users, 'new_role'=>$new_role, 'message'=>'success');
         
         return $answer;
     }
@@ -137,8 +131,7 @@ class URE_Ajax_Processor {
     
     
     protected function get_role_caps() {
-        
-        $role = $this->lib->get_request_var('role', 'post' );
+        $role = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
         if (empty($role)) {
             $answer = array('result'=>'error', 'message'=>'Provide role ID');
             return $answer;
@@ -172,7 +165,6 @@ class URE_Ajax_Processor {
     
     
     protected function _dispatch() {
-        
         switch ($this->action) {
             case 'get_caps_to_remove':
                 $answer = $this->get_caps_to_remove();
@@ -190,7 +182,7 @@ class URE_Ajax_Processor {
                 $answer = $this->get_role_caps();
                 break;
             default:
-                $answer = array('result' => 'error', 'message' => 'Unknown action "' . $this->action . '"');
+                $answer = array('result' => 'error', 'message' => 'unknown action "' . $this->action . '"');
         }
         
         return $answer;
@@ -203,19 +195,14 @@ class URE_Ajax_Processor {
      */    
     public function dispatch() {
         
-        $this->action = $this->get_action();
-        if ( !$this->valid_nonce() || !$this->user_can() ) {
-            die;
-        }
-        
+        $this->get_action();
+        $this->ajax_check_permissions();                
         $answer = $this->_dispatch();
         
         $json_answer = json_encode($answer);
         echo $json_answer;
         die;
-
-    }
-    // end of dispatch()
+    }    
     
 }
 // end of URE_Ajax_Processor

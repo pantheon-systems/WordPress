@@ -152,7 +152,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Checks whether or not a plugin is known within the Yoast SEO collection.
 	 *
-	 * @param string $plugin The plugin to search for.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return bool Whether or not the plugin is exists.
 	 */
@@ -172,7 +172,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Gets a specific plugin. Returns an empty array if it cannot be found.
 	 *
-	 * @param string $plugin The plugin to search for.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return array The plugin properties.
 	 */
@@ -187,7 +187,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Gets the version of the plugin.
 	 *
-	 * @param array $plugin The information available about the plugin.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return string The version associated with the plugin.
 	 */
@@ -202,7 +202,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Checks if there are dependencies available for the plugin.
 	 *
-	 * @param array $plugin The information available about the plugin.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return bool Whether or not there is a dependency present.
 	 */
@@ -213,7 +213,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Gets the dependencies for the plugin.
 	 *
-	 * @param array $plugin The information available about the plugin.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return array Array containing all the dependencies associated with the plugin.
 	 */
@@ -228,7 +228,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Checks if all dependencies are satisfied.
 	 *
-	 * @param array $plugin The information available about the plugin.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return bool Whether or not the dependencies are satisfied.
 	 */
@@ -246,7 +246,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Checks whether or not one of the plugins is properly installed and usable.
 	 *
-	 * @param array $plugin The information available about the plugin.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return bool Whether or not the plugin is properly installed.
 	 */
@@ -278,7 +278,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Checks for the availability of the plugin.
 	 *
-	 * @param array $plugin The information available about the plugin.
+	 * @param {string} $plugin The plugin to search for.
 	 *
 	 * @return bool Whether or not the plugin is available.
 	 */
@@ -289,7 +289,7 @@ class WPSEO_Plugin_Availability {
 	/**
 	 * Checks whether a dependency is available.
 	 *
-	 * @param array $dependency The information about the dependency to look for.
+	 * @param {string} $dependency The dependency to look for.
 	 *
 	 * @return bool Whether or not the dependency is available.
 	 */

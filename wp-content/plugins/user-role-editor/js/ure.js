@@ -274,14 +274,7 @@ jQuery(function ($) {
             buttons: {
                 'Delete Role': function () {
                     var user_role_id = $('#del_user_role').val();
-                    var question = '';
-                    if (user_role_id!=-1) {
-                        question = ure_data.delete_role +' "'+ user_role_id +'"';
-                    } else {
-                        question = $('#del_user_role').find('option:selected').text();
-                    }
-                    question += '?';
-                    if (!confirm(question)) {
+                    if (!confirm(ure_data.delete_role)) {
                         return false;
                     }
                     $(this).dialog('close');
@@ -456,12 +449,10 @@ function ure_apply_to_all_on_click(cb) {
 // end of ure_apply_to_all_on_click()
 
 
-// turn on checkbox back if clicked to turn off - for 'administrator' role only!
-function ure_turn_it_back( event ) {
-    
-    if ( 'administrator'===ure_current_role ) {
-        event.target.checked = true; 
-    }
+// turn on checkbox back if clicked to turn off
+function ure_turn_it_back(control) {
+
+    control.checked = true;
 
 }
 // end of ure_turn_it_back()
@@ -534,31 +525,21 @@ function ure_refresh_role_view(response) {
         return;
     }
     
-    // remove "Granted Only" filter is it was set before current role change
-    var granted_only = jQuery('#granted_only').prop('checked');
-    if (granted_only) {
-        jQuery('#granted_only').prop('checked', false);
-        ure_show_granted_caps_only();
-    }
-    
     ure_current_role = response.role_id;
     ure_current_role_name = response.role_name;        
     // Select capabilities granted to a newly selected role and exclude others
     jQuery('.ure-cap-cb').each(function () { // go through all capabilities checkboxes
         jQuery(this).prop('checked', response.caps.hasOwnProperty(this.id) && response.caps[this.id]);
-        if ( ure_data.do_not_revoke_from_admin ) {  
-            var el = document.getElementById(this.id);
-            if ( 'administrator'===ure_current_role ) {
-                el.addEventListener( 'click', ure_turn_it_back );
-            } else {
-                el.removeEventListener( 'click', ure_turn_it_back );
-            }
-        }
     }); 
     
     // Recalculate granted capabilities for capabilities groups
     ure_count_caps_in_groups();
-    ure_select_selectable_element(jQuery('#ure_caps_groups_list'), jQuery('#ure_caps_group_all'));    
+    ure_select_selectable_element(jQuery('#ure_caps_groups_list'), jQuery('#ure_caps_group_all'));
+    var granted_only = jQuery('#granted_only').prop('checked');
+    if (granted_only) {
+        jQuery('#granted_only').prop('checked', false);
+        ure_show_granted_caps_only();
+    }
     
     // additional options section
     jQuery('#additional_options').find(':checkbox').each(function() {   // go through all additional options checkboxes
@@ -586,7 +567,7 @@ function ure_role_change(role_name) {
 
 function ure_filter_capabilities(cap_id) {
     var div_list = jQuery('.ure-cap-div');
-    for (var i = 0; i < div_list.length; i++) {
+    for (i = 0; i < div_list.length; i++) {
         if (cap_id !== '' && div_list[i].id.substr(11).indexOf(cap_id) !== -1) {
             jQuery('#'+ div_list[i].id).addClass('ure_tag');
             div_list[i].style.color = '#27CF27';
@@ -595,6 +576,7 @@ function ure_filter_capabilities(cap_id) {
             jQuery('#'+ div_list[i].id).removeClass('ure_tag');
         }
     }
+    ;
 
 }
 // end of ure_filter_capabilities()
@@ -666,13 +648,13 @@ function ure_caps_refresh(group) {
 
 
 function ure_validate_columns(columns) {    
-    if (columns==1 || ure_main.selected_group==='all') {  
+    if (columns==1 || ure_main.selected_group=='all') {  
         return columns;
     }
     
     // Do not split list on columns in case it contains less then < 25 capabilities
-    for (var i=0; i<ure_main.caps_counter.length; i++) {
-        if (ure_main.caps_counter[i].id===ure_main.selected_group) {
+    for (i=0; i<ure_main.caps_counter.length; i++) {
+        if (ure_main.caps_counter[i].id==ure_main.selected_group) {
             if (ure_main.caps_counter[i].total<=25) {
                 columns = 1;
             }
@@ -699,7 +681,7 @@ function ure_init_caps_counter() {
     ure_main.caps_counter = new Array();
     jQuery('#ure_caps_groups_list li').each(function() {
         var group_id = jQuery(this).attr('id').substr(15);
-        var group_counter = {'id': group_id, 'total': 0, 'granted':0};
+        group_counter = {'id': group_id, 'total': 0, 'granted':0};
         ure_main.caps_counter.push(group_counter);
     });
     
@@ -712,7 +694,7 @@ function ure_count_caps_in_groups() {
     jQuery('.ure-cap-div').each(function () {
         var cap_div = jQuery(this);
         var capability = cap_div.attr('id').substr(12);
-        for (var i=0; i<ure_main.caps_counter.length; i++) {
+        for (i=0; i<ure_main.caps_counter.length; i++) {
             if (cap_div.hasClass(ure_main.class_prefix + ure_main.caps_counter[i].id)) {
                 ure_main.caps_counter[i].total++;
                 if (jQuery('#'+ capability).is(':checked')) {
@@ -722,7 +704,7 @@ function ure_count_caps_in_groups() {
         }
     });
     
-    for (var i=0; i<ure_main.caps_counter.length; i++) {
+    for (i=0; i<ure_main.caps_counter.length; i++) {
         var el = jQuery('#ure_caps_group_'+ ure_main.caps_counter[i].id);
         var old_text = el.text();
         var key_pos = old_text.indexOf('(');    // exclude (0/0) text if it is in string already
@@ -743,8 +725,8 @@ function ure_sizes_update() {
 }
 
 
-jQuery(window).resize(function () {
-    ure_sizes_update();
+jQuery(window).resize(function() {
+   ure_sizes_update(); 
 });
 
 
@@ -766,7 +748,7 @@ function ure_show_granted_caps_only() {
                 cap_div.addClass('hidden');
             }
         } else {
-            if (cap_div.hasClass('ure-deprecated') && !show_deprecated) {
+            if (cap_div.hasClass('deprecated') && !show_deprecated) {
                 return;
             }
             if (cap_div.hasClass('hidden')) {

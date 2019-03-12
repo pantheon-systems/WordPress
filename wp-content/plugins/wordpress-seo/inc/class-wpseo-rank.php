@@ -10,29 +10,10 @@
  */
 class WPSEO_Rank {
 
-	/**
-	 * @var string
-	 */
-	const BAD = 'bad';
-
-	/**
-	 * @var string
-	 */
-	const OK = 'ok';
-
-	/**
-	 * @var string
-	 */
-	const GOOD = 'good';
-
-	/**
-	 * @var string
-	 */
+	const BAD      = 'bad';
+	const OK       = 'ok';
+	const GOOD     = 'good';
 	const NO_FOCUS = 'na';
-
-	/**
-	 * @var string
-	 */
 	const NO_INDEX = 'noindex';
 
 	/**

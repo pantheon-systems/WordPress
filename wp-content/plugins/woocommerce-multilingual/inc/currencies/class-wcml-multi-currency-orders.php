@@ -139,7 +139,7 @@ class WCML_Multi_Currency_Orders {
 
 			$the_order = new WC_Order( get_the_ID() );
 			if ( $the_order ) {
-				$order_currency = $the_order->get_currency();
+				$order_currency = WooCommerce_Functions_Wrapper::get_order_currency( $the_order );
 
 				if ( ! $order_currency && isset( $_COOKIE['_wcml_order_currency'] ) ) {
 					$order_currency = $_COOKIE['_wcml_order_currency'];
@@ -290,10 +290,9 @@ class WCML_Multi_Currency_Orders {
 
 		if ( $item instanceof WC_Order_Item_Product ) {
 
-			if ( 'line_item' === $item->get_type() ) {
+			$original_product_id = $this->woocommerce_wpml->products->get_original_product_id( $item->get_product_id() );
 
-				$product_id          = $item->get_variation_id() ? $item->get_variation_id() : $item->get_product_id();
-				$original_product_id = $this->woocommerce_wpml->products->get_original_product_id( $product_id );
+			if ( 'line_item' === $item->get_type() ) {
 
 				$converted_price = get_post_meta( $original_product_id, '_price_' . $order_currency, true );
 
@@ -325,8 +324,7 @@ class WCML_Multi_Currency_Orders {
 			}
 		} else {
 
-			$product_id          = $item['variation_id'] ? $item['variation_id'] : $item['product_id'];
-			$original_product_id = $this->woocommerce_wpml->products->get_original_product_id( $product_id );
+			$original_product_id = $this->woocommerce_wpml->products->get_original_product_id( $item[ 'product_id' ] );
 
 			$converted_price = $converted_subtotal_price = $converted_total_price = get_post_meta( $original_product_id, '_price_' . $order_currency, true );
 
@@ -423,7 +421,7 @@ class WCML_Multi_Currency_Orders {
 	// handle currency in order emails before handled in woocommerce
 	public function fix_currency_before_order_email( $order ) {
 
-		$order_currency = $order->get_currency();
+		$order_currency = WooCommerce_Functions_Wrapper::get_order_currency( $order );
 
 		if ( ! $order_currency ) {
 			return;

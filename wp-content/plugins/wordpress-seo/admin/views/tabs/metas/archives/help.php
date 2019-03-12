@@ -3,6 +3,8 @@
  * WPSEO plugin file.
  *
  * @package WPSEO\Admin\Views\Archive
+ *
+ * @var Yoast_Form $yform
  */
 
 $archives_help_content = array(

@@ -76,7 +76,7 @@ class Cookie_Law_Info {
 		} 
 		else 
 		{
-			$this->version = '1.7.5';
+			$this->version = '1.7.0';
 		}
 		$this->plugin_name = 'cookie-law-info';
 
@@ -84,8 +84,7 @@ class Cookie_Law_Info {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		$this->define_thrid_party_hooks();
-		//$this->cli_patches();
+		$this->cli_patches();
 	}
 
 	/**
@@ -128,13 +127,6 @@ class Cookie_Law_Info {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-cookie-law-info-public.php';
-
-
-		/**
-		 * The class responsible for adding compatibility to third party plugins
-		 * 
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'third-party/class-cookie-law-info-third-party.php';
 
 		$this->loader = new Cookie_Law_Info_Loader();
 
@@ -215,21 +207,6 @@ class Cookie_Law_Info {
   		$this->loader->add_action('wp_head',$plugin_public,'include_user_accepted_cookielawinfo');
   		$this->loader->add_action('wp_footer',$plugin_public,'include_user_accepted_cookielawinfo_in_body');
 	}
-
-
-	/**
-	 * Register all of the hooks related to the Third party plugin compatibility
-	 * of the plugin.
-	 *
-	 * @since    1.7.2
-	 * @access   public
-	 */
-	public function define_thrid_party_hooks() 
-	{
-		$plugin_third_party = new Cookie_Law_Info_Third_Party();
-		$plugin_third_party->register_scripts();
-	}
-	
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
@@ -378,7 +355,6 @@ class Cookie_Law_Info {
 			'button_2_button_size' 			=> 'medium',
 			'button_2_url_type'				=>'url',
 			'button_2_page'					=>get_option('wp_page_for_privacy_policy') ? get_option('wp_page_for_privacy_policy') : 0,
-			'button_2_hidebar'					=>false,
 	            
 	        'button_3_text'					=> 'Reject',
 			'button_3_url' 					=> '#',
@@ -400,15 +376,15 @@ class Cookie_Law_Info {
 	            
 			'font_family' 					=> 'inherit', // Pick the family, not the easy name (see helper function below)
 			'header_fix'                    => false,
-			'is_on' 						=> true,
-	        'is_eu_on' 						=> false,
-	        'logging_on' 					=> false,
+			'is_on' 		=> true,
+	         'is_eu_on' 		=> false,
+	        'logging_on' 		=> false,
 			'notify_animate_hide'			=> true,
 			'notify_animate_show'			=> false,
 			'notify_div_id' 				=> '#cookie-law-info-bar',
 			'notify_position_horizontal'	=> 'right',	// left | right
 			'notify_position_vertical'		=> 'bottom', // 'top' = header | 'bottom' = footer
-			'notify_message'				=> addslashes ( 'This website uses cookies to improve your experience. We\'ll assume you\'re ok with this, but you can opt-out if you wish.[cookie_button margin="5px"][cookie_reject margin="5px"] [cookie_link margin="5px"]'),
+			'notify_message'				=> addslashes ( 'This website uses cookies to improve your experience. We\'ll assume you\'re ok with this, but you can opt-out if you wish.[cookie_button] [cookie_link]'),
 			'scroll_close'                  => false,
 			'scroll_close_reload'           => false,
 	        'accept_close_reload'           => false,
@@ -424,12 +400,9 @@ class Cookie_Law_Info {
 			'show_once_yn'					=> false,	// this is a new feature so default = switched off
 			'show_once'						=> '10000',	// 8 seconds
 			'is_GMT_on'						=> true,
-			'as_popup'						=> false,  // version 1.7.1 onwards this option is merged with `cookie_bar_as`
-			'popup_overlay'					=> true,  // 
+			'as_popup'						=> false,
+			'popup_overlay'					=> true,
 			'bar_heading_text'				=>'',
-			'cookie_bar_as'					=>'banner',
-			'popup_showagain_position'		=>'bottom-right', //bottom-right | bottom-left | top-right | top-left
-			'widget_position'		=>'left', //left | right
 		);
 		return $key!="" ? $settings_v0_9[$key] : $settings_v0_9;
 	}
@@ -463,7 +436,6 @@ class Cookie_Law_Info {
 	    'button_2_button_hover'     => (self::su_hex_shift( $settings['button_2_button_colour'], 'down', 20 )),
 	    'button_2_link_colour'      => $settings['button_2_link_colour'],
 	    'button_2_as_button'      => $settings['button_2_as_button'],
-	    'button_2_hidebar'		 =>$settings['button_2_hidebar'],
 	    'button_3_button_colour'    => $settings['button_3_button_colour'],
 	    'button_3_button_hover'     => (self::su_hex_shift( $settings['button_3_button_colour'], 'down', 20 )),
 	    'button_3_link_colour'      => $settings['button_3_link_colour'],
@@ -496,9 +468,6 @@ class Cookie_Law_Info {
 	    'as_popup'=>$settings['as_popup'],
 	    'popup_overlay'=>$settings['popup_overlay'],
 	    'bar_heading_text'=>$settings['bar_heading_text'],
-	    'cookie_bar_as'=>$settings['cookie_bar_as'],
-		'popup_showagain_position'=>$settings['popup_showagain_position'],
-		'widget_position'=>$settings['widget_position'],
 	  );
 	  $str = json_encode( $slim_settings );
 	  /*
@@ -532,7 +501,6 @@ class Cookie_Law_Info {
 			case 'button_1_as_button':
 			case 'button_2_new_win':
 			case 'button_2_as_button':
-			case 'button_2_hidebar':
 	        case 'button_3_new_win':
 			case 'button_3_as_button':
 	        case 'button_4_new_win':
@@ -744,63 +712,41 @@ class Cookie_Law_Info {
 				'class' => array(),
 				'title' => array(),
 				'target' => array(),
-				'rel' => array(),
-				'style' => array()
+				'rel' => array()
 			),
 			'b' => array(),
 			'br' => array(
 				'id' => array(),
-				'class' => array(),
-				'style' => array()
+				'class' => array()
 			),
 			'div' => array(
 				'id' => array(),
-				'class' => array(),
-				'style' => array()
+				'class' => array()
 			),
 			'em' => array (
 				'id' => array(),
-				'class' => array(),
-				'style' => array()
+				'class' => array()
 			),
 			'i' => array(),
 			'img' => array(
 				'src' => array(),
 				'id' => array(),
 				'class' => array(),
-				'alt' => array(),
-				'style' => array()				
+				'alt' => array()
 			),
 			'p' => array (
 				'id' => array(),
-				'class' => array(),
-				'style' => array()
+				'class' => array()
 			),
 			'span' => array(
 				'id' => array(),
-				'class' => array(),
-				'style' => array()
+				'class' => array()
 			),
 			'strong' => array(
 				'id' => array(),
-				'class' => array(),
-				'style' => array()
+				'class' => array()
 			),
-			'label' => array(
-				'id' => array(),
-				'class' => array(),
-				'style' => array()
-			)
 		);
-		$html5_tags=array('article','section','aside','details','figcaption','figure','footer','header','main','mark','nav','summary','time');
-		foreach($html5_tags as $html5_tag)
-		{
-			$allowed_html[$html5_tag]=array(
-				'id' => array(),
-				'class' => array(),
-				'style' => array()
-			);
-		}
 		return $allowed_html;
 	}
 
@@ -855,18 +801,7 @@ class Cookie_Law_Info {
     {
     	$options=self::get_settings();
 
-    	//========bar as widget=========@since 1.7.1
-    	if($options['cookie_bar_as']=='banner' && $options['as_popup']==true) //the site in popup mode
-		{
-			$options['cookie_bar_as']='popup';
-			$options['as_popup']=false;
-			$options['popup_showagain_position']=$options['notify_position_vertical'].'-'.$options['notify_position_horizontal'];
-			update_option( CLI_SETTINGS_FIELD,$options);
-		}
-
-
-
-    	//========reject button missing issue=========@since 1.6.7
+    	//========reject button missing issue=========
     	$message_bar_text=$options['notify_message'];
     	//user turned on the reject button with his previous settings
     	if(isset($options['is_reject_on']) && $options['is_reject_on']==true)
@@ -897,7 +832,6 @@ class Cookie_Law_Info {
     	}
     	//---------reject button missing issue------------
 
-    	//bar heading text issue @since 1.6.7
     	$bar_version='1.6.6';
     	$bar_heading_version = get_option('cli_heading_version');
     	if($bar_heading_version!=$bar_version)

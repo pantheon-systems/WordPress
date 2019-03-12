@@ -10,18 +10,10 @@
  */
 class WPSEO_Configuration_Translations {
 
-	/**
-	 * Registered steps.
-	 *
-	 * @var array
-	 */
+	/** @var array Registered steps */
 	protected $translations = array();
 
-	/**
-	 * The locale.
-	 *
-	 * @var string
-	 */
+	/** @var string The locale */
 	protected $locale;
 
 	/**

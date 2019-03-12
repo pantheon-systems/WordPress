@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * WC_Report_Sales_By_Product
  *
+ * @author      WooThemes
+ * @category    Admin
  * @package     WooCommerce/Admin/Reports
  * @version     2.1.0
  */
@@ -42,13 +44,11 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 	 * Constructor.
 	 */
 	public function __construct() {
-		// @codingStandardsIgnoreStart
 		if ( isset( $_GET['product_ids'] ) && is_array( $_GET['product_ids'] ) ) {
 			$this->product_ids = array_filter( array_map( 'absint', $_GET['product_ids'] ) );
 		} elseif ( isset( $_GET['product_ids'] ) ) {
 			$this->product_ids = array_filter( array( absint( $_GET['product_ids'] ) ) );
 		}
-		// @codingStandardsIgnoreEnd
 	}
 
 	/**
@@ -78,14 +78,13 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 					'relation' => 'OR',
 					array(
 						'type'       => 'order_item_meta',
-						'meta_key'   => array( '_product_id', '_variation_id' ), // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_key
-						'meta_value' => $this->product_ids, // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_value
+						'meta_key'   => array( '_product_id', '_variation_id' ),
+						'meta_value' => $this->product_ids,
 						'operator'   => 'IN',
 					),
 				),
 				'query_type'   => 'get_var',
 				'filter_range' => true,
-				'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
 			)
 		);
 
@@ -104,14 +103,13 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 						'relation' => 'OR',
 						array(
 							'type'       => 'order_item_meta',
-							'meta_key'   => array( '_product_id', '_variation_id' ), // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_key
-							'meta_value' => $this->product_ids, // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_value
+							'meta_key'   => array( '_product_id', '_variation_id' ),
+							'meta_value' => $this->product_ids,
 							'operator'   => 'IN',
 						),
 					),
 					'query_type'   => 'get_var',
 					'filter_range' => true,
-					'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
 				)
 			)
 		);
@@ -150,9 +148,9 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 			'item_count'   => '#d4d9dc',
 		);
 
-		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( wp_unslash( $_GET['range'] ) ) : '7day'; //phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( wp_unslash( $_GET['range'] ) ) : '7day';
 
-		if ( ! in_array( $current_range, array( 'custom', 'year', 'last_month', 'month', '7day' ), true ) ) {
+		if ( ! in_array( $current_range, array( 'custom', 'year', 'last_month', 'month', '7day' ) ) ) {
 			$current_range = '7day';
 		}
 
@@ -256,7 +254,6 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 						'limit'        => 12,
 						'query_type'   => 'get_results',
 						'filter_range' => true,
-						'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
 					)
 				);
 
@@ -299,8 +296,8 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 						'where_meta'   => array(
 							array(
 								'type'       => 'order_item_meta',
-								'meta_key'   => '_line_subtotal', // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_key
-								'meta_value' => '0', // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_value
+								'meta_key'   => '_line_subtotal',
+								'meta_value' => '0',
 								'operator'   => '=',
 							),
 						),
@@ -353,7 +350,6 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 						'limit'        => 12,
 						'query_type'   => 'get_results',
 						'filter_range' => true,
-						'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
 					)
 				);
 
@@ -400,7 +396,7 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 	 */
 	public function get_export_button() {
 
-		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( wp_unslash( $_GET['range'] ) ) : '7day'; //phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+		$current_range = ! empty( $_GET['range'] ) ? sanitize_text_field( wp_unslash( $_GET['range'] ) ) : '7day';
 		?>
 		<a
 			href="#"
@@ -454,8 +450,8 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 						'relation' => 'OR',
 						array(
 							'type'       => 'order_item_meta',
-							'meta_key'   => array( '_product_id', '_variation_id' ), // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_key
-							'meta_value' => $this->product_ids, // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_value
+							'meta_key'   => array( '_product_id', '_variation_id' ),
+							'meta_value' => $this->product_ids,
 							'operator'   => 'IN',
 						),
 					),
@@ -463,7 +459,6 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 					'order_by'     => 'post_date ASC',
 					'query_type'   => 'get_results',
 					'filter_range' => true,
-					'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
 				)
 			);
 
@@ -492,8 +487,8 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 						'relation' => 'OR',
 						array(
 							'type'       => 'order_item_meta',
-							'meta_key'   => array( '_product_id', '_variation_id' ), // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_key
-							'meta_value' => $this->product_ids, // phpcs:ignore WordPress.VIP.SlowDBQuery.slow_db_query_meta_value
+							'meta_key'   => array( '_product_id', '_variation_id' ),
+							'meta_value' => $this->product_ids,
 							'operator'   => 'IN',
 						),
 					),
@@ -501,7 +496,6 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 					'order_by'     => 'post_date ASC',
 					'query_type'   => 'get_results',
 					'filter_range' => true,
-					'order_status' => array( 'completed', 'processing', 'on-hold', 'refunded' ),
 				)
 			);
 
@@ -510,7 +504,7 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 			$order_item_amounts = $this->prepare_chart_data( $order_item_amounts, 'post_date', 'order_item_amount', $this->chart_interval, $this->start_date, $this->chart_groupby );
 
 			// Encode in json format.
-			$chart_data = wp_json_encode(
+			$chart_data = json_encode(
 				array(
 					'order_item_counts'  => array_values( $order_item_counts ),
 					'order_item_amounts' => array_values( $order_item_amounts ),
@@ -525,7 +519,7 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 				var main_chart;
 
 				jQuery(function(){
-					var order_data = JSON.parse( decodeURIComponent( '<?php echo rawurlencode( $chart_data ); ?>' ) );
+					var order_data = jQuery.parseJSON( '<?php echo $chart_data; ?>' );
 
 					var drawGraph = function( highlight ) {
 
@@ -582,7 +576,7 @@ class WC_Report_Sales_By_Product extends WC_Admin_Report {
 									tickColor: 'transparent',
 									mode: "time",
 									timeformat: "<?php echo ( 'day' === $this->chart_groupby ) ? '%d %b' : '%b'; ?>",
-									monthNames: JSON.parse( decodeURIComponent( '<?php echo rawurlencode( wp_json_encode( array_values( $wp_locale->month_abbrev ) ) ); ?>' ) ),
+									monthNames: <?php echo json_encode( array_values( $wp_locale->month_abbrev ) ) ?>,
 									tickLength: 1,
 									minTickSize: [1, "<?php echo $this->chart_groupby; ?>"],
 									font: {

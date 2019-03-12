@@ -10,39 +10,19 @@
  */
 class WPSEO_Sitemap_Image_Parser {
 
-	/**
-	 * Holds the home_url() value to speed up loops.
-	 *
-	 * @var string
-	 */
+	/** @var string $home_url Holds the home_url() value to speed up loops. */
 	protected $home_url = '';
 
-	/**
-	 * Holds site URL hostname.
-	 *
-	 * @var string
-	 */
+	/** @var string $host Holds site URL hostname. */
 	protected $host = '';
 
-	/**
-	 * Holds site URL protocol.
-	 *
-	 * @var string
-	 */
+	/** @var string $scheme Holds site URL protocol. */
 	protected $scheme = 'http';
 
-	/**
-	 * Cached set of attachments for multiple posts.
-	 *
-	 * @var array
-	 */
+	/** @var array $attachments Cached set of attachments for multiple posts. */
 	protected $attachments = array();
 
-	/**
-	 * Holds blog charset value for use in DOM parsing.
-	 *
-	 * @var string
-	 */
+	/** @var string $charset Holds blog charset value for use in DOM parsing. */
 	protected $charset = 'UTF-8';
 
 	/**

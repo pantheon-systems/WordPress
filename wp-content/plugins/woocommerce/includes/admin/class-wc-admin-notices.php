@@ -404,7 +404,7 @@ class WC_Admin_Notices {
 	 * @since  3.5.1
 	 */
 	protected static function is_ssl() {
-		$shop_page = wc_get_page_permalink( 'shop' );
+		$shop_page = 0 < wc_get_page_id( 'shop' ) ? get_permalink( wc_get_page_id( 'shop' ) ) : get_home_url();
 
 		return ( is_ssl() && 'https' === substr( $shop_page, 0, 5 ) );
 	}

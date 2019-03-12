@@ -4,8 +4,8 @@ Contributors: Zoho SalesIQ team
 Donate link: http://zoho.com
 Tags: Zoho SalesIQ, Chat Widget, live chat support, livechat, LiveDesk, livesupport, supportchat, webchat, Zoho, Zoho chat, Zoho livechat, Zoho LiveDesk
 Requires at least: 2.8
-Tested up to: 5.0
-Stable tag: 1.0.8
+Tested up to: 4.8.1
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,58 +13,42 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 [youtube https://www.youtube.com/watch?v=kcY8Cz7Wg2M]
 
-Optimze the content of the site that you create using the Wordpress platform based on the trail of your visitors through your site, time spent on each webpage and boost the lead conversion rates of your site. 
+= What is SalesIQ and how does it increase your sales conversions? =
 
-= Key features =
+Hassle-free live chat software re-imagined for business growth.
+
+Convert your website visitors into happy paying customers. Increase the ROI on your content, SEO, Adwords and email marketing efforts. Get started now with our forever free plan. A platform trusted by 120K users. 
+
+= How SalesIQ can help you to close more deals faster? =
 
 
-= Hunt hot leads down: = 
+Real-time visitor tracking:
 
-Track down prospective visitors hitting your site and analyze their trail on your site.
+Analyze your store visitors in real-time. Understand how they are navigating your store. Gain insights into their geo-location and referrer source to engage in contextual conversations.
 
-= Priorities matter: = 
+Visitor insights and lead scoring:
 
-Prioritize visitors hitting your site based on various metrics and using cool features of SalesIQ like Lead scoring to make sure that you don’t desiccate your firm’s time and resource over junk leads.
+Gain access to a highly insightful list of 'All' your store visitors. Prioritize them as hot, warm and cold based on their score. Drive sharper and more relevant engagement.
 
-= Be optimistic: =  
+Sell smarter. Close deals faster:
 
-Trace the source of your web traffic as they land on your site, figure out the prominent gateways to your site like - Campaigns, Social media platforms, Newsletters, Direct, Search engine. Thereby you’ll stand a chance in optimizing the most utilized mediums of web traffic source of your site.
+Supercharge your sales conversions by automating your store -visitor engagement with intelligent triggers. Recognize & engage prospects landing on your website through email campaigns.
 
-= Pro-active: =
+Automated strategic chat initiation:
 
-Don’t have to wait until your visitors reach out to you. When you find a visitor grazing through your site who perfectly matches the buyer persona you have in your mind, strike a conversation proactively and bombard them with deals and offers.
+Identify new Vs returning store visitors. Identify hot prospects based on their landing page time on store and referrer campaign. Set rules to automatically initiate proactive chat invitations.
 
-= Trigger up a little: = 
+Automatic chat translation:
 
-You can’t expect your operators to stay vigil round the clock, and you might always seem to let prospective leads slip away unknowingly. A perfect solution for this would be SalesIQ’s Intelligent Triggers feature. Specify filtering criterions, specific actions and those visitors who match the criterions and also perform the specified action would be triggered in a mode of your preference.
+Engage with a wider audience and cover markets spreads across the globe. Receive messages in any language, but reply to prospects in their native language.
 
-= We abide by GDPR: = 
+Easy to setup and customize:
 
-As we deal with all your site data, visitor data and your operator data, we vowed our compliance to GDPR just to provide a double-checked data security.
+Setup is as simple as copy & paste. Customization is just a few more clicks. Whatever be the look & feel of your online store, SalesIQ just blends right in.
 
-= Next-gen chat experience: = 
+Take SalesIQ with you:
 
-Now you can build, deploy smart AI bots in your SalesIQ as support executives, sales representatives or whatsoever based on your business needs.
-
-= Self-serve is always the best: = 
-
-Rather than letting your visitors rely on your operators for trivial doubts they have, you can create insightful articles on general topics on your products and services, and embed them in the former’s chat window! Thus, letting visitors figure out answers to their simple doubts all my themselves.
-
-= Never too intricate for a call: = 
-
-You operators would be smart enough to resolve almost all the issues that your visitors face. However, there might raise issues that can’t be resolved in a couple of texts! In that case, your operators would need back up, that’s why we’ve launched our Audio call feature using which your operators can call up visitors and offer rapid resolutions.
-
-= Have an app? = 
-
-Own an app for your firm and looking forward to provide SalesIQ powered support for your app users? Cool! We have mobile SDKs for both Android and IOS platforms that seamlessly integrate with your existing apps.
-
-= Draft templates: = 
-
-If you constantly find yourself drafting same email contents repeatedly, you do realize that you are almost wasting your precious time over something that you shouldn’t sweat much on. That’s why we have launched the email template feature, that lets you draft templates for those emails that you occasionally send out to your visitors.
-
-= Split to boost productivity: = 
-
-Route your visitors and the chat requests initiated by them to operators of your firm based on the latter's skill sets and field experiences. Just to make sure that your visitors are provided with the pro assistance that they had sought out for.
+Live chat with your store visitors from the comfort of your couch or while waiting at the airport. SalesIQ offer native apps for your iPhone, iPad and Andriod devices.
 
 == Installation ==
 
@@ -73,11 +57,6 @@ Simple, unzip file under wp-content/plugins.
 Else You can install Zoho SalesIQ directly from the WordPress admin! Visit the Plugins - > Add New page and search for 'Zoho SalesIQ'. Click to install.
 
 And then, activate the plugin
-
-Unravel more about SalesIQ by referring to our insightful <a href="https://www.zoho.com/salesiq/help/" target="_blank">help docs</a>.
-
-Explore more about the developer aspects of SalesIQ <a href="https://www.zoho.com/salesiq/help/developer-guides.html" target="_blank">here</a>!
-
 
 == Frequently Asked Questions  ==
 
@@ -101,24 +80,19 @@ We built Zoho SalesIQ to connect you with your customers and prospective custome
 
 We offer native mobile apps for both [iOS](https://itunes.apple.com/us/app/zoho-saesiq/id1094699978?ls=1&mt=8%27) and [Andriod](https://play.google.com/store/apps/details?id=com.zoho.salesiq) 
 
-Please visit https://salesiq.zoho.com/mobile to configure your Zoho SalesIQ account for other jabber clients.
+Please visit https://salesiq.zoho.com/mobile to configure your SalesIQ account for other jabber clients.
 
 
 == Screenshots ==
 
-1. User Tracking
-2. SalesIQ Bots
-3. Ongoing chat
-4. Audio & Video calls
-5. FAQ in Widgets
-6. SalesIQ Mobile apps
-7. Articles - Mobile view
-8. Bots to the rescue!
+1. Tracking users
+1. Visitor information
+3. Visitor Scoring
+4. Proactive Chat
+5. Account Configuration
+6. SalesIQ Homepage
 
 == Changelog ==
-
-= 1.0.8 =
-* Fix for error message shown while hiding SalesIQ app in DIVI theme
 
 = 1.0.7 =
 * Minor issue fixes to improve performance
@@ -151,7 +125,7 @@ Please visit https://salesiq.zoho.com/mobile to configure your Zoho SalesIQ acco
 
 == Upgrade Notice ==
 
-= 1.0.8 =
-* Fix for error message shown while hiding SalesIQ app in DIVI theme
+= 1.0.7 =
+* Minor issue fixes to improve performance
 
 

@@ -12,23 +12,17 @@
 class Yoast_Dismissable_Notice_Ajax {
 
 	/**
-	 * Notice type toggle value for user notices.
-	 *
-	 * @var string
+	 * @var string Notice type toggle value for user notices.
 	 */
 	const FOR_USER = 'user_meta';
 
 	/**
-	 * Notice type toggle value for network notices.
-	 *
-	 * @var string
+	 * @var string Notice type toggle value for network notices.
 	 */
 	const FOR_NETWORK = 'site_option';
 
 	/**
-	 * Notice type toggle value for site notices.
-	 *
-	 * @var string
+	 * @var string Notice type toggle value for site notices.
 	 */
 	const FOR_SITE = 'option';
 

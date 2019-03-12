@@ -46,9 +46,7 @@ class Cookie_Law_Info_Admin {
 	 * admin module list, Module folder and main file must be same as that of module name
 	 * Please check the `admin_modules` method for more details
 	 */
-	private $modules=array(
-		'cli-policy-generator'
-	);
+	private $modules=array();
 
 	public static $existing_modules=array();
 
@@ -182,7 +180,6 @@ class Cookie_Law_Info_Admin {
 	{
 	   $links[] = '<a href="'. get_admin_url(null,'edit.php?post_type='.CLI_POST_TYPE.'&page=cookie-law-info') .'">'.__('Settings','cookie-law-info').'</a>';
 	   $links[] = '<a href="https://www.webtoffee.com/product/gdpr-cookie-consent/" target="_blank">'.__('Support','cookie-law-info').'</a>';
-	   $links[] = '<a href="https://www.webtoffee.com/product/gdpr-cookie-consent/" target="_blank">'.__('Premium Upgrade','cookie-law-info').'</a>';
 	   return $links;
 	}
 

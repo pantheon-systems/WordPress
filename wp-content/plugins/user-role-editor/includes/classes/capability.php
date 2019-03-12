@@ -48,13 +48,6 @@ class URE_Capability {
                 'cap_id'=>'do_not_allow');
             return $data;
         }
-        if ($cap_id=='administrator') {
-            $data = array(
-                'result'=>false, 
-                'message'=>esc_html__('Error: this word is used by WordPress as a role ID', 'user-role-editor'),
-                'cap_id'=>'administrator');
-            return $data;
-        }
         
         $data = array(
             'result'=>true, 
@@ -72,7 +65,7 @@ class URE_Capability {
      * @global WP_Roles $wp_roles
      * @return string
      */
-    public static function add( $ure_object ) {
+    public static function add() {
         global $wp_roles;
 
         if (!current_user_can('ure_create_capabilities')) {
@@ -92,7 +85,8 @@ class URE_Capability {
         $cap_id = $data['cap_id'];                
         $lib = URE_Lib::get_instance();
         $lib->get_user_roles();
-        $full_capabilities = $lib->init_full_capabilities( $ure_object );
+        $lib->init_full_capabilities();
+        $full_capabilities = $lib->get('full_capabilities');
         if (!isset($full_capabilities[$cap_id])) {
             $admin_role = $lib->get_admin_role();            
             $wp_roles->use_db = true;
@@ -128,19 +122,15 @@ class URE_Capability {
         return $caps;
     }
     // end of get_caps_for_deletion_from_post()
-            
+    
+    
         
     private static function revoke_caps_from_user($user_id, $caps) {
         $user = get_user_to_edit($user_id);
         foreach($caps as $cap_id) {
-            if (!isset($user->caps[$cap_id])) {
-                continue;
+            if (isset($user->caps[$cap_id])) {
+                $user->remove_cap($cap_id);
             }
-            // Prevent sudden revoke role 'administrator' from a user during 'administrator' capability deletion.
-            if ($cap_id=='administrator') { 
-                continue;
-            }
-            $user->remove_cap($cap_id);            
         }
     }
     // end of revoke_caps_from_user()
@@ -189,26 +179,25 @@ class URE_Capability {
             return esc_html__('Insufficient permissions to work with User Role Editor','user-role-editor');
         }
                         
-        $capabilities = URE_Capabilities::get_instance();
+        $lib = URE_Lib::get_instance();
         $mess = '';                
-        $caps_allowed_to_remove = $capabilities->get_caps_to_remove();
+        $caps_allowed_to_remove = $lib->get_caps_to_remove();
         if (!is_array($caps_allowed_to_remove) || count($caps_allowed_to_remove) == 0) {
             return esc_html__('There are no capabilities available for deletion!', 'user-role-editor');
         }
         
-        $caps = self::get_caps_for_deletion_from_post($caps_allowed_to_remove);
-        if (empty($caps)) {
+        $capabilities = self::get_caps_for_deletion_from_post($caps_allowed_to_remove);
+        if (empty($capabilities)) {
             return esc_html__('There are no capabilities available for deletion!', 'user-role-editor');
         }
 
-        self::revoke_caps($caps);
+        self::revoke_caps($capabilities);        
         
-        if (count($caps)==1) {
-            $mess = sprintf(esc_html__('Capability %s was removed successfully', 'user-role-editor'), $caps[0]);
+        if (count($capabilities)==1) {
+            $mess = sprintf(esc_html__('Capability %s was removed successfully', 'user-role-editor'), $capabilities[0]);
         } else {
-            $lib = URE_Lib::get_instance();
-            $short_list_str = $lib->get_short_list_str( $caps );
-            $mess = count($caps) .' '. esc_html__('capabilities were removed successfully', 'user-role-editor') .': '. 
+            $short_list_str = $lib->get_short_list_str($capabilities);
+            $mess = count($capabilities) .' '. esc_html__('capabilities were removed successfully', 'user-role-editor') .': '. 
                     $short_list_str;
         }
 

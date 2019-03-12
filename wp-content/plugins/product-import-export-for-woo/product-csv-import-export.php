@@ -5,8 +5,8 @@
   Description: Import and Export Products From and To your WooCommerce Store.
   Author: WebToffee
   Author URI: https://www.webtoffee.com/product/product-import-export-woocommerce/
-  Version: 1.5.5
-  WC tested up to: 3.5.5
+  Version: 1.4.9
+  WC tested up to: 3.5.0
   License:           GPLv3
   License URI:       https://www.gnu.org/licenses/gpl-3.0.html
   Text Domain: wf_csv_import_export
@@ -18,7 +18,7 @@ if (!defined('ABSPATH') || !is_admin()) {
 
 
 if (!defined('WF_PIPE_CURRENT_VERSION')) {
-    define("WF_PIPE_CURRENT_VERSION", "1.5.5");
+    define("WF_PIPE_CURRENT_VERSION", "1.4.9");
 }
 if (!defined('WF_PROD_IMP_EXP_ID')) {
     define("WF_PROD_IMP_EXP_ID", "wf_prod_imp_exp");
@@ -29,7 +29,7 @@ if (!defined('WF_WOOCOMMERCE_CSV_IM_EX')) {
 /**
  * Check if WooCommerce is active
  */
-//if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
 
     if (!class_exists('WF_Product_Import_Export_CSV')) :
 
@@ -468,7 +468,7 @@ if (!defined('WF_WOOCOMMERCE_CSV_IM_EX')) {
         endif;
 
     new WF_Product_Import_Export_CSV();
-//}
+}
 
 
 
@@ -478,10 +478,6 @@ add_action('admin_init', 'impexp_welcome');
 register_activation_hook(__FILE__, 'hf_welcome_screen_activate_basic');
 
 function hf_welcome_screen_activate_basic() {
-    if(!class_exists( 'WooCommerce' )){
-        deactivate_plugins(basename(__FILE__));
-        wp_die(__("WooCommerce is not installed/actived. it is required for this plugin to work properly. Please activate WooCommerce.", "wf_csv_import_export"), "", array('back_link' => 1));
-    }
     if (is_plugin_active('product-csv-import-export-for-woocommerce/product-csv-import-export.php')) {
         deactivate_plugins(basename(__FILE__));
         wp_die(__("Is everything fine? You already have the Premium version installed in your website. For any issues, kindly raise a ticket via <a target='_blank' href='https://www.webtoffee.com/support/'>support</a>", "wf_csv_import_export"), "", array('back_link' => 1));

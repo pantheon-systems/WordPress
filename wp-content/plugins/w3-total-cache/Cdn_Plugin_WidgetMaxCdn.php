@@ -23,11 +23,11 @@ class Cdn_Plugin_WidgetMaxCdn {
 		add_action( 'w3tc_widget_setup', array(
 				$this,
 				'wp_dashboard_setup'
-			), 2000 );
+			), 100 );
 		add_action( 'w3tc_network_dashboard_setup', array(
 				$this,
 				'wp_dashboard_setup'
-			), 2000 );
+			), 100 );
 
 		// Configure authorize and have_zone
 		$this->authorized = $this->_config->get_string( 'cdn.maxcdn.authorization_key' ) != '' &&

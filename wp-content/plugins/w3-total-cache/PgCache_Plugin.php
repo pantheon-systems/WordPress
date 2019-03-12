@@ -133,6 +133,7 @@ class PgCache_Plugin {
 	/**
 	 * Prime cache
 	 *
+	 * @param integer $start
 	 * @return void
 	 */
 	function prime() {

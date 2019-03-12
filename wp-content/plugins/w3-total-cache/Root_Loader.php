@@ -55,7 +55,8 @@ class Root_Loader {
 			$plugins[] = new Cdn_Plugin_Admin();
 			$plugins[] = new Cdnfsd_Plugin_Admin();
 			$cdn_engine = $c->get_string( 'cdn.engine' );
-			if ( $cdn_engine == 'maxcdn' ) {
+			if ( $cdn_engine == 'highwinds' || $cdn_engine == 'stackpath' ) {
+			} else {
 				$plugins[] = new Cdn_Plugin_WidgetMaxCdn();
 			}
 
@@ -63,7 +64,9 @@ class Root_Loader {
 				$plugins[] = new PageSpeed_Plugin_Widget();
 
 			$plugins[] = new Generic_Plugin_AdminCompatibility();
-			$plugins[] = new Licensing_Plugin_Admin();
+
+			if ( !( defined( 'W3TC_PRO' ) || defined( 'W3TC_ENTERPRISE' ) ) )
+				$plugins[] = new Licensing_Plugin_Admin();
 
 			if ( $c->get_boolean( 'pgcache.enabled' ) ||
 				$c->get_boolean( 'varnish.enabled' ) )

@@ -10,18 +10,10 @@
  */
 class WPSEO_Configuration_Components {
 
-	/**
-	 * List of registered components.
-	 *
-	 * @var WPSEO_Config_Component[]
-	 */
+	/** @var WPSEO_Config_Component[] List of registered components */
 	protected $components = array();
 
-	/**
-	 * Adapter.
-	 *
-	 * @var WPSEO_Configuration_Options_Adapter
-	 */
+	/** @var WPSEO_Configuration_Options_Adapter Adapter */
 	protected $adapter;
 
 	/**

@@ -7,11 +7,11 @@
 if( ! defined("ABSPATH") ) die("Not Allowed");
 
 // $ppom_fields_meta = json_decode ( $ppom_settings -> the_meta, true );
-$ppom_id = is_array($ppom_id) ? implode(',', $ppom_id) : $ppom_id;
+// ppom_pa($ppom_fields_meta);
 
 // echo '<input type="hidden" name="woo_option_price">';	// it will be populated while dynamic prices set in script.js
 echo '<input type="hidden" id="ppom_product_price" value="'.esc_attr($product->get_price()).'">';	// it is setting price to be used for dymanic prices in script.js
-echo '<input type="hidden" name="ppom[fields][id]" id="ppom_productmeta_id" value="'.esc_attr($ppom_id).'">';
+echo '<input type="hidden" name="ppom[fields][id]" id="ppom_productmeta_id" value="'.esc_attr(PPOM()->productmeta_id).'">';
 echo '<input type="hidden" name="ppom_product_id" id="ppom_product_id" value="'.esc_attr(ppom_get_product_id($product)).'">';
 // Hidden input for validation callback
 echo '<input type="hidden" name="action" value="ppom_ajax_validation">';
@@ -30,7 +30,7 @@ echo '<input type="hidden" name="ppom_cart_key" value="'.esc_attr($cart_key).'">
 // Price placeholder, it will be cloned via js in ppom-price.js
 echo '<div id="ppom-price-cloner-wrapper">';
 echo '<span id="ppom-price-cloner">';
-printf(__(get_woocommerce_price_format(), "ppom"), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');
+printf(__(get_woocommerce_price_format(), 'ppom'), get_woocommerce_currency_symbol(), '<span class="ppom-price"></span>');
 echo '</span>';
 echo '</div>';
 
@@ -61,7 +61,7 @@ foreach( $ppom_fields_meta as $meta ) {
 	if( ! ppom_is_field_visible($meta) ) continue;
 	
 	if( empty($data_name) ) {
-	    printf(__("Please provide data name property for %s", "ppom"), $title);
+	    printf(__("Please provide data name property for %s", 'ppom'), $title);
 	    continue;
 	}
 	// Dataname senatize
@@ -86,7 +86,6 @@ foreach( $ppom_fields_meta as $meta ) {
 			case 'image':
 				$image_data  = $posted_values[$data_name];
 				foreach($image_data as $data){
-					unset($default_value);
 					$default_value[] = json_decode( stripslashes($data), true);
 				}
 				break;
@@ -132,7 +131,6 @@ foreach( $ppom_fields_meta as $meta ) {
 	
 	// Stripslashes: default values
 	$default_value = ! is_array($default_value) ? stripslashes($default_value) : $default_value;
-	$default_value = apply_filters("ppom_field_default_value", $default_value, $meta, $product);
 	
 	//WPML
 	$title			= ppom_wpml_translate($title, 'PPOM');
@@ -377,7 +375,6 @@ foreach( $ppom_fields_meta as $meta ) {
     				$onetime = isset($meta['onetime']) ? $meta['onetime'] : '';
                 	$taxable		= (isset( $meta['onetime_taxable'] ) ? $meta['onetime_taxable'] : '' );
                 	$display_circle	= (isset($meta['circle']) && $meta['circle'] == 'on') ? true : false;
-                	$multiple_allowed	= isset($meta['multiple_allowed']) ? $meta['multiple_allowed'] : '';
                 	
 					$ppom_field_setting = array(  
                     				'id'        => $data_name,
@@ -392,7 +389,6 @@ foreach( $ppom_fields_meta as $meta ) {
                                     'onetime'		=> $onetime,
 					            	'taxable'		=> $taxable,
 					            	'display_circle'	=> $display_circle,
-					            	'multiple_allowed' => $multiple_allowed,
                                     
                                     );
                     
@@ -404,7 +400,6 @@ foreach( $ppom_fields_meta as $meta ) {
 					
 					$images	= isset($meta['images']) ? $meta['images'] : array();
 					$show_popup	= isset($meta['show_popup']) ? $meta['show_popup'] : '';
-					$multiple_allowed	= isset($meta['multiple_allowed']) ? $meta['multiple_allowed'] : '';
 					
 					$ppom_field_setting = array(  
                     				'id'        => $data_name,
@@ -414,7 +409,7 @@ foreach( $ppom_fields_meta as $meta ) {
                                     'label'     => $field_label,
                                     'title'		=> $title,
                                     'legacy_view'	=> (isset($meta['legacy_view'])) ? $meta['legacy_view'] : '',
-									'multiple_allowed' => $multiple_allowed,
+									'multiple_allowed' => $meta['multiple_allowed'],
 									'images'	=> $meta['images'],
                                     'show_popup'=> $show_popup,
                                     );
@@ -496,7 +491,6 @@ foreach( $ppom_fields_meta as $meta ) {
 				case 'audio':
 					
 					$audios	= isset($meta['audio']) ? $meta['audio'] : array();
-					$multiple_allowed	= isset($meta['multiple_allowed']) ? $meta['multiple_allowed'] : '';
 					// $audios = ppom_convert_options_to_key_val($audios, $meta, $product);
 				
 					$ppom_field_setting = array(  
@@ -509,7 +503,7 @@ foreach( $ppom_fields_meta as $meta ) {
                                     /*'legacy_view'	=> (isset($meta['legacy_view'])) ? $meta['legacy_view'] : '',
 									'popup_width'	=> $popup_width,
 									'popup_height'	=> $popup_height,*/
-									'multiple_allowed' => $multiple_allowed,
+									'multiple_allowed' => $meta['multiple_allowed'],
 									'audios'		=> $audios,
                                     
                                     );
@@ -621,7 +615,6 @@ foreach( $ppom_fields_meta as $meta ) {
 						$first_option	= isset($meta['first_option']) ? $meta['first_option'] : '';
 						$unit_plural	= isset($meta['unit_plural']) ? $meta['unit_plural'] : '';
 						$unit_single	= isset($meta['unit_single']) ? $meta['unit_single'] : '';
-						$decimal_place	= isset($meta['decimal_place']) ? $meta['decimal_place'] : '';
 						$options = ppom_convert_options_to_key_val($options, $meta, $product);
 						
 						$ppom_field_setting = array(
@@ -637,7 +630,6 @@ foreach( $ppom_fields_meta as $meta ) {
 								'unit_plural'	=> $unit_plural,
 								'unit_single'	=> $unit_single,
 								'title'			=> $title,
-								'decimal_place' => $decimal_place,
 						);
 						
 						$ppom_field_setting = apply_filters('ppom_field_setting', $ppom_field_setting, $meta);

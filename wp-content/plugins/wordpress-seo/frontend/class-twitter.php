@@ -13,29 +13,21 @@
 class WPSEO_Twitter {
 
 	/**
-	 * Instance of this class.
-	 *
-	 * @var object
+	 * @var    object    Instance of this class
 	 */
 	public static $instance;
 
 	/**
-	 * Images.
-	 *
-	 * @var array
+	 * @var array Images
 	 */
 	private $images = array();
 
 	/**
-	 * Images.
-	 *
-	 * @var array
+	 * @var array Images
 	 */
 	public $shown_images = array();
 
-	/**
-	 * @var WPSEO_Frontend_Page_Type
-	 */
+	/** @var WPSEO_Frontend_Page_Type */
 	protected $frontend_page_type;
 
 	/**
@@ -44,20 +36,6 @@ class WPSEO_Twitter {
 	 * @var string
 	 */
 	private $type;
-
-	/**
-	 * Card types currently allowed by Twitter.
-	 *
-	 * @link https://dev.twitter.com/cards/types
-	 *
-	 * @var array
-	 */
-	private $valid_types = array(
-		'summary',
-		'summary_large_image',
-		'app',
-		'player',
-	);
 
 	/**
 	 * Class constructor
@@ -148,7 +126,13 @@ class WPSEO_Twitter {
 	 * @link https://dev.twitter.com/cards/types
 	 */
 	private function sanitize_card_type() {
-		if ( ! in_array( $this->type, $this->valid_types, true ) ) {
+		if ( ! in_array( $this->type, array(
+			'summary',
+			'summary_large_image',
+			'app',
+			'player',
+		), true )
+		) {
 			$this->type = 'summary';
 		}
 	}
@@ -241,7 +225,7 @@ class WPSEO_Twitter {
 			$meta_desc = $this->fallback_description();
 		}
 
-		if ( is_string( $meta_desc ) && $meta_desc !== '' ) {
+		if ( is_string( $meta_desc ) || $meta_desc !== '' ) {
 			return $meta_desc;
 		}
 

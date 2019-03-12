@@ -90,12 +90,8 @@ class ConfigDbStorage {
 		if ( defined('W3TC_CONFIG_DATABASE_TABLE' ) ) {
 			$template = W3TC_CONFIG_DATABASE_TABLE;
 		} else {
-			if ( is_multisite() ) {
-				error_log( 'Please use W3TC_CONFIG_DATABASE_TABLE constant, funcationality without it is not stable in multisite mode' );
-			}
-
 			global $table_prefix;
-			$template = $table_prefix . 'options';
+			$template = $table_prefix . '{blog_id_prefix}options';
 		}
 
 		if ( $blog_id <= 0 )

@@ -4,8 +4,8 @@ Contributors: ishanverma
 Donate link: http://www.indatos.com?ref=wp.org
 Tags: woocommerce authorize.net, authorize.net, payment gateway, woocommerce, woocommerce payment gateway, credit cards, refunds, capture. authorize.net woocommerce
 Requires at least: 3.0.1
-Tested up to: 5.0.3
-Stable tag: 5.0
+Tested up to: 4.9.8
+Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,9 +13,7 @@ Authorize.net Payment Gateway For WooCommerce extends the functionality of WooCo
 
 == Description ==
 
-<h3>Authorize.net Payment Gateway for WooCommerce</h3> makes your website ready to use Authorize.net payment gateway to accept credit/debit cards on your woocommerce store in safe way. Authorize.net HMAC-SHA512 Compatible version.
-
-
+<h3>Authorize.net Payment Gateway for WooCommerce</h3> makes your website ready to use Authorize.net payment gateway to accept credit/debit cards on your woocommerce store in safe way. 
 
 Authorize.net is most widely used payment gateway to process payments online and accepts Visa, MasterCard, Discover and other variants of cards.
 <h3>Latest WooCommerce v3x Compatible</h3>

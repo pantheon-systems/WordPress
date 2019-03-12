@@ -9,40 +9,19 @@
  * Class WPSEO_Config_Field
  */
 class WPSEO_Config_Field {
-
-	/**
-	 * Field name.
-	 *
-	 * @var string
-	 */
+	/** @var string Field name */
 	protected $field;
 
-	/**
-	 * Component to use.
-	 *
-	 * @var string
-	 */
+	/** @var string Component to use */
 	protected $component;
 
-	/**
-	 * Properties of this field.
-	 *
-	 * @var array
-	 */
+	/** @var array Properties of this field */
 	protected $properties = array();
 
-	/**
-	 * Field requirements.
-	 *
-	 * @var array
-	 */
+	/** @var array Field requirements */
 	protected $requires = array();
 
-	/**
-	 * Value of this field.
-	 *
-	 * @var array|mixed
-	 */
+	/** @var array|mixed Value of this field */
 	protected $data = array();
 
 	/**

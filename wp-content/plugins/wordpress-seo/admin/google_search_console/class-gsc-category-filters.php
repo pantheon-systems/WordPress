@@ -156,12 +156,10 @@ class WPSEO_GSC_Category_Filters {
 			)
 		);
 
-		$class        = 'gsc_category';
-		$aria_current = '';
+		$class = 'gsc_category';
 
 		if ( $this->category === $category ) {
-			$class       .= ' current';
-			$aria_current = ' aria-current="page"';
+			$class .= ' current';
 		}
 
 		$help_button = '';
@@ -173,15 +171,14 @@ class WPSEO_GSC_Category_Filters {
 		}
 
 		return sprintf(
-			'<a href="%1$s" class="%2$s"%8$s>%3$s</a> (<span id="gsc_count_%4$s">%5$s</span>) %6$s %7$s',
+			'<a href="%1$s" class="%2$s">%3$s</a> (<span id="gsc_count_%4$s">%5$s</span>) %6$s %7$s',
 			esc_attr( $href ),
 			$class,
 			$this->filter_values[ $category ]['value'],
 			$category,
 			$count,
 			$help_button,
-			$help_panel,
-			$aria_current
+			$help_panel
 		);
 	}
 

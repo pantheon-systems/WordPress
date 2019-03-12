@@ -5,7 +5,7 @@ Plugin URI: https://www.brainstormforce.com
 Author: Brainstorm Force
 Author URI: https://www.brainstormforce.com
 Description: Welcome to the All In One Schema Rich Snippet! You can now easily add schema markup on various pages and posts of your website. Implement schema types such as Review, Events, Recipes, Article, Products, Services etc.
-Version: 1.5.5
+Version: 1.5.4
 Text Domain: rich-snippets
 License: GPL2
 */
@@ -93,8 +93,7 @@ if ( !class_exists( "RichSnippets" ) )
 			wp_enqueue_style( 'star_style' );
 			wp_register_script( 'bsf-scripts', BSF_META_BOX_URL . 'js/cmb.js','', '0.9.1' );
 			wp_enqueue_script( 'bsf-scripts' );
-			wp_enqueue_media();
-			wp_register_script( 'bsf-scripts-media', BSF_META_BOX_URL . 'js/media.js', array( 'jquery' ), '1.0' );
+			wp_register_script( 'bsf-scripts-media', BSF_META_BOX_URL . 'js/media.js', array( 'jquery', 'media-upload', 'media-editor' ), '1.0' );
 			wp_enqueue_script( 'bsf-scripts-media' );
 			wp_enqueue_script('jquery-ui-datepicker');
 			if(!function_exists('vc_map'))
@@ -113,8 +112,7 @@ if ( !class_exists( "RichSnippets" ) )
 			wp_enqueue_style( 'star_style' );
 			wp_register_script( 'bsf-scripts', BSF_META_BOX_URL . 'js/cmb.js', '', '0.9.1' );
 			wp_enqueue_script( 'bsf-scripts' );
-			wp_enqueue_media();
-			wp_register_script( 'bsf-scripts-media', BSF_META_BOX_URL . 'js/media.js', array( 'jquery' ), '1.0' );
+			wp_register_script( 'bsf-scripts-media', BSF_META_BOX_URL . 'js/media.js', array( 'jquery', 'media-upload', 'media-editor' ), '1.0' );
 			wp_enqueue_script( 'bsf-scripts-media' );
 			wp_enqueue_script('jquery-ui-datepicker');
 			if(!function_exists('vc_map'))

@@ -232,10 +232,7 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 										done_count++;
 
 										$('body').trigger( 'woocommerce_csv_import_request_complete' );
-									},
-                                                                error:  function (jqXHR, httpStatusMessage, customErrorMessage) {
-                                                                            import_rows(start_pos, end_pos);
-                                                                        }    
+									}
 								});
 							}
 
@@ -282,7 +279,6 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 
 							var data = rows.shift();
 							var regen_count = 0;
-                                                        var failed_regen_count = 0;
 							import_rows( data[0], data[1] );
 
 							$('body').on( 'woocommerce_csv_import_request_complete', function() {
@@ -320,36 +316,22 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 									url: ajaxurl,
 									data: { action: "woocommerce_csv_import_regenerate_thumbnail", id: id },
 									success: function( response ) {
-                                                                                //console.log('On Success:-'+JSON.stringify(response, null, 4));
 										if ( response !== Object( response ) || ( typeof response.success === "undefined" && typeof response.error === "undefined" ) ) {
 											response = new Object;
 											response.success = false;
 											response.error = "<?php printf( esc_js( __( 'The resize request was abnormally terminated (ID %s). This is likely due to the image exceeding available memory or some other type of fatal error.', 'wf_csv_import_export' ) ), '" + id + "' ); ?>";
 										}
 
-										//regen_count ++;
-                                                                                if (! response.error) {
-                                                                                    regen_count ++;
-                                                                                }
-                                                                                if (! response.success) {
-                                                                                    failed_regen_count++;
-                                                                                }
-                                                                                
-                                                                                
-                                                                                all_regen_count = failed_regen_count + regen_count;
-                                                                                $('#import-progress tbody .regenerating .progress').css( 'width', ( ( all_regen_count / attachments.length ) * 100 ) + '%' ).html( regen_count + ' / ' + attachments.length + ' <?php echo esc_js(__('thumbnails regenerated.', 'wf_csv_import_export')); ?>' );
-										//$('#import-progress tbody .regenerating .progress').css( 'width', ( ( regen_count / attachments.length ) * 100 ) + '%' ).html( regen_count + ' / ' + attachments.length + ' <?php //echo esc_js( __( 'thumbnails regenerated', 'wf_csv_import_export' ) ); ?>' );
+										regen_count ++;
 
-//										if ( ! response.success ) {
-//											$('#import-progress tbody').append( '<tr><td colspan="5">' + response.error + '</td></tr>' );
-//										}
+										$('#import-progress tbody .regenerating .progress').css( 'width', ( ( regen_count / attachments.length ) * 100 ) + '%' ).html( regen_count + ' / ' + attachments.length + ' <?php echo esc_js( __( 'thumbnails regenerated', 'wf_csv_import_export' ) ); ?>' );
+
+										if ( ! response.success ) {
+											$('#import-progress tbody').append( '<tr><td colspan="5">' + response.error + '</td></tr>' );
+										}
 									},
 									error: function( response ) {
-                                                                                //console.log('On Error:-'+JSON.stringify(response, null, 4));
-										failed_regen_count++;
-                                                                                all_regen_count = failed_regen_count + regen_count;
-                                                                                $('#import-progress tbody .regenerating .progress').css( 'width', ( ( all_regen_count / attachments.length ) * 100 ) + '%' ).html( regen_count + ' / ' + attachments.length + ' <?php echo esc_js(__('thumbnails regenerated.', 'wf_csv_import_export')); ?>' );
-                                                                                //$('#import-progress tbody').append( '<tr><td colspan="5">' + response.error + '</td></tr>' );
+										$('#import-progress tbody').append( '<tr><td colspan="5">' + response.error + '</td></tr>' );
 									}
 								});
 							}
@@ -581,11 +563,11 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 		foreach ( $this->parsed_data as $key => &$item ) {
 
 			$product = $this->parser->parse_product( $item, $this->merge_empty_cells );
-			if ( ! is_wp_error( $product ) ){
+			if ( ! is_wp_error( $product ) )
 				$this->process_product( $product );
-                        }else{
-				$this->add_import_result( 'failed', $product->get_error_message(), 'Not parsed', json_encode( $item ), '-' );                                
-                        }
+			else
+				$this->add_import_result( 'failed', $product->get_error_message(), 'Not parsed', json_encode( $item ), '-' );
+
 			unset( $item, $product );
 		}
 		$this->hf_log_data_change( 'csv-import', __( 'Finished processing products.', 'wf_csv_import_export' ) );
@@ -1087,18 +1069,11 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 					$image_basenames[] = basename( $image );
 
 				// Loop attachments already attached to the product
-				//$attachments = get_posts( 'post_parent=' . $post_id . '&post_type=attachment&fields=ids&post_mime_type=image&numberposts=-1' );
-                                
-                                $processing_product_object = wc_get_product($post_id);
-                                $attachments = $processing_product_object->get_gallery_attachment_ids();
-                                $post_thumbnail_id = get_post_thumbnail_id($post_id);
-                                if(isset($post_thumbnail_id)&& !empty($post_thumbnail_id)){
-                                    $attachments[]=$post_thumbnail_id;
-                                }
-                                
+				$attachments = get_posts( 'post_parent=' . $post_id . '&post_type=attachment&fields=ids&post_mime_type=image&numberposts=-1' );
+
 				foreach ( $attachments as $attachment_key => $attachment ) {
 
-					$attachment_url 	= wp_get_attachment_url( $attachment );
+					$attachment_url 		= wp_get_attachment_url( $attachment );
 					$attachment_basename 	= basename( $attachment_url );
 
 					// Don't import existing images
@@ -1234,8 +1209,7 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 			$this->add_import_result( 'imported', 'Import successful', $post_id, $processing_product_title, $processing_product_sku );
 			$this->hf_log_data_change( 'csv-import', sprintf( __('> Finished importing post ID %s.', 'wf_csv_import_export'), $post_id ) );
 		}
-                
-                do_action('wf_refresh_after_product_import',$processing_product_object); // hook for forcefully refresh product
+
 		unset( $post );
 	}
 
@@ -1273,17 +1247,6 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 
 		} else*/
 		if ( strstr( $url, site_url() ) ) {
-                    
-                        $image_id = $this->wt_get_image_id_by_url($url);
-                        if($image_id){
-                            $attachment_id = $image_id;
-
-                            $this->hf_log_data_change('csv-import', sprintf(__('> > (Image already in the site)Inserted image attachment "%s"', 'wf_csv_import_export'), $url));
-
-                            $this->attachments[] = $attachment_id;
-
-                            return $attachment_id;
-                        }
 			$abs_url 	= str_replace( trailingslashit( site_url() ), trailingslashit( ABSPATH ), urldecode($url) );
 			$new_name 	= wp_unique_filename( $upload_dir['path'], basename( urldecode($url) ) );
 			$new_url 	= trailingslashit( $upload_dir['path'] ) . $new_name;
@@ -1293,7 +1256,7 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 			}
 		}
 
-		if ( ! strstr( $url, 'http' ) ) {  // if not a url
+		if ( ! strstr( $url, 'http' ) ) {
 
 			// Local file
 			$attachment_file 	= trailingslashit( $upload_dir['basedir'] ) . 'product_images/' . $url;
@@ -1311,15 +1274,6 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 					$post['post_mime_type'] = $info['type'];
 				else
 					return new WP_Error( 'attachment_processing_error', __('Invalid file type', 'wordpress-importer') );
-                                
-                                
-                                $image_id = $this->wt_get_image_id_by_url($attachment_url);
-                                if($image_id){
-                                    $attachment_id = $image_id;
-                                    $this->hf_log_data_change('csv-import', sprintf(__('> > (Image already in the site)Inserted image attachment "%s"', 'wf_csv_import_export'), $url));
-                                    $this->attachments[] = $attachment_id;
-                                    return $attachment_id;
-                                }
 
 				$post['guid'] = $attachment_url;
 
@@ -1363,12 +1317,6 @@ class WF_ProdImpExpCsv_Product_Import extends WP_Importer {
 
 		return $attachment_id;
 	}
-        
-        function wt_get_image_id_by_url($image_url) {
-            global $wpdb;
-            $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url));
-            return isset($attachment[0])&& $attachment[0]>0 ? $attachment[0]:'';
-        }
 
 	/**
 	 * Attempt to download a remote file attachment

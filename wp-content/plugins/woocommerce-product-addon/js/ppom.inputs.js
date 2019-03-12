@@ -10,7 +10,8 @@
  
  jQuery(function($){
      
-    // $('[data-toggle="tooltip"]').tooltip({container:'body', trigger:'hover'});
+     
+    $('[data-toggle="tooltip"]').tooltip({container:'body'});
     
     // Measure
     $('.ppom-measure').on('change', '.ppom-measure-unit', function(e){
@@ -22,7 +23,9 @@
     });
     
     // Disable ajax add to cart
-    $(".add_to_cart_button").removeClass("ajax_add_to_cart")
+    $(document).ready(function() {
+         $(".add_to_cart_button").removeClass("ajax_add_to_cart")
+     });
      
     // Range slider updated
     $(document).on('ppom_range_slider_updated', function(e){ 
@@ -128,7 +131,7 @@
             // Palettes
             case 'palettes':
                 
-                // $(".ppom-single-palette").tooltip({container: 'body'});
+                $(".ppom-single-palette").tooltip({container: 'body'});
                 break;
             // Bulk quantity
             case 'bulkquantity':
@@ -208,20 +211,6 @@ function ppom_get_field_meta_by_id( field_id ) {
     
      if( field.data_name === field_id ) {
          field_meta = field;
-         return;
-     }
- });
- 
- return field_meta;
-}
-
-function ppom_get_field_meta_by_type( type ) {
- 
- var field_meta = Array();
- jQuery.each(ppom_input_vars.ppom_inputs, function(i, field){
-    
-     if( field.type === type ) {
-         field_meta.push(field);
          return;
      }
  });

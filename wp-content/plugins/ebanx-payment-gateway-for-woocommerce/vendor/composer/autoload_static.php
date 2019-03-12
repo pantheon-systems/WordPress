@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdf40d74f395cbe250950d34274a07240
+class ComposerStaticInit112e8df3d74defd7156e9960f474e6e8
 {
     public static $files = array (
         'a0063ca44df31a81bb0634cab48f040a' => __DIR__ . '/..' . '/ebanx/benjamin/main.php',
@@ -37,7 +37,6 @@ class ComposerStaticInitdf40d74f395cbe250950d34274a07240
         'Ebanx\\Benjamin\\Models\\Country' => __DIR__ . '/..' . '/ebanx/benjamin/src/Models/Country.php',
         'Ebanx\\Benjamin\\Models\\Currency' => __DIR__ . '/..' . '/ebanx/benjamin/src/Models/Currency.php',
         'Ebanx\\Benjamin\\Models\\Item' => __DIR__ . '/..' . '/ebanx/benjamin/src/Models/Item.php',
-        'Ebanx\\Benjamin\\Models\\Notification' => __DIR__ . '/..' . '/ebanx/benjamin/src/Models/Notification.php',
         'Ebanx\\Benjamin\\Models\\Payment' => __DIR__ . '/..' . '/ebanx/benjamin/src/Models/Payment.php',
         'Ebanx\\Benjamin\\Models\\Person' => __DIR__ . '/..' . '/ebanx/benjamin/src/Models/Person.php',
         'Ebanx\\Benjamin\\Models\\Request' => __DIR__ . '/..' . '/ebanx/benjamin/src/Models/Request.php',
@@ -96,15 +95,14 @@ class ComposerStaticInitdf40d74f395cbe250950d34274a07240
         'Ebanx\\Benjamin\\Services\\Traits\\Printable' => __DIR__ . '/..' . '/ebanx/benjamin/src/Services/Traits/Printable.php',
         'Ebanx\\Benjamin\\Services\\Validators\\BaseValidator' => __DIR__ . '/..' . '/ebanx/benjamin/src/Services/Validators/BaseValidator.php',
         'Ebanx\\Benjamin\\Services\\Validators\\ValidationHelper' => __DIR__ . '/..' . '/ebanx/benjamin/src/Services/Validators/ValidationHelper.php',
-        'Ebanx\\Benjamin\\Util\\Http' => __DIR__ . '/..' . '/ebanx/benjamin/src/Util/Http.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitdf40d74f395cbe250950d34274a07240::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitdf40d74f395cbe250950d34274a07240::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitdf40d74f395cbe250950d34274a07240::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit112e8df3d74defd7156e9960f474e6e8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit112e8df3d74defd7156e9960f474e6e8::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit112e8df3d74defd7156e9960f474e6e8::$classMap;
 
         }, null, ClassLoader::class);
     }

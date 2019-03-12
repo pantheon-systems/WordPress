@@ -9,18 +9,15 @@
  * Renders a replacement variable editor.
  */
 class WPSEO_Replacevar_Editor {
-
 	/**
-	 * Yoast Forms instance.
-	 *
-	 * @var Yoast_Form
+	 * @var Yoast_Form Yoast Forms instance.
 	 */
 	private $yform;
 
 	/**
-	 * The arguments required for the div to render.
-	 *
 	 * @var array {
+	 *      The arguments required for the div to render.
+	 *
 	 *      @type string $title                 The title field id.
 	 *      @type string $description           The description field id.
 	 *      @type string $page_type_recommended The page type for the context of the recommended replace vars.
@@ -75,8 +72,7 @@ class WPSEO_Replacevar_Editor {
 		$this->yform->hidden( $this->arguments['title'], $this->arguments['title'] );
 		$this->yform->hidden( $this->arguments['description'], $this->arguments['description'] );
 
-		printf(
-			'<div
+		printf( '<div
 				data-react-replacevar-editor
 				data-react-replacevar-title-field-id="%1$s"
 				data-react-replacevar-metadesc-field-id="%2$s"

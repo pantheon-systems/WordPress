@@ -230,7 +230,7 @@ class NM_Form {
           
           if( $use_units ) {
           $html .= '<div class="form-check form-check-inline">';
-            // $html .= '<button class="btn btn-outline-secondary ppom-measure-btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.__('Select',"ppom").'</button>';
+            // $html .= '<button class="btn btn-outline-secondary ppom-measure-btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'.__('Select','ppom').'</button>';
             // $html .= '<div class="dropdown-menu">';
             
                 foreach($options as $option) {
@@ -240,9 +240,9 @@ class NM_Form {
                     $option_id = $option['option_id'];
                     $unit    = $option['raw'];
                     $html .= '<input checked name="ppom[unit]['.$id.']" value="'.esc_attr($unit).'" class="form-check-input ppom-measure-unit" type="radio" id="'.esc_attr($option_id).'" data-apply="measure" ';
-                    $html .= sprintf(__('data-use_units="'.esc_attr($use_units).'" data-price="%s" data-label="%s" data-data_name="%s" data-unit="%s" data-optionid="%s">',"ppom"), $option['price'], esc_attr($data_label), $id, $unit, $option_id);
+                    $html .= sprintf(__('data-use_units="'.esc_attr($use_units).'" data-price="%s" data-label="%s" data-data_name="%s" data-unit="%s" data-optionid="%s">','ppom'), $option['price'], esc_attr($data_label), $id, $unit, $option_id);
                     $html .= '<label class="form-check-label" id="'.esc_attr($option_id).'">';
-                    $html .= sprintf(__("%s","ppom"), $option['label']);
+                    $html .= sprintf(__("%s",'ppom'), $option['label']);
                     $html .= '</label>';
                 }
                 
@@ -254,7 +254,7 @@ class NM_Form {
               
                 $option_id = "{$id}_unit";
                 $html .= '<input style="display:none" value="" checked name="ppom[unit]['.$id.']" class="form-check-input ppom-measure-unit" type="radio" id="'.esc_attr($option_id).'" data-apply="measure" ';
-                $html .= sprintf(__('data-use_units="no" data-price="%s" data-label="%s" data-data_name="%s" data-optionid="%s">',"ppom"), ppom_get_product_price($product), esc_attr($label), $id, $option_id);
+                $html .= sprintf(__('data-use_units="no" data-price="%s" data-label="%s" data-data_name="%s" data-optionid="%s">','ppom'), ppom_get_product_price($product), esc_attr($label), $id, $option_id);
                     
           }// Units used closed
           
@@ -388,6 +388,7 @@ class NM_Form {
         $onetime    = $args['onetime'];
         $taxable	= $args['taxable'];
         
+        
         // Options
         $options    = $this -> get_attribute_value('options', $args);
         
@@ -425,31 +426,26 @@ class NM_Form {
             $option_id      = isset($value['option_id']) ? $value['option_id'] : '';
             $raw_label      = $value['raw'];
             $without_tax    = $value['without_tax'];
-            $opt_percent    = isset($value['percent']) ? $value['percent']: '';
-            $option_class   = "ppom-option-{$option_id}";
             
             if( is_array($selected_value) ){
             
                 foreach($selected_value as $s){
                     $html   .= '<option '.selected( $s, $key, false ).' value="'.esc_attr($key).'" ';
-                    $html   .= 'class="'.esc_attr($option_class).'" ';
                     $html   .= 'data-price="'.esc_attr($option_price).'" ';
-                    $html   .= 'data-label="'.esc_attr($option_label).'" ';
+                    $html   .= 'data-label="'.esc_attr($option_label).'"';
                     $html   .= 'data-onetime="'.esc_attr($onetime).'"';
                     $html   .= '>'.$option_label.'</option>';
                 }
             } else {
                 $html   .= '<option '.selected( $selected_value, $key, false ).' ';
                 $html   .= 'value="'.esc_attr($key).'" ';
-                $html   .= 'class="'.esc_attr($option_class).'" ';
                 $html   .= 'data-price="'.esc_attr($option_price).'" ';
                 $html   .= 'data-optionid="'.esc_attr($option_id).'" ';
-                $html   .= 'data-percent="'.esc_attr($opt_percent).'" ';
-                $html   .= 'data-label="'.esc_attr($raw_label).'" ';
-                $html   .= 'data-title="'.esc_attr($title).'" '; // Input main label/title
-                $html   .= 'data-onetime="'.esc_attr($onetime).'" ';
-                $html   .= 'data-taxable="'.esc_attr($taxable).'" ';
-                $html   .= 'data-without_tax="'.esc_attr($without_tax).'" ';
+                $html   .= 'data-label="'.esc_attr($raw_label).'"';
+                $html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
+                $html   .= 'data-onetime="'.esc_attr($onetime).'"';
+                $html   .= 'data-taxable="'.esc_attr($taxable).'"';
+                $html   .= 'data-without_tax="'.esc_attr($without_tax).'"';
                 $html   .= 'data-data_name="'.esc_attr($id).'"';
                 $html   .= '>'.$option_label.'</option>';
             }
@@ -760,42 +756,22 @@ class NM_Form {
             
 			
 			$html .= '<label for="'.esc_attr($option_id).'"> ';
+				$html .= '<input id="'.esc_attr($option_id).'" ';
+				$html .= 'data-price="'.esc_attr($option_price).'" ';
+				$html .= 'data-label="'.esc_attr($color_label).'"';
+				$html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
+				$html .= 'type="radio" ';
+				$html .= 'name="'.esc_attr($name).'" ';
+				$html .= 'value="'.esc_attr($raw_label).'" ';
+				$html .= 'data-onetime="'.esc_attr($onetime).'"';
+                $html .= 'data-taxable="'.esc_attr($taxable).'"';
+                $html .= 'data-without_tax="'.esc_attr($without_tax).'"';
+				$html .= $checked_option;
+				$html .= '>';
 			
-			if ($args['multiple_allowed'] == 'on') {
-    			$html .= '<input id="'.esc_attr($option_id).'" ';
-    			$html .= 'data-price="'.esc_attr($option_price).'" ';
-    			$html .= 'data-label="'.esc_attr($color_label).'"';
-    			$html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
-    			$html .= 'type="checkbox" ';
-    			$html .= 'name="'.esc_attr($name).'[]" ';
-    			$html .= 'value="'.esc_attr($raw_label).'" ';
-    			$html .= 'data-onetime="'.esc_attr($onetime).'" ';
-                $html .= 'data-taxable="'.esc_attr($taxable).'" ';
-                $html .= 'data-without_tax="'.esc_attr($without_tax).'" ';
-                $html .= 'data-optionid="'.esc_attr($option_id).'" ';
-                $html .= 'data-data_name="'.esc_attr($id).'" ';
-    			$html .= $checked_option;
-    			$html .= '>';
-    		}else{
-    			
-    			$html .= '<input id="'.esc_attr($option_id).'" ';
-    			$html .= 'data-price="'.esc_attr($option_price).'" ';
-    			$html .= 'data-label="'.esc_attr($color_label).'"';
-    			$html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
-    			$html .= 'type="radio" ';
-    			$html .= 'name="'.esc_attr($name).'" ';
-    			$html .= 'value="'.esc_attr($raw_label).'" ';
-    			$html .= 'data-onetime="'.esc_attr($onetime).'" ';
-                $html .= 'data-taxable="'.esc_attr($taxable).'" ';
-                $html .= 'data-without_tax="'.esc_attr($without_tax).'" ';
-                $html .= 'data-optionid="'.esc_attr($option_id).'" ';
-                $html .= 'data-data_name="'.esc_attr($id).'" ';
-    			$html .= $checked_option;
-    			$html .= '>';
-    		}
-		
+				
 			$html .= '<span class="ppom-single-palette" ';
-			$html	.= 'title="'.esc_attr($option_label).'" data-ppom-tooltip="ppom_tooltip"';
+			$html	.= 'title="'.esc_attr($option_label).'" data-html="true" data-toggle="tooltip"';
 			$html	.= 'style="background-color:'.esc_attr($color_code).';';
 			$html	.= 'width:'.esc_attr($args['color_width']).'px;';
 			$html	.= 'height:'.esc_attr($args['color_height']).'px;';
@@ -833,7 +809,7 @@ class NM_Form {
 	    // Options
 	   // ppom_pa($args['images']);
 		$images    = isset($args['images']) ? $args['images'] : '';
-		if ( ! $images ) return __("Images not selected", "ppom");
+		if ( ! $images ) return __("Images not selected", 'ppom');
 
         $input_wrapper_class = $this->get_default_setting_value('global', 'input_wrapper_class', $id);
         $input_wrapper_class = apply_filters('ppom_input_wrapper_class', $input_wrapper_class, $args);
@@ -848,11 +824,10 @@ class NM_Form {
 	        $html .= '<div class="ppom_upload_image_box">';
 			foreach ($images as $image){
 						
-				$image_full     = isset($image['link']) ? $image['link'] : 0;
-				$image_id       = isset($image['id']) ? $image['id'] : 0;
-				$image_title    = isset($image['title']) ? stripslashes($image['title']) : 0;
-				$image_price    = isset($image['price']) ? $image['price'] : 0;
-				$option_id      = $id.'-'.$image_id;
+				$image_full   = isset($image['link']) ? $image['link'] : 0;
+				$image_id   = isset($image['id']) ? $image['id'] : 0;
+				$image_title= isset($image['title']) ? stripslashes($image['title']) : 0;
+				$image_price= isset($image['price']) ? $image['price'] : 0;
 				
 				// If price set in %
 				if(strpos($image['price'],'%') !== false){
@@ -868,7 +843,7 @@ class NM_Form {
 				if( ! empty($default_value) ){
 	        
 	                $checked = ($image['title'] == $default_value ? 'checked = "checked"' : '' );
-	                $checked_option = checked( $default_value, $image['title'], false );
+	                $checked_option = checked( $default_value, $key, false );
 	            }
 				
 				$html .= '<div class="pre_upload_image '.esc_attr($classes).'">';
@@ -876,7 +851,7 @@ class NM_Form {
 				if( !empty($image_link) ) {
 				    $html .= '<a href="'.esc_url($image_link).'"><img class="img-thumbnail" src="'.esc_url($image_url).'" /></a>';
 				} else {
-				    $html .= '<img class="img-thumbnail"  data-model-id="modalImage'.esc_attr($image_id).'" src="'.esc_url($image_url).'" />';
+				    $html .= '<img data-toggle="modal" class="img-thumbnail"  data-target="#modalImage'.esc_attr($image_id).'" src="'.esc_url($image_url).'" />';
 				}
 				
 				// Loading Modals
@@ -889,12 +864,9 @@ class NM_Form {
 				$html	.= '<div class="input_image">';
 				if ($args['multiple_allowed'] == 'on') {
 					$html	.= '<input type="checkbox" ';
-					$html   .= 'id="'.esc_attr($option_id).'"';
 					$html   .= 'data-price="'.esc_attr($image_price).'" ';
 					$html   .= 'data-label="'.esc_attr($image_title).'" ';
-					$html   .= 'data-title="'.esc_attr($title).'" '; // Input main label/title
-					$html   .= 'data-optionid="'.esc_attr($option_id).'" ';
-                    $html   .= 'data-data_name="'.esc_attr($id).'" ';
+					$html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
 					$html   .= 'name="'.$args['name'].'[]" ';
 					$html   .= 'value="'.esc_attr(json_encode($image)).'" />';
 				}else{
@@ -902,13 +874,10 @@ class NM_Form {
 					//default selected
 					$checked = ($image['title'] == $default_value ? 'checked = "checked"' : '' );
 					$html	.= '<input type="radio" ';
-					$html   .= 'id="'.esc_attr($option_id).'"';
-					$html   .= 'data-price="'.esc_attr($image_price).'" ';
+					$html   .= 'data-price="'.esc_attr($image_price).'"';
 					$html   .= 'data-label="'.esc_attr($image_title).'" ';
-					$html   .= 'data-title="'.esc_attr($title).'" '; // Input main label/title
+					$html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
 					$html   .= 'data-type="'.esc_attr($type).'" name="'.$args['name'].'[]" ';
-					$html   .= 'data-optionid="'.esc_attr($option_id).'" ';
-                    $html   .= 'data-data_name="'.esc_attr($id).'" ';
 					$html   .= 'value="'.esc_attr(json_encode($image)).'" '.$checked_option.' />';
 				}
 					
@@ -970,15 +939,13 @@ class NM_Form {
 					
 					$html .= '<label>';
 					$html .= '<div class="pre_upload_image '.esc_attr($classes).'" ';
-					$html .= 'title="'.esc_attr($image_title_price).'" data-ppom-tooltip="ppom_tooltip">';
+					$html .= 'title="'.esc_attr($image_title_price).'" data-html="true" data-toggle="tooltip">';
 						if ($args['multiple_allowed'] == 'on') {
 							$html	.= '<input type="checkbox" ';
 							$html   .= 'id="'.esc_attr($option_id).'"';
 							$html   .= 'data-price="'.esc_attr($image_price).'" ';
 							$html   .= 'data-label="'.esc_attr($image_title).'" ';
-							$html   .= 'data-title="'.esc_attr($title).'" '; // Input main label/title
-							$html   .= 'data-optionid="'.esc_attr($option_id).'" ';
-                            $html   .= 'data-data_name="'.esc_attr($id).'" ';
+							$html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
 							$html   .= 'name="'.$args['name'].'[]" ';
 							$html   .= 'value="'.esc_attr(json_encode($image)).'" '.esc_attr($checked_option).' />';
 						}else{
@@ -986,16 +953,13 @@ class NM_Form {
 							//default selected
 				// 			$checked = ($image['title'] == $default_value ? 'checked = "checked"' : '' );
 							$html	.= '<input type="radio" ';
-							$html   .= 'id="'.esc_attr($option_id).'" ';
-							$html   .= 'data-price="'.esc_attr($image_price).'" ';
+							$html   .= 'id="'.esc_attr($option_id).'"';
+							$html   .= 'data-price="'.esc_attr($image_price).'"';
 							$html   .= 'data-label="'.esc_attr($image_title).'" ';
-							$html   .= 'data-title="'.esc_attr($title).'" '; // Input main label/title
-							$html   .= 'data-optionid="'.esc_attr($option_id).'" ';
-                            $html   .= 'data-data_name="'.esc_attr($id).'" ';
+							$html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
 							$html   .= 'data-type="'.esc_attr($type).'" name="'.$args['name'].'[]" ';
 							$html   .= 'value="'.esc_attr(json_encode($image)).'" '.esc_attr($checked_option).' />';
 						}
-						
 					if($image['id'] != ''){
 						if( isset($image['url']) && $image['url'] != '' ) {
 							$html .= '<a href="'.$image['url'].'"><img src="'.wp_get_attachment_thumb_url( $image['id'] ).'" /></a>';
@@ -1167,7 +1131,7 @@ class NM_Form {
         
 	    // Options
 		$audios    = isset($args['audios']) ? $args['audios'] : '';
-		if ( ! $audios ) return __("audios not selected", "ppom");
+		if ( ! $audios ) return __("audios not selected", 'ppom');
 
         $input_wrapper_class = $this->get_default_setting_value('global', 'input_wrapper_class', $id);
         $input_wrapper_class = apply_filters('ppom_input_wrapper_class', $input_wrapper_class, $args);
@@ -1265,15 +1229,13 @@ class NM_Form {
 			$html .= 'href="javascript:;" ';
 			$html .= 'class="btn btn-primary '.esc_attr($args['button_class']).'">';
 			$html .= $args['button_label'] . '</a>';
-			$html .= '<span class="ppom-dragdrop-text">';
-			$html .= __("Drag File Here", "ppom");
-			$html .= '</span>';
+			$html .= '<span class="ppom-dragdrop-text">'.__('Drag file(s) here', 'ppom').'</span>';
 		$html .= '</div>';		//ppom-file-container
 
 		if($args['dragdrop']){
 			
 			$html .= '<div class="ppom-droptext">';
-				$html .= __('Drag file/directory here', "ppom");
+				$html .= __('Drag file/directory here', 'ppom');
 			$html .= '</div>';
 		}
     	
@@ -1346,13 +1308,13 @@ class NM_Form {
 			$html .= 'href="javascript:;" ';
 			$html .= 'class="btn btn-primary '.esc_attr($args['button_class']).'">';
 			$html .= $args['button_label'] . '</a>';
-			$html .= '<span class="ppom-dragdrop-text">'.__('Drag file/directory here', "ppom").'</span>';
+			$html .= '<span class="ppom-dragdrop-text">'.__('Drag file/directory here', 'ppom').'</span>';
 		$html .= '</div>';		//ppom-file-container
 
 		if($args['dragdrop']){
 			
 			$html .= '<div class="ppom-droptext">';
-				$html .= __('Drag file/directory here', "ppom");
+				$html .= __('Drag file/directory here', 'ppom');
 			$html .= '</div>';
 		}
     	
@@ -1379,7 +1341,7 @@ class NM_Form {
                     $raw_label      = $size['raw'];
                     $without_tax    = $size['without_tax'];
     	            
-    	            $html   .= '<option ';
+    	            $html   .= '<option '.selected( $selected_value, $key, false ).' ';
                     $html   .= 'value="'.esc_attr($key).'" ';
                     $html   .= 'data-price="'.esc_attr($option_price).'" ';
                     $html   .= 'data-label="'.esc_attr($raw_label).'" ';
@@ -1391,14 +1353,22 @@ class NM_Form {
                     $html   .= '>'.$option_label.'</option>';
     	        }
     	        
-    	        $html .= '<option selected="selected">'.__('Select Size', "ppom").'</option>';
+    	        $html .= '<option selected="selected">'.__('Select Size', 'ppom').'</option>';
     	   $html    .= '</select>';
     	   
     	}
     	
     	$html   .= '</div>';    // ppom-croppie-preview
+    	
+    	$html   .= '<a href="#" style="display:none" data-fileid="'.esc_attr($args['id']).'" class="btn btn-info ppom-croppie-btn">';
+    	$html   .= __('Confirm and Preview', 'ppom').'</a>';
     	$html   .= '</div>'; //ppom-croppie-wrapper
-    
+    	// Loading Modals
+		$modal_vars = array('file_id' => $args['id'], 'image_full'=>'', 'image_title'=>$args['label']);
+		ob_start();
+        ppom_load_template('v10/cropper-modals.php', $modal_vars);
+        $html .= ob_get_clean();
+        
         $html   .= '</div>';    //form-group
         
         // filter: nmforms_input_htmls
@@ -1471,8 +1441,6 @@ class NM_Form {
         
         $html       .= '>';  // Closing select
         
-        $unit_decimal_places = !empty($args['decimal_place']) ? $args['decimal_place'] : wc_get_price_decimals();
-        
         // ppom_pa($options);
         foreach($options as $key => $value) {
             
@@ -1484,8 +1452,7 @@ class NM_Form {
             $unit_price     = 0;
             $fixed_qty      = 0;
             if( $value['price'] ) {
-                $unit_price	= wc_format_decimal( $value['price']/$value['raw'], intval($unit_decimal_places));
-                // $unit_price     = $value['price']/$value['raw'];
+                $unit_price     = $value['price']/$value['raw'];
                 $fixed_qty      = $value['raw'];
             }
             
@@ -1496,7 +1463,6 @@ class NM_Form {
                     $html   .= 'data-price="'.esc_attr($option_price).'" ';
                     $html   .= 'data-label="'.esc_attr($option_label).'"';
                     $html   .= 'data-unitprice="'.esc_attr($unit_price).'"'; 
-                    $html   .= 'data-decimal_place="'.esc_attr($unit_decimal_places).'"'; 
                     $html   .= 'data-qty="'.esc_attr($fixed_qty).'"';
                     $html   .= '>'.$option_label.'</option>';
                 }
@@ -1506,8 +1472,7 @@ class NM_Form {
                 $html   .= 'data-price="'.esc_attr($option_price).'" ';
                 $html   .= 'data-label="'.esc_attr($raw_label).'"';
                 $html   .= 'data-title="'.esc_attr($title).'"'; // Input main label/title
-                $html   .= 'data-unitprice="'.esc_attr($unit_price).'"';
-                $html   .= 'data-decimal_place="'.esc_attr($unit_decimal_places).'"'; 
+                $html   .= 'data-unitprice="'.esc_attr($unit_price).'"'; 
                 $html   .= 'data-qty="'.esc_attr($fixed_qty).'"';
                 $html   .= '>'.$option_label.'</option>';
             }

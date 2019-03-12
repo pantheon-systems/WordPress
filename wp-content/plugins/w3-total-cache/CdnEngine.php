@@ -92,10 +92,6 @@ class CdnEngine {
 				$instances[$instance_key] = new CdnEngine_Mirror_StackPath( $config );
 				break;
 
-			case 'stackpath2':
-				$instances[$instance_key] = new CdnEngine_Mirror_StackPath2( $config );
-				break;
-
 			default :
 				trigger_error( 'Incorrect CDN engine', E_USER_WARNING );
 				$instances[$instance_key] = new CdnEngine_Base();

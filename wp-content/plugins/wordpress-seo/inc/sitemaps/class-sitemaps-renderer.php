@@ -10,39 +10,19 @@
  */
 class WPSEO_Sitemaps_Renderer {
 
-	/**
-	 * XSL stylesheet for styling a sitemap for web browsers.
-	 *
-	 * @var string
-	 */
+	/** @var string $stylesheet XSL stylesheet for styling a sitemap for web browsers. */
 	protected $stylesheet = '';
 
-	/**
-	 * Holds the get_bloginfo( 'charset' ) value to reuse for performance.
-	 *
-	 * @var string
-	 */
+	/** @var string $charset Holds the get_bloginfo( 'charset' ) value to reuse for performance. */
 	protected $charset = 'UTF-8';
 
-	/**
-	 * Holds charset of output, might be converted.
-	 *
-	 * @var string
-	 */
+	/** @var string $output_charset Holds charset of output, might be converted. */
 	protected $output_charset = 'UTF-8';
 
-	/**
-	 * If data encoding needs to be converted for output.
-	 *
-	 * @var bool
-	 */
+	/** @var bool $needs_conversion If data encoding needs to be converted for output. */
 	protected $needs_conversion = false;
 
-	/**
-	 * Timezone.
-	 *
-	 * @var WPSEO_Sitemap_Timezone
-	 */
+	/** @var WPSEO_Sitemap_Timezone $timezone */
 	protected $timezone;
 
 	/**

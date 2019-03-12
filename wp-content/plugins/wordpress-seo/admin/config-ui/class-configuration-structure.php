@@ -10,33 +10,27 @@
  */
 class WPSEO_Configuration_Structure {
 
-	/**
-	 * Registered steps.
-	 *
-	 * @var array
-	 */
+	/** @var array Registered steps */
 	protected $steps = array();
 
 	/**
-	 * List of fields for each configuration step.
-	 *
-	 * This list does not include the fields for the 'postTypeVisibility'
-	 * step as that list will be generated on the fly.
-	 *
-	 * @var array
+	 * WPSEO_Configuration_Structure constructor.
 	 */
-	private $fields = array(
-		'intro'                      => array( 'configurationChoices' ),
-		'environment_type'           => array( 'environment_type' ),
-		'siteType'                   => array( 'siteType' ),
-		'publishingEntity'           => array(
+	public function initialize() {
+		$this->add_step( 'intro', __( 'Welcome!', 'wordpress-seo' ), array(
+			'configurationChoices',
+		), false, true );
+
+		$this->add_step( 'environment_type', __( 'Environment', 'wordpress-seo' ), array( 'environment_type' ) );
+		$this->add_step( 'siteType', __( 'Site type', 'wordpress-seo' ), array( 'siteType' ) );
+		$this->add_step( 'publishingEntity', __( 'Company or person', 'wordpress-seo' ), array(
 			'publishingEntity',
 			'publishingEntityType',
 			'publishingEntityCompanyName',
 			'publishingEntityCompanyLogo',
 			'publishingEntityPersonName',
-		),
-		'profileUrls'                => array(
+		) );
+		$this->add_step( 'profileUrls', __( 'Social profiles', 'wordpress-seo' ), array(
 			'socialProfilesIntro',
 			'profileUrlFacebook',
 			'profileUrlTwitter',
@@ -46,36 +40,7 @@ class WPSEO_Configuration_Structure {
 			'profileUrlPinterest',
 			'profileUrlYouTube',
 			'profileUrlGooglePlus',
-		),
-		'multipleAuthors'            => array( 'multipleAuthors' ),
-		'connectGoogleSearchConsole' => array(
-			'googleSearchConsoleIntro',
-			'connectGoogleSearchConsole',
-		),
-		'titleTemplate'              => array(
-			'titleIntro',
-			'siteName',
-			'separator',
-		),
-		'newsletter'                 => array( 'mailchimpSignup' ),
-		'suggestions'                => array( 'suggestions' ),
-		'success'                    => array( 'successMessage' ),
-	);
-
-	/**
-	 * WPSEO_Configuration_Structure constructor.
-	 */
-	public function initialize() {
-		$this->add_step( 'intro', __( 'Welcome!', 'wordpress-seo' ), $this->fields['intro'], false, true );
-
-		$this->add_step( 'environment_type', __( 'Environment', 'wordpress-seo' ), $this->fields['environment_type'] );
-		$this->add_step( 'siteType', __( 'Site type', 'wordpress-seo' ), $this->fields['siteType'] );
-		$this->add_step(
-			'publishingEntity',
-			__( 'Company or person', 'wordpress-seo' ),
-			$this->fields['publishingEntity']
-		);
-		$this->add_step( 'profileUrls', __( 'Social profiles', 'wordpress-seo' ), $this->fields['profileUrls'] );
+		) );
 
 		$fields = array( 'postTypeVisibility' );
 
@@ -85,21 +50,26 @@ class WPSEO_Configuration_Structure {
 		}
 		$this->add_step( 'postTypeVisibility', __( 'Search engine visibility', 'wordpress-seo' ), $fields );
 
-		$this->add_step(
-			'multipleAuthors',
-			__( 'Multiple authors', 'wordpress-seo' ),
-			$this->fields['multipleAuthors']
-		);
-		$this->add_step(
+		$this->add_step( 'multipleAuthors', __( 'Multiple authors', 'wordpress-seo' ), array( 'multipleAuthors' ) );
+		$this->add_step( 'connectGoogleSearchConsole', __( 'Google Search Console', 'wordpress-seo' ), array(
+			'googleSearchConsoleIntro',
 			'connectGoogleSearchConsole',
-			__( 'Google Search Console', 'wordpress-seo' ),
-			$this->fields['connectGoogleSearchConsole']
-		);
-		$this->add_step( 'titleTemplate', __( 'Title settings', 'wordpress-seo' ), $this->fields['titleTemplate'] );
+		) );
+		$this->add_step( 'titleTemplate', __( 'Title settings', 'wordpress-seo' ), array(
+			'titleIntro',
+			'siteName',
+			'separator',
+		) );
 
-		$this->add_step( 'newsletter', __( 'Newsletter', 'wordpress-seo' ), $this->fields['newsletter'], true, true );
-		$this->add_step( 'suggestions', __( 'You might like', 'wordpress-seo' ), $this->fields['suggestions'], true, true );
-		$this->add_step( 'success', __( 'Success!', 'wordpress-seo' ), $this->fields['success'], true, true );
+		$this->add_step( 'newsletter', __( 'Newsletter', 'wordpress-seo' ), array(
+			'mailchimpSignup',
+		), true, true );
+		$this->add_step( 'suggestions', __( 'You might like', 'wordpress-seo' ), array(
+			'suggestions',
+		), true, true );
+		$this->add_step( 'success', __( 'Success!', 'wordpress-seo' ), array(
+			'successMessage',
+		), true, true );
 	}
 
 	/**

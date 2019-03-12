@@ -9,11 +9,8 @@
  * Class that handles the Admin side of XML sitemaps
  */
 class WPSEO_Sitemaps_Admin {
-
 	/**
-	 * Post_types that are being imported.
-	 *
-	 * @var array
+	 * @var array Post_types that are being imported.
 	 */
 	private $importing_post_types = array();
 

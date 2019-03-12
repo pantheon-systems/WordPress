@@ -9,7 +9,6 @@
  * Class with functionality to import & clean WP Meta SEO post metadata.
  */
 class WPSEO_Import_WP_Meta_SEO extends WPSEO_Plugin_Importer {
-
 	/**
 	 * The plugin name.
 	 *

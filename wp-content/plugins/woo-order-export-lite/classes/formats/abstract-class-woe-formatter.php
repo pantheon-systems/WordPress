@@ -22,22 +22,13 @@ abstract class WOE_Formatter {
 	var $format_number_fields;
 	var $counter_value;
 
-	var $filename;
+	protected $filename;
 
-	var $decimals;
-	var $decimal_separator;
-	var $thousands_separator;
+	protected $decimals;
+	protected $decimal_separator;
+	protected $thousands_separator;
 
-	public function __construct(
-		$mode,
-		$filename,
-		$settings,
-		$format,
-		$labels,
-		$field_formats,
-		$date_format,
-		$offset
-	) {
+	public function __construct( $mode, $filename, $settings, $format, $labels, $field_formats, $date_format, $offset ) {
 		$this->has_output_filter = has_filter( "woe_{$format}_output_filter" );
 		$this->mode              = $mode;
 		$this->filename          = $filename;
@@ -134,7 +125,7 @@ abstract class WOE_Formatter {
 						}
 					}
 				} else {
-					if ( in_array( $field, $this->field_formats['order'][ $format_type ] ) ) {
+						if ( in_array( $field, $this->field_formats['order'][ $format_type ] ) ) {
 						$rec[ $field ] = $this->format_field( $format_type, $value );
 					}
 				}
@@ -172,7 +163,7 @@ abstract class WOE_Formatter {
 	}
 
 	protected function format_number_field( $field_value ) {
-		$new_value = $field_value; //as is!
+		$new_value = $field_value ; //as is!
 		$new_value = apply_filters( 'woe_format_numbers', $new_value, $field_value );
 
 		return $new_value;

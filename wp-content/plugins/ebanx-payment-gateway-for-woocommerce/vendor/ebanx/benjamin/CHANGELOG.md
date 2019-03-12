@@ -1,18 +1,3 @@
-## 1.18.0
-* Feature - Add util to validate a API notification about update and refund [#151](https://github.com/ebanx/benjamin/pull/151)
-
-## 1.17.3
-* Fix - Fix User Agent source tag [#149](https://github.com/ebanx/benjamin/pull/149)
-
-## 1.17.2
-* Fix - Fix array format passed to Curl as Header [#147](https://github.com/ebanx/benjamin/pull/147)
-
-## 1.17.1
-* Fix - Add Facade method to submit Source/Version data [#145](https://github.com/ebanx/benjamin/pull/145)
-
-## 1.17.0
-* Feature - Add User Agent Data with version data to every HTTP request [#143](https://github.com/ebanx/benjamin/pull/143)
-
 ## 1.16.0
 * Feature - Add BankTransfer as a payment method [#141](https://github.com/ebanx/benjamin/pull/141)
 

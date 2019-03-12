@@ -1,10 +1,12 @@
 <?php
 
 if(isset($_POST['ldsubmit'])){
-    update_option('ldcode',stripslashes($_POST['ldcodesnippet']));
-    $hidecodevalue = !empty($_POST['hidecode']) ? $_POST['hidecode'] : 0;
-    update_option('hidecode',stripslashes($hidecodevalue));
+
+update_option('ldcode',stripslashes($_POST['ldcodesnippet']));
+update_option('hidecode',stripslashes($_POST['hidecode']));
+
 }
+
 
 ?>
 

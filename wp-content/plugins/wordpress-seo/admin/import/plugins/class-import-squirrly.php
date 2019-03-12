@@ -9,7 +9,6 @@
  * Class with functionality to import & clean Squirrly post metadata.
  */
 class WPSEO_Import_Squirrly extends WPSEO_Plugin_Importer {
-
 	/**
 	 * The plugin name.
 	 *

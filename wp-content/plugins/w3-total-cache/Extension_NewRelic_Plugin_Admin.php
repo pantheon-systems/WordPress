@@ -72,19 +72,14 @@ class Extension_NewRelic_Plugin_Admin {
 				) );
 		}
 
-		$v = $this->_config->get_string( array( 'newrelic', 'api_key' ) );
-		$new_relic_configured = !empty( $v );
+		add_action( 'admin_init_w3tc_dashboard', array(
+				'\W3TC\Extension_NewRelic_Widget',
+				'admin_init_w3tc_dashboard' ) );
+		add_action( 'w3tc_ajax', array(
+				'\W3TC\Extension_NewRelic_Widget',
+				'w3tc_ajax' ) );
 
-		if ( $new_relic_configured ) {
-			add_action( 'admin_init_w3tc_dashboard', array(
-					'\W3TC\Extension_NewRelic_Widget',
-					'admin_init_w3tc_dashboard' ) );
-			add_action( 'w3tc_ajax', array(
-					'\W3TC\Extension_NewRelic_Widget',
-					'w3tc_ajax' ) );
-
-			add_filter( 'w3tc_notes', array( $this, 'w3tc_notes' ) );
-		}
+		add_filter( 'w3tc_notes', array( $this, 'w3tc_notes' ) );
 	}
 
 

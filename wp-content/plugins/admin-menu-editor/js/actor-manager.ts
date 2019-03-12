@@ -12,17 +12,7 @@ interface CapabilityMap {
 	[capabilityName: string] : boolean;
 }
 
-interface IAmeActor {
-	getId(): string;
-	getDisplayName(): string;
-}
-
-interface IAmeUser extends IAmeActor {
-	userLogin: string;
-	isSuperAdmin: boolean;
-}
-
-abstract class AmeBaseActor implements IAmeActor {
+abstract class AmeBaseActor {
 	public id: string;
 	public displayName: string = '[Error: No displayName set]';
 	public capabilities: CapabilityMap;
@@ -30,7 +20,7 @@ abstract class AmeBaseActor implements IAmeActor {
 
 	groupActors: string[] = [];
 
-	protected constructor(id: string, displayName: string, capabilities: CapabilityMap, metaCapabilities: CapabilityMap = {}) {
+	constructor(id: string, displayName: string, capabilities: CapabilityMap, metaCapabilities: CapabilityMap = {}) {
 		this.id = id;
 		this.displayName = displayName;
 		this.capabilities = capabilities;
@@ -78,14 +68,6 @@ abstract class AmeBaseActor implements IAmeActor {
 	toString(): string {
 		return this.displayName + ' [' + this.id + ']';
 	}
-
-	getId(): string {
-		return this.id;
-	}
-
-	getDisplayName(): string {
-		return this.displayName;
-	}
 }
 
 class AmeRole extends AmeBaseActor {
@@ -118,7 +100,7 @@ interface AmeUserPropertyMap {
 	avatar_html?: string;
 }
 
-class AmeUser extends AmeBaseActor implements IAmeUser {
+class AmeUser extends AmeBaseActor {
 	userLogin: string;
 	userId: number = 0;
 	roles: string[];
@@ -193,7 +175,7 @@ interface AmeCapabilitySuggestion {
 	capability: string;
 }
 
-class AmeActorManager implements AmeActorManagerInterface {
+class AmeActorManager {
 	private static _ = wsAmeLodash;
 
 	private roles: {[roleId: string] : AmeRole} = {};
@@ -201,7 +183,7 @@ class AmeActorManager implements AmeActorManagerInterface {
 	private grantedCapabilities: AmeGrantedCapabilityMap = {};
 
 	public readonly isMultisite: boolean = false;
-	private readonly superAdmin: AmeSuperAdmin;
+	private superAdmin: AmeSuperAdmin;
 	private exclusiveSuperAdminCapabilities = {};
 
 	private tagMetaCaps = {};
@@ -251,7 +233,6 @@ class AmeActorManager implements AmeActorManagerInterface {
 		}
 	}
 
-	// noinspection JSUnusedGlobalSymbols
 	actorCanAccess(
 		actorId: string,
 		grantAccess: {[actorId: string] : boolean},
@@ -638,23 +619,6 @@ class AmeActorManager implements AmeActorManagerInterface {
 	public getSuggestedCapabilities(): AmeCapabilitySuggestion[] {
 		return this.suggestedCapabilities;
 	}
-
-	createUserFromProperties(properties: AmeUserPropertyMap): IAmeUser {
-		return AmeUser.createFromProperties(properties);
-	}
-}
-
-interface AmeActorManagerInterface {
-	getUsers(): AmeDictionary<IAmeUser>;
-	getUser(login: string): IAmeUser;
-	addUsers(newUsers: IAmeUser[]);
-	createUserFromProperties(properties: AmeUserPropertyMap): IAmeUser;
-
-	getRoles(): AmeDictionary<IAmeActor>;
-	getSuperAdmin(): IAmeActor;
-
-	getActor(actorId): IAmeActor;
-	actorExists(actorId: string): boolean;
 }
 
 if (typeof wsAmeActorData !== 'undefined') {

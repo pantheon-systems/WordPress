@@ -4,7 +4,7 @@
  *
  * @package WPSEO\Admin\Views\General
  *
- * @uses WP_Post_Type $wpseo_post_type
+ * @var WP_Post_Type $wpseo_post_type
  */
 
 $woocommerce_shop_page = new WPSEO_WooCommerce_Shop_Page();

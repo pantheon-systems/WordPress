@@ -4,7 +4,7 @@
  *
  * @package WPSEO\Admin\Views\Archive
  *
- * @uses Yoast_Form $yform Form object.
+ * @var Yoast_Form $yform
  */
 
 $special_pages_help = new WPSEO_Admin_Help_Panel(

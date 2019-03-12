@@ -4,7 +4,6 @@
     padding: 0 !important;
     clear:both;
     margin-bottom:15px;
-    width: 100%;
 }
 
 .ppom-wrapper span.show_description{
@@ -305,67 +304,4 @@ padding: 5px;
 }
 #ppomSlider .slider-selection {
 	background: #81bfde;
-}
-
-.ppom-delete-option-table{
-  color: red;
-  cursor: pointer;
-}
-
-/*
-    2- Helper Icon With Desciption CSS
-*/
-#ppom_tooltip{
-    font-family: Ubuntu, sans-serif;
-    font-size: 0.875em;
-    text-align: center;
-    text-shadow: 0 1px rgba( 0, 0, 0, .5 );
-    line-height: 1.5;
-    color: #fff;
-    background: -webkit-linear-gradient( top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.88) );
-    background: -moz-linear-gradient( top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.88) );
-    background: -ms-radial-gradient( top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.88) );
-    background: -o-linear-gradient( top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.88) );
-    background: linear-gradient( top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.88) );
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border-top: 1px solid #fff;
-    -webkit-box-shadow: 0 3px 5px rgba( 0, 0, 0, .3 );
-    -moz-box-shadow: 0 3px 5px rgba( 0, 0, 0, .3 );
-    box-shadow: 0 3px 5px rgba( 0, 0, 0, .3 );
-    position: absolute;
-    z-index: 10024;
-    padding: 15px;
-    overflow: visible;
-
-}
-#ppom_tooltip:after{
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #333;
-    border-top-color: rgba( 0, 0, 0, .7 );
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -10px;
-    margin-left: -10px;
-}
-#ppom_tooltip.top:after{
-    border-top-color: transparent;
-    border-bottom: 10px solid #333;
-    border-bottom-color: rgba( 0, 0, 0, .6 );
-    top: -20px;
-    bottom: auto;
-}
-#ppom_tooltip.left:after{
-    left: 10px;
-    margin: 0;
-}
-#ppom_tooltip.right:after{
-    right: 10px;
-    left: auto;
-    margin: 0;
 }

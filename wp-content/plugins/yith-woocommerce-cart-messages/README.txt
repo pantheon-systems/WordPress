@@ -3,12 +3,14 @@
 Contributors: yithemes
 Tags: cart, notices, yithemes, message, woocommerce, shop, ecommerce, e-commerce, cart notices, notifications, show notice, checkout notice, checkout message, deadline notices, deadline message
 Requires at least: 3.5.1
-Tested up to: 5.0
-Stable tag: 1.3.7
+Tested up to: 4.9
+Stable tag: 1.3.5
+
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 The YITH Woocommerce Cart Messages plugin let you add custom messages in the cart page and/or in the checkout page.
+
 
 == Description ==
 
@@ -66,14 +68,6 @@ During this transition step, .po and .mo files will be used as always, but in or
 
 == Changelog ==
 *YITH WooCommerce Cart Messages Free*
-= 1.3.7 - Released on Jan 28, 2019 =
-* Update: Plugin Core 3.1.15
-
-= 1.3.6 - Released on Dec 05, 2018 =
-* New: Support to WordPress 5.0
-* Update: Plugin Core 3.1.5
-
-
 = 1.3.5 - Released on Oct 24, 2018 =
 * Update: Plugin Core 3.0.28
 

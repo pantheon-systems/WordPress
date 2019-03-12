@@ -10,25 +10,9 @@ var $filelist_DIV = Array();
 var ppom_file_progress = '';
 var featherEditor = '';
 var uploaderInstances = {};
-var Cropped_Data_Captured = false;
 
 jQuery(function($){
 	
-	// If cropper input found in fields
-	if( ppom_get_field_meta_by_type('cropper').length > 0) {
-	    
-	    var wc_cart_form = $( 'form.cart' );
-        $(wc_cart_form).on('submit',function(e) {
-            
-            // e.preventDefault();
-            var cropper_fields = ppom_get_field_meta_by_type('cropper');
-            $.each(cropper_fields, function(i, cropper){
-                var cropper_name = cropper.data_name;
-                ppom_generate_cropper_data_for_cart(cropper.data_name);
-            
-            });
-        });
-	}
 
 	$(document).on('ppom_image_ready', function(e){
 	    
@@ -53,29 +37,57 @@ jQuery(function($){
 	   
 	    ppom_reset_cropping_preview(field_name);
 		ppom_update_option_prices();
-	});
-    
+	})
+	
+
+	// Peview cropped image
+    $(".ppom-croppie-btn").on('click', function(e) {
+        
+        e.preventDefault();
+        
+        var file_id = $(this).data('fileid');
+        var croppie = $filelist_DIV[file_id]['cropped'];
+        var imag_id	= $filelist_DIV[file_id]['image_id'];
+        
+        $filelist_DIV[file_id]['croppie'].croppie('result', {
+        	type: 'rawcanvas',
+        	// size: { width: 300, height: 300 },
+        	format: 'png'
+        }).then(function (canvas) {
+			/*popupResult({
+				src: canvas.toDataURL()
+			});*/
+			
+			var fileCheck = $('<input checked="checked" name="ppom[fields]['+file_id+']['+imag_id+'][cropped]" type="checkbox"/>')
+    				                .val(canvas.toDataURL())
+    				                .css('display','none')
+    				                .appendTo($filelist_DIV[file_id]);
+			
+			var modalID = 'modalCrop_'+file_id;
+// 			console.log(canvas.toDataURL());
+			$("#"+modalID).find('.ppom-cropped-image').attr('src', canvas.toDataURL());
+			$("#"+modalID).modal();
+		});
+		
+    });
     
     // Croppie update size
     $('.ppom-croppie-preview').on('change', '.ppom-cropping-size', function(e) {
-        
-        var data_name = $(this).data('field_name');
-        var cropp_preview_container = jQuery(".ppom-croppie-wrapper-"+data_name);
-        var v_width = $('option:selected', this).data('width');
-        var v_height = $('option:selected', this).data('height');
-    
-        cropp_preview_container.find('.croppie-container').each(function(i, croppie_dom){
-            
-            var image_id = jQuery(croppie_dom).attr('data-image_id');
-            $(croppie_dom).croppie('destroy');
-            var viewport = {'width':v_width,'height':v_height};
-            ppom_set_croppie_options(data_name, viewport, image_id);
-        });
+       
+       var data_name = $(this).data('field_name');
+       $filelist_DIV[data_name]['croppie'].croppie('destroy');
+       
+       var viewport = {'width':$('option:selected', this).data('width'),'height':$('option:selected', this).data('height')};
+       ppom_set_croppie_options(data_name, viewport);
        
     });
-    
-    // Deleting File
-    $(".ppom-wrapper").on('click','.u_i_c_tools_del', function(e){
+	
+    $.each(ppom_file_vars.file_inputs, function(index, file_input){
+        
+        var file_data_name = file_input.data_name;
+        file_count[file_data_name] = 0;
+    	// delete file
+   	$(".ppom-wrapper").on('click','.u_i_c_tools_del', function(e){
     		e.preventDefault();
     
     		var del_message = ppom_file_vars.delete_file_msg;
@@ -83,8 +95,8 @@ jQuery(function($){
     		if(a){
     			// it is removing from uploader instance
     			var fileid = $(this).closest('.u_i_c_box').attr("data-fileid");
-    			var file_data_name = $(this).closest('div.ppom-field-wrapper').attr("data-data_name");
-                file_count[file_data_name] = 0;
+    			
+    // 			console.log(fileid);
     			
     			upload_instance[file_data_name].removeFile(fileid);
     
@@ -117,15 +129,31 @@ jQuery(function($){
     			});
     		}
     	});
-	
-    $.each(ppom_file_vars.file_inputs, function(index, file_input){
-        
-        var file_data_name = file_input.data_name;
-        file_count[file_data_name] = 0;
-    
+    	
     	$filelist_DIV[file_data_name] = $('#filelist-'+file_data_name);
     	
     	ppom_setup_file_upload_input( file_input );
+    	
+    	
+    	// ==================== If Aviary Editor is Enabled =======================
+    	if(ppom_file_vars.aviary_api_key !== '' && file_input.photo_editing == 'on') {
+    	    
+    	    
+            featherEditor = new Aviary.Feather({
+                apiKey: ppom_file_vars.aviary_api_key,
+                apiVersion: 3,
+                theme: 'dark',
+                onSave: function(imageID, newURL) {
+                    var img = document.getElementById(imageID);
+                    img.src = newURL;
+                    save_edited_photo(imageID, newURL);
+                    featherEditor.close();
+                },
+                onError: function(errorObj) {
+                    alert(errorObj.message);
+                }
+            });
+    	} 
     	
     });         // $.each(ppom_file_vars
 
@@ -185,29 +213,39 @@ function save_edited_photo(img_id, photo_url){
 	});
 }
 
+function launch_aviary_editor(id, src, file_name, editing_tools, cropping_preset) {
+    
+    editing_tools = (editing_tools == "" && editing_tools == undefined) ? 'all' : editing_tools;
+    // console.log(editing_tools);
+    featherEditor.launch({
+        image: id,
+        url: src,
+        tools: editing_tools,
+        cropPresets: eval(cropping_preset),
+        postData: {
+            filename: file_name
+        },
+    });
+    return false;
+}
+
 // Cropping image with Croppie
 function ppom_show_cropped_preview( file_name, image_url, image_id ) {
     
     
     var cropp_preview_container = jQuery(".ppom-croppie-wrapper-"+file_name);
-    // Enable size option
+    // Enable preview button & size option
+    cropp_preview_container.find('.ppom-croppie-btn').show();
     cropp_preview_container.find('.ppom-cropping-size').show();
     
-    var croppie_container = jQuery('<div/>')
-                            .addClass('ppom-croppie-preview-'+image_id)
-                            .attr('data-image_id', image_id)
-                            .appendTo(cropp_preview_container);
-                            
-    // $filelist_DIV[file_name]['croppie']     = cropp_preview_container.find('.ppom-croppie-preview');
-    $filelist_DIV[file_name]['croppie'][image_id]     = croppie_container;
+    $filelist_DIV[file_name]['croppie']     = cropp_preview_container.find('.ppom-croppie-preview');
 	$filelist_DIV[file_name]['image_id']    = image_id;    
 	$filelist_DIV[file_name]['image_url']   = image_url;
 	
-	var viewport = undefined;
-	ppom_set_croppie_options( file_name, viewport, image_id );
+	ppom_set_croppie_options( file_name );
 }
 
-function ppom_set_croppie_options( file_name, viewport, image_id ) {
+function ppom_set_croppie_options( file_name, viewport ) {
     
     var croppie_options = ppom_file_vars.croppie_options;
 	jQuery.each(croppie_options, function(field_name, option){
@@ -219,7 +257,7 @@ function ppom_set_croppie_options( file_name, viewport, image_id ) {
 	           option.viewport = viewport;
 	       }
         // console.log(option);
-	    $filelist_DIV[file_name]['croppie'][image_id].croppie(option);
+	    $filelist_DIV[file_name]['croppie'].croppie(option);
 	    }
 	});
 }
@@ -228,6 +266,8 @@ function ppom_set_croppie_options( file_name, viewport, image_id ) {
 function ppom_reset_cropping_preview(file_name) {
     
     var cropp_preview_container = jQuery(".ppom-croppie-wrapper-"+file_name);
+    // Enable preview button
+    cropp_preview_container.find('.ppom-croppie-btn').hide();
     // Reseting preview DOM
     cropp_preview_container.find('.ppom-croppie-preview').html('');
 }
@@ -241,22 +281,25 @@ function ppom_setup_file_upload_input( file_input ) {
         upload_instance[file_data_name].destroy();
     }
     
-    var ppom_file_data = {'action'          : 'ppom_upload_file', 
-                            'settings'      : file_input,
-                            'ppom_nonce'    : ppom_file_vars.ppom_file_upload_nonce
-                        }
+    
     upload_instance[file_data_name] = new plupload.Uploader({
     		runtimes 			: ppom_file_vars.plupload_runtime,
     		browse_button 		: 'selectfiles-'+file_data_name, // you can pass in id...
     		container			: 'ppom-file-container-'+file_data_name, // ... or DOM Element itself
     		drop_element		: 'ppom-file-container-'+file_data_name,
     		url 				: ppom_file_vars.ajaxurl,
-    		multipart_params 	: ppom_file_data,
+    		multipart_params 	: {'action' : 'ppom_upload_file', 'settings': file_input},
     		max_file_size 		: file_input.file_size,
     		max_file_count 		: parseInt(file_input.files_allowed),
+    	    
     	    chunk_size: '1mb',
     		
-    	  	filters : {
+    	    // Flash settings
+    // 		flash_swf_url 		: ppom_file_vars.plugin_url+'/js/plupload-2.1.2/js/Moxie.swf?nocache='+Math.random(),
+    		// Silverlight settings
+    // 		silverlight_xap_url : ppom_file_vars.plugin_url+'/js/plupload-2.1.2/js/Moxie.xap',
+    		
+    		filters : {
     			mime_types: [
     				{title : "Filetypes", extensions : file_input.file_types}
     			]
@@ -441,27 +484,4 @@ function ppom_setup_file_upload_input( file_input ) {
     	
     	upload_instance[file_data_name].init();
     	uploaderInstances[file_data_name] = upload_instance[file_data_name];
-}
-
-// Generate Cropped image data for cart
-function ppom_generate_cropper_data_for_cart(field_name) {
-    
-    var cropp_preview_container = jQuery(".ppom-croppie-wrapper-"+field_name);
-    
-    cropp_preview_container.find('.croppie-container').each(function(i, croppie_dom){
-        
-        var image_id = jQuery(croppie_dom).attr('data-image_id');
-        jQuery(croppie_dom).croppie('result', {
-        	type: 'rawcanvas',
-        	// size: { width: 300, height: 300 },
-        	format: 'png'
-        }).then(function (canvas) {
-    		var image_url = canvas.toDataURL();
-    		var fileCheck = jQuery('<input checked="checked" name="ppom[fields]['+field_name+']['+image_id+'][cropped]" type="checkbox"/>')
-    				                .val(image_url)
-    				                .css('display','none')
-    				                .appendTo($filelist_DIV[field_name]);
-    		
-    	});
-    });
 }

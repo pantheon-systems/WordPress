@@ -1,0 +1,129 @@
+/**
+ Responsive table courtesy of Mark Wiltshire: mark@bamboorocketapps.com (thanks!)
+ 
+ For more styles try: http://icant.co.uk/csstablegallery/
+ ----
+ Generic styles:
+ Here you could e.g. customise width of column 1 and 2,
+ or add a generic roll-over effect on table rows
+*/
+.cookielawinfo-column-1 {width: 25%;}
+.cookielawinfo-column-2 {width: 10%;}
+.cookielawinfo-column-3 {width: 15%;}
+.cookielawinfo-column-4 {width: 50%;}
+
+/** Simple style */
+.cookielawinfo-simple thead {width: 100%;}
+.cookielawinfo-simple td {padding: 5px 5px 5px 0;vertical-align: top;}
+.cookielawinfo-simple thead th {padding-right: 10px;text-align: left;}
+
+/** Modern style */
+.cookielawinfo-modern {border: 1px solid #e3e3e3;background-color: #f2f2f2;width: 100%;border-radius: 6px;-webkit-border-radius: 6px;-moz-border-radius: 6px;}
+.cookielawinfo-modern td, .cookielawinfo-modern th {padding: 5px;color: #333;}
+.cookielawinfo-modern thead {font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;padding: .2em 0 .2em .5em;text-align: left;color: #4B4B4B;background-color: #C8C8C8;background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e3e3e3), color-stop(.6,#B3B3B3));background-image: -moz-linear-gradient(top, #D6D6D6, #B0B0B0, #B3B3B3 90%);border-bottom: solid 1px #999;}
+.cookielawinfo-modern th {font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 17px;line-height: 20px;font-style: normal;font-weight: normal;text-align: left;text-shadow: white 1px 1px 1px;}
+.cookielawinfo-modern td {line-height: 20px;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 14px;border-bottom: 1px solid #fff;border-top: 1px solid #fff;}
+.cookielawinfo-modern tr.cookielawinfo-row:hover {background-color: #fff;}
+
+/** Elegant style */
+.cookielawinfo-elegant {border: 1px solid #DFDFDF;background-color: #F9F9F9;width: 100%;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;font-family: Arial,"Bitstream Vera Sans",Helvetica,Verdana,sans-serif;color: #333;}
+.cookielawinfo-elegant tr {border-top-color: white;border-bottom: 1px solid #DFDFDF;color: #555;}
+.cookielawinfo-elegant th {text-shadow: rgba(255, 255, 255, 0.796875) 0px 1px 0px;font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;font-weight: normal;padding: 7px 7px 8px;text-align: left;line-height: 1.3em;font-size: 14px;}
+.cookielawinfo-elegant td {font-size: 12px;padding: 4px 7px 2px;vertical-align: top;}
+
+/** Rounded style */
+.cookielawinfo-rounded {background-color: #f5f5f5;padding: 5px;border-radius: 5px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border: 1px solid #ebebeb;}
+.cookielawinfo-rounded td, .rounded th {padding: 1px 5px;}
+.cookielawinfo-rounded thead {text-shadow: 0 1px 0 white;color: #999;}
+.cookielawinfo-rounded th {text-align: left;text-transform: uppercase;font-size: 11pt;border-bottom: 1px solid #fff;padding: 1px 5px;}
+.cookielawinfo-rounded td {font-size: 10pt;padding: 5px;}
+.cookielawinfo-rounded tr.cookielawinfo-row:hover {background-color: #fff;}
+
+/** Classic Style */
+table.cookielawinfo-classic {font-family: Verdana, Arial, Helvetica, sans-serif;border-collapse: collapse;border-left: 1px solid #ccc;border-top: 1px solid #ccc; color: #333;}
+table.cookielawinfo-classic thead tr th {text-transform: uppercase;background: #e2e2e2;}
+table.cookielawinfo-classic tfoot tr th, table.cookielawinfo-classic tfoot tr td {text-transform: uppercase;color: #000;font-weight: bold;}
+table.cookielawinfo-classic tfoot tr th {width: 20%;}
+table.cookielawinfo-classic tfoot tr td {width: 80%;}
+table.cookielawinfo-classic td, table.cookielawinfo-classic th {border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;padding: 5px;line-height: 1.8em;font-size: 0.8em;vertical-align: top;width: 20%;}
+table.cookielawinfo-classic tr.odd th, table.cookielawinfo-classic tr.odd td {background: #efefef;}
+
+/* "Winter Blues" CSS theme for CSS Table Gallery (http://icant.co.uk/csstablegallery/) by Gunta Klavina (http://www.klavina.com) */
+table.cookielawinfo-winter {font: 85% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;padding: 0; margin: 10px 0 20px; border-collapse: collapse; color: #333; background: #F3F5F7;}
+table.cookielawinfo-winter a {color: #3A4856; text-decoration: none; border-bottom: 1px solid #C6C8CB;}  
+table.cookielawinfo-winter a:visited {color: #777;}
+table.cookielawinfo-winter a:hover {color: #000;}  
+table.cookielawinfo-winter caption {text-align: left; text-transform: uppercase;  padding-bottom: 10px; font: 200% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;}
+table.cookielawinfo-winter thead th {background: #3A4856; padding: 15px 10px; color: #fff; text-align: left; font-weight: normal;}
+table.cookielawinfo-winter tbody {border-left: 1px solid #EAECEE; border-right: 1px solid #EAECEE;}
+table.cookielawinfo-winter tbody {border-bottom: 1px solid #EAECEE;}
+table.cookielawinfo-winter tbody td, table.cookielawinfo-winter tbody th {padding: 10px; background: url("../images/td_back.gif") repeat-x; text-align: left;}
+table.cookielawinfo-winter tbody tr {background: #F3F5F7;}
+table.cookielawinfo-winter tbody tr.odd {background: #F0F2F4;}
+table.cookielawinfo-winter tbody  tr:hover {background: #EAECEE; color: #111;}
+table.cookielawinfo-winter tfoot td, table.cookielawinfo-winter tfoot th, table.cookielawinfo-winter tfoot tr {text-align: left; font: 120%  "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif; text-transform: uppercase; background: #fff; padding: 10px;}
+
+/** 27/05/2013: responsive table by Mark Wiltshire */
+@media(max-width:800px) {
+        /* cookielawinfo responsive tables when smaller */
+/*        table.cookielawinfo-winter, table.cookielawinfo-winter thead,
+        table.cookielawinfo-winter tbody, table.cookielawinfo-winter th,
+        table.cookielawinfo-winter td, table.cookielawinfo-winter tr,
+        th.cookielawinfo-column-1, td.cookielawinfo-column-1,
+        th.cookielawinfo-column-2, td.cookielawinfo-column-2,
+        th.cookielawinfo-column-3, td.cookielawinfo-column-3,
+        th.cookielawinfo-column-4, td.cookielawinfo-column-4,
+        tr.cookielawinfo-row{
+                display:block;
+        }*/
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        table.cookielawinfo-winter thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+        }
+        table.cookielawinfo-winter tr { border: 1px solid #ccc; }
+        table.cookielawinfo-winter td ,
+        table.cookielawinfo-winter td.cookielawinfo-column-1, 
+        table.cookielawinfo-winter td.cookielawinfo-column-2,
+        table.cookielawinfo-winter td.cookielawinfo-column-3, 
+        table.cookielawinfo-winter td.cookielawinfo-column-4 {
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                width: 50%;
+        }
+        tr.cookielawinfo-row {
+                padding-right: 1.2em;
+        }
+        table.cookielawinfo-winter td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 1.5em;
+                left: 0.5em;
+                width: 45%;
+                padding-right: 1em;
+                white-space: nowrap;
+        }
+        /* label the data */
+        table.cookielawinfo-winter td:nth-of-type(1):before { content: "COOKIE"; }
+        table.cookielawinfo-winter td:nth-of-type(2):before { content: "TYPE"; }
+        table.cookielawinfo-winter td:nth-of-type(3):before { content: "DURATION"; }
+        table.cookielawinfo-winter td:nth-of-type(4):before { content: "DESCRIPTION"; }
+}
+
+.cookielawinfo-row-cat-title{
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+.cookielawinfo-row-cat-title-head{
+    text-align: center;
+}
+.cookielawinfo-row-cat-table{
+    width: 99%;
+    margin-left: 5px;
+}

@@ -10,58 +10,23 @@
  */
 class Yoast_Alerts {
 
-	/**
-	 * @var string
-	 */
 	const ADMIN_PAGE = 'wpseo_dashboard';
 
-	/**
-	 * Total notifications count.
-	 *
-	 * @var int
-	 */
+	/** @var int Total notifications count */
 	private static $notification_count = 0;
 
-	/**
-	 * All error notifications.
-	 *
-	 * @var array
-	 */
+	/** @var array All error notifications */
 	private static $errors = array();
-
-	/**
-	 * Active errors.
-	 *
-	 * @var array
-	 */
+	/** @var array Active errors */
 	private static $active_errors = array();
-
-	/**
-	 * Dismissed errors.
-	 *
-	 * @var array
-	 */
+	/** @var array Dismissed errors */
 	private static $dismissed_errors = array();
 
-	/**
-	 * All warning notifications.
-	 *
-	 * @var array
-	 */
+	/** @var array All warning notifications */
 	private static $warnings = array();
-
-	/**
-	 * Active warnings.
-	 *
-	 * @var array
-	 */
+	/** @var array Active warnings */
 	private static $active_warnings = array();
-
-	/**
-	 * Dismissed warnings.
-	 *
-	 * @var array
-	 */
+	/** @var array Dismissed warnings */
 	private static $dismissed_warnings = array();
 
 	/**

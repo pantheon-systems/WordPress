@@ -24,17 +24,17 @@ class WPSEO_Config_Field_Choice extends WPSEO_Config_Field {
 	/**
 	 * Add a choice to the properties
 	 *
-	 * @param string $value      Value op the option.
-	 * @param string $label      Label to display for the value.
-	 * @param string $aria_label Optional. Aria label text to use.
+	 * @param string $value              Value op the option.
+	 * @param string $label              Label to display for the value.
+	 * @param string $screen_reader_text Optional. Screenreader text to use.
 	 */
-	public function add_choice( $value, $label, $aria_label = '' ) {
+	public function add_choice( $value, $label, $screen_reader_text = '' ) {
 		$choice = array(
 			'label' => $label,
 		);
 
-		if ( $aria_label ) {
-			$choice['screenReaderText'] = $aria_label;
+		if ( $screen_reader_text ) {
+			$choice['screenReaderText'] = $screen_reader_text;
 		}
 
 		$this->properties['choices'][ $value ] = $choice;

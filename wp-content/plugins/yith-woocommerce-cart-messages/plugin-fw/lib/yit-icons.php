@@ -1136,10 +1136,8 @@ if ( !class_exists( 'YIT_Icons' ) ) {
 
     }
 }
-if( ! function_exists( 'YIT_Icons' ) ){
-	function YIT_Icons() {
-		return YIT_Icons::get_instance();
-	}
+function YIT_Icons() {
+    return YIT_Icons::get_instance();
 }
 
 YIT_Icons();

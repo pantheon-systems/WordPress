@@ -18,7 +18,6 @@ return array(
     'Ebanx\\Benjamin\\Models\\Country' => $vendorDir . '/ebanx/benjamin/src/Models/Country.php',
     'Ebanx\\Benjamin\\Models\\Currency' => $vendorDir . '/ebanx/benjamin/src/Models/Currency.php',
     'Ebanx\\Benjamin\\Models\\Item' => $vendorDir . '/ebanx/benjamin/src/Models/Item.php',
-    'Ebanx\\Benjamin\\Models\\Notification' => $vendorDir . '/ebanx/benjamin/src/Models/Notification.php',
     'Ebanx\\Benjamin\\Models\\Payment' => $vendorDir . '/ebanx/benjamin/src/Models/Payment.php',
     'Ebanx\\Benjamin\\Models\\Person' => $vendorDir . '/ebanx/benjamin/src/Models/Person.php',
     'Ebanx\\Benjamin\\Models\\Request' => $vendorDir . '/ebanx/benjamin/src/Models/Request.php',
@@ -77,5 +76,4 @@ return array(
     'Ebanx\\Benjamin\\Services\\Traits\\Printable' => $vendorDir . '/ebanx/benjamin/src/Services/Traits/Printable.php',
     'Ebanx\\Benjamin\\Services\\Validators\\BaseValidator' => $vendorDir . '/ebanx/benjamin/src/Services/Validators/BaseValidator.php',
     'Ebanx\\Benjamin\\Services\\Validators\\ValidationHelper' => $vendorDir . '/ebanx/benjamin/src/Services/Validators/ValidationHelper.php',
-    'Ebanx\\Benjamin\\Util\\Http' => $vendorDir . '/ebanx/benjamin/src/Util/Http.php',
 );

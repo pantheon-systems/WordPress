@@ -11,7 +11,7 @@
 class WPSEO_Invalid_Argument_Exception extends InvalidArgumentException {
 
 	/**
-	 * Creates an invalid empty parameter exception.
+	 * Creates an invalid empty parameter exeception.
 	 *
 	 * @param string $name The name of the parameter.
 	 *

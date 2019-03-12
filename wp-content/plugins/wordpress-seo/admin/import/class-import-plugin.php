@@ -11,7 +11,6 @@
  * Class with functionality to import Yoast SEO settings from other plugins.
  */
 class WPSEO_Import_Plugin {
-
 	/**
 	 * @var WPSEO_Import_Status
 	 */

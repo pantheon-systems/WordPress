@@ -254,12 +254,6 @@ class WCML_Multi_Currency_Prices {
 
 	}
 
-	/**
-	 * @param float|int $amount
-	 * @param bool|string $currency
-	 *
-	 * @return float|int
-	 */
 	public function convert_price_amount( $amount, $currency = false ) {
 
 		if ( empty( $currency ) ) {
@@ -268,59 +262,20 @@ class WCML_Multi_Currency_Prices {
 
 		if ( $currency != get_option( 'woocommerce_currency' ) ) {
 
-			$amount = $this->calculate_exchange_rate_price( $amount, $currency, '*' );
+			$exchange_rates = $this->multi_currency->get_exchange_rates();
 
-		}
-
-		return $amount;
-
-	}
-
-	/**
-	 * @param float|int $amount
-	 * @param string $from_currency
-	 * @param string $to_currency
-	 *
-	 * @return float|int
-	 */
-	public function convert_price_amount_by_currencies( $amount, $from_currency, $to_currency ){
-
-		if( $to_currency !== get_option( 'woocommerce_currency' )  ){
-			$amount = $this->calculate_exchange_rate_price( $amount, $to_currency, '*' );
-		}else{
-			$amount = $this->calculate_exchange_rate_price( $amount, $from_currency, '/' );
-		}
-
-		return $amount;
-	}
-
-	/**
-	 * @param float|int $amount
-	 * @param string $currency
-	 * @param string $operator
-	 *
-	 * @return float|int
-	 */
-	private function calculate_exchange_rate_price( $amount, $currency, $operator ){
-
-		$exchange_rates = $this->multi_currency->get_exchange_rates();
-
-		if ( isset( $exchange_rates[ $currency ] ) && is_numeric( $amount ) ) {
-
-			if( '*' === $operator ){
+			if ( isset( $exchange_rates[ $currency ] ) && is_numeric( $amount ) ) {
 				$amount = $amount * $exchange_rates[ $currency ];
-			}elseif( '/' === $operator ){
-				$amount = $amount / $exchange_rates[ $currency ];
+
+				// exception - currencies_without_cents
+				if ( in_array( $currency, $this->multi_currency->get_currencies_without_cents() ) ) {
+					$amount = $this->round_up( $amount );
+				}
+
+			} else {
+				$amount = 0;
 			}
 
-
-			// exception - currencies_without_cents
-			if ( in_array( $currency, $this->multi_currency->get_currencies_without_cents() ) ) {
-				$amount = $this->round_up( $amount );
-			}
-
-		} else {
-			$amount = 0;
 		}
 
 		return $amount;

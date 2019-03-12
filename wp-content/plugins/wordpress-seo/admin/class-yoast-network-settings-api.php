@@ -11,23 +11,17 @@
 class Yoast_Network_Settings_API {
 
 	/**
-	 * Registered network settings.
-	 *
-	 * @var array
+	 * @var array Registered network settings.
 	 */
 	private $registered_settings = array();
 
 	/**
-	 * Options whitelist, keyed by option group.
-	 *
-	 * @var array
+	 * @var array Options whitelist, keyed by option group.
 	 */
 	private $whitelist_options = array();
 
 	/**
-	 * The singleton instance of this class.
-	 *
-	 * @var Yoast_Network_Settings_API
+	 * @var Yoast_Network_Settings_API The singleton instance of this class.
 	 */
 	private static $instance = null;
 

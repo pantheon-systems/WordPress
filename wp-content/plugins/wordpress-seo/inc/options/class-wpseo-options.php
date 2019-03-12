@@ -11,11 +11,9 @@
  * Instantiates all the options and offers a number of utility methods to work with the options.
  */
 class WPSEO_Options {
-
 	/**
-	 * Options this class uses.
-	 *
-	 * @var array Array format: (string) option_name  => (string) name of concrete class for the option.
+	 * @var  array  Options this class uses.
+	 *              Array format:  (string) option_name  => (string) name of concrete class for the option
 	 * @static
 	 */
 	public static $options = array(
@@ -25,26 +23,16 @@ class WPSEO_Options {
 		'wpseo_ms'            => 'WPSEO_Option_MS',
 		'wpseo_taxonomy_meta' => 'WPSEO_Taxonomy_Meta',
 	);
-
 	/**
-	 * Array of instantiated option objects.
-	 *
-	 * @var array
+	 * @var  array   Array of instantiated option objects.
 	 */
 	protected static $option_instances = array();
-
 	/**
-	 * Instance of this class.
-	 *
-	 * @var object
+	 * @var  object  Instance of this class.
 	 */
 	protected static $instance;
 
-	/**
-	 * Backfill instance.
-	 *
-	 * @var WPSEO_Options_Backfill
-	 */
+	/** @var WPSEO_Options_Backfill Backfill instance. */
 	protected static $backfill;
 
 	/**

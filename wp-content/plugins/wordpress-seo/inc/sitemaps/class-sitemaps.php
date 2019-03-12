@@ -12,80 +12,51 @@
  */
 class WPSEO_Sitemaps {
 
-	/**
-	 * Sitemap index identifier.
-	 *
-	 * @var string
-	 */
+	/** Sitemap index identifier. */
 	const SITEMAP_INDEX_TYPE = '1';
 
-	/**
-	 * Content of the sitemap to output.
-	 *
-	 * @var string
-	 */
+	/** @var string $sitemap Content of the sitemap to output. */
 	protected $sitemap = '';
 
-	/**
-	 * Flag to indicate if this is an invalid or empty sitemap.
-	 *
-	 * @var bool
-	 */
+	/** @var bool $bad_sitemap Flag to indicate if this is an invalid or empty sitemap. */
 	public $bad_sitemap = false;
 
-	/**
-	 * Whether or not the XML sitemap was served from a transient or not.
-	 *
-	 * @var bool
-	 */
+	/** @var bool $transient Whether or not the XML sitemap was served from a transient or not. */
 	private $transient = false;
 
 	/**
-	 * HTTP protocol to use in headers.
-	 *
+	 * @var string $http_protocol HTTP protocol to use in headers.
 	 * @since 3.2
-	 *
-	 * @var string
 	 */
 	protected $http_protocol = 'HTTP/1.1';
 
-	/**
-	 * Holds the n variable.
-	 *
-	 * @var int
-	 */
+	/** @var int $current_page Holds the n variable. */
 	private $current_page = 1;
 
-	/**
-	 * @var WPSEO_Sitemap_Timezone
-	 */
+	/** @var WPSEO_Sitemap_Timezone $timezone */
 	private $timezone;
 
 	/**
+	 * @var WPSEO_Sitemaps_Router $router
 	 * @since 3.2
-	 *
-	 * @var WPSEO_Sitemaps_Router
 	 */
 	public $router;
 
 	/**
+	 * @var WPSEO_Sitemaps_Renderer $renderer
 	 * @since 3.2
-	 *
-	 * @var WPSEO_Sitemaps_Renderer
 	 */
 	public $renderer;
 
 	/**
+	 * @var WPSEO_Sitemaps_Cache $cache
 	 * @since 3.2
-	 *
-	 * @var WPSEO_Sitemaps_Cache
 	 */
 	public $cache;
 
 	/**
+	 * @var WPSEO_Sitemap_Provider[] $providers
 	 * @since 3.2
-	 *
-	 * @var WPSEO_Sitemap_Provider[]
 	 */
 	public $providers;
 
@@ -106,7 +77,7 @@ class WPSEO_Sitemaps {
 		$this->cache    = new WPSEO_Sitemaps_Cache();
 
 		if ( ! empty( $_SERVER['SERVER_PROTOCOL'] ) ) {
-			$this->http_protocol = sanitize_text_field( wp_unslash( $_SERVER['SERVER_PROTOCOL'] ) );
+			$this->http_protocol = sanitize_text_field( $_SERVER['SERVER_PROTOCOL'] );
 		}
 	}
 
@@ -141,7 +112,7 @@ class WPSEO_Sitemaps {
 			return;
 		}
 
-		$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+		$request_uri = $_SERVER['REQUEST_URI'];
 		$extension   = substr( $request_uri, -4 );
 
 		if ( false !== stripos( $request_uri, 'sitemap' ) && in_array( $extension, array( '.xml', '.xsl' ), true ) ) {

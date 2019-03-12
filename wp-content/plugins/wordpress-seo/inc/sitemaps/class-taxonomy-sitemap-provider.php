@@ -10,11 +10,7 @@
  */
 class WPSEO_Taxonomy_Sitemap_Provider implements WPSEO_Sitemap_Provider {
 
-	/**
-	 * Holds image parser instance.
-	 *
-	 * @var WPSEO_Sitemap_Image_Parser
-	 */
+	/** @var WPSEO_Sitemap_Image_Parser $image_parser Holds image parser instance. */
 	protected static $image_parser;
 
 	/**
@@ -26,13 +22,7 @@ class WPSEO_Taxonomy_Sitemap_Provider implements WPSEO_Sitemap_Provider {
 	 */
 	public function handles_type( $type ) {
 
-		$taxonomy = get_taxonomy( $type );
-
-		if ( $taxonomy === false || ! $this->is_valid_taxonomy( $taxonomy->name ) || ! $taxonomy->public ) {
-			return false;
-		}
-
-		return true;
+		return taxonomy_exists( $type );
 	}
 
 	/**
@@ -62,13 +52,12 @@ class WPSEO_Taxonomy_Sitemap_Provider implements WPSEO_Sitemap_Provider {
 
 		$all_taxonomies = array();
 
-		$term_args = array(
-			'hide_empty' => $hide_empty,
-			'fields'     => 'ids',
-		);
-
 		foreach ( $taxonomy_names as $taxonomy_name ) {
-			$taxonomy_terms = get_terms( $taxonomy_name, $term_args );
+
+			$taxonomy_terms = get_terms( $taxonomy_name, array(
+				'hide_empty' => $hide_empty,
+				'fields'     => 'ids',
+			) );
 
 			if ( count( $taxonomy_terms ) > 0 ) {
 				$all_taxonomies[ $taxonomy_name ] = $taxonomy_terms;
@@ -147,14 +136,15 @@ class WPSEO_Taxonomy_Sitemap_Provider implements WPSEO_Sitemap_Provider {
 	 * @return array
 	 */
 	public function get_sitemap_links( $type, $max_entries, $current_page ) {
+
 		global $wpdb;
 
-		$links = array();
-		if ( ! $this->handles_type( $type ) ) {
+		$links    = array();
+		$taxonomy = get_taxonomy( $type );
+
+		if ( $taxonomy === false || ! $this->is_valid_taxonomy( $taxonomy->name ) || ! $taxonomy->public ) {
 			return $links;
 		}
-
-		$taxonomy = get_taxonomy( $type );
 
 		$steps  = $max_entries;
 		$offset = ( $current_page > 1 ) ? ( ( $current_page - 1 ) * $max_entries ) : 0;

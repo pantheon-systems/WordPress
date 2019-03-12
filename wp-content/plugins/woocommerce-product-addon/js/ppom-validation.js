@@ -10,7 +10,7 @@ jQuery(function($){
         $.blockUI.defaults.message = "";
     }
    
-   $('form.cart').on('submit', function(e) {
+   $('form.cart').on('submit', function(e) { 
       
        if( ppom_cart_validated ) return true;
        
@@ -24,13 +24,12 @@ jQuery(function($){
        $.post(ppom_input_vars.ajaxurl, data, function( notices ) {
            
            $('form.cart').unblock();
-           if( notices.status == 'error' ) {
+           if( notices.length > 0 ) {
                
                var show_notice = $('<div/>')
-                                .addClass('woocommerce-notices-wrapper ppom-ajax-validation')
+                                .addClass('alert alert-danger ppom-ajax-validation')
                                 .css('clear','both')
-                                .css('margin-top', '5px')
-                                .html(notices.message)
+                                .html( notices.join("<br>"))
                                 .appendTo('form.cart');
                                 
            } else {

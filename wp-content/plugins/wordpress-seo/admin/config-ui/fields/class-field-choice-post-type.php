@@ -10,11 +10,7 @@
  */
 class WPSEO_Config_Field_Choice_Post_Type extends WPSEO_Config_Field_Choice {
 
-	/**
-	 * Post type.
-	 *
-	 * @var string
-	 */
+	/** @var string Post type */
 	protected $post_type;
 
 	/**

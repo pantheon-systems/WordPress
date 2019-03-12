@@ -10,32 +10,16 @@
  */
 class WPSEO_Help_Center_Item {
 
-	/**
-	 * Identifier for this tab.
-	 *
-	 * @var string
-	 */
+	/** @var string Identifier for this tab. */
 	private $identifier;
 
-	/**
-	 * Label to display.
-	 *
-	 * @var string
-	 */
+	/** @var string Label to display. */
 	private $label;
 
-	/**
-	 * The dashicon classname to display in front of the label.
-	 *
-	 * @var string
-	 */
+	/** @var string The dashicon classname to display in front of the label. */
 	private $dashicon;
 
-	/**
-	 * Optional arguments.
-	 *
-	 * @var array
-	 */
+	/** @var array Optional arguments. */
 	private $args = array();
 
 	/**

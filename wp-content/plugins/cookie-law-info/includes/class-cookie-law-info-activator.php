@@ -41,14 +41,12 @@ class Cookie_Law_Info_Activator {
             {
                 switch_to_blog( $blog_id );
                 self::install_tables();
-                Cookie_Law_Info::cli_patches();
                 restore_current_blog();
             }
         }
         else 
         {
             self::install_tables();
-            Cookie_Law_Info::cli_patches();
         }
 
 	}

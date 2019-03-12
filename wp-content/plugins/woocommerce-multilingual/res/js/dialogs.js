@@ -48,7 +48,7 @@ jQuery( function($){
                 position: { my: 'center', at: 'center', of: window },
                 modal:true,
                 width: "90%",
-                height: "auto",
+                height: window_h * 0.7,
                 resizable:false,
                 draggable: data.draggable,
                 beforeOpen: function (event) {
@@ -56,17 +56,14 @@ jQuery( function($){
                 beforeClose: function (event) {
                 },
                 close: function (event) {
-                    $('#jquery-ui-style-css').removeAttr('disabled');
-                    $('body').css('overflow-y', self.overflow_y);
+                    $('body').css('overflow-y', self.overflow_y)
                 },
                 create: function (event) {
-
                 },
                 focus: function (event) {
                 },
                 open: function (event) {
                     $('body').css('overflow', 'hidden');
-					$('#jquery-ui-style-css').attr('disabled', 'disabled');
 
                     if( data.class === 'wcml-cs-dialog' ){
                         WCML_Dialog._attachDialogScrollEvent();
@@ -144,14 +141,11 @@ jQuery( function($){
         var winH = $(window).height() - 180;
         dialog_div.css("max-height", winH);
 
-        setTimeout(function() {
-                dialog_div.dialog("option", "position", {
-                my: "center",
-                at: "center",
-                of: window
-            });
-        }, 50);
-
+        dialog_div.dialog("option", "position", {
+            my: "center",
+            at: "center",
+            of: window
+        });
     }
 
     WCML_Dialog._attachDialogScrollEvent = function() {

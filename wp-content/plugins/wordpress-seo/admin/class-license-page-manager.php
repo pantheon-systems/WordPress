@@ -11,16 +11,12 @@
 class WPSEO_License_Page_Manager implements WPSEO_WordPress_Integration {
 
 	/**
-	 * Version number for License Page Manager.
-	 *
-	 * @var string
+	 * @var string Version number for License Page Manager.
 	 */
 	const VERSION_LEGACY = '1';
 
 	/**
-	 * Version number for License Page Manager.
-	 *
-	 * @var string
+	 * @var string Version number for License Page Manager.
 	 */
 	const VERSION_BACKWARDS_COMPATIBILITY = '2';
 

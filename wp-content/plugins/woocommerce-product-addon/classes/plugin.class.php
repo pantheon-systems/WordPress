@@ -48,15 +48,13 @@ class NM_PersonalizedProduct {
 		
 		/** ============ NEW Hooks ==================== */
 		
-		// add_action( 'wp_enqueue_scripts', 'ppom_hooks_scripts' );
-		add_action( 'admin_bar_menu',   'ppom_admin_bar_menu', 1000 );
+		add_action( 'wp_enqueue_scripts', 'ppom_hooks_scripts' );
 		
 		// Rendering fields on product page
 		add_action ( 'woocommerce_before_add_to_cart_button', 'ppom_woocommerce_show_fields', 15);
-		// if( apply_filters('ppom_remove_duplicate_fields', true) ) {
-		// 	add_action ( 'woocommerce_single_variation', 'ppom_woocommerce_show_fields', 15);
-		// }
-		
+		if( apply_filters('ppom_remove_duplicate_fields', true) ) {
+			add_action ( 'woocommerce_single_variation', 'ppom_woocommerce_show_fields', 15);
+		}
 		
 		// Validating before add to cart
 		add_filter ( 'woocommerce_add_to_cart_validation', 'ppom_woocommerce_validate_product', 10, 3 );
@@ -107,10 +105,9 @@ class NM_PersonalizedProduct {
 		/**
 		 * Adding item_meta to orders 2.0 it is in classes/class-wc-checkout function:
 		** create_order() 
-		** woocommerce_new_order_item is deprecated
+		**
 		*/
-		// add_action ( 'woocommerce_new_order_item', 'ppom_woocommerce_order_item_meta', 10, 3);
-		add_action ( 'woocommerce_checkout_create_order_line_item', 'ppom_woocommerce_order_item_meta', 99, 4);
+		add_action ( 'woocommerce_add_order_item_meta', 'ppom_woocommerce_order_item_meta', 10, 3);
 		
 		// Changing display to label in orders
 		add_filter( 'woocommerce_order_item_display_meta_key', 'ppom_woocommerce_order_key', 10, 3);
@@ -150,7 +147,7 @@ class NM_PersonalizedProduct {
 		 add_filter('ppom_cart_fixed_fee', 'ppom_hooks_convert_price_back');
 		 
 		 // Shortcode
-		 //add_shortcode('ppom', 'ppom_hooks_render_shortcode');
+		 add_shortcode('ppom', 'ppom_hooks_render_shortcode');
 		 
 		 /** ============ Ajax callbacks ==================== */
 		 add_action('wp_ajax_nopriv_ppom_upload_file', 'ppom_upload_file');
@@ -185,6 +182,14 @@ class NM_PersonalizedProduct {
 		add_action ( 'woocommerce_process_product_meta', 'ppom_admin_process_product_meta');
 		
 		
+		/*
+		 * plugin localization being initiated here
+		 */
+		add_action ( 'init', array (
+				$this,
+				'wpp_textdomain' 
+		) );
+		
 		/**
 		 * change add to cart text on shop page
 		 */
@@ -201,6 +206,8 @@ class NM_PersonalizedProduct {
 		 */
 		add_action('do_action_remove_images', 'ppom_files_removed_unused_images');
 		
+		
+
 		add_action('admin_footer-edit.php', array($this, 'nm_add_bulk_meta'));
 		
 		add_action('load-edit.php', array(&$this, 'nm_meta_bulk_action'));
@@ -210,10 +217,6 @@ class NM_PersonalizedProduct {
 		// Export & Import Meta
 		add_action( 'admin_post_ppom_import_meta', array($this, 'ppom_import_meta') );
 		add_action( 'admin_post_ppom_export_meta', array($this, 'ppom_export_meta') );
-		
-		// Applying meta
-		add_action( 'admin_post_ppom_attach', array($this, 'ppom_attach_meta') );
-		add_action( 'template_redirect', array($this, 'show_wc_custom_message'));
 		
 		/**
 		 * adding extra column in products list for meta show
@@ -288,7 +291,7 @@ class NM_PersonalizedProduct {
   		if (!in_array($product->get_type(), array('variable', 'grouped', 'external'))) {
   			// only if can be purchased
   			if ($ppom->is_exists) {
-  				$text = apply_filters('ppom_select_option_text', __('Select options', 'woocommerce'), $text, $product);
+  				return __('Select options', 'woocommerce');
   			}
   		}
   		return $text;
@@ -333,7 +336,15 @@ class NM_PersonalizedProduct {
 	  
 	  
 	
-	
+	// i18n and l10n support here
+	// plugin localization
+	function wpp_textdomain() {
+		
+		$locale_dir = dirname( plugin_basename( dirname(__FILE__) ) ) . '/languages';
+		
+		load_plugin_textdomain('ppom', false, $locale_dir);
+		
+	}
 	
 	
 	function wp_loaded() {
@@ -357,8 +368,8 @@ class NM_PersonalizedProduct {
 				?>
 <script type="text/javascript">
 						jQuery(document).ready(function() {
-							jQuery('<option>').val('<?php printf(__("nm_action_%d", "ppom"), $meta->productmeta_id)?>', "ppom").text('<?php _e($meta->productmeta_name)?>').appendTo("select[name='action']");
-							jQuery('<option>').val('<?php printf(__("nm_action_%d", "ppom"), $meta->productmeta_id)?>').text('<?php _e($meta->productmeta_name)?>').appendTo("select[name='action2']");
+							jQuery('<option>').val('<?php printf(__("nm_action_%d", 'ppom'), $meta->productmeta_id)?>', 'ppom').text('<?php _e($meta->productmeta_name)?>').appendTo("select[name='action']");
+							jQuery('<option>').val('<?php printf(__("nm_action_%d", 'ppom'), $meta->productmeta_id)?>').text('<?php _e($meta->productmeta_name)?>').appendTo("select[name='action2']");
 						});
 					</script>
 <?php
@@ -366,8 +377,8 @@ class NM_PersonalizedProduct {
 			?>
 <script type="text/javascript">
 					jQuery(document).ready(function() {
-						jQuery('<option>').val('nm_delete_meta').text('<?php _e('Remove Meta', "ppom")?>').appendTo("select[name='action']");
-						jQuery('<option>').val('nm_delete_meta').text('<?php _e('Remove Meta', "ppom")?>').appendTo("select[name='action2']");
+						jQuery('<option>').val('nm_delete_meta').text('<?php _e('Remove Meta', 'ppom')?>').appendTo("select[name='action']");
+						jQuery('<option>').val('nm_delete_meta').text('<?php _e('Remove Meta', 'ppom')?>').appendTo("select[name='action2']");
 					});
 				</script>
 <?php
@@ -407,8 +418,7 @@ class NM_PersonalizedProduct {
 				$nm_updated = 0;
 				foreach( $post_ids as $post_id ) {
 							
-					$meta_id  = array( intval(substr($action, 10)) );
-					update_post_meta ( $post_id, '_product_meta_id', $meta_id );
+					update_post_meta ( $post_id, '_product_meta_id', substr($action, 10) );
 			
 					$nm_updated++;
 				}
@@ -747,31 +757,6 @@ class NM_PersonalizedProduct {
 	    set_transient("ppom_meta_imported", $response, 30);
 	    wp_redirect(  admin_url( 'admin.php?page=ppom' ) );
    		exit;
-	}
-	
-	
-	function ppom_attach_meta() {
-		
-		$product_id = isset($_GET['productid']) ? $_GET['productid'] : '';
-		$meta_id = isset($_GET['metaid']) ? $_GET['metaid'] : '';
-		$meta_title = isset($_GET['metatitle']) ? $_GET['metatitle'] : '';
-		
-		$ppom_meta = array($meta_id);
-		update_post_meta ( $product_id, '_product_meta_id', $ppom_meta );
-		
-		
-		$product_url = add_query_arg('ppom_title', $meta_title, get_permalink($product_id));
-		wp_redirect( $product_url );
-   		exit;
-	}
-	
-	function show_wc_custom_message() {
-		
-	    if ( is_product() && isset($_GET['ppom_title'])) {
-	    	
-	    	$meta_title = $_GET['ppom_title'];
-	    	wc_add_notice( sprintf(__("PPOM Meta Successfully Changed to - %s", "ppom"), $meta_title));
-	    }
 	}
 	
 	

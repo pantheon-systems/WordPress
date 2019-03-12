@@ -11,10 +11,13 @@
 
 class URE_bbPress {
    
+    protected $lib = null;
     protected $bbpress_detected = false;
     
     
-    public function __construct() {        
+    public function __construct(URE_Lib $lib) {
+        
+        $this->lib = $lib;
         
         add_action('plugins_loaded', array($this, 'detect_bbpress'), 8);
     }
@@ -23,6 +26,9 @@ class URE_bbPress {
     
     public function detect_bbpress() {
 
+        if (!function_exists('is_plugin_active')) {
+            require_once(ABSPATH .'/wp-admin/includes/plugin.php');
+        }
         $this->bbpress_detected = false;
         if (function_exists('bbp_filter_blog_editable_roles')) {
             $this->bbpress_detected = true;  // bbPress plugin is installed and active

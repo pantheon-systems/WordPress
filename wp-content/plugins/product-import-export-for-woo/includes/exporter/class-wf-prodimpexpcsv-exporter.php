@@ -30,11 +30,9 @@ class WF_ProdImpExpCsv_Exporter {
 		if ( function_exists( 'apache_setenv' ) )
 			@apache_setenv( 'no-gzip', 1 );
 		@ini_set('zlib.output_compression', 0);
-
-		//@ob_clean();
-        @ob_end_clean(); // to prevent issue that unidentified characters when opened in MS-Excel in some servers
-
-				
+		@ob_clean();
+		
+		
 			header( 'Content-Type: text/csv; charset=UTF-8' );
 			header( 'Content-Disposition: attachment; filename=woocommerce-product-export.csv' );
 			header( 'Pragma: no-cache' );

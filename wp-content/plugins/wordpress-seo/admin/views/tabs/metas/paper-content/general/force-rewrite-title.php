@@ -4,7 +4,7 @@
  *
  * @package WPSEO\Admin\Views\General
  *
- * @uses Yoast_Form $yform Form object.
+ * @var Yoast_Form $yform
  */
 
 if ( ! current_theme_supports( 'title-tag' ) ) {

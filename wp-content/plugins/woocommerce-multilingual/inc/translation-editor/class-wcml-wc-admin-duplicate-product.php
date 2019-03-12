@@ -17,15 +17,20 @@ class WCML_WC_Admin_Duplicate_Product{
         $this->sitepress        = $sitepress;
         $this->wpdb             = $wpdb;
 
-        add_action( 'woocommerce_product_duplicate', array( $this, 'woocommerce_duplicate_product' ), 10, 2 );
+        if( ( defined('WC_VERSION') && version_compare( WC_VERSION , '3.0.0', '<' ) ) ) {
+            add_action('woocommerce_duplicate_product', array( $this, 'woocommerce_duplicate_product'), 10, 2);
+        }else{
+            add_action( 'woocommerce_product_duplicate', array( $this, 'woocommerce_duplicate_product' ), 10, 2 );
+        }
+
     }
 
     public function woocommerce_duplicate_product( $new_id, $post ){
         $duplicated_products = array();
 
-        $product_id = $post->get_id();
+        $product_id = WooCommerce_Functions_Wrapper::get_product_id( $post );
         if( !is_numeric( $new_id ) ){
-            $new_id = $new_id->get_id();
+            $new_id = WooCommerce_Functions_Wrapper::get_product_id( $new_id );
         }
 
         //duplicate original first
@@ -102,8 +107,13 @@ class WCML_WC_Admin_Duplicate_Product{
 
         $product = wc_get_product( $post_to_duplicate->ID );
         $wc_duplicate_product_instance = new WC_Admin_Duplicate_Product();;
-        $duplicate = $wc_duplicate_product_instance->product_duplicate( $product );
-        $new_orig_id = $duplicate->get_id();
+
+        if( WooCommerce_Functions_Wrapper::is_deprecated() ){
+            $new_orig_id = $wc_duplicate_product_instance->duplicate_product( $product );
+        }else{
+            $duplicate = $wc_duplicate_product_instance->product_duplicate( $product );
+            $new_orig_id = $duplicate->get_id();
+        }
 
         return $new_orig_id;
     }

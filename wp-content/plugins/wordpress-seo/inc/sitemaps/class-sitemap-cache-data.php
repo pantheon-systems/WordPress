@@ -10,18 +10,10 @@
  */
 class WPSEO_Sitemap_Cache_Data implements WPSEO_Sitemap_Cache_Data_Interface, Serializable {
 
-	/**
-	 * Sitemap XML data.
-	 *
-	 * @var string
-	 */
+	/** @var string Sitemap XML data. */
 	private $sitemap = '';
 
-	/**
-	 * Status of the sitemap, usable or not.
-	 *
-	 * @var string
-	 */
+	/** @var string Status of the sitemap, usable or not. */
 	private $status = self::UNKNOWN;
 
 	/**

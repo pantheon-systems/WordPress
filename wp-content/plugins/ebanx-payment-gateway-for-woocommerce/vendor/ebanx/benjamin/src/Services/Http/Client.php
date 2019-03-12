@@ -209,14 +209,4 @@ class Client
     {
         return $this->mode === self::MODE_SANDBOX;
     }
-
-    public function addUserAgentInfo($userData)
-    {
-        $this->engine->addUserAgentInfo($userData);
-    }
-
-    public function getUserAgentInfo()
-    {
-        return $this->engine->getUserAgentInfo();
-    }
 }

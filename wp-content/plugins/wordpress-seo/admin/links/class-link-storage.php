@@ -10,23 +10,12 @@
  */
 class WPSEO_Link_Storage implements WPSEO_Installable {
 
-	/**
-	 * Table name for the link storage.
-	 *
-	 * @var string
-	 */
 	const TABLE_NAME = 'yoast_seo_links';
 
-	/**
-	 * @var WPSEO_Database_Proxy
-	 */
+	/** @var WPSEO_Database_Proxy */
 	protected $database_proxy;
 
-	/**
-	 * @deprecated
-	 *
-	 * @var null|string
-	 */
+	/** @var null|string Deprecated. */
 	protected $table_prefix;
 
 	/**
@@ -83,8 +72,7 @@ class WPSEO_Link_Storage implements WPSEO_Installable {
 		global $wpdb;
 
 		$results = $this->database_proxy->get_results(
-			$wpdb->prepare(
-				'
+			$wpdb->prepare( '
 				SELECT url, post_id, target_post_id, type
 				FROM ' . $this->get_table_name() . '
 				WHERE post_id = %d',

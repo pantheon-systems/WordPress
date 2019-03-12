@@ -155,47 +155,42 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 
-	$( '#schedule-1,#schedule-2,#schedule-3,#schedule-4,#schedule-5' ).change( function() {
+	$( '#schedule-1,#schedule-2,#schedule-3,#schedule-4' ).change( function() {
 		if ( $( '#schedule-1' ).is( ':checked' ) && $( '#schedule-1' ).val() == 'schedule-1' ) {
 			$( '#d-schedule-2 input:not(input[type=radio])' ).attr( 'disabled', true )
 			$( '#d-schedule-2 select' ).attr( 'disabled', true )
 			$( '#d-schedule-1 input:not(input[type=radio])' ).attr( 'disabled', false )
 			$( '#d-schedule-1 select' ).attr( 'disabled', false )
 			$( '#d-schedule-3 .block' ).addClass( 'disabled' );
-            $( '#d-schedule-4 .block' ).addClass( 'disabled' );
-            $( '#d-schedule-5 .block' ).addClass( 'disabled' );
+                        $( '#d-schedule-4 .block' ).addClass( 'disabled' );
 		} else if( $( '#schedule-2' ).is( ':checked' ) && $( '#schedule-2' ).val() == 'schedule-2' ) {
 			$( '#d-schedule-1 input:not(input[type=radio])' ).attr( 'disabled', true )
 			$( '#d-schedule-1 select' ).attr( 'disabled', true )
 			$( '#d-schedule-2 select' ).attr( 'disabled', false )
 			$( '#d-schedule-2 input:not(input[type=radio]) ' ).attr( 'disabled', false )
 			$( '#d-schedule-3 .block' ).addClass( 'disabled' );
-            $( '#d-schedule-4 .block' ).addClass( 'disabled' );
-            $( '#d-schedule-5 .block' ).addClass( 'disabled' );
+                        $( '#d-schedule-4 .block' ).addClass( 'disabled' );
 		} else if( $( '#schedule-3' ).is( ':checked' ) && $( '#schedule-3' ).val() == 'schedule-3' ) {
 			$( '#d-schedule-1 input:not(input[type=radio])' ).attr( 'disabled', true )
 			$( '#d-schedule-1 select' ).attr( 'disabled', true )
+
 			$( '#d-schedule-2 input:not(input[type=radio])' ).attr( 'disabled', true )
 			$( '#d-schedule-2 select' ).attr( 'disabled', true )
+
 			$( '#d-schedule-3 .block' ).removeClass( 'disabled' );
-			$( '#d-schedule-4 .block' ).addClass( 'disabled' );
-			$( '#d-schedule-5 .block' ).addClass( 'disabled' );
+
+                        $( '#d-schedule-4 .block' ).addClass( 'disabled' );
 		} else if( $( '#schedule-4' ).is( ':checked' ) && $( '#schedule-4' ).val() == 'schedule-4' ) {
-			$( '#d-schedule-1 input:not(input[type=radio])' ).attr( 'disabled', true )
+
+                        $( '#d-schedule-1 input:not(input[type=radio])' ).attr( 'disabled', true )
 			$( '#d-schedule-1 select' ).attr( 'disabled', true )
+
 			$( '#d-schedule-2 input:not(input[type=radio])' ).attr( 'disabled', true )
 			$( '#d-schedule-2 select' ).attr( 'disabled', true )
-			$( '#d-schedule-3 .block' ).addClass( 'disabled' );
+
+                        $( '#d-schedule-3 .block' ).addClass( 'disabled' );
+
 			$( '#d-schedule-4 .block' ).removeClass( 'disabled' );
-			$( '#d-schedule-5 .block' ).addClass( 'disabled' );
-		} else if( $( '#schedule-5' ).is( ':checked' ) && $( '#schedule-5' ).val() == 'schedule-5' ) {
-			$( '#d-schedule-1 input:not(input[type=radio])' ).attr( 'disabled', true )
-			$( '#d-schedule-1 select' ).attr( 'disabled', true )
-			$( '#d-schedule-2 input:not(input[type=radio])' ).attr( 'disabled', true )
-			$( '#d-schedule-2 select' ).attr( 'disabled', true )
-			$( '#d-schedule-3 .block' ).addClass( 'disabled' );
-			$( '#d-schedule-4 .block' ).addClass( 'disabled' );
-			$( '#d-schedule-5 .block' ).removeClass( 'disabled' );
 		}
 	} );
 	$( '#schedule-1' ).change()
@@ -268,7 +263,7 @@ jQuery( document ).ready( function( $ ) {
 	$( '.wc_oe_test' ).click( function() {
 		var test = $( this ).attr( 'data-test' );
 		var data = 'json=' + makeJsonVar( $( '#export_job_settings' ) )
-		data = data + "&action=order_exporter&method=test_destination&mode=" + mode + "&id=" + job_id + "&destination=" + test + '&woe_nonce=' + woe_nonce;
+		data = data + "&action=order_exporter&method=test_destination&mode=" + mode + "&id=" + job_id + "&destination=" + test;
 		$( '#test_reply_div' ).hide();
 		$.post( ajaxurl, data, function( data ) {
 			$( '#test_reply' ).val( data );
@@ -292,17 +287,15 @@ jQuery( document ).ready( function( $ ) {
 	} );
 
 	setTimeout( function () {
-		if (summary_mode) {
-			$('.segment_choice[href="products"]').click()
-		} else if (window.location.hash.indexOf('segment') !== -1) {
+		if (window.location.hash.indexOf('segment') !== -1) {
 			$('.segment_choice[href="'+ window.location.hash +'"]').click()
 		} else {
-			$('.segment_choice').first().click();
+			$('.segment_choice').first().click()
 		}
 	}, 1000 );
 
 
-	var text_area = $( '#destination-email-body' );
+	let text_area = $( '#destination-email-body' );
 
 	$( '#show-email-body' ).click( function () {
 		text_area.toggle();
@@ -341,8 +334,7 @@ function make_repeat_options( index ) {
 	});
 
 	var duplicate_settings = window.duplicated_fields_settings[index] || {};
-	var repeat_value = ( typeof( duplicate_settings.repeat ) !== 'undefined' ) ? duplicate_settings.repeat : "rows";
-	repeat_select.val( repeat_value );
+	repeat_select.val(duplicate_settings.repeat);
 
 	// rows options
 	if ( index === 'products' ) {
@@ -615,7 +607,7 @@ function to_xml_tags( str ) {
 
 
 function change_filename_ext() {
-	if ( jQuery( '#export_filename' ).length ) {
+	if ( jQuery( '#export_filename' ).size() ) {
 		var filename = jQuery( '#export_filename input' ).val();
 		var ext = output_format.toLowerCase();
 		if( ext=='xls'  && !jQuery( '#format_xls_use_xls_format' ).prop('checked') ) //fix for XLSX
@@ -728,11 +720,10 @@ jQuery( document ).ready( function( $ ) {
 			jQuery( this ).next().addClass( 'ui-icon-triangle-1-n' );
 			jQuery( '#' + output_format + '_options' ).hide();
 			jQuery( '#' + new_format + '_options' ).show();
-			var format_type_changed = ! (is_flat_format(new_format) && is_flat_format(output_format));
 			old_output_format = output_format;
 			output_format = new_format;
-			synch_selected_fields( old_output_format, output_format );
-			create_selected_fields( old_output_format, output_format, format_type_changed );
+                        synch_selected_fields(old_output_format, output_format);
+                        create_selected_fields( old_output_format, output_format, true );
 			jQuery( '.field_section' ).prop('checked', true);
 			jQuery( '#output_preview, #output_preview_csv' ).hide();
 //				jQuery( '#fields' ).hide();
@@ -780,7 +771,7 @@ jQuery( document ).ready( function( $ ) {
 	} );
 
 	$( '#order_fields input[type=checkbox]' ).change( function() {
-		if ( $( '#order_fields input[type=checkbox]:not(:checked)' ).length ) {
+		if ( $( '#order_fields input[type=checkbox]:not(:checked)' ).size() ) {
 			$( 'input[name=orders_all]' ).attr( 'checked', false );
 		}
 		else {
@@ -797,7 +788,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 	} );
 
-	if ( $( '#order_fields input[type=checkbox]' ).length ) {
+	if ( $( '#order_fields input[type=checkbox]' ).size() ) {
 		$( '#order_fields input[type=checkbox]:first' ).change();
 	}
 
@@ -820,18 +811,14 @@ jQuery( document ).ready( function( $ ) {
 	function preview(size) {
 		jQuery( '#output_preview, #output_preview_csv' ).hide();
 		var data = 'json=' + makeJsonVar( $( '#export_job_settings' ) );
-		var estimate_data = data + "&action=order_exporter&method=estimate&mode=" + mode + "&id=" + job_id + '&woe_nonce=' + woe_nonce;
+		var estimate_data = data + "&action=order_exporter&method=estimate&mode=" + mode + "&id=" + job_id;
 		$.post( ajaxurl, estimate_data, function( response ) {
-				if (!response || typeof response.total == 'undefined') {
-					woe_show_error_message(response);
-					return;
+				if ( response.total !== undefined ) {
+					jQuery( '#output_preview_total' ).find( 'span' ).html( response.total );
+					jQuery( '#preview_actions' ).removeClass( 'hide' );
 				}
-				jQuery( '#output_preview_total' ).find( 'span' ).html( response.total );
-				jQuery( '#preview_actions' ).removeClass( 'hide' );
 			}, "json"
-		).fail( function( xhr, textStatus, errorThrown ) {
-			woe_show_error_message( xhr.responseText );
-		});
+		);
 
 		function showPreview( response ) {
 			var id = 'output_preview';
@@ -847,7 +834,7 @@ jQuery( document ).ready( function( $ ) {
 			window.scrollTo( 0, document.body.scrollHeight );
 		}
 
-		data = data + "&action=order_exporter&method=preview&limit="+size+"&mode=" + mode + "&id=" + job_id + '&woe_nonce=' + woe_nonce;
+		data = data + "&action=order_exporter&method=preview&limit="+size+"&mode=" + mode + "&id=" + job_id;
 		$.post( ajaxurl, data, showPreview, "html" ).fail( function( xhr, textStatus, errorThrown ) {
 			showPreview( xhr.responseText );
 		});
@@ -894,7 +881,6 @@ jQuery( document ).ready( function( $ ) {
 			data.push( { name: 'method', value: method } );
 			data.push( { name: 'start', value: start } );
 			data.push( { name: 'file_id', value: window.file_id } );
-			data.push( { name: 'woe_nonce', value: woe_nonce } );
 
 			jQuery.ajax( {
 				type: "post",
@@ -903,14 +889,12 @@ jQuery( document ).ready( function( $ ) {
 				url: ajaxurl,
 				dataType: "json",
 				error: function( xhr, status, error ) {
-					woe_show_error_message( xhr.responseText );
+					alert( xhr.responseText );
 					progress( 100, jQuery( '#progressBar' ) );
 				},
 				success: function( response ) {
-					if ( !response) {
-						woe_show_error_message(response);
-					} else if ( typeof response.error !== 'undefined') {
-						woe_show_error_message( response.error );
+					if ( typeof response.error !== 'undefined') {
+						alert( response.error );
 					} else {
 						get_all( response.start, ( response.start / window.count ) * 100, method )
 					}
@@ -921,7 +905,6 @@ jQuery( document ).ready( function( $ ) {
 			data = get_data();
 			data.push( { name: 'method', value: 'export_finish' } );
 			data.push( { name: 'file_id', value: window.file_id } );
-			data.push( { name: 'woe_nonce', value: woe_nonce } );
 			jQuery.ajax( {
 				type: "post",
 				data: data,
@@ -998,7 +981,7 @@ jQuery( document ).ready( function( $ ) {
 		verify_checkboxes = verify_checkboxes || 0;
 		var f = false;
 		$( '#'+object_id+' ul' ).each( function( index ) {
-			if ( $( this ).find( 'li:not(:first)' ).length ) {
+			if ( $( this ).find( 'li:not(:first)' ).size() ) {
 				f = true;
 			}
 		} );
@@ -1024,7 +1007,7 @@ jQuery( document ).ready( function( $ ) {
 				return false;
 			}
 		}
-		if ( $( '#order_fields > li' ).length == 0 )
+		if ( $( '#order_fields > li' ).size() == 0 )
 		{
 			alert( export_messages.no_fields );
 			return false;
@@ -1046,10 +1029,7 @@ jQuery( document ).ready( function( $ ) {
 		data = get_data();
 
 		data.push( { name: 'method', value: 'export_start' } );
-
-		data.push( { name: 'woe_nonce', value: woe_nonce } );
-
-                if ( ( $( "#from_date" ).val() ) && ( $( "#to_date" ).val() ) ) {
+		if ( ( $( "#from_date" ).val() ) && ( $( "#to_date" ).val() ) ) {
 			var d1 = new Date( $( "#from_date" ).val() );
 			var d2 = new Date( $( "#to_date" ).val() );
 			if ( d1.getTime() > d2.getTime() ) {
@@ -1058,26 +1038,23 @@ jQuery( document ).ready( function( $ ) {
 			}
 		}
 
-		if ( $( '#order_fields > li' ).length == 0 )
+		if ( $( '#order_fields > li' ).size() == 0 )
 		{
 			alert( export_messages.no_fields );
 			return false;
 		}
 
-                jQuery.ajax( {
+
+		jQuery.ajax( {
 			type: "post",
 			data: data,
 			cache: false,
 			url: ajaxurl,
 			dataType: "json",
 			error: function( xhr, status, error ) {
-				woe_show_error_message( xhr.responseText.replace(/<\/?[^>]+(>|$)/g, "") );
+				alert( xhr.responseText.replace(/<\/?[^>]+(>|$)/g, "") );
 			},
 			success: function( response ) {
-				if (!response || typeof response['total'] == 'undefined') {
-					woe_show_error_message(response);
-					return;
-				}
 				window.count = response['total'];
 				window.file_id = response['file_id'];
 				console.log( window.count );
@@ -1099,7 +1076,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 		setFormSubmitting();
 		var data = 'json=' + makeJsonVar( $( '#export_job_settings' ) )
-		data = data + "&action=order_exporter&method=save_settings&mode=" + mode + "&id=" + job_id + '&woe_nonce=' + woe_nonce;
+		data = data + "&action=order_exporter&method=save_settings&mode=" + mode + "&id=" + job_id;
 		$.post( ajaxurl, data, function( response ) {
 			document.location = settings_form.save_settings_url;
 		}, "json" );
@@ -1111,7 +1088,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 		setFormSubmitting();
 		var data = 'json=' + makeJsonVar( $( '#export_job_settings' ) )
-		data = data + "&action=order_exporter&method=save_settings&mode=" + mode + "&id=" + job_id + '&woe_nonce=' + woe_nonce;
+		data = data + "&action=order_exporter&method=save_settings&mode=" + mode + "&id=" + job_id;
 		$('#Settings_updated').hide();
 		$.post( ajaxurl, data, function( response ) {
 				$('#Settings_updated').show().delay(5000).fadeOut();
@@ -1124,23 +1101,10 @@ jQuery( document ).ready( function( $ ) {
 		}
 
 		var data = 'json=' + makeJsonVar( $( '#export_job_settings' ) )
-		data = data + "&action=order_exporter&method=save_settings&mode=" + settings_form.EXPORT_PROFILE + "&id=" + '&woe_nonce=' + woe_nonce;
+		data = data + "&action=order_exporter&method=save_settings&mode=" + settings_form.EXPORT_PROFILE + "&id=";
 		$.post( ajaxurl, data, function( response ) {
 			document.location =settings_form.copy_to_profiles_url  + '&profile_id=' + response.id;
 		}, "json" );
-		return false;
-	} );
-
-	$( "#reset-profile" ).click( function () {
-		if ( confirm( localize_settings_form.reset_profile_confirm ) ) {
-			var data = "action=order_exporter&method=reset_profile&mode=" + mode + "&id=" + '&woe_nonce=' + woe_nonce;
-			$.post( ajaxurl, data, function ( response ) {
-				if (response.success) {
-					document.location.reload();
-				}
-			}, "json" );
-		}
-
 		return false;
 	} );
 
@@ -1170,7 +1134,7 @@ jQuery( document ).ready( function( $ ) {
 		jQuery('#summary_setup_fields').hide();
 
 	//logic for setup link
-	jQuery( "#summary_report_by_products_checkbox" ).change( function(e, action) {
+	jQuery( "#summary_report_by_products_checkbox" ).change( function() {
 		var summary_report_fields = [];
 		summary_report_fields.push($('#products_unselected_segment input[value="plain_products_summary_report_total_qty"]').parents('li'));
 		summary_report_fields.push($('#products_unselected_segment input[value="plain_products_summary_report_total_amount"]').parents('li'));
@@ -1191,36 +1155,30 @@ jQuery( document ).ready( function( $ ) {
 		            }
 	            } );
 
-	            if ( 'onstart' !== action ) {
-		            // purge summary report fields before insert
-		            $('#order_fields input[value="plain_products_summary_report_total_qty"]').closest('.mapping_row').remove();
-		            $('#order_fields input[value="plain_products_summary_report_total_amount"]').closest('.mapping_row').remove();
+	            // purge summary report fields before insert
+	            $('#order_fields input[value="plain_products_summary_report_total_qty"]').closest('.mapping_row').remove();
+	            $('#order_fields input[value="plain_products_summary_report_total_amount"]').closest('.mapping_row').remove();
 
-		            // insert summary report fields
-		            jQuery.each( summary_report_fields, function( i, value ) {
-			            $(value).show();
-			            var $field_to_copy = $(value).clone();
-			            $field_to_copy
-				            .attr('style', '')
-				            .addClass('ui-draggabled')
-				            .removeClass('segment_field')
-				            .find('input').prop('disabled', false);
+	            // insert summary report fields
+	            jQuery.each( summary_report_fields, function( i, value ) {
+		            $(value).show();
+		            var $field_to_copy = $(value).clone();
+		            $field_to_copy
+			            .attr('style', '')
+			            .addClass('ui-draggabled')
+			            .removeClass('segment_field')
+			            .find('input').prop('disabled', false);
 
-			            jQuery('#manage_fields #order_fields').append($field_to_copy);
-		            } );
-	            }
+		            jQuery('#manage_fields #order_fields').append($field_to_copy);
+	            } );
 
             } else {
                 var segment = window.location.hash.replace('#segment=', '');
 
 	            // show product fields starts with 'line' and 'qty'
 	            $( '#products_unselected_segment input, #order_fields input' ).map( function () {
-	            	var $value = $( this ).attr( 'value' );
-	            	if ( typeof $value === 'undefined' ) {
-	            		return;
-		            }
-
-		            if ( $value.match( /plain_products_(line|qty).*/ ) ) {
+		            var matches = $( this ).attr( 'value' ).match( /plain_products_(line|qty).*/ );
+		            if ( matches ) {
 			            $( this ).closest( '.mapping_row' ).show();
 		            }
 	            } );
@@ -1240,7 +1198,7 @@ jQuery( document ).ready( function( $ ) {
 	});
 
         setTimeout(function () {
-           jQuery( "#summary_report_by_products_checkbox" ).trigger('change', 'onstart');
+           jQuery( "#summary_report_by_products_checkbox" ).trigger('change');
         }, 1)
 
 	// this line must be last , we don't have any errors
@@ -1298,7 +1256,6 @@ jQuery( document ).ready( function( $ ) {
             return false;
         });
 
-	init_image_uploaders();
 
 } );
 
@@ -1683,47 +1640,4 @@ function synch_selected_fields (old_format, new_format) {
         return;
     }
 
-}
-
-function woe_show_error_message(text) {
-	if (!text)
-		 text = "Please, open section 'Misc Settings' and \n mark checkbox 'Enable debug output' \n to see exact error message";
-	alert(text);
-}
-
-function init_image_uploaders() {
-	var custom_uploader;
-	jQuery( '.image-upload-button' ).click( function ( e ) {
-		e.preventDefault();
-		if ( custom_uploader ) {
-			custom_uploader.open();
-			return;
-		}
-
-		custom_uploader = wp.media.frames.file_frame = wp.media( {
-			title: 'Choose Image',
-			button: {
-				text: 'Choose Image'
-			},
-			multiple: false
-		} );
-
-		var self = this;
-		custom_uploader.on( 'select', function () {
-			attachment = custom_uploader.state().get( 'selection' ).first().toJSON();
-			jQuery( self ).siblings( 'input[type="hidden"]' ).val( attachment.url );
-			jQuery( self ).siblings( 'img' ).attr( 'src', attachment.url ).removeClass('hidden');
-			jQuery( self ).siblings( '.image-clear-button' ).removeClass('hidden');
-		} );
-
-		custom_uploader.open();
-	} );
-
-	jQuery( '.image-clear-button' ).click( function ( e ) {
-		jQuery( this ).siblings( 'input[type="hidden"]' ).val( '' );
-		jQuery( this ).siblings( 'img' ).attr( 'src', '' ).addClass( 'hidden' );
-		jQuery( this ).addClass( 'hidden' );
-	} );
-
-	return custom_uploader;
 }

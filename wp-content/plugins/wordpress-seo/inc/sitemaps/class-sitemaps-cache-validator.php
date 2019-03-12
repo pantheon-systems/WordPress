@@ -12,25 +12,13 @@
  */
 class WPSEO_Sitemaps_Cache_Validator {
 
-	/**
-	 * Prefix of the transient key for sitemap caches.
-	 *
-	 * @var string
-	 */
+	/** @var string Prefix of the transient key for sitemap caches */
 	const STORAGE_KEY_PREFIX = 'yst_sm_';
 
-	/**
-	 * Name of the option that holds the global validation value.
-	 *
-	 * @var string
-	 */
+	/** Name of the option that holds the global validation value */
 	const VALIDATION_GLOBAL_KEY = 'wpseo_sitemap_cache_validator_global';
 
-	/**
-	 * The format which creates the key of the option that holds the type validation value.
-	 *
-	 * @var string
-	 */
+	/** The format which creates the key of the option that holds the type validation value */
 	const VALIDATION_TYPE_KEY_FORMAT = 'wpseo_sitemap_%s_cache_validator';
 
 	/**

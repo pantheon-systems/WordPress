@@ -290,7 +290,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 					}
 
 					if ( 'wpseo_focuskw' === $key ) {
-						$search = array(
+						$clean[ $key ] = str_replace( array(
 							'&lt;',
 							'&gt;',
 							'&quot',
@@ -299,9 +299,7 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 							'>',
 							'"',
 							'`',
-						);
-
-						$clean[ $key ] = str_replace( $search, '', $clean[ $key ] );
+						), '', $clean[ $key ] );
 					}
 					break;
 			}

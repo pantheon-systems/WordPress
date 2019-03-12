@@ -4,7 +4,7 @@
  *
  * @package WPSEO\Admin\Views\Taxonomies
  *
- * @uses Yoast_Form $yform Form object.
+ * @var Yoast_Form $yform
  */
 
 $remove_buttons = array( __( 'Keep', 'wordpress-seo' ), __( 'Remove', 'wordpress-seo' ) );

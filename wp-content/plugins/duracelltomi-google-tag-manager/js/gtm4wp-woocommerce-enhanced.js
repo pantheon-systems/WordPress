@@ -1,5 +1,4 @@
 var gtm4wp_last_selected_product_variation;
-var gtm4wp_changedetail_fired_during_pageload=false;
 
 function gtm4wp_handle_cart_qty_change() {
 	jQuery( '.product-quantity input.qty' ).each(function() {
@@ -298,7 +297,7 @@ jQuery(function() {
 			return true;
 		}
 
-		var ctrl_key_pressed = event.ctrlKey || event.metaKey;
+		var ctrl_key_pressed = event.ctrlKey;
 
 		event.preventDefault();
 		if ( ctrl_key_pressed ) {
@@ -337,11 +336,6 @@ jQuery(function() {
 	jQuery( document ).on( 'found_variation', function( event, product_variation ) {
 		if ( "undefined" == typeof product_variation ) {
 			// some ither plugins trigger this event without variation data
-			return;
-		}
-
-		if ( (document.readyState === "interactive") && gtm4wp_changedetail_fired_during_pageload ) {
-			// some custom attribute rendering plugins fire this event multiple times during page load
 			return;
 		}
 
@@ -387,12 +381,8 @@ jQuery(function() {
 			},
 			'ecomm_prodid': gtm4wp_id_prefix + current_product_detail_data.id,
 			'ecomm_pagetype': 'product',
-			'ecomm_totalvalue': current_product_detail_data.price,
+			'ecomm_totalvalue': current_product_detail_data.price
 		});
-
-		if ( document.readyState === "interactive" ) {
-			gtm4wp_changedetail_fired_during_pageload = true;
-		}
 	});
 	jQuery( '.variations select' ).trigger( 'change' );
 
@@ -450,7 +440,7 @@ jQuery(function() {
 			gtm4wp_checkout_step_fired.push( 'shipping' );
 		});
 
-		jQuery( document ).on( 'change', 'input[name=shipping_method]', function() {
+		jQuery( document ).on( 'click', 'input[name=shipping_method]', function() {
 			// do not report checkout step if already reported
 			if ( gtm4wp_checkout_step_fired.indexOf( 'shipping_method' ) > -1 ) {
 				return;
@@ -476,7 +466,7 @@ jQuery(function() {
 			gtm4wp_checkout_step_fired.push( 'shipping_method' );
 		});
 
-		jQuery( document ).on( 'change', 'input[name=payment_method]', function() {
+		jQuery( document ).on( 'click', 'input[name=payment_method]', function() {
 			// do not report checkout step if already reported
 			if ( gtm4wp_checkout_step_fired.indexOf( 'payment_method' ) > -1 ) {
 				return;

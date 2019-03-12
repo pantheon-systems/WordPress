@@ -3,8 +3,6 @@
  * WPSEO plugin file.
  *
  * @package WPSEO\Admin
- *
- * @uses array $alerts_data
  */
 
 $type     = 'warnings';

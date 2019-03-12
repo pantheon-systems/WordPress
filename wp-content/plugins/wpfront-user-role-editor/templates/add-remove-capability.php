@@ -40,15 +40,6 @@ if (!defined('ABSPATH')) {
         <?php echo $this->__('Add/Remove Capability'); ?>
     </h2>
     <?php
-    if (!empty($this->error)) {
-        ?>
-        <div class="error">
-            <p><?php echo $this->error; ?></p>
-        </div>
-        <?php
-    }
-    ?>
-    <?php
     if (!empty($this->message)) {
         ?>
         <div class="updated">

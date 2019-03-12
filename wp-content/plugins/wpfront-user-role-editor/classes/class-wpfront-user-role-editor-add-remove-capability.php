@@ -43,7 +43,6 @@ if (!class_exists('WPFront_User_Role_Editor_Add_Remove_Capability')) {
         private $roles_type;
         private $roles;
         private $message;
-        private $error;
 
         public function add_remove_capability() {
 
@@ -57,7 +56,6 @@ if (!class_exists('WPFront_User_Role_Editor_Add_Remove_Capability')) {
             $this->roles_type = 'all';
             $this->roles = array();
             $this->message = NULL;
-            $this->error = NULL;
 
             if (!empty($_POST['add-remove-capability'])) {
                 $this->main->verify_nonce();
@@ -69,7 +67,7 @@ if (!class_exists('WPFront_User_Role_Editor_Add_Remove_Capability')) {
                 $this->roles_type = $_POST['roles_type'];
                 if ($this->roles_type === 'selected' && !empty($_POST['selected-roles']))
                     $this->roles = $_POST['selected-roles'];
-                
+
                 if (!empty($this->capability)) {
                     $roles = array();
                     switch ($this->roles_type) {
@@ -85,12 +83,6 @@ if (!class_exists('WPFront_User_Role_Editor_Add_Remove_Capability')) {
                     $func = NULL;
                     switch ($this->action) {
                         case 'add':
-                            //network caps check
-                            if(strpos($this->capability, 'manage_network_') === 0) {
-                                $this->error = $this->__('This capability is reserved for Super Admins and can not be added to site roles.');
-                                break;
-                            }
-                            
                             $func = 'add_cap';
                             if (!isset($roles[self::ADMINISTRATOR_ROLE_KEY])) {
                                 $roles[self::ADMINISTRATOR_ROLE_KEY] = TRUE;
@@ -106,16 +98,14 @@ if (!class_exists('WPFront_User_Role_Editor_Add_Remove_Capability')) {
                             break;
                     }
 
-                    if(!empty($func) && empty($this->error)) {
-                        foreach ($roles as $key => $value) {
-                            $role = get_role($key);
-                            if (!empty($role)) {
-                                $role->$func($this->capability);
-                            }
+                    foreach ($roles as $key => $value) {
+                        $role = get_role($key);
+                        if (!empty($role)) {
+                            $role->$func($this->capability);
                         }
-                        
-                        $this->message = $this->__('Roles updated.');
                     }
+
+                    $this->message = $this->__('Roles updated.');
                 }
             }
 

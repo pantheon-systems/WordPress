@@ -14,7 +14,7 @@ class Cdn_RackSpaceCdn_AdminActions {
 			$domains = $cdn->service_domains_get();
 		} catch ( \Exception $ex ) {
 			Util_Admin::redirect_with_custom_messages2( array(
-					'errors' => array( 'Failed to obtain <acronym title="Canonical Name">CNAME</acronym>s: ' . $ex->getMessage() )
+					'errors' => array( 'Failed to obtain CNAMEs: ' . $ex->getMessage() )
 				), true );
 			return;
 		}

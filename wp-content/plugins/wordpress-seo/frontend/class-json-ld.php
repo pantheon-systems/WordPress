@@ -13,18 +13,12 @@
  * @since 1.8
  */
 class WPSEO_JSON_LD implements WPSEO_WordPress_Integration {
-
 	/**
-	 * Holds the social profiles for the entity.
-	 *
-	 * @var array
+	 * @var array Holds the social profiles for the entity
 	 */
 	private $profiles = array();
-
 	/**
-	 * Holds the data to put out.
-	 *
-	 * @var array
+	 * @var array Holds the data to put out
 	 */
 	private $data = array();
 
@@ -44,9 +38,7 @@ class WPSEO_JSON_LD implements WPSEO_WordPress_Integration {
 	 * @since 1.8
 	 */
 	public function json_ld() {
-		if ( ! is_404() ) {
-			do_action( 'wpseo_json_ld' );
-		}
+		do_action( 'wpseo_json_ld' );
 	}
 
 	/**
@@ -85,14 +77,11 @@ class WPSEO_JSON_LD implements WPSEO_WordPress_Integration {
 		if ( ! is_front_page() ) {
 			return;
 		}
-
-		$home_url = $this->get_home_url();
-
 		$this->data = array(
 			'@context' => 'https://schema.org',
 			'@type'    => 'WebSite',
-			'@id'      => $home_url . '#website',
-			'url'      => $home_url,
+			'@id'      => '#website',
+			'url'      => $this->get_home_url(),
 			'name'     => $this->get_website_name(),
 		);
 
@@ -125,10 +114,6 @@ class WPSEO_JSON_LD implements WPSEO_WordPress_Integration {
 		$broken               = false;
 
 		foreach ( $breadcrumbs as $index => $breadcrumb ) {
-			if ( ! empty( $breadcrumb['hide_in_schema'] ) ) {
-				continue;
-			}
-
 			if ( ! array_key_exists( 'url', $breadcrumb ) || ! array_key_exists( 'text', $breadcrumb ) ) {
 				$broken = true;
 				break;
@@ -168,27 +153,11 @@ class WPSEO_JSON_LD implements WPSEO_WordPress_Integration {
 		$this->data = apply_filters( 'wpseo_json_ld_output', $this->data, $context );
 
 		if ( is_array( $this->data ) && ! empty( $this->data ) ) {
-			echo "<script type='application/ld+json'>", $this->format_data( $this->data ), '</script>', "\n";
+			echo "<script type='application/ld+json'>", wp_json_encode( $this->data ), '</script>', "\n";
 		}
 
 		// Empty the $data array so we don't output it twice.
 		$this->data = array();
-	}
-
-	/**
-	 * Prepares the data for outputting.
-	 *
-	 * @param array $data The data to format.
-	 *
-	 * @return false|string The prepared string.
-	 */
-	public function format_data( $data ) {
-		if ( version_compare( PHP_VERSION, '5.4', '>=' ) ) {
-			// @codingStandardsIgnoreLine
-			return wp_json_encode( $data, JSON_UNESCAPED_SLASHES ); // phpcs:ignore PHPCompatibility.Constants.NewConstants.json_unescaped_slashesFound -- Version check present.
-		}
-
-		return wp_json_encode( $data );
 	}
 
 	/**

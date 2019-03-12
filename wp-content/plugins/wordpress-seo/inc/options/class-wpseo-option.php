@@ -59,82 +59,58 @@ abstract class WPSEO_Option {
 
 	/**
 	 * Prefix for override option keys that allow or disallow the option key of the same name.
-	 *
-	 * @var string
 	 */
 	const ALLOW_KEY_PREFIX = 'allow_';
 
 	/**
-	 * Option name - MUST be set in concrete class and set to public.
-	 *
-	 * @var string
+	 * @var  string  Option name - MUST be set in concrete class and set to public.
 	 */
 	protected $option_name;
 
 	/**
-	 * Option group name for use in settings forms.
-	 *
-	 * Will be set automagically if not set in concrete class (i.e.
-	 * if it confirm to the normal pattern 'yoast' . $option_name . 'options',
-	 * only set in conrete class if it doesn't).
-	 *
-	 * @var string
+	 * @var  string  Option group name for use in settings forms
+	 *               - will be set automagically if not set in concrete class
+	 *               (i.e. if it confirm to the normal pattern 'yoast' . $option_name . 'options',
+	 *               only set in conrete class if it doesn't)
 	 */
 	public $group_name;
 
 	/**
-	 * Whether to include the option in the return for WPSEO_Options::get_all().
-	 *
-	 * Also determines which options are copied over for ms_(re)set_blog().
-	 *
-	 * @var bool
+	 * @var  bool  Whether to include the option in the return for WPSEO_Options::get_all().
+	 *             Also determines which options are copied over for ms_(re)set_blog().
 	 */
 	public $include_in_all = true;
 
 	/**
-	 * Whether this option is only for when the install is multisite.
-	 *
-	 * @var bool
+	 * @var  bool  Whether this option is only for when the install is multisite.
 	 */
 	public $multisite_only = false;
 
 	/**
-	 * Array of defaults for the option - MUST be set in concrete class.
-	 *
-	 * Shouldn't be requested directly, use $this->get_defaults();
-	 *
-	 * @var array
+	 * @var  array  Array of defaults for the option - MUST be set in concrete class.
+	 *              Shouldn't be requested directly, use $this->get_defaults();
 	 */
 	protected $defaults;
 
 	/**
-	 * Array of variable option name patterns for the option - if any -.
-	 *
-	 * Set this when the option contains array keys which vary based on post_type
-	 * or taxonomy.
-	 *
-	 * @var array
+	 * @var  array  Array of variable option name patterns for the option - if any -
+	 *              Set this when the option contains array keys which vary based on post_type
+	 *              or taxonomy.
 	 */
 	protected $variable_array_key_patterns;
 
 	/**
-	 * Array of sub-options which should not be overloaded with multi-site defaults.
-	 *
-	 * @var array
+	 * @var array  Array of sub-options which should not be overloaded with multi-site defaults.
 	 */
 	public $ms_exclude = array();
 
 	/**
-	 * Name for an option higher in the hierarchy to override setting access.
-	 *
-	 * @var string
+	 * @var string Name for an option higher in the hierarchy to override setting access.
 	 */
 	protected $override_option_name;
 
 	/**
-	 * Instance of this class.
-	 *
-	 * @var object
+	 * @var  object  Instance of this class.
 	 */
 	protected static $instance;
 

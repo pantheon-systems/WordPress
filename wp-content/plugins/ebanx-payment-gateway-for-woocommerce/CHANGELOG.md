@@ -1,19 +1,5 @@
 # CHANGELOG
 
-# 1.37.3
-* Improvement - Using WP_Mock in unit test and remove wc_function for mock [#746](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/746)
-
-# 1.37.2
-* Improvement - Remove iof when request a payment using benjamin [#738](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/738)
-
-#  1.37.1
-* Improvement - Hide optional fields tag from checkout [#740](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/740)
-
-# 1.37.0
-* Feature - Add User Agent header usage to send plugin-version data [#734](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/734)
-* Feature - Add plugin check page [#735](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/735)
-* Improvement - Remove PDF button and embed voucher in mobile for Banktransfer [#733](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/733)
-
 # 1.36.0
 * Fix - Resolved wrong behavior with CPF and CPNJ inputs exhibition [#729](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/729)
 * Feature - Add credit card validation to front-end layer [#731](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/731)

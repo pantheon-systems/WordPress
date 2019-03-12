@@ -173,6 +173,17 @@ class WCML_Bookings {
 			//allow filtering resources by language
 			add_filter( 'get_booking_resources_args', array( $this, 'filter_get_booking_resources_args' ) );
 
+			if ( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'ICL_SITEPRESS_VERSION' ), '3.8.0', '<' ) ) {
+				add_filter( 'get_translatable_documents', array( $this, 'filter_translatable_documents' ) );
+
+				//@TODO review after WPML 3.6
+				if ( $this->sitepress->get_wp_api()->version_compare( $this->sitepress->get_wp_api()->constant( 'ICL_SITEPRESS_VERSION' ), '3.6', '<' ) ) {
+					add_action( 'added_post_meta', array(
+						$this,
+						'maybe_fix_double_serialized_wc_booking_availability'
+					), 10, 4 );
+				}
+			}
 			add_filter( 'get_translatable_documents_all', array( $this, 'filter_translatable_documents' ) );
 
 			add_filter( 'pre_wpml_is_translated_post_type', array( $this, 'filter_is_translated_post_type' ) );
@@ -294,7 +305,7 @@ class WCML_Bookings {
 			$wc_currencies = get_woocommerce_currencies();
 
 			if ( ! function_exists( 'woocommerce_wp_text_input' ) ) {
-				include_once dirname( WC_PLUGIN_FILE ) . '/includes/admin/wc-meta-box-functions.php';
+				include_once dirname( WC_PLUGIN_FILE ) . 'includes/admin/wc-meta-box-functions.php';
 			}
 
 			echo '<div class="wcml_custom_cost_field" >';
@@ -1074,15 +1085,14 @@ class WCML_Bookings {
 		$product_id = $pagenow == 'post.php' && isset( $_GET['post'] ) ? (int)$_GET['post'] : false;
 
 		if( $product_id && get_post_type( $product_id ) === 'product' ){
-		    $product = wc_get_product( $product_id );
-		    $product_type = $product->get_type();
+			$product_type = WooCommerce_Functions_Wrapper::get_product_type( $product_id );
 
-			if ( ( $this->is_booking( $product ) || $product_type === $external_product_type ) || $pagenow == 'post-new.php' ) {
+			if ( ( $product_type === 'booking' || $product_type === $external_product_type ) || $pagenow == 'post-new.php' ) {
 
 				wp_register_style( 'wcml-bookings-css', WCML_PLUGIN_URL . '/compatibility/res/css/wcml-bookings.css', array(), WCML_VERSION );
 				wp_enqueue_style( 'wcml-bookings-css' );
 
-				wp_register_script( 'wcml-bookings-js', WCML_PLUGIN_URL . '/compatibility/res/js/wcml-bookings.js', array( 'jquery' ), WCML_VERSION, true );
+				wp_register_script( 'wcml-bookings-js', WCML_PLUGIN_URL . '/compatibility/res/js/wcml-bookings.js', array( 'jquery' ), WCML_VERSION );
 				wp_enqueue_script( 'wcml-bookings-js' );
 
 			}
@@ -1304,8 +1314,7 @@ class WCML_Bookings {
 	}
 
 	function custom_box_html( $obj, $product_id, $data ) {
-
-		if ( !$this->is_booking( $product_id ) ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $product_id ) !== 'booking' ) {
 			return;
 		}
 
@@ -1368,7 +1377,7 @@ class WCML_Bookings {
 
 	function custom_box_html_data( $data, $product_id, $translation, $lang ) {
 
-		if ( !$this->is_booking( $product_id ) ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $product_id ) !== 'booking' ) {
 			return $data;
 		}
 
@@ -1856,7 +1865,9 @@ class WCML_Bookings {
 	function append_persons_to_translation_package( $package, $post ) {
 
 		if ( $post->post_type == 'product' ) {
-			if ( $this->is_booking( $post->ID ) ) {
+			$product_type = WooCommerce_Functions_Wrapper::get_product_type( $post->ID );
+
+			if ( $product_type === 'booking' ) {
 
 				$bookable_product = new WC_Product_Booking( $post->ID );
 
@@ -1891,7 +1902,7 @@ class WCML_Bookings {
 	function save_person_translation( $post_id, $data, $job ) {
 		$person_translations = array();
 
-		if ( $this->is_booking( $post_id ) ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $post_id ) === 'booking' ) {
 
 			foreach ( $data as $value ) {
 
@@ -1957,7 +1968,10 @@ class WCML_Bookings {
 
 		if ( $post->post_type == 'product' ) {
 			$product = wc_get_product( $post->ID );
-			if ( $this->is_booking( $product ) && $product->has_resources() ) {
+
+			$product_type = WooCommerce_Functions_Wrapper::get_product_type( $post->ID );
+
+			if ( $product_type === 'booking' && $product->has_resources() ) {
 
 				$resources = $product->get_resources();
 
@@ -1982,7 +1996,7 @@ class WCML_Bookings {
 	function save_resource_translation( $post_id, $data, $job ) {
 		$resource_translations = array();
 
-		if ( $this->is_booking( $post_id ) ) {
+		if ( WooCommerce_Functions_Wrapper::get_product_type( $post_id ) === 'booking' ) {
 
 			foreach ( $data as $value ) {
 
@@ -2284,6 +2298,28 @@ class WCML_Bookings {
 		return true;
 	}
 
+	public function maybe_fix_double_serialized_wc_booking_availability( $mid, $object_id, $meta_key, $_meta_value ) {
+		global $wpdb;
+
+		if ( version_compare( ICL_SITEPRESS_VERSION, '3.6', '<' ) ) {
+
+			$meta_keys_to_fix = array(
+				'_wc_booking_availability',
+				'_wc_booking_pricing'
+			);
+
+			if ( in_array( $meta_key, $meta_keys_to_fix ) ) {
+
+				if ( is_string( $_meta_value ) ) {
+					$wpdb->update( $wpdb->postmeta, array( 'meta_value' => $_meta_value ), array( 'meta_id' => $mid ) );
+				}
+
+			}
+
+		}
+
+	}
+
 	public function extra_conditions_to_filter_bookings( $extra_conditions ){
 
 		if( isset( $_GET[ 'post_type' ] ) && $_GET[ 'post_type' ] == 'wc_booking' && !isset( $_GET[ 'post_status' ] ) ){
@@ -2531,19 +2567,6 @@ class WCML_Bookings {
 			}
 		}
 
-	}
-
-	/**
-	 * @param WC_Product|int|string $product
-	 *
-	 * @return bool
-	 */
-	private function is_booking( $product ){
-	    if( !$product instanceof WC_Product ){
-		    $product = wc_get_product( $product );
-        }
-
-		return $product ? $product->get_type() === 'booking' : false;
 	}
 
 }

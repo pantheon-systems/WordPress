@@ -6,16 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 include_once 'abstract-class-woe-formatter-sv.php';
 
 class WOE_Formatter_Tsv extends WOE_Formatter_sv {
-	public function __construct(
-		$mode,
-		$filename,
-		$settings,
-		$format,
-		$labels,
-		$field_formats,
-		$date_format,
-		$offset
-	) {
+	public function __construct( $mode, $filename, $settings, $format, $labels, $field_formats, $date_format, $offset ) {
 		parent::__construct( $mode, $filename, $settings, $format, $labels, $field_formats, $date_format, $offset );
 
 		$this->enclosure = '';

@@ -20,10 +20,9 @@ class WPSEO_FAQ_Block implements WPSEO_WordPress_Integration {
 			return;
 		}
 
-		register_block_type(
-			'yoast/faq-block',
-			array( 'render_callback' => array( $this, 'render' ) )
-		);
+		register_block_type( 'yoast/faq-block', array(
+			'render_callback' => array( $this, 'render' ),
+		) );
 	}
 
 	/**

@@ -10,51 +10,28 @@
  */
 class WPSEO_OnPage_Option {
 
-	/**
-	 * @var int
-	 */
-	const NOT_FETCHED = 99;
-
-	/**
-	 * @var int
-	 */
-	const IS_INDEXABLE = 1;
-
-	/**
-	 * @var int
-	 */
+	const NOT_FETCHED      = 99;
+	const IS_INDEXABLE     = 1;
 	const IS_NOT_INDEXABLE = 0;
+	const CANNOT_FETCH     = -1;
 
 	/**
-	 * @var int
-	 */
-	const CANNOT_FETCH = -1;
-
-	/**
-	 *  The name of the option where data will be stored.
-	 *
-	 * @var string
+	 *  The name of the option where data will be stored
 	 */
 	const OPTION_NAME = 'wpseo_onpage';
 
 	/**
-	 * The key of the status in the option.
-	 *
-	 * @var string
+	 * The key of the status in the option
 	 */
 	const STATUS = 'status';
 
 	/**
 	 * The key of the last fetch date in the option.
-	 *
-	 * @var string
 	 */
 	const LAST_FETCH = 'last_fetch';
 
 	/**
 	 * The limit for fetching the status manually.
-	 *
-	 * @var int
 	 */
 	const FETCH_LIMIT = 15;
 

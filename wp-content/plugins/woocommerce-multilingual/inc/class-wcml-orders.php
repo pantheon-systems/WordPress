@@ -187,12 +187,7 @@ class WCML_Orders {
                     }
                 }elseif( $item instanceof WC_Order_Item_Shipping ){
                     if( $item->get_method_id() ){
-
-	                    $shipping_id = $item->get_method_id();
-	                    if( method_exists( $item ,'get_instance_id' ) ){
-		                    $shipping_id .= $item->get_instance_id();
-                        }
-
+	                    $shipping_id = $item->get_method_id() . $item->get_instance_id();
                         $item->set_method_title(
                                 $this->woocommerce_wpml->shipping->translate_shipping_method_title(
                                     $item->get_method_title(),
@@ -400,17 +395,17 @@ class WCML_Orders {
 
     public function filter_downloadable_product_items( $files, $item, $object  ){
 
-        $order_language = get_post_meta( $object->get_id(), 'wpml_language', true );
+        $order_language = get_post_meta( WooCommerce_Functions_Wrapper::get_order_id( $object ), 'wpml_language', true );
 
-        if( $item->get_variation_id() > 0 ){
-            $item->set_variation_id( apply_filters( 'translate_object_id', $item->get_variation_id(), 'product_variation', false, $order_language ) );
+        if( $item['variation_id'] > 0 ){
+            $item['variation_id'] =  apply_filters( 'translate_object_id', $item['variation_id'], 'product_variation', false, $order_language );
         }else{
-            $item->set_product_id( apply_filters( 'translate_object_id',  $item->get_product_id(), 'product', false, $order_language ) );
+            $item['product_id'] = apply_filters( 'translate_object_id',  $item['product_id'], 'product', false, $order_language );
         }
 
         remove_filter( 'woocommerce_get_item_downloads', array( $this, 'filter_downloadable_product_items' ), 10, 3 );
 
-        $files = $item->get_item_downloads();
+        $files = WooCommerce_Functions_Wrapper::get_item_downloads( $object, $item );
 
         add_filter( 'woocommerce_get_item_downloads', array( $this, 'filter_downloadable_product_items' ), 10, 3 );
 

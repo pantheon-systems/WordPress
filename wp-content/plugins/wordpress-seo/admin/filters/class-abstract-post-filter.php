@@ -10,9 +10,6 @@
  */
 abstract class WPSEO_Abstract_Post_Filter implements WPSEO_WordPress_Integration {
 
-	/**
-	 * @var string
-	 */
 	const FILTER_QUERY_ARG = 'yoast_filter';
 
 	/**
@@ -132,12 +129,10 @@ abstract class WPSEO_Abstract_Post_Filter implements WPSEO_WordPress_Integration
 	 * @return string The url to activate this filter.
 	 */
 	protected function get_filter_url() {
-		$query_args = array(
+		return add_query_arg( array(
 			self::FILTER_QUERY_ARG => $this->get_query_val(),
 			'post_type'            => $this->get_current_post_type(),
-		);
-
-		return add_query_arg( $query_args, 'edit.php' );
+		), 'edit.php' );
 	}
 
 	/**
@@ -156,11 +151,11 @@ abstract class WPSEO_Abstract_Post_Filter implements WPSEO_WordPress_Integration
 	 * @return string The current post type.
 	 */
 	protected function get_current_post_type() {
-		$filter_options = array(
-			'options' => array( 'default' => 'post' ),
+		return filter_input(
+			INPUT_GET, 'post_type', FILTER_DEFAULT, array(
+				'options' => array( 'default' => 'post' ),
+			)
 		);
-
-		return filter_input( INPUT_GET, 'post_type', FILTER_DEFAULT, $filter_options );
 	}
 
 	/**

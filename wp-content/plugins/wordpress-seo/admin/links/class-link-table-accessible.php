@@ -10,14 +10,7 @@
  */
 class WPSEO_Link_Table_Accessible {
 
-	/**
-	 * @var string
-	 */
-	const ACCESSIBLE = '0';
-
-	/**
-	 * @var string
-	 */
+	const ACCESSIBLE   = '0';
 	const INACCESSBILE = '1';
 
 	/**

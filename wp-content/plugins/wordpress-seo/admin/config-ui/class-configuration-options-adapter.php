@@ -14,26 +14,11 @@
  */
 class WPSEO_Configuration_Options_Adapter {
 
-	/**
-	 * @var string
-	 */
 	const OPTION_TYPE_WORDPRESS = 'wordpress';
-
-	/**
-	 * @var string
-	 */
 	const OPTION_TYPE_YOAST = 'yoast';
-
-	/**
-	 * @var string
-	 */
 	const OPTION_TYPE_CUSTOM = 'custom';
 
-	/**
-	 * List of registered lookups.
-	 *
-	 * @var array
-	 */
+	/** @var array List of registered lookups */
 	protected $lookup = array();
 
 	/**
@@ -87,11 +72,10 @@ class WPSEO_Configuration_Options_Adapter {
 			throw new InvalidArgumentException( 'Custom option must be callable.' );
 		}
 
-		$this->add_lookup(
-			$class_name,
-			self::OPTION_TYPE_CUSTOM,
-			array( $callback_get, $callback_set )
-		);
+		$this->add_lookup( $class_name, self::OPTION_TYPE_CUSTOM, array(
+			$callback_get,
+			$callback_set,
+		) );
 	}
 
 	/**

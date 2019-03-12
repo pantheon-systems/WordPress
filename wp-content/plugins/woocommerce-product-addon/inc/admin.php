@@ -40,7 +40,7 @@ function ppom_admin_product_meta_column( $column, $post_id ) {
                 	echo sprintf(__('<a href="%s">%s</a>', "ppom"), $url_edit, $meta_title);
                 	echo ', ';
             	}
-            } else if ( $ppom->ppom_settings ){
+            } else if ( $ppom->settings ){
                 $url_edit = add_query_arg(array('productmeta_id'=> $ppom->meta_id, 'do_meta'=>'edit'), $ppom_settings_url);
                 echo sprintf(__('<a href="%s">%s</a>', "ppom"), $url_edit, $ppom->meta_title);
             }else{
@@ -68,7 +68,7 @@ function ppom_meta_list( $post ) {
 	$html .= '<a class="button button-primary" href="'.esc_url($ppom_setting).'">Create New Meta</a>';
 	
 	$html .= '<select name="ppom_product_meta" id="ppom_product_meta" class="select">';
-	$html .= '<option selected="selected"> ' . __('None', "ppom"). '</option>';
+	$html .= '<option selected="selected"> ' . __('None', 'ppom'). '</option>';
 	
 	foreach ( $all_meta as $meta ) {
 			
@@ -168,15 +168,11 @@ function ppom_admin_save_form_meta() {
 	
 	extract ( $_REQUEST );
 	
-	$product_meta = apply_filters('ppom_meta_data_saving', $ppom);
+	$product_meta = apply_filters('ppom_meta_data_saving', $product_meta);
 	
-	$send_file_attachment 	= "NA";
-	$aviary_api_key			= "NA";
-	$show_cart_thumb		= "NA";
-
 	$dt = array (
 			'productmeta_name'          => $productmeta_name,
-			'productmeta_validation'	=> $enable_ajax_validation,
+			'productmeta_validation'	=> $productmeta_validation,
             'dynamic_price_display'     => $dynamic_price_hide,
             'send_file_attachment'		=> $send_file_attachment,
             'show_cart_thumb'			=> $show_cart_thumb,
@@ -234,14 +230,14 @@ function ppom_admin_update_form_meta() {
 	// ppom_pa($product_meta); exit;
 	
 	$productmeta_name = isset($_REQUEST['productmeta_name']) ? sanitize_text_field($_REQUEST['productmeta_name']) : '';
-	$productmeta_validation = isset($_REQUEST['enable_ajax_validation']) ? sanitize_text_field($_REQUEST['enable_ajax_validation']) : '';
+	$productmeta_validation = isset($_REQUEST['productmeta_validation']) ? sanitize_text_field($_REQUEST['productmeta_validation']) : '';
 	$dynamic_price_hide = isset($_REQUEST['dynamic_price_hide']) ? sanitize_text_field($_REQUEST['dynamic_price_hide']) : '';
 	$send_file_attachment = isset($_REQUEST['send_file_attachment']) ? sanitize_text_field($_REQUEST['send_file_attachment']) : '';
 	$show_cart_thumb = isset($_REQUEST['show_cart_thumb']) ? sanitize_text_field($_REQUEST['show_cart_thumb']) : '';
 	$aviary_api_key = isset($_REQUEST['aviary_api_key']) ? sanitize_text_field($_REQUEST['aviary_api_key']) : '';
 	$productmeta_style = isset($_REQUEST['productmeta_style']) ? sanitize_text_field($_REQUEST['productmeta_style']) : '';
 	$productmeta_categories = isset($_REQUEST['productmeta_categories']) ? $_REQUEST['productmeta_categories'] : '';
-	$product_meta = isset($_REQUEST['ppom']) ? $_REQUEST['ppom'] : '';
+	$product_meta = isset($_REQUEST['product_meta']) ? $_REQUEST['product_meta'] : '';
 	
 	
 	// ppom_pa($product_meta); exit;
@@ -299,7 +295,7 @@ function ppom_admin_update_form_meta() {
 	} else {
 		
 		$resp = array (
-				'message' => __ ( 'Form updated successfully.', 'ppom' ),
+				'message' => __ ( 'No changes found, please change and try again.', 'ppom' ),
 				'status' => 'success',
 				'productmeta_id' => $productmeta_id 
 		);
@@ -399,50 +395,5 @@ function ppom_admin_simplify_meta($meta) {
 		}
 		
 		echo '</ul>';
-	}
-}
-
-// Showing PPOM Edit on Product Page
-function ppom_admin_bar_menu() {
-
-	if( ! is_product() ) return;
-	
-	global $wp_admin_bar, $product;
-	
-	$product_id = ppom_get_product_id( $product ); 
-	$ppom		= new PPOM_Meta( $product_id );
-	
-	if( ! $ppom->is_exists ) return;
-
-	$ppom_setting_url = admin_url( 'admin.php');
-	$ppom_setting_url = add_query_arg(array('page'=>'ppom',
-									'productmeta_id'=>$ppom->single_meta_id,
-									'do_meta'	=> 'edit'),
-									$ppom_setting_url
-									);
-	
-	$bar_title = "Edit PPOM ({$ppom->meta_title})";
-	$wp_admin_bar->add_node( array(
-		'id'     => 'ppom-setting-bar',
-		'title'  => sprintf(__( "%s", "ppom"), $bar_title ),
-		'href'  => $ppom_setting_url,
-	) );
-	
-	$all_meta	= PPOM() -> get_product_meta_all ();
-	foreach ( $all_meta as $meta ) {
-			
-			$apply_link = admin_url('admin-post.php');
-			$apply_arg	= array('productid'=>$product_id,
-								'metaid'=>$meta->productmeta_id,
-								'metatitle'=>$meta->productmeta_name,
-								'action'=>'ppom_attach');
-			$apply_link = add_query_arg($apply_arg, $apply_link);
-			$bar_title = "Apply {$meta->productmeta_name}";
-			$wp_admin_bar->add_node( array(
-			'id'    	=> "ppom-setting-bar-{$meta->productmeta_id}",
-			'title' 	=> sprintf(__( "%s", "ppom"), $bar_title ),
-			'href'  	=> $apply_link,
-			'parent'	=> 'ppom-setting-bar',
-		) );
 	}
 }

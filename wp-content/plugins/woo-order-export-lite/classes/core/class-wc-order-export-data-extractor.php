@@ -429,21 +429,17 @@ class WC_Order_Export_Data_Extractor {
 			$product_where        = join( " AND ", $product_where );
 			$sql                  = "SELECT DISTINCT ID FROM {$wpdb->posts} AS products $left_join_product_meta  WHERE products.post_type in ('product','product_variation') AND products.post_status<>'trash' AND $product_where ";
 			$settings['products'] = $wpdb->get_col( $sql );
-			if ( empty( $settings['products'] ) ) // failed condition!
-			{
-				$settings['products'] = array( 0 );
-			}
+			if( empty($settings['products']) ) // failed condition!
+				$settings['products'] = array(0);
 		}
 
 		//  we have to use variations , if user sets product attributes
 		if ( $settings['products'] AND $settings['product_attributes'] ) {
 			$values               = self::sql_subset( $settings['products'] );
-			$sql                  = "SELECT DISTINCT ID FROM {$wpdb->posts} AS products WHERE products.post_type in ('product','product_variation') AND products.post_status<>'trash' AND post_parent<>0 AND post_parent IN ($values)";
+			$sql                  = "SELECT DISTINCT ID FROM {$wpdb->posts} AS products WHERE products.post_type in ('product','product_variation') AND products.post_status<>'trash' AND post_parent IN ($values)";
 			$settings['products'] = $wpdb->get_col( $sql );
-			if ( empty( $settings['products'] ) ) // failed condition!
-			{
-				$settings['products'] = array( 0 );
-			}
+			if( empty($settings['products']) ) // failed condition!
+				$settings['products'] = array(0);
 		}
 		if ( ! empty( $sql ) AND self::$track_sql_queries ) {
 			self::$sql_queries[] = $sql;
@@ -494,7 +490,7 @@ class WC_Order_Export_Data_Extractor {
 			// get products and variations!
 			$product_category_where = "AND orderitemmeta_product.meta_value IN
 				(
-					SELECT DISTINCT ID FROM {$wpdb->posts} AS product_category_variations WHERE post_parent<>0 AND post_parent IN ($product_category_where)
+					SELECT DISTINCT ID FROM {$wpdb->posts} AS product_category_variations WHERE post_parent IN ($product_category_where)
 					UNION
 					$product_category_where
 				)
@@ -745,7 +741,7 @@ class WC_Order_Export_Data_Extractor {
 				}
 			}
 		}
-		if ( ! empty( $settings['user_custom_fields'] ) ) {
+		if ( ! empty($settings['user_custom_fields']) ) {
 			$cf_names = self::get_user_custom_fields();
 			$filters  = self::parse_complex_pairs( $settings['user_custom_fields'], $cf_names );
 			$pos      = 1;
@@ -758,7 +754,7 @@ class WC_Order_Export_Data_Extractor {
 						} elseif ( $operator == 'IS SET' ) {
 							$user_meta_where[] = " ( usermeta_cf_{$pos}.meta_value IS NOT NULL ) ";
 						} elseif ( $operator == 'IN' OR $operator == 'NOT IN' ) {
-							$values            = self::sql_subset( $values );
+							$values             = self::sql_subset( $values );
 							$user_meta_where[] = " ( usermeta_cf_{$pos}.meta_value $operator ($values) ) ";
 						} elseif ( in_array( $operator, self::$operator_must_check_values ) ) {
 							$pairs = array();
@@ -766,7 +762,7 @@ class WC_Order_Export_Data_Extractor {
 								$pairs[] = self::operator_compare_field_and_value( "`usermeta_cf_{$pos}`.meta_value",
 									$operator, $v );
 							}
-							$pairs             = join( "OR", $pairs );
+							$pairs              = join( "OR", $pairs );
 							$user_meta_where[] = " ( $pairs ) ";
 						}
 						$pos ++;
@@ -802,36 +798,36 @@ class WC_Order_Export_Data_Extractor {
 		}
 
 		// users
-		$user_ids                    = array();
+		$user_ids = array();
 		$user_ids_ui_filters_applied = false;
 		if ( ! empty( $settings['user_names'] ) ) {
-			$user_ids          = array_filter( array_map( "intval", $settings['user_names'] ) );
-			$values            = self::sql_subset( $user_ids );
+			$user_ids = array_filter( array_map( "intval", $settings['user_names'] ) );
+			$values = self::sql_subset( $user_ids );
 			$user_meta_where[] = "( {$wpdb->users}.ID IN ($values) )";
 		}
 		//roles
 		if ( ! empty( $settings['user_roles'] ) ) {
-			$metakey                = $wpdb->get_blog_prefix() . 'capabilities';
+			$metakey = $wpdb->get_blog_prefix() . 'capabilities';
 			$inner_join_user_meta[] = "INNER JOIN {$wpdb->usermeta} AS usermeta_cf_role ON usermeta_cf_role.user_id = {$wpdb->users}.ID AND usermeta_cf_role.meta_key='$metakey'";
 
 			$roles_where = array();
 			foreach ( $settings['user_roles'] as $role ) {
 				$roles_where[] = "( usermeta_cf_role.meta_value LIKE '%$role%' )";
 			}
-			$user_meta_where[] = "(" . join( ' OR ', $roles_where ) . ")";
+			$user_meta_where[] = "(" . join(' OR ', $roles_where) . ")";
 		}
 		if ( ! empty( $user_meta_where ) AND ! empty( $inner_join_user_meta ) ) {
 			$user_meta_where      = join( ' AND ', $user_meta_where );
 			$inner_join_user_meta = join( ' ', $inner_join_user_meta );
-			$sql                  = "SELECT DISTINCT ID FROM {$wpdb->users} $inner_join_user_meta WHERE $user_meta_where";
+			$sql = "SELECT DISTINCT ID FROM {$wpdb->users} $inner_join_user_meta WHERE $user_meta_where";
 			if ( self::$track_sql_queries ) {
 				self::$sql_queries[] = $sql;
 			}
-			$user_ids                    = $wpdb->get_col( $sql );
+			$user_ids = $wpdb->get_col( $sql );
 			$user_ids_ui_filters_applied = true;
 		}
 		$user_ids = apply_filters( "woe_sql_get_customer_ids", $user_ids, $settings );
-		if ( empty( $user_ids ) AND $user_ids_ui_filters_applied ) {
+		if( empty($user_ids) AND $user_ids_ui_filters_applied ) {
 			$order_meta_where [] = "0"; // user filters failed
 		}
 
@@ -1178,8 +1174,8 @@ class WC_Order_Export_Data_Extractor {
 		global $wpdb;
 		$coupons = array();
 		foreach ( $order->get_items( 'coupon' ) as $item ) {
-			$coupon_meta     = array();
-			$get_coupon_meta = ( array_diff( $labels->get_keys(),
+			$coupon_meta = array();
+			$get_coupon_meta    = ( array_diff( $labels->get_keys(),
 				array( 'code', 'discount_amount', 'discount_amount_tax', 'excerpt' ) ) );
 			if ( $get_coupon_meta ) {
 				$recs = $wpdb->get_results( $wpdb->prepare( "SELECT meta_value,meta_key FROM {$wpdb->postmeta} AS meta
@@ -1220,16 +1216,15 @@ class WC_Order_Export_Data_Extractor {
 			}
 		}
 
-		return apply_filters( "woe_fetch_order_coupons", $coupons, $order, $labels->get_legacy_labels(), $format = "",
-			$static_vals );
+		return apply_filters( "woe_fetch_order_coupons", $coupons, $order, $labels->get_legacy_labels(), $format="", $static_vals );
 	}
 
 
 	/**
-	 * @param WC_Order               $order
+	 * @param WC_Order $order
 	 * @param WC_Order_Export_Labels $labels
-	 * @param array                  $static_vals
-	 * @param array                  $options
+	 * @param array $static_vals
+	 * @param array $options
 	 *
 	 * @return array
 	 */
@@ -1239,11 +1234,10 @@ class WC_Order_Export_Data_Extractor {
 		$static_vals,
 		$options
 	) {
-		$export_only_products     = $options['include_products'];
+		$export_only_products = $options['include_products'];
 		$product_fields_with_tags = array( 'product_variation', 'post_content', 'post_excerpt' );
 		$products                 = array();
 		$i                        = 0;
-
 		foreach ( $order->get_items( 'line_item' ) as $item_id => $item ) {
 			do_action( "woe_get_order_product_item", $item );
 			if ( $options['export_refunds'] AND $item['qty'] == 0 ) // skip zero items, when export refunds
@@ -1312,14 +1306,10 @@ class WC_Order_Export_Data_Extractor {
 					$row[ $field ] = implode( ', ', $taxonomies );
 				} else if ( $field == 'product_shipping_class' ) {
 					$taxonomies = array();
-					if ( ! empty( $item['variation_id'] ) )// try get from variation at first!
-					{
-						$taxonomies = wc_get_product_terms( $item['variation_id'], $field,
-							array( 'fields' => 'names' ) );
-					}
-					if ( ! $taxonomies ) {
-						$taxonomies = wc_get_product_terms( $item['product_id'], $field, array( 'fields' => 'names' ) );
-					}
+					if( !empty($item['variation_id']) )// try get from variation at first!
+						$taxonomies = wc_get_product_terms( $item['variation_id'], $field,array( 'fields' => 'names' ) );
+					if( !$taxonomies )
+						$taxonomies = wc_get_product_terms( $item['product_id'], $field,array( 'fields' => 'names' ) );
 					//done	
 					$row[ $field ] = implode( ', ', $taxonomies );
 				} elseif ( $field == 'line_total_plus_tax' ) {
@@ -1426,7 +1416,7 @@ class WC_Order_Export_Data_Extractor {
 						'full' ) : false;
 					$row[ $field ] = is_array( $images_src ) ? current( $images_src ) : '';
 				} elseif ( $field == 'full_category_names' ) {
-					$row[ $field ] = self::get_product_category_full( $product_id );
+					$row[ $field ] = self::get_product_category_full( $product );
 				} elseif ( isset( $static_vals[ $field ] ) ) {
 					$row[ $field ] = $static_vals[ $field ];
 				} elseif ( isset( $item_meta[ $field ] ) ) {    //meta from order
@@ -1475,9 +1465,8 @@ class WC_Order_Export_Data_Extractor {
 				$products[ $item_id ] = $row;
 			}
 		}
-
-		return apply_filters( "woe_fetch_order_products", $products, $order, $labels->get_legacy_labels(), $format = "",
-			$static_vals );
+		
+		return apply_filters( "woe_fetch_order_products", $products, $order, $labels->get_legacy_labels(), $format="", $static_vals );
 	}
 
 
@@ -1486,12 +1475,12 @@ class WC_Order_Export_Data_Extractor {
 	 *
 	 * @return string
 	 */
-	public static function get_product_category_full( $product_id ) {
+	public static function get_product_category_full( $product ) {
 		$full_names = array();
-		if ( ! $product_id ) {
+		if ( ! $product ) {
 			return '';
 		}
-		$prod_terms = get_the_terms( $product_id, 'product_cat' );
+		$prod_terms = get_the_terms( $product->get_id(), 'product_cat' );
 		if ( ! $prod_terms ) {
 			return '';
 		}
@@ -1537,12 +1526,12 @@ class WC_Order_Export_Data_Extractor {
 		global $wp_roles;
 
 //		$extra_rows = array();
-		$row = array();
+		$row        = array();
 
 		// get order meta
 		$order_meta = array();
-		if ( $order_post_meta = get_post_meta( $order_id ) ) {
-			foreach ( $order_post_meta as $meta_key => $meta_values ) {
+		if ( $order_post_meta = get_post_meta( $order_id )) {
+			foreach ( $order_post_meta as $meta_key=>$meta_values ) {
 				$order_meta[ $meta_key ] = join( self::$export_custom_fields_separator, $meta_values );
 			}
 		}
@@ -1568,7 +1557,7 @@ class WC_Order_Export_Data_Extractor {
 			$overwrite_child_order_meta = apply_filters( 'woe_overwrite_child_order_meta', $is_refund );
 
 			if ( $parent_order_meta = get_post_meta( $parent_order_id ) ) {
-				foreach ( $parent_order_meta as $meta_key => $meta_values ) {
+				foreach ( $parent_order_meta as $meta_key=>$meta_values ) {
 					if ( $overwrite_child_order_meta OR ! isset( $order_meta[ $meta_key ] ) ) {
 						$order_meta[ $meta_key ] = join( self::$export_custom_fields_separator, $meta_values );
 					}
@@ -1596,30 +1585,23 @@ class WC_Order_Export_Data_Extractor {
 		}
 
 		// we know parent!
-		if (  ( $export['products'] || $options['include_products'] ) && ! empty( $labels['products'] )  || 
-		      isset( $labels['order']->count_unique_products ) || isset( $labels['order']->total_weight_items ) ) {
-		    //   no labels for products??
-			$tmp_labels = !empty($labels['products']) ? clone $labels['products'] : new WC_Order_Export_Labels();
-			//need qty?
-			if ( isset( $labels['order']->total_weight_items )  || isset( $labels['order']->count_unique_products ) ) {
-				if ( ! isset( $tmp_labels->qty ) ) {
+		if ( ( $export['products'] || isset( $labels['order']->count_unique_products ) || isset( $labels['order']->total_weight_items ) || $options['include_products'] ) && ! empty( $labels['products'] ) ) {
+			$tmp_labels = clone $labels['products'];
+			// need qty and weight?
+			if( isset( $labels['order']->total_weight_items ) ) {
+				if( !isset($tmp_labels->qty) )
 					$tmp_labels->qty = "";
-				}
-			}
-			// need weight too?
-			if ( isset( $labels['order']->total_weight_items ) ) {
-				if ( ! isset( $tmp_labels->weight ) ) {
+				if( !isset($tmp_labels->weight) )
 					$tmp_labels->weight = "";
-				}
 			}
-			
 			$data['products'] = self::fetch_order_products(
 				$order,
 				$tmp_labels,
-				isset( $static_vals['products'] ) ? $static_vals['products'] : array(),
+				isset($static_vals['products']) ? $static_vals['products'] : array(),
 				$options
 			);
-			if ( $options['include_products'] AND empty( $data['products'] ) AND apply_filters( "woe_skip_order_without_products", false ) ) {
+			if ( $options['include_products'] AND empty( $data['products'] ) AND apply_filters( "woe_skip_order_without_products",
+					false ) ) {
 				return array();
 			}
 		} else {
@@ -1630,7 +1612,7 @@ class WC_Order_Export_Data_Extractor {
 			$data['coupons'] = self::fetch_order_coupons(
 				$parent_order ? $parent_order : $order,
 				$labels['coupons'],
-				isset( $static_vals['coupons'] ) ? $static_vals['coupons'] : array(),
+				isset($static_vals['coupons']) ? $static_vals['coupons'] : array(),
 				$options
 			);
 		} else {
@@ -1640,13 +1622,12 @@ class WC_Order_Export_Data_Extractor {
 		// extra WP_User
 		$user = ! empty( $order_meta['_customer_user'] ) ? get_userdata( $order_meta['_customer_user'] ) : false;
 		// setup missed fields for full addresses
-		foreach ( array( '_billing_address_1', '_billing_address_2', '_shipping_address_1', '_shipping_address_2' ) as $optional_field ) {
+		foreach ( array( '_billing_address_2', '_shipping_address_2' ) as $optional_field ) {
 			if ( ! isset( $order_meta[ $optional_field ] ) ) {
 				$order_meta[ $optional_field ] = '';
 			}
 		}
 
-		$order_meta = apply_filters( 'woe_fetch_order_meta', $order_meta, $order_id );
 
 		// fill as it must
 		foreach ( $labels['order']->get_fetch_fields() as $field ) {
@@ -1695,7 +1676,7 @@ class WC_Order_Export_Data_Extractor {
 			} elseif ( $field == 'order_shipping' ) {
 				$row[ $field ] = $order->get_shipping_total();
 			} elseif ( $field == 'order_shipping_plus_tax' ) {
-				$row[ $field ] = $order->get_shipping_total() + $order->get_shipping_tax();
+				$row[ $field ] = $order->get_shipping_total()+$order->get_shipping_tax();
 			} elseif ( $field == 'order_shipping_refunded' ) {
 				$row[ $field ] = $order->get_total_shipping_refunded();
 			} elseif ( $field == 'order_shipping_minus_refund' ) {
@@ -1719,13 +1700,13 @@ class WC_Order_Export_Data_Extractor {
 			} elseif ( $field == 'order_total_tax_minus_refund' ) {
 				$row[ $field ] = wc_round_tax_total( $order->get_total_tax() - $order->get_total_tax_refunded() );
 			} elseif ( $field == 'order_status' ) {
-				$status        = empty( $order_status ) ? $order->get_status() : $order_status;
-				$status        = 'wc-' === substr( $status, 0, 3 ) ? substr( $status, 3 ) : $status;
+				$status              = empty( $order_status ) ? $order->get_status() : $order_status;
+				$status              = 'wc-' === substr( $status, 0, 3 ) ? substr( $status, 3 ) : $status;
 				$row[ $field ] = isset( self::$statuses[ 'wc-' . $status ] ) ? self::$statuses[ 'wc-' . $status ] : $status;
-			} elseif ( $field == 'user_login' OR $field == 'user_email' OR $field == 'user_url' ) {
+			} elseif ( $field == 'user_login' OR $field == 'user_email' OR $field == 'user_url') {
 				$row[ $field ] = $user ? $user->$field : "";
 			} elseif ( $field == 'user_role' ) {
-				$roles         = $wp_roles->roles;
+				$roles = $wp_roles->roles;
 				$row[ $field ] = ( isset( $user->roles[0] ) && isset( $roles[ $user->roles[0] ] ) ) ? $roles[ $user->roles[0] ]['name'] : ""; // take first role Name
 			} elseif ( $field == 'customer_total_orders' ) {
 				$row[ $field ] = ( isset( $user->ID ) ) ? wc_get_customer_order_count( $user->ID ) : 0;
@@ -1751,12 +1732,8 @@ class WC_Order_Export_Data_Extractor {
 				$row[ $field ]  = isset( $country_states[ $shipping_state ] ) ? html_entity_decode( $country_states[ $shipping_state ] ) : $shipping_state;
 			} elseif ( $field == 'billing_citystatezip' ) {
 				$row[ $field ] = self::get_city_state_postcode_field_value( $order, 'billing' );
-			} elseif ( $field == 'billing_citystatezip_us' ) {
-				$row[ $field ] = self::get_city_state_postcode_field_value( $order, 'billing', true);
 			} elseif ( $field == 'shipping_citystatezip' ) {
 				$row[ $field ] = self::get_city_state_postcode_field_value( $order, 'shipping' );
-			} elseif ( $field == 'shipping_citystatezip_us' ) {
-				$row[ $field ] = self::get_city_state_postcode_field_value( $order, 'shipping', true);
 			} elseif ( $field == 'products' OR $field == 'coupons' ) {
 				if ( isset( $data[ $field ] ) ) {
 					$row[ $field ] = $data[ $field ];
@@ -1858,20 +1835,11 @@ class WC_Order_Export_Data_Extractor {
 			} //if order field set
 		}
 
-		//no labels - no data !
-		if( empty($labels['products']) ) {
-			$row['products']  = array();
-		}
-		if( empty($labels['coupons']) ) {
-			$row['coupons']  = array();
-		}
-		
 		$row = apply_filters( "woe_fetch_order", $row, $order );
-
 		return $row;
 	}
 
-	public static function get_city_state_postcode_field_value( $order, $type, $us_format = false  ) {
+	public static function get_city_state_postcode_field_value( $order, $type ) {
 		if ( $type != 'shipping' && $type != 'billing' ) {
 			return null;
 		}
@@ -1886,14 +1854,7 @@ class WC_Order_Export_Data_Extractor {
 				'get_' . $field_name ) ? $order->{'get_' . $field_name}() : $order->{$field_name};
 		}
 
-		if( $us_format ) {
-			//reformat as "Austin, TX 95076"
-			$parts[] = $citystatepostcode[ $type . '_city' ] ;
-			$parts[] = trim( $citystatepostcode[ $type . '_state' ] . " " . $citystatepostcode[ $type . '_postcode' ] );
-		} else {
-			$parts = $citystatepostcode;
-		}	
-		return join( ", ", $parts );
+		return join( ", ", $citystatepostcode );
 	}
 
 	public static function get_order_shipping_tax_refunded( $order_id ) {
@@ -1935,7 +1896,6 @@ class WC_Order_Export_Data_Extractor {
 			'_line_tax',
 			'method_id',
 			'cost',
-			'_reduced_stock',
 		) );
 
 		$result = array();
@@ -1958,7 +1918,7 @@ class WC_Order_Export_Data_Extractor {
 			if ( taxonomy_exists( wc_sanitize_taxonomy_name( $meta['meta_key'] ) ) ) {
 				$term               = get_term_by( 'slug', $meta['meta_value'],
 					wc_sanitize_taxonomy_name( $meta['meta_key'] ) );
-				$meta['meta_key']   = wc_attribute_label( wc_sanitize_taxonomy_name( $meta['meta_key'] ), $product );
+				$meta['meta_key']   = wc_attribute_label( wc_sanitize_taxonomy_name( $meta['meta_key'] ), $product);
 				$meta['meta_value'] = isset( $term->name ) ? $term->name : $meta['meta_value'];
 			} else {
 				$meta['meta_key'] = wc_attribute_label( $meta['meta_key'], $product );

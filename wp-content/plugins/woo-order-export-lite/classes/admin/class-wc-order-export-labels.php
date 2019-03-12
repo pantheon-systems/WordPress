@@ -8,8 +8,8 @@ class WC_Order_Export_Labels {
 
 	private $labels;
 
-	public function __get( $key ) {
-		if ( ! $key || empty( $this->labels ) ) {
+	public function __get($key) {
+		if ( ! $key || empty($this->labels) ) {
 			return false;
 		}
 
@@ -22,8 +22,8 @@ class WC_Order_Export_Labels {
 		return false;
 	}
 
-	public function __isset( $key ) {
-		if ( ! $key || empty( $this->labels ) ) {
+	public function __isset($key) {
+		if ( ! $key || empty($this->labels) ) {
 			return false;
 		}
 
@@ -36,18 +36,18 @@ class WC_Order_Export_Labels {
 		return false;
 	}
 
-	public function __unset( $key ) {
-		if ( ! $key || empty( $this->labels ) ) {
+	public function __unset($key) {
+		if ( ! $key || empty($this->labels) ) {
 			return false;
 		}
 
 		foreach ( $this->labels as $num_index => $label_data ) {
 			if ( $label_data['key'] === $key || $label_data['parent_key'] === $key ) {
-				unset( $this->labels[ $num_index ] );
+				unset($this->labels[$num_index]);
 			}
 		}
 
-		$this->labels = array_values( $this->labels );
+		$this->labels = array_values($this->labels);
 	}
 
 	public function __set( $key, $label ) {
@@ -72,23 +72,23 @@ class WC_Order_Export_Labels {
 	}
 
 	public function get_keys() {
-		return array_map( function ( $label_data ) {
+		return array_map( function($label_data) {
 			return $label_data['key'];
 		}, $this->labels );
 	}
 
 	public function is_not_empty() {
-		return (boolean) $this->labels;
+		return (boolean)$this->labels;
 	}
 
 	public function to_Array() {
 		return array_combine(
-			array_map( function ( $label_data ) {
+			array_map(function ($label_data){
 				return $label_data['key'];
-			}, $this->labels ),
-			array_map( function ( $label_data ) {
+			}, $this->labels),
+			array_map(function ($label_data){
 				return $label_data['label'];
-			}, $this->labels )
+			}, $this->labels)
 		);
 	}
 
@@ -103,7 +103,7 @@ class WC_Order_Export_Labels {
 		return $unique_keys;
 	}
 
-	public function get_childs( $key ) {
+	public function get_childs($key) {
 		$child_labels = array();
 		foreach ( $this->labels as $label_data ) {
 			if ( $label_data['parent_key'] == $key ) {
@@ -114,7 +114,7 @@ class WC_Order_Export_Labels {
 		return $child_labels;
 	}
 
-	public function get_parent( $key ) {
+	public function get_parent($key) {
 		foreach ( $this->labels as $label_data ) {
 			if ( $label_data['key'] == $key ) {
 				return $label_data['parent_key'];
@@ -124,8 +124,8 @@ class WC_Order_Export_Labels {
 		return false;
 	}
 
-	public function replace_label( $key, $new_label ) {
-		if ( ! $key || empty( $this->labels ) ) {
+	public function replace_label($key, $new_label) {
+		if ( ! $key || empty($this->labels) ) {
 			return;
 		}
 
@@ -136,7 +136,7 @@ class WC_Order_Export_Labels {
 		}
 	}
 
-	public function get_labels() {
+	public function get_labels(){
 		return $this->labels;
 	}
 
@@ -151,7 +151,7 @@ class WC_Order_Export_Labels {
 
 		return $fetch_fields;
 	}
-
+	
 	public function get_legacy_labels() {
 		$unique_keys = array();
 		foreach ( $this->labels as $label_data ) {
@@ -161,5 +161,5 @@ class WC_Order_Export_Labels {
 		}
 
 		return $unique_keys;
-	}
+	}	
 }

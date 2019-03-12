@@ -28,68 +28,68 @@ class NM_Section_wooproduct extends PPOM_Inputs{
 		
 		$this -> title 		= __ ( 'HTML', 'ppom' );
 		$this -> desc		= __ ( 'HTML content', 'ppom' );
-		$this -> icon		= __ ( '<i class="fa fa-code" aria-hidden="true"></i>', 'ppom' );
 		$this -> settings	= self::get_settings();
 		
 	}
 	
 	
+	
+	
 	private function get_settings(){
 		
 		return array (
-			'data_name' => array (
-						'type' => 'text',
-						'title' => __ ( 'Data name', 'ppom' ),
-						'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', 'ppom' ) 
-				),
-			'html' => array (
-					'type' => 'textarea',
-					'title' => __ ( 'Content', 'ppom' ),
-					'desc' => __ ( 'Add your text/HTML here.', 'ppom' ) 
-			),
-			'description' => array (
-					'type' => 'textarea',
-					'title' => __ ( 'Description', 'ppom' ),
-					'desc' => __ ( 'Small description, it will be display near name title.', 'ppom' ) 
-			),
-			
-			'width' => array (
-					'type' => 'select',
-					'title' => __ ( 'Width', 'ppom' ),
-					'desc' => __ ( 'Select width column.', "ppom"),
-					'options'	=> ppom_get_input_cols(),
-					'default'	=> 12,
-			),
-			'visibility' => array (
-					'type' => 'select',
-					'title' => __ ( 'Visibility', 'ppom' ),
-					'desc' => __ ( 'Set field visibility based on user.', "ppom"),
-					'options'	=> ppom_field_visibility_options(),
-					'default'	=> 'everyone',
-			),
-			'visibility_role' => array (
-					'type' => 'text',
-					'title' => __ ( 'User Roles', 'ppom' ),
-					'desc' => __ ( 'Role separated by comma.', "ppom"),
-					'hidden' => true,
-			),
-			'desc_tooltip' => array (
-					'type' => 'checkbox',
-					'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
-					'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
-			),
-			'logic' => array (
-					'type' => 'checkbox',
-					'title' => __ ( 'Enable Conditions', "ppom" ),
-					'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
-			),
-			'conditions' => array (
-					'type' => 'html-conditions',
-					'title' => __ ( 'Conditions', "ppom" ),
-					'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
-			),
-		);
-
+						'data_name' => array (
+									'type' => 'text',
+									'title' => __ ( 'Data name', 'ppom' ),
+									'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', 'ppom' ) 
+							),
+						'html' => array (
+								'type' => 'textarea',
+								'title' => __ ( 'Content', 'ppom' ),
+								'desc' => __ ( 'Add your text/HTML here.', 'ppom' ) 
+						),
+						'description' => array (
+								'type' => 'textarea',
+								'title' => __ ( 'Description', 'ppom' ),
+								'desc' => __ ( 'Small description, it will be diplay near name title.', 'ppom' ) 
+						),
+						'desc_tooltip' => array (
+								'type' => 'checkbox',
+								'title' => __ ( 'Show tooltip (PRO)', 'ppom' ),
+								'desc' => __ ( 'Show Description in Tooltip with Help Icon', 'ppom' )
+						),
+						'width' => array (
+								'type' => 'select',
+								'title' => __ ( 'Width', 'ppom' ),
+								'desc' => __ ( 'Select width column', 'ppom'),
+								'options'	=> ppom_get_input_cols(),
+								'default'	=> 12,
+						),
+						'visibility' => array (
+								'type' => 'select',
+								'title' => __ ( 'Visibility', 'ppom' ),
+								'desc' => __ ( 'Set field visibility based on user.', 'ppom'),
+								'options'	=> ppom_field_visibility_options(),
+								'default'	=> 'everyone',
+						),
+						'visibility_role' => array (
+								'type' => 'text',
+								'title' => __ ( 'User Roles', 'ppom' ),
+								'desc' => __ ( 'Role separated by comma.', 'ppom'),
+								'hidden' => true,
+						),
+						'logic' => array (
+								'type' => 'checkbox',
+								'title' => __ ( 'Enable Conditions', "ppom" ),
+								'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
+						),
+						'conditions' => array (
+								'type' => 'html-conditions',
+								'title' => __ ( 'Conditions', "ppom" ),
+								'desc' => __ ( 'Tick it to turn conditional logic to work below', "ppom" )
+						),
+				);
+	
 	}
 	
 	

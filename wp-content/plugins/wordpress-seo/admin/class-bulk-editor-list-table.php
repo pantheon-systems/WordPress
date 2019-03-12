@@ -44,7 +44,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	 *
 	 * @var string
 	 */
-	private $request_url = '';
+	private $request_url;
 
 	/**
 	 * The current page (depending on $_GET['paged']) if current tab is for current page_type, else it will be 1
@@ -102,45 +102,66 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	protected $pagination = array();
 
 	/**
-	 * Holds the sanitized data from the user input.
-	 *
-	 * @var array
-	 */
-	protected $input_fields = array();
-
-	/**
 	 * Class constructor
-	 *
-	 * @param array $args The arguments.
 	 */
-	public function __construct( $args = array() ) {
+	public function __construct() {
 		parent::__construct( $this->settings );
 
-		$args = wp_parse_args(
-			$args,
-			array(
-				'nonce'        => '',
-				'input_fields' => array(),
-			)
-		);
-
-		$this->input_fields = $args['input_fields'];
-		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
-			$this->request_url = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
-		}
-
-		$this->current_page   = ( ! empty( $this->input_fields['paged'] ) ) ? $this->input_fields['paged'] : 1;
-		$this->current_filter = ( ! empty( $this->input_fields['post_type_filter'] ) ) ? $this->input_fields['post_type_filter'] : 1;
-		$this->current_status = ( ! empty( $this->input_fields['post_status'] ) ) ? $this->input_fields['post_status'] : 1;
+		$this->request_url    = $_SERVER['REQUEST_URI'];
+		$this->current_page   = ( ! empty( $_GET['paged'] ) ) ? $_GET['paged'] : 1;
+		$this->current_filter = ( ! empty( $_GET['post_type_filter'] ) ) ? $_GET['post_type_filter'] : 1;
+		$this->current_status = ( ! empty( $_GET['post_status'] ) ) ? $_GET['post_status'] : 1;
 		$this->current_order  = array(
-			'order'   => ( ! empty( $this->input_fields['order'] ) ) ? $this->input_fields['order'] : 'asc',
-			'orderby' => ( ! empty( $this->input_fields['orderby'] ) ) ? $this->input_fields['orderby'] : 'post_title',
+			'order'   => ( ! empty( $_GET['order'] ) ) ? $_GET['order'] : 'asc',
+			'orderby' => ( ! empty( $_GET['orderby'] ) ) ? $_GET['orderby'] : 'post_title',
 		);
 
-		$this->nonce    = $args['nonce'];
+		$this->verify_nonce();
+
+		$this->nonce    = wp_create_nonce( 'bulk-editor-table' );
 		$this->page_url = "&nonce={$this->nonce}&type={$this->page_type}#top#{$this->page_type}";
 
 		$this->populate_editable_post_types();
+	}
+
+	/**
+	 * Verifies nonce if additional parameters have been sent.
+	 *
+	 * Shows an error notification if the nonce check fails.
+	 */
+	private function verify_nonce() {
+		if ( $this->should_verify_nonce() && ! wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'bulk-editor-table' ) ) {
+			Yoast_Notification_Center::get()->add_notification(
+				new Yoast_Notification(
+					__( 'You are not allowed to access this page.', 'wordpress-seo' ),
+					array( 'type' => Yoast_Notification::ERROR )
+				)
+			);
+			Yoast_Notification_Center::get()->display_notifications();
+			die;
+		}
+	}
+
+	/**
+	 * Checks if additional parameters have been sent to determine if nonce should be checked or not.
+	 *
+	 * @return bool
+	 */
+	private function should_verify_nonce() {
+		$possible_params = array(
+			'type',
+			'paged',
+			'post_type_filter',
+			'post_status',
+			'order',
+			'orderby',
+		);
+
+		foreach ( $possible_params as $param_name ) {
+			if ( filter_input( INPUT_GET, $param_name ) ) {
+				return true;
+			}
+		}
 	}
 
 	/**
@@ -277,15 +298,15 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		);
 
 
-		$post_status             = filter_input( INPUT_GET, 'post_status' );
-		$current_link_attributes = empty( $post_status ) ? ' class="current" aria-current="page"' : '';
-		$localized_text          = sprintf(
+		$post_status    = filter_input( INPUT_GET, 'post_status' );
+		$class          = empty( $post_status ) ? ' class="current"' : '';
+		$localized_text = sprintf(
 			/* translators: %s expands to the number of posts in localized format. */
 			_nx( 'All <span class="count">(%s)</span>', 'All <span class="count">(%s)</span>', $total_posts, 'posts', 'wordpress-seo' ),
 			number_format_i18n( $total_posts )
 		);
 
-		$status_links['all'] = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor' . $this->page_url ) ) . '"' . $current_link_attributes . '>' . $localized_text . '</a>';
+		$status_links['all'] = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor' . $this->page_url ) ) . '"' . $class . '>' . $localized_text . '</a>';
 
 		$post_stati = get_post_stati( array( 'show_in_admin_all_list' => true ), 'objects' );
 		if ( is_array( $post_stati ) && $post_stati !== array() ) {
@@ -307,15 +328,15 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 					continue;
 				}
 
-				$current_link_attributes = '';
+				$class = '';
 				if ( $status_name === $post_status ) {
-					$current_link_attributes = ' class="current" aria-current="page"';
+					$class = ' class="current"';
 				}
 
-				$status_links[ $status_name ] = '<a href="' . esc_url( add_query_arg( array( 'post_status' => $status_name ), admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor' . $this->page_url ) ) ) . '"' . $current_link_attributes . '>' . sprintf( translate_nooped_plural( $status->label_count, $total ), number_format_i18n( $total ) ) . '</a>';
+				$status_links[ $status_name ] = '<a href="' . esc_url( add_query_arg( array( 'post_status' => $status_name ), admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor' . $this->page_url ) ) ) . '"' . $class . '>' . sprintf( translate_nooped_plural( $status->label_count, $total ), number_format_i18n( $total ) ) . '</a>';
 			}
 		}
-		unset( $post_stati, $status, $status_name, $total, $current_link_attributes );
+		unset( $post_stati, $status, $status_name, $total, $class );
 
 		$trashed_posts = $wpdb->get_var(
 			"
@@ -324,9 +345,9 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 				"
 		);
 
-		$current_link_attributes = '';
+		$class = '';
 		if ( 'trash' === $post_status ) {
-			$current_link_attributes = 'class="current" aria-current="page"';
+			$class = 'class="current"';
 		}
 
 		$localized_text = sprintf(
@@ -335,7 +356,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			number_format_i18n( $trashed_posts )
 		);
 
-		$status_links['trash'] = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor&post_status=trash' . $this->page_url ) ) . '"' . $current_link_attributes . '>' . $localized_text . '</a>';
+		$status_links['trash'] = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=bulk-editor&post_status=trash' . $this->page_url ) ) . '"' . $class . '>' . $localized_text . '</a>';
 
 		return $status_links;
 	}
@@ -437,7 +458,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		$current_order  = $this->current_order;
 
 		// If current type doesn't compare with objects page_type, than we have to unset some vars in the requested url (which will be use for internal table urls).
-		if ( isset( $this->input_fields['type'] ) && $this->input_fields['type'] !== $this->page_type ) {
+		if ( $_GET['type'] !== $this->page_type ) {
 			$request_url = remove_query_arg( 'paged', $request_url ); // Page will be set with value 1 below.
 			$request_url = remove_query_arg( 'post_type_filter', $request_url );
 			$request_url = remove_query_arg( 'post_status', $request_url );
@@ -678,8 +699,8 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		$states          = get_post_stati( array( 'show_in_admin_all_list' => true ) );
 		$states['trash'] = 'trash';
 
-		if ( ! empty( $this->input_fields['post_status'] ) ) {
-			$requested_state = $this->input_fields['post_status'];
+		if ( ! empty( $_GET['post_status'] ) ) {
+			$requested_state = sanitize_text_field( $_GET['post_status'] );
 			if ( in_array( $requested_state, $states, true ) ) {
 				$states = array( $requested_state );
 			}

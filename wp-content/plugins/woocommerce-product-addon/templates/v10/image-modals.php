@@ -7,17 +7,19 @@ ppom_direct_access_not_allowed();
 $modal_id = 'modalImage'.$image_id;
 ?>
 
-<div id="<?php echo esc_attr($modal_id)?>" class="ppom-popup-wrapper ppom-popup-handle">
-    <div class="ppom-popup-inner-section">
-        <header class="ppom-popup-header"> 
-            <!-- <a href="#" class="js-modal-close close">×</a> -->
-            <h3><?php echo $image_title?></h3>
-        </header>
-        <div class="ppom-popup-body">
-            <img src="<?php echo esc_url($image_full) ?>">
-        </div>
-        <footer class="ppom-popup-footer"> 
-            <a href="#" class="ppom-popup-button ppom-popup-close-js">Close</a> 
-        </footer>
+<div class="modal ppom-modals fade" id="<?php echo esc_attr($modal_id)?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><?php echo $image_title?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+         <img src="<?php echo $image_full?>">   
+      </div>
+      
     </div>
+  </div>
 </div>

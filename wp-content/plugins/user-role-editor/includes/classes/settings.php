@@ -18,7 +18,7 @@ class URE_Settings {
             'ure_addons_settings_update', 
             'ure_settings_ms_update', 
             'ure_default_roles_update',
-            'ure_settings_tools_exec');
+            'ure_reset_roles_exec');
         foreach($update_buttons as $update_button) {
             if (!isset($_POST[$update_button])) {
                 continue;
@@ -142,20 +142,16 @@ class URE_Settings {
     }
     // end of update_multisite_options()
 
-    
-    protected static function tools_exec() {
+
+    protected static function reset_roles() {
         
         $lib = URE_Lib::get_instance();
-        $roles_reset = $lib->get_request_var( 'ure_reset_roles_exec', 'post', 'int');
-        if ( $roles_reset==1 ) {
-            URE_Tools::reset_roles();
-        } else {        
-            do_action( 'ure_settings_tools_exec' );
-        }
-        
+        $lib->reset_user_roles();
+        $lib->put_option('other_default_roles', array(), true);
+        $lib->show_message(esc_html__('Tools: Reset: User Roles were initialized', 'user-role-editor'));
     }
-    //end of tools_exec()
-    
+    // end of reset_roles()
+
     
     private static function controller() {
         
@@ -173,8 +169,8 @@ class URE_Settings {
             case 'ure_default_roles_update':
                 self::update_default_roles();
                 break;
-            case 'ure_settings_tools_exec':
-                self::tools_exec();
+            case 'ure_reset_roles_exec':
+                self::reset_roles();
                 break;
             case 'show':
             default:                
@@ -183,49 +179,6 @@ class URE_Settings {
         
     }
     // end of controller()
-    
-    
-    public static function show_other_default_roles() {
-        
-        $lib = URE_Lib::get_instance();
-        $other_default_roles = $lib->get_option('other_default_roles', array());
-        $roles = $lib->get_user_roles();
-        $wp_default_role = get_option('default_role');
-        foreach ($roles as $role_id => $role) {
-            if ( $role_id=='administrator' || $role_id==$wp_default_role ) {
-                continue;
-            }
-            if ( in_array( $role_id, $other_default_roles ) ) {
-                $checked = 'checked="checked"';
-            } else {
-                $checked = '';
-            }
-            echo '<label for="wp_role_' . $role_id .'"><input type="checkbox"	id="wp_role_' . $role_id . 
-                '" name="wp_role_' . $role_id . '" value="' . $role_id . '"' . $checked .' />&nbsp;' . 
-                esc_html__( $role['name'], 'user-role-editor' ) . '</label><br />';
-          }		
-           
-    }
-    // end of show_other_default_roles()
-    
-    
-    
-    public static function get_settings_link() {
-        
-        $lib = URE_Lib::get_instance();
-        $multisite = $lib->get('multisite');
-        
-        if ($multisite && is_network_admin()) {
-            $link = 'settings.php';
-        } else {
-            $link = 'options-general.php';
-        }
-        
-        return $link;
-        
-    }
-    // end of get_settings_link();
-
     
     
     public static function show() {                
@@ -250,6 +203,7 @@ class URE_Settings {
             $count_users_without_role = $lib->get_option('count_users_without_role', 0);
         }
         
+        $lib->get_default_role();
         $view = new URE_Role_View();
         $view->role_default_prepare_html(0);
         
@@ -257,7 +211,12 @@ class URE_Settings {
                 
         do_action('ure_settings_load');        
 
-        $link = self::get_settings_link();        
+        if ($multisite && is_network_admin()) {
+            $link = 'settings.php';
+        } else {
+            $link = 'options-general.php';
+        }
+        
         $active_for_network = $lib->get('active_for_network');
         $license_key_only = $multisite && is_network_admin() && !$active_for_network;
 

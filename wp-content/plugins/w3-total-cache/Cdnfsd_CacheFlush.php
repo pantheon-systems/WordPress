@@ -18,17 +18,9 @@ class Cdnfsd_CacheFlush {
 	/**
 	 * Purges everything from CDNs that supports it
 	 */
-	static public function w3tc_flush_all( $extras = null ) {
+	static public function w3tc_flush_all( $extras = array() ) {
 		if ( isset( $extras['only'] ) && $extras['only'] != 'cdn' )
 			return;
-
-		$config = Dispatcher::config();
-		if ( $config->get_boolean( 'cdn.flush_manually' ) ) {
-			// in this mode flush only on purge button clicks
-			if ( !isset( $extras['ui_action'] ) ) {
-				return true;
-			}
-		}
 
 		$o = Dispatcher::component( 'Cdnfsd_CacheFlush' );
 
@@ -44,7 +36,7 @@ class Cdnfsd_CacheFlush {
 	 * @param integer $post_id
 	 * @return boolean
 	 */
-	static public function w3tc_flush_post( $post_id, $extras = null ) {
+	static public function w3tc_flush_post( $post_id ) {
 		if ( !$post_id ) {
 			$post_id = Util_Environment::detect_post_id();
 		}
@@ -53,13 +45,6 @@ class Cdnfsd_CacheFlush {
 			return false;
 
 		$config = Dispatcher::config();
-		if ( $config->get_boolean( 'cdn.flush_manually' ) ) {
-			// in this mode flush only on purge button clicks
-			if ( !isset( $extras['ui_action'] ) ) {
-				return true;
-			}
-		}
-
 		$full_urls = array();
 		$post = null;
 		$terms = array();
@@ -196,15 +181,7 @@ class Cdnfsd_CacheFlush {
 	 *
 	 * @param unknown $url
 	 */
-	static public function w3tc_flush_url( $url, $extras = null ) {
-		$config = Dispatcher::config();
-		if ( $config->get_boolean( 'cdn.flush_manually' ) ) {
-			// in this mode flush only on purge button clicks
-			if ( !isset( $extras['ui_action'] ) ) {
-				return true;
-			}
-		}
-
+	static public function w3tc_flush_url( $url ) {
 		$o = Dispatcher::component( 'Cdnfsd_CacheFlush' );
 		$o->queued_urls[$url] = '*';
 

@@ -36,32 +36,11 @@ abstract class Minify_Inline {
     }
 
     protected function _process($openTag, $content, $closeTag) {
-        $type = '';
-        if (preg_match('#type="([^"]+)"#i', $openTag, $matches)) {
-            $type = strtolower($matches[1]);
-        }
+        $content = $this->_removeCdata($content);
 
-        // minify
-        $minifier = $this->_minifier;
+        $content = call_user_func($this->_minifier, $content, $this->_minifierOptions);
 
-        if (in_array($type, array('text/template', 'text/x-handlebars-template'))) {
-            $minifier = '';
-        }
-
-        $minifier = apply_filters('w3tc_minify_html_script_minifier', $minifier, $type, $openTag . $content . $closeTag);
-
-        if (empty($minifier)) {
-            $needsCdata = false;
-        } else {
-            // remove CDATA section markers
-            $content_old = $content;
-            $content = $this->_removeCdata($content);
-            $needsCdata = ( $content_old != $content );
-
-            $content = call_user_func($minifier, $content, $this->_minifierOptions);
-        }
-
-        if ($needsCdata && $this->_needsCdata($content)) {
+        if ($this->_needsCdata($content)) {
             $content = $this->_wrapCdata($content);
         }
 

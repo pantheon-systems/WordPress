@@ -542,11 +542,12 @@ if ( !class_exists( 'YWCM_Cart_Messages' ) ) {
                 'screen_id'     => 'plugins',
                 'pointer_id' => 'yith_woocommerce_cart_messages',
                 'target'     => '#toplevel_page_yit_plugin_panel',
-                'content'    => sprintf( '<h3> %s </h3> <p> %s <a href="%s">%s</a></p>',
+                'content'    => sprintf( '<h3> %s </h3> <p> %s </p>',
                     __( 'YITH WooCommerce Cart Messages', 'yith-woocommerce-cart-messages' ),
-                    __( 'In the YITH Plugins tab you can find the YITH WooCommerce Cart Messages options.
+                    __( 'In the YIT Plugins tab you can find the YITH WooCommerce Cart Messages options.
 With this menu, you can access to all the settings of our plugins that you have activated.
-YITH WooCommerce Cart Messages is available in an outstanding PREMIUM version with many new options', 'yith-woocommerce-cart-messages' ),$this->get_premium_landing_uri(),__('discover it now','yith-woocommerce-cart-messages') ),
+YITH WooCommerce Cart Messages is available in an outstanding PREMIUM version with many new options, <a href="'.$this->get_premium_landing_uri().'">discover it now</a>', 'yith-woocommerce-cart-messages' )
+                ),
                 'position'   => array( 'edge' => 'left', 'align' => 'center' ),
                 'init'  => YITH_YWCM_FREE_INIT
             );
