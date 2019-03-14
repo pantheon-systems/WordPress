@@ -60,6 +60,8 @@ if( $show_return_to_pantheon_button ){
 
         $login_message = empty( $custom_login_message ) ? 'Login to your WordPress Site' : $custom_login_message;
 
+        remove_all_filters( 'login_message' );
+
         ?>
         <div id="return-to-pantheon" style="display: none;">
             <div class="left">
