@@ -86,6 +86,7 @@ class Endpoints extends Controller {
 		$args['offset']       = isset( $request['offset'] )       ? $request['offset'] : 0;
 		$args['referral_id']  = isset( $request['referral_id'] )  ? $request['referral_id'] : 0;
 		$args['affiliate_id'] = isset( $request['affiliate_id'] ) ? $request['affiliate_id'] : 0;
+		$args['rest_id']      = isset( $request['rest_id'] )      ? $request['rest_id'] : '';
 		$args['reference']    = isset( $request['reference'] )    ? $request['reference'] : '';
 		$args['context']      = isset( $request['ref_context'] )  ? $request['ref_context'] : '';
 		$args['campaign']     = isset( $request['campaign'] )     ? $request['campaign'] : '';
@@ -94,6 +95,7 @@ class Endpoints extends Controller {
 		$args['order']        = isset( $request['order'] )        ? $request['order'] : 'ASC';
 		$args['search']       = isset( $request['search'] )       ? $request['search'] : false;
 		$args['date']         = isset( $request['date'] )         ? $request['date'] : '';
+		$args['parent_id']    = isset( $request['parent_id'] )    ? $request['parent_id'] : '';
 
 		if ( is_array( $request['filter'] ) ) {
 			$args = array_merge( $args, $request['filter'] );
@@ -239,6 +241,14 @@ class Endpoints extends Controller {
 			},
 		);
 
+		$params['parent_id'] = array(
+			'description'       => __( 'The parent referral ID or array of IDs to query for.', 'affiliate-wp' ),
+			'sanitize_callback' => 'absint',
+			'validate_callback' => function( $param, $request, $key ) {
+				return is_numeric( $param );
+			},
+		);
+
 		/*
 		 * Pass any valid get_referrals() args via filter:
 		 * /referrals/?filter[status]=pending&filter[order]=desc
@@ -277,6 +287,10 @@ class Endpoints extends Controller {
 				'visit_id'     => array(
 					'description' => __( 'ID for the visit associated with the referral.', 'affiliate-wp' ),
 					'type'        => 'integer',
+				),
+				'rest_id'         => array(
+					'description' => __( 'REST ID (site:referral ID combination).', 'affiliate-wp' ),
+					'type'        => 'string',
 				),
 				'description'  => array(
 					'description' => __( 'Referral description.', 'affiliate-wp' ),
@@ -317,6 +331,10 @@ class Endpoints extends Controller {
 				'date'         => array(
 					'description' => __( 'The date the referral was generated.', 'affiliate-wp' ),
 					'type'        => 'string',
+				),
+				'parent_id' => array(
+					'description' => __( 'The ID for the parent referral.', 'affiliate-wp' ),
+					'type'        => 'integer',
 				),
 			),
 		);

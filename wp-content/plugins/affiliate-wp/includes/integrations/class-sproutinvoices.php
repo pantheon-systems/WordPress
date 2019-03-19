@@ -50,7 +50,12 @@ class Affiliate_WP_Sprout_Invoices extends Affiliate_WP_Base {
 		}
 		$amount   = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 		$name     = affiliate_wp()->affiliates->get_affiliate_name( $referral->affiliate_id );
-		$note     = sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
+		$note     = sprintf( __( 'Referral #%1$d for %2$s recorded for %3$s (ID: %4$d).', 'affiliate-wp' ),
+			$referral->referral_id,
+			$amount,
+			$name,
+			$referral->affiliate_id
+		);
 
 		$new_data = wp_parse_args( $payment->get_data(), array( 'affwp_notes' => $note ) );
 		$payment->set_data( $new_data );

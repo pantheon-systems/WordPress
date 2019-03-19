@@ -27,6 +27,7 @@ function affwp_is_admin_page( $page = '' ) {
 		'affiliate-wp',
 		'affiliate-wp-affiliates',
 		'affiliate-wp-referrals',
+		'affiliate-wp-customers',
 		'affiliate-wp-payouts',
 		'affiliate-wp-visits',
 		'affiliate-wp-creatives',

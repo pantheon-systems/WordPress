@@ -26,14 +26,29 @@ function affwp_payouts_screen_options() {
 		return;
 	}
 
-	add_screen_option(
-		'per_page',
-		array(
-			'label'   => __( 'Number of payouts per page:', 'affiliate-wp' ),
-			'option'  => 'affwp_edit_payouts_per_page',
-			'default' => 30,
-		)
-	);
+	if ( isset( $_GET['payout_id'] ) ) {
+
+		add_screen_option(
+			'per_page',
+			array(
+				'label'   => __( 'Number of referrals per page:', 'affiliate-wp' ),
+				'option'  => 'affwp_edit_referrals_per_page',
+				'default' => 30,
+			)
+		);
+
+	} else {
+
+		add_screen_option(
+			'per_page',
+			array(
+				'label'   => __( 'Number of payouts per page:', 'affiliate-wp' ),
+				'option'  => 'affwp_edit_payouts_per_page',
+				'default' => 30,
+			)
+		);
+
+	}
 
 	/*
 	 * Instantiate the list table to make the columns array available to screen options.

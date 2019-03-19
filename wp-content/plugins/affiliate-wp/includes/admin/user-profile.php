@@ -73,8 +73,10 @@ function affwp_user_profile_fields( $user ) {
 			</td>
 		</tr>
 
-		<?php if ( ! affiliate_wp()->emails->is_email_disabled()
+		<?php 
+		if ( ! affiliate_wp()->emails->is_email_disabled()
 			&& ( $affiliate && ! in_array( $affiliate->status, array( 'active', 'inactive' ), true ) )
+			&& affwp_email_notification_enabled( 'affiliate_application_accepted_email' )
 		) : ?>
 			<tr>
 				<th scope="row"><label for="disable-affiliate-email"><?php _e( 'Disable Affiliate Email',  'affiliate-wp' ); ?></label></th>
@@ -107,3 +109,21 @@ function affwp_user_profile_update( $user_id ) {
 }
 add_action( 'personal_options_update',  'affwp_user_profile_update' );
 add_action( 'edit_user_profile_update', 'affwp_user_profile_update' );
+
+/**
+ * Adds an Add Affiliate link to the user row actions.
+ *
+ * @since 2.2.2
+ *
+ * @param array   $actions An array of current action links.
+ * @param WP_User $user    WP_User object for the currently-listed user.
+ */
+function affwp_user_row_add_affiliate_action( $actions, $user ) {
+	if ( ! affwp_is_affiliate( $user->ID ) ) {
+		$add_affiliate_link = esc_url( affwp_admin_url( 'affiliates' ,array( 'affwp_notice' => false, 'action' => 'add_affiliate', 'user_id' => $user->ID ) ) );
+		$actions['add_affiliate'] = '<a href="' . $add_affiliate_link . '">' . __( 'Add Affiliate', 'affiliate-wp' ) . '</a>';
+	}
+
+	return $actions;
+}
+add_filter( 'user_row_actions', 'affwp_user_row_add_affiliate_action', 10, 2 );

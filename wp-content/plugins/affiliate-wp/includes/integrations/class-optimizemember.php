@@ -16,10 +16,14 @@ class Affiliate_WP_OptimizeMember extends Affiliate_WP_Base {
 		add_action( 'init', array( $this, 'revoke_referral_on_refund' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'notify_url' ) );
-		add_action('ws_plugin__optimizemember_before_sc_paypal_button_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
-		add_action('ws_plugin__optimizemember_pro_before_sc_stripe_form_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
-		add_action('ws_plugin__optimizemember_pro_before_sc_authnet_form_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
-		add_action('ws_plugin__optimizemember_pro_before_sc_paypal_form_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
+		add_action( 'ws_plugin__optimizemember_before_sc_paypal_button_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
+		add_action( 'ws_plugin__optimizemember_pro_before_sc_stripe_form_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
+		add_action( 'ws_plugin__optimizemember_pro_before_sc_authnet_form_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
+		add_action( 'ws_plugin__optimizemember_pro_before_sc_paypal_form_after_shortcode_atts', array( $this, 'set_referral_variable' ) );
+
+		add_action( 'affwp_tracking_set_visit_id', array( $this, 'set_visit_id' ), 10, 2 );
+		add_action( 'affwp_tracking_set_affiliate_id', array( $this, 'set_affiliate_id' ), 10, 2 );
+		add_action( 'affwp_tracking_set_campaign', array( $this, 'set_campaign' ), 10, 2 );
 	}
 
 	/**
@@ -124,6 +128,15 @@ class Affiliate_WP_OptimizeMember extends Affiliate_WP_Base {
 					'affiliate_id'	=> $affiliate_id
 				);
 
+				if( $user_id ) {
+
+					$user = get_userdata( $user_id );
+
+					if( $user ) {
+						$this->email = $user->user_email;
+					}
+				}
+
 				$this->add_pending_referral( $args );
 
 				$this->log( 'OptimizeMember pending referral created.' );
@@ -131,6 +144,8 @@ class Affiliate_WP_OptimizeMember extends Affiliate_WP_Base {
 				$this->complete_referral( $txn_id );
 
 				$this->log( 'OptimizeMember referral completed.' );
+			
+				exit;
 			}
 
 			$this->log( 'OptimizeMember referral validation failed. Missing affiliate ID.' );
@@ -218,12 +233,11 @@ class Affiliate_WP_OptimizeMember extends Affiliate_WP_Base {
 		}
 	}
 
-
 	/**
 	 * Add the Affiliate ID if set to the request that is sent to the gateway
 	 *
 	 * @access  public
-	 * @since 1.9
+	 * @since   1.9
 	*/
 	public function set_referral_variable( $vars ){
 
@@ -238,6 +252,57 @@ class Affiliate_WP_OptimizeMember extends Affiliate_WP_Base {
 
 			$this->log( 'OptimizeMember custom variable set to ' . $vars["__refs"]["attr"]["custom"] );
 
+		}
+	}
+
+	/**
+	 * Set the affwp_ref cookie from the affiliate ID
+	 *
+	 * @access  public
+	 * @since   2.1.17
+	 *
+	 * @param int                    $affiliate_id Affiliate ID.
+	 * @param \Affiliate_WP_Tracking $tracking     Tracking class instance.
+	 */
+	public function set_affiliate_id( $affiliate_id, $tracking ) {
+		$affwp_ref = ! empty( $_COOKIE['affwp_ref'] ) ? $_COOKIE['affwp_ref'] : false;
+
+		if ( empty( $affwp_ref ) ) {
+			$_COOKIE['affwp_ref'] = $affiliate_id;
+		}
+	}
+
+	/**
+	 * Set the affwp_ref_visit_id cookie from the visit ID
+	 *
+	 * @access  public
+	 * @since   2.1.17
+	 *
+	 * @param int                    $visit id Visit ID.
+	 * @param \Affiliate_WP_Tracking $tracking Tracking class instance.
+	 */
+	public function set_visit_id( $visit_id, $tracking ) {
+		$affwp_ref_visit_id = ! empty( $_COOKIE['affwp_ref_visit_id'] ) ? $_COOKIE['affwp_ref_visit_id'] : false;
+
+		if ( empty( $affwp_ref_visit_id ) ) {
+			$_COOKIE['affwp_ref_visit_id'] = $visit_id;
+		}
+	}
+
+	/**
+	 * Set the affwp_campaign cookie from the campaign
+	 *
+	 * @access  public
+	 * @since   2.1.17
+	 *
+	 * @param string                 $campaign Campaign.
+	 * @param \Affiliate_WP_Tracking $tracking Tracking class instance.
+	 */
+	public function set_campaign( $campaign, $tracking ) {
+		$affwp_campaign = ! empty( $_COOKIE['affwp_campaign'] ) ? $_COOKIE['affwp_campaign'] : false;
+
+		if ( empty( $affwp_campaign ) ) {
+			$_COOKIE['affwp_campaign'] = $campaign;
 		}
 	}
 

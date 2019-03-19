@@ -35,6 +35,14 @@ final class Affiliate extends Base_Object {
 	public $affiliate_id = 0;
 
 	/**
+	 * REST ID (site:affiliate ID combination).
+	 *
+	 * @since 2.2.2
+	 * @var   string
+	 */
+	public $rest_id = '';
+
+	/**
 	 * Affiliate user ID.
 	 *
 	 * @since 1.9
@@ -240,6 +248,10 @@ final class Affiliate extends Base_Object {
 			$value = floatval( $value );
 		}
 
+		if ( in_array( $field, array( 'rest_id' ) ) ) {
+			$value = sanitize_text_field( $value );
+		}
+
 		return $value;
 	}
 
@@ -302,4 +314,5 @@ final class Affiliate extends Base_Object {
 	public function has_custom_rate() {
 		return empty( $this->rate ) ? false : true;
 	}
+
 }

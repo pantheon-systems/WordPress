@@ -162,6 +162,10 @@ table.affiliates #unpaid {
 	background-color: #fadedc !important;
 }
 
+#affwp-referrals-filter-form select.affwp-referral-type-select {
+	float: none;
+}
+
 .affwp-status.pending i,
 .affwp-status.unpaid i,
 .affwp-status.paid i,
@@ -435,6 +439,16 @@ form .spinner {
 }
 .admin-color-sunrise .affwp-batch-progress div {
 	background: #dd823b;
+}
+.wc-order-preview-affwp-referral {
+    padding: 1em 1.5em;
+    text-align: left;
+    border-top: 1px solid #eee;
+    width: 100%;
+    margin: 0;
+}
+.wc-order-preview-affwp-referral strong {
+	display: block;
 }
 
 /* Media Queries */

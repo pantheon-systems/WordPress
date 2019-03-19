@@ -5,7 +5,7 @@
  * Description: Easily allow your affiliates to share referral URLs generated from the affiliate dashboard
  * Author: AffiliateWP
  * Author URI: https://affiliatewp.com
- * Version: 1.1.5
+ * Version: 1.1.6
  * Text Domain: affwp-affiliate-dashboard-sharing
  * Domain Path: languages
  *
@@ -49,7 +49,7 @@ if ( ! class_exists( 'AffiliateWP_Affiliate_Dashboard_Sharing' ) ) {
 		/**
 		 * Plugin Version
 		 */
-		private static $version = '1.1.5';
+		private static $version = '1.1.6';
 
 		/**
 		 * Main Instance
@@ -449,9 +449,14 @@ if ( ! class_exists( 'AffiliateWP_Affiliate_Dashboard_Sharing' ) ) {
 		 * @return [type] [description]
 		 */
 		public function affiliate_dashboard_js() {
-			global $post;
-
+			
 			if ( ! $this->is_enabled() ) {
+				return;
+			}
+
+			$post = get_post();
+
+			if( ! $post ) {
 				return;
 			}
 

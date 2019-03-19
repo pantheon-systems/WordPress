@@ -238,11 +238,19 @@ class Sub_Commands extends Base {
 	 */
 	public function update( $args, $assoc_args ) {
 		if ( empty( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid payout ID must be supplied to update a payout', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid payout ID must be supplied to update a payout', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		if ( ! $payout = affwp_get_payout( absint( $args[0] ) ) ) {
-			\WP_CLI::error( __( 'A valid payout ID must be supplied to update a payout', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid payout ID must be supplied to update a payout', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		$owner         = Utils\get_flag_value( $assoc_args, 'owner',         0  );
@@ -303,7 +311,11 @@ class Sub_Commands extends Base {
 
 				$data['referrals'] = implode( ',', $referrals );
 			} else {
-				\WP_CLI::error( __( 'All values passed via the --referrals argument are invalid.', 'affiliate-wp' ) );
+				try {
+
+					\WP_CLI::error( __( 'All values passed via the --referrals argument are invalid.', 'affiliate-wp' ) );
+
+				} catch( \Exception $exception ) {}
 			}
 		}
 
@@ -313,7 +325,11 @@ class Sub_Commands extends Base {
 
 				$data['affiliate_id'] = $affiliate->ID;
 			} else {
-				\WP_CLI::error( __( 'The supplied affiliate ID or username is invalid and has been ignored.', 'affiliate-wp' ) );
+				try {
+
+					\WP_CLI::error( __( 'The supplied affiliate ID or username is invalid and has been ignored.', 'affiliate-wp' ) );
+
+				} catch( \Exception $exception ) {}
 			}
 		}
 
@@ -326,7 +342,11 @@ class Sub_Commands extends Base {
 		if ( $updated ) {
 			\WP_CLI::success( sprintf( __( "Payout #%d has been updated successfully.", 'affiliate-wp' ), $payout->ID ) );
 		} else {
-			\WP_CLI::error( sprintf( __( "Payout #%d could not be updated due to an error.", 'affiliate-wp' ), $payout->ID ) );
+			try {
+
+				\WP_CLI::error( sprintf( __( "Payout #%d could not be updated due to an error.", 'affiliate-wp' ), $payout->ID ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -351,11 +371,19 @@ class Sub_Commands extends Base {
 	 */
 	public function delete( $args, $assoc_args ) {
 		if ( empty( $args[0] ) || ! is_numeric( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid payout ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid payout ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		if ( ! $payout = affwp_get_payout( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid payout ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid payout ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		\WP_CLI::confirm( __( 'Are you sure you want to delete this payout?', 'affiliate-wp' ), $assoc_args );
@@ -365,7 +393,11 @@ class Sub_Commands extends Base {
 		if ( $deleted ) {
 			\WP_CLI::success( __( 'The payout has been successfully deleted.', 'affiliate-wp' ) );
 		} else {
-			\WP_CLI::error( __( 'The payout could not be deleted.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The payout could not be deleted.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -496,4 +528,12 @@ class Sub_Commands extends Base {
 
 }
 
-\WP_CLI::add_command( 'affwp payout', 'AffWP\Affiliate\Payout\CLI\Sub_Commands' );
+try {
+
+	\WP_CLI::add_command( 'affwp payout', 'AffWP\Affiliate\Payout\CLI\Sub_Commands' );
+
+} catch( \Exception $exception ) {
+
+	affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+}

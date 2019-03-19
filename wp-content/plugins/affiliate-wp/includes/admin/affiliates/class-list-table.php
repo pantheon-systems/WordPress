@@ -193,7 +193,7 @@ class AffWP_Affiliates_Table extends List_Table {
 	 * @return array Array of all the sortable columns
 	 */
 	public function get_sortable_columns() {
-		return array(
+		$columns = array(
 			'name'            => array( 'name',            false ),
 			'affiliate_id'    => array( 'affiliate_id',    false ),
 			'username'        => array( 'username',        false ),
@@ -205,6 +205,14 @@ class AffWP_Affiliates_Table extends List_Table {
 			'visits'          => array( 'visits',          false ),
 			'status'          => array( 'status',          false )
 		);
+
+		/**
+		 * Filters the affiliates list table sortable columns.
+		 *
+		 * @param array                   $columns          The sortable columns for this list table.
+		 * @param \AffWP_Affiliates_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_affiliate_table_sortable_columns', $columns, $this );
 	}
 
 	/**

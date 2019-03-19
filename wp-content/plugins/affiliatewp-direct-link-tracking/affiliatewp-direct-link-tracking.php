@@ -5,7 +5,7 @@
  * Description: Allow affiliates to link directly to your site, from their site, without the need for an affiliate link
  * Author: AffiliateWP
  * Author URI: https://affiliatewp.com
- * Version: 1.1.2
+ * Version: 1.1.3
  * Text Domain: affiliatewp-direct-link-tracking
  * Domain Path: languages
  *
@@ -97,7 +97,7 @@ if ( ! class_exists( 'AffiliateWP_Direct_Link_Tracking' ) ) {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof AffiliateWP_Direct_Link_Tracking ) ) {
 
 				self::$instance = new AffiliateWP_Direct_Link_Tracking;
-				self::$version  = '1.1.2';
+				self::$version  = '1.1.3';
 
 				self::$instance->setup_constants();
 				self::$instance->load_textdomain();

@@ -205,13 +205,48 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 
 		$this->log( 'Referral ID (' . $referral->ID . ') successfully retrieved during process_ipn()' );
 
+		$payer_email = ! empty( $ipn_data['payer_email'] ) ? sanitize_text_field( $ipn_data['payer_email'] ) : '';
+
+		if ( ! empty( $payer_email ) ) {
+
+			$customer = affwp_get_customer( $payer_email );
+
+			if ( ! $customer ) {
+
+				$first_name = ! empty( $ipn_data['first_name'] ) ? sanitize_text_field( $ipn_data['first_name'] ) : '';
+				$last_name  = ! empty( $ipn_data['last_name'] ) ? sanitize_text_field( $ipn_data['last_name'] ) : '';
+
+				$args = array(
+					'email'        => $payer_email,
+					'first_name'   => $first_name,
+					'last_name'    => $last_name,
+					'affiliate_id' => $affiliate_id,
+					'ip'           => $visit->ip
+				);
+
+				$user = get_user_by( 'email', $payer_email );
+
+				if ( $user ) {
+					$args['user_id'] = $user->ID;
+				}
+
+				affwp_add_customer( $args );
+
+			} else {
+
+				affwp_add_customer_meta( $customer->customer_id, 'affiliate_id', $affiliate_id, true );
+
+			}
+
+		}
+
 		if( 'completed' === strtolower( $ipn_data['payment_status'] ) ) {
 
 			if( 'pending' !== $referral->status ) {
 
 				$this->log( 'Referral has status other than Pending during process_ipn()' );
 
-				die( 'Referral not pending' );
+				return;
 			}
 
 			$visit->set( 'referral_id', $referral->ID, true );
@@ -236,7 +271,7 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 
 					$this->log( 'Referral completed successfully during process_ipn()' );
 
-					die( 'Referral completed successfully' );
+					return;
 
 				} else {
 
@@ -244,13 +279,13 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 
 				}
 
-				die( 'Referral not completed successfully' );
+				return;
 
 			} else {
 
 				$this->log( 'Referral not updated successfully during process_ipn()' );
 
-				die( 'Referral not updated successfully' );
+				return;
 
 			}
 
@@ -263,7 +298,13 @@ class Affiliate_WP_PayPal extends Affiliate_WP_Base {
 				return;
 			}
 
-			$this->reject_referral( $referral->reference );
+			$referral = affiliate_wp()->referrals->get_by( 'reference', $ipn_data['parent_txn_id'] );
+
+			if ( $referral ) {
+
+				$this->reject_referral( $referral->reference );
+
+			}
 
 		} else {
 

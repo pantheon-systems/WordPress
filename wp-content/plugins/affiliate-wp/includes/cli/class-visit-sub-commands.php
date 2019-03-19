@@ -301,10 +301,18 @@ class Sub_Commands extends Base {
 	 */
 	public function delete( $args, $assoc_args ) {
 		if ( empty( $args[0] ) || ! is_numeric( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid visit ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid visit ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		} else {
 			if ( ! $visit = affiliate_wp()->visits->get( $args[0] ) ) {
-				\WP_CLI::error( __( 'A valid visit ID is required to proceed.', 'affiliate-wp' ) );
+				try {
+
+					\WP_CLI::error( __( 'A valid visit ID is required to proceed.', 'affiliate-wp' ) );
+
+				} catch( \Exception $exception ) {}
 			}
 		}
 
@@ -315,7 +323,11 @@ class Sub_Commands extends Base {
 		if ( $deleted ) {
 			\WP_CLI::success( __( 'The visit has been successfully deleted.', 'affiliate-wp' ) );
 		} else {
-			\WP_CLI::error( __( 'The visit could not be deleted.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The visit could not be deleted.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -478,4 +490,12 @@ class Sub_Commands extends Base {
 
 }
 
-\WP_CLI::add_command( 'affwp visit', 'AffWP\Visit\CLI\Sub_Commands' );
+try {
+
+	\WP_CLI::add_command( 'affwp visit', 'AffWP\Visit\CLI\Sub_Commands' );
+
+} catch( \Exception $exception ) {
+
+	affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+}

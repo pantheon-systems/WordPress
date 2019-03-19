@@ -60,7 +60,11 @@ class CSV extends Batch\Export implements Exporter\CSV {
 			return 'done';
 		}
 
-		$this->set_current_count( $current_count + $this->rows );
+		if ( false !== $current_count ) {
+			$this->set_current_count( $current_count + $this->rows );
+		} else {
+			$this->set_current_count( $this->rows );
+		}
 
 		return ++$this->step;
 	}

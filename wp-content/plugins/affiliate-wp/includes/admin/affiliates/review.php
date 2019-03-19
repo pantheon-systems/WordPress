@@ -5,6 +5,7 @@ $name             = affiliate_wp()->affiliates->get_affiliate_name( $affiliate_i
 $user_info        = get_userdata( $affiliate->user_id );
 $user_url         = $user_info->user_url;
 $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method', true );
+$payment_email    = $affiliate->payment_email;
 ?>
 <div class="wrap">
 
@@ -58,6 +59,20 @@ $promotion_method = get_user_meta( $affiliate->user_id, 'affwp_promotion_method'
 				</td>
 
 			</tr>
+
+			<?php if ( $payment_email ) : ?>
+			<tr class="form-row form-required">
+
+				<th scope="row">
+					<?php _e( 'Payment Email', 'affiliate-wp' ); ?>
+				</th>
+
+				<td>
+					<?php echo esc_html( $payment_email ); ?>
+				</td>
+
+			</tr>
+			<?php endif; ?>
 
 			<?php if ( $user_url ) : ?>
 			<tr class="form-row form-required">

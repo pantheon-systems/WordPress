@@ -40,6 +40,14 @@ final class Consumer extends \AffWP\Base_Object {
 	public $user_id = 0;
 
 	/**
+	 * REST ID (ironically unused for Consumers).
+	 *
+	 * @since 2.2.2
+	 * @var   null|string
+	 */
+	public $rest_id;
+
+	/**
 	 * API consumer token.
 	 *
 	 * @access public
@@ -65,6 +73,22 @@ final class Consumer extends \AffWP\Base_Object {
 	 * @var    string
 	 */
 	public $secret_key = '';
+
+	/**
+	 * Consumer status.
+	 *
+	 * @since 2.2.2
+	 * @var   string
+	 */
+	public $status;
+
+	/**
+	 * Date the consumer was created.
+	 *
+	 * @since 2.2.2
+	 * @var   string
+	 */
+	public $date;
 
 	/**
 	 * Token to use for generating cache keys.

@@ -121,3 +121,21 @@ function affwp_register_rest_field( $object_type, $field_name, $args = array() )
 		default : break;
 	}
 }
+
+/**
+ * Validates a rest_id value.
+ *
+ * @since 2.2.2
+ *
+ * @param string $rest_id Potential REST ID to validate.
+ * @return bool True of the rest_id value is syntactically valid, otherwise false.
+ */
+function affwp_validate_rest_id( $rest_id ) {
+	$valid = false;
+
+	if ( false !== strpos( $rest_id, ':' ) ) {
+		$valid = true;
+	}
+
+	return $valid;
+}

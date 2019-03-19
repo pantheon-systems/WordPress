@@ -153,7 +153,11 @@ class AffiliateWP_Direct_Link_Tracking_Frontend {
      */
     public function is_direct_links_tab() {
 
-		global $post;
+		$post = get_post();
+
+		if( ! $post ) {
+			return;
+		}
 
         $affiliate_area = function_exists( 'affwp_get_affiliate_area_page_id' ) ? is_page( affwp_get_affiliate_area_page_id() ) : is_page( affiliate_wp()->settings->get( 'affiliates_page' ) );
 

@@ -1197,6 +1197,9 @@ function affwp_add_affiliate( $data = array() ) {
 		$user_id = absint( $data['user_id'] );
 	}
 
+	// Enable referral notifications by default for new users.
+	update_user_meta( $user_id, 'affwp_referral_notifications', true );
+
 	$args = array(
 		'user_id'         => $user_id,
 		'status'          => $status,
@@ -1254,6 +1257,12 @@ function affwp_update_affiliate( $data = array() ) {
 		$timestamp = strtotime( $data['date_registered'] ) - affiliate_wp()->utils->wp_offset;
 
 		$args['date_registered'] = gmdate( 'Y-m-d H:i:s', $timestamp );
+	}
+
+	if ( ! empty( $data['rest_id'] ) ) {
+		if ( affwp_validate_rest_id( $data['rest_id'] ) ) {
+			$args['rest_id'] = sanitize_text_field( $data['rest_id'] );
+		}
 	}
 
 	/**

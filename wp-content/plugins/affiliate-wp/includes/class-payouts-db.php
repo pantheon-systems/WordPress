@@ -501,6 +501,10 @@ class Affiliate_WP_Payouts_DB extends Affiliate_WP_DB {
 			$where = $this->prepare_date_query( $where, $args['date'] );
 		}
 
+		// Select valid payouts only
+		$where .= empty( $where ) ? "WHERE " : "AND ";
+		$where .= "`$this->primary_key` > 0";
+
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
 
 		// Non-column orderby exception;

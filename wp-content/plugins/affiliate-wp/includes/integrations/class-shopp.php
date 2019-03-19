@@ -28,9 +28,9 @@ class Affiliate_WP_Shopp extends Affiliate_WP_Base {
 
 			$this->order = apply_filters( 'affwp_get_shopp_order', shopp_order( $order_id->order ) );
 
-			$customer_email = $this->order->email;
+			$this->email = $this->order->email;
 
-			if ( $this->is_affiliate_email( $customer_email ) ) {
+			if ( $this->is_affiliate_email( $this->email ) ) {
 			
 				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
@@ -75,7 +75,12 @@ class Affiliate_WP_Shopp extends Affiliate_WP_Base {
 			$Note->type           = 'order_note';
 			$Note->value          = new stdClass();
 			$Note->value->author  = $user->ID;
-			$Note->value->message = sprintf( __( 'Referral #%d for %s recorded for %s', 'affiliate-wp' ), $referral->referral_id, $amount, $name );
+			$Note->value->message = sprintf( __( 'Referral #%1$d for %2$s recorded for %3$s (ID: %4$d).', 'affiliate-wp' ),
+				$referral->referral_id,
+				$amount,
+				$name,
+				$referral->affiliate_id
+			);
 			$Note->save();
 		}
 

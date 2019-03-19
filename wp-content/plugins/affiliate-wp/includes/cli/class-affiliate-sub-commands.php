@@ -136,18 +136,44 @@ class Sub_Commands extends Base {
 
 		// Check validity of username or ID, retrieve the user object.
 		if ( empty( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid username must be specified as the first argument.', 'affiliate-wp' ) );
+
+			try {
+
+				\WP_CLI::error( __( 'A valid username must be specified as the first argument.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {
+
+				affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+			}
+
 		} else {
 			$field = is_numeric( $args[0] ) ? 'id' : 'login';
 
 			if ( ! $user = get_user_by( $field, $args[0] ) ) {
-				\WP_CLI::error( sprintf( __( 'A user with the ID or username "%s" does not exist. See wp help user create for registering new users.', 'affiliate-wp' ), $args[0] ) );
+				try {
+
+					\WP_CLI::error( sprintf( __( 'A user with the ID or username "%s" does not exist. See wp help user create for registering new users.', 'affiliate-wp' ), $args[0] ) );
+
+				} catch( \Exception $exception ) {
+
+					affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+				}
 			}
 		}
 
 		// Bail if this user already has an affiliate account.
 		if ( affiliate_wp()->affiliates->get_by( 'user_id', $user->ID ) ) {
-			\WP_CLI::error( __( 'An affiliate already exists for this user account.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'An affiliate already exists for this user account.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {
+
+				affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+			}
 		}
 
 		// Grab flag values.
@@ -166,7 +192,15 @@ class Sub_Commands extends Base {
 		if ( $affiliate ) {
 			\WP_CLI::success( sprintf( __( 'An affiliate with the username "%s" has been created.', 'affiliate-wp' ), $user->user_login ) );
  		} else {
-			\WP_CLI::error( __( 'The affiliate account could not be added.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The affiliate account could not be added.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {
+
+				affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+			}
 		}
 	}
 
@@ -212,11 +246,27 @@ class Sub_Commands extends Base {
 	 */
 	public function update( $args, $assoc_args ) {
 		if ( empty( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid affiliate username or ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid affiliate username or ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {
+
+				affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+			}
 		}
 
 		if ( ! $affiliate = affwp_get_affiliate( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid affiliate username or ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid affiliate username or ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {
+
+				affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+			}
 		}
 
 		$data['affiliate_id']  = $affiliate->affiliate_id;
@@ -230,7 +280,15 @@ class Sub_Commands extends Base {
 		if ( $update ) {
 			\WP_CLI::success( __( 'The affiliate was updated successfully.', 'affiliate-wp' ) );
 		} else {
-			\WP_CLI::error( __( 'The affiliate account could not be updated.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The affiliate account could not be updated.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {
+
+				affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+			}
 		}
 	}
 
@@ -505,4 +563,12 @@ class Sub_Commands extends Base {
 	}
 }
 
-\WP_CLI::add_command( 'affwp affiliate', 'AffWP\Affiliate\CLI\Sub_Commands' );
+try {
+
+	\WP_CLI::add_command( 'affwp affiliate', 'AffWP\Affiliate\CLI\Sub_Commands' );
+
+} catch( \Exception $exception ) {
+
+	affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+}

@@ -12,7 +12,8 @@ class Affiliate_WP_Shortcodes {
 		add_shortcode( 'affiliate_content',           array( $this, 'affiliate_content'      ) );
 		add_shortcode( 'non_affiliate_content',       array( $this, 'non_affiliate_content'  ) );
 		add_shortcode( 'affiliate_creative',          array( $this, 'affiliate_creative'     ) );
-		add_shortcode( 'affiliate_creatives',         array( $this, 'affiliate_creatives'     ) );
+		add_shortcode( 'affiliate_creatives',         array( $this, 'affiliate_creatives'    ) );
+		add_shortcode( 'opt_in',                      array( $this, 'opt_in_form'            ) );
 
 	}
 
@@ -126,7 +127,6 @@ class Affiliate_WP_Shortcodes {
 
 	}
 
-
 	/**
 	 *  Renders the affiliate registration form
 	 *
@@ -197,7 +197,8 @@ class Affiliate_WP_Shortcodes {
 				'reference'   => '',
 				'context'     => '',
 				'campaign'    => '',
-				'status'      => ''
+				'status'      => '',
+				'type'        => 'sale',
 			),
 			$atts,
 			'affwp_conversion_script'
@@ -348,6 +349,45 @@ class Affiliate_WP_Shortcodes {
 
 		return do_shortcode( $content );
 	}
+
+	/**
+	 *  Renders the opt-in
+	 *
+	 *  @since 2.2
+	 *  @return string
+	 */
+	public function opt_in_form( $atts, $content = null ) {
+
+		$atts = shortcode_atts(
+			array(
+				'redirect' => '',
+			),
+			$atts,
+			'opt_in'
+		);
+
+		$redirect = ! empty( $atts['redirect'] ) ? $atts['redirect'] : '';
+
+		// redirect added to shortcode
+		if ( $redirect ) {
+
+			if ( 'current' === $redirect ) {
+				// redirect to current page
+				$redirect = '';
+			} elseif ( 'referrer' === $redirect && wp_get_referer() ) {
+				// redirect to the page before landing on login page
+				$redirect = wp_get_referer();
+			} else {
+				// redirect to the location entered in the shortcode
+				$redirect = $redirect;
+			}
+
+		}
+
+		return affiliate_wp()->integrations->opt_in->form( $redirect );
+
+	}
+
 
 }
 new Affiliate_WP_Shortcodes;

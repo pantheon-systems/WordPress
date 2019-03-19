@@ -91,7 +91,7 @@ class Affiliate_WP_Tracking {
 		) {
 			$this->print_header_script();
 		} else {
-			add_action( 'wp_footer', 'header_scripts' );
+			add_action( 'wp_footer', array( $this, 'header_scripts' ) );
 		}
 	}
 
@@ -146,7 +146,8 @@ class Affiliate_WP_Tracking {
 			'reference'   => '',
 			'context'     => '',
 			'campaign'    => '',
-			'status'      => ''
+			'status'      => '',
+			'type'        => 'sale',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -179,6 +180,16 @@ class Affiliate_WP_Tracking {
 
 		$md5 = md5( $args['amount'] . $args['description'] . $args['reference'] . $args['context'] . $args['status'] . $args['campaign'] );
 
+		/**
+		 * Fires before the JavaScript that maybe fires off a conversion creation is triggered via the [affiliate_conversion_script] shortcode.
+		 *
+		 * @since 2.2.4
+		 *
+		 * @param array  $args The arguments passed to the track_conversion() method.
+		 * @param string $md5  The md5 hash of the amount, description, reference, context, status and campaign arguments.
+		 */
+		do_action( 'affwp_before_conversion_tracking_script', $args, $md5 );
+
 ?>
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
@@ -201,6 +212,7 @@ class Affiliate_WP_Tracking {
 						context     : '<?php echo $args["context"]; ?>',
 						reference   : '<?php echo $args["reference"]; ?>',
 						campaign    : '<?php echo $args["campaign"]; ?>',
+						type        : '<?php echo $args["type"]; ?>',
 						md5         : '<?php echo $md5; ?>'
 					},
 					url: affwp_scripts.ajaxurl,
@@ -417,6 +429,7 @@ class Affiliate_WP_Tracking {
 			$context     = sanitize_text_field( $_POST['context'] );
 			$campaign    = sanitize_text_field( $_POST['campaign'] );
 			$reference   = sanitize_text_field( $_POST['reference'] );
+			$type        = sanitize_text_field( $_POST['type'] );
 
 			// Create a new referral
 			$referral_id = affiliate_wp()->referrals->add( apply_filters( 'affwp_insert_pending_referral', array(
@@ -427,6 +440,7 @@ class Affiliate_WP_Tracking {
 					'context'      => $context,
 					'campaign'     => $campaign,
 					'reference'    => $reference,
+					'type'         => $type,
 					'visit_id'     => $visit_id,
 			), $amount, $reference, $description, $affiliate_id, $visit_id, array(), $context ) );
 
@@ -673,6 +687,16 @@ class Affiliate_WP_Tracking {
 	 */
 	public function set_visit_id( $visit_id = 0 ) {
 		setcookie( 'affwp_ref_visit_id', $visit_id, strtotime( '+' . $this->get_expiration_time() . ' days' ), COOKIEPATH, $this->get_cookie_domain() );
+
+		/**
+		 * Fires immediately after the affwp_ref_visit_id cookie is set
+		 *
+		 * @since 2.1.17
+		 *
+		 * @param int                    $visit_id Visit ID.
+		 * @param \Affiliate_WP_Tracking $this     Tracking class instance.
+		 */
+		do_action( 'affwp_tracking_set_visit_id', $visit_id, $this );
 	}
 
 	/**
@@ -756,6 +780,16 @@ class Affiliate_WP_Tracking {
 	 */
 	public function set_affiliate_id( $affiliate_id = 0 ) {
 		setcookie( 'affwp_ref', $affiliate_id, strtotime( '+' . $this->get_expiration_time() . ' days' ), COOKIEPATH, $this->get_cookie_domain() );
+
+		/**
+		 * Fires immediately after the affwp_ref cookie is set
+		 *
+		 * @since 2.1.17
+		 *
+		 * @param int                    $affiliate_id Affiliate ID.
+		 * @param \Affiliate_WP_Tracking $this         Tracking class instance.
+		 */
+		do_action( 'affwp_tracking_set_affiliate_id', $affiliate_id, $this );
 	}
 
 	/**
@@ -765,6 +799,16 @@ class Affiliate_WP_Tracking {
 	 */
 	public function set_campaign( $campaign = '' ) {
 		setcookie( 'affwp_campaign', $campaign, strtotime( '+' . $this->get_expiration_time() . ' days' ), COOKIEPATH, $this->get_cookie_domain() );
+
+		/**
+		 * Fires immediately after the affwp_campaign cookie is set
+		 *
+		 * @since 2.1.17
+		 *
+		 * @param string                 $campaign Campaign.
+		 * @param \Affiliate_WP_Tracking $this     Tracking class instance.
+		 */
+		do_action( 'affwp_tracking_set_campaign', $campaign, $this );
 	}
 
 	/**

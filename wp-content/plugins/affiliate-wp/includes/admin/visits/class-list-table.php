@@ -113,9 +113,9 @@ class AffWP_Visits_Table extends List_Table {
 		/**
 		 * Filters the visits list table columns.
 		 *
-		 * @param function                $prepared_columns Prepared columns.
-		 * @param array                   $columns          The columns for this list table.
-		 * @param \AffWP_Affiliates_Table $this             List table instance.
+		 * @param function            $prepared_columns Prepared columns.
+		 * @param array               $columns          The columns for this list table.
+		 * @param \AffWP_Visits_Table $this             List table instance.
 		 */
 		return apply_filters( 'affwp_visit_table_columns', $this->prepare_columns( $columns ), $columns, $this );
 	}
@@ -128,11 +128,19 @@ class AffWP_Visits_Table extends List_Table {
 	 * @return array Array of all the sortable columns
 	 */
 	public function get_sortable_columns() {
-		return array(
+		$columns = array(
 			'visit_id'  => array( 'visit_id', false ),
 			'date'      => array( 'date', false ),
 			'converted' => array( 'referral_id', false )
 		);
+
+		/**
+		 * Filters the visits list table sortable columns.
+		 *
+		 * @param array               $columns          The sortable columns for this list table.
+		 * @param \AffWP_Visits_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_visit_table_sortable_columns', $columns, $this );
 	}
 
 	/**
@@ -328,6 +336,8 @@ class AffWP_Visits_Table extends List_Table {
 
 		}
 
+		$url = '';
+
 		if ( strpos( $search, 'referral:' ) !== false ) {
 			$referral_id = absint( trim( str_replace( 'referral:', '', $search ) ) );
 			$search      = '';
@@ -339,7 +349,11 @@ class AffWP_Visits_Table extends List_Table {
 			$search   = '';
 		} elseif ( strpos( $search, 'context:' ) !== false ) {
 			$context = trim( str_replace( 'context:', '', $search ) );
-			$search   = '';
+			$search  = '';
+		} elseif ( strpos( $search, 'url:' ) !== false ) {
+			$url    = trim( str_replace( 'url:', '', $search ) );
+			$url    = rtrim( $url, '/' ) . '/';
+			$search = '';
 		}
 
 		$per_page = $this->get_items_per_page( 'affwp_edit_visits_per_page', $this->per_page );
@@ -355,6 +369,7 @@ class AffWP_Visits_Table extends List_Table {
 			'orderby'         => $orderby,
 			'order'           => $order,
 			'search'          => $search,
+			'url'             => $url,
 			'referral_status' => $status
 		) );
 

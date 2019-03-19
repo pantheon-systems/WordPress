@@ -3,6 +3,14 @@
 class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 
 	/**
+	 * The current form being submitted
+	 *
+	 * @access  public
+	 * @since   2.2
+	*/
+	public $form;
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -127,6 +135,7 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	 */
 	public function add_pending_referral( $args = array(), $form ) {
 
+		$this->form   = $form;
 		$affiliate_id = $this->affiliate_id;
 		$entry_id     = $args['entry_id'];
 
@@ -141,18 +150,21 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 		}
 
 		// get customer email
-		$customer_email = $this->get_field_value( 'email', $form );
+		$this->email = $this->get_field_value( 'email', $form );
 
 		// Customers cannot refer themselves
-		if ( $this->is_affiliate_email( $customer_email, $affiliate_id ) ) {
+		if ( $this->is_affiliate_email( $this->email, $affiliate_id ) ) {
 
 			$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
 			return false;
 		}
 
+		// Get the referral type we are creating
+		$this->referral_type = ! empty( $form['affwp_referral_type'] ) ? $form['affwp_referral_type'] : 'sale'; 
+
 		// Referral total
-		$referral_total = $args['referral_total'];
+		$referral_total = floatval( $args['referral_total'] );
 
 		// Use form title as description
 		$description = $form['name'];
@@ -198,8 +210,12 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 			// Get the newly created referral based on the process ID
 			$existing = affiliate_wp()->referrals->get_by( 'reference', $process_id, $this->context );
 
-			// Swap our the processs ID for the entry ID
-			affiliate_wp()->referrals->update( $existing->referral_id, array( 'reference' => $entry_id ) );
+			if( $existing ) {
+
+				// Swap our the processs ID for the entry ID
+				affiliate_wp()->referrals->update( $existing->referral_id, array( 'reference' => $entry_id ) );
+
+			}
 
 		}
 
@@ -237,6 +253,8 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 	 * @return void
 	 */
 	public function add_settings( $element ) {
+		
+		$selected = isset( $element['affwp_referral_type'] ) ? $element['affwp_referral_type'] : '';
 		?>
 
 		<div class="caldera-config-group">
@@ -250,11 +268,44 @@ class Affiliate_WP_Caldera_Forms extends Affiliate_WP_Base {
 						<?php esc_html_e( 'Enable affiliate referral creation for this form', 'affiliate-wp' ); ?>
 					</label>
 				</div>
+				<div class="caldera-config-field">
+					<label for="affwp-referral-type">
+						<select name="config[affwp_referral_type]" id="affwp-referral-type" class="field-config">';
+							<?php foreach( affiliate_wp()->referrals->types_registry->get_types() as $type_id => $type ) : ?>
+								<option value="<?php echo esc_attr( $type_id ); ?>"<?php selected( $type_id, $selected ); ?>><?php echo esc_html( $type['label'] ); ?></option>
+							<?php endforeach; ?>
+						</select>
+						<?php esc_html_e( 'Select the referral type for this form.', 'affiliate-wp' ); ?>
+					</label>
+				</div>
 			</fieldset>
 		</div>
 
 		<?php
 	}
+
+	/**
+	 * Retrieves the customer details for an entry
+	 *
+	 * @since 2.2
+	 *
+	 * @param int $entry_id The ID of the entry to retrieve customer details for.
+	 * @return array An array of the customer details
+	 */
+	public function get_customer( $entry_id = 0 ) {
+
+		$customer = array();
+
+		if ( class_exists( 'Caldera_Forms' ) ) {
+
+			$customer          = parent::get_customer( $entry_id );
+			$customer['email'] = $this->get_field_value( 'email', $this->form );
+
+		}
+
+		return $customer;
+	}
+
 
 }
 

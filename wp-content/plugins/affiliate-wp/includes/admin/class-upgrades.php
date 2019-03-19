@@ -147,6 +147,22 @@ class Affiliate_WP_Upgrades {
 			$this->v2131_upgrade();
 		}
 
+		if ( version_compare( $this->version, '2.2', '<' ) ) {
+			$this->v22_upgrade();
+		}
+
+		if ( version_compare( $this->version, '2.2.2', '<' ) ) {
+			$this->v222_upgrade();
+		}
+
+		if ( version_compare( $this->version, '2.2.8', '<' ) ) {
+			$this->v228_upgrade();
+		}
+
+		if ( version_compare( $this->version, '2.2.9', '<' ) ) {
+			$this->v229_upgrade();
+		}
+
 		// Inconsistency between current and saved version.
 		if ( version_compare( $this->version, AFFILIATEWP_VERSION, '<>' ) ) {
 			$this->upgraded = true;
@@ -179,6 +195,15 @@ class Affiliate_WP_Upgrades {
 			)
 		) );
 
+		$this->add_routine( 'upgrade_v22_create_customer_records', array(
+			'version' => '2.2',
+			'compare' => '<',
+			'batch_process' => array(
+				'id'    => 'create-customers-upgrade',
+				'class' => 'AffWP\Utils\Batch_Process\Upgrade_Create_Customers',
+				'file'  => AFFILIATEWP_PLUGIN_DIR . 'includes/admin/tools/upgrades/class-batch-upgrade-create-customers.php'
+			)
+		) );
 	}
 
 	/**
@@ -680,4 +705,225 @@ class Affiliate_WP_Upgrades {
 
 		$this->upgraded = true;
 	}
+
+	/**
+	 * Performs database upgrades for version 2.2.
+	 *
+	 * @access private
+	 * @since  2.2
+	 */
+	private function v22_upgrade() {
+		
+		global $wpdb;
+
+		// Add type column to referrals database.
+		@affiliate_wp()->referrals->create_table();
+		$table = affiliate_wp()->referrals->table_name;
+		$wpdb->query( "UPDATE $table SET type = 'sale' where type IS NULL;" );
+		@affiliate_wp()->utils->log( 'Upgrade: Referrals table has been upgraded for 2.2.' );
+
+		// New 'customer_id' column for referrals.
+		@affiliate_wp()->referrals->create_table();
+		@affiliate_wp()->capabilities->add_caps();
+		@affiliate_wp()->customers->create_table();
+		affiliate_wp()->utils->log( 'Upgrade: The customers table has been created.' );
+		@affiliate_wp()->customer_meta->create_table();
+		affiliate_wp()->utils->log( 'Upgrade: The customer meta table has been created.' );
+
+		// Update email settings
+		$registration_notifications   = 'registration_notifications';
+		$admin_referral_notifications = 'admin_referral_notifications';
+		$disable_all_emails           = 'disable_all_emails';
+
+		/**
+		 * Enable all email notifications by default.
+		 * Fresh installations of AffiliateWP and upgrades should enable all notifications.
+		 */
+		$email_notifications = affiliate_wp()->settings->email_notifications( true );
+
+		/**
+		 * If "Disable All Emails" checkbox option was previously enabled,
+		 * clear out the email notification array, essentially disabling all notifications.
+		 */
+		if ( affiliate_wp()->settings->get( $disable_all_emails ) ) {
+			$email_notifications = array();
+		}
+
+		// Enable the new admin affiliate registration email if it was previously enabled.
+		if ( affiliate_wp()->settings->get( $registration_notifications ) ) {
+			$email_notifications['admin_affiliate_registration_email'] = __( 'Notify site admin when a new affiliate has registered', 'affiliate-wp' );
+		} else {
+			// Uncheck the new admin affiliate registration email if it was previously unchecked.
+			unset( $email_notifications['admin_affiliate_registration_email'] );
+		}
+
+		// Enable the new admin referral notification email if it was previously enabled.
+		if ( affiliate_wp()->settings->get( $admin_referral_notifications ) ) {
+			$email_notifications['admin_new_referral_email'] = __( 'Notify site admin when new referrals are earned', 'affiliate-wp' );
+		} else {
+			// Uncheck the new admin referral notification email if it was previously unchecked.
+			unset( $email_notifications['admin_new_referral_email'] );
+		}
+
+		// Make the required changes to the Email Notifications.
+		@affiliate_wp()->settings->set( array(
+			'email_notifications' => $email_notifications
+		), $save = true );
+
+		// Get all settings.
+		$settings = affiliate_wp()->settings->get_all();
+
+		// Remove old "Disable All Emails" setting.
+		if ( isset( $settings[$disable_all_emails] ) ) {
+			unset( $settings[$disable_all_emails] );
+		}
+
+		// Remove old "Notify Admin" setting.
+		if ( isset( $settings[$registration_notifications] ) ) {
+			unset( $settings[$registration_notifications] );
+		}
+
+		// Remove old "Notify Admin of Referrals" setting.
+		if ( isset( $settings[$admin_referral_notifications] ) ) {
+			unset( $settings[$admin_referral_notifications] );
+		}
+
+		// Update affwp_settings option.
+		update_option( 'affwp_settings', $settings );
+
+		$this->upgraded = true;
+
+	}
+
+	/**
+	 * Performs database upgrades for version 2.2.2.
+	 *
+	 * @since 2.2.2
+	 */
+	private function v222_upgrade() {
+		foreach ( $this->get_sites_for_upgrade() as $site_id ) {
+
+			if( is_multisite() ) {
+				switch_to_blog( $site_id );
+			}
+
+			affiliate_wp()->affiliates->create_table();
+			@affiliate_wp()->utils->log( sprintf( 'Upgrade: The rest_id column has been added to the Affiliates table for site #%1$s.', $site_id ) );
+
+			affiliate_wp()->referrals->create_table();
+			@affiliate_wp()->utils->log( sprintf( 'Upgrade: The rest_id column has been added to the Referrals table for site #%1$s.', $site_id ) );
+
+			affiliate_wp()->REST->consumers->create_table();
+			@affiliate_wp()->utils->log( sprintf( 'Upgrade: The status and date columns have been added to the REST Consumers table for site #%1$s.', $site_id ) );
+
+			affiliate_wp()->visits->create_table();
+			@affiliate_wp()->utils->log( sprintf( 'Upgrade: The rest_id column has been added to the Visits table for site #%1$s.', $site_id ) );
+
+			// Populate the date and status columns for existing consumers.
+			$consumers = affiliate_wp()->REST->consumers->get_consumers( array(
+				'number' => -1
+			) );
+
+			if ( ! empty( $consumers ) ) {
+				$date = get_post_field( 'post_date', affwp_get_affiliate_area_page_id() );
+
+				if ( empty( $date ) ) {
+					$date = gmdate( 'Y-m-d H:i:s' );
+				} else {
+					$date = gmdate( 'Y-m-d H:i:s', strtotime( $date ) );
+				}
+
+				foreach ( $consumers as $consumer ) {
+
+					affiliate_wp()->REST->consumers->update( $consumer->ID, array(
+						'date'   => $date,
+						'status' => 'active'
+					) );
+				}
+			}
+
+			if( is_multisite() ) {
+				restore_current_blog();
+			}
+		}
+
+		$this->upgraded = true;
+	}
+
+	/**
+	 * Performs database upgrades for version 2.2.8.
+	 *
+	 * @since 2.2.8
+	 */
+	private function v228_upgrade() {
+		affiliate_wp()->referrals->create_table();
+		@affiliate_wp()->utils->log( 'Upgrade: The length of the campaign column in the Referrals table has been changed to 50 characters.' );
+
+		$this->upgraded = true;
+	}
+
+	/**
+	 * Performs database upgrades for version 2.2.9.
+	 *
+	 * @since 2.2.9
+	 */
+	private function v229_upgrade() {
+		affiliate_wp()->referrals->create_table();
+		@affiliate_wp()->utils->log( 'Upgrade: The parent_id column has been added to the Referrals table.' );
+
+		$this->upgraded = true;
+	}
+
+	/**
+	 * Retrieves the site IDs array.
+	 *
+	 * Most commonly used for db schema changes in networks (but also works for single site).
+	 *
+	 * @return array Site IDs in the netework (single or multisite).
+	 */
+	private function get_sites_for_upgrade() {
+		if ( is_multisite() ) {
+
+			if ( true === version_compare( $GLOBALS['wp_version'], '4.6', '<' ) ) {
+
+				$sites = wp_list_pluck( 'blog_id', wp_get_sites() );
+
+			} else {
+
+				$sites = get_sites( array( 'fields' => 'ids' ) );
+
+			}
+
+		} else {
+
+			$sites = array( get_current_blog_id() );
+
+		}
+
+		$plugin = AFFILIATEWP_PLUGIN_DIR_NAME . '/affiliate-wp.php';
+
+		// Only return sites AffWP is active on.
+		foreach ( $sites as $index => $site_id ) {
+
+
+			if( is_multisite() ) {
+
+				switch_to_blog( $site_id );
+				
+			}
+
+			if ( ! in_array( $plugin, get_option( 'active_plugins', array() ) ) ) {
+				unset( $sites[ $index ] );
+			}
+
+			if( is_multisite() ) {
+
+				restore_current_blog();
+
+			}
+
+		}
+		return $sites;
+	}
+
 }

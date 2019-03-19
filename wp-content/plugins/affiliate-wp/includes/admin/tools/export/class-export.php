@@ -100,7 +100,7 @@ class Affiliate_WP_Export {
 		/**
 		 * Filters the available CSV export columns for this export.
 		 *
-		 * This dynamic filter is appended with he export type string, for example:
+		 * This dynamic filter is appended with the export type string, for example:
 		 *
 		 *     `affwp_export_csv_cols_affiliates`
 		 *

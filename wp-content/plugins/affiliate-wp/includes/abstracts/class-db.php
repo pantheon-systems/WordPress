@@ -166,10 +166,11 @@ abstract class Affiliate_WP_DB {
 	public function get_results( $clauses, $args, $callback = '' ) {
 		global $wpdb;
 
+
 		if ( true === $clauses['count'] ) {
 
 			$results = $wpdb->get_var(
-				"SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$clauses['where']};"
+				"SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$clauses['join']} {$clauses['where']};"
 			);
 
 			$results = absint( $results );
@@ -312,7 +313,7 @@ abstract class Affiliate_WP_DB {
 
 		$object = $this->get_core_object( $row_id, $this->query_object_type );
 
-		if ( ! $object ) {
+		if ( ! $object || empty( $data ) ) {
 			return false;
 		}
 
@@ -340,6 +341,10 @@ abstract class Affiliate_WP_DB {
 		// Reorder $column_formats to match the order of columns given in $data
 		$data_keys = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
+
+		if ( empty( $data ) ) {
+			return false;
+		}
 
 		if ( false === $wpdb->update( $this->table_name, $data, array( $where => $object->{$this->primary_key} ), $column_formats ) ) {
 			return false;

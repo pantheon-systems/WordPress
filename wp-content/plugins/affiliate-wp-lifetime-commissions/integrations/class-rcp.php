@@ -8,49 +8,39 @@ class Affiliate_WP_Lifetime_Commissions_RCP extends Affiliate_WP_Lifetime_Commis
 	 * @access  public
 	 * @since   1.0
 	*/
-    public function init() {
-        $this->context = 'rcp';
-        $this->table_name = function_exists( 'rcp_get_payments_db_name' ) ? rcp_get_payments_db_name() : '';
-    }
+	public function init() {
+		$this->context = 'rcp';
+		$this->table_name = function_exists( 'rcp_get_payments_db_name' ) ? rcp_get_payments_db_name() : '';
+	}
 
-    /**
-     * Retrieves the user's email or ID by payment ID
-     *
-     * @param string $get what to retrieve
-     * @param int $reference Payment reference number
-     *
-     * @since 1.1
-     */
-    public function get( $get = '', $reference = 0, $context ) {
+	/**
+	 * Retrieve the email address of a customer from the subsccription key
+	 *
+	 * @access  public
+	 * @since   2.0
+	 * @return  string
+	 */
+	public function get_email( $reference = 0 ) {
 
-        if ( ! $get ) {
-            return false;
-        }
+		global $wpdb;
 
-        global $wpdb;
+		$email   = '';
+		$user_id = $wpdb->get_var( "SELECT user_id FROM $this->table_name WHERE subscription_key = '$reference' LIMIT 1;" );
 
-        $user_id = $wpdb->get_var( "SELECT user_id FROM $this->table_name WHERE subscription_key = '$reference' LIMIT 1;" );
+		if ( $user_id ) {
 
-        if ( 'email' === $get ) {
+			$user_info = get_userdata( $user_id );
+			$email     = $user_info->user_email;
 
-            if ( $user_id ) {
+		} else if ( ! empty( $_POST['rcp_user_email'] ) ) {
 
-                $user_info = get_userdata( $user_id );
-                $email     = $user_info->user_email;
+			$email = sanitize_text_field( $_POST['rcp_user_email'] );
+		
+		}
 
-            } else {
-                $email = $_POST['rcp_user_email'];
-            }
+		return $email;
 
-            return $email;
-
-        } elseif ( 'user_id' === $get ) {
-            return $user_id;
-        }
-
-        return false;
-
-    }
+	}
 
 }
 new Affiliate_WP_Lifetime_Commissions_RCP;

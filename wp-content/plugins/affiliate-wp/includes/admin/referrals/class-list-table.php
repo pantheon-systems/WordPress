@@ -165,10 +165,12 @@ class AffWP_Referrals_Table extends List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'          => '<input type="checkbox" />',
+			'referral_id' => __( 'Referral ID', 'affiliate-wp' ),
 			'amount'      => __( 'Amount', 'affiliate-wp' ),
 			'affiliate'   => __( 'Affiliate', 'affiliate-wp' ),
 			'reference'   => __( 'Reference', 'affiliate-wp' ),
 			'description' => __( 'Description', 'affiliate-wp' ),
+			'type'        => __( 'Type', 'affiliate-wp' ),
 			'date'        => __( 'Date', 'affiliate-wp' ),
 			'actions'     => __( 'Actions', 'affiliate-wp' ),
 			'status'      => __( 'Status', 'affiliate-wp' ),
@@ -192,12 +194,22 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return array Array of all the sortable columns
 	 */
 	public function get_sortable_columns() {
-		return array(
-			'amount'    => array( 'amount', false ),
-			'affiliate' => array( 'affiliate_id', false ),
-			'date'      => array( 'date', false ),
-			'status'    => array( 'status', false ),
+		$columns = array(
+			'referral_id' => array( 'referral_id', false ),
+			'amount'      => array( 'amount', false ),
+			'affiliate'   => array( 'affiliate_id', false ),
+			'type'        => array( 'type', false ),
+			'date'        => array( 'date', false ),
+			'status'      => array( 'status', false ),
 		);
+
+		/**
+		 * Filters the referrals list table sortable columns.
+		 *
+		 * @param array                  $columns          The sortable columns for this list table.
+		 * @param \AffWP_Referrals_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_referral_table_sortable_columns', $columns, $this );
 	}
 
 	/**
@@ -215,11 +227,12 @@ class AffWP_Referrals_Table extends List_Table {
 		switch( $column_name ) {
 
 			case 'date' :
-				$value = $referral->date_i18n();
+				$value = $referral ? $referral->date_i18n() : '—';
 				break;
 
 			case 'description' :
-				$value = wp_trim_words( $referral->description, 10 );
+				$value       = $referral ? wp_trim_words( $referral->description, 10 ) : '—';
+				$description = $referral ? $referral->description : '—';
 
 				/**
 				 * Filters the referral description column data in the referrals list table.
@@ -227,11 +240,24 @@ class AffWP_Referrals_Table extends List_Table {
 				 * @param string $value       Data shown in the Description column.
 				 * @param array  $description The referral description.
 				 */
-				$value = (string) apply_filters( 'affwp_referral_description_column', $value, $referral->description );
+				$value = (string) apply_filters( 'affwp_referral_description_column', $value, $description );
+				break;
+
+			case 'type' :
+				$value = $referral ? $referral->type() : '—';
+				$type  = $referral ? $referral->type : '—';
+
+				/**
+				 * Filters the referral type column data in the referrals list table.
+				 *
+				 * @param string $value Data shown in the type column.
+				 * @param array  $type  The referral type.
+				 */
+				$value = (string) apply_filters( 'affwp_referral_type_column', $value, $type );
 				break;
 
 			default:
-				$value = isset( $referral->$column_name ) ? $referral->$column_name : '';
+				$value = isset( $referral->$column_name ) ? $referral->$column_name : '—';
 				break;
 		}
 
@@ -259,6 +285,10 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return string Displays a checkbox
 	 */
 	public function column_cb( $referral ) {
+		if ( ! $referral ) {
+			return '';
+		}
+
 		return '<input type="checkbox" name="referral_id[]" value="' . absint( $referral->referral_id ) . '" />';
 	}
 
@@ -272,6 +302,10 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return string Displays the referral amount
 	 */
 	public function column_amount( $referral ) {
+		if ( ! $referral ) {
+			return affwp_currency_filter( affwp_format_amount( 0.00 ) );
+		}
+
 		$value = affwp_currency_filter( affwp_format_amount( $referral->amount ) );
 
 		/**
@@ -293,6 +327,10 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return string Displays the referral status
 	 */
 	public function column_status( $referral ) {
+		if ( ! $referral ) {
+			return '—';
+		}
+
 		$value ='<span class="affwp-status ' . $referral->status . '"><i></i>' . affwp_get_referral_status_label( $referral ) . '</span>';
 
 		/**
@@ -314,6 +352,9 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return string The affiliate
 	 */
 	public function column_affiliate( $referral ) {
+		if ( ! $referral ) {
+			return '—';
+		}
 
 		$value = affwp_admin_link(
 			'referrals',
@@ -351,6 +392,9 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return string The reference.
 	 */
 	public function column_reference( $referral ) {
+		if ( ! $referral ) {
+			return '—';
+		}
 
 		/**
 		 * Filters the referral reference column value in the referrals list table.
@@ -379,6 +423,9 @@ class AffWP_Referrals_Table extends List_Table {
 	 * @return string The actions HTML.
 	 */
 	public function column_actions( $referral ) {
+		if ( ! $referral ) {
+			return '—';
+		}
 
 		$row_actions = array();
 
@@ -395,14 +442,14 @@ class AffWP_Referrals_Table extends List_Table {
 					'action' => 'mark_as_unpaid'
 				) ),
 				array(
-					'nonce' => 'referral-nonce',
-					'class' => 'mark-as-unpaid'
+					'nonce'    => 'referral-nonce',
+					'class'    => 'mark-as-unpaid'
 				)
 			);
 
 		} else {
 
-			if( 'unpaid' == $referral->status ) {
+			if( 'unpaid' == $referral->status && current_user_can( 'manage_payouts' ) ) {
 
 				// Mark as Paid.
 				$row_actions['mark-as-paid'] = $this->get_row_action_link(
@@ -411,8 +458,8 @@ class AffWP_Referrals_Table extends List_Table {
 						'action' => 'mark_as_paid'
 					) ),
 					array(
-						'nonce' => 'referral-nonce',
-						'class' => 'mark-as-paid'
+						'nonce'    => 'referral-nonce',
+						'class'    => 'mark-as-paid'
 					)
 				);
 
@@ -427,8 +474,8 @@ class AffWP_Referrals_Table extends List_Table {
 						'action' => 'accept'
 					) ),
 					array(
-						'nonce' => 'referral-nonce',
-						'class' => 'accept'
+						'nonce'    => 'referral-nonce',
+						'class'    => 'accept'
 					)
 				);
 
@@ -443,8 +490,8 @@ class AffWP_Referrals_Table extends List_Table {
 						'action' => 'reject'
 					) ),
 					array(
-						'nonce' => 'referral-nonce',
-						'class' => 'reject'
+						'nonce'    => 'referral-nonce',
+						'class'    => 'reject'
 					)
 				);
 			}
@@ -457,7 +504,10 @@ class AffWP_Referrals_Table extends List_Table {
 			array_merge( $base_query_args, array(
 				'action' => 'edit_referral'
 			) ),
-			array( 'class' => 'edit' )
+			array(
+				'base_uri' => affwp_admin_url( 'referrals' ),
+				'class'    => 'edit'
+			)
 		);
 
 		// Delete.
@@ -467,8 +517,9 @@ class AffWP_Referrals_Table extends List_Table {
 				'affwp_action' => 'process_delete_referral'
 			) ),
 			array(
-				'nonce' => 'affwp_delete_referral_nonce',
-				'class' => 'delete'
+				'base_uri' => affwp_admin_url( 'referrals' ),
+				'nonce'    => 'affwp_delete_referral_nonce',
+				'class'    => 'delete'
 			)
 		);
 		$row_actions['delete'] = '<span class="trash">' . $row_actions['delete'] . '</span>';
@@ -568,12 +619,21 @@ class AffWP_Referrals_Table extends List_Table {
 				<input type="text" name="affiliate_id" id="user_name" class="affwp-user-search" value="<?php echo esc_attr( $affiliate_name ); ?>" data-affwp-status="any" autocomplete="off" placeholder="<?php _e( 'Affiliate name', 'affiliate-wp' ); ?>" />
 			</span>
 			<?php
-			$from = ! empty( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from'] : '';
-			$to   = ! empty( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']   : '';
+			$from     = ! empty( $_REQUEST['filter_from'] ) ? $_REQUEST['filter_from'] : '';
+			$to       = ! empty( $_REQUEST['filter_to'] )   ? $_REQUEST['filter_to']   : '';
+			$set_type = ! empty( $_REQUEST['type'] )        ? $_REQUEST['type']        : '';
 
 			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_from' placeholder='" . __( 'From - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . esc_attr( $from ) . "'/>";
 			echo "<input type='text' class='affwp-datepicker' autocomplete='off' name='filter_to' placeholder='" . __( 'To - mm/dd/yyyy', 'affiliate-wp' ) . "' value='" . esc_attr( $to ) . "'/>&nbsp;";
 
+			?>
+			<select name="type" class="affwp-referral-type-select">
+				<option value=""><?php _e( 'All Types', 'affiliate-wp' ); ?></option>
+				<?php foreach( affiliate_wp()->referrals->types_registry->get_types() as $type_id => $type ) : ?>
+					<option value="<?php echo esc_attr( $type_id ); ?>"<?php selected( $type_id, $set_type ); ?>><?php echo esc_html( $type['label'] ); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<?php
 			/**
 			 * Fires in the admin referrals screen, inside the search filters form area, prior to the submit button.
 			 */
@@ -601,6 +661,10 @@ class AffWP_Referrals_Table extends List_Table {
 			'mark_as_unpaid' => __( 'Mark as Unpaid', 'affiliate-wp' ),
 			'delete'         => __( 'Delete', 'affiliate-wp' ),
 		);
+
+		if ( ! current_user_can( 'manage_payouts' ) ) {
+			unset( $actions['mark_as_paid'] );
+		}
 
 		/**
 		 * Filters the bulk actions array for the referrals list table.
@@ -654,7 +718,8 @@ class AffWP_Referrals_Table extends List_Table {
 			}
 
 			if ( 'mark_as_paid' === $this->current_action() ) {
-				if ( $referral = affwp_get_referral( $id ) ) {
+				$referral = affwp_get_referral( $id );
+				if ( $referral && current_user_can( 'manage_payouts' ) ) {
 					affwp_add_payout( array(
 						'affiliate_id'  => $referral->affiliate_id,
 						'referrals'     => $id,
@@ -741,6 +806,7 @@ class AffWP_Referrals_Table extends List_Table {
 		$reference   = isset( $_GET['reference'] )    ? $_GET['reference']       : '';
 		$context     = isset( $_GET['context'] )      ? $_GET['context']         : '';
 		$campaign    = isset( $_GET['campaign'] )     ? $_GET['campaign']        : '';
+		$type        = isset( $_GET['type'] )         ? $_GET['type']            : '';
 		$from        = isset( $_GET['filter_from'] )  ? $_GET['filter_from']     : '';
 		$to          = isset( $_GET['filter_to'] )    ? $_GET['filter_to']       : '';
 		$order       = isset( $_GET['order'] )        ? $_GET['order']           : 'DESC';
@@ -802,6 +868,7 @@ class AffWP_Referrals_Table extends List_Table {
 			'reference'    => $reference,
 			'context'      => $context,
 			'campaign'     => $campaign,
+			'type'         => $type,
 			'amount'       => $amount,
 			'description'  => $description,
 			'date'         => $date,

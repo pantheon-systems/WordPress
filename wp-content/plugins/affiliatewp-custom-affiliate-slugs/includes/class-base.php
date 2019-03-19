@@ -723,10 +723,14 @@ class AffiliateWP_Custom_Affiliates_Slugs_Base {
 	 */
 	public function scripts_profile_settings() {
 
-		global $post;
-
 		// return if custom slugs are not allowed
 		if ( ! $this->allow_affiliate_slugs( affwp_get_affiliate_id() ) ) {
+			return;
+		}
+
+		$post = get_post();
+
+		if( ! $post ) {
 			return;
 		}
 

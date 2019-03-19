@@ -5,7 +5,7 @@
  * Description: Tiered affiliate rates for AffiliateWP
  * Author: AffiliateWP
  * Author URI: http://affiliatewp.com
- * Version: 1.1
+ * Version: 1.1.2
  * Text Domain: affiliate-wp-tiered
  * Domain Path: languages
  *
@@ -24,7 +24,7 @@
  * @package AffiliateWP Tiered Rates
  * @category Core
  * @author Pippin Williamson
- * @version 1.1
+ * @version 1.1.2
  */
 
 // Exit if accessed directly
@@ -59,7 +59,7 @@ final class AffiliateWP_Tiered_Rates {
 			self::$instance = new AffiliateWP_Tiered_Rates;
 
 			self::$plugin_dir = plugin_dir_path( __FILE__ );
-			self::$version    = '1.1';
+			self::$version    = '1.1.2';
 
 			self::$instance->load_textdomain();
 			self::$instance->includes();
@@ -159,6 +159,8 @@ final class AffiliateWP_Tiered_Rates {
 
 		if( is_admin() ) {
 			self::$instance->updater();
+
+			add_filter( 'affwp_affiliate_table_rate', array( $this, 'affiliate_table_rate' ), 10, 2 );
 		}
 
 		add_filter( 'affwp_tiered_rates', array( $this, 'remove_disabled_rates' ) );
@@ -214,9 +216,11 @@ final class AffiliateWP_Tiered_Rates {
 	 *
 	 * @access public
 	 * @since 1.0
-	 * @return array
+	 * @return int
 	 */
 	public function get_affiliate_rate( $rate, $affiliate_id, $type ) {
+
+		$has_tiered_rate = false;
 
 		$rates          = $this->get_rates();
 		$affiliate_rate = affiliate_wp()->affiliates->get_column( 'rate', $affiliate_id );
@@ -234,6 +238,87 @@ final class AffiliateWP_Tiered_Rates {
 			} else {
 				$earnings  = affwp_get_affiliate_earnings( $affiliate_id, false );
 				$referrals = affwp_get_affiliate_referral_count( $affiliate_id );
+			}
+
+			// Loop through the rates to see which applies to this affiliate
+			foreach( $rates as $tiered_rate ) {
+
+				if( empty( $tiered_rate['threshold'] ) || empty( $tiered_rate['rate'] ) ) {
+					continue;
+				}
+
+				if( 'earnings' == $tiered_rate['type'] ) {
+
+					if( $earnings >= affwp_sanitize_amount( $tiered_rate['threshold'] ) ) {
+
+						$rate            = $tiered_rate['rate'];
+						$has_tiered_rate = true;
+						break;
+
+					}
+
+				} else {
+
+					if( $referrals >= $tiered_rate['threshold'] ) {
+
+						$rate            = $tiered_rate['rate'];
+						$has_tiered_rate = true;
+						break;
+
+					}
+
+				}
+
+			}
+
+			if ( $has_tiered_rate && 'percentage' == $type ) {
+				// Sanitize the rate and ensure it's in the proper format
+				if ( $rate > 0 ) {
+					$rate = $rate / 100;
+				}
+			}
+		
+		}
+
+		return $rate;
+	}
+
+	/**
+	 * Filters the rate for an affiliate in the affiliates list table.
+	 *
+	 * @since  1.1.2
+	 * @access public
+	 *
+	 * @param int              $rate      The current affiliate rate.
+	 * @param \AffWP\Affiliate $affiliate The current affiliate object.
+	 *
+	 * @return int The filtered affiliate rate
+	 */
+	public function affiliate_table_rate( $rate, $affiliate ) {
+
+		// Get the default rate set instead of the passed rate.
+		$rate = affiliate_wp()->settings->get( 'referral_rate', 20 );
+		$rate = affwp_abs_number_round( $rate );
+
+		$rates          = $this->get_rates();
+		$affiliate_rate = affiliate_wp()->affiliates->get_column( 'rate', $affiliate->affiliate_id );
+
+		// Get the referral rate type.
+		$type = affwp_get_affiliate_rate_type( $affiliate->affiliate_id );
+
+		$tiers_expire = affiliate_wp()->settings->get( 'rate-expiration', null );
+		$tiers_expire = isset( $tiers_expire );
+
+		if ( ! empty( $rates ) && empty( $affiliate_rate ) ) {
+			// Start with highest tiers
+			$rates = array_reverse( $rates );
+
+			if ( $tiers_expire ) {
+				$earnings  = affiliate_wp()->referrals->paid_earnings( 'month', $affiliate->affiliate_id, false );
+				$referrals = $this->paid_count( 'month', $affiliate->affiliate_id );
+			} else {
+				$earnings  = affwp_get_affiliate_earnings( $affiliate->affiliate_id, false );
+				$referrals = affwp_get_affiliate_referral_count( $affiliate->affiliate_id );
 			}
 
 			// Loop through the rates to see which applies to this affiliate
@@ -264,16 +349,22 @@ final class AffiliateWP_Tiered_Rates {
 
 			}
 
-			if ( 'percentage' == $type ) {
-				// Sanitize the rate and ensure it's in the proper format
-				if ( $rate > 1 ) {
-					$rate = $rate / 100;
-				}
-			}
-		
+		} else {
+
+			$affiliate_rate = affwp_abs_number_round( $affiliate_rate );
+
+			$rate = ( null !== $affiliate_rate ) ? $affiliate_rate : $rate;
+
 		}
 
+		// Format percentage rates.
+		$rate = ( 'percentage' === $type ) ? $rate / 100 : $rate;
+
+		// Format the rate based on the type.
+		$rate = affwp_format_rate( $rate, $type );
+
 		return $rate;
+
 	}
 
 	public function updater() {

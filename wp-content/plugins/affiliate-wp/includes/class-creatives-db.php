@@ -176,6 +176,10 @@ class Affiliate_WP_Creatives_DB extends Affiliate_WP_DB {
 			$where = $this->prepare_date_query( $where, $args['date'] );
 		}
 
+		// Select valid creatives only
+		$where .= empty( $where ) ? "WHERE " : "AND ";
+		$where .= "`$this->primary_key` > 0";
+
 		// There can be only two orders.
 		if ( 'ASC' === strtoupper( $args['order'] ) ) {
 			$order = 'ASC';

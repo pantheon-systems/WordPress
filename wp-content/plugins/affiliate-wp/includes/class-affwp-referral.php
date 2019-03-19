@@ -50,6 +50,32 @@ final class Referral extends Base_Object {
 	public $visit_id = 0;
 
 	/**
+	 * REST ID (site:referral ID combination).
+	 *
+	 * @since 2.2.2
+	 * @var   string
+	 */
+	public $rest_id = '';
+
+	/**
+	 * Customer ID.
+	 *
+	 * @since 2.2
+	 * @access public
+	 * @var int
+	 */
+	public $customer_id = 0;
+
+	/**
+	 * Parent ID.
+	 *
+	 * @since 2.2.9
+	 * @access public
+	 * @var int
+	 */
+	public $parent_id = 0;
+
+	/**
 	 * Referral description.
 	 *
 	 * @since 1.9
@@ -140,6 +166,15 @@ final class Referral extends Base_Object {
 	public $date;
 
 	/**
+	 * Referral type.
+	 *
+	 * @since 2.2
+	 * @access public
+	 * @var string
+	 */
+	public $type;
+
+	/**
 	 * Token to use for generating cache keys.
 	 *
 	 * @since 1.9
@@ -186,12 +221,37 @@ final class Referral extends Base_Object {
 	 * @return mixed Sanitized field value.
 	 */
 	public static function sanitize_field( $field, $value ) {
-		if ( in_array( $field, array( 'referral_id', 'affiliate_id', 'visit_id', 'ID' ) ) ) {
+		if ( in_array( $field, array( 'referral_id', 'affiliate_id', 'visit_id', 'ID', 'parent_id' ) ) ) {
 			$value = (int) $value;
 		}
 
 		if ( 'custom' === $field ) {
 			$value = affwp_maybe_unserialize( affwp_maybe_unserialize( $value ) );
+		}
+
+		if ( in_array( $field, array( 'rest_id' ) ) ) {
+			$value = sanitize_text_field( $value );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Retrieves the referral type name
+	 *
+	 * @since 2.2
+	 * @access public
+	 * @static
+	 *
+	 * @return string Nice name of the referral type.
+	 */
+	public function type() {
+
+		$value = empty( $this->type ) ? 'sale' : $this->type;
+		$type  = affiliate_wp()->referrals->types_registry->get_type( $value );
+
+		if( $type ) {
+			$value = $type['label'];
 		}
 
 		return $value;

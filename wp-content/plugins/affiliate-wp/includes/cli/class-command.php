@@ -21,7 +21,11 @@ class Command extends \WP_CLI_Command {
 	 */
 	public function details( $_, $assoc_args ) {
 		if ( ! class_exists( 'Affiliate_WP' ) ) {
-			\WP_CLI::error( __( 'AffiliateWP is not installed', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'AffiliateWP is not installed', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		// Version.
@@ -63,7 +67,7 @@ class Command extends \WP_CLI_Command {
 			 *
 			 * Remember, it's backward logic.
 			 */
-			if ( ! affiliate_wp()->settings->get( 'disable_all_emails' ) ) {
+			if ( ! affiliate_wp()->emails->is_email_disabled() ) {	
 				$notifications_disabled = '%G' . _x( 'Enabled', 'emails disabled', 'affiliate-wp' ) . '%N';
 			} else {
 				$notifications_disabled = '%R' . _x( 'Disabled', 'emails disabled', 'affiliate-wp' ) . '%N';

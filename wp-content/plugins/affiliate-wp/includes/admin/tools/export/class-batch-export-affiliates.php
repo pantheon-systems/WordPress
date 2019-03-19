@@ -144,7 +144,8 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 
 			foreach( $affiliates as $affiliate ) {
 
-				$data[] = array(
+				/** This filter is documented in includes/admin/tools/export/class-export-affiliates.php */
+				$affiliate_data = apply_filters( 'affwp_affiliate_export_get_data_line', array(
 					'affiliate_id'    => $affiliate->ID,
 					'email'           => affwp_get_affiliate_email( $affiliate->ID ),
 					'first_name'      => affwp_get_affiliate_first_name( $affiliate->ID ),
@@ -160,8 +161,14 @@ class Export_Affiliates extends Batch\Export\CSV implements Batch\With_PreFetch 
 					'conversion_rate' => affwp_get_affiliate_conversion_rate( $affiliate->ID ),
 					'status'          => $affiliate->status,
 					'date_registered' => $affiliate->date_i18n( 'datetime' ),
-				);
+				), $affiliate );
 
+				// Add slashing.
+				$data[] = array_map( function( $column ) {
+					return addslashes( preg_replace( "/\"/","'", $column ) );
+				}, $affiliate_data );
+
+				unset( $affiliate_data );
 			}
 
 		}

@@ -22,7 +22,7 @@
 		do_action( 'affwp_before_creatives' );
 		?>
 
-		<?php echo affiliate_wp()->creative->affiliate_creatives( $args ); ?>
+		<?php echo $creatives; ?>
 
 		<?php if ( $pages > 1 ) : ?>
 

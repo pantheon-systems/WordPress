@@ -173,8 +173,10 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				$affiliate_id = $order->coupon_affiliate_id;
 			}
 
+			$this->email = $order->user_data->user_email;
+
 			// Customers cannot refer themselves.
-			if ( $this->is_affiliate_email( $order->user_data->user_email, $affiliate_id ) ) {
+			if ( $this->is_affiliate_email( $this->email, $affiliate_id ) ) {
 
 				$this->log( __( 'Referral not created because affiliate\'s own account was used.', 'affiliate-wp' ) );
 
@@ -299,8 +301,10 @@ class Affiliate_WP_LifterLMS extends Affiliate_WP_Base {
 				$affiliate_id = $coupon_affiliate_id;
 			}
 
+			$this->email = $order->get( 'billing_email' );
+
 			// Customers cannot refer themselves.
-			if ( $this->is_affiliate_email( $order->get( 'billing_email', $affiliate_id ) ) ) {
+			if ( $this->is_affiliate_email( $this->email, $affiliate_id ) ) {
 
 				$this->log( __( 'Referral not created because affiliate\'s own account was used.', 'affiliate-wp' ) );
 

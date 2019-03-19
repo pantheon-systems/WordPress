@@ -104,6 +104,7 @@ class Affiliate_WP_MarketPress extends Affiliate_WP_Base {
 
 			}
 
+			$this->email = $customer_email;
 			$description = array();
 
 		    foreach( $items as $item ) {

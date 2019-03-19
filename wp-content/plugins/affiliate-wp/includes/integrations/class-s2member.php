@@ -16,10 +16,14 @@ class Affiliate_WP_S2Member extends Affiliate_WP_Base {
 		add_action( 'init', array( $this, 'revoke_referral_on_refund' ) );
 
 		add_action( 'plugins_loaded', array( $this, 's2member_notify_url' ) );
-		add_action('ws_plugin__s2member_before_sc_paypal_button_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
-		add_action('ws_plugin__s2member_pro_before_sc_stripe_form_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
-		add_action('ws_plugin__s2member_pro_before_sc_authnet_form_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
-		add_action('ws_plugin__s2member_pro_before_sc_paypal_form_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
+		add_action( 'ws_plugin__s2member_before_sc_paypal_button_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
+		add_action( 'ws_plugin__s2member_pro_before_sc_stripe_form_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
+		add_action( 'ws_plugin__s2member_pro_before_sc_authnet_form_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
+		add_action( 'ws_plugin__s2member_pro_before_sc_paypal_form_after_shortcode_atts', array( $this, 's2member_set_referral_variable' ) );
+
+		add_action( 'affwp_tracking_set_visit_id', array( $this, 'set_visit_id' ), 10, 2 );
+		add_action( 'affwp_tracking_set_affiliate_id', array( $this, 'set_affiliate_id' ), 10, 2 );
+		add_action( 'affwp_tracking_set_campaign', array( $this, 'set_campaign' ), 10, 2 );
 	}
 
 	/**
@@ -157,10 +161,10 @@ class Affiliate_WP_S2Member extends Affiliate_WP_Base {
 
 		if ( affiliate_wp()->tracking->is_valid_affiliate( $args['affiliate_id'] ) ) {
 
-			$user           = get_userdata( $args['user_id'] );
-			$customer_email = $user->user_email;
+			$user        = get_userdata( $args['user_id'] );
+			$this->email = $user->user_email;
 
-			if ( $this->is_affiliate_email( $customer_email ) ) {
+			if ( $this->is_affiliate_email( $this->email ) ) {
 
 				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 
@@ -200,6 +204,57 @@ class Affiliate_WP_S2Member extends Affiliate_WP_Base {
 
 		}
     }
+
+	/**
+	 * Set the affwp_ref cookie from the affiliate ID
+	 *
+	 * @access  public
+	 * @since   2.1.17
+	 *
+	 * @param int                    $affiliate_id Affiliate ID.
+	 * @param \Affiliate_WP_Tracking $tracking     Tracking class instance.
+	 */
+	public function set_affiliate_id( $affiliate_id, $tracking ) {
+		$affwp_ref = ! empty( $_COOKIE['affwp_ref'] ) ? $_COOKIE['affwp_ref'] : false;
+
+		if ( empty( $affwp_ref ) ) {
+			$_COOKIE['affwp_ref'] = $affiliate_id;
+		}
+	}
+
+	/**
+	 * Set the affwp_ref_visit_id cookie from the visit ID
+	 *
+	 * @access  public
+	 * @since   2.1.17
+	 *
+	 * @param int                    $visit id Visit ID.
+	 * @param \Affiliate_WP_Tracking $tracking Tracking class instance.
+	 */
+	public function set_visit_id( $visit_id, $tracking ) {
+		$affwp_ref_visit_id = ! empty( $_COOKIE['affwp_ref_visit_id'] ) ? $_COOKIE['affwp_ref_visit_id'] : false;
+
+		if ( empty( $affwp_ref_visit_id ) ) {
+			$_COOKIE['affwp_ref_visit_id'] = $visit_id;
+		}
+	}
+
+	/**
+	 * Set the affwp_campaign cookie from the campaign
+	 *
+	 * @access  public
+	 * @since   2.1.17
+	 *
+	 * @param string                 $campaign Campaign.
+	 * @param \Affiliate_WP_Tracking $tracking Tracking class instance.
+	 */
+	public function set_campaign( $campaign, $tracking ) {
+		$affwp_campaign = ! empty( $_COOKIE['affwp_campaign'] ) ? $_COOKIE['affwp_campaign'] : false;
+
+		if ( empty( $affwp_campaign ) ) {
+			$_COOKIE['affwp_campaign'] = $campaign;
+		}
+	}
 
 }
 

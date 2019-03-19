@@ -15,6 +15,8 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 		add_action( 'rcp_form_processing', array( $this, 'add_pending_referral' ), 10, 3 );
 		add_action( 'rcp_insert_payment', array( $this, 'mark_referral_complete' ), 10, 3 );
 		add_action( 'rcp_delete_payment', array( $this, 'revoke_referral_on_delete' ), 10 );
+		add_action( 'rcp_update_payment_status_refunded', array( $this, 'revoke_referral_refunded_payment' ), 10 );
+		add_action( 'rcp_update_payment_status_abandoned', array( $this, 'revoke_referral_abandoned_payment' ), 10 );
 
 		add_filter( 'affwp_referral_reference_column', array( $this, 'reference_link' ), 10, 2 );
 
@@ -68,7 +70,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 			}
 
-			$price = rcp_get_registration()->get_total( true, false );
+			$price = rcp_get_registration()->get_total( true, true );
 
 		} else {
 
@@ -85,7 +87,6 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 			$affiliate_id  = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->usermeta WHERE meta_key = %s", 'affwp_discount_rcp_' . $discount_obj->id ) );
 			$aff_user_id   = affwp_get_affiliate_user_id( $affiliate_id );
 			$discount_aff  = get_user_meta( $aff_user_id, 'affwp_discount_rcp_' . $discount_obj->id, true );
-			$visit_id      = affiliate_wp()->tracking->get_visit_id();
 
 			if( $discount_aff && affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
 
@@ -93,23 +94,15 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 				$this->affiliate_id = $affiliate_id;
 
-				$amount = $this->calculate_referral_amount( $price, $key, absint( $_POST['rcp_level'] ) );
+				$subscription_level = $rcp_levels_db->get_level( $subscription_id );
 
-				if( 0 == $amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
-
-					$this->log( 'Referral not created due to 0.00 amount.' );
-
-					return false; // Ignore a zero amount referral
+				if ( ! empty( $subscription_level->trial_duration ) && ! $member->has_trialed() ) {
+					$total = 0;
+				} else {
+					$total = $this->calculate_referral_amount( $price, $key, absint( $subscription_level ) );
 				}
 
-				$referral_id = affiliate_wp()->referrals->add( apply_filters( 'affwp_insert_pending_referral', array(
-					'amount'       => $amount,
-					'reference'    => $subscription_key,
-					'description'  => $subscription,
-					'affiliate_id' => $this->affiliate_id,
-					'context'      => $this->context,
-					'campaign'     => affiliate_wp()->tracking->get_campaign(),
-				), $amount, $subscription_key, $subscription, $this->affiliate_id, $visit_id, array(), $this->context ) );
+				$this->insert_pending_referral( $total, $key, $subscription );
 
 			}
 
@@ -125,9 +118,9 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 				return; // Customers cannot refer themselves
 			}
-			
+
 			$subscription_level = $rcp_levels_db->get_level( $subscription_id );
-			
+
 			if ( ! empty( $subscription_level->trial_duration ) && ! $member->has_trialed() ) {
 				$total = 0;
 			} else {
@@ -156,8 +149,62 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 		}
 
-		return apply_filters( 'affwp_get_product_rate', $rate, $level_id, $args, $this->affiliate_id, $this->context );
+		$rate = apply_filters( 'affwp_get_product_rate', $rate, $level_id, $args, $this->affiliate_id, $this->context );
 
+		$rate = affwp_sanitize_referral_rate( $rate );
+
+		return $rate;
+
+	}
+
+	/**
+	 * Retrieves the customer details for a specific subscription key
+	 *
+	 * @since 2.2
+	 *
+	 * @param int $subscription_key The subscription key to retrieve customer details for.
+	 * @return array An array of the customer details
+	*/
+	public function get_customer( $subscription_key = 0 ) {
+
+		global $wpdb;
+
+		if( ! empty( $subscription_key ) ) {
+
+			$rcp_payments_db_name = rcp_get_payments_db_name();
+
+			$user_id = $wpdb->get_var( $wpdb->prepare( "SELECT user_id FROM $rcp_payments_db_name WHERE subscription_key = '%s' LIMIT 1;", $subscription_key ) );
+
+			if( $user_id ) {
+
+				$user = get_userdata( $user_id );
+
+				$customer = array(
+					'first_name'   => $user ? $user->first_name : '',
+					'last_name'    => $user ? $user->last_name : '',
+					'email'        => $user ? $user->user_email : '',
+					'user_id'      => $user_id,
+					'affiliate_id' => $this->affiliate_id
+				);
+
+			}
+
+		}
+
+		if( empty( $customer ) ) {
+
+			$customer = array(
+				'first_name'   => is_user_logged_in() ? wp_get_current_user()->first_name : '',
+				'last_name'    => is_user_logged_in() ? wp_get_current_user()->last_name : '',
+				'email'        => is_user_logged_in() ? wp_get_current_user()->user_email : '',
+				'user_id'      => get_current_user_id(),
+				'ip'           => affiliate_wp()->tracking->get_ip(),
+				'affiliate_id' => $this->affiliate_id
+			);
+
+		}
+
+		return $customer;
 	}
 
 	/**
@@ -184,10 +231,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 			return;
 		}
 
-		$payments = new RCP_Payments;
-		$payment  = $payments->get_payment( $payment_id );
-		$this->reject_referral( $payment->subscription_key );
-
+		$this->revoke_referral( $payment_id );
 	}
 
 	/**
@@ -433,6 +477,46 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 		}
 
+	}
+
+
+	/**
+	 * Revokes a referral when the associated payment is refunded.
+	 *
+	 * @since 2.1.16
+	 *
+	 * @param int $payment_id The payment ID.
+	 */
+	public function revoke_referral_refunded_payment( $payment_id ) {
+
+		if( ! affiliate_wp()->settings->get( 'revoke_on_refund' ) ) {
+			return;
+		}
+
+		$this->revoke_referral( $payment_id );
+	}
+
+	/**
+	 * Revokes a referral when the payment is abandoned.
+	 *
+	 * @since 2.1.16
+	 *
+	 * @param int $payment_id The payment ID.
+	 */
+	public function revoke_referral_abandoned_payment( $payment_id ) {
+		$this->revoke_referral( $payment_id );
+	}
+
+	/**
+	 * Revokes the referral for the specified payment.
+	 *
+	 * @since 2.1.16
+	 * @param int $payment_id The payment ID.
+	 */
+	private function revoke_referral( $payment_id ) {
+		$payments = new RCP_Payments;
+		$payment  = $payments->get_payment( $payment_id );
+		$this->reject_referral( $payment->subscription_key );
 	}
 
 }

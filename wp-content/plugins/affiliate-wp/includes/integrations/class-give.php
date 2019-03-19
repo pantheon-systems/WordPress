@@ -63,7 +63,6 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 
 		// Get referral total
 		$referral_total = $this->get_referral_total( $payment_id, $affiliate_id );
-		$referral_total = affwp_calc_referral_amount( $referral_total, $affiliate_id, $payment_id, $rate, 0 );
 
 		// Get referral description
 		$desc = $this->get_referral_description( $payment_id );
@@ -260,6 +259,41 @@ class Affiliate_WP_Give extends Affiliate_WP_Base {
 
 		return $settings;
 	}
+
+	/**
+	 * Retrieves the customer details for a donation.
+	 *
+	 * @since 2.2
+	 *
+	 * @param int $payment_id The ID of the payment to retrieve customer details for.
+	 * @return array An array of the customer details
+	*/
+	public function get_customer( $payment_id = 0 ) {
+
+		$customer = array();
+
+		if ( class_exists( 'Give_Donor' ) ) {
+
+			$donor        = new Give_Donor( give_get_payment_donor_id( $payment_id ) );
+			$names        = explode( ' ', $donor->name );
+			$first_name   = $names[0];
+			$last_name    = '';
+			if( ! empty( $names[1] ) ) {
+				unset( $names[0] );
+				$last_name = implode( ' ', $names );
+			}
+
+			$customer['user_id']    = $donor->user_id;
+			$customer['email']      = $donor->email;
+			$customer['first_name'] = $first_name;
+			$customer['last_name']  = $last_name;
+			$customer['ip']         = give_get_payment_user_ip( $payment_id );
+
+		}
+
+		return $customer;
+	}
+
 
 }
 

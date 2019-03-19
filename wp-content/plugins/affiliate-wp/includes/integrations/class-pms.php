@@ -27,6 +27,9 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
         add_action( 'pms_payment_updated', array( $this, 'complete_pending_referral_on_payment_complete' ), 10, 3 );
         add_action( 'pms_payment_updated', array( $this, 'reject_referral_on_payment_refunded' ), 10, 3 );
 
+        // Add referral for a free membership plan.
+        add_action( 'pms_after_checkout_is_processed', array( $this, 'add_referral_for_free_membership' ), 10, 2 );
+
     }
 
     /**
@@ -151,9 +154,12 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
     public function add_pending_referral_on_register( $payment_data ) {
 
         // Allow referrals only on register subscription
-        $allowed_form_locations = array( 'register', 'register_email_confirmation' );
+        $allowed_form_locations = array( 'register', 'register_email_confirmation', 'new_subscription', 'renew_subscription', 'upgrade_subscription' );
 
         if ( ! in_array( $payment_data['form_location'], $allowed_form_locations ) ) {
+
+            $this->log( 'PMS: Referral not created because the used form, ' . $payment_data['form_location'] . ', is not one of the allowed form locations' );
+
             return;
         }
 
@@ -164,25 +170,31 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
          */
         if ( ! empty( $payment_data['discount_code'] ) ) {
 
+            $this->log( 'PMS: Discount code used, determining if it is an affiliate discount code' );
+
             $discount = pms_get_discount_by_code( $payment_data['discount_code'] );
 
             if ( $discount ) {
+
+	            // Set base amount as the discounted value
+	            $base_amount = $payment_data['amount'];
 
                 $affiliate_id = get_post_meta( $discount->id, '_affwp_pms_affiliate_id', true );
 
                 if ( ! empty( $affiliate_id ) ) {
 
+	                $this->log( 'PMS: Discount code used that belongs to affiliate ID ' . $affiliate_id );
+
                     if ( ! affiliate_wp()->tracking->is_valid_affiliate( $affiliate_id ) ) {
 
-						$this->log( 'Referral not created because affiliate is invalid.' );
+                        $this->log( 'PMS: Referral not created because affiliate is invalid.' );
 
                     } else {
 
                         $this->affiliate_id = $affiliate_id;
                         $affiliate_discount = true;
 
-                        // Set base amount as the discounted value
-                        $base_amount = $payment_data['amount'];
+                        $this->log( 'PMS: Discount code used that belongs to affiliate ID ' . $affiliate_id . ' will be used to generate referral based on amount ' . $base_amount );
 
                     }
 
@@ -194,6 +206,7 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
 
         // Do nothing if we have no referral and no affiliate on discount
         if ( ! $this->was_referred() && ! $affiliate_discount ) {
+            $this->log( 'PMS: Referral creation stopped because customer was not referred and no affiliate discount was detected' );
             return;
         }
 
@@ -204,7 +217,7 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
              */
             if ( $this->is_affiliate_email( $payment_data['user_data']['user_id'] ) ) {
 
-				$this->log( 'Referral not created because affiliate\'s own account was used.' );
+				$this->log( 'PMS: Referral not created because affiliate\'s own account was used.' );
 
                 return;
             }
@@ -212,23 +225,108 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
         }
 
         // Set base amount for referral
-        if ( !isset( $base_amount ) ) {
-            $base_amount = $payment_data['user_data']['subscription']->price;
+        if ( ! isset( $base_amount ) ) {
+            $base_amount = $payment_data['amount'];
         }
 
         // If the base amount is zero and it's set to ignore zero amounts, exit
         if ( 0 == $base_amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
 
-			$this->log( 'Referral not created due to 0.00 amount.' );
+            $this->log( 'PMS: Referral not created due to 0.00 amount.' );
 
             return;
         }
 
+        if ( isset( $payment_data['payment_id'] ) ) {
+        	$payment_id = $payment_data['payment_id'];
+        } else {
+	        $payment_id = $payment_data['user_data']['user_id'] . '|' . $payment_data['subscription_data']['subscription_plan_id'];
+        }
+
         // Calculate the referral amount
-        $referral_amount = $this->calculate_referral_amount( $base_amount, $payment_data['payment_id'], $payment_data['user_data']['subscription']->id, $this->affiliate_id );
+        $referral_amount = $this->calculate_referral_amount( $base_amount, $payment_id, $payment_data['user_data']['subscription']->id, $this->affiliate_id );
+
+		$this->log( 'PMS: Referral calculated for affiliate ID ' . $this->affiliate_id . ' in the amount of ' . $referral_amount );
 
         // Insert the pending referral
-        $this->insert_pending_referral( $referral_amount, $payment_data['payment_id'], $payment_data['user_data']['subscription']->name );
+        $this->insert_pending_referral( $referral_amount, $payment_id, $payment_data['user_data']['subscription']->name );
+
+	    // If the base amount is zero complete the referral.
+        if ( 0 == $base_amount ) {
+	        $this->complete_referral( $payment_id );
+        }
+    }
+
+	/**
+	 * Adds a referral when registering to a free subscription plan.
+	 * This handles only first time subscriptions, on the register form.
+	 *
+	 * @access public
+	 * @since  2.2.12
+	 * @param  array $subscription
+	 * @param  string $form_location
+	 */
+    public function add_referral_for_free_membership( $subscription, $form_location ) {
+
+	    $subscription_id = $subscription->subscription_plan_id;
+
+	    $subscription_plan = pms_get_subscription_plan( $subscription_id );
+
+	    if ( ( $subscription_plan->price == 0 ) && ( $subscription_plan->sign_up_fee == 0 ) ) {
+
+		    // Allow referrals only on register subscription
+		    $allowed_form_locations = array( 'register', 'register_email_confirmation', 'new_subscription', 'renew_subscription', 'upgrade_subscription' );
+
+		    if ( ! in_array( $form_location, $allowed_form_locations ) ) {
+
+			    $this->log( 'PMS: Referral not created because the used form, ' . $form_location . ', is not one of the allowed form locations' );
+
+			    return;
+		    }
+
+		    // Do nothing if we have no referral
+		    if ( ! $this->was_referred() ) {
+			    $this->log( 'PMS: Referral creation stopped because customer was not referred and no affiliate discount was detected' );
+			    return;
+		    }
+
+		    if ( $this->was_referred() ) {
+
+			    /**
+			     * Check to see if the subscriber is also an affiliate. Return if true.
+			     */
+			    if ( $this->is_affiliate_email( $subscription->user_id ) ) {
+
+				    $this->log( 'PMS: Referral not created because affiliate\'s own account was used.' );
+
+				    return;
+			    }
+
+		    }
+
+		    $base_amount = $subscription_plan->price;
+
+		    // If the base amount is zero and it's set to ignore zero amounts, exit
+		    if ( 0 == $base_amount && affiliate_wp()->settings->get( 'ignore_zero_referrals' ) ) {
+
+			    $this->log( 'PMS: Referral not created due to 0.00 amount.' );
+
+			    return;
+		    }
+
+		    $payment_id = $subscription->user_id . '|' . $subscription->subscription_plan_id;
+
+		    // Calculate the referral amount
+		    $referral_amount = $this->calculate_referral_amount( $base_amount, $payment_id, $subscription_plan->id, $this->affiliate_id );
+
+		    $this->log( 'PMS: Referral calculated for affiliate ID ' . $this->affiliate_id . ' in the amount of ' . $referral_amount );
+
+		    // Insert the pending referral
+		    $this->insert_pending_referral( $referral_amount, $payment_id, $subscription_plan->name );
+
+		    $this->complete_referral( $payment_id );
+
+	    }
 
     }
 
@@ -247,12 +345,15 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
             return;
         }
 
-        if ( empty( $data['status'] ) ) {
+        if ( empty( $updated['status'] ) ) {
             return;
         }
 
-        if ( $data['status'] == 'completed' ) {
+        if ( $updated['status'] == 'completed' ) {
+            $this->log( 'PMS: Referral for payment ID ' . $payment_id . ' about to be marked as complete' );
             $this->complete_referral( $payment_id );
+        } else {
+            $this->log( 'PMS: Referral for payment ID ' . $payment_id . ' not marked as complete because payment status is not completed' );
         }
 
     }
@@ -276,11 +377,12 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
             return;
         }
 
-        if ( empty( $data['status'] ) ) {
+        if ( empty( $updated['status'] ) ) {
             return;
         }
 
-        if ( $data['status'] == 'refunded' ) {
+        if ( $updated['status'] == 'refunded' ) {
+            $this->log( 'PMS: Referral for payment ID ' . $payment_id . ' about to be marked as rejected during refund' );
             $this->reject_referral( $payment_id );
         }
 
@@ -297,7 +399,18 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
             return $reference;
         }
 
-        $url = admin_url( 'admin.php?page=pms-payments-page&pms-action=edit_payment&payment_id=' . $reference );
+	    if ( false !== strpos( $reference, '|' ) ) {
+
+		    $reference_array = explode( '|', $reference );
+		    $user_id         = $reference_array[0];
+
+		    $url = admin_url( 'admin.php?page=pms-members-page&subpage=edit_member&member_id=' . $user_id );
+
+	    } else {
+
+		    $url = admin_url( 'admin.php?page=pms-payments-page&pms-action=edit_payment&payment_id=' . $reference );
+
+	    }
 
         return '<a href="' . esc_url( $url ) . '">' . $reference . '</a>';
 
@@ -323,12 +436,75 @@ class Affiliate_WP_PMS extends Affiliate_WP_Base {
         /**
          * This filter is documented in the base class
          */
-        return apply_filters( 'affwp_get_product_rate', $rate, $subscription_id, $args, $this->affiliate_id, $this->context );
+        $rate = apply_filters( 'affwp_get_product_rate', $rate, $subscription_id, $args, $this->affiliate_id, $this->context );
+
+	    $rate = affwp_sanitize_referral_rate( $rate );
+
+	    return $rate;
 
     }
 
+	/**
+	 * Retrieves the customer details for a payment.
+	 *
+	 * @since 2.2.7
+	 *
+	 * @param int $payment_id The ID of the payment to retrieve customer details for.
+	 * @return array An array of the customer details
+	 */
+	public function get_customer( $payment_id = 0 ) {
+
+		$customer = array();
+
+		if ( false !== strpos( $payment_id, '|' ) ) {
+
+			$payment_id = explode( '|', $payment_id );
+
+			$user_id = $payment_id[0];
+
+			$user = get_userdata( $user_id );
+
+			if ( $user ) {
+
+				$customer['user_id']    = $user->ID;
+				$customer['email']      = $user->user_email;
+				$customer['first_name'] = $user->first_name;
+				$customer['last_name']  = $user->last_name;
+				$customer['ip']         = affiliate_wp()->tracking->get_ip();
+
+			}
+
+		} else {
+
+			if ( function_exists( 'pms_get_payment' ) ) {
+
+				$payment = pms_get_payment( $payment_id );
+
+				if ( $payment->user_id ) {
+
+					$user = get_userdata( $payment->user_id );
+
+					if ( $user ) {
+
+						$customer['user_id']    = $payment->user_id;
+						$customer['email']      = $user->user_email;
+						$customer['first_name'] = $user->first_name;
+						$customer['last_name']  = $user->last_name;
+						$customer['ip']         = $payment->ip_address;
+
+					}
+
+				}
+
+			}
+
+		}
+
+		return $customer;
+	}
+
 }
 
-if ( function_exists( 'pms_get_discount_by_code' ) ) {
+if ( class_exists( 'Paid_Member_Subscriptions' ) ) {
 	new Affiliate_WP_PMS;
 }

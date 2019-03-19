@@ -85,7 +85,31 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Expor
 
 			foreach( $affiliates as $affiliate ) {
 
-				$data[] = array(
+				/**
+				 * Filters an individual line of affiliate data to be exported.
+				 *
+				 * @since 2.1.17
+				 *
+				 * @param array           $affiliate_data {
+				 *     Single line of exported affiliate data
+				 *
+				 *     @type int    $affiliate_id      Affiliate ID.
+				 *     @type string $email             Affiliate email.
+				 *     @type string $name              Affiliate name.
+				 *     @type string $payment_email     Affiliate payment email.
+				 *     @type string $username          Affiliate username.
+				 *     @type string $rate              Affiliate referral rate.
+				 *     @type string $rate_type         Affiliate rate type.
+				 *     @type string $earnings          Affiliate earnings.
+				 *     @type string $referrals         Number of referrals.
+				 *     @type string $visits            Number of visits.
+				 *     @type string $conversion_rate   Affiliate conversion rate.
+				 *     @type string $status            Affiliate status.
+				 *     @type float  $date_registered   Date the affiliate was registered.
+				 * }
+				 * @param \AffWP\Affiliate $affiliate Affiliate object.
+				 */
+				$affiliate_data = apply_filters( 'affwp_affiliate_export_get_data_line', array(
 					'affiliate_id'    => $affiliate->affiliate_id,
 					'email'           => affwp_get_affiliate_email( $affiliate->affiliate_id ),
 					'name'            => affwp_get_affiliate_name( $affiliate->affiliate_id ),
@@ -99,8 +123,14 @@ class Affiliate_WP_Affiliate_Export extends Affiliate_WP_Export implements Expor
 					'conversion_rate' => affwp_get_affiliate_conversion_rate( $affiliate->affiliate_id ),
 					'status'          => $affiliate->status,
 					'date_registered' => $affiliate->date_i18n( 'datetime' ),
-				);
+				), $affiliate );
 
+				// Add slashing.
+				$data[] = array_map( function( $column ) {
+					return addslashes( preg_replace( "/\"/","'", $column ) );
+				}, $affiliate_data );
+
+				unset( $affiliate_data );
 			}
 
 		}

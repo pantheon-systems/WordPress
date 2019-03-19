@@ -5,6 +5,8 @@ affiliate_wp()->register->print_errors();
 
 $errors = affiliate_wp()->register->get_errors();
 
+$required_registration_fields = affiliate_wp()->settings->get( 'required_registration_fields' );
+
 if ( ! is_user_logged_in() && ! empty( $errors ) ) {
 
 	if ( ! array_key_exists( 'empty_name', $errors ) ) {
@@ -90,7 +92,7 @@ if ( is_user_logged_in() ) {
 			<textarea id="affwp-promotion-method" name="affwp_promotion_method" rows="5" cols="30"<?php echo affwp_required_field_attr( 'promotion_method' ); ?>><?php if( ! empty( $method ) ) { echo esc_textarea( $method ); } ?></textarea>
 		</p>
 
-		<?php if ( ! is_user_logged_in() ) : ?>
+		<?php if ( ! is_user_logged_in() && isset( $required_registration_fields['password'] ) ) : ?>
 
 			<p>
 				<label for="affwp-user-pass"><?php _e( 'Password', 'affiliate-wp' ); ?></label>
@@ -116,7 +118,7 @@ if ( is_user_logged_in() ) {
 			<p>
 				<label class="affwp-tos" for="affwp-tos">
 					<input id="affwp-tos" required="required" type="checkbox" name="affwp_tos" />
-					<?php printf( __( 'Agree to our <a href="%s" target="_blank">Terms of Use</a>', 'affiliate-wp' ), esc_url( get_permalink( affiliate_wp()->settings->get( 'terms_of_use' ) ) ) ); ?>
+					<a href="<?php echo esc_url( get_permalink( affiliate_wp()->settings->get( 'terms_of_use' ) ) ); ?>" target="_blank"><?php echo affiliate_wp()->settings->get( 'terms_of_use_label', __( 'Agree to our Terms of Use and Privacy Policy', 'affiliate-wp' ) ); ?></a>
 				</label>
 			</p>
 		<?php endif; ?>

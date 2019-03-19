@@ -49,6 +49,15 @@ class Affiliate_WP_Utilities {
 	public $logs;
 
 	/**
+	 * The privacy tools instance variable
+	 *
+	 * @access public
+	 * @since  2.2
+	 * @var    \AffWP\Utils\Privacy_Tools
+	 */
+	public $privacy_tools;
+
+	/**
 	 * Signifies whether debug mode is enabled.
 	 *
 	 * @access protected
@@ -85,6 +94,7 @@ class Affiliate_WP_Utilities {
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-batch-process-registry.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-data-storage.php';
 		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/class-upgrades.php';
+		require_once AFFILIATEWP_PLUGIN_DIR . 'includes/admin/utilities/class-privacy-tools.php';
 	}
 
 	/**
@@ -97,10 +107,11 @@ class Affiliate_WP_Utilities {
 		// Set the debug flag.
 		$this->debug_enabled = affiliate_wp()->settings->get( 'debug_mode', false );
 
-		$this->logs     = new Affiliate_WP_Logging;
-		$this->batch    = new Utils\Batch_Process\Registry;
-		$this->upgrades = new Affiliate_WP_Upgrades( $this );
-		$this->data     = new Utils\Data_Storage;
+		$this->logs          = new Affiliate_WP_Logging;
+		$this->batch         = new Utils\Batch_Process\Registry;
+		$this->upgrades      = new Affiliate_WP_Upgrades( $this );
+		$this->data          = new Utils\Data_Storage;
+		$this->privacy_tools = new Utils\Privacy_Tools;
 
 		// Initialize batch registry after loading the upgrades class.
 		$this->batch->init();

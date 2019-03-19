@@ -170,6 +170,11 @@ class Endpoints extends Controller {
 
 		$params['context']['default'] = 'view';
 
+		// Payouts don't have rest IDs.
+		if ( isset( $params['rest_id'] ) ) {
+			unset( $params['rest_id'] );
+		}
+
 		/*
 		 * Pass top-level args as query vars:
 		 * /payouts/?status=paid&order=desc

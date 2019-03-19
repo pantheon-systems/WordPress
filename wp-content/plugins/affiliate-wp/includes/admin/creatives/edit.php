@@ -37,8 +37,14 @@ $creative = affwp_get_creative( absint( $_GET['creative_id'] ) );
 				</th>
 
 				<td>
-					<textarea name="description" id="description" class="large-text" rows="8"><?php echo esc_textarea( stripslashes( $creative->description ) ); ?></textarea>
-					<p class="description"><?php _e( 'An optional description for this creative. This is visible to affiliates and is displayed below the creative.', 'affiliate-wp' ); ?></p>
+					<?php
+					wp_editor( $creative->description, 'description', array(
+						'textarea_name' => 'description',
+						'textarea_rows' => 8,
+						'media_buttons' => false,
+					) );
+					?>
+					<p class="description"><?php _e( 'An optional description for this creative. This is visible to affiliates and is displayed above the creative.', 'affiliate-wp' ); ?></p>
 				</td>
 
 			</tr>

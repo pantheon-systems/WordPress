@@ -30,7 +30,9 @@ class Affiliate_WP_EasyCart extends Affiliate_WP_Base {
 
 		if( $this->was_referred() ) {
 
-			if( affwp_get_affiliate_email( $this->affiliate_id ) == $user->email ) {
+			$this->email = $user->email;
+
+			if( affwp_get_affiliate_email( $this->affiliate_id ) == $this->email ) {
 
 				$this->log( 'Referral not created because affiliate\'s own account was used.' );
 

@@ -139,10 +139,18 @@ class AffWP_Creatives_Table extends List_Table {
 	 * @return array Array of all the sortable columns
 	 */
 	public function get_sortable_columns() {
-		return array(
+		$columns = array(
 			'name'   => array( 'name', false ),
 			'status' => array( 'status', false ),
 		);
+
+		/**
+		 * Filters the creatives list table sortable columns.
+		 *
+		 * @param array                  $columns          The sortable columns for this list table.
+		 * @param \AffWP_Creatives_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_creative_table_sortable_columns', $columns, $this );
 	}
 
 	/**

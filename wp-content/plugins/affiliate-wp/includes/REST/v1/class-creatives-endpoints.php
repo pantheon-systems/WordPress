@@ -158,6 +158,11 @@ class Endpoints extends Controller {
 
 		$params['context']['default'] = 'view';
 
+		// Creatives don't have REST IDs.
+		if ( isset( $params['rest_id'] ) ) {
+			unset( $params['rest_id'] );
+		}
+
 		/*
 		 * Pass top-level args as query vars:
 		 * /creatives/?status=inactive&order=desc

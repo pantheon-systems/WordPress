@@ -88,6 +88,7 @@ class Endpoints extends Controller {
 		$args['visit_id']        = isset( $request['visit_id'] )        ? $request['visit_id'] : 0;
 		$args['affiliate_id']    = isset( $request['affiliate_id'] )    ? $request['affiliate_id'] : 0;
 		$args['referral_id']     = isset( $request['referral_id'] )     ? $request['referral_id'] : 0;
+		$args['rest_id']         = isset( $request['rest_id'] )         ? $request['rest_id'] : '';
 		$args['referral_status'] = isset( $request['referral_status'] ) ? $request['referral_status'] : '';
 		$args['campaign']        = isset( $request['campaign'] )        ? $request['campaign'] : '';
 		$args['context']         = isset( $request['visit_context'] )   ? $request['visit_context'] : '';
@@ -266,6 +267,10 @@ class Endpoints extends Controller {
 				'referral_id'  => array(
 					'description' => __( 'ID for the referral associated with the visit.', 'affiliate-wp' ),
 					'type'        => 'integer',
+				),
+				'rest_id'         => array(
+					'description' => __( 'REST ID (site:visit ID combination).', 'affiliate-wp' ),
+					'type'        => 'string',
 				),
 				'url'          => array(
 					'description' => __( 'The visit URL.', 'affiliate-wp' ),

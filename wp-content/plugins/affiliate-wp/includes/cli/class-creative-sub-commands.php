@@ -116,7 +116,11 @@ class Sub_Commands extends Base {
 		$name = Utils\get_flag_value(  $assoc_args, 'name', '' );
 
 		if ( empty( $name ) ) {
-			\WP_CLI::error( __( 'A --name value must be specified to add a new creative.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A --name value must be specified to add a new creative.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		$data['name']        = $name;
@@ -132,7 +136,11 @@ class Sub_Commands extends Base {
 			$creative = affiliate_wp()->creatives->get_by( 'name', $data['name'] );
 			\WP_CLI::success( sprintf( __( 'A creative with the ID %d has been successfully created.', 'affiliate-wp' ), $creative->creative_id ) );
 		} else {
-			\WP_CLI::error( __( 'The creative could not be created.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The creative could not be created.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -178,11 +186,19 @@ class Sub_Commands extends Base {
 	 */
 	public function update( $args, $assoc_args ) {
 		if ( empty( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		if ( ! $creative = affwp_get_creative( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		$data['name']        = Utils\get_flag_value( $assoc_args, 'name', $creative->name        );
@@ -198,7 +214,11 @@ class Sub_Commands extends Base {
 		if ( $updated ) {
 			\WP_CLI::success( __( 'The creative was successfully updated.', 'affiliate-wp' ) );
 		} else {
-			\WP_CLI::error( __( 'The creative could not be updated.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The creative could not be updated.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -223,11 +243,19 @@ class Sub_Commands extends Base {
 	 */
 	public function delete( $args, $assoc_args ) {
 		if ( empty( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		if ( ! $creative = affwp_get_creative( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid creative ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		$deleted = affwp_delete_creative( $creative );
@@ -235,7 +263,11 @@ class Sub_Commands extends Base {
 		if ( $deleted ) {
 			\WP_CLI::success( __( 'The creative was successfully deleted.', 'affiliate-wp' ) );
 		} else {
-			\WP_CLI::error( __( 'The creative could not be deleted.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The creative could not be deleted.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -346,4 +378,12 @@ class Sub_Commands extends Base {
 
 }
 
-\WP_CLI::add_command( 'affwp creative', 'AffWP\Creative\CLI\Sub_Commands' );
+try {
+
+	\WP_CLI::add_command( 'affwp creative', 'AffWP\Creative\CLI\Sub_Commands' );
+
+} catch( \Exception $exception ) {
+
+	affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+}

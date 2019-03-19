@@ -50,6 +50,14 @@ final class Visit extends Base_Object {
 	public $referral_id = 0;
 
 	/**
+	 * REST ID (site:visit ID combination).
+	 *
+	 * @since 2.2.2
+	 * @var   string
+	 */
+	public $rest_id = '';
+
+	/**
 	 * Visit URL.
 	 *
 	 * @since 1.9
@@ -153,6 +161,11 @@ final class Visit extends Base_Object {
 		if ( in_array( $field, array( 'visit_id', 'affiliate_id', 'referral_id', 'ID' ) ) ) {
 			$value = (int) $value;
 		}
+
+		if ( in_array( $field, array( 'rest_id' ) ) ) {
+			$value = sanitize_text_field( $value );
+		}
+
 		return $value;
 	}
 

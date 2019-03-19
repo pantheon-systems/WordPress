@@ -49,11 +49,13 @@ class Affiliate_WP_Capabilities {
 			$wp_roles->add_cap( 'administrator', 'view_affiliate_reports' );
 			$wp_roles->add_cap( 'administrator', 'export_affiliate_data' );
 			$wp_roles->add_cap( 'administrator', 'export_referral_data' );
+			$wp_roles->add_cap( 'administrator', 'export_customer_data' );
 			$wp_roles->add_cap( 'administrator', 'export_visit_data' );
 			$wp_roles->add_cap( 'administrator', 'export_payout_data' );
 			$wp_roles->add_cap( 'administrator', 'manage_affiliate_options' );
 			$wp_roles->add_cap( 'administrator', 'manage_affiliates' );
 			$wp_roles->add_cap( 'administrator', 'manage_referrals' );
+			$wp_roles->add_cap( 'administrator', 'manage_customers' );
 			$wp_roles->add_cap( 'administrator', 'manage_visits' );
 			$wp_roles->add_cap( 'administrator', 'manage_creatives' );
 			$wp_roles->add_cap( 'administrator', 'manage_payouts' );
@@ -83,11 +85,13 @@ class Affiliate_WP_Capabilities {
 			$wp_roles->remove_cap( 'administrator', 'view_affiliate_reports' );
 			$wp_roles->remove_cap( 'administrator', 'export_affiliate_data' );
 			$wp_roles->remove_cap( 'administrator', 'export_referral_data' );
+			$wp_roles->remove_cap( 'administrator', 'export_customer_data' );
 			$wp_roles->remove_cap( 'administrator', 'export_visit_data' );
 			$wp_roles->remove_cap( 'administrator', 'export_payout_data' );
 			$wp_roles->remove_cap( 'administrator', 'manage_affiliate_options' );
 			$wp_roles->remove_cap( 'administrator', 'manage_affiliates' );
 			$wp_roles->remove_cap( 'administrator', 'manage_referrals' );
+			$wp_roles->remove_cap( 'administrator', 'manage_customers' );
 			$wp_roles->remove_cap( 'administrator', 'manage_visits' );
 			$wp_roles->remove_cap( 'administrator', 'manage_creatives' );
 			$wp_roles->remove_cap( 'administrator', 'manage_payouts' );
@@ -132,6 +136,14 @@ class Affiliate_WP_Capabilities {
 				$creative = affwp_get_creative( $args[0] );
 
 				$caps[] = $creative ? 'manage_creatives' : 'do_not_allow';
+				break;
+
+			case 'edit_customer':
+			case 'delete_customer':
+			case 'view_customer':
+				$customer = affwp_get_customer( $args[0] );
+
+				$caps[] = $customer ? 'manage_customers' : 'do_not_allow';
 				break;
 
 			case 'add_payout':

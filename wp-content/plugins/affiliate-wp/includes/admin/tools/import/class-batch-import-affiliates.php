@@ -116,8 +116,11 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 		$offset        = $this->get_offset();
 
 		if ( $current_count >= $this->get_total_count() ) {
+			affiliate_wp()->utils->log( 'Affiliate CSV Import Done' );
 			return 'done';
 		}
+
+		affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step );
 
 		$data = $this->get_data();
 
@@ -126,7 +129,12 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 			$data = array_slice( $data, $offset, $this->per_step, true );
 
 			foreach ( $data as $key => $row ) {
+
+				affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step . ' raw data: ' . print_r( $row, true ) );
+
 				$args = $this->map_row( $row );
+
+				affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step . ' mapped data: ' . print_r( $args, true ) );
 
 				if ( empty( $args['email'] ) ) {
 					continue;
@@ -135,19 +143,27 @@ class Import_Affiliates extends Batch\Import\CSV implements Batch\With_PreFetch 
 				$user_id = $this->create_user( $args );
 
 				if ( $user_id ) {
+						affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step . ' - Affiliate ' . $key . ' user ID ' . $user_id );
 					// Check for an existing affiliate for this user.
 					if ( $affiliate = affiliate_wp()->affiliates->get_by( 'user_id', $user_id ) ) {
+						affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step . ' - Affiliate ' . $key . ' skipped because affiliate already exists' );
 						continue;
 					} else {
 						$args['user_id'] = $user_id;
 					}
 				} else {
+					affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step . ' -  Affiliate ' . $key . ' skipped because user not found nor created' );
 					continue;
 				}
 
 				$args['user_id']   = $user_id;
 
+				affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step . ' -  Affiliate ' . $key . ' data pre creation: ' . print_r( $args, true ) );
+
 				if ( false !== $affiliate = affwp_add_affiliate( $args ) ) {
+
+					affiliate_wp()->utils->log( 'Affiliate CSV Import Step ' . $this->step . ' -  Affiliate ' . $key . ' created successfully' );
+
 					$data = array();
 
 					if ( ! empty( $args['visits'] ) ) {

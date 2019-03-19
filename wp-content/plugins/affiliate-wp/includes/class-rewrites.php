@@ -82,7 +82,7 @@ class Affiliate_WP_Rewrites {
 
 		}
 
-		add_rewrite_endpoint( affiliate_wp()->tracking->get_referral_var(), EP_ALL, false );
+		add_rewrite_endpoint( affiliate_wp()->tracking->get_referral_var(), EP_PERMALINK | EP_ROOT | EP_COMMENTS | EP_SEARCH | EP_PAGES | EP_ALL_ARCHIVES , false );
 
 	}
 

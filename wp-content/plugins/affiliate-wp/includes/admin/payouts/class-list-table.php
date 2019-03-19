@@ -175,7 +175,7 @@ class AffWP_Payouts_Table extends List_Table {
 	 * @return array Array of all the sortable columns
 	 */
 	public function get_sortable_columns() {
-		return array(
+		$columns = array(
 			'payout_id'     => array( 'payout_id', false ),
 			'amount'        => array( 'amount', false ),
 			'affiliate'     => array( 'affiliate', false ),
@@ -183,6 +183,14 @@ class AffWP_Payouts_Table extends List_Table {
 			'status'        => array( 'status', false ),
 			'date'          => array( 'date', false ),
 		);
+
+		/**
+		 * Filters the payouts list table sortable columns.
+		 *
+		 * @param array                $columns          The sortable columns for this list table.
+		 * @param \AffWP_Payouts_Table $this             List table instance.
+		 */
+		return apply_filters( 'affwp_payout_table_sortable_columns', $columns, $this );
 	}
 
 	/**

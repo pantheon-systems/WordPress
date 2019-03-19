@@ -110,3 +110,65 @@ function affwp_process_settings_export() {
 	exit;
 }
 add_action( 'affwp_export_settings', 'affwp_process_settings_export' );
+
+/**
+ * Converts the character encoding for the export data
+ *
+ * @since 2.1.17
+ *
+ * @param array $data Single row of exported data.
+ * @return array Single row of exported data.
+ */
+function affwp_export_set_data_charset( $data ) {
+
+	if ( defined( 'AFFILIATE_WP_EXPORT_CHARSET' ) ) {
+
+		$charset = AFFILIATE_WP_EXPORT_CHARSET;
+
+		foreach ( $data as $key => $value ) {
+
+			$data[ $key ] = mb_convert_encoding( $value , $charset, get_option( 'blog_charset' ));
+
+		}
+
+	}
+
+	return $data;
+
+}
+add_filter( 'affwp_visit_export_get_data_line', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_payout_export_get_data_line', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_referral_export_get_data_line', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_affiliate_export_get_data_line', 'affwp_export_set_data_charset' );
+
+/**
+ * Converts the character encoding for the export CSV columns (headers)
+ *
+ * @since 2.1.17
+ *
+ * @param array $cols The export CSV columns (headers)
+ * @return array The export CSV columns (headers)
+ */
+function affwp_export_set_header_charset( $cols ) {
+
+	if ( defined( 'AFFILIATE_WP_EXPORT_CHARSET' ) ) {
+
+		$charset = AFFILIATE_WP_EXPORT_CHARSET;
+
+		foreach ( $cols as $key => $value ) {
+
+			$cols[ $key ] = mb_convert_encoding( $value , $charset, get_option( 'blog_charset' ));
+
+		}
+
+	}
+
+	return $cols;
+
+}
+add_filter( 'affwp_export_csv_cols_visits', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_export_csv_cols_payouts', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_export_csv_cols_referrals', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_export_csv_cols_affiliates', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_export_csv_cols_payout-logs', 'affwp_export_set_data_charset' );
+add_filter( 'affwp_export_csv_cols_referrals_payout', 'affwp_export_set_data_charset' );

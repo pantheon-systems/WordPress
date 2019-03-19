@@ -117,11 +117,19 @@ class Sub_Commands extends Base {
 	 */
 	public function create( $args, $assoc_args ) {
 		if ( empty( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid affiliate username or ID must be specified as the first argument.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid affiliate username or ID must be specified as the first argument.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		if ( ! $affiliate = affwp_get_affiliate( $args[0] ) ) {
-			\WP_CLI::error( sprintf( __( 'An affiliate with the ID or username "%s" does not exist. See wp affwp affiliate create for adding affiliates.', 'affiliate-wp' ), $args[0] ) );
+			try {
+
+				\WP_CLI::error( sprintf( __( 'An affiliate with the ID or username "%s" does not exist. See wp affwp affiliate create for adding affiliates.', 'affiliate-wp' ), $args[0] ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		// Grab flag values.
@@ -143,7 +151,11 @@ class Sub_Commands extends Base {
 			$referral = affwp_get_referral( $referral_id );
 			\WP_CLI::success( sprintf( __( 'A referral with the ID "%d" has been created.', 'affiliate-wp' ), $referral->referral_id ) );
 		} else {
-			\WP_CLI::error( __( 'The referral could not be added.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The referral could not be added.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -192,17 +204,29 @@ class Sub_Commands extends Base {
 	 */
 	public function update( $args, $assoc_args ) {
 		if ( empty( $args[0] ) || ! is_numeric( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		if ( ! $referral = affwp_get_referral( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		$affiliate = Utils\get_flag_value( $assoc_args, 'affiliate', $referral->affiliate_id );
 
 		if ( ! $affiliate = affwp_get_affiliate( $affiliate ) ) {
-			\WP_CLI::error( __( 'A valid affiliate username or ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid affiliate username or ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		} else {
 			$data['affiliate_id'] = $affiliate->affiliate_id;
 		}
@@ -218,7 +242,11 @@ class Sub_Commands extends Base {
 		if ( $update ) {
 			\WP_CLI::success( __( 'The referral was updated successfully.', 'affiliate-wp' ) );
 		} else {
-			\WP_CLI::error( __( 'The referral could not be updated', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The referral could not be updated', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 	}
@@ -244,11 +272,19 @@ class Sub_Commands extends Base {
 	 */
 	public function delete( $args, $assoc_args ) {
 		if ( empty( $args[0] ) || ! is_numeric( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		if ( ! $referral = affwp_get_referral( $args[0] ) ) {
-			\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'A valid referral ID is required to proceed.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 
 		\WP_CLI::confirm( __( 'Are you sure you want to delete this referral?', 'affiliate-wp' ), $assoc_args );
@@ -258,7 +294,11 @@ class Sub_Commands extends Base {
 		if ( $deleted ) {
 			\WP_CLI::success( __( 'The referral has been successfully deleted.', 'affiliate-wp' ) );
 		} else {
-			\WP_CLI::error( __( 'The referral could not be deleted.', 'affiliate-wp' ) );
+			try {
+
+				\WP_CLI::error( __( 'The referral could not be deleted.', 'affiliate-wp' ) );
+
+			} catch( \Exception $exception ) {}
 		}
 	}
 
@@ -399,4 +439,12 @@ class Sub_Commands extends Base {
 
 }
 
-\WP_CLI::add_command( 'affwp referral', 'AffWP\Referral\CLI\Sub_Commands' );
+try {
+
+	\WP_CLI::add_command( 'affwp referral', 'AffWP\Referral\CLI\Sub_Commands' );
+
+} catch( \Exception $exception ) {
+
+	affiliate_wp()->utils->log( $exception->getCode() . ' - ' . $exception->getMessage() );
+
+}

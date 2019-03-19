@@ -220,3 +220,65 @@ function affwp_email_tag_get_landing_page( $affiliate_id = 0, $referral ) {
 function affwp_email_tag_campaign_name( $affiliate_id = 0, $referral ) {
 	return empty( $referral->campaign ) ? __( '(no campaign)', 'affiliate-wp' ) : esc_html( $referral->campaign );
 }
+
+/**
+ * Determine if New Referral Notifications can be sent to the affiliate 
+ *
+ * @since 2.2
+ * @uses affwp_email_notification_enabled()
+ * @param int $affiliate_id The affiliate's ID
+ *
+ * @return boolean True if new referral notifications are enabled, false otherwise.
+ */
+function affwp_email_referral_notifications( $affiliate_id = 0 ) {
+
+	$enabled = false;
+
+	if ( true === affwp_email_notification_enabled( 'affiliate_new_referral_email', $affiliate_id ) ) {
+		$enabled = true;
+	}
+
+	return (bool) $enabled;
+
+}
+
+/**
+ * Determine if a specific email notification is enabled.
+ *
+ * @since 2.2
+ * @param string $email_notification The email notification to check.
+ * @param int $affiliate_id The affiliate's ID
+ * 
+ * @return boolean True if the email notification is enabled, false otherwise.
+ */
+function affwp_email_notification_enabled( $email_notification = '', $affiliate_id = 0 ) {
+
+	$enabled = false;
+
+	if ( array_key_exists( $email_notification, affwp_get_enabled_email_notifications() ) ) {
+		$enabled = true;
+	}
+
+	return (bool) apply_filters( 'affwp_email_notification_enabled', $enabled, $email_notification, $affiliate_id );
+
+}
+
+/**
+ * Get the email notifications settings array.
+ *
+ * @since 2.2
+ *
+ * @return array $email_notifications
+ */
+function affwp_get_enabled_email_notifications() {
+
+	$email_notifications = affiliate_wp()->settings->get( 'email_notifications' );
+
+	if ( is_array( $email_notifications ) ) {
+		return $email_notifications;
+	}
+
+	// Return empty array.
+	return array();
+
+}

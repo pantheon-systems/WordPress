@@ -5,7 +5,7 @@
  * Description: Automatically generate custom slugs for your affiliates, or let your affiliates create their own
  * Author: Pippin Williamson and Andrew Munro
  * Author URI: https://affiliatewp.com
- * Version: 1.0.1
+ * Version: 1.0.2
  * Text Domain: affiliatewp-custom-affiliate-slugs
  * Domain Path: languages
  *
@@ -60,7 +60,7 @@ if ( ! class_exists( 'AffiliateWP_Custom_Affiliate_Slugs' ) ) {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof AffiliateWP_Custom_Affiliate_Slugs ) ) {
 
 				self::$instance = new AffiliateWP_Custom_Affiliate_Slugs;
-				self::$version = '1.0.1';
+				self::$version = '1.0.2';
 
 				self::$instance->setup_constants();
 				self::$instance->load_textdomain();

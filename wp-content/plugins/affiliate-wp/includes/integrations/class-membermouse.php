@@ -45,7 +45,25 @@ class Affiliate_WP_Membermouse extends Affiliate_WP_Base {
 
 		$this->affiliate_id = $affiliate_data['order_affiliate_id'];
 
-		$user = get_userdata( $affiliate_data['member_id'] );
+		if ( ! absint( $this->affiliate_id ) && is_string( $this->affiliate_id ) ) {
+			$this->affiliate_id = affiliate_wp()->tracking->get_affiliate_id_from_login( $affiliate_data['order_affiliate_id'] );
+		}
+
+		if ( ! affiliate_wp()->tracking->is_valid_affiliate( $this->affiliate_id ) ) {
+
+			$this->log( 'Referral not created because affiliate is invalid.' );
+
+			return;
+		}
+
+		$user_info = get_userdata( $affiliate_data['member_id'] );
+
+		if ( $this->is_affiliate_email( $user_info->user_email ) ) {
+
+			$this->log( 'Referral not created because affiliate\'s own account was used.' );
+
+			return; // Customers cannot refer themselves
+		}
 
 		$products = json_decode( stripslashes( $affiliate_data['order_products'] ) );
 
@@ -53,6 +71,7 @@ class Affiliate_WP_Membermouse extends Affiliate_WP_Base {
 
 		if( is_array( $products ) ) {
 
+			$key   = 0;
 			$count = count( $products );
 
 			foreach( $products as $product ) {

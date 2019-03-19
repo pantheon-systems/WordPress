@@ -64,9 +64,16 @@ function affwp_cf7_paypal_redirect( $cf7, $result, $referral_id ) {
 	$postid = $cf7->id();
 
 	$enable = get_post_meta( $postid, "_cf7pp_enable", true );
-	$email  = get_post_meta( $postid, "_cf7pp_email", true );
 
-	if ( $enable == "1" && $email == "2" ) {
+	$options = get_option('cf7pp_options');
+
+	if ( $options['mode'] == "1" ) {
+		$email = $options['sandboxaccount'];
+	} elseif ( $options['mode'] == "2" ) {
+		$email = $options['liveaccount'];
+	}
+
+	if ( $enable == "1" && is_email( $email ) ) {
 		affwp_cf7_paypal_redirect_output( $cf7, $result, $referral_id );
 	}
 }
@@ -246,7 +253,7 @@ function affwp_cf7_paypal_redirect_output( $cf7, $result, $referral_id ) {
 			<input type='hidden' name='bn' value='WPPlugin_SP'>
 			<input type='hidden' name='cancel_return' value='<?php echo esc_url( $affwp_cf7_cancel ); ?>' />
 			<input type='hidden' name='custom' value='<?php echo $referral_id; ?>'>
-			<img alt='' border='0' style='border:none;display:none;' src='https://www.paypal.com/$language/i/scr/pixel.gif' width='1' height='1'>
+			<img alt='' border='0' style='border:none;display:none;' src='https://www.paypal.com/<?php echo $language; ?>/i/scr/pixel.gif' width='1' height='1'>
 			</form>
 			<script type="text/javascript">
 			document.cf7pp.submit();

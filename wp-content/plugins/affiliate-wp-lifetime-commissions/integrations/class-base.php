@@ -3,19 +3,115 @@
 class Affiliate_WP_Lifetime_Commissions_Base {
 
 	public $context;
+	public $email;
+	public $customer;
 
 	public function __construct() {
 
 		// filter the affiliate ID
-		add_filter( 'affwp_get_referring_affiliate_id', array( $this, 'set_affiliate_id' ), 10, 3 );
+		add_filter( 'affwp_get_referring_affiliate_id', array( $this, 'get_affiliate_id' ), 99, 3 );
 
-		// link the customer with the affiliate
-		// this fires when the referral's status changes from "pending" to "unpaid"
-		add_action( 'affwp_complete_referral', array( $this, 'link_to_affiliate' ), 10, 3 );
-
-		add_action( 'affwp_register_user', array( $this, 'link_affiliate_at_registration' ), 10, 3 );
+		// Create a customer record when user accounts are registered
+		add_action( 'user_register', array( $this, 'create_customer_on_register' ), 10 );
 
 		$this->init();
+
+	}
+
+	/**
+	 * Gets things started
+	 *
+	 * This is for integration-specific initiations and declarations
+	 *
+	 * @access  public
+	 * @since   1.0
+	 * @return  void
+	 */
+	public function init() {}
+
+
+	/***********************************************************************
+	 * The following methods are typically overwritten by each integration *
+	 **********************************************************************/
+
+
+	/**
+	 * Retrieve the email address of a customer from the referrence (order, payment, etc)
+	 *
+	 * @access  public
+	 * @since   2.0
+	 * @return  string
+	 */
+	public function get_email( $reference = 0 ) {
+		return is_user_logged_in() ? wp_get_current_user()->user_email : '';
+	}
+
+
+
+	/*************************************************************************
+	 * The following methods should typically not be changed by integrations *
+	 *************************************************************************/
+
+	public function get_affiliate_id( $affiliate_id, $reference, $context ) {
+
+		if ( $this->context !== $context ) {
+			return $affiliate_id;
+		}
+
+		if ( ! $this->is_lifetime_customer( $reference ) ) {
+			return $affiliate_id;
+		}
+
+		$lc_affiliate_id = $this->customer->get_canonical_affiliate_id();
+
+		if ( ! $this->is_lifetime_length_valid( $lc_affiliate_id ) ) {
+
+			affiliate_wp()->utils->log( 'Referral failed to be created. Lifetime limit reached.' );
+
+			return $affiliate_id;
+		}
+
+		if ( ! $this->can_receive_lifetime_commissions( $lc_affiliate_id ) ) {
+			return $affiliate_id;
+		}
+
+		$this->filter_affiliate_rates();
+
+		return $lc_affiliate_id;
+
+	}
+
+	public function filter_affiliate_rates() {
+
+		// filter the affiliate rate
+		add_filter( 'affwp_get_affiliate_rate', array( $this, 'set_lifetime_rate' ), 10, 4 );
+
+		// set affiliate rate type
+		add_filter( 'affwp_get_affiliate_rate_type', array( $this, 'set_lifetime_rate_type' ), 10, 2 );
+
+		// set a flag for lifetime referrals
+		add_filter( 'affwp_insert_pending_referral', array( $this, 'set_lifetime_referral_flag' ), 10, 8 );
+
+	}
+
+	public function is_lifetime_customer( $reference = 0 ) {
+
+		$ret         = false;
+		$this->email = $this->get_email( $reference );
+
+		if ( $this->email ) {
+
+			$this->customer = affwp_get_customer( $this->email );
+
+			if ( $this->customer && $this->customer->get_canonical_affiliate_id() ) {
+
+				$ret = true;
+
+			}
+
+		}
+
+		return apply_filters( 'affwp_lc_is_lifetime_customer', $ret, $this->email, $reference );
 
 	}
 
@@ -30,83 +126,15 @@ class Affiliate_WP_Lifetime_Commissions_Base {
 		$lifetime_affiliate_rate_type = $this->get_affiliate_lifetime_referral_rate_type( $affiliate_id );
 
 		// lifetime referral rate type from Affiliates -> Settings -> Integrations
-		$lifetime_referral_rate_type  = affiliate_wp()->settings->get( 'lifetime_commissions_lifetime_referral_rate_type' );
+		$lifetime_referral_rate_type = affiliate_wp()->settings->get( 'lifetime_commissions_lifetime_referral_rate_type' );
 
 		if ( $lifetime_affiliate_rate_type ) {
 			$type = $lifetime_affiliate_rate_type;
-		} elseif( $lifetime_referral_rate_type ) {
+		} elseif ( $lifetime_referral_rate_type ) {
 			$type = $lifetime_referral_rate_type;
 		}
 
 		return $type;
-
-	}
-
-	/**
-	 * Gets things started
-	 *
-	 * @access  public
-	 * @since   1.0
-	 * @return  void
-	 */
-	public function init() {
-		// intentionally left blank
-	}
-
-	/**
-	 * Retrieves the user's email or ID depending on the referral's context
-	 *
-	 * @param string $get what to retrieve
-	 * @param int $reference Payment reference number
-	 *
-	 * @since 1.0
-	 */
-	public function get( $get = '', $reference = 0, $context ) {
-		// intentionally left blank
-	}
-
-	/**
-	 * Sets the affiliate ID to the lifetime affiliate's ID
-	 * $affiliate_id will generally be 0 since no affiliate will be tracked.
-	 * This changes the affiliate ID from 0 to their lifetime affiliate ID
-	 *
-	 * @since 1.1
-	 */
-	public function set_affiliate_id( $affiliate_id = 0, $payment_id = 0, $context ) {
-
-		if ( $this->context !== $context ) {
-			return $affiliate_id;
-		}
-
-		// integrations that use tracked affiliate coupons bypass this filter and pass their affiliate ID directly into the insert pending referral function
-
-		// get the lifetime affiliate that is connected to the customer
-
-		$lifetime_affiliate_user_id = $this->get_users_lifetime_affiliate( $payment_id, $context );
-
-		if ( $lifetime_affiliate_user_id ) {
-
-			$lifetime_affiliate = (int) $this->get_affiliate_id( $lifetime_affiliate_user_id );
-
-			if ( $this->can_receive_lifetime_commissions( $lifetime_affiliate ) ) {
-
-				// filter the affiliate rate
-				add_filter( 'affwp_get_affiliate_rate', array( $this, 'set_lifetime_rate' ), 10, 4 );
-
-				// set affiliate rate type
-				add_filter( 'affwp_get_affiliate_rate_type', array( $this, 'set_lifetime_rate_type' ), 10, 2 );
-
-				// set a flag for lifetime referrals
-				add_filter( 'affwp_insert_pending_referral', array( $this, 'set_lifetime_referral_flag' ), 10, 8 );
-
-				// lifetime affiliate found
-				$affiliate_id = $lifetime_affiliate;
-
-			}
-
-		}
-
-		return $affiliate_id;
 
 	}
 
@@ -236,6 +264,23 @@ class Affiliate_WP_Lifetime_Commissions_Base {
 
 	}
 
+	/**
+	 * Get the lifetime length for an affiliate
+	 *
+	 * @since 1.3
+	 */
+	public function get_affiliate_lifetime_length( $affiliate_id = 0 ) {
+
+		// get per affiliate lifetime length
+		$length = affwp_get_affiliate_meta( $affiliate_id, 'affwp_lc_lifetime_length', true );
+
+		if ( $length !== '' ) {
+			return $length;
+		}
+
+		return false;
+
+	}
 
 	/**
 	 * Change the affiliate's rate if lifetime commissions rate is set for the affiliate
@@ -248,355 +293,10 @@ class Affiliate_WP_Lifetime_Commissions_Base {
 
 		// has lifetime rate
 		if ( $lifetime_rate ) {
-			// connected user has a lifetime affiliate therefore it is a lifetime commissions purchase
-			$is_lifetime_purchase = $this->get_users_lifetime_affiliate( $reference, $this->context );
-
-			if ( $is_lifetime_purchase ) {
-				$rate = $lifetime_rate;
-			}
+			$rate = $lifetime_rate;
 		}
 
 		return $rate;
-	}
-
-	/**
-	 * Link the customer and affiliate together
-	 * Runs when the referral is complete and the referral status is updated to "unpaid"
-	 *
-	 * @return void
-	 * @since  1.0
-	 * @todo make the link when a pending referral is created instead
-	 */
-	public function link_to_affiliate( $referral_id, $referral, $reference ) {
-
-		// get the context
-		$context = $referral->context;
-
-		// return early if the context does not match
-		if ( $this->context !== $context ) {
-			return;
-		}
-
-		// get the affiliate's ID
-		$affiliate_id = $referral->affiliate_id;
-
-		// get the user's ID (for logged in users)
-		// We don't simply get the currently logged in user ID since the link between customer and affiliate could happen at a later point
-		$user_id = $this->get( 'user_id', $reference, $context );
-
-		// get the user's email address from the referral
-		// if a user changes their email address at checkout, we'll add this to the $customer_emails array
-		$user_email = $this->get( 'email', $reference, $context );
-
-		// is the customer already linked to an affiliate?
-		if ( $this->is_customer_linked( $user_id ) ) {
-
-			// if the customer is already linked and logged in, but they used a different email address, add it to the affiliate
-			$this->maybe_add_email_to_affiliate( $affiliate_id, $user_email );
-
-			// customer is already linked to an affiliate, no need to go any further
-			if ( ! (bool) apply_filters( 'affwp_lc_update_affiliate', false, $affiliate_id, $user_id, $referral, $context ) ) {
-				return true; // Allow extensions to update lifetime affiliates
-			}
-
-		}
-
-		// continue the process of linking the customer to the affiliate
-
-
-		// affiliate is allowed to receive lifetime commissions
-		if ( $this->can_receive_lifetime_commissions( $affiliate_id ) ) {
-
-			/**
-			 * Customer is logged in
-			 */
-			if ( $user_id && $user_id != -1 ) {
-
-				// get an array of customer's lifetime emails that they use/have used
-				$customer_emails = $this->get_customer_emails( $user_id );
-
-				// add the customer's WordPress user ID to the affiliate if it doesn't already exist
-				$this->maybe_add_customer_id_to_affiliate( $user_id, $affiliate_id );
-
-				// store the affiliate's ID against the user
-				$this->add_affiliate_id_to_customer( $user_id, $affiliate_id );
-
-				// customer has used an email address that they previously have not used
-				if ( ! in_array( $user_email, $customer_emails ) ) {
-
-					// store the email address to the customer's known list of email addresses used
-					$this->add_email_to_customer( $user_id, $user_email );
-
-					// store it to affiliate's user meta
-					$this->maybe_add_email_to_affiliate( $affiliate_id, $user_email );
-
-				}
-
-				// add all the customers emails to the affiliate
-				// useful if the customer is de-linked and linked to a new affiliate at a later point
-				if ( $customer_emails ) {
-
-					foreach ( $customer_emails as $email ) {
-
-						// loop through and delete all associated email addresses for the old affiliate
-						$this->delete_customer_email_from_affiliate( $affiliate_id, $email );
-
-						// Add a customer's email address to the affiliate
-						$this->maybe_add_email_to_affiliate( $affiliate_id, $email );
-
-					}
-
-				}
-
-			} else {
-
-				/**
-				 * Customer is making a guest purchase (no user account)
-				 */
-
-				// add customer's email to affiliate's user meta for future guest purchases
-				$this->maybe_add_email_to_affiliate( $affiliate_id, $user_email );
-
-			}
-
-		}
-
-		// customer is now linked to affiliate, huzzah!
-	}
-
-	/**
-	 * Checks to see if a customer is already linked to an affiliate
-	 *
-	 * @since 1.1
-	 * @return boolean true is customer is linked to affiliate, false otherwise
-	 */
-	public function is_customer_linked( $user_id = 0 ) {
-
-		if ( $user_id ) {
-
-			// customer has meta key so must be linked
-			if ( get_user_meta( $user_id, 'affwp_lc_affiliate_id', true ) ) {
-				return true;
-			}
-		}
-
-		return false;
-
-	}
-
-	/**
-	 * Delete a customer email from an affiliate
-	 *
-	 * @since 1.1
-	 */
-	public function delete_customer_email_from_affiliate( $affiliate_id = 0, $email = '' ) {
-
-		if ( ! $affiliate_id ) {
-			return;
-		}
-
-		if ( $email ) {
-
-			// the WordPress user ID of the affiliate
-			$affiliate_user_id = affwp_get_affiliate_user_id( $affiliate_id );
-
-			delete_user_meta( $affiliate_user_id, 'affwp_lc_customer_email', $email );
-
-		}
-
-	}
-
-	/**
-	 * Get email addresses belonging to a customer
-	 * A customer might have more than 1 email address they have used
-	 *
-	 * @since 1.1
-	 * @return array An array of emails
-	 */
-	public function get_customer_emails( $user_id = 0 ) {
-
-		// get an array of customer's lifetime emails that they use/have used
-		$customer_emails = get_user_meta( $user_id, 'affwp_lc_email' );
-
-		return $customer_emails;
-	}
-
-
-	/**
-	 * Maybe add email to affiliate
-	 *
-	 * @since 1.1
-	 */
-	public function maybe_add_email_to_affiliate( $affiliate_id = 0, $user_email = '' ) {
-
-		if ( ! in_array( $user_email, $this->get_affiliates_customer_emails( $affiliate_id ) ) ) {
-			$this->add_email_to_affiliate( $affiliate_id, $user_email );
-		}
-
-	}
-
-	/**
-	 * Add a customer's email address to the affiliate
-	 *
-	 * @since 1.1
-	 * @todo store email address in affiliate meta table and provide backwards compatibility
-	 */
-	public function add_email_to_affiliate( $affiliate_id = 0, $user_email = '' ) {
-
-		// the WordPress user ID of the affiliate
-		$affiliate_user_id = affwp_get_affiliate_user_id( $affiliate_id );
-
-		add_user_meta( $affiliate_user_id, 'affwp_lc_customer_email', $user_email );
-
-	}
-
-	/**
-	 * Add a customer's email address to their user meta
-	 * These emails will be checked against an affiliate when making a guest purchase
-	 *
-	 * @since 1.1
-	 */
-	public function add_email_to_customer( $user_id = 0, $email = '' ) {
-
-		add_user_meta( $user_id, 'affwp_lc_email', $email );
-
-	}
-
-	/**
-	 * Add an affiliate's ID to the customer, in user meta
-	 * A user can only have 1 affiliate assigned to them
-	 *
-	 * @since 1.1
-	 */
-	public function add_affiliate_id_to_customer( $user_id = 0, $affiliate_id = 0 ) {
-
-		// store the affiliate ID with the user.
-		update_user_meta( $user_id, 'affwp_lc_affiliate_id', $affiliate_id );
-
-	}
-
-	/**
-	 * Add the customer's WordPress user ID to the affiliate, if it doesn't already exist
-	 *
-	 * @since 1.1
-	 */
-	public function maybe_add_customer_id_to_affiliate( $user_id = 0, $affiliate_id = 0 ) {
-
-		// add the customer's WordPress user ID to the affiliate if it doesn't already exist
-		if ( ! in_array( $user_id, $this->get_affiliates_customer_ids( $affiliate_id ) ) ) {
-			$this->add_customer_id_to_affiliate( $user_id, $affiliate_id );
-		}
-
-	}
-
-	/**
-	 * Add the customer's WordPress user ID to the affiliate, if it doesn't already exist
-	 *
-	 * @since 1.1
-	 */
-	public function add_customer_id_to_affiliate( $user_id = 0, $affiliate_id = 0 ) {
-
-		// the WordPress user ID of the affiliate
-		$affiliate_user_id = affwp_get_affiliate_user_id( $affiliate_id );
-
-		// add the customer's WordPress user ID to the affiliate if it doesn't already exist
-		add_user_meta( $affiliate_user_id, 'affwp_lc_customer_id', $user_id );
-
-	}
-
-	/**
-	 * Get array of affiliate's customer email addresses
-	 *
-	 * @return array customer emails linked to an affiliate
-	 * @since  1.0
-	 */
-	public function get_affiliates_customer_emails( $affiliate_id = 0 ) {
-
-		if ( ! $affiliate_id ) {
-			return;
-		}
-
-		$emails = get_user_meta( affwp_get_affiliate_user_id( $affiliate_id ), 'affwp_lc_customer_email' );
-
-		return (array) $emails;
-
-	}
-
-	/**
-	 * Get array of affiliate's customer IDs
-	 *
-	 * @return array customer ids linked to an affiliate
-	 * @since  1.0
-	 */
-	public function get_affiliates_customer_ids( $affiliate_id = 0 ) {
-
-		if ( ! $affiliate_id ) {
-			return;
-		}
-
-		$ids = get_user_meta( affwp_get_affiliate_user_id( $affiliate_id ), 'affwp_lc_customer_id' );
-
-		return (array) $ids;
-
-	}
-
-	/**
-	 * Retrieves the affiliate ID that should receive a commission
-	 *
-	 * If a user is logged in, the affiliate ID is looked up via the user's ID
-	 * If a user is not logged in, the affiliate ID is looked up via the user's email address
-	 *
-	 * @return absint $lifetime_affiliate_id ID of affiliate linked to user, false otherwise
-	 * @since  1.0
-	 */
-	public function get_users_lifetime_affiliate( $reference = 0, $context = '' ) {
-
-		// get ID of currently logged in user
-		$user_id = get_current_user_id();
-
-		// user is logged in.
-		if ( $user_id ) {
-
-			$affiliate_id = get_user_meta( $user_id, 'affwp_lc_affiliate_id', true );
-
-			// user has linked affiliate ID, use that
-			if ( $affiliate_id ) {
-
-				$lifetime_affiliate_id = $affiliate_id;
-
-			} else {
-				// user is a guest and has a linked affiliate but has created an account at checkout.
-
-				// look up affiliate ID by customer email
-				$customer_email_address = $this->get( 'email', $reference, $context );
-				$lifetime_affiliate_id  = $this->get_affiliate_id_from_email( $customer_email_address );
-
-				// store the lifetime affiliate ID with the affiliate's user account for later use
-				if ( $lifetime_affiliate_id ) {
-					update_user_meta( $user_id, 'affwp_lc_affiliate_id', $lifetime_affiliate_id );
-				}
-
-				// store their email against their new user account
-				update_user_meta( $user_id, 'affwp_lc_email', $customer_email_address );
-			}
-
-		} else {
-			// must not be logged in, as user ID will be 0
-
-			// get customer's email
-			$customer_email_address = $this->get( 'email', $reference, $context );
-
-			// lookup affiliate ID by customer email
-			$lifetime_affiliate_id = $this->get_affiliate_id_from_email( $customer_email_address );
-
-		}
-
-		if ( $lifetime_affiliate_id ) {
-			return absint( affwp_get_affiliate_user_id( $lifetime_affiliate_id ) );
-		}
-
-		return false;
-
 	}
 
 	/**
@@ -610,108 +310,173 @@ class Affiliate_WP_Lifetime_Commissions_Base {
 		// get global setting
 		$global_lifetime_commissions_enabled = affiliate_wp()->settings->get( 'lifetime_commissions' );
 
-		// get user ID of affiliate
-		$user_id = affwp_get_affiliate_user_id( $affiliate_id );
-
 		// all affiliates can earn lifetime commissions
 		if ( $global_lifetime_commissions_enabled ) {
 			return true;
 		}
 
-		$allowed = get_user_meta( $user_id, 'affwp_lc_enabled', true );
+		return (bool) affwp_get_affiliate_meta( $affiliate_id, 'affwp_lc_enabled', true );
 
-		if ( $allowed ) {
-			return true;
-		}
-
-		return false;
 	}
 
 	/**
 	 * Get an affiliate's ID from a customer's email address
 	 *
-	 * @param $customer_email_address The customer's email address
-	 * @return int affiliate's ID
 	 * @since  1.0
+	 * @param  string $email The customer's email address
+	 * @return bool
+	 *
 	 */
-	public function get_affiliate_id_from_email( $customer_email_address = '' ) {
+	public function get_affiliate_id_from_customer_email( $email = '' ) {
 
-		if ( ! $customer_email_address ) {
+		if ( ! $email ) {
 			return;
 		}
 
-		$args = array(
-			'meta_key'   => 'affwp_lc_customer_email',
-			'meta_value' => $customer_email_address,
-			'fields'     => 'ID',
-			'number'     => '1' // there will/can only be one linked customer
-		);
+		$customer = affwp_get_customer( $email );
 
-		$users = get_users( $args );
-
-		if ( $users ) {
-			return (int) $this->get_affiliate_id( $users[0] );
+		if ( $customer ) {
+			return $customer->get_canonical_affiliate_id();
 		}
 
 		return false;
 	}
 
 	/**
-	 * Get an affiliate's ID from user's ID
-	 * Based on affwp_get_affiliate_id() but does not return the currently logged in affiliate ID when no user is passed in
+	 * Creates a customer record if referred when user account is registered
 	 *
-	 * @param $user_id user ID of specified user
-	 * @return int affiliate's ID
-	 * @since  1.0.1
+	 * @since 1.2.1
+	 * @param int $user_id
 	 */
-	public function get_affiliate_id( $user_id = 0 ) {
+	public function create_customer_on_register( $user_id ) {
 
-		if ( empty( $user_id ) ) {
-			return false;
+		// Check if a new customer can be automatically linked to an affiliate on registration.
+		if ( ! affiliate_wp()->settings->get( 'lifetime_commissions_link_customers_on_registration' ) ) {
+			return;
 		}
 
-		$affiliate = affiliate_wp()->affiliates->get_by( 'user_id', $user_id );
+		// get referring affiliate ID
+		$referring_affiliate_id = affiliate_wp()->tracking->get_affiliate_id();
 
-		if ( $affiliate ) {
-			return $affiliate->affiliate_id;
+		if ( $referring_affiliate_id ) {
+
+			$user = get_userdata( $user_id );
+
+			// store the affiliate ID with the user.
+			$customer = affwp_get_customer( $user->user_email );
+
+			if ( ! $customer ) {
+
+				$args = array(
+					'affiliate_id' => $referring_affiliate_id,
+					'first_name'   => $user->first_name,
+					'last_name'    => $user->last_name,
+					'user_id'      => $user->ID,
+					'email'        => $user->user_email,
+					'ip'           => affiliate_wp()->tracking->get_ip()
+				);
+
+				affwp_add_customer( $args );
+
+			}
+
 		}
-
-		return false;
 
 	}
 
 	/**
-     * Link an affiliate to another affiliate via Lifetime Commissions if the
-     * newly registered affiliate uses an affiliate's referral URL. Uses the
-     * affwp_register_user action hook
+	 * Get all customers for an affiliate
 	 *
-	 * Supports:
+	 * @since  1.3
+	 * @param  int   $affiliate_id The affiliate ID
+	 * @return array The customer IDs
+	 */
+	public function get_customers_for_affiliate( $affiliate_id ) {
+
+		global $wpdb;
+
+		$table        = affiliate_wp()->customer_meta->table_name;
+		$customers    = array();
+		$customer_ids = $wpdb->get_col( $wpdb->prepare( "SELECT affwp_customer_id FROM {$table} WHERE meta_key = 'affiliate_id' AND meta_value = %d ORDER BY meta_id ASC;", $affiliate_id ) );
+		$customer_ids = array_map( 'absint', $customer_ids );
+
+		if ( ! empty( $customer_ids ) ) {
+
+			$customer_ids = array_unique( $customer_ids );
+
+			foreach ( $customer_ids as $customer_id ) {
+				$customers[] = affwp_get_customer( $customer_id );
+			}
+
+		}
+
+		return $customers;
+
+	}
+
+	/**
+	 * Get the lifetime commission expiration length
 	 *
-	 * Affiliate Forms for Ninja Forms
-	 * Affiliate Forms for Gravity Forms
-	 * The default affiliate registration form
-     *
-     * @since 1.2.1
-     */
-    public function link_affiliate_at_registration( $affiliate_id, $status, $args ) {
+	 * @since  1.3
+	 * @param  int $affiliate_id The affiliate ID
+	 * @return int $days The number of days lifetime commissions can be created
+	 */
+	public function get_lifetime_length( $affiliate_id = 0 ) {
 
-      // get referring affiliate ID
-      $referring_affiliate_id = affiliate_wp()->tracking->get_affiliate_id();
+		$length = affiliate_wp()->settings->get( 'lifetime_commissions_lifetime_length', 0 );
 
-      if ( $referring_affiliate_id ) {
-        // get current user since they have just been registered
-        $current_user = wp_get_current_user();
+		// get per affiliate lifetime length
+		$lifetime_affiliate_length = $this->get_affiliate_lifetime_length( $affiliate_id );
 
-        // add the customer's WordPress user ID to the affiliate if it doesn't already exist
-        $this->maybe_add_customer_id_to_affiliate( $current_user->ID, $referring_affiliate_id );
+		if ( $lifetime_affiliate_length !== false ) {
+			$length = $lifetime_affiliate_length;
+		}
 
-        // store the affiliate's ID against the user
-        $this->add_affiliate_id_to_customer( $current_user->ID, $referring_affiliate_id );
+		/**
+		 * Filter the lifetime commissions length for an affiliate.
+		 *
+		 * This could be used in the future to provide a per affiliate lifetime expiration length.
+		 *
+		 * @since 1.3
+		 *
+		 * @param int $length The number of days lifetime commissions can be created
+		 * @param int $affiliate_id The affiliate ID
+		 */
+		return apply_filters( 'affwp_lc_expiration_length', $length, $affiliate_id );
 
-        // store the newly registered affiliate's email with the referring Affiliate
-        $this->maybe_add_email_to_affiliate( $referring_affiliate_id, $args['user_email'] );
-      }
+	}
 
-    }
+	/**
+	 * Check if the lifetime commissions length hasn't been reached
+	 *
+	 * @since  1.3
+	 * @param  int $affiliate_id The affiliate ID
+	 * @return bool
+	 */
+	public function is_lifetime_length_valid( $affiliate_id = 0 ) {
+
+		$length = $this->get_lifetime_length( $affiliate_id );
+
+		if ( $length !== '' ) {
+
+			if ( $length == 0 ) {
+				$lifetime_commissions_length = '1970-01-01 00:00:00';
+			} else {
+				$lifetime_commissions_length = date( 'Y-m-d H:i:s', strtotime( '-' . $length . ' days' ) );
+			}
+
+			$registration_date = date( 'Y-m-d H:i:s', strtotime( $this->customer->date_created ) );
+
+			if ( $registration_date < $lifetime_commissions_length ) {
+
+				return false;
+
+			}
+
+		}
+
+		return true;
+
+	}
 
 }

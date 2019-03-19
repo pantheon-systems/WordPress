@@ -43,9 +43,19 @@ final class Authentication {
 
 		if ( $consumer = affiliate_wp()->REST->consumers->get_by( 'public_key', $public_key ) ) {
 			if ( hash_equals( affwp_auth_hash( $public_key, $consumer->secret_key, false ), $token ) ) {
+				/**
+				 * Fires immediately after a REST consumer has been successfully authenticated.
+				 *
+				 * @since 2.2.2
+				 *
+				 * @param \AffWP\REST\Consumer $consumer REST Consumer object.
+				 */
+				do_action( 'affwp_rest_authenticate_consumer', $consumer );
+
 				return $consumer->user_id;
 			}
 		}
+
 		return $user_id;
 	}
 }

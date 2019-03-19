@@ -72,6 +72,8 @@ class Database extends \Affiliate_WP_DB {
 			'token'       => '%s',
 			'public_key'  => '%s',
 			'secret_key'  => '%s',
+			'status'      => '%s',
+			'date'        => '%s',
 		);
 	}
 
@@ -124,7 +126,7 @@ class Database extends \Affiliate_WP_DB {
 			'public_key'   => '',
 			'secret_key'   => '',
 			'order'        => 'DESC',
-			'orderby'      => 'consumer_id',
+			'orderby'      => $this->primary_key,
 			'fields'       => '',
 		);
 
@@ -163,6 +165,22 @@ class Database extends \Affiliate_WP_DB {
 
 			$where .= "`user_id` IN( {$user_ids} ) ";
 
+		}
+
+		// Status.
+		if ( ! empty( $args['status'] ) ) {
+			$status = esc_sql( $args['status'] );
+
+			if ( ! empty( $where ) ) {
+				$where .= "AND `status` = '" . $status . "' ";
+			} else {
+				$where .= "WHERE `status` = '" . $status . "' ";
+			}
+		}
+
+		// Date.
+		if( ! empty( $args['date'] ) ) {
+			$where = $this->prepare_date_query( $where, $args['date'] );
 		}
 
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
@@ -320,6 +338,8 @@ class Database extends \Affiliate_WP_DB {
 			token varchar(32) NOT NULL,
 			public_key varchar(32) NOT NULL,
 			secret_key varchar(32) NOT NULL,
+			status tinytext NOT NULL,
+			date datetime NOT NULL,
 			PRIMARY KEY  (consumer_id),
 			KEY user_id (user_id)
 			) CHARACTER SET utf8 COLLATE utf8_general_ci;";

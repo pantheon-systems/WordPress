@@ -72,6 +72,8 @@ class Affiliate_WP_MemberPress extends Affiliate_WP_Base {
 				return; // Referrals are disabled on this membership
 			}
 
+			$this->email = $user->user_email;
+
 			// Set the base amount from the transaction at the top of the stack.
 			$amount = $txn->amount;
 

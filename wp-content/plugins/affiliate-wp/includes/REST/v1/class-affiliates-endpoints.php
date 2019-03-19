@@ -102,6 +102,7 @@ class Endpoints extends Controller {
 		$args['exclude']      = isset( $request['exclude'] )      ? $request['exclude'] : array();
 		$args['affiliate_id'] = isset( $request['affiliate_id'] ) ? $request['affiliate_id'] : 0;
 		$args['user_id']      = isset( $request['user_id'] )      ? $request['user_id'] : 0;
+		$args['rest_id']      = isset( $request['rest_id'] )      ? $request['rest_id'] : '';
 		$args['status']       = isset( $request['status'] )       ? $request['status'] : '';
 		$args['order']        = isset( $request['order'] )        ? $request['order'] : 'ASC';
 		$args['orderby']      = isset( $request['orderby'] )      ? $request['orderby'] : '';
@@ -300,6 +301,10 @@ class Endpoints extends Controller {
 				'user_id'         => array(
 					'description' => __( 'ID for the user account associated with the affiliate.', 'affiliate-wp' ),
 					'type'        => 'integer',
+				),
+				'rest_id'         => array(
+					'description' => __( 'REST ID (site:affiliate ID combination).', 'affiliate-wp' ),
+					'type'        => 'string',
 				),
 				'rate'            => array(
 					'description'       => __( 'The affiliate rate.', 'affiliate-wp' ),

@@ -30,6 +30,15 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	public $query_object_type = 'AffWP\Referral';
 
 	/**
+	 * Referral types registry.
+	 *
+	 * @since 2.2
+	 * @access public
+	 * @var object
+	 */
+	public $types_registry;
+
+	/**
 	 * Get things started
 	 *
 	 * @access  public
@@ -45,12 +54,15 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$this->table_name  = $wpdb->prefix . 'affiliate_wp_referrals';
 		}
 		$this->primary_key = 'referral_id';
-		$this->version     = '1.1';
+		$this->version     = '1.2';
 
 		// REST endpoints.
 		if ( version_compare( $wp_version, '4.4', '>=' ) ) {
 			$this->REST = new \AffWP\Referral\REST\v1\Endpoints;
 		}
+
+		$this->types_registry = new AffWP\Utils\Referral_Types\Registry;
+		$this->types_registry->init();
 	}
 
 	/**
@@ -79,6 +91,9 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			'referral_id' => '%d',
 			'affiliate_id'=> '%d',
 			'visit_id'    => '%d',
+			'rest_id'     => '%s',
+			'customer_id' => '%d',
+			'parent_id'   => '%d',
 			'description' => '%s',
 			'status'      => '%s',
 			'amount'      => '%s',
@@ -89,6 +104,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			'reference'   => '%s',
 			'products'    => '%s',
 			'payout_id'   => '%d',
+			'type'        => '%s',
 			'date'        => '%s',
 		);
 	}
@@ -102,8 +118,11 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	public function get_column_defaults() {
 		return array(
 			'affiliate_id' => 0,
+			'customer_id'  => 0,
+			'parent_id'    => 0,
 			'date'         => gmdate( 'Y-m-d H:i:s' ),
-			'currency'     => affwp_get_currency()
+			'currency'     => affwp_get_currency(),
+			'type'         => 'sale',
 		);
 	}
 
@@ -125,7 +144,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		$defaults = array(
 			'status' => 'pending',
-			'amount' => 0
+			'amount' => 0,
+			'type'   => 'sale'
 		);
 
 		$args = wp_parse_args( $data, $defaults );
@@ -144,8 +164,24 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$args['products'] = maybe_serialize( $args['products'] );
 		}
 
+		if( empty( $args['description'] ) ) {
+			$args['description'] = ''; // Force description to empty string. NULL values won't work. See https://github.com/AffiliateWP/AffiliateWP/issues/2672
+		}
+
 		if ( ! empty( $args['custom'] ) ) {
 			$args['custom']	 = maybe_serialize( $args['custom'] );
+		}
+
+		$rest_id_error = false;
+
+		if ( ! empty( $args['rest_id'] ) ) {
+			if ( ! affwp_validate_rest_id( $args['rest_id'] ) ) {
+				$rest_id_error = true;
+
+				unset( $args['rest_id'] );
+			} else {
+				$args['rest_id'] = sanitize_text_field( $args['rest_id'] );
+			}
 		}
 
 		if ( empty( $args['date'] ) ) {
@@ -155,6 +191,12 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 			$args['date'] = gmdate( 'Y-m-d H:i:s', $time - affiliate_wp()->utils->wp_offset );
 		}
+
+		if( ! empty( $args['type'] ) && ! $this->types_registry->get_type( $args['type'] ) ) {
+			$args['type'] = 'sale';
+		}
+
+		$args['customer_id'] = $this->setup_customer( $args );
 
 		$add = $this->insert( $args, 'referral' );
 
@@ -168,6 +210,13 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			 * @param int $add Referral ID.
 			 */
 			do_action( 'affwp_insert_referral', $add );
+
+			if ( false !== $rest_id_error ) {
+				affiliate_wp()->utils->log( sprintf( 'REST ID %1$s for new referral #%2$d is invalid.',
+					$rest_id_error,
+					$add
+				) );
+			}
 
 			return $add;
 		}
@@ -202,8 +251,15 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			$args['date'] = gmdate( 'Y-m-d H:i:s', $timestamp );
 		}
 
+		if ( ! empty( $data['rest_id'] ) && is_string( $data['rest_id'] ) && $data['rest_id'] !== $referral->rest_id ) {
+			if ( false !== strpos( $data['rest_id'], ':' ) ) {
+				$args['rest_id'] = sanitize_text_field( $data['rest_id'] );
+			}
+		}
+
 		$args['affiliate_id']  = ! empty( $data['affiliate_id' ] ) ? absint( $data['affiliate_id'] )             : $referral->affiliate_id;
 		$args['visit_id']      = ! empty( $data['visit_id' ] )     ? absint( $data['visit_id'] )                 : $referral->visit_id;
+		$args['customer_id']   = ! empty( $data['customer_id' ] )  ? absint( $data['customer_id'] )              : $referral->customer_id;
 		$args['description']   = ! empty( $data['description' ] )  ? sanitize_text_field( $data['description'] ) : '';
 		$args['amount']        = ! empty( $data['amount'] )        ? affwp_sanitize_amount( $data['amount'] )    : $referral->amount;
 		$args['currency']      = ! empty( $data['currency'] )      ? sanitize_text_field( $data['currency'] )    : '';
@@ -211,6 +267,12 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		$args['context']       = ! empty( $data['context'] )       ? sanitize_text_field( $data['context'] )     : '';
 		$args['campaign']      = ! empty( $data['campaign'] )      ? sanitize_text_field( $data['campaign'] )    : '';
 		$args['reference']     = ! empty( $data['reference'] )     ? sanitize_text_field( $data['reference'] )   : '';
+		$args['type']          = ! empty( $data['type'] )          ? sanitize_text_field( $data['type'] )        : '';
+		$args['parent_id']     = ! empty( $data['parent_id'] )     ? absint( $data['parent_id'] )                : $referral->parent_id;
+
+		if( ! empty( $args['type'] ) && ! $this->types_registry->get_type( $args['type'] ) ) {
+			$args['type'] = 'sale';
+		}
 
 		/*
 		 * Deliberately defer updating the status – it will be updated instead
@@ -314,6 +376,8 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *     @type int          $offset         Number of referrals to offset in the query. Default 0.
 	 *     @type int|array    $referral_id    Specific referral ID or array of IDs to query for. Default 0 (all).
 	 *     @type int|array    $affiliate_id   Affiliate ID or array of IDs to query referrals for. Default 0 (all).
+	 *     @type int|array    $customer_id    Customer ID or array of IDs to query referrals for. Default 0 (all).
+	 *     @type int|array    $parent_id      Parent ID or array of IDs to query referrals for. Default 0 (all).
 	 *     @type int|array    $payout_id      Payout ID or array of IDs to query referrals for. Default 0 (all).
 	 *     @type float|array  $amount {
 	 *         Specific amount to query for or min/max range. If float, can be used with `$amount_compare`.
@@ -334,6 +398,7 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	 *                                        Default empty.
 	 *     @type string       $context        Specific context to query referrals for. Default empty.
 	 *     @type string       $campaign       Specific campaign to query referrals for. Default empty.
+	 *     @type string       $type           Specific referral type to query referrals for. Default empty.
 	 *     @type string       $description    Description to search referrals for. Fuzzy matching is permitted when
 	 *                                        `$search` is true.
 	 *     @type string|array $status         Referral status or array of statuses to query referrals for.
@@ -359,12 +424,15 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 			'referral_id'    => 0,
 			'payout_id'      => 0,
 			'affiliate_id'   => 0,
+			'customer_id'    => 0,
+			'parent_id'      => 0,
 			'amount'         => 0,
 			'amount_compare' => '=',
 			'description'    => '',
 			'reference'      => '',
 			'context'        => '',
 			'campaign'       => '',
+			'type'           => '',
 			'status'         => '',
 			'orderby'        => 'referral_id',
 			'order'          => 'DESC',
@@ -383,18 +451,22 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		// Specific referrals
 		if( ! empty( $args['referral_id'] ) ) {
 
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
 			if( is_array( $args['referral_id'] ) ) {
 				$referral_ids = implode( ',', array_map( 'intval', $args['referral_id'] ) );
 			} else {
 				$referral_ids = intval( $args['referral_id'] );
 			}
 
-			$where .= "WHERE `referral_id` IN( {$referral_ids} ) ";
+			$where .= "`referral_id` IN( {$referral_ids} ) ";
 
 		}
 
 		// Referrals for specific affiliates
 		if( ! empty( $args['affiliate_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
 
 			if( is_array( $args['affiliate_id'] ) ) {
 				$affiliate_ids = implode( ',', array_map( 'intval', $args['affiliate_id'] ) );
@@ -402,12 +474,29 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				$affiliate_ids = intval( $args['affiliate_id'] );
 			}
 
-			$where .= "WHERE `affiliate_id` IN( {$affiliate_ids} ) ";
+			$where .= "`affiliate_id` IN( {$affiliate_ids} ) ";
+
+		}
+
+		// Referrals for specific customers
+		if( ! empty( $args['customer_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if( is_array( $args['customer_id'] ) ) {
+				$customer_ids = implode( ',', array_map( 'intval', $args['customer_id'] ) );
+			} else {
+				$customer_ids = intval( $args['customer_id'] );
+			}
+
+			$where .= "`customer_id` IN( {$customer_ids} ) ";
 
 		}
 
 		// Referrals for specific payouts
 		if( ! empty( $args['payout_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
 
 			if( is_array( $args['payout_id'] ) ) {
 				$payout_ids = implode( ',', array_map( 'intval', $args['payout_id'] ) );
@@ -415,7 +504,22 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				$payout_ids = intval( $args['payout_id'] );
 			}
 
-			$where .= "WHERE `payout_id` IN( {$payout_ids} ) ";
+			$where .= "`payout_id` IN( {$payout_ids} ) ";
+
+		}
+
+		// Referrals for specific parent_ids
+		if( ! empty( $args['parent_id'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if( is_array( $args['parent_id'] ) ) {
+				$parent_ids = implode( ',', array_map( 'intval', $args['parent_id'] ) );
+			} else {
+				$parent_ids = intval( $args['parent_id'] );
+			}
+
+			$where .= "`parent_id` IN( {$parent_ids} ) ";
 
 		}
 
@@ -520,6 +624,25 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 
 		}
 
+		if( ! empty( $args['type'] ) ) {
+
+			$where .= empty( $where ) ? "WHERE " : "AND ";
+
+			if( is_array( $args['type'] ) ) {
+				$where .= "`type` IN(" . implode( ',', array_map( 'esc_sql', $args['type'] ) ) . ") ";
+			} else {
+				$type = esc_sql( $args['type'] );
+
+				if ( ! empty( $args['search'] ) ) {
+					$where .= "`type` LIKE '%%" . $type . "%%' ";
+				} else {
+					$where .= "`type` = '" . $type . "' ";
+				}
+			}
+
+		}
+
+
 		// Description.
 		if( ! empty( $args['description'] ) ) {
 
@@ -533,6 +656,10 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 				$where .= "`description` = '" . $description . "' ";
 			}
 		}
+
+		// Select valid referrals only
+		$where .= empty( $where ) ? "WHERE " : "AND ";
+		$where .= "`$this->primary_key` > 0";
 
 		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->primary_key;
 
@@ -830,6 +957,81 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 	}
 
 	/**
+	 * Set up the customer_id key for the args array.
+	 *
+	 * A customer record will be created if it does not already exist.
+	 *
+	 * @since 2.2
+	 *
+	 * @param array $args {
+	 *     Optional. Arguments for setting up the customer record.
+	 *
+	 *     @type int    $customer_id ID of an existing customer record to attribute the referral to.
+	 *     @type string $email       Email address for the customer.
+	 * }
+	 * @return int The ID of the customer record for the referral.
+	 */
+	private function setup_customer( $args = array() ) {
+
+		$existing      = false;
+		$customer_id   = 0;
+
+		if( ! isset( $args['customer'] ) ) {
+			return $customer_id;
+		}
+
+		if( ! empty( $args['customer_id'] ) ) {
+
+			// Ensure the provided customer ID exists
+			$customer = affwp_get_customer( absint( $args['customer_id'] ) );
+
+			if( $customer ) {
+				$existing    = true;
+				$customer_id = $customer->customer_id;
+			}
+
+		}
+
+		if( ! $existing && is_array( $args['customer'] ) && ! empty( $args['customer']['email'] ) ) {
+
+			$customer = affiliate_wp()->customers->get_by( 'email', $args['customer']['email'] );
+
+			if( $customer ) {
+				$existing = true;
+				$customer_id = $customer->customer_id;
+			}
+
+		}
+
+		if( $existing ) {
+
+			// Update the customer record
+			$args['customer_id'] = $customer_id;
+
+			if ( ! $customer->user_id ) {
+
+				$user = get_user_by( 'email', $customer->email );
+
+				if ( $user ) {
+
+					$args['user_id'] = $user->ID;
+
+				}
+			}
+
+			affwp_update_customer( $args );
+
+		} else {
+
+			// Create a new customer record
+			$customer_id = affiliate_wp()->customers->add( $args['customer'] );
+
+		}
+
+		return $customer_id;
+	}
+
+	/**
 	 * Create the table
 	 *
 	 * @access  public
@@ -845,13 +1047,17 @@ class Affiliate_WP_Referrals_DB extends Affiliate_WP_DB  {
 		referral_id bigint(20) NOT NULL AUTO_INCREMENT,
 		affiliate_id bigint(20) NOT NULL,
 		visit_id bigint(20) NOT NULL,
+		rest_id mediumtext NOT NULL,
+		customer_id bigint(20) NOT NULL,
+		parent_id bigint(20) NOT NULL,
 		description longtext NOT NULL,
 		status tinytext NOT NULL,
 		amount mediumtext NOT NULL,
 		currency char(3) NOT NULL,
 		custom longtext NOT NULL,
 		context tinytext NOT NULL,
-		campaign varchar(30) NOT NULL,
+		campaign varchar(50) NOT NULL,
+		type varchar(30) NOT NULL,
 		reference mediumtext NOT NULL,
 		products mediumtext NOT NULL,
 		payout_id bigint(20) NOT NULL,

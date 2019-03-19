@@ -22,6 +22,10 @@ function affwp_process_add_affiliate( $data ) {
 		wp_die( __( 'You do not have permission to manage affiliates', 'affiliate-wp' ), __( 'Error', 'affiliate-wp' ), array( 'response' => 403 ) );
 	}
 
+	if ( ! username_exists( $data['user_name'] ) && is_numeric( $data['user_name'] ) ) {
+		$errors[ 'invalid_username_numeric' ] = __( 'Invalid user login name. User login name must include at least one letter', 'affiliate_wp' );
+	}
+
 	if ( ! username_exists( $data['user_name'] ) && mb_strlen( $data['user_name'] ) < 4 || mb_strlen( $data['user_name'] ) > 60 ) {
 		$errors[ 'invalid_username'] = __( 'Invalid user login name. Must be between 4 and 60 characters.', 'affiliate-wp' );
 	}
@@ -51,9 +55,9 @@ function affwp_process_add_affiliate( $data ) {
 		if( isset( $errors ) ) {
 
 			echo '<div class="error">';
-				foreach( $errors as $error ) {
-					echo '<p>' . $error . '</p>';
-				}
+			foreach( $errors as $error ) {
+				echo '<p>' . $error . '</p>';
+			}
 			echo '</div>';
 
 		}

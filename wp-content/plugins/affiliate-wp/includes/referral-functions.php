@@ -226,9 +226,11 @@ function affwp_add_referral( $data = array() ) {
 		'amount'       => ! empty( $data['amount'] )      ? sanitize_text_field( $data['amount'] )      : '',
 		'description'  => ! empty( $data['description'] ) ? sanitize_text_field( $data['description'] ) : '',
 		'reference'    => ! empty( $data['reference'] )   ? sanitize_text_field( $data['reference'] )   : '',
+		'parent_id'    => ! empty( $data['parent_id'] )   ? absint( $data['parent_id'] )                : '',
 		'context'      => ! empty( $data['context'] )     ? sanitize_text_field( $data['context'] )     : '',
 		'custom'       => ! empty( $data['custom'] )      ? $data['custom']                             : '',
 		'date'         => ! empty( $data['date'] )        ? $data['date']                               : '',
+		'type'         => ! empty( $data['type'] )        ? $data['type']                               : '',
 		'status'       => 'pending',
 	);
 
@@ -309,9 +311,10 @@ function affwp_delete_referral( $referral ) {
  * @param  int     $reference
  * @param  string  $rate
  * @param  int     $product_id
+ * @param  string  $context
  * @return float
  */
-function affwp_calc_referral_amount( $amount = '', $affiliate_id = 0, $reference = 0, $rate = '', $product_id = 0 ) {
+function affwp_calc_referral_amount( $amount = '', $affiliate_id = 0, $reference = 0, $rate = '', $product_id = 0, $context = '' ) {
 
 	$rate     = affwp_get_affiliate_rate( $affiliate_id, false, $rate, $reference );
 	$type     = affwp_get_affiliate_rate_type( $affiliate_id );
@@ -323,7 +326,7 @@ function affwp_calc_referral_amount( $amount = '', $affiliate_id = 0, $reference
 		$referral_amount = 0;
 	}
 
-	return (string) apply_filters( 'affwp_calc_referral_amount', $referral_amount, $affiliate_id, $amount, $reference, $product_id );
+	return (string) apply_filters( 'affwp_calc_referral_amount', $referral_amount, $affiliate_id, $amount, $reference, $product_id, $context );
 
 }
 
@@ -415,4 +418,17 @@ function affwp_is_url_banned( $url ) {
 	 * @param string $url    The URL check for ban status.
 	 */
 	return apply_filters( 'affwp_is_url_banned', $banned, $url );
+}
+
+/**
+ * Sanitize the given referral rate.
+ *
+ * @since 2.2.11
+ *
+ * @param string $rate The referral rate to sanitize.
+ *
+ * @return string The sanitized referral rate.
+ */
+function affwp_sanitize_referral_rate( $rate ) {
+	return preg_replace( '/[^0-9\.]/', '', $rate );
 }

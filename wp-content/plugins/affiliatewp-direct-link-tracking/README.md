@@ -3,6 +3,9 @@ Direct Link Tracking
 
 Allow affiliates to link directly to your site, from their site, without the need for an affiliate link
 
+= Version 1.1.3, May 2nd, 2018
+* Fix: PHP Error Notice: Trying to get property of non-object
+
 = Version 1.1.2, November 1st, 2017
 * New: The "Direct Links" tab now shows within the Affiliate Area Tabs add-on. Affiliate Area Tabs v1.1.6 and AffiliateWP v2.1.7 required.
 * Fix: PHP Notice when adding a new direct link from the admin

@@ -111,8 +111,12 @@ class Affiliate_WP_Register {
 				$this->add_error( 'payment_email_invalid', __( 'Invalid payment email', 'affiliate-wp' ) );
 			}
 
-			if ( ( ! empty( $_POST['affwp_user_pass'] ) && empty( $_POST['affwp_user_pass2'] ) ) || ( $_POST['affwp_user_pass'] !== $_POST['affwp_user_pass2'] ) ) {
-				$this->add_error( 'password_mismatch', __( 'Passwords do not match', 'affiliate-wp' ) );
+			$required_registration_fields = affiliate_wp()->settings->get( 'required_registration_fields' );
+
+			if( isset( $required_registration_fields['password'] ) ) {
+				if ( ( ! empty( $_POST['affwp_user_pass'] ) && empty( $_POST['affwp_user_pass2'] ) ) || ( $_POST['affwp_user_pass'] !== $_POST['affwp_user_pass2'] ) ) {
+					$this->add_error( 'password_mismatch', __( 'Passwords do not match', 'affiliate-wp' ) );
+				}
 			}
 
 		} else {
@@ -222,11 +226,6 @@ class Affiliate_WP_Register {
 			'affwp_user_url' 	=> array(
 				'error_id'      => 'invalid_url',
 				'error_message' => __( 'Please enter a website URL', 'affiliate-wp' )
-			),
-			'affwp_user_pass' 	=> array(
-				'error_id'      => 'empty_password',
-				'error_message' => __( 'Please enter a password', 'affiliate-wp' ),
-				'logged_out'    => true
 			)
 		);
 
@@ -282,6 +281,13 @@ class Affiliate_WP_Register {
 			$required_fields['affwp_promotion_method']['logged_out']    = true;
 		}
 
+		// Password
+		if ( isset( $required_registration_fields['password'] ) ) {
+			$required_fields['affwp_user_pass']['error_id']      = 'empty_password';
+			$required_fields['affwp_user_pass']['error_message'] = __( 'Please enter a password', 'affiliate-wp' );
+			$required_fields['affwp_user_pass']['logged_out']    = true;
+		}
+
 		return $required_fields;
 
 	}
@@ -302,16 +308,27 @@ class Affiliate_WP_Register {
 			$user_last  = '';
 		}
 
+		$required_registration_fields = affiliate_wp()->settings->get( 'required_registration_fields' );
+
+		if ( isset( $required_registration_fields['password'] ) ) {
+			$user_pass = sanitize_text_field( $_POST['affwp_user_pass'] );
+		} else {
+			$user_pass = wp_generate_password( 24 );
+		}
+
 		if ( ! is_user_logged_in() ) {
 
 			$args = array(
 				'user_login'    => sanitize_text_field( $_POST['affwp_user_login'] ),
 				'user_email'    => sanitize_text_field( $_POST['affwp_user_email'] ),
-				'user_pass'     => sanitize_text_field( $_POST['affwp_user_pass'] ),
+				'user_pass'     => $user_pass,
 				'display_name'  => $user_first . ' ' . $user_last
 			);
 
 			$user_id = wp_insert_user( $args );
+
+			// Enable referral notifications by default for new users.
+			update_user_meta( $user_id, 'affwp_referral_notifications', true );
 
 		} else {
 
