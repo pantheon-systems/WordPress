@@ -2,6 +2,8 @@
 /**
  * @var string $tabUrl Fully qualified URL of the "Plugins" tab.
  */
+
+do_action('admin_menu_editor-display_header');
 ?>
 
 <div id="ame-plugin-visibility-editor">
@@ -141,3 +143,5 @@
 		</table>
 
 	</div> <!-- /module container -->
+
+<?php do_action('admin_menu_editor-display_footer'); ?>

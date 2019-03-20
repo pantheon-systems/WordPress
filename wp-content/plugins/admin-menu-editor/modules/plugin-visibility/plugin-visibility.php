@@ -1,32 +1,23 @@
 <?php
-class amePluginVisibility extends amePersistentModule {
+class amePluginVisibility {
+	const OPTION_NAME = 'ws_ame_plugin_visibility';
+	const TAB_SLUG = 'plugin-visibility';
+
 	const HIDE_USAGE_NOTICE_FLAG = 'ws_ame_hide_pv_notice';
-
-	protected $optionName = 'ws_ame_plugin_visibility';
-
-	protected $tabSlug = 'plugin-visibility';
-	protected $tabTitle = 'Plugins';
-	protected $tabOrder = 20;
-
-	protected $defaultSettings = array(
-		'plugins' => array(),
-		'grantAccessByDefault' => array(),
-	);
 
 	private static $lastInstance = null;
 
 	/**
-	 * @var Ajaw_v1_Action
+	 * @var WPMenuEditor
 	 */
+	private $menuEditor;
+	private $settings = array();
+
 	private $dismissNoticeAction;
 
 	public function __construct($menuEditor) {
-		parent::__construct($menuEditor);
+		$this->menuEditor = $menuEditor;
 		self::$lastInstance = $this;
-
-		if ( !$this->isEnabledForRequest() ) {
-			return;
-		}
 
 		//Remove "hidden" plugins from the list on the "Plugins -> Installed Plugins" page.
 		add_filter('all_plugins', array($this, 'filterPluginList'), 15);
@@ -37,7 +28,13 @@ class amePluginVisibility extends amePersistentModule {
 		add_action('check_admin_referer', array($this, 'authorizePluginAction'));
 
 		//Register the plugin visibility tab.
+		add_action('admin_menu_editor-tabs', array($this, 'addSettingsTab'), 20);
+		add_action('admin_menu_editor-section-' . self::TAB_SLUG, array($this, 'displayUi'));
 		add_action('admin_menu_editor-header', array($this, 'handleFormSubmission'), 10, 2);
+
+		//Enqueue scripts and styles.
+		add_action('admin_menu_editor-enqueue_scripts-' . self::TAB_SLUG, array($this, 'enqueueScripts'));
+		add_action('admin_menu_editor-enqueue_styles-' . self::TAB_SLUG, array($this, 'enqueueStyles'));
 
 		//Display a usage hint in our tab.
 		add_action('admin_notices', array($this, 'displayUsageNotice'));
@@ -46,6 +43,44 @@ class amePluginVisibility extends amePersistentModule {
 			->permissionCallback(array($this->menuEditor, 'current_user_can_edit_menu'))
 			->method('post')
 			->register();
+	}
+
+	public function getSettings() {
+		if (!empty($this->settings)) {
+			return $this->settings;
+		}
+
+		if ( $this->menuEditor->get_plugin_option('menu_config_scope') === 'site' ) {
+			$json = get_option(self::OPTION_NAME, null);
+		} else {
+			$json = get_site_option(self::OPTION_NAME, null);
+		}
+
+		if ( is_string($json) ) {
+			$settings = json_decode($json, true);
+		} else {
+			$settings = array();
+		}
+
+		$this->settings = array_merge(
+			array(
+				'plugins' => array(),
+				'grantAccessByDefault' => array(),
+			),
+			$settings
+		);
+
+		return $this->settings;
+	}
+
+	private function saveSettings() {
+		//Save per site or site-wide based on plugin configuration.
+		$settings = json_encode($this->settings);
+		if ($this->menuEditor->get_plugin_option('menu_config_scope') === 'site') {
+			update_option(self::OPTION_NAME, $settings);
+		} else {
+			WPMenuEditor::atomic_update_site_option(self::OPTION_NAME, $settings);
+		}
 	}
 
 	/**
@@ -72,7 +107,7 @@ class amePluginVisibility extends amePersistentModule {
 		if ($user === null) {
 			$user = wp_get_current_user();
 		}
-		$settings = $this->loadSettings();
+		$settings = $this->getSettings();
 
 		//Do we have custom settings for this plugin?
 		if (isset($settings['plugins'][$pluginFileName])) {
@@ -155,7 +190,7 @@ class amePluginVisibility extends amePersistentModule {
 	 */
 	public function filterPluginList($plugins) {
 		$user = wp_get_current_user();
-		$settings = $this->loadSettings();
+		$settings = $this->getSettings();
 
 		//Don't try to hide plugins outside the WP admin. It prevents WP-CLI from seeing all installed plugins.
 		if ( !$user->exists() || !is_admin() ) {
@@ -253,14 +288,15 @@ class amePluginVisibility extends amePersistentModule {
 	}
 
 	public function addSettingsTab($tabs) {
-		$tabs[$this->tabSlug] = 'Plugins';
+		$tabs[self::TAB_SLUG] = 'Plugins';
 		return $tabs;
 	}
 
-	protected function getTemplateVariables($templateName) {
-		$result = parent::getTemplateVariables($templateName);
-		$result['tabUrl'] = $this->getTabUrl();
-		return $result;
+	public function displayUi() {
+		/** @noinspection PhpUnusedLocalVariableInspection Used in the "action" attribute of the settings form. */
+		$tabUrl = $this->getTabUrl();
+
+		require dirname(__FILE__) . '/plugin-visibility-template.php';
 	}
 
 	public function handleFormSubmission($action, $post = array()) {
@@ -283,7 +319,15 @@ class amePluginVisibility extends amePersistentModule {
 		}
 	}
 
-	public function enqueueTabScripts() {
+	private function getTabUrl($queryParameters = array()) {
+		$queryParameters = array_merge(
+			array('sub_section' => self::TAB_SLUG),
+			$queryParameters
+		);
+		return $this->menuEditor->get_plugin_page_url($queryParameters);
+	}
+
+	public function enqueueScripts() {
 		wp_register_auto_versioned_script(
 			'ame-plugin-visibility',
 			plugins_url('plugin-visibility.js', __FILE__),
@@ -341,7 +385,7 @@ class amePluginVisibility extends amePersistentModule {
 		}
 
 		return array(
-			'settings' => $this->loadSettings(),
+			'settings' => $this->getSettings(),
 			'installedPlugins' => $plugins,
 			'canManagePlugins' => $canManagePlugins,
 			'isMultisite' => is_multisite(),
@@ -349,7 +393,7 @@ class amePluginVisibility extends amePersistentModule {
 		);
 	}
 
-	public function enqueueTabStyles() {
+	public function enqueueStyles() {
 		wp_enqueue_auto_versioned_style(
 			'ame-plugin-visibility-css',
 			plugins_url('plugin-visibility.css', __FILE__)
@@ -357,12 +401,12 @@ class amePluginVisibility extends amePersistentModule {
 	}
 
 	public function displayUsageNotice() {
-		if ( !$this->menuEditor->is_tab_open($this->tabSlug) ) {
+		if ( !$this->menuEditor->is_tab_open(self::TAB_SLUG) ) {
 			return;
 		}
 
 		//If the user has already made some changes, they probably don't need to see this notice any more.
-		$settings = $this->loadSettings();
+		$settings = $this->getSettings();
 		if ( !empty($settings['plugins']) ) {
 			return;
 		}
@@ -401,7 +445,7 @@ class amePluginVisibility extends amePersistentModule {
 	 * @param string $pluginFile
 	 */
 	public function forgetPlugin($pluginFile) {
-		$settings = $this->loadSettings();
+		$settings = $this->getSettings();
 		unset($settings['plugins'][$pluginFile]);
 		$this->settings = $settings;
 		$this->saveSettings();

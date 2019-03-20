@@ -18,8 +18,6 @@ abstract class ameModule {
 		$this->menuEditor = $menuEditor;
 
 		if ( class_exists('ReflectionClass', false) ) {
-			//This should never throw an exception since the current class must exist for this constructor to be run.
-			/** @noinspection PhpUnhandledExceptionInspection */
 			$reflector = new ReflectionClass(get_class($this));
 			$this->moduleDir = dirname($reflector->getFileName());
 			$this->moduleId = basename($this->moduleDir);
@@ -148,13 +146,5 @@ abstract class ameModule {
 		} else {
 			WPMenuEditor::atomic_update_site_option($name, $value);
 		}
-	}
-
-	public function getModuleId() {
-		return $this->moduleId;
-	}
-
-	public function getTabTitle() {
-		return $this->tabTitle;
 	}
 }

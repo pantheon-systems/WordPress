@@ -583,15 +583,13 @@ input.date{
 }
 
 #d-schedule-3 .block,
-#d-schedule-4 .block,
-#d-schedule-5 .block {
+#d-schedule-4 .block {
     margin-left: 20px;
     margin-right: 5px;
 }
 
 #d-schedule-3 .block.disabled,
-#d-schedule-4 .block.disabled,
-#d-schedule-5 .block.disabled {
+#d-schedule-4 .block.disabled {
     pointer-events: none;
     opacity: 0.7;
 }
@@ -905,19 +903,4 @@ input.date{
     position: absolute;
     top: 5px;
     right: 5px;
-}
-
-.pdf_two_col_block {
-    display: inline-block;
-    width: 48%;
-    vertical-align: top;
-}
-
-.pdf_two_col_block input[type=number]{
-    width: 40%;
-}
-
-#unselected_fields_list {
-    overflow-y: scroll;
-    height: 700px;
 }

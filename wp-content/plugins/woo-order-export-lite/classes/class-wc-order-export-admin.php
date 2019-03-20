@@ -7,7 +7,7 @@ class WC_Order_Export_Admin {
 	const settings_name_common = 'woocommerce-order-export-common';
 	var $activation_notice_option = 'woocommerce-order-export-activation-notice-shown';
 	var $step = 30;
-	public static $formats = array( 'XLS', 'CSV', 'XML', 'JSON', 'TSV', 'PDF' );
+	public static $formats = array( 'XLS', 'CSV', 'XML', 'JSON', 'TSV' );
 	public static $export_types = array( 'EMAIL', 'FTP', 'HTTP', 'FOLDER', 'SFTP', 'ZAPIER' );
 	public $url_plugin;
 	public $path_plugin;
@@ -24,7 +24,7 @@ class WC_Order_Export_Admin {
 			// load scripts on our pages only
 			if ( isset( $_GET['page'] ) && $_GET['page'] == 'wc-order-export' ) {
 				add_action( 'admin_enqueue_scripts', array( $this, 'thematic_enqueue_scripts' ) );
-				add_filter( 'script_loader_src', array( $this, 'script_loader_src' ), 999, 2 );
+				add_filter( 'script_loader_src', array( $this, 'script_loader_src' ), 10, 2 );
 			}
 			add_action( 'wp_ajax_order_exporter', array( $this, 'ajax_gate' ) );
 
@@ -70,7 +70,10 @@ class WC_Order_Export_Admin {
 			add_action( 'woocommerce_order_status_changed', array( $this, 'wc_order_status_changed' ), 10, 3 );
 			// activate CRON hook if it was removed
 			add_action( 'wp_loaded', function () {
-				WC_Order_Export_Cron::try_install_job();
+				$all_jobs = WC_Order_Export_Manage::get_export_settings_collection( WC_Order_Export_Manage::EXPORT_SCHEDULE );
+				if ( $all_jobs ) {
+					WC_Order_Export_Cron::install_job();
+				}
 			} );
 		}
 
@@ -118,8 +121,9 @@ class WC_Order_Export_Admin {
 	}
 
 	public function install() {
+		//wp_clear_scheduled_hook( "wc_export_cron_global" ); //debug
 		if ( self::is_full_version() ) {
-			WC_Order_Export_Cron::try_install_job();
+			WC_Order_Export_Cron::install_job();
 		}
 	}
 
@@ -130,7 +134,7 @@ class WC_Order_Export_Admin {
 					'woo-order-export-lite' ); ?></p>
         </div>
 		<?php
-		update_option( $this->activation_notice_option, true, false );
+		update_option( $this->activation_notice_option, true, false);
 	}
 
 	public function add_action_links( $links ) {
@@ -259,16 +263,6 @@ class WC_Order_Export_Admin {
 
 	public function render_tab_order_actions() {
 		$wc_oe     = isset( $_REQUEST['wc_oe'] ) ? $_REQUEST['wc_oe'] : '';
-
-		if (in_array($wc_oe, array(
-		    'copy_action',
-		    'delete',
-		    'change_status',
-		    'change_statuses',
-		)) && !check_admin_referer( 'woe_nonce', 'woe_nonce' )) {
-		    return;
-		}
-
 		$ajaxurl   = admin_url( 'admin-ajax.php' );
 		$mode      = WC_Order_Export_Manage::EXPORT_ORDER_ACTION;
 		$all_items = WC_Order_Export_Manage::get_export_settings_collection( $mode );
@@ -305,6 +299,10 @@ class WC_Order_Export_Admin {
 				}
 				$item_id                                   = $_REQUEST['action_id'];
 				WC_Order_Export_Manage::$edit_existing_job = true;
+				$clone                                     = isset( $_REQUEST['clone'] ) ? $_REQUEST['clone'] : '';
+				if ( $clone ) {
+					$item_id = WC_Order_Export_Manage::clone_export_settings( $mode, $item_id );
+				}
 				$this->render( 'settings-form', array(
 					'mode'            => $mode,
 					'id'              => $item_id,
@@ -314,23 +312,6 @@ class WC_Order_Export_Admin {
 				) );
 
 				return;
-			case 'copy_action':
-				if ( ! isset( $_REQUEST['action_id'] ) ) {
-					break;
-				}
-				$item_id = $_REQUEST['action_id'];
-				$item_id = WC_Order_Export_Manage::clone_export_settings( $mode, $item_id );
-
-				$url = add_query_arg( array(
-				    'action_id' => $item_id,
-				    'wc_oe'	=> 'edit_action',
-				));
-
-				$url = remove_query_arg(array('woe_nonce'), $url);
-
-				wp_redirect( $url );
-
-				return;
 			case 'delete':
 				if ( ! isset( $_REQUEST['action_id'] ) ) {
 					break;
@@ -338,10 +319,6 @@ class WC_Order_Export_Admin {
 				$item_id = $_REQUEST['action_id'];
 				unset( $all_items[ $item_id ] );
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_items );
-
-				$url = remove_query_arg( array( 'wc_oe', 'action_id', 'woe_nonce' ) );
-				wp_redirect( $url );
-
 				break;
 			case 'change_status':
 				if ( ! isset( $_REQUEST['action_id'] ) ) {
@@ -350,7 +327,7 @@ class WC_Order_Export_Admin {
 				$item_id                         = $_REQUEST['action_id'];
 				$all_items[ $item_id ]['active'] = $_REQUEST['status'];
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_items );
-				$url = remove_query_arg( array( 'wc_oe', 'action_id', 'status', 'woe_nonce' ) );
+				$url = remove_query_arg( array( 'wc_oe', 'action_id', 'status' ) );
 				wp_redirect( $url );
 				break;
 			case 'change_statuses':
@@ -370,7 +347,7 @@ class WC_Order_Export_Admin {
 					}
 				}
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_items );
-				$url = remove_query_arg( array( 'wc_oe', 'chosen_order_actions', 'doaction', 'woe_nonce' ) );
+				$url = remove_query_arg( array( 'wc_oe', 'chosen_order_actions', 'doaction' ) );
 				wp_redirect( $url );
 				break;
 		}
@@ -380,16 +357,6 @@ class WC_Order_Export_Admin {
 
 	public function render_tab_schedules() {
 		$wc_oe    = isset( $_REQUEST['wc_oe'] ) ? $_REQUEST['wc_oe'] : '';
-
-		if (in_array($wc_oe, array(
-		    'copy_schedule',
-		    'delete_schedule',
-		    'change_status_schedule',
-		    'change_status_schedules',
-		)) && !check_admin_referer( 'woe_nonce', 'woe_nonce' )) {
-		    return;
-		}
-
 		$ajaxurl  = admin_url( 'admin-ajax.php' );
 		$mode     = WC_Order_Export_Manage::EXPORT_SCHEDULE;
 		$all_jobs = WC_Order_Export_Manage::get_export_settings_collection( $mode );
@@ -419,6 +386,10 @@ class WC_Order_Export_Admin {
 				}
 				$schedule_id                               = $_REQUEST['schedule_id'];
 				WC_Order_Export_Manage::$edit_existing_job = true;
+				$clone                                     = isset( $_REQUEST['clone'] ) ? $_REQUEST['clone'] : '';
+				if ( $clone ) {
+					$schedule_id = WC_Order_Export_Manage::clone_export_settings( $mode, $schedule_id );
+				}
 				$this->render( 'settings-form', array(
 					'mode'            => $mode,
 					'id'              => $schedule_id,
@@ -428,23 +399,6 @@ class WC_Order_Export_Admin {
 				) );
 
 				return;
-			case 'copy_schedule':
-				if ( ! isset( $_REQUEST['schedule_id'] ) ) {
-					break;
-				}
-				$schedule_id = $_REQUEST['schedule_id'];
-				$schedule_id = WC_Order_Export_Manage::clone_export_settings( $mode, $schedule_id );
-
-				$url = add_query_arg( array(
-				    'schedule_id' => $schedule_id,
-				    'wc_oe'	 => 'edit_schedule',
-				));
-
-				$url = remove_query_arg(array('woe_nonce'), $url);
-
-				wp_redirect( $url );
-
-				return;
 			case 'delete_schedule':
 				if ( ! isset( $_REQUEST['schedule_id'] ) ) {
 					break;
@@ -452,10 +406,6 @@ class WC_Order_Export_Admin {
 				$schedule_id = $_REQUEST['schedule_id'];
 				unset( $all_jobs[ $schedule_id ] );
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_jobs );
-
-				$url = remove_query_arg( array( 'wc_oe', 'schedule_id', 'woe_nonce' ) );
-				wp_redirect( $url );
-
 				break;
 			case 'change_status_schedule':
 				if ( ! isset( $_REQUEST['schedule_id'] ) ) {
@@ -464,7 +414,7 @@ class WC_Order_Export_Admin {
 				$schedule_id                        = $_REQUEST['schedule_id'];
 				$all_jobs[ $schedule_id ]['active'] = $_REQUEST['status'];
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_jobs );
-				$url = remove_query_arg( array( 'wc_oe', 'schedule_id', 'status', 'woe_nonce' ) );
+				$url = remove_query_arg( array( 'wc_oe', 'schedule_id', 'status' ) );
 				wp_redirect( $url );
 				break;
 			case 'change_status_schedules':
@@ -484,7 +434,7 @@ class WC_Order_Export_Admin {
 					}
 				}
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_jobs );
-				$url = remove_query_arg( array( 'wc_oe', 'chosen_schedules', 'doaction', 'woe_nonce' ) );
+				$url = remove_query_arg( array( 'wc_oe', 'chosen_schedules', 'doaction' ) );
 				wp_redirect( $url );
 				break;
 		}
@@ -493,17 +443,6 @@ class WC_Order_Export_Admin {
 
 	public function render_tab_profiles() {
 		$wc_oe     = isset( $_REQUEST['wc_oe'] ) ? $_REQUEST['wc_oe'] : '';
-
-		if (in_array($wc_oe, array(
-		    'copy_profile',
-		    'copy_profile_to_scheduled',
-		    'copy_profile_to_actions',
-		    'delete_profile',
-		    'change_profile_statuses',
-		)) && !check_admin_referer( 'woe_nonce', 'woe_nonce' )) {
-		    return;
-		}
-
 		$ajaxurl   = admin_url( 'admin-ajax.php' );
 		$mode      = WC_Order_Export_Manage::EXPORT_PROFILE;
 		$all_items = WC_Order_Export_Manage::get_export_settings_collection( $mode );
@@ -533,6 +472,10 @@ class WC_Order_Export_Admin {
 				}
 				$profile_id                                = $_REQUEST['profile_id'];
 				WC_Order_Export_Manage::$edit_existing_job = true;
+				$clone                                     = isset( $_REQUEST['clone'] ) ? $_REQUEST['clone'] : '';
+				if ( $clone ) {
+					$profile_id = WC_Order_Export_Manage::clone_export_settings( $mode, $profile_id );
+				}
 				$this->render( 'settings-form', array(
 					'mode'            => $mode,
 					'id'              => $profile_id,
@@ -542,29 +485,11 @@ class WC_Order_Export_Admin {
 				) );
 
 				return;
-			case 'copy_profile':
-				if ( ! isset( $_REQUEST['profile_id'] ) ) {
-					break;
-				}
-
-				$profile_id = $_REQUEST['profile_id'];
-				$profile_id = WC_Order_Export_Manage::clone_export_settings( $mode, $profile_id );
-
-				$url = add_query_arg( array(
-				    'profile_id' => $profile_id,
-				    'wc_oe'	 => 'edit_profile',
-				));
-
-				$url = remove_query_arg(array('woe_nonce'), $url);
-
-				wp_redirect( $url );
-
-				return;
 			case 'copy_profile_to_scheduled':
 				$profile_id  = isset( $_REQUEST['profile_id'] ) ? $_REQUEST['profile_id'] : '';
 				$schedule_id = WC_Order_Export_Manage::advanced_clone_export_settings( $profile_id, $mode,
 					WC_Order_Export_Manage::EXPORT_SCHEDULE );
-				$url         = remove_query_arg( array('profile_id', 'woe_nonce') );
+				$url         = remove_query_arg( 'profile_id' );
 				$url         = add_query_arg( 'tab', 'schedules', $url );
 				$url         = add_query_arg( 'wc_oe', 'edit_schedule', $url );
 				$url         = add_query_arg( 'schedule_id', $schedule_id, $url );
@@ -574,7 +499,7 @@ class WC_Order_Export_Admin {
 				$profile_id  = isset( $_REQUEST['profile_id'] ) ? $_REQUEST['profile_id'] : '';
 				$schedule_id = WC_Order_Export_Manage::advanced_clone_export_settings( $profile_id, $mode,
 					WC_Order_Export_Manage::EXPORT_ORDER_ACTION );
-				$url         = remove_query_arg( array('profile_id', 'woe_nonce') );
+				$url         = remove_query_arg( 'profile_id' );
 				$url         = add_query_arg( 'tab', 'order_actions', $url );
 				$url         = add_query_arg( 'wc_oe', 'edit_action', $url );
 				$url         = add_query_arg( 'action_id', $schedule_id, $url );
@@ -587,10 +512,6 @@ class WC_Order_Export_Admin {
 				$profile_id = $_REQUEST['profile_id'];
 				unset( $all_items[ $profile_id ] );
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_items );
-
-				$url = remove_query_arg( array( 'wc_oe', 'profile_id', 'woe_nonce' ) );
-				wp_redirect( $url );
-
 				break;
 			case 'change_profile_statuses':
 				if ( ! isset( $_REQUEST['chosen_profiles'] ) AND ! isset( $_REQUEST['doaction'] ) AND - 1 == $_REQUEST['doaction'] ) {
@@ -609,7 +530,7 @@ class WC_Order_Export_Admin {
 					}
 				}
 				WC_Order_Export_Manage::save_export_settings_collection( $mode, $all_items );
-				$url = remove_query_arg( array( 'wc_oe', 'chosen_profiles', 'doaction', 'woe_nonce' ) );
+				$url = remove_query_arg( array( 'wc_oe', 'chosen_profiles', 'doaction' ) );
 				wp_redirect( $url );
 				break;
 		}
@@ -629,12 +550,9 @@ class WC_Order_Export_Admin {
 
 
 	public function thematic_enqueue_scripts() {
-		wp_enqueue_media();
-
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'jquery-ui-draggable' );
-		wp_enqueue_script( 'jquery-touch-punch' );
 		wp_enqueue_style( 'jquery-style',
 			'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css' );
 		$this->enqueue_select2_scripts();
@@ -648,41 +566,38 @@ class WC_Order_Export_Admin {
 		$_REQUEST['tab'] = isset( $_REQUEST['tab'] ) ? $_REQUEST['tab'] : $this->settings['default_tab'];
 		if ( isset( $_REQUEST['wc_oe'] ) AND ( strpos( $_REQUEST['wc_oe'], 'add_' ) === 0 OR strpos( $_REQUEST['wc_oe'],
 					'edit_' ) === 0 ) OR $_REQUEST['tab'] == 'export' ) {
-			wp_enqueue_script( 'wp-color-picker' );
-			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'settings-form', $this->url_plugin . 'assets/js/settings-form.js', array(),
 				WOE_VERSION );
 
 			$localize_settings_form = array(
-				'add_fields_to_export'      => __( 'Add %s fields', 'woo-order-export-lite' ),
-				'repeats'                   => array(
-					'rows'            => __( 'rows', 'woo-order-export-lite' ),
-					'columns'         => __( 'columns', 'woo-order-export-lite' ),
-					'inside_one_cell' => __( 'one row', 'woo-order-export-lite' ),
-				),
-				'js_tpl_popup'              => array(
-					'add'                      => __( 'Add', 'woo-order-export-lite' ),
-					'as'                       => __( 'as', 'woo-order-export-lite' ),
-					'split_values_by'          => __( 'Split values by', 'woo-order-export-lite' ),
-					'fill_order_columns_label' => __( 'Fill order columns for', 'woo-order-export-lite' ),
-					'for_all_rows_label'       => __( 'all rows', 'woo-order-export-lite' ),
-					'for_first_row_only_label' => __( '1st row only', 'woo-order-export-lite' ),
-					'grouping_by'              => array(
-						'products' => __( 'Grouping by product', 'woo-order-export-lite' ),
-						'coupons'  => __( 'Grouping by coupon', 'woo-order-export-lite' ),
-					),
-				),
-				'index'                     => array(
-					'product_pop_up_title' => __( 'Set up product fields', 'woo-order-export-lite' ),
-					'coupon_pop_up_title'  => __( 'Set up coupon fields', 'woo-order-export-lite' ),
-					'products'             => __( 'products', 'woo-order-export-lite' ),
-					'coupons'              => __( 'coupons', 'woo-order-export-lite' ),
-				),
-				'remove_all_fields_confirm' => __( 'Remove all fields?', 'woo-order-export-lite' ),
-				'reset_profile_confirm' => __( 'This action will reset filters, settings and fields to default state. Are you sure?', 'woo-order-export-lite' ),
+                            'add_fields_to_export' => __('Add %s fields', 'woo-order-export-lite'),
+                            'repeats' => array(
+	                            'rows'                    => __( 'rows', 'woo-order-export-lite' ),
+	                            'columns'                 => __( 'columns', 'woo-order-export-lite' ),
+	                            'inside_one_cell'         => __( 'one row', 'woo-order-export-lite' ),
+                            ),
+                            'js_tpl_popup'         => array(
+	                            'add'                      => __( 'Add', 'woo-order-export-lite' ),
+	                            'as'                       => __( 'as', 'woo-order-export-lite' ),
+	                            'split_values_by'          => __( 'Split values by', 'woo-order-export-lite' ),
+	                            'fill_order_columns_label' => __( 'Fill order columns for', 'woo-order-export-lite' ),
+	                            'for_all_rows_label'       => __( 'all rows', 'woo-order-export-lite' ),
+	                            'for_first_row_only_label' => __( '1st row only', 'woo-order-export-lite' ),
+	                            'grouping_by'              => array(
+		                            'products' => __( 'Grouping by product', 'woo-order-export-lite' ),
+		                            'coupons'  => __( 'Grouping by coupon', 'woo-order-export-lite' ),
+	                            ),
+                            ),
+                            'index'                => array(
+                            'product_pop_up_title' => __('Set up product fields', 'woo-order-export-lite'),
+                            'coupon_pop_up_title'  => __('Set up coupon fields', 'woo-order-export-lite'),
+                            'products'             => __('products', 'woo-order-export-lite'),
+                            'coupons'              => __('coupons', 'woo-order-export-lite'),
+                        ),
+                            'remove_all_fields_confirm' => __('Remove all fields?', 'woo-order-export-lite'),
 
 			);
-			wp_localize_script( 'settings-form', 'localize_settings_form', $localize_settings_form );
+                        wp_localize_script( 'settings-form', 'localize_settings_form', $localize_settings_form );
 
 
 			$settings_form = array(
@@ -707,7 +622,7 @@ class WC_Order_Export_Admin {
 					),
 					admin_url( 'admin.php' ) ) ),
 
-				'flat_formats'   => array_map('strtoupper', WC_Order_Export_Engine::get_plain_formats()),
+				'flat_formats'   => array( 'XLS', 'CSV', 'TSV' ),
 				'object_formats' => array( 'XML', 'JSON' ),
 				'xml_formats'    => array( 'XML' ),
 
@@ -736,9 +651,9 @@ class WC_Order_Export_Admin {
 		wp_localize_script( 'export', 'export_messages', $translation_array );
 
 		$script_data = array(
-			'locale'         => get_locale(),
-			'select2_locale' => $this->get_select2_locale(),
-		);
+            'locale'=> get_locale(),
+            'select2_locale'=> $this->get_select2_locale(),
+        );
 
 		wp_localize_script( 'export', 'script_data', $script_data );
 	}
@@ -757,19 +672,19 @@ class WC_Order_Export_Admin {
 		);
 
 		return isset( $select2_locales[ $locale ] ) ? $select2_locales[ $locale ] : 'en';
-	}
+    }
 
 	private function enqueue_select2_scripts() {
 		wp_enqueue_script( 'select22', $this->url_plugin . 'assets/js/select2/select2.full.js',
-			array( 'jquery' ), '4.0.3' );
+			array( 'jquery' ) );
 
 
 		if ( $select2_locale = $this->get_select2_locale() ) {
-			// enable by default
-			if ( $select2_locale !== 'en' ) {
-				wp_enqueue_script( "select22-i18n-{$select2_locale}",
-					$this->url_plugin . "assets/js/select2/i18n/{$select2_locale}.js", array( 'jquery', 'select22' ) );
-			}
+		    // enable by default
+		    if ( $select2_locale !== 'en' ) {
+			    wp_enqueue_script( "select22-i18n-{$select2_locale}",
+				    $this->url_plugin . "assets/js/select2/i18n/{$select2_locale}.js", array( 'jquery', 'select22' ) );
+            }
 		}
 
 		wp_enqueue_style( 'select2-css', $this->url_plugin . 'assets/css/select2/select2.min.css',
@@ -784,8 +699,6 @@ class WC_Order_Export_Admin {
 		) {
 			return $src;
 		}
-
-		return "";
 	}
 
 	public function render( $view, $params = array(), $path_views = null ) {
@@ -820,8 +733,6 @@ class WC_Order_Export_Admin {
 
 	//on status change
 	public function wc_order_status_changed( $order_id, $old_status, $new_status ) {
-		global $wp_filter;
-
 		$all_items = get_option( WC_Order_Export_Manage::settings_name_actions, array() );
 		if ( empty( $all_items ) ) {
 			return;
@@ -845,7 +756,6 @@ class WC_Order_Export_Admin {
 			     AND
 			     ( empty( $item['to_status'] ) OR in_array( $new_status, $item['to_status'] ) )
 			) {
-				$filters = $wp_filter;//remember hooks/filters
 				do_action( 'woe_order_action_started', $order_id, $item );
 				$result = WC_Order_Export_Engine::build_files_and_export( $item );
 				$output = sprintf( __( 'Status change job #%s for order #%s. Result: %s', 'woo-order-export-lite' ),
@@ -856,7 +766,6 @@ class WC_Order_Export_Admin {
 				}
 
 				do_action( 'woe_order_action_completed', $order_id, $item, $result );
-				$wp_filter = $filters;//reset hooks/filters
 			}
 		}
 		remove_filter( 'woe_sql_get_order_ids_where', array( $this, "filter_by_changed_order" ), 10 );
@@ -874,11 +783,6 @@ class WC_Order_Export_Admin {
 		if ( isset( $_REQUEST['method'] ) ) {
 			$method = $_REQUEST['method'];
 			if ( method_exists( 'WC_Order_Export_Ajax', $method ) ) {
-
-                                if ($_POST && !check_admin_referer( 'woe_nonce', 'woe_nonce' )) {
-                                    return;
-                                }
-
 				$_POST = stripslashes_deep( $_POST );
 				// parse json to arrays?
 				if ( ! empty( $_POST['json'] ) ) {

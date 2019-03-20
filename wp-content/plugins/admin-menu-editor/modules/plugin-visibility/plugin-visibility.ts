@@ -61,7 +61,7 @@ class AmePluginVisibilityModule {
 	 * Actors that don't lose access to a plugin when you uncheck it in the "All" view.
 	 * This is a convenience feature that lets the user quickly hide a bunch of plugins from everyone else.
 	 */
-	private privilegedActors: Array<IAmeActor>;
+	private privilegedActors: Array<AmeBaseActor>;
 
 	constructor(scriptData: PluginVisibilityScriptData) {
 		const _ = AmePluginVisibilityModule._;

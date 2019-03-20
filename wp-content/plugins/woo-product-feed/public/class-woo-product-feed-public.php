@@ -74,6 +74,11 @@ class Woo_Product_Feed_Public {
    */
   public function init() {
 
+    // Confirm that WooCommerce product registration ran
+    if ( ! did_action( 'woocommerce_after_register_post_type' ) ) {
+      return;
+    }
+
     foreach ($this->feed_names as $feed) {
       add_feed( $feed, array( $this, 'render_feed' ) );
     }

@@ -1,12 +1,11 @@
 <?php
 class ameRoleUtils {
 	/**
-	 * Retrieve a list of all known, non-meta capabilities of all roles.
-	 *
-	 * @param bool $include_multisite_caps
-	 * @return array Associative array with capability names as keys
-	 */
-	public static function get_all_capabilities($include_multisite_caps = true){
+	  * Retrieve a list of all known, non-meta capabilities of all roles.
+	  *
+	  * @return array Associative array with capability names as keys
+	  */
+	public static function get_all_capabilities(){
 		//Cache the results.
 		static $capabilities = null;
 		if ( isset($capabilities) ) {
@@ -24,17 +23,15 @@ class ameRoleUtils {
 		}
 
 		//Add multisite-specific capabilities (not listed in any roles in WP 3.0)
-		if ($include_multisite_caps) {
-			$multisite_caps = array(
-				'manage_sites' => 1,
-				'manage_network' => 1,
-				'manage_network_users' => 1,
-				'manage_network_themes' => 1,
-				'manage_network_options' => 1,
-				'manage_network_plugins' => 1,
-			);
-			$capabilities = array_merge($capabilities, $multisite_caps);
-		}
+		$multisite_caps = array(
+			'manage_sites' => 1,
+			'manage_network' => 1,
+			'manage_network_users' => 1,
+			'manage_network_themes' => 1,
+			'manage_network_options' => 1,
+			'manage_network_plugins' => 1,
+		);
+		$capabilities = array_merge($capabilities, $multisite_caps);
 
 		return $capabilities;
 	}

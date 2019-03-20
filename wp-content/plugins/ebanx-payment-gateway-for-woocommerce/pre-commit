@@ -1,3 +1,0 @@
-#!/bin/bash
-current_branch=$(git branch | grep \* | sed 's/\* //g')
-php $(pwd)/vendor/squizlabs/php_codesniffer/bin/phpcbf --extensions=php,phtml -n --parallel=5 $(git diff --name-only ${current_branch}) && php $(pwd)/vendor/squizlabs/php_codesniffer/bin/phpcs --extensions=php,phtml -n --parallel=5 $(git diff --name-only ${current_branch})

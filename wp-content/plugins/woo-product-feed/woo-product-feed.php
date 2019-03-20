@@ -44,10 +44,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-woo-product-feed.php';
  */
 function run_woo_product_feed() {
 
-  if ( class_exists('woocommerce') ) {
-    $plugin = new Woo_Product_Feed();
-    $plugin->run();
-  }
+  $plugin = new Woo_Product_Feed();
+  $plugin->run();
 
 }
 run_woo_product_feed();

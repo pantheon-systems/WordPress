@@ -18,5 +18,4 @@ $active_tab = isset( $_REQUEST[ 'tab' ] ) ? $_REQUEST[ 'tab' ] : 'export';
 
 <script>
 	var ajaxurl = "<?php echo $ajaxurl ?>"
-	var woe_nonce = "<?php echo wp_create_nonce( 'woe_nonce' ) ?>"
 </script>

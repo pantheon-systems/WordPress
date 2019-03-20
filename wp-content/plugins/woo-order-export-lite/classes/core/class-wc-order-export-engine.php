@@ -47,8 +47,7 @@ class WC_Order_Export_Engine {
 						break;
 					}
 				}
-				do_action( "woe_export_destination_finished", $exporter->finished_successfully, $export_type, $filename,
-					$filepath, $settings, $exporter );
+				do_action("woe_export_destination_finished", $exporter->finished_successfully, $export_type, $filename, $filepath, $settings, $exporter);
 			} else {
 				$results[] = $custom_export;
 			}
@@ -146,7 +145,7 @@ class WC_Order_Export_Engine {
 	private static function get_order_labels( $settings, $format, $field_formats_list ) {
 		$fields = $settings['order_fields'];
 
-		$labels        = new WC_Order_Export_Labels();
+		$labels = new WC_Order_Export_Labels();
 		$static_fields = array();
 		$field_formats = array();
 
@@ -175,11 +174,11 @@ class WC_Order_Export_Engine {
 			}
 
 			$field['colname'] = apply_filters( "woe_get_{$format}_label_{$key}", $field['colname'] );
-			$labels->$key     = $field['colname'];
+			$labels->$key = $field['colname'];
 		}
 
 		return array(
-			'labels'        => $labels->is_not_empty() ? $labels : false,
+			'labels' => $labels->is_not_empty() ? $labels : false,
 			'static_fields' => $static_fields,
 			'field_formats' => $field_formats,
 		);
@@ -187,12 +186,12 @@ class WC_Order_Export_Engine {
 
 	/* process product/coupon fields*/
 	private static function get_sub_segment_labels( $segment, $settings, $format, $field_formats_list ) {
-		$labels        = new WC_Order_Export_Labels();
+		$labels = new WC_Order_Export_Labels();
 		$static_fields = array();
 		$field_formats = array();
 
 		$is_flat = self::is_plain_format( $format );
-		$fields  = $is_flat ? $settings['order_fields'] : $settings[ 'order_' . $segment . '_fields' ];
+		$fields = $is_flat ? $settings['order_fields'] : $settings['order_' . $segment . '_fields'];
 
 		foreach ( $fields as $field ) {
 			if ( empty ( $field['key'] ) ) {
@@ -202,7 +201,7 @@ class WC_Order_Export_Engine {
 
 			$key = $full_key;
 			if ( $is_flat ) {
-				if ( preg_match( '/^plain_' . $segment . 's_(.+)/', $full_key, $matches ) ) {
+				if ( preg_match( '/^plain_'. $segment . 's_(.+)/', $full_key, $matches ) ) {
 					if ( isset( $matches[1] ) ) {
 						$key = $matches[1];
 					}
@@ -222,11 +221,11 @@ class WC_Order_Export_Engine {
 			}
 
 			$field['colname'] = apply_filters( "woe_get_{$format}_label_{$key}", $field['colname'] );
-			$labels->$key     = $field['colname'];
+			$labels->$key = $field['colname'];
 		}
 
 		return array(
-			'labels'        => $labels->is_not_empty() ? $labels : false,
+			'labels' => $labels->is_not_empty() ? $labels : false,
 			'static_fields' => $static_fields,
 			'field_formats' => $field_formats,
 		);
@@ -263,8 +262,7 @@ class WC_Order_Export_Engine {
 		do_action( 'woe_init_custom_formatter', $mode, $fname, $format_settings, $format, $labels, $field_formats,
 			self::$date_format, $settings, $offset );
 
-		return new $class( $mode, $fname, $format_settings, $format, $labels, $field_formats, self::$date_format,
-			$offset );
+		return new $class( $mode, $fname, $format_settings, $format, $labels, $field_formats, self::$date_format, $offset );
 	}
 
 	private static function init_labels( $settings, &$labels, &$static_vals, &$field_formats ) {
@@ -281,21 +279,21 @@ class WC_Order_Export_Engine {
 //		);
 
 		$field_formats_ar = array( 'money', 'number', 'date', 'string' );
-		$labels_data      = array(
-			'order'    => self::get_order_labels( $settings, $format, $field_formats_ar ),
+		$labels_data = array(
+			'order' => self::get_order_labels( $settings, $format, $field_formats_ar ),
 			'products' => self::get_sub_segment_labels( 'product', $settings, $format, $field_formats_ar ),
-			'coupons'  => self::get_sub_segment_labels( 'coupon', $settings, $format, $field_formats_ar ),
+			'coupons' => self::get_sub_segment_labels( 'coupon', $settings, $format, $field_formats_ar ),
 		);
-		$labels           = array();
-		$static_vals      = array();
-		$field_formats    = array();
+		$labels = array();
+		$static_vals = array();
+		$field_formats = array();
 		foreach ( $labels_data as $segment => $label_data ) {
-			$labels[ $segment ] = ! empty( $label_data['labels'] ) ? $label_data['labels'] : array();
+			$labels[$segment] = ! empty( $label_data['labels'] ) ? $label_data['labels'] : array();
 			if ( ! empty( $label_data['static_fields'] ) ) {
-				$static_vals[ $segment ] = $label_data['static_fields'];
+				$static_vals[$segment] = $label_data['static_fields'];
 			}
 			if ( ! empty( $label_data['field_formats'] ) ) {
-				$field_formats[ $segment ] = array_map( "array_unique", $label_data['field_formats'] );
+				$field_formats[$segment] = array_map( "array_unique", $label_data['field_formats'] );
 				//clean up possible duplicates
 //				$field_formats = array_merge_recursive( $field_formats, $label_data['field_formats'] );
 			}
@@ -311,7 +309,7 @@ class WC_Order_Export_Engine {
 	 */
 	private static function _check_products_and_coupons_fields( $settings, &$export ) {
 		$export['products'] = false;
-		$export['coupons']  = false;
+		$export['coupons'] = false;
 		foreach ( $settings['order_fields'] as $field ) {
 			if ( 'products' == $field['key'] ) {
 				$export['products'] = true;
@@ -325,7 +323,6 @@ class WC_Order_Export_Engine {
 		}
 
 	}
-
 	private static function _install_options( $settings ) {
 		global $wpdb;
 
@@ -486,11 +483,11 @@ class WC_Order_Export_Engine {
 			$sql .= apply_filters( "woe_sql_get_order_ids_order_by",
 					" ORDER BY " . $settings['sort'] . " " . $settings['sort_direction'] ) . " LIMIT " . ( $limit !== false ? $limit : 1 );
 		} elseif ( $make_mode == 'partial' ) {
-			$sql     .= apply_filters( "woe_sql_get_order_ids_order_by",
+			$sql    .= apply_filters( "woe_sql_get_order_ids_order_by",
 				" ORDER BY " . $settings['sort'] . " " . $settings['sort_direction'] );
-			$startat = ( $settings['mark_exported_orders'] && $settings['export_unmarked_orders'] ) ? 0 : intval( $offset );
-			$limit   = intval( $limit );
-			$sql     .= " LIMIT $startat,$limit";
+			$startat = ($settings['mark_exported_orders'] && $settings['export_unmarked_orders']) ? 0 : intval( $offset );
+			$limit  = intval( $limit );
+			$sql    .= " LIMIT $startat,$limit";
 		}
 
 		$order_ids = apply_filters( "woe_get_order_ids", $wpdb->get_col( $sql ) );
@@ -519,7 +516,7 @@ class WC_Order_Export_Engine {
 				continue;
 			}
 			self::$order_id = $order_id;
-			$row            = WC_Order_Export_Data_Extractor::fetch_order_data( $order_id, $labels,
+			$row           = WC_Order_Export_Data_Extractor::fetch_order_data( $order_id, $labels,
 				$export, $static_vals, self::$extractor_options );
 
 			$row = apply_filters( "woe_fetch_order_row", $row, $order_id );
@@ -542,7 +539,7 @@ class WC_Order_Export_Engine {
 		} elseif ( $make_mode == 'preview' ) {
 //			self::maybe_output_summary_report( $formater );
 			//limit debug output 
-			if ( $settings['enable_debug'] AND self::is_plain_format( $settings['format'] ) ) {
+			if ( $settings['enable_debug'] AND self::is_plain_format( $settings['format']) ) {
 				echo "<b>" . __( 'Main SQL queries are listed below', 'woo-order-export-lite' ) . "</b>";
 				echo '<textarea rows=5 style="width:100%">';
 				$s = array();
@@ -591,8 +588,7 @@ class WC_Order_Export_Engine {
 
 		if ( empty( $order_ids ) AND apply_filters( 'woe_schedule_job_skip_empty_file',
 				(bool) $settings['skip_empty_file'] ) ) {
-			unlink( $filename );
-
+                        unlink($filename);
 			return false;
 		}
 
@@ -614,16 +610,16 @@ class WC_Order_Export_Engine {
 				continue;
 			}
 			self::$order_id = $order_id;
-			$row            = WC_Order_Export_Data_Extractor::fetch_order_data( $order_id, $labels,
+			$row           = WC_Order_Export_Data_Extractor::fetch_order_data( $order_id, $labels, 
 				$export, $static_vals, self::$extractor_options );
-			$row            = apply_filters( "woe_fetch_order_row", $row, $order_id );
+			$row = apply_filters( "woe_fetch_order_row", $row, $order_id );
 			if ( $row ) {
 				$formater->output( $row );
 				do_action( "woe_order_row_exported", $row, $order_id );
 			}
 			do_action( "woe_order_exported", $order_id );
 
-			do_action( 'woe_formatter_output_custom_formatter', $row, $order_id, $labels,
+			do_action( 'woe_formatter_output_custom_formatter', $row, $order_id, $labels, 
 				$export, $static_vals, self::$extractor_options );
 
 			self::$orders_exported ++;
@@ -695,11 +691,11 @@ class WC_Order_Export_Engine {
 			$formater       = self::init_formater( '', $settings, $filename, $labels, $static_vals, 0 );
 
 			$formater->truncate();
-			$formater->start();
-			$row = WC_Order_Export_Data_Extractor::fetch_order_data( $order_id, $labels,
+			$formater->start(  );
+			$row           = WC_Order_Export_Data_Extractor::fetch_order_data( $order_id, $labels, 
 				$export, $static_vals, self::$extractor_options );
 			$row = apply_filters( "woe_fetch_order_row", $row, $order_id );
-
+			
 			if ( $row ) {
 				$formater->output( $row );
 				do_action( "woe_order_row_exported", $row, $order_id );
@@ -732,11 +728,11 @@ class WC_Order_Export_Engine {
 			$file = self::build_file_full( $settings, $filename, $limit, $order_ids );
 			if ( $file !== false ) {
 
-				$result = self::export( $settings, $file );
+                            $result = self::export( $settings, $file );
 
-				if ( file_exists( $file ) ) {
-					unlink( $file );
-				}
+                            if (file_exists($file)) {
+                                unlink($file);
+                            }
 
 			} else {
 				$result = false;
@@ -762,10 +758,7 @@ class WC_Order_Export_Engine {
 	}
 
 	public static function is_plain_format( $format ) {
-		return in_array( strtolower( $format ), self::get_plain_formats() );
-	}
-
-	public static function get_plain_formats() {
-		return array( 'xls', 'csv', 'tsv', 'pdf' );
+		$flat_formats = array( 'xls', 'csv', 'tsv' );
+		return in_array( strtolower($format), $flat_formats);
 	}
 }

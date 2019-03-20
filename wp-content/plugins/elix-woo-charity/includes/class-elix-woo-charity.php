@@ -9,8 +9,8 @@
  * @link       https://elixinol.com
  * @since      1.0.0
  *
- * @package    Elix_woo_charity
- * @subpackage Elix_woo_charity/includes
+ * @package    Elix_Woo_Charity
+ * @subpackage Elix_Woo_Charity/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Elix_woo_charity
- * @subpackage Elix_woo_charity/includes
+ * @package    Elix_Woo_Charity
+ * @subpackage Elix_Woo_Charity/includes
  * @author     Zvi Epner <zvi.epner@elixinol.com>
  */
-class Elix_woo_charity {
+class Elix_Woo_Charity {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Elix_woo_charity {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Elix_woo_charity_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Elix_Woo_Charity_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -67,10 +67,18 @@ class Elix_woo_charity {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		$this->version = (defined('EW_CHARITY_VERSION')) ? EW_CHARITY_VERSION : '1.0.0';
+		if ( defined( 'ELIX_WOO_CHARITY_VERSION' ) ) {
+			$this->version = ELIX_WOO_CHARITY_VERSION;
+		} else {
+			$this->version = '1.0.0';
+		}
 		$this->plugin_name = 'elix-woo-charity';
+
 		$this->load_dependencies();
+		$this->set_locale();
+		$this->define_admin_hooks();
 		$this->define_public_hooks();
+
 	}
 
 	/**
@@ -78,10 +86,10 @@ class Elix_woo_charity {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Elix_woo_charity_Loader. Orchestrates the hooks of the plugin.
-	 * - Elix_woo_charity_i18n. Defines internationalization functionality.
-	 * - Elix_woo_charity_Admin. Defines all hooks for the admin area.
-	 * - Elix_woo_charity_Public. Defines all hooks for the public side of the site.
+	 * - Elix_Woo_Charity_Loader. Orchestrates the hooks of the plugin.
+	 * - Elix_Woo_Charity_i18n. Defines internationalization functionality.
+	 * - Elix_Woo_Charity_Admin. Defines all hooks for the admin area.
+	 * - Elix_Woo_Charity_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -91,10 +99,71 @@ class Elix_woo_charity {
 	 */
 	private function load_dependencies() {
 
+		/**
+		 * The class responsible for orchestrating the actions and filters of the
+		 * core plugin.
+		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-elix-woo-charity-loader.php';
+
+		/**
+		 * The class responsible for defining internationalization functionality
+		 * of the plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-elix-woo-charity-i18n.php';
+
+		/**
+		 * The class responsible for generating the reports.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-elix-woo-charity-table.php';
+		
+		/**
+		 * The class responsible for defining all actions that occur in the admin area.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-elix-woo-charity-admin.php';
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing
+		 * side of the site.
+		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-elix-woo-charity-public.php';
 
-		$this->loader = new Elix_woo_charity_Loader();
+		$this->loader = new Elix_Woo_Charity_Loader();
+
+	}
+
+	/**
+	 * Define the locale for this plugin for internationalization.
+	 *
+	 * Uses the Elix_Woo_Charity_i18n class in order to set the domain and to register the hook
+	 * with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function set_locale() {
+
+		$plugin_i18n = new Elix_Woo_Charity_i18n();
+
+		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to the admin area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_admin_hooks() {
+
+		$plugin_admin = new Elix_Woo_Charity_Admin( $this->get_plugin_name(), $this->get_version() );
+		
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		$this->loader->add_filter('pre_option_link_manager_enabled', $plugin_admin, '__return_true');
+		$this->loader->add_action('admin_menu', $plugin_admin, 'ewc_add_menu_items');
+
 	}
 
 	/**
@@ -106,12 +175,14 @@ class Elix_woo_charity {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Elix_woo_charity_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Elix_Woo_Charity_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action('woocommerce_after_order_notes', $plugin_public, 'elix_woo_load_charity');
+		$this->loader->add_action( 'woocommerce_after_order_notes', $plugin_public, 'elix_woo_load_charity' );
 		$this->loader->add_action( 'woocommerce_checkout_update_order_meta', $plugin_public, 'elix_woo_save_charity' );
 		$this->loader->add_action( 'woocommerce_admin_order_data_after_billing_address', $plugin_public, 'elix_woo_display_charity', 10, 1 );
+		
+		$this->loader->add_action('elix_woo_charity_cronjob', $plugin_public, 'elix_woo_charity_cron');
+
 	}
 
 	/**
@@ -138,7 +209,7 @@ class Elix_woo_charity {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Elix_woo_charity_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Elix_Woo_Charity_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

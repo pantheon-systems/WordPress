@@ -120,10 +120,10 @@ class TCMP_Ecommerce {
         $tcmp->Log->debug('Ecommerce: WOOCOMMERCE THANKYOU');
 
         $order=new WC_Order($orderId);
-        $purchase->email=$order->get_billing_email();
-        $purchase->fullname=$order->get_billing_first_name();
-        if($order->get_billing_last_name()!='') {
-            $purchase->fullname.=' '.$order->get_billing_last_name();
+        $purchase->email=$order->billing_email;
+        $purchase->fullname=$order->billing_first_name;
+        if($order->billing_last_name!='') {
+            $purchase->fullname.=' '.$order->billing_last_name;
         }
 
         $items=$order->get_items();

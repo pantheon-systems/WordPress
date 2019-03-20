@@ -19,7 +19,7 @@ class WOE_Formatter_Csv extends WOE_Formatter_sv {
 	}
 
 	protected function prepare_array( &$arr ) {
-		if ( ! empty($this->settings['delete_linebreaks']) ) {
+		if ( $this->settings['delete_linebreaks'] ) {
 			$this->delete_linebreaks_from_array( $arr );
 		}
 		parent::prepare_array( $arr );

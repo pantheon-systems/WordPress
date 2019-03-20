@@ -40,12 +40,8 @@ class WF_ProdImpExpCsv_Admin_Screen {
      * Admin Scripts
      */
     public function admin_scripts() {
-        $screen = get_current_screen();
-        $allowed_creen_id = array('product_page_wf_woocommerce_csv_im_ex');
-        if (in_array($screen->id, $allowed_creen_id) || (isset($_GET['import']) && $_GET['import'] == 'xa_woocommerce_csv')) {
-            wp_enqueue_style('woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css');
-            wp_enqueue_style('woocommerce-product-csv-importer', plugins_url(basename(plugin_dir_path(WF_ProdImpExpCsv_FILE)) . '/styles/wf-style.css', basename(__FILE__)), '', '1.4.4', 'screen');
-        }
+        wp_enqueue_style('woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css');
+        wp_enqueue_style('woocommerce-product-csv-importer', plugins_url(basename(plugin_dir_path(WF_ProdImpExpCsv_FILE)) . '/styles/wf-style.css', basename(__FILE__)), '', '1.4.4', 'screen');
     }
 
     /**

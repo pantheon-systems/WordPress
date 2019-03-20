@@ -6,18 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WOE_Formatter_Json extends WOE_Formatter {
 	var $prev_added = false;
 
-	public function __construct(
-		$mode,
-		$filename,
-		$settings,
-		$format,
-		$labels,
-		$field_formats,
-		$date_format,
-		$offset
-	) {
+	public function __construct( $mode, $filename, $settings, $format, $labels, $field_formats, $date_format, $offset ) {
 		parent::__construct( $mode, $filename, $settings, $format, $labels, $field_formats, $date_format, $offset );
-		$this->prev_added = ( $offset > 0 );
+		$this->prev_added = ($offset > 0);
 	}
 
 	public function start( $data = '' ) {
@@ -44,10 +35,10 @@ class WOE_Formatter_Json extends WOE_Formatter {
 
 		foreach ( $labels->get_labels() as $label_data ) {
 			$original_key = $label_data['key'];
-			$label        = $label_data['label'];
-			$key          = $label_data['parent_key'] ? $label_data['parent_key'] : $original_key;
+			$label = $label_data['label'];
+			$key = $label_data['parent_key'] ? $label_data['parent_key'] : $original_key;
 
-			$field_value = $rec[ $key ];
+			$field_value = $rec[$key];
 			if ( is_array( $field_value ) ) {
 				if ( $original_key == "products" ) {
 					$child_labels = $this->labels['products'];
@@ -57,17 +48,14 @@ class WOE_Formatter_Json extends WOE_Formatter {
 					$rec_out[ $label ] = $field_value;
 					continue;
 				}
-				
-				if( empty($child_labels ) ) // can't export!
-					continue;
-					
+
 				$rec_out[ $label ] = array();
 				foreach ( $field_value as $child_element ) {
 					$child = array();
 					foreach ( $child_labels->get_labels() as $child_label_data ) {
 						$child_original_key = $child_label_data['key'];
-						$child_label        = $child_label_data['label'];
-						$child_key          = $child_label_data['parent_key'] ? $child_label_data['parent_key'] : $child_original_key;
+						$child_label = $child_label_data['label'];
+						$child_key = $child_label_data['parent_key'] ? $child_label_data['parent_key'] : $child_original_key;
 						if ( isset( $child_element[ $child_key ] ) ) {
 							$child[ $child_label ] = $child_element[ $child_key ];
 						}

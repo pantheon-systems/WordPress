@@ -3,11 +3,11 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://elixinol.com
+ * @link       https://elixinol.com/
  * @since      1.0.0
  *
- * @package    Elix_woo_charity
- * @subpackage Elix_woo_charity/includes
+ * @package    Elix_Woo_Charity
+ * @subpackage Elix_Woo_Charity/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Elix_woo_charity
- * @subpackage Elix_woo_charity/includes
+ * @package    Elix_Woo_Charity
+ * @subpackage Elix_Woo_Charity/includes
  * @author     Zvi Epner <zvi.epner@elixinol.com>
  */
-class Elix_woo_charity_Loader {
+class Elix_Woo_Charity_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.
