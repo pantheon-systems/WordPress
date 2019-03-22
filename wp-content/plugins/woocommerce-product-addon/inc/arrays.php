@@ -193,3 +193,148 @@ function ppom_get_plupload_languages() {
 								'zh_TW' => 'ZH_TW',
 						);
 }
+
+// PPOM Settings
+function ppom_array_settings() {
+	
+	$ppom_settings = array(
+       
+		array(
+			'title' => 'PPOM Labels',
+			'type'  => 'title',
+			'desc'	=> __('You can add your own Labels for PPOM Like Price Table etc'),
+			'id'    => 'ppom_labels_settings',
+		),
+		
+		array(
+            'title'		=> __( 'Option Total', 'ppom' ),
+            'type'		=> 'text',
+            'desc'		=> __( 'Label For Price Table', 'ppom' ),
+            'default'	=> __('Option Total', 'ppom'),
+            'id'		=> 'ppom_label_option_total',
+            'css'   	=> 'min-width:300px;',
+			'desc_tip'	=> true,
+        ),
+        array(
+            'title'		=> __( 'Product Price', 'ppom' ),
+            'type'		=> 'text',
+            'desc'		=> __( 'Label For Price Table', 'ppom' ),
+            'default'	=> __('Product Price', 'ppom'),
+            'id'		=> 'ppom_label_product_price',
+            'css'   	=> 'min-width:300px;',
+			'desc_tip'	=> true,
+        ),
+        array(
+            'title'		=> __( 'Total', 'ppom' ),
+            'type'		=> 'text',
+            'desc'		=> __( 'Label For Price Table', 'ppom' ),
+            'default'	=> __('Total', 'ppom'),
+            'id'		=> 'ppom_label_total',
+            'css'   	=> 'min-width:300px;',
+			'desc_tip'	=> true,
+        ),
+        array(
+            'title'		=> __( 'Fixed Fee', 'ppom' ),
+            'type'		=> 'text',
+            'desc'		=> __( 'Label For Price Table', 'ppom' ),
+            'default'	=> __('Fixed Fee', 'ppom'),
+            'id'		=> 'ppom_label_fixed_fee',
+            'css'   	=> 'min-width:300px;',
+			'desc_tip'	=> true,
+        ),
+        array(
+            'title'		=> __( 'Discount Price', 'ppom' ),
+            'type'		=> 'text',
+            'desc'		=> __( 'Label For Price Table', 'ppom' ),
+            'default'	=> __('Discount Price', 'ppom'),
+            'id'		=> 'ppom_label_discount_price',
+            'css'   	=> 'min-width:300px;',
+			'desc_tip'	=> true,
+        ),
+        array(
+            'title'		=> __( 'Total Discount', 'ppom' ),
+            'type'		=> 'text',
+            'desc'		=> __( 'Label For Price Table', 'ppom' ),
+            'default'	=> __('Total Discount', 'ppom'),
+            'id'		=> 'ppom_label_total_discount',
+            'css'   	=> 'min-width:300px;',
+			'desc_tip'	=> true,
+        ),
+        
+        array(
+				'title'          => __( 'Disable Bootstrap', 'ppom' ),
+				'type'          => 'checkbox',
+				'label'         => __( 'Yes', 'ppom' ),
+				'default'       => 'no',
+				'id'            => 'ppom_disable_bootstrap',
+				'desc'          => __( 'Bootstrap JS is being loaded from CDN, it will disable if your site already loading it.', 'ppom' ),
+			),
+			
+		array(
+				'title'          => __( 'Disable FontAwesome', 'ppom' ),
+				'type'          => 'checkbox',
+				'label'         => __( 'Yes', 'ppom' ),
+				'default'       => 'no',
+				'id'            => 'ppom_disable_fontawesome',
+				'desc'          => __( 'FontAwesome are being loaded from CDN, it will disable if your site already loading it.', 'ppom' ),
+			),
+        
+	    array(
+			'type' => 'sectionend',
+			'id'   => 'ppom_labels_settings',
+		),
+			
+		array(
+            'name'     => __( 'Advance Features (PRO)', 'ppom' ),
+            'type'     => 'title',
+            'desc'     => __('These options will work when PRO version is installed', 'ppom'),
+            'id'       => 'ppom_pro_features'
+        ),
+        
+        array(
+				'title'          => __( 'Hide Options Price?', 'ppom' ),
+				'type'          => 'checkbox',
+				'label'         => __( 'Yes', 'ppom' ),
+				'default'       => 'no',
+				'id'            => 'ppom_hide_option_price',
+				'desc'          => __( 'Hides options price in Selec/Radio/Checkbox/Image display prices with label', 'ppom' ),
+				
+			),
+			
+		array(
+            'title'		=> __( 'Select Option Label', 'ppom' ),
+            'type'		=> 'text',
+            'desc'		=> __( 'Label For Price Table', 'ppom' ),
+            'default'	=> __('Select Options', 'ppom'),
+            'id'		=> 'ppom_label_select_option',
+            'css'   	=> 'min-width:300px;',
+			'desc_tip'	=> true,
+        ),
+			
+		array(
+				'title'          => __( 'Enable PPOM REST API?', 'ppom' ),
+				'type'          => 'checkbox',
+				'label'         => __( 'Yes', 'ppom' ),
+				'default'       => 'no',
+				'id'            => 'ppom_api_enable',
+				'desc'          => __( 'Check this option to enable PPOM REST API', 'ppom' ),
+			),
+			
+		array(
+            'title' => __( 'PPOM API Secret Key', 'ppom' ),
+            'type' => 'text',
+            'desc' => __( 'Enter any characters to create a secret key. This key must be set while requesting to API', 'ppom' ),
+            'id'   => 'ppom_rest_secret_key',
+            'css'   		=> 'min-width:300px;',
+			'desc_tip'		=> true,
+        ),
+        
+        array(
+			'type' => 'sectionend',
+			'id'   => 'ppom_pro_features',
+		),
+        
+		);
+		
+	return apply_filters('ppom_settings_data', $ppom_settings);
+}

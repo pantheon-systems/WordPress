@@ -2,10 +2,10 @@
 Contributors: algolplus
 Donate link: https://algolplus.com/plugins/
 Tags: woocommerce,export,order,xls,csv,xml,woo export lite,export orders,orders export,csv export,xml export,xls export,tsv
-Requires PHP: 5.3.0
+Requires PHP: 5.4.0
 Requires at least: 4.7
-Tested up to: 4.9
-Stable tag: 2.0.0
+Tested up to: 5.1
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,8 +80,8 @@ Please, increase "memory_limit" upto 256M or ask hosting support to do it.
 = How can I add a Gravity Forms field to export? =
 Open order, look at items and remember meta name.
 Visit WooCommerce>Export Orders,
-open section "Set up fields", scroll down to "Products", click button "Set up fields" ( you will see popup)
-select SAME name in second dropdown
+open section "Set up fields", open section "Products"(at right), click button "Add field",
+select SAME name in second dropdown (screenshot #5)
 
 = When exporting .csv containing european special characters , I want to open this csv in Excel without extra actions =
 You  should open tab "CSV" and set up ISO-8859-1 as codepage.
@@ -103,9 +103,32 @@ Yes, you can email a request to aprokaev@gmail.com. We intensively develop this 
 
 == Changelog ==
 
+= 2.1.1 - 2019-02-14 =
+* Fixed critical bug - new version damages CSV and TSV parameters, so "Bulk action" doesn't work
+
+= 2.1.0 - 2019-02-06 =
+* New format - **PDF**
+* Fixed some vulnerabilities
+* Added button "Reset settings"
+* Section "Setup fields" works on phone/tablet
+* New XLS option to avoid formatting - "Force general format for all cells"
+* Fixed bug - fields "Summary Report Total xxxx" stayed at bottom
+* Fixed bug -  "Summary report" was not sorted by item name
+* Fixed bug - fields reset when  user switches between flat formats
+* Fixed bug - field "full categories" was empty for variations
+* Tested for jQuery 3.0+
+
+= 2.0.1 - 2018-11-14 =
+* Fixed bug - "total weight" and "count of unique products" were empty
+* Fixed bug - message "wrong Select2 loaded"
+* Fixed bug - UI issues after switching formats (CSV-XML-CSV)
+* Shows some instructions if user gets popup with empty error message
+* Shows warning if XML can not be built (PHP extension is not installed)
+
 = 2.0.0 - 2018-10-24 =
 * It's a **major update**. Backup settings (tab "Tools") before upgrading
 * New section "Set up fields to export"  - simplify UI, format fields, allow duplicates
+* Compatible with Woocommerce 3.5
 
 = 1.5.6 - 2018-08-30 =
 * Added filter by user custom fields

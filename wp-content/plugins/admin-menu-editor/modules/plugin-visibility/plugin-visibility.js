@@ -137,10 +137,12 @@ var AmePluginVisibilityModule = /** @class */ (function () {
                 isVisibleByDefault: plugin.isVisibleByDefault(),
                 grantAccess: _.mapValues(plugin.grantAccess, function (allow) {
                     return allow();
-                }),
-                customName: plugin.customName(),
-                customDescription: plugin.customDescription()
+                })
             };
+            for (var i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+                var key = AmePlugin.editablePropertyNames[i], upperKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+                result.plugins[plugin.fileName]['custom' + upperKey] = plugin.customProperties[key]();
+            }
         });
         return result;
     };
@@ -162,30 +164,33 @@ var AmePluginVisibilityModule = /** @class */ (function () {
 var AmePlugin = /** @class */ (function () {
     function AmePlugin(details, settings, module) {
         var _this = this;
+        this.defaultProperties = {};
+        this.customProperties = {};
+        this.editableProperties = {};
         var _ = AmePluginVisibilityModule._;
-        this.defaultName = ko.observable(details.name);
-        this.defaultDescription = ko.observable(details.description);
-        this.customName = ko.observable(_.get(settings, 'customName', ''));
-        this.customDescription = ko.observable(_.get(settings, 'customDescription', ''));
+        for (var i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+            var key = AmePlugin.editablePropertyNames[i], upperKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+            this.defaultProperties[key] = ko.observable(_.get(details, key, ''));
+            this.customProperties[key] = ko.observable(_.get(settings, 'custom' + upperKey, ''));
+            this.editableProperties[key] = ko.observable(this.defaultProperties[key]());
+        }
         this.name = ko.computed(function () {
-            var value = _this.customName();
+            var value = _this.customProperties['name']();
             if (value === '') {
-                value = _this.defaultName();
+                value = _this.defaultProperties['name']();
             }
             return AmePlugin.stripAllTags(value);
         });
         this.description = ko.computed(function () {
-            var value = _this.customDescription();
+            var value = _this.customProperties['description']();
             if (value === '') {
-                value = _this.defaultDescription();
+                value = _this.defaultProperties['description']();
             }
             return AmePlugin.stripAllTags(value);
         });
         this.fileName = details.fileName;
         this.isActive = details.isActive;
         this.isBeingEdited = ko.observable(false);
-        this.editableName = ko.observable(this.defaultName());
-        this.editableDescription = ko.observable(this.defaultDescription());
         this.isVisibleByDefault = ko.observable(_.get(settings, 'isVisibleByDefault', true));
         var emptyGrant = {};
         this.grantAccess = _.mapValues(_.get(settings, 'grantAccess', emptyGrant), function (hasAccess) {
@@ -209,8 +214,10 @@ var AmePlugin = /** @class */ (function () {
     };
     //noinspection JSUnusedGlobalSymbols Used in KO template.
     AmePlugin.prototype.openInlineEditor = function () {
-        this.editableName(this.customName() === '' ? this.defaultName() : this.customName());
-        this.editableDescription(this.customDescription() === '' ? this.defaultDescription() : this.customDescription());
+        for (var i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+            var key = AmePlugin.editablePropertyNames[i], customValue = this.customProperties[key]();
+            this.editableProperties[key](customValue === '' ? this.defaultProperties[key]() : customValue);
+        }
         this.isBeingEdited(true);
     };
     //noinspection JSUnusedGlobalSymbols Used in KO template.
@@ -219,20 +226,21 @@ var AmePlugin = /** @class */ (function () {
     };
     //noinspection JSUnusedGlobalSymbols Used in KO template.
     AmePlugin.prototype.confirmEdit = function () {
-        this.customName(this.editableName());
-        this.customDescription(this.editableDescription());
-        if (this.customName() === this.defaultName()) {
-            this.customName('');
-        }
-        if (this.customDescription() === this.defaultDescription()) {
-            this.customDescription('');
+        for (var i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+            var key = AmePlugin.editablePropertyNames[i], customValue = this.editableProperties[key]();
+            if (customValue === this.defaultProperties[key]()) {
+                customValue = '';
+            }
+            this.customProperties[key](customValue);
         }
         this.isBeingEdited(false);
     };
     //noinspection JSUnusedGlobalSymbols Used in KO template.
     AmePlugin.prototype.resetNameAndDescription = function () {
-        this.customName('');
-        this.customDescription('');
+        for (var i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+            var key = AmePlugin.editablePropertyNames[i];
+            this.customProperties[key]('');
+        }
         this.isBeingEdited(false);
     };
     AmePlugin.stripAllTags = function (input) {
@@ -240,6 +248,7 @@ var AmePlugin = /** @class */ (function () {
         var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
         return input.replace(commentsAndPhpTags, '').replace(tags, '');
     };
+    AmePlugin.editablePropertyNames = ['name', 'description', 'author', 'siteUrl', 'version'];
     return AmePlugin;
 }());
 jQuery(function ($) {
@@ -250,4 +259,3 @@ jQuery(function ($) {
         AjawV1.getAction('ws_ame_dismiss_pv_usage_notice').request();
     });
 });
-//# sourceMappingURL=plugin-visibility.js.map

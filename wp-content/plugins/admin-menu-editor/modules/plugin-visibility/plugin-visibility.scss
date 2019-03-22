@@ -58,10 +58,10 @@
 
 #ame-plugin-visibility-editor .inline-edit-row {
 	.ame-pv-inline-edit-left {
-		width: 30%;
+		width: 35%;
 	}
 	.ame-pv-inline-edit-right {
-		width: 70%;
+		width: 65%;
 	}
 
 	span.title {
@@ -69,6 +69,10 @@
 	}
 	input[type="text"] {
 		width: 100%;
+	}
+
+	.ame-pv-custom-description {
+		height: 9em;
 	}
 
 	.ame-pv-inline-reset {
@@ -82,5 +86,12 @@
 
 	p.submit {
 		margin-bottom: 0.2em;
+	}
+
+	.inline-edit-legend {
+		margin: 0;
+		padding: 0.2em 0.5em 0;
+		line-height: 2.5;
+		font-weight: 600;
 	}
 }

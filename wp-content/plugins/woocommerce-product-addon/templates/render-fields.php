@@ -145,6 +145,8 @@ foreach( $ppom_fields_meta as $meta ) {
 	
 	$field_label = $title . $show_asterisk . $show_description;
 	
+	$placeholder 				= isset( $meta['placeholder'] ) ? stripslashes($meta['placeholder']) : '';
+	
 	
 	if(is_array($options)){
 		$options		= array_map("ppom_translation_options", $options);
@@ -190,7 +192,7 @@ foreach( $ppom_fields_meta as $meta ) {
                 	$min	= isset( $meta['min'] ) ? $meta['min'] : '';
                 	$max	= isset( $meta['max'] ) ? $meta['max'] : '';
                 	$step	= isset( $meta['step'] ) ? $meta['step'] : '';
-                	$ph 	= isset( $meta['placeholder'] ) ? $meta['placeholder'] : '';
+                	
                 	$default_value = strip_tags($default_value);
                 	
                     $ppom_field_setting = array(  
@@ -204,7 +206,7 @@ foreach( $ppom_fields_meta as $meta ) {
                                     'min'		=> $min,
                                     'max'		=> $max,
                                     'step'		=> $step,
-                                    'placeholder'	=> $ph,
+                                    'placeholder'	=> $placeholder,
                                     'autocomplete' => "false",
                                     );
                                     
@@ -266,6 +268,7 @@ foreach( $ppom_fields_meta as $meta ) {
 		                                'cols'		=> $cols,
 		                                'rows'		=> $rows,
 		                                'rich_editor' => $editor,
+		                                'placeholder'	=> $placeholder,
 		                                );
 		                
 		            $ppom_field_setting = apply_filters('ppom_field_setting', $ppom_field_setting, $meta);

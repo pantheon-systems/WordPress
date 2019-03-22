@@ -80,8 +80,8 @@ class URE_Capabilities_Groups_Manager {
     
     private function add_woocommerce_groups() {
         
-        $full_caps = $this->lib->get('full_capabilities');
-        if (!isset($full_caps['manage_woocommerce'])) {
+        $full_caps = $this->lib->init_full_capabilities( 'role' );
+        if ( !isset( $full_caps['manage_woocommerce'] ) ) {
             return;
         }
         

@@ -1590,7 +1590,7 @@ class NM_Form {
                                     'date'      => array(),
                                     'email'     => array(),
                                     'number'    => array(),
-                                    'textarea'  => array('cols' => 6, 'rows' => 3),
+                                    'textarea'  => array('cols' => 6, 'rows' => 3, 'placeholder'=>''),
                                     'select'    => array('multiple' => false),
                                     'checkbox'  => array('label_class' => 'form-control-label',
                                                         'check_wrapper_class' => 'form-check',

@@ -63,10 +63,12 @@ function ppom_meta_list( $post ) {
 	$all_meta	= PPOM() -> get_product_meta_all ();
 	$ppom_setting = admin_url('admin.php?page=ppom');
 	
-	$html = '<p>';
-	
-	$html .= '<a class="button button-primary" href="'.esc_url($ppom_setting).'">Create New Meta</a>';
-	
+	$html = '<div class="options_group">';
+	$html .= '<p>'.__('Select Meta to Show Fields on this product', 'ppom');
+	// $html .= __(' Or <a target="_blank" class="button" href="'.esc_url($ppom_setting).'">Create New Meta</a>', 'ppom');
+	$html .= '</p>';
+
+	$html .= '<p>';
 	$html .= '<select name="ppom_product_meta" id="ppom_product_meta" class="select">';
 	$html .= '<option selected="selected"> ' . __('None', "ppom"). '</option>';
 	
@@ -83,14 +85,24 @@ function ppom_meta_list( $post ) {
 	if( $ppom->single_meta_id != 'None' ) {
 		
 		$url_edit = add_query_arg(array('productmeta_id'=> $ppom->single_meta_id, 'do_meta'=>'edit'), $ppom_setting);
-		$html .= '<a href="'.esc_url($url_edit).'" title="Edit"><span class="dashicons dashicons-edit"></span></a>';
+		$html .= ' <a class="button" href="'.esc_url($url_edit).'" title="Edit"><span class="dashicons dashicons-edit"></span></a>';
 	}
 	
+	// $html .= '<hr>';
+	// $html .= ' <a class="button button-primary" href="'.esc_url($ppom_setting).'">Create New Meta</a>';
+	
 	$html .= '</p>';
+	$html .= '</div>';
+	
+	$video_url = 'https://najeebmedia.com/ppom/#howtovideo';
+	$html .= sprintf(__('<p><a href="%s" target="_blank">How to use?</a>', "ppom"), $video_url);
+	$html .= sprintf(__(' - <a href="%s" target="_blank">Create New Meta</a></p>', "ppom"), $ppom_setting);
 	
 	echo apply_filters('ppom_select_meta_in_product', $html, $ppom, $all_meta);
 	
+	echo '<div class="ppom_extra_options_panel">';
 	do_action('ppom_meta_box_after_list', $post);
+	echo '</div>';
 }
 
 /*
@@ -102,6 +114,7 @@ function ppom_admin_process_product_meta( $post_id ) {
      
     $ppom_meta_selected = isset($_POST ['ppom_product_meta']) ? $_POST ['ppom_product_meta'] : '';
     
+    // $ppom_save_in_array = array($ppom_meta_selected);
 	update_post_meta ( $post_id, '_product_meta_id', $ppom_meta_selected );
     
     do_action('ppom_proccess_meta', $post_id);

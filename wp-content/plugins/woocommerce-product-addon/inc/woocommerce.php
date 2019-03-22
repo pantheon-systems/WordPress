@@ -540,25 +540,28 @@ function ppom_woocommerce_add_item_meta($item_meta, $cart_item) {
 	
 	foreach( $ppom_meta as $key => $meta ) {
 		
-		$hidden = isset($meta['hidden']) ? $meta['hidden'] : false;
-		$display = isset($meta['display']) ? $meta['display'] : $meta['value'];
-		
+		$hidden 	= isset($meta['hidden']) ? $meta['hidden'] : false;
+		$meta_name	= isset($meta['name']) ? $meta['name'] : '';
+		$meta_value = isset($meta['value']) ? $meta['value'] : '';
+		$display	= isset($meta['display']) ? $meta['display'] : $meta_value;
 		if( $key == 'ppom_has_quantities' ) $hidden = true;
-		// if( $key == 'ppom_has_files' ) $hidden = true;
 		
-		if( isset( $meta['name']) ) {
+
+		// If no value		
+		if( ! $display ) continue;
 		
-			$meta_val = $meta['value'];
+		if( !empty( $meta_name ) ) {
+	
 			if( apply_filters('ppom_show_option_price_cart', false) && isset($meta['price']) ) {
-				$meta_val .=' ('.wc_price($meta['price']).')';
+				$meta_value .=' ('.wc_price($meta['price']).')';
 			}
 			
-			$meta_key = stripslashes($meta['name']);
+			$meta_key = stripslashes($meta_name);
 			
 			// WPML
 			$meta_key = ppom_wpml_translate($meta_key, 'PPOM');
 			
-			$item_meta[] = array('name'	=> wp_strip_all_tags($meta_key), 'value' => $meta_val, 'hidden' => $hidden, 'display'=>$display);
+			$item_meta[] = array('name'	=> wp_strip_all_tags($meta_key), 'value' => $meta_value, 'hidden' => $hidden, 'display'=>$display);
 		} else {
 			$item_meta[] = array('name'	=> ($key), 'value' => $meta, 'hidden' => $hidden, 'display'=>$display);
 		}

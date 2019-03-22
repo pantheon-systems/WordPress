@@ -1074,7 +1074,7 @@ function buildEditboxField(entry, field_name, field_settings){
 		case 'icon_selector':
 			//noinspection HtmlUnknownTag
 			inputBox = $(basicTextField)
-                .add('<button class="button ws_select_icon" title="Select icon"><div class="icon16 icon-settings"></div><img src="" style="display:none;"></button>');
+                .add('<button class="button ws_select_icon" title="Select icon"><div class="icon16 icon-settings"></div><img src="" style="display:none;" alt="Icon"></button>');
 			break;
 
 		case 'color_scheme_editor':
@@ -1129,7 +1129,7 @@ function buildEditboxField(entry, field_name, field_settings){
 
 	editField
 		.append(
-			$('<img class="ws_reset_button" title="Reset to default value" src="">')
+			$('<img class="ws_reset_button" title="Reset to default value" src="" alt="Reset">')
 				.attr('src', wsEditorData.imagesUrl + '/transparent16.png')
 		).data('field_name', field_name);
 
@@ -2877,9 +2877,9 @@ function ameOnDomReady() {
 
 	//Alternatively, use the WordPress media uploader to select a custom icon.
 	//This code is based on the header selection script in /wp-admin/js/custom-header.js.
+	var mediaFrame = null;
 	$('#ws_choose_icon_from_media').click(function(event) {
 		event.preventDefault();
-		var frame = null;
 
 		//This option is not usable on the demo site since the filesystem is usually read-only.
 		if (wsEditorData.isDemoMode) {
@@ -2888,13 +2888,13 @@ function ameOnDomReady() {
 		}
 
         //If the media frame already exists, reopen it.
-        if ( frame ) {
-            frame.open();
+        if ( mediaFrame !== null ) {
+            mediaFrame.open();
             return;
         }
 
         //Create a custom media frame.
-        frame = wp.media.frames.customAdminMenuIcon = wp.media({
+        mediaFrame = wp.media.frames.customAdminMenuIcon = wp.media({
             //Set the title of the modal.
             title: 'Choose a Custom Icon (20x20)',
 
@@ -2911,9 +2911,9 @@ function ameOnDomReady() {
         });
 
         //When an image is selected, set it as the menu icon.
-        frame.on( 'select', function() {
+        mediaFrame.on( 'select', function() {
             //Grab the selected attachment.
-            var attachment = frame.state().get('selection').first();
+            var attachment = mediaFrame.state().get('selection').first();
             //TODO: Warn the user if the image exceeds 20x20 pixels.
 
 	        //Set the menu icon to the attachment URL.
@@ -2935,11 +2935,11 @@ function ameOnDomReady() {
         });
 
 		//If the user closes the frame by via Esc or the "X" button, clear up state.
-		frame.on('escape', function(){
+		mediaFrame.on('escape', function(){
 			currentIconButton = null;
 		});
 
-        frame.open();
+        mediaFrame.open();
 		iconSelector.hide();
 	});
 
@@ -4321,6 +4321,13 @@ function ameOnDomReady() {
 		}
 	});
 
+	//Enable the "load default menu" and "undo changes" buttons only when "All" is selected.
+	//Otherwise some users incorrectly assume these buttons only affect the currently selected role or user.
+	actorSelectorWidget.onChange(function (newSelectedActor) {
+		$('#ws_load_menu, #ws_reset_menu').prop('disabled', newSelectedActor !== null);
+	});
+	$('#ws_load_menu, #ws_reset_menu').prop('disabled', actorSelectorWidget.selectedActor !== null);
+
 	$('#ws_toggle_editor_layout').click(function () {
 		var isCompactLayoutEnabled = menuEditorNode.toggleClass('ws_compact_layout').hasClass('ws_compact_layout');
 		$.cookie('ame-compact-layout', isCompactLayoutEnabled ? '1' : '0', {expires: 90});
@@ -4938,7 +4945,7 @@ function ameOnDomReady() {
 				},
 				method: 'post',
 				dataType: 'json',
-				success: function(response, textStatus) {
+				success: function(response) {
 					if (!response) {
 						alert('Error: Could not parse the server response.');
 						testAccessButton.prop('disabled', false);

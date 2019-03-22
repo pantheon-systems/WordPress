@@ -14,64 +14,13 @@ class PPOM_Rest {
     
     function __construct() {
 
-        // Settings meta
-		// Settings meta
-		$this->settings = array(
-        array(
-            'name'     => __( 'PPOM REST API', 'ppom' ),
-            'type'     => 'title',
-            'desc'     => '',
-            'id'       => 'ppom_rest_title'
-        ),
-        array(
-				'name'          => __( 'Enable API?', 'ppom' ),
-				'type'          => 'checkbox',
-				'label'         => __( 'Yes', 'ppom' ),
-				'default'       => 'no',
-				'id'            => 'ppom_api_enable',
-				'desc'          => __( 'Check this option to enable REST API', 'ppom' ),
-			),
-        array(
-            'name' => __( 'PPOM API Secret Key', 'ppom' ),
-            'type' => 'text',
-            'desc' => __( 'Enter any characters to create a secret key. This key must be set while requesting to API', 'ppom' ),
-            'id'   => 'ppom_rest_secret_key',
-        ),
-		);
-		
-		
-
-        // Adding setting tab in WooCommerce
-    	add_filter( 'woocommerce_settings_tabs_array', __CLASS__ . '::add_settings_tab', 50 );
-    	
-    	// Display settings
-    	add_action( 'woocommerce_settings_tabs_ppom_rest', array($this, 'settings_tab') );
-    	// Save settings
-    	add_action( 'woocommerce_update_options_ppom_rest', array($this, 'save_settings') );
-        
-		
-		if( ppom_is_api_enable() ) {
+        if( ppom_is_api_enable() ) {
             add_action( 'rest_api_init', array($this, 'init_api') );
 		}
         
     }
     
-    public static function add_settings_tab( $settings_tabs ) {
-    	
-        $settings_tabs['ppom_rest'] = __( 'PPOM API', 'ppom' );
-        return $settings_tabs;
-    }
     
-    function settings_tab() {
-    	
-    	woocommerce_admin_fields( $this->settings );
-        
-    }
-    
-    function save_settings() {
-    	
-    	woocommerce_update_options( $this->settings );
-    }
     
     function init_api() {
         

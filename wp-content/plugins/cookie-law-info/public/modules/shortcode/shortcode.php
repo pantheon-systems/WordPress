@@ -175,7 +175,7 @@ class Cookie_Law_Info_Shortcode {
         
         extract( shortcode_atts( array(
             'style' => 'classic',
-            'not_shown_message' => '',
+            'not_shown_message' => __('No records found','cookie-law-info'),
             'columns' =>'cookie,type,duration,description',
             'heading' =>'',
         ), $atts ) );
@@ -245,12 +245,13 @@ class Cookie_Law_Info_Shortcode {
             }
         }
         $ret .= '</tbody></table>';
-        if(count($posts)>0 && $heading!="")
+        if(count($posts)>0)
         {
-            $ret='<p>'.__($heading,'cookie-law-info').'</p>'.$ret;
-        }else
-        {
-            $ret='';
+            if($heading!="")
+            {
+                $ret='<p>'.__($heading,'cookie-law-info').'</p>'.$ret;
+            }
+            
         }
         return $ret;
     }

@@ -119,7 +119,7 @@ function ppom_upload_file() {
 	$file_upload_nonce_action = "ppom_uploading_file_action";
 	if ( ! wp_verify_nonce( $ppom_nonce, $file_upload_nonce_action ) && apply_filters('ppom_verify_upload_file', true) ) {
     	$response ['status'] = 'error';
-		$response ['message'] = __ ( 'Due to security issue, you cannot upload file, please try again.', 'ppom' );
+		$response ['message'] = __ ( 'You cannot upload the file at this time, please refresh the page and try again. Note that your current option choices will be reset.', 'ppom' );
 		wp_send_json( $response );
 	}
 	

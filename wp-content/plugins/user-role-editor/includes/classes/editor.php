@@ -555,6 +555,28 @@ class URE_Editor {
 
    
     /**
+     * if existing user was not added to the current blog - add him
+     * @global type $blog_id
+     * @param type $user
+     * @return bool
+     */
+    protected function check_blog_user( $user ) {
+        global $blog_id;
+        
+        $result = true;
+        if ( is_network_admin() ) {
+            if (!array_key_exists( $blog_id, get_blogs_of_user( $user->ID ) ) ) {
+                $result = add_existing_user_to_blog( array( 'user_id' => $user->ID, 'role' => 'subscriber' ) );
+            }
+        }
+
+        return $result;
+    }
+    // end of check_blog_user()
+
+    
+    
+    /**
      * Update user roles and capabilities
      * 
      * @global WP_Roles $wp_roles

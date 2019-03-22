@@ -156,16 +156,17 @@
 .pipe-premium-features{
     background: #fff;
     padding:5px;
+    padding-bottom: 20px;
 }
 .pipe-premium-features ul {
     padding-left: 20px;
     padding-right: 20px;
 }
-.pipe-premium-features li {
+.pipe-premium-features .ticked-list li {
     margin-bottom: 15px;
     padding-left: 15px;
 }
-.pipe-premium-features li:before
+.pipe-premium-features .ticked-list li:before
 {
     font-family: dashicons;
     text-decoration: inherit;
@@ -179,20 +180,18 @@
     font-size: 16px;
     color: #3085bb;
 }
-.pipe-premium-features .button {
-    margin-bottom: 20px;
-}
+
 .pipe-premium-features .button-go-pro {
     box-shadow: none;
     border: 0;
     text-shadow: none;
     padding: 10px 15px;
     height: auto;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 4px;
-    font-weight: 600;
+    font-weight: 400;
     background: #00cb95;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 .pipe-premium-features .button-go-pro:hover,
 .pipe-premium-features .button-go-pro:focus,

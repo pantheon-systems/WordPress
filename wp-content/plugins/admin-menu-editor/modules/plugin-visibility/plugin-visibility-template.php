@@ -2,8 +2,6 @@
 /**
  * @var string $tabUrl Fully qualified URL of the "Plugins" tab.
  */
-
-do_action('admin_menu_editor-display_header');
 ?>
 
 <div id="ame-plugin-visibility-editor">
@@ -77,10 +75,33 @@ do_action('admin_menu_editor-display_header');
 			<tr class="inline-edit-row" data-bind="if: isBeingEdited">
 				<td class="colspanchange" colspan="3">
 					<fieldset class="ame-pv-inline-edit-left">
+						<legend class="inline-edit-legend" data-bind="text: defaultProperties['name']">
+							Edit Plugin Properties
+						</legend>
 						<div class="inline-edit-col">
 							<label>
 								<span class="title">Name</span>
-								<input type="text" data-bind="value: editableName" class="ame-pv-custom-name">
+								<span class="input-text-wrap">
+									<input type="text" data-bind="value: editableProperties['name']" class="ame-pv-custom-name">
+								</span>
+							</label>
+							<label>
+								<span class="title">Author</span>
+								<span class="input-text-wrap">
+									<input type="text" data-bind="value: editableProperties['author']" class="ame-pv-custom-author">
+								</span>
+							</label>
+							<label>
+								<span class="title">Site URL</span>
+								<span class="input-text-wrap">
+									<input type="text" data-bind="value: editableProperties['siteUrl']" class="ame-pv-custom-site-url">
+								</span>
+							</label>
+							<label>
+								<span class="title">Version</span>
+								<span class="input-text-wrap">
+									<input type="text" data-bind="value: editableProperties['version']" class="ame-pv-custom-version-number">
+								</span>
 							</label>
 						</div>
 					</fieldset>
@@ -90,7 +111,7 @@ do_action('admin_menu_editor-display_header');
 								<span class="title">Description</span>
 								<textarea name="plugin-description" cols="30" rows="5"
 								          class="ame-pv-custom-description"
-								          data-bind="value: editableDescription"></textarea>
+								          data-bind="value: editableProperties['description']"></textarea>
 							</label>
 						</div>
 					</fieldset>
@@ -143,5 +164,3 @@ do_action('admin_menu_editor-display_header');
 		</table>
 
 	</div> <!-- /module container -->
-
-<?php do_action('admin_menu_editor-display_footer'); ?>

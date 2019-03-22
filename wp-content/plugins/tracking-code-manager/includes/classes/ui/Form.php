@@ -227,28 +227,30 @@ class TCMP_Form {
                 ?>
                 <div id="<?php echo $id?>Ace" style="height:<?php echo $options['height']+50?>px; width: <?php echo $options['width']?>px;"><?php echo $text?></div>
                 <textarea id="<?php echo $id?>" name="<?php echo $id?>" ui-visible="<?php echo $options['ui-visible']?>" style="display: none;"></textarea>
-                <script>
-                    var text=jQuery('#<?php echo $id?>Ace').html();
-                    text=TCMP.replace(text, '&lt;', '<');
-                    text=TCMP.replace(text, '&gt;', '>');
-                    text=TCMP.replace(text, '&amp;', '&');
+				<script>
+				jQuery.noConflict()(function($){
+					var text=$('#<?php echo $id?>Ace').html();
+					text=TCMP.replace(text, '&lt;', '<');
+					text=TCMP.replace(text, '&gt;', '>');
+					text=TCMP.replace(text, '&amp;', '&');
 
-                    var <?php echo $ace?>=ace.edit("<?php echo $id?>Ace");
-                    <?php echo $ace?>.renderer.setShowGutter(false);
-                    <?php echo $ace?>.setTheme("ace/theme/<?php echo $options['theme']?>");
-                    <?php echo $ace?>.getSession().setMode("ace/mode/<?php echo $options['editor']?>");
-                    <?php echo $ace?>.getSession().setUseSoftTabs(true);
-                    <?php echo $ace?>.getSession().setUseWrapMode(true);
-                    <?php echo $ace?>.session.setUseWorker(false)
-                    <?php echo $ace?>.setValue(text);
+					var <?php echo $ace?>=ace.edit("<?php echo $id?>Ace");
+					<?php echo $ace?>.renderer.setShowGutter(false);
+					<?php echo $ace?>.setTheme("ace/theme/<?php echo $options['theme']?>");
+					<?php echo $ace?>.getSession().setMode("ace/mode/<?php echo $options['editor']?>");
+					<?php echo $ace?>.getSession().setUseSoftTabs(true);
+					<?php echo $ace?>.getSession().setUseWrapMode(true);
+					<?php echo $ace?>.session.setUseWorker(false)
+					<?php echo $ace?>.setValue(text);
 
-                    jQuery('#<?php echo $id?>Ace').focusout(function() {
-                        var $hidden=jQuery('#<?php echo $id?>');
-                        var code=<?php echo $ace?>.getValue();
-                        $hidden.val(code);
-                    });
-                    jQuery('#<?php echo $id?>Ace').trigger('focusout');
-                </script>
+					$('#<?php echo $id?>Ace').focusout(function() {
+						var $hidden=$('#<?php echo $id?>');
+						var code=<?php echo $ace?>.getValue();
+						$hidden.val(code);
+					});
+					$('#<?php echo $id?>Ace').trigger('focusout');
+				});
+				</script>
                 <?php
                 break;
         }

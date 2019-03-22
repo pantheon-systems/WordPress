@@ -93,8 +93,9 @@ abstract class WC_EBANX_Credit_Card_Gateway extends WC_EBANX_New_Gateway {
 
 		$user_cc = get_user_meta( $order->data['customer_id'], '_ebanx_credit_card_token', true );
 
-		if ( count( $user_cc ) ) {
-			$data = $this->transform_payment_data( $order );
+		$user_cc_token = ! empty( $user_cc ) && ! empty( $user_cc[0]->token ) ? $user_cc[0]->token : null;
+		if ( ! is_null( $user_cc_token ) ) {
+			$data = WC_EBANX_Payment_Adapter::transform_card_subscription_payment( $order, $this->configs, $user_cc_token );
 
 			$response = $this->ebanx->creditCard( $this->get_credit_card_config( $country ) )->create( $data );
 
@@ -178,7 +179,7 @@ abstract class WC_EBANX_Credit_Card_Gateway extends WC_EBANX_New_Gateway {
 		if ( is_checkout() ) {
 			wp_enqueue_script( 'wc-credit-card-form' );
 			// Using // to avoid conflicts between http and https protocols.
-			wp_enqueue_script( 'ebanx', '//js.ebanx.com/ebanx-1.5.min.js', '', null, true );
+			wp_enqueue_script( 'ebanx', '//js.ebanx.com/ebanx-1.5.2.min.js', '', null, true );
 			wp_enqueue_script( 'woocommerce_ebanx_jquery_mask', plugins_url( 'assets/js/jquery-mask.js', WC_EBANX::DIR ), array( 'jquery' ), WC_EBANX::get_plugin_version(), true );
 			wp_enqueue_script( 'woocommerce_ebanx_credit_card', plugins_url( 'assets/js/credit-card.js', WC_EBANX::DIR ), array( 'jquery-payment', 'ebanx' ), WC_EBANX::get_plugin_version(), true );
 

@@ -47,6 +47,11 @@ abstract class amePersistentModule extends ameModule {
 		$this->setScopedOption($this->optionName, $settings);
 	}
 
+	public function mergeSettingsWith($newSettings) {
+		$this->settings = array_merge($this->loadSettings(), $newSettings);
+		return $this->settings;
+	}
+
 	protected function getTemplateVariables($templateName) {
 		$variables = parent::getTemplateVariables($templateName);
 		if ( $templateName === $this->moduleId ) {

@@ -71,8 +71,9 @@
     		modal.trigger(prefix+':open');
 			
 			// close popup listner
-			var closeButton = $('.' + options.popupcloseclass).bind('click.modalEvent', function () {
-			  modal.trigger(prefix+':close')
+			var closeButton = $('.' + options.popupcloseclass).bind('click.modalEvent', function (e) {
+			  modal.trigger(prefix+':close');
+			  e.preventDefault();
 			});
 			
 			// disable backgroundclickevent close

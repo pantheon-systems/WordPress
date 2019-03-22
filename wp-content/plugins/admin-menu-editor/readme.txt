@@ -3,8 +3,8 @@ Contributors: whiteshadow
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6P9S6CE3SRSW
 Tags: admin, dashboard, menu, security, wpmu
 Requires at least: 4.1
-Tested up to: 4.9
-Stable tag: 1.8.4
+Tested up to: 5.1
+Stable tag: 1.8.8
 
 Lets you edit the WordPress admin menu. You can re-order, hide or rename menus, add custom menus and more. 
 
@@ -33,9 +33,9 @@ The [Pro version](http://w-shadow.com/AdminMenuEditor/) lets you set per-role me
 **Normal installation**
 
 1. Download the admin-menu-editor.zip file to your computer.
-1. Unzip the file.
-1. Upload the `admin-menu-editor` directory to your `/wp-content/plugins/` directory.
-1. Activate the plugin through the 'Plugins' menu in WordPress.
+2. Unzip the file.
+3. Upload the `admin-menu-editor` directory to your `/wp-content/plugins/` directory.
+4. Activate the plugin through the 'Plugins' menu in WordPress.
 
 That's it. You can access the the menu editor by going to *Settings -> Menu Editor*. The plugin will automatically load your current menu configuration the first time you run it.
 
@@ -44,10 +44,10 @@ That's it. You can access the the menu editor by going to *Settings -> Menu Edit
 If you have WordPress set up in Multisite ("Network") mode, you can also install Admin Menu Editor as a global plugin. This will enable you to edit the Dashboard menu for all sites and users at once.
 
 1. Download the admin-menu-editor.zip file to your computer.
-1. Unzip the file.
-1. Create a new directory named `mu-plugins` in your site's `wp-content` directory (unless it already exists).
-1. Upload the `admin-menu-editor` directory to `/wp-content/mu-plugins/`.
-1. Move `admin-menu-editor-mu.php` from `admin-menu-editor/includes` to `/wp-content/mu-plugins/`.
+2. Unzip the file.
+3. Create a new directory named `mu-plugins` in your site's `wp-content` directory (unless it already exists).
+4. Upload the `admin-menu-editor` directory to `/wp-content/mu-plugins/`.
+5. Move `admin-menu-editor-mu.php` from `admin-menu-editor/includes` to `/wp-content/mu-plugins/`.
 
 Plugins installed in the `mu-plugins` directory are treated as "always on", so you don't need to explicitly activate the menu editor. Just go to *Settings -> Menu Editor* and start customizing your admin menu :)
 
@@ -62,6 +62,24 @@ Plugins installed in the `mu-plugins` directory are treated as "always on", so y
 3. Re-ordering menu items via drag and drop
 
 == Changelog ==
+
+= 1.8.8 =
+* Added the ability to edit more plugin details like author name, site URL and version number. Note that this feature only changes how plugins are displayed. It doesn't actually modify plugin files.
+* Fixed a PHP deprecation notice: "strpos(): Non-string needles will be interpreted as strings in the future". Hopefully this time it's been fixed for good.
+* Fixed a couple of HTML validation errors.
+* Fixed an inefficiency where the plugin would reinitialise the media frame every time the user tried to select an image from the media library. 
+* Added a partial workaround for situations where menu icons that were more than 32 pixels wide would be displayed incorrectly. 
+* Tested up to WP 5.1.1.
+
+= 1.8.7 =
+* Fixed a bug introcuded in 1.8.6 that caused a PHP warning "strpos(): Empty needle".
+
+= 1.8.6 =
+* Fixed a PHP warning being thrown when the WPMU_PLUGIN_DIR constant is not a valid path or the full path cannot be determined.
+* Fixed a rare PHP warning "parameter 1 to be array, null given in menu-editor-core.php on line 4254" that was most likely caused by an unidentified plugin conflict.
+* Fixed a rare warning about a class being redefined.
+* Updated a number of internal dependencies.
+* Tested with WP 5.0.
 
 = 1.8.5 =
 * Fixed a bug where very long submenus wouldn't be scrollable if the current item was one that was moved to the current submenu from a different top level menu.

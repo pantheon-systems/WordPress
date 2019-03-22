@@ -23,8 +23,11 @@ interface PluginVisibilitySettings {
 		[fileName : string] : {
 			isVisibleByDefault: boolean,
 			grantAccess: GrantAccessMap,
-			customName: string,
-			customDescription: string
+			customName?: string,
+			customDescription?: string;
+			customAuthor?: string;
+			customSiteUrl?: string;
+			customVersion?: string;
 		}
 	}
 }
@@ -35,21 +38,22 @@ interface GrantAccessMap {
 
 interface PvPluginInfo {
 	name: string,
-	fileName: string,
 	description: string,
-	isActive: boolean,
+	author: string,
+	version: string,
+	siteUrl: string,
 
-	customName: string,
-	customDescription: string
+	fileName: string,
+	isActive: boolean;
 }
 
 class AmePluginVisibilityModule {
 	static _ = wsAmeLodash;
 
 	plugins: Array<AmePlugin>;
-	private canRoleManagePlugins: {[roleId: string] : boolean};
+	private readonly canRoleManagePlugins: {[roleId: string] : boolean};
 	grantAccessByDefault: {[actorId: string] : KnockoutObservable<boolean>};
-	private isMultisite: boolean;
+	private readonly isMultisite: boolean;
 
 	actorSelector: AmeActorSelector;
 	selectedActor: KnockoutComputed<string>;
@@ -61,7 +65,7 @@ class AmePluginVisibilityModule {
 	 * Actors that don't lose access to a plugin when you uncheck it in the "All" view.
 	 * This is a convenience feature that lets the user quickly hide a bunch of plugins from everyone else.
 	 */
-	private privilegedActors: Array<AmeBaseActor>;
+	private readonly privilegedActors: Array<IAmeActor>;
 
 	constructor(scriptData: PluginVisibilityScriptData) {
 		const _ = AmePluginVisibilityModule._;
@@ -209,10 +213,14 @@ class AmePluginVisibilityModule {
 				isVisibleByDefault: plugin.isVisibleByDefault(),
 				grantAccess: _.mapValues(plugin.grantAccess, (allow): boolean => {
 					return allow();
-				}),
-				customName: plugin.customName(),
-				customDescription: plugin.customDescription()
+				})
 			};
+
+			for (let i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+				let key = AmePlugin.editablePropertyNames[i],
+					upperKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+				result.plugins[plugin.fileName]['custom' + upperKey] = plugin.customProperties[key]();
+			}
 		});
 
 		return result;
@@ -236,21 +244,23 @@ class AmePluginVisibilityModule {
 	}
 }
 
+interface AmeStringObservableMap {
+	[key: string]: KnockoutObservable<string>;
+}
+
 class AmePlugin {
 	name: KnockoutComputed<string>;
 	fileName: string;
 	description: KnockoutComputed<string>;
 	isActive: boolean;
 
-	defaultName: KnockoutObservable<string>;
-	defaultDescription: KnockoutObservable<string>;
+	static readonly editablePropertyNames = ['name', 'description', 'author', 'siteUrl', 'version'];
+
+	defaultProperties: AmeStringObservableMap = {};
+	customProperties: AmeStringObservableMap = {};
+	editableProperties: AmeStringObservableMap = {};
 
 	isBeingEdited: KnockoutObservable<boolean>;
-	customName: KnockoutObservable<string>;
-	customDescription: KnockoutObservable<string>;
-	editableName: KnockoutObservable<string>;
-	editableDescription: KnockoutObservable<string>;
-
 	isChecked: KnockoutComputed<boolean>;
 
 	isVisibleByDefault: KnockoutObservable<boolean>;
@@ -259,22 +269,25 @@ class AmePlugin {
 	constructor(details: PvPluginInfo, settings: Object, module: AmePluginVisibilityModule) {
 		const _ = AmePluginVisibilityModule._;
 
-		this.defaultName = ko.observable(details.name);
-		this.defaultDescription = ko.observable(details.description);
-		this.customName = ko.observable(_.get(settings, 'customName', ''));
-		this.customDescription = ko.observable(_.get(settings, 'customDescription', ''));
+		for (let i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+			let key = AmePlugin.editablePropertyNames[i],
+				upperKey = key.substring(0, 1).toUpperCase() + key.substring(1);
+			this.defaultProperties[key] = ko.observable(_.get(details, key, ''));
+			this.customProperties[key] = ko.observable(_.get(settings, 'custom' + upperKey, ''));
+			this.editableProperties[key] = ko.observable(this.defaultProperties[key]());
+		}
 
 		this.name = ko.computed(() => {
-			let value = this.customName();
+			let value = this.customProperties['name']();
 			if (value === '') {
-				value = this.defaultName();
+				value = this.defaultProperties['name']();
 			}
 			return AmePlugin.stripAllTags(value);
 		});
 		this.description = ko.computed(() => {
-			let value = this.customDescription();
+			let value = this.customProperties['description']();
 			if (value === '') {
-				value = this.defaultDescription();
+				value = this.defaultProperties['description']();
 			}
 			return AmePlugin.stripAllTags(value);
 		});
@@ -283,12 +296,10 @@ class AmePlugin {
 		this.isActive = details.isActive;
 
 		this.isBeingEdited = ko.observable(false);
-		this.editableName = ko.observable(this.defaultName());
-		this.editableDescription = ko.observable(this.defaultDescription());
 
 		this.isVisibleByDefault = ko.observable(_.get(settings, 'isVisibleByDefault', true));
 
-		const emptyGrant: {[actorId : string] : boolean} = {};
+		const emptyGrant: { [actorId: string]: boolean } = {};
 		this.grantAccess = _.mapValues(_.get(settings, 'grantAccess', emptyGrant), (hasAccess) => {
 			return ko.observable<boolean>(hasAccess);
 		});
@@ -312,8 +323,12 @@ class AmePlugin {
 
 	//noinspection JSUnusedGlobalSymbols Used in KO template.
 	openInlineEditor() {
-		this.editableName(this.customName() === '' ? this.defaultName() : this.customName());
-		this.editableDescription(this.customDescription() === '' ? this.defaultDescription() : this.customDescription());
+		for (let i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+			let key = AmePlugin.editablePropertyNames[i],
+				customValue = this.customProperties[key]();
+			this.editableProperties[key](customValue === '' ? this.defaultProperties[key]() : customValue);
+		}
+
 		this.isBeingEdited(true);
 	}
 
@@ -324,14 +339,13 @@ class AmePlugin {
 
 	//noinspection JSUnusedGlobalSymbols Used in KO template.
 	confirmEdit() {
-		this.customName(this.editableName());
-		this.customDescription(this.editableDescription());
-
-		if (this.customName() === this.defaultName()) {
-			this.customName('');
-		}
-		if (this.customDescription() === this.defaultDescription()) {
-			this.customDescription('');
+		for (let i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+			let key = AmePlugin.editablePropertyNames[i],
+				customValue = this.editableProperties[key]();
+			if (customValue === this.defaultProperties[key]()) {
+				customValue = '';
+			}
+			this.customProperties[key](customValue);
 		}
 
 		this.isBeingEdited(false);
@@ -339,8 +353,10 @@ class AmePlugin {
 
 	//noinspection JSUnusedGlobalSymbols Used in KO template.
 	resetNameAndDescription() {
-		this.customName('');
-		this.customDescription('');
+		for (let i = 0; i < AmePlugin.editablePropertyNames.length; i++) {
+			let key = AmePlugin.editablePropertyNames[i];
+			this.customProperties[key]('');
+		}
 		this.isBeingEdited(false);
 	}
 

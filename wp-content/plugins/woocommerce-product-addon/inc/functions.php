@@ -244,9 +244,13 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
 						$total_qty += $qty;	
 					}
 				}
-				$qty_values[] = __('Total',"ppom").' = '.$total_qty;
-				$meta_data = array('name'=>$field_title, 'value'=>implode(",",$qty_values));
-				// A placeholder key to handle qunantity display in item meta data under myaccount
+				
+				if( $total_qty > 0 ) {
+					$qty_values[] = __('Total',"ppom").' = '.$total_qty;
+					$meta_data = array('name'=>$field_title, 'value'=>implode(",",$qty_values));
+					// A placeholder key to handle qunantity display in item meta data under myaccount
+				}
+				
 				$ppom_meta['ppom_has_quantities'] = $total_qty;
 				break;
 				
@@ -346,7 +350,7 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
 	                }
 				}
 				
-				if( ppom_is_api_enable() ) {
+				if( $context == 'api' ) {
 					$meta_data = array('name'		=>$field_title, 
 										'value'		=> json_encode($options_data_array),
 										'display'	=> implode(',',$option_label_array), 
@@ -379,7 +383,7 @@ function ppom_make_meta_data( $cart_item, $context="cart" ){
                     }
                 }
 				
-				if( ppom_is_api_enable() ) {
+				if( $context == 'api' ) {
 					$meta_data = array('name'		=> $field_title, 
 										'value'		=> json_encode($option_data),
 										'display'	=> $option_price, 
@@ -641,10 +645,18 @@ function ppom_load_file($file_path, $variables=array('')){
 function ppom_load_bootstrap_css() {
 	
 	$return = true;
+	if( ppom_get_option('ppom_disable_bootstrap') == 'Yes' ) $return = false;
 	
 	return apply_filters('ppom_bootstrap_css', $return);
 }
 
+function ppom_load_fontawesome() {
+	
+	$return = true;
+	if( ppom_get_option('ppom_disable_fontawesome') == 'Yes' ) $return = false;
+	
+	return apply_filters('ppom_disable_fontawesome', $return);
+}
 
 
 function ppom_convert_options_to_key_val($options, $meta, $product) {
@@ -1264,4 +1276,20 @@ function ppom_is_price_attached_with_fields( $fields_posted ) {
 	// exit;
 	
 	return apply_filters('ppom_option_price_attached', $is_price_attached, $fields_posted, $product_id);
+}
+
+// PPOM Get settings
+function ppom_get_option($key, $default_val=false) {
+	
+	$value = get_option($key);
+	if( ! $value )
+		$value = $default_val;
+	return ppom_wpml_translate($value, 'PPOM');
+}
+
+// Checking PPOM Pro version
+function ppom_get_pro_version() {
+	
+	if( ! defined('PPOM_PRO_VERSION') ) return 16.0;
+	return intval( PPOM_PRO_VERSION );
 }

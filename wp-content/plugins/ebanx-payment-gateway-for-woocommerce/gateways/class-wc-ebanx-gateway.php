@@ -163,6 +163,7 @@ class WC_EBANX_Gateway extends WC_Payment_Gateway {
 				'ARG_CUIT' => __( 'CUIT', 'woocommerce-gateway-ebanx' ),
 				'ARG_CUIL' => __( 'CUIL', 'woocommerce-gateway-ebanx' ),
 				'ARG_CDI'  => __( 'CDI', 'woocommerce-gateway-ebanx' ),
+				'ARG_DNI'  => __( 'DNI', 'woocommerce-gateway-ebanx' ),
 			),
 		);
 

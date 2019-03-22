@@ -37,13 +37,13 @@ class URE_Base_Lib {
      */
     protected function __construct($options_id) {
 
-        $this->multisite = function_exists('is_multisite') && is_multisite();
-        if ($this->multisite) {
+        $this->multisite = function_exists( 'is_multisite' ) && is_multisite();
+        if ( $this->multisite ) {
             // get Id of the 1st (main) blog
             $this->main_blog_id = $this->get_main_site();
         }
 
-        $this->init_options($options_id);
+        $this->init_options( $options_id );
 
     }
     // end of __construct()
@@ -85,9 +85,11 @@ class URE_Base_Lib {
     /**
      * get current options for this plugin
      */
-    protected function init_options($options_id) {
+    protected function init_options( $options_id ) {
+        
         $this->options_id = $options_id;
-        $this->options = get_option($options_id);
+        $this->options = get_option( $options_id );
+        
     }
     // end of init_options()
 

@@ -44,8 +44,10 @@ if( ! defined('ABSPATH') ) die('Not Allowed');
         // PPOM Meta Table File
         wp_enqueue_script('PPOM-meta-table', PPOM_URL."/scripts/ppom-meta-table.js", array('jquery'), PPOM_VERSION, true);
         
-        // Font-awesome File 
-        wp_enqueue_style('PPOM-fontawsome', PPOM_URL."/scripts/font-awesome/css/font-awesome.css");
+        // Font-awesome File
+        if( ppom_load_fontawesome() ) {
+        	wp_enqueue_style('PPOM-fontawsome', PPOM_URL."/scripts/font-awesome/css/font-awesome.css");
+        }
 
         // Swal Files
         wp_enqueue_style('PPOM-swal', PPOM_URL."/scripts/sweetalert.css");
@@ -101,6 +103,8 @@ if( ! defined('ABSPATH') ) die('Not Allowed');
            	$field_desc  = isset($meta -> desc) ? $meta -> desc : null;
            	$settings    = isset($meta -> settings) ? $meta -> settings : array();
 
+           	$settings = $this->ppom_tabs_panel_classes($settings);
+
             // new model
             $html .= '<div class="ppom-modal-box ppom-slider ppom-field-'.esc_attr($fields_type).'">';
 			    $html .= '<header>';
@@ -127,28 +131,31 @@ if( ! defined('ABSPATH') ) die('Not Allowed');
     **============ Render all fields meta =========== 
     */
     function render_field_meta($field_meta, $fields_type, $field_index='', $save_meta='') {
-    	// var_dump($fields_type);
+    	// ppom_pa($save_meta);
     	$html  = '';
        	$html .= '<div data-table-id="'.esc_attr($fields_type).'" class="row ppom-tabs ppom-fields-actions" data-field-no="'.esc_attr($field_index).'">';
        		$html .= '<input type="hidden" name="ppom['.$field_index.'][type]" value="'.$fields_type.'" class="ppom-meta-field" data-metatype="type">';
 			$html .= '<div class="col-md-12 ppom-tabs-header">';
 				
-				$html .= '<label for="tab1" id="tab1" class="ppom-tabs-label ppom-active-tab">'.esc_html__( 'Fields', 'ppom' ).'</label>';
-				
-				if ($fields_type != 'hidden') {
-				$html .= '<label for="tab2" id="tab2" class="ppom-tabs-label ppom-condition-tab-js">'.esc_html__( 'Conditions', 'ppom' ).'</label>';
+
+				$ppom_field_tabs = $this->ppom_fields_tabs();
+				foreach ($ppom_field_tabs as $tab_index => $tab_meta) {
+					
+					$tab_label  = isset($tab_meta['label']) ? $tab_meta['label'] : '';
+					$tab_class  = isset($tab_meta['class']) ? $tab_meta['class'] : '';
+					$tab_depend = isset($tab_meta['field_depend']) ? $tab_meta['field_depend'] : array();
+					$not_allowed = isset($tab_meta['not_allowed']) ? $tab_meta['not_allowed'] : array();
+					$tab_class  = implode(' ',$tab_class);
+
+					if ( in_array('all', $tab_depend) && !in_array($fields_type, $not_allowed)) {
+					
+						$html .= '<label for="'.esc_attr($tab_index).'" id="'.esc_attr($tab_index).'" class="'.esc_attr($tab_class).'">'.$tab_label.'</label>';
+					}else if( in_array($fields_type, $tab_depend) ){
+						
+						$html .= '<label for="'.esc_attr($tab_index).'" id="'.esc_attr($tab_index).'" class="'.esc_attr($tab_class).'">'.$tab_label.'</label>';
+					}
 				}
-				
-				if ($fields_type == 'select' || $fields_type == 'radio' || $fields_type == 'checkbox' || $fields_type == 'cropper' || $fields_type == 'quantities' || $fields_type == 'pricematrix' || $fields_type == 'palettes' || $fields_type == 'fixedprice' || $fields_type == 'bulkquantity'){
-				$html .= '<label for="tab3" id="tab3" class="ppom-tabs-label">'.esc_html__( 'Add Options', 'ppom' ).'</label>';
-				}else if($fields_type == 'image' || $fields_type == 'imageselect'){
-				$html .= '<label for="tab3" id="tab3" class="ppom-tabs-label">'.esc_html__( 'Add Images', 'ppom' ).'</label>';
-				}else if($fields_type == 'audio'){
-				$html .= '<label for="tab3" id="tab3" class="ppom-tabs-label">'.esc_html__( 'Add Audio/Video ', 'ppom' ).'</label>';
-				}else if ($fields_type == 'fonts') {
-				$html .= '<label for="tab4" id="tab4" class="ppom-tabs-label">'.esc_html__( 'Fonts Family ', 'ppom' ).'</label>';	
-				$html .= '<label for="tab5" id="tab5" class="ppom-tabs-label">'.esc_html__( 'Custom Fonts ', 'ppom' ).'</label>';	
-				}
+
 			
 			$html .= '</div>';
         if ($field_meta) {
@@ -162,32 +169,24 @@ if( ! defined('ABSPATH') ) die('Not Allowed');
                 $values     = isset($save_meta[$fields_meta_key]) ? $save_meta[$fields_meta_key] : '';
 
                 $default_value		= isset($meta ['default']) ? $meta ['default'] : '';
-                // ppom_pa($default_value);
+                // ppom_pa($fields_meta_key);
 			
 				if ( empty( $values) ){
 					$values = $default_value;
 				}
 
-                if ($type == 'checkbox') {
-                    $col = 'col-md-6 col-sm-6 ppom-handle-all-fields ppom-checkboxe-style';
-                }else if($type == 'html-conditions'){
-                    $col = 'col-md-12 ppom-handle-condition';
-                }else if($type == 'paired' || $type == 'paired-cropper' || $type == 'paired-quantity' || $type == 'pre-images' || $type == 'pre-audios' || $type == 'bulk-quantity' || $type == 'imageselect'){
-                    $col = 'col-md-12 ppom-handle-paired';
-                }else{ 
-                    $col = 'col-md-6 col-sm-6 ppom-handle-all-fields';
-                }
-                if ($fields_meta_key== 'logic') {
-                	$col = 'col-md-6 ppom-handle-condition ppom-checkboxe-style';	
-                }
 
-                if ($fields_meta_key == 'fonts') {
-                    $col = 'col-md-12 ppom-handle-fontsfamily-fields';
-                }else if ($fields_meta_key == 'custom_fonts') {
-                    $col = 'col-md-12 ppom-handle-customfonts-fields';
-                }
+				$panel_classes = isset($meta['tabs_class']) ? $meta['tabs_class'] : array('ppom_handle_fields_tab', 'col-md-6', 'col-sm-6');
+				$panel_classes[] = 'ppom-control-all-fields-tabs';
 
-                $html .= '<div data-meta-id="'.esc_attr($fields_meta_key).'" class="'.esc_attr($col).'">';
+				if ($type == 'checkbox') {
+					$panel_classes[] = 'ppom-checkboxe-style';
+				}
+				if (!empty($panel_classes)) {
+					$panel_classes = implode(' ',$panel_classes);
+				}
+
+                $html .= '<div data-meta-id="'.esc_attr($fields_meta_key).'" class="'.esc_attr($panel_classes).'">';
 	                $html .= '<div class="form-group">';
 
 	                    $html .= '<label>'.sprintf(__("%s","ppom"), $title).'';
@@ -213,7 +212,7 @@ if( ! defined('ABSPATH') ) die('Not Allowed');
 	* this function is rendring input field for settings
 	*/
 	function render_all_input_types($name, $data, $fields_type, $field_index, $values ) {
-		// ppom_pa($data);
+		// ppom_pa($values);
 
 		$type		   = (isset( $data ['type'] ) ? $data ['type'] : '');
 		
@@ -325,6 +324,49 @@ if( ! defined('ABSPATH') ) die('Not Allowed');
 						$html_input .= '<input type="text" class="option-weight form-control ppom-option-keys" placeholder="'.$plc_weight.'" data-metatype="weight">';
 
 						$html_input .= '<input type="text" class="option-id form-control ppom-option-keys" placeholder="'.$plc_id.'" data-metatype="id">';
+						$html_input .= '<button class="btn btn-success ppom-add-option" data-option-type="paired"><i class="fa fa-plus" aria-hidden="true"></i></button>';
+					$html_input .= '</li>';
+				}
+				$html_input .= '<input type="hidden" id="ppom-meta-opt-index" value="'.esc_attr($opt_index0).'">';
+				$html_input	.= '<ul/>';
+				
+				break;
+
+
+				case 'font_paired' :
+				
+				$plc_option = (!empty($placeholders)) ? $placeholders[0] : __('Data Name',"ppom");
+				$plc_price = (!empty($placeholders)) ? $placeholders[1] : __('Font Name', "ppom");
+			
+				$opt_index0  = 1;
+				$html_input .= '<ul class="ppom-options-container ppom-options-sortable">';
+				
+				if($values){
+					$last_array_id = max(array_keys($values));
+
+					foreach ($values as $opt_index => $option){
+
+						$weight = isset($option['weight']) ? $option['weight'] : '';
+						
+						$html_input .= '<li class="data-options ppom-sortable-handle" style="display: flex;">';
+							$html_input .= '<span class="dashicons dashicons-move"></span>';
+							$html_input .= '<input type="text" class="option-title form-control ppom-option-keys" name="ppom['.esc_attr($field_index).'][options]['.esc_attr($opt_index).'][dataname]" value="'.esc_attr(stripslashes($option['dataname'])).'" placeholder="'.$plc_option.'" data-metatype="dataname">';
+							$html_input .= '<input type="text" class="form-control ppom-option-keys" name="ppom['.esc_attr($field_index).'][options]['.esc_attr($opt_index).'][font_name]" value="'.esc_attr($option['font_name']).'" placeholder="'.$plc_price.'" data-metatype="font_name">';
+							
+
+							$html_input .= '<button class="btn btn-success ppom-add-option" data-option-type="paired"><i class="fa fa-plus" aria-hidden="true"></i></button>';
+						$html_input .= '</li>';
+
+						$opt_index0 =  $last_array_id;
+                    	$opt_index0++;
+
+					}
+				}else{
+					$html_input .= '<li class="data-options" style="display: flex;">';
+						$html_input .= '<span class="dashicons dashicons-move"></span>';
+						$html_input .= '<input type="text" class="option-title form-control ppom-option-keys" placeholder="'.$plc_option.'" data-metatype="dataname">';
+						$html_input .= '<input type="text" class="form-control ppom-option-keys" placeholder="'.$plc_price.'" data-metatype="font_name">';
+
 						$html_input .= '<button class="btn btn-success ppom-add-option" data-option-type="paired"><i class="fa fa-plus" aria-hidden="true"></i></button>';
 					$html_input .= '</li>';
 				}
@@ -865,6 +907,96 @@ if( ! defined('ABSPATH') ) die('Not Allowed');
 		return apply_filters('render_input_types', $html_input, $type, $name, $values, $options);
 	}
     
+
+    function ppom_fields_tabs(){
+	
+		$tabs = array();
+
+		$tabs = array ( 
+				'fields_tab' => array (
+						'label' => __ ( 'Fields', 'ppom' ),
+						'class' => array('ppom-tabs-label', 'ppom-active-tab'),
+						'field_depend'=> array('all')
+				),
+				'condition_tab' => array (
+						'label' => __ ( 'Conditions', 'ppom' ),
+						'class' => array('ppom-tabs-label','ppom-condition-tab-js'),
+						'field_depend'=> array('all'),
+						'not_allowed'=> array('hidden','koll')
+				),
+				'add_option_tab' => array (
+						'label' => __ ( 'Add Options', 'ppom' ),
+						'class' => array('ppom-tabs-label'),
+						'field_depend'=> array('select','radio','checkbox','cropper','quantities','pricematrix','palettes','fixedprice','bulkquantity')
+				),
+				'add_images_tab' => array (
+						'label' => __ ( 'Add Images', 'ppom' ),
+						'class' => array('ppom-tabs-label'),
+						'field_depend'=> array('image','imageselect')
+				),
+				'add_audio_video_tab' => array (
+						'label' => __ ( 'Add Audio/Video', 'ppom' ),
+						'class' => array('ppom-tabs-label'),
+						'field_depend'=> array('audio')
+				),
+
+				// Font Picker Addon tabs
+				'fonts_family_tab' => array (
+						'label' => __ ( 'Fonts Family', 'ppom' ),
+						'class' => array('ppom-tabs-label'),
+						'field_depend'=> array('fonts')
+				),
+				'custom_fonts_tab' => array (
+						'label' => __ ( 'Custom Fonts', 'ppom' ),
+						'class' => array('ppom-tabs-label'),
+						'field_depend'=> array('fonts')
+				),
+
+				
+			);
+
+		return apply_filters('ppom_fields_tabs_show', $tabs);
+
+	}
+
+
+	function ppom_tabs_panel_classes($settings){
+
+
+		foreach ($settings as $fields_meta_key => $meta) {
+
+			$type       = isset($meta['type']) ? $meta['type'] : '';
+
+			if ($type == 'html-conditions') {
+
+				$settings['conditions']['tabs_class'] = array('ppom_handle_condition_tab','col-md-12');
+			}else if($type == 'paired' || $type == 'paired-cropper' || $type == 'paired-quantity' || $type == 'bulk-quantity') { 
+				//Bulk Quantity Addon Tabs
+				//Fixed Price Addon Tabs
+
+				$settings['options']['tabs_class'] = array('ppom_handle_add_option_tab','col-md-12');
+			}else if( $type == 'pre-images' || $type == 'imageselect') { // Image DropDown Addon Tabs
+
+				$settings['images']['tabs_class'] = array('ppom_handle_add_images_tab','col-md-12');
+			}else if( $type == 'pre-audios' ) {
+
+				$settings['audio']['tabs_class'] = array('ppom_handle_add_audio_video_tab','col-md-12');
+			}else if($fields_meta_key== 'logic') {
+				
+				$settings['logic']['tabs_class'] = array('ppom_handle_condition_tab','col-md-12');
+			}
+
+			// Fonts Picker Addon tabs
+			if ($fields_meta_key == 'fonts') {
+				$settings['fonts']['tabs_class'] = array('ppom_handle_fonts_family_tab','col-md-12');
+			}elseif ($fields_meta_key == 'custom_fonts') {
+				$settings['custom_fonts']['tabs_class'] = array('ppom_handle_custom_fonts_tab','col-md-12');
+			}
+
+		}
+
+		return apply_filters('ppom_tabs_panel_classes', $settings);
+	}
 
 }
 

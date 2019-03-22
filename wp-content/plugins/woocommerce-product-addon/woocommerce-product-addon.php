@@ -3,7 +3,7 @@
  Plugin Name: N-Media WooCommerce PPOM
 Plugin URI: http://najeebmedia.com/wordpress-plugin/woocommerce-personalized-product-option/
 Description: PPOM (Personalized Product Meta Manager) plugin allow WooCommerce Store Admin to create unlimited input fields and files to attach with Product Page
-Version: 16.9
+Version: 17.0
 Author: Najeeb Ahmad
 Text Domain: ppom
 Domain Path: /languages

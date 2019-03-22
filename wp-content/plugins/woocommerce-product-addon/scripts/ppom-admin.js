@@ -125,7 +125,7 @@ jQuery(function($){
     /**
         4- Show And Hide Visibility Role Field
     **/
-    $('.ppom-slider').find('[data-meta-id="visibility_role"]').removeClass('ppom-handle-all-fields').hide();
+    $('.ppom-slider').find('[data-meta-id="visibility_role"]').removeClass('ppom_handle_fields_tab').hide();
     $('.ppom_save_fields_model .ppom-slider').each(function(i, div){
         var visibility_value = $(div).find('[data-meta-id="visibility"] select').val();     
         if (visibility_value == 'roles') {
@@ -509,44 +509,17 @@ jQuery(function($){
     /**
         16- Handle Fields Tabs
     **/
-    if ($('#tab1').hasClass('ppom-active-tab')) {
-        $('.ppom-handle-all-fields').show();
-    }
+    $('.ppom_handle_fields_tab').show();
     $(document).on('click', '.ppom-tabs-label', function(){
-
-        var div = $(this).closest('.ppom-slider');
-        div.find('.ppom-tabs-label').removeClass('ppom-active-tab');
-        $(this).addClass('ppom-active-tab');
+            
         var id = $(this).attr('id');
-        if (id == 'tab1') {
-            div.find('.ppom-handle-condition').hide();
-            div.find('.ppom-handle-paired').hide();
-            div.find('.ppom-handle-all-fields').show();
-            div.find('.ppom-handle-customfonts-fields').hide();
-            div.find('.ppom-handle-fontsfamily-fields').hide();
-        }else if(id == 'tab3'){
-            div.find('.ppom-handle-condition').hide();
-            div.find('.ppom-handle-all-fields').hide();
-            div.find('.ppom-handle-paired').show();
-            div.find('.ppom-handle-customfonts-fields').hide();
-            div.find('.ppom-handle-fontsfamily-fields').hide();
-        }else if(id == 'tab4'){
-            div.find('.ppom-handle-condition').hide();
-            div.find('.ppom-handle-all-fields').hide();
-            div.find('.ppom-handle-customfonts-fields').hide();
-            div.find('.ppom-handle-fontsfamily-fields').show();
-        }else if(id == 'tab5'){
-            div.find('.ppom-handle-condition').hide();
-            div.find('.ppom-handle-all-fields').hide();
-            div.find('.ppom-handle-fontsfamily-fields').hide();
-            div.find('.ppom-handle-customfonts-fields').show();
-        }else{
-            div.find('.ppom-handle-all-fields').hide();
-            div.find('.ppom-handle-paired').hide();
-            div.find('.ppom-handle-condition').show();
-            div.find('.ppom-handle-customfonts-fields').hide();
-            div.find('.ppom-handle-fontsfamily-fields').hide();
-        }
+        var selectedTab = $(this).parent();
+        var fields_wrap = selectedTab.parent();
+        selectedTab.find('.ppom-tabs-label').removeClass('ppom-active-tab');
+        $(this).addClass('ppom-active-tab');
+        var content_box = fields_wrap.find('.ppom-control-all-fields-tabs');
+        content_box.hide();
+        fields_wrap.find('.ppom_handle_'+id).fadeIn(200);
     });
 
 

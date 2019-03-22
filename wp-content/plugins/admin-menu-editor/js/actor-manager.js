@@ -1,9 +1,12 @@
 /// <reference path="lodash-3.10.d.ts" />
 /// <reference path="common.d.ts" />
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -57,6 +60,12 @@ var AmeBaseActor = /** @class */ (function () {
     };
     AmeBaseActor.prototype.toString = function () {
         return this.displayName + ' [' + this.id + ']';
+    };
+    AmeBaseActor.prototype.getId = function () {
+        return this.id;
+    };
+    AmeBaseActor.prototype.getDisplayName = function () {
+        return this.displayName;
     };
     return AmeBaseActor;
 }());
@@ -162,6 +171,7 @@ var AmeActorManager = /** @class */ (function () {
             this.tagMetaCaps[tagMetaCaps[i]] = true;
         }
     }
+    // noinspection JSUnusedGlobalSymbols
     AmeActorManager.prototype.actorCanAccess = function (actorId, grantAccess, defaultCapability) {
         if (defaultCapability === void 0) { defaultCapability = null; }
         if (grantAccess.hasOwnProperty(actorId)) {
@@ -480,6 +490,9 @@ var AmeActorManager = /** @class */ (function () {
     AmeActorManager.prototype.getSuggestedCapabilities = function () {
         return this.suggestedCapabilities;
     };
+    AmeActorManager.prototype.createUserFromProperties = function (properties) {
+        return AmeUser.createFromProperties(properties);
+    };
     AmeActorManager._ = wsAmeLodash;
     return AmeActorManager;
 }());
@@ -489,4 +502,3 @@ if (typeof wsAmeActorData !== 'undefined') {
         AmeActors.generateCapabilitySuggestions(wsAmeActorData['capPower']);
     }
 }
-//# sourceMappingURL=actor-manager.js.map

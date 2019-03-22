@@ -3,8 +3,8 @@ Contributors: webtoffee
 Donate link: https://www.webtoffee.com/plugins/
 Tags: woocommerce product import, woocommerce import products, woocommerce export products, export woocommerce products, import products into woocommerce
 Requires at least: 3.0.1
-Tested up to: 4.9.8
-Stable tag: 1.4.9
+Tested up to: 5.1.1
+Stable tag: 1.5.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,7 +20,7 @@ Are you trying to import products into WooCommerce store or export WooCommerce p
 
 &#128312; Export Simple Products  in to a CSV file.
 &#128312; Import Simple Products in CSV format in to WooCommerce Store.
-&#128312; Tested OK with WooCommerce 3.5.0.
+&#128312; Tested OK with WooCommerce 3.5.6.
 
 
 Highlights: WooCommerce Product Export, WooCommerce Product CSV Import Suite, WooCommerce bulk product upload, WooCommerce import products with images, import amazon products to WooCommerce, Export Products to xls. Pro Version supports both Simple and Variable products.
@@ -40,18 +40,19 @@ You can create the CSV from scratch or you can export the product to get the for
 Product Import Export Plugin for WooCommerce is the leading tool for Woocommerce product export and WooCommerce product import. Some of the major features are listed below
 
 <ul>
-<li> &#9989; Export WooCommerce Products (Simple, Group, External and Variations) in to a CSV file.</li>
-<li> &#9989; Import Products in to WooCommerce (Simple, Group, External and Variations) in CSV format in to WooComemrce Store.</li>
-<li> &#9989; Export WooCommerce Products by Category.</li>
-<li> &#9989; Various Filter options for exporting WooCommerce Products. </li>
-<li> &#9989; Map and Transform fields while Importing WooCommerce Products.</li>
-<li> &#9989; Change values while importing WooCommerce products using Evaluation Fields.</li>
+<li> &#9989; Export/Import simple, group, external and variation products.</li>
+<li> &#9989; Export products by category.</li>
+<li> &#9989; Import/Export product reviews..</li>
+<li> &#9989; Various filter options for exporting products. </li>
+<li> &#9989; Map and transform fields during import.</li>
+<li> &#9989; Manipulate/evaluate data during import.</li>
 <li> &#9989; Choice to Update or Skip existing imported products. </li>
-<li> &#9989; WPML Supported. French and German (Deutschland) language support Out of the Box.</li>
-<li> &#9989; Import/Export file from/to a remote server via FTP.</li>
-<li> &#9989; Automatic scheduled Import/Export.</li>
-<li> &#9989; Supports Product Reviews Export Import.</li>
-<li> &#9989; Excellent Support for setting it up!</li>
+<li> &#9989; WPML support for simple products.</li>
+<li> &#9989; Import/Export file via FTP.</li>
+<li> &#9989; Import from URL.</li>
+<li> &#9989; Automatic scheduled import and export.</li>
+<li> &#9989; Supports product reviews export and import.</li>
+<li> &#9989; Third party plugin customization support.</li>
 </ul>
 
 Please visit <a rel="nofollow" href="https://www.webtoffee.com/product/product-import-export-woocommerce/">Product Import Export Plugin for WooCommerce</a> for more details
@@ -97,7 +98,7 @@ WooCommerce variable product import allows you to import all variations of the p
 
 = WooCommerce import products with images =
 
-A WooCommerce product importer which supports 'woocommerce import products with images' feature is common requirement. The premium plugin has this feature buit into it.
+The plugin facilitates easy import of images related to a product. When the products are imported using the plugin, the first image related to a product in the image column of the CSV file is taken as its featured image. If there are multiple images in the same column, the image(s) after the first one is taken as the gallery images of the product.
 
 
 = Other features =
@@ -134,6 +135,10 @@ WebToffee creates quality WordPress/WooCommerce plugins that are easy to use and
 
 Yes. You can import or export product images along with other details
 
+= Which is the best free CSV editor suggested? =
+
+LibreOffice.
+
 == Screenshots ==
 
 1. WooCommerce Product Import Screen
@@ -143,6 +148,35 @@ Yes. You can import or export product images along with other details
 3. Premium Export Settings Screen
 
 == Changelog ==
+= 1.5.6 =
+* Updates: Tested OK with WC 3.5.6 and WP 5.1.1
+* Bug Fix:- Updating Stock status based on stock quantity.
+
+= 1.5.5 =
+* Updates: Tested OK with WC 3.5.5 and WP 5.1
+* Bug Fix:- Import process getting stuck randomly.
+
+= 1.5.4 =
+* Updates: Tested OK with WC 3.5.4
+* Bug Fix:- Importing hierarchical category
+* Content Update.
+
+= 1.5.3 =
+* Updates: Tested OK with WP 5.0.3 and WC 3.5.3
+* Bug Fix:- Image Thumbnail Regeneration error reporting.
+* Content Update.
+
+= 1.5.2 =
+* Updates: Tested OK with WP 5.0.2 and WC 3.5.2
+* Optimized product image import.
+
+= 1.5.1 =
+* Content update.
+
+= 1.5.0 =
+* Tested OK with WC 3.5.1
+* Image importing process optimised
+* Bug fix.
 
 = 1.4.9 =
 * Tested OK with WC 3.5.0
@@ -257,6 +291,6 @@ Yes. You can import or export product images along with other details
 
 == Upgrade Notice ==
 
-= 1.4.9 =
-* Tested OK with WC 3.5.0
-* Compatible with new meta '_low_stock_amount' which introduced in WC3.5.0
+= 1.5.6 =
+* Updates: Tested OK with WC 3.5.6 and WP 5.1.1
+* Bug Fix:- Updating Stock status based on stock quantity.

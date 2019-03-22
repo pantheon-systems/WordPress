@@ -3,7 +3,7 @@ Contributors: ebanxwp
 Tags: credit card, boleto, ebanx, woocommerce, payment gateway, latin america, brazil, mexico, argentina, peru, colombia, chile, ecuador, cash payment, local payment, card payment, one-click payment, alternative payments, payment processing
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 1.37.3
+Stable tag: 1.38.0
 License: Apache v2.0
 License URI: http://www.apache.org/licenses/LICENSE-2.0
 
@@ -147,6 +147,12 @@ Yes, you can.
 4. There you go, you’re all set!
 
 == Changelog ==
+= 1.38.0 =
+* Fix          - Fix WooCommerce Subscription [#756](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/756)
+* Improvement  - Update lib js version [#755](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/755)
+* Improvement  - Quality/fix e2 e tests intermittent [#752](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/752)
+* Improvement  - Add payment method validation to avoid EBANX warnings on other methods [#751](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/751)
+* Feature      - Add Argentine DNI Document on Checkout [#748](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/748)
 
 = 1.37.3 =
 * Improvement - Using WP_Mock in unit test and remove wc_function for mock [#746](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/746)

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdf40d74f395cbe250950d34274a07240
+class ComposerStaticInit113e0ee5cfc6d3a57108fc05f54d3c2f
 {
     public static $files = array (
         'a0063ca44df31a81bb0634cab48f040a' => __DIR__ . '/..' . '/ebanx/benjamin/main.php',
@@ -102,9 +102,9 @@ class ComposerStaticInitdf40d74f395cbe250950d34274a07240
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitdf40d74f395cbe250950d34274a07240::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitdf40d74f395cbe250950d34274a07240::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitdf40d74f395cbe250950d34274a07240::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit113e0ee5cfc6d3a57108fc05f54d3c2f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit113e0ee5cfc6d3a57108fc05f54d3c2f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit113e0ee5cfc6d3a57108fc05f54d3c2f::$classMap;
 
         }, null, ClassLoader::class);
     }

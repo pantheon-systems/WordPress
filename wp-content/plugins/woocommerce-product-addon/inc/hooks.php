@@ -155,7 +155,9 @@ function ppom_hooks_load_input_scripts( $product ) {
     $show_price_per_unit	= false;
     
     // Font-awesome
-	wp_enqueue_style( 'prefix-font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' );
+    if( ppom_load_fontawesome() ) {
+		wp_enqueue_style( 'prefix-font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' );
+    }
     
     // Price display controller
 	wp_enqueue_script( 'ppom-price', PPOM_URL.'/js/ppom-price.js', array('jquery','ppom-inputs'), PPOM_DB_VERSION, true);
@@ -382,14 +384,14 @@ function ppom_hooks_load_input_scripts( $product ) {
 	$ppom_input_vars['wc_decimal_sep']	= get_option('woocommerce_price_decimal_sep');
 	$ppom_input_vars['wc_no_decimal']	= $decimal_palces;
 	$ppom_input_vars['wc_product_price']= ppom_get_product_price($product);
-	$ppom_input_vars['product_base_label'] = __("Product Price", "ppom");
-	$ppom_input_vars['option_total_label'] = __("Option Total", "ppom");
+	$ppom_input_vars['price_matrix_heading'] = ppom_get_option('ppom_label_discount_price', 'Discount Price');
+	$ppom_input_vars['product_base_label'] = ppom_get_option('ppom_label_product_price', 'Product Price');
+	$ppom_input_vars['option_total_label'] = ppom_get_option('ppom_label_option_total', 'Option Total');
+	$ppom_input_vars['fixed_fee_heading'] = ppom_get_option('ppom_label_fixed_fee', 'Fixed Fee');
+	$ppom_input_vars['total_discount_label'] = ppom_get_option('ppom_label_total_discount', 'Total Discount');
+	$ppom_input_vars['total_without_fixed_label'] = ppom_get_option('ppom_label_total', 'Total');
 	$ppom_input_vars['product_quantity_label'] = __("Product Quantity", "ppom");
-	$ppom_input_vars['total_without_fixed_label'] = __("Total", "ppom");
 	$ppom_input_vars['product_title'] = sprintf(__("%s", "ppom"), $product->get_title());
-	$ppom_input_vars['total_discount_label'] = __("Total Discount", "ppom");
-	$ppom_input_vars['fixed_fee_heading'] = __("Fixed Fee", "ppom");
-	$ppom_input_vars['price_matrix_heading'] = __("Discount Price", "ppom");
 	$ppom_input_vars['per_unit_label'] = __("unit", "ppom");
 	$ppom_input_vars['show_price_per_unit'] = $show_price_per_unit;
 	$ppom_input_vars['text_quantity'] = __("Quantity","ppom");
@@ -611,20 +613,21 @@ function ppom_hooks_render_shortcode( $atts ) {
 		wp_add_inline_style( 'ppom-main', $ppom->inline_css );
     }
     
+        
+    $ppom_bs_css = PPOM_URL.'/css/bootstrap/bootstrap.css';
+    $ppom_bs_modal_css = PPOM_URL.'/css/bootstrap/bootstrap.modal.css';
+    // $ppom_bs_css = '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css';
+    
+    wp_enqueue_style( 'ppom-bootstrap', $ppom_bs_css);
+    wp_enqueue_style( 'ppom-bootstrap-modal', $ppom_bs_modal_css);
+
+    // Description Tooltips JS File
+    wp_enqueue_script('PPOM-tooltip', PPOM_URL."/scripts/ppom-tooltip.js", array('jquery') );
+    
     // If Bootstrap is enabled
     if( ppom_load_bootstrap_css() ) {
         
-        $ppom_bs_css = PPOM_URL.'/css/bootstrap/bootstrap.css';
-        $ppom_bs_modal_css = PPOM_URL.'/css/bootstrap/bootstrap.modal.css';
-        // $ppom_bs_css = '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css';
         $ppom_bs_js_cdn  = '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js';
-        
-        wp_enqueue_style( 'ppom-bootstrap', $ppom_bs_css);
-        wp_enqueue_style( 'ppom-bootstrap-modal', $ppom_bs_modal_css);
-
-        // Description Tooltips JS File
-        wp_enqueue_script('PPOM-tooltip', PPOM_URL."/scripts/ppom-tooltip.js", array('jquery') );
-        
         wp_enqueue_script( 'bootstrap-js', $ppom_bs_js_cdn, array('jquery'));
     }
     

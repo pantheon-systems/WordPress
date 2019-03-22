@@ -50,6 +50,16 @@ class NM_PersonalizedProduct_Admin extends NM_PersonalizedProduct {
 		// Getting products list
 		add_action('wp_ajax_ppom_get_products', array($this, 'get_products'));
 		add_action('wp_ajax_ppom_attach_ppoms', array($this, 'ppom_attach_ppoms'));
+		
+		// Adding setting tab in WooCommerce
+    	add_filter( 'woocommerce_settings_tabs_array', __CLASS__ . '::add_settings_tab', 50 );
+    	
+    	// Display settings
+    	add_action( 'woocommerce_settings_tabs_ppom_settings', array($this, 'settings_tab') );
+    	// Save settings
+    	add_action( 'woocommerce_update_options_ppom_settings', array($this, 'save_settings') );
+    	
+    	add_action( 'admin_head', array($this, 'ppom_tabs_custom_style') );
 	}
 	
 
@@ -65,13 +75,13 @@ class NM_PersonalizedProduct_Admin extends NM_PersonalizedProduct {
 			
 			if ($page ['parent_slug'] == '') {
 				
-				$menu = add_options_page ( __ ( 'PPOM Settings', "ppom" ), __ ( 'PPOM Settings', "ppom" ), $page ['cap'], $page ['slug'], array (
+				$menu = add_options_page ( __ ( 'PPOM Fields', "ppom" ), __ ( 'PPOM Fields', "ppom" ), $page ['cap'], $page ['slug'], array (
 						$this,
 						$page ['callback'] 
 				), $this->plugin_meta ['logo'], $this->plugin_meta ['menu_position'] );
 			} else {
 				
-				$menu = add_submenu_page ( $page ['parent_slug'], __ ( $page ['page_title'], "ppom" ), __ ( 'PPOM Settings', "ppom" ), $page ['cap'], $page ['slug'], array (
+				$menu = add_submenu_page ( $page ['parent_slug'], __ ( $page ['page_title'], "ppom" ), __ ( 'PPOM Fields', "ppom" ), $page ['cap'], $page ['slug'], array (
 						$this,
 						$page ['callback'] 
 				) );
@@ -102,11 +112,13 @@ class NM_PersonalizedProduct_Admin extends NM_PersonalizedProduct {
 			$this -> clone_product_meta($_REQUEST ['productmeta_id']);
 		}else{
 			$url_add = add_query_arg(array('action' => 'new'));
-			$video_url = 'https://najeebmedia.com/wordpress-plugin/woocommerce-personalized-product-option/#ppom-quick-video';
+			$video_url = 'https://najeebmedia.com/ppom/#howtovideo';
+			$ppom_settings_url = admin_url( "admin.php?page=wc-settings&tab=ppom_settings" );
 			
 			echo '<div class="ppom-product-meta-block text-center ppom-meta-card-block">';
 				echo '<h2>' . __ ( 'How it works?', "ppom" ) . '</h2>';
-				printf(__('<p><a href="%s" target="_blank">Watch a Quick Video</a></p>', "ppom"), $video_url);
+				printf(__('<p><a href="%s" target="_blank">Watch a Quick Video</a>', "ppom"), $video_url);
+				printf(__(' - <a href="%s">PPOM Settings</a></p>', "ppom"), $ppom_settings_url);
 				echo '<a class="btn btn-success" href="'.esc_url($url_add).'"><span class="dashicons dashicons-plus"></span> '. __ ( 'Add PPOM Meta Group', "ppom" ) . '</a>';
 			echo '</div>';
 			echo '<br>';
@@ -208,5 +220,33 @@ class NM_PersonalizedProduct_Admin extends NM_PersonalizedProduct {
 		
 		echo '</div>';
 	}
+	
+	public static function add_settings_tab( $settings_tabs ) {
+    	
+        $settings_tabs['ppom_settings'] = __( 'PPOM Settings', 'ppom' );
+        return $settings_tabs;
+    }
+    
+    function settings_tab() {
+    	
+    	woocommerce_admin_fields( ppom_array_settings() );
+        
+    }
+    
+    function save_settings() {
+    	
+    	woocommerce_update_options( ppom_array_settings() );
+    }
 
+    function ppom_tabs_custom_style() {
+		?>
+		<style>
+			#woocommerce-product-data .ppom_extra_options_panel label{ margin: 0 !important; }
+			
+			/* PPOM Meta in column */
+			th.column-ppom_meta{ width: 10%!important;}
+		</style><?php
+	}
+    
+    
 }

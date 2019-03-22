@@ -3,7 +3,7 @@ Contributors: shinephp
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=vladimir%40shinephp%2ecom&lc=RU&item_name=ShinePHP%2ecom&item_number=User%20Role%20Editor%20WordPress%20plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: user, role, editor, security, access, permission, capability
 Requires at least: 4.0
-Tested up to: 5.1
+Tested up to: 5.1.1
 Stable tag: 4.50
 Requires PHP: 5.5
 License: GPLv2 or later
@@ -80,8 +80,11 @@ https://translate.wordpress.org/projects/wp-plugins/user-role-editor/
 
 
 == Changelog =
+= [4.50.1] 16.03.2019 =
+* Fix: WP Multisite: Users->Capabilities->Update: "Fatal error: Uncaught Error: Call to undefined method URE_Editor::check_blog_user() in /wp-content/plugins/user-role-editor/includes/classes/editor.php on line 576" was fixed. 
+* Fix: WooCommerce group was not shown under "Custom capabilities" section.
 
-= [4.50] 03.02.2019 =
+= [4.50] 03.03.2019 =
 * PHP version 5.5 was marked as required.
 * Update: General code restructure and optimization.
 * Update: URE_Base_Lib::get_blog_ids() returns null, if it's called under WordPress single site (not multisite).

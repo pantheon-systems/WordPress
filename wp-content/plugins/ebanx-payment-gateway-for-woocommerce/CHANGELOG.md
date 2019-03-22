@@ -1,4 +1,10 @@
 # CHANGELOG
+# 1.38.0
+* Fix          - Fix WooCommerce Subscription [#756](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/756)
+* Improvement  - Update lib js version [#755](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/755)
+* Improvement  - Quality/fix e2 e tests intermittent [#752](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/752)
+* Improvement  - Add payment method validation to avoid EBANX warnings on other methods [#751](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/751)
+* Feature      - Add Argentine DNI Document on Checkout [#748](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/748)
 
 # 1.37.3
 * Improvement - Using WP_Mock in unit test and remove wc_function for mock [#746](https://github.com/ebanx/woocommerce-gateway-ebanx/pull/746)

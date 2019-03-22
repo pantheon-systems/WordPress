@@ -41,6 +41,11 @@ class NM_Date_wooproduct extends PPOM_Inputs{
 					'title' => __ ( 'Data name', 'ppom' ),
 					'desc' => __ ( 'REQUIRED: The identification name of this field, that you can insert into body email configuration. Note:Use only lowercase characters and underscores.', 'ppom' ) 
 			),
+			'placeholder' => array (
+					'type' => 'text',
+					'title' => __ ( 'Placeholder', 'ppom' ),
+					'desc' => __ ( 'Optional.', 'ppom' ) 
+			),
 			'description' => array (
 					'type' => 'textarea',
 					'title' => __ ( 'Description', 'ppom' ),

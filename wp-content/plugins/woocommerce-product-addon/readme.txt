@@ -4,7 +4,7 @@ Tags: woocommerce, woocommerce pesonalized products, woocommerce custom fields, 
 Donate link: http://www.najeebmedia.com/donate
 Requires at least: 3.5
 Tested up to: 5.0
-Stable tag: 16.9
+Stable tag: 17.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.6
@@ -83,6 +83,19 @@ Drag & Drop input fields with many options. Prices can also be added with option
 9. Attach inputs to bulk products
 
 == Changelog ==
+= 17.0 March 19, 2019 =
+* Feature: Option added to disable Bootrap from PPOM Settings
+* Feature: Option added to disable FontAwesome from PPOM Settings
+* Feature: [Placeholder option added for Date](https://clients.najeebmedia.com/forums/topic/adding-placeholder-to-date-input/)
+* Feature: [Placeholder option added for Textarea](https://clients.najeebmedia.com/forums/topic/adding-placeholder-to-textarea/)
+* Feature: Now Product has new UI for PPOM Meta under WooCommerce Settings MetaBox
+* Feature: PPOM Metas on Product now in Wide, Nice UI
+* Feature: PPOM has Settings Panel under WooCommerce->Settings->PPOM Settings
+* Feature: Settings: Change Labels
+* Feature: Sectings: Show/Hide Option Price
+* Feature: Settings: "Select Option" button label option
+* Tweaks: [Error message updated when nonce expired](https://clients.najeebmedia.com/forums/topic/error-message-when-end-user-try-to-upload-image/#post-10938)
+* Tweaks: [Hide cart meta when variation quantities is zero](https://clients.najeebmedia.com/forums/topic/hide-total0-in-cart-where-is-variation/)
 = 16.9 February 27, 2019 =
 * Bug fixed: [Image PopUp not working in legacy view, it's fixed](https://wordpress.org/support/topic/image-option/)
 * Bug fixed: [Title and Description is set to same size in last update, now fixed](https://wordpress.org/support/topic/title-vs-description/)

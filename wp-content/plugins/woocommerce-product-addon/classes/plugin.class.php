@@ -169,7 +169,12 @@ class NM_PersonalizedProduct {
 		 /** ============ Admin hooks ===================== **/		/*
 		 * adding a panel on product single page in admin
 		 */
-		add_action ( 'add_meta_boxes', 'ppom_admin_product_meta_metabox');
+		 
+		if( version_compare( ppom_get_pro_version(), 17.0, "<" ) && ppom_pro_is_installed() ) {
+			
+			add_action ( 'add_meta_boxes', 'ppom_admin_product_meta_metabox');
+		}
+		
 		add_action( 'admin_notices', 'ppom_admin_show_notices' );
 		
 		// Saving settings and fields
@@ -239,6 +244,16 @@ class NM_PersonalizedProduct {
 		// WCFM - wc-frontend-manager
 		add_action( 'end_wcfm_products_manage', array( &$this, 'wcfm_ppom_meta' ), 583 );
 		add_action( 'after_wcfm_products_manage_meta_save', array( &$this, 'wcfm_ppom_meta_update' ), 580, 2 );
+		
+		
+		// Yes here, Not in admin due to priority issues
+		if( version_compare( ppom_get_pro_version(), 17.0, ">=" ) || !ppom_pro_is_installed() ) {
+    		add_filter( 'woocommerce_product_data_tabs', array($this, 'add_ppom_meta_tabs') );
+    		add_filter( 'woocommerce_product_data_panels', array($this, 'add_ppom_meta_panel') );
+    	}
+    	
+    	// NOTE: Debug only
+    	// delete_option('ppom_demo_meta_installed');
 	}
 	
 	/*
@@ -567,6 +582,9 @@ class NM_PersonalizedProduct {
 			wp_schedule_event( time(), 'daily', 'setup_styles_and_scripts_wooproduct');
 		}
 		
+		// Installing Demo Meta
+		self::ppom_install_demo_meta();
+		
 	}
 	
 	public static function deactivate_plugin() {
@@ -683,12 +701,12 @@ class NM_PersonalizedProduct {
 	    return $ReturnArray;
 	}
 	
-	function ppom_decode_entities($arr){
+	public static function ppom_decode_entities($arr){
 		// asort($arr);
 		$ReturnArray = array();
 		foreach ($arr as $k => $v)
 			// ppom_pa($v);
-	        $ReturnArray[$k] = (is_array($v) || is_object($v)) ? $this->ppom_decode_entities($v) : html_entity_decode($v);
+	        $ReturnArray[$k] = (is_array($v) || is_object($v)) ? self::ppom_decode_entities($v) : html_entity_decode($v);
 	    return $ReturnArray;
 	}
 	
@@ -711,9 +729,8 @@ class NM_PersonalizedProduct {
 		}
 		
 		$ppom_meta = json_decode($ppom_meta);
-		$ppom_meta = $this->ppom_decode_entities($ppom_meta);
+		$ppom_meta = self::ppom_decode_entities($ppom_meta);
 		// ppom_pa( $ppom_meta ); exit;
-	    
 	    
 	    $meta_count = 0;
 	    foreach($ppom_meta as $meta) {
@@ -749,6 +766,63 @@ class NM_PersonalizedProduct {
    		exit;
 	}
 	
+	// Since Version 17.0
+	// Adding demo
+	public static function ppom_install_demo_meta(){
+		
+		if( get_option('ppom_demo_meta_installed') ) return;
+		
+		global $wpdb;
+		//get the csv file
+		// ppom_pa($_FILES);
+	    $demo_file = PPOM_PATH.'/assets/ppom-basic-meta.json';
+	    if( ! file_exists($demo_file) ) return;
+	    
+	    $handle = fopen($demo_file,"r");
+	    
+	    $ppom_meta = '';
+		if ($handle) {
+		    while (!feof($handle)) {
+		      $ppom_meta .= fgetss($handle, 50000);
+		    }
+		
+		    fclose($handle);
+		}
+		
+		$ppom_meta = json_decode($ppom_meta);
+		$ppom_meta = self::ppom_decode_entities($ppom_meta);
+		// ppom_pa( $ppom_meta ); exit;
+	    
+	    $meta_count = 0;
+	    foreach($ppom_meta as $meta) {
+	    	
+	    	$table = $wpdb->prefix . PPOM_TABLE_META;
+	    	$qry = "INSERT INTO {$table} SET ";
+	    	$meta_count++;
+	    	
+	    		foreach($meta as $key => $val) {
+	    			
+	    			if( $key == 'productmeta_id' ) continue;
+	    			
+	    			if( $key == 'productmeta_name' ) {
+	    				$val = 'PPOM Demo Field';
+	    			}
+	    			
+	    			$qry .= "{$key}='{$val}',";
+	    		}
+	    		
+	    		$qry = substr($qry, 0, -1);
+	    		// print $qry; exit;
+	    		$res = $wpdb->query( $qry );
+	    
+			    /*$wpdb->show_errors();
+			    $wpdb->print_error();
+			    exit;*/
+	    }
+	    
+	    update_option('ppom_demo_meta_installed', 1);
+	}
+	
 	
 	function ppom_attach_meta() {
 		
@@ -772,6 +846,32 @@ class NM_PersonalizedProduct {
 	    	$meta_title = $_GET['ppom_title'];
 	    	wc_add_notice( sprintf(__("PPOM Meta Successfully Changed to - %s", "ppom"), $meta_title));
 	    }
+	}
+	
+	function add_ppom_meta_tabs( $default_tabs ) {
+    	
+    	$default_tabs['ppmo_tab'] = array(
+		      'label'   =>  __( 'PPOM Fields', 'ppom' ),
+		      'target'  =>  'ppom_meta_data_tab',
+		      'priority' => 60,
+		      'class'   => array('show_if_simple','show_if_variable')
+		  );
+		  
+		return $default_tabs;
+    }
+    
+    
+    /**
+	 * Contents of the gift card options product tab.
+	 */
+	function add_ppom_meta_panel() {
+	
+		global $post;
+		
+		echo '<div id="ppom_meta_data_tab" class="panel woocommerce_options_panel"	>';
+		ppom_meta_list( $post );
+		echo '</div>';
+
 	}
 	
 	

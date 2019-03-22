@@ -1,23 +1,32 @@
 <?php
-class amePluginVisibility {
-	const OPTION_NAME = 'ws_ame_plugin_visibility';
-	const TAB_SLUG = 'plugin-visibility';
-
+class amePluginVisibility extends amePersistentModule {
 	const HIDE_USAGE_NOTICE_FLAG = 'ws_ame_hide_pv_notice';
+
+	protected $optionName = 'ws_ame_plugin_visibility';
+
+	protected $tabSlug = 'plugin-visibility';
+	protected $tabTitle = 'Plugins';
+	protected $tabOrder = 20;
+
+	protected $defaultSettings = array(
+		'plugins' => array(),
+		'grantAccessByDefault' => array(),
+	);
 
 	private static $lastInstance = null;
 
 	/**
-	 * @var WPMenuEditor
+	 * @var Ajaw_v1_Action
 	 */
-	private $menuEditor;
-	private $settings = array();
-
 	private $dismissNoticeAction;
 
 	public function __construct($menuEditor) {
-		$this->menuEditor = $menuEditor;
+		parent::__construct($menuEditor);
 		self::$lastInstance = $this;
+
+		if ( !$this->isEnabledForRequest() ) {
+			return;
+		}
 
 		//Remove "hidden" plugins from the list on the "Plugins -> Installed Plugins" page.
 		add_filter('all_plugins', array($this, 'filterPluginList'), 15);
@@ -28,13 +37,7 @@ class amePluginVisibility {
 		add_action('check_admin_referer', array($this, 'authorizePluginAction'));
 
 		//Register the plugin visibility tab.
-		add_action('admin_menu_editor-tabs', array($this, 'addSettingsTab'), 20);
-		add_action('admin_menu_editor-section-' . self::TAB_SLUG, array($this, 'displayUi'));
 		add_action('admin_menu_editor-header', array($this, 'handleFormSubmission'), 10, 2);
-
-		//Enqueue scripts and styles.
-		add_action('admin_menu_editor-enqueue_scripts-' . self::TAB_SLUG, array($this, 'enqueueScripts'));
-		add_action('admin_menu_editor-enqueue_styles-' . self::TAB_SLUG, array($this, 'enqueueStyles'));
 
 		//Display a usage hint in our tab.
 		add_action('admin_notices', array($this, 'displayUsageNotice'));
@@ -43,44 +46,6 @@ class amePluginVisibility {
 			->permissionCallback(array($this->menuEditor, 'current_user_can_edit_menu'))
 			->method('post')
 			->register();
-	}
-
-	public function getSettings() {
-		if (!empty($this->settings)) {
-			return $this->settings;
-		}
-
-		if ( $this->menuEditor->get_plugin_option('menu_config_scope') === 'site' ) {
-			$json = get_option(self::OPTION_NAME, null);
-		} else {
-			$json = get_site_option(self::OPTION_NAME, null);
-		}
-
-		if ( is_string($json) ) {
-			$settings = json_decode($json, true);
-		} else {
-			$settings = array();
-		}
-
-		$this->settings = array_merge(
-			array(
-				'plugins' => array(),
-				'grantAccessByDefault' => array(),
-			),
-			$settings
-		);
-
-		return $this->settings;
-	}
-
-	private function saveSettings() {
-		//Save per site or site-wide based on plugin configuration.
-		$settings = json_encode($this->settings);
-		if ($this->menuEditor->get_plugin_option('menu_config_scope') === 'site') {
-			update_option(self::OPTION_NAME, $settings);
-		} else {
-			WPMenuEditor::atomic_update_site_option(self::OPTION_NAME, $settings);
-		}
 	}
 
 	/**
@@ -107,7 +72,7 @@ class amePluginVisibility {
 		if ($user === null) {
 			$user = wp_get_current_user();
 		}
-		$settings = $this->getSettings();
+		$settings = $this->loadSettings();
 
 		//Do we have custom settings for this plugin?
 		if (isset($settings['plugins'][$pluginFileName])) {
@@ -190,12 +155,21 @@ class amePluginVisibility {
 	 */
 	public function filterPluginList($plugins) {
 		$user = wp_get_current_user();
-		$settings = $this->getSettings();
+		$settings = $this->loadSettings();
 
 		//Don't try to hide plugins outside the WP admin. It prevents WP-CLI from seeing all installed plugins.
 		if ( !$user->exists() || !is_admin() ) {
 			return $plugins;
 		}
+
+		$editableProperties = array(
+			'Name' => 'name',
+			'Description' => 'description',
+			'Author' => 'author',
+			'PluginURI' => 'siteUrl',
+			'AuthorURI' => 'siteUrl',
+			'Version' => 'version',
+		);
 
 		$pluginFileNames = array_keys($plugins);
 		foreach($pluginFileNames as $fileName) {
@@ -205,14 +179,12 @@ class amePluginVisibility {
 				continue;
 			}
 
-			//Set custom names and descriptions.
-			$customName = ameUtils::get($settings, array('plugins', $fileName, 'customName'), '');
-			$customDescription = ameUtils::get($settings, array('plugins', $fileName, 'customDescription'), '');
-			if ( $customName !== '' ) {
-				$plugins[$fileName]['Name'] = $customName;
-			}
-			if ( $customDescription !== '' ) {
-				$plugins[$fileName]['Description'] = $customDescription;
+			//Set custom names, descriptions, and other properties.
+			foreach($editableProperties as $header => $property) {
+				$customValue = ameUtils::get($settings, array('plugins', $fileName, 'custom' . ucfirst($property)), '');
+				if ( $customValue !== '' ) {
+					$plugins[$fileName][$header] = $customValue;
+				}
 			}
 		}
 
@@ -288,15 +260,14 @@ class amePluginVisibility {
 	}
 
 	public function addSettingsTab($tabs) {
-		$tabs[self::TAB_SLUG] = 'Plugins';
+		$tabs[$this->tabSlug] = 'Plugins';
 		return $tabs;
 	}
 
-	public function displayUi() {
-		/** @noinspection PhpUnusedLocalVariableInspection Used in the "action" attribute of the settings form. */
-		$tabUrl = $this->getTabUrl();
-
-		require dirname(__FILE__) . '/plugin-visibility-template.php';
+	protected function getTemplateVariables($templateName) {
+		$result = parent::getTemplateVariables($templateName);
+		$result['tabUrl'] = $this->getTabUrl();
+		return $result;
 	}
 
 	public function handleFormSubmission($action, $post = array()) {
@@ -319,15 +290,7 @@ class amePluginVisibility {
 		}
 	}
 
-	private function getTabUrl($queryParameters = array()) {
-		$queryParameters = array_merge(
-			array('sub_section' => self::TAB_SLUG),
-			$queryParameters
-		);
-		return $this->menuEditor->get_plugin_page_url($queryParameters);
-	}
-
-	public function enqueueScripts() {
+	public function enqueueTabScripts() {
 		wp_register_auto_versioned_script(
 			'ame-plugin-visibility',
 			plugins_url('plugin-visibility.js', __FILE__),
@@ -368,12 +331,13 @@ class amePluginVisibility {
 
 			$plugins[] = array(
 				'fileName' => $pluginFile,
-				'name' => $header['Name'],
-				'description' => isset($header['Description']) ? $header['Description'] : '',
 				'isActive' => $isActive || $isActiveForNetwork,
 
-				'customName' => '',
-				'customDescription' => '',
+				'name' => $header['Name'],
+				'description' => isset($header['Description']) ? $header['Description'] : '',
+				'author' => isset($header['Author']) ? $header['Author'] : '',
+				'siteUrl' => isset($header['PluginURI']) ? $header['PluginURI'] : '',
+				'version' => isset($header['Version']) ? $header['Version'] : '',
 			);
 		}
 
@@ -385,7 +349,7 @@ class amePluginVisibility {
 		}
 
 		return array(
-			'settings' => $this->getSettings(),
+			'settings' => $this->loadSettings(),
 			'installedPlugins' => $plugins,
 			'canManagePlugins' => $canManagePlugins,
 			'isMultisite' => is_multisite(),
@@ -393,7 +357,7 @@ class amePluginVisibility {
 		);
 	}
 
-	public function enqueueStyles() {
+	public function enqueueTabStyles() {
 		wp_enqueue_auto_versioned_style(
 			'ame-plugin-visibility-css',
 			plugins_url('plugin-visibility.css', __FILE__)
@@ -401,12 +365,12 @@ class amePluginVisibility {
 	}
 
 	public function displayUsageNotice() {
-		if ( !$this->menuEditor->is_tab_open(self::TAB_SLUG) ) {
+		if ( !$this->menuEditor->is_tab_open($this->tabSlug) ) {
 			return;
 		}
 
 		//If the user has already made some changes, they probably don't need to see this notice any more.
-		$settings = $this->getSettings();
+		$settings = $this->loadSettings();
 		if ( !empty($settings['plugins']) ) {
 			return;
 		}
@@ -445,7 +409,7 @@ class amePluginVisibility {
 	 * @param string $pluginFile
 	 */
 	public function forgetPlugin($pluginFile) {
-		$settings = $this->getSettings();
+		$settings = $this->loadSettings();
 		unset($settings['plugins'][$pluginFile]);
 		$this->settings = $settings;
 		$this->saveSettings();

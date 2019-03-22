@@ -206,15 +206,8 @@ ul.ppom-options-container li {
     margin-bottom: 16px;
     border-bottom: 1px solid #a29494;
 }
-.ppom-tabs .ppom-handle-all-fields,
-.ppom-tabs .ppom-handle-condition,
-.ppom-tabs .ppom-handle-paired,
-.ppom-tabs .ppom-handle-fontsfamily-fields,
-.ppom-tabs .ppom-handle-customfonts-fields {
-    display: none;
-}
-.ppom-handle-fontsfamily-fields textarea,
-.ppom-handle-customfonts-fields textarea{
+.ppom_handle_fonts_family_tab textarea,
+.ppom_handle_custom_fonts_tab textarea{
     min-height: 206px;
 }
 .ppom-tabs  .ppom-tabs-label {
@@ -230,15 +223,7 @@ ul.ppom-options-container li {
     font-family: fontawesome;
     font-weight: normal;
     margin-right: 10px;
-}
-.ppom-tabs  .ppom-tabs-label[for*='1']:before {
     content: '\f1cb';
-}
-.ppom-tabs  .ppom-tabs-label[for*='2']:before {
-    content: '\f17d';
-}
-.ppom-tabs  .ppom-tabs-label[for*='3']:before {
-    content: '\f03a';
 }
 .ppom-tabs  .ppom-tabs-label:hover {
     color: #888;
@@ -249,6 +234,9 @@ ul.ppom-options-container li {
     border: 1px solid #a29494;
     border-top: 2px solid orange;
     border-bottom: 1px solid #fff;
+}
+.ppom-control-all-fields-tabs{
+    display: none;
 }
 
 
@@ -512,7 +500,7 @@ ul.ppom-options-container li {
     position: fixed;
     top: 0;
     left: 0;
-    bottom: 0
+    bottom: 0;
     right:0;
     z-index: 900;
     width: 100%;

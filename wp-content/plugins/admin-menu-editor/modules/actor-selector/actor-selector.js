@@ -2,36 +2,24 @@
 /// <reference path="../../js/jquery-json.d.ts" />
 /// <reference path="../../js/actor-manager.ts" />
 var AmeActorSelector = /** @class */ (function () {
-    function AmeActorSelector(actorManager, isProVersion, currentUserLogin, visibleUsers, ajaxParams) {
+    function AmeActorSelector(actorManager, isProVersion, allOptionEnabled) {
+        if (allOptionEnabled === void 0) { allOptionEnabled = true; }
         var _this = this;
         this.selectedActor = null;
         this.selectedDisplayName = 'All';
         this.visibleUsers = [];
         this.subscribers = [];
         this.isProVersion = false;
+        this.allOptionEnabled = true;
         this.cachedVisibleActors = null;
         this.actorManager = actorManager;
-        if (typeof currentUserLogin !== 'undefined') {
-            this.currentUserLogin = currentUserLogin;
-        }
-        else {
-            this.currentUserLogin = wsAmeActorSelectorData.currentUserLogin;
-        }
-        if (typeof visibleUsers !== 'undefined') {
-            this.visibleUsers = visibleUsers;
-        }
-        else {
-            this.visibleUsers = wsAmeActorSelectorData.visibleUsers;
-        }
         if (typeof isProVersion !== 'undefined') {
             this.isProVersion = isProVersion;
         }
-        if (ajaxParams) {
-            this.ajaxParams = ajaxParams;
-        }
-        else {
-            this.ajaxParams = wsAmeActorSelectorData;
-        }
+        this.allOptionEnabled = allOptionEnabled;
+        this.currentUserLogin = wsAmeActorSelectorData.currentUserLogin;
+        this.visibleUsers = wsAmeActorSelectorData.visibleUsers;
+        this.ajaxParams = wsAmeActorSelectorData;
         //Discard any users that don't exist / were not loaded by the actor manager.
         var _ = AmeActorSelector._;
         this.visibleUsers = _.intersection(this.visibleUsers, _.keys(actorManager.getUsers()));
@@ -69,6 +57,7 @@ var AmeActorSelector = /** @class */ (function () {
                 currentUserLogin: _this.currentUserLogin,
                 users: _this.actorManager.getUsers(),
                 visibleUsers: _this.visibleUsers,
+                actorManager: _this.actorManager,
                 save: function (userDetails, selectedUsers) {
                     _this.actorManager.addUsers(userDetails);
                     _this.visibleUsers = selectedUsers;
@@ -90,7 +79,7 @@ var AmeActorSelector = /** @class */ (function () {
         this.selectedActor = actorId;
         this.highlightSelectedActor();
         if (actorId !== null) {
-            this.selectedDisplayName = this.actorManager.getActor(actorId).displayName;
+            this.selectedDisplayName = this.actorManager.getActor(actorId).getDisplayName();
         }
         else {
             this.selectedDisplayName = 'All';
@@ -123,16 +112,18 @@ var AmeActorSelector = /** @class */ (function () {
         var isSelectedActorVisible = false;
         //Build the list of available actors.
         actorSelector.empty();
-        actorSelector.append('<li><a href="#" class="current ws_actor_option ws_no_actor" data-text="All">All</a></li>');
+        if (this.allOptionEnabled) {
+            actorSelector.append('<li><a href="#" class="current ws_actor_option ws_no_actor" data-text="All">All</a></li>');
+        }
         var visibleActors = this.getVisibleActors();
         for (var i = 0; i < visibleActors.length; i++) {
             var actor = visibleActors[i], name_1 = this.getNiceName(actor);
             actorSelector.append($('<li></li>').append($('<a></a>')
-                .attr('href', '#' + actor.id)
+                .attr('href', '#' + actor.getId())
                 .attr('data-text', name_1)
                 .text(name_1)
                 .addClass('ws_actor_option')));
-            isSelectedActorVisible = (actor.id === this.selectedActor) || isSelectedActorVisible;
+            isSelectedActorVisible = (actor.getId() === this.selectedActor) || isSelectedActorVisible;
         }
         if (this.isProVersion) {
             var moreUsersText = 'Choose users\u2026';
@@ -145,11 +136,21 @@ var AmeActorSelector = /** @class */ (function () {
         if (this.isProVersion) {
             actorSelector.show();
         }
-        //If the selected actor is no longer on the list, select "All" instead.
+        //If the selected actor is no longer on the list, select the first available option instead.
         if ((this.selectedActor !== null) && !isSelectedActorVisible) {
-            this.setSelectedActor(null);
+            if (this.allOptionEnabled) {
+                this.setSelectedActor(null);
+            }
+            else {
+                var availableActors = this.getVisibleActors();
+                this.setSelectedActor(AmeActorSelector._.first(availableActors).getId());
+            }
         }
         this.highlightSelectedActor();
+    };
+    AmeActorSelector.prototype.repopulate = function () {
+        this.cachedVisibleActors = null;
+        this.populateActorSelector();
     };
     AmeActorSelector.prototype.getVisibleActors = function () {
         var _this = this;
@@ -192,13 +193,14 @@ var AmeActorSelector = /** @class */ (function () {
         return this.actorManager.getUser(this.currentUserLogin);
     };
     AmeActorSelector.prototype.getNiceName = function (actor) {
-        var name = actor.displayName;
-        if (actor instanceof AmeUser) {
-            if (actor.userLogin === this.currentUserLogin) {
-                name = 'Current user (' + actor.userLogin + ')';
+        var name = actor.getDisplayName();
+        if (actor.hasOwnProperty('userLogin')) {
+            var user = actor;
+            if (user.userLogin === this.currentUserLogin) {
+                name = 'Current user (' + user.userLogin + ')';
             }
             else {
-                name = actor.displayName + ' (' + actor.userLogin + ')';
+                name = user.getDisplayName() + ' (' + user.userLogin + ')';
             }
         }
         return name;
@@ -206,4 +208,3 @@ var AmeActorSelector = /** @class */ (function () {
     AmeActorSelector._ = wsAmeLodash;
     return AmeActorSelector;
 }());
-//# sourceMappingURL=actor-selector.js.map

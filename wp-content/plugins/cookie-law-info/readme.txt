@@ -3,8 +3,8 @@ Contributors: webtoffee,markwt
 Donate link: https://www.webtoffee.com/plugins/ 
 Tags: eu cookie law, GDPR, cookie law, cookie consent, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
-Tested up to: 5.1.0
-Stable tag: 1.7.5
+Tested up to: 5.1.1
+Stable tag: 1.7.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -171,6 +171,12 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.7.6 =
+
+* Updated translation files for German, Danish, French, Dutch & Spanish
+* Added support for Portuguese
+* [Bug fix] [cookie_audit] shortcode conflict with heading
 
 = 1.7.5 =
 
@@ -368,7 +374,8 @@ See http://cookielawinfo.com for more information on what is required.
 
 == Upgrade Notice ==
 
-= 1.7.5 =
+= 1.7.6 =
 
-* Defaulted the minimize cookie bar option for Read more link to disabled state.
-* The cookie message bar has been defaulted to include Reject option in addition to Accept.
+* Updated translation files for German, Danish, French, Dutch & Spanish
+* Added support for Portuguese
+* [Bug fix] [cookie_audit] shortcode conflict with heading
