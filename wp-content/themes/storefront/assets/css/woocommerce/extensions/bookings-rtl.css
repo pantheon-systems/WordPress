@@ -1,0 +1,59 @@
+/**
+ * WooCommerce Bookings
+ */
+/**
+ * Imports
+ */
+#wc-bookings-booking-form {
+  border: 0;
+  padding: 0; }
+  #wc-bookings-booking-form .wc-bookings-booking-cost {
+    margin: 0;
+    border: 0; }
+  #wc-bookings-booking-form .wc-bookings-date-picker-date-fields input {
+    margin-bottom: 0; }
+  #wc-bookings-booking-form .wc-bookings-date-picker-date-fields label {
+    width: 20%; }
+  #wc-bookings-booking-form .ui-widget {
+    font-family: inherit; }
+  #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker-header {
+    border: 0;
+    background-image: none; }
+  #wc-bookings-booking-form .wc-bookings-date-picker .ui-widget-content {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    background: none; }
+  #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker table {
+    font-size: 1em; }
+  #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker th {
+    border: 0; }
+  #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker td {
+    border: 0; }
+    #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker td.bookable a {
+      text-shadow: none; }
+    #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker td.ui-datepicker-today a,
+    #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker td.ui-datepicker-today span {
+      box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.2); }
+    #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker td.fully_booked a,
+    #wc-bookings-booking-form .wc-bookings-date-picker .ui-datepicker td.fully_booked span {
+      text-decoration: line-through;
+      cursor: not-allowed; }
+  #wc-bookings-booking-form .block-picker {
+    text-align: right; }
+    #wc-bookings-booking-form .block-picker li a {
+      border: 0 !important;
+      padding: 0.236em 0.5407911001em;
+      display: inline-block;
+      text-align: center; }
+      #wc-bookings-booking-form .block-picker li a:hover {
+        text-decoration: none;
+        border: 0; }
+
+.product-type-booking form.cart {
+  padding-right: 0;
+  padding-left: 0; }
+
+@media (min-width: 768px) {
+  table.my_account_bookings {
+    font-size: 0.875em; } }

@@ -1,0 +1,37 @@
+/**
+ * WooCommerce Memberships
+ */
+/**
+ * Imports
+ */
+.woocommerce .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--members-area a::before,
+.woocommerce-page .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--members-area a::before {
+  content: "\f023"; }
+
+.woocommerce .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--back-to-memberships a::before,
+.woocommerce-page .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--back-to-memberships a::before {
+  content: "\f0a9"; }
+
+.woocommerce .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-content a::before,
+.woocommerce-page .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-content a::before {
+  content: "\f023"; }
+
+.woocommerce .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-products a::before,
+.woocommerce-page .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-products a::before {
+  content: "\f07a"; }
+
+.woocommerce .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-discounts a::before,
+.woocommerce-page .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-discounts a::before {
+  content: "\f02c"; }
+
+.woocommerce .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-notes a::before,
+.woocommerce-page .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-notes a::before {
+  content: "\f075"; }
+
+.woocommerce .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-details a::before,
+.woocommerce-page .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--my-membership-details a::before {
+  content: "\f013"; }
+
+@media (max-width: 768px) {
+  .woocommerce-account table.my_account_memberships {
+    table-layout: auto; } }
