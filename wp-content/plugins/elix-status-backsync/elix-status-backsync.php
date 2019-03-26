@@ -33,7 +33,7 @@ function elix_status_backsync_cron() {
 	$results = $wpdb->get_results( "SELECT ID, post_status 
 		FROM wp_posts 
 		WHERE post_type = 'shop_order' AND post_status IN ('wc-processing', '')
-		AND post_modified NOT LIKE '" . date("Y-m-d h:m") . "%' 
+		AND post_modified NOT LIKE '" . date("Y-m-d") . "%' 
 		ORDER BY RAND() LIMIT 0,20", OBJECT );
 
 	foreach ($results as $result) {
