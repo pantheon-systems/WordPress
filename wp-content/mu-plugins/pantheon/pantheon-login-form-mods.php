@@ -15,7 +15,7 @@ $show_return_to_pantheon_button = apply_filters( 'show_return_to_pantheon_button
     ( ! defined('RETURN_TO_PANTHEON_BUTTON') || RETURN_TO_PANTHEON_BUTTON ) &&
     (
         false !== stripos( get_site_url(), 'pantheonsite.io') ||
-        false !== stripos( $_SERVER['HTTP_HOST'], 'pantheonsite.io') 
+        ( isset( $_SERVER['HTTP_HOST'] ) && false !== stripos( $_SERVER['HTTP_HOST'], 'pantheonsite.io') )
      )
 ) );
 
