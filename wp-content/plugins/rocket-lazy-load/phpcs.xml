@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ruleset name="Rocket Lazyload">
+    <description>Rocket LazyLoad</description>
+
+    <arg name="extensions" value="php"/>
+
+    <file>.</file>
+
+    <!-- Run against the PHPCompatibility ruleset -->
+    <rule ref="PHPCompatibility"/>
+    <rule ref="PSR2" />
+    <!-- Check for cross-version support for PHP 5.4 and higher. -->
+    <config name="testVersion" value="5.4-"/>
+    <config name="minimum_supported_wp_version" value="4.7"/>
+
+    <exclude-pattern>*.js</exclude-pattern>
+    <exclude-pattern>/vendor/*</exclude-pattern>
+    <exclude-pattern>/assets/*</exclude-pattern>
+ 
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array" value="rocket-lazy-load" />
+        </properties>
+    </rule>
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array" value="rocket_lazyload,ROCKET_LL,RocketLazyLoadPlugin" />
+        </properties>
+    </rule>
+</ruleset>
