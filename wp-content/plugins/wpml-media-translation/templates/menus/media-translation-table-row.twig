@@ -1,0 +1,64 @@
+<tr class="wpml-media-attachment-row" data-attachment-id="{{ attachment.post.ID }}"
+    data-language-code="{{ attachment.language }}"
+    data-language-name="{{ languages[attachment.language].name }}"
+    data-is-image="{{ attachment.is_image }}"
+    data-thumb="{{ attachment.thumb.src }}"
+    data-file-name="{{ attachment.file_name }}"
+    data-mime-type="{{ attachment.mime_type }}"
+    data-title="{{ attachment.post.post_title }}"
+    data-caption="{{ attachment.post.post_excerpt }}"
+    data-alt_text="{{ attachment.alt }}"
+    data-description="{{ attachment.post.post_content }}"
+    data-flag="{{ languages[attachment.language].flag }}">
+    <td class="wpml-col-media-title">
+        <span title="{{ languages[attachment.language].name }}" class="wpml-media-original-flag js-wpml-popover-tooltip"
+              data-tippy-distance="-12">
+            <img src="{{ languages[attachment.language].flag }}" width="16" height="12" alt="{{ attachment.language }}">
+        </span>
+        <span class="wpml-media-wrapper">
+            <img src="{{ attachment.thumb.src }}" width="{{ attachment.thumb.width }}"
+                 height="{{ attachment.thumb.height }}" alt="{{ attachment.language }}"
+                 {% if not attachment.is_image %}class="is-non-image"{% endif %}>
+        </span>
+    </td>
+    <td class="wpml-col-media-translations">
+        {% for code, language in languages %}
+            {% if target_language is empty or target_language == code %}
+                {% if attachment.language == code %}
+                    <span class="js-wpml-popover-tooltip" data-tippy-distance="-12"
+                          title="{{ languages[attachment.language].name }}: {{ strings.original_language }}">
+                                    <i class="otgs-ico-original"></i>
+                                </span>
+                {% else %}
+                    <span class="wpml-media-wrapper js-wpml-popover-tooltip"
+                          id="media-attachment-{{ attachment.post.ID }}-{{ code }}"
+                          data-file-name="{{ attachment.translations[code].file_name }}"
+                          title="{{ languages[code].name }}: {{ strings.statuses[attachment.translations[code].status ] }}"
+                            {% if not attachment.translations[code].media_is_translated %}
+                          data-tippy-distance="-12"
+                            {% endif %}
+                          data-attachment-id="{{ attachment.translations[code].id }}"
+                          data-language-code="{{ code }}"
+                          data-language-name="{{ language.name }}"
+                          data-thumb="{{ attachment.translations[code].thumb.src }}"
+                          data-title="{{ attachment.translations[code].title }}"
+                          data-caption="{{ attachment.translations[code].caption }}"
+                          data-alt_text="{{ attachment.translations[code].alt }}"
+                          data-description="{{ attachment.translations[code].description }}"
+                          data-flag="{{ languages[code].flag }}"
+                          data-media-is-translated="{{ attachment.translations[code].media_is_translated }}">
+                                    <a class="js-open-media-translation-dialog {% if attachment.translations[code].media_is_translated %}wpml-media-translation-image{% endif %}">
+                                        <img src="{{ attachment.translations[code].thumb.src }}"
+                                             width="{{ attachment.thumb.width }}" height="{{ attachment.thumb.height }}"
+                                             alt="{{ attachment.language }}"
+                                             {% if not attachment.is_image %}class="is-non-image"{% endif %}
+                                                {% if not attachment.translations[code].media_is_translated %}style="display:none"{% endif %}>
+                                        <i class="{% if attachment.translations[code].id %}otgs-ico-edit{% else %}otgs-ico-add{% endif %}"
+                                           {% if attachment.translations[code].media_is_translated %}style="display:none"{% endif %}></i>
+                                    </a>
+                                </span>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </td>
+</tr>

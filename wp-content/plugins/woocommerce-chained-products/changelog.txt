@@ -1,0 +1,300 @@
+*** WooCommerce Chained Products Changelog ***
+
+2018.06.11 - version 2.8.2
+ * New: WooCommerce 3.5.0 compatible
+ * Fix: Fatal error "Call to a member function get_id() on boolean"
+
+2018.10.22 - version 2.8.1
+ * Fix: PHP Notice: Undefined variable: override_total
+ * Update: POT file
+
+2018.10.15 - version 2.8.0
+ * New: Feature to allow chained item to be priced individually ( only for WC > 3.0 )
+ * Update: About page
+ * Update: POT file
+
+2018.09.12 - version 2.7.0
+ * New: WordPress Coding Standards
+ * New: Settings page for chained products
+ * Fix: Compatibility issue with WooCommerce version < 3.0
+ * Update: Doc and help links
+ * Update: POT file
+
+2018.07.02 - version 2.6.2
+ * New: WooCommerce 3.4 compatible
+ * Fix: Chained item showing on-sale tag on shop/product page when the same chained item is present in cart
+ * Fix: Deprecation notice on purchase of a subscription product
+
+2018.05.21 - version 2.6.1
+ * New: WooCommerce 3.3 compatible
+ * Fix: Shortcode vanishing from the editor on publish/update of variable product
+ * Fix: Do not accept coupon for on-sale products with chained items when 'Exclude sale items' option is checked
+ * Fix: Notice not being displayed when chained items are out of stock and 'Manage Stock?' option is checked
+ * Fix: Error notice when product with chained item is removed from cart (for WooCommerce 3.2+)
+ * Update: POT file
+
+2018.02.01 - version 2.6.0
+ * New: WooCommerce 3.2 compatible
+ * Fix: Too many redirect issue on multi-site setup
+ * Fix: Fatal error when pulling products having chained item using REST API
+ * Fix: Show notice on product page when chained item is out of stock
+ * Fix: Select2 search issue with variable product
+ * Fix: Incorrect order total when creating order from back-end
+ * Fix: Old chained item not getting removed while switching subscription
+
+2017.10.09 - version 2.5.7
+ * Fix: Allow adding chained products to cart if back ordering is allowed
+ * Fix: Price not set to zero for chained variable product while manually creating order from backend
+ * Update: POT file
+
+2017.09.06 - version 2.5.6
+ * Fix: Select2 restricting selection of parent product in select2 of other plugins.
+ * Update: Suppress 'Error Loading' message while searching for a product
+
+2017.07.26 - version 2.5.5
+ * Fix: Don't allow chaining a variation to itself
+ * Fix: Chaining issue on order received page
+
+2017.07.24 - version 2.5.4
+ * Fix: Compatibility issue with WooCommerce version lower than 3.0
+
+2017.07.10 - version 2.5.3
+ * Fix: Fatal error on subscription renewal with WooCommerce Subscriptions - v2.2.8
+
+2017.06.22- version 2.5.2
+ * Fix: WooCommerce Bookings emails not being send when Chained Products is active
+
+2017.05.11- version 2.5.1
+ * Fix: Search for variable products returning parent variable product
+ * Fix: Mini Cart count count sets to zero when 'sa_cp_show_chained_items' filter was used
+ * Fix: Compatibility notices and warnings when 'sa_show_chained_item_price' is set to yes
+
+2017.04.07 - version 2.5
+ * New: WooCommerce 3.0 compatible
+ * New: WooCommerce Subscriptions 2.2.0 compatible
+ * Fix: UI issue on order screen for WooCommerce less than 3.0
+ * Fix: When hide out of stock items in checked then the parent product should hide too if chained product is out of stock.
+ * Fix: Take backorders into consideration for chained products
+ * Update: Class structure for frontend code
+ * Update: Will now support only WooCommmerce 2.5+
+ * Update: POT file
+
+2016.11.10 - version 2.4.4
+ * Fix: Mini Cart count not getting updated when 'sa_cp_show_chained_items' filter was used
+ * Fix: Incorrect stock count for variable product
+ * Fix: Variable product title not getting parsed correctly when used with different language
+ * Update: Textdomain correction
+ * Update: POT file
+
+2016.09.19 - version 2.4.3
+ * Fix: Chained child items getting added twice, after clicking Pay button from Order
+
+2016.06.20 - version 2.4.2
+ * New: Tested upto WooCommerce 2.6+
+ * Fix: Housekeeping feature not working for variable products with chained items
+ * Update: POT file
+
+2016.05.12 - version 2.4.1
+ * Fix: Updating chained grouped products quantities in cart, which lead to removal of chained products from cart
+ * Fix: Removal of some warnings related to database queries
+
+2016.04.27 - version 2.4
+ * New: Housekeeping feature for chained products
+ * Fix: Showing parent product in search result for chained item, which may lead to infinite chain of products
+ * Fix: Total products count in cart when chained item's visibility is set to hidden
+ * Fix: Product titles getting stripped incorrectly when a product having chained item is a part of grouped product
+ * Update: Added filter to modify Chained Products storewide settings
+ * Update: Total chained products quantities on product edit page
+
+2016.04.14 - version 2.3.9
+ * Fix: 'continue' is not used inside loop
+
+2016.01.21 - version 2.3.8
+ * New: Tested up to WooCommerce 2.5
+ * Fix: Chained products fields visible for variable products under Linked products tab
+ * Fix: CSS of Chained Products field under variable products
+ * Update: Modified content on Welcome Page
+ * Update: POT file
+
+2015.12.29 - version 2.3.7
+ * New: Support for 'Mix & Match Product'
+ * New: Support for 'Composite Product'
+ * New: Support for 'Product Bundle'
+ * Fix: 'Total' column in cart & order, showing wrong price for chained item as per their quantity
+ * Update: Improved method for adding chained products to cart (Thanks to: Kathy)
+ * Update: Strikethrough chained item's original price in cart & order
+
+2015.10.21 - version 2.3.6
+ * Fix: PHP notice 'Undefined variable: chained_parent_id...' (Thanks to: Goncalo Salgado)
+
+2015.10.06 - version 2.3.5
+ * Tweak: Use of filter 'woocommerce_add_cart_item_data' before adding chained item to cart
+
+2015.09.21 - version 2.3.4
+ * Fix: Warnings on Simple product page
+ * Fix: Show 'out of stock' for all variations if any one of the chained products associated with any one variation is out of stock
+
+2015.09.09 - version 2.3.3
+ * Fix: Shortcode not showing chained items for variable products
+ * Update: On product edit page, add chained products field above existing field instead of below
+ * Update: Replaced loader image that is shown before loading chained items on variable product page
+ * Tweak: Minor CSS change for About screen & Chained Products select field on product edit page
+
+2015.08.31 - version 2.3.2
+ * Fix: Duplicate 'Add to cart' button in loop
+
+2015.08.13 - version 2.3.1
+ * Fix: 'Update chained products in existing orders' not working for products which didn't had any chained products previously
+
+2015.08.08 - version 2.3
+ * New: WooCommerce 2.4 ready
+ * New: Text domain 'woocommerce-chained-products' & language loader
+ * New: POT file
+ * New: Compatibility with WooCommerce Product Bundle
+ * New: Compatibility with WooCommerce Give Products
+ * New: Option to show/hide chained item's price
+ * New: Option to show/hide chained items in cart, cart widget, checkout & order
+ * New: Filter to add custom CSS class for chained items displayed on store
+ * New: Added support for custom CSS class in chained products shortcode
+ * New: Function to find whether a product has chained products associated with it
+ * New: Welcome page
+ * Update: Add indentation for chained items
+ * Fix: 'Update chained products in existing orders' not working
+ * Fix: Chained item's price is not zero when added from order admin page
+ * Fix: Chained item's quantity is always 1
+ * Fix: Chained item not getting deleted after removing the main product
+
+2015.06.13 - version 2.2.4
+ * Fix: Showing errors when adding chained products from order admin page
+
+2015.04.21 - version 2.2.3
+ * Fix: Adding chained products not working in some cases for already created products
+ * Fix: Select2 placeholder for chained products not displaying properly
+ * Update: Icons for add & remove chained products
+
+2015.03.17 - version 2.2.2
+ * Fix: Chained products 'Add Product' not working due to 'wc_select_params' not defined
+ * Fix: Chained products fatal error when using 'Add Product' in some cases
+ * Fix: Chained products not displaying for variations on click of 'Expand All'
+
+2015.02.19 - version 2.2.1
+ * Fix: Fixes related to chained products not displaying for variations
+
+2015.02.10 - version 2.2
+ * Update: WooCommerce 2.3 Compatibility
+
+2014.09.12 - version 2.1
+ * Update: WooCommerce 2.2 Compatibility
+ * Update: Docblocks & code cleanup
+
+2014.06.06 - version 2.0.3
+ * Fix: "Update existing orders?" feature compatible with 2.1+
+
+2014.04.04 - version 2.0.2
+ * Fix: Chained products duplicate on re-orders from My Account page
+
+2014.02.14 - version 2.0.1
+ * Fix: Chained products settings layout issue for variable products
+ * Fix: Prevent unrequired ajax call for the variale products having no variations with chained products
+
+2014.01.23 - version 2.0
+ * Update: WooCommerce 2.1 compatibility
+ * Update: Minor fixes related to PHP warnings.
+
+2014.01.08 - version 1.5.1
+ * Fix: Minor fix related to updating chained product detail for variation
+
+2013.12.05 - version 1.5
+ * Fix: Conflict with Recommendation Engine plugin on variable product shop page
+ * Update: Admin referer for searching product & only variations
+ * Update: Ordering chained products on shop pages using default WooCommerce catalog order
+
+2013.11.15 - version 1.4
+ * New: Option to update existing order on addition / removal of chained products (only for downloadable and virtual products)
+ * Update: Modification in admin UI
+ * Update: Improvements in stock checking of chained products
+
+2013.09.22 - version 1.3.8.4
+ * Fix: Product variation's price not showing in IE10
+
+2013.08.08 - version 1.3.8.3
+ * Fix: 'is_in_stock' is a function
+
+2013.08.05 - version 1.3.8.2
+ * Fix: Prevent purchase of main product for the out of stock chained product(s)
+
+2013.07.30 - version 1.3.8.1
+ * New: Compatibility with 'WooCommerce Variation Swatches and Photos' plugin
+ * Fix: Notice on product page
+
+2013.06.24 - version 1.3.8
+ * New: Added shortcode [chained_products] to display chained products on product page
+
+2013.05.02 - version 1.3.7.5
+ * Fix: Unnecessary tag causing misplacement of div elements in product writepanel for simple products
+ * Update: Converted all front end javascript to inline javascript using 'add_inline_js' of WC object
+
+2013.04.20 - version 1.3.7.4
+ * Fix: Unnecessary tag causing misplacement of div elements in product writepanel
+
+2013.03.26 - version 1.3.7.3
+ * Fix: Manual addition of order item in Order from admin panel was not working & was giving output as -1
+ * Update: Localization & compatibility with 'Codestyling Localization' plugin from Wordpress
+
+2013.03.19 - version 1.3.7.2
+ * Fix: Removed use of 'goto' operator which was creating syntax error
+ * Fix: Set 'Included Products' tab priority to 1 for making it default opened tab on Product Shop page
+
+2013.03.01 - version 1.3.7.1
+ * Fix: Removed Chained Products fields from 'Related Products' tab if the product is 'variable'
+ * Fix: Set 'Included Products' tab priority to 30 to make it as default selected tab on product shop page
+ * Fix: Minor fixes related to jQuery & other performance improvements
+
+2013.02.21 - version 1.3.7
+ * Fix: Addition of Chained Products getting stuck due to loop in nesting of chained items
+ * Fix: Product variation's link on Product Page
+
+2013.02.18 - version 1.3.6
+ * Fix: Product variation's link on Product Page & in Cart
+ * Update: Minor changes for code reduction
+
+2013.01.28 - version 1.3.5
+ * Update: Compatibility version for both WooCommerce 1.6.6 and 2.0
+ * Update: Allowed nesting of chained items to reuse existing combo/bundles
+
+2013.01.18 - version 1.3.4
+ * Fix: Showing 'Add to cart' button even when chained item is 'Out of Stock'
+
+2013.01.11 - version 1.3.3
+ * Fix: Better compat for variation product
+
+2013.01.01 - version 1.3.2
+ * Fix: An issue with adding a chained product to cart by non-logged in user
+
+2012.12.04 - version 1.3.1
+ * New updater
+
+2012.10.25 - version 1.3
+ * Chained products can now be added to products variations too
+ * Can control quantities of chained products (Quantity Bundle)
+ * Fix: Chained Products getting added twice when chained products are added to the cart separately
+ * Fix: Chained and Bundled products plugins compatibility issue
+
+
+2012.08.29 - version 1.2
+ * Products of any visibility type can be chained now - Catalog/Search/Hidden
+ * Fixed chained products getting lost on product auto save
+ * Subscriptions can chain other products, but can't be chained to other products
+
+
+2012.07.05 - version 1.1
+ * Chained products can be added to Variable products also
+ * Chained products now show as separate items in cart
+ * Compatibility with WooCommerce 1.6+
+ * Products with "search" visibility too will be included in chained products (but not hidden products)
+ * Overall code improvements
+
+
+2012.04.20 - version 1.0
+ * First release
+

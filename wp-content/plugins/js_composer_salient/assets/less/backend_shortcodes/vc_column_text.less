@@ -1,0 +1,27 @@
+/* Text Block
+---------------------------------------------------------- */
+.wpb_vc_column_text,
+.wpb_vc_message,
+.wpb_vc_toggle {
+  > .wpb_element_wrapper {
+    height: auto;
+    min-height: 1px;
+    background-image: none;
+    padding-left: 10px;
+    p:first-child {
+      margin-top: 0;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+    > .wpb_vc_param_value {
+      &.textarea_html {
+        overflow: hidden;
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,100 @@
+<div class="wpml-section wpml-st-localization {{ section_class }}"
+    {% for field, data in nonces %}
+        data-{{ field }}-action="{{ data.action }}" data-{{ field }}-nonce="{{ data.nonce }}"
+    {% endfor %}
+>
+    <div id="wpml-{{ type }}-content">
+        <div class="wpml-section-header">
+            <h3>{{ section_label }}</h3>
+        </div>
+        <div class="wpml-section-content">
+            <ul class="state-selector">
+                <li data-status="all">{{ all_text }} ({{ status_count.active + status_count.inactive }})</li>
+                <li>|</li>
+                <li data-status="active">{{ active_text }} ({{ status_count.active }})</li>
+                <li>|</li>
+                <li data-status="inactive">{{ inactive_text }} ({{ status_count.inactive }})</li>
+            </ul>
+            <table class="widefat striped">
+
+            <input type="hidden" name="{{ scan_folder_nonce_field }}" value="{{ scan_folder_nonce_val }}">
+            <input type="hidden" name="{{ scan_files_nonce_field }}" value="{{ scan_files_nonce_val }}">
+
+            {% include 'theme-plugin-localization-ui-header.twig' with {'position': 'header'} %}
+
+                {% for dir_and_file, component_data in components %}
+
+                <tr class="item{{ component_data.active ? ' active' }}">
+                    <td>
+                        <input type="checkbox" name="{{ type }}[]" id="{{ type }}-{{ component_data.id }}" value="{{ dir_and_file }}" data-component-name="{{ component_data.component_name|replace(' ', '-')|lower }}">
+                    </td>
+                    <td>
+                        <label for="{{ type }}-{{ component_data.id }}">{{ component_data.component_name }}</label>
+                    </td>
+                    <td>
+                        {% if component_data.domains %}
+                            <ul>
+                                {% for domain, domains_statistics in component_data.domains %}
+                                    <li><a title="{{ domains_statistics.title_all_strings }}" href="{{ domains_statistics.domain_link }}">{{ domain }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </td>
+
+                    <td class="wpml-translated">
+                        {% if component_data.domains %}
+                            <ul>
+                                {% for domain, domains_statistics in component_data.domains %}
+                                    <li>
+                                        {{ domains_statistics.translated }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </td>
+
+                    <td class="wpml-needs-update">
+                        {% if component_data.domains %}
+                        <ul>
+                            {% for domain, domains_statistics in component_data.domains %}
+                                <li>
+                                    {% if domains_statistics.needs_update %}
+                                    <a title="{{ domains_statistics.title_needs_translation }}" href="{{ domains_statistics.needs_update_link }}">
+                                        {% endif %}
+                                        {{ domains_statistics.needs_update }}
+                                        {% if domains_statistics.needs_update %}
+                                    </a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                    {% if 'plugin' == type %}
+                    <td class="wpml-create-po-file">
+                        {% if component_data.domains %}
+                            <ul>
+                                {% for domain, domains_statistics in component_data.domains %}
+                                    <li>
+                                        {% if domains_statistics.translated or domains_statistics.needs_update %}
+                                            <a class="wpml_st_pop_download button-secondary" href="#{{ dir_and_file|e }}">create PO file</a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </td>
+                    {% endif %}
+                    {% set current = current - 1 %}
+                </tr>
+
+                {% endfor %}
+
+                {% include 'theme-plugin-localization-ui-header.twig' with {'position': 'footer'} %}
+
+            </table>
+            <br />
+            <button id="{{ scan_button_id }}" type="button" class="button-primary btn-scan" disabled="disabled">{{ scan_button_label }}</button>
+        </div>
+    </div>
+</div>

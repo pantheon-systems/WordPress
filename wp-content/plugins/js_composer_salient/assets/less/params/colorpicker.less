@@ -1,0 +1,61 @@
+/** Color picker field **/
+.wpb_el_type_colorpicker,
+.vc_edit_form_elements .wpb_el_type_colorpicker {
+  .colorpicker_field {
+    display: inline-block;
+    width: 90px;
+    padding: 4px 3px 3px;
+    margin-right: 4px;
+  }
+  .wp-picker-clear {
+    width: auto;
+  }
+}
+
+.edit_form_line {
+  .updated {
+    margin: 5px 0px 2px;
+  }
+}
+
+// Fix for bootstrap modal and autocomplete z-index
+.vc_ui-front {
+  z-index: 100052 !important;
+}
+
+.vc_color-picker {
+  &.wp-picker-container {
+    width: auto;
+  }
+  .wp-picker-clear {
+    padding: 2px 4px;
+  }
+  .wp-picker-holder {
+    z-index: 10000;
+    position: relative;
+    .vc_alpha-container {
+      border-radius: 0;
+      border: 1px solid #dfdfdf;
+      padding: 6px;
+      background: #ffffff;
+      position: absolute;
+      width: 243px;
+      left: -1px;
+      z-index: 1000;
+      bottom: -64px;
+      label {
+        display: block;
+        output {
+          padding-top: 0px;
+          display: inline;
+          vertical-align: top;
+        }
+      }
+      input {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+    }
+  }
+}

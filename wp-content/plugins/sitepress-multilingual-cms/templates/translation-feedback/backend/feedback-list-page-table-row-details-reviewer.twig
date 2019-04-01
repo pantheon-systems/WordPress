@@ -1,0 +1,25 @@
+{% set corrected_by_label = 'fixed' == feedback.get_status ? strings.corrected_by : strings.reviewed_by %}
+<div class="wpml-tf-line">
+    <div class="wpml-tf-title">{{ corrected_by_label }}</div>
+    <div class="wpml-tf-value">
+    {% if has_admin_capabilities and 'fixed' != feedback.get_status %}
+        {% if feedback.get_available_translators %}
+            <select class="js-wpml-tf-reviewer" title="{{ corrected_by_label }}">
+                {% set reviewer_name = feedback.get_translator_name %}
+                {% if feedback.get_reviewer.get_id %}
+                    {% set reviewer_name = feedback.get_reviewer.get_reviewer_display_name %}
+                {% endif %}
+                {% for id, name in feedback.get_available_translators %}
+                    <option value="{{ id }}"
+                            {% if name == reviewer_name %} selected="selected"{% endif %}
+                    >{{ name }}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            {{ strings.no_translator_available }}
+        {% endif %}
+    {% else %}
+        {{ feedback.get_reviewer.get_reviewer_display_name }}
+    {% endif %}
+    </div>
+</div>

@@ -1,0 +1,1 @@
+(function(c){c(document).on("click",".notice-dismiss",function(){var a=c(this).parent("div.yith-notice-is-dismissible"),b=a.attr("id");"undefined"!=typeof b&&(b="hide_"+b,a=a.data("expiry"),a=new Date(a),a.setUTCHours(23),a.setUTCMinutes(59),a.setUTCSeconds(59),document.cookie=b+"=yes;expires="+a.toUTCString()+";path=/")})})(jQuery);

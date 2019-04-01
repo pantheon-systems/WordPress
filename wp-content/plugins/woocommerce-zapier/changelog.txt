@@ -1,0 +1,220 @@
+=== WooCommerce Zapier Integration Changelog ===
+
+2019.02.08 - version 1.8.1
+* Full details: https://wczap.com/?p=1047
+* New: Compatibility with WooCommerce Subscriptions v2.5.0 (and backwards compatible with WooCommerce Subscriptions v2.3.x). #144
+* Fix: Improve support of older WooCommerce versions < 3.3.0 combined with specific newer WordPress versions. #145
+
+2019.02.04 - version 1.8.0
+* Full details: https://wczap.com/?p=1034
+* Change: When setting up Customer, Order or Subscription Zaps, send real Customer/Order/Subscription data from your store (rather than static data). This should make setting up Zaps much easier, as the Zap editor will show real fields and data from your store. #105
+* Change: Remove remaining support for WooCommerce 2.6.x. WooCommerce 3.0 or above is required. #132
+* Change: The "Subscription Created" trigger now tiggers for all cases (not just checkout and REST API subscription creations). #132
+* Change: Requires WordPress v4.6.0 or newer (no longer supports WordPress v4.5.x). #140
+* Change: Requires WooCommerce Subscriptions v2.3.0 or newer (no longer supports WooCommerce Subscriptions v2.2.x or 2.1.x). #136
+
+2018.11.21 - version 1.7.5
+* Full details: https://wczap.com/?p=1001
+* Fix: Avoid duplicate New Order triggers during subscription renewals. #128
+* Fix: Avoid Undefined Index notice when running via WP-CLI. #129
+* Change: Improved queueing during WP-Cron (ie for Subscription Renewals). #128
+* Fix: Avoid PHP Warning: html_entity_decode() expects parameter 1 to be string, object given. #125
+* Marked as compatible with WooCommerce 3.5.x.
+
+2018.07.24 - version 1.7.4
+* Full details: https://wczap.com/?p=999
+* Fix: Avoid a fatal error that was occurring when orders or subscriptions containing a deleted product were being sent to Zapier. In those cases cases, the line_items.categories, line_items.tags and line_items.type data fields will be empty. #121
+
+2018.06.19 - version 1.7.3
+* Full details: https://wczap.com/?p=991
+* Fix: New Order trigger not consistently triggering for orders that use the PayPal Standard payment gateway with PayPal IPN. #119
+* Change: Improved logging for queue processing. #119
+
+2018.05.24 - version 1.7.2
+* Full details: https://wczap.com/?p=980
+* New: Coupons field for Orders, which is a comma-separated list of coupon codes that were used for the order. #67
+* Send unique sample data so the "Pick a Sample to Set Up Your Zap" screen in the Zap editor shows the most recent sample data.
+* Send JSON Content-Type header when sending data to Zapier. #102
+* WooCommerce 3.4 compatibility. #113
+* GDPR privacy support (requires WordPress 4.9.6+ and WooCommerce 3.4+). #117
+
+2018.03.09 - version 1.7.1
+* Full details: https://wczap.com/?p=967
+* New: Order metadata (custom field data) is now sent to Zapier using a new meta_data array. #107
+* Change: Order line item metadata now includes hidden meta data. #106
+* Fix: Avoid Undefined Index notice for orders from countries with no states. #108
+
+2018.01.31 - version 1.7.0
+* Full details: https://wczap.com/?p=951
+* Compatibility with WooCommerce 3.3 and 3.2 (and backwards compatible with WooCommerce v3.1.x and 3.0.x).
+* Send data to Zapier synchronously, instead of relying on WordPress Cron. This should prevent scenarios where data is sent to Zapier multiple times or not at all.
+* New: Line Item Unit Price field for orders and subscriptions.
+* Fix: Avoid intermittent PHP fatal error that occurred with some variable products.
+* Sending data asynchronously via WordPress cron is now deprecated and will be removed in a future version.
+* "New Order Status Change" trigger: Include previous and new order statuses in the order's notes.
+* "New Subscription Status Change" trigger: Include previous and new subscription statuses in the subscription's notes.
+* Improved logging of Zapier's response after sending data to Zapier.
+* Asynchronous sending: attempt to send data to Zapier more promptly (5 seconds instead of 10 seconds).
+* Improved logging for WordPress Cron.
+* Fix: Avoid PHP notice that occurred for New Order Status Change trigger.
+* Ensure sample order data is sent to Zapier in the store's local timezone (not UTC/GMT).
+
+2017.07.06 - version 1.6.9
+* Full details: https://wczap.com/?p=898
+* New: Billing State Name field for orders and customers.
+* New: Shipping State Name field for orders and customers.
+* Change: Minimum required version is now WooCommerce 2.6.0 (tested up to WooCommerce 3.1.0).
+* Remove support for WooCommerce 2.4 and 2.5.
+
+2017.05.01 - version 1.6.8
+* Full details: https://wczap.com/?p=881
+* Fix: Orders/Subscriptions: ensure order line item meta data is sent correctly when using WooCommerce 3.0+.
+* Fix: Orders: correctly send product category/tag information for variable products.
+
+2017.04.07 - version 1.6.7
+* Full details: https://wczap.com/?p=878
+* Fix: Avoid "Undefined index: variation_id" error when using WooCommerce 2.6.x or earlier.
+* Change: System status information now displays in WooCommerce 3.0.1 or newer, or 2.6.x or older. It won't display in WooCommerce 3.0.0.
+* Change: Minimum required version is WooCommerce 2.4.9.
+
+2017.04.04 - version 1.6.6
+* Full details: https://wczap.com/?p=875
+* New: Compatibility with WooCommerce 3.0 (and backwards compatible with WooCommerce v2.6.x)
+* New: Compatibility with WooCommerce Subscriptions v2.2.0 (and backwards compatible with WooCommerce Subscriptions v2.1.x).
+* Fix: Orders & Subscriptions: Ensure each line_item.type field value is correctly set to the product type. Previously it was being incorrectly set to the line item type of line_item.
+
+2017.01.19 - version 1.6.5
+* Full details: https://wczap.com/?p=873
+* Security Fix: Improved output escaping in the WordPress admin area. Thanks to David Green of 10up for reporting these.
+* Fix: Ensure a few more strings are translatable.
+* Change: Code standards improvements.
+* Note: Tested up to WordPress 4.7.1.
+* Note: Tested up to WooCommerce v2.6.13.
+
+2016.12.15 - version 1.6.4
+* Full details: https://wczap.com/?p=867
+* New: 'transaction_id' order data field.
+* Fix: Improved compatibility with WooCommerce Subscriptions v2.1.x.
+* Change: Subscription Created triggers now only use one parameter. This should minimize the likelihood of a "Serialization of 'SimpleXMLElement' is not allowed" error occurring when using "Subscription Created" trigger and the Authorize.net CIM Gateway.
+
+2016.08.19 - version 1.6.3
+* Full details: https://wczap.com/?p=865
+* Fix: "New Order" trigger sending orders to Zapier twice for some payment gateways (such as PayPal).
+* Change: Send data to Zapier 10 seconds later, rather than immediately.
+* Change: Improved handling of existing Feeds after Subscriptions is deactivated.
+* Change: Improved handling of invalid Zapier Feeds.
+* Change: Tested up to WooCommerce v2.6.4.
+* Change: Tested up to WordPress 4.6.
+* New: Add new 'wc_zapier_scheduled_event' hook so that other plugins or code can act once customer/order/subscription data is scheduled to be sent to Zapier.
+
+2016.08.03 - version 1.6.2
+* Full details: https://wczap.com/?p=852
+* Fix: Avoid "Serialization of 'SimpleXMLElement' is not allowed" error when using "Subscription Status Changed" trigger and the Authorize.net CIM Gateway.
+* Fix: If sending immediately/synchronously (rather than asynchronously), ensure the New Order trigger only fires once when using a payment gateway that uses the payment_complete() function.
+* Change: Subscription triggers now use the subscription ID instead of the WC_Subscription object.
+* New: Add new 'wc_zapier_data_sent_to_zapier_successfully' hook so that other plugins or code can act once customer/order/subscription data has been sent to Zapier.
+
+2016.07.21 - version 1.6.1
+* Full details: https://wczap.com/?p=845
+* Fix: Ensure the "New Order" trigger fires correctly when WooCommerce Subscriptions is installed. This bug was causing Zaps that use the "New Order" trigger to not fire when WooCommerce Subscriptions was active.
+* Fix: Prevent PHP warning that could occur when WooCommerce subscriptions was installed and the "New Order" trigger event is used.
+* Change: readme.txt improvements.
+
+2016.06.10 - version 1.6.0
+ * Full details: https://wczap.com/?p=833
+ * New: Compatibility with WooCommerce 2.6
+ * New: Add support for the WooCommerce Subscriptions extension (requires WooCommerce Subscriptions v2.0.12 or later).
+ * New: Add a "Subscription Created" Trigger Event (if the WooCommerce Subscriptions extension is active).
+ * New: Add a "Subscription Renewed" Trigger Event (if the WooCommerce Subscriptions extension is active).
+ * New: Add a "Subscription Renewal Failed" Trigger Event (if the WooCommerce Subscriptions extension is active).
+ * New: Add a "Subscription Status Changed" Trigger Event (if the WooCommerce Subscriptions extension is active).
+ * New: 'is_subscription_renewal' order data field (if the WooCommerce Subscriptions extension is active).
+ * New: 'subscription_id' order data field (if the WooCommerce Subscriptions extension is active).
+ * New: 'user_id' order data field.
+ * New: 'view_url' order data field.
+ * New: 'wc_zapier_send_asynchronously' filter so that other plugins or code can override how the data sent is to Zapier.
+ * Change: Zapier Order Notes: Include trigger name (not just the initiating hook).
+ * Fix: Prevent PHP notice that was occurring when an order did not have a billing country.
+ * Fix: Prevent "Invalid Webhook URL" error messages that were occurring when adding or saving a Zapier Feed.
+
+2016.03.24 - version 1.5.3
+ * Full details: https://wczap.com/?p=828
+ * New: Add support for Zapier's new webhook URL format.
+ * Fix: Prevent "Invalid Webhook URL" error messages that were occurring when adding a new Zapier Feed.
+
+2016.01.27 - version 1.5.2
+ * Full details: https://wczap.com/?p=796
+ * Fix: Ensure order data is sent to zapier in plain (text) form (rather than HTML encoded).
+ * Change: remove reliance on $woocommerce global.
+ * Change: readme.txt improvements.
+
+2015.12.18 - version 1.5.1
+ * Full details: https://wczap.com/?p=774
+ * New: Compatibility with WooCommerce 2.4 and 2.5 beta 3 (and backwards compatible with WooCommerce 2.2.x).
+ * New: Compatibility with WordPress 4.4.
+ * Change: Orders: Don't use the woocommerce_get_filename_from_url() function (it is deprecated).
+ * Change: Orders: Use order currency rather than store-wide currency.
+
+2015.02.12 - version 1.5
+ * Full details: https://wczap.com/?p=748
+ * New: Compatibility with WooCommerce 2.3 (and backwards compatible with WooCommerce 2.2.x).
+ * Change: Orders: The order.discount_total field now returns an empty string (because WooCommerce 2.3 no longer has a concept of after tax discounts), and this field will be removed entirely in a future version.
+ * Change: Orders: dollar amounts are now formatted to 2 decimal places. Fields: order.total, order.subtotal, order.discount_total, order.cart_discount, order.tax_total, order.shipping_total, order.shipping_tax
+ * Change: readme.txt improvements
+
+2014.09.10 - version 1.4
+ * Full details: https://wczap.com/?p=728
+ * New: Compatibility with WooCommerce 2.2 (and backwards compatible with WooCommerce 2.1.x).
+ * New: 'subtotal' order data field (which requires WooCommerce 2.2 in order for this field to be populated).
+
+2014.07.21 - version 1.3
+ * Full details: https://wczap.com/?p=694
+ * New: The "New Customer" trigger now includes billing/shipping address details if the customer has previously placed an order or added billing/shipping details via the my account page.
+ * New: Contextual documentation of the "New Customer" trigger on the Add/Edit Zapier feed screen.
+ * New: Display a warning message if using the "New Customer" trigger with user registration disabled.
+
+2014.06.05 - version 1.2.1
+ * Full details: https://wczap.com/?p=687
+ * Change: Use a 10 second connection timeout instead of 5 when sending data to Zapier.
+ * Change: Add support for debugging/logging - useful for troubleshooting.
+
+2014.05.13 - version 1.2
+ * Full details: https://wczap.com/?p=630
+ * New: The "New Order" trigger now also acts on orders that consist of only virtual & downloadable products (ie orders that skip the "processing" status and go straight to "completed").
+ * New: Compatibility with the Product Add-ons Extension: http://www.woothemes.com/products/product-add-ons/
+ * New: Compatibility with the Gravity Forms Add-ons Extension: http://www.woothemes.com/products/gravity-forms-add-ons/
+ * New: Order line item metadata is now sent to Zapier using the new line_items.item_meta array.
+ * Fix: Prevent "This Zapier Feed is inactive" warning from displaying when adding a new Zapier Feed.
+ * Change: Improved documentation on the Add/Edit Zapier feed screen.
+ * Change: Requires WooCommerce 2.1.0 or newer. WooCommerce 2.0.x is no longer supported.
+ * Change: Remove WooCommerce 2.0.x code.
+
+2014.04.10 - version 1.1.2
+ * Full details: https://wczap.com/?p=648
+ * New: Add support for Zapier's new webhook URL format.
+ * Fix: Prevent "Invalid Webhook URL" error messages that were occurring when adding a new Zapier Feed.
+
+2014.01.20 - version 1.1.1
+ * Full details: https://wczap.com/?p=632
+ * New: Compatibility with WooCommerce 2.1 and WooCommerce 2.0.x.
+ * New: Updated Zapier logo.
+ * Fix: Prevent PHP notice that was occurring when an order did not contain a shipping address.
+ * Change: Don't use the WC_Order::get_shipping() function (it is deprecated in WooCommerce v2.1).
+ * Change: Don't use the WC_Order::get_downloadable_file_urls() function (it is deprecated in WooCommerce v2.1).
+ * Change: Use the WC_Order::get_product_from_item() function instead of a manual check.
+ * Change: PHPDoc updates for WC_Zapier.
+
+2013.10.14 - version 1.1
+ * Full details: https://wczap.com/?p=506
+ * New: Use your custom checkout fields in your Zaps! Compatibility with the WooCommerce Checkout Field Editor plugin. Checkout fields added by that plugin are now sent to Zapier.
+ * New: Compatibility with the Sequential Order Numbers Pro plugin.
+ * New: 'number' order data field.
+ * New: 'billing_country_name' order data field.
+ * New: 'shipping_country_name' order data field.
+ * New: 4 new filters (wc_zapier_data and wc_zapier_data_json) are available so that other plugins or code can override the data sent to Zapier.
+ * Fix: Order cancellations are now handled correctly when the user elects to cancel their order during the checkout/payment process.
+ * Change: "Test Data" is now known as "Sample Data".
+
+2013.09.12 - version 1.0
+ * Full details: https://wczap.com/?p=87
+ * First Release

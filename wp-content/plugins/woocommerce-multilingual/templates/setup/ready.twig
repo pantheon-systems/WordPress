@@ -1,0 +1,13 @@
+<span id="{{ strings.step_id }}">
+<h1>{{ strings.heading }}</h1>
+
+<p>{{ strings.description1|format('<strong>','</strong>')|raw }}</p>
+
+<p>{{ strings.description2|format('<strong>','</strong>')|raw }}</p>
+
+
+<p class="wcml-setup-actions step">
+    <a href="{{ continue_url }}" class="button button-primary button-large">{{ strings.continue }}</a>
+</p>
+</span>
+

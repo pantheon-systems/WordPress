@@ -1,0 +1,24 @@
+<div class="wpml-form-row">
+    <label>{{ strings.first_name }}</label>
+    <input type="text" class="js-first-name"/>
+</div>
+<div class="wpml-form-row">
+    <label>{{ strings.last_name }}</label>
+    <input type="text" class="js-last-name"/>
+</div>
+<div class="wpml-form-row">
+    <label>{{ strings.email }}</label>
+    <input type="text" class="js-email"/>
+</div>
+<div class="wpml-form-row">
+    <label>{{ strings.user_name }}</label>
+    <input type="text" class="js-user-name"/>
+</div>
+<div class="wpml-form-row">
+    <label>{{ strings.wp_role }}</label>
+    <select class="js-role">
+        {% for role in wp_roles %}
+            <option value="{{ role.id }}">{{ role.name }}</option>
+        {% endfor %}
+    </select>
+</div>

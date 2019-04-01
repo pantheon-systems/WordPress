@@ -1,0 +1,653 @@
+/* self-clear floats */
+.clearfix:after {
+    content    : ".";
+    display    : block;
+    height     : 0;
+    clear      : both;
+    visibility : hidden;
+    overflow   : hidden;
+}
+
+/* ie.css */
+* html .clearfix { /* IE6 */
+    height : 1%;
+}
+
+*:first-child + html .clearfix { /* IE7 */
+    min-height : 1%;
+}
+
+.clearboth {
+    clear : both
+}
+
+/* === TAB STYLE */
+.metaboxes-tab {
+    margin : -6px -12px -8px;
+}
+
+.metaboxes-tab div.tabs-panel {
+    height     : auto;
+    overflow   : visible;
+    margin-top : 0px;
+    padding    : 0 10px;
+    background : none;
+    border     : 0;
+}
+
+.metaboxes-tab ul.metaboxes-tabs {
+    background : #f1f1f1;
+    margin     : 0;
+    padding    : 10px 0 0 5px;
+}
+
+.metaboxes-tab ul.metaboxes-tabs li {
+    float      : left;
+    background : #dedede;
+    margin     : 0 0 0 5px;
+}
+
+.metaboxes-tab ul.metaboxes-tabs li a {
+    color           : #555;
+    text-decoration : none;
+    padding         : 8px 15px;
+    display         : block;
+    box-shadow      : none !important;
+}
+
+.metaboxes-tab ul.metaboxes-tabs li.tabs {
+    background : #fff;
+}
+
+.metaboxes-tab p.field-row {
+    margin : 20px 0;
+}
+
+.metaboxes-tab div.sep {
+    height       : 1px;
+    background   : #dfdfdf;
+    clear        : both;
+    margin-left  : -10px;
+    margin-right : -10px;
+}
+
+.metaboxes-tab label {
+    font-weight : bold;
+    width       : 160px;
+    float       : left;
+    line-height : 23px;
+    margin-left : -184px;
+}
+
+.metaboxes-tab label small {
+    font-weight : normal;
+    line-height : 15px;
+    font-style  : italic;
+    color       : #999;
+    display     : block;
+}
+
+.metaboxes-tab .wp-picker-container label {
+    font-weight : inherit;
+    width       : auto;
+    float       : none;
+    line-height : inherit;
+    margin-left : 0;
+}
+
+.metaboxes-tab input[type="checkbox"] {
+    vertical-align : middle
+}
+
+.metaboxes-tab input.button-secondary, .metaboxes-tab input.checkbox {
+    width : auto;
+}
+
+.metaboxes-tab p.field-row.textarea .description {
+    vertical-align : top;
+}
+
+.metaboxes-tab p.field-row.checkbox {
+    background : none;
+}
+
+.metaboxes-tab .the-metabox {
+    margin      : 20px 0;
+    margin-left : 184px;
+}
+
+.metaboxes-tab .the-metabox.no-label {
+    margin      : 20px 0;
+    margin-left : 0;
+}
+
+.metaboxes-tab hr {
+    height       : 0px;
+    border-top   : 1px solid #dadada;
+    width        : auto;
+    margin-left  : -10px;
+    margin-right : -10px;
+}
+
+.metaboxes-tab .the-metabox p {
+    margin : 0;
+}
+
+.metaboxes-tab .the-metabox:last-child {
+    border-bottom : 0px;
+}
+
+.metaboxes-tab .the-metabox.checkbox {
+    background : none;
+}
+
+.metaboxes-tab span.description.inline {
+    display        : inline-block;
+    line-height    : 23px;
+    width          : auto;
+    vertical-align : middle;
+    margin         : 0;
+}
+
+.metaboxes-tab .slider label {
+    padding : 15px 0;
+}
+
+/* sortable table posts */
+
+#the-list.ui-sortable tr:hover {
+    cursor : move;
+}
+
+.the-metabox.preview {
+    float : none;
+}
+
+.metaboxes-tab .the-metabox.no-label.preview {
+    margin-left : 184px;
+}
+
+.metaboxes-tab .the-metabox.no-label.preview img {
+    box-shadow : 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+/**************************************
+                FIELDS
+***************************************/
+
+.metaboxes-tab select,
+.metaboxes-tab input[type=text],
+.metaboxes-tab input[type=number],
+.metaboxes-tab textarea,
+.metaboxes-tab .yith-plugin-fw-select,
+.metaboxes-tab .yith-plugin-fw-slider-container,
+.metaboxes-tab .yith-plugin-fw-text-input,
+.metaboxes-tab .yith-plugin-fw-text-array-table,
+.metaboxes-tab .yith-plugin-fw-textarea {
+    width     : 400px;
+    max-width : 100%;
+}
+
+.metaboxes-tab .yith-plugin-fw-text-array-table input[type=text] {
+    width : 100%;
+}
+
+/* wp editor */
+.the-metabox.textarea-editor .mceIframeContainer {
+    background : #fff;
+}
+
+.the-metabox.textarea-editor label {
+    margin-top : 24px;
+}
+
+/* categories */
+.categories-panel {
+    width        : 30%;
+    float        : left;
+    margin-right : 4px;
+}
+
+.categories-panel .box {
+    height     : 200px;
+    border     : 1px solid #dfdfdf;
+    background : #fff;
+    padding    : 6px 10px;
+    overflow   : auto;
+}
+
+.categories-panel ul {
+    list-style : none;
+    margin     : 0;
+}
+
+.categories-panel ul li {
+    line-height : 19px;
+    margin      : 0;
+    padding     : 0;
+    word-wrap   : break-word;
+}
+
+.categories-panel ul li label {
+    font-weight : normal !important;
+    margin-left : 0 !important;
+}
+
+.categories-panel input.newcategory {
+    width         : 100%;
+    margin-bottom : 3px;
+}
+
+/* contact form */
+.contactform_item {
+    border-style     : solid;
+    border-width     : 1px;
+    line-height      : 1;
+    margin-bottom    : 20px;
+    padding          : 0;
+    background-color : #f5f5f5;
+    background-image : -moz-linear-gradient(center top, #f9f9f9, #f5f5f5);
+    border-color     : #dfdfdf;
+    border-radius    : 3px 3px 3px 3px;
+    box-shadow       : 0 1px 0 #fff inset;
+    min-width        : 255px;
+    position         : relative;
+}
+
+.contactform_item .handlediv {
+    position : relative;
+    top      : -4px;
+}
+
+.contactform_item h3 {
+    min-height : 21px;
+    margin     : 13px;
+}
+
+.contactform_item .inside {
+    padding : 10px !important;
+}
+
+.contactform_item .deps {
+    display : none;
+}
+
+.contactform_item .addoptions p.option {
+    margin : 5px 0 5px 200px
+}
+
+.contactform_item .addoptions p label {
+    width : 80px !important;
+}
+
+.contactform_item .add-field-option {
+    margin-bottom : 10px !important;
+}
+
+.remove_item {
+    float : right;
+}
+
+.metabox-sortable-placeholder {
+    border : 1px dotted #dedede;
+    margin : 10px 0
+}
+
+/* features tab */
+.featurestab_item {
+    border-style     : solid;
+    border-width     : 1px;
+    line-height      : 1;
+    margin-bottom    : 20px;
+    padding          : 0;
+    background-color : #f5f5f5;
+    background-image : -moz-linear-gradient(center top, #f9f9f9, #f5f5f5);
+    border-color     : #dfdfdf;
+    border-radius    : 3px 3px 3px 3px;
+    box-shadow       : 0 1px 0 #fff inset;
+    min-width        : 255px;
+    position         : relative;
+}
+
+.featurestab_item .handlediv {
+    position : relative;
+    top      : -4px;
+}
+
+.featurestab_item h3 {
+    min-height : 21px
+}
+
+.featurestab_item .inside {
+    padding : 10px !important;
+}
+
+.featurestab_item .deps {
+    display : none;
+}
+
+.featurestab_item .addoptions p.option {
+    margin : 5px 0 5px 200px
+}
+
+.featurestab_item .addoptions p label {
+    width : 80px !important;
+}
+
+.featurestab_item .add-field-option {
+    margin-bottom : 10px !important;
+}
+
+.messages-panel.updated {
+    margin             : 10px 0px 10px !important;
+    max-width          : 1200px;
+    border-radius      : 5px;
+    -webkit-box-sizing : border-box;
+    box-sizing         : border-box;
+}
+
+.ui-widget-overlay {
+    background-image : none !important;
+}
+
+.the-metabox .icon_type {
+    width        : 30%;
+    float        : left;
+    margin-right : 40px
+}
+
+#post-type-settings .category-list label {
+    width : 187px;
+}
+
+.remove_cat {
+    float           : right;
+    text-align      : center;
+    display         : block;
+    width           : 20px;
+    height          : 20px;
+    border-radius   : 20px;
+    font-weight     : bold;
+    font-size       : 10px;
+    background      : #efefef;
+    text-decoration : none;
+}
+
+/* typography */
+.the-metabox.typography .select_wrapper.font-family {
+    width : 200px;
+}
+
+.the-metabox.typography .spinner_container {
+    float        : left;
+    margin-right : 10px;
+}
+
+.the-metabox.typography .spinner_container input.number {
+    width                              : 50px !important;
+    -webkit-border-top-right-radius    : 0px;
+    -webkit-border-bottom-right-radius : 0px;
+    -moz-border-radius-topright        : 0px;
+    -moz-border-radius-bottomright     : 0px;
+    border-top-right-radius            : 0px;
+    border-bottom-right-radius         : 0px;
+}
+
+/* number */
+.the-metabox.number input.number {
+    width : 50px !important;
+}
+
+/* number */
+.rm_number .number {
+    width                              : 70px;
+    text-align                         : right;
+    -webkit-border-top-right-radius    : 0px;
+    -webkit-border-bottom-right-radius : 0px;
+    -moz-border-radius-topright        : 0px;
+    -moz-border-radius-bottomright     : 0px;
+    border-top-right-radius            : 0px;
+    border-bottom-right-radius         : 0px;
+}
+
+.spinner-wrapper {
+    position : relative;
+    height   : 23px;
+    overflow : hidden;
+}
+
+.spinner-wrapper input.number {
+    float : left;
+}
+
+.spinner-wrapper .spinner-button {
+    cursor      : pointer;
+    float       : left;
+    position    : absolute;
+    left        : 69px;
+    width       : 15px;
+    height      : 12px;
+    border      : 1px solid #dfdfdf;
+    background  : #fff;
+    margin      : 0;
+    padding     : 0;
+    line-height : 9999px;
+    overflow    : hidden;
+    background  : url('../images/spinner.png') no-repeat center -11px
+}
+
+.spinner-wrapper .spinner-button.button-plus {
+    top                             : 0;
+    -webkit-border-top-right-radius : 3px !important;
+    -moz-border-radius-topright     : 3px !important;
+    border-top-right-radius         : 3px !important;
+}
+
+.spinner-wrapper .spinner-button.button-minus {
+    bottom                             : 0;
+    background-position                : center -30px;
+    -webkit-border-bottom-right-radius : 3px !important;
+    -moz-border-radius-bottomright     : 3px !important;
+    border-bottom-right-radius         : 3px !important;
+}
+
+.spinner-wrapper .spinner-button.button-plus:active {
+    background-position : center 0px;
+}
+
+.spinner-wrapper .spinner-button.button-minus:active {
+    background-position : center -20px;
+}
+
+.rm_typography .spinner_container {
+    float        : left;
+    margin-right : 10px;
+}
+
+.rm_typography .spinner-wrapper {
+    height : 28px;
+}
+
+.rm_typography .spinner-wrapper input.number {
+    height : 28px;
+}
+
+.rm_typography .spinner-wrapper .spinner-button.button-plus {
+    height              : 15px;
+    background-position : center -10px;
+}
+
+.rm_typography .spinner-wrapper .spinner-button.button-minus {
+    height : 14px;
+}
+
+.the-metabox .spinner-wrapper .spinner-button {
+    left : 49px;
+}
+
+.the-metabox.typography .spinner-wrapper .spinner-button {
+    left : 35px;
+}
+
+/* images */
+.the-metabox.images, .the-metabox.images label {
+    margin-left : 0;
+    display     : block;
+}
+
+.the-metabox.images .slides-wrapper {
+    clear : both;
+}
+
+.the-metabox.images .slides-wrapper li {
+    position : relative;
+}
+
+.the-metabox.images a.delete {
+    display         : block;
+    margin-left     : 4px;
+    text-decoration : none;
+    font-weight     : bold;
+    color           : red;
+    position        : absolute;
+    top             : 0;
+    right           : 0;
+    width           : 10px;
+    height          : 18px;
+    z-index         : 10;
+    cursor          : pointer !important;
+}
+
+/* wp editor */
+.wp_themeSkin iframe {
+    background : #fff !important;
+}
+
+/* custom tabs */
+.customtab_item {
+    border-style     : solid;
+    border-width     : 1px;
+    line-height      : 1;
+    margin-bottom    : 20px;
+    padding          : 0;
+    background-color : #f5f5f5;
+    background-image : -moz-linear-gradient(center top, #f9f9f9, #f5f5f5);
+    border-color     : #dfdfdf;
+    border-radius    : 3px 3px 3px 3px;
+    box-shadow       : 0 1px 0 #fff inset;
+    min-width        : 255px;
+    position         : relative;
+}
+
+.customtab_item .handlediv {
+    position : relative;
+    top      : -4px;
+}
+
+.customtab_item h3 {
+    min-height : 21px
+}
+
+.customtab_item .inside {
+    padding : 10px !important;
+}
+
+.customtab_item .deps {
+    display : none;
+}
+
+.customtab_item .addoptions p.option {
+    margin : 5px 0 5px 200px
+}
+
+.customtab_item .addoptions p label {
+    width : 80px !important;
+}
+
+.customtab_item .add-field-option {
+    margin-bottom : 10px !important;
+}
+
+.customtab_item .remove_item {
+    float : right;
+}
+
+.metabox-sortable-placeholder {
+    border : 1px dotted #dedede;
+    margin : 10px 0
+}
+
+.the-metabox.customtabs {
+    margin-left : 0;
+}
+
+#customtab_item_sample {
+    display : none;
+}
+
+.the-metabox.customtabs .field-row {
+    margin-bottom : 10px;
+}
+
+#yit_custom_tabs label {
+    font-weight : normal;
+    width       : auto;
+    float       : none;
+    line-height : auto;
+    margin-left : 0;
+}
+
+.wp-admin p label input[type=radio] {
+    width        : 16px;
+    margin-right : 10px;
+    margin-top   : 3px;
+}
+
+.wp-admin .form-field._preset_onsale_icon_field label input[type=radio] {
+    margin-top : 0;
+}
+
+.the-metabox .spinner {
+    margin-top : 5px;
+    float      : none;
+}
+
+/*sidebars*/
+#choose-sidebars.choose {
+    margin-left : 0px;
+}
+
+#_active_page_options-container label, #_active_page_options-container p {
+    display : inline-block;
+    margin  : 0px;
+}
+
+#_active_page_options-container label {
+    margin-right : 10px;
+    margin-top   : 3px;
+}
+
+#_active_page_options-container {
+    float        : right;
+    margin-right : 20px;
+    margin-top   : 5px;
+    z-index      : 9999 !important;
+    position     : absolute;
+    right        : 0;
+}
+
+/*-----------------------
+* Colorpicker - fix issues in combination with third-party themes or plugin (Basel, VC Addons, ...)
+*/
+.metaboxes-tab .the-metabox.colorpicker {
+    display     : block;
+    width       : auto;
+    height      : auto;
+    overflow    : visible;
+    top         : auto;
+    left        : auto;
+    background  : transparent;
+    position    : static;
+    z-index     : 1;
+    font-family : inherit;
+}

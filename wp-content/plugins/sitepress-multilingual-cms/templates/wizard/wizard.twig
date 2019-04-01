@@ -1,0 +1,20 @@
+<div class="wpml-wizard js-wpml-wizard" data-nonce="{{ nonce }}" style="display:none;">
+    <ul class="wizard-steps-container js-wizard-steps-container">
+        {% set before_current_step_class = 'wizard-active-step' %}
+        {% for step in steps %}
+            {% if step.slug == current_step_slug %}
+                <li class="wizard-current-step wizard-step js-wizard-step" data-step-slug="{{ step.slug }}">{{ step.title }}</li>
+                {% set before_current_step_class = '' %}
+            {% else %}
+                <li class="wizard-step {{ before_current_step_class }} js-wizard-step" data-step-slug="{{ step.slug }}">{{ step.title }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <div class="wizard-step-content js-wizard-step-content" data-current-step="{{ current_step_slug }}">
+
+    </div>
+
+    <button class="wizard-back js-wizard-back">{{ strings.back }}</button>
+    <button class="wizard-next js-wizard-next">{{ strings.next }}</button>
+</div>

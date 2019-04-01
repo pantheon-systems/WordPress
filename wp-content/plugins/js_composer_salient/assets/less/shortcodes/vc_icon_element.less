@@ -1,0 +1,212 @@
+@icon-element-bottom-margin: @vc_element_margin_bottom;
+@icon-element-rounded-radius: 5px;
+@icon-element-font-size-base: 14px;
+
+@icon-element-icon-size-xs: 1.20em;
+// 17px
+@icon-element-icon-size-sm: 1.6em;
+// 22px
+@icon-element-icon-size-md: 2.15em;
+// 30px default
+@icon-element-icon-size-lg: 2.85em;
+// 40px
+@icon-element-icon-size-xl: 5em;
+// 70px
+
+@icon-element-box-size-xs: 2.5em;
+// 35px
+@icon-element-box-size-sm: 3.15em;
+// 45px
+@icon-element-box-size-md: 4em;
+// 56px default
+@icon-element-box-size-lg: 5em;
+// 70px
+@icon-element-box-size-xl: 7.15em;
+// 100px
+
+.vc_icon_element {
+  line-height: 0;
+  font-size: @icon-element-font-size-base;
+  margin-bottom: @icon-element-bottom-margin;
+  &.vc_icon_element-outer {
+    box-sizing: border-box;
+    text-align: center; // default align
+    //align styles
+    &.vc_icon_element-align-left {
+      text-align: left;
+    }
+    &.vc_icon_element-align-center {
+      text-align: center;
+    }
+    &.vc_icon_element-align-right {
+      text-align: right;
+    }
+
+    .vc_icon_element-inner {
+      text-align: center;
+      display: inline-block;
+      border: 2px solid transparent;
+      width: @icon-element-box-size-md; // default size md
+      height: @icon-element-box-size-md; //default size md
+      box-sizing: content-box; // helps for font-awesome centring on small sizes
+      position: relative;
+      .vc_icon_element-icon {
+        font-size: @icon-element-icon-size-md; // default size md
+        // font awesome logic for all icons
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1 !important;
+        font-size-adjust: none;
+        font-stretch: normal;
+        -webkit-font-feature-settings: normal;
+        font-feature-settings: normal;
+        -webkit-font-language-override: normal;
+        font-language-override: normal;
+        -webkit-font-kerning: auto;
+        font-kerning: auto;
+        font-synthesis: weight style;
+        font-variant: normal;
+        text-rendering: auto;
+
+        display: inline-block;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        .translate(-50%, -50%);
+
+        &:before {
+          font-style: normal;
+          font-weight: normal;
+          display: inline-block;
+          text-decoration: inherit;
+          width: inherit;
+          height: inherit;
+          font-size: 1em;
+          text-align: center;
+          text-rendering: optimizelegibility;
+        }
+
+      }
+
+      .vc_icon_element-link, .vc_gitem-link {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        box-sizing: content-box;
+        border: none;
+      }
+
+      // size styles
+      .size-(@selector, @size, @font_size) {
+        &.vc_icon_element-size-@{selector} {
+          // fix if no background style selected
+          &.vc_icon_element-have-style-inner {
+            width: @size !important;
+            height: @size !important;
+          }
+          max-width: 100% !important;
+          line-height: @font_size !important;
+          .vc_icon_element-icon {
+            font-size: @font_size !important;
+          }
+        }
+      }
+      .size-(~"xs", @icon-element-box-size-xs, @icon-element-icon-size-xs);
+      .size-(~"sm", @icon-element-box-size-sm, @icon-element-icon-size-sm);
+      .size-(~"md", @icon-element-box-size-md, @icon-element-icon-size-md);
+      .size-(~"lg", @icon-element-box-size-lg, @icon-element-icon-size-lg);
+      .size-(~"xl", @icon-element-box-size-xl, @icon-element-icon-size-xl);
+
+      // display styles
+      &.vc_icon_element-style-boxed {
+      }
+
+      &.vc_icon_element-style-boxed-outline {
+      }
+
+      &.vc_icon_element-style-rounded {
+        border-radius: 50%;
+        .vc_icon_element-link, .vc_gitem-link {
+          border-radius: 50%;
+        }
+      }
+      &.vc_icon_element-style-rounded-outline {
+        border-radius: 50%;
+        .vc_icon_element-link, .vc_gitem-link {
+          border-radius: 50%;
+        }
+      }
+      &.vc_icon_element-style-rounded-less {
+        border-radius: @icon-element-rounded-radius;
+        .vc_icon_element-link, .vc_gitem-link {
+          border-radius: @icon-element-rounded-radius;
+        }
+      }
+      &.vc_icon_element-style-rounded-less-outline {
+        border-radius: @icon-element-rounded-radius;
+        .vc_icon_element-link, .vc_gitem-link {
+          border-radius: @icon-element-rounded-radius;
+        }
+      }
+
+      .vc_icon_element_colors_variants(@selector, @text_color) {
+        &.vc_icon_element-color-@{selector} {
+          .vc_icon_element-icon {
+            color: @text_color;
+          }
+        }
+      }
+      .vc_icon_element_colors_variants(~'blue', @blue);
+      .vc_icon_element_colors_variants(~'turquoise', @turquoise);
+      .vc_icon_element_colors_variants(~'pink', @pink);
+      .vc_icon_element_colors_variants(~'violet', @violet);
+      .vc_icon_element_colors_variants(~'peacoc', @peacoc);
+      .vc_icon_element_colors_variants(~'chino', @chino);
+      .vc_icon_element_colors_variants(~'mulled_wine', @mulled_wine);
+      .vc_icon_element_colors_variants(~'vista_blue', @vista_blue);
+      .vc_icon_element_colors_variants(~'black', @black);
+      .vc_icon_element_colors_variants(~'grey', @grey);
+      .vc_icon_element_colors_variants(~'orange', @orange);
+      .vc_icon_element_colors_variants(~'sky', @sky);
+      .vc_icon_element_colors_variants(~'green', @green);
+      .vc_icon_element_colors_variants(~'juicy_pink', @juicy_pink);
+      .vc_icon_element_colors_variants(~'sandy_brown', @sandy_brown);
+      .vc_icon_element_colors_variants(~'purple', @purple);
+      .vc_icon_element_colors_variants(~'white', @white);
+
+      // colors for styles
+      // Background Shape Colors
+      .vc_icon_element_shape_color_variants(@selector, @color) {
+        &.vc_icon_element-background-color-@{selector} {
+          &.vc_icon_element-outline {
+            border-color: @color;
+          }
+          &.vc_icon_element-background {
+            background-color: @color;
+          }
+        }
+      }
+      .vc_icon_element_shape_color_variants(~'blue', @blue);
+      .vc_icon_element_shape_color_variants(~'turquoise', @turquoise);
+      .vc_icon_element_shape_color_variants(~'pink', @pink);
+      .vc_icon_element_shape_color_variants(~'violet', @violet);
+      .vc_icon_element_shape_color_variants(~'peacoc', @peacoc);
+      .vc_icon_element_shape_color_variants(~'chino', @chino);
+      .vc_icon_element_shape_color_variants(~'mulled_wine', @mulled_wine);
+      .vc_icon_element_shape_color_variants(~'vista_blue', @vista_blue);
+      .vc_icon_element_shape_color_variants(~'black', @black);
+      .vc_icon_element_shape_color_variants(~'grey', @grey);
+      .vc_icon_element_shape_color_variants(~'orange', @orange);
+      .vc_icon_element_shape_color_variants(~'sky', @sky);
+      .vc_icon_element_shape_color_variants(~'green', @green);
+      .vc_icon_element_shape_color_variants(~'juicy_pink', @juicy_pink);
+      .vc_icon_element_shape_color_variants(~'sandy_brown', @sandy_brown);
+      .vc_icon_element_shape_color_variants(~'purple', @purple);
+      .vc_icon_element_shape_color_variants(~'white', @white);
+    }
+  }
+}

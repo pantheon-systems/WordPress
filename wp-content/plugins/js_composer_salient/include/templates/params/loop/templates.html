@@ -1,0 +1,163 @@
+<script type="text/html" id="vcl-loop-frame">
+    <div class="vc_row">
+        <div class="vc_col-sm-12">
+            <# if(vc.loop_field_not_hidden('post_type', loop)) { #>
+                <label class="wpb_element_label"><?php _e('Post types', 'js_composer') ?></label>
+
+                <div class="post-types-list">
+                    {{{ vc.loop_partial('checkboxes', 'post_type', loop) }}}
+                </div>
+                <span class="description clear"><?php _e('Select post types to populate posts from. Note: If no post type is selected, WordPress will use default "Post" value.', 'js_composer'); ?></span>
+                <# } #>
+        </div>
+    </div>
+    <div class="vc_row">
+        <# if(vc.loop_field_not_hidden('size', loop)) { #>
+            <div class="vc_col-sm-4">
+                <label class="wpb_element_label"><?php _e('Post count', 'js_composer') ?></label>
+                {{{ vc.loop_partial('text-input', 'size', loop) }}}
+                <span class="description clear"><?php _e('How many teasers to show? Enter number or word "All".', 'js_composer'); ?></span>
+            </div>
+            <# } #>
+                <# if(vc.loop_field_not_hidden('order_by', loop)) { #>
+                    <div class="vc_col-sm-4">
+                        <label class="wpb_element_label"><?php _e('Order by', 'js_composer') ?></label>
+                        {{{ vc.loop_partial('dropdown', 'order_by', loop) }}}
+                        <span class="description clear"><?php echo sprintf(__('Select how to sort retrieved posts. More at %s.', 'js_composer'), '<a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters" target="_blank">
+                            WordPress codex page</a>'); ?></span>
+                    </div>
+                    <# } #>
+                        <# if(vc.loop_field_not_hidden('order', loop)) { #>
+                            <div class="vc_col-sm-4">
+                                <label class="wpb_element_label"><?php _e('Sort order', 'js_composer') ?></label>
+                                {{{ vc.loop_partial('dropdown', 'order', loop) }}}
+                                <span class="description clear"><?php _e('Designates the ascending or descending order.', 'js_composer'); ?></span>
+                            </div>
+                            <# } #>
+    </div>
+
+    <# if(vc.loop_field_not_hidden('categories', loop)) { #>
+        <div class="vc_row">
+            <div class="vc_col-sm-12">
+                <div class="vc_suggest-field" data-block="suggestion">
+                    <label class="wpb_element_label"><?php _e('Categories', 'js_composer') ?></label>
+                    {{{ vc.loop_partial('autosuggest', 'categories', loop) }}}
+                    <span class="description clear"><?php _e('Filter output by posts categories, enter category names here.', 'js_composer'); ?></span>
+                </div>
+            </div>
+        </div>
+        <# } #>
+            <# if(vc.loop_field_not_hidden('tags', loop)) { #>
+                <div class="vc_row">
+                    <div class="vc_col-sm-12">
+                        <div class="vc_suggest-field" data-block="suggestion">
+                            <label class="wpb_element_label"><?php _e('Tags', 'js_composer') ?></label>
+                            {{{ vc.loop_partial('autosuggest', 'tags', loop) }}}
+                            <span class="description clear"><?php _e('Filter output by posts tags, enter tag names here.', 'js_composer'); ?></span>
+                        </div>
+                    </div>
+                </div>
+                <# } #>
+                    <# if(vc.loop_field_not_hidden('tax_query', loop)) { #>
+                        <div class="vc_row">
+                            <div class="vc_col-sm-12">
+                                <div class="vc_suggest-field" data-block="suggestion">
+                                    <label class="wpb_element_label"><?php _e('Taxonomies', 'js_composer') ?></label>
+                                    {{{ vc.loop_partial('autosuggest', 'tax_query', loop) }}}
+                                    <span class="description clear"><?php _e('Filter output by custom taxonomies categories, enter category names here.', 'js_composer'); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <# } #>
+                            <# if(vc.loop_field_not_hidden('by_id', loop)) { #>
+                                <div class="vc_row">
+                                    <div class="vc_col-sm-12">
+                                        <div class="vc_suggest-field" data-block="suggestion">
+                                            <label class="wpb_element_label"><?php _e('Individual Posts/Pages/Custom Post Types', 'js_composer') ?></label>
+                                            {{{ vc.loop_partial('autosuggest', 'by_id', loop) }}}
+                                            <span class="description clear"><?php _e('Only entered posts/pages will be included in the output. Note: Works in conjunction with selected "Post types".', 'js_composer'); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <# } #>
+                                    <# if(vc.loop_field_not_hidden('authors', loop)) { #>
+                                        <div class="vc_row">
+                                            <div class="vc_col-sm-12">
+                                                <div class="vc_suggest-field" data-block="suggestion">
+                                                    <label class="wpb_element_label"><?php _e('Author', 'js_composer') ?></label>
+                                                    {{{ vc.loop_partial('autosuggest', 'authors', loop) }}}
+                                                    <span class="description clear"><?php _e('Filter by author name.', 'js_composer'); ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <# } #>
+</script>
+<script type="text/html" id="_vcl-text-input">
+    <#
+            var is_locked = vc.is_locked(data),
+            disabled = is_locked  ? ' disabled="true"' : '',
+            value = _.isObject(data) && !_.isUndefined(data.value) ? data.value : '';
+            #>
+        <input type="text" name="{{ name }}" value="{{ value }}" class="vc_{{ name }}_field" {{ disabled }}>
+</script>
+<script type="text/html" id="_vcl-dropdown">
+    <#
+            var is_locked = vc.is_locked(data),
+            disabled = is_locked  ? ' disabled="true"' : '';
+            #>
+        <select name="{{ name }}" class="vc_dropdown" {{ disabled }}>
+            <option value=""></option>
+            <# if(_.isObject(data) && _.isArray(data.options)) { #>
+                <#
+                        _.each(data.options, function(opt) {
+                        var value, label;
+                        if(_.isArray(opt)) {
+                        value = opt[0];
+                        label = opt[1];
+                        } else {
+                        value = opt;
+                        label = opt;
+                        }#>
+                    <option value="{{ value }}"
+                            {{ data.value===value ?
+                    ' selected="true"' : '' }}>{{ label }}</option>
+                    <#
+                            });
+                            #>
+                        <# } #>
+        </select>
+</script>
+<script type="text/html" id="_vcl-checkboxes">
+    <#
+            var is_locked = vc.is_locked(data);
+            #>
+        <input type="hidden" name="{{ name }}" value="{{ data.value }}" data-name="{{ name }}">
+        <# if(_.isObject(data) && _.isArray(data.options)) {
+                _.each(data.options, function(opt) {
+                var value, label, params;
+                if(_.isArray(opt)) {
+                value = opt[0];
+                label = opt[1];
+                } else {
+                value = opt;
+                label = opt;
+                }
+                params = _.indexOf(data.value, value) >=0 ? ' checked="true"' : '';
+            if(!_.isEmpty(params) && is_locked) params += ' disabled="true"';
+            #>
+            <label><input type="checkbox" data-input="{{ name }}" value="{{ value }}" {{ params }}/> {{ label }}</label>
+            <#
+                    });
+                    } #>
+</script>
+<script type="text/html" id="_vcl-autosuggest">
+    <# limit_param = _.isObject(settings) && !_.isUndefined(settings.limit) ? ' data-limit="' + settings.limit + '"' : ''; #>
+        <input type="hidden" data-suggest-prefill="{{ name }}"
+               value="{{ _.isObject(data) && _.isArray(data.options) ? window.encodeURIComponent(JSON.stringify(data.options)) : '' }}">
+        <input type="hidden" name="{{ name }}"
+               value="{{ _.isObject(data) && _.isArray(data.value) ? data.value.join(',') : '' }}"
+               data-suggest-value="{{ name }}">
+        <input type="text" name="{{ name }}_autosuggest" value=""
+               placeholder="<?php _e('Click here and start typing...', 'js_composer'); ?>" class="vc_{{ name }}_field"
+               data-suggest="{{ name }}" {{ limit_param }}/>
+</script>

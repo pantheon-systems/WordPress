@@ -1,0 +1,43 @@
+<div class="wrap">
+	<h2 id="xml-config-log">{{ strings.title }}</h2>
+	{% if entries %}
+		<p>
+			{{ strings.message }}
+		</p>
+		<p>
+			{% for button_id,button in buttons %}
+				<a href="{{ button.url }}" class="button-{{ button.type|default('secondary') }}">{{ button.label }}</a>
+			{% endfor %}
+		</p>
+		<h3>{{ strings.details }}</h3>
+		<table class="widefat wpml-xml-config-log">
+			<thead>
+			<tr>
+				{% for column in columns %}
+					<th>{{ column }}</th>
+				{% endfor %}
+			</tr>
+			</thead>
+			<tfoot>
+			<tr>
+				{% for column in columns %}
+					<th>{{ column }}</th>
+				{% endfor %}
+			</tr>
+			</tfoot>
+			<tbody>
+			{% for entry in entries %}
+				<tr>
+					{% for entry_value in entry %}
+						<td>
+							{% include 'iterable.twig' with {'item': entry_value} %}
+						</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<p>{{ strings.empty_log }}</p>
+	{% endif %}
+</div>

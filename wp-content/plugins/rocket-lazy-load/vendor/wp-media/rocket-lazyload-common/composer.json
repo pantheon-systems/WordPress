@@ -1,0 +1,49 @@
+{
+    "name": "wp-media/rocket-lazyload-common",
+    "description": "Common Code between WP Rocket and Lazyload by WP Rocket",
+    "license": "GPL-3.0-or-later",
+    "support": {
+        "issues": "https://github.com/wp-media/rocket-lazyload-common/issues",
+        "source": "https://github.com/wp-media/rocket-lazyload-common"
+    },
+    "authors": [
+        {
+            "name": "WP Media",
+            "email": "contact@wp-media.me"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "RocketLazyload\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RocketLazyload\\Tests\\Unit\\": "tests/Unit",
+            "RocketLazyload\\Tests\\Integration\\": "tests/Integration"
+        }
+    },
+    "config": {
+		"sort-packages": true
+	},
+    "require": {
+        "php": ">=5.6"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+        "doctrine/instantiator": "1.0.*",
+        "myclabs/deep-copy": "1.6.*",
+        "phpcompatibility/phpcompatibility-wp": "^2.0",
+        "phpdocumentor/reflection-docblock": "^3.3",
+        "phpunit/php-token-stream": "^1.4",
+        "phpunit/phpunit": "^5.7",
+        "symfony/yaml": "2.8.*",
+        "wp-coding-standards/wpcs": "^2.0.0"
+    },
+    "scripts": {
+        "test-unit":"\"vendor/bin/phpunit\" --testsuite unit --colors=always",
+        "test-integration": "\"vendor/bin/phpunit\" --testsuite integration --colors=always --configuration tests/Integration/phpunit.xml.dist"
+    }
+}

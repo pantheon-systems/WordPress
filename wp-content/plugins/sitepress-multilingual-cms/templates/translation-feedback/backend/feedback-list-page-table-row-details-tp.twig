@@ -1,0 +1,19 @@
+{% set tp_responses = feedback.get_tp_responses %}
+{% set ts_name = feedback.get_translator_name %}
+{% if tp_responses.is_manual_feedback %}
+    <div class="wpml-tf-line wpml-tf-sent-to-ts-manual notice notice-info inline">
+        {{ tp_responses.get_strings.display_for_manual|format(ts_name, ts_name) }}
+    </div>
+{% elseif tp_responses.is_email_feedback and tp_responses.get_feedback_id %}
+    <div class="wpml-tf-line wpml-tf-sent-to-ts-email notice notice-warning inline">
+        {{ tp_responses.get_strings.display_for_email|format(ts_name) }}
+    </div>
+{% elseif tp_responses.is_api_feedback and tp_responses.get_feedback_id %}
+    <div class="wpml-tf-line wpml-tf-sent-to-ts-api">
+        <div class="wpml-tf-value">
+            <a class="wpml-external-link" href="{{ tp_responses.get_feedback_tp_url }}" target="_blank">
+                {{ tp_responses.get_strings.display_for_api|format(ts_name) }}
+            </a>
+        </div>
+    </div>
+{% endif %}

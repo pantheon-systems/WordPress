@@ -1,0 +1,47 @@
+{% if( ( xml_config_errors is not empty  ) or ( miss_slug_lang is not empty ) ) %}
+    <div class="wcml-section">
+        <div class="wcml-section-header">
+            <h3>
+                {{ strings.conf }}
+            </h3>
+        </div>
+        <div class="wcml-section-content">
+            <ul class="wcml-status-list">
+                {% if miss_slug_lang is not empty %}
+                    <li>
+                        <i class="otgs-ico-warning"></i>
+                        {{ strings.base_not_trnsl }}
+                        <ul class="wcml-lang-list">
+                            {% for miss_lang in miss_slug_lang %}
+                                <li>
+                                    <span class="wpml-title-flag">
+                                        <img src="{{ get_flag_url( miss_lang.code ) }}" alt="{{ miss_lang.english_name|e }}" />
+                                    </span>
+                                    {{ miss_lang.display_name|capitalize }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <a class="button-secondary" href="{{ slugs_tab }}">
+                            {{ strings.trsl_urls }}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if xml_config_errors is not empty %}
+                    <li class="wcml_xml_config_warnings">
+                        <i class="otgs-ico-warning"></i>
+                        <strong>{{ strings.over_sett }}</strong>
+                        <p>
+                            {{ strings.check_conf|raw|format( strings.cont_set )|raw }}
+                        </p>
+                        <ul>
+                            {% for error in xml_config_errors %}
+                                <li>{{ error|raw }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

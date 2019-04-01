@@ -1,0 +1,11 @@
+<div id="wpml-media-selector-preloader" class="hidden">
+    <a class="js-wpml-media-selector-toggle wpml-media-selector-toggle {% if hide_selector %}collapsed{% endif %}">{{ strings.has_posts }}</a>
+    <div class="wpml-media-selector-wrapper" {% if hide_selector %}style="display: none"{% endif %}>
+        <div class="wpml-media-selector-wrapper-inner">
+            <div class="wpml-media-selector-placeholder">&nbsp;</div>
+            <div class="wpml-media-selector-placeholder">&nbsp;</div>
+            <div class="wpml-media-selector-placeholder">&nbsp;</div>
+            <p class="explanation-text small"><i>{{  strings.loading }}</i></p>
+        </div>
+    </div>
+</div>

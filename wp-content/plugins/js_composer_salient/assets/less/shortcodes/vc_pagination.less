@@ -1,0 +1,287 @@
+//====== VARIABLES
+@vc-pagination-item-height: 10px;
+@vc-pagination-item-width: @vc-pagination-item-height;
+@vc-pagination-item-margin-horizontal: 7px;
+@vc-pagination-item-margin-vertical: 5px;
+@vc-pagination-item-round: 50%;
+@vc-pagination-item-rounded: 3px;
+@vc-pagination-item-border-width: 3px;
+
+//====== COLORS
+// blue
+@vc_pagination-color-blue: @blue;
+// turquoise
+@vc_pagination-color-turquoise: @turquoise;
+// pink
+@vc_pagination-color-pink: @pink;
+// violet
+@vc_pagination-color-violet: @violet;
+// peacoc
+@vc_pagination-color-peacoc: @peacoc;
+// chino
+@vc_pagination-color-chino: @chino;
+// mulled_wine
+@vc_pagination-color-mulled-wine: @mulled_wine;
+// vista_blue
+@vc_pagination-color-vista-blue: @vista_blue;
+// orange
+@vc_pagination-color-orange: @orange;
+// sky
+@vc_pagination-color-sky: @sky;
+// green
+@vc_pagination-color-green: @green;
+// juicy_pink
+@vc_pagination-color-juicy-pink: @juicy_pink;
+// sandy_brown
+@vc_pagination-color-sandy-brown: @sandy_brown;
+// purple
+@vc_pagination-color-purple: @purple;
+// black
+@vc_pagination-color-black: @black;
+// grey
+@vc_pagination-color-grey: @grey;
+// white
+@vc_pagination-color-white: @white;
+
+// core
+.vc_general.vc_pagination {
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+  .vc_pagination-item {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  .vc_pagination-trigger {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    height: @vc-pagination-item-height;
+    width: @vc-pagination-item-width;
+    margin: @vc-pagination-item-margin-vertical @vc-pagination-item-margin-horizontal;
+    background: transparent;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .vc_active .vc_pagination-trigger {
+    cursor: default;
+  }
+}
+
+// styles
+.vc_pagination {
+  &.vc_pagination-style-outline {
+    .vc_pagination-trigger {
+      border: @vc-pagination-item-border-width solid transparent;
+    }
+  }
+  &.vc_pagination-style-flat {
+    .vc_pagination-trigger {
+      opacity: .6;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .vc_active {
+      .vc_pagination-trigger {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// shapes
+.vc_pagination {
+  &.vc_pagination-shape-round {
+    .vc_pagination-trigger {
+      border-radius: @vc-pagination-item-round;
+    }
+  }
+  &.vc_pagination-shape-rounded {
+    .vc_pagination-trigger {
+      border-radius: @vc-pagination-item-rounded;
+    }
+  }
+}
+
+// colors
+// Blue Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-blue';
+@background:        @vc_pagination-color-blue;
+@border:            @vc_pagination-color-blue;
+);
+
+// Turquoise Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-turquoise';
+@background:        @vc_pagination-color-turquoise;
+@border:            @vc_pagination-color-turquoise;
+);
+
+// Pink Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-pink';
+@background:        @vc_pagination-color-pink;
+@border:            @vc_pagination-color-pink;
+);
+
+// Violet Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-violet';
+@background:        @vc_pagination-color-violet;
+@border:            @vc_pagination-color-violet;
+);
+
+// Peacoc Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-peacoc';
+@background:        @vc_pagination-color-peacoc;
+@border:            @vc_pagination-color-peacoc;
+);
+// chino
+.vc_pagination-make-colors-set(~'vc_pagination-color-chino';
+@background:        @vc_pagination-color-chino;
+@border:            @vc_pagination-color-chino;
+);
+
+// Mulled Wine Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-mulled-wine';
+@background:        @vc_pagination-color-mulled-wine;
+@border:            @vc_pagination-color-mulled-wine;
+);
+
+// Vista Blue Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-vista-blue';
+@background:        @vc_pagination-color-vista-blue;
+@border:            @vc_pagination-color-vista-blue;
+);
+
+// Orange Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-orange';
+@background:        @vc_pagination-color-orange;
+@border:            @vc_pagination-color-orange;
+);
+
+// Sky Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-sky';
+@background:        @vc_pagination-color-sky;
+@border:            @vc_pagination-color-sky;
+);
+
+// Green Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-green';
+@background:        @vc_pagination-color-green;
+@border:            @vc_pagination-color-green;
+);
+
+// Juicy Pink Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-juicy-pink';
+@background:        @vc_pagination-color-juicy-pink;
+@border:            @vc_pagination-color-juicy-pink;
+);
+
+// Sandy Brown Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-sandy-brown';
+@background:        @vc_pagination-color-sandy-brown;
+@border:            @vc_pagination-color-sandy-brown;
+);
+
+// Purple Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-purple';
+@background:        @vc_pagination-color-purple;
+@border:            @vc_pagination-color-purple;
+);
+
+// Black Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-black';
+@background:        @vc_pagination-color-black;
+@border:            @vc_pagination-color-black;
+);
+
+// Grey Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-grey';
+@background:        @vc_pagination-color-grey;
+@border:            @vc_pagination-color-grey;
+);
+
+// White Color
+// ------------------------
+.vc_pagination-make-colors-set(~'vc_pagination-color-white';
+@background:        @vc_pagination-color-white;
+@border:            @vc_pagination-color-white;
+);
+
+//
+// Mixins
+// =====================
+
+// Make Colors Set
+// ==========================
+.vc_pagination-make-colors-set(@selector; @background; @border;) {
+  .@{selector} {
+
+    // Outline Style
+    // ------------------------
+    &.vc_pagination-style-outline {
+      .vc_pagination-make-color(
+      @border: @border;
+      @background-hover: @background;
+      @background-active: @background;
+      );
+    }
+
+    // Flat Style
+    // ------------------------
+    &.vc_pagination-style-flat {
+      .vc_pagination-make-color(
+      @background: @background;
+      );
+    }
+  }
+}
+
+// Make Panels Color
+// ==========================
+.vc_pagination-make-color( @border:false; @background: false; @background-hover: false; @background-active: false; ) {
+  .vc_pagination-trigger {
+    & when not (@border = false) {
+      border-color: @border;
+    }
+    & when not (@background = false) {
+      background-color: @background;
+    }
+    & when not (@background-hover = false) {
+      &:hover {
+        background-color: @background-hover;
+      }
+    }
+  }
+  & when not (@background-active = false) {
+    .vc_active .vc_pagination-trigger {
+      background-color: @background-active;
+    }
+  }
+}
+
+

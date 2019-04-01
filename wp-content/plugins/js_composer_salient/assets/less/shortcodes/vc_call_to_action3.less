@@ -1,0 +1,600 @@
+/* Call to action 3
+---------------------------------------------------------- */
+// @dependency vc_icon_element.less
+
+@vc_cta3-font-size-base: 1em;
+@vc_cta3-gold-size-base: 14px;
+@vc_cta3-elements-margin: 1em;
+@vc_cta3-padding-vertical: @vc_cta3-gold-size-base * 2;
+@vc_cta3-padding-horizontal: @vc_cta3-gold-size-base * 2;
+@vc_cta3-shadow-width-3d: 5px;
+@vc_cta3-border-radius-rounded: 5px;
+@vc_cta3-border-radius-round: 4em;
+@vc_cta3-actions-max-width: 30%;
+@vc_cta3-icons-max-width: none;
+
+@vc_tta3-outline-border-width: 3px;
+
+//====== COLORS
+// Classic
+@vc_cta3-color-classic: @vc_call_to_action_border;
+@vc_cta3-color-classic-bg: @vc_call_to_action_bg;
+@vc_cta3-color-classic-border: @vc_cta3-color-classic;
+@vc_cta3-color-classic-text: #9d9d9e;
+@vc_cta3-color-classic-headings: #666;
+// Custom
+@vc_cta3-color-custom-bg: @vc_cta3-color-classic-bg;
+@vc_cta3-color-custom-border: @vc_cta3-color-classic-border;
+// ---------------------------
+
+// blue
+@vc_cta3-color-blue: @blue;
+@vc_cta3-color-blue-bg: lighten(@vc_cta3-color-blue, 38%);
+@vc_cta3-color-blue-border: darken(@vc_cta3-color-blue-bg, 10%);
+@vc_cta3-color-blue-text: #c9d2f0;
+@vc_cta3-color-blue-headings: #fff;
+// turquoise
+@vc_cta3-color-turquoise: @turquoise;
+@vc_cta3-color-turquoise-bg: lighten(desaturate(@vc_cta3-color-turquoise, 20%), 55%);
+@vc_cta3-color-turquoise-border: darken(desaturate(@vc_cta3-color-turquoise-bg, 25%), 10%);
+@vc_cta3-color-turquoise-text: #d3f5f1;
+@vc_cta3-color-turquoise-headings: #fff;
+// pink
+@vc_cta3-color-pink: @pink;
+@vc_cta3-color-pink-bg: lighten(@vc_cta3-color-pink, 28%);
+@vc_cta3-color-pink-border: darken(@vc_cta3-color-pink-bg, 5%);
+@vc_cta3-color-pink-text: #fcdbd7;
+@vc_cta3-color-pink-headings: #fff;
+// violet
+@vc_cta3-color-violet: @violet;
+@vc_cta3-color-violet-bg: lighten(@vc_cta3-color-violet, 35%);
+@vc_cta3-color-violet-border: darken(@vc_cta3-color-violet-bg, 10%);
+@vc_cta3-color-violet-text: #e1d5f5;
+@vc_cta3-color-violet-headings: #fff;
+// peacoc
+@vc_cta3-color-peacoc: @peacoc;
+@vc_cta3-color-peacoc-bg: lighten(@vc_cta3-color-peacoc, 40%);
+@vc_cta3-color-peacoc-border: darken(@vc_cta3-color-peacoc-bg, 10%);
+@vc_cta3-color-peacoc-text: #d0edf5;
+@vc_cta3-color-peacoc-headings: #fff;
+// chino
+@vc_cta3-color-chino: @chino;
+@vc_cta3-color-chino-bg: lighten(@vc_cta3-color-chino, 22%);
+@vc_cta3-color-chino-border: darken(@vc_cta3-color-chino-bg, 10%);
+@vc_cta3-color-chino-text: #f7f3eb;
+@vc_cta3-color-chino-headings: #fff;
+// mulled_wine
+@vc_cta3-color-mulled-wine: @mulled_wine;
+@vc_cta3-color-mulled-wine-bg: lighten(@vc_cta3-color-mulled-wine, 60%);
+@vc_cta3-color-mulled-wine-border: darken(@vc_cta3-color-mulled-wine-bg, 10%);
+@vc_cta3-color-mulled-wine-text: #e2ddeb;
+@vc_cta3-color-mulled-wine-headings: #fff;
+// vista_blue
+@vc_cta3-color-vista-blue: @vista_blue;
+@vc_cta3-color-vista-blue-bg: lighten(@vc_cta3-color-vista-blue, 28%);
+@vc_cta3-color-vista-blue-border: darken(@vc_cta3-color-vista-blue-bg, 10%);
+@vc_cta3-color-vista-blue-text: #e1f5e9;
+@vc_cta3-color-vista-blue-headings: #fff;
+// orange
+@vc_cta3-color-orange: @orange;
+@vc_cta3-color-orange-bg: lighten(@vc_cta3-color-orange, 27%);
+@vc_cta3-color-orange-border: darken(@vc_cta3-color-orange-bg, 10%);
+@vc_cta3-color-orange-text: #faf0e1;
+@vc_cta3-color-orange-headings: #fff;
+// sky
+@vc_cta3-color-sky: @sky;
+@vc_cta3-color-sky-bg: lighten(@vc_cta3-color-sky, 33%);
+@vc_cta3-color-sky-border: darken(@vc_cta3-color-sky-bg, 10%);
+@vc_cta3-color-sky-text: #dce9f5;
+@vc_cta3-color-sky-headings: #fff;
+// green
+@vc_cta3-color-green: @green;
+@vc_cta3-color-green-bg: lighten(@vc_cta3-color-green, 47%);
+@vc_cta3-color-green-border: darken(@vc_cta3-color-green-bg, 15%);
+@vc_cta3-color-green-text: #e5f2da;
+@vc_cta3-color-green-headings: #fff;
+// juicy_pink
+@vc_cta3-color-juicy-pink: @juicy_pink;
+@vc_cta3-color-juicy-pink-bg: lighten(@vc_cta3-color-juicy-pink, 35%);
+@vc_cta3-color-juicy-pink-border: darken(@vc_cta3-color-juicy-pink-bg, 10%);
+@vc_cta3-color-juicy-pink-text: #fce2e1;
+@vc_cta3-color-juicy-pink-headings: #fff;
+// sandy_brown
+@vc_cta3-color-sandy-brown: @sandy_brown;
+@vc_cta3-color-sandy-brown-bg: lighten(@vc_cta3-color-sandy-brown, 27%);
+@vc_cta3-color-sandy-brown-border: darken(@vc_cta3-color-sandy-brown-bg, 10%);
+@vc_cta3-color-sandy-brown-text: #f7e1d7;
+@vc_cta3-color-sandy-brown-headings: #fff;
+// purple
+@vc_cta3-color-purple: @purple;
+@vc_cta3-color-purple-bg: lighten(@vc_cta3-color-purple, 33%);
+@vc_cta3-color-purple-border: darken(@vc_cta3-color-purple-bg, 10%);
+@vc_cta3-color-purple-text: #f4dff5;
+@vc_cta3-color-purple-headings: #fff;
+// black
+@vc_cta3-color-black: @black;
+@vc_cta3-color-black-bg: lighten(@vc_cta3-color-black, 7%);
+@vc_cta3-color-black-border: @vc_cta3-color-black;
+@vc_cta3-color-black-text: #d9d9d9;
+@vc_cta3-color-black-headings: #fff;
+// grey
+@vc_cta3-color-grey: @grey;
+@vc_cta3-color-grey-bg: @vc_cta3-color-grey;
+@vc_cta3-color-grey-border: darken(@vc_cta3-color-grey-bg, 10%);
+@vc_cta3-color-grey-text: #9d9d9e;
+@vc_cta3-color-grey-headings: #666;
+// white
+@vc_cta3-color-white: @white;
+@vc_cta3-color-white-bg: @vc_cta3-color-white;
+@vc_cta3-color-white-border: darken(@vc_cta3-color-white-bg, 10%);
+@vc_cta3-color-white-text: #9d9d9e;
+@vc_cta3-color-white-headings: #666;
+
+.vc_cta3-container {
+  margin-bottom: @vc_element_margin_bottom;
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+  // Creating sizes
+  //------------------
+  &.vc_cta3-size-xs {
+    width: 50%;
+  }
+  &.vc_cta3-size-sm {
+    width: 60%;
+  }
+  &.vc_cta3-size-md {
+    width: 70%;
+  }
+  &.vc_cta3-size-lg {
+    width: 80%;
+  }
+  &.vc_cta3-size-xl {
+    width: 90%;
+  }
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vc_general.vc_cta3 {
+  border: 1px solid transparent;
+  font-size: @vc_cta3-font-size-base;
+  padding: @vc_cta3-padding-vertical @vc_cta3-padding-horizontal;
+  word-wrap: break-word;
+
+  .vc_cta3-content {
+    vertical-align: top;
+  }
+  .vc_cta3-content,
+  .vc_cta3-icons {
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .vc_cta3-actions {
+    vertical-align: middle;
+    white-space: nowrap;
+    @media (min-width: @grid-float-breakpoint) {
+      .vc_btn3-container {
+        margin: 0;
+      }
+    }
+  }
+  .vc_cta3-icons {
+    vertical-align: middle;
+  }
+
+  h2, h4 {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  // Creating Layouts
+  //------------------
+  &.vc_cta3-align-left {
+    .vc_cta3-content {
+      text-align: left;
+    }
+  }
+  &.vc_cta3-align-right {
+    .vc_cta3-content {
+      text-align: right;
+    }
+  }
+  &.vc_cta3-align-center {
+    .vc_cta3-content {
+      text-align: center;
+    }
+  }
+  &.vc_cta3-align-justify {
+    .vc_cta3-content {
+      text-align: justify;
+    }
+  }
+
+  // Changing icons positions
+  // ----------------------------
+  // on top
+  &.vc_cta3-icons-top {
+    .vc_cta3_content-container {
+      padding-top: @vc_cta3-elements-margin;
+    }
+    .vc_cta3-icons {
+      text-align: center;
+      .vc_icon_element {
+        display: inline-block;
+      }
+    }
+  }
+  // on bottom
+  &.vc_cta3-icons-bottom {
+    .vc_cta3_content-container {
+      padding-bottom: @vc_cta3-elements-margin;
+    }
+    .vc_cta3-icons {
+      text-align: center;
+      .vc_icon_element {
+        display: inline-block;
+      }
+    }
+  }
+
+  // on left side
+  &.vc_cta3-icons-left {
+    .vc_cta3-icons {
+      display: table-cell;
+    }
+    .vc_cta3_content-container {
+      display: table-cell;
+      padding-left: @vc_cta3-elements-margin;
+    }
+  }
+
+  // on right side
+  &.vc_cta3-icons-right {
+    .vc_cta3-icons {
+      display: table-cell;
+    }
+    .vc_cta3_content-container {
+      display: table-cell;
+      padding-right: @vc_cta3-elements-margin;
+    }
+  }
+
+  //  Icons on border
+  &.vc_cta3-icons-on-border {
+    position: relative;
+    .vc_cta3-icons {
+      position: absolute;
+    }
+    &.vc_cta3-icons-right {
+      .vc_cta3-icons {
+        right: 0;
+        top: 50%;
+        -webkit-transform: translate(50%, -50%);
+        -ms-transform: translate(50%, -50%);
+        transform: translate(50%, -50%);
+      }
+      .vc_cta3-make-icon-on-border-margins(~'right');
+    }
+    &.vc_cta3-icons-left {
+      .vc_cta3-icons {
+        left: 0;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      .vc_cta3-make-icon-on-border-margins(~'left');
+    }
+    &.vc_cta3-icons-top {
+      .vc_cta3-icons {
+        left: 50%;
+        top: 0;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      .vc_cta3-make-icon-on-border-margins(~'top');
+    }
+    &.vc_cta3-icons-bottom {
+      .vc_cta3-icons {
+        left: 50%;
+        bottom: 0;
+        -webkit-transform: translate(-50%, 50%);
+        -ms-transform: translate(-50%, 50%);
+        transform: translate(-50%, 50%);
+      }
+      .vc_cta3-make-icon-on-border-margins(~'bottom');
+    }
+  }
+
+  // Changing actions positions
+  // ----------------------------
+  // on top
+  &.vc_cta3-actions-top {
+    .vc_cta3-content {
+      margin-top: @vc_cta3-elements-margin;
+    }
+  }
+  // on bottom
+  &.vc_cta3-actions-bottom {
+    .vc_cta3-content {
+      margin-bottom: @vc_cta3-elements-margin;
+    }
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    // on left side
+    &.vc_cta3-actions-left {
+      .vc_cta3-actions {
+        display: table-cell;
+        max-width: 30%;
+      }
+      .vc_cta3-content {
+        padding-left: @vc_cta3-padding-horizontal;
+        display: table-cell;
+      }
+    }
+
+    // on right side
+    &.vc_cta3-actions-right {
+      .vc_cta3-actions {
+        display: table-cell;
+        max-width: 30%;
+      }
+      .vc_cta3-content {
+        padding-right: @vc_cta3-padding-horizontal;
+        display: table-cell;
+      }
+    }
+  }
+
+  // Creating Styles
+  //------------------
+  // Classic (Old style)
+  &.vc_cta3-style-classic {
+    border-color: @vc_cta3-color-classic-border;
+    background-color: @vc_cta3-color-classic-bg;
+    &:not(.vc_cta3-color-classic) .vc_cta3-content-header {
+      h2, h4 {
+        color: inherit;
+      }
+    }
+  }
+  // Flat
+  &.vc_cta3-style-flat {
+    .vc_cta3-content-header {
+      h2, h4 {
+        color: inherit;
+      }
+    }
+  }
+  // Outline (transparent background)
+  &.vc_cta3-style-outline {
+    border-width: @vc_tta3-outline-border-width;
+    &:not(.vc_cta3-color-classic) .vc_cta3-content-header {
+      h2, h4 {
+        color: inherit;
+      }
+    }
+  }
+  // 3d
+  &.vc_cta3-style-3d {
+    .vc_cta3-content-header {
+      h2, h4 {
+        color: inherit;
+      }
+    }
+  }
+  // Custom
+  &.vc_cta3-style-custom {
+    border-color: @vc_cta3-color-custom-border;
+    background-color: @vc_cta3-color-custom-bg;
+  }
+
+  // Creating Shapes
+  //------------------
+  // Square
+  &.vc_cta3-shape-square {
+    border-radius: 0;
+  }
+  // Rounded
+  &.vc_cta3-shape-rounded {
+    border-radius: @vc_cta3-border-radius-rounded;
+  }
+  // Round
+  &.vc_cta3-shape-round {
+    border-radius: @vc_cta3-border-radius-round;
+  }
+
+  // Generating color sets
+  //------------------
+  // blue
+  .vc_cta3-make-colors-set(~'vc_cta3-color-blue'; @vc_cta3-color-blue; @vc_cta3-color-blue-text; @vc_cta3-color-blue-border; @vc_cta3-color-blue-bg; @vc_cta3-color-blue-headings);
+  // turquoise
+  .vc_cta3-make-colors-set(~'vc_cta3-color-turquoise'; @vc_cta3-color-turquoise; @vc_cta3-color-turquoise-text; @vc_cta3-color-turquoise-border; @vc_cta3-color-turquoise-bg; @vc_cta3-color-turquoise-headings);
+  // pink
+  .vc_cta3-make-colors-set(~'vc_cta3-color-pink'; @vc_cta3-color-pink; @vc_cta3-color-pink-text; @vc_cta3-color-pink-border; @vc_cta3-color-pink-bg; @vc_cta3-color-pink-headings);
+  // violet
+  .vc_cta3-make-colors-set(~'vc_cta3-color-violet'; @vc_cta3-color-violet; @vc_cta3-color-violet-text; @vc_cta3-color-violet-border; @vc_cta3-color-violet-bg; @vc_cta3-color-violet-headings);
+  // peacoc
+  .vc_cta3-make-colors-set(~'vc_cta3-color-peacoc'; @vc_cta3-color-peacoc; @vc_cta3-color-peacoc-text; @vc_cta3-color-peacoc-border; @vc_cta3-color-peacoc-bg; @vc_cta3-color-peacoc-headings);
+  // chino
+  .vc_cta3-make-colors-set(~'vc_cta3-color-chino'; @vc_cta3-color-chino; @vc_cta3-color-chino-text; @vc_cta3-color-chino-border; @vc_cta3-color-chino-bg; @vc_cta3-color-chino-headings);
+  // mulled_wine
+  .vc_cta3-make-colors-set(~'vc_cta3-color-mulled-wine'; @vc_cta3-color-mulled-wine; @vc_cta3-color-mulled-wine-text; @vc_cta3-color-mulled-wine-border; @vc_cta3-color-mulled-wine-bg; @vc_cta3-color-mulled-wine-headings);
+  // vista_blue
+  .vc_cta3-make-colors-set(~'vc_cta3-color-vista-blue'; @vc_cta3-color-vista-blue; @vc_cta3-color-vista-blue-text; @vc_cta3-color-vista-blue-border; @vc_cta3-color-vista-blue-bg; @vc_cta3-color-vista-blue-headings);
+  // orange
+  .vc_cta3-make-colors-set(~'vc_cta3-color-orange'; @vc_cta3-color-orange; @vc_cta3-color-orange-text; @vc_cta3-color-orange-border; @vc_cta3-color-orange-bg; @vc_cta3-color-orange-headings);
+  // sky
+  .vc_cta3-make-colors-set(~'vc_cta3-color-sky'; @vc_cta3-color-sky; @vc_cta3-color-sky-text; @vc_cta3-color-sky-border; @vc_cta3-color-sky-bg; @vc_cta3-color-sky-headings);
+  // green
+  .vc_cta3-make-colors-set(~'vc_cta3-color-green'; @vc_cta3-color-green; @vc_cta3-color-green-text; @vc_cta3-color-green-border; @vc_cta3-color-green-bg; @vc_cta3-color-green-headings);
+  // juicy_pink
+  .vc_cta3-make-colors-set(~'vc_cta3-color-juicy-pink'; @vc_cta3-color-juicy-pink; @vc_cta3-color-juicy-pink-text; @vc_cta3-color-juicy-pink-border; @vc_cta3-color-juicy-pink-bg; @vc_cta3-color-juicy-pink-headings);
+  // sandy_brown
+  .vc_cta3-make-colors-set(~'vc_cta3-color-sandy-brown'; @vc_cta3-color-sandy-brown; @vc_cta3-color-sandy-brown-text; @vc_cta3-color-sandy-brown-border; @vc_cta3-color-sandy-brown-bg; @vc_cta3-color-sandy-brown-headings);
+  // purple
+  .vc_cta3-make-colors-set(~'vc_cta3-color-purple'; @vc_cta3-color-purple; @vc_cta3-color-purple-text; @vc_cta3-color-purple-border; @vc_cta3-color-purple-bg; @vc_cta3-color-purple-headings);
+  // black
+  .vc_cta3-make-colors-set(~'vc_cta3-color-black'; @vc_cta3-color-black; @vc_cta3-color-black-text; @vc_cta3-color-black-border; @vc_cta3-color-black-bg; @vc_cta3-color-black-headings);
+  // grey
+  .vc_cta3-make-colors-set(~'vc_cta3-color-grey'; @vc_cta3-color-grey; @vc_cta3-color-grey-text; @vc_cta3-color-grey-border; @vc_cta3-color-grey-bg; @vc_cta3-color-grey-headings);
+  // white
+  .vc_cta3-make-colors-set(~'vc_cta3-color-white'; @vc_cta3-color-white; @vc_cta3-color-white-text; @vc_cta3-color-white-border; @vc_cta3-color-white-bg; @vc_cta3-color-white-headings);
+
+  // Generating custom color sets
+  //------------------
+  // classic
+  &.vc_cta3-color-classic {
+    // Classic (Old style)
+    &.vc_cta3-style-classic {
+      .vc_make-cta3-color(@text: false; @headings-text: false);
+    }
+    // Flat
+    &.vc_cta3-style-flat {
+      .vc_make-cta3-color(@text: @vc_cta3-color-classic-text; @headings-text: @vc_cta3-color-classic-headings; @border: transparent; @background: @vc_cta3-color-classic);
+    }
+    // 3d
+    &.vc_cta3-style-3d {
+      box-shadow: 0 @vc_cta3-shadow-width-3d 0 darken(@vc_cta3-color-classic, 11%);
+      .vc_make-cta3-color(@text: @vc_cta3-color-classic-text; @headings-text: @vc_cta3-color-classic-headings; @border: transparent; @background: @vc_cta3-color-classic);
+    }
+    // Outline (transparent background)
+    &.vc_cta3-style-outline {
+      .vc_make-cta3-color(@text: false; @headings-text: @vc_cta3-color-classic; @border: @vc_cta3-color-classic; @background: transparent);
+    }
+  }
+}
+
+// Fix for icon element
+// ======================
+.vc_cta3 {
+  &.vc_cta3-icon-size-xs {
+    .vc_icon_element .vc_icon_element-inner {
+      height: 1em;
+      width: 1em;
+    }
+  }
+  &.vc_cta3-icon-size-sm {
+    .vc_icon_element .vc_icon_element-inner {
+      height: 2em;
+      width: 2em;
+    }
+  }
+  &.vc_cta3-icon-size-md {
+    .vc_icon_element .vc_icon_element-inner {
+      height: 3em;
+      width: 3em;
+    }
+  }
+  &.vc_cta3-icon-size-lg {
+    .vc_icon_element .vc_icon_element-inner {
+      height: 4em;
+      width: 4em;
+    }
+  }
+  &.vc_cta3-icon-size-xl {
+    .vc_icon_element .vc_icon_element-inner {
+      height: 5em;
+      width: 5em;
+    }
+  }
+}
+
+//====== MIXINS
+// Creating Colors
+.vc_make-cta3-color(@text: false; @headings-text: false; @border: false; @background: false) {
+  & when not (@text = false) {
+    color: @text;
+  }
+  & when not (@headings-text = false) {
+    .vc_cta3-content-header {
+      color: @headings-text;
+    }
+  }
+  & when not (@border = false) {
+    border-color: @border;
+  }
+  & when not (@background = false) {
+    background-color: @background;
+  }
+
+}
+
+// make colors set
+.vc_cta3-make-colors-set(@selector; @color; @text; @border; @background; @headings-color) {
+  &.@{selector} {
+    // Classic (Old style)
+    &.vc_cta3-style-classic {
+      .vc_make-cta3-color(@text: false; @headings-text: @color);
+    }
+    // Flat
+    &.vc_cta3-style-flat {
+      .vc_make-cta3-color(@text: @text; @headings-text: @headings-color; @border: transparent; @background: @color);
+    }
+    // 3d
+    &.vc_cta3-style-3d {
+      box-shadow: 0 @vc_cta3-shadow-width-3d 0 darken(@color, 11%);
+      .vc_make-cta3-color(@text: @text; @headings-text: @headings-color; @border: transparent; @background: @color);
+    }
+    // Outline (transparent background)
+    &.vc_cta3-style-outline {
+      .vc_make-cta3-color(@text: false; @headings-text: @color; @border: @color; @background: transparent);
+    }
+  }
+}
+
+// make icon margins
+.vc_cta3-make-icon-on-border-margins(@direction;) {
+  &.vc_cta3-icon-size-xs {
+    margin-@{direction}: floor(@icon-element-font-size-base * unit(@icon-element-box-size-xs) / 2);
+    .vc_cta3_content-container {
+      padding-@{direction}: 0;
+    }
+    &.vc_cta3-icons-in-box .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base * 0.5;
+    }
+  }
+  &.vc_cta3-icon-size-sm {
+    margin-@{direction}: floor(@icon-element-font-size-base * unit(@icon-element-box-size-sm) / 2);
+    .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base * 0.5;
+    }
+    &.vc_cta3-icons-in-box .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base;
+    }
+  }
+  &.vc_cta3-icon-size-md {
+    margin-@{direction}: floor(@icon-element-font-size-base * unit(@icon-element-box-size-md) / 2);
+    .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base;
+    }
+    &.vc_cta3-icons-in-box .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base * 1.5;
+    }
+  }
+  &.vc_cta3-icon-size-lg {
+    margin-@{direction}: floor(@icon-element-font-size-base * unit(@icon-element-box-size-lg) / 2);
+    .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base * 1.5;
+    }
+    &.vc_cta3-icons-in-box .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base * 2;
+    }
+  }
+  &.vc_cta3-icon-size-xl {
+    margin-@{direction}: floor(@icon-element-font-size-base * unit(@icon-element-box-size-xl) / 2);
+    .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base * 2;
+    }
+    &.vc_cta3-icons-in-box .vc_cta3_content-container {
+      padding-@{direction}: @vc_cta3-gold-size-base * 2.5;
+    }
+  }
+}

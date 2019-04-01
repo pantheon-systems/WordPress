@@ -1,0 +1,537 @@
+// Toggle 2
+// =============================================
+
+// Variables;
+// --------------------
+@toggle-border-width: 2px;
+
+@toggle-icon-size-sm: 16px;
+@toggle-icon-size-md: 22px;
+@toggle-icon-size-lg: 28px;
+
+@toggle-font-size-base: 1em;
+@toggle-content-top-margin: 1em;
+
+// Base Styles;
+// --------------------
+.vc_toggle {
+  display: block;
+  margin: 0 0 @vc_margin_bottom_gold 0;
+  padding: 0;
+  font-size: @toggle-font-size-base;
+  &:last-of-type {
+    margin-bottom: @vc_element_margin_bottom;
+  }
+}
+
+.vc_toggle_title {
+  cursor: pointer;
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  .user-select(none);
+  font-weight: normal;
+  > h4 {
+    display: inline;
+
+  }
+}
+
+.vc_toggle_icon {
+  display: none;
+  position: relative;
+  vertical-align: middle;
+}
+
+.vc_toggle_content {
+  display: none;
+  margin-bottom: @vc_margin_bottom_gold;
+  margin-top: @toggle-content-top-margin;
+  overflow: hidden;
+  padding: 0;
+}
+
+// States
+// ------------------
+.vc_toggle {
+  &.vc_toggle_active {
+    > .vc_toggle_content {
+      display: block;
+    }
+  }
+}
+
+// Themes
+// --------------------
+
+// Simple
+.vc_toggle_simple {
+  .vc-make-toggle-shape();
+  .vc-make-toggle-shape-color(@color: @black; @hover-color: @black-hover);
+  .vc_toggle_icon {
+    margin-left: 2px;
+  }
+}
+
+// Round
+.vc_toggle_round {
+  .vc-make-toggle-shape(@border-width: @toggle-border-width, @border-radius: 50%);
+}
+
+// Rounded
+.vc_toggle_rounded {
+  .vc-make-toggle-shape(@border-width: @toggle-border-width, @border-radius: 20%);
+}
+
+// Square
+.vc_toggle_square {
+  .vc-make-toggle-shape(@border-width: @toggle-border-width);
+}
+
+// Text Only
+.vc_toggle_text_only {
+  .vc_toggle_icon {
+    display: none;
+  }
+}
+
+// Arrow
+.vc_toggle_arrow {
+  .vc_toggle_icon {
+    display: inline-block;
+    &::before,
+    &::after {
+      content: '';
+      border-style: solid;
+      display: block;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      .box-sizing(border-box);
+      .wpb_transform(rotate(45deg));
+    }
+
+    &::before {
+      border-left: none;
+      border-top: none;
+    }
+    &::after {
+      border-right: none;
+      border-bottom: none;
+      .vc-toggle-hidden();
+    }
+  }
+  &.vc_toggle_active {
+    .vc_toggle_icon {
+      &::before {
+        .vc-toggle-hidden();
+      }
+      &::after {
+        .vc-toggle-visible();
+      }
+    }
+  }
+}
+
+// add arrow style color
+.vc_toggle {
+  .vc-make-toggle-arrow-style-size(@toggle-icon-size-md);
+  .vc-make-toggle-arrow-style-color(@black; @black-hover);
+}
+
+// Default
+.vc_toggle_default {
+  // back compatibility related to toggle FAQ
+  @border: 1px solid #acacac;
+  @background: #bababa;
+  .vc_toggle_icon {
+    background: @background;
+    border: @border;
+    .box-sizing(border-box);
+    .translate(0, -50%);
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      .box-sizing(border-box);
+      .translate(-50%, -50%);
+      background: #bababa;
+    }
+    &::before {
+      border: @border;
+    }
+  }
+  &.vc_toggle_active {
+    .vc_toggle_icon {
+      &::before,
+      &::after {
+        .vc-toggle-hidden();
+      }
+    }
+  }
+}
+
+.vc_toggle {
+  .vc-make-toggle-default-style-size(@toggle-icon-size-md);
+}
+
+// Colors
+// --------------------
+// Blue color
+.vc-make-toggle-colors-set(~'blue', @blue, @white, @blue-hover);
+// Turquoise color
+.vc-make-toggle-colors-set(~'turquoise', @turquoise, @white, @turquoise-hover);
+// Pink color
+.vc-make-toggle-colors-set(~'pink', @pink, @white, @pink-hover);
+// Violet color
+.vc-make-toggle-colors-set(~'violet', @violet, @white, @violet-hover);
+// Peacoc color
+.vc-make-toggle-colors-set(~'peacoc', @peacoc, @white, @peacoc-hover);
+// Chino color
+.vc-make-toggle-colors-set(~'chino', @chino, @white, @chino-hover);
+// Mulled Wine color
+.vc-make-toggle-colors-set(~'mulled_wine', @mulled_wine, @white, @mulled_wine-hover);
+// Vista Blue color
+.vc-make-toggle-colors-set(~'vista_blue', @vista_blue, @white, @vista_blue-hover);
+// Black color
+.vc-make-toggle-colors-set(~'black', @black, @white, @black-hover);
+// Grey color
+.vc-make-toggle-colors-set(~'grey', @grey, @white, @grey-hover);
+// Orange color
+.vc-make-toggle-colors-set(~'orange', @orange, @white, @orange-hover);
+// Sky color
+.vc-make-toggle-colors-set(~'sky', @sky, @white, @sky-hover);
+// Green color
+.vc-make-toggle-colors-set(~'green', @green, @white, @green-hover);
+// Juicy Pink color
+.vc-make-toggle-colors-set(~'juicy_pink', @juicy_pink, @white, @juicy_pink-hover);
+// Sandy Brown color
+.vc-make-toggle-colors-set(~'sandy_brown', @sandy_brown, @white, @sandy_brown-hover);
+// Purple color
+.vc-make-toggle-colors-set(~'purple', @purple, @white, @purple-hover);
+// White color
+.vc-make-toggle-colors-set(~'white', @white, @black, @white-hover);
+
+// Sizes
+// ---------------
+// Smail size
+.vc-make-toggle-sizes-set(~'sm', @toggle-icon-size-sm);
+// Normal size
+.vc-make-toggle-sizes-set(~'md', @toggle-icon-size-md);
+// Large size
+.vc-make-toggle-sizes-set(~'lg', @toggle-icon-size-lg);
+
+// Indents
+// ---------------
+.vc-make-toggle-indents(@toggle-icon-size-md);
+
+// Make shape
+// ===================================
+.vc-make-toggle-shape(@border-width: 0; @border-radius: 0) {
+  // Icon
+  .vc_toggle_icon {
+    border: @border-width solid transparent;
+    border-radius: @border-radius;
+    display: inline-block;
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      .box-sizing(border-box);
+      .translate(-50%, -50%);
+    }
+  }
+  &.vc_toggle_active {
+    .vc_toggle_icon {
+      &::after {
+        .vc-toggle-hidden();
+      }
+    }
+  }
+  // make default size and color
+  .vc-make-toggle-shape-size(@toggle-icon-size-md);
+  .vc-make-toggle-shape-color(@white; @white; @black; @black-hover);
+}
+
+// Make colors set
+// ------------------------------------- 
+.vc-make-toggle-colors-set(@selector; @background; @color; @hover-color) {
+  .vc_toggle_color_@{selector} {
+    .vc-make-toggle-simple-style-color(@background; @hover-color);
+    .vc-make-toggle-shape-color(@color, @color, @background, @hover-color);
+    .vc-make-toggle-default-style-color(@background; @hover-color);
+    .vc-make-toggle-arrow-style-color(@background; @hover-color);
+  }
+}
+
+// Make sizes set
+// ------------------------------------- 
+.vc-make-toggle-sizes-set(@selector; @size) {
+  .vc_toggle_size_@{selector} {
+    .vc-make-toggle-shape-size(@size);
+    .vc-make-toggle-default-style-size(@size);
+    .vc-make-toggle-arrow-style-size(@size);
+    .vc-make-toggle-indents(@size);
+  }
+}
+
+// Make indents
+// ------------------------------------- 
+.vc-make-toggle-indents(@indent) {
+  &.vc_toggle_simple,
+  &.vc_toggle_round,
+  &.vc_toggle_rounded,
+  &.vc_toggle_square,
+  &.vc_toggle_default {
+    .vc_toggle_title,
+    .vc_toggle_content {
+      padding-left: @indent * 1.5;
+      .vc_toggle_icon {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        .translate(0, -50%);
+      }
+    }
+  }
+  &.vc_toggle_default {
+    .vc_toggle_title,
+    .vc_toggle_content {
+      padding-left: @indent * 1.1;
+    }
+  }
+  &.vc_toggle_arrow {
+    .vc_toggle_icon {
+      margin-left: @indent / 2;
+    }
+  }
+}
+
+// Make color
+// ------------------------------------- 
+.vc-make-toggle-shape-color(@color: @black; @hover-color: false; @background: transparent; @hover-background: transparent;) {
+  // normal
+  .vc_toggle_icon {
+    background-color: @background;
+    border-color: transparent;
+    &::before,
+    &::after {
+      background-color: @color;
+    }
+  }
+  // inverted color
+  &.vc_toggle_color_inverted {
+    .vc_toggle_icon {
+      background-color: transparent;
+      border-color: @background;
+      &::before,
+      &::after {
+        background-color: @background;
+      }
+    }
+  }
+  // hover
+  & when not (@hover-color = false) {
+    // hover normal
+    .vc_toggle_title {
+      &:hover {
+        .vc_toggle_icon {
+          background-color: @hover-background;
+          &::before,
+          &::after {
+            background-color: @hover-color;
+          }
+        }
+      }
+    }
+    // hover inverted
+    &.vc_toggle_color_inverted {
+      .vc_toggle_title {
+        &:hover {
+          .vc_toggle_icon {
+            background-color: transparent;
+            border-color: @hover-background;
+            &::before,
+            &::after {
+              background-color: @hover-background;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Make Default style color
+// -------------------------------------
+.vc-make-toggle-default-style-color(@background: @grey; @hover-color: false) {
+  &.vc_toggle_default {
+    .vc_toggle_icon {
+      background: @background;
+      border-color: darken(@background, 10%);
+      &::before {
+        border-color: darken(@background, 10%);
+        background: @background;
+      }
+      &::after {
+        background: @background;
+      }
+    }
+    // hover
+    & when not (@hover-color = false) {
+      .vc_toggle_title {
+        &:hover {
+          .vc_toggle_icon {
+            background: @hover-color;
+            border-color: darken(@hover-color, 10%);
+            &::before {
+              border-color: darken(@hover-color, 10%);
+              background: @hover-color;
+            }
+            &::after {
+              background: @hover-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Make Arrow style color
+// -------------------------------------
+.vc-make-toggle-arrow-style-color(@background: @black, @hover-color: false) {
+  &.vc_toggle_arrow {
+    .vc_toggle_icon {
+      background: transparent;
+      &::before,
+      &::after {
+        border-color: @background;
+        background: transparent;
+      }
+    }
+    // hover
+    & when not (@hover-color = false) {
+      .vc_toggle_title {
+        &:hover {
+          .vc_toggle_icon {
+            background: transparent;
+            &::before,
+            &::after {
+              border-color: @hover-color;
+              background: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Make simple style color
+// ------------------------------------- 
+.vc-make-toggle-simple-style-color(@plus-color; @plus-hover) {
+  &.vc_toggle_simple {
+    .vc-make-toggle-shape-color(@color: @plus-color; @hover-color: @plus-hover);
+  }
+}
+
+// Make sizes
+// ===================================
+.vc-make-toggle-shape-size(@icon-size; @plus-size: floor(@icon-size * 0.5)) {
+  @mod: mod(@plus-size, 2);
+  .vc_toggle_icon {
+    height: @icon-size;
+    width: @icon-size;
+    &::before {
+      height: 2px;
+      width: @plus-size - @mod;
+    }
+    &::after {
+      height: @plus-size - @mod;
+      width: 2px;
+    }
+  }
+}
+
+// Default style sizes
+.vc-make-toggle-default-style-size(@icon-size; @plus-size: floor(@icon-size * 0.5)) {
+  @plus-computed-size: max(@plus-size - mod(@plus-size, 2), 8px);
+  @plus-width-max: 4px;
+  @plus-width-min: 2px;
+  &.vc_toggle_default {
+    .vc_toggle_icon {
+      display: inline-block;
+      width: @plus-computed-size;
+      margin-left: @plus-computed-size / 2;
+      & when (@plus-size >= 10) {
+        height: @plus-width-max;
+      }
+      & when (@plus-size < 10) {
+        height: @plus-width-min;
+      }
+      &::before {
+        height: @plus-computed-size;
+        & when (@plus-size >= 10) {
+          width: @plus-width-max;
+        }
+        & when (@plus-size < 10) {
+          width: @plus-width-min;
+        }
+      }
+      &::after {
+        width: @plus-computed-size - 2px;
+        & when (@plus-size >= 10) {
+          height: @plus-width-max - 2px;
+        }
+        & when (@plus-size < 10) {
+          height: @plus-width-min - 2px;
+        }
+      }
+    }
+  }
+}
+
+// Arrow style sizes
+.vc-make-toggle-arrow-style-size(@icon-size; @plus-size: floor(@icon-size * 0.5)) {
+  @mod: mod(@plus-size, 2);
+  &.vc_toggle_arrow {
+    .vc_toggle_icon {
+      height: @icon-size;
+      width: @icon-size;
+      &::before,
+      &::after {
+        border-width: 2px;
+        height: @plus-size - @mod;
+        margin-left: -(@plus-size - @mod) / 2;
+        width: @plus-size - @mod;
+      }
+      &::before {
+        margin-top: -(@plus-size - @mod);
+      }
+      &::after {
+        margin-top: -(@plus-size - @mod) / 2;
+      }
+    }
+  }
+}
+
+// Mixins
+// ==================================
+
+// Hide element
+.vc-toggle-hidden() {
+  visibility: hidden;
+}
+
+// Show element
+.vc-toggle-visible() {
+  visibility: visible;
+}

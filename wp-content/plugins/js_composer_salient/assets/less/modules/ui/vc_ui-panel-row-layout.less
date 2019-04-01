@@ -1,0 +1,45 @@
+.vc_layout-panel-switcher() {
+  .vc_layout-btn {
+    display: inline-block;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: white;
+    cursor: pointer;
+    padding: 2px;
+    margin: 8px 4px 1px 0;
+    color: #A0A0A0;
+    font-size: 14px;
+    &:hover {
+      color: #0473aa;
+    }
+  }
+  .vc_custom-layout-btn {
+    background-color: transparent;
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 4px 0 3px;
+    font-size: 11px;
+    text-align: center;
+  }
+}
+
+[data-vc-ui-element="panel-row-layout"] {
+  width: 420px;
+  z-index: 100001;
+  top: 90px;
+  left: 50%;
+  .vc_row_layout {
+    width: 288px;
+  }
+  .vc_layout-panel-switcher {
+    .vc_layout-panel-switcher;
+  }
+  .vc_ui-panel-window-inner > .vc_ui-panel-content-container {
+    overflow: hidden;
+  }
+}
+
+.vc_general.vc_ui-button-update-layout {
+  vertical-align: top;
+}

@@ -1,0 +1,45 @@
+@import "../vc_ui-fonts.less";
+@import "../vc_ui-panel/vc_ui-panel-window.less";
+@import "../vc_ui-panel/vc_ui-panel-header.less";
+@import "../vc_ui-panel/vc_ui-panel-content.less";
+@import "../vc_ui-panel/vc_ui-panel-footer.less";
+@import "../vc_ui-panel/vc_ui-panel-footer.less";
+@import "../vc_ui-prompt.less";
+@import "../vc_ui-gaps.less";
+@import "../vc_ui-flex-bootstrap.less";
+
+@vcui-panel-width: 650px;
+
+.vc_ui-panel {
+  display: none;
+  &.vc_ui-panel-window {
+    width: @vcui-panel-width;
+    position: fixed;
+    z-index: 50000;
+    top: 74px;
+    left: 50%;
+  }
+  &.vc_active {
+    display: flex;
+  }
+  .panel-body {
+    padding: 0;
+  }
+  .vc_panel-tabs {
+    flex-grow: 1;
+  }
+  .vc_layout-onion {
+    width: 350px;
+    flex-grow: initial;
+  }
+}
+
+// Loaders behaviour
+.vc_ui-panel {
+  .vc_ui-panel-content > .vc_ui-wp-spinner {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+  }
+}

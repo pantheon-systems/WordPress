@@ -1,0 +1,17 @@
+{% if filters %}
+<ul class="subsubsub">
+    {% for filter_key, filter in filters %}
+        <li class="{{ filter_key }}">
+        {% if filter.url %}
+            <a href="{{ filter.url }}"{% if filter.current %} class="current"{% endif %}>
+                {{ filter.label }} <span class="count">({{ filter.count }})</span>
+            </a>
+        {% else %}
+            <b>{{ filter.label }}</b>
+        {% endif %}
+        {% if not loop.last %} |{% endif %}
+        </li>
+    {% endfor %}
+</ul>
+<br class="clear">
+{% endif %}

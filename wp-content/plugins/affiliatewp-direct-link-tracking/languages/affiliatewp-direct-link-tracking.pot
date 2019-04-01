@@ -1,0 +1,557 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: AffiliateWP - Direct Link Tracking\n"
+"POT-Creation-Date: 2017-05-07 00:28+1200\n"
+"PO-Revision-Date: 2015-04-04 11:12-0600\n"
+"Last-Translator: Andrew Munro, Sumobi <andrew@sumobi.com>\n"
+"Language-Team: AffiliateWP <support@affiliatewp.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../affiliatewp-direct-link-tracking.php:129
+#: ../affiliatewp-direct-link-tracking.php:141
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: ../affiliatewp-direct-link-tracking.php:321
+msgid "Get more add-ons for AffiliateWP"
+msgstr ""
+
+#: ../affiliatewp-direct-link-tracking.php:321
+msgid "More add-ons"
+msgstr ""
+
+#: ../includes/actions.php:35 ../includes/actions.php:102
+#: ../includes/class-admin.php:656
+msgid "You do not have permission to manage direct links"
+msgstr ""
+
+#: ../includes/actions.php:35 ../includes/actions.php:102
+#: ../includes/class-admin.php:656 ../includes/class-notices.php:134
+msgid "Error"
+msgstr ""
+
+#: ../includes/actions.php:39 ../includes/actions.php:106
+#: ../includes/class-notices.php:134
+msgid "Security check failed"
+msgstr ""
+
+#: ../includes/add-direct-link.php:3
+msgid "New Direct Link"
+msgstr ""
+
+#: ../includes/add-direct-link.php:9
+msgid "Use this screen to manually create a new direct link for an affiliate."
+msgstr ""
+
+#: ../includes/add-direct-link.php:16 ../includes/class-list-table.php:213
+#: ../includes/edit-direct-link.php:18
+msgid "Affiliate"
+msgstr ""
+
+#: ../includes/add-direct-link.php:23
+msgid "Enter the name of the affiliate or enter a partial name or email to perform a search."
+msgstr ""
+
+#: ../includes/add-direct-link.php:31 ../includes/class-list-table.php:212
+#: ../includes/edit-direct-link.php:40
+msgid "Domain"
+msgstr ""
+
+#: ../includes/add-direct-link.php:36
+msgid "Enter a domain for this direct link."
+msgstr ""
+
+#: ../includes/add-direct-link.php:48
+msgid "Add Direct Link"
+msgstr ""
+
+#: ../includes/class-activation.php:46
+msgid "This plugin"
+msgstr ""
+
+#: ../includes/class-activation.php:81
+#, php-format
+msgid "requires %s. Please activate it to continue."
+msgstr ""
+
+#: ../includes/class-activation.php:84
+#, php-format
+msgid "requires %s. Please install it to continue."
+msgstr ""
+
+#: ../includes/class-admin.php:62 ../includes/class-admin.php:141
+#: ../includes/class-admin.php:222
+msgid "Direct Link Tracking"
+msgstr ""
+
+#: ../includes/class-admin.php:123
+#, php-format
+msgid "%d direct links pending approval"
+msgstr ""
+
+#: ../includes/class-admin.php:125
+#, php-format
+msgid "Direct Links %s"
+msgstr ""
+
+#: ../includes/class-admin.php:127 ../includes/class-frontend.php:38
+#: ../includes/class-list-table.php:37
+#: ../templates/dashboard-tab-direct-links.php:11
+msgid "Direct Links"
+msgstr ""
+
+#: ../includes/class-admin.php:145 ../includes/class-admin.php:230
+msgid "Allow Direct Link Tracking"
+msgstr ""
+
+#: ../includes/class-admin.php:146
+msgid "Allow direct link tracking for all affiliates. Leave unchecked if you would like to enable direct link tracking on a per-affiliate level."
+msgstr ""
+
+#: ../includes/class-admin.php:150
+msgid "Notify Admin"
+msgstr ""
+
+#: ../includes/class-admin.php:151
+msgid "Notify site admin when a direct link has been submitted for approval."
+msgstr ""
+
+#: ../includes/class-admin.php:155
+msgid "Notify Affiliate"
+msgstr ""
+
+#: ../includes/class-admin.php:158
+msgid "Notify affiliate when a direct link has been approved."
+msgstr ""
+
+#: ../includes/class-admin.php:159
+msgid "Notify affiliate when a direct link has been rejected."
+msgstr ""
+
+#: ../includes/class-admin.php:163 ../includes/class-admin.php:260
+msgid "Domains Allowed"
+msgstr ""
+
+#: ../includes/class-admin.php:164
+msgid "Enter the number of domains an affiliate can add. This can also be set on a per-affiliate level."
+msgstr ""
+
+#: ../includes/class-admin.php:172
+msgid "URL Blacklist"
+msgstr ""
+
+#: ../includes/class-admin.php:173
+msgid "URLs placed here will be blocked from being added (by site admin or affiliate) and prevent a visit from being created if already in use. Enter one URL per line."
+msgstr ""
+
+#: ../includes/class-admin.php:178
+msgid "Remove Data When Deleted"
+msgstr ""
+
+#: ../includes/class-admin.php:179
+msgid "Remove all data from Direct Link Tracking when the plugin is deleted."
+msgstr ""
+
+#: ../includes/class-admin.php:235
+msgid "Allow direct link tracking for this affiliate."
+msgstr ""
+
+#: ../includes/class-admin.php:264
+msgid "The number of domains this affiliate can have for direct link tracking."
+msgstr ""
+
+#: ../includes/class-admin.php:277
+#: ../templates/dashboard-tab-direct-links.php:46
+msgid "#1"
+msgstr ""
+
+#: ../includes/class-admin.php:284 ../includes/class-admin.php:309
+#, php-format
+msgid "Domain %s"
+msgstr ""
+
+#: ../includes/class-admin.php:289 ../includes/class-admin.php:437
+msgid "Enter a direct link domain."
+msgstr ""
+
+#: ../includes/class-admin.php:304
+#: ../templates/dashboard-tab-direct-links.php:71
+#, php-format
+msgid " #%s"
+msgstr ""
+
+#: ../includes/class-admin.php:323 ../includes/class-admin.php:337
+msgid "Current domain."
+msgstr ""
+
+#: ../includes/class-admin.php:330
+msgid "This domain is currently inactive."
+msgstr ""
+
+#: ../includes/class-admin.php:346
+msgid "New domain to review."
+msgstr ""
+
+#: ../includes/class-admin.php:346
+msgid "Domain to review."
+msgstr ""
+
+#: ../includes/class-admin.php:353 ../includes/class-list-table.php:336
+#: ../includes/class-list-table.php:339 ../includes/class-list-table.php:374
+msgid "Accept"
+msgstr ""
+
+#: ../includes/class-admin.php:357 ../includes/class-list-table.php:337
+#: ../includes/class-list-table.php:375
+msgid "Reject"
+msgstr ""
+
+#: ../includes/class-admin.php:376
+msgid "This domain was rejected."
+msgstr ""
+
+#: ../includes/class-admin.php:387
+msgid "The affiliate submitted an invalid domain."
+msgstr ""
+
+#: ../includes/class-admin.php:411
+#: ../templates/dashboard-tab-direct-links.php:95
+msgid "Add new domain"
+msgstr ""
+
+#: ../includes/class-admin.php:430
+msgid "Domain #"
+msgstr ""
+
+#: ../includes/class-admin.php:470
+msgid "Remove"
+msgstr ""
+
+#: ../includes/class-emails.php:55
+#, php-format
+msgid "A new direct link, %s, has been submitted for approval"
+msgstr ""
+
+#: ../includes/class-emails.php:100
+msgid "A direct link has been submitted for approval."
+msgstr ""
+
+#: ../includes/class-emails.php:102
+#, php-format
+msgid "Domain: %s"
+msgstr ""
+
+#: ../includes/class-emails.php:107
+#, php-format
+msgid "Old domain: %s"
+msgstr ""
+
+#: ../includes/class-emails.php:111
+#, php-format
+msgid "Affiliate: %s"
+msgstr ""
+
+#: ../includes/class-emails.php:114
+msgid "View direct links:"
+msgstr ""
+
+#: ../includes/class-emails.php:166
+#, php-format
+msgid "Your direct link, %s, has been approved"
+msgstr ""
+
+#: ../includes/class-emails.php:172
+#, php-format
+msgid "Your direct link, %s, has not been approved"
+msgstr ""
+
+#: ../includes/class-emails.php:204
+#, php-format
+msgid "Hi %s,"
+msgstr ""
+
+#: ../includes/class-emails.php:209
+#, php-format
+msgid "Your direct link, %s, has been approved."
+msgstr ""
+
+#: ../includes/class-emails.php:214
+#, php-format
+msgid "Your direct link, %s, has not been approved."
+msgstr ""
+
+#: ../includes/class-frontend.php:91
+msgid "Your direct link(s) have been updated"
+msgstr ""
+
+#: ../includes/class-frontend.php:252
+msgid "Direct Link Domain #"
+msgstr ""
+
+#: ../includes/class-frontend.php:285
+msgid "remove"
+msgstr ""
+
+#: ../includes/class-frontend.php:314
+#, php-format
+msgid "%s has been submitted for approval. Until it has been approved, the old domain will continue to work: %s"
+msgstr ""
+
+#: ../includes/class-frontend.php:316
+#, php-format
+msgid "%s has been submitted for approval."
+msgstr ""
+
+#: ../includes/class-frontend.php:327
+#, php-format
+msgid "%s was not approved. Your old domain will continue to work: %s"
+msgstr ""
+
+#: ../includes/class-frontend.php:328
+msgid "Dismiss this notice"
+msgstr ""
+
+#: ../includes/class-frontend.php:330
+#, php-format
+msgid "%s was not approved."
+msgstr ""
+
+#: ../includes/class-frontend.php:339
+msgid "This domain is inactive. Contact the site owner for more information."
+msgstr ""
+
+#: ../includes/class-list-table.php:39
+msgid "Add New"
+msgstr ""
+
+#: ../includes/class-list-table.php:191
+msgid "All"
+msgstr ""
+
+#: ../includes/class-list-table.php:192 ../includes/edit-direct-link.php:67
+msgid "Active"
+msgstr ""
+
+#: ../includes/class-list-table.php:193 ../includes/edit-direct-link.php:68
+msgid "Inactive"
+msgstr ""
+
+#: ../includes/class-list-table.php:194 ../includes/edit-direct-link.php:69
+msgid "Pending"
+msgstr ""
+
+#: ../includes/class-list-table.php:195 ../includes/edit-direct-link.php:70
+msgid "Rejected"
+msgstr ""
+
+#: ../includes/class-list-table.php:214 ../includes/class-list-table.php:301
+msgid "Visits"
+msgstr ""
+
+#: ../includes/class-list-table.php:215 ../includes/edit-direct-link.php:62
+msgid "Status"
+msgstr ""
+
+#: ../includes/class-list-table.php:216 ../includes/edit-direct-link.php:51
+msgid "Date Added"
+msgstr ""
+
+#: ../includes/class-list-table.php:217
+msgid "Actions"
+msgstr ""
+
+#: ../includes/class-list-table.php:330
+msgid "Edit"
+msgstr ""
+
+#: ../includes/class-list-table.php:333 ../includes/class-list-table.php:377
+msgid "Deactivate"
+msgstr ""
+
+#: ../includes/class-list-table.php:341 ../includes/class-list-table.php:376
+msgid "Activate"
+msgstr ""
+
+#: ../includes/class-list-table.php:345 ../includes/class-list-table.php:378
+msgid "Delete"
+msgstr ""
+
+#: ../includes/class-list-table.php:361
+msgid "No direct links found."
+msgstr ""
+
+#: ../includes/class-notices.php:46
+msgid "Direct Link activated"
+msgstr ""
+
+#: ../includes/class-notices.php:50
+msgid "Direct Link deactivated"
+msgstr ""
+
+#: ../includes/class-notices.php:54
+msgid "Direct Link accepted"
+msgstr ""
+
+#: ../includes/class-notices.php:58
+msgid "Direct Link rejected"
+msgstr ""
+
+#: ../includes/class-notices.php:62
+msgid "Direct Link deleted"
+msgstr ""
+
+#: ../includes/class-notices.php:66
+msgid "Direct Link added successfully"
+msgstr ""
+
+#: ../includes/class-notices.php:70
+msgid "Direct Link wasn&#8217;t added, please try again"
+msgstr ""
+
+#: ../includes/class-notices.php:75
+msgid "Direct Link updated"
+msgstr ""
+
+#: ../includes/class-notices.php:79
+msgid "Direct Link wasn&#8217;t updated, please try again"
+msgstr ""
+
+#: ../includes/class-notices.php:87
+msgid "Direct Link wasn&#8217;t added. Reason: Direct Link is blacklisted."
+msgstr ""
+
+#: ../includes/class-notices.php:92
+msgid "Direct Link wasn&#8217;t added. Reason: Direct Link did not have a domain suffix (.com, .org etc)."
+msgstr ""
+
+#: ../includes/class-notices.php:97
+msgid "Direct Link wasn&#8217;t added. Reason: Base domain already exists and is assigned to another affiliate."
+msgstr ""
+
+#: ../includes/class-notices.php:102
+msgid "Direct Link wasn&#8217;t added. Reason: Domain already exists."
+msgstr ""
+
+#: ../includes/class-notices.php:107
+msgid "Direct Link wasn&#8217;t added. Reason: Domain was entered incorrectly."
+msgstr ""
+
+#: ../includes/class-notices.php:112
+msgid "Direct Link wasn&#8217;t added. Reason: Domain's base domain is blacklisted."
+msgstr ""
+
+#: ../includes/edit-direct-link.php:8
+msgid "Edit Direct Link"
+msgstr ""
+
+#: ../includes/edit-direct-link.php:23
+msgid "The affiliate this direct link belongs to. This cannot be changed."
+msgstr ""
+
+#: ../includes/edit-direct-link.php:29
+msgid "Affiliate ID"
+msgstr ""
+
+#: ../includes/edit-direct-link.php:34
+msgid "The affiliate ID the direct link belongs to. This cannot be changed."
+msgstr ""
+
+#: ../includes/edit-direct-link.php:45
+msgid "The domain of the direct link."
+msgstr ""
+
+#: ../includes/edit-direct-link.php:56
+msgid "The date the direct link was added. This cannot be changed."
+msgstr ""
+
+#: ../includes/edit-direct-link.php:72
+msgid "The status of the direct link."
+msgstr ""
+
+#: ../includes/edit-direct-link.php:83
+msgid "Update Direct Link"
+msgstr ""
+
+#: ../includes/screen-options.php:22
+msgid "Number of direct links per page:"
+msgstr ""
+
+#: ../includes/url-functions.php:244
+msgid "No domain specified."
+msgstr ""
+
+#: ../includes/url-functions.php:268
+msgid "Domain must start with http:// or https://"
+msgstr ""
+
+#: ../includes/url-functions.php:279
+msgid "Direct Link did not have a domain suffix (.com, .org etc)."
+msgstr ""
+
+#: ../includes/url-functions.php:293
+msgid "Domain was entered incorrectly."
+msgstr ""
+
+#: ../includes/url-functions.php:315
+msgid "Domain is blacklisted."
+msgstr ""
+
+#: ../includes/url-functions.php:327
+msgid "Domain's base domain is blacklisted."
+msgstr ""
+
+#: ../includes/url-functions.php:360
+msgid "Base domain already exists in database, assigned to another affiliate."
+msgstr ""
+
+#: ../includes/url-functions.php:375
+msgid "Domain already exists in database."
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:8
+#, php-format
+msgid "Note, your domain%s must be HTTP (not HTTPS) based."
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:8
+#: ../templates/dashboard-tab-direct-links.php:16
+msgid "s"
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:16
+#, php-format
+msgid "Direct links allow you to link directly to this site, from your own website, without an affiliate link. Submit your domain or individual domain path%s below for approval."
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:27
+msgid "An invalid domain was submitted."
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:31
+msgid "You have domains that were not approved:"
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:33
+#, php-format
+msgid "%s"
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:52
+#, php-format
+msgid "Direct Link Domain %s"
+msgstr ""
+
+#: ../templates/dashboard-tab-direct-links.php:75
+#, php-format
+msgid "Direct Link Domain%s"
+msgstr ""

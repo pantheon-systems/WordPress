@@ -1,0 +1,42 @@
+<div class="wpml-wizard-step wpml-summary-step js-wpml-summary-step">
+
+    <h2 class="text-center">{{ strings.title }}</h2>
+
+    {% if ( translation_service ) %}
+        <div class="wpml-translation-service">
+            <h3>{{ strings.translation_service }}:</h3>
+            <div>
+                <img style="vertical-align:middle" src="{{ translation_service.logo_url }}">
+                <span><strong>{{ translation_service.name }}</strong></span>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if( translators|length > 0 ) %}
+        <div class="wpml-local-translators">
+            <h3>{{ strings.local_translators }}:</h3>
+            <ul>
+                {% for user in translators %}
+                    <li>{{ user.display_name }}</li>
+                {% endfor %}
+            </ul>
+            <div class="notice notice-success inline">
+                <p>{{ strings.local_summary }}</p>
+            </div>
+
+            <p class="wpml-margin-top-base">{{ strings.translators_note }}</p>
+            <p>
+                <a class="wpml-external-link"
+                   href="{{ strings.translation_how_to_link }}"
+                   target="_blank">{{ strings.translation_how_to }}</a>
+            </p>
+        </div>
+    {% endif %}
+
+
+    <div class="wpml-wizard-buttons-container">
+        <button class="button button-secondary alignleft  js-go-back">&laquo; {{ strings.go_back }}</button>
+        <button class="button wpml-button button-lg alignright js-done">{{ strings.done }}</button>
+    </div>
+
+</div>

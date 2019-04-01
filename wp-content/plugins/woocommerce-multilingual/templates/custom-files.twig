@@ -1,0 +1,28 @@
+{% if is_variation %}
+    <tr><td>
+{% endif %}
+
+<div class="wcml-downloadable-options">
+
+    <input type="checkbox" name="wcml_file_path_option[{{ product_id }}]" id="wcml_file_path_option" {% if sync_custom %} checked="checked"{% endif %} />
+    <label for="wcml_file_path_option">{{ strings.use_custom }}</label>
+
+    <ul {% if sync_custom is empty %} style="display: none"{% endif %}>
+        <li>
+            <input type="radio" name="wcml_file_path_sync[{{ product_id }}]" value="auto"
+                    {% if sync_custom == 'auto' or sync_custom is empty %} checked="checked"{% endif %} id="wcml_file_path_sync_auto" />
+            <label for="wcml_file_path_sync_auto">{{ strings.use_same }}</label>
+        </li>
+        <li>
+            <input type="radio" name="wcml_file_path_sync[{{ product_id }}]" value="self"
+                    {% if sync_custom == 'self' %} checked="checked"{% endif %} id="wcml_file_path_sync_self" />
+            <label for="wcml_file_path_sync_self">{{ strings.separate }}</label>
+        </li>
+    </ul>
+    <p></p>
+    {{ nonce|raw }}
+</div>
+
+{% if is_variation %}
+    </td></tr>
+{% endif %}

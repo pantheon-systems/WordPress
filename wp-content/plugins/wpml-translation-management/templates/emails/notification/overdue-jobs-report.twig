@@ -1,0 +1,12 @@
+<p>{{ intro_message_1 }}</p>
+<p>{{ intro_message_2 }}</p>
+<ul>
+    {% for job in jobs %}
+        {% set deadline_date = job.get_deadline_date|date("Y-m-d") %}
+        {% set overdue_days = job.get_number_of_days_overdue %}
+        {% set details = job_deadline_details|format(deadline_date, overdue_days) %}
+
+        <li>{{ job.get_title }} ({{ details }})</li>
+    {% endfor %}
+</ul>
+<p>{{ message_to_translation_jobs|raw }}</p>

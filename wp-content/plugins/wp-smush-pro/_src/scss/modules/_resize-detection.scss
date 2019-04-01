@@ -1,0 +1,128 @@
+@import "variables";
+
+@font-face {
+	font-family: 'wpmudev-plugin-icons';
+	src: url('#{$font--path}/wpmudev-plugin-icons.eot');
+	src: url('#{$font--path}/wpmudev-plugin-icons.eot') format('embedded-opentype'),
+	url('#{$font--path}/wpmudev-plugin-icons.ttf') format('truetype'),
+	url('#{$font--path}/wpmudev-plugin-icons.woff') format('woff'),
+	url('#{$font--path}/wpmudev-plugin-icons.woff2') format('woff2'),
+	url('#{$font--path}/wpmudev-plugin-icons.svg') format('svg');
+	font-weight: 400;
+	font-style: normal
+}
+
+.smush-detected-img {
+	border: 5px solid #FECF2F;
+	border-radius: 5px;
+}
+
+.smush-resize-box {
+	width: max-content;
+	display: block;
+	padding: 10px;
+	box-shadow: 0 5px 25px 0 rgba(0, 0, 0, .15);
+	margin: 20px auto;
+	border-radius: 30px;
+	cursor: pointer;
+
+	.smush-front-icons {
+		margin-left: 10px;
+		&:before {
+			font-family: 'wpmudev-plugin-icons', sans-serif !important;
+			speak: none;
+			font-size: 1em;
+			font-style: normal;
+			font-weight: 400;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+			text-rendering: auto;
+			display: inline-block;
+			color: #888;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		&.smush-front-icon-arrows-in {
+			&:before {
+				content: '\2264';
+			}
+		}
+	}
+
+	.smush-tag {
+		display: inline-block;
+		background-color: #fecf2f;
+		color: #333;
+		border-radius: 15px;
+		min-width: 39px;
+		height: 26px;
+		font-size: 10px;
+		line-height: 26px;
+		text-align: center;
+		font-weight: 500;
+		padding: 0 10px;
+
+		&.smush-tag-success {
+			background-color: #1abc9c;
+			color: #fff;
+			margin-left: 10px;
+		}
+	}
+
+	&.smush-tooltip {
+		position: relative;
+
+		&:before,
+		&:after {
+			content: "";
+			opacity: 0;
+			backface-visibility: hidden;
+			pointer-events: none;
+			position: absolute;
+			z-index: 1;
+			transition: margin .2s, opacity .2s;
+		}
+
+		&:before {
+			border: 5px solid transparent;
+			bottom: 100%;
+			left: 50%;
+			border-top-color: #000000;
+			transform: translateX(-50%);
+		}
+
+		&:after {
+			content: attr(data-tooltip);
+			min-width: 40px;
+			padding: 8px 12px;
+			border-radius: 4px;
+			background: #000000;
+			box-sizing: border-box;
+			color: #FFFFFF;
+			font: 400 12px/18px "Roboto", Arial, sans-serif;
+			text-transform: none;
+			text-align: center;
+			white-space: nowrap;
+			bottom: 100%;
+			left: 50%;
+			margin: 0 0 10px;
+			transform: translateX(-50%);
+		}
+
+		&:hover {
+			&:before,
+			&:after {
+				opacity: 1;
+			}
+		}
+
+		&.smush-tooltip-constrained {
+			&:after {
+				min-width: 240px;
+				white-space: normal;
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+/* === Plugins Upgrader === */
+
+.yit-plugin-changelog-wrapper {
+    display: none;
+}
+
+.yit-plugin-changelog-title {
+    text-transform: uppercase;
+}
+
+.yit-plugin-changelog {
+    height     : calc(100% - 15px);
+    width      : calc(100% - 15px);
+    overflow-x : hidden;
+    overflow-y : auto;
+    z-index    : 999;
+    background: #fcfcfc;
+}
+
+.yith-updating:before{
+    animation: rotation 2s infinite linear;
+}

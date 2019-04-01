@@ -1,0 +1,35 @@
+// Use bootstrap mixin for transition
+.transition-all() {
+  .transition('all 0.3s ease-in-out');
+}
+
+// Condition select if @color is a color
+// This mixin will do nothing if @color is not a color (like false or etc)
+.if_color (@color, @property, @value) when (iscolor(@color)) {
+  @{property}: @value !important;
+}
+
+//Content
+.vc_grid {
+  &.vc_row {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.vc-row[data-vc-full-width] {
+  .vc_grid.vc_row {
+    overflow: hidden;
+  }
+}
+
+@import "vc_grid_gap.less";
+@import "../../params/vc_grid_item/vc_grid_item.less";
+@import "vc_grid_style.less";
+@import "vc_grid_loading.less";
+// Import all other extensions
+@import "vc_grid_filter.less";
+@import "vc_grid_carousel.less";
+

@@ -1,0 +1,22 @@
+<h1 id="icl20-migration">{{ title }}</h1><p>{{ message }}</p>
+<table class="widefat wpml-support-info striped">
+	<tbody>
+	{% for label,value in data %}
+		<tr>
+			<th style="vertical-align: top">
+				{{ label }}
+			</th>
+			<td style="vertical-align: top">
+				{{ value }}
+			</td>
+		</tr>
+	{% endfor %}
+	{% for action,button_data in buttons %}
+		<tr>
+			<th colspan="2" style="vertical-align: top">
+				<a href="{{ button_data.url }}" class="button-{{ button_data.type }}">{{ button_data.label }}</a>
+			</th>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>

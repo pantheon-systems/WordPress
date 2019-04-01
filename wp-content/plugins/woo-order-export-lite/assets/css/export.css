@@ -1,0 +1,923 @@
+#fields, #unselected_fields {
+    height: 800px;
+    /*overflow: scroll;*/
+    padding: 20px;
+    border-color: rgb(187, 180, 180);
+    border-style: solid;
+    border-width: 1px;
+    padding-top: 0px;
+
+}
+.fields_control_style input,select{
+    margin: 3px;
+    width: 80%;
+}
+
+.tablenav.top {
+    margin-bottom: 10px;
+}
+
+.tablenav.top select {
+    margin: 0 6px 0 0;
+    width: 100%;
+    height: 32px;
+}
+
+.tablenav.top #doaction {
+    margin: 0 6px 0 0;
+    height: 32px;
+}
+
+.fields_control_style {
+    padding: 10px;
+    border-color: rgb(187, 180, 180);
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+.fields_control_style .div_meta{
+    float: left;
+    width: 50%;
+    padding: 2px;
+}
+.fields_control_style .div_custom{
+    padding: 2px;
+    float: left;
+    width: 45%;
+    border-left: dotted 1px;
+}
+.fields_control_style label {
+    display: inline-block;
+    padding: 5px;
+    min-width: 100px;
+
+}
+.fields_control_style span {
+    display:block;
+    width:100px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+#fields_control {
+    padding: 10px;
+    /*width: 530px;*/
+    border-color: rgb(187, 180, 180);
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+}
+#fields_control label {
+    display: inline-block;
+    padding: 5px;
+    min-width: 100px;
+
+}
+#fields_control span {
+    display:block;
+    width:100px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 5px;
+}
+#fields_control .div1 {
+    width: 60%;
+    float:left;
+}
+#fields_control .div2 {
+    width: 40%;
+    float:left;
+}
+#fields_control .div_meta label {
+    display: inline-block;
+    padding: 0px;
+    min-width: 100px;
+}
+#order_fields {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    min-height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 630px;
+}
+#output_preview {border-color:green; border-style: dashed;    border-width: 1px; display:none; width:90% }
+.spit-settings-cols {width:20px}
+
+/*.mapping_row{
+    display:table-row;
+    border-spacing: 5px 20px;
+    border-top:thin solid black;
+    -moz-border-radius:5px 5px 5px 5px;
+    -webkit-border-radius:5px 5px 5px 5px;
+    -khtml-border-radius:5px;
+}*/
+.mapping_header{
+    display:table-row;
+    font-weight:bold;
+}
+.mapping_col_1{
+    display:table-cell;
+    width:50px;
+    padding: 3px;
+}
+.mapping_col_2{
+    display:table-cell;
+    min-width:150px;
+}
+.mapping_col_3{
+    display:table-cell;
+    padding: 3px;
+}
+.mapping_fieldname {
+    width:100%;
+    font-weight: normal;
+}
+
+.select2-search__field:focus
+{
+    border-color: rgba(30,140,190,0) !important;
+    border:none;
+    -webkit-box-shadow: 0 0 2px rgba(30,140,190,0) !important;
+    box-shadow: 0 0 2px rgba(30,140,190,0) !important;
+}
+
+.select2-search__field{
+    border-color: rgba(30,140,190,0) !important;
+    border:none;
+    -webkit-box-shadow: 0 0 2px rgba(30,140,190,0) !important;
+    box-shadow: 0 0 2px rgba(30,140,190,0) !important;
+}
+
+input.date{
+    width: 25%;
+}
+
+.mapping_row {
+    background-color: #E0E0E0;
+    /*padding: 7px;*/
+    border: 1px #969696 solid;
+}
+
+#sort_products,#sort_coupons{
+    list-style-type: none;
+}
+
+.btn-edit{
+    padding: 2px 3px!important;
+}
+.btn-trash{
+    padding: 2px 3px !important;
+}
+
+
+.padding-10{
+    padding: 10px;
+}
+
+.run-at{
+    width: 180px;
+    float: left;
+}
+.weekday label {
+    width: 10px;
+    float: left;
+    margin: 0px 15px;
+    font-weight: bold;
+}
+.weekday {
+    float: left;
+}
+
+.wc-oe-header{
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.wc_oe-select-interval{
+    width: 150px;
+}
+.wc_oe-select-weekday {
+    width: 80px;
+}
+#d-shedule-3 input[type="submit"] {
+    margin: 3px;
+}
+
+
+.clearfix:before,
+.clearfix:after,
+.wc_oe-row:after{
+    content:"";
+    display:table;
+}
+.clearfix:after,
+.wc_oe-row:after{
+    clear:both;
+}
+.clearfix,
+.wc_oe-row:after{
+    zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.wc-oe-schedule-type{
+    float: left;
+}
+#custom_interval{
+    display: none;
+}
+
+#schedule-1{
+    margin-top: 8px;
+}
+#schedule-2,
+#schedule-3,
+#schedule-4 {
+    margin-top: 8px;
+}
+.ftp-settings label{
+    display: block;
+}
+.ftp-settings .wc_oe-inline{
+    width:80px;
+    display: inline;
+}
+.tr-pad{
+    vertical-align: top;
+}
+#d-schedule-2{
+    padding-bottom: 10px;
+}
+.padding-bottom-10 {
+    padding-bottom: 10px;
+}
+.width-100{
+    width: 100%;
+}
+.width-5{
+    width: 5%;
+}
+.width-15{
+    width: 15%;
+}
+.set-estination{
+    display: none;
+}
+
+.wc_oe-row {
+    margin: 7px;
+}
+.col-50pr{
+    float: left;
+    width: 50%;
+}
+.col-100pr{
+    float: left;
+    width: 100%;
+}
+
+.all-input-100pr input[type="text"]{
+    width: 100%;
+}
+.hide-destination{
+    text-align: center;
+    width: 100%;
+}
+
+.xml-title{
+    display: inline-block;
+    width: 125px;
+}
+
+.my-block{
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #ccc;
+    padding: 10px 5px 10px 10px;
+}
+
+.my-test-button{
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-radius: 3px !important;
+    border-color: #ccc !important;
+    margin-left: 0px !important;
+}
+
+.my-icon-triangle{
+    vertical-align: middle;
+    display: inline-block;
+}
+.my-hide-next{
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.my-manage-li{
+    display: inline-block;
+    width: 47%;
+}
+
+.my-manage-li:nth-child(2n){
+    margin-left: 10px;
+    float: right;
+}
+#my-quick-export-btn{
+    display: inline-block !important;
+    margin-left: 10px !important;
+}
+
+#add_attributes,#add_taxonomies,#add_shipping_locations,#add_billing_locations,#add_custom_fields,#add_product_custom_fields,#add_item_names,#add_item_metadata{
+    font-size: large;
+}
+
+.select2-selection-single{
+    margin-bottom: 5px;
+}
+
+#select_attributes,#select_taxonomies,#text_shipping_locations,#text_billing_locations,#select_custom_fields,#select_product_custom_fields,#select_itemmeta,#text_item_names,#text_item_metadata{
+    width: 120px;
+}
+.dashicons{
+    margin-top: 3px;
+}
+
+#progress_div{
+    z-index: 10001;
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    text-align: center;
+}
+
+#progress_div .title-download {
+    display: none;
+    background-color: white;
+    padding: 28px;
+    font-weight: 400;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid lightgrey;
+}
+
+#progressBar {
+
+    width: 400px;
+    background: #292929;
+    border: 1px solid #111;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 5px #333;
+
+}
+
+#progressBar div {
+    height: 100%;
+    color: #fff;
+    text-align: right;
+    font-size: 12px;
+    line-height: 22px;
+    text-align: right;
+    background-color: #1a82f7;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0099FF), to(#1a82f7));
+    background: -webkit-linear-gradient(top, #0099FF, #1a82f7);
+    background: -moz-linear-gradient(top, #0099FF, #1a82f7);
+    background: -ms-linear-gradient(top, #0099FF, #1a82f7);
+    background: -o-linear-gradient(top, #0099FF, #1a82f7);
+}
+
+#background.loading{
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #F1F1F1;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=55);
+    -moz-opacity: 0.55;
+    -khtml-opacity: 0.55;
+    opacity: 0.55;
+}
+
+.email_body_textarea
+{
+    height: 451px;
+    width: 100%;
+}
+.select_compare
+{
+    width: 60px;
+    margin-top: 0px;
+    margin-right: 6px;
+}
+
+#custom_meta_products_mode input, #custom_meta_coupons_mode input  {
+    width: auto;
+}
+
+#date_format_block, #time_format_block {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+}
+
+#custom_date_format_block input, #custom_time_format_block input {
+    width: 70%;
+    margin-left: 41px;
+}
+
+#date_format_block select, #time_format_block select {
+    width: 70%;
+}
+
+.woe-tab {
+  border: 1px solid #ccc;
+  border-top-width: 0;
+  background: #f1f1f1;
+  padding: 30px;
+}
+.woe-tab .form-group label input {
+  display: inline-block;
+  margin-top: -3px;
+}
+.woe-separator {
+  height: 1px;
+  border-top: 1px solid #ddd;
+  margin: 2em auto;
+  width: 100%;
+  clear: both;
+}
+
+#woe-admin .woe-tab {
+    margin-right: 14.16667rem;
+    border: none;
+    border-top-width: 0;
+    background: transparent;
+    padding: 0 0 3.33333rem 0;
+}
+
+#woe-admin .woe-box-main {
+    background-color: #fff;
+    padding: 1.66667rem 1.66667rem 0 1.66667rem;
+}
+
+#woe-admin .woe-input-simple textarea {
+    width: 100%;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #c7dff3;
+    background-color: #c7dff3;
+    padding: 0.41667rem 0.66667rem;
+    transition: border-color 100ms, background-color 250ms;
+}
+#woe-admin .woe-input-simple textarea:focus {
+    background-color: #003553;
+    color: #fff;
+}
+#woe-admin .tools-textarea {
+    width: 66.66667%;
+}
+#woe-admin .woe-input-simple input, #woe-admin .woe-select input, #woe-admin .woe-input-simple textarea, #woe-admin .woe-select textarea, .woe-calendar-wrapper .woe-input-simple input, .woe-calendar-wrapper .woe-select input, .woe-calendar-wrapper .woe-input-simple textarea, .woe-calendar-wrapper .woe-select textarea, #woe-admin .woe-checkbox label, #woe-admin .woe-radiobox label, #woe-admin .woe-switch label, #woe-admin .woe-select.woe-select-info-label .woe-label-big label, .woe-calendar-wrapper .woe-select.woe-select-info-label #woe-admin .woe-label-big label, .woe-calendar-wrapper .woe-checkbox label, .woe-calendar-wrapper .woe-radiobox label, .woe-calendar-wrapper .woe-switch label, .woe-calendar-wrapper .woe-select.woe-select-info-label .woe-label-big label, #woe-admin .woe-checkbutton input + label, .woe-calendar-wrapper .woe-checkbutton input + label, #woe-admin .col-time, .woe-calendar-wrapper .col-time, #woe-admin .woe-box-title, .woe-calendar-wrapper .woe-box-title, .select2-container.select2-container-woe .select2-selection-single, .select2-container.select2-container-woe .select2-selection-multiple {
+  font-family: "Open sans", serif;
+  font-size: 0.83333rem;
+  line-height: 1.41667rem;
+  line-height: 1.41667rem; }
+  @media only screen and (min-width: 768px) {
+    #woe-admin .woe-input-simple input, #woe-admin .woe-select input, #woe-admin .woe-input-simple textarea, #woe-admin .woe-select textarea, .woe-calendar-wrapper .woe-input-simple input, .woe-calendar-wrapper .woe-select input, .woe-calendar-wrapper .woe-input-simple textarea, .woe-calendar-wrapper .woe-select textarea, #woe-admin .woe-checkbox label, #woe-admin .woe-radiobox label, #woe-admin .woe-switch label, #woe-admin .woe-select.woe-select-info-label .woe-label-big label, .woe-calendar-wrapper .woe-select.woe-select-info-label #woe-admin .woe-label-big label, .woe-calendar-wrapper .woe-checkbox label, .woe-calendar-wrapper .woe-radiobox label, .woe-calendar-wrapper .woe-switch label, .woe-calendar-wrapper .woe-select.woe-select-info-label .woe-label-big label, #woe-admin .woe-checkbutton input + label, .woe-calendar-wrapper .woe-checkbutton input + label, #woe-admin .col-time, .woe-calendar-wrapper .col-time, #woe-admin .woe-box-title, .woe-calendar-wrapper .woe-box-title, .select2-container.select2-container-woe .select2-selection-single, .select2-container.select2-container-woe .select2-selection-multiple {
+      font-size: 1rem; } }
+
+#woe-admin .woe-input-simple label, #woe-admin .woe-select label, .woe-calendar-wrapper .woe-input-simple label, .woe-calendar-wrapper .woe-select label, #woe-admin .woe-fake-label, .woe-calendar-wrapper .woe-fake-label, #woe-admin .woe-btn-big, #woe-admin p.submit, #woe-admin .woe-btn-big input, #woe-admin p.submit input, #woe-admin .woe-btn-big button, #woe-admin p.submit button, .woe-calendar-wrapper .woe-btn-big, .woe-calendar-wrapper p.submit, .woe-calendar-wrapper .woe-btn-big input, .woe-calendar-wrapper p.submit input, .woe-calendar-wrapper .woe-btn-big button, .woe-calendar-wrapper p.submit button, #woe-admin .woe-box-maininfo p, .woe-calendar-wrapper .woe-box-maininfo p, #woe-admin .woe-box-title span, .woe-calendar-wrapper .woe-box-title span, #woe-admin .woe-box-info .woe-box-info-content, .woe-calendar-wrapper .woe-box-info .woe-box-info-content, #woe-admin .woe-box-info .woe-box-info-content h5, .woe-calendar-wrapper .woe-box-info .woe-box-info-content h5, #woe-admin .woe-message, .woe-calendar-wrapper .woe-message, .select2-container.select2-container-woe .select2-dropdown, .select2-container.select2-container-woe .select2-search-dropdown .select2-search__field {
+  font-family: "Open sans", serif;
+  font-size: 0.75rem;
+  font-weight: normal;
+  line-height: 1.16667rem; }
+
+#woe-admin .woe-input-simple p, #woe-admin .woe-checkbox p, #woe-admin .woe-radiobox p, #woe-admin .woe-switch p, #woe-admin .woe-select p, .woe-calendar-wrapper .woe-input-simple p, .woe-calendar-wrapper .woe-checkbox p, .woe-calendar-wrapper .woe-radiobox p, .woe-calendar-wrapper .woe-switch p, .woe-calendar-wrapper .woe-select p, #woe-admin .woe-btn-medium, #woe-admin .nav-tab-wrapper .nav-tab,
+#woe-admin h2.nav-tab-wrapper .nav-tab, .woe-calendar-wrapper .nav-tab-wrapper #woe-admin .nav-tab, #woe-admin .woe-admin-nav a, .woe-calendar-wrapper .woe-admin-nav #woe-admin a, #woe-admin .woe-btn-medium input, #woe-admin .nav-tab-wrapper .nav-tab input, .woe-calendar-wrapper .nav-tab-wrapper #woe-admin .nav-tab input, #woe-admin .woe-admin-nav a input, .woe-calendar-wrapper .woe-admin-nav #woe-admin a input, #woe-admin .woe-btn-medium button, #woe-admin .nav-tab-wrapper .nav-tab button, .woe-calendar-wrapper .nav-tab-wrapper #woe-admin .nav-tab button, #woe-admin .woe-admin-nav a button, .woe-calendar-wrapper .woe-admin-nav #woe-admin a button, .woe-calendar-wrapper .woe-btn-medium, .woe-calendar-wrapper .nav-tab-wrapper .nav-tab,
+.woe-calendar-wrapper h2.nav-tab-wrapper .nav-tab, .woe-calendar-wrapper .woe-admin-nav a, .woe-calendar-wrapper .woe-btn-medium input, .woe-calendar-wrapper .nav-tab-wrapper .nav-tab input, .woe-calendar-wrapper .woe-admin-nav a input, .woe-calendar-wrapper .woe-btn-medium button, .woe-calendar-wrapper .nav-tab-wrapper .nav-tab button, .woe-calendar-wrapper .woe-admin-nav a button, #woe-admin .woe-btn-small, .woe-calendar-wrapper .woe-btn-small, #woe-admin .woe-btn-small-round, .woe-calendar-wrapper .woe-btn-small-round, #woe-admin .woe-box-maininfo, .woe-calendar-wrapper .woe-box-maininfo {
+  font-family: "Open sans", serif;
+  font-size: 0.66667rem;
+  line-height: 0.91667rem; }
+
+#woe-admin .woe-box-maininfo p, #woe-admin .woe-box-title span, #woe-admin .woe-box-info .woe-box-info-content, .woe-calendar-wrapper .woe-box-info .woe-box-info-content, #woe-admin .woe-box-info .woe-box-info-content h5, .woe-calendar-wrapper .woe-box-info .woe-box-info-content h5 {
+  color: #444; }
+
+#woe-admin .woe-input-simple p {
+    color: #888;
+    font-weight: 400;
+    padding: 0.41667rem 0.66667rem;
+    margin: 0;
+}
+
+#woe-admin .woe-input-simple {
+    padding-bottom: 15px;
+}
+#woe-admin .woe-input-simple input, #woe-admin .woe-select input, #woe-admin .woe-input-simple textarea, #woe-admin .woe-select textarea {
+  color: #003553; }
+
+#woe-admin .woe-input-simple input:focus, #woe-admin .woe-select input:focus, #woe-admin .woe-input-simple textarea:focus, #woe-admin .woe-select textarea:focus {
+  color: #0C6EB6; }
+
+.woe-btn-tools {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    background-color: #fff;
+    border-color: #ccc;
+    margin-bottom: 10px;
+}
+
+#my-sort select {
+    width: 30%;
+    font-weight: normal;
+}
+#my-sort {
+    font-weight: bold;
+}
+
+#output_preview_total {
+    margin-left: 40px;
+    margin-right: 30px;
+}
+
+.hide {
+    display: none !important;
+}
+
+
+.without-dropdown.select2-dropdown,
+.without-dropdown .select2-search--inline {
+    display: none;
+}
+
+.profiles #bulk_action{
+    width: 70px;
+}
+
+.like-input {
+    width: 120px;
+}
+
+#d-schedule-3 .block,
+#d-schedule-4 .block,
+#d-schedule-5 .block {
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+#d-schedule-3 .block.disabled,
+#d-schedule-4 .block.disabled,
+#d-schedule-5 .block.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+#d-schedule-3 .input-times,
+#d-schedule-4 .input-date-times {
+    width: 100%;
+    min-height: 30px;
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: text;
+    margin: 3px;
+    display: inline-block;
+}
+
+#d-schedule-3 .time,
+#d-schedule-4 .time {
+    background-color: #e4e4e4;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin: 5px;
+    padding: 0 5px;
+}
+
+#d-schedule-3 .btn-delete,
+#d-schedule-4 .btn-delete {
+    color: #999;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+#d-schedule-3 .btn-delete:hover,
+#d-schedule-4 .btn-delete:hover {
+    color: #333;
+}
+
+#d-schedule-4 .date-picker .datetimes-date {
+    max-width: 120px;
+    height: 28px;
+    vertical-align: middle;
+    background: url("../img/calendar.png") 98px 5px no-repeat;
+}
+
+.woe-row-sort-handle {
+    width: 20px;
+    height: 20px;
+    color: black;
+    cursor: move;
+}
+
+#reorder_section {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+#reorder_section #apply_reorder, #reorder_section #cancel_reorder {
+    display: none;
+}
+
+.wp-wrap .column-order {
+    width: 2.2em;
+}
+
+.wp-wrap .pipe {
+    font-size: x-large;
+    vertical-align: middle;
+}
+
+.section_choice {
+    cursor: pointer;
+}
+
+.section_choice.active {
+    font-weight: bold;
+    color: #000;
+}
+
+.section:not(.active) {
+    display: none;
+}
+
+.license_paragraph {
+    margin : 15px 0 15px 0;
+}
+
+#license_help_text {
+    background-color: white;
+    border: 1px #b2b2b2 solid;
+    border-radius: 5px;
+    padding:10px;
+    margin: 15px 0 15px 0;
+}
+
+#my-shedule-days .wc_oe-select-interval {
+    width: 55%;
+}
+
+#my-shedule-days .input-mins-custom-interval {
+    max-width: 100px;
+}
+
+.flat_format_controls div {
+    margin: 10px;
+}
+
+.mapping_row.segment_products {
+    background-color: #c5ffbb;
+}
+
+.mapping_row.segment_coupons {
+    background-color: #c2bdff;
+}
+
+
+
+.segment_choice {
+    cursor: pointer;
+}
+
+.segment_choice.active {
+    font-weight: bold;
+    color: #000;
+}
+
+.settings-segment:not(.active) {
+    display: none;
+}
+
+.segment_fields li {
+    /*padding: 3px;*/
+}
+
+.segment_field {
+    padding: 3px;
+    margin: 3px;
+    cursor: pointer;
+    /*display: inline-block;*/
+    vertical-align: top;
+    overflow: hidden;
+    /*flex-basis: 45%;*/
+}
+
+.segment_field.blink {
+    animation: blinker 3s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+.section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ui-draggable.segment_field .mapping_col_1,
+.ui-draggable.segment_field .mapping_col_3:not(.custom-field-value),
+.mapping_row.segment_field .mapping_row-delete_field,
+.mapping_row.ui-draggabled .mapping_row-delete_custom_field {
+    display: none;
+}
+
+.ui-draggable.segment_field .mapping_col_3.custom-field-value {
+    padding: 0;
+}
+
+.ui-draggable.segment_field .mapping_col_3.custom-field-value .mapping_fieldname {
+    margin: 0 1px;
+    font-size: 12px;
+    padding: 0 3px;
+}
+
+.ui-draggable.segment_field .mapping_col_3.custom-field-value {
+    max-width: 50px;
+}
+
+
+#order_fields #sortable_products,
+#order_fields #sortable_coupons {
+    min-height: 40px;
+    margin-left: 30px;
+}
+
+#order_fields.non_flat_height {
+    height: 750px;
+}
+
+.tab-actions-buttons {
+    margin-top: 10px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.tab-actions-buttons__title {
+    margin-right: 7px;
+}
+
+.tab-actions-forms .segment-form {
+    border-color: rgb(187, 180, 180);
+    border-style: solid;
+    border-width: 1px;
+    /*display: inline-block;*/
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.tab-actions-forms label {
+    display: inline-block;
+    padding: 5px;
+    min-width: 100px;
+
+}
+
+.tab-actions-forms span {
+    display:block;
+    width:100px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.tab-actions-forms .div_meta label {
+    display: inline-block;
+    padding: 0px;
+    min-width: 120px;
+}
+
+.tab-actions-forms .segment-form:not(.active) {
+    display: none;
+}
+
+.tab-actions-forms .segment-form select {
+    margin-left: 1px;
+}
+
+#fields .fields-control-block .display_as {
+    display: none;
+}
+
+#fields .fields-control-block .display_as input[type="text"] {
+    max-width: 50px;
+}
+
+#fields .fields-control-block .display_as.active {
+    display: inline-block;
+}
+
+#fields .fields-control-block .display_as div {
+    display: inline-block;
+}
+
+#fields .fields-control-block .display_as.duplicate_columns_options > div {
+    margin: 0 5px 0 5px;
+}
+
+#fields .fields-control-block .display_as.duplicate_rows_options > div label,
+#fields .fields-control-block .display_as.duplicate_inside_one_cell_options > div label{
+    margin: 0 5px 0 5px;
+}
+
+.fields-control-block {
+    margin-top: 10px;
+}
+
+.fields-control-block .segment-header {
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.fields-control-block .segment-header select {
+    width: auto;
+}
+
+.fields-control-block .display_as .input-delimiter {
+    max-width: 40px;
+}
+
+#manage_fields.summary-products-report .fields-control-block,
+#manage_fields.summary-products-report #order_fields .mapping_row:not(.segment_products),
+#manage_fields.summary-products-report .field-prefix,
+#manage_fields.summary-products-report #unselected_fields .subsubsub,
+#manage_fields.summary-products-report #unselected_fields label[for="select_custom_meta_order_items"],
+#manage_fields.summary-products-report #unselected_fields #select_custom_meta_order_items {
+    display: none;
+}
+
+#manage_fields.summary-products-report #unselected_fields .tab-actions-buttons {
+    margin-top: 0;
+}
+
+.mapping_row-delete_field_block .mapping_row-delete_field {
+    color: #000;
+    text-decoration: none;
+}
+
+.mapping_row-delete_field_block .mapping_row-delete_field .dashicons {
+    margin-top: 0;
+}
+
+#order_fields .mapping_row:not(.flat-products-group):not(.flat-coupons-group) {
+    position: relative;
+    padding-right: 35px;
+}
+
+#order_fields .mapping_row  .mapping_row-delete_field_block {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.pdf_two_col_block {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+}
+
+.pdf_two_col_block input[type=number]{
+    width: 40%;
+}
+
+#unselected_fields_list {
+    overflow-y: scroll;
+    height: 700px;
+}

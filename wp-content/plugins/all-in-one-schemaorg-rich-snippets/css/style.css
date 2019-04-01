@@ -1,0 +1,132 @@
+/* Snippet Box Architecture */
+#snippet-box {
+	background: #F5F5F5;
+    border: 1px solid #ACACAC;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 0;
+    margin: 0 0 15px 0;
+    width: 100%;
+    max-width: 600px;
+    display: block;
+}
+.snippet-title {
+	display: block;
+	position: relative;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: bold;
+	background: #E4E4E4;
+	border-bottom: 1px solid #ACACAC;
+	clear: both;
+	padding: 0.5em 1em;
+	width: 100%;
+}
+.snippet-image {
+    min-height: 190px;
+    width: 200px;
+    display: inline-block;
+    vertical-align: top;
+}
+.snippet-image img {
+	margin: 10px auto;
+	display: block;
+}
+.aio-info {
+    width: calc(100% - 200px);
+    display: inline-block;
+    vertical-align: top;
+}
+.snippet-label-img {
+    width: 40%;
+    display: inline-block;
+    text-align: right;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0.3em 0.5em;
+    vertical-align: top;
+}
+.snippet-data-img {
+    width: 58%;
+    display: inline-block;
+    padding: 0.3em 0.5em;
+    vertical-align: top;
+}
+.snippet-type-2 .aio-info {
+    width: 100%;
+}
+.snippet-type-2 .snippet-label-img {
+    width: 33%;
+}
+.snippet-type-2 .snippet-data-img {
+    width: 65%;
+}
+.snippet-clear { 
+	clear:both;
+}
+.snippet-markup {
+    width: 100%;
+    display: block;
+}
+.snippet-label {
+    width: 33%;
+    display: inline-block;
+    text-align: right;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0.3em 0.5em;
+}
+.snippet-data {
+    width: 65%;
+    display: inline-block;
+    padding: 0.3em 0.5em;
+}
+/* Ratings */
+.ratings {
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.star-blocks {
+	background: transparent;
+}
+.star-rating-control {
+	margin-top: 0;
+}
+.star-img img {
+	box-shadow: none;
+	margin: -2px 2px;
+	border: none !important;
+	padding: 0 !important;
+}
+.rating-count {
+	font-weight:bold;
+}
+.rating-value {
+	display:none;
+}
+
+/* Unknown CSS */
+#snippet-box iframe {
+	width: 90%;
+	margin: 0 auto;
+	display: block;
+}
+
+/* Responsive Structure */
+@media (max-width: 768px) {
+	.snippet-title {
+		padding: 0.5em 0 0.5em 4%;	
+	}
+	.snippet-image {
+		margin: 0 0 15px 0;
+		width: 100%;
+	}
+	.aio-info {
+		width: 100%;
+		clear: both;	
+	}
+}

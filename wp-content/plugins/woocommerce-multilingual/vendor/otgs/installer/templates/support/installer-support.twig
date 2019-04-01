@@ -1,0 +1,130 @@
+<div class="wrap">
+    <h1>{{ strings.page_title }}</h1>
+
+    <div class="otgs-installer-support-test-connection">
+        <h2>{{ strings.tester.title }} <a class="button check-again">{{ strings.tester.button_label }}</a></h2>
+
+        <ul>
+            {% for endpoint in tester.endpoints %}
+                <li class="endpoint" data-repository="{{ endpoint.repository }}" data-type="{{ endpoint.type }}"><span class="dashicons dashicons-yes status"></span> {{ endpoint.description }}</li>
+            {% endfor %}
+        </ul>
+
+        {{ tester.nonce|raw }}
+
+        <span class="clearfix"></span>
+    </div>
+
+    <hr>
+
+    <div class="otgs-installer-support-test-connection">
+        <h2>{{ strings.requirements.title }}</h2>
+
+        <ul>
+            {% for requirement in requirements %}
+                {% set icon_class = requirement.active ? 'dashicons-yes' : 'dashicons-no-alt' %}
+
+                <li><span class="dashicons {{ icon_class }} status"></span> {{ requirement.name }}</li>
+            {% endfor %}
+        </ul>
+
+        {{ tester.nonce|raw }}
+
+        <span class="clearfix"></span>
+    </div>
+
+    <hr>
+
+    <h2>{{ strings.instances.title }}</h2>
+
+    <table class="wp-list-table widefat striped installer-instances">
+        <thead>
+
+        {% include 'header-instance.twig' %}
+
+        </thead>
+
+        <tbody>
+
+        {% for instance in instances %}
+            <tr {% if instance.is_delegated %} class="active" {% endif %}>
+                <td>
+                    {{ instance.get_bootfile }}
+                </td>
+                <td>
+                    {{ instance.get_version }}
+                </td>
+                <td>
+                    {{ instance.get_high_priority }}
+                </td>
+                <td>
+                    {% if instance.is_delegated %} <span class="dashicons dashicons-yes"></span> {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+        <tfoot>
+
+        {% include 'header-instance.twig' %}
+
+        </tfoot>
+
+    </table>
+
+    <br>
+
+    <hr>
+
+    <h2>{{ strings.log.title }}</h2>
+
+    <table class="wp-list-table widefat fixed striped posts">
+        <thead>
+
+        {% include 'header.twig' %}
+
+        </thead>
+
+        <tbody id="the-list">
+
+        {% for log in log_entries %}
+
+            <tr>
+                <td class="title column-title has-row-actions column-primary">
+                    {{ log.request_url }}
+                </td>
+                <td class="title column-title has-row-actions column-primary">
+                    {{ log.request_arguments }}
+                </td>
+                <td class="title column-title has-row-actions column-primary">
+                    {{ log.response }}
+                </td>
+                <td class="title column-title has-row-actions column-primary">
+                    {{ log.component }}
+                </td>
+                <td class="title column-title has-row-actions column-primary">
+                    {{ log.time }}
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        {% if log_entries is empty %}
+            <tr>
+                <td colspan="5" class="title column-title has-row-actions column-primary">
+                    {{ strings.log.empty_log }}
+                </td>
+            </tr>
+        {% endif %}
+
+
+        </tbody>
+        <tfoot>
+
+        {% include 'header.twig' %}
+
+        </tfoot>
+
+    </table>
+</div>
+

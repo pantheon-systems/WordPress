@@ -1,0 +1,947 @@
+/* Don't Fill Content With Colors
+ * =================================== */
+.vc_tta {
+  &.vc_tta-o-no-fill {
+    .vc_tta-panels {
+      .vc_tta-panel-body {
+        border-color: transparent;
+        background-color: transparent;
+      }
+    }
+    // fix for tabs colors
+    &.vc_tta-tabs {
+      .vc_tta-panels {
+        //.vc_non_responsive must be exactly same as @media below
+        .vc_non_responsive &,
+        .vc_tta-o-non-responsive & {
+          border-color: transparent;
+          background-color: transparent;
+        }
+        @media (min-width: @vc_tta-breakpoint) {
+          border-color: transparent;
+          background-color: transparent;
+        }
+      }
+    }
+    &.vc_tta-tabs .vc_tta-tabs-container {
+      margin: 0;
+    }
+    &.vc_tta-tabs-position-top,
+    &.vc_tta-tabs-position-bottom {
+      .vc_tta-panel-body {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    &.vc_tta-tabs-position-left,
+    &.vc_tta-tabs-position-right {
+      .vc_tta-panel-body {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+/* TTA Spacings
+ * =================================== */
+.vc_tta {
+  .vc_tta-make-spacing(1);
+  .vc_tta-make-spacing(2);
+  .vc_tta-make-spacing(3);
+  .vc_tta-make-spacing(4);
+  .vc_tta-make-spacing(5);
+  .vc_tta-make-spacing(10);
+  .vc_tta-make-spacing(15);
+  .vc_tta-make-spacing(20);
+  .vc_tta-make-spacing(25);
+  .vc_tta-make-spacing(30);
+  .vc_tta-make-spacing(35);
+}
+
+/* TTA Gaps
+ * =================================== */
+.vc_tta {
+  .vc_tta-make-gap(1);
+  .vc_tta-make-gap(2);
+  .vc_tta-make-gap(3);
+  .vc_tta-make-gap(4);
+  .vc_tta-make-gap(5);
+  .vc_tta-make-gap(10);
+  .vc_tta-make-gap(15);
+  .vc_tta-make-gap(20);
+  .vc_tta-make-gap(25);
+  .vc_tta-make-gap(30);
+  .vc_tta-make-gap(35);
+}
+
+/* Positions For Tabs
+ * ========================== */
+.vc_tta-tabs {
+  // Tabs On Top
+  // ------------------------
+  &.vc_tta-tabs-position-top {
+    // For Tabs
+    .vc_tta-tabs-container {
+      overflow: hidden;
+    }
+    .vc_tta-tabs-list {
+      overflow: hidden;
+    }
+    // For Panels
+    .vc_tta-panel-body {
+      &,
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        &::before {
+          right: auto;
+          bottom: auto;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          border-right-width: 0;
+          border-bottom-width: 0;
+        }
+        &::after {
+          left: auto;
+          bottom: auto;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          border-left-width: 0;
+          border-bottom-width: 0;
+        }
+      }
+    }
+    // Fix For Shape Group
+    &.vc_tta-o-shape-group {
+      .vc_tta-tab:not(:first-child):not(:last-child) {
+        > a {
+          border-radius: 0;
+        }
+      }
+      .vc_tta-tab:first-child {
+        &:not(:last-child) {
+          > a {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-tab:last-child {
+        &:not(:first-child) {
+          > a {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+          }
+        }
+      }
+    }
+  }
+  // Tabs On Bottom
+  // ------------------------
+  &.vc_tta-tabs-position-bottom {
+    // For Tabs
+    .vc_tta-tabs-container {
+      overflow: hidden;
+    }
+    .vc_tta-tabs-list {
+      overflow: hidden;
+    }
+    // For Panels
+    .vc_tta-panel-body {
+      &,
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        &::before {
+          right: auto;
+          top: auto;
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+          border-top-left-radius: 0;
+          border-right-width: 0;
+          border-top-width: 0;
+        }
+        &::after {
+          left: auto;
+          top: auto;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 0;
+          border-left-width: 0;
+          border-top-width: 0;
+        }
+      }
+    }
+    // Fix For Shape Group
+    &.vc_tta-o-shape-group {
+      .vc_tta-tab:not(:first-child):not(:last-child) {
+        > a {
+          border-radius: 0;
+        }
+      }
+      .vc_tta-tab:first-child {
+        &:not(:last-child) {
+          > a {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-tab:last-child {
+        &:not(:first-child) {
+          > a {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+          }
+        }
+      }
+    }
+  }
+  // Tabs On Left Side
+  // ------------------------
+  &.vc_tta-tabs-position-left {
+    // For Tabs
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    .vc_tta-tabs-container {
+      overflow: hidden;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      margin-top: 0;
+      margin-left: 0;
+      //.vc_non_responsive must be exactly same as @media below
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+    }
+    .vc_tta-tabs-list {
+      overflow: hidden;
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+    }
+    .vc_tta-tab {
+      display: block;
+    }
+    // For Panels
+    .vc_tta-panels-container {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      min-width: 0; // FF bug fix for flexbox width
+    }
+    .vc_tta-panels {
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+    }
+    .vc_tta-panel-body {
+      &,
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        &::before {
+          right: auto;
+          bottom: auto;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+          border-right-width: 0;
+          border-bottom-width: 0;
+        }
+        &::after {
+          right: auto;
+          top: auto;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-right-width: 0;
+          border-top-width: 0;
+        }
+      }
+    }
+    // Fix For Shape Group
+    &.vc_tta-o-shape-group {
+      .vc_tta-tab:not(:first-child):not(:last-child) {
+        > a {
+          border-radius: 0;
+        }
+      }
+      .vc_tta-tab:first-child {
+        &:not(:last-child) {
+          > a {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-tab:last-child {
+        &:not(:first-child) {
+          > a {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+    }
+  }
+  // Tabs On Right Side
+  // ------------------------
+  &.vc_tta-tabs-position-right {
+    // For Tabs
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    .vc_tta-tabs-container {
+      overflow: hidden;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      margin-top: 0;
+      margin-right: 0;
+      //.vc_non_responsive must be exactly same as @media below
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+    }
+    .vc_tta-tabs-list {
+      overflow: hidden;
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+      @media (min-width: @vc_tta-breakpoint) {
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+      }
+    }
+    .vc_tta-tab {
+      display: block;
+    }
+    // For Panels
+    .vc_tta-panels-container {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      min-width: 0; // FF bug fix for flexbox width
+    }
+    .vc_tta-panels {
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+    }
+    .vc_tta-panel-body {
+      &,
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        &::before {
+          left: auto;
+          bottom: auto;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          border-left-width: 0;
+          border-bottom-width: 0;
+        }
+        &::after {
+          left: auto;
+          top: auto;
+          border-top-right-radius: 0;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-left-width: 0;
+          border-top-width: 0;
+        }
+      }
+    }
+    // Fix For Shape Group
+    &.vc_tta-o-shape-group {
+      .vc_tta-tab:not(:first-child):not(:last-child) {
+        > a {
+          border-radius: 0;
+        }
+      }
+      .vc_tta-tab:first-child {
+        &:not(:last-child) {
+          > a {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+        }
+      }
+      .vc_tta-tab:last-child {
+        &:not(:first-child) {
+          > a {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Positions Fixes For Tabs
+ * ========================== */
+.vc_tta-tabs {
+  // Tabs With Gaps
+  // ------------------------
+  &[class*="vc_tta-gap"],
+  &.vc_tta-o-no-fill {
+    .vc_tta-panel-body {
+      &,
+      .vc_non_responsive &,
+      .vc_tta-o-non-responsive & {
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+    }
+    // fix for tabs positioning
+    .vc_tta-tabs-container,
+    .vc_tta-tabs-list {
+      overflow: initial;
+    }
+  }
+
+  // Tabs Without Gaps
+  // ------------------------
+  &:not([class*="vc_tta-gap"]):not(.vc_tta-o-no-fill) {
+    // Position Top
+    // ---------------------
+    &.vc_tta-tabs-position-top {
+      .vc_tta-tab {
+        > a {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &.vc_active {
+          > a {
+            border-bottom-color: transparent;
+            &::before {
+              display: block;
+              height: auto;
+              top: 100%;
+              right: 100%;
+              border-bottom: 0;
+              border-left: 0;
+              border-right: 0;
+            }
+            &::after {
+              display: block;
+              height: auto;
+              top: 100%;
+              left: 100%;
+              border-bottom: 0;
+              border-left: 0;
+              border-right: 0;
+            }
+          }
+        }
+      }
+      .vc_tta-tabs-container {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      // margin-bottom for TTA Styles
+      &.vc_tta-style-classic,
+      &.vc_tta-style-modern {
+        .vc_tta-tabs-container {
+          margin-bottom: -@vc_tta-border-size;
+        }
+      }
+      &.vc_tta-style-outline {
+        .vc_tta-tabs-container {
+          margin-bottom: -@vc_tta-border-size-outline;
+        }
+
+        &:not(.vc_tta-pageable) {
+          .vc_tta-panels {
+            border-top-color: transparent;
+          }
+        }
+      }
+    }
+
+    // Position Bottom
+    // ---------------------
+    &.vc_tta-tabs-position-bottom {
+      .vc_tta-tab {
+        > a {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+        &.vc_active {
+          > a {
+            border-top-color: transparent;
+            &::before {
+              display: block;
+              height: auto;
+              bottom: 100%;
+              right: 100%;
+              border-top: 0;
+              border-left: 0;
+              border-right: 0;
+            }
+            &::after {
+              display: block;
+              height: auto;
+              bottom: 100%;
+              left: 100%;
+              border-top: 0;
+              border-left: 0;
+              border-right: 0;
+            }
+          }
+        }
+      }
+      .vc_tta-tabs-container {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      // margin-bottom for TTA Styles
+      &.vc_tta-style-classic,
+      &.vc_tta-style-modern {
+        .vc_tta-tabs-container {
+          margin-top: -@vc_tta-border-size;
+        }
+      }
+      &.vc_tta-style-outline {
+        .vc_tta-tabs-container {
+          margin-top: -@vc_tta-border-size-outline;
+        }
+
+        &:not(.vc_tta-pageable) {
+          .vc_tta-panels {
+            border-bottom-color: transparent;
+          }
+        }
+      }
+    }
+    // Position Left
+    // ---------------------
+    &.vc_tta-tabs-position-left {
+      .vc_tta-tab {
+        > a {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        &.vc_active {
+          > a {
+            border-right-color: transparent;
+            &::before {
+              display: block;
+              width: auto;
+              left: 100%;
+              bottom: 100%;
+              border-bottom: 0;
+              border-top: 0;
+              border-right: 0;
+            }
+            &::after {
+              display: block;
+              width: auto;
+              left: 100%;
+              top: 100%;
+              border-bottom: 0;
+              border-top: 0;
+              border-right: 0;
+            }
+          }
+        }
+      }
+      .vc_tta-tabs-container {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      // margin-bottom for TTA Styles
+      &.vc_tta-style-classic,
+      &.vc_tta-style-modern {
+        .vc_tta-tabs-container {
+          margin-right: -@vc_tta-border-size;
+        }
+      }
+      &.vc_tta-style-outline {
+        .vc_tta-tabs-container {
+          margin-right: -@vc_tta-border-size-outline;
+        }
+        .vc_tta-panels {
+          border-left-color: transparent;
+        }
+      }
+      // Fixes For Shapes
+      // Rounded
+      &.vc_tta-shape-rounded,
+      &.vc_tta-shape-round {
+        .vc_tta-panels {
+          margin-top: 0;
+          border-top-left-radius: 0;
+        }
+        .vc_tta-panel-body {
+          &,
+          .vc_non_responsive &,
+          .vc_tta-o-non-responsive & {
+            &::before {
+              display: none;
+            }
+          }
+
+        }
+      }
+    }
+    // Position Right
+    // ---------------------
+    &.vc_tta-tabs-position-right {
+      .vc_tta-tab {
+        > a {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+        &.vc_active {
+          > a {
+            border-left-color: transparent;
+            &::before {
+              display: block;
+              width: auto;
+              right: 100%;
+              bottom: 100%;
+              border-bottom: 0;
+              border-top: 0;
+              border-left: 0;
+            }
+            &::after {
+              display: block;
+              width: auto;
+              right: 100%;
+              top: 100%;
+              border-bottom: 0;
+              border-top: 0;
+              border-left: 0;
+            }
+          }
+        }
+      }
+      .vc_tta-tabs-container {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      // margin-bottom for TTA Styles
+      &.vc_tta-style-classic,
+      &.vc_tta-style-modern {
+        .vc_tta-tabs-container {
+          margin-left: -@vc_tta-border-size;
+        }
+      }
+      &.vc_tta-style-outline {
+        .vc_tta-tabs-container {
+          margin-left: -@vc_tta-border-size-outline;
+        }
+        .vc_tta-panels {
+          border-right-color: transparent;
+        }
+      }
+      // Fixes For Shapes
+      // Rounded
+      &.vc_tta-shape-rounded,
+      &.vc_tta-shape-round {
+        .vc_tta-panels {
+          margin-top: 0;
+          border-top-right-radius: 0;
+        }
+        .vc_tta-panel-body {
+          &,
+          .vc_non_responsive &,
+          .vc_tta-o-non-responsive & {
+            &::before {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Sizes For Tabs
+ * ========================== */
+.vc_tta-tabs {
+  // Tabs On Left and Right Side (Tours Sizes)
+  // ------------------------
+  &.vc_tta-tabs-position-left,
+  &.vc_tta-tabs-position-right {
+    // Tabs Size XS
+    &.vc_tta-controls-size-xs {
+      .vc_tta-tabs-container {
+        -webkit-flex-basis: @vc_tta-controls-size-xs;
+        -ms-flex-preferred-size: @vc_tta-controls-size-xs;
+        flex-basis: @vc_tta-controls-size-xs;
+      }
+    }
+    // Tabs Size SM
+    &.vc_tta-controls-size-sm {
+      .vc_tta-tabs-container {
+        flex-basis: @vc_tta-controls-size-sm;
+      }
+    }
+    // Tabs Size MD
+    &.vc_tta-controls-size-md {
+      .vc_tta-tabs-container {
+        flex-basis: @vc_tta-controls-size-md;
+      }
+    }
+    // Tabs Size LG
+    &.vc_tta-controls-size-lg {
+      .vc_tta-tabs-container {
+        flex-basis: @vc_tta-controls-size-lg;
+      }
+    }
+    // Tabs Size XL
+    &.vc_tta-controls-size-xl {
+      .vc_tta-tabs-container {
+        flex-basis: @vc_tta-controls-size-xl;
+      }
+    }
+  }
+}
+
+/* Controls Alignments
+ * =================================== */
+.vc_tta {
+  // Tabs Align Left
+  // ------------------------
+  &.vc_tta-controls-align-left {
+    .vc_tta-tabs-container,
+    .vc_tta-panel-heading {
+      text-align: left;
+    }
+  }
+  // Tabs Align right
+  // ------------------------
+  &.vc_tta-controls-align-right {
+    .vc_tta-tabs-container,
+    .vc_tta-panel-heading {
+      text-align: right;
+    }
+  }
+  // Tabs Align center
+  // ------------------------
+  &.vc_tta-controls-align-center {
+    .vc_tta-tabs-container,
+    .vc_tta-panel-heading {
+      text-align: center;
+    }
+  }
+}
+
+/* Controls Alignments Fixes
+ * ========================== */
+// Tabs Align Left
+// ------------------------
+.vc_tta-controls-align-left {
+  &.vc_tta-tabs {
+    // Tabs Position From Top
+    &.vc_tta-tabs-position-top {
+      .vc_tta-tabs-container {
+        margin-left: 0;
+      }
+      .vc_tta-panel-body {
+        &,
+        .vc_non_responsive &,
+        .vc_tta-o-non-responsive & {
+          &::before {
+            display: none;
+          }
+        }
+      }
+      // Tabs Without Gaps
+      &:not([class*="vc_tta-gap"]):not(.vc_tta-o-no-fill) {
+        .vc_tta-panels {
+          border-top-left-radius: 0;
+        }
+      }
+    }
+    // Tabs Position From Bottom
+    &.vc_tta-tabs-position-bottom {
+      .vc_tta-tabs-container {
+        margin-left: 0;
+      }
+      .vc_tta-panel-body {
+        &,
+        .vc_non_responsive &,
+        .vc_tta-o-non-responsive & {
+          &::before {
+            display: none;
+          }
+        }
+      }
+      // Tabs Without Gaps
+      &:not([class*="vc_tta-gap"]):not(.vc_tta-o-no-fill) {
+        .vc_tta-panels {
+          border-bottom-left-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+// Tabs Align right
+// ------------------------
+.vc_tta-controls-align-right {
+  &.vc_tta-tabs {
+    // Tabs Position From Top
+    &.vc_tta-tabs-position-top {
+      .vc_tta-tabs-container {
+        margin-right: 0;
+      }
+      .vc_tta-panel-body {
+        &::after {
+          display: none;
+        }
+      }
+      // Tabs Without Gaps
+      &:not([class*="vc_tta-gap"]):not(.vc_tta-o-no-fill) {
+        .vc_tta-panels {
+          border-top-right-radius: 0;
+        }
+      }
+    }
+    // Tabs Position From Bottom
+    &.vc_tta-tabs-position-bottom {
+      .vc_tta-tabs-container {
+        margin-right: 0;
+      }
+      .vc_tta-panel-body {
+        &::after {
+          display: none;
+        }
+      }
+      // Tabs Without Gaps
+      &:not([class*="vc_tta-gap"]):not(.vc_tta-o-no-fill) {
+        .vc_tta-panels {
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+// Tabs Align center
+// ------------------------
+.vc_tta-controls-align-center {
+
+}
+
+// Pagination
+// ------------------------
+.vc_tta-tabs {
+  &.vc_tta-has-pagination {
+    &:not(.vc_tta-tabs-position-bottom) {
+      padding-bottom: @vc_tta-pagination-gap * 2;
+    }
+    .vc_pagination {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: @vc_tta-pagination-gap;
+      margin-bottom: @vc_tta-pagination-gap;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+    &.vc_tta-tabs-position-bottom {
+      padding-top: @vc_tta-pagination-gap * 2;
+      .vc_pagination {
+        top: auto;
+        bottom: 100%;
+        -webkit-transform: translateY(50%);
+        -ms-transform: translateY(50%);
+        transform: translateY(50%);
+      }
+    }
+  }
+}

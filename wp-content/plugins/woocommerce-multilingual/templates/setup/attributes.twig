@@ -1,0 +1,23 @@
+<span id="{{ strings.step_id }}">
+<h1>{{ strings.heading|raw }}</h1>
+
+{% if attributes %}
+    <ul class="no-bullets" >
+    {% for attribute in attributes %}
+    <li>
+        <label>
+            <input type="hidden" name="attributes[{{ attribute.name }}]" value="0" />
+            <input type="checkbox" name="attributes[{{ attribute.name }}]" value="1" {% if attribute.translated %}checked="cehcked"{% endif %} />
+            {{ attribute.label }}
+        </label>
+    </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p><i>{{ strings.no_attributes }}</i></p>
+{% endif %}
+
+<p class="wcml-setup-actions step">
+    <a href="{{ continue_url }}" class="button button-large button-primary submit">{{ strings.continue }}</a>
+</p>
+</span>

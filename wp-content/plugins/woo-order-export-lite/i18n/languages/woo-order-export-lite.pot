@@ -1,0 +1,1629 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Advanced Order Export For WooCommerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-05 07:41+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: woo-order-export-lite.php:48
+msgid ""
+"Please, <a href=\"plugins.php\">deactivate</a> Free version of Advanced "
+"Order Export For WooCommerce!"
+msgstr ""
+
+#: view/settings-form.php:42
+msgid "Field format"
+msgstr ""
+
+#: view/settings-form.php:45 view/settings-form.php:481
+#: view/settings-form.php:507
+msgid "-"
+msgstr ""
+
+#: view/settings-form.php:103
+msgid "Filter orders by"
+msgstr ""
+
+#: view/settings-form.php:109 view/settings-form.php:525
+#: classes/core/class-wc-order-export-data-extractor-ui.php:661
+msgid "Order Date"
+msgstr ""
+
+#: view/settings-form.php:116 view/settings-form.php:526
+#: classes/core/class-wc-order-export-data-extractor-ui.php:666
+msgid "Modification Date"
+msgstr ""
+
+#: view/settings-form.php:123
+#: classes/core/class-wc-order-export-data-extractor-ui.php:686
+msgid "Paid Date"
+msgstr ""
+
+#: view/settings-form.php:130
+#: classes/core/class-wc-order-export-data-extractor-ui.php:681
+msgid "Completed Date"
+msgstr ""
+
+#: view/settings-form.php:135
+msgid "This date range should not be saved in the scheduled task"
+msgstr ""
+
+#: view/settings-form.php:138
+msgid "Date range"
+msgstr ""
+
+#: view/settings-form.php:141
+msgid "to"
+msgstr ""
+
+#: view/settings-form.php:146
+msgid "Express export"
+msgstr ""
+
+#: view/settings-form.php:153
+msgid "Summary Report By Products"
+msgstr ""
+
+#: view/settings-form.php:162
+msgid "Export filename"
+msgstr ""
+
+#: view/settings-form.php:173
+msgid "Format"
+msgstr ""
+
+#: view/settings-form.php:186
+msgid "XLS options"
+msgstr ""
+
+#: view/settings-form.php:196
+msgid "Export as .xls (Binary File Format)"
+msgstr ""
+
+#: view/settings-form.php:198
+msgid "Use sheet name"
+msgstr ""
+
+#: view/settings-form.php:204 view/settings-form.php:231
+#: view/settings-form.php:309 view/settings-form.php:328
+msgid "Output column titles as first line"
+msgstr ""
+
+#: view/settings-form.php:208
+msgid "Auto column width"
+msgstr ""
+
+#: view/settings-form.php:212
+msgid "Right-to-Left direction"
+msgstr ""
+
+#: view/settings-form.php:216
+msgid "Force general format for all cells"
+msgstr ""
+
+#: view/settings-form.php:218
+msgid "CSV options"
+msgstr ""
+
+#: view/settings-form.php:227 view/settings-form.php:305
+msgid "Output UTF-8 BOM"
+msgstr ""
+
+#: view/settings-form.php:235
+msgid "Convert line breaks to literals"
+msgstr ""
+
+#: view/settings-form.php:239
+msgid "Item rows start from new line"
+msgstr ""
+
+#: view/settings-form.php:240
+msgid "Enclosure"
+msgstr ""
+
+#: view/settings-form.php:244
+msgid "Field Delimiter"
+msgstr ""
+
+#: view/settings-form.php:248 view/settings-form.php:310
+msgid "Line Break"
+msgstr ""
+
+#: view/settings-form.php:253 view/settings-form.php:315
+msgid "Character encoding"
+msgstr ""
+
+#: view/settings-form.php:259
+msgid "XML options"
+msgstr ""
+
+#: view/settings-form.php:262
+msgid "Please, install/enable PHP XML Extension!"
+msgstr ""
+
+#: view/settings-form.php:265
+msgid "Prepend XML"
+msgstr ""
+
+#: view/settings-form.php:268
+msgid "Root tag"
+msgstr ""
+
+#: view/settings-form.php:271
+msgid "Order tag"
+msgstr ""
+
+#: view/settings-form.php:274
+msgid "Product tag"
+msgstr ""
+
+#: view/settings-form.php:277
+msgid "Coupon tag"
+msgstr ""
+
+#: view/settings-form.php:280
+msgid "Append XML"
+msgstr ""
+
+#: view/settings-form.php:283
+msgid "Self closing tags"
+msgstr ""
+
+#: view/settings-form.php:289
+msgid "JSON options"
+msgstr ""
+
+#: view/settings-form.php:291
+msgid "Start tag"
+msgstr ""
+
+#: view/settings-form.php:294
+msgid "End tag"
+msgstr ""
+
+#: view/settings-form.php:298
+msgid "TSV options"
+msgstr ""
+
+#: view/settings-form.php:322
+msgid "PDF options"
+msgstr ""
+
+#: view/settings-form.php:335
+msgid "repeat at each page"
+msgstr ""
+
+#: view/settings-form.php:339
+msgid "Orientation"
+msgstr ""
+
+#: view/settings-form.php:348
+msgid "Page size"
+msgstr ""
+
+#: view/settings-form.php:357
+msgid "Font size"
+msgstr ""
+
+#: view/settings-form.php:362
+msgid "Page numbers"
+msgstr ""
+
+#: view/settings-form.php:365
+msgid "Left align"
+msgstr ""
+
+#: view/settings-form.php:366
+msgid "Center align"
+msgstr ""
+
+#: view/settings-form.php:367
+msgid "Right align"
+msgstr ""
+
+#: view/settings-form.php:372
+msgid "No page numbers"
+msgstr ""
+
+#: view/settings-form.php:381
+msgid "Page header text"
+msgstr ""
+
+#: view/settings-form.php:385
+msgid "Columns width"
+msgstr ""
+
+#: view/settings-form.php:386 view/settings-form.php:395
+msgid "comma separated list"
+msgstr ""
+
+#: view/settings-form.php:390
+msgid "Page footer text"
+msgstr ""
+
+#: view/settings-form.php:394
+msgid "Columns align"
+msgstr ""
+
+#: view/settings-form.php:400
+msgid "Fit table to page width"
+msgstr ""
+
+#: view/settings-form.php:401
+msgid "Yes"
+msgstr ""
+
+#: view/settings-form.php:402
+msgid "No"
+msgstr ""
+
+#: view/settings-form.php:406
+msgid "Table header text color"
+msgstr ""
+
+#: view/settings-form.php:410
+msgid "Table header background color"
+msgstr ""
+
+#: view/settings-form.php:415
+msgid "Table row text color"
+msgstr ""
+
+#: view/settings-form.php:419
+msgid "Table row background color"
+msgstr ""
+
+#: view/settings-form.php:424
+msgid "Page header text color"
+msgstr ""
+
+#: view/settings-form.php:428
+msgid "Page footer text color"
+msgstr ""
+
+#: view/settings-form.php:444
+msgid "Logo align"
+msgstr ""
+
+#: view/settings-form.php:452
+msgid "Logo height"
+msgstr ""
+
+#: view/settings-form.php:457
+msgid "Logo width"
+msgstr ""
+
+#: view/settings-form.php:457
+msgid "0 - auto scale"
+msgstr ""
+
+#: view/settings-form.php:467
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1149
+msgid "Date"
+msgstr ""
+
+#: view/settings-form.php:485 view/settings-form.php:511
+msgid "custom"
+msgstr ""
+
+#: view/settings-form.php:494
+msgid "Time"
+msgstr ""
+
+#: view/settings-form.php:524
+#: classes/core/class-wc-order-export-data-extractor-ui.php:646
+msgid "Order ID"
+msgstr ""
+
+#: view/settings-form.php:543
+msgid "Descending"
+msgstr ""
+
+#: view/settings-form.php:545
+msgid "Ascending"
+msgstr ""
+
+#: view/settings-form.php:550
+#, php-format
+msgid "Sort orders by %s in %s order"
+msgstr ""
+
+#: view/settings-form.php:556
+msgid "Change order status to"
+msgstr ""
+
+#: view/settings-form.php:561
+msgid "- don't modify -"
+msgstr ""
+
+#: view/settings-form.php:573
+msgid "Misc settings"
+msgstr ""
+
+#: view/settings-form.php:579
+msgid "Format numbers (use WC decimal separator)"
+msgstr ""
+
+#: view/settings-form.php:585
+msgid "Export all order notes"
+msgstr ""
+
+#: view/settings-form.php:591
+msgid "Export refund notes as Customer Note"
+msgstr ""
+
+#: view/settings-form.php:597
+msgid "Strip tags from Product Description/Variation"
+msgstr ""
+
+#: view/settings-form.php:603
+msgid "Cleanup phone (export only digits)"
+msgstr ""
+
+#: view/settings-form.php:609
+msgid "Enable debug output"
+msgstr ""
+
+#: view/settings-form.php:615
+msgid "Custom PHP code to modify output"
+msgstr ""
+
+#: view/settings-form.php:620
+msgid ""
+"Please check permissions for your role. You must have capability "
+"“edit_themes” to use this box."
+msgstr ""
+
+#: view/settings-form.php:624
+msgid "Use only unnamed functions!"
+msgstr ""
+
+#: view/settings-form.php:641
+msgid "Filter by order"
+msgstr ""
+
+#: view/settings-form.php:646
+msgid "Don't export child orders"
+msgstr ""
+
+#: view/settings-form.php:650
+msgid "Export refunds"
+msgstr ""
+
+#: view/settings-form.php:654
+msgid "Mark exported orders"
+msgstr ""
+
+#: view/settings-form.php:658
+msgid "Export unmarked orders only"
+msgstr ""
+
+#: view/settings-form.php:660
+msgid "Order statuses"
+msgstr ""
+
+#: view/settings-form.php:672 view/settings-form.php:936
+msgid "Custom fields"
+msgstr ""
+
+#: view/settings-form.php:715
+msgid ""
+"The filters won't work correctly.<br>Another plugin(or theme) has loaded "
+"outdated Select2.js"
+msgstr ""
+
+#: view/settings-form.php:717
+msgid "Filter by product"
+msgstr ""
+
+#: view/settings-form.php:722
+msgid "Export all products from the order"
+msgstr ""
+
+#: view/settings-form.php:726
+msgid "Skip fully refunded items"
+msgstr ""
+
+#: view/settings-form.php:728
+msgid "Product categories"
+msgstr ""
+
+#: view/settings-form.php:745
+msgid "Vendor/creator"
+msgstr ""
+
+#: view/settings-form.php:760
+msgid "Product"
+msgstr ""
+
+#: view/settings-form.php:774
+msgid "Product taxonomies"
+msgstr ""
+
+#: view/settings-form.php:803
+msgid "Product custom fields"
+msgstr ""
+
+#: view/settings-form.php:837
+msgid "Variable product attributes"
+msgstr ""
+
+#: view/settings-form.php:868
+msgid "Item meta data"
+msgstr ""
+
+#: view/settings-form.php:908
+msgid "Filter by customers"
+msgstr ""
+
+#: view/settings-form.php:912
+msgid "Usernames"
+msgstr ""
+
+#: view/settings-form.php:925
+msgid "User roles"
+msgstr ""
+
+#: view/settings-form.php:976
+msgid "Filter by coupons"
+msgstr ""
+
+#: view/settings-form.php:982
+msgid "Any coupon used"
+msgstr ""
+
+#: view/settings-form.php:985
+#: classes/admin/class-wc-order-export-manage.php:766
+#: classes/core/class-wc-order-export-data-extractor-ui.php:934
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1136
+msgid "Coupons"
+msgstr ""
+
+#: view/settings-form.php:1002
+msgid "Filter by billing"
+msgstr ""
+
+#: view/settings-form.php:1005
+msgid "Billing locations"
+msgstr ""
+
+#: view/settings-form.php:1032
+msgid "Payment methods"
+msgstr ""
+
+#: view/settings-form.php:1048
+msgid "Filter by shipping"
+msgstr ""
+
+#: view/settings-form.php:1051
+msgid "Shipping locations"
+msgstr ""
+
+#: view/settings-form.php:1078
+msgid "Shipping methods"
+msgstr ""
+
+#: view/settings-form.php:1093
+msgid "Filter by item and metadata"
+msgstr ""
+
+#: view/settings-form.php:1096
+msgid "Item names"
+msgstr ""
+
+#: view/settings-form.php:1123
+msgid "Item metadata"
+msgstr ""
+
+#: view/settings-form.php:1160
+msgid "Set up fields to export"
+msgstr ""
+
+#: view/settings-form.php:1176
+msgid "Drag rows to reorder exported fields"
+msgstr ""
+
+#: view/settings-form.php:1182
+msgid "Remove all fields"
+msgstr ""
+
+#: view/settings-form.php:1209
+msgid "Actions"
+msgstr ""
+
+#: view/settings-form.php:1212
+msgid "Add field"
+msgstr ""
+
+#: view/settings-form.php:1215
+msgid "Add static field"
+msgstr ""
+
+#: view/settings-form.php:1221 view/settings-form.php:1342
+msgid "Meta key"
+msgstr ""
+
+#: view/settings-form.php:1232 view/settings-form.php:1292
+#: view/settings-form.php:1351
+msgid "or type meta key here"
+msgstr ""
+
+#: view/settings-form.php:1237 view/settings-form.php:1280
+#: view/settings-form.php:1345
+msgid "Hide unused fields"
+msgstr ""
+
+#: view/settings-form.php:1241 view/settings-form.php:1257
+#: view/settings-form.php:1307 view/settings-form.php:1321
+#: view/settings-form.php:1354 view/settings-form.php:1369
+msgid "Column name"
+msgstr ""
+
+#: view/settings-form.php:1249 view/settings-form.php:1270
+#: view/settings-form.php:1313 view/settings-form.php:1335
+#: view/settings-form.php:1361 view/settings-form.php:1383
+msgid "Confirm"
+msgstr ""
+
+#: view/settings-form.php:1251 view/settings-form.php:1272
+#: view/settings-form.php:1315 view/settings-form.php:1337
+#: view/settings-form.php:1363 view/settings-form.php:1386
+msgid "Cancel"
+msgstr ""
+
+#: view/settings-form.php:1262 view/settings-form.php:1326
+#: view/settings-form.php:1374
+msgid "Value"
+msgstr ""
+
+#: view/settings-form.php:1283
+msgid "Product fields"
+msgstr ""
+
+#: view/settings-form.php:1287
+msgid "Order item fields"
+msgstr ""
+
+#: view/settings-form.php:1294
+msgid "OR"
+msgstr ""
+
+#: view/settings-form.php:1296
+msgid "Taxonomy"
+msgstr ""
+
+#: view/settings-form.php:1414
+#, php-format
+msgid ""
+"If you see this message after page load, user interface won't work correctly!"
+"<br>There is a JS error (<a target=blank href='%s'>read here</a> how to view "
+"it). Probably, it's a conflict with another plugin or active theme."
+msgstr ""
+
+#: view/settings-form.php:1420
+msgid "Preview"
+msgstr ""
+
+#: view/settings-form.php:1421
+msgid "Might be different from actual export!"
+msgstr ""
+
+#: view/settings-form.php:1424 view/settings-form.php:1429
+msgid "Save settings"
+msgstr ""
+
+#: view/settings-form.php:1427
+msgid "Save & Exit"
+msgstr ""
+
+#: view/settings-form.php:1434
+msgid "Export"
+msgstr ""
+
+#: view/settings-form.php:1438
+msgid "Export [w/o progressbar]"
+msgstr ""
+
+#: view/settings-form.php:1439
+msgid "It might not work for huge datasets!"
+msgstr ""
+
+#: view/settings-form.php:1443
+msgid "Save as a profile"
+msgstr ""
+
+#: view/settings-form.php:1448
+msgid "Reset settings"
+msgstr ""
+
+#: view/settings-form.php:1452
+#, php-format
+msgid "Export total: %s orders"
+msgstr ""
+
+#: view/settings-form.php:1454
+msgid "Preview size"
+msgstr ""
+
+#: view/settings-form.php:1461 view/tab/tools.php:86
+msgid "Settings were successfully updated!"
+msgstr ""
+
+#: view/settings-form.php:1466
+msgid "Press 'Esc' to cancel the export"
+msgstr ""
+
+#: view/settings-form.php:1467
+msgid "Click here to download"
+msgstr ""
+
+#: view/main.php:8
+msgid "Settings saved"
+msgstr ""
+
+#: view/main.php:11 view/tab/tools.php:46
+msgid "Export now"
+msgstr ""
+
+#: view/main.php:12 view/tab/tools.php:22
+msgid "Profiles"
+msgstr ""
+
+#: view/main.php:13 view/tab/tools.php:23
+msgid "Status change jobs"
+msgstr ""
+
+#: view/main.php:14 view/tab/tools.php:24
+msgid "Scheduled jobs"
+msgstr ""
+
+#: view/main.php:15
+msgid "Tools"
+msgstr ""
+
+#: view/main.php:16
+msgid "Help"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:88
+msgid "Export Status"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:129
+msgid ""
+"Advanced Order Export For WooCommerce is available <a href=\"admin.php?"
+"page=wc-order-export\">on this page</a>."
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:138
+msgid "Settings"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:139
+msgid "Docs"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:141
+msgid "Support"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:219
+#: classes/class-wc-order-export-admin.php:220
+#: classes/class-wc-order-export-admin.php:224
+#: classes/class-wc-order-export-admin.php:225
+msgid "Export Orders"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:621
+msgid "Copied from \"Export now\""
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:657
+#, php-format
+msgid "Add %s fields"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:659
+msgid "rows"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:660
+msgid "columns"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:661
+msgid "one row"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:664
+msgid "Add"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:665
+msgid "as"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:666
+msgid "Split values by"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:667
+msgid "Fill order columns for"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:668
+msgid "all rows"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:669
+msgid "1st row only"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:671
+msgid "Grouping by product"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:672
+msgid "Grouping by coupon"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:676
+msgid "Set up product fields"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:677
+msgid "Set up coupon fields"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:678
+msgid "products"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:679
+msgid "coupons"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:681
+msgid "Remove all fields?"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:682
+msgid ""
+"This action will reset filters, settings and fields to default state. Are "
+"you sure?"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:724
+msgid "empty column name"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:725
+msgid "empty meta key"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:726
+msgid "select product field or item field or taxonomy"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:728
+msgid "empty value"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:729
+msgid "title is empty"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:730
+msgid "Date From is greater than Date To"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:731
+msgid "Please, set up fields to export"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:732
+#: classes/admin/class-wc-order-export-ajax.php:370
+#: classes/core/class-wc-order-export-engine.php:747
+#: classes/core/class-wc-order-export-engine.php:760
+msgid "Nothing to export. Please, adjust your filters"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:734
+#: classes/core/class-wc-order-export-data-extractor.php:225
+msgid "empty"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:851
+#, php-format
+msgid "Status change job #%s for order #%s. Result: %s"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:920
+#, php-format
+msgid "Export as %s"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:926
+msgid "Mark exported"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:927
+msgid "Unmark exported"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:933
+#, php-format
+msgid "Export as profile '%s'"
+msgstr ""
+
+#: classes/class-wc-order-export-admin.php:1004
+#, php-format
+msgid "%s order marked."
+msgid_plural "%s orders marked."
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/class-wc-order-export-admin.php:1013
+#, php-format
+msgid "%s order unmarked."
+msgid_plural "%s orders unmarked."
+msgstr[0] ""
+msgstr[1] ""
+
+#: view/tab/tools.php:33
+msgid "Export settings"
+msgstr ""
+
+#: view/tab/tools.php:36
+msgid ""
+"Copy these settings and use it to migrate plugin to another WordPress "
+"install."
+msgstr ""
+
+#: view/tab/tools.php:42
+msgid "All"
+msgstr ""
+
+#: view/tab/tools.php:57
+msgid "Just click inside the textarea and copy (Ctrl+C)"
+msgstr ""
+
+#: view/tab/tools.php:67
+msgid "Import settings"
+msgstr ""
+
+#: view/tab/tools.php:70
+msgid ""
+"Paste text into this field to import settings into the current WordPress "
+"install."
+msgstr ""
+
+#: view/tab/tools.php:75
+msgid ""
+"This process will overwrite your settings for \"Advanced Order Export For "
+"WooCommerce\" !"
+msgstr ""
+
+#: view/tab/tools.php:82
+msgid "Import"
+msgstr ""
+
+#: view/tab/tools.php:110
+msgid "Are you sure to continue?"
+msgstr ""
+
+#: view/tab/order-actions.php:5 view/tab/profiles.php:5
+#: view/tab/schedules.php:5
+msgid "Pro version"
+msgstr ""
+
+#: view/tab/order-actions.php:7
+#, php-format
+msgid "Buy %s to get access to Status change jobs"
+msgstr ""
+
+#: view/tab/help.php:6
+msgid "settings"
+msgstr ""
+
+#: view/tab/help.php:8
+msgid "code snippets"
+msgstr ""
+
+#: view/tab/help.php:10
+msgid "this page"
+msgstr ""
+
+#: view/tab/help.php:16
+msgid "Need help? Create ticket in"
+msgstr ""
+
+#: view/tab/help.php:17
+msgid "helpdesk system"
+msgstr ""
+
+#: view/tab/help.php:21
+#, php-format
+msgid ""
+"Don't forget to attach your %s or some screenshots. It will significantly "
+"reduce reply time :)"
+msgstr ""
+
+#: view/tab/help.php:24
+#, php-format
+msgid ""
+"Look at %s for popular plugins or check %s to study how to extend the plugin."
+msgstr ""
+
+#: view/tab/profiles.php:7
+#, php-format
+msgid "Buy %s to get access to profiles"
+msgstr ""
+
+#: view/tab/schedules.php:7
+#, php-format
+msgid "Buy %s to get access to Scheduled jobs"
+msgstr ""
+
+#: classes/formats/abstract-class-woe-formatter-sv.php:103
+#: classes/formats/class-woe-formatter-xls.php:187
+msgid "<td colspan=10><b>No results</b></td>"
+msgstr ""
+
+#: classes/formats/abstract-class-woe-formatter.php:49
+msgid "can not open for output"
+msgstr ""
+
+#: classes/formats/class-woe-formatter-xls.php:116
+#: classes/admin/class-wc-order-export-manage.php:210
+msgid "Orders"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:21
+msgid "Sun"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:22
+msgid "Mon"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:23
+msgid "Tue"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:24
+msgid "Wed"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:25
+msgid "Thu"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:26
+msgid "Fri"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:27
+msgid "Sat"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-manage.php:723
+#: classes/core/class-wc-order-export-data-extractor-ui.php:922
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1135
+msgid "Products"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-ajax.php:33
+msgid "Wrong key for cron url!"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-ajax.php:260
+msgid "Can't create temporary file"
+msgstr ""
+
+#: classes/admin/class-wc-order-export-ajax.php:282
+msgid "Can't find exported file"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:344
+msgid "Item ID"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:349
+msgid "Item #"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:354
+msgid "SKU"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:359
+msgid "Item Name"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:364
+msgid "Product Id"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:369
+msgid "Product Name"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:374
+msgid "Variation Id"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:379
+msgid "Product Variation"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:384
+msgid "Item Seller"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:389
+msgid "Quantity"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:394
+msgid "Quantity (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:399
+msgid "Item Cost"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:404
+msgid "Product Current Price"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:409
+msgid "Order Line (w/o tax)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:414
+msgid "Order Line Tax"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:419
+msgid "Order Line Tax Refunded"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:424
+msgid "Order Line Tax (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:429
+msgid "Order Line Subtotal"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:434
+msgid "Order Line Subtotal Tax"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:439
+msgid "Order Line Total"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:444
+msgid "Order Line Total (include tax)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:449
+msgid "Order Line Total Refunded"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:454
+msgid "Order Line Total (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:459
+msgid "Item Discount Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:464
+msgid "Item Tax Rate"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:469
+msgid "Type"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:474
+msgid "Category"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:479
+msgid "Tags"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:484
+msgid "Width"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:489
+msgid "Length"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:494
+msgid "Height"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:499
+msgid "Weight"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:504
+msgid "Product URL"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:509
+msgid "Download URL"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:514
+msgid "Image URL"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:519
+msgid "Product Shipping Class"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:524
+msgid "Description"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:529
+msgid "Short Description"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:534
+msgid "Full names for categories"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:539
+msgid "Summary Report Total Quantity"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:544
+msgid "Summary Report Total Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:561
+msgid "Coupon Code"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:566
+msgid "Discount Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:571
+msgid "Discount Amount Tax"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:576
+msgid "Discount Amount + Tax"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:581
+msgid "Coupon Description"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:585
+msgid "Coupon Type"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:590
+msgid "Coupon Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:641
+msgid "Line number"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:651
+msgid "Order Number"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:656
+msgid "Order Status"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:671
+msgid "Transaction ID"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:676
+msgid "Currency"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:691
+msgid "Date of first refund"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:696
+msgid "Customer Note"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:701
+msgid "Order Notes"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:711
+msgid "Customer IP address"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:716
+msgid "Customer User ID"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:721
+msgid "Customer Username"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:726
+msgid "User Website"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:731
+msgid "Customer User Email"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:736
+msgid "Customer Role"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:741
+msgid "Customer Total Orders"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:751
+msgid "First Name (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:756
+msgid "Last Name (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:761
+msgid "Full Name (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:766
+msgid "Company (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:771
+msgid "Address 1&2 (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:776
+msgid "Address 1 (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:781
+msgid "Address 2 (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:786
+msgid "City (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:791
+msgid "State Code (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:796
+msgid "City, State, Zip (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:801
+msgid "City, State Zip (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:806
+msgid "State Name (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:811
+msgid "Postcode (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:816
+msgid "Country Code (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:821
+msgid "Country Name (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:826
+msgid "Email (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:831
+msgid "Phone (Billing)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:841
+msgid "First Name (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:846
+msgid "Last Name (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:851
+msgid "Full Name (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:856
+msgid "Company (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:861
+msgid "Address 1&2 (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:866
+msgid "Address 1 (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:871
+msgid "Address 2 (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:876
+msgid "City (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:881
+msgid "State Code (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:886
+msgid "City, State, Zip (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:891
+msgid "City, State Zip (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:896
+msgid "State Name (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:901
+msgid "Postcode (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:906
+msgid "Country Code (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:911
+msgid "Country Name (Shipping)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:945
+msgid "Shipping Method Title"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:950
+msgid "Shipping Method"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:955
+msgid "Payment Method Title"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:960
+msgid "Payment Method"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:965
+msgid "Coupons Used"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:970
+msgid "Cart Discount Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:975
+msgid "Cart Discount Amount Tax"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:980
+msgid "Order Subtotal Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:985
+msgid "Order Subtotal - Cart Discount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:990
+msgid "Order Subtotal Amount Refunded"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:995
+msgid "Order Subtotal Amount (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1000
+msgid "Order Tax Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1010
+msgid "Order Shipping Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1015
+msgid "Order Shipping + Tax Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1020
+msgid "Order Shipping Amount Refunded"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1025
+msgid "Order Shipping Amount (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1030
+msgid "Order Shipping Tax Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1035
+msgid "Order Shipping Tax Refunded"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1040
+msgid "Order Shipping Tax Amount (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1050
+msgid "Order Total Fee"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1055
+msgid "Order Refund Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1060
+msgid "Order Total Amount (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1065
+msgid "Order Total Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1070
+msgid "Order Total Amount without Tax"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1075
+msgid "Order Total Tax Amount"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1080
+msgid "Order Total Tax Amount Refunded"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1085
+msgid "Order Total Tax Amount (- Refund)"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1095
+msgid "Total weight"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1100
+msgid "Total items"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1105
+msgid "Exported items"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1110
+msgid "Total products"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1131
+msgid "Common"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1132
+msgid "User"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1133
+msgid "Billing Address"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1134
+msgid "Shipping Address"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1137
+msgid "Cart"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1138
+msgid "Shipping"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1139
+msgid "Totals"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1140
+msgid "Others"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1146
+msgid "String"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1147
+msgid "Money"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor-ui.php:1148
+msgid "Number"
+msgstr ""
+
+#: classes/core/class-wc-order-export-data-extractor.php:2010
+msgid "[Rest of the World]"
+msgstr ""
+
+#: classes/core/class-wc-order-export-engine.php:19
+#: classes/core/class-wc-order-export-engine.php:63
+msgid "No destination selected"
+msgstr ""
+
+#: classes/core/class-wc-order-export-engine.php:29
+msgid "Wrong format"
+msgstr ""
+
+#: classes/core/class-wc-order-export-engine.php:73
+msgid "Wrong export type"
+msgstr ""
+
+#: classes/core/class-wc-order-export-engine.php:419
+msgid "Don't Panic"
+msgstr ""
+
+#: classes/core/class-wc-order-export-engine.php:420
+#, php-format
+msgid "The code you are trying to save produced a fatal error on line %d:"
+msgstr ""
+
+#: classes/core/class-wc-order-export-engine.php:546
+msgid "Main SQL queries are listed below"
+msgstr ""
+
+#. Name of the plugin
+msgid "Advanced Order Export For WooCommerce"
+msgstr ""
+
+#. Description of the plugin
+msgid "Export orders from WooCommerce with ease (Excel/CSV/XML/JSON supported)"
+msgstr ""
+
+#. Author of the plugin
+msgid "AlgolPlus"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://algolplus.com/"
+msgstr ""

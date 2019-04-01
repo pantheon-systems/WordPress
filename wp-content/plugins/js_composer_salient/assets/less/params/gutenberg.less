@@ -1,0 +1,66 @@
+@gutenberg-modal-overlay: rgba(0, 0, 0, .7);
+@gutenberg-modal-background: #fff;
+@gutenberg-modal-spacing: 20px;
+@gutenberg-close-button-color: rgba(0, 0, 0, .5);
+@gutenberg-close-button-hover-color: rgba(0, 0, 0, .7);
+@gutenberg-close-button-size: 16px;
+@gutenberg-close-button-padding: 5px;
+@gutenberg-close-button-offset: 10px;
+
+.wpb-gutenberg-modal {
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: @gutenberg-modal-overlay;
+  z-index: 10000;
+
+  .wpb-loading-overlay {
+    top: @gutenberg-modal-spacing;
+    left: @gutenberg-modal-spacing;
+    right: @gutenberg-modal-spacing;
+    bottom: @gutenberg-modal-spacing;
+    background: @gutenberg-modal-background;
+    align-items: center;
+    z-index: 1;
+  }
+}
+
+.wpb-gutenberg-modal-inner {
+  background: @gutenberg-modal-background;
+  position: fixed;
+  top: @gutenberg-modal-spacing;
+  left: @gutenberg-modal-spacing;
+  right: @gutenberg-modal-spacing;
+  bottom: @gutenberg-modal-spacing;
+}
+
+.wpb-gutenberg-modal-inner iframe {
+  width: 100%;
+  height: 100%;
+  padding-top: @gutenberg-close-button-size + (@gutenberg-close-button-padding * 2) + @gutenberg-close-button-offset;
+}
+
+button.wpb-gutenberg-modal-close-button {
+  position: absolute;
+  top: @gutenberg-close-button-offset;
+  right: @gutenberg-close-button-offset;
+  color: @gutenberg-close-button-color;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  transition: color .2s ease-in-out;
+  font-size: @gutenberg-close-button-size;
+  padding: @gutenberg-close-button-padding;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: @gutenberg-close-button-hover-color;
+  }
+}

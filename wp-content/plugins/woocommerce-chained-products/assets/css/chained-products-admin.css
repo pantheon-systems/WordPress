@@ -1,0 +1,51 @@
+.chained_products_admin_settings .chained_products_quantity {
+	width: 8% !important;
+	margin: 0 1em;
+}
+.add_remove_chained_products_row {
+	float: left;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	font: normal 28px/1 dashicons;
+	color: #AAA !important;
+}
+
+.chained_products_admin_settings a { cursor: pointer }
+
+span.cp_priced_individually {
+	float: left;
+	margin-right: 2em;
+}
+
+span.cp_priced_individually span {
+	margin-left: 0.5em;
+}
+
+.cp_hide_content {
+	display: none;
+}
+
+.cp_admin_notice {
+	padding: 0.5em;
+}
+
+.cp_admin_notice a {
+	padding: 0.5em 1em;
+	margin: 0 1em;
+}
+
+.cp_admin_notice a:hover {
+	cursor: pointer;
+}
+
+.cp_admin_notice a.cp_btn_primary:hover{
+	background: #64806f;
+}
+
+.cp_admin_notice a.cp_btn_primary {
+	text-decoration: none;
+	color: #FFF;
+	font-weight: bold;
+	background: #84d270d9;
+}

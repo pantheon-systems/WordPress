@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="WPML">
+	<description>WPML Coding Standards</description>
+
+	<config name="testVersion" value="5.2-"/>
+
+    <rule ref="PHPCompatibility" />
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>*.js</exclude-pattern>
+	<exclude-pattern>*.mo</exclude-pattern>
+	<exclude-pattern>*.po</exclude-pattern>
+	<exclude-pattern>*.twig</exclude-pattern>
+	<exclude-pattern>*.css</exclude-pattern>
+	<exclude-pattern>*.scss</exclude-pattern>
+
+
+</ruleset>

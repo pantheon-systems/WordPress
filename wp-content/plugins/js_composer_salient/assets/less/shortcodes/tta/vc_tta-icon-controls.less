@@ -1,0 +1,166 @@
+/* Control Icons For Accordions
+ * ============================= */
+.vc_tta {
+  .vc_tta-controls-icon {
+    display: inline-block;
+    vertical-align: middle;
+    height: @vc_tta-control-icon-size;
+    width: @vc_tta-control-icon-size;
+    position: relative;
+    font-size: inherit;
+    margin: 0;
+    &:before,
+    &:after {
+      -webkit-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+    }
+  }
+  .vc_tta-title-text:not(:empty) {
+    ~ .vc_tta-controls-icon {
+      margin-left: 0;
+    }
+  }
+}
+
+/* Control Icons
+ * ============================= */
+.vc_tta {
+  .vc_tta-controls-icon {
+    // Plus Control Icon
+    &.vc_tta-controls-icon-plus {
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        left: 0;
+        right: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        border-style: solid;
+        border-width: @vc_tta-control-icon-width 0 0 0;
+      }
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        left: 50%;
+        bottom: 0;
+        top: 0;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+        border-style: solid;
+        border-width: 0 0 0 @vc_tta-control-icon-width;
+      }
+    }
+    // Chevron Control Icon
+    &.vc_tta-controls-icon-chevron {
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        left: @vc_tta-control-icon-width;
+        right: @vc_tta-control-icon-width;
+        top: @vc_tta-control-icon-width;
+        bottom: @vc_tta-control-icon-width;
+        border-style: solid;
+        border-width: 0 @vc_tta-control-icon-width @vc_tta-control-icon-width 0;
+        -webkit-transform: rotate(45deg) translate(-25%, -25%);
+        -ms-transform: rotate(45deg) translate(-25%, -25%);
+        transform: rotate(45deg) translate(-25%, -25%);
+      }
+    }
+    // Triangle Control Icon
+    &.vc_tta-controls-icon-triangle {
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border-style: solid;
+        border-width: floor(@vc_tta-control-icon-size / 2);
+        border-bottom-color: transparent !important;
+        border-right-color: transparent !important;
+        border-left-color: transparent !important;
+        -webkit-transform: translateY(25%);
+        -ms-transform: translateY(25%);
+        transform: translateY(25%);
+      }
+    }
+  }
+  // active icon
+  .vc_active {
+    .vc_tta-controls-icon {
+      // Plus Control Icon
+      &.vc_tta-controls-icon-plus {
+        &::after {
+          display: none;
+        }
+      }
+      // Chevron Control Icon
+      &.vc_tta-controls-icon-chevron {
+        &::before {
+          -webkit-transform: rotate(225deg) translate(-25%, -25%);
+          -ms-transform: rotate(225deg) translate(-25%, -25%);
+          transform: rotate(225deg) translate(-25%, -25%);
+        }
+      }
+      // Triangle Control Icon
+      &.vc_tta-controls-icon-triangle {
+        &::before {
+          -webkit-transform: rotate(180deg) translateY(25%);
+          -ms-transform: rotate(180deg) translateY(25%);
+          transform: rotate(180deg) translateY(25%);
+        }
+      }
+    }
+  }
+}
+
+/* Control Icons Positions
+ * ============================= */
+.vc_tta {
+  &.vc_tta-accordion {
+    // Icon From Left
+    .vc_tta-controls-icon-position-left {
+      &.vc_tta-panel-title {
+        > a {
+          padding-left: @vc_tta-panels-padding-horizontal + @vc_tta-icon-spacing + @vc_tta-control-icon-size;
+        }
+      }
+      .vc_tta-controls-icon {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        left: @vc_tta-panels-padding-horizontal;
+      }
+    }
+    // Icon From Right
+    .vc_tta-controls-icon-position-right {
+      &.vc_tta-panel-title {
+        > a {
+          padding-right: @vc_tta-panels-padding-horizontal * 1.5 + @vc_tta-control-icon-size;
+        }
+      }
+      .vc_tta-controls-icon {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: @vc_tta-panels-padding-horizontal;
+      }
+    }
+  }
+}

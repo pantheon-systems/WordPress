@@ -1,0 +1,47 @@
+<div class="wrap">
+
+    <h2>{{ strings.heading }}</h2>
+
+    {% include 'batch-translation.twig' with batch_translation %}
+
+    <div class="tablenav top wpml-media-tablenav">
+        {% include 'media-translation-filters.twig' %}
+    </div>
+
+    <table class="widefat striped wpml-media-table js-otgs-table-sticky-header">
+        <thead>
+        <tr>
+            <th class="wpml-col-media-title">{{ strings.original_language }}</th>
+            <th class="wpml-col-media-translations">
+                {% for code, language in languages %}
+                    {% if target_language is empty or target_language == code %}
+                        <span class="js-wpml-popover-tooltip" title="{{ language.name }}"><img src="{{ language.flag }}"
+                                                                                               width="16" height="12"
+                                                                                               alt="{{ language.code }}"></span>
+                    {% endif %}
+                {% endfor %}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if attachments %}
+            {% for attachment in attachments %}
+                {% include 'media-translation-table-row.twig' with {'attachment' : attachment, 'languages': languages, 'strings': strings, 'target_language': target_language } only %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="2">{{ strings.no_attachments }}</td>
+            </tr>
+        {% endif %}
+        </tbody>
+
+    </table>
+
+    <div class="tablenav bottom">
+        {% include 'pagination.twig' with {'pagination_model' : pagination} only %}
+
+        {% include 'media-translation-popup.twig' %}
+
+    </div>
+
+</div>

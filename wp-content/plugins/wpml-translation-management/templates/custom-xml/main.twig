@@ -1,0 +1,19 @@
+<div class="wpml-tm-custom-xml js-wpml-tm-custom-xml">
+	<h3>{{ strings.content }}</h3>
+	<div class="wpml-tm-custom-xml-toolbar">
+		<div class="wpml-tm-custom-xml-controls">
+			<a href="#" class="button-primary">{{ strings.save }}</a><span class="spinner"></span>
+		</div>
+		<div class="wpml-tm-messages js-wpml-tm-messages">&nbsp;</div>
+		<div class="wpml-tm-custom-xml-shortcuts">
+			<a href="{{ links.documentation }}" target="_blank" class="documentation">{{ strings.documentation }}</a>
+			<p>{{ strings.shortcuts }}</p>
+			<ul>
+				{% for keymap, text in strings.keysmap %}
+					<li><strong>{{ keymap }}</strong>: {{ text }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<textarea title="{{ string.content }}" cols="50" rows="10" class="wpml-tm-custom-xml-content" data-action="{{ data.action }}" data-nonce-validate="{{ data.nonceValidate }}" data-nonce-save="{{ data.nonceSave }}">{{ content }}</textarea>
+</div>

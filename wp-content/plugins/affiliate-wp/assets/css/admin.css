@@ -1,0 +1,514 @@
+/* General */
+@font-face {
+  font-family: "affwp-dashicons";
+  src:url("../fonts/dashicons.eot");
+  src:url("../fonts/dashicons.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/dashicons.woff") format("woff"),
+    url("../fonts/dashicons.ttf") format("truetype"),
+    url("../fonts/dashicons.svg#dashicons") format("svg");
+}
+
+#adminmenu #toplevel_page_affiliate-wp div.wp-menu-image:before {
+	font-family: 'affwp-dashicons' !important;
+	content: "\e000";
+}
+
+.affwp-ajax-search-wrap {
+	position: relative;
+}
+
+.affwp-ajax {
+	position: absolute;
+	right: 8px;
+	top: 1px;
+}
+
+select.affwp-graphs-date-options {
+	vertical-align: top;
+	height: 26px;
+}
+
+table.affwp_table {
+	text-align: left;
+	width: 100%;
+	border: none;
+	margin: 0 0 21px;
+	border-collapse: collapse;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+table.affwp_table th,
+table.affwp_table td {
+	text-align: left;
+	border: 1px solid #eee;
+	color: #666;
+	padding: 0.3em 1em;
+	max-width: 100%;
+}
+table.affwp_table th {
+	background: #fafafa;
+	font-weight: bold;
+}
+table.affwp_table td a {
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+}
+#affwp-dashboard-widgets-wrap .postbox h3 {
+	cursor: default;
+    font-weight: 600;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+#affwp-dashboard-widgets-wrap p:last-child:not( .affwp-batch-success ) {
+	margin-bottom: 0px;
+}
+
+#affwp-dashboard-widgets-wrap .muted {
+	color: #999;
+}
+
+/* Affiliate Overview */
+#affwp-dashboard-widgets-wrap .postbox {
+	margin: 0 8px 20px;
+}
+
+/* Affiliates */
+table.affiliates #name {
+	width: 240px;
+}
+
+table.affiliates #rate,
+table.affiliates #visits {
+	width: 80px;
+}
+
+table.affiliates #unpaid {
+	width: 150px;
+}
+
+/* Consumers */
+.row-actions span.revoke a {
+	color: #a00;
+}
+
+/* Creatives */
+#affwp_add_creative table,
+#affwp_edit_creative table {
+    table-layout: fixed;
+}
+
+#preview_image {
+    margin: 15px 0;
+}
+
+#preview_image img {
+    height: auto;
+    display: block;
+    max-width: 100%;
+}
+
+.affiliates_page_affiliate-wp-creatives .widefat tbody th.check-column {
+	padding-top: 0;
+}
+
+.affiliates_page_affiliate-wp-creatives th.check-column,
+.affiliates_page_affiliate-wp-creatives td {
+	vertical-align: middle;
+}
+
+.affiliates_page_affiliate-wp-creatives .column-image img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Review page */
+#affwp_review_affiliate .button + .button {
+	margin-left: 8px;
+}
+
+/* Referrals page */
+#affwp-referrals-export-form,
+#affwp_unpaid_counts,
+#affwp_unpaid_earnings,
+#affwp_total_earnings,
+#affwp_affiliate_stats,
+.affwp-gray-form {
+	clear: both;	background: #f5f5f5;
+	background-image: -webkit-gradient(linear, left bottom, left top, from(#f5f5f5), to(#fafafa));
+	background-image: -webkit-linear-gradient(bottom, #f5f5f5, #fafafa);
+	background-image:    -moz-linear-gradient(bottom, #f5f5f5, #fafafa);
+	background-image:      -o-linear-gradient(bottom, #f5f5f5, #fafafa);
+	background-image: linear-gradient(to top, #f5f5f5, #fafafa);
+	border-color: #dfdfdf;
+	margin: 8px 0;
+	padding: 12px 12px 22px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+	font-size: 13px;
+	line-height: 2.1em;
+}
+
+#affwp-referrals-export-wrap h2 {
+	margin-top: 0em;
+}
+
+.affwp-required-import-field {
+	background-color: #fadedc !important;
+}
+
+#affwp-referrals-filter-form select.affwp-referral-type-select {
+	float: none;
+}
+
+.affwp-status.pending i,
+.affwp-status.unpaid i,
+.affwp-status.paid i,
+.affwp-status.rejected i,
+.affwp-status.active i,
+.affwp-status.inactive i {
+	display: inline-block;
+	position: relative;
+	top:2px;
+	left: -2px;
+}
+.affwp-status.pending i:before,
+.affwp-status.unpaid i:before,
+.affwp-status.paid i:before,
+.affwp-status.rejected i:before,
+.affwp-status.active i:before,
+.affwp-status.inactive i:before {
+	font-family: "dashicons";
+	font-style: normal;
+}
+.affwp-status.pending i:before {
+	content: "\f159";
+	color: #d8ecb4;
+}
+.affwp-status.unpaid i:before,
+.affwp-status.inactive i:before {
+	content: "\f159";
+	color: #5e95ef;
+}
+.affwp-status.paid i:before,
+.affwp-status.active i:before {
+	content: "\f159";
+	color: green;
+}
+.affwp-status.rejected i:before {
+	content: "\f159";
+	color: #ef6c5e;
+}
+
+#affwp_edit_affiliate input:disabled {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* Visits page */
+#affwp-visits-filter #url {
+	width: 30%;
+}
+
+.visit-converted i {
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	left: 2px;
+}
+.visit-converted i:before {
+	font-family: "dashicons";
+	font-style: normal;
+}
+.visit-converted.yes i:before {
+	content: "\f147";
+	color: #5e95ef;
+}
+.visit-converted.no i:before {
+	content: "\f158";
+	color: #ef6c5e;
+}
+
+/* Reports */
+#reports-nav {
+	background-color: #fff;
+	margin: 20px 0 10px;
+	overflow: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets {
+	overflow: auto;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container {
+	width: 33.3%;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container .empty-container {
+	margin-top: 1px;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets #primary-sortables {
+	margin-left: 0;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets #tertiary-sortables {
+	margin-right: 0;
+}
+
+#affwp-reports-widgets-wrap .metabox-holder .empty-container {
+	height: 127px;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox,
+#affwp-reports-widgets-wrap #dashboard-widgets .meta-box-sortables {
+	min-height: 127px;
+}
+
+#affwp-reports-widgets-wrap #dashboard-widgets .postbox.closed {
+	min-height: 0;
+}
+
+#affwp-reports-widgets-wrap h2.hndle {
+	margin-left: 25px;
+	text-align: center;
+	font-weight: normal;
+	color: #999;
+}
+
+#affwp-reports-widgets-wrap .postbox .inside {
+	text-align: center;
+}
+
+#affwp-reports-widgets-wrap .inside span {
+	display: block;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-value {
+	color: #21759b;
+	font-size: 3em;
+	line-height: 1;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-value.tile-no-data {
+	color: #888;
+	font-size: 1.5em;
+	line-height: 1;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-value.tile-url {
+	font-size: 1.5em;
+}
+
+#affwp-reports-widgets-wrap .inside .tile-compare {
+	color: #333;
+	padding-top: 10px;
+	font-size: 1.1em;
+}
+
+.reports-filters {
+	padding: 25px 20px;
+	background-color: #fff;
+	margin-bottom: 10px;
+	box-sizing: content-box;
+}
+
+.affwp-inline-button {
+	position: relative;
+	left: 8px;
+}
+
+/* WooCommerce Admin Tweaks */
+.affwp-woo-coupon-field .affwp-ajax-search-wrap {
+	position: relative;
+	display:block;
+	width: 100%;
+}
+.affwp-woo-coupon-field input#user_name.affwp-user-search {
+	width: 50%;
+}
+.affwp-woo-coupon-field .affwp-woo-coupon-input-wrap {
+	position: relative;
+}
+
+.widefat .column-referral {
+	width: 110px;
+}
+
+/* Add-ons */
+
+#affwp-add-ons h2 {
+  margin: 0 0 15px;
+}
+
+#affwp-add-ons .affwp-add-on {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 11px 14px 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  width: 320px;
+  padding: 14px;
+  min-height: 290px;
+  position: relative;
+}
+
+#affwp-add-ons .affwp-add-on h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+#affwp-add-ons .affwp-add-on .button-secondary {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+}
+
+#affwp-add-ons .affwp-add-on .wp-post-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.affwp-add-ons-footer {
+  padding-top: 10px;
+}
+
+#affwp-system-info-textarea {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	display: block;
+	font-family: Menlo,Monaco,monospace;
+	height: 400px;
+	overflow: auto;
+	white-space: pre;
+	width: 800px;
+}
+
+/* Batch Processor */
+
+.affwp-batch-progress {
+	background: #ddd;
+	height: 15px;
+}
+.affiliates_page_affiliate-wp-referrals .affwp-batch-progress {
+	position: relative;
+}
+.affwp-batch-progress div {
+	background: #ccc;
+	height: 100%;
+	width: 0;
+}
+.notice-wrap {
+	border-style: solid;
+	border-width: 1px 0;
+	border-color: #eae9e9;
+	padding: 12px 12px 12px 0;
+	overflow: auto;
+}
+.notice-wrap #affwp-batch-success {
+	margin: 5px 0;
+}
+form .spinner {
+	margin: 4px 10px 8px;
+	position: relative;
+	float: none;
+}
+.admin-color-fresh .affwp-batch-progress div {
+	background: #0073aa;
+}
+.admin-color-light .affwp-batch-progress div {
+	background: #888;
+}
+.admin-color-blue .affwp-batch-progress div {
+	background: #096484;
+}
+.admin-color-coffee .affwp-batch-progress div {
+	background: #c7a589;
+}
+.admin-color-ectoplasm .affwp-batch-progress div {
+	background: #a3b745;
+}
+.admin-color-midnight .affwp-batch-progress div {
+	background: #e14d43;
+}
+.admin-color-sunrise .affwp-batch-progress div {
+	background: #dd823b;
+}
+.wc-order-preview-affwp-referral {
+    padding: 1em 1.5em;
+    text-align: left;
+    border-top: 1px solid #eee;
+    width: 100%;
+    margin: 0;
+}
+.wc-order-preview-affwp-referral strong {
+	display: block;
+}
+
+/* Media Queries */
+@media screen and ( max-width: 1024px ) {
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container {
+		width: 50%;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container:last-child {
+		width: 99%;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets #tertiary-sortables {
+		margin-left: 0;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox {
+		min-height: 0;
+	}
+}
+
+@media screen and ( max-width: 782px ) {
+	#affwp-affiliates-filter .column-affiliate_id,
+	#affwp-affiliates-filter .column-rate,
+	#affwp-affiliates-filter .column-referrals,
+	#affwp-affiliates-filter .column-visits {
+		display: none;
+	}
+
+	#affwp-affiliates-filter .column-actions span {
+		display: block;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets .postbox-container {
+		width: 99%;
+	}
+
+	#affwp-reports-widgets-wrap #dashboard-widgets #primary-sortables,
+	#affwp-reports-widgets-wrap #dashboard-widgets #secondary-sortables,
+	#affwp-reports-widgets-wrap #dashboard-widgets #tertiary-sortables {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
+@media screen and ( min-width: 1025px ) {
+	#affwp-affiliates-filter .column-actions {
+		width: 20%;
+	}
+	#affwp-payouts-filter .column-payout_id {
+		width: 8%;
+	}
+	#affwp-payouts-filter .column-status {
+		width: 10%;
+	}
+}
+
+@media screen and ( min-width: 680px ) {
+	#affwp-referrals-filter-form .column-actions {
+		width: 24%;
+	}
+}

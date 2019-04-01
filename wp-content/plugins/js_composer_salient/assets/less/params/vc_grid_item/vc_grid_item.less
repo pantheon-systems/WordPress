@@ -1,0 +1,132 @@
+@vc_gitem_post_data_shortcode_margin_bottom: 15px;
+.vc_grid.vc_row {
+  //Causes https://app.asana.com/0/90442874619636/85765759204968 bug on ios and etc.
+  //.vc_pageable-slide-wrapper {
+  //  > *:hover {
+  //    z-index: 3;
+  //  }
+  //}
+  .vc_pageable-slide-wrapper {
+    .vc_grid-item.vc_visible-item:hover {
+      z-index: 3;
+    }
+  }
+  .vc_grid-item {
+    display: none;
+    padding: 0;
+    vertical-align: top;
+    float: none;
+    box-sizing: border-box;
+    z-index: 1;
+    .vc_grid-item-mini {
+      .vc_grid-item-content {
+        overflow: hidden;
+      }
+    }
+    .wpb_content_element, .vc_icon_element, .vc_btn {
+      margin-bottom: @vc_gitem_post_data_shortcode_margin_bottom;
+      a {
+        text-decoration: none;
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+.vc_grid {
+  .vc_gitem-link {
+    border-bottom: none;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.vc_masonry_grid, .vc_masonry_media_grid {
+  .vc_grid.vc_row {
+    .vc_grid-item {
+      position: static; // Fix for FF with masonry
+      &.vc_visible-item {
+        display: block;
+      }
+    }
+  }
+}
+
+.vc_basic_grid, .vc_media_grid {
+  .vc_grid.vc_row {
+    .vc_grid-item {
+      &.vc_visible-item {
+        display: block;
+      }
+      @media (min-width: @screen-sm-min) {
+        &.vc_visible-item {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  .vc_masonry_grid, .vc_masonry_media_grid {
+    .vc_grid-item {
+      margin-left: -0.01px; // Fix for FF with masonry
+    }
+  }
+}
+
+.vc_gitem-zone-b {
+  display: none;
+}
+
+.vc_gitem-float {
+  &-none {
+    float: none;
+  }
+  &-left {
+    float: left;
+  }
+  &-right {
+    float: right;
+  }
+}
+
+.vc_gitem-align {
+  &-center {
+    text-align: center;
+  }
+  &-right {
+    text-align: right;
+  }
+  &-justify {
+    text-align: justify;
+  }
+}
+
+.vc_gitem-block {
+  position: relative;
+  overflow: hidden;
+}
+
+.vc_gitem-is-link {
+  cursor: pointer;
+}
+
+.vc_gitem-link {
+  text-decoration: none;
+}
+
+@import "shortcodes/vc_gitem_row.less";
+@import "shortcodes/vc_gitem_col.less";
+@import "shortcodes/vc_gitem_zone.less";
+@import "shortcodes/vc_gitem_zone_a.less";
+@import "shortcodes/vc_gitem_zone_b.less";
+@import "shortcodes/vc_gitem_zone_c.less";
+@import "shortcodes/vc_gitem_gitem_zone_height_mode.less";
+@import "shortcodes/vc_gitem_animated_block.less";
+@import "shortcodes/vc_gitem_post_data.less";
+@import "shortcodes/vc_gitem_post_categories.less";
+
+

@@ -1,0 +1,239 @@
+<wpml-config>
+    <custom-fields>
+        <custom-field action="translate">title</custom-field>
+        <custom-field action="translate">description</custom-field>
+        <custom-field action="translate">keywords</custom-field>
+        <custom-field action="ignore">_edit_last</custom-field>
+        <custom-field action="ignore">_edit_lock</custom-field>
+        <custom-field action="ignore">_wp_page_template</custom-field>
+        <custom-field action="ignore">_wp_attachment_metadata</custom-field>
+        <custom-field action="ignore">original_post_id</custom-field>
+        <custom-field action="ignore">_wpml_original_post_id</custom-field>
+        <custom-field action="ignore">_wp_old_slug</custom-field>
+        <custom-field action="ignore">_icl_translator_note</custom-field>
+        <custom-field action="ignore">_alp_processed</custom-field>
+        <custom-field action="ignore">_pingme</custom-field>
+        <custom-field action="ignore">_encloseme</custom-field>
+        <custom-field action="ignore">_icl_lang_duplicate_of</custom-field>
+        <custom-field action="ignore">_thumbnail_id</custom-field>
+        <custom-field action="ignore">_wp_attached_file</custom-field>
+        <custom-field action="translate">_wp_attachment_image_alt</custom-field>
+    </custom-fields>
+    <taxonomies>
+        <taxonomy translate="1">translation_priority</taxonomy>
+    </taxonomies>
+    <language-switcher-settings>
+        <key name="link_empty">0</key>
+        <key name="statics">
+            <key name="footer">
+                <key name="show">0</key>
+                <key name="display_flags">1</key>
+                <key name="display_names_in_current_lang">1</key>
+                <key name="display_names_in_native_lang">1</key>
+                <key name="display_link_for_current_lang">1</key>
+                <key name="font_current_normal">#444444</key>
+                <key name="font_current_hover">#000000</key>
+                <key name="background_current_normal">#ffffff</key>
+                <key name="background_current_hover">#eeeeee</key>
+                <key name="font_other_normal">#444444</key>
+                <key name="font_other_hover">#000000</key>
+                <key name="background_other_normal">#ffffff</key>
+                <key name="background_other_hover">#eeeeee</key>
+                <key name="border">#cdcdcd</key>
+            </key>
+            <key name="post_translations">
+                <key name="show">0</key>
+                <key name="display_flags">0</key>
+                <key name="display_names_in_current_lang">1</key>
+                <key name="display_names_in_native_lang">1</key>
+                <key name="display_link_for_current_lang">0</key>
+                <key name="display_before_content">1</key>
+                <key name="display_after_content">0</key>
+                <key name="availability_text">This post is also available in: %s</key>
+            </key>
+            <key name="shortcode_actions">
+                <key name="show">0</key>
+                <key name="display_flags">0</key>
+                <key name="display_names_in_current_lang">1</key>
+                <key name="display_names_in_native_lang">1</key>
+                <key name="display_link_for_current_lang">1</key>
+            </key>
+        </key>
+    </language-switcher-settings>
+    <custom-types>
+        <custom-type translate="1">attachment</custom-type>
+    </custom-types>
+	<shortcode-list>call_to_action,newsletter,tours_shortcode,cta_button,woocommerce_thankyou,woocommerce_shop,table,custom_profile,symple_heading,row,tagcloud,sform,nano,add_eventon_list,che,era,essa,nel,gli,per,come,anima,ella,quel,show_gd_mylist_btn,su_spoiler,email,vul,wpv-view,wpv-post-field,accordion_item,citation,gallery,foogallery,user-submitted-posts,chronologie,adresse,get_unit_label,get_reference_label,woocommerce_api_manager_lost_api_key,wp-knowledgebase,testimonials_slider,rpwe,posts,nowotworu,intima-media,dostarcza,standaryzowany,jako,czarny,ekstrakt,kwas,std,dwuwodzian,stm_icon_box,ess_grid,rev_slider,linkview,dropcap,permalinklist,testimonial_slider,woocommerce_software_lost_license,text-blocks,wp_sitemap_page,wcmp_vendor,vendor_registration,efsrow,efscolumn,efsbutton,md_rev_slider,md_live_text,md_imagebox_full,flagallery,pbr_quicklinksmenu,rev_slider_vc,opalhotel_reservation_form,pbr_title_heading,pbr_testimonials,embedyt,yith_wcwl_wishlist,wcm_content_restricted,feature_box,woocommerce_en_check,wc_box,wc_row,wc_column,wc_fullwidth,wc_center,wp_social_sharing,infoboxes,testimonials,woocommerce_social_media_share_buttons,wcv_vendor_dashboard,wcv_shop_settings,wcv_orders,inplayer,useyourdrive,wp_blog_designer,us_blog,tt_address,tt_dashboard,envira-gallery,hotspotitem,woocommerce_klarna_checkout,wpml_mailto,contact-field,ux_banner,advanced_iframe,siteorigin_widget,ec_store,simpay_payment_receipt,su-mensaje,borlabs_cookie,contact_info,stm_boats_video,packages_orderdata,yith_ywraq_request_quote,woocommerce_pay,button,supsystic-tables,clean-login,woocommerce_pay,pdf-embedder,insertgenerator,youzer_register,wysija_form,video,customer-area,customer-area-dashboard,customer-area-private-files-home,customer-area-private-files,customer-account-home,customer-area-account,customer-area-logout,bookly-form,bookly-cancellation-confirmation,stm_classic_filter,popup_trigger,mainwp_archived_lists,wcv_vendorslist,dotpay_content,formularz,cyberactive_school_courses_selection_form,cyberactive_school_session_timeout,ditty_news_ticker,donationcampaign,das-list-events,event_embed,sectiontitle,learn_press_profile,ticket-submit,tickets,aanduiding,datum,thim-icon-box,ngg_images,wpdomainchecker,visualizer,mk_page_section,rssreviews,animate_this,simple-sitemap,gravityform,stm_tech_info,fep_submission_form,ucaddon_diagonal_event_box,wcv_feedback_form,newsletters_management,wcv_pro_dashboard,tm_pb_section,wwof_product_listing,res_map,jssupportticket,socialbar,socialbar_service,front-end-pm,stm_sidebar,give_receipt,donation_history,simpay_error,tm_pb_contact_field,jwp,woocommerce_checkout,mk_custom_list,sg_popup,icon,extra_wrap,frontier-post,invierno,appbox,highlight,ci_alert,vc_mad_products,dt_list,geoip-continent,geoip-country,geoip-region,geoip-city,geoip-postalcode,geoip-latitude,geoip-longitude,geoip-location,woocommerce_notices,stm_icon_box,post-timeline,tt_address,private-message,visualizer,ga_optout,manage_serial_key_usage,ut_header,site_name,bfname,order_id,menu-country,menu-prefer,accordion-item,mini-icon,gvlogic,stm_gmap,contact-form,iconbox,woocommerce_my_account,super_form,wpdm-all-packages,photoblocks,et_pb_map_pin,ginger_reset_cookie,su_divider,fbl_login_button,gmw_single_location,one_full,recent_products,custom_list,endif,jours,wpuf-login,lyte,product_table,wpuf-registration,wpuf_dashboard,amazon,member-pricing-table,rozinky,ngg_images,add_to_cart_url,srizonfbgallery,wysija_form,cl-itext,embedyt,icon_counter,text_block,vtftable,header_static,bookingcalendar,flexslider,anova-geoip-meta,zp_vc_slideshow_element,zp_scrollto,my_calendar_upcoming,wpv-post-url,fusion_button,su_tab,freeconsultation_technical_forum_link,vc_images_carousel,otgs_logo_url,wpv-conditional,wpv-view,teaser,dt_fancy_image,fusion_tagline_box,contact_us_add,content_box,tagline_box,us_iconbox,fusion_tab,fisicamente,one_half_sidebar,action-btn,invicta_contacts,pricing_price,button,icon_link,slideshow,vcex_milestone,secondary-demo,vh_pricing_table,category_name,blogurl,q_team,tab_nav_item</shortcode-list>
+
+    <built-with-page-builder><![CDATA[/<!-- wp:/]]></built-with-page-builder>
+
+    <gutenberg-blocks>
+        <gutenberg-block type="core/paragraph" translate="1">
+            <xpath>//p</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/heading" translate="1">
+            <xpath>//*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/button" translate="1">
+            <xpath>//a</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/image" translate="1">
+            <xpath>//figure/figcaption</xpath>
+            <xpath>//figure/img/@alt</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/gallery" translate="1">
+            <xpath>//figure/figcaption</xpath>
+            <xpath>//figure/img/@alt</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/media-text" translate="1">
+            <xpath>//figure/img/@alt</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/list" translate="1">
+            <xpath>//ul/li</xpath>
+            <xpath>//ol/li</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/quote" translate="1">
+            <xpath>//blockquote/p</xpath>
+            <xpath>//blockquote/cite</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/audio" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/video" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/file" translate="1">
+            <xpath>//div/a</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/cover" translate="1">
+            <xpath>//div/p</xpath>
+        </gutenberg-block>
+        <!-- Since WP 5.0.0 core/cover-image is replaced with core/cover -->
+        <gutenberg-block type="core/cover-image" translate="1">
+            <xpath>//div/p</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/subhead" translate="1">
+            <xpath>//p</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/verse" translate="1">
+            <xpath>//pre</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/table" translate="1">
+            <xpath>//td</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/preformatted" translate="1">
+            <xpath>//pre</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/pullquote" translate="1">
+            <xpath>//blockquote/p</xpath>
+            <xpath>//blockquote/cite</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/column" translate="0" />
+        <gutenberg-block type="core/columns" translate="0" />
+        <gutenberg-block type="core/code" translate="0" />
+        <gutenberg-block type="core/more" translate="0" />
+        <gutenberg-block type="core/nextpage" translate="0" />
+        <gutenberg-block type="core/separator" translate="0" />
+        <gutenberg-block type="core/spacer" translate="0" />
+        <gutenberg-block type="core/shortcode" translate="0" />
+        <gutenberg-block type="core-embed/twitter" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/youtube" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/facebook" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/instagram" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/vimeo" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/soundcloud" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/spotify" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/flickr" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/animoto" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/collegehumor" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/dailymotion" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/funnyordie" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/hulu" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/imgur" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/issuu" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/kickstarter" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/meetup-com" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/mixcloud" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/photobucket" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/photobucket" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/polldaddy" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/reddit" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/reverbnation" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/screencast" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/scribd" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/slideshare" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/smugmug" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/speaker" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/ted" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/tumblr" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/videopress" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/wordpress" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core-embed/wordpress-tv" translate="1">
+            <xpath>//figure/figcaption</xpath>
+        </gutenberg-block>
+    </gutenberg-blocks>
+</wpml-config>

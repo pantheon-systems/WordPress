@@ -1,0 +1,105 @@
+.cnkt-plugin-installer{
+   box-sizing: border-box;
+   display: -webkit-box;
+   display: -moz-box;
+   display: -ms-flexbox;
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-wrap: wrap;
+   flex-wrap: wrap;
+   flex-flow: row wrap;
+   -webkit-flex-flow: row wrap;
+   justify-content: space-between;
+   position: relative;
+   padding: 20px;
+   margin-bottom: 30px;
+   border: 2px solid rgba(119, 204, 109, 1);
+}
+   .cnkt-plugin-installer:after {
+      content: "";
+      flex: auto;
+   }
+   .cnkt-plugin-installer * {
+      box-sizing: border-box;
+   }
+   .redux-container .nectar-demo-importer-selection-modal h3 {
+     margin: 0 0 5px;
+     border: none;
+   }
+   .cnkt-plugin-installer .plugin{
+      width: 100%;
+      margin: 0 1% 6px;
+      padding: 0;
+      overflow: hidden;
+      text-align: left;
+      position: relative;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+   }
+   .cnkt-plugin-installer .plugin h4 { margin: 0; line-height: 28px; color: #333; }
+  .cnkt-plugin-installer .plugin:hover{
+     border-color: #cecece;
+  }
+
+   .cnkt-plugin-installer .plugin-wrap{
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+   }
+   .cnkt-plugin-installer li a,
+   .cnkt-plugin-installer .plugin-wrap a{
+      text-decoration: none;
+   }
+   .cnkt-plugin-installer .plugin-wrap h2,
+   .cnkt-plugin-installer .plugin-wrap p{
+      padding: 0;
+      margin: 0;
+      font-size: 17px;
+      font-weight: 600;
+      color: #333;
+      line-height: 1.4;
+   }
+   .cnkt-plugin-installer .plugin-wrap p{
+      padding: 10px 0 0;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+      color: #777;
+   }
+   .cnkt-plugin-installer .plugin-wrap p.plugin-author{
+      font-size: 13px;
+      padding-top: 20px;
+      font-style: italic;
+   }
+
+.cnkt-plugin-installer .activation-row{
+      display: inline-block;
+      margin: 0 0 0 10px;
+      overflow: hidden;
+      text-align: left;
+   }
+.admin-color-fresh .redux-container  .cnkt-plugin-installer .activation-row .button:not(.wp-picker-default):not(.wp-color-result) {
+  margin: 0;
+}
+  .cnkt-plugin-installer .activation-row li{
+     display: inline-block;
+     vertical-align: top;
+     margin: 0 10px 0 0;
+     font-size: 13px;
+     line-height: 27px;
+  }
+
+
+@media screen and (max-width: 640px){
+	.cnkt-plugin-installer{
+		width: 100%;
+		position: static;
+	}
+   .cnkt-plugin-installer .plugin{
+      width: 100%;
+      margin: 0 0 20px;
+   }
+}
+

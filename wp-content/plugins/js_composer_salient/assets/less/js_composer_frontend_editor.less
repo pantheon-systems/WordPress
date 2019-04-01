@@ -1,0 +1,97 @@
+@import "lib/bootstrap-components.less";
+@import "lib/editor.less";
+// Navbar
+@import "modules/vc_navbar.less";
+
+.vc_navbar {
+  .navbar-fixed-top();
+}
+
+@import "lib/elements_icons.less";
+// Add element box
+@import "popups/modal_add_element.less";
+// Edit form for shortcode
+@import "popups/panel_edit_form.less";
+// Template library
+@import "popups/panel_template_library";
+// For param group and other controls
+@import "lib/controls.less";
+@import "lib/backend_controls.less";
+@import "backend_shortcodes/empty_containers.less";
+// Templates
+@import "modules/ui/vc_ui-panel-templates.less";
+//Presets
+@import "modules/ui/vc_ui-panel-preset.less";
+// Vc Button
+@import (reference) "backend_shortcodes/vc_button.less";
+
+@import (reference)"shortcodes/vc_button3.less";
+@import "shortcodes/vc_button3_editform.less";
+
+@import (reference)"shortcodes/vc_icon_element.less";
+
+@import (reference)"shortcodes/vc_call_to_action3.less";
+@import "shortcodes/vc_cta3_editform.less";
+// Used in deprecated logic in edit form and add element windows
+@import "shortcodes/vc_message_box/vc_message_box_front.less";
+@import "backend_shortcodes/vc_charts.less";
+// edit form for vc_line_chart
+
+.vc_editor {
+  // Fix admin page
+  #adminmenuback {
+    display: none;
+  }
+  #wpbody {
+    padding-top: 10px;
+  }
+  #wpcontent, #wpfooter {
+    margin-left: 0 !important;
+  }
+  #wpcontent {
+    padding-left: 0 !important;
+  }
+  #adminmenuback, #adminmenuwrap {
+    display: none;
+  }
+  #wpbody-content {
+    padding-bottom: 0;
+  }
+  #wpfooter,
+  #local-storage-notice,
+  #setting-error-tgmpa {
+    display: none !important;
+  }
+  // Frame settings
+  #vc_inline-frame-wrapper {
+    position: absolute;
+    width: 100%;
+  }
+  #vc_inline-frame {
+    margin: 0 auto;
+    display: block;
+    position: initial !important;
+  }
+  #wpb_csseditor {
+    border: 1px solid #BABABA;
+  }
+}
+
+// Vendors
+@import "vendor/contact_form_7.less";
+@import "vendor/gravity_form.less";
+@import "vendor/layerslider.less";
+@import "vendor/rev_slider.less";
+@import "vendor/jwplayer.less";
+
+.vc_shortcode-param[data-param_type="iconpicker"] {
+  .vc-icons-selector .selected-icon {
+    line-height: 40px;
+    i.vc_pixel_icon {
+      position: relative;
+      top: 3px;
+    }
+  }
+}
+
+@import "lib/vc_pointer.less";

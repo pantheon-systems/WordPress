@@ -1,0 +1,51 @@
+// ALERT STYLES
+// ------------
+
+// Base alert styles
+.wpb_alert {
+  padding: 1em 35px 1em 14px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+  background-color: @warningBackground;
+  border: 1px solid @warningBorder;
+  .border-radius(2px);
+  color: @warningText;
+  clear: both;
+}
+
+// Alternate styles
+// ----------------
+.wpb_alert-success {
+  background-color: @successBackground;
+  border-color: @successBorder;
+  color: @successText;
+}
+
+.wpb_alert-danger,
+.wpb_alert-error {
+  background-color: @errorBackground;
+  border-color: @errorBorder;
+  color: @errorText;
+}
+
+.wpb_alert-info {
+  background-color: @infoBackground;
+  border-color: @infoBorder;
+  color: @infoText;
+}
+
+.wpb_alert .messagebox_text {
+  padding-left: 28px;
+  background: url(../vc/alert.png) no-repeat left center;
+}
+
+.wpb_alert-info .messagebox_text {
+  background: url(../vc/info.png) no-repeat left center;
+}
+
+.wpb_alert-success .messagebox_text {
+  background: url(../vc/tick.png) no-repeat left center;
+}
+
+.wpb_alert-error .messagebox_text {
+  background: url(../vc/exclamation.png) no-repeat left center;
+}

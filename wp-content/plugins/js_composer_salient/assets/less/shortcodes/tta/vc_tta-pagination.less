@@ -1,0 +1,11 @@
+// Hide paging when TTA collapses to accordion (except pageable)
+// ==========================
+@media (max-width: @vc_tta-breakpoint) {
+  .vc_tta-container {
+    .vc_tta:not([class*="vc_tta-pageable"]) {
+      .vc_pagination {
+        display: none;
+      }
+    }
+  }
+}

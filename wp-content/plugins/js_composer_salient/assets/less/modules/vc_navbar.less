@@ -1,0 +1,312 @@
+@vcui-navbar-transition-duration: .2s;
+@vcui-navbar-transition-function: ease-in-out;
+
+.vc_navbar {
+  .box-sizing(border-box);
+  min-height: @vc_navbar_height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
+  margin: @vc_navbar_margin;
+  border: 0;
+  // Prevent floats from breaking the navbar
+  &:extend(.clearfix all);
+  * {
+    .box-sizing(border-box);
+  }
+  .vc_navbar-collapse {
+    padding: 0;
+  }
+  background-color: @vc_navbar_background_color;
+  border-bottom: none;
+  .vc_navbar-nav {
+    display: block;
+    margin: 0;
+    > li {
+      float: left;
+      margin: 0;
+      a {
+      }
+      height: 56px;
+    }
+  }
+
+  .vc_navbar-brand {
+    .navbar-brand();
+    font-size: 0;
+    background: transparent url(@vcui_navbar_logo) center center no-repeat;
+    background-size: 36px;
+    display: block;
+    width: 42px;
+    height: 42px;
+    padding: 27px 30px 27px 35px;
+    &.vc_ui-wp-spinner {
+      background-image: none;
+    }
+  }
+  &.vc_navbar-frontend {
+    .vc_navbar-brand {
+      &.vc_ui-wp-spinner {
+        &::before {
+          background-image: url(@vc_ui-wp-spinner-light-svg-src);
+        }
+      }
+    }
+  }
+  .vc_last {
+    padding-right: 25px;
+  }
+  .vc_right-space {
+    padding-right: 5px;
+  }
+  .vc_icon-btn {
+    display: block;
+    width: 60px;
+    height: @vc_navbar_height;
+    padding: 28px 30px;
+    cursor: pointer;
+    outline: 0;
+    background: transparent;
+    transition: background-color @vcui-navbar-transition-duration @vcui-navbar-transition-function;
+    position: relative;
+    font-size: 22px;
+    &[disabled] {
+      .opacity(0.2);
+    }
+    &:not([disabled]):hover {
+      background-color: @vc_navbar_icon_btn_color_hover;
+    }
+    &:not([disabled]):focus {
+      background-color: transparent;
+    }
+
+    .vc-composer-icon, .vc_navbar-icon {
+      color: @vc_navbar_icon_color;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      .translate(-50%, -50%);
+    }
+  }
+  .vc_open {
+    > a, > a:focus {
+      background-color: @vc_navbar_background_color;
+    }
+  }
+  .vc_btn-backend-editor {
+    margin-right: 2px;
+  }
+  .vc_btn-save {
+    margin-left: 2px;
+    &-draft {
+      margin-right: 2px;
+    }
+  }
+  .vc_back-button {
+    font-size: 26px;
+    padding: 20px 23px;
+  }
+  .vc_post-settings {
+    font-size: 20px;
+  }
+  .vc_windowed-button {
+    display: none;
+  }
+  .vc_badge-custom-css {
+    display: block;
+    background-color: #fcb714;
+    position: absolute;
+    top: 9px;
+    left: 31px;
+    font-size: 9px;
+    font-weight: normal;
+    border-radius: 4px;
+    padding: 2px 3px;
+    z-index: 1;
+  }
+  .vc_save-backend {
+    display: none;
+    .vc_control-preview {
+      margin-right: 0;
+    }
+    .vc_control-save {
+      margin-left: 5px;
+    }
+  }
+  .vc_dropdown {
+    position: relative;
+    font-size: 18px;
+    .vc_dropdown-toggle {
+      transition: background-color @vcui-navbar-transition-duration @vcui-navbar-transition-function;
+      cursor: default;
+      display: block;
+      width: 68px;
+      height: 56px;
+      line-height: 16px;
+      padding: 19px;
+      text-decoration: none;
+    }
+    .vc_current-layout-icon {
+      color: #FFFFFF;
+    }
+    .vc-c-icon-arrow_drop_down {
+      color: #FFFFFF;
+      opacity: 0.5;
+    }
+    .vc_dropdown-list {
+      display: none;
+      position: absolute;
+      z-index: 1000;
+      top: 55px;
+      // left: 0px;
+      background: @vc_navbar_icon_btn_color_hover;
+      // border: 1px solid #1e5072;
+      // border-width: 0 1px 1px 1px;
+      padding-top: 1px;
+      .border-bottom-radius(3px);
+      > li {
+        margin: 0;
+      }
+      a {
+        display: block;
+        color: #FFFFFF;
+        text-decoration: none;
+        transition: background-color @vcui-navbar-transition-duration @vcui-navbar-transition-function;
+        background-color: transparent;
+        width: 68px;
+        height: 37px;
+        position: relative;
+        &::before {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          .translate(-50%, -50%);
+        }
+        &:hover {
+          background-color: #00aef0;
+        }
+        &.active {
+          background-color: #00aef0;
+        }
+      }
+    }
+    &:hover {
+      .vc_dropdown-toggle {
+        background-color: @vc_navbar_icon_btn_color_hover;
+      }
+      .vc_dropdown-list {
+        display: block;
+      }
+    }
+    .vc-c-icon-layout_landscape-smartphones {
+      font-size: 13px;
+    }
+  }
+}
+
+// Buttons in navbars
+//
+// Vertically center a button within a navbar (when *not* in a form).
+
+.vc_navbar-btn {
+  transition: background-color @vcui-navbar-transition-duration @vcui-navbar-transition-function;
+  .navbar-vertical-align(@input-height-base);
+  margin-left: 21px;
+  margin-right: 21px;
+  &.vc_btn-sm {
+    .navbar-vertical-align(@input-height-small);
+  }
+  &.vc_btn-xs {
+    .navbar-vertical-align(22);
+  }
+}
+
+.vc_subnav-fixed {
+  position: fixed;
+  top: 32px;
+  left: 0;
+  z-index: 9980;
+  width: 100%;
+  padding-left: @vc_navbar_fixed_right_padding;
+  .vc_save-backend {
+    display: block;
+  }
+}
+
+.folded {
+  .vc_subnav-fixed {
+    padding-left: 40px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .auto-fold {
+    .vc_subnav-fixed {
+      padding-left: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 782px) {
+  .vc_navbar li, .navbar-header {
+    display: none;
+  }
+
+  .vc_navbar li.vc_show-mobile {
+    display: block;
+    float: left;
+  }
+
+  .vc_navbar-nav {
+    float: left;
+    margin: 0;
+    &.navbar-right {
+      float: right;
+    }
+  }
+
+  .vc_navbar-header {
+    float: left;
+  }
+
+  .vc_navbar {
+    padding-left: 0;
+    position: fixed;
+    z-index: 9980;
+    width: 100%;
+    left: 0;
+    top: 46px; // #wpadminbar height
+  }
+
+  #wpcontent {
+    padding-top: @vc_navbar_height;
+  }
+
+  .auto-fold {
+    .vc_subnav-fixed {
+      padding-left: 0;
+    }
+  }
+}
+
+.vc_navbar-border-right {
+  border-right: 1px solid @vc_navbar_border_color;
+}
+
+.vc_dropdown-menu {
+  background-color: #000000;
+}
+
+.vc_navbar-header {
+  .navbar-header();
+  float: left;
+}
+
+.vc_navbar-collapse {
+  .navbar-collapse();
+}
+
+.vc_select-navbar {
+  margin: 12.5px 21px;
+}
+
+#vc_navbar-redo, #vc_navbar-undo {
+  transition: all 0.2s ease-in-out;
+}

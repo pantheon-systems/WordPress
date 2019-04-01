@@ -1,0 +1,147 @@
+<div>
+    <p>{{ strings.notice }}</p>
+    <p>{{ strings.notice_defaults|raw }}</p>
+</div>
+<table class="widefat wpml-list-table wp-list-table striped" cellspacing="0">
+    <thead>
+        <tr>
+            <th scope="col">{{ strings.slug_type }}</th>
+            <th scope="col" id="date" class="wpml-col-url">
+                {{ strings.orig_slug }}
+            </th>
+            <th scope="col" class="wpml-col-languages">
+                {% for language in data.flags %}
+                    <span title="{{ language.name|e }}">
+							<img src="{{ language.flag_url }}"  alt="{{ language.name|e }}"/>
+						</span>
+                {% endfor %}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <strong>
+                    {{ strings.shop }}
+                </strong>
+            </td>
+
+            <td class="wpml-col-url">
+                <img src="{{ shop_base.flag }}" />
+                <strong>{{ shop_base.orig_value }}</strong>
+            </td>
+
+            <td class="wpml-col-languages">
+                {{ shop_base.statuses|raw  }}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    {{ strings.product }}
+                </strong>
+            </td>
+
+            <td class="wpml-col-url">
+                <img src="{{ product_base.flag }}" />
+                <strong>{{ product_base.orig_value }}</strong>
+            </td>
+
+            <td class="wpml-col-languages">
+                {{ product_base.statuses|raw }}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    {{ strings.category }}
+                </strong>
+            </td>
+
+            <td class="wpml-col-url">
+                <img src="{{ cat_base.flag }}" />
+                <strong>{{ cat_base.orig_value }}</strong>
+            </td>
+
+            <td class="wpml-col-languages">
+                {{ cat_base.statuses|raw }}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    {{ strings.tag }}
+                </strong>
+            </td>
+
+            <td class="wpml-col-url">
+                <img src="{{ tag_base.flag }}" />
+                <strong>{{ tag_base.orig_value }}</strong>
+            </td>
+
+            <td class="wpml-col-languages">
+                {{ tag_base.statuses|raw }}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    {{ strings.attr }}
+                </strong>
+            </td>
+
+            <td class="wpml-col-url">
+                <img src="{{ attr_base.flag }}" />
+                <strong>{{ attr_base.orig_value }}</strong>
+            </td>
+
+            <td class="wpml-col-languages">
+                {{ attr_base.statuses|raw }}
+            </td>
+        </tr>
+        {% for endpoint in endpoints_base %}
+            <tr>
+                <td>
+                    <strong>
+                        {{ strings.endpoint|format( endpoint.key ) }}
+                    </strong>
+                </td>
+
+                <td class="wpml-col-url">
+                    <img src="{{ endpoint.flag }}" />
+                    <strong>{{ endpoint.orig_value }}</strong>
+                </td>
+
+                <td class="wpml-col-languages">
+                    {{ endpoint.statuses|raw }}
+                </td>
+            </tr>
+        {% endfor %}
+        {% for slug in attribute_slugs %}
+            <tr>
+                <td>
+                    <strong>
+                        {{ strings.attribute_slug|format( slug.label ) }}
+                    </strong>
+                </td>
+
+                <td class="wpml-col-url">
+                    <img src="{{ slug.flag }}" />
+                    <strong>{{ slug.orig_value }}</strong>
+                </td>
+
+                <td class="wpml-col-languages">
+                    {{ slug.statuses|raw }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{{ nonces.edit_base|raw }}
+{{ nonces.update_base|raw }}

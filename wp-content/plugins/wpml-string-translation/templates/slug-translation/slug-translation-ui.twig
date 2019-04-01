@@ -1,0 +1,45 @@
+<div class="icl_slug_translation_choice {{ css_class_wrapper }}">
+    <p>
+        <a href="#" class="js-toggle-slugs-table">{{- strings.toggle_slugs_table -}}
+            <span class="otgs-ico-caret-down"></span></a>
+    </p>
+
+    <table class="js-custom-type-slugs" style="display:none;">
+    {% for slug in slugs %}
+
+        <tr{% if slug.is_original %} style="display:none;"{% endif %}>
+        <td>
+            <label for="{{ slug.input_id }}">
+                {{ slug.language_flag|raw }} {{ slug.language_name }}
+            </label>
+        </td>
+        <td>
+            <input id="{{ slug.input_id }}" class="js-translate-slug" name="{{ slug.input_id }}"
+                   type="text" value="{{ slug.value }}" placeholder="{{ slug.placeholder }}"
+                   data-lang="{{ slug.language_code }}" />
+
+            {% if slug.status_is_incomplete %}
+                <em class="icl_st_slug_tr_warn">{{ strings.slug_status_incomplete }}</em>
+            {% endif %}
+        </td>
+        </tr>
+
+        {% if slug.is_original %}
+            <tr>
+                <td>
+                    {{ slug.language_selector|raw }}
+                    <label for="{{ slug.input_id }}">
+                        <em>{{ strings.original_label }}</em>
+                    </label>
+                </td>
+                <td>
+                    <input disabled="disabled" class="disabled" id="{{ slug.input_id }}"
+                           name="{{ slug.input_id }}" type="text" value="{{ slug.value }}"/>
+                </td>
+            </tr>
+        {% endif %}
+
+    {%  endfor %}
+
+    </table>
+</div>

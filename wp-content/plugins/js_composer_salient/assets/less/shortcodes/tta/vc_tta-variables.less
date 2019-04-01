@@ -1,0 +1,170 @@
+// Variables
+// ----------------------------------------------------------
+@vc_tta-font-size: 1em;
+@vc_tta-icon-font-size: 1.15em;
+@vc_tta-icon-spacing: @vc_tta-tabs-padding-vertical;
+@vc_tta-border-size: 1px;
+@vc_tta-border-size-outline: 2px;
+@vc_tta-tabs-padding-vertical: 14px;
+@vc_tta-tabs-padding-horizontal: 20px;
+@vc_tta-panels-padding-vertical: @vc_tta-tabs-padding-vertical;
+@vc_tta-panels-padding-horizontal: @vc_tta-tabs-padding-horizontal;
+@vc_tta-panes-padding-vertical: @vc_tta-tabs-padding-vertical;
+@vc_tta-panes-padding-horizontal: @vc_tta-tabs-padding-horizontal;
+@vc_tta-breakpoint: @grid-float-breakpoint;
+@vc_tta-breakpoint-max: (@vc_tta-breakpoint - 1);
+@vc_tta-border-radius-round: 2em;
+@vc_tta-border-radius-rounded: 5px;
+@vc_tta-pagination-gap: 30px;
+// Tabs sizes
+@vc_tta-controls-size-xs: 10%;
+@vc_tta-controls-size-sm: 20%;
+@vc_tta-controls-size-md: 30%;
+@vc_tta-controls-size-lg: 40%;
+@vc_tta-controls-size-xl: 50%;
+// z-index
+@vc_tta-tabs-z-index: 3;
+//
+@vc_tta-control-icon-width: 2px;
+@vc_tta-control-icon-size: 12px;
+
+@vc_tta-common-background-color: #f8f8f8;
+@vc_tta-common-border-color: darken(@vc_tta-common-background-color, 3%);
+
+//====== COLORS
+// blue
+@vc_tta-color-blue: @blue;
+@vc_tta-color-blue-bg: @vc_tta-common-background-color;
+@vc_tta-color-blue-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-blue-border: darken(@vc_tta-color-blue, 3%);
+@vc_tta-color-blue-text: #666;
+@vc_tta-color-blue-contrast: #fff;
+@vc_tta-color-blue-content: #c9d2f0;
+// turquoise
+@vc_tta-color-turquoise: @turquoise;
+@vc_tta-color-turquoise-bg: @vc_tta-common-background-color;
+@vc_tta-color-turquoise-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-turquoise-border: darken(@vc_tta-color-turquoise, 3%);
+@vc_tta-color-turquoise-text: #666;
+@vc_tta-color-turquoise-contrast: #fff;
+@vc_tta-color-turquoise-content: #d3f5f1;
+// pink
+@vc_tta-color-pink: @pink;
+@vc_tta-color-pink-bg: @vc_tta-common-background-color;
+@vc_tta-color-pink-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-pink-border: darken(@vc_tta-color-pink, 3%);
+@vc_tta-color-pink-text: #666;
+@vc_tta-color-pink-contrast: #fff;
+@vc_tta-color-pink-content: #fcdbd7;
+// violet
+@vc_tta-color-violet: @violet;
+@vc_tta-color-violet-bg: @vc_tta-common-background-color;
+@vc_tta-color-violet-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-violet-border: darken(@vc_tta-color-violet, 3%);
+@vc_tta-color-violet-text: #666;
+@vc_tta-color-violet-contrast: #fff;
+@vc_tta-color-violet-content: #e1d5f5;
+// peacoc
+@vc_tta-color-peacoc: @peacoc;
+@vc_tta-color-peacoc-bg: @vc_tta-common-background-color;
+@vc_tta-color-peacoc-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-peacoc-border: darken(@vc_tta-color-peacoc, 3%);
+@vc_tta-color-peacoc-text: #666;
+@vc_tta-color-peacoc-contrast: #fff;
+@vc_tta-color-peacoc-content: #d0edf5;
+// chino
+@vc_tta-color-chino: @chino;
+@vc_tta-color-chino-bg: @vc_tta-common-background-color;
+@vc_tta-color-chino-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-chino-border: darken(@vc_tta-color-chino, 3%);
+@vc_tta-color-chino-text: #666;
+@vc_tta-color-chino-contrast: #fff;
+@vc_tta-color-chino-content: #f7f3eb;
+// mulled_wine
+@vc_tta-color-mulled-wine: @mulled_wine;
+@vc_tta-color-mulled-wine-bg: @vc_tta-common-background-color;
+@vc_tta-color-mulled-wine-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-mulled-wine-border: darken(@vc_tta-color-mulled-wine, 3%);
+@vc_tta-color-mulled-wine-text: #666;
+@vc_tta-color-mulled-wine-contrast: #fff;
+@vc_tta-color-mulled-wine-content: #e2ddeb;
+// vista_blue
+@vc_tta-color-vista-blue: @vista_blue;
+@vc_tta-color-vista-blue-bg: @vc_tta-common-background-color;
+@vc_tta-color-vista-blue-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-vista-blue-border: darken(@vc_tta-color-vista-blue, 3%);
+@vc_tta-color-vista-blue-text: #666;
+@vc_tta-color-vista-blue-contrast: #fff;
+@vc_tta-color-vista-blue-content: #e1f5e9;
+// orange
+@vc_tta-color-orange: @orange;
+@vc_tta-color-orange-bg: @vc_tta-common-background-color;
+@vc_tta-color-orange-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-orange-border: darken(@vc_tta-color-orange, 3%);
+@vc_tta-color-orange-text: #666;
+@vc_tta-color-orange-contrast: #fff;
+@vc_tta-color-orange-content: #faf0e1;
+// sky
+@vc_tta-color-sky: @sky;
+@vc_tta-color-sky-bg: @vc_tta-common-background-color;
+@vc_tta-color-sky-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-sky-border: darken(@vc_tta-color-sky, 3%);
+@vc_tta-color-sky-text: #666;
+@vc_tta-color-sky-contrast: #fff;
+@vc_tta-color-sky-content: #dce9f5;
+// green
+@vc_tta-color-green: @green;
+@vc_tta-color-green-bg: @vc_tta-common-background-color;
+@vc_tta-color-green-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-green-border: darken(@vc_tta-color-green, 3%);
+@vc_tta-color-green-text: #666;
+@vc_tta-color-green-contrast: #fff;
+@vc_tta-color-green-content: #e5f2da;
+// juicy_pink
+@vc_tta-color-juicy-pink: @juicy_pink;
+@vc_tta-color-juicy-pink-bg: @vc_tta-common-background-color;
+@vc_tta-color-juicy-pink-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-juicy-pink-border: darken(@vc_tta-color-juicy-pink, 3%);
+@vc_tta-color-juicy-pink-text: #666;
+@vc_tta-color-juicy-pink-contrast: #fff;
+@vc_tta-color-juicy-pink-content: #fce2e1;
+// sandy_brown
+@vc_tta-color-sandy-brown: @sandy_brown;
+@vc_tta-color-sandy-brown-bg: @vc_tta-common-background-color;
+@vc_tta-color-sandy-brown-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-sandy-brown-border: darken(@vc_tta-color-sandy-brown, 3%);
+@vc_tta-color-sandy-brown-text: #666;
+@vc_tta-color-sandy-brown-contrast: #fff;
+@vc_tta-color-sandy-brown-content: #f7e1d7;
+// purple
+@vc_tta-color-purple: @purple;
+@vc_tta-color-purple-bg: @vc_tta-common-background-color;
+@vc_tta-color-purple-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-purple-border: darken(@vc_tta-color-purple, 3%);
+@vc_tta-color-purple-text: #666;
+@vc_tta-color-purple-contrast: #fff;
+@vc_tta-color-purple-content: #f4dff5;
+// black
+@vc_tta-color-black: @black;
+@vc_tta-color-black-bg: @vc_tta-common-background-color;
+@vc_tta-color-black-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-black-border: darken(@vc_tta-color-black, 3%);
+@vc_tta-color-black-text: #666;
+@vc_tta-color-black-contrast: #fff;
+@vc_tta-color-black-content: #d9d9d9;
+// grey
+@vc_tta-color-grey: @grey;
+@vc_tta-color-grey-bg: @vc_tta-common-background-color;
+@vc_tta-color-grey-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-grey-border: darken(@vc_tta-color-grey, 3%);
+@vc_tta-color-grey-text: #666;
+@vc_tta-color-grey-contrast: #666;
+@vc_tta-color-grey-content: #9d9d9e;
+// white
+@vc_tta-color-white: @white;
+@vc_tta-color-white-bg: @vc_tta-common-background-color;
+@vc_tta-color-white-bg-border: @vc_tta-common-border-color;
+@vc_tta-color-white-border: darken(@vc_tta-color-white, 3%);
+@vc_tta-color-white-text: #666;
+@vc_tta-color-white-contrast: #666;
+@vc_tta-color-white-content: #9d9d9e;

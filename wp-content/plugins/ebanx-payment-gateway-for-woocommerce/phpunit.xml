@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/4.8/phpunit.xsd"
+         bootstrap="tests/unit/bootstrap.php"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         colors="true"
+         verbose="true"
+>
+    <testsuite name="woocommerce">
+        <directory suffix=".php">./tests/unit</directory>
+    </testsuite>
+</phpunit>

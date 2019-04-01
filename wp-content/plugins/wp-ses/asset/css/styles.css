@@ -1,0 +1,223 @@
+.wpses-container {
+	width: 742px;
+	position: relative;
+	min-height: 950px;
+}
+
+.wpses-header-block {
+	border: 1px solid #ddd;
+	background-color: #fff;
+	padding: 20px;
+	margin: .5em 0 1em 0;
+}
+
+.wpses-issues.notice {
+	padding-bottom: 1em;
+}
+
+.wpses-issues ul {
+	list-style-type: disc;
+	padding-left: 20px;
+}
+
+.wpses-issues p:first-child {
+	margin-top: 0;
+}
+
+.wpses-status p:first-child {
+	margin-top: 0;
+}
+
+.wpses-status form p {
+	margin: 0;
+}
+
+.wpses-status form p.wpses-submit {
+	margin-bottom: 1em;
+}
+
+.wpses-status form p.wpses-activation-warning {
+	font-style: italic;
+	color: #999;
+	margin-bottom: 1em;
+}
+
+.wpses-status form p.wpses-activation-desc {
+	font-size: 13px;
+	color: #999;
+	font-style: italic;
+}
+
+.wpses-status form p.wpses-force-activation-desc {
+	margin-bottom: 1em;
+}
+
+.wpses-sidebar {
+	position: absolute;
+	top: 0;
+	right: -312px;
+	width: 292px;
+}
+
+.wpses-sidebar .wpses-block {
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+
+.wpses-sidebar .wpses-block p {
+	margin-top: 0;
+	line-height: 1.4;
+}
+
+.wpses-sidebar .wpses-banner {
+	background: #fff7d1 url(../img/oses-banner.png) no-repeat;
+	background-size: contain;
+	height: 206px;
+	width: 292px;
+	display: block;
+}
+
+.wpses-sidebar .wpses-upgrade-details {
+	background-color: #341f38;
+    padding: 10px 20px 20px 20px;
+    color: #eee;
+    font-size: 13px;
+    margin: 0;
+    display: block;
+    text-decoration: none;
+}
+
+.wpses-sidebar .wpses-upgrade-details h1 {
+    font-size: 28px;
+    color: #ffc539;
+    margin: 0 0 15px 0;
+    padding: 0;
+    text-decoration: none;
+    font-weight: 200;
+    line-height: 1;
+}
+
+.wpses-sidebar .wpses-upgrade-details h3 {
+	color: #ffc539;
+	font-weight: normal;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.wpses-sidebar .wpses-upgrade-details ul {
+	margin-top: 0;
+    margin-left: 16px;
+    list-style-type: disc;
+}
+
+.wpses-sidebar .wpses-upgrade-details a {
+	color: #eee;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.wpses-sidebar form .promise {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.4em;
+}
+
+.wpses-block.credits {
+	border-top: 0;
+}
+
+.wpses-block.credits h4 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.wpses-block.credits ul {
+	margin: 0;
+}
+
+.wpses-block.credits li {
+	overflow: hidden;
+}
+
+.wpses-block.credits li:last-child {
+	margin-bottom: none;
+}
+
+.wpses-block.credits a {
+    display: block;
+    text-decoration: none;
+    color: #444;
+    font-size: 16px;
+    text-align: center;
+}
+
+.wpses-block.credits img {
+    float: left;
+    margin-right: 10px;
+}
+
+.wpses-block.credits span {
+	float: left;
+    display: block;
+    line-height: 32px;
+}
+
+.wpses-dbi-logo {
+	float: left;
+	margin: 3px 15px 0 0;
+}
+
+.wpses-sidebar .wpses-subscribe {
+	border-top: none;
+}
+
+.wpses-sidebar .wpses-subscribe h2 {
+	padding: 0;
+	margin: 0;
+	margin-bottom: 0.5em;
+	color: #666;
+	font-size: 20px;
+	line-height: 1.2em;
+	float: none;
+}
+
+.wpses-sidebar .wpses-subscribe h3 {
+	font-size: 16px;
+	margin: 0;
+}
+
+.wpses-sidebar .wpses-subscribe p {
+	margin: 0;
+}
+
+.wpses-sidebar .wpses-subscribe .wpses-interesting {
+	margin-bottom: 1em;
+	line-height: 1.4;
+}
+
+.wpses-sidebar .wpses-subscribe input {
+	width: 100%;
+}
+
+.wpses-sidebar .wpses-subscribe .wpses-field {
+	margin-bottom: 0.5em;
+}
+
+.wpses-sidebar .wpses-subscribe .wpses-field.wpses-submit-button {
+	margin-bottom: 1em;
+}
+
+@media screen and (max-width: 1252px) {
+	.wpses-sidebar {
+		position: relative;
+		top: auto;
+		right: auto;
+		margin-top: 50px;
+	}
+}

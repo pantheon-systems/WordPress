@@ -1,0 +1,17 @@
+<label class="label-header"><strong>{{ gateway_title }}</strong></label>
+<div class="wpml-form-row">
+    <label>{{ strings.currency_label }}</label>
+    <select name="currency_options[gateways_settings][{{ gateway_id }}][currency]" id="wcml_currency_options_gateway_code_{{ gateway_id }}">
+        {% for code, currency_details in currencies_details %}
+            <option value="{{ code }}" {% if ( gateway_settings and code == gateway_settings.currency ) or ( gateway_settings is empty and code == current_currency ) %}selected="selected"{% endif %} data-publishable-key="{{ currency_details.publishable_key }}" data-secret-key="{{ currency_details.secret_key }}" >{{ code }}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="wpml-form-row">
+    <label>{{ strings.publishable_label}}</label>
+    <input type="password" name="currency_options[gateways_settings][{{ gateway_id }}][publishable_key]" value="{{ gateway_settings.publishable_key }}"/>
+</div>
+<div class="wpml-form-row">
+    <label>{{ strings.secret_label}}</label>
+    <input type="password" name="currency_options[gateways_settings][{{ gateway_id }}][secret_key]" value="{{ gateway_settings.secret_key }}"/>
+</div>

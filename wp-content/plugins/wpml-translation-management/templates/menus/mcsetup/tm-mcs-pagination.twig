@@ -1,0 +1,59 @@
+<div class="wpml_tm_pagination_container">
+    <div class="otgs-notice otgs-notice__errors error inline hidden">
+        <p></p>
+    </div>
+
+    <div class="tablenav">
+        <div class="tablenav-pages">
+            <span class="spinner"></span>
+
+            <span class="displaying-num">
+                {% if total_items > 0 %}
+                    {{ strings.displaying }} {{ from }}–{{ to }} {{ strings.of }} {{ total_items }}
+                {% else %}
+                    {{ strings.nothing_found }}
+                {% endif %}
+            </span>
+
+            {% if current_page != -1 %}
+                {% if ( paginate_links ) %}
+                    {% if current_page > 1 %}
+                        <a class="prev page-numbers" href="#">«</a>
+                    {% endif %}
+
+                    {% for link in paginate_links %}
+                        {% if link.class == "current" %}
+                            <span aria-current="page" class="page-numbers current">{{ link.number }}</span>
+                        {% endif %}
+                        {% if link.class == "" %}
+                            <a class="page-numbers" href="#">{{ link.number }}</a>
+                        {% endif %}
+                        {% if link.class == "dots" %}
+                            <span class="page-numbers dots">{{ link.number }}</span>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if current_page < total_pages %}
+                        <a class="next page-numbers" href="#">»</a>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            {% if total_items > select[0] %}
+                <select name="wpml_tm_per_page">
+                    {% for option in select %}
+                        {% set selected = "" %}
+                        {% if option == select_value %}
+                            {% set selected = "selected" %}
+                        {% endif %}
+                        <option value="{{ option }}" {{ selected }}>{{ option }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+
+            {% if ( current_page != -1 ) and ( total_items > select_value ) %}
+                <a class="display-all" href="#">{{ strings.display_all }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

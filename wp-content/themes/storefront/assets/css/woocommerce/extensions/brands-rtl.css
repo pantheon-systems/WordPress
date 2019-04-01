@@ -1,0 +1,138 @@
+/**
+ * WooCommerce Brands
+ */
+/**
+ * Imports
+ */
+/**
+ * Header region
+ */
+.header-widget-region .widget_brand_thumbnails ul.brand-thumbnails {
+  text-align: center; }
+  .header-widget-region .widget_brand_thumbnails ul.brand-thumbnails::before, .header-widget-region .widget_brand_thumbnails ul.brand-thumbnails::after {
+    content: '';
+    display: table; }
+  .header-widget-region .widget_brand_thumbnails ul.brand-thumbnails::after {
+    clear: both; }
+  .header-widget-region .widget_brand_thumbnails ul.brand-thumbnails li {
+    display: inline-block;
+    width: auto !important;
+    float: none !important;
+    margin-bottom: 0 !important; }
+    .header-widget-region .widget_brand_thumbnails ul.brand-thumbnails li img {
+      max-height: 16px;
+      width: auto;
+      display: block; }
+
+/**
+ * WooCommerce Brand Layered Nav
+ */
+.widget_brand_nav ul li .count {
+  float: left; }
+
+/**
+ * WooCommerce Brand Archive
+ */
+.tax-product_brand .woocommerce-products-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  margin: 0 0 2.2906835em;
+  text-align: center; }
+  .tax-product_brand .woocommerce-products-header .brand-thumbnail {
+    margin: 0 0 1em;
+    width: auto;
+    max-height: 2.2906835em;
+    -webkit-align-self: center;
+            align-self: center;
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+            order: 1; }
+  .tax-product_brand .woocommerce-products-header .woocommerce-products-header__title,
+  .tax-product_brand .woocommerce-products-header .term-description {
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+            order: 2; }
+
+div#brands_a_z::before, div#brands_a_z::after {
+  content: '';
+  display: table; }
+
+div#brands_a_z::after {
+  clear: both; }
+
+div#brands_a_z ul.brands_index {
+  margin-right: 0;
+  padding: 0; }
+  div#brands_a_z ul.brands_index li {
+    float: none;
+    display: inline-block;
+    margin: 0 0 0.2360828548em 0.3342343017em;
+    padding: 0;
+    text-transform: uppercase; }
+    div#brands_a_z ul.brands_index li a,
+    div#brands_a_z ul.brands_index li span {
+      float: none;
+      display: block;
+      border: 0;
+      padding: 0.3819820591em;
+      min-width: 1.618em;
+      text-align: center;
+      background-color: #eeeeee;
+      color: #43454b;
+      line-height: 1; }
+    div#brands_a_z ul.brands_index li span {
+      opacity: 0.3; }
+
+div#brands_a_z h3 {
+  text-transform: uppercase; }
+
+div#brands_a_z a.top {
+  padding: 0.6180469716em;
+  background-color: #eeeeee;
+  color: #43454b;
+  border: 0;
+  line-height: 1; }
+
+div#brands_a_z ul.brands {
+  margin-right: 0;
+  list-style-position: inside; }
+  div#brands_a_z ul.brands li {
+    margin: 0 0 0.3819820591em;
+    padding: 0 0 0.3819820591em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+
+/**
+ * WooCommerce Brand single product
+ */
+.storefront-wc-brands-single-product {
+  margin: 0 0 0.5407911001em; }
+  .storefront-wc-brands-single-product img {
+    max-height: 2.2906835em; }
+
+@media (min-width: 768px) {
+  div#brands_a_z ul.brands_index {
+    width: 21.7391304348%;
+    float: right;
+    margin-left: 4.347826087%;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  div#brands_a_z h3 {
+    width: 73.9130434783%;
+    float: left;
+    margin-left: 0;
+    clear: left;
+    text-transform: uppercase; }
+    div#brands_a_z h3:first-of-type {
+      margin-top: 0; }
+  div#brands_a_z a.top {
+    clear: left; }
+  div#brands_a_z ul.brands {
+    width: 73.9130434783%;
+    float: left;
+    margin-left: 0;
+    clear: left; } }

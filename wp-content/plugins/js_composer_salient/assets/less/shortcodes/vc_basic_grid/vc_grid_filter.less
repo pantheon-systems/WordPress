@@ -1,0 +1,134 @@
+.vc_grid_filter_color_variants(@selector, @background_color, @text_color) {
+  &.vc_grid-filter-color-@{selector} {
+    > .vc_grid-filter-item {
+      &:hover, &.vc_active {
+        background-color: @background_color;
+        > span {
+          color: @text_color;
+        }
+      }
+    }
+  }
+}
+
+// Filter
+.vc_grid-filter {
+  margin-left: 0;
+  margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+  &.vc_grid-filter-center {
+    text-align: center;
+  }
+  &.vc_grid-filter-right {
+    text-align: right;
+  }
+  &.vc_grid-filter-left {
+    text-align: left;
+  }
+
+  .vc_grid_filter_color_variants(~'blue', @blue, @white);
+  .vc_grid_filter_color_variants(~'turquoise', @turquoise, @white);
+  .vc_grid_filter_color_variants(~'pink', @pink, @white);
+  .vc_grid_filter_color_variants(~'violet', @violet, @white);
+  .vc_grid_filter_color_variants(~'peacoc', @peacoc, @white);
+  .vc_grid_filter_color_variants(~'chino', @chino, @white);
+  .vc_grid_filter_color_variants(~'mulled_wine', @mulled_wine, @white);
+  .vc_grid_filter_color_variants(~'vista_blue', @vista_blue, @white);
+  .vc_grid_filter_color_variants(~'black', @black, @white);
+  .vc_grid_filter_color_variants(~'grey', @grey, #666666);
+  .vc_grid_filter_color_variants(~'orange', @orange, @white);
+  .vc_grid_filter_color_variants(~'sky', @sky, @white);
+  .vc_grid_filter_color_variants(~'green', @green, @white);
+  .vc_grid_filter_color_variants(~'juicy_pink', @juicy_pink, @white);
+  .vc_grid_filter_color_variants(~'sandy_brown', @sandy_brown, @white);
+  .vc_grid_filter_color_variants(~'purple', @purple, @white);
+  .vc_grid_filter_color_variants(~'white', @white, #666666);
+
+  // global filter styles
+  > .vc_grid-filter-item {
+    &:first-child {
+      margin-left: 0 !important;
+    }
+    cursor: pointer;
+    display: inline-block;
+    background: transparent;
+    padding: 4px 10px;
+    .transition(background-color 0.1s linear);
+    > span {
+      .transition(color 0.1s linear);
+      outline: none;
+      padding: 0;
+      text-decoration: none;
+    }
+    &:hover, &.vc_active {
+      > span {
+        text-decoration: none;
+      }
+    }
+  }
+
+  @import "filter_styles/filter_default.less";
+  @import "filter_styles/filter_default_less_rounded.less";
+  @import "filter_styles/filter_bordered.less";
+  @import "filter_styles/filter_filled.less";
+
+  &.vc_grid-filter-size-xs {
+    .vc_grid-filter-item {
+      font-size: 12px;
+      padding: 1px 5px;
+    }
+  }
+  &.vc_grid-filter-size-sm {
+    .vc_grid-filter-item {
+      font-size: 13px;
+      padding: 2px 7px;
+    }
+  }
+  &.vc_grid-filter-size-md {
+    .vc_grid-filter-item {
+      font-size: 100%;
+      padding: 2px 10px;
+    }
+  }
+  &.vc_grid-filter-size-lg {
+    .vc_grid-filter-item {
+      font-size: 18px;
+      padding: 4px 10px;
+    }
+  }
+}
+
+// Never be shown if not vc_responsive
+.vc_grid-filter-select {
+  display: none;
+}
+
+.vc_grid-filter-select, .vc_grid-filter-dropdown {
+  font-size: 12px;
+  margin-bottom: 20px;
+  &.vc_grid-filter-center {
+    text-align: center;
+  }
+  &.vc_grid-filter-right {
+    text-align: right;
+  }
+  &.vc_grid-filter-left {
+    text-align: left;
+  }
+
+  @import "filter_styles/filter_dropdown.less";
+}
+
+// If responsive enabled we will show select on xs displays
+@media (max-width: @screen-sm-min) {
+  .vc_responsive {
+    .vc_grid-filter-select {
+      display: block;
+    }
+    .vc_grid-filter {
+      display: none !important;
+    }
+  }
+
+}

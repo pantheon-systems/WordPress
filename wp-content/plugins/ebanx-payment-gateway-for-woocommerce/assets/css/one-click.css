@@ -1,0 +1,153 @@
+.ebanx-one-click-container {
+  position: relative;
+  padding: 15px 0;
+  clear: both;
+}
+
+.ebanx-one-click-button-container {
+  position: relative;
+}
+
+.ebanx-one-click-button {
+  float: none !important;
+  margin-left: 0 !important;
+}
+
+.ebanx-one-click-tooltip {
+  position: absolute;
+  top: 140%;
+  left: 0;
+  z-index: 100;
+
+  width: 260px;
+  padding: 15px;
+
+  background: #FFF;
+  border: 1px solid #EDEDED;
+  box-shadow: 0 2px 11px 0 rgba(0,0,0,0.15);
+  border-radius: 3px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s;
+  transform: translateY(5px);
+}
+
+.ebanx-one-click-tooltip.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.ebanx-one-click-tooltip:after, .ebanx-one-click-tooltip:before {
+	bottom: 100%;
+	left: 20%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.ebanx-one-click-tooltip:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #FFF;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.ebanx-one-click-tooltip:before {
+	border-color: rgba(245, 2, 2, 0);
+	border-bottom-color: #EDEDED;
+	border-width: 12px;
+	margin-left: -12px;
+}
+
+.ebanx-one-click-tooltip > h3 {
+  margin: 0 0 12px;
+  padding: 0;
+
+  font-size: 14px;
+}
+
+.ebanx-one-click-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  width: 20px;
+  height: 20px;
+  padding: 0;
+
+  border: 0;
+  background: url(../images/close-button.png) no-repeat center;
+  background-size: 20px;
+  border-radius: 50%;
+}
+
+.ebanx-one-click-close-button:hover {
+  background: url(../images/close-button.png) no-repeat center;
+  background-size: 20px;
+  border-radius: 50%;
+  opacity: .5;
+}
+
+.ebanx-one-click-card {
+  overflow: hidden;
+}
+
+.ebanx-one-click-card > img {
+  height: 20px;
+  margin: 0 10px;
+}
+
+.ebanx-one-click-cvv {
+  margin: 10px 0;
+}
+
+.ebanx-one-click-cvv-input {
+  display: block !important;
+  width: 100% !important;
+  transition: all .2s;
+}
+
+.ebanx-one-click-cvv-input.is-invalid {
+  -webkit-box-shadow: inset 2px 0 0 #e2401c;;
+  box-shadow: inset 2px 0 0 #e2401c;;
+}
+
+.ebanx-one-click-tooltip .ebanx-instalments {
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+
+.ebanx-one-click-installments-select {
+  width: 100%;
+  display: block;
+}
+
+.ebanx-one-click-container label {
+  display: block;
+  width: 100%;
+  margin-bottom: 2px;
+  padding: 0 2px;
+}
+
+.ebanx-one-click-pay {
+  margin-top: 15px !important;
+  float: none !important;
+  width: 100% !important;
+  display: block !important;
+  margin-left: 0 !important;
+}
+
+.ebanx-one-click-card-radio {
+  width: auto !important;
+  margin: 0 !important;
+}
+
+.ebanx-one-click-card-radio,
+.ebanx-one-click-card > img,
+.ebanx-one-click-card > span {
+  float: left !important;
+}

@@ -1,0 +1,69 @@
+<div class="wpml-wizard-step wpml-select-translation-manager-step js-wpml-select-translation-manager-step"
+     data-nonce="{{ nonce }}"
+     data-user-id="{{ user_id }}">
+
+    <div class="js-main">
+        <h2 class="text-center">{{ strings.title }}</h2>
+
+        <p class="text-center">{{ strings.intro }}</p>
+
+        <p>{{ strings.role_includes_heading }}</p>
+
+        <ul>
+            {% for task in strings.role_tasks %}
+                <li>{{ task }}</li>
+            {% endfor %}
+        </ul>
+
+        <p>{{ strings.intro_2 }}</p>
+
+        <div class="wpml-wizard-buttons-container-flex js-translation-managers-radios">
+            <label class="button wpml-button button-lg-wrap">
+                <input type="radio" name="user-mode" value="create"/> {{ strings.new_user }}
+            </label>
+            <label class="button wpml-button button-lg-wrap">
+                <input type="radio" name="user-mode" value="existing"/> {{ strings.existing_user }}
+            </label>
+            <label class="button button-secondary button-lg-wrap">
+                <input type="radio" name="user-mode" value="myself"/> {{ strings.use_myself }}
+            </label>
+            <small class="wpml-user-mode-myself-info">{{ strings.myself_warning }}<span class="js-wpml-tooltip-open otgs-ico-help">{{ strings.myself_warning_tooltip }}</span></small>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ strings.skip_url }}" class="js-skip-wizard">{{ strings.skip_setup }}</a>
+        </div>
+
+        <p class="wpml-wizard-privacy-info">
+            {{ strings.privacy_info }}
+        </p>
+    </div>
+
+    <div class="js-sub-section">
+        <div class="js-create-user-section-wizard new-user-section">
+            <h2>{{ strings.section_heading }}</h2>
+            <p>{{ strings.create_heading }}</p>
+            {% include 'new-user-inputs.twig' %}
+
+            <div class="wpml-wizard-buttons-container ">
+                <button class="button button-secondary alignleft js-go-back">&laquo; {{ strings.go_back }}</button>
+                <button class="button wpml-button button-lg alignright js-add-translation-manager">{{ strings.button_text }} &raquo;</button>
+            </div>
+        </div>
+
+
+        <div class="js-existing-user-section-wizard existing-user-section">
+            <h2>{{ strings.section_heading }}</h2>
+            <p>{{ strings.existing_heading }}</p>
+            <div class="wpml-form-row">
+                <input type="text" class="js-translation-manager-select" placeholder="{{ strings.placeholder }}"/>
+            </div>
+            <div class="wpml-wizard-buttons-container ">
+                <button class="button button-secondary alignleft js-go-back">&laquo; {{ strings.go_back }}</button>
+                <button class="button wpml-button button-lg alignright js-add-translation-manager button-primary">{{ strings.button_text }} &raquo;</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

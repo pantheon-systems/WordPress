@@ -1,0 +1,39 @@
+<div id="{{ dialog.id }}"
+     class="{{ dialog.class }}"
+     title="{{ dialog.strings.title }}"
+     style="display:none"
+     data-previous-text="{{ dialog.strings.previous_text }}"
+     data-cancel-text="{{ dialog.strings.cancel_text }}">
+
+    <div class="js-select-translator"
+         data-set-languages-text="{{ dialog.strings.set_languages_text }}"
+         data-nonce="{{ dialog.nonce }}"
+         style="width: 600px">
+
+        <label class="add-new-translator-label"  for="existing-user-translator"><input type="radio" id="existing-user-translator" name="user-translator" value="existing"/> {{ dialog.strings.existing_user }}</label>
+
+        <div class="js-existing-user-section add-new-translator-form" style="display: none">
+            <input type="text" class="js-translation-translator-select" placeholder=""/>
+        </div>
+
+
+
+
+        <label class="add-new-translator-label"  for="new-user-translator"> <input type="radio" id="new-user-translator" name="user-translator" value="new"/> {{ dialog.strings.new_user }}</label>
+
+        <div class="js-new-user-section add-new-translator-form" style="display: none">
+            {% include 'new-user-inputs.twig' %}
+        </div>
+    </div>
+
+    <div class="js-select-languages-section add-new-translator-languages"
+         data-add-translator-text="{{ dialog.strings.add_translator_text }}"
+         style="width: 600px;display: none">
+
+        <h4 data-text="{{ dialog.strings.set_lang }}"></h4>
+        <div class="js-error notice notice-error otgs-notice-icon" style="display: none"></div>
+
+        {% include 'language-pairs.twig' %}
+
+    </div>
+</div>

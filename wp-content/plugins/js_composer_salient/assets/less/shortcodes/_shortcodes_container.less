@@ -1,0 +1,44 @@
+.vc_shortcodes_container {
+  margin: 4px 0 0 0;
+
+  background-position: 10px 35px;
+  background-repeat: no-repeat;
+  background-color: #fff;
+
+  .wpb_column_container {
+    margin: 0 10px;
+  }
+  > .controls_column {
+    text-align: center;
+    width: 100%;
+    line-height: 1px;
+    padding: 2px;
+    height: @vc_backend_column_controls_height;
+  }
+  > .wpb_element_wrapper {
+    position: relative;
+    > .wpb_element_title {
+      position: absolute;
+      top: 11px;
+      left: 10px;
+      margin: 0;
+    }
+    > .vc_container_for_children {
+      margin: 0 10px 0 52px;
+      outline: 1px dotted @vc_border_color;
+      min-height: 55px;
+    }
+  }
+}
+
+.wpb_vc_item {
+  &.wpb_content_element {
+    > .wpb_element_wrapper {
+      background-image: url(../vc/item_icon.png);
+      background-position: 8px 7px;
+      min-height: 13px;
+      height: 13px;
+      padding-left: 32px;
+    }
+  }
+}

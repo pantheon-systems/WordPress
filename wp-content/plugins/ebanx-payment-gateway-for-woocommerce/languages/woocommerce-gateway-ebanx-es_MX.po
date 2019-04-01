@@ -1,0 +1,424 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2016-12-30 14:07-0200\n"
+"PO-Revision-Date: 2017-04-25 13:30-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/admin/views/html-notice-currency-not-supported.php:15
+#, php-format
+msgid "Currency %s is not supported. Works only with Brazilian Real."
+msgstr ""
+
+#: includes/class-wc-ebanx-account-gateway.php:13
+msgid "EBANX - ACCOUNT"
+msgstr ""
+
+#: includes/class-wc-ebanx-account-gateway.php:16
+msgid "Saldo EBANX"
+msgstr ""
+
+#: includes/class-wc-ebanx-account-gateway.php:17
+msgid "Pague usando o saldo da sua conta do EBANX."
+msgstr ""
+
+#: includes/class-wc-ebanx-banking-ticket-gateway.php:13
+msgid "EBANX - Banking Ticket"
+msgstr ""
+
+#: includes/class-wc-ebanx-banking-ticket-gateway.php:16
+msgid "Boleto EBANX"
+msgstr ""
+
+#: includes/class-wc-ebanx-banking-ticket-gateway.php:17
+msgid "Pague com boleto bancário."
+msgstr ""
+
+#: includes/class-wc-ebanx-credit-card-gateway.php:12
+msgid "EBANX - Credit Card"
+msgstr ""
+
+#: includes/class-wc-ebanx-credit-card-gateway.php:15 includes/class-wc-ebanx-global-gateway.php:163
+msgid "Credit Card"
+msgstr ""
+
+#: includes/class-wc-ebanx-credit-card-gateway.php:16
+msgid "Pay with credit card."
+msgstr ""
+
+#: includes/class-wc-ebanx-credit-card-gateway.php:22
+msgid "Capture by EBANX"
+msgstr ""
+
+#: includes/class-wc-ebanx-credit-card-gateway.php:50
+msgid "EBANX: Transaction captured by "
+msgstr ""
+
+#: includes/class-wc-ebanx-custom-order.php:6
+msgid "My Field"
+msgstr ""
+
+#: includes/class-wc-ebanx-debit-card-gateway.php:12
+msgid "EBANX - Debit Card"
+msgstr ""
+
+#: includes/class-wc-ebanx-debit-card-gateway.php:15
+msgid "Tarjeta de Débito"
+msgstr ""
+
+#: includes/class-wc-ebanx-debit-card-gateway.php:16
+msgid "Paga con tarjeta de débito."
+msgstr ""
+
+#: includes/class-wc-ebanx-eft-gateway.php:13
+msgid "EBANX - PSE"
+msgstr ""
+
+#: includes/class-wc-ebanx-eft-gateway.php:16
+msgid "PSE - Pago Seguros en Línea"
+msgstr ""
+
+#: includes/class-wc-ebanx-eft-gateway.php:17
+msgid "Paga con PSE - Pago Seguros en Línea."
+msgstr ""
+
+#: includes/class-wc-ebanx-gateway.php:38 includes/class-wc-ebanx-gateway.php:48
+msgid "Birth Date"
+msgstr "Fecha de Nacimiento"
+
+#: includes/class-wc-ebanx-gateway.php:449
+msgid "EBANX: Transaction paid."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:13
+msgid "EBANX"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:14
+msgid "EBANX easy-to-setup checkout allows your business to accept local payments in Brazil, Mexico, Colombia, Chile & Peru."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:49
+msgid "Integration"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:51
+msgid "You can obtain the integration keys in the settings section, logging in to the <a href=\"https://www.ebanx.com/business/en/dashboard\">EBANX Dashboard.</a>"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:54
+msgid "Sandbox Integration Key"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:58
+msgid "Sandbox Public Integration Key"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:62
+msgid "Live Integration Key"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:66
+msgid "Live Public Integration Key"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:70
+msgid "EBANX Sandbox"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:72
+msgid "Enable Sandbox Mode"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:73
+msgid "EBANX Sandbox is a testing environment that mimics the live environment. Use it to make payment requests to see how your ecommerce processes them."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:78
+msgid "Debug Log"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:79
+msgid "Enable Debug Log"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:80
+msgid "Record all errors that occur when executing a transaction."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:85
+msgid "Enable Payment Methods"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:87
+msgid "Set up payment methods for your checkout. Confirm that method is enabled on your contract."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:90
+msgid "Brazil"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:107
+msgid "Mexico"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:122
+msgid "Chile"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:135
+msgid "Colombia"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:146
+msgid "Peru"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:159
+msgid "Advanced Options"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:167
+msgid "Save Card Data"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:170
+msgid "Enable saving card data"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:171
+msgid "Allow your customer to save credit card and debit card data for future purchases."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:176
+msgid "One-Click Payment"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:177
+msgid "Enable one-click-payment"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:179
+msgid "Allow your customer to complete payments in one-click using credit cards saved."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:184
+msgid "Enable Auto-Capture"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:185
+msgid "Capture the payment immediatly."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:187
+msgid ""
+"Automatically capture payments from your customers. Otherwise you will need to capture the payment going to: WooCommerce -> Orders. Not captured payments will be "
+"cancelled in 4 days."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:191
+msgid "Maximum nº of Installments"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:209
+msgid "Establish the maximum number of installments in which your customer can pay, as consented on your contract."
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:213
+msgid "Cash Payments"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:217
+msgid "Days to Expiration"
+msgstr ""
+
+#: includes/class-wc-ebanx-global-gateway.php:226
+msgid "Define the maximum number of days on which your customer can complete the payment of: Boleto, OXXO, Sencilito, PagoEfectivo and SafetyPay."
+msgstr ""
+
+#: includes/class-wc-ebanx-my-account.php:52
+msgid "View Banking Ticket"
+msgstr ""
+
+#: includes/class-wc-ebanx-one-click.php:102 includes/class-wc-ebanx-one-click.php:141 includes/class-wc-ebanx-one-click.php:151
+#: includes/class-wc-ebanx-one-click.php:172 includes/class-wc-ebanx-one-click.php:185
+#, php-format
+msgid "Error %d: Unable to create the order. Please try again."
+msgstr ""
+
+#: includes/class-wc-ebanx-one-click.php:159
+#, php-format
+msgid "Unfortunately <strong>we do not ship to %s</strong>. Please enter an alternative shipping address."
+msgstr ""
+
+#: includes/class-wc-ebanx-one-click.php:178
+msgid "Sorry, invalid shipping method."
+msgstr ""
+
+#: includes/class-wc-ebanx-one-click.php:429
+msgid "Pay with one click"
+msgstr ""
+
+#: includes/class-wc-ebanx-oxxo-gateway.php:13
+msgid "EBANX - OXXO"
+msgstr ""
+
+#: includes/class-wc-ebanx-oxxo-gateway.php:16
+msgid "OXXO"
+msgstr ""
+
+#: includes/class-wc-ebanx-oxxo-gateway.php:17
+msgid "Paga con boleta OXXO."
+msgstr ""
+
+#: includes/class-wc-ebanx-pagoefectivo-gateway.php:13
+msgid "EBANX - Pagoefectivo"
+msgstr ""
+
+#: includes/class-wc-ebanx-pagoefectivo-gateway.php:16
+msgid "PagoEfectivo"
+msgstr ""
+
+#: includes/class-wc-ebanx-pagoefectivo-gateway.php:17
+msgid "Paga con PagoEfectivo."
+msgstr ""
+
+#: includes/class-wc-ebanx-safetypay-gateway.php:13
+msgid "EBANX - Safetypay"
+msgstr ""
+
+#: includes/class-wc-ebanx-safetypay-gateway.php:15
+msgid "SafetyPay"
+msgstr ""
+
+#: includes/class-wc-ebanx-safetypay-gateway.php:16
+msgid "Paga con SafetyPay."
+msgstr ""
+
+#: includes/class-wc-ebanx-sencillito-gateway.php:12
+msgid "EBANX - Sencillito"
+msgstr ""
+
+#: includes/class-wc-ebanx-sencillito-gateway.php:15
+msgid "Sencillito"
+msgstr ""
+
+#: includes/class-wc-ebanx-sencillito-gateway.php:16
+msgid "Paga con Sencillito."
+msgstr ""
+
+#: includes/class-wc-ebanx-servipag-gateway.php:13
+msgid "EBANX - Servipag"
+msgstr ""
+
+#: includes/class-wc-ebanx-servipag-gateway.php:16
+msgid "ServiPag"
+msgstr ""
+
+#: includes/class-wc-ebanx-servipag-gateway.php:17
+msgid "Paga con Servipag."
+msgstr ""
+
+#: includes/class-wc-ebanx-tef-gateway.php:13
+msgid "EBANX - TEF"
+msgstr ""
+
+#: includes/class-wc-ebanx-tef-gateway.php:15
+msgid "Débito Online"
+msgstr ""
+
+#: includes/class-wc-ebanx-tef-gateway.php:16
+msgid "Selecione o seu banco. A seguir, você será redirecionado para concluir o pagamento pelo seu internet banking."
+msgstr ""
+
+#: templates/credit-card/card-template.php:16 templates/debit-card/payment-form.php:21
+msgid "MM / YY"
+msgstr ""
+
+#: templates/credit-card/card-template.php:20 templates/credit-card/payment-form.php:33 templates/debit-card/payment-form.php:25
+msgid "CVV"
+msgstr ""
+
+#: templates/credit-card/emails/html-instructions.php:17 templates/credit-card/payment-instructions.php:18 templates/oxxo/emails/html-instructions.php:17
+#, php-format
+msgid "Payment successfully made using %1$s credit card in %2$s."
+msgstr "Pago realizado con tarjeta de crédito %1$s (%2$s meses sin intereses)"
+
+#: templates/credit-card/installments.php:9
+#, php-format
+msgid "%1$dx of %2$s"
+msgstr "%1$d de %2$s"
+
+#: templates/instalments.php:20
+#, php-format
+msgid "with interest"
+msgstr "con intereses"
+
+#: templates/credit-card/one-click.php:18
+msgid "One-Click Purchase"
+msgstr ""
+
+#: templates/eft/payment-instructions.php:17 templates/servipag/payment-instructions.php:17 templates/tef/payment-instructions.php:17
+#, php-format
+msgid "Payment successfully made using %1$s oxxo in %2$s."
+msgstr ""
+
+#: templates/pagoefectivo/payment-instructions.php:17
+#, php-format
+msgid "Payment successfully made using %1$s pagoefectivo in %2$s."
+msgstr ""
+
+#: templates/safetypay/payment-instructions.php:17
+#, php-format
+msgid "Payment successfully made using %1$s safetypay in %2$s."
+msgstr ""
+
+#: woocommerce-gateway-ebanx.php:199
+#, php-format
+msgid "WooCommerce EBANX Gateway - The minimum PHP version required for this plugin is %1$s. You are running %2$s."
+msgstr ""
+
+#: woocommerce-gateway-ebanx.php:203
+msgid "WooCommerce EBANX Gateway requires WooCommerce to be activated to work."
+msgstr ""
+
+#: woocommerce-gateway-ebanx.php:206
+#, php-format
+msgid "WooCommerce EBANX Gateway - The minimum WooCommerce version required for this plugin is %1$s. You are running %2$s."
+msgstr ""
+
+#: woocommerce-gateway-ebanx.php:301
+msgid "Settings"
+msgstr ""
+
+#: woocommerce-gateway-ebanx.php:421
+msgid "EBANX - Credit Cards"
+msgstr "EBANX - Tarjetas de Crédito"
+
+#: templates/my-account/ebanx-credit-cards.php:3
+msgid "Your saved credit cards"
+msgstr "Sus tarjetas de crédito guardados"
+
+#: templates/my-account/ebanx-credit-cards.php:5
+msgid "The following credit cards will be listed on the checkout page. To delete a credit card, just check it and submit."
+msgstr "Las tarjetas de crédito siguientes se mostrarán en la página de pago. Para borrar una tarjeta de crédito, seleccionarlo y haga clic en \"Borrar tarjetas\"."
+
+#: templates/my-account/ebanx-credit-cards.php:23
+msgid "Delete cards"
+msgstr "Borrar tarjetas"
+
+#: templates/my-account/ebanx-credit-cards.php:27
+msgid "No credit cards found"
+msgstr "Ninguna tarjeta de crédito encontrada"
+
+#: templates/my-account/ebanx-credit-cards.php:29
+msgid "To save a credit card, pay an order on checkout using credit card as payment method."
+msgstr "Para guardar una tarjeta de crédito, termina una compra seleccionando tarjeta de crédito como medio de pago."

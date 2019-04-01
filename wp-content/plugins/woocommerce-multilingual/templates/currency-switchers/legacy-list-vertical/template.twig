@@ -1,0 +1,9 @@
+<div class="{{ css_classes }}" >
+	<ul>
+		{% for currency in currencies %}
+			<li {% if( currency == selected_currency) %} class="wcml-cs-active-currency" {% endif %} >
+				<a rel="{{ currency }}">{{ get_formatted_price( currency, format )|raw }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

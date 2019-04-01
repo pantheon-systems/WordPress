@@ -1,0 +1,28 @@
+<p>{{ strings.shortcode_actions.section_description|raw }}</p>
+<p>
+    <input type="checkbox" id="wpml-ls-show-in-shortcode-actions" name="statics[shortcode_actions][show]" value="1"
+                   class="js-wpml-ls-toggle-slot js-wpml-ls-trigger-save" data-target=".js-wpml-ls-shortcode-actions-toggle-target"
+                   {% if settings.statics.shortcode_actions.show %}checked="checked"{% endif %}/>
+
+    <label for="wpml-ls-show-in-shortcode-actions">{{ strings.shortcode_actions.show }}</label>
+</p>
+
+<div class="hidden">
+    {% set slot_settings = [] %}
+    {% set slot_settings = slot_settings|merge({'shortcode_actions': settings.statics.footer}) %}
+
+    {% include 'table-slots.twig'
+        with {
+            "slot_type": "statics",
+            "slots_settings": slot_settings,
+            "slug"     : 'shortcode_actions',
+        }
+    %}
+
+</div>
+
+<div class="js-wpml-ls-shortcode-actions-toggle-target alignleft{% if settings.statics.shortcode_actions.show != 1 %} hidden{% endif %}">
+    <button class="js-wpml-ls-open-dialog button-secondary"
+            data-target="#wpml-ls-slot-list-statics-shortcode_actions"
+            name="wpml-ls-customize">{{ strings.shortcode_actions.customize_button_label }}</button>
+</div>

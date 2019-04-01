@@ -1,0 +1,124 @@
+@import (reference) "../vc_tta.less";
+@import "vc_tta-icon-controls.less";
+
+@vc_frontend_editor_tta_container_top_margin: 31px;
+// Extending aliases for frontend editor
+.vc_general.vc_tta .vc_tta-controls-icon[data-vc-tta-controls-icon="plus"]::before:extend(.vc_tta .vc_tta-controls-icon.vc_tta-controls-icon-plus::before) {
+}
+
+.vc_general.vc_tta .vc_tta-controls-icon[data-vc-tta-controls-icon="plus"]::after:extend(.vc_tta .vc_tta-controls-icon.vc_tta-controls-icon-plus::after) {
+}
+
+.vc_general.vc_tta .vc_tta-controls-icon[data-vc-tta-controls-icon="chevron"]::before:extend(.vc_tta .vc_tta-controls-icon.vc_tta-controls-icon-chevron::before) {
+}
+
+.vc_general.vc_tta .vc_tta-controls-icon[data-vc-tta-controls-icon="triangle"]::before:extend(.vc_tta .vc_tta-controls-icon.vc_tta-controls-icon-triangle::before) {
+}
+
+.vc_general.vc_tta .vc_active .vc_tta-controls-icon[data-vc-tta-controls-icon="plus"]::after:extend(.vc_tta .vc_active .vc_tta-controls-icon.vc_tta-controls-icon-plus::after) {
+}
+
+.vc_general.vc_tta .vc_active .vc_tta-controls-icon[data-vc-tta-controls-icon="chevron"]::before:extend(.vc_tta .vc_active .vc_tta-controls-icon.vc_tta-controls-icon-chevron::before) {
+}
+
+.vc_general.vc_tta .vc_active .vc_tta-controls-icon[data-vc-tta-controls-icon="triangle"]::before:extend(.vc_tta .vc_active .vc_tta-controls-icon.vc_tta-controls-icon-triangle::before) {
+}
+
+// Extending aliases for controls icon position:
+
+.vc_general.vc_tta.vc_tta-accordion [data-vc-tta-controls-icon-position="left"].vc_tta-panel-title > a:extend(.vc_tta.vc_tta-accordion .vc_tta-controls-icon-position-left.vc_tta-panel-title > a) {
+}
+
+.vc_general.vc_tta.vc_tta-accordion [data-vc-tta-controls-icon-position="left"] .vc_tta-controls-icon:extend(.vc_tta.vc_tta-accordion .vc_tta-controls-icon-position-left .vc_tta-controls-icon) {
+}
+
+.vc_general.vc_tta.vc_tta-accordion [data-vc-tta-controls-icon-position="right"].vc_tta-panel-title > a:extend(.vc_tta.vc_tta-accordion .vc_tta-controls-icon-position-right.vc_tta-panel-title > a) {
+}
+
+.vc_general.vc_tta.vc_tta-accordion [data-vc-tta-controls-icon-position="right"] .vc_tta-controls-icon:extend(.vc_tta.vc_tta-accordion .vc_tta-controls-icon-position-right .vc_tta-controls-icon) {
+}
+
+.vc_element-container > .vc_element:last-child .vc_tta-container {
+  margin-bottom: 40px;
+}
+
+.vc_general.vc_tta-tabs .vc_element.vc_vc_tta_section {
+  position: static;
+}
+
+.vc_general .vc_element.vc_empty .vc_tta-panel-body.vc_empty-element {
+  min-height: 0;
+  position: static;
+}
+
+// TTA Placeholder
+.vc_general .vc_placeholder-tta, .vc_placeholder-tta-tab {
+  padding: 0;
+  margin: 0;
+  background: transparent url('../vc/pattern.gif');
+  height: 50px;
+}
+
+.vc_general .vc_placeholder-tta-tab {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+// TTA empty element
+// =============================
+.vc_general .vc_element.vc_empty .vc_tta-panel-body {
+  min-height: 100px !important;
+  .vc_empty-element {
+    position: absolute;
+    top: @vc_tta-panes-padding-vertical;
+    bottom: @vc_tta-panes-padding-vertical;
+    left: @vc_tta-panes-padding-horizontal;
+    right: @vc_tta-panes-padding-horizontal;
+  }
+}
+
+.vc_general.vc_tta-accordion .vc_element.vc_empty .vc_tta-panel-body {
+  position: relative;
+}
+
+@media (max-width: @vc_tta-breakpoint-max) {
+  .vc_general.vc_tta-tabs .vc_element.vc_vc_tta_section,
+  .vc_general.vc_tta-tour .vc_element.vc_vc_tta_section {
+    position: relative;
+  }
+
+  .vc_element.vc_empty .vc_tta-panel-body {
+    position: relative;
+  }
+}
+
+@media (min-width: @vc_tta-breakpoint-max) {
+  .compose-mode .vc_tta-tabs .vc_move-vc_tta_section.vc_child-element-move .vc_btn-content {
+    cursor: default !important;
+    background-image: none !important;
+    padding-left: 12px !important;
+
+    .vc-composer-icon {
+      display: none;
+    }
+  }
+}
+
+// ==================
+
+// TTA container space
+.vc_vc_tta_accordion, .vc_vc_tta_tour {
+  margin-top: @vc_frontend_editor_tta_container_top_margin;
+}
+
+// Sorting fixes for Tabs list
+
+.vc_tta-tabs-list.ui-sortable {
+  .vc_tta-tab.ui-sortable-helper {
+    a {
+      &:before, &:after {
+        display: none !important;
+      }
+    }
+  }
+}

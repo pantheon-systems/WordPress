@@ -1,0 +1,55 @@
+<div class="otgs-installer-component-setting" data-has-setting="{{ has_setting }}">
+	{% if custom_raw_heading is defined and custom_raw_heading is not null %}
+		{{ custom_raw_heading|raw }}
+	{% else %}
+		<h4 class="heading">{{ strings.heading }}
+			<a
+							href="{{ company_url }}"
+							target="_blank"
+							rel="noopener"
+							class="otgs-external-link"
+			>
+				{{- company_site -}}
+			</a>
+		</h4>
+	{% endif %}
+	<input
+					type="checkbox"
+					{% if is_repo_allowed %}
+						checked="checked"
+					{% endif %}
+					id="{{ nonce.action }}{{ nonce.value }}"
+					class="js-otgs-components-report-user-choice otgs-switcher-input"
+					value="1"
+					data-nonce-action="{{ nonce.action }}"
+					data-nonce-value="{{ nonce.value }}"
+					data-repo="{{ repo }}"
+	/>
+	<label for="{{ nonce.action }}{{ nonce.value }}"
+		   class="otgs-switcher wpml-theme"
+		   data-on="ON"
+		   data-off="OFF"
+	>
+		{% if custom_raw_label is defined and custom_raw_label is not null %}
+			{{ custom_raw_label|raw }}
+		{% else %}
+			{{ strings.report_to }} {{ company_site }} {{ strings.which_theme_and_plugins }}
+		{% endif %}
+	</label>
+	<div class="spinner otgs-components-report-setting-spinner"></div>
+
+	<p>
+		<a
+				href="{{ privacy_policy_url }}"
+				target="_blank"
+				rel="noopener"
+				class="otgs-external-link"
+		>
+            {%- if custom_privacy_policy_text is defined and custom_privacy_policy_text is not null -%}
+                {{- custom_privacy_policy_text|raw -}}
+            {%- else -%}
+                {{- privacy_policy_text -}}
+            {%- endif -%}
+		</a>
+	</p>
+</div>

@@ -1,0 +1,93 @@
+<div id="wpml-media-dialog">
+    <span class="ajax-loader"></span>
+    <form id="wpml-media-dialog-form" method="post" enctype="multipart/form-data">
+        {{ nonce|raw }}
+        <input type="hidden" name="original-attachment-id" value=""/>
+        <input type="hidden" name="translated-attachment-id" value=""/>
+        <input type="hidden" name="translated-language" value=""/>
+        <input type="hidden" name="restore-media" value="0"/>
+        <input type="hidden" name="update-media-file" value="0"/>
+        <input type="hidden" name="action" value="wpml_media_save_translation"/>
+        <header class="wpml-media-translation-header">
+            <h3 class="wpml-header-original">{{ strings.original }}<span class="wpml-title-flag"><img
+                            src="#"></span><strong>%from_language%</strong>
+            </h3>
+            <h3 class="wpml-header-translation">{{ strings.translation }}<span class="wpml-title-flag"><img
+                            src="#"></span><strong>%to_language%</strong>
+            </h3>
+        </header>
+
+
+        <div class="wpml-form-row">
+
+            <label>{{ strings.file }}</label>
+
+            <span class="wpml-media-wrapper">
+                <span class="wpml-media-original-image">
+                    <img src="#" alt="#">
+                    <span class="wpml-media-original-title"></span>
+                </span>
+            </span>
+
+            <span class="wpml-media-wrapper wpml-media-upload-handle">
+                <a class="wpml-media-translation-image drag-drop-area">
+                    <img src="#" alt="#">
+                    <span class="wpml-media-translated-title"></span>
+                    <span class="wpml-media-upload-text hidden">{{ strings.use_different_file }}</span>
+                </a>
+
+                <span class="js-wpml-media-revert wpml-display-block text-center hidden">
+                    <a class="button button-secondary button-small">{{ strings.revert_to_original }}</a>
+                </span>
+            </span>
+
+        </div>
+
+        <div class="wpml-form-row wpml-form-row-title hidden">
+            <label for="media-title">{{ strings.name }}</label>
+            <input readonly value="" id="media-title-original" type="text">
+            <button class="button-copy button-secondary js-button-copy otgs-ico-copy"
+                    title="{{ strings.copy_from_original }}"></button>
+            <input name="translation[title]" id="media-title-translation" value="" type="text">
+        </div>
+        <div class="wpml-form-row wpml-form-row-caption hidden">
+            <label for="media-caption">{{ strings.caption }}</label>
+            <textarea readonly id="media-caption-original" cols="22" rows="4"></textarea>
+            <button class="button-copy button-secondary js-button-copy otgs-ico-copy"
+                    title="{{ strings.copy_from_original }}"></button>
+            <textarea name="translation[caption]" id="media-caption-translation" cols="22" rows="4"></textarea>
+        </div>
+        <div class="wpml-form-row wpml-form-row-alt-text hidden">
+            <label for="media-alt-text">{{ strings.alt_text }}</label>
+            <input readonly value="" id="media-alt-text-original" type="text">
+            <button class="button-copy button-secondary js-button-copy otgs-ico-copy"
+                    title="{{ strings.copy_from_original }}"></button>
+            <input name="translation[alt-text]" id="media-alt-text-translation" value="" type="text">
+        </div>
+        <div class="wpml-form-row wpml-form-row-description hidden">
+            <label for="media-description">{{ strings.description }}</label>
+            <textarea readonly id="media-description-original" cols="22" rows="4"></textarea>
+            <button class="button-copy button-secondary js-button-copy otgs-ico-copy"
+                    title="{{ strings.copy_from_original }}"></button>
+            <textarea name="translation[description]" id="media-description-translation" cols="22" rows="4"></textarea>
+        </div>
+    </form>
+    {% if( show_text_change_notice) %}
+    <div class="text-change-notice notice notice-info inline is-dismissible hidden">
+        <p>{{ strings.texts_change_notice }}</p>
+    </div>
+    {% endif %}
+    <div id="wpml-media-upload-progress-animation">
+        <div class="upload-progress-bar"></div>
+        <div class="status">0%</div>
+    </div>
+    <span id="wpml-media-upload-error" class="icl_error_text"></span>
+</div>
+<form id="wpml-media-file-upload-form" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="wpml_media_upload_file">
+    <input type="hidden" name="attachment-id" value="">
+    <input type="hidden" name="original-attachment-id" value="">
+    <input type="hidden" name="language" value="">
+    {{ nonce|raw }}
+    <input style="display:none" type="file" name="image" accept="image/*" />
+</form>

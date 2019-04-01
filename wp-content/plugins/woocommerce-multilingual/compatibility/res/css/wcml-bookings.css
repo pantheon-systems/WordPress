@@ -1,0 +1,65 @@
+.wcml_custom_cost_field{
+    display: none;
+    clear: both;
+}
+
+.wcml_bookings_range_block,
+.wcml_bookings_person_block,
+.wcml_bookings_resource_block{
+    padding: 5px 0;
+    display: -webkit-flex;
+    display: flex;
+    display: -moz-box;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.wcml_bookings_range_block label,
+.wcml_bookings_person_block label,
+.wcml_bookings_resource_block label{
+    width: auto;
+    margin: 0;
+    padding: 6px 7px;
+}
+
+.wcml_custom_costs{
+    padding: 9px 9px 0;
+    display: inline-block;
+    width: 100%;
+    float:left;
+    margin-top:10px;
+}
+
+#bookings_pricing .wcml_custom_costs label,
+.woocommerce_options_panel .wcml_custom_costs label{
+    width: auto;
+    margin: 0 5px;
+    float: left;
+}
+.woocommerce_options_panel .wcml_bookings_range_block label{
+    width: 10px;;
+    margin: 0;
+    padding: inherit;
+}
+
+#bookings_pricing .wcml_custom_cost_field label,
+#bookings_resources .woocommerce_booking_resource .wcml_bookings_resource_block label{
+    width: 20px;
+    margin: 0 5px;
+    float: left;
+}
+
+.wcml_custom_costs input{
+    width: 16px;
+    clear: both;
+    margin: 2px 5px 2px 0;
+    float: left;
+}
+input.wcml_bookings_custom_price,
+#bookings_pricing .table_grid table td input.wcml_bookings_custom_price{
+    background-color: #F5F2E1;
+}
+#bookings_pricing #wcml_custom_costs_manually{
+    clear: both;
+    margin-bottom: 20px;
+}

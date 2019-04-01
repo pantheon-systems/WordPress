@@ -1,0 +1,26 @@
+{% if edit_mode %}
+    <div class="wcml-is-translatable-attr-block" style="display: none">
+        <table>
+            <tr class="form-field">
+                <th scope="row" valign="top">
+                    <label for="wcml-is-translatable-attr">{{ strings.label }}</label>
+                </th>
+                <td>
+                    <input name="wcml-is-translatable-attr" id="wcml-is-translatable-attr" type="checkbox" value="1" {% if checked %} checked="checked" {% endif %} />
+                    <p class="description">{{ strings.description }}</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <input type="hidden" id="wcml-is-translatable-attr-notice" value="{{ strings.notice }}" />
+{% else %}
+    <div class="wcml-is-translatable-attr-block" style="display: none">
+        <div class="form-field">
+            <label for="wcml-is-translatable-attr">
+                <input name="wcml-is-translatable-attr" id="wcml-is-translatable-attr" type="checkbox" value="1" {% if checked %} checked="checked" {% endif %} />
+                {{ strings.label }}
+            </label>
+            <p class="description">{{ strings.description }}</p>
+        </div>
+    </div>
+{% endif %}

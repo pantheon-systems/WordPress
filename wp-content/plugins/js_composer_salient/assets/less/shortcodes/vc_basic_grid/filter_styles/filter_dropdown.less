@@ -1,0 +1,67 @@
+.vc_grid_filter_dropdown_color_variants(@selector, @text_color) {
+  &.vc_grid-filter-color-@{selector} {
+    .vc_arrow-icon-navicon {
+      color: @text_color;
+    }
+  }
+}
+
+.vc_grid-styled-select {
+  .vc_arrow-icon-navicon {
+    display: none;
+  }
+  select {
+    outline: none;
+    display: inline-block;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .vc_grid_filter_dropdown_color_variants(~'blue', @blue);
+  .vc_grid_filter_dropdown_color_variants(~'turquoise', @turquoise);
+  .vc_grid_filter_dropdown_color_variants(~'pink', @pink);
+  .vc_grid_filter_dropdown_color_variants(~'violet', @violet);
+  .vc_grid_filter_dropdown_color_variants(~'peacoc', @peacoc);
+  .vc_grid_filter_dropdown_color_variants(~'chino', @chino);
+  .vc_grid_filter_dropdown_color_variants(~'mulled_wine', @mulled_wine);
+  .vc_grid_filter_dropdown_color_variants(~'vista_blue', @vista_blue);
+  .vc_grid_filter_dropdown_color_variants(~'black', @black);
+  .vc_grid_filter_dropdown_color_variants(~'grey', @grey);
+  .vc_grid_filter_dropdown_color_variants(~'orange', @orange);
+  .vc_grid_filter_dropdown_color_variants(~'sky', @sky);
+  .vc_grid_filter_dropdown_color_variants(~'green', @green);
+  .vc_grid_filter_dropdown_color_variants(~'juicy_pink', @juicy_pink);
+  .vc_grid_filter_dropdown_color_variants(~'sandy_brown', @sandy_brown);
+  .vc_grid_filter_dropdown_color_variants(~'purple', @purple);
+  .vc_grid_filter_dropdown_color_variants(~'white', @white);
+
+  .vc_grid-styled-select {
+    border: 1px solid #ccc;
+    display: inline-block;
+    height: 30px;
+    overflow: hidden;
+    padding-right: 5px;
+    text-align: left;
+    width: auto;
+    vertical-align: middle;
+    .vc_arrow-icon-navicon {
+      font-size: 17px;
+      display: inline;
+      vertical-align: middle;
+    }
+    select {
+      background: none repeat scroll 0 0 transparent;
+      border: 0 none;
+      border-radius: 0;
+      height: 30px;
+      line-height: 1;
+      margin-right: -50px;
+      padding: 5px;
+      position: relative;
+      font-size: 12px;
+      z-index: 0;
+      cursor: pointer;
+      max-width: inherit !important;
+    }
+  }
+}

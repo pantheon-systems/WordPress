@@ -1,0 +1,21 @@
+.owl-carousel {
+  .owl-item {
+    .vc_grid-item {
+      -webkit-transform: translate3D(0, 0, 0);
+      -ms-transform: translate3D(0, 0, 0);
+      transform: translate3D(0, 0, 0);
+    }
+  }
+  /* .owl-animated-out - only for current item */
+  /* This is very important class. Use z-index if you want move Out item above In item */
+  .owl-animated-out {
+    z-index: 0;
+  }
+  /* .owl-animated-in - only for upcoming item
+  /* This is very important class. Use z-index if you want move In item above Out item */
+  .owl-animated-in {
+    z-index: 1;
+  }
+  /* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */
+}
+

@@ -1,0 +1,26 @@
+{% if taxonomies is empty %}
+
+    <p>{{ strings.no_taxonomies }}</p>
+
+{% else %}
+
+	<div class="wpml-loading-taxonomy"><span class="spinner is-active"></span>{{ strings.loading }}</div>
+	<div class="wpml_taxonomy_loaded wcml_custom_taxonomies_wrap">
+		<h3 class="wcml-product-custom-taxonomies-selector">
+			<label>{{ strings.select_label }}</label>
+			<select id="wcml_product_custom_taxonomies">
+				{% for taxonomy in taxonomies %}
+					<option
+							value="{{ taxonomy.name }}"
+							{% if taxonomy.name == selected_taxonomy.name  %}selected="selected"{% endif %}
+							{% if taxonomy.name == '' %}disabled="disabled"{% endif %}
+							>
+						{{ taxonomy.label }}
+					</option>
+				{% endfor %}
+			</select>
+		</h3>
+		{{ translation_ui|raw }}
+	</div>
+
+{% endif %}

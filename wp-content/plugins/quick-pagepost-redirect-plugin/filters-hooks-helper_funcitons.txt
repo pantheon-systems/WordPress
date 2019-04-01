@@ -1,0 +1,171 @@
+/*
+== Helper Functions ==
+You can use the following helper functions:
+*******************
+* desc:		helper function to create Quick Redirect programatically.
+* function:	qppr_create_quick_redirect
+* @param:	array $atts settings
+* 		request_url (string | URL)
+* 		destination_url (string | URL)
+* 		newwindow (int) 1 or 0
+* 		nofollow (int) 1 or 0
+* @return:	bool true on success, false on error
+* @example:	
+* 	$attrs = array(
+* 		'request_url'		=> '/some-url/',
+* 		'destination_url'	=> '/new-url/',
+* 		'newwindow'		=> 1,
+* 		'nofollow'		=> 0,
+* 	);
+* 	$mytest_add = qppr_create_quick_redirect( $attrs );
+*
+*******************
+* desc:		helper function to delete Quick Redirect programatically.
+* function:	qppr_delete_quick_redirect
+* @param:	request_url (string | URL)
+* @return:	bool true on success, false on error
+* @example:	
+* 	$mytest_del = qppr_cdelete_quick_redirect( '/url-to-remove/' );
+*
+********************
+* desc:		helper function to create Individual Redirect programatically.
+* function:	qppr_create_individual_redirect
+* @param:	array $atts settings
+*		post_id (int|string) the post id
+*		active (int) 1 or 0
+*		url (string) redirect URL
+*		type (string) 301, 302, 307 or meta
+*		newwindow (int) 1 or 0
+*		nofollow (int) 1 or 0
+*		rewrite (int) 1 or 0
+* @return 	bool true on success false on error
+* @example:
+* 	$atts = array(
+* 		'post_id' 	=> $post->ID,
+* 		'url' 		=> 'http://example.com/',
+* 		'active' 	=> 1, 
+* 		'type' 		=> '301',
+* 		'newwindow'	=> 1,
+* 		'nofollow'	=> 0,
+*  		'rewrite'	=> 0
+* 	);
+* 	$mytest_add = qppr_create_individual_redirect( $atts );
+*
+******************** 
+* desc:		helper function to delete Individual Redirect programatically.
+* function:	qppr_delete_individual_redirect
+* @param:	post_id (string | int)
+* @return:	bool true on success, false on error
+* @example:	
+* 	$mytest_delete = qppr_delete_individual_redirect( $post->ID );
+*
+*******************
+
+== Hooks & Filters ==
+You can use the following action and filter hooks with this plugin:
+Remember to change funciton names to your own custom unique names if using the examples.
+*******************
+* filter: 	qppr_filter_quickredirect_index
+* related:	Quick Redirects
+* desc: 	Adjust the index (redirect URL) before the final redirect happens.
+* arg1: 	index URL. 
+* arg2: 	querysting data.
+* return: 	return the final redirect URL.
+* examples:	//below example does not redirect a URL if there is Query String Data with it
+*		add_filter( 'qppr_filter_quickredirect_index', 'mycustom_qppr_filter_quickredirect_index' );
+*		function mycustom_qppr_filter_quickredirect_index( $index, $querydata ){
+*			if( $querydata != '' ){
+*				return '';
+*			}
+*			return $index;
+*		}
+*******************
+* filter: 	appip_metabox_context_filter
+* related:	Individual Redirects
+* desc: 	Adjust the context for the individual redirect metabox.
+* arg1: 	string for context. 
+* return: 	should be 'normal', 'advanced', or 'side' (plugin default is 'normal')
+*******************
+* filter: 	appip_metabox_priority_filter
+* related:	Individual Redirects
+* desc: 	Adjust the context for the individual redirect metabox.
+* arg1: 	string for priority.
+* return: 	should be 'high', 'core', 'default' or 'low' (plugin default is 'high')
+*******************
+* filter: 	qppr_allowed_protocols
+* related:	Quick Redirects and Individual Redirects
+* desc: 	allowed protocols in the URLs
+* arg1: 	array of allowed protocols; 
+* return: 	should be an array of allowed protocols
+*******************
+* filter: 	qppr_filter_quickredirect_append_QS_data
+* related:	Quick Redirects Only
+* desc:		Querystring dtata to add back to Destination.
+* arg1: 	current query string data
+* return:	sting - any change to querystring data or blank to remove.
+*******************
+* filter: 	qppr_filter_quickredirect_url
+* related:	Quick Redirects Only
+* desc:		filter or change the final Destination URL. 
+			The request can be checked and destination could be modified based on request (or destination)
+* arg1: 	the destination URL
+* arg2: 	the matched request URL
+* return:	URI - the final destination URL.  
+*******************
+* filter: 	qppr_filter_quickredirect_type
+* related:	Quick Redirects Only
+* desc:		Redirect type. You can use to change the redirect type .
+* arg1: 	redirect type (i.e., 301, 302, 307)
+* return	string - '301', '302', '307' or 'meta' (default is 301)
+*******************
+* filter: 	qppr_filter_quickredirect_add_home_link_to_destination_url
+* related:	Quick Redirects Only
+* desc:		Plugin add the home URL back to relative links before redirect. Use this to turn on or off.
+* arg1:		current setting (bool) 
+* return:	bool - true or false (default is true)
+* examples:	add_filter( 'qppr_filter_quickredirect_add_home_link_to_destination_url', '__return_false' );
+*			add_filter( 'qppr_filter_quickredirect_add_home_link_to_destination_url', '__return_true' );
+*******************
+* action:	qppr_redirect
+* related:	Quick Redirects Only
+* desc:		Quick Rediects function - use to take over redirect
+* arg1:		Redirect URL
+* arg2:		Redirect Type
+* return:	none
+* example:	add_action( 'qppr_redirect', 'some_callback_function', 10, 2 );
+********************
+* action:	qppr_do_redirect
+* related:	Individual Redirects Only
+* desc:		Page/Post Redirects function - use to take over redirect
+* arg1:		Redirect URL
+* arg2:		Redirect Type
+* example:	add_action('qppr_do_redirect','some_callback_function2',10,2);
+********************
+* action:	ppr_meta_head_hook
+* related:	Individual Redirects Only
+* desc:		Meta Redirect Action: Used for Meta Redirect Page Headers (so you can add meta tag)
+* arg1: 	URL site
+* arg2: 	Meta Redirect Time in Seconds
+* arg3: 	Meta Message to display
+* example:	add_action('ppr_meta_head_hook','override_ppr_metahead',10,3);
+			function override_ppr_metahead( $refresh_url = '' ,$refresh_secs = 0, $messages = '' ){
+        		echo '<meta http-equiv="refresh" content="'.$refresh_secs.'; URL='.$refresh_url.'" />'."\n";
+        		echo '<div id="ppr_custom_message">'. $messages.'</div>'."\n";
+        		return;
+			}
+********************
+* filter:	ppr_meta_head_hook_filter
+* related:	Individual Redirects Only
+* desc:		Meta Redirect Filter: Used for Meta Redirect Page Headers (so you can add meta and message, etc.)
+* arg1: 	Meta Tag (fully generated)
+* arg2: 	Page HTML Message (wrapped in a <div> tag)
+* example:	add_filter( 'ppr_meta_head_hook_filter', 'override_ppr_metahead_new', 10, 2 );
+			function override_ppr_metahead_new( $meta_tag = '', $meta_message = '' ){
+        		$meta 		= $meta_tag;
+        		$function 	= create_function( '$content', 'return \'<div id="ppr_custom_message">sample message override</div>\';' );
+        		$function2 	= create_function( '$title', 'return \'sample message override TITLE\';' );
+       			add_filter( 'get_content', $function, 100, 1 );
+      			add_filter( 'get_title', $function2, 100, 1 );
+        		return $meta;
+			}
+*/

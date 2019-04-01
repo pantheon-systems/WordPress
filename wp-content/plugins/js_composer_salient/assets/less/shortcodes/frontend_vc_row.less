@@ -1,0 +1,171 @@
+/**
+ * Row styles
+ */
+
+.vc_row {
+  .vc_make-frontend-column-gap(1);
+  .vc_make-frontend-column-gap(2);
+  .vc_make-frontend-column-gap(3);
+  .vc_make-frontend-column-gap(4);
+  .vc_make-frontend-column-gap(5);
+  .vc_make-frontend-column-gap(10);
+  .vc_make-frontend-column-gap(15);
+  .vc_make-frontend-column-gap(20);
+  .vc_make-frontend-column-gap(25);
+  .vc_make-frontend-column-gap(30);
+  .vc_make-frontend-column-gap(35);
+}
+
+.vc_vc_column,
+.vc_vc_column_inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// row gaps
+.vc_make-frontend-column-gap(@spacing) {
+  &.vc_column-gap-@{spacing} {
+    > .vc_vc_column,
+    > .vc_vc_column_inner {
+      > .vc_column_container {
+        padding-left: unit(@spacing/2, px);
+        padding-right: unit(@spacing/2, px);
+      }
+    }
+  }
+}
+
+//
+
+.vc_row {
+  &.vc_row-flex {
+    > .vc_vc_column,
+    > .vc_vc_column_inner {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+
+      > .vc_column_container {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        > .vc_column-inner {
+          -webkit-box-flex: 1;
+          -webkit-flex-grow: 1;
+          -ms-flex-positive: 1;
+          flex-grow: 1;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+
+  // equal height
+  &.vc_row-o-equal-height {
+    > .vc_column_container {
+      -webkit-box-align: stretch;
+      -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+      align-items: stretch;
+    }
+  }
+
+  // content alignment
+  &.vc_row-o-content-top {
+    > .vc_vc_column,
+    > .vc_vc_column_inner {
+      > .vc_column_container {
+        > .vc_column-inner {
+          -webkit-box-pack: start;
+          -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+          justify-content: flex-start;
+        }
+      }
+    }
+    &:not(.vc_row-o-equal-height) {
+      > .vc_vc_column,
+      > .vc_vc_column_inner {
+        > .vc_column_container {
+          -webkit-box-align: start;
+          -webkit-align-items: flex-start;
+          -ms-flex-align: start;
+          align-items: flex-start;
+        }
+      }
+
+    }
+  }
+  &.vc_row-o-content-bottom {
+    > .vc_vc_column,
+    > .vc_vc_column_inner {
+      > .vc_column_container {
+        > .vc_column-inner {
+          -webkit-box-pack: end;
+          -webkit-justify-content: flex-end;
+          -ms-flex-pack: end;
+          justify-content: flex-end;
+        }
+      }
+    }
+    &:not(.vc_row-o-equal-height) {
+      > .vc_vc_column,
+      > .vc_vc_column_inner {
+        > .vc_column_container {
+          -webkit-box-align: end;
+          -webkit-align-items: flex-end;
+          -ms-flex-align: end;
+          align-items: flex-end;
+        }
+      }
+    }
+  }
+  &.vc_row-o-content-middle {
+    > .vc_vc_column,
+    > .vc_vc_column_inner {
+      > .vc_column_container {
+        > .vc_column-inner {
+          -webkit-box-pack: center;
+          -webkit-justify-content: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+        }
+      }
+    }
+    &:not(.vc_row-o-equal-height) {
+      > .vc_vc_column,
+      > .vc_vc_column_inner {
+        > .vc_column_container {
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+// fix for empty col
+.vc_empty-element > .vc_column-inner {
+  min-height: 100px;
+}
+
+// row fills
+.vc_row-has-fill > .vc_row > .vc_vc_column > .vc_column_container > .vc_column-inner,
+.vc_row-has-fill > .vc_vc_column_inner > .vc_column_container > .vc_column-inner,
+.vc_row-has-fill + .vc_vc_row > .vc_row > .vc_vc_column > .vc_column_container > .vc_column-inner,
+.vc_row-has-fill + .vc_vc_row_inner > .vc_row > .vc_vc_column_inner > .vc_column_container > .vc_column-inner {
+  padding-top: @vc_element_margin_bottom;
+}

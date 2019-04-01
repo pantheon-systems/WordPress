@@ -1,0 +1,14 @@
+@stop_standalone_compiling: @vc_grey;
+/* Responsive stuff
+---------------------------------------------------------- */
+/* Make all grid-sized elements block level again */
+@media (max-width: @vc_responsive_max_w) {
+  .vc_responsive {
+    div.vc_row-fluid div[class*="vc_col-"] {
+      float: none;
+      display: block;
+      width: auto;
+      margin-left: 0;
+    }
+  }
+}

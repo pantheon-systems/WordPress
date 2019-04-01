@@ -1,0 +1,5 @@
+<select class="wcml-currencies">
+	{% for currency in active_currencies %}
+		<option value="{{ currency }}" {% if currency == selected_currency %}selected="selected"{% endif %}>{{ currency }}</option>
+	{% endfor %}
+</select>

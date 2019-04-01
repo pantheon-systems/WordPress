@@ -1,0 +1,394 @@
+
+#button-dialog #insert {
+	display: block;
+	line-height: 24px;
+	text-align: center;
+	margin: 10px 0 0 0;
+	float: right;
+}
+
+[class^="icon-"],[class*=" icon-"] {
+	color: #333!important;
+}
+
+select[name="icon-set-select"] {
+	display: block;
+	clear: both;
+	margin-bottom: 22px;
+}
+
+.column-wrap .clear {
+	margin-top: 14px!important;
+	margin-bottom: 0px!important;
+	border: none!important;
+}
+
+.column-wrap {
+	border-bottom: 1px solid #E5E5E5;
+	margin-bottom: 25px;
+}
+
+.half_width {
+	width: 30%;	
+	float: left;
+}
+
+.clear.no-line {
+	border: none!important;
+	margin: 0!important;
+}
+
+.half_width .clear {
+	margin-top: 73px!important;
+}
+
+.second_half_width .label, .half_width .label  {
+	margin-bottom: 5px!important;
+	width: 100%!important;
+}
+
+.second_half_width {
+	width: 70%;	
+	display: inline-block;
+}
+
+.shortcode-dynamic-item .redux-opts-screenshot {
+	max-width: 300px;
+}
+
+.shortcode-dynamic-item {
+	margin-top: 35px;
+}
+
+.shortcode-dynamic-item div.label {
+	clear: left;
+}
+
+.redux-opts-upload-remove {
+	margin-left: 10px;
+}
+
+.clients > div:last-child {
+	padding-bottom: 0px;
+	border-bottom: 0px;	
+}
+
+.clients .shortcode-dynamic-item {
+	padding-bottom: 30px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.clients label.inline {
+	display: inline;
+	margin-right: 3px;
+	min-width: 0px!important;
+}
+
+input[type=radio] {
+	margin-right: 18px;
+}
+
+.clients .shortcode-dynamic-item .clear {
+	border: none;	
+}
+
+.icon-option i {
+	margin-right: 1px;
+	margin-bottom: 1px;
+	text-align: center;
+	vertical-align: center;
+	font-size: 18px;
+	height: 37px;
+	cursor: pointer;
+	line-height: 37px;
+	width: 46px;
+	border: 1px solid #e9e9e9;
+	background-color: #ebebeb;
+	display: inline-block;
+}
+
+.icon-option.linea {
+	line-height: 1px;
+}
+.icon-option.linea i {
+	font-size: 20px;
+	line-height: 42px;
+}
+
+.icon-option img {
+	padding: 6px;
+	height: 18px;
+	width: 18px;
+}
+
+.icon-option i:hover, .icon-option img:hover {
+	position: relative;
+	z-index: 200;
+	 transform: scale(1.8);
+    -moz-transform: scale(1.8);
+    -o-transform: scale(1.8);
+    -webkit-transform: scale(1.8);
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+	-o-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+}
+
+.icon-option i.selected, .icon-option img.selected {
+	background-color: #fff;
+	border: 1px solid #fff!important;
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+	-o-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+}
+
+.shortcode-content .remove-list-item {
+   margin-left: 5px;
+   float: right;
+   position: relative;
+   bottom: -45px;
+}
+
+.shortcode-content .add-list-item {
+   float: right;
+   bottom: -45px;
+   position: relative;
+}
+
+.shortcode-dynamic-item input[type=text], .shortcode-dynamic-item textarea {
+	margin-bottom: 3px;
+}
+
+#nectar-sc-generator input[type="text"], textarea, select, #insert-shortcode{ 
+	padding: 10px; 
+	font-family: Arial, Helvetica, sans-serif;
+	color: #555;
+}
+
+#nectar-sc-generator input[type="text"], textarea {
+	width:100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+#nectar-sc-generator div.label {
+	display: inline-block;
+	width: 30%;
+	float: left;
+	margin: 10px 0px;
+}
+
+#nectar-sc-generator div.content {
+	display: inline-block;
+	width: 69%;
+}
+
+#nectar-sc-generator div.clear {
+	margin: 19px 0px;
+	border-bottom: 1px solid #e5e5e5;
+	clear: both;
+}
+
+div.clear.no-border {
+	margin: 0px!important;
+	border: none!important;
+}
+
+.shortcode-options {
+	display: none;
+}
+
+.shortcode-options label {
+	display: inline;
+	margin-right: 3px;
+	min-width: 0px!important;
+}
+
+div[data-type="radios"] label, div[data-type="direct_to_editor"] label {
+	display: inline;
+}
+
+div[data-type="radios"] .content, div[data-type="checkbox"] .content {
+	margin: 7px 0px;
+}
+
+.description{margin-top:-.5em; }
+.description{ margin: 3px 0 0 0; color: #666; font-style: italic; }
+
+
+div.hr {
+	width: 100%;
+	margin: 20px 0px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+
+.btn {
+	cursor: pointer;
+	background-color: #77cc6d;
+	padding: 8px 14px 8px !important;
+	color: #fff!important;
+	font-size: 11px;
+	line-height: normal;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-transition: 0.1s linear all;
+	-moz-transition: 0.1s linear all;
+	-ms-transition: 0.1s linear all;
+	-o-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	margin-top:10px;
+    margin-right:5px;
+    text-decoration: none;
+}
+
+.btn.blue {
+	background-color: #049CDB;
+}
+
+.btn:hover {
+	color: #fff;
+	background-position: 0 -15px;
+	background-color: #372f3e;
+	text-decoration: none;
+}
+
+.tall {
+	height: 70px;	
+}
+
+#shortcode-generator option[disabled=disabled] {
+	background: #333;
+	font-weight: bold;
+	color: #FFF;
+	margin-top: 10px;
+}
+
+#shortcode-generator .shortcode-dynamic-item {
+	position: relative;
+	margin-bottom: 30px;
+}
+
+#shortcode-generator .shortcode-dynamic-items > div:last-child {
+	margin-bottom: 0px;
+}
+
+#shortcode-generator .shortcode-dynamic-item-text {
+	height: 125px;
+	margin-top: 4px;
+}
+#shortcode-generator .shortcode-content {
+	padding: 15px 15px;
+}
+
+/* Shortcode Code Storage */
+.shortcode_storage {
+	display:none;
+}
+
+label#option-label {
+	display: block;
+	font-weight: bold;	
+}
+
+#shortcode-content textarea#shortcode_content {
+	height: 180px;
+	font-size: 12px;
+	line-height: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+	-webkit-transition: 0.2s linear all;
+	-moz-transition: 0.2s linear all;
+	-ms-transition: 0.2s linear all;
+	-o-transition: 0.2s linear all;
+	transition: 0.2s linear all;
+}
+
+.shortcode-content input[type="text"], .shortcode-content textarea {
+	-webkit-transition: 0.2s linear all;
+	-moz-transition: 0.2s linear all;
+	-ms-transition: 0.2s linear all;
+	-o-transition: 0.2s linear all;
+	transition: 0.2s linear all;
+}
+
+#shortcode-content textarea#shortcode_content:focus, .shortcode-content input[type="text"]:focus, .shortcode-content textarea:focus {
+	border-color: #77cc6d!important;
+}
+
+#shortcode-content {
+	display: none;
+}
+
+.mfp-close-btn-in .mfp-close {
+	color: #fff!important;
+	right: -45px;
+	top: -17px!important;
+	opacity: 1!important;
+}
+
+#nectar-sc-generator {
+	width: 980px;
+	position: relative;
+	margin: 55px auto 20px auto;
+	padding: 20px;
+	min-height: 600px;
+	height: auto;
+	background-color: #f8f8f8;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	box-shadow: 0 0 26px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 0 26px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0 0 26px rgba(0, 0, 0, 0.4);
+	-o-box-shadow: 0 0 26px rgba(0, 0, 0, 0.4);
+}
+
+#nectar-sc-header {
+	padding: 20px;
+	text-shadow: none!important;
+	margin: -20px -20px 30px -20px;
+	background-color: #f1f1f1;
+	border-radius: 2px 2px 0 0;
+	-moz-border-radius: 2px 2px 0 0;
+	-webkit-border-radius: 2px 2px 0 0;
+}
+
+select[multiple="multiple"] {
+	height: 93px !important;
+}
+
+.nectar-shortcode-generator img {
+	margin-left: -7px;
+	margin-right: -2px;
+	margin-top: -2px;
+}
+
+
+.button.nectar-shortcode-generator, .ui-buttonset .ui-state-active {
+	background-color: #1990DC !important;
+    background-image: none!important;
+    padding-left: 10px!important;
+    background-repeat: repeat-x;
+    border-color: #085eb8!important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)!important;
+}
+
+.ui-button {
+	background-image: none!important;
+	background: none repeat scroll 0 0 #F7F7F7!important;
+    border-color: #CCCCCC;
+    box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 rgba(0, 0, 0, 0.08);
+    color: #555555;
+    vertical-align: top;
+}
+
+body .button.nectar-shortcode-generator:hover {
+	background-color: #1884c9!Important;
+	border-color: #00448b!important;
+}

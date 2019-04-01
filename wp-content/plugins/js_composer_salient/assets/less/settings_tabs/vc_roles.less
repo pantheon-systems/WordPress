@@ -1,0 +1,61 @@
+@import "../lib/elements_icons.less";
+
+@vc_roles-tab-controls-min-width: 200px;
+@vc_roles-tab-accordion-content-padding: 0 10px;
+@vc_roles-tab-element-description-font-size: 11px;
+@vc_roles-tab-table-selection-controls-margin: 0 0 10px;
+@vc_roles-tab-table-element-icon-margin-right: .8em;
+
+.vc_ui-settings-roles-dropdown {
+  min-width: @vc_roles-tab-controls-min-width;
+}
+
+.vc_role-custom-settings {
+  display: none;
+  &.vc_visible {
+    display: table-row;
+  }
+  .vc_wp-form-table {
+    .js-category-deprecated {
+      display: none;
+    }
+  }
+}
+
+[data-vc-roles-filter-value=".js-category-deprecated"] {
+  .vc_wp-form-table {
+    .js-category-deprecated {
+      display: table-row;
+    }
+  }
+}
+
+.vc_ui-settings-roles-role {
+  &.vc_active {
+    .widget-top {
+      cursor: default;
+      .toggle-indicator:before {
+        content: '\f142';
+        cursor: pointer;
+      }
+    }
+  }
+  .vc_wp-accordion-panel-body {
+    padding: @vc_roles-tab-accordion-content-padding;
+  }
+  .vc_wp-form-table .vc_hidden {
+    display: none;
+  }
+  .vc_element-icon {
+    float: left;
+    margin-right: @vc_roles-tab-table-element-icon-margin-right;
+  }
+  .vc_element-description {
+    font-size: @vc_roles-tab-element-description-font-size;
+    display: block;
+  }
+}
+
+.vc_ui-settings-roles-role .widget .widget-top {
+  cursor: pointer;
+}

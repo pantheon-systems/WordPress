@@ -1,0 +1,10 @@
+<div id="wpml-tm-post-edit-alert" class="js-wpml-tm-post-edit-alert wpml-tm-post-edit-alert" style="display: none;">
+    {{ nonce | raw }}
+    <p>{{ warning|raw }}</p>
+    <p class="text-center">
+        <a class="js-wpml-tm-go-back button button-secondary">{{ go_back_button }}</a>
+        <a class="js-wpml-tm-use-standard-editor button button-secondary">{{ edit_anyway_button }}</a>
+        <a class="js-wpml-tm-open-in-te wpml-button button button-primary" href="{{ translation_editor_url }}">{{ open_in_te_button }}</a>
+    </p>
+    <p><label><input class="do-not-show-again" type="checkbox" value="1">{{ do_not_show_again }}</label></p>
+</div>

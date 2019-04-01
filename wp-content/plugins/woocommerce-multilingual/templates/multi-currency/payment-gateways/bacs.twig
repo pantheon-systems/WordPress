@@ -1,0 +1,20 @@
+<label class="label-header"><strong>{{ gateway_title }}</strong> <i class="wcml-tip otgs-ico-help" data-tip="{{ strings.tooltip }}"></i></label>
+<div class="wpml-form-row">
+    <label>{{ strings.currency_label }}</label>
+    <select name="currency_options[gateways_settings][{{ gateway_id }}][currency]">
+        {% for code, currency in active_currencies %}
+            <option value="{{ code }}" {% if ( gateway_settings and code == gateway_settings.currency ) or ( gateway_settings is empty and code == current_currency ) %}selected="selected"{% endif %} >{{ code }}</option>
+        {% endfor %}
+    </select>
+</div>
+<div class="wpml-form-row">
+    <label>{{ strings.setting_label}}</label>
+
+    <select name="currency_options[gateways_settings][{{ gateway_id }}][value]">
+        <option value="all" {% if ( gateway_settings and "all" == gateway_settings.value ) %}selected="selected"{% endif %}>{{ strings.all_label }}</option>
+        <option value="all_in" {% if ( gateway_settings and "all_in" == gateway_settings.value ) %}selected="selected"{% endif %}>{{ strings.all_in_label }}</option>
+        {% for account_id, account in account_details %}
+            <option value="{{ account_id }}" {% if( gateway_settings and gateway_settings.value not in [ 'all', 'all_in' ] and account_id == gateway_settings.value ) %}selected="selected"{% endif %} >{{ account.account_name }}</option>
+        {% endfor %}
+    </select>
+</div>

@@ -1,0 +1,25 @@
+{% for language in active_languages %}
+    {% if language.code == source_language %}
+        <span title="{{ language.english_name|e }}: {{ strings.orig_lang|e }}">
+                    <i class="otgs-ico-original"></i>
+        </span>
+    {% else %}
+        {{ wcml_base_edit_dialog( base, language.code )|raw }}
+
+        <a class="js-wcml-dialog-trigger {% if not value %}dis_base{% endif %}" id="wcml-edit-base-slug-{{ base|e }}-{{ language.code|e }}-link"
+           data-dialog="wcml-edit-base-slug-{{ base|e }}-{{ language.code|e }}"
+           data-content="wcml-edit-base-slug-{{ base|e }}-{{ language.code|e }}"  data-width="700" data-height="150"
+
+            {% if language.status == 'upd' %}
+                title="{{ language.english_name|e }}: {{ strings.update|e }}">
+                    <i class="otgs-ico-refresh"></i>
+            {% elseif language.status == 'add' %}
+                title="{{ language.english_name|e }}: {{ strings.add|e }}">
+                    <i class="otgs-ico-add"></i>
+            {% elseif language.status == 'edit' %}
+                title="{{ language.english_name|e }}: {{ strings.edit|e }}>">
+                <i class="otgs-ico-edit"></i>
+            {% endif %}
+        </a>
+    {% endif %}
+{% endfor %}

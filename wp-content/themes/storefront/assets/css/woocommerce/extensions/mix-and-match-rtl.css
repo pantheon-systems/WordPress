@@ -1,0 +1,36 @@
+/**
+ * WooCommerce Mix and Match
+ */
+/**
+ * Imports
+ */
+.mnm_table .product-thumbnail,
+.mnm_table .product-name,
+.mnm_table .product-quantity,
+.mnm_table .container-quantity {
+  padding: 0.6180469716em 0.875em !important; }
+
+.mnm_table .mnm_item img {
+  max-width: 100%; }
+
+.mnm_table .product-name {
+  vertical-align: middle; }
+
+.cart .mnm_table_item .product-thumbnail img,
+.shop_table .mnm_table_item .product-thumbnail img {
+  max-width: 2.617924em !important; }
+
+.cart .mnm_table_item .mnm_table_item_indent,
+.shop_table .mnm_table_item .mnm_table_item_indent {
+  padding-right: 0; }
+
+.cart .mnm_table_item .product-name,
+.cart .mnm_table_item .product-price,
+.cart .mnm_table_item .product-quantity,
+.shop_table .mnm_table_item .product-name,
+.shop_table .mnm_table_item .product-price,
+.shop_table .mnm_table_item .product-quantity {
+  font-size: 1em; }
+
+.mnm_image {
+  max-width: 3.706325903em; }

@@ -1,0 +1,18 @@
+.vc_ui-panel {
+  .vc_panel-tabs {
+    > .vc_edit-form-tab {
+      &.vc_row {
+        display: none;
+        flex-wrap: wrap;
+        &::before,
+        &::after {
+          width: 0;
+        }
+      }
+      &.vc_active {
+        display: flex;
+      }
+    }
+  }
+}
+

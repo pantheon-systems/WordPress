@@ -1,0 +1,24 @@
+// single image can have different styles, including round, rounded and zoomed images inherits ome of those those styles
+.wpb_single_image {
+  .wpb_wrapper {
+    .vc_single_image-wrapper {
+      .zoomImg {
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.wpb_single_image {
+  [class*='_circle'] {
+    .vc-zoom-wrapper {
+      border-radius: 50%;
+    }
+  }
+
+  [class*='_rounded'] {
+    .vc-zoom-wrapper {
+      border-radius: 4px;
+    }
+  }
+}
