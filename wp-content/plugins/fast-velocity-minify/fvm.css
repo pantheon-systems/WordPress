@@ -1,0 +1,33 @@
+#fastvelocity-min{margin-top:10px;}
+#fastvelocity-min .processed{ min-height: 20px; margin: -4px 0 -2px 0; border: none !important; }
+#fastvelocity-min .processed li{margin:0; padding:10px 0; border: none !important; }
+#fastvelocity-min .processed > li:last-of-type { border: 0; }
+#fastvelocity-min .processed li .filename{width: 50%;float:left;font-family:monospace;display:block;word-wrap:break-word;line-height:30px;}
+#fastvelocity-min .processed li .accessed{display:block;}
+#fastvelocity-min .processed li .error{color:red}
+#fastvelocity-min .processed li .actions{display:block; padding:0; margin:0; text-align: right;}
+#fastvelocity-min .processed li a{margin-left:10px}
+#fastvelocity-min .processed pre{background:#EEE;max-height:300px;overflow:auto;display:none;margin-top:18px;margin-bottom:7px;padding:5px}
+#fastvelocity-min .clear { clear:both; }
+#fastvelocity-min #purgeall-row { padding-bottom: 2px; }
+.fvm-settings label { font-size: 14px; color: #222; padding-top: 1px; }
+.fvm-settings span.note-info { font-size: 14px; margin-left: 8px; color: #666; font-style: italic; }
+.fvm-settings p.description { font-size: 14px; color: #666; font-style: italic; font-size: 14px; }
+#tab-info h4{font-size: 14px; margin-bottom:-10px; }
+h3.hndle { background: #F7F7F7; color: #000; cursor: default !important; }
+.fvm-hide { max-height: 1px; overflow: none; position: absolute; top: -9999px; left: -9999px; visibility: hidden; }
+.fvm-warning { font-weight: 600; color: #AA0000; }
+.fvm-bold-green { font-weight: 600; color: #1196A3; }
+.fvm-label-special { line-height: 38px; }
+.fvm-label-pad { line-height: 21px; }
+.fvm-rowintro { padding-bottom: 10px; }
+
+
+
+@media screen and (max-width:520px) {
+#fastvelocity-min .processed li .filename{width: 100%;float:none;}
+#fastvelocity-min .processed li .actions{text-align: left;margin-top: 4px}
+#fastvelocity-min .processed li a{margin-left:0;margin-right:10px}
+#fastvelocity-min .processed pre{margin-top:12px;margin-bottom:5px;}
+.fvm-label-special { line-height: inherit; }
+}
