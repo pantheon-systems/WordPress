@@ -82,7 +82,8 @@ class Pantheon_Cache {
 	protected function setup() {
 		$this->options = get_option( self::SLUG, array() );
 		$this->default_options = array(
-			'default_ttl' => 600
+			'default_ttl' => 600,
+			'default_ttl_rest' => 600
 		);
 		$this->options = wp_parse_args( $this->options, $this->default_options );
 
@@ -118,6 +119,7 @@ class Pantheon_Cache {
 		register_setting( self::SLUG, self::SLUG, array( self::$instance, 'sanitize_options' ) );
 		add_settings_section( 'general', false, '__return_false', self::SLUG );
 		add_settings_field( 'default_ttl', null, array( self::$instance, 'default_ttl_field' ), self::SLUG, 'general' );
+		add_settings_field( 'default_ttl_rest', null, array( self::$instance, 'default_ttl_field_rest' ), self::SLUG, 'general' );
 	}
 
 
@@ -166,6 +168,16 @@ class Pantheon_Cache {
 		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $this->options['default_ttl'] . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
 	}
 
+	/**
+	 * Add the HTML for the default TTL field for REST endpoints.
+	 *
+	 * @return void
+	 */
+	public function default_ttl_field_rest() {
+		echo '<p>' . __( 'Specific TTL value for REST endpoints. Suggestion is to at least have 60 at minimum.', 'pantheon-cache' ) . '</p>';
+		echo '<input type="text" name="' . self::SLUG . '[default_ttl_rest]" value="' . $this->options['default_ttl_rest'] . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
+	}
+
 
 	/**
 	 * Sanitize our options.
@@ -178,8 +190,14 @@ class Pantheon_Cache {
 
 		// Validate default_ttl
 		$out['default_ttl'] = absint( $in['default_ttl'] );
+		$out['default_ttl_rest'] = absint( $in['default_ttl_rest'] );
+
 		if ( $out['default_ttl'] < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
 			$out['default_ttl'] = 60;
+		}
+		
+		if ( $out['default_ttl_rest'] < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+			$out['default_ttl_rest'] = 60;
 		}
 
 		return $out;
@@ -274,7 +292,6 @@ class Pantheon_Cache {
 		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
 			$ttl = 60;
 		}
-
 		header( 'cache-control: public, max-age=' . $ttl );
 	}
 
@@ -282,7 +299,7 @@ class Pantheon_Cache {
 	 * Send the cache control header for REST API requests
 	 */
 	public function filter_rest_post_dispatch_send_cache_control( $response, $server ) {
-		$ttl = absint( $this->options['default_ttl'] );
+		$ttl = absint( $this->options['default_ttl_rest'] );
 		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
 			$ttl = 60;
 		}
