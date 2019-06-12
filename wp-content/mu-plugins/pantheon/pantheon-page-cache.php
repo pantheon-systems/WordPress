@@ -275,7 +275,7 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function no_cache_add_headers() {
-		header( 'cache-control: no-cache, no-store, must-revalidate');
+		header( 'cache-control: no-cache, no-store, must-revalidate' );
 	}
 
 	/**
