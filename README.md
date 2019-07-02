@@ -30,3 +30,8 @@ If you would like to keep a separate set of configuration for local development,
 
 ![alt](http://i.imgur.com/fzIeQBP.png, '')
 
+### 5. Local development with `wp-config-local.php`
+
+Pantheon's copy of WordPress core has a few tweaks to make things run smoothly on Pantheon, such as configuring database credentials automatically in `wp-config.php`.
+
+When working locally, you will need to define these values yourself. The easiest way to do this is to create a `wp-config-local.php` file. See [Pantheon's Local Development Documentation](https://pantheon.io/docs/local-development/#example-%60wp-config-local.php%60-file) for more details and an example `wp-config-local.php` file.
