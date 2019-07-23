@@ -55,14 +55,15 @@ if( $show_return_to_pantheon_button ){
         $pantheon_dashboard_url = 'https://dashboard.pantheon.io/sites/' . $_ENV['PANTHEON_SITE'] . '#' . $_ENV['PANTHEON_ENVIRONMENT'];
 
         $pantheon_fist_icon_url = plugin_dir_url(__FILE__) . 'assets/images/pantheon-fist-icon-black.svg';
+        $login_message = apply_filters( 'pantheon_wp_login_text', __('Login to your WordPress Site', 'pantheon') );
         ?>
         <div id="return-to-pantheon" style="display: none;">
             <div class="left">
-                    <?php _e('Login to your WordPress Site', 'pantheon'); ?>
+                    <?php echo $login_message; ?>
             </div>
             <div class="right">
-                <a href="<?php echo $pantheon_dashboard_url; ?>">
-                    <img class="fist-icon"  src="<?php echo $pantheon_fist_icon_url; ?>">
+                <a href="<?php echo esc_url( $pantheon_dashboard_url ); ?>">
+                    <img class="fist-icon"  src="<?php echo esc_url( $pantheon_fist_icon_url ); ?>">
                     <?php _e('Return to Pantheon', 'pantheon'); ?>
                 </a>
             </div>
