@@ -92,8 +92,11 @@ class Pantheon_Cache {
 
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
-		if ( ! is_admin() ) {
+		if ( ! is_admin() && ! is_user_logged_in() ) {
 			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
+		}
+		else {
+			add_action( 'send_headers',               array( $this, 'no_cache_add_headers' ) );
 		}
 		add_filter( 'rest_post_dispatch', array( $this, 'filter_rest_post_dispatch_send_cache_control' ), 10, 2 );
 
@@ -263,6 +266,17 @@ class Pantheon_Cache {
 		<?php
 	}
 
+	/**
+	 * Set a stronger cache-control header for admin or logged in requests.
+	 *
+	 * This removes "max-age=0" which could hypothetically be used by
+	 * Varnish on an immediate subsequent request.
+	 *
+	 * @return void
+	 */
+	public function no_cache_add_headers() {
+		header( 'cache-control: no-cache, no-store, must-revalidate');
+	}
 
 	/**
 	 * Add the cache-control header.
@@ -380,7 +394,7 @@ class Pantheon_Cache {
 			# If the path doesn't exist, set it to the null string
 			else {
 				$path = '';
-			}			
+			}
 			if ( '' == $path ) {
 				continue;
 			}
