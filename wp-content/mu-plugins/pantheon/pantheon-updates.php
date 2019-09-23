@@ -16,12 +16,54 @@ function _pantheon_hide_update_nag() {
 	remove_action( 'network_admin_notices', 'update_nag', 3 );
 }
 
-// Compare the current WordPress version to the latest available
+// Get the latest WordPress version
+function _pantheon_get_latest_wordpress_version() {
+	$core_updates = get_core_updates( array('dismissed' => false) );
+
+	if( ! is_array($core_updates) || empty($core_updates) || ! property_exists($core_updates[0], 'current' ) ){
+		return null;
+	}
+
+	return $core_updates[0]->current;
+}
+
+// Check if WordPress core is at the latest version.
+function _pantheon_is_wordpress_core_latest() {
+	$latest_wp_version = _pantheon_get_latest_wordpress_version();
+
+	if( null === $latest_wp_version ){
+		return true;
+	}
+
+	// include an unmodified $wp_version
+	include( ABSPATH . WPINC . '/version.php' );
+
+	// Return true if our version is the latest
+	return version_compare( str_replace( '-src', '', $latest_wp_version ), str_replace( '-src', '', $wp_version ), '=' );
+
+}
+
+// Check if the site is using the default WordPress upstream.
+function _pantheon_is_default_upstream() {
+	$data = _pantheon_curl_cached( 'https://api.live.getpantheon.com/sites/self/code-upstream-updates' );
+	return ( ! empty( $data['remote_url'] ) && false !== stripos( $data['remote_url'], '/pantheon-systems/' ) );
+}
+
+// Check if Pantheon upstream updates are available.
 function _pantheon_wordpress_update_available() {
 
 	if ( ! function_exists( 'pantheon_curl' ) ) {
 		return false;
 	}
+
+	/**
+	 * If the site is using the default WordPress upstream and
+	 * WordPress is up to date, do not show the update notice
+	 */
+	if( _pantheon_is_default_upstream() && _pantheon_is_wordpress_core_latest() ) {
+		return false;
+	}
+
 	$data = _pantheon_curl_cached( 'https://api.live.getpantheon.com/sites/self/code-upstream-updates' );
 	if ( ! empty( $data['dev'] ) && isset( $data['dev']['is_up_to_date_with_upstream'] ) ) {
 		return $data['dev']['is_up_to_date_with_upstream'] ? false : true;
@@ -46,7 +88,7 @@ function _pantheon_upstream_update_notice() {
 	$update_type = 'new WordPress version';
 	$update_help = 'If you need help, open a support chat on Pantheon.';
 	$data = _pantheon_curl_cached( 'https://api.live.getpantheon.com/sites/self/code-upstream-updates' );
-	if ( ! empty( $data['remote_url'] ) && false === stripos( $data['remote_url'], '/pantheon-systems/' ) ) {
+	if ( ! _pantheon_is_default_upstream() ) {
 		$update_type = 'Pantheon Custom Upstream update';
 		$update_help = 'If you need help, contact an administrator for your Pantheon organization.';
 	}
@@ -84,7 +126,7 @@ function _pantheon_disable_wp_updates() {
 
 // In the Test and Live environments, clear plugin/theme update notifications.
 // Users must check a dev or multidev environment for updates.
-if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], Array('test', 'live') ) && (php_sapi_name() !== 'cli') ) {
+if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], array('test', 'live') ) && (php_sapi_name() !== 'cli') ) {
 
 	// Disable Plugin Updates
 	remove_action( 'load-update-core.php', 'wp_update_plugins' );
