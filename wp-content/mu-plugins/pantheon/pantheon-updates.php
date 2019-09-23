@@ -1,12 +1,13 @@
 <?php
-// Disable WordPress auto updates
-if( ! defined('WP_AUTO_UPDATE_CORE')) {
-	define( 'WP_AUTO_UPDATE_CORE', false );
-}
-remove_action( 'wp_maybe_auto_update', 'wp_maybe_auto_update' );
-
-// Remove the default WordPress core update nag if on Pantheon
+// If on Pantheon
 if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ){
+	// Disable WordPress auto updates
+	if( ! defined('WP_AUTO_UPDATE_CORE')) {
+		define( 'WP_AUTO_UPDATE_CORE', false );
+	}
+
+	remove_action( 'wp_maybe_auto_update', 'wp_maybe_auto_update' );
+	// Remove the default WordPress core update nag
     add_action('admin_menu','_pantheon_hide_update_nag');
 }
 
