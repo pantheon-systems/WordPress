@@ -1074,7 +1074,7 @@ switch ( $action ) {
 	</p>
 	<p>
 		<label for="user_pass"><?php _e( 'Password' ); ?><br />
-		<input type="password" name="pwd" id="user_pass"<?php echo $aria_describedby_error; ?> class="input" value="" size="20" /></label>
+		<input type="password" name="pwd" id="user_pass"<?php echo $aria_describedby_error; ?> class="input" value="" size="20" autocomplete="off" /></label>
 	</p>
 		<?php
 		/**
