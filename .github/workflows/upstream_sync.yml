@@ -1,0 +1,26 @@
+name: Pantheon WordPress Upstream Sync
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '*/5 * * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: git config
+      uses: srt32/git-actions@v0.0.3
+      with:
+        args: git config --global user.email "se@pantheon.io" && git config --global user.name "Dunder Mifflin Engineering"
+    - name: git remote
+      uses: srt32/git-actions@v0.0.3
+      with:
+        args: git remote add upstream https://github.com/pantheon-systems/WordPress.git && git fetch upstream
+    - name: git merge
+      uses: srt32/git-actions@v0.0.3
+      with:
+        args: git checkout master && git merge upstream/master --no-commit && git push https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} -f
