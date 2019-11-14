@@ -12,10 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: git config
-      uses: srt32/git-actions@v0.0.3
-      with:
-        args: git config --global user.email "se@pantheon.io" && git config --global user.name "Dunder Mifflin Engineering"
     - name: git remote
       uses: srt32/git-actions@v0.0.3
       with:
