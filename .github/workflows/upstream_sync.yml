@@ -15,7 +15,7 @@ jobs:
     - name: git remote
       uses: srt32/git-actions@v0.0.3
       with:
-        args: git remote add upstream git@github.com:pantheon-systems/WordPress.git && git fetch upstream --all
+        args: git remote add upstream git@github.com:pantheon-systems/WordPress.git && git fetch upstream
     - name: git merge
       uses: srt32/git-actions@v0.0.3
       with:
