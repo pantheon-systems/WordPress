@@ -1,0 +1,25 @@
+{
+    "name": "wordpress/lockr",
+    "type": "wordpress-plugin",
+    "homepage": "https://wordpress.org/plugins/lockr",
+    "authors": [
+        {
+            "name": "Chris Teitzel",
+            "homepage": "https://profiles.wordpress.org/cteitzel/",
+            "email": "chris@lockr.io"
+        },
+        {
+            "name": "Tynor Fujimoto",
+            "homepage": "https://profiles.wordpress.org/tynor/",
+            "email": "tynor@lockr.io"
+        }
+    ],
+    "support": {
+        "issues": "https://wordpress.org/support/plugin/lockr/"
+    },
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "lockr/lockr": "^1.0",
+        "defuse/php-encryption": "^2.2"
+    }
+}

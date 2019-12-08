@@ -1,0 +1,230 @@
+# Copyright (C) 2016 Purgely
+# This file is distributed under the same license as the Purgely package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Purgely 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/purgely\n"
+"POT-Creation-Date: 2016-01-11 03:08:41+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#. #-#-#-#-#  purgely.pot (Purgely 1.0.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: src/settings-page.php:52 src/settings-page.php:53
+msgid "Purgely"
+msgstr ""
+
+#: src/settings-page.php:78
+msgid "Fastly settings"
+msgstr ""
+
+#: src/settings-page.php:86
+msgid "API Key"
+msgstr ""
+
+#: src/settings-page.php:94
+msgid "Service ID"
+msgstr ""
+
+#: src/settings-page.php:102
+msgid "API Endpoint"
+msgstr ""
+
+#: src/settings-page.php:111
+msgid "General settings"
+msgstr ""
+
+#: src/settings-page.php:118
+msgid "Cache TTL for end users (in Seconds)"
+msgstr ""
+
+#: src/settings-page.php:126
+msgid "Default Purge Type"
+msgstr ""
+
+#: src/settings-page.php:134
+msgid "Allow Full Cache Purges"
+msgstr ""
+
+#: src/settings-page.php:143
+msgid "Content revalidation settings"
+msgstr ""
+
+#: src/settings-page.php:150
+msgid "Enable Stale while Revalidate"
+msgstr ""
+
+#: src/settings-page.php:158
+msgid "Stale while Revalidate TTL (in Seconds)"
+msgstr ""
+
+#: src/settings-page.php:166
+msgid "Enable Stale if Error"
+msgstr ""
+
+#: src/settings-page.php:174
+msgid "Stale if Error TTL (in Seconds)"
+msgstr ""
+
+#: src/settings-page.php:189
+msgid ""
+"Please enter details related to your Fastly account. A Fastly API token and "
+"service ID are required for some operations (e.g., surrogate key and full "
+"cache purges). "
+msgstr ""
+
+#: src/settings-page.php:203 src/settings-page.php:231
+msgid "Required for surrogate key and full cache purges"
+msgstr ""
+
+#: src/settings-page.php:205
+msgid "API token for the Fastly account associated with this site."
+msgstr ""
+
+#: src/settings-page.php:208 src/settings-page.php:236
+msgid "Please see Fastly's documentation for %s."
+msgstr ""
+
+#: src/settings-page.php:212
+msgid "more information on finding your API token"
+msgstr ""
+
+#: src/settings-page.php:233
+msgid "Fastly service ID for this site."
+msgstr ""
+
+#: src/settings-page.php:240
+msgid "more information on finding your service ID"
+msgstr ""
+
+#: src/settings-page.php:260
+msgid "API endpoint for this service."
+msgstr ""
+
+#: src/settings-page.php:273
+msgid ""
+"This section allows you to configure general cache settings. Note that "
+"changes to these settings can cause destabilization to your site if "
+"misconfigured. The default setting should be sufficient for most sites."
+msgstr ""
+
+#: src/settings-page.php:288
+msgid ""
+"This setting controls the \"surrogate-control\" header's \"max-age\" value. "
+"It defines the cache duration for all pages on the site."
+msgstr ""
+
+#: src/settings-page.php:304
+msgid "Soft"
+msgstr ""
+
+#: src/settings-page.php:305
+msgid "Instant"
+msgstr ""
+
+#: src/settings-page.php:316
+msgid ""
+"The purge type setting controls the manner in which the cache is purged. "
+"Instant purging causes the cached object(s) to be purged immediately. Soft "
+"purging causes the origin to revalidate the cache and Fastly will serve "
+"stale content until revalidation is completed. For more information, please "
+"see %s."
+msgstr ""
+
+#: src/settings-page.php:320
+msgid "Fastly's documentation for more information on soft purging"
+msgstr ""
+
+#: src/settings-page.php:341
+msgid ""
+"The full cache purging behavior available to WP CLI must be explicitly "
+"enabled in order for it to work. Purging the entire cache can cause "
+"significant site stability issues and is disabled by default."
+msgstr ""
+
+#: src/settings-page.php:354
+msgid ""
+"This section allows you to configure how content is handled as it is "
+"revalidated. It is important that proper consideration is given to how "
+"content is regenerated after it expires from cache. The default settings "
+"take a conservative approach by allowing stale content to be served while "
+"new content is regenerated in the background."
+msgstr ""
+
+#: src/settings-page.php:372
+msgid ""
+"Turn the \"stale while revalidate\" behavior on or off. The stale while "
+"revalidate behavior allows stale content to be served while content is "
+"regenerated in the background. Please see %s"
+msgstr ""
+
+#: src/settings-page.php:376
+msgid "Fastly's documentation for more information on stale while revalidate"
+msgstr ""
+
+#: src/settings-page.php:396
+msgid ""
+"This setting determines the amount of time that stale content will be served "
+"while new content is generated."
+msgstr ""
+
+#: src/settings-page.php:416
+msgid ""
+"Turn the \"stale if error\" behavior on or off. The stale if error behavior "
+"allows stale content to be served while the origin is returning an error "
+"state. Please see %s"
+msgstr ""
+
+#: src/settings-page.php:420
+msgid "Fastly's documentation for more information on stale if error"
+msgstr ""
+
+#: src/settings-page.php:440
+msgid ""
+"This setting determines the amount of time that stale content will be served "
+"while the origin is returning an error state."
+msgstr ""
+
+#: src/settings-page.php:458
+msgid "Purgely Settings"
+msgstr ""
+
+#: src/wp-cli.php:111
+msgid "purge type is unknown"
+msgstr ""
+
+#: src/wp-cli.php:118 src/wp-cli.php:126
+msgid "purged %s"
+msgstr ""
+
+#: src/wp-cli.php:120
+msgid "URL could not be purged"
+msgstr ""
+
+#: src/wp-cli.php:128
+msgid "key could not be purged"
+msgstr ""
+
+#: src/wp-cli.php:134
+msgid "purged all"
+msgstr ""
+
+#: src/wp-cli.php:136
+msgid "cache could not be purged"
+msgstr ""
+
+#: src/wp-cli.php:143
+msgid "purged %d %s"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A plugin to manage Fastly caching behavior and purging."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Zack Tollman, WIRED Tech Team"
+msgstr ""

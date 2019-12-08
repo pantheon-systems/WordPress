@@ -1,0 +1,13 @@
+<phpunit
+  bootstrap="vendor/autoload.php"
+  verbose="false">
+
+  <testsuites>
+    <testsuite name="Lockr">
+      <directory suffix="Test.php">tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
+<!--
+  ex: ft=xml ts=2 sts=2 sw=2 et:
+-->

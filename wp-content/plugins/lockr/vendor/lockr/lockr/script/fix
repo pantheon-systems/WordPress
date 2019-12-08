@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+unset CDPATH
+
+main() {
+    (cd "$(proj_dir)" && ./vendor/bin/phpcbf "$@")
+}
+
+proj_dir() {
+    dirname "$(script_dir)"
+}
+
+script_dir() {
+    local source="${BASH_SOURCE[0]}"
+    local dir
+    while [ -h "$source" ]; do
+        dir="$(cd -P "$(dirname "$source")" >/dev/null && pwd)"
+        source="$(readlink "$source")"
+        [[ $source != /* ]] && source="$dir/$source"
+    done
+    (cd -P "$(dirname "$source")" >/dev/null && pwd)
+}
+
+main "$@"
