@@ -1,0 +1,23 @@
+.lockr-config .status{
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.lockr-config .status.lockr-info{
+	color: #000000;
+}
+
+.lockr-config .status.lockr-ok{
+	color: #4CAF50;
+}
+
+.lockr-config .status.lockr-error{
+	color: #F44336;
+}
+
+.lockr-config .status.lockr-warning{
+	color: #FFBA00;
+}
+
+#client-token #submit{
+	display: none;
+}
