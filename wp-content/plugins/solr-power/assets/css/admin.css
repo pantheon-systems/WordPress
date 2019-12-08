@@ -1,0 +1,106 @@
+.solrtab {
+  display: none; }
+  .solrtab.active {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    background: #fff;
+    padding: 20px; }
+  .solrtab .solr-display {
+    width: 50%;
+    float: left;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    .solrtab .solr-display div {
+      width: 100%;
+      padding: 20px;
+      border: 1px solid #c0c0c0; }
+      .solrtab .solr-display div h3 {
+        border-bottom: 1px solid #c0c0c0;
+        margin: 0; }
+      .solrtab .solr-display div ul li {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+        border-bottom: 1px dotted #c0c0c0; }
+        .solrtab .solr-display div ul li strong {
+          width: 50%;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex; }
+
+#solr-tabs .nav-tab-active {
+  background: #fff;
+  border-bottom: 1px solid #ffffff; }
+  #solr-tabs .nav-tab-active .dashicons {
+    color: #EFD01D; }
+
+.solr-green {
+  color: green; }
+
+.solr-red {
+  color: red; }
+
+#solr_header {
+  height: 55px;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  background: url("../images/logo.svg") no-repeat 99% #635C27; }
+  #solr_header h2 {
+    color: #fff;
+    padding-left: 10px;
+    font-size: 20px;
+    text-shadow: 1px 1px 5px #000; }
+    #solr_header h2 span {
+      font-size: 9px; }
+
+#wpcontent {
+  padding-left: 0; }
+  #wpcontent #wrap {
+    margin-left: 20px; }
+  #wpcontent div.update-nag {
+    display: none; }
+
+#solr_action form {
+  float: left;
+  clear: both;
+  display: block;
+  width: 100%; }
+
+#percentspan {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 20px;
+  padding: 20px; }
+
+#message {
+  background: #fff;
+  border-left: 4px solid #fff;
+  border-color: #7ad03a;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  padding: 1px 12px; }
+  #message p {
+    margin: 0.5em 0;
+    padding: 2px; }
+
+.solr-indexing-message {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 26px;
+  height: 28px;
+  margin: 0;
+  padding: 0 10px 1px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ddd;
+  background: #f7f7f7;
+  color: #444; }
+/*# sourceMappingURL=admin.css.map */
