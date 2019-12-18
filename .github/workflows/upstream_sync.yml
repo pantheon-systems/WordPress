@@ -19,4 +19,4 @@ jobs:
     - name: git merge
       uses: srt32/git-actions@v0.0.3
       with:
-        args: git checkout --track origin/master && git rebase upstream/master master --no-commit && git push https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY} -f
+        args: git config --global user.email "presales@pantheon.io"; git config --global user.name "Pantheon SE"; git checkout --track origin/master && git rebase upstream/master master --no-commit && git push https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY} -f
