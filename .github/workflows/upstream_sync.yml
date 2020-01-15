@@ -16,7 +16,12 @@ jobs:
       uses: srt32/git-actions@v0.0.3
       with:
         args: git remote add upstream https://github.com/pantheon-systems/WordPress.git && git fetch upstream
+    - name: git config
+      uses: srt32/git-actions@v0.0.3
+      with:
+        args: git config --global user.email "presales@pantheon.io"; git config --global user.name "Pantheon SE" 
     - name: git merge
       uses: srt32/git-actions@v0.0.3
       with:
-        args: git config --global user.email "presales@pantheon.io"; git config --global user.name "Pantheon SE"; git checkout --track origin/master && git rebase upstream/master master --no-commit && git push https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY} -f
+        args: git checkout --track origin/master && git rebase upstream/master master --no-commit && git push https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY} -f
+        
