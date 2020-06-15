@@ -10,8 +10,8 @@ enforce_https: transitional
 
 # See https://pantheon.io/docs/pantheon-yml#protected-web-paths for usage.
 protected_web_paths:
-  - /private
-  - /wp-content/uploads/private
+  - /private/
+  - /wp-content/uploads/private/
   - /xmlrpc.php
 
 # By default, any 'protected_web_paths' added to the pantheon.yml file
