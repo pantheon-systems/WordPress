@@ -1,0 +1,37 @@
+{
+	"name": "pantheon-systems/wordpress",
+	"description": "WordPress upstream for the Pantheon website platform. Includes a platform integration plugins and a pre-configured wp-config.php.",
+	"license": "GPL-2.0-or-later",
+	"type": "wordpress-core",
+	"keywords": [
+		"wordpress",
+		"cms",
+		"webops",
+		"managed"
+	],
+	"homepage": "https://pantheon.io/",
+	"authors": [
+		{
+			"name": "WordPress Community",
+			"homepage": "https://wordpress.org/about/"
+		},
+		{
+			"name": "Pantheon",
+			"homepage": "https://pantheon.io/company/"
+		}
+	],
+	"support": {
+		"chat": "https://pantheon.io/docs/support#real-time-chat-support",
+		"docs": "https://pantheon.io/docs/develop/",
+		"forum": "https://pantheon-community.slack.com/#/",
+		"issues": "https://github.com/pantheon-systems/WordPress/issues",
+		"source": "https://github.com/pantheon-systems/WordPress"
+	},
+	"require": {
+		"php": ">=5.6.20",
+		"ext-json": "*"
+	},
+	"provide": {
+		"wordpress/core-implementation": "dev-master"
+	}
+}
