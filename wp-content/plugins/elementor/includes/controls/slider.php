@@ -95,8 +95,7 @@ class Control_Slider extends Control_Base_Units {
 		<div class="elementor-control-field">
 			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
 			<?php $this->print_units_template(); ?>
-			<div class="elementor-control-input-wrapper elementor-clearfix">
-				<div class="elementor-control-tag-area ">
+			<div class="elementor-control-input-wrapper elementor-control-dynamic-switcher-wrapper elementor-clearfix elementor-control-tag-area">
 				<# if ( isMultiple && ( data.labels.length || data.scales ) ) { #>
 					<div class="elementor-slider__extra">
 						<# if ( data.labels.length ) { #>
@@ -120,7 +119,6 @@ class Control_Slider extends Control_Base_Units {
 						<input id="<?php echo $control_uid; ?>" type="number" min="{{ data.min }}" max="{{ data.max }}" step="{{ data.step }}" data-setting="size" />
 					</div>
 				<# } #>
-				</div>
 			</div>
 		</div>
 		<# if ( data.description ) { #>

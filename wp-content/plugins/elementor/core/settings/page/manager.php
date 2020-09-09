@@ -4,9 +4,8 @@ namespace Elementor\Core\Settings\Page;
 use Elementor\Core\Files\CSS\Base;
 use Elementor\Core\Files\CSS\Post;
 use Elementor\Core\Files\CSS\Post_Preview;
+use Elementor\Core\Settings\Base\CSS_Manager;
 use Elementor\Core\Utils\Exceptions;
-use Elementor\Core\Settings\Manager as SettingsManager;
-use Elementor\Core\Settings\Base\Manager as BaseManager;
 use Elementor\Core\Settings\Base\Model as BaseModel;
 use Elementor\DB;
 use Elementor\Plugin;
@@ -24,30 +23,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.6.0
  */
-class Manager extends BaseManager {
+class Manager extends CSS_Manager {
 
 	/**
 	 * Meta key for the page settings.
 	 */
 	const META_KEY = '_elementor_page_settings';
-
-	/**
-	 * Is CPT supports custom templates.
-	 *
-	 * Whether the Custom Post Type supports templates.
-	 *
-	 * @since 1.6.0
-	 * @deprecated 2.0.0 Use `Utils::is_cpt_custom_templates_supported()` method instead.
-	 * @access public
-	 * @static
-	 *
-	 * @return bool True is templates are supported, False otherwise.
-	 */
-	public static function is_cpt_custom_templates_supported() {
-		_deprecated_function( __METHOD__, '2.0.0', 'Utils::is_cpt_custom_templates_supported()' );
-
-		return Utils::is_cpt_custom_templates_supported();
-	}
 
 	/**
 	 * Get manager name.
@@ -170,6 +151,29 @@ class Manager extends BaseManager {
 			// Use `update_metadata` in order to save also for revisions.
 			update_metadata( 'post', $post->ID, '_wp_page_template', $template );
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 *
+	 * Override parent because the page setting moved to document.settings.
+	 */
+	protected function print_editor_template_content( $name ) {
+		?>
+		<#
+		const tabs = elementor.config.document.settings.tabs;
+
+		if ( Object.values( tabs ).length > 1 ) { #>
+		<div class="elementor-panel-navigation">
+			<# _.each( tabs, function( tabTitle, tabSlug ) { #>
+			<div class="elementor-component-tab elementor-panel-navigation-tab elementor-tab-control-{{ tabSlug }}" data-tab="{{ tabSlug }}">
+				<a href="#">{{{ tabTitle }}}</a>
+			</div>
+			<# } ); #>
+		</div>
+		<# } #>
+		<div id="elementor-panel-<?php echo $name; ?>-settings-controls"></div>
+		<?php
 	}
 
 	/**

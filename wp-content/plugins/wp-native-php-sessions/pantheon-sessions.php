@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Native PHP Sessions for WordPress
- * Version: 0.9.0
+ * Version: 1.2.0
  * Description: Offload PHP's native sessions to your database for multi-server compatibility.
  * Author: Pantheon
  * Author URI: https://www.pantheon.io/
@@ -14,7 +14,7 @@
 
 use Pantheon_Sessions\Session;
 
-define( 'PANTHEON_SESSIONS_VERSION', '0.9.0' );
+define( 'PANTHEON_SESSIONS_VERSION', '1.2.0' );
 
 /**
  * Main controller class for the plugin.
@@ -48,6 +48,10 @@ class Pantheon_Sessions {
 	private function load() {
 
 		if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
+			return;
+		}
+
+		if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
 			return;
 		}
 
@@ -137,7 +141,11 @@ class Pantheon_Sessions {
 
 		// Use session cookies, not transparent sessions that puts the session id in
 		// the query string.
-		ini_set( 'session.use_cookies', '1' );
+		$use_cookies = '1';
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			$use_cookies = '0';
+		}
+		ini_set( 'session.use_cookies', $use_cookies );
 		ini_set( 'session.use_only_cookies', '1' );
 		ini_set( 'session.use_trans_sid', '0' );
 		// Don't send HTTP headers using PHP's session handler.

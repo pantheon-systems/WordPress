@@ -21,7 +21,7 @@ use Google\Site_Kit\Context;
  * @access private
  * @ignore
  */
-final class User_Options {
+final class User_Options implements User_Options_Interface {
 
 	/**
 	 * Plugin context.
@@ -45,7 +45,7 @@ final class User_Options {
 	 * @since 1.0.0
 	 *
 	 * @param Context $context Plugin context.
-	 * @param integer $user_id Optional. User ID for whom options should be managed. Default is the current user.
+	 * @param int     $user_id Optional. User ID for whom options should be managed. Default is the current user.
 	 */
 	public function __construct( Context $context, $user_id = 0 ) {
 		$this->context = $context;
@@ -53,7 +53,7 @@ final class User_Options {
 		if ( empty( $user_id ) ) {
 			$user_id = get_current_user_id();
 		}
-		$this->user_id = $user_id;
+		$this->user_id = (int) $user_id;
 	}
 
 	/**
@@ -123,6 +123,17 @@ final class User_Options {
 	}
 
 	/**
+	 * Gets the ID of the user that options are controlled for.
+	 *
+	 * @since 1.1.4
+	 *
+	 * @return int User ID.
+	 */
+	public function get_user_id() {
+		return $this->user_id;
+	}
+
+	/**
 	 * Switches the user that options are controlled for to the one with the given ID.
 	 *
 	 * This method exists to exchange the user that is set as the current user in WordPress on the fly. In most cases
@@ -136,5 +147,23 @@ final class User_Options {
 	 */
 	public function switch_user( $user_id ) {
 		$this->user_id = (int) $user_id;
+	}
+
+	/**
+	 * Gets the underlying meta key for the given option.
+	 *
+	 * @since 1.4.0
+	 *
+	 * @param string $option Option name.
+	 * @return string Meta key name.
+	 */
+	public function get_meta_key( $option ) {
+		global $wpdb;
+
+		if ( $this->context->is_network_mode() ) {
+			return $option;
+		}
+
+		return $wpdb->get_blog_prefix() . $option;
 	}
 }

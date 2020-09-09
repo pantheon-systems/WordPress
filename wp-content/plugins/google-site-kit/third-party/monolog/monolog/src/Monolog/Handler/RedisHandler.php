@@ -37,7 +37,7 @@ class RedisHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abstrac
      */
     public function __construct($redis, $key, $level = \Google\Site_Kit_Dependencies\Monolog\Logger::DEBUG, $bubble = \true, $capSize = \false)
     {
-        if (!($redis instanceof \Google\Site_Kit_Dependencies\Predis\Client || $redis instanceof \Google\Site_Kit_Dependencies\Redis)) {
+        if (!($redis instanceof \Google\Site_Kit_Dependencies\Predis\Client || $redis instanceof \Redis)) {
             throw new \InvalidArgumentException('Predis\\Client or Redis instance required');
         }
         $this->redisClient = $redis;
@@ -65,8 +65,9 @@ class RedisHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abstrac
      */
     protected function writeCapped(array $record)
     {
-        if ($this->redisClient instanceof \Google\Site_Kit_Dependencies\Redis) {
-            $this->redisClient->multi()->rpush($this->redisKey, $record["formatted"])->ltrim($this->redisKey, -$this->capSize, -1)->exec();
+        if ($this->redisClient instanceof \Redis) {
+            $mode = \defined('\\Redis::MULTI') ? \Redis::MULTI : 1;
+            $this->redisClient->multi($mode)->rpush($this->redisKey, $record["formatted"])->ltrim($this->redisKey, -$this->capSize, -1)->exec();
         } else {
             $redisKey = $this->redisKey;
             $capSize = $this->capSize;

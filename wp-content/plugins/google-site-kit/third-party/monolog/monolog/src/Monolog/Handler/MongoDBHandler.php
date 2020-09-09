@@ -28,7 +28,7 @@ class MongoDBHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abstr
     protected $mongoCollection;
     public function __construct($mongo, $database, $collection, $level = \Google\Site_Kit_Dependencies\Monolog\Logger::DEBUG, $bubble = \true)
     {
-        if (!($mongo instanceof \Google\Site_Kit_Dependencies\MongoClient || $mongo instanceof \Google\Site_Kit_Dependencies\Mongo || $mongo instanceof \Google\Site_Kit_Dependencies\MongoDB\Client)) {
+        if (!($mongo instanceof \MongoClient || $mongo instanceof \Mongo || $mongo instanceof \Google\Site_Kit_Dependencies\MongoDB\Client)) {
             throw new \InvalidArgumentException('MongoClient, Mongo or MongoDB\\Client instance required');
         }
         $this->mongoCollection = $mongo->selectCollection($database, $collection);

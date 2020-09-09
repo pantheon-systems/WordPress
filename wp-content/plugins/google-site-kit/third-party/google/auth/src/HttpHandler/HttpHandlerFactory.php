@@ -25,18 +25,25 @@ class HttpHandlerFactory
      * Builds out a default http handler for the installed version of guzzle.
      *
      * @param ClientInterface $client
-     * @return Guzzle5HttpHandler|Guzzle6HttpHandler
+     * @return Guzzle5HttpHandler|Guzzle6HttpHandler|Guzzle7HttpHandler
      * @throws \Exception
      */
     public static function build(\Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface $client = null)
     {
-        $version = \Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::VERSION;
         $client = $client ?: new \Google\Site_Kit_Dependencies\GuzzleHttp\Client();
-        switch ($version[0]) {
-            case '5':
+        $version = null;
+        if (\defined('Google\\Site_Kit_Dependencies\\GuzzleHttp\\ClientInterface::MAJOR_VERSION')) {
+            $version = \Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::MAJOR_VERSION;
+        } elseif (\defined('Google\\Site_Kit_Dependencies\\GuzzleHttp\\ClientInterface::VERSION')) {
+            $version = (int) \substr(\Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::VERSION, 0, 1);
+        }
+        switch ($version) {
+            case 5:
                 return new \Google\Site_Kit_Dependencies\Google\Auth\HttpHandler\Guzzle5HttpHandler($client);
-            case '6':
+            case 6:
                 return new \Google\Site_Kit_Dependencies\Google\Auth\HttpHandler\Guzzle6HttpHandler($client);
+            case 7:
+                return new \Google\Site_Kit_Dependencies\Google\Auth\HttpHandler\Guzzle7HttpHandler($client);
             default:
                 throw new \Exception('Version not supported');
         }

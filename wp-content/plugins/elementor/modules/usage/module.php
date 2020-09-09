@@ -4,7 +4,7 @@ namespace Elementor\Modules\Usage;
 use Elementor\Core\Base\Document;
 use Elementor\Core\Base\Module as BaseModule;
 use Elementor\Core\DynamicTags\Manager;
-use Elementor\System_Info\Main as System_Info;
+use Elementor\Modules\System_Info\Module as System_Info;
 use Elementor\DB;
 use Elementor\Plugin;
 
@@ -43,9 +43,48 @@ class Module extends BaseModule {
 	}
 
 	/**
+	 * Get doc type count.
+	 *
+	 * Get count of documents based on doc type
+	 *
+	 * Remove 'wp-' from $doc_type for BC, support doc type change since 2.7.0.
+	 *
+	 * @param \Elementor\Core\Documents_Manager $doc_class
+	 * @param String $doc_type
+	 *
+	 * @return int
+	 */
+	public function get_doc_type_count( $doc_class, $doc_type ) {
+		static $posts = null;
+		static $library = null;
+
+		if ( null === $posts ) {
+			$posts = \Elementor\Tracker::get_posts_usage();
+		}
+
+		if ( null === $library ) {
+			$library = \Elementor\Tracker::get_library_usage();
+		}
+
+		$posts_usage = $posts;
+
+		if ( $doc_class::get_property( 'show_in_library' ) ) {
+			$posts_usage = $library;
+		}
+
+		$doc_type_common = str_replace( 'wp-', '', $doc_type );
+
+		$doc_usage = isset( $posts_usage[ $doc_type_common ] ) ? $posts_usage[ $doc_type_common ] : 0;
+
+		return is_array( $doc_usage ) ? $doc_usage['publish'] : $doc_usage;
+	}
+
+	/**
 	 * Get formatted usage.
 	 *
 	 * Retrieve formatted usage, for frontend.
+	 *
+	 * @param String format
 	 *
 	 * @return array
 	 */
@@ -60,6 +99,8 @@ class Module extends BaseModule {
 			} else {
 				$doc_title = $doc_type;
 			}
+
+			$doc_count = $this->get_doc_type_count( $doc_class, $doc_type );
 
 			$tab_group = $doc_class::get_property( 'admin_tab_group' );
 
@@ -92,6 +133,7 @@ class Module extends BaseModule {
 			$usage[ $doc_type ] = [
 				'title' => $doc_title,
 				'elements' => $elements,
+				'count' => $doc_count,
 			];
 
 			// Sort usage by title.
@@ -114,9 +156,15 @@ class Module extends BaseModule {
 	 * Called on elementor/document/before_save, remove document from global & set saving flag.
 	 *
 	 * @param Document $document
+	 * @param array $data new settings to save.
 	 */
-	public function before_document_save( $document ) {
-		$this->remove_from_global( $document );
+	public function before_document_save( $document, $data ) {
+		$current_status = get_post_status( $document->get_post() );
+		$new_status = isset( $data['settings']['post_status'] ) ? $data['settings']['post_status'] : '';
+
+		if ( $current_status === $new_status ) {
+			$this->remove_from_global( $document );
+		}
 
 		$this->is_document_saving = true;
 	}
@@ -129,7 +177,7 @@ class Module extends BaseModule {
 	 * @param Document $document
 	 */
 	public function after_document_save( $document ) {
-		if ( DB::STATUS_PUBLISH === $document->get_post()->post_status ) {
+		if ( DB::STATUS_PUBLISH === $document->get_post()->post_status || DB::STATUS_PRIVATE === $document->get_post()->post_status ) {
 			$this->save_document_usage( $document );
 		}
 
@@ -185,6 +233,11 @@ class Module extends BaseModule {
 	 */
 	public function on_before_delete_post( $post_id ) {
 		$document = Plugin::$instance->documents->get( $post_id );
+
+		if ( $document->get_id() !== $document->get_main_id() ) {
+			return;
+		}
+
 		$this->remove_from_global( $document );
 	}
 
@@ -239,6 +292,9 @@ class Module extends BaseModule {
 
 			$this->after_document_save( $document );
 		}
+
+		// Clear query memory before leave.
+		wp_cache_flush();
 
 		return count( $query->posts );
 	}
@@ -499,19 +555,23 @@ class Module extends BaseModule {
 	 * @param Document $document
 	 */
 	private function save_document_usage( Document $document ) {
-		if ( ! $document::get_property( 'is_editable' ) ) {
+		if ( ! $document::get_property( 'is_editable' ) && ! $document->is_built_with_elementor() ) {
 			return;
 		}
 
 		// Get data manually to avoid conflict with `\Elementor\Core\Base\Document::get_elements_data... convert_to_elementor`.
 		$data = $document->get_json_meta( '_elementor_data' );
 
-		if ( is_array( $data ) ) {
-			$usage = $this->get_elements_usage( $document->get_elements_raw_data( $data ) );
+		if ( ! empty( $data ) ) {
+			try {
+				$usage = $this->get_elements_usage( $document->get_elements_raw_data( $data ) );
 
-			$document->update_meta( self::META_KEY, $usage );
+				$document->update_meta( self::META_KEY, $usage );
 
-			$this->add_to_global( $document->get_name(), $usage );
+				$this->add_to_global( $document->get_name(), $usage );
+			} catch ( \Exception $exception ) {
+				return; // Do nothing.
+			};
 		}
 	}
 
@@ -536,11 +596,11 @@ class Module extends BaseModule {
 		add_action( 'transition_post_status', [ $this, 'on_status_change' ], 10, 3 );
 		add_action( 'before_delete_post', [ $this, 'on_before_delete_post' ] );
 
-		add_action( 'elementor/document/before_save', [ $this, 'before_document_save' ] );
+		add_action( 'elementor/document/before_save', [ $this, 'before_document_save' ], 10, 2 );
 		add_action( 'elementor/document/after_save', [ $this, 'after_document_save' ] );
 
 		add_filter( 'elementor/tracker/send_tracking_data_params', [ $this, 'add_tracking_data' ] );
 
-		add_action( 'admin_init', [ $this, 'add_system_info_report' ] );
+		add_action( 'admin_init', [ $this, 'add_system_info_report' ], 50 );
 	}
 }

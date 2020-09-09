@@ -30,7 +30,7 @@ class SignalHandler
     }
     public function registerSignalHandler($signo, $level = \Google\Site_Kit_Dependencies\Psr\Log\LogLevel::CRITICAL, $callPrevious = \true, $restartSyscalls = \true, $async = \true)
     {
-        if (!\extension_loaded('pcntl') || !\function_exists('Google\\Site_Kit_Dependencies\\pcntl_signal')) {
+        if (!\extension_loaded('pcntl') || !\function_exists('pcntl_signal')) {
             return $this;
         }
         if ($callPrevious) {
@@ -48,10 +48,10 @@ class SignalHandler
         }
         $this->signalLevelMap[$signo] = $level;
         $this->signalRestartSyscalls[$signo] = $restartSyscalls;
-        if (\function_exists('Google\\Site_Kit_Dependencies\\pcntl_async_signals') && $async !== null) {
-            pcntl_async_signals($async);
+        if (\function_exists('pcntl_async_signals') && $async !== null) {
+            \pcntl_async_signals($async);
         }
-        pcntl_signal($signo, array($this, 'handleSignal'), $restartSyscalls);
+        \pcntl_signal($signo, array($this, 'handleSignal'), $restartSyscalls);
         return $this;
     }
     public function handleSignal($signo, array $siginfo = null)
@@ -79,15 +79,15 @@ class SignalHandler
         if (!isset($this->previousSignalHandler[$signo])) {
             return;
         }
-        if ($this->previousSignalHandler[$signo] === \true || $this->previousSignalHandler[$signo] === SIG_DFL) {
-            if (\extension_loaded('pcntl') && \function_exists('Google\\Site_Kit_Dependencies\\pcntl_signal') && \function_exists('Google\\Site_Kit_Dependencies\\pcntl_sigprocmask') && \function_exists('Google\\Site_Kit_Dependencies\\pcntl_signal_dispatch') && \extension_loaded('posix') && \function_exists('posix_getpid') && \function_exists('posix_kill')) {
+        if ($this->previousSignalHandler[$signo] === \true || $this->previousSignalHandler[$signo] === \SIG_DFL) {
+            if (\extension_loaded('pcntl') && \function_exists('pcntl_signal') && \function_exists('pcntl_sigprocmask') && \function_exists('pcntl_signal_dispatch') && \extension_loaded('posix') && \function_exists('posix_getpid') && \function_exists('posix_kill')) {
                 $restartSyscalls = isset($this->signalRestartSyscalls[$signo]) ? $this->signalRestartSyscalls[$signo] : \true;
-                pcntl_signal($signo, SIG_DFL, $restartSyscalls);
-                pcntl_sigprocmask(SIG_UNBLOCK, array($signo), $oldset);
+                \pcntl_signal($signo, \SIG_DFL, $restartSyscalls);
+                \pcntl_sigprocmask(\SIG_UNBLOCK, array($signo), $oldset);
                 \posix_kill(\posix_getpid(), $signo);
-                pcntl_signal_dispatch();
-                pcntl_sigprocmask(SIG_SETMASK, $oldset);
-                pcntl_signal($signo, array($this, 'handleSignal'), $restartSyscalls);
+                \pcntl_signal_dispatch();
+                \pcntl_sigprocmask(\SIG_SETMASK, $oldset);
+                \pcntl_signal($signo, array($this, 'handleSignal'), $restartSyscalls);
             }
         } elseif (\is_callable($this->previousSignalHandler[$signo])) {
             if (\PHP_VERSION_ID >= 70100) {

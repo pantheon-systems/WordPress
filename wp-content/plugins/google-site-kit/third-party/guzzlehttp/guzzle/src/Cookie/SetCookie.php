@@ -70,7 +70,7 @@ class SetCookie implements \Google\Site_Kit_Dependencies\GuzzleHttp\ToArrayInter
         foreach ($this->data as $k => $v) {
             if ($k != 'Name' && $k != 'Value' && $v !== null && $v !== \false) {
                 if ($k == 'Expires') {
-                    $str .= 'Expires=' . \gmdate('Google\\Site_Kit_Dependencies\\D, d M Y H:i:s \\G\\M\\T', $v) . '; ';
+                    $str .= 'Expires=' . \gmdate('D, d M Y H:i:s \\G\\M\\T', $v) . '; ';
                 } else {
                     $str .= ($v === \true ? $k : "{$k}={$v}") . '; ';
                 }

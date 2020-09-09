@@ -11,9 +11,10 @@
 namespace Google\Site_Kit\Core\Admin;
 
 use Google\Site_Kit\Context;
-use Google\Site_Kit\Core\Authentication\Authentication;
-use Google\Site_Kit\Core\Permissions\Permissions;
 use Google\Site_Kit\Core\Assets\Assets;
+use Google\Site_Kit\Core\Authentication\Authentication;
+use Google\Site_Kit\Core\Modules\Modules;
+use Google\Site_Kit\Core\Permissions\Permissions;
 
 /**
  * Class managing admin screens.
@@ -43,6 +44,14 @@ final class Screens {
 	private $assets;
 
 	/**
+	 * Modules instance.
+	 *
+	 * @since 1.7.0
+	 * @var Modules
+	 */
+	private $modules;
+
+	/**
 	 * Associative array of $hook_suffix => $screen pairs.
 	 *
 	 * @since 1.0.0
@@ -57,14 +66,16 @@ final class Screens {
 	 *
 	 * @param Context $context Plugin context.
 	 * @param Assets  $assets  Optional. Assets API instance. Default is a new instance.
+	 * @param Modules $modules Optional. Modules instance. Default is a new instance.
 	 */
-	public function __construct( Context $context, Assets $assets = null ) {
+	public function __construct(
+		Context $context,
+		Assets $assets = null,
+		Modules $modules = null
+	) {
 		$this->context = $context;
-
-		if ( ! $assets ) {
-			$assets = new Assets( $this->context );
-		}
-		$this->assets = $assets;
+		$this->assets  = $assets ?: new Assets( $this->context );
+		$this->modules = $modules ?: new Modules( $this->context );
 	}
 
 	/**
@@ -93,6 +104,14 @@ final class Screens {
 			'admin_enqueue_scripts',
 			function( $hook_suffix ) {
 				$this->enqueue_screen_assets( $hook_suffix );
+			}
+		);
+
+		// Redirect dashboard to splash if no dashboard access (yet).
+		add_action(
+			'admin_page_access_denied',
+			function() {
+				$this->no_access_redirect_dashboard_to_splash();
 			}
 		);
 
@@ -146,6 +165,18 @@ final class Screens {
 	}
 
 	/**
+	 * Gets the Screen instance for a given hook suffix.
+	 *
+	 * @since 1.11.0
+	 *
+	 * @param string $hook_suffix The hook suffix associated with the screen to retrieve.
+	 * @return Screen|null Screen instance if available, otherwise null;
+	 */
+	public function get_screen( $hook_suffix ) {
+		return isset( $this->screens[ $hook_suffix ] ) ? $this->screens[ $hook_suffix ] : null;
+	}
+
+	/**
 	 * Adds all screens to the admin.
 	 *
 	 * @since 1.0.0
@@ -192,13 +223,37 @@ final class Screens {
 		}
 
 		$this->screens[ $hook_suffix ]->enqueue_assets( $this->assets );
+		$this->modules->enqueue_assets();
+	}
 
-		/**
-		 * Fires when assets are enqueued for a Site Kit admin screen.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'googlesitekit_enqueue_screen_assets' );
+	/**
+	 * Redirects from the dashboard to the splash screen if permissions to access the dashboard are currently not met.
+	 *
+	 * Dashboard permission access is conditional based on whether the user has successfully authenticated. When
+	 * e.g. accessing the dashboard manually or having it open in a separate tab while disconnecting in the other tab,
+	 * it is a better user experience to redirect to the splash screen so that the user can re-authenticate.
+	 *
+	 * The only time the dashboard should fail with the regular WordPress permissions error is when the current user is
+	 * not eligible for accessing Site Kit entirely, i.e. if they are not allowed to authenticate.
+	 *
+	 * @since 1.12.0
+	 */
+	private function no_access_redirect_dashboard_to_splash() {
+		global $plugin_page;
+
+		// At this point, our preferred `$hook_suffix` is not set, and the dashboard page will not even be registered,
+		// so we need to rely on the `$plugin_page` global here.
+		if ( ! isset( $plugin_page ) || self::PREFIX . 'dashboard' !== $plugin_page ) {
+			return;
+		}
+
+		// Redirect to splash screen if user is allowed to authenticate.
+		if ( current_user_can( Permissions::AUTHENTICATE ) ) {
+			wp_safe_redirect(
+				$this->context->admin_url( 'splash' )
+			);
+			exit;
+		}
 	}
 
 	/**
@@ -216,40 +271,22 @@ final class Screens {
 					'title'            => __( 'Dashboard', 'google-site-kit' ),
 					'capability'       => Permissions::VIEW_DASHBOARD,
 					'enqueue_callback' => function( Assets $assets ) {
-						if ( filter_input( INPUT_GET, 'permaLink' ) ) {
-							$assets->enqueue_asset( 'googlesitekit_dashboard_details' );
+						if ( $this->context->input()->filter( INPUT_GET, 'permaLink' ) ) {
+							$assets->enqueue_asset( 'googlesitekit-dashboard-details' );
 						} else {
-							$assets->enqueue_asset( 'googlesitekit_dashboard' );
+							$assets->enqueue_asset( 'googlesitekit-dashboard' );
 						}
 					},
 					'render_callback'  => function( Context $context ) {
-						?>
-						<div class="googlesitekit-plugin">
-							<?php
-							if ( filter_input( INPUT_GET, 'permaLink' ) ) {
-								/**
-								 * Fires before the Dashboard Details App wrapper is rendered.
-								 *
-								 * @since 1.0.0
-								 */
-								do_action( 'googlesitekit_above_dashboard_details_app' );
-								?>
-								<div id="js-googlesitekit-dashboard-details" class="googlesitekit-page"></div>
-								<?php
-							} else {
-								/**
-								 * Fires before the Dashboard App wrapper is rendered.
-								 *
-								 * @since 1.0.0
-								 */
-								do_action( 'googlesitekit_above_dashboard_app' );
-								?>
-								<div id="js-googlesitekit-dashboard" class="googlesitekit-page"></div>
-								<?php
-							}
+						if ( $context->input()->filter( INPUT_GET, 'permaLink' ) ) {
 							?>
-						</div>
-						<?php
+							<div id="js-googlesitekit-dashboard-details" class="googlesitekit-page"></div>
+							<?php
+						} else {
+							?>
+							<div id="js-googlesitekit-dashboard" class="googlesitekit-page"></div>
+							<?php
+						}
 					},
 				)
 			),
@@ -277,21 +314,13 @@ final class Screens {
 				'title'            => __( 'Settings', 'google-site-kit' ),
 				'capability'       => Permissions::MANAGE_OPTIONS,
 				'enqueue_callback' => function( Assets $assets ) {
-					$assets->enqueue_asset( 'googlesitekit_settings' );
+					$assets->enqueue_asset( 'googlesitekit-settings' );
 				},
 				'render_callback'  => function( Context $context ) {
 					?>
-					<div class="googlesitekit-plugin">
-						<?php
-						/**
-						 * Fires before the Settings App wrapper is rendered.
-						 *
-						 * @since 1.0.0
-						 */
-						do_action( 'googlesitekit_above_settings_app' );
-						?>
-						<div id="googlesitekit-settings-wrapper" class="googlesitekit-page"></div>
-					</div>
+
+					<div id="googlesitekit-settings-wrapper" class="googlesitekit-page"></div>
+
 					<?php
 				},
 			)
@@ -308,56 +337,47 @@ final class Screens {
 
 				// This callback will redirect to the dashboard on successful authentication.
 				'initialize_callback' => function( Context $context ) {
-					$splash_context = filter_input( INPUT_GET, 'googlesitekit_context' );
+					$splash_context = $context->input()->filter( INPUT_GET, 'googlesitekit_context' );
+					$reset_session  = $context->input()->filter( INPUT_GET, 'googlesitekit_reset_session', FILTER_VALIDATE_BOOLEAN );
 					$authentication = new Authentication( $context );
 
 					// If the user is authenticated, redirect them to the disconnect URL and then send them back here.
-					if ( empty( $_GET['googlesitekit_reset_session'] ) && 'revoked' === $splash_context && $authentication->is_authenticated() ) { // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+					if ( ! $reset_session && 'revoked' === $splash_context && $authentication->is_authenticated() ) {
 						$authentication->disconnect();
 
 						wp_safe_redirect( add_query_arg( array( 'googlesitekit_reset_session' => 1 ) ) );
 						exit;
 					}
 
-					$notification = filter_input( INPUT_GET, 'notification' );
-					$error        = filter_input( INPUT_GET, 'error' );
-
-					// Bail if no success parameter indicator.
-					if ( 'authentication_success' !== $notification || ! empty( $error ) ) {
-						return;
-					}
-
-					// Bail if the current user cannot access the dashboard.
+					// Don't consider redirect if the current user cannot access the dashboard (yet).
 					if ( ! current_user_can( Permissions::VIEW_DASHBOARD ) ) {
 						return;
 					}
 
-					wp_safe_redirect(
-						$context->admin_url(
-							'dashboard',
-							array(
-								'notification' => 'authentication_success',
+					$notification = $context->input()->filter( INPUT_GET, 'notification' );
+					$error        = $context->input()->filter( INPUT_GET, 'error' );
+
+					// Redirect to dashboard if success parameter indicator.
+					if ( 'authentication_success' === $notification && empty( $error ) ) {
+						wp_safe_redirect(
+							$context->admin_url(
+								'dashboard',
+								array(
+									'notification' => 'authentication_success',
+								)
 							)
-						)
-					);
-					exit;
+						);
+						exit;
+					}
 				},
 				'enqueue_callback'    => function( Assets $assets ) {
-					$assets->enqueue_asset( 'googlesitekit_dashboard_splash' );
+					$assets->enqueue_asset( 'googlesitekit-dashboard-splash' );
 				},
 				'render_callback'     => function( Context $context ) {
 					?>
-					<div class="googlesitekit-plugin">
-						<?php
-						/**
-						 * Fires before the Dashboard Splash App wrapper is rendered.
-						 *
-						 * @since 1.0.0
-						 */
-						do_action( 'googlesitekit_above_dashboard_splash_app' );
-						?>
-						<div id="js-googlesitekit-dashboard-splash" class="googlesitekit-page"></div>
-					</div>
+
+					<div id="js-googlesitekit-dashboard-splash" class="googlesitekit-page"></div>
+
 					<?php
 				},
 			)

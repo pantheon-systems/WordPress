@@ -2,6 +2,9 @@
 
 namespace Google\Site_Kit_Dependencies\React\Promise;
 
+/**
+ * @deprecated 2.8.0 External usage of FulfilledPromise is deprecated, use `resolve()` instead.
+ */
 class FulfilledPromise implements \Google\Site_Kit_Dependencies\React\Promise\ExtendedPromiseInterface, \Google\Site_Kit_Dependencies\React\Promise\CancellablePromiseInterface
 {
     private $value;

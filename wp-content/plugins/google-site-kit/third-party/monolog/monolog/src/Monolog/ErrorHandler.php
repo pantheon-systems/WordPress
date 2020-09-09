@@ -13,7 +13,6 @@ namespace Google\Site_Kit_Dependencies\Monolog;
 use Google\Site_Kit_Dependencies\Psr\Log\LoggerInterface;
 use Google\Site_Kit_Dependencies\Psr\Log\LogLevel;
 use Google\Site_Kit_Dependencies\Monolog\Handler\AbstractHandler;
-use Google\Site_Kit_Dependencies\Monolog\Registry;
 /**
  * Monolog error handler
  *

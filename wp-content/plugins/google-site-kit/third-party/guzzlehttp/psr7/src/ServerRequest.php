@@ -131,7 +131,7 @@ class ServerRequest extends \Google\Site_Kit_Dependencies\GuzzleHttp\Psr7\Reques
     public static function fromGlobals()
     {
         $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
-        $headers = getallheaders();
+        $headers = \getallheaders();
         $uri = self::getUriFromGlobals();
         $body = new \Google\Site_Kit_Dependencies\GuzzleHttp\Psr7\CachingStream(new \Google\Site_Kit_Dependencies\GuzzleHttp\Psr7\LazyOpenStream('php://input', 'r+'));
         $protocol = isset($_SERVER['SERVER_PROTOCOL']) ? \str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1';

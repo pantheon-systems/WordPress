@@ -208,13 +208,17 @@ function cptui_manage_post_types() {
 		<div class="postbox-container">
 		<div id="poststuff">
 			<div class="cptui-section postbox">
-				<button type="button" class="handlediv button-link" aria-expanded="true">
-					<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Basic settings', 'custom-post-type-ui' ); ?></span>
-					<span class="toggle-indicator" aria-hidden="true"></span>
-				</button>
-				<h2 class="hndle">
-					<span><?php esc_html_e( 'Basic settings', 'custom-post-type-ui' ); ?></span>
-				</h2>
+				<div class="postbox-header">
+					<h2 class="hndle ui-sortable-handle">
+						<span><?php esc_html_e( 'Basic settings', 'custom-post-type-ui' ); ?></span>
+					</h2>
+					<div class="handle-actions hide-if-no-js">
+						<button type="button" class="handlediv" aria-expanded="true">
+							<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Basic settings', 'custom-post-type-ui' ); ?></span>
+							<span class="toggle-indicator" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
 				<div class="inside">
 					<div class="main">
 						<table class="form-table cptui-table">
@@ -322,7 +326,7 @@ function cptui_manage_post_types() {
 						 * @param string $value Text to use for the button.
 						 */
 						?>
-						<input type="submit" class="button-secondary" name="cpt_delete" id="cpt_submit_delete" value="<?php echo esc_attr( apply_filters( 'cptui_post_type_submit_delete', __( 'Delete Post Type', 'custom-post-type-ui' ) ) ); ?>" />
+						<input type="submit" class="button-secondary cptui-delete-top" name="cpt_delete" id="cpt_submit_delete" value="<?php echo esc_attr( apply_filters( 'cptui_post_type_submit_delete', __( 'Delete Post Type', 'custom-post-type-ui' ) ) ); ?>" />
 						<?php } else { ?>
 						<?php
 
@@ -348,13 +352,17 @@ function cptui_manage_post_types() {
 				</div>
 			</div>
 			<div class="cptui-section cptui-labels postbox">
-				<button type="button" class="handlediv button-link" aria-expanded="true">
-					<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Additional labels', 'custom-post-type-ui' ); ?></span>
-					<span class="toggle-indicator" aria-hidden="true"></span>
-				</button>
-				<h2 class="hndle">
-					<span><?php esc_html_e( 'Additional labels', 'custom-post-type-ui' ); ?></span>
-				</h2>
+				<div class="postbox-header">
+					<h2 class="hndle ui-sortable-handle">
+						<span><?php esc_html_e( 'Additional labels', 'custom-post-type-ui' ); ?></span>
+					</h2>
+					<div class="handle-actions hide-if-no-js">
+						<button type="button" class="handlediv" aria-expanded="true">
+							<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Basic settings', 'custom-post-type-ui' ); ?></span>
+							<span class="toggle-indicator" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
 				<div class="inside">
 					<div class="main">
 						<table class="form-table cptui-table">
@@ -786,13 +794,17 @@ function cptui_manage_post_types() {
 				</div>
 			</div>
 			<div class="cptui-section cptui-settings postbox">
-				<button type="button" class="handlediv button-link" aria-expanded="true">
-					<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Settings', 'custom-post-type-ui' ); ?></span>
-					<span class="toggle-indicator" aria-hidden="true"></span>
-				</button>
-				<h2 class="hndle">
-					<span><?php esc_html_e( 'Settings', 'custom-post-type-ui' ); ?></span>
-				</h2>
+				<div class="postbox-header">
+					<h2 class="hndle ui-sortable-handle">
+						<span><?php esc_html_e( 'Settings', 'custom-post-type-ui' ); ?></span>
+					</h2>
+					<div class="handle-actions hide-if-no-js">
+						<button type="button" class="handlediv" aria-expanded="true">
+							<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Basic settings', 'custom-post-type-ui' ); ?></span>
+							<span class="toggle-indicator" aria-hidden="true"></span>
+						</button>
+					</div>
+				</div>
 				<div class="inside">
 					<div class="main">
 						<table class="form-table cptui-table">
@@ -1384,7 +1396,7 @@ function cptui_manage_post_types() {
 					 * @param string $value Text to use for the button.
 					 */
 					?>
-					<input type="submit" class="button-secondary" name="cpt_delete" id="cpt_submit_delete" value="<?php echo esc_attr( apply_filters( 'cptui_post_type_submit_delete', __( 'Delete Post Type', 'custom-post-type-ui' ) ) ); ?>" />
+					<input type="submit" class="button-secondary cptui-delete-bottom" name="cpt_delete" id="cpt_submit_delete" value="<?php echo esc_attr( apply_filters( 'cptui_post_type_submit_delete', __( 'Delete Post Type', 'custom-post-type-ui' ) ) ); ?>" />
 			<?php
 				} else {
 
@@ -1421,8 +1433,8 @@ function cptui_post_types_dropdown( $post_types = [] ) {
 		$select['options'] = [];
 
 		foreach ( $post_types as $type ) {
-			$text = ! empty( $type['label'] ) ? $type['label'] : $type['name'];
-			$select['options'][] = [ 'attr' => $type['name'], 'text' => $text ];
+			$text                = ! empty( $type['label'] ) ? esc_html( $type['label'] ) : esc_html( $type['name'] );
+			$select['options'][] = [ 'attr' => esc_html( $type['name'] ), 'text' => $text ];
 		}
 
 		$current = cptui_get_current_post_type();

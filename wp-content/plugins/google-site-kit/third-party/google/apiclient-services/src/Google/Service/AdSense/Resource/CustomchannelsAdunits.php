@@ -37,11 +37,11 @@ class Google_Service_AdSense_Resource_CustomchannelsAdunits extends \Google\Site
      *
      * @opt_param bool includeInactive Whether to include inactive ad units.
      * Default: true.
-     * @opt_param int maxResults The maximum number of ad units to include in the
-     * response, used for paging.
      * @opt_param string pageToken A continuation token, used to page through ad
      * units. To retrieve the next page, set this parameter to the value of
      * "nextPageToken" from the previous response.
+     * @opt_param int maxResults The maximum number of ad units to include in the
+     * response, used for paging.
      * @return Google_Service_AdSense_AdUnits
      */
     public function listCustomchannelsAdunits($adClientId, $customChannelId, $optParams = array())

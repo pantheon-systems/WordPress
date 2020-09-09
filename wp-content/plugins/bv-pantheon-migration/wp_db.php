@@ -168,5 +168,24 @@ class PTNWPDb {
 		$table = $this->getBVTable($name);
 		return $wpdb->replace($table, $value);
 	}
+	
+	public function tinfo($name) {
+		$result = array();
+		$table = $this->getBVTable($name);
+
+		$result['name'] = $table;
+
+		if ($this->isTablePresent($table)) {
+			$result['exists'] = true;
+			$result['createquery'] = $this->showTableCreate($table);
+		}
+
+		return $result;
+	}
+
+	public function getMysqlVersion() {
+		global $wpdb;
+		return $wpdb->db_version();
+	}
 }
 endif;

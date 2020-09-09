@@ -73,10 +73,10 @@ class NewRelicHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abst
             unset($record['formatted']['context']['transaction_name']);
         }
         if (isset($record['context']['exception']) && ($record['context']['exception'] instanceof \Exception || \PHP_VERSION_ID >= 70000 && $record['context']['exception'] instanceof \Throwable)) {
-            newrelic_notice_error($record['message'], $record['context']['exception']);
+            \newrelic_notice_error($record['message'], $record['context']['exception']);
             unset($record['formatted']['context']['exception']);
         } else {
-            newrelic_notice_error($record['message']);
+            \newrelic_notice_error($record['message']);
         }
         if (isset($record['formatted']['context']) && \is_array($record['formatted']['context'])) {
             foreach ($record['formatted']['context'] as $key => $parameter) {
@@ -146,7 +146,7 @@ class NewRelicHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abst
      */
     protected function setNewRelicAppName($appName)
     {
-        newrelic_set_appname($appName);
+        \newrelic_set_appname($appName);
     }
     /**
      * Overwrites the name of the current transaction
@@ -155,7 +155,7 @@ class NewRelicHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abst
      */
     protected function setNewRelicTransactionName($transactionName)
     {
-        newrelic_name_transaction($transactionName);
+        \newrelic_name_transaction($transactionName);
     }
     /**
      * @param string $key
@@ -164,9 +164,9 @@ class NewRelicHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abst
     protected function setNewRelicParameter($key, $value)
     {
         if (null === $value || \is_scalar($value)) {
-            newrelic_add_custom_parameter($key, $value);
+            \newrelic_add_custom_parameter($key, $value);
         } else {
-            newrelic_add_custom_parameter($key, \Google\Site_Kit_Dependencies\Monolog\Utils::jsonEncode($value, null, \true));
+            \newrelic_add_custom_parameter($key, \Google\Site_Kit_Dependencies\Monolog\Utils::jsonEncode($value, null, \true));
         }
     }
     /**

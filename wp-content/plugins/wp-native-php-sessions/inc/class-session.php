@@ -176,7 +176,7 @@ class Session {
 			$wpdb->pantheon_sessions,
 			array(
 				'user_id'    => (int) get_current_user_id(),
-				'datetime'   => date( 'Y-m-d H:i:s' ),
+				'datetime'   => gmdate( 'Y-m-d H:i:s' ),
 				'ip_address' => self::get_client_ip_server(),
 				'data'       => maybe_serialize( $data ),
 			),
@@ -196,14 +196,14 @@ class Session {
 		$ip_address = apply_filters( 'pantheon_sessions_client_ip_default', '127.0.0.1' );
 		$ip_source  = null;
 
-		$keys = [
+		$keys = array(
 			'HTTP_CLIENT_IP',
 			'HTTP_X_FORWARDED_FOR',
 			'HTTP_X_FORWARDED',
 			'HTTP_FORWARDED_FOR',
 			'HTTP_FORWARDED',
 			'REMOTE_ADDR',
-		];
+		);
 
 		$ip_filter_flags = apply_filters( 'pantheon_sessions_client_ip_filter_flags', FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE );
 

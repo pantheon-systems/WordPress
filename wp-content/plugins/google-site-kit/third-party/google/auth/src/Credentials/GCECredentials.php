@@ -18,14 +18,17 @@
 namespace Google\Site_Kit_Dependencies\Google\Auth\Credentials;
 
 use Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader;
+use Google\Site_Kit_Dependencies\Google\Auth\GetQuotaProjectInterface;
 use Google\Site_Kit_Dependencies\Google\Auth\HttpHandler\HttpClientCache;
 use Google\Site_Kit_Dependencies\Google\Auth\HttpHandler\HttpHandlerFactory;
 use Google\Site_Kit_Dependencies\Google\Auth\Iam;
+use Google\Site_Kit_Dependencies\Google\Auth\ProjectIdProviderInterface;
 use Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface;
 use Google\Site_Kit_Dependencies\GuzzleHttp\Exception\ClientException;
 use Google\Site_Kit_Dependencies\GuzzleHttp\Exception\RequestException;
 use Google\Site_Kit_Dependencies\GuzzleHttp\Exception\ServerException;
 use Google\Site_Kit_Dependencies\GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
 /**
  * GCECredentials supports authorization on Google Compute Engine.
  *
@@ -50,9 +53,11 @@ use Google\Site_Kit_Dependencies\GuzzleHttp\Psr7\Request;
  *
  *   $res = $client->get('myproject/taskqueues/myqueue');
  */
-class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader implements \Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface
+class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader implements \Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface, \Google\Site_Kit_Dependencies\Google\Auth\ProjectIdProviderInterface, \Google\Site_Kit_Dependencies\Google\Auth\GetQuotaProjectInterface
 {
+    // phpcs:disable
     const cacheKey = 'GOOGLE_AUTH_PHP_GCE';
+    // phpcs:enable
     /**
      * The metadata IP address on appengine instances.
      *
@@ -65,9 +70,17 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
      */
     const TOKEN_URI_PATH = 'v1/instance/service-accounts/default/token';
     /**
+     * The metadata path of the default id token.
+     */
+    const ID_TOKEN_URI_PATH = 'v1/instance/service-accounts/default/identity';
+    /**
      * The metadata path of the client ID.
      */
     const CLIENT_ID_URI_PATH = 'v1/instance/service-accounts/default/email';
+    /**
+     * The metadata path of the project ID.
+     */
+    const PROJECT_ID_URI_PATH = 'v1/project/project-id';
     /**
      * The header whose presence indicates GCE presence.
      */
@@ -101,9 +114,13 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
      */
     protected $lastReceivedToken;
     /**
-     * @var string
+     * @var string|null
      */
     private $clientName;
+    /**
+     * @var string|null
+     */
+    private $projectId;
     /**
      * @var Iam|null
      */
@@ -113,13 +130,27 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
      */
     private $tokenUri;
     /**
+     * @var string
+     */
+    private $targetAudience;
+    /**
+     * @var string|null
+     */
+    private $quotaProject;
+    /**
      * @param Iam $iam [optional] An IAM instance.
      * @param string|array $scope [optional] the scope of the access request,
      *        expressed either as an array or as a space-delimited string.
+     * @param string $targetAudience [optional] The audience for the ID token.
+     * @param string $quotaProject [optional] Specifies a project to bill for access
+     *   charges associated with the request.
      */
-    public function __construct(\Google\Site_Kit_Dependencies\Google\Auth\Iam $iam = null, $scope = null)
+    public function __construct(\Google\Site_Kit_Dependencies\Google\Auth\Iam $iam = null, $scope = null, $targetAudience = null, $quotaProject = null)
     {
         $this->iam = $iam;
+        if ($scope && $targetAudience) {
+            throw new \InvalidArgumentException('Scope and targetAudience cannot both be supplied');
+        }
         $tokenUri = self::getTokenUri();
         if ($scope) {
             if (\is_string($scope)) {
@@ -127,8 +158,12 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
             }
             $scope = \implode(',', $scope);
             $tokenUri = $tokenUri . '?scopes=' . $scope;
+        } elseif ($targetAudience) {
+            $tokenUri = \sprintf('http://%s/computeMetadata/%s?audience=%s', self::METADATA_IP, self::ID_TOKEN_URI_PATH, $targetAudience);
+            $this->targetAudience = $targetAudience;
         }
         $this->tokenUri = $tokenUri;
+        $this->quotaProject = $quotaProject;
     }
     /**
      * The full uri for accessing the default token.
@@ -151,10 +186,20 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
         return $base . self::CLIENT_ID_URI_PATH;
     }
     /**
+     * The full uri for accessing the default project ID.
+     *
+     * @return string
+     */
+    private static function getProjectIdUri()
+    {
+        $base = 'http://' . self::METADATA_IP . '/computeMetadata/';
+        return $base . self::PROJECT_ID_URI_PATH;
+    }
+    /**
      * Determines if this an App Engine Flexible instance, by accessing the
      * GAE_INSTANCE environment variable.
      *
-     * @return true if this an App Engine Flexible Instance, false otherwise
+     * @return bool true if this an App Engine Flexible Instance, false otherwise
      */
     public static function onAppEngineFlexible()
     {
@@ -166,8 +211,7 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
      * If $httpHandler is not specified a the default HttpHandler is used.
      *
      * @param callable $httpHandler callback which delivers psr7 request
-     *
-     * @return true if this a GCEInstance false otherwise
+     * @return bool True if this a GCEInstance, false otherwise
      */
     public static function onGce(callable $httpHandler = null)
     {
@@ -200,11 +244,14 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
      *
      * @param callable $httpHandler callback which delivers psr7 request
      *
-     * @return array A set of auth related metadata, containing the following
-     * keys:
+     * @return array A set of auth related metadata, based on the token type.
+     *
+     * Access tokens have the following keys:
      *   - access_token (string)
      *   - expires_in (int)
      *   - token_type (string)
+     * ID tokens have the following keys:
+     *   - id_token (string)
      *
      * @throws \Exception
      */
@@ -219,8 +266,11 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
             return array();
             // return an empty array with no access token
         }
-        $json = $this->getFromMetadata($httpHandler, $this->tokenUri);
-        if (null === ($json = \json_decode($json, \true))) {
+        $response = $this->getFromMetadata($httpHandler, $this->tokenUri);
+        if ($this->targetAudience) {
+            return ['id_token' => $response];
+        }
+        if (null === ($json = \json_decode($response, \true))) {
             throw new \Exception('Invalid JSON response');
         }
         // store this so we can retrieve it later
@@ -293,6 +343,30 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
         return $signer->signBlob($email, $accessToken, $stringToSign);
     }
     /**
+     * Fetch the default Project ID from compute engine.
+     *
+     * Returns null if called outside GCE.
+     *
+     * @param callable $httpHandler Callback which delivers psr7 request
+     * @return string|null
+     */
+    public function getProjectId(callable $httpHandler = null)
+    {
+        if ($this->projectId) {
+            return $this->projectId;
+        }
+        $httpHandler = $httpHandler ?: \Google\Site_Kit_Dependencies\Google\Auth\HttpHandler\HttpHandlerFactory::build(\Google\Site_Kit_Dependencies\Google\Auth\HttpHandler\HttpClientCache::getHttpClient());
+        if (!$this->hasCheckedOnGce) {
+            $this->isOnGce = self::onGce($httpHandler);
+            $this->hasCheckedOnGce = \true;
+        }
+        if (!$this->isOnGce) {
+            return null;
+        }
+        $this->projectId = $this->getFromMetadata($httpHandler, self::getProjectIdUri());
+        return $this->projectId;
+    }
+    /**
      * Fetch the value of a GCE metadata server URI.
      *
      * @param callable $httpHandler An HTTP Handler to deliver PSR7 requests.
@@ -303,5 +377,14 @@ class GCECredentials extends \Google\Site_Kit_Dependencies\Google\Auth\Credentia
     {
         $resp = $httpHandler(new \Google\Site_Kit_Dependencies\GuzzleHttp\Psr7\Request('GET', $uri, [self::FLAVOR_HEADER => 'Google']));
         return (string) $resp->getBody();
+    }
+    /**
+     * Get the quota project used for this API request
+     *
+     * @return string|null
+     */
+    public function getQuotaProject()
+    {
+        return $this->quotaProject;
     }
 }

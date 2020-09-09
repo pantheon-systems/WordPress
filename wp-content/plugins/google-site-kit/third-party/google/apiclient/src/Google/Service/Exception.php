@@ -32,7 +32,6 @@ class Google_Service_Exception extends \Google\Site_Kit_Dependencies\Google_Exce
      * @param Exception|null $previous
      * @param [{string, string}] errors List of errors returned in an HTTP
      * response.  Defaults to [].
-     * @param array|null $retryMap Map of errors with retry counts.
      */
     public function __construct($message, $code = 0, \Exception $previous = null, $errors = array())
     {

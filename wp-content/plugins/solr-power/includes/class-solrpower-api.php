@@ -50,7 +50,7 @@ class SolrPower_Api {
 	 *
 	 * @var bool
 	 */
-	public $ping = false;
+	protected $ping_status;
 
 	/**
 	 * Grab instance of object.
@@ -70,7 +70,33 @@ class SolrPower_Api {
 	 */
 	function __construct() {
 		add_action( 'admin_notices', array( $this, 'check_for_schema' ) );
-		add_action( 'init', array( $this, 'ping_server' ) );
+	}
+
+	/**
+	 * Allow 'ping' to be unset until it needs to be accessed.
+	 *
+	 * @param string $key Key to be accessed.
+	 */
+	public function __get( $key ) {
+		if ( 'ping' === $key ) {
+			if ( isset( self::$instance->ping_status ) ) {
+				return self::$instance->ping_status;
+			}
+			self::ping_server();
+			return self::$instance->ping_status;
+		}
+	}
+
+	/**
+	 * Allow setting of 'ping' publicly, because it was once public and made protected.
+	 *
+	 * @param string $key   Key to be set.
+	 * @param mixed  $value Value to be set on the key.
+	 */
+	public function __set( $key, $value ) {
+		if ( 'ping' === $key ) {
+			self::$instance->ping_status = $value;
+		}
 	}
 
 	/**

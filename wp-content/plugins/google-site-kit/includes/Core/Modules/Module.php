@@ -10,17 +10,22 @@
 
 namespace Google\Site_Kit\Core\Modules;
 
+use Closure;
 use Google\Site_Kit\Context;
+use Google\Site_Kit\Core\Authentication\Clients\OAuth_Client;
+use Google\Site_Kit\Core\Authentication\Exception\Insufficient_Scopes_Exception;
+use Google\Site_Kit\Core\Authentication\Exception\Google_Proxy_Code_Exception;
+use Google\Site_Kit\Core\Contracts\WP_Errorable;
 use Google\Site_Kit\Core\Storage\Options;
 use Google\Site_Kit\Core\Storage\User_Options;
 use Google\Site_Kit\Core\Storage\Cache;
 use Google\Site_Kit\Core\Authentication\Authentication;
+use Google\Site_Kit\Core\Authentication\Clients\Google_Site_Kit_Client;
+use Google\Site_Kit\Core\REST_API\Exception\Invalid_Datapoint_Exception;
 use Google\Site_Kit\Core\REST_API\Data_Request;
-use Google\Site_Kit_Dependencies\Google_Client;
 use Google\Site_Kit_Dependencies\Google_Service;
 use Google\Site_Kit_Dependencies\Google_Service_Exception;
 use Google\Site_Kit_Dependencies\Psr\Http\Message\RequestInterface;
-use Google\Site_Kit_Dependencies\Psr\Http\Message\ResponseInterface;
 use WP_Error;
 use Exception;
 
@@ -91,9 +96,9 @@ abstract class Module {
 	 * Google API client instance.
 	 *
 	 * @since 1.0.0
-	 * @var Google_Client|null
+	 * @var Google_Site_Kit_Client|null
 	 */
-	private $google_client = null;
+	private $google_client;
 
 	/**
 	 * Google services as $identifier => $service_instance pairs.
@@ -101,7 +106,7 @@ abstract class Module {
 	 * @since 1.0.0
 	 * @var array|null
 	 */
-	private $google_services = null;
+	private $google_services;
 
 	/**
 	 * Constructor.
@@ -119,24 +124,11 @@ abstract class Module {
 		User_Options $user_options = null,
 		Authentication $authentication = null
 	) {
-		$this->context = $context;
-
-		if ( ! $options ) {
-			$options = new Options( $this->context );
-		}
-		$this->options = $options;
-
-		if ( ! $user_options ) {
-			$user_options = new User_Options( $this->context );
-		}
-		$this->user_options = $user_options;
-
-		if ( ! $authentication ) {
-			$authentication = new Authentication( $this->context, $this->options, $this->user_options );
-		}
-		$this->authentication = $authentication;
-
-		$this->info = $this->parse_info( (array) $this->setup_info() );
+		$this->context        = $context;
+		$this->options        = $options ?: new Options( $this->context );
+		$this->user_options   = $user_options ?: new User_Options( $this->context );
+		$this->authentication = $authentication ?: new Authentication( $this->context, $this->options, $this->user_options );
+		$this->info           = $this->parse_info( (array) $this->setup_info() );
 	}
 
 	/**
@@ -202,7 +194,7 @@ abstract class Module {
 			'autoActivate' => $this->force_active,
 			'internal'     => $this->internal,
 			'screenID'     => $this instanceof Module_With_Screen ? $this->get_screen()->get_slug() : false,
-			'hasSettings'  => ! in_array( $this->slug, array( 'site-verification', 'search-console', 'pagespeed-insights' ), true ),
+			'settings'     => $this instanceof Module_With_Settings ? $this->get_settings()->get() : false,
 		);
 	}
 
@@ -271,12 +263,10 @@ abstract class Module {
 			}
 		}
 
-		$client     = $this->get_client();
-		$orig_defer = $client->shouldDefer();
-		$client->setDefer( true );
+		$restore_defer = $this->with_client_defer( true );
 
-		$datapoint_services = $this->get_datapoint_services();
-		$service_batches    = array();
+		$datapoint_definitions = $this->get_datapoint_definitions();
+		$service_batches       = array();
 
 		$data_requests = array();
 		$results       = array();
@@ -297,25 +287,34 @@ abstract class Module {
 				continue;
 			}
 
-			if ( ! isset( $datapoint_services[ $dataset->datapoint ] ) ) {
+			$definition_key = "{$dataset->method}:{$dataset->datapoint}";
+			if ( ! isset( $datapoint_definitions[ $definition_key ] ) ) {
 				continue;
 			}
 
 			$key                   = $dataset->key ?: wp_rand();
 			$data_requests[ $key ] = $dataset;
 			$datapoint             = $dataset->datapoint;
-			$request               = $this->create_data_request( $dataset );
+
+			try {
+				$this->validate_data_request( $dataset );
+				$request = $this->create_data_request( $dataset );
+			} catch ( Exception $e ) {
+				$request = $this->exception_to_error( $e, $datapoint );
+			}
 
 			if ( is_wp_error( $request ) ) {
 				$results[ $key ] = $request;
 				continue;
 			}
 
-			if ( ! $request instanceof RequestInterface ) {
+			if ( $request instanceof Closure ) {
 				try {
-					$results[ $key ] = call_user_func( $request );
-					if ( ! is_wp_error( $results[ $key ] ) ) {
-						$results[ $key ] = $this->parse_data_response( $dataset, $results[ $key ] );
+					$response        = $request();
+					$results[ $key ] = $response;
+
+					if ( ! is_wp_error( $response ) ) {
+						$results[ $key ] = $this->parse_data_response( $dataset, $response );
 					}
 				} catch ( Exception $e ) {
 					$results[ $key ] = $this->exception_to_error( $e, $datapoint );
@@ -323,16 +322,17 @@ abstract class Module {
 				continue;
 			}
 
-			if ( empty( $datapoint_services[ $datapoint ] ) ) {
+			$datapoint_service = $datapoint_definitions[ $definition_key ]['service'];
+			if ( empty( $datapoint_service ) ) {
 				continue;
 			}
 
-			if ( ! isset( $service_batches[ $datapoint_services[ $datapoint ] ] ) ) {
-				$service_batches[ $datapoint_services[ $datapoint ] ] = $this->google_services[ $datapoint_services[ $datapoint ] ]->createBatch();
+			if ( ! isset( $service_batches[ $datapoint_service ] ) ) {
+				$service_batches[ $datapoint_service ] = $this->google_services[ $datapoint_service ]->createBatch();
 			}
 
-			$service_batches[ $datapoint_services[ $datapoint ] ]->add( $request, $key );
-			$results[ $key ] = $datapoint;
+			$service_batches[ $datapoint_service ]->add( $request, $key );
+			$results[ $key ] = $definition_key;
 		}
 
 		foreach ( $service_batches as $service_identifier => $batch ) {
@@ -340,12 +340,18 @@ abstract class Module {
 				$batch_results = $batch->execute();
 			} catch ( Exception $e ) {
 				// Set every result of this batch to the exception.
-				foreach ( $results as $key => $datapoint ) {
-					if ( ! is_string( $datapoint ) || ! isset( $datapoint_services[ $datapoint ] ) || $service_identifier !== $datapoint_services[ $datapoint ] ) {
+				foreach ( $results as $key => $definition_key ) {
+					if ( is_wp_error( $definition_key ) ) {
 						continue;
 					}
 
-					$results[ $key ] = $this->exception_to_error( $e, $datapoint );
+					$datapoint_service = ! empty( $datapoint_definitions[ $definition_key ] )
+						? $datapoint_definitions[ $definition_key ]['service']
+						: null;
+
+					if ( is_string( $definition_key ) && $service_identifier === $datapoint_service ) {
+						$results[ $key ] = $this->exception_to_error( $e, explode( ':', $definition_key, 2 )[1] );
+					}
 				}
 				continue;
 			}
@@ -358,24 +364,23 @@ abstract class Module {
 					continue;
 				}
 
-				$datapoint = $results[ $key ];
-
 				if ( ! $result instanceof Exception ) {
 					$results[ $key ] = $result;
 					$results[ $key ] = $this->parse_data_response( $data_requests[ $key ], $result );
 				} else {
-					$results[ $key ] = $this->exception_to_error( $result, $datapoint );
+					$definition_key  = $results[ $key ];
+					$results[ $key ] = $this->exception_to_error( $result, explode( ':', $definition_key, 2 )[1] );
 				}
 			}
 		}
 
-		$client->setDefer( $orig_defer );
+		$restore_defer();
 
 		// Cache the results for storybook.
 		if (
-			current_user_can( 'manage_options' ) &&
-			isset( $_GET['datacache'] ) // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
-			&& ! empty( $results )
+			! empty( $results )
+			&& null !== $this->context->input()->filter( INPUT_GET, 'datacache' )
+			&& current_user_can( 'manage_options' )
 		) {
 			$cache = new Cache();
 			$cache->cache_batch_results( $datasets, $results );
@@ -392,17 +397,44 @@ abstract class Module {
 	 * @return array List of datapoints.
 	 */
 	final public function get_datapoints() {
-		return array_keys( $this->get_datapoint_services() );
+		$keys        = array();
+		$definitions = $this->get_datapoint_definitions();
+
+		foreach ( array_keys( $definitions ) as $key ) {
+			$parts = explode( ':', $key );
+			$name  = end( $parts );
+			if ( ! empty( $name ) ) {
+				$keys[ $name ] = $name;
+			}
+		}
+
+		return array_values( $keys );
 	}
 
 	/**
 	 * Returns the mapping between available datapoints and their services.
 	 *
 	 * @since 1.0.0
+	 * @since 1.9.0 No longer abstract.
+	 * @deprecated 1.12.0
 	 *
 	 * @return array Associative array of $datapoint => $service_identifier pairs.
 	 */
-	abstract protected function get_datapoint_services();
+	protected function get_datapoint_services() {
+		_deprecated_function( __METHOD__, '1.12.0', static::class . '::get_datapoint_definitions' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		return array();
+	}
+
+	/**
+	 * Gets map of datapoint to definition data for each.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @return array Map of datapoints to their definitions.
+	 */
+	protected function get_datapoint_definitions() {
+		return array();
+	}
 
 	/**
 	 * Creates a request object for the given datapoint.
@@ -433,27 +465,28 @@ abstract class Module {
 	 * @since 1.0.0
 	 *
 	 * @param Data_Request $data Data request object.
-	 *
 	 * @return mixed Data on success, or WP_Error on failure.
+	 *
+	 * phpcs:disable Squiz.Commenting.FunctionCommentThrowTag.Missing
 	 */
 	final protected function execute_data_request( Data_Request $data ) {
-		$client     = $this->get_client();
-		$orig_defer = $client->shouldDefer();
-		$client->setDefer( true );
-
-		$request = $this->create_data_request( $data );
-
-		$client->setDefer( $orig_defer );
-
-		if ( is_wp_error( $request ) ) {
-			return $request;
-		}
-
 		try {
-			if ( ! $request instanceof RequestInterface ) {
-				$response = call_user_func( $request );
+			$this->validate_data_request( $data );
+
+			$request = $this->make_data_request( $data );
+
+			if ( is_wp_error( $request ) ) {
+				return $request;
+			} elseif ( $request instanceof Closure ) {
+				$response = $request();
+			} elseif ( $request instanceof RequestInterface ) {
+				$response = $this->get_client()->execute( $request );
 			} else {
-				$response = $client->execute( $request );
+				return new WP_Error(
+					'invalid_datapoint_request',
+					__( 'Invalid datapoint request.', 'google-site-kit' ),
+					array( 'status' => 400 )
+				);
 			}
 		} catch ( Exception $e ) {
 			return $this->exception_to_error( $e, $data->datapoint );
@@ -467,33 +500,108 @@ abstract class Module {
 	}
 
 	/**
+	 * Validates the given data request.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param Data_Request $data Data request object.
+	 *
+	 * @throws Invalid_Datapoint_Exception   Thrown if the datapoint does not exist.
+	 * @throws Insufficient_Scopes_Exception Thrown if the user has not granted
+	 *                                       necessary scopes required by the datapoint.
+	 */
+	private function validate_data_request( Data_Request $data ) {
+		$definitions   = $this->get_datapoint_definitions();
+		$datapoint_key = "$data->method:$data->datapoint";
+
+		// All datapoints must be defined.
+		if ( empty( $definitions[ $datapoint_key ] ) ) {
+			throw new Invalid_Datapoint_Exception();
+		}
+
+		if ( empty( $definitions[ $datapoint_key ]['scopes'] ) ) {
+			return;
+		}
+
+		$datapoint = $definitions[ $datapoint_key ];
+
+		// If the datapoint requires specific scopes, ensure they are satisfied.
+		if ( ! $this->authentication->get_oauth_client()->has_sufficient_scopes( $datapoint['scopes'] ) ) {
+			throw new Insufficient_Scopes_Exception( $datapoint['request_scopes_message'], 0, null, $datapoint['scopes'] );
+		}
+	}
+
+	/**
+	 * Facilitates the creation of a request object for execution.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @param Data_Request $data Data request object.
+	 * @return RequestInterface|Closure|WP_Error
+	 */
+	private function make_data_request( Data_Request $data ) {
+		$definitions = $this->get_datapoint_definitions();
+
+		// We only need to initialize the client if this datapoint relies on a service.
+		$requires_client = ! empty( $definitions[ "$data->method:$data->datapoint" ]['service'] );
+
+		if ( $requires_client ) {
+			$restore_defer = $this->with_client_defer( true );
+		}
+
+		$request = $this->create_data_request( $data );
+
+		if ( isset( $restore_defer ) ) {
+			$restore_defer();
+		}
+
+		return $request;
+	}
+
+	/**
 	 * Parses a date range string into a start date and an end date.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $range      Date range string. Either 'last-7-days', 'last-14-days', 'last-90-days', or
-	 *                           'last-28-days' (default).
-	 * @param string $multiplier Optional. How many times the date range to get. This value can be specified if the
-	 *                           range should be request multiple times back. Default 1.
-	 * @param int    $offset     Days the range should be offset by. Default 1. Used by Search Console where
-	 *                           data is delayed by two days.
-	 * @param bool   $previous   Whether to select the previous period. Default false.
+	 * @param string $range         Date range string. Either 'last-7-days', 'last-14-days', 'last-90-days', or
+	 *                              'last-28-days' (default).
+	 * @param string $multiplier    Optional. How many times the date range to get. This value can be specified if the
+	 *                              range should be request multiple times back. Default 1.
+	 * @param int    $offset        Days the range should be offset by. Default 1. Used by Search Console where
+	 *                              data is delayed by two days.
+	 * @param bool   $previous      Whether to select the previous period. Default false.
+	 * @param bool   $weekday_align Whether to align the previous period days of the week to current period. Default false.
 	 *
 	 * @return array List with two elements, the first with the start date and the second with the end date, both as
 	 *               'Y-m-d'.
 	 */
-	protected function parse_date_range( $range, $multiplier = 1, $offset = 1, $previous = false ) {
-
+	protected function parse_date_range( $range, $multiplier = 1, $offset = 1, $previous = false, $weekday_align = false ) {
 		preg_match( '*-(\d+)-*', $range, $matches );
 		$number_of_days = $multiplier * ( isset( $matches[1] ) ? $matches[1] : 28 );
 
 		// Calculate the end date. For previous period requests, offset period by the number of days in the request.
-		$offset   = $previous ? $offset + $number_of_days : $offset;
-		$date_end = date( 'Y-m-d', strtotime( '' . $offset . 'daysago' ) );
+		$end_date_offset = $previous ? $offset + $number_of_days : $offset;
+		$date_end        = gmdate( 'Y-m-d', strtotime( $end_date_offset . ' days ago' ) );
 
 		// Set the start date.
-		$start_date_offset = $offset + $number_of_days - 1;
-		$date_start        = date( 'Y-m-d', strtotime( '' . $start_date_offset . 'daysAgo' ) );
+		$start_date_offset = $end_date_offset + $number_of_days - 1;
+		$date_start        = gmdate( 'Y-m-d', strtotime( $start_date_offset . ' days ago' ) );
+
+		// When weekday_align is true and request is for a previous period,
+		// ensure the last & previous periods align by day of the week.
+		$date_end_day_of_week      = gmdate( 'w', strtotime( $date_end ) );
+		$previous_date_end_of_week = gmdate( 'w', strtotime( $offset . ' days ago' ) );
+		if ( $weekday_align && $previous && $date_end_day_of_week !== $previous_date_end_of_week ) {
+			// Adjust the date to closest period that matches the same days of the week.
+			$off_by = $number_of_days % 7;
+			if ( $off_by > 3 ) {
+				$off_by = $off_by - 7;
+			}
+
+			// Move the date to match the same day of the week.
+			$date_end   = gmdate( 'Y-m-d', strtotime( $off_by . ' days', strtotime( $date_end ) ) );
+			$date_start = gmdate( 'Y-m-d', strtotime( $off_by . ' days', strtotime( $date_start ) ) );
+		}
 
 		return array( $date_start, $date_end );
 	}
@@ -557,15 +665,16 @@ abstract class Module {
 	 * This method should be used to access the client.
 	 *
 	 * @since 1.0.0
+	 * @since 1.2.0 Now returns Google_Site_Kit_Client instance.
 	 *
-	 * @return Google_Client Google client instance.
+	 * @return Google_Site_Kit_Client Google client instance.
 	 *
 	 * @throws Exception Thrown when the module did not correctly set up the client.
 	 */
 	final protected function get_client() {
 		if ( null === $this->google_client ) {
 			$client = $this->setup_client();
-			if ( ! $client instanceof Google_Client ) {
+			if ( ! $client instanceof Google_Site_Kit_Client ) {
 				throw new Exception( __( 'Google client not set up correctly.', 'google-site-kit' ) );
 			}
 			$this->google_client = $client;
@@ -624,8 +733,9 @@ abstract class Module {
 	 * for the first time.
 	 *
 	 * @since 1.0.0
+	 * @since 1.2.0 Now returns Google_Site_Kit_Client instance.
 	 *
-	 * @return Google_Client Google client instance.
+	 * @return Google_Site_Kit_Client Google client instance.
 	 */
 	protected function setup_client() {
 		return $this->authentication->get_oauth_client()->get_client();
@@ -638,12 +748,25 @@ abstract class Module {
 	 * for the first time.
 	 *
 	 * @since 1.0.0
+	 * @since 1.2.0 Now requires Google_Site_Kit_Client instance.
 	 *
-	 * @param Google_Client $client Google client instance.
+	 * @param Google_Site_Kit_Client $client Google client instance.
 	 * @return array Google services as $identifier => $service_instance pairs. Every $service_instance must be an
 	 *               instance of Google_Service.
 	 */
-	abstract protected function setup_services( Google_Client $client );
+	abstract protected function setup_services( Google_Site_Kit_Client $client );
+
+	/**
+	 * Sets whether or not to return raw requests and returns a callback to reset to the previous value.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param bool $defer Whether or not to return raw requests.
+	 * @return callable Callback function that resets to the original $defer value.
+	 */
+	protected function with_client_defer( $defer ) {
+		return $this->get_client()->withDefer( $defer );
+	}
 
 	/**
 	 * Parses information about the module.
@@ -696,49 +819,87 @@ abstract class Module {
 	 * @param string    $datapoint Datapoint originally requested.
 	 * @return WP_Error WordPress error object.
 	 */
-	private function exception_to_error( Exception $e, $datapoint ) {
+	protected function exception_to_error( Exception $e, $datapoint ) {
+		if ( $e instanceof WP_Errorable ) {
+			return $e->to_wp_error();
+		}
+
 		$code = $e->getCode();
+
+		$message       = $e->getMessage();
+		$status        = is_numeric( $code ) && $code ? (int) $code : 500;
+		$reason        = '';
+		$reconnect_url = '';
+
+		if ( $e instanceof Google_Service_Exception ) {
+			$errors = $e->getErrors();
+			if ( isset( $errors[0]['message'] ) ) {
+				$message = $errors[0]['message'];
+			}
+			if ( isset( $errors[0]['reason'] ) ) {
+				$reason = $errors[0]['reason'];
+			}
+		} elseif ( $e instanceof Google_Proxy_Code_Exception ) {
+			$status        = 401;
+			$code          = $message;
+			$auth_client   = $this->authentication->get_oauth_client();
+			$message       = $auth_client->get_error_message( $code );
+			$reconnect_url = $auth_client->get_proxy_setup_url( $e->getAccessCode(), $code );
+		}
+
 		if ( empty( $code ) ) {
 			$code = 'unknown';
 		}
 
-		// This is not great to have here, but is completely internal so it can be improved/removed at any time.
-		if ( $this instanceof \Google\Site_Kit\Modules\AdSense ) {
-			switch ( $datapoint ) {
-				case 'accounts':
-				case 'alerts':
-				case 'clients':
-				case 'urlchannels':
-					$errors = json_decode( $e->getMessage() );
-					if ( $errors ) {
-						return new \WP_Error( $e->getCode(), $errors, array( 'status' => 500 ) );
-					}
-					break;
-			}
-		}
-
-		$reason = '';
-
-		if ( $e instanceof Google_Service_Exception ) {
-			$message = $e->getErrors();
-			if ( isset( $message[0] ) && isset( $message[0]['message'] ) ) {
-				$message = $message[0]['message'];
-				$errors  = json_decode( $e->getMessage() );
-				if ( isset( $errors->error->errors[0]->reason ) ) {
-					$reason = $errors->error->errors[0]->reason;
-				}
-			}
-		} else {
-			$message = $e->getMessage();
-		}
-
-		return new WP_Error(
-			$code,
-			$message,
-			array(
-				'status' => 500,
-				'reason' => $reason,
-			)
+		$data = array(
+			'status' => $status,
+			'reason' => $reason,
 		);
+
+		if ( ! empty( $reconnect_url ) ) {
+			$data['reconnectURL'] = $reconnect_url;
+		}
+
+		return new WP_Error( $code, $message, $data );
 	}
+
+	/**
+	 * Parses the string list into an array of strings.
+	 *
+	 * @since 1.15.0
+	 *
+	 * @param string|array $items Items to parse.
+	 * @return array An array of string items.
+	 */
+	protected function parse_string_list( $items ) {
+		if ( is_string( $items ) ) {
+			$items = explode( ',', $items );
+		}
+
+		if ( ! is_array( $items ) || empty( $items ) ) {
+			return array();
+		}
+
+		$items = array_map(
+			function( $item ) {
+				if ( ! is_string( $item ) ) {
+					return false;
+				}
+
+				$item = trim( $item );
+				if ( empty( $item ) ) {
+					return false;
+				}
+
+				return $item;
+			},
+			$items
+		);
+
+		$items = array_filter( $items );
+		$items = array_values( $items );
+
+		return $items;
+	}
+
 }

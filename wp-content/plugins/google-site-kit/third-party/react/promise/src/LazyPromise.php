@@ -2,6 +2,9 @@
 
 namespace Google\Site_Kit_Dependencies\React\Promise;
 
+/**
+ * @deprecated 2.8.0 LazyPromise is deprecated and should not be used anymore.
+ */
 class LazyPromise implements \Google\Site_Kit_Dependencies\React\Promise\ExtendedPromiseInterface, \Google\Site_Kit_Dependencies\React\Promise\CancellablePromiseInterface
 {
     private $factory;

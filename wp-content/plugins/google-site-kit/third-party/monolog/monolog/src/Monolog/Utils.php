@@ -21,6 +21,31 @@ class Utils
         return 'c' === $class[0] && 0 === \strpos($class, "class@anonymous\0") ? \get_parent_class($class) . '@anonymous' : $class;
     }
     /**
+     * Makes sure if a relative path is passed in it is turned into an absolute path
+     *
+     * @param string $streamUrl stream URL or path without protocol
+     *
+     * @return string
+     */
+    public static function canonicalizePath($streamUrl)
+    {
+        $prefix = '';
+        if ('file://' === \substr($streamUrl, 0, 7)) {
+            $streamUrl = \substr($streamUrl, 7);
+            $prefix = 'file://';
+        }
+        // other type of stream, not supported
+        if (\false !== \strpos($streamUrl, '://')) {
+            return $streamUrl;
+        }
+        // already absolute
+        if (\substr($streamUrl, 0, 1) === '/' || \substr($streamUrl, 1, 1) === ':' || \substr($streamUrl, 0, 2) === '\\\\') {
+            return $prefix . $streamUrl;
+        }
+        $streamUrl = \getcwd() . '/' . $streamUrl;
+        return $prefix . $streamUrl;
+    }
+    /**
      * Return the JSON representation of a value
      *
      * @param  mixed             $data

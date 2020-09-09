@@ -25,6 +25,13 @@ class SolrPower_WP_Query {
 	private $found_posts = array();
 
 	/**
+	 * Number of found Solr returned posts based on query hash.
+	 *
+	 * @var number
+	 */
+	private $found_posts_count = array();
+
+	/**
 	 * Returned facets from search.
 	 *
 	 * @var Solarium\QueryType\Select\Result\Facet\Field[] $facets
@@ -58,6 +65,13 @@ class SolrPower_WP_Query {
 	 * @var object
 	 */
 	public $query;
+
+	/**
+	 * Highlighted field snippets
+	 *
+	 * @var array
+	 */
+	public $highlighting;
 
 	/**
 	 * Grab instance of object.
@@ -113,10 +127,16 @@ class SolrPower_WP_Query {
 			}
 		}
 
+		add_filter( 'pre_get_posts', array( $this, 'pre_get_posts' ) );
+
 		add_filter( 'posts_request', array( $this, 'posts_request' ), 10, 2 );
 
 		// Nukes the FOUND_ROWS() database query.
 		add_filter( 'found_posts_query', array( $this, 'found_posts_query' ), 5, 2 );
+
+		add_filter( 'found_posts', array( $this, 'found_posts' ), 5, 2 );
+
+		add_filter( 'posts_pre_query', array( $this, 'posts_pre_query' ), 10, 2 );
 
 		add_filter( 'the_posts', array( $this, 'the_posts' ), 10, 2 );
 	}
@@ -130,6 +150,20 @@ class SolrPower_WP_Query {
 	}
 
 	/**
+	 * Generate a unique hash for the query at the beginning of the request.
+	 * We used to used spl_object_hash(), but it turned out not to be unique.
+	 *
+	 * @param object $query Existing query object.
+	 */
+	public function pre_get_posts( $query ) {
+		if ( isset( $query->solr_query_id ) ) {
+			return;
+		}
+		$query->solr_query_id = md5( mt_rand() );
+	}
+
+
+	/**
 	 * Parse the posts request into a Solr request.
 	 *
 	 * @param string   $request SQL Query.
@@ -138,9 +172,7 @@ class SolrPower_WP_Query {
 	 * @return string
 	 */
 	function posts_request( $request, $query ) {
-		if ( ( ! $query->is_search() && ! $query->get( 'solr_integrate' ) )
-			|| false === SolrPower_Api::get_instance()->ping
-		) {
+		if ( ! $this->is_solr_query( $query ) || false === SolrPower_Api::get_instance()->ping ) {
 			return $request;
 		}
 		add_filter( 'solr_query', array( SolrPower_Api::get_instance(), 'dismax_query' ), 10, 2 );
@@ -188,23 +220,27 @@ class SolrPower_WP_Query {
 				$fields = null;
 				break;
 		}
-		$query->set( 'fields', '' );
-		unset( $query->query['fields'] );
 		$search = SolrPower_Api::get_instance()->query( $qry, $offset, $count, $fq, $sortby, $order, $fields, $extra );
 
 		if ( is_null( $search ) ) {
+			$this->found_posts[ $query->solr_query_id ] = array();
+			$this->reset_vars();
 			return false;
 		}
 		$this->search = $search;
 		if ( $search->getFacetSet() ) {
 			$this->facets = $search->getFacetSet()->getFacets();
 		}
+
+		$this->highlighting = $search->getHighlighting();
+
 		$search = $search->getData();
 
-		$search_header        = $search['responseHeader'];
-		$search               = $search['response'];
-		$query->found_posts   = $search['numFound'];
-		$query->max_num_pages = ceil( $search['numFound'] / $query->get( 'posts_per_page' ) );
+		$search_header      = $search['responseHeader'];
+		$search             = $search['response'];
+		$query->found_posts = $search['numFound'];
+		$this->found_posts_count[ $query->solr_query_id ] = $search['numFound'];
+		$query->max_num_pages                             = ceil( $search['numFound'] / $query->get( 'posts_per_page' ) );
 
 		SolrPower_Api::get_instance()->add_log(
 			array(
@@ -215,7 +251,7 @@ class SolrPower_WP_Query {
 
 		$posts = $this->parse_results( $search );
 
-		$this->found_posts[ spl_object_hash( $query ) ] = $posts;
+		$this->found_posts[ $query->solr_query_id ] = $posts;
 		$this->reset_vars();
 		global $wpdb;
 
@@ -256,6 +292,23 @@ class SolrPower_WP_Query {
 				if ( 'post_id' === $key ) {
 					$post->ID = $value;
 					continue;
+				}
+
+				if ( 'solr_id' === $key ) {
+					if ( $this->highlighting ) {
+						$highlighted_doc = $this->highlighting->getResult( $value );
+
+						if ( $highlighted_doc ) {
+								$snippet = '';
+
+							foreach ( $highlighted_doc as $field => $highlight ) {
+								$snippet .= implode( ' ... ', $highlight );
+							}
+
+								$post->excerpt = $snippet;
+								continue;
+						}
+					}
 				}
 
 				$post->$key = $value;
@@ -371,11 +424,50 @@ class SolrPower_WP_Query {
 	 * @return string
 	 */
 	function found_posts_query( $sql, $query ) {
-		if ( ! $query->is_search() || false === SolrPower_Api::get_instance()->ping ) {
+		if ( ! $this->is_solr_query( $query ) || false === SolrPower_Api::get_instance()->ping ) {
 			return $sql;
 		}
 
 		return '';
+	}
+
+	/**
+	 * Overload the found posts hook.
+	 *
+	 * @param string   $found_posts The number of found posts.
+	 * @param WP_Query $query WP_Query instance.
+	 *
+	 * @return string
+	 */
+	public function found_posts( $found_posts, $query ) {
+		if ( ! $this->is_solr_query( $query ) || false === SolrPower_Api::get_instance()->ping ) {
+			return $found_posts;
+		}
+
+		return $this->found_posts_count[ $query->solr_query_id ];
+	}
+
+	/**
+	 * Overload posts returned by WP_Query
+	 *
+	 * @param array    $posts Original posts.
+	 * @param WP_Query $query WP_Query instance.
+	 *
+	 * @return mixed
+	 */
+	public function posts_pre_query( $posts, $query ) {
+		if ( ! isset( $this->found_posts[ $query->solr_query_id ] ) ) {
+			return null;
+		}
+
+		$new_posts = $this->found_posts[ $query->solr_query_id ];
+
+		return array_map(
+			function ( $post ) {
+				return $post->ID;
+			},
+			$new_posts
+		);
 	}
 
 	/**
@@ -387,11 +479,11 @@ class SolrPower_WP_Query {
 	 * @return mixed
 	 */
 	function the_posts( $posts, $query ) {
-		if ( ! isset( $this->found_posts[ spl_object_hash( $query ) ] ) ) {
+		if ( ! isset( $this->found_posts[ $query->solr_query_id ] ) ) {
 			return $posts;
 		}
 
-		$new_posts = $this->found_posts[ spl_object_hash( $query ) ];
+		$new_posts = $this->found_posts[ $query->solr_query_id ];
 
 		return $new_posts;
 	}
@@ -464,7 +556,7 @@ class SolrPower_WP_Query {
 			'post__not_in' => '-ID',
 			'name'         => 'post_name',
 		);
-		if ( ! $query->is_search() && ! $query->get( 'solr_integrate' ) ) {
+		if ( ! $this->is_solr_query( $query ) ) {
 			return '';
 		}
 
@@ -941,7 +1033,7 @@ class SolrPower_WP_Query {
 				} else {
 					$the_date = strtotime( $the_date );
 					$the_date = ( ( isset( $dq['inclusive'] ) && $dq['inclusive'] ) || $inclusive ) ? $the_date : strtotime( '-1 second', $the_date );
-					$the_date = date( 'Y-m-d H:i:s', $the_date );
+					$the_date = gmdate( 'Y-m-d H:i:s', $the_date );
 					$the_date = SolrPower_Sync::get_instance()->format_date( $the_date );
 					$column   = ( isset( $dq['column'] ) ) ? $dq['column'] : 'post_date';
 
@@ -963,7 +1055,7 @@ class SolrPower_WP_Query {
 
 					$the_date = strtotime( $the_date );
 					$the_date = ( ( isset( $dq['inclusive'] ) && $dq['inclusive'] ) || $inclusive ) ? $the_date : strtotime( '+1 second', $the_date );
-					$the_date = date( 'Y-m-d H:i:s', $the_date );
+					$the_date = gmdate( 'Y-m-d H:i:s', $the_date );
 					$the_date = SolrPower_Sync::get_instance()->format_date( $the_date );
 					$column   = ( isset( $dq['column'] ) ) ? $dq['column'] : 'post_date';
 
@@ -999,7 +1091,7 @@ class SolrPower_WP_Query {
 			&& array_key_exists( 'day', $dq ) )
 		) {
 
-			$the_date = date( 'Y-m-d', strtotime( $dq['year'] . '-' . $dq['month'] . '-' . $dq['day'] ) );
+			$the_date = gmdate( 'Y-m-d', strtotime( $dq['year'] . '-' . $dq['month'] . '-' . $dq['day'] ) );
 
 			switch ( $type ) {
 				case 'before':
@@ -1025,11 +1117,11 @@ class SolrPower_WP_Query {
 					return '(year_i:[* TO ' . $year . '])';
 				}
 				if ( ! isset( $dq['day'] ) ) {
-					$the_date = date( 'Y-m-d', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
+					$the_date = gmdate( 'Y-m-d', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
 					if ( ( isset( $dq['inclusive'] ) && true === $dq['inclusive'] )
 						|| true === $inclusive
 					) {
-						$the_date = date( 'Y-m-t', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
+						$the_date = gmdate( 'Y-m-t', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
 					}
 
 					return '(' . $column . ':' . '[* TO ' . $the_date . 'T00:00:00Z])';
@@ -1044,19 +1136,19 @@ class SolrPower_WP_Query {
 					return '(year_i:[' . $year . ' TO *])';
 				}
 				if ( ! isset( $dq['day'] ) ) {
-					$the_date = date( 'Y-m-d', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
+					$the_date = gmdate( 'Y-m-d', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
 					if ( ( isset( $dq['inclusive'] ) && false === $dq['inclusive'] )
 						|| false === $inclusive
 					) {
-						$the_date = date( 'Y-m-t', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
-						$the_date = date( 'Y-m-d', strtotime( '+1 Day', strtotime( $the_date ) ) );
+						$the_date = gmdate( 'Y-m-t', strtotime( $dq['year'] . '-' . $dq['month'] . '-01' ) );
+						$the_date = gmdate( 'Y-m-d', strtotime( '+1 Day', strtotime( $the_date ) ) );
 					}
 
 					return '(' . $column . ':' . '[' . $the_date . 'T00:00:00Z TO *])';
 				} else {
-					$the_date = date( 'Y-m-t', strtotime( $dq['year'] . '-' . $dq['month'] . '-' . $dq['day'] ) );
+					$the_date = gmdate( 'Y-m-t', strtotime( $dq['year'] . '-' . $dq['month'] . '-' . $dq['day'] ) );
 					if ( ( isset( $dq['inclusive'] ) && $dq['inclusive'] ) || $inclusive ) {
-						$the_date = date( 'Y-m-d', strtotime( '+1 Day', strtotime( $the_date ) ) );
+						$the_date = gmdate( 'Y-m-d', strtotime( '+1 Day', strtotime( $the_date ) ) );
 					}
 
 					return '(' . $column . ':' . '[' . $the_date . 'T00:00:00Z TO *])';
@@ -1133,6 +1225,16 @@ class SolrPower_WP_Query {
 				return '(' . $field . '_i:[* TO ' . $field_value . '])';
 				break;
 		}
+	}
+
+	/**
+	 * Whether or not the provided query should be a Solr query.
+	 *
+	 * @param object $query Query object.
+	 * @return boolean
+	 */
+	private function is_solr_query( $query ) {
+		return $query->is_search() || $query->get( 'solr_integrate' );
 	}
 
 }

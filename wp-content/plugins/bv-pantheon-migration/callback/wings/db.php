@@ -9,9 +9,13 @@ class BVDBCallback extends BVCallbackBase {
 	public $stream;
 	public $account;
 
+	public static $bvTables = array("fw_requests", "lp_requests", "ip_store");
+
 	public function __construct($callback_handler) {
 		$this->db = $callback_handler->db;
 		$this->account = $callback_handler->account;
+		$this->siteinfo = $callback_handler->siteinfo;
+		$this->bvinfo = $callback_handler->bvinfo;
 	}
 
 	public function getLastID($pkeys, $end_row) {
@@ -64,6 +68,9 @@ class BVDBCallback extends BVCallbackBase {
 		$db = $this->db;
 		$params = $request->params;
 		$stream_init_info = BVStream::startStream($this->account, $request);
+
+		
+
 		if (array_key_exists('stream', $stream_init_info)) {
 			$this->stream = $stream_init_info['stream'];
 			switch ($request->method) {
@@ -140,17 +147,17 @@ class BVDBCallback extends BVCallbackBase {
 				$resp = $this->getTableData($table, $tname, $rcount, $offset, $limit, $bsize, $filter, $pkeys, true);
 				break;
 			case "tblexists":
-				$resp = array("tblexists" => $db->isTablePresent($params['tablename']));
+				$resp = array("tblexists" => $db->isTablePresent($params['table']));
 				break;
 			case "crttbl":
 				$usedbdelta = array_key_exists('usedbdelta', $params);
-				$resp = array("crttbl" => $db->createTable($params['query'], $params['tablename'], $usedbdelta));
+				$resp = array("crttbl" => $db->createTable($params['query'], $params['table'], $usedbdelta));
 				break;
 			case "drptbl":
-				$resp = array("drptbl" => $db->dropBVTable($params['name']));
+				$resp = array("drptbl" => $db->dropBVTable($params['table']));
 				break;
 			case "trttbl":
-				$resp = array("trttbl" => $db->truncateBVTable($params['name']));
+				$resp = array("trttbl" => $db->truncateBVTable($params['table']));
 				break;
 			case "altrtbl":
 				$resp = array("altrtbl" => $db->alterBVTable($params['query'], $params['query']));

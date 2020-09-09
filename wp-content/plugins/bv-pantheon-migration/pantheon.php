@@ -5,7 +5,7 @@ Plugin URI: https://pantheon.io
 Description: The easiest way to migrate your site to Pantheon
 Author: Pantheon
 Author URI: https://pantheon.io
-Version: 3.4
+Version: 4.35
 Network: True
  */
 
@@ -28,6 +28,7 @@ Network: True
 /* Global response array */
 
 if (!defined('ABSPATH')) exit;
+
 require_once dirname( __FILE__ ) . '/wp_settings.php';
 require_once dirname( __FILE__ ) . '/wp_site_info.php';
 require_once dirname( __FILE__ ) . '/wp_db.php';
@@ -65,6 +66,7 @@ if (is_admin()) {
 		add_action('admin_menu', array($wpadmin, 'menu'));
 	}
 	add_filter('plugin_action_links', array($wpadmin, 'settingsLink'), 10, 2);
+	add_action('admin_head', array($wpadmin, 'removeAdminNotices'), 3);
 	##ACTIVATEWARNING##
 	add_action('admin_enqueue_scripts', array($wpadmin, 'ptnsecAdminMenu'));
 }
@@ -80,7 +82,7 @@ if ((array_key_exists('bvplugname', $_REQUEST)) && ($_REQUEST['bvplugname'] == "
 	require_once dirname( __FILE__ ) . '/callback/request.php';
 	require_once dirname( __FILE__ ) . '/recover.php';
 
-	$pubkey = $_REQUEST['pubkey'];
+	$pubkey = PTNAccount::sanitizeKey($_REQUEST['pubkey']);
 
 	if (array_key_exists('rcvracc', $_REQUEST)) {
 		$account = PTNRecover::find($bvsettings, $pubkey);
@@ -92,13 +94,15 @@ if ((array_key_exists('bvplugname', $_REQUEST)) && ($_REQUEST['bvplugname'] == "
 	$response = new BVCallbackResponse($request->bvb64cksize);
 
 	if ($account && (1 === $account->authenticate($request))) {
+		##BVBASEPATH##
+
 		require_once dirname( __FILE__ ) . '/callback/handler.php';
 		$params = $request->processParams($_REQUEST);
 		if ($params === false) {
 			$resp = array(
-				"account_info" => $account->respInfo(),
-				"request_info" => $request->respInfo(),
-				"bvinfo" => $bvinfo->respInfo(),
+				"account_info" => $account->info(),
+				"request_info" => $request->info(),
+				"bvinfo" => $bvinfo->info(),
 				"statusmsg" => "BVPRMS_CORRUPTED"
 			);
 			$response->terminate($resp);
@@ -115,9 +119,9 @@ if ((array_key_exists('bvplugname', $_REQUEST)) && ($_REQUEST['bvplugname'] == "
 		}
 	} else {
 		$resp = array(
-			"account_info" => $account ? $account->respInfo() : array("error" => "ACCOUNT_NOT_FOUND"),
-			"request_info" => $request->respInfo(),
-			"bvinfo" => $bvinfo->respInfo(),
+			"account_info" => $account ? $account->info() : array("error" => "ACCOUNT_NOT_FOUND"),
+			"request_info" => $request->info(),
+			"bvinfo" => $bvinfo->info(),
 			"statusmsg" => "FAILED_AUTH",
 			"api_pubkey" => substr(PTNAccount::getApiPublicKey($bvsettings), 0, 8),
 			"def_sigmatch" => substr(PTNAccount::getSigMatch($request, PTNRecover::getDefaultSecret($bvsettings)), 0, 8)

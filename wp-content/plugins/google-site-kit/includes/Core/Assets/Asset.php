@@ -10,6 +10,8 @@
 
 namespace Google\Site_Kit\Core\Assets;
 
+use Google\Site_Kit\Context;
+
 /**
  * Class representing a single asset.
  *
@@ -44,12 +46,11 @@ abstract class Asset {
 	 * @param array  $args {
 	 *     Associative array of asset arguments.
 	 *
-	 *     @type string   $src             Required asset source URL.
-	 *     @type array    $dependencies    List of asset dependencies. Default empty array.
-	 *     @type string   $version         Asset version. Default is the version of Site Kit.
-	 *     @type bool     $fallback        Whether to only register as a fallback. Default false.
-	 *     @type callable $post_register   Optional callback to execute after registration. Default none.
-	 *     @type callable $post_enqueue    Optional callback to execute after enqueuing. Default none.
+	 *     @type string   $src          Required asset source URL.
+	 *     @type array    $dependencies List of asset dependencies. Default empty array.
+	 *     @type string   $version      Asset version. Default is the version of Site Kit.
+	 *     @type bool     $fallback     Whether to only register as a fallback. Default false.
+	 *     @type callable $before_print Optional callback to execute before printing. Default none.
 	 * }
 	 */
 	public function __construct( $handle, array $args ) {
@@ -57,12 +58,11 @@ abstract class Asset {
 		$this->args   = wp_parse_args(
 			$args,
 			array(
-				'src'           => '',
-				'dependencies'  => array(),
-				'version'       => GOOGLESITEKIT_VERSION,
-				'fallback'      => false,
-				'post_register' => null,
-				'post_enqueue'  => null,
+				'src'          => '',
+				'dependencies' => array(),
+				'version'      => GOOGLESITEKIT_VERSION,
+				'fallback'     => false,
+				'before_print' => null,
 			)
 		);
 	}
@@ -82,8 +82,11 @@ abstract class Asset {
 	 * Registers the asset.
 	 *
 	 * @since 1.0.0
+	 * @since 1.15.0 Adds $context parameter.
+	 *
+	 * @param Context $context Plugin context.
 	 */
-	abstract public function register();
+	abstract public function register( Context $context );
 
 	/**
 	 * Enqueues the asset.
@@ -91,4 +94,17 @@ abstract class Asset {
 	 * @since 1.0.0
 	 */
 	abstract public function enqueue();
+
+	/**
+	 * Executes the extra callback if defined before printing the asset.
+	 *
+	 * @since 1.2.0
+	 */
+	final public function before_print() {
+		if ( ! is_callable( $this->args['before_print'] ) ) {
+			return;
+		}
+
+		call_user_func( $this->args['before_print'], $this->handle );
+	}
 }

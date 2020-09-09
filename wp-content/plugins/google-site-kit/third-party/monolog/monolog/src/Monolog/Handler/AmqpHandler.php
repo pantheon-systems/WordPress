@@ -14,7 +14,7 @@ use Google\Site_Kit_Dependencies\Monolog\Logger;
 use Google\Site_Kit_Dependencies\Monolog\Formatter\JsonFormatter;
 use Google\Site_Kit_Dependencies\PhpAmqpLib\Message\AMQPMessage;
 use Google\Site_Kit_Dependencies\PhpAmqpLib\Channel\AMQPChannel;
-use Google\Site_Kit_Dependencies\AMQPExchange;
+use AMQPExchange;
 class AmqpHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\AbstractProcessingHandler
 {
     /**
@@ -33,7 +33,7 @@ class AmqpHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abstract
      */
     public function __construct($exchange, $exchangeName = 'log', $level = \Google\Site_Kit_Dependencies\Monolog\Logger::DEBUG, $bubble = \true)
     {
-        if ($exchange instanceof \Google\Site_Kit_Dependencies\AMQPExchange) {
+        if ($exchange instanceof \AMQPExchange) {
             $exchange->setName($exchangeName);
         } elseif ($exchange instanceof \Google\Site_Kit_Dependencies\PhpAmqpLib\Channel\AMQPChannel) {
             $this->exchangeName = $exchangeName;
@@ -50,7 +50,7 @@ class AmqpHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abstract
     {
         $data = $record["formatted"];
         $routingKey = $this->getRoutingKey($record);
-        if ($this->exchange instanceof \Google\Site_Kit_Dependencies\AMQPExchange) {
+        if ($this->exchange instanceof \AMQPExchange) {
             $this->exchange->publish($data, $routingKey, 0, array('delivery_mode' => 2, 'content_type' => 'application/json'));
         } else {
             $this->exchange->basic_publish($this->createAmqpMessage($data), $this->exchangeName, $routingKey);
@@ -61,7 +61,7 @@ class AmqpHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abstract
      */
     public function handleBatch(array $records)
     {
-        if ($this->exchange instanceof \Google\Site_Kit_Dependencies\AMQPExchange) {
+        if ($this->exchange instanceof \AMQPExchange) {
             parent::handleBatch($records);
             return;
         }

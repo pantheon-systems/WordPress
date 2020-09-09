@@ -3,6 +3,7 @@ namespace Elementor;
 
 use Elementor\Core\Base\App;
 use Elementor\Core\Base\Document;
+use Elementor\Core\Frontend\Render_Mode_Manager;
 use Elementor\Core\Responsive\Files\Frontend as FrontendFile;
 use Elementor\Core\Files\CSS\Global_CSS;
 use Elementor\Core\Files\CSS\Post as Post_CSS;
@@ -51,6 +52,13 @@ class Frontend extends App {
 	 * @var array Used fonts. Default is an empty array.
 	 */
 	public $fonts_to_enqueue = [];
+
+	/**
+	 * Holds the class that respond to manage the render mode.
+	 *
+	 * @var Render_Mode_Manager
+	 */
+	public $render_mode_manager;
 
 	/**
 	 * Registered fonts.
@@ -153,6 +161,7 @@ class Frontend extends App {
 			return;
 		}
 
+		add_action( 'template_redirect', [ $this, 'init_render_mode' ], -1 /* Before admin bar. */ );
 		add_action( 'template_redirect', [ $this, 'init' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_scripts' ], 5 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_styles' ], 5 );
@@ -176,6 +185,17 @@ class Frontend extends App {
 	 */
 	public function get_name() {
 		return 'frontend';
+	}
+
+	/**
+	 * Init render mode manager.
+	 */
+	public function init_render_mode() {
+		if ( Plugin::$instance->editor->is_edit_mode() ) {
+			return;
+		}
+
+		$this->render_mode_manager = new Render_Mode_Manager();
 	}
 
 	/**
@@ -212,10 +232,14 @@ class Frontend extends App {
 
 		// Priority 7 to allow google fonts in header template to load in <head> tag
 		add_action( 'wp_head', [ $this, 'print_fonts_links' ], 7 );
+		add_action( 'wp_head', [ $this, 'add_theme_color_meta_tag' ] );
 		add_action( 'wp_footer', [ $this, 'wp_footer' ] );
 
 		// Add Edit with the Elementor in Admin Bar.
 		add_action( 'admin_bar_menu', [ $this, 'add_menu_in_admin_bar' ], 200 );
+
+		// Detect Elementor documents via their css that printed before the Admin Bar.
+		add_action( 'elementor/css-file/post/enqueue', [ $this, 'add_document_to_admin_bar' ] );
 	}
 
 	/**
@@ -228,6 +252,23 @@ class Frontend extends App {
 			$this->body_classes = array_merge( $this->body_classes, $class );
 		} else {
 			$this->body_classes[] = $class;
+		}
+	}
+
+	/**
+	 * Add Theme Color Meta Tag
+	 *
+	 * @since 3.0.0
+	 * @access public
+	 */
+	public function add_theme_color_meta_tag() {
+		$kit = Plugin::$instance->kits_manager->get_active_kit_for_frontend();
+		$mobile_theme_color = $kit->get_settings( 'mobile_theme_color' );
+
+		if ( ! empty( $mobile_theme_color ) ) {
+			?>
+			<meta name="theme-color" content="<?php echo $mobile_theme_color; ?>">
+			<?php
 		}
 	}
 
@@ -357,7 +398,7 @@ class Frontend extends App {
 			'swiper',
 			$this->get_js_assets_url( 'swiper', 'assets/lib/swiper/' ),
 			[],
-			'4.4.6',
+			'5.3.6',
 			true
 		);
 
@@ -380,7 +421,7 @@ class Frontend extends App {
 			[
 				'jquery-ui-position',
 			],
-			'4.7.3',
+			'4.8.1',
 			true
 		);
 
@@ -390,7 +431,17 @@ class Frontend extends App {
 			[
 				'jquery',
 			],
-			'1.0.2',
+			'1.2.0',
+			true
+		);
+
+		wp_register_script(
+			'share-link',
+			$this->get_js_assets_url( 'share-link', 'assets/lib/share-link/' ),
+			[
+				'jquery',
+			],
+			ELEMENTOR_VERSION,
 			true
 		);
 
@@ -402,6 +453,7 @@ class Frontend extends App {
 				'elementor-dialog',
 				'elementor-waypoints',
 				'swiper',
+				'share-link',
 			],
 			ELEMENTOR_VERSION,
 			true
@@ -448,7 +500,7 @@ class Frontend extends App {
 			'elementor-icons',
 			$this->get_css_assets_url( 'elementor-icons', 'assets/lib/eicons/css/' ),
 			[],
-			'5.4.0'
+			'5.9.1'
 		);
 
 		wp_register_style(
@@ -469,7 +521,7 @@ class Frontend extends App {
 			'elementor-gallery',
 			$this->get_css_assets_url( 'e-gallery', 'assets/lib/e-gallery/css/' ),
 			[],
-			'1.0.2'
+			'1.2.0'
 		);
 
 		$min_suffix = Utils::is_script_debug() ? '' : '.min';
@@ -494,10 +546,24 @@ class Frontend extends App {
 			$frontend_file_url = ELEMENTOR_ASSETS_URL . 'css/' . $frontend_file_name;
 		}
 
+		$frontend_dependencies = [];
+
+		if ( Plugin::instance()->get_legacy_mode( 'elementWrappers' ) ) {
+			// If The Markup Legacy Mode is active, register the legacy CSS
+			wp_register_style(
+				'elementor-frontend-legacy',
+				ELEMENTOR_ASSETS_URL . 'css/frontend-legacy' . $direction_suffix . $min_suffix . '.css',
+				[],
+				ELEMENTOR_VERSION
+			);
+
+			$frontend_dependencies[] = 'elementor-frontend-legacy';
+		}
+
 		wp_register_style(
 			'elementor-frontend',
 			$frontend_file_url,
-			[],
+			$frontend_dependencies,
 			$has_custom_file ? null : ELEMENTOR_VERSION
 		);
 
@@ -744,7 +810,15 @@ class Frontend extends App {
 				'cs_CZ' => 'latin-ext',
 				'ro_RO' => 'latin-ext',
 				'pl_PL' => 'latin-ext',
+				'hr_HR' => 'latin-ext',
+				'hu_HU' => 'latin-ext',
+				'sk_SK' => 'latin-ext',
+				'tr_TR' => 'latin-ext',
+				'lt_LT' => 'latin-ext',
 			];
+
+			$subsets = apply_filters( 'elementor/frontend/google_font_subsets', $subsets );
+
 			$locale = get_locale();
 
 			if ( isset( $subsets[ $locale ] ) ) {
@@ -867,10 +941,6 @@ class Frontend extends App {
 		// Change the current post, so widgets can use `documents->get_current`.
 		Plugin::$instance->documents->switch_to_document( $document );
 
-		if ( $document->is_editable_by_current_user() ) {
-			$this->admin_bar_edit_documents[ $document->get_main_id() ] = $document;
-		}
-
 		$data = $document->get_elements_data();
 
 		/**
@@ -934,6 +1004,17 @@ class Frontend extends App {
 		Plugin::$instance->documents->restore_document();
 
 		return $content;
+	}
+
+	/**
+	 * @param Post_CSS $css_file
+	 */
+	public function add_document_to_admin_bar( $css_file ) {
+		$document = Plugin::$instance->documents->get( $css_file->get_post_id() );
+
+		if ( $document::get_property( 'show_on_admin_bar' ) && $document->is_editable_by_current_user() ) {
+			$this->admin_bar_edit_documents[ $document->get_main_id() ] = $document;
+		}
 	}
 
 	/**
@@ -1096,6 +1177,25 @@ class Frontend extends App {
 		return $this->_has_elementor_in_page;
 	}
 
+	public function create_action_hash( $action, array $settings = [] ) {
+		return '#' . rawurlencode( sprintf( 'elementor-action:action=%1$s&settings=%2$s', $action, base64_encode( wp_json_encode( $settings ) ) ) );
+	}
+
+	/**
+	 * Is the current render mode is static.
+	 *
+	 * @return bool
+	 */
+	public function is_static_render_mode() {
+		// The render mode manager is exists only in frontend,
+		// so by default if it is not exist the method will return false.
+		if ( ! $this->render_mode_manager ) {
+			return false;
+		}
+
+		return $this->render_mode_manager->get_current()->is_static();
+	}
+
 	/**
 	 * Get Init Settings
 	 *
@@ -1115,9 +1215,27 @@ class Frontend extends App {
 				'edit' => $is_preview_mode,
 				'wpPreview' => is_preview(),
 			],
+			'i18n' => [
+				'shareOnFacebook' => __( 'Share on Facebook', 'elementor' ),
+				'shareOnTwitter' => __( 'Share on Twitter', 'elementor' ),
+				'pinIt' => __( 'Pin it', 'elementor' ),
+				'download' => __( 'Download', 'elementor' ),
+				'downloadImage' => __( 'Download image', 'elementor' ),
+				'fullscreen' => __( 'Fullscreen', 'elementor' ),
+				'zoom' => __( 'Zoom', 'elementor' ),
+				'share' => __( 'Share', 'elementor' ),
+				'playVideo' => __( 'Play Video', 'elementor' ),
+				'previous' => __( 'Previous', 'elementor' ),
+				'next' => __( 'Next', 'elementor' ),
+				'close' => __( 'Close', 'elementor' ),
+			],
 			'is_rtl' => is_rtl(),
 			'breakpoints' => Responsive::get_breakpoints(),
 			'version' => ELEMENTOR_VERSION,
+			'is_static' => $this->is_static_render_mode(),
+			'legacyMode' => [
+				'elementWrappers' => Plugin::instance()->get_legacy_mode( 'elementWrappers' ),
+			],
 			'urls' => [
 				'assets' => ELEMENTOR_ASSETS_URL,
 			],
@@ -1125,18 +1243,25 @@ class Frontend extends App {
 
 		$settings['settings'] = SettingsManager::get_settings_frontend_config();
 
+		$kit = Plugin::$instance->kits_manager->get_active_kit_for_frontend();
+		$settings['kit'] = $kit->get_frontend_settings();
+
 		if ( is_singular() ) {
 			$post = get_post();
+
+			$title = Utils::urlencode_html_entities( wp_get_document_title() );
+
 			$settings['post'] = [
 				'id' => $post->ID,
-				'title' => $post->post_title,
+				'title' => $title,
 				'excerpt' => $post->post_excerpt,
+				'featuredImage' => get_the_post_thumbnail_url(),
 			];
 		} else {
 			$settings['post'] = [
 				'id' => 0,
 				'title' => wp_get_document_title(),
-				'excerpt' => '',
+				'excerpt' => get_the_archive_description(),
 			];
 		}
 

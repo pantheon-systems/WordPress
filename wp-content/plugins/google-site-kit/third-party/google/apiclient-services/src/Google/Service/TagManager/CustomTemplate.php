@@ -22,6 +22,8 @@ class Google_Service_TagManager_CustomTemplate extends \Google\Site_Kit_Dependen
     public $accountId;
     public $containerId;
     public $fingerprint;
+    protected $galleryReferenceType = 'Google\Site_Kit_Dependencies\Google_Service_TagManager_GalleryReference';
+    protected $galleryReferenceDataType = '';
     public $name;
     public $path;
     public $tagManagerUrl;
@@ -51,6 +53,20 @@ class Google_Service_TagManager_CustomTemplate extends \Google\Site_Kit_Dependen
     public function getFingerprint()
     {
         return $this->fingerprint;
+    }
+    /**
+     * @param Google_Service_TagManager_GalleryReference
+     */
+    public function setGalleryReference(\Google\Site_Kit_Dependencies\Google_Service_TagManager_GalleryReference $galleryReference)
+    {
+        $this->galleryReference = $galleryReference;
+    }
+    /**
+     * @return Google_Service_TagManager_GalleryReference
+     */
+    public function getGalleryReference()
+    {
+        return $this->galleryReference;
     }
     public function setName($name)
     {

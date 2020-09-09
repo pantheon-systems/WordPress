@@ -1,7 +1,7 @@
 <?php
 namespace Elementor\Core\Logger;
 
-use Elementor\System_Info\Classes\Abstracts\Base_Reporter;
+use Elementor\Modules\System_Info\Reporters\Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 2.4.0
  */
-class Log_Reporter extends Base_Reporter {
+class Log_Reporter extends Base {
 
 	const MAX_ENTRIES = 20;
 	const CLEAR_LOG_ACTION = 'elementor-clear-log';
@@ -30,7 +30,7 @@ class Log_Reporter extends Base_Reporter {
 				'_wpnonce' => $nonce,
 			] );
 
-			$title .= '<a href="' . $url . '#elementor-clear-log" class="box-title-tool">' . __( 'Clear Log', 'elementor' ) . '</a>';
+			$title .= '<a href="' . esc_url( $url ) . '#elementor-clear-log" class="box-title-tool">' . __( 'Clear Log', 'elementor' ) . '</a>';
 			$title .= '<span id="elementor-clear-log"></span>';
 		}
 
@@ -61,13 +61,14 @@ class Log_Reporter extends Base_Reporter {
 		}
 
 		$log_string = 'No entries to display';
-		$log_entries = $logger->get_formatted_log_entries( self::MAX_ENTRIES, true );
+		$log_entries = $logger->get_formatted_log_entries( self::MAX_ENTRIES, false );
 
 		if ( ! empty( $log_entries ) ) {
 			$entries_string = '';
 			foreach ( $log_entries as $key => $log_entry ) {
 				if ( $log_entry['count'] ) {
-					$entries_string .= '<table><thead><th>' . sprintf( '%s: showing %s of %s', $key, $log_entry['count'], $log_entry['total_count'] ) . '</th></thead><tbody class="elementor-log-entries">' . $log_entry['entries'] . '</tbody></table>';
+					$entries_string .= '<h3>' . sprintf( '%s: showing %s of %s', $key, $log_entry['count'], $log_entry['total_count'] ) . '</h3>';
+					$entries_string .= '<div class="elementor-log-entries">' . $log_entry['entries'] . '</div>';
 				}
 			}
 
@@ -82,7 +83,6 @@ class Log_Reporter extends Base_Reporter {
 	}
 
 	public function get_raw_log_entries() {
-
 		$log_string = 'No entries to display';
 
 		/** @var \Elementor\Core\Logger\Manager $manager */
