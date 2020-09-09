@@ -18,7 +18,9 @@
 namespace Google\Site_Kit_Dependencies\Google\Auth\Credentials;
 
 use Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader;
+use Google\Site_Kit_Dependencies\Google\Auth\GetQuotaProjectInterface;
 use Google\Site_Kit_Dependencies\Google\Auth\OAuth2;
+use Google\Site_Kit_Dependencies\Google\Auth\ProjectIdProviderInterface;
 use Google\Site_Kit_Dependencies\Google\Auth\ServiceAccountSignerTrait;
 use Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface;
 /**
@@ -30,7 +32,7 @@ use Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface;
  * console (via 'Generate new Json Key').  It is not part of any OAuth2
  * flow, rather it creates a JWT and sends that as a credential.
  */
-class ServiceAccountJwtAccessCredentials extends \Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader implements \Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface
+class ServiceAccountJwtAccessCredentials extends \Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader implements \Google\Site_Kit_Dependencies\Google\Auth\GetQuotaProjectInterface, \Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface, \Google\Site_Kit_Dependencies\Google\Auth\ProjectIdProviderInterface
 {
     use ServiceAccountSignerTrait;
     /**
@@ -39,6 +41,10 @@ class ServiceAccountJwtAccessCredentials extends \Google\Site_Kit_Dependencies\G
      * @var OAuth2
      */
     protected $auth;
+    /**
+     * The quota project associated with the JSON credentials
+     */
+    protected $quotaProject;
     /**
      * Create a new ServiceAccountJwtAccessCredentials.
      *
@@ -62,7 +68,11 @@ class ServiceAccountJwtAccessCredentials extends \Google\Site_Kit_Dependencies\G
         if (!\array_key_exists('private_key', $jsonKey)) {
             throw new \InvalidArgumentException('json key is missing the private_key field');
         }
+        if (\array_key_exists('quota_project', $jsonKey)) {
+            $this->quotaProject = (string) $jsonKey['quota_project'];
+        }
         $this->auth = new \Google\Site_Kit_Dependencies\Google\Auth\OAuth2(['issuer' => $jsonKey['client_email'], 'sub' => $jsonKey['client_email'], 'signingAlgorithm' => 'RS256', 'signingKey' => $jsonKey['private_key']]);
+        $this->projectId = isset($jsonKey['project_id']) ? $jsonKey['project_id'] : null;
     }
     /**
      * Updates metadata with the authorization token.
@@ -70,7 +80,6 @@ class ServiceAccountJwtAccessCredentials extends \Google\Site_Kit_Dependencies\G
      * @param array $metadata metadata hashmap
      * @param string $authUri optional auth uri
      * @param callable $httpHandler callback which delivers psr7 request
-     *
      * @return array updated metadata hashmap
      */
     public function updateMetadata($metadata, $authUri = null, callable $httpHandler = null)
@@ -114,6 +123,18 @@ class ServiceAccountJwtAccessCredentials extends \Google\Site_Kit_Dependencies\G
         return $this->auth->getLastReceivedToken();
     }
     /**
+     * Get the project ID from the service account keyfile.
+     *
+     * Returns null if the project ID does not exist in the keyfile.
+     *
+     * @param callable $httpHandler Not used by this credentials type.
+     * @return string|null
+     */
+    public function getProjectId(callable $httpHandler = null)
+    {
+        return $this->projectId;
+    }
+    /**
      * Get the client name from the keyfile.
      *
      * In this case, it returns the keyfile's client_email key.
@@ -124,5 +145,14 @@ class ServiceAccountJwtAccessCredentials extends \Google\Site_Kit_Dependencies\G
     public function getClientName(callable $httpHandler = null)
     {
         return $this->auth->getIssuer();
+    }
+    /**
+     * Get the quota project used for this API request
+     *
+     * @return string|null
+     */
+    public function getQuotaProject()
+    {
+        return $this->quotaProject;
     }
 }

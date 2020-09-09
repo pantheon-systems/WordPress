@@ -34,7 +34,7 @@ abstract class AbstractSyslogHandler extends \Google\Site_Kit_Dependencies\Monol
     public function __construct($facility = \LOG_USER, $level = \Google\Site_Kit_Dependencies\Monolog\Logger::DEBUG, $bubble = \true)
     {
         parent::__construct($level, $bubble);
-        if (!\defined('Google\\Site_Kit_Dependencies\\PHP_WINDOWS_VERSION_BUILD')) {
+        if (!\defined('PHP_WINDOWS_VERSION_BUILD')) {
             $this->facilities['local0'] = \LOG_LOCAL0;
             $this->facilities['local1'] = \LOG_LOCAL1;
             $this->facilities['local2'] = \LOG_LOCAL2;

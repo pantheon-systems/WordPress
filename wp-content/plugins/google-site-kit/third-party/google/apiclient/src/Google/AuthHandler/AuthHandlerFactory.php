@@ -29,12 +29,19 @@ class Google_AuthHandler_AuthHandlerFactory
      */
     public static function build($cache = null, array $cacheConfig = [])
     {
-        $version = \Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::VERSION;
-        switch ($version[0]) {
-            case '5':
+        $guzzleVersion = null;
+        if (\defined('\\Google\\Site_Kit_Dependencies\\GuzzleHttp\\ClientInterface::MAJOR_VERSION')) {
+            $guzzleVersion = \Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::MAJOR_VERSION;
+        } elseif (\defined('\\Google\\Site_Kit_Dependencies\\GuzzleHttp\\ClientInterface::VERSION')) {
+            $guzzleVersion = (int) \substr(\Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::VERSION, 0, 1);
+        }
+        switch ($guzzleVersion) {
+            case 5:
                 return new \Google\Site_Kit_Dependencies\Google_AuthHandler_Guzzle5AuthHandler($cache, $cacheConfig);
-            case '6':
+            case 6:
                 return new \Google\Site_Kit_Dependencies\Google_AuthHandler_Guzzle6AuthHandler($cache, $cacheConfig);
+            case 7:
+                return new \Google\Site_Kit_Dependencies\Google_AuthHandler_Guzzle7AuthHandler($cache, $cacheConfig);
             default:
                 throw new \Exception('Version not supported');
         }

@@ -11,6 +11,9 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 ?>
 <script type="text/template" id="tmpl-elementor-panel">
 	<div id="elementor-mode-switcher"></div>
+	<div id="elementor-panel-state-loading">
+		<i class="eicon-loading eicon-animation-spin"></i>
+	</div>
 	<header id="elementor-panel-header-wrapper"></header>
 	<main id="elementor-panel-content-wrapper"></main>
 	<footer id="elementor-panel-footer">
@@ -21,6 +24,14 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 
 <script type="text/template" id="tmpl-elementor-panel-menu">
 	<div id="elementor-panel-page-menu-content"></div>
+	<# if ( elementor.config.document.panel.needHelpUrl ) { #>
+	<div id="elementor-panel__editor__help">
+		<a id="elementor-panel__editor__help__link" href="{{{ elementor.config.document.panel.needHelpUrl }}}" target="_blank">
+			<?php echo __( 'Need Help', 'elementor' ); ?>
+			<i class="eicon-help-o"></i>
+		</a>
+	</div>
+	<# } #>
 </script>
 
 <script type="text/template" id="tmpl-elementor-panel-menu-group">
@@ -94,7 +105,7 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 	</div>
 	<div id="elementor-panel-footer-saver-preview" class="elementor-panel-footer-tool tooltip-target" data-tooltip="<?php esc_attr_e( 'Preview Changes', 'elementor' ); ?>">
 		<span id="elementor-panel-footer-saver-preview-label">
-			<i class="eicon-eye" aria-hidden="true"></i>
+			<i class="eicon-preview-medium" aria-hidden="true"></i>
 			<span class="elementor-screen-only"><?php echo __( 'Preview Changes', 'elementor' ); ?></span>
 		</span>
 	</div>
@@ -109,7 +120,7 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 		</button>
 	</div>
 	<div id="elementor-panel-footer-saver-options" class="elementor-panel-footer-tool elementor-toggle-state">
-		<button id="elementor-panel-saver-button-save-options" class="elementor-button elementor-button-success tooltip-target elementor-disabled" data-tooltip="<?php esc_attr_e( 'Save Options', 'elementor' ); ?>">
+		<button id="elementor-panel-saver-button-save-options" class="elementor-button elementor-button-success tooltip-target elementor-disabled" data-tooltip="<?php esc_attr_e( 'Save Options', 'elementor' ); ?>" data-tooltip-offset="7">
 			<i class="eicon-caret-up" aria-hidden="true"></i>
 			<span class="elementor-screen-only"><?php echo __( 'Save Options', 'elementor' ); ?></span>
 		</button>
@@ -119,7 +130,6 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 					<i class="eicon-loading eicon-animation-spin" aria-hidden="true"></i>
 				</span>
 				<span class="elementor-last-edited">
-					{{{ elementor.config.document.last_edited }}}
 				</span>
 			</p>
 			<div class="elementor-panel-footer-sub-menu">
@@ -177,15 +187,13 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 </script>
 
 <script type="text/template" id="tmpl-elementor-panel-schemes-disabled">
-	<i class="elementor-nerd-box-icon eicon-nerd" aria-hidden="true"></i>
+	<img class="elementor-nerd-box-icon" src="<?php echo ELEMENTOR_ASSETS_URL . 'images/information.svg'; ?>" />
 	<div class="elementor-nerd-box-title">{{{ '<?php echo __( '%s are disabled', 'elementor' ); ?>'.replace( '%s', disabledTitle ) }}}</div>
 	<div class="elementor-nerd-box-message"><?php printf( __( 'You can enable it from the <a href="%s" target="_blank">Elementor settings page</a>.', 'elementor' ), Settings::get_url() ); ?></div>
 </script>
 
 <script type="text/template" id="tmpl-elementor-panel-scheme-color-item">
-	<div class="elementor-panel-scheme-color-input-wrapper">
-		<input type="text" class="elementor-panel-scheme-color-value" value="{{ value }}" data-alpha="true" />
-	</div>
+	<div class="elementor-panel-scheme-color-picker-placeholder"></div>
 	<div class="elementor-panel-scheme-color-title">{{{ title }}}</div>
 </script>
 
@@ -207,9 +215,9 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 
 		foreach ( $scheme_fields as $option_name => $option ) :
 			?>
-			<div class="elementor-panel-scheme-typography-item">
+			<div class="elementor-panel-scheme-typography-item elementor-control elementor-control-type-select">
 				<div class="elementor-panel-scheme-item-title elementor-control-title"><?php echo $option['label']; ?></div>
-				<div class="elementor-panel-scheme-typography-item-value">
+				<div class="elementor-panel-scheme-typography-item-value elementor-control-input-wrapper">
 					<?php if ( 'select' === $option['type'] ) : ?>
 						<select name="<?php echo esc_attr( $option_name ); ?>" class="elementor-panel-scheme-typography-item-field">
 							<?php foreach ( $option['options'] as $field_key => $field_value ) : ?>
@@ -238,24 +246,26 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 
 <script type="text/template" id="tmpl-elementor-control-responsive-switchers">
 	<div class="elementor-control-responsive-switchers">
+		<div class="elementor-control-responsive-switchers__holder">
 		<#
 			var devices = responsive.devices || [ 'desktop', 'tablet', 'mobile' ];
 
-			_.each( devices, function( device ) { #>
-				<a class="elementor-responsive-switcher elementor-responsive-switcher-{{ device }}" data-device="{{ device }}">
+			_.each( devices, function( device ) {
+				var deviceLabel = device.charAt(0).toUpperCase() + device.slice(1),
+					tooltipDir = "<?php echo is_rtl() ? 'e' : 'w'; ?>";
+			#>
+				<a class="elementor-responsive-switcher tooltip-target elementor-responsive-switcher-{{ device }}" data-device="{{ device }}" data-tooltip="{{ deviceLabel }}" data-tooltip-pos="{{ tooltipDir }}">
 					<i class="eicon-device-{{ device }}"></i>
 				</a>
 			<# } );
 		#>
+		</div>
 	</div>
 </script>
 
 <script type="text/template" id="tmpl-elementor-control-dynamic-switcher">
-	<div class="elementor-control-dynamic-switcher-wrapper">
-		<div class="elementor-control-dynamic-switcher">
-			<?php echo __( 'Dynamic', 'elementor' ); ?>
-			<i class="eicon-database"></i>
-		</div>
+	<div class="elementor-control-dynamic-switcher elementor-control-unit-1" data-tooltip="<?php echo __( 'Dynamic Tags', 'elementor' ); ?>">
+		<i class="eicon-database"></i>
 	</div>
 </script>
 
@@ -269,4 +279,19 @@ $document = Plugin::$instance->documents->get( Plugin::$instance->editor->get_po
 			<i class="eicon-close-circle"></i>
 		</div>
 	<# } #>
+</script>
+
+<script type="text/template" id="tmpl-elementor-dynamic-tags-promo">
+	<div class="elementor-tags-list__teaser">
+		<div class="elementor-tags-list__group-title elementor-tags-list__teaser-title">
+			<i class="eicon-info-circle"></i><?php echo __( 'Elementor Dynamic Content', 'elementor' ); ?>
+		</div>
+		<div class="elementor-tags-list__teaser-text">
+			<?php echo __( 'You’re missing out!', 'elementor' ); ?><br />
+			<?php echo __( 'Get more dynamic capabilities by incorporating dozens of Elementor\'s native dynamic tags.', 'elementor' ); ?>
+			<a href="{{{ elementor.config.dynamicPromotionURL }}}" class="elementor-tags-list__teaser-link" target="_blank">
+				<?php echo __( 'See it in action', 'elementor' ); ?>
+			</a>
+		</div>
+	</div>
 </script>

@@ -5,6 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+
 /**
  * Elementor progress widget.
  *
@@ -128,7 +131,6 @@ class Widget_Progress extends Widget_Base {
 				'dynamic' => [
 					'active' => true,
 				],
-				'label_block' => true,
 			]
 		);
 
@@ -180,9 +182,8 @@ class Widget_Progress extends Widget_Base {
 			[
 				'label' => __( 'Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
-				'scheme' => [
-					'type' => Scheme_Color::get_type(),
-					'value' => Scheme_Color::COLOR_1,
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-progress-wrapper .elementor-progress-bar' => 'background-color: {{VALUE}};',
@@ -273,9 +274,8 @@ class Widget_Progress extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .elementor-title' => 'color: {{VALUE}};',
 				],
-				'scheme' => [
-					'type' => Scheme_Color::get_type(),
-					'value' => Scheme_Color::COLOR_1,
+				'global' => [
+					'default' => Global_Colors::COLOR_PRIMARY,
 				],
 			]
 		);
@@ -285,7 +285,9 @@ class Widget_Progress extends Widget_Base {
 			[
 				'name' => 'typography',
 				'selector' => '{{WRAPPER}} .elementor-title',
-				'scheme' => Scheme_Typography::TYPOGRAPHY_3,
+				'global' => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 			]
 		);
 
@@ -308,6 +310,12 @@ class Widget_Progress extends Widget_Base {
 		if ( 100 < $progress_percentage ) {
 			$progress_percentage = 100;
 		}
+
+		$this->add_render_attribute( 'title', [
+			'class' => 'elementor-title',
+		]);
+
+		$this->add_inline_editing_attributes( 'title' );
 
 		$this->add_render_attribute( 'wrapper', [
 			'class' => 'elementor-progress-wrapper',
@@ -334,7 +342,7 @@ class Widget_Progress extends Widget_Base {
 		$this->add_inline_editing_attributes( 'inner_text' );
 
 		if ( ! Utils::is_empty( $settings['title'] ) ) { ?>
-			<span class="elementor-title"><?php echo $settings['title']; ?></span>
+			<span <?php echo $this->get_render_attribute_string( 'title' ); ?>><?php echo $settings['title']; ?></span>
 		<?php } ?>
 
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
@@ -353,16 +361,22 @@ class Widget_Progress extends Widget_Base {
 	 *
 	 * Written as a Backbone JavaScript template and used to generate the live preview.
 	 *
-	 * @since 1.0.0
+	 * @since 2.9.0
 	 * @access protected
 	 */
-	protected function _content_template() {
+	protected function content_template() {
 		?>
 		<#
 		let progress_percentage = 0;
 		if ( ! isNaN( settings.percent.size ) ) {
 			progress_percentage = 100 < settings.percent.size ? 100 : settings.percent.size;
 		}
+
+		view.addRenderAttribute( 'title', {
+			'class': 'elementor-title'
+		} );
+
+		view.addInlineEditingAttributes( 'title' );
 
 		view.addRenderAttribute( 'progressWrapper', {
 			'class': [ 'elementor-progress-wrapper', 'progress-' + settings.progress_type ],
@@ -380,7 +394,7 @@ class Widget_Progress extends Widget_Base {
 		view.addInlineEditingAttributes( 'inner_text' );
 		#>
 		<# if ( settings.title ) { #>
-			<span class="elementor-title">{{{ settings.title }}}</span><#
+			<span {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</span><#
 		} #>
 		<div {{{ view.getRenderAttributeString( 'progressWrapper' ) }}}>
 			<div class="elementor-progress-bar" data-max="{{ progress_percentage }}">

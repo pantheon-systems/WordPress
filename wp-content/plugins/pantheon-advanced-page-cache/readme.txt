@@ -2,8 +2,8 @@
 Contributors: getpantheon, danielbachhuber
 Tags: pantheon, cdn, cache
 Requires at least: 4.7
-Tested up to: 5.3
-Stable tag: 0.3.1
+Tested up to: 5.5
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -290,6 +290,9 @@ Different WordPress actions cause different surrogate keys to be purged, documen
 * Affected views: REST API resource endpoint
 
 == Changelog ==
+
+= 1.0.0 (March 2, 2020) =
+* Plugin is stable.
 
 = 0.3.1 (October 27th, 2019) =
 * Fixes reversed argument order with use of `implode()` [[#139](https://github.com/pantheon-systems/pantheon-advanced-page-cache/pull/139)].

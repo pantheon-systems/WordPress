@@ -83,6 +83,6 @@ class MongoDBFormatter implements \Google\Site_Kit_Dependencies\Monolog\Formatte
     }
     protected function formatDate(\DateTime $value, $nestingLevel)
     {
-        return new \Google\Site_Kit_Dependencies\MongoDate($value->getTimestamp());
+        return new \MongoDate($value->getTimestamp());
     }
 }

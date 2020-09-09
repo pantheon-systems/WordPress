@@ -158,6 +158,28 @@ final class Permissions {
 			4
 		);
 
+		add_filter(
+			'googlesitekit_user_data',
+			function( $data ) {
+				$permissions = array(
+					self::AUTHENTICATE,
+					self::SETUP,
+					self::VIEW_POSTS_INSIGHTS,
+					self::VIEW_DASHBOARD,
+					self::VIEW_MODULE_DETAILS,
+					self::MANAGE_OPTIONS,
+					self::PUBLISH_POSTS,
+				);
+
+				$data['permissions'] = array_combine(
+					$permissions,
+					array_map( 'current_user_can', $permissions )
+				);
+
+				return $data;
+			}
+		);
+
 		// This constant can be set if an alternative mechanism to grant these capabilities is in place.
 		if ( defined( 'GOOGLESITEKIT_DISABLE_DYNAMIC_CAPABILITIES' ) && GOOGLESITEKIT_DISABLE_DYNAMIC_CAPABILITIES ) {
 			return;
@@ -213,8 +235,8 @@ final class Permissions {
 		// Special setup and authentication rules.
 		if ( ( isset( $this->primitive_to_core[ $cap ] ) || isset( $this->meta_to_core[ $cap ] ) ) ) {
 			// If setup has not yet been completed, require administrator capabilities for everything.
-			if ( self::MANAGE_OPTIONS !== $cap && ! $this->is_setup_complete() ) {
-				$caps[] = self::MANAGE_OPTIONS;
+			if ( self::SETUP !== $cap && ! $this->authentication->is_setup_completed() ) {
+				$caps[] = self::SETUP;
 			}
 
 			if ( ! in_array( $cap, array( self::AUTHENTICATE, self::SETUP ), true ) ) {
@@ -228,7 +250,7 @@ final class Permissions {
 
 				// For all users, require setup to have been completed.
 				if ( ! $prevent_access ) {
-					$prevent_access = ! $this->is_setup_complete();
+					$prevent_access = ! $this->authentication->is_setup_completed();
 				}
 
 				if ( $prevent_access ) {
@@ -259,32 +281,5 @@ final class Permissions {
 		}
 
 		return $allcaps;
-	}
-
-	/**
-	 * Checks whether the Site Kit setup is considered complete.
-	 *
-	 * If this is not the case, most permissions will be force-prevented to ensure that only permissions required for
-	 * initial setup are granted.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool True if setup is completed, false otherwise.
-	 */
-	private function is_setup_complete() {
-		if ( ! $this->authentication->credentials()->has() ) {
-			return false;
-		}
-
-		/**
-		 * Filters whether the Site Kit plugin should consider its setup to be completed.
-		 *
-		 * This can be used by essential auto-activated modules to amend the result of this check.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param bool $complete Whether the setup is completed.
-		 */
-		return (bool) apply_filters( 'googlesitekit_setup_complete', true );
 	}
 }

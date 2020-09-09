@@ -449,8 +449,13 @@ class Logger implements \Google\Site_Kit_Dependencies\Psr\Log\LoggerInterface, \
      */
     public static function toMonologLevel($level)
     {
-        if (\is_string($level) && \defined(__CLASS__ . '::' . \strtoupper($level))) {
-            return \constant(__CLASS__ . '::' . \strtoupper($level));
+        if (\is_string($level)) {
+            // Contains chars of all log levels and avoids using strtoupper() which may have
+            // strange results depending on locale (for example, "i" will become "İ")
+            $upper = \strtr($level, 'abcdefgilmnortuwy', 'ABCDEFGILMNORTUWY');
+            if (\defined(__CLASS__ . '::' . $upper)) {
+                return \constant(__CLASS__ . '::' . $upper);
+            }
         }
         return $level;
     }

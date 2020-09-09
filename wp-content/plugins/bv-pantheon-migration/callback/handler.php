@@ -10,6 +10,7 @@ if (!class_exists('BVCallbackHandler')) :
 		public $request;
 		public $account;
 		public $response;
+		public $bvinfo;
 
 		public function __construct($db, $settings, $siteinfo, $request, $account, $response) {
 			$this->db = $db;
@@ -18,6 +19,7 @@ if (!class_exists('BVCallbackHandler')) :
 			$this->request = $request;
 			$this->account = $account;
 			$this->response = $response;
+			$this->bvinfo = new PTNInfo($this->settings);
 		}
 
 		public function bvAdmExecuteWithoutUser() {
@@ -30,17 +32,16 @@ if (!class_exists('BVCallbackHandler')) :
 
 		public function execute($resp = array()) {
 			$this->routeRequest();
-			$bvinfo = new PTNInfo($this->settings);
 			$resp = array(
-				"request_info" => $this->request->respInfo(),
-				"site_info" => $this->siteinfo->respInfo(),
-				"account_info" => $this->account->respInfo(),
-				"bvinfo" => $bvinfo->respInfo(),
+				"request_info" => $this->request->info(),
+				"site_info" => $this->siteinfo->info(),
+				"account_info" => $this->account->info(),
+				"bvinfo" => $this->bvinfo->info(),
 				"api_pubkey" => substr(PTNAccount::getApiPublicKey($this->settings), 0, 8)
 			);
 			$this->response->terminate($resp);
 		}
-	
+
 		public function routeRequest() {
 			switch ($this->request->wing) {
 			case 'manage':
@@ -67,17 +68,9 @@ if (!class_exists('BVCallbackHandler')) :
 				require_once dirname( __FILE__ ) . '/wings/ipstore.php';
 				$module = new BVIPStoreCallback($this);
 				break;
-			case 'fw':
-				require_once dirname( __FILE__ ) . '/wings/fw.php';
-				$module = new BVFirewallCallback($this);
-				break;
-			case 'lp':
-				require_once dirname( __FILE__ ) . '/wings/lp.php';
-				$module = new BVLoginProtectCallback($this);
-				break;
-			case 'monit':
-				require_once dirname( __FILE__ ) . '/wings/monit.php';
-				$module = new BVMonitCallback($this);
+			case 'wtch':
+				require_once dirname( __FILE__ ) . '/wings/watch.php';
+				$module = new BVWatchCallback($this);
 				break;
 			case 'brand':
 				require_once dirname( __FILE__ ) . '/wings/brand.php';
@@ -90,6 +83,10 @@ if (!class_exists('BVCallbackHandler')) :
 			case 'act':
 				require_once dirname( __FILE__ ) . '/wings/account.php';
 				$module = new BVAccountCallback($this);
+				break;
+			case 'fswrt':
+				require_once dirname( __FILE__ ) . '/wings/fs_write.php';
+				$module = new BVFSWriteCallback();
 				break;
 			default:
 				require_once dirname( __FILE__ ) . '/wings/misc.php';

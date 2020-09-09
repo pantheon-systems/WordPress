@@ -16,7 +16,7 @@ class CancellationQueue
     }
     public function enqueue($cancellable)
     {
-        if (!\method_exists($cancellable, 'then') || !\method_exists($cancellable, 'cancel')) {
+        if (!\is_object($cancellable) || !\method_exists($cancellable, 'then') || !\method_exists($cancellable, 'cancel')) {
             return;
         }
         $length = \array_push($this->queue, $cancellable);

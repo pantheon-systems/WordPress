@@ -80,15 +80,15 @@ abstract class DB_Upgrades_Manager extends Background_Task_Manager {
 		$message = '<p>' . sprintf( __( '%s Your site database needs to be updated to the latest version.', 'elementor' ), $this->get_updater_label() ) . '</p>';
 		$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $upgrade_link, __( 'Update Now', 'elementor' ) ) . '</p>';
 
-		echo '<div class="notice notice-error">' . $message . '</div>';
+		echo '<div class="notice notice-error is-dismissible">' . $message . '</div>';
 	}
 
 	public function admin_notice_upgrade_is_running() {
 		$upgrade_link = $this->get_continue_action_url();
 		$message = '<p>' . sprintf( __( '%s Database update process is running in the background.', 'elementor' ), $this->get_updater_label() ) . '</p>';
-		$message .= '<p>' . sprintf( 'Taking a while? <a href="%s" class="button-primary">Click here to run it now</a>', $upgrade_link ) . '</p>';
+		$message .= '<p>' . __( 'Taking a while?', 'elementor' ) . ' <a href="' . $upgrade_link . '" class="button-primary">' . __( 'Click here to run it now', 'elementor' ) . '</a></p>';
 
-		echo '<div class="notice notice-warning">' . $message . '</div>';
+		echo '<div class="notice notice-warning is-dismissible">' . $message . '</div>';
 	}
 
 	public function admin_notice_upgrade_is_completed() {
@@ -96,7 +96,7 @@ abstract class DB_Upgrades_Manager extends Background_Task_Manager {
 
 		$message = '<p>' . sprintf( __( '%s The database update process is now complete. Thank you for updating to the latest version!', 'elementor' ), $this->get_updater_label() ) . '</p>';
 
-		echo '<div class="notice notice-success">' . $message . '</div>';
+		echo '<div class="notice notice-success is-dismissible">' . $message . '</div>';
 	}
 
 	/**
@@ -169,7 +169,7 @@ abstract class DB_Upgrades_Manager extends Background_Task_Manager {
 	public function __construct() {
 		// If upgrade is completed - show the notice only for admins.
 		// Note: in this case `should_upgrade` returns false, because it's already upgraded.
-		if ( is_admin() && current_user_can( 'manage_options' ) && $this->get_flag( 'completed' ) ) {
+		if ( is_admin() && current_user_can( 'update_plugins' ) && $this->get_flag( 'completed' ) ) {
 			add_action( 'admin_notices', [ $this, 'admin_notice_upgrade_is_completed' ] );
 		}
 
@@ -181,7 +181,7 @@ abstract class DB_Upgrades_Manager extends Background_Task_Manager {
 
 		$this->start_run();
 
-		if ( $updater->is_running() ) {
+		if ( $updater->is_running() && current_user_can( 'update_plugins' ) ) {
 			add_action( 'admin_notices', [ $this, 'admin_notice_upgrade_is_running' ] );
 		}
 

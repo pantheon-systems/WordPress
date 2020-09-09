@@ -13,6 +13,8 @@ namespace Google\Site_Kit;
 use AMP_Options_Manager;
 use AMP_Theme_Support;
 use Google\Site_Kit\Core\Util\Input;
+use Google\Site_Kit\Core\Util\Entity;
+use Google\Site_Kit\Core\Util\Entity_Factory;
 
 /**
  * Class representing the context in which the plugin is running.
@@ -58,7 +60,7 @@ final class Context {
 	/**
 	 * Input access abstraction.
 	 *
-	 * @since n.e.x.t
+	 * @since 1.1.2
 	 * @var Input
 	 */
 	private $input;
@@ -67,7 +69,7 @@ final class Context {
 	 * Constructor.
 	 *
 	 * @since 1.0.0
-	 * @since n.e.x.t Added optional $input instance.
+	 * @since 1.1.2 Added optional $input instance.
 	 *
 	 * @param string $main_file Absolute path to the plugin main file.
 	 * @param Input  $input Input instance.
@@ -103,7 +105,7 @@ final class Context {
 	/**
 	 * Gets the Input instance.
 	 *
-	 * @since n.e.x.t
+	 * @since 1.1.2
 	 *
 	 * @return Input
 	 */
@@ -121,9 +123,21 @@ final class Context {
 	 * @return string Full admin screen URL.
 	 */
 	public function admin_url( $slug = 'dashboard', array $query_args = array() ) {
-		$query_args['page'] = Core\Admin\Screens::PREFIX . $slug;
+		unset( $query_args['page'] );
 
-		return add_query_arg( $query_args, self_admin_url( 'admin.php' ) );
+		if ( $this->is_network_mode() ) {
+			$base_url = network_admin_url( 'admin.php' );
+		} else {
+			$base_url = admin_url( 'admin.php' );
+		}
+
+		return add_query_arg(
+			array_merge(
+				array( 'page' => Core\Admin\Screens::PREFIX . $slug ),
+				$query_args
+			),
+			$base_url
+		);
 	}
 
 	/**
@@ -159,27 +173,57 @@ final class Context {
 	 * @return string Reference site URL.
 	 */
 	public function get_reference_site_url() {
-		$orig_site_url = home_url();
-		$site_url      = $orig_site_url;
+		return $this->filter_reference_url();
+	}
 
-		/**
-		 * Filters the reference site URL to use for stats.
-		 *
-		 * This can be used to override the current site URL, for example when using the plugin on a non-public site,
-		 * such as in a staging environment.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string $site_url Reference site URL, typically the WordPress home URL.
-		 */
-		$site_url = apply_filters( 'googlesitekit_site_url', $site_url );
-
-		// Ensure this is not empty.
-		if ( empty( $site_url ) ) {
-			$site_url = $orig_site_url;
+	/**
+	 * Gets the entity for the current request context.
+	 *
+	 * An entity in Site Kit terminology is based on a canonical URL, i.e. every
+	 * canonical URL has an associated entity.
+	 *
+	 * An entity may also have a type, a title, and an ID.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @return Entity|null The current entity, or null if none could be determined.
+	 */
+	public function get_reference_entity() {
+		// Support specific URL stats being checked in Site Kit dashboard details view.
+		if ( is_admin() && 'googlesitekit-dashboard' === $this->input()->filter( INPUT_GET, 'page' ) ) {
+			$entity_url_query_param = $this->input()->filter( INPUT_GET, 'permaLink' );
+			if ( ! empty( $entity_url_query_param ) ) {
+				return $this->get_reference_entity_from_url( $entity_url_query_param );
+			}
 		}
 
-		return untrailingslashit( $site_url );
+		$entity = Entity_Factory::from_context();
+		return $this->filter_entity_reference_url( $entity );
+	}
+
+	/**
+	 * Gets the entity for the given URL, if available.
+	 *
+	 * An entity in Site Kit terminology is based on a canonical URL, i.e. every
+	 * canonical URL has an associated entity.
+	 *
+	 * An entity may also have a type, a title, and an ID.
+	 *
+	 * @since 1.10.0
+	 *
+	 * @param string $url URL to determine the entity from.
+	 * @return Entity|null The current entity, or null if none could be determined.
+	 */
+	public function get_reference_entity_from_url( $url ) {
+		// Ensure local URL is used for lookup.
+		$url = str_replace(
+			$this->get_reference_site_url(),
+			untrailingslashit( home_url() ),
+			$url
+		);
+
+		$entity = Entity_Factory::from_url( $url );
+		return $this->filter_entity_reference_url( $entity );
 	}
 
 	/**
@@ -187,60 +231,43 @@ final class Context {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int|\WP_Post $post  Optional. Post ID or post object. Default is the global `$post`.
+	 * @param int|WP_Post $post Optional. Post ID or post object. Default is the global `$post`.
 	 *
 	 * @return string|false The reference permalink URL or false if post does not exist.
 	 */
 	public function get_reference_permalink( $post = 0 ) {
-		$reference_site_url = $this->get_reference_site_url();
-		$orig_site_url      = home_url();
-
-		// Gets post object. On front area we need to use get_queried_object to get the current post object.
-		if ( ! $post ) {
-			if ( is_admin() ) {
-				$post = get_post();
-			} else {
-				$post = get_queried_object();
-			}
-
-			if ( ! $post instanceof \WP_Post ) {
+		// If post is provided, get URL for that.
+		if ( $post ) {
+			$permalink = get_permalink( $post );
+			if ( false === $permalink ) {
 				return false;
 			}
+			return $this->filter_reference_url( $permalink );
 		}
 
-		$permalink = get_permalink( $post );
-		if ( false === $permalink ) {
-			return $permalink;
+		// Otherwise use entity detection.
+		$entity = $this->get_reference_entity();
+		if ( ! $entity || 'post' !== $entity->get_type() ) {
+			return false;
 		}
 
-		if ( $orig_site_url !== $reference_site_url ) {
-			$permalink = str_replace( $orig_site_url, $reference_site_url, $permalink );
-		}
-
-		return $permalink;
+		return $entity->get_url();
 	}
 
 	/**
 	 * Gets the canonical url for the current request.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string|false The reference canonical URL or false if no URL was identified.
 	 */
 	public function get_reference_canonical() {
-		$reference_permalink = $this->get_reference_permalink();
-
-		if ( $reference_permalink || is_admin() ) {
-			return $reference_permalink;
+		$entity = $this->get_reference_entity();
+		if ( ! $entity ) {
+			return false;
 		}
 
-		// Handle the home page URL.
-		if ( is_front_page() ) {
-			return user_trailingslashit( $this->get_reference_site_url() );
-		} elseif ( is_home() ) {
-			return $this->get_reference_permalink( get_option( 'page_for_posts' ) );
-		}
-
-		// Unidentified URL.
-		return false;
+		return $entity->get_url();
 	}
 
 	/**
@@ -251,11 +278,17 @@ final class Context {
 	 * @return bool True if an AMP request, false otherwise.
 	 */
 	public function is_amp() {
+		if ( is_singular( 'web-story' ) ) {
+			return true;
+		}
+
 		return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
 	}
 
 	/**
 	 * Gets the current AMP mode.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return bool|string 'primary' if in standard mode,
 	 *                     'secondary' if in transitional or reader modes
@@ -266,13 +299,52 @@ final class Context {
 			return false;
 		}
 
-		$mode = AMP_Theme_Support::get_support_mode();
+		$exposes_support_mode = defined( 'AMP_Theme_Support::STANDARD_MODE_SLUG' )
+			&& defined( 'AMP_Theme_Support::TRANSITIONAL_MODE_SLUG' )
+			&& defined( 'AMP_Theme_Support::READER_MODE_SLUG' );
 
-		if ( AMP_Theme_Support::STANDARD_MODE_SLUG === $mode ) {
-			return self::AMP_MODE_PRIMARY;
+		if ( defined( 'AMP__VERSION' ) ) {
+			$amp_plugin_version = AMP__VERSION;
+			if ( strpos( $amp_plugin_version, '-' ) !== false ) {
+				$amp_plugin_version = explode( '-', $amp_plugin_version )[0];
+			}
+
+			$amp_plugin_version_2_or_higher = version_compare( $amp_plugin_version, '2.0.0', '>=' );
+		} else {
+			$amp_plugin_version_2_or_higher = false;
 		}
 
-		if ( in_array( $mode, array( AMP_Theme_Support::TRANSITIONAL_MODE_SLUG, AMP_Theme_Support::READER_MODE_SLUG ), true ) ) {
+		if ( $amp_plugin_version_2_or_higher ) {
+			$exposes_support_mode = class_exists( 'AMP_Options_Manager' )
+				&& method_exists( 'AMP_Options_Manager', 'get_option' )
+				&& $exposes_support_mode;
+		} else {
+			$exposes_support_mode = class_exists( 'AMP_Theme_Support' )
+				&& method_exists( 'AMP_Theme_Support', 'get_support_mode' )
+				&& $exposes_support_mode;
+		}
+
+		if ( $exposes_support_mode ) {
+			// If recent version, we can properly detect the mode.
+			if ( $amp_plugin_version_2_or_higher ) {
+				$mode = AMP_Options_Manager::get_option( 'theme_support' );
+			} else {
+				$mode = AMP_Theme_Support::get_support_mode();
+			}
+
+			if ( AMP_Theme_Support::STANDARD_MODE_SLUG === $mode ) {
+				return self::AMP_MODE_PRIMARY;
+			}
+
+			if ( in_array( $mode, array( AMP_Theme_Support::TRANSITIONAL_MODE_SLUG, AMP_Theme_Support::READER_MODE_SLUG ), true ) ) {
+				return self::AMP_MODE_SECONDARY;
+			}
+		} elseif ( function_exists( 'amp_is_canonical' ) ) {
+			// On older versions, if it is not primary AMP, it is definitely secondary AMP (transitional or reader mode).
+			if ( amp_is_canonical() ) {
+				return self::AMP_MODE_PRIMARY;
+			}
+
 			return self::AMP_MODE_SECONDARY;
 		}
 
@@ -301,5 +373,74 @@ final class Context {
 		}
 
 		return $this->network_active;
+	}
+
+	/**
+	 * Filters the given entity's reference URL, effectively creating a copy of
+	 * the entity with the reference URL accounted for.
+	 *
+	 * @since 1.15.0
+	 *
+	 * @param Entity|null $entity Entity to filter reference ID for, or null.
+	 * @return Entity|null Filtered entity or null, based on $entity.
+	 */
+	private function filter_entity_reference_url( Entity $entity = null ) {
+		if ( ! $entity ) {
+			return null;
+		}
+
+		return new Entity(
+			$this->filter_reference_url( $entity->get_url() ),
+			array(
+				'type'  => $entity->get_type(),
+				'title' => $entity->get_title(),
+				'id'    => $entity->get_id(),
+			)
+		);
+	}
+
+	/**
+	 * Filters the given URL to ensure the reference URL is used as part of it.
+	 *
+	 * If the site reference URL differs from the home URL (e.g. via filters),
+	 * this method performs the necessary replacement.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param string $url Optional. Input URL. If not provided, returns the plain reference site URL.
+	 * @return string URL that starts with the reference site URL.
+	 */
+	private function filter_reference_url( $url = '' ) {
+		$site_url = untrailingslashit( home_url() );
+
+		/**
+		 * Filters the reference site URL to use for stats.
+		 *
+		 * This can be used to override the current site URL, for example when using the plugin on a non-public site,
+		 * such as in a staging environment.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $site_url Reference site URL, typically the WordPress home URL.
+		 */
+		$reference_site_url = apply_filters( 'googlesitekit_site_url', $site_url );
+		$reference_site_url = untrailingslashit( $reference_site_url );
+
+		// Ensure this is not empty.
+		if ( empty( $reference_site_url ) ) {
+			$reference_site_url = $site_url;
+		}
+
+		// If no URL given, just return the reference site URL.
+		if ( empty( $url ) ) {
+			return $reference_site_url;
+		}
+
+		// Replace site URL with the reference site URL.
+		if ( $reference_site_url !== $site_url ) {
+			$url = str_replace( $site_url, $reference_site_url, $url );
+		}
+
+		return $url;
 	}
 }

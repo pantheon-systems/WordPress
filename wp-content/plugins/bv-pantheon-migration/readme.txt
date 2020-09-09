@@ -2,8 +2,9 @@
 Contributors: akshatc, blogvault, getpantheon
 Tags: pantheon, migration
 Requires at least: 4.0
-Tested up to: 5.3
-Stable tag: 3.4
+Tested up to: 5.5
+Requires PHP: 5.4.0
+Stable tag: 4.35
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +75,15 @@ No, that's the beauty of this plugin. It runs on a SAAS based technology and a s
 2. Adding information to the Pantheon Migrations plugin
 
 == Changelog ==
+= 4.35 =
+* Improved scanfiles and filelist api
+
+= 4.31 =
+* Fetching Mysql Version
+* Robust data fetch APIs
+* Core plugin changes
+* Sanitizing incoming params
+
 = 3.4 =
 * Plugin branding fixes
 

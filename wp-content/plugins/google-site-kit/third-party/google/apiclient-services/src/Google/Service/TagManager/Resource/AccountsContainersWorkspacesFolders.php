@@ -112,9 +112,9 @@ class Google_Service_TagManager_Resource_AccountsContainersWorkspacesFolders ext
      * @param Google_Service_TagManager_Folder $postBody
      * @param array $optParams Optional parameters.
      *
+     * @opt_param string tagId The tags to be moved to the folder.
      * @opt_param string triggerId The triggers to be moved to the folder.
      * @opt_param string variableId The variables to be moved to the folder.
-     * @opt_param string tagId The tags to be moved to the folder.
      */
     public function move_entities_to_folder($path, \Google\Site_Kit_Dependencies\Google_Service_TagManager_Folder $postBody, $optParams = array())
     {

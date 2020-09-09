@@ -43,7 +43,6 @@ class Guzzle5HttpHandler
      *
      * @param RequestInterface $request
      * @param array $options
-     *
      * @return ResponseInterface
      */
     public function __invoke(\Google\Site_Kit_Dependencies\Psr\Http\Message\RequestInterface $request, array $options = [])
@@ -56,7 +55,6 @@ class Guzzle5HttpHandler
      *
      * @param RequestInterface $request
      * @param array $options
-     *
      * @return Promise
      */
     public function async(\Google\Site_Kit_Dependencies\Psr\Http\Message\RequestInterface $request, array $options = [])

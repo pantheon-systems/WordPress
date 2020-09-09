@@ -21,7 +21,7 @@ class BVAccountCallback extends BVCallbackBase {
 			$resp = array("status" => PTNAccount::exists($this->settings, $params['public']));
 			break;
 		case "rmacc":
-			$resp = array("status" => $account->remove($params['public']));
+			$resp = array("status" => PTNAccount::remove($this->settings, $params['public']));
 			break;
 		case "updt":
 			$info = array();
@@ -32,7 +32,8 @@ class BVAccountCallback extends BVCallbackBase {
 			$resp = array("status" => PTNAccount::exists($this->settings, $params['pubkey']));
 			break;
 		case "updtapikey":
-			$resp = array("status" => PTNAccount::updateApiPublicKey($this->settings, $params['pubkey']));
+			PTNAccount::updateApiPublicKey($this->settings, $params['pubkey']);
+			$resp = array("status" => $this->settings->getOption(PTNAccount::$api_public_key));
 			break;
 		case "rmdefsec":
 			$resp = array("status" => $settings->deleteOption('bvDefaultSecret'));

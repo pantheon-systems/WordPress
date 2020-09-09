@@ -83,7 +83,6 @@ class Autoloader {
 
 	private static function init_classes_map() {
 		self::$classes_map = [
-			'Admin' => 'includes/admin.php',
 			'Api' => 'includes/api.php',
 			'Base_Control' => 'includes/controls/base.php',
 			'Base_Data_Control' => 'includes/controls/base-data.php',
@@ -93,8 +92,8 @@ class Autoloader {
 			'Conditions' => 'includes/conditions.php',
 			'Controls_Manager' => 'includes/managers/controls.php',
 			'Controls_Stack' => 'includes/base/controls-stack.php',
+			'Sub_Controls_Stack' => 'includes/base/sub-controls-stack.php',
 			'DB' => 'includes/db.php',
-			'Debug\Debug' => 'includes/debug/debug.php',
 			'Elements_Manager' => 'includes/managers/elements.php',
 			'Embed' => 'includes/embed.php',
 			'Fonts' => 'includes/fonts.php',
@@ -105,15 +104,8 @@ class Autoloader {
 			'Images_Manager' => 'includes/managers/image.php',
 			'Maintenance' => 'includes/maintenance.php',
 			'Maintenance_Mode' => 'includes/maintenance-mode.php',
-			'Posts_CSS_Manager' => 'includes/managers/css-files.php',
 			'Preview' => 'includes/preview.php',
 			'Rollback' => 'includes/rollback.php',
-			'Scheme_Base' => 'includes/schemes/base.php',
-			'Scheme_Color' => 'includes/schemes/color.php',
-			'Scheme_Color_Picker' => 'includes/schemes/color-picker.php',
-			'Scheme_Typography' => 'includes/schemes/typography.php',
-			'Scheme_Interface' => 'includes/interfaces/scheme.php',
-			'Schemes_Manager' => 'includes/managers/schemes.php',
 			'Settings' => 'includes/settings/settings.php',
 			'Settings_Controls' => 'includes/settings/controls.php',
 			'Settings_Validations' => 'includes/settings/validations.php',
@@ -130,7 +122,6 @@ class Autoloader {
 			'TemplateLibrary\Source_Remote' => 'includes/template-library/sources/remote.php',
 			'Tools' => 'includes/settings/tools.php',
 			'Tracker' => 'includes/tracker.php',
-			'Upgrades' => 'includes/upgrades.php',
 			'User' => 'includes/user.php',
 			'Utils' => 'includes/utils.php',
 			'Widget_WordPress' => 'includes/widgets/wordpress.php',
@@ -179,10 +170,6 @@ class Autoloader {
 
 	private static function init_classes_aliases() {
 		self::$classes_aliases = [
-			'Admin' => [
-				'replacement' => 'Core\Admin\Admin',
-				'version' => '2.2.0',
-			],
 			'Core\Ajax' => [
 				'replacement' => 'Core\Common\Modules\Ajax\Module',
 				'version' => '2.3.0',
@@ -190,6 +177,62 @@ class Autoloader {
 			'Editor' => [
 				'replacement' => 'Core\Editor\Editor',
 				'version' => '2.6.0',
+			],
+			'Scheme_Base' => [
+				'replacement' => 'Core\Schemes\Base',
+				'version' => '2.8.0',
+			],
+			'Scheme_Color' => [
+				'replacement' => 'Core\Schemes\Color',
+				'version' => '2.8.0',
+			],
+			'Scheme_Color_Picker' => [
+				'replacement' => 'Core\Schemes\Color_Picker',
+				'version' => '2.8.0',
+			],
+			'Schemes_Manager' => [
+				'replacement' => 'Core\Schemes\Manager',
+				'version' => '2.8.0',
+			],
+			'Scheme_Typography' => [
+				'replacement' => 'Core\Schemes\Typography',
+				'version' => '2.8.0',
+			],
+			'System_Info\Main' => [
+				'replacement' => 'Modules\System_Info\Module',
+				'version' => '2.9.0',
+			],
+			'System_Info\Classes\Abstracts\Base_Reporter' => [
+				'replacement' => 'Modules\System_Info\Reporters\Base',
+				'version' => '2.9.0',
+			],
+			'System_Info\Classes\Server_Reporter' => [
+				'replacement' => 'Modules\System_Info\Reporters\Server',
+				'version' => '2.9.0',
+			],
+			'System_Info\Classes\MU_Plugins_Reporter' => [
+				'replacement' => 'Modules\System_Info\Reporters\MU_Plugins',
+				'version' => '2.9.0',
+			],
+			'System_Info\Classes\Network_Plugins_Reporter' => [
+				'replacement' => 'Modules\System_Info\Reporters\Network_Plugins',
+				'version' => '2.9.0',
+			],
+			'System_Info\Classes\Plugins_Reporter' => [
+				'replacement' => 'Modules\System_Info\Reporters\Plugins',
+				'version' => '2.9.0',
+			],
+			'System_Info\Classes\Theme_Reporter' => [
+				'replacement' => 'Modules\System_Info\Reporters\Theme',
+				'version' => '2.9.0',
+			],
+			'System_Info\Classes\User_Reporter' => [
+				'replacement' => 'Modules\System_Info\Reporters\User',
+				'version' => '2.9.0',
+			],
+			'System_Info\Helpers\Model_Helper' => [
+				'replacement' => 'Modules\System_Info\Helpers\Model_Helper',
+				'version' => '2.9.0',
 			],
 		];
 	}

@@ -24,6 +24,7 @@ namespace Google\Site_Kit_Dependencies\Google\Auth\Credentials;
  */
 use Google\Site_Kit_Dependencies\google\appengine\api\app_identity\AppIdentityService;
 use Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader;
+use Google\Site_Kit_Dependencies\Google\Auth\ProjectIdProviderInterface;
 use Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface;
 /**
  * AppIdentityCredentials supports authorization on Google App Engine.
@@ -31,40 +32,48 @@ use Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface;
  * It can be used to authorize requests using the AuthTokenMiddleware or
  * AuthTokenSubscriber, but will only succeed if being run on App Engine:
  *
- *   use Google\Auth\Credentials\AppIdentityCredentials;
- *   use Google\Auth\Middleware\AuthTokenMiddleware;
- *   use GuzzleHttp\Client;
- *   use GuzzleHttp\HandlerStack;
+ * Example:
+ * ```
+ * use Google\Auth\Credentials\AppIdentityCredentials;
+ * use Google\Auth\Middleware\AuthTokenMiddleware;
+ * use GuzzleHttp\Client;
+ * use GuzzleHttp\HandlerStack;
  *
- *   $gae = new AppIdentityCredentials('https://www.googleapis.com/auth/books');
- *   $middleware = new AuthTokenMiddleware($gae);
- *   $stack = HandlerStack::create();
- *   $stack->push($middleware);
+ * $gae = new AppIdentityCredentials('https://www.googleapis.com/auth/books');
+ * $middleware = new AuthTokenMiddleware($gae);
+ * $stack = HandlerStack::create();
+ * $stack->push($middleware);
  *
- *   $client = new Client([
- *       'handler' => $stack,
- *       'base_uri' => 'https://www.googleapis.com/books/v1',
- *       'auth' => 'google_auth'
- *   ]);
+ * $client = new Client([
+ *     'handler' => $stack,
+ *     'base_uri' => 'https://www.googleapis.com/books/v1',
+ *     'auth' => 'google_auth'
+ * ]);
  *
- *   $res = $client->get('volumes?q=Henry+David+Thoreau&country=US');
+ * $res = $client->get('volumes?q=Henry+David+Thoreau&country=US');
+ * ```
  */
-class AppIdentityCredentials extends \Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader implements \Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface
+class AppIdentityCredentials extends \Google\Site_Kit_Dependencies\Google\Auth\CredentialsLoader implements \Google\Site_Kit_Dependencies\Google\Auth\SignBlobInterface, \Google\Site_Kit_Dependencies\Google\Auth\ProjectIdProviderInterface
 {
     /**
      * Result of fetchAuthToken.
      *
-     * @array
+     * @var array
      */
     protected $lastReceivedToken;
     /**
      * Array of OAuth2 scopes to be requested.
+     *
+     * @var array
      */
     private $scope;
     /**
      * @var string
      */
     private $clientName;
+    /**
+     * @param array $scope One or more scopes.
+     */
     public function __construct($scope = array())
     {
         $this->scope = $scope;
@@ -74,7 +83,7 @@ class AppIdentityCredentials extends \Google\Site_Kit_Dependencies\Google\Auth\C
      * SERVER_SOFTWARE environment variable (prod) or the APPENGINE_RUNTIME
      * environment variable (dev).
      *
-     * @return true if this an App Engine Instance, false otherwise
+     * @return bool true if this an App Engine Instance, false otherwise
      */
     public static function onAppEngine()
     {
@@ -96,7 +105,6 @@ class AppIdentityCredentials extends \Google\Site_Kit_Dependencies\Google\Auth\C
      * the GuzzleHttp\ClientInterface instance passed in will not be used.
      *
      * @param callable $httpHandler callback which delivers psr7 request
-     *
      * @return array A set of auth related metadata, containing the following
      *     keys:
      *         - access_token (string)
@@ -128,6 +136,23 @@ class AppIdentityCredentials extends \Google\Site_Kit_Dependencies\Google\Auth\C
     {
         $this->checkAppEngineContext();
         return \base64_encode(\Google\Site_Kit_Dependencies\google\appengine\api\app_identity\AppIdentityService::signForApp($stringToSign)['signature']);
+    }
+    /**
+     * Get the project ID from AppIdentityService.
+     *
+     * Returns null if AppIdentityService is unavailable.
+     *
+     * @param callable $httpHandler Not used by this type.
+     * @return string|null
+     */
+    public function getProjectId(callable $httpHander = null)
+    {
+        try {
+            $this->checkAppEngineContext();
+        } catch (\Exception $e) {
+            return null;
+        }
+        return \Google\Site_Kit_Dependencies\google\appengine\api\app_identity\AppIdentityService::getApplicationId();
     }
     /**
      * Get the client name from AppIdentityService.

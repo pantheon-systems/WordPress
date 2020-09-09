@@ -40,7 +40,7 @@ if (!class_exists('BVCallbackRequest')) :
 			return array_key_exists('apicall', $this->params);
 		}
 
-		public function respInfo() {
+		public function info() {
 			$info = array(
 				"requestedsig" => $this->sig,
 				"requestedtime" => $this->time,
@@ -89,7 +89,7 @@ if (!class_exists('BVCallbackRequest')) :
 			if (array_key_exists('bvprms', $in_params) && isset($in_params['bvprms']) &&
 					array_key_exists('bvprmsmac', $in_params) && isset($in_params['bvprmsmac'])) {
 				$digest_algo = 'SHA1';
-				$sent_mac = $in_params['bvprmsmac'];
+				$sent_mac = PTNAccount::sanitizeKey($in_params['bvprmsmac']);
 
 				if (array_key_exists('bvprmshshalgo', $in_params) && isset($in_params['bvprmshshalgo'])) {
 					$digest_algo = $in_params['bvprmshshalgo'];

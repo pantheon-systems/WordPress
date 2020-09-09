@@ -28,6 +28,9 @@ class Google_Service_TagManager_Tag extends \Google\Site_Kit_Dependencies\Google
     public $firingRuleId;
     public $firingTriggerId;
     public $liveOnly;
+    protected $monitoringMetadataType = 'Google\Site_Kit_Dependencies\Google_Service_TagManager_Parameter';
+    protected $monitoringMetadataDataType = '';
+    public $monitoringMetadataTagNameKey;
     public $name;
     public $notes;
     protected $parameterType = 'Google\Site_Kit_Dependencies\Google_Service_TagManager_Parameter';
@@ -111,6 +114,28 @@ class Google_Service_TagManager_Tag extends \Google\Site_Kit_Dependencies\Google
     public function getLiveOnly()
     {
         return $this->liveOnly;
+    }
+    /**
+     * @param Google_Service_TagManager_Parameter
+     */
+    public function setMonitoringMetadata(\Google\Site_Kit_Dependencies\Google_Service_TagManager_Parameter $monitoringMetadata)
+    {
+        $this->monitoringMetadata = $monitoringMetadata;
+    }
+    /**
+     * @return Google_Service_TagManager_Parameter
+     */
+    public function getMonitoringMetadata()
+    {
+        return $this->monitoringMetadata;
+    }
+    public function setMonitoringMetadataTagNameKey($monitoringMetadataTagNameKey)
+    {
+        $this->monitoringMetadataTagNameKey = $monitoringMetadataTagNameKey;
+    }
+    public function getMonitoringMetadataTagNameKey()
+    {
+        return $this->monitoringMetadataTagNameKey;
     }
     public function setName($name)
     {

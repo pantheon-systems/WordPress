@@ -39,7 +39,7 @@ class PTNWPSiteInfo {
 		return is_main_site();
 	}
 
-	public function respInfo() {
+	public function info() {
 		$info = array();
 		$this->basic($info);
 		$info['dbsig'] = $this->dbsig(false);
@@ -51,12 +51,18 @@ class PTNWPSiteInfo {
 		$info['wpurl'] = $this->wpurl();
 		$info['siteurl'] = $this->siteurl();
 		$info['homeurl'] = $this->homeurl();
-		$info['serverip'] = $_SERVER['SERVER_ADDR'];
+		if (array_key_exists('SERVER_ADDR', $_SERVER)) {
+			$info['serverip'] = $_SERVER['SERVER_ADDR'];
+		}
 		$info['abspath'] = ABSPATH;
 	}
 
 	public function serversig($full = false) {
-		$sig = sha1($_SERVER['SERVER_ADDR'].ABSPATH);
+		$sig_param = ABSPATH;
+		if (array_key_exists('SERVER_ADDR', $_SERVER)) {
+			$sig_param = $_SERVER['SERVER_ADDR'].ABSPATH;
+		}
+		$sig = sha1($sig_param);
 		if ($full)
 			return $sig;
 		else
@@ -74,6 +80,10 @@ class PTNWPSiteInfo {
 			return $sig;
 		else
 			return substr($sig, 0, 6);
+	}
+
+	public static function isCWServer() {
+		return isset($_SERVER['cw_allowed_ip']);
 	}
 }
 endif;

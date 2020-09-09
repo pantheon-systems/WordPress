@@ -102,12 +102,13 @@ class Google_Service_PeopleService_Resource_ContactGroups extends \Google\Site_K
      *
      * @param array $optParams Optional parameters.
      *
-     * @opt_param string syncToken A sync token, returned by a previous call to
-     * `contactgroups.list`. Only resources changed since the sync token was created
-     * will be returned.
-     * @opt_param string pageToken The next_page_token value returned from a
-     * previous call to [ListContactGroups](/people/api/rest/v1/contactgroups/list).
-     * Requests the next page of resources.
+     * @opt_param string pageToken Optional. The next_page_token value returned from
+     * a previous call to
+     * [ListContactGroups](/people/api/rest/v1/contactgroups/list). Requests the
+     * next page of resources.
+     * @opt_param string syncToken Optional. A sync token, returned by a previous
+     * call to `contactgroups.list`. Only resources changed since the sync token was
+     * created will be returned.
      * @opt_param int pageSize Optional. The maximum number of resources to return.
      * Valid values are between 1 and 1000, inclusive. Defaults to 30 if not set or
      * set to 0.
@@ -125,7 +126,7 @@ class Google_Service_PeopleService_Resource_ContactGroups extends \Google\Site_K
      *
      * @param string $resourceName The resource name for the contact group, assigned
      * by the server. An ASCII string, in the form of
-     * `contactGroups/`contact_group_id.
+     * `contactGroups/{contact_group_id}`.
      * @param Google_Service_PeopleService_UpdateContactGroupRequest $postBody
      * @param array $optParams Optional parameters.
      * @return Google_Service_PeopleService_ContactGroup

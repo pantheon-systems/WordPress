@@ -25,6 +25,7 @@ class Google_Service_Pagespeedonline_LighthouseAuditResultV5 extends \Google\Sit
     public $errorMessage;
     public $explanation;
     public $id;
+    public $numericValue;
     public $score;
     public $scoreDisplayMode;
     public $title;
@@ -76,6 +77,14 @@ class Google_Service_Pagespeedonline_LighthouseAuditResultV5 extends \Google\Sit
     public function getId()
     {
         return $this->id;
+    }
+    public function setNumericValue($numericValue)
+    {
+        $this->numericValue = $numericValue;
+    }
+    public function getNumericValue()
+    {
+        return $this->numericValue;
     }
     public function setScore($score)
     {

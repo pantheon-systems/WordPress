@@ -20,6 +20,7 @@ namespace Google\Site_Kit_Dependencies\Google\Auth;
 use Google\Site_Kit_Dependencies\Google\Auth\Credentials\InsecureCredentials;
 use Google\Site_Kit_Dependencies\Google\Auth\Credentials\ServiceAccountCredentials;
 use Google\Site_Kit_Dependencies\Google\Auth\Credentials\UserRefreshCredentials;
+use Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface;
 /**
  * CredentialsLoader contains the behaviour used to locate and find default
  * credentials files on the file system.
@@ -50,13 +51,28 @@ abstract class CredentialsLoader implements \Google\Site_Kit_Dependencies\Google
         return \strtoupper(\substr(\PHP_OS, 0, 3)) === 'WIN';
     }
     /**
+     * Returns the currently available major Guzzle version.
+     *
+     * @return int
+     */
+    private static function getGuzzleMajorVersion()
+    {
+        if (\defined('Google\\Site_Kit_Dependencies\\GuzzleHttp\\ClientInterface::MAJOR_VERSION')) {
+            return \Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::MAJOR_VERSION;
+        }
+        if (\defined('Google\\Site_Kit_Dependencies\\GuzzleHttp\\ClientInterface::VERSION')) {
+            return (int) \substr(\Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::VERSION, 0, 1);
+        }
+        throw new \Exception('Version not supported');
+    }
+    /**
      * Load a JSON key from the path specified in the environment.
      *
      * Load a JSON key from the path specified in the environment
      * variable GOOGLE_APPLICATION_CREDENTIALS. Return null if
      * GOOGLE_APPLICATION_CREDENTIALS is not specified.
      *
-     * @return array JSON key | null
+     * @return array|null JSON key | null
      */
     public static function fromEnv()
     {
@@ -75,12 +91,13 @@ abstract class CredentialsLoader implements \Google\Site_Kit_Dependencies\Google
      * Load a JSON key from a well known path.
      *
      * The well known path is OS dependent:
-     * - windows: %APPDATA%/gcloud/application_default_credentials.json
-     * - others: $HOME/.config/gcloud/application_default_credentials.json
      *
-     * If the file does not exists, this returns null.
+     * * windows: %APPDATA%/gcloud/application_default_credentials.json
+     * * others: $HOME/.config/gcloud/application_default_credentials.json
      *
-     * @return array JSON key | null
+     * If the file does not exist, this returns null.
+     *
+     * @return array|null JSON key | null
      */
     public static function fromWellKnownFile()
     {
@@ -101,9 +118,8 @@ abstract class CredentialsLoader implements \Google\Site_Kit_Dependencies\Google
      * Create a new Credentials instance.
      *
      * @param string|array $scope the scope of the access request, expressed
-     *   either as an Array or as a space-delimited String.
+     *        either as an Array or as a space-delimited String.
      * @param array $jsonKey the JSON credentials.
-     *
      * @return ServiceAccountCredentials|UserRefreshCredentials
      */
     public static function makeCredentials($scope, array $jsonKey)
@@ -123,30 +139,24 @@ abstract class CredentialsLoader implements \Google\Site_Kit_Dependencies\Google
      * Create an authorized HTTP Client from an instance of FetchAuthTokenInterface.
      *
      * @param FetchAuthTokenInterface $fetcher is used to fetch the auth token
-     * @param array $httpClientOptoins (optional) Array of request options to apply.
+     * @param array $httpClientOptions (optional) Array of request options to apply.
      * @param callable $httpHandler (optional) http client to fetch the token.
      * @param callable $tokenCallback (optional) function to be called when a new token is fetched.
-     *
      * @return \GuzzleHttp\Client
      */
     public static function makeHttpClient(\Google\Site_Kit_Dependencies\Google\Auth\FetchAuthTokenInterface $fetcher, array $httpClientOptions = [], callable $httpHandler = null, callable $tokenCallback = null)
     {
-        $version = \Google\Site_Kit_Dependencies\GuzzleHttp\ClientInterface::VERSION;
-        switch ($version[0]) {
-            case '5':
-                $client = new \Google\Site_Kit_Dependencies\GuzzleHttp\Client($httpClientOptions);
-                $client->setDefaultOption('auth', 'google_auth');
-                $subscriber = new \Google\Site_Kit_Dependencies\Google\Auth\Subscriber\AuthTokenSubscriber($fetcher, $httpHandler, $tokenCallback);
-                $client->getEmitter()->attach($subscriber);
-                return $client;
-            case '6':
-                $middleware = new \Google\Site_Kit_Dependencies\Google\Auth\Middleware\AuthTokenMiddleware($fetcher, $httpHandler, $tokenCallback);
-                $stack = \Google\Site_Kit_Dependencies\GuzzleHttp\HandlerStack::create();
-                $stack->push($middleware);
-                return new \Google\Site_Kit_Dependencies\GuzzleHttp\Client(['handler' => $stack, 'auth' => 'google_auth'] + $httpClientOptions);
-            default:
-                throw new \Exception('Version not supported');
+        if (self::getGuzzleMajorVersion() === 5) {
+            $client = new \Google\Site_Kit_Dependencies\GuzzleHttp\Client($httpClientOptions);
+            $client->setDefaultOption('auth', 'google_auth');
+            $subscriber = new \Google\Site_Kit_Dependencies\Google\Auth\Subscriber\AuthTokenSubscriber($fetcher, $httpHandler, $tokenCallback);
+            $client->getEmitter()->attach($subscriber);
+            return $client;
         }
+        $middleware = new \Google\Site_Kit_Dependencies\Google\Auth\Middleware\AuthTokenMiddleware($fetcher, $httpHandler, $tokenCallback);
+        $stack = \Google\Site_Kit_Dependencies\GuzzleHttp\HandlerStack::create();
+        $stack->push($middleware);
+        return new \Google\Site_Kit_Dependencies\GuzzleHttp\Client(['handler' => $stack, 'auth' => 'google_auth'] + $httpClientOptions);
     }
     /**
      * Create a new instance of InsecureCredentials.
@@ -172,7 +182,6 @@ abstract class CredentialsLoader implements \Google\Site_Kit_Dependencies\Google
      * @param array $metadata metadata hashmap
      * @param string $authUri optional auth uri
      * @param callable $httpHandler callback which delivers psr7 request
-     *
      * @return array updated metadata hashmap
      */
     public function updateMetadata($metadata, $authUri = null, callable $httpHandler = null)

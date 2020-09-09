@@ -34,6 +34,7 @@ class Google_Service_PeopleService_Name extends \Google\Site_Kit_Dependencies\Go
     public $phoneticHonorificPrefix;
     public $phoneticHonorificSuffix;
     public $phoneticMiddleName;
+    public $unstructuredName;
     public function setDisplayName($displayName)
     {
         $this->displayName = $displayName;
@@ -151,5 +152,13 @@ class Google_Service_PeopleService_Name extends \Google\Site_Kit_Dependencies\Go
     public function getPhoneticMiddleName()
     {
         return $this->phoneticMiddleName;
+    }
+    public function setUnstructuredName($unstructuredName)
+    {
+        $this->unstructuredName = $unstructuredName;
+    }
+    public function getUnstructuredName()
+    {
+        return $this->unstructuredName;
     }
 }

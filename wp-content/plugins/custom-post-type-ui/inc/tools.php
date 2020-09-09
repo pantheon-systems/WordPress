@@ -204,16 +204,16 @@ function cptui_get_taxonomy_code( $cptui_taxonomies = [], $single = false ) {
 		$callback = 'cptui_register_my_taxes';
 		if ( $single ) {
 			$key      = key( $cptui_taxonomies );
-			$callback = 'cptui_register_my_taxes_' . str_replace( '-', '_', $cptui_taxonomies[ $key ]['name'] );
+			$callback = 'cptui_register_my_taxes_' . str_replace( '-', '_', esc_html( $cptui_taxonomies[ $key ]['name'] ) );
 		}
 	?>
-function <?php echo $callback; ?>() {
+function <?php echo esc_html( $callback ); ?>() {
 <?php
 foreach ( $cptui_taxonomies as $tax ) {
 	echo cptui_get_single_taxonomy_registery( $tax );
 } ?>
 }
-add_action( 'init', '<?php echo $callback; ?>' );
+add_action( 'init', '<?php echo esc_html( $callback ); ?>' );
 <?php
 	} else {
 		esc_html_e( 'No taxonomies to display at this time', 'custom-post-type-ui' );
@@ -285,6 +285,24 @@ function cptui_get_single_taxonomy_registery( $taxonomy = [] ) {
 		$meta_box_cb = ( false !== get_disp_boolean( $taxonomy['meta_box_cb'] ) ) ? '"' . $taxonomy['meta_box_cb'] . '"' : 'false';
 	}
 
+	$default_term = '';
+	if ( ! empty( $taxonomy['default_term'] ) ) {
+		$term_parts = explode( ',', $taxonomy['default_term'] );
+		$default_term_start = '[';
+		$default_term_end   = ']';
+		if ( ! empty( $term_parts[0] ) ) {
+			$default_term .= "'name' => '" . trim( $term_parts[0] ) . "'";
+		}
+		if ( ! empty( $term_parts[1] ) ) {
+			$default_term .= ", 'slug' => '" . trim( $term_parts[1] ) . "'";
+		}
+		if ( ! empty( $term_parts[2] ) ) {
+			$default_term .= ", 'description' => '" . trim( $term_parts[2] ) . "'";
+		}
+
+		$default_term = $default_term_start . $default_term . $default_term_end;
+	}
+
 	$my_theme   = wp_get_theme();
 	$textdomain = $my_theme->get( 'TextDomain' );
 	if ( empty( $textdomain ) ) {
@@ -327,8 +345,11 @@ foreach ( $taxonomy['labels'] as $key => $label ) {
 	<?php if ( ! empty( $meta_box_cb ) ) { ?>
 	"meta_box_cb" => <?php echo $meta_box_cb; ?>,
 	<?php } ?>
+	<?php if ( ! empty( $default_term ) ) { ?>
+	"default_term" => <?php echo $default_term; ?>,
+	<?php } ?>
 	];
-	register_taxonomy( "<?php echo $taxonomy['name']; ?>", <?php echo $post_types; ?>, $args );
+	register_taxonomy( "<?php echo esc_html( $taxonomy['name'] ); ?>", <?php echo $post_types; ?>, $args );
 <?php
 }
 
@@ -348,11 +369,11 @@ function cptui_get_post_type_code( $cptui_post_types = [], $single = false ) {
 		$callback = 'cptui_register_my_cpts';
 		if ( $single ) {
 			$key      = key( $cptui_post_types );
-			$callback = 'cptui_register_my_cpts_' . str_replace( '-', '_', $cptui_post_types[ $key ]['name'] );
+			$callback = 'cptui_register_my_cpts_' . str_replace( '-', '_', esc_html( $cptui_post_types[ $key ]['name'] ) );
 		}
 ?>
 
-function <?php echo $callback; ?>() {
+function <?php echo esc_html( $callback ); ?>() {
 <?php
 // Space before this line reflects in textarea.
 		foreach ( $cptui_post_types as $type ) {
@@ -361,7 +382,7 @@ function <?php echo $callback; ?>() {
 ?>
 }
 
-add_action( 'init', '<?php echo $callback; ?>' );
+add_action( 'init', '<?php echo esc_html( $callback ); ?>' );
 <?php
 	} else {
 		esc_html_e( 'No post types to display at this time', 'custom-post-type-ui' );
@@ -460,8 +481,6 @@ function cptui_get_single_post_type_registery( $post_type = [] ) {
 	}
 	$rest_controller_class = ! empty( $post_type['rest_controller_class'] ) ? $post_type['rest_controller_class'] : 'WP_REST_Posts_Controller';
 
-	$delete_with_user = ( ! empty( $post_type['delete_with_user'] ) && false !== get_disp_boolean( $post_type['delete_with_user'] ) ) ? 'true' : 'false';
-
 	$show_in_menu = get_disp_boolean( $post_type['show_in_menu'] );
 	if ( false !== $show_in_menu ) {
 		$show_in_menu = disp_boolean( $post_type['show_in_menu'] );
@@ -532,7 +551,6 @@ function cptui_get_single_post_type_registery( $post_type = [] ) {
 		"public" => <?php echo disp_boolean( $post_type['public'] ); ?>,
 		"publicly_queryable" => <?php echo disp_boolean( $post_type['publicly_queryable'] ); ?>,
 		"show_ui" => <?php echo disp_boolean( $post_type['show_ui'] ); ?>,
-		"delete_with_user" => <?php echo $delete_with_user; ?>,
 		"show_in_rest" => <?php echo disp_boolean( $post_type['show_in_rest'] ); ?>,
 		"rest_base" => "<?php echo $post_type['rest_base']; ?>",
 		"rest_controller_class" => "<?php echo $rest_controller_class; ?>",
@@ -563,7 +581,7 @@ function cptui_get_single_post_type_registery( $post_type = [] ) {
 <?php } ?>
 	];
 
-	register_post_type( "<?php echo $post_type['name']; ?>", $args );
+	register_post_type( "<?php echo esc_html( $post_type['name'] ); ?>", $args );
 <?php
 }
 
@@ -580,6 +598,10 @@ function cptui_get_single_post_type_registery( $post_type = [] ) {
 function cptui_import_types_taxes_settings( $postdata = [] ) {
 	if ( ! isset( $postdata['cptui_post_import'] ) && ! isset( $postdata['cptui_tax_import'] ) ) {
 		return false;
+	}
+
+	if ( ! check_admin_referer( 'cptui_typetaximport_nonce_action', 'cptui_typetaximport_nonce_field' ) ) {
+		return 'nonce_fail';
 	}
 
 	$status  = 'import_fail';
@@ -753,6 +775,7 @@ function cptui_render_posttypes_taxonomies_section() {
 					<p>
 						<input class="button button-primary" type="submit" value="<?php esc_attr_e( 'Import', 'custom-post-type-ui' ); ?>" />
 					</p>
+					<?php wp_nonce_field( 'cptui_typetaximport_nonce_action', 'cptui_typetaximport_nonce_field' ); ?>
 				</form>
 			</td>
 			<td class="outer">
@@ -791,6 +814,7 @@ function cptui_render_posttypes_taxonomies_section() {
 					<p>
 						<input class="button button-primary" type="submit" value="<?php esc_attr_e( 'Import', 'custom-post-type-ui' ); ?>" />
 					</p>
+					<?php wp_nonce_field( 'cptui_typetaximport_nonce_action', 'cptui_typetaximport_nonce_field' ); ?>
 				</form>
 			</td>
 			<td class="outer">
@@ -840,7 +864,7 @@ function cptui_render_getcode_section() {
 			?>
 				<h2 id="<?php echo esc_attr( $post_type['name'] ); ?>">
 					<?php
-					$type = ! empty( $post_type['label'] ) ? $post_type['label'] : $post_type['name'];
+					$type = ! empty( $post_type['label'] ) ? esc_html( $post_type['label'] ) : esc_html( $post_type['name'] );
 					printf( esc_html__( '%s Post Type', 'custom-post-type-ui' ), esc_html( $type ) ); ?></h2>
 				<p><label for="cptui_post_type_get_code_<?php echo esc_attr( $post_type['name'] ); ?>"><?php esc_html_e( 'Copy/paste the code below into your functions.php file.', 'custom-post-type-ui' ); ?></label></p>
 				<textarea name="cptui_post_type_get_code_<?php echo esc_attr( $post_type['name'] ); ?>" id="cptui_post_type_get_code_<?php echo esc_attr( $post_type['name'] ); ?>" class="large-text cptui_post_type_get_code" onclick="this.focus();this.select()" onfocus="this.focus();this.select();" readonly="readonly" aria-readonly="true"><?php cptui_get_post_type_code( [ $post_type ], true ); ?></textarea>
@@ -861,7 +885,7 @@ function cptui_render_getcode_section() {
 			?>
 				<h2 id="<?php echo esc_attr( $taxonomy['name'] ); ?>">
 					<?php
-					$tax = ! empty( $taxonomy['label'] ) ? $taxonomy['label'] : $taxonomy['name'];
+					$tax = ! empty( $taxonomy['label'] ) ? esc_html( $taxonomy['label'] ) : esc_html( $taxonomy['name'] );
 					printf( esc_html__( '%s Taxonomy', 'custom-post-type-ui' ), esc_html( $tax ) );
 					?>
 				</h2>

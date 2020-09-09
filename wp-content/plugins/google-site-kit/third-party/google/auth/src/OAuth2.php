@@ -101,7 +101,7 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * The scope of the access request, expressed either as an Array or as a
      * space-delimited string.
      *
-     * @var string
+     * @var array
      */
     private $scope;
     /**
@@ -148,6 +148,12 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * @var string
      */
     private $signingKey;
+    /**
+     * The signing key id when using assertion profile. Param kid in jwt header
+     *
+     * @var string
+     */
+    private $signingKeyId;
     /**
      * The signing algorithm when using an assertion profile.
      *
@@ -257,6 +263,9 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * - signingKey
      *   Signing key when using assertion profile
      *
+     * - signingKeyId
+     *   Signing key id when using assertion profile
+     *
      * - refreshToken
      *   The refresh token associated with the access token
      *   to be refreshed.
@@ -275,7 +284,7 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      */
     public function __construct(array $config)
     {
-        $opts = \array_merge(['expiry' => self::DEFAULT_EXPIRY_SECONDS, 'extensionParams' => [], 'authorizationUri' => null, 'redirectUri' => null, 'tokenCredentialUri' => null, 'state' => null, 'username' => null, 'password' => null, 'clientId' => null, 'clientSecret' => null, 'issuer' => null, 'sub' => null, 'audience' => null, 'signingKey' => null, 'signingAlgorithm' => null, 'scope' => null, 'additionalClaims' => []], $config);
+        $opts = \array_merge(['expiry' => self::DEFAULT_EXPIRY_SECONDS, 'extensionParams' => [], 'authorizationUri' => null, 'redirectUri' => null, 'tokenCredentialUri' => null, 'state' => null, 'username' => null, 'password' => null, 'clientId' => null, 'clientSecret' => null, 'issuer' => null, 'sub' => null, 'audience' => null, 'signingKey' => null, 'signingKeyId' => null, 'signingAlgorithm' => null, 'scope' => null, 'additionalClaims' => []], $config);
         $this->setAuthorizationUri($opts['authorizationUri']);
         $this->setRedirectUri($opts['redirectUri']);
         $this->setTokenCredentialUri($opts['tokenCredentialUri']);
@@ -289,6 +298,7 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
         $this->setExpiry($opts['expiry']);
         $this->setAudience($opts['audience']);
         $this->setSigningKey($opts['signingKey']);
+        $this->setSigningKeyId($opts['signingKeyId']);
         $this->setSigningAlgorithm($opts['signingAlgorithm']);
         $this->setScope($opts['scope']);
         $this->setExtensionParams($opts['extensionParams']);
@@ -302,11 +312,21 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * - if present, but invalid, raises DomainException.
      * - otherwise returns the payload in the idtoken as a PHP object.
      *
-     * if $publicKey is null, the key is decoded without being verified.
+     * The behavior of this method varies depending on the version of
+     * `firebase/php-jwt` you are using. In versions lower than 3.0.0, if
+     * `$publicKey` is null, the key is decoded without being verified. In
+     * newer versions, if a public key is not given, this method will throw an
+     * `\InvalidArgumentException`.
      *
      * @param string $publicKey The public key to use to authenticate the token
      * @param array $allowed_algs List of supported verification algorithms
-     *
+     * @throws \DomainException if the token is missing an audience.
+     * @throws \DomainException if the audience does not match the one set in
+     *         the OAuth2 class instance.
+     * @throws \UnexpectedValueException If the token is invalid
+     * @throws SignatureInvalidException If the signature is invalid.
+     * @throws BeforeValidException If the token is not yet valid.
+     * @throws ExpiredException If the token has expired.
      * @return null|object
      */
     public function verifyIdToken($publicKey = null, $allowed_algs = array())
@@ -328,7 +348,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * Obtains the encoded jwt from the instance data.
      *
      * @param array $config array optional configuration parameters
-     *
      * @return string
      */
     public function toJwt(array $config = [])
@@ -354,7 +373,7 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
             $assertion['sub'] = $this->getSub();
         }
         $assertion += $this->getAdditionalClaims();
-        return $this->jwtEncode($assertion, $this->getSigningKey(), $this->getSigningAlgorithm());
+        return $this->jwtEncode($assertion, $this->getSigningKey(), $this->getSigningAlgorithm(), $this->getSigningKeyId());
     }
     /**
      * Generates a request for token credentials.
@@ -406,7 +425,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * Fetches the auth tokens based on the current state.
      *
      * @param callable $httpHandler callback which delivers psr7 request
-     *
      * @return array the response
      */
     public function fetchAuthToken(callable $httpHandler = null)
@@ -428,9 +446,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      */
     public function getCacheKey()
     {
-        if (\is_string($this->scope)) {
-            return $this->scope;
-        }
         if (\is_array($this->scope)) {
             return \implode(':', $this->scope);
         }
@@ -441,9 +456,7 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * Parses the fetched tokens.
      *
      * @param ResponseInterface $resp the response.
-     *
      * @return array the tokens parsed from the response body.
-     *
      * @throws \Exception
      */
     public function parseTokenResponse(\Google\Site_Kit_Dependencies\Psr\Http\Message\ResponseInterface $resp)
@@ -463,12 +476,14 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
     /**
      * Updates an OAuth 2.0 client.
      *
-     * @example
-     *   client.updateToken([
+     * Example:
+     * ```
+     * $oauth->updateToken([
      *     'refresh_token' => 'n4E9O119d',
      *     'access_token' => 'FJQbwq9',
      *     'expires_in' => 3600
-     *   ])
+     * ]);
+     * ```
      *
      * @param array $config
      *  The configuration parameters related to the token.
@@ -515,9 +530,7 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * Builds the authorization Uri that the user should be redirected to.
      *
      * @param array $config configuration options that customize the return url
-     *
      * @return UriInterface the authorization Url.
-     *
      * @throws InvalidArgumentException
      */
     public function buildFullAuthorizationUri(array $config = [])
@@ -632,7 +645,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * a space-delimited String.
      *
      * @param string|array $scope
-     *
      * @throws InvalidArgumentException
      */
     public function setScope($scope)
@@ -683,7 +695,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * Sets the current grant type.
      *
      * @param $grantType
-     *
      * @throws InvalidArgumentException
      */
     public function setGrantType($grantType)
@@ -863,6 +874,24 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
     public function setSigningKey($signingKey)
     {
         $this->signingKey = $signingKey;
+    }
+    /**
+     * Gets the signing key id when using an assertion profile.
+     *
+     * @return string
+     */
+    public function getSigningKeyId()
+    {
+        return $this->signingKeyId;
+    }
+    /**
+     * Sets the signing key id when using an assertion profile.
+     *
+     * @param string $signingKeyId
+     */
+    public function setSigningKeyId($signingKeyId)
+    {
+        $this->signingKeyId = $signingKeyId;
     }
     /**
      * Gets the signing algorithm when using an assertion profile.
@@ -1090,7 +1119,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * @todo handle uri as array
      *
      * @param string $uri
-     *
      * @return null|UriInterface
      */
     private function coerceUri($uri)
@@ -1104,7 +1132,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
      * @param string $idToken
      * @param string|array|null $publicKey
      * @param array $allowedAlgs
-     *
      * @return object
      */
     private function jwtDecode($idToken, $publicKey, $allowedAlgs)
@@ -1114,19 +1141,18 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
         }
         return \Google\Site_Kit_Dependencies\JWT::decode($idToken, $publicKey, $allowedAlgs);
     }
-    private function jwtEncode($assertion, $signingKey, $signingAlgorithm)
+    private function jwtEncode($assertion, $signingKey, $signingAlgorithm, $signingKeyId = null)
     {
         if (\class_exists('Google\\Site_Kit_Dependencies\\Firebase\\JWT\\JWT')) {
-            return \Google\Site_Kit_Dependencies\Firebase\JWT\JWT::encode($assertion, $signingKey, $signingAlgorithm);
+            return \Google\Site_Kit_Dependencies\Firebase\JWT\JWT::encode($assertion, $signingKey, $signingAlgorithm, $signingKeyId);
         }
-        return \Google\Site_Kit_Dependencies\JWT::encode($assertion, $signingKey, $signingAlgorithm);
+        return \Google\Site_Kit_Dependencies\JWT::encode($assertion, $signingKey, $signingAlgorithm, $signingKeyId);
     }
     /**
      * Determines if the URI is absolute based on its scheme and host or path
      * (RFC 3986).
      *
      * @param string $uri
-     *
      * @return bool
      */
     private function isAbsoluteUri($uri)
@@ -1136,7 +1162,6 @@ class OAuth2 implements \Google\Site_Kit_Dependencies\Google\Auth\FetchAuthToken
     }
     /**
      * @param array $params
-     *
      * @return array
      */
     private function addClientCredentials(&$params)

@@ -96,11 +96,13 @@ class BVInfoCallback extends BVCallbackBase {
 
 	public function getSystemInfo() {
 		$sys_info = array(
-			'serverip' => $_SERVER['SERVER_ADDR'],
 			'host' => $_SERVER['HTTP_HOST'],
 			'phpversion' => phpversion(),
 			'AF_INET6' => defined('AF_INET6')
 		);
+		if (array_key_exists('SERVER_ADDR', $_SERVER)) {
+			$sys_info['serverip'] = $_SERVER['SERVER_ADDR'];
+		}
 		if (function_exists('get_current_user')) {
 			$sys_info['user'] = get_current_user();
 		}
@@ -133,7 +135,9 @@ class BVInfoCallback extends BVCallbackBase {
 			'charset' => get_bloginfo('charset'),
 			'wpversion' => $wp_version,
 			'dbversion' => $wp_db_version,
+			'mysql_version' => $db->getMysqlVersion(),
 			'abspath' => ABSPATH,
+			'bvpluginpath' => defined('PTNBASEPATH') ? PTNBASEPATH : null,
 			'uploadpath' => $upload_dir['basedir'],
 			'uploaddir' => wp_upload_dir(),
 			'contentdir' => defined('WP_CONTENT_DIR') ? WP_CONTENT_DIR : null,
@@ -203,49 +207,9 @@ class BVInfoCallback extends BVCallbackBase {
 		$data['dynsync'] = $settings->getOption('bvDynSyncActive');
 		$data['woodyn'] = $settings->getOption('bvWooDynSync');
 		$data['dynplug'] = $settings->getOption('bvdynplug');
-		$data['ptplug'] = $settings->getOption('bvptplug');
-		$data['fw'] = $this->getFWConfig();
-		$data['lp'] = $this->getLPConfig();
+		$data['protect'] = $settings->getOption('bvptconf');
 		$data['brand'] = $settings->getOption($this->bvinfo->brand_option);
 		$data['badgeinfo'] = $settings->getOption($this->bvinfo->badgeinfo);
-	}
-
-	public function getLPConfig() {
-		$config = array();
-		$settings = $this->settings;
-		$mode = $settings->getOption('bvlpmode');
-		$cplimit = $settings->getOption('bvlpcaptchalimit');
-		$tplimit = $settings->getOption('bvlptempblocklimit');
-		$bllimit = $settings->getOption('bvlpblockAllLimit');
-		$config['mode'] = intval($mode ? $mode : 1);
-		$config['captcha_limit'] = intval($cplimit ? $cplimit : 3);
-		$config['temp_block_limit'] = intval($tplimit? $tplimit : 6);
-		$config['block_all_limit'] = intval($bllimit ? $bllimit : 100);
-		return $config;
-	}
-
-	public function getFWConfig() {
-		$config = array();
-		$settings = $this->settings;
-		$mode = $settings->getOption('bvfwmode');
-		$drules = $settings->getOption('bvfwdisabledrules');
-		$arules = $settings->getOption('bvfwauditrules');
-		$rmode = $settings->getOption('bvfwrulesmode');
-		$reqprofilingmode = $settings->getOption('bvfwreqprofilingmode');
-		$bypass_level = $settings->getOption('bvfwbypasslevel');
-		$custom_roles = $settings->getOption('bvfwcustomroles');
-		$cookiemode = $settings->getOption('bvfwcookiemode');
-		$cookiekey = (string) $settings->getOption('bvfwcookiekey');
-		$config['mode'] = intval($mode ? $mode : 1);
-		$config['disabled_rules'] = $drules ? $drules : array();
-		$config['audit_rules'] = $arules ? $arules : array();
-		$config['rules_mode'] = intval($rmode ? $rmode : 1);
-		$config['req_profiling_mode'] = intval($reqprofilingmode ? $reqprofilingmode : 1);
-		$config['bypslevl'] = intval($bypass_level ? $bypass_level : 2);
-		$config['cstmrls'] = $custom_roles ? $custom_roles : array();
-		$config['cookiemode'] = intval($cookiemode ? $cookiemode : 2);
-		$config['cookiekey'] = $cookiekey;
-		return $config;
 	}
 
 	public function dbconf(&$info) {
@@ -255,6 +219,15 @@ class BVInfoCallback extends BVCallbackBase {
 		$info['dbprefix'] = $db->dbprefix();
 		$info['charset_collate'] = $db->getCharsetCollate();
 		return $info;
+	}
+
+	public function cookieInfo() {
+		$resp = array();
+		if (defined('COOKIEPATH'))
+			$resp['cookiepath'] = COOKIEPATH;
+		if (defined('COOKIE_DOMAIN'))
+			$resp['cookiedomain'] = COOKIE_DOMAIN;
+		return array('cookieinfo' => $resp);
 	}
 	
 	public function activate() {
@@ -266,12 +239,24 @@ class BVInfoCallback extends BVCallbackBase {
 		return array('actinfo' => $resp);
 	}
 
+	public function getHostInfo() {
+		$host_info = $_SERVER;
+		$host_info['PHP_SERVER_NAME'] = php_uname('\n');
+		if (array_key_exists('IS_PRESSABLE', get_defined_constants())) {
+			$host_info['IS_PRESSABLE'] = true;
+		}
+		return array('host_info' => $host_info);
+	}
+
 	public function process($request) {
 		$db = $this->db;
 		$params = $request->params;
 		switch ($request->method) {
 		case "activateinfo":
 			$resp = $this->activate();
+			break;
+		case "ckeyinfo":
+			$resp = $this->cookieInfo();
 			break;
 		case "gtpsts":
 			$count = 5;
@@ -294,6 +279,13 @@ class BVInfoCallback extends BVCallbackBase {
 		case "gtwp":
 			$resp = $this->getWpInfo();
 			break;
+		case "gtallhdrs":
+			$data = (function_exists('getallheaders')) ? getallheaders() : false;
+			$resp = array("allhdrs" => $data);
+			break;
+		case "gtsvr":
+			$resp = array("svr" => $_SERVER);
+			break;
 		case "getoption":
 			$resp = array("option" => $this->settings->getOption($params['name']));
 			break;
@@ -308,6 +300,19 @@ class BVInfoCallback extends BVCallbackBase {
 			if ($transient && array_key_exists('asarray', $params))
 				$transient = $this->objectToArray($transient);
 			$resp = array("transient" => $transient);
+			break;
+		case "gthost":
+			$resp = $this->getHostInfo();
+			break;	
+		case "gtplinfo":
+			$args = array(
+				'slug' => wp_unslash($params['slug'])
+			);
+			$action = $params['action'];
+			$args = (object) $args;
+			$args = apply_filters('plugins_api_args', $args, $action);
+			$data = apply_filters('plugins_api', false, $action, $args);
+			$resp = array("plugins_info" => $data);
 			break;
 		default:
 			$resp = false;

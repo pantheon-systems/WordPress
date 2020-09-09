@@ -11,6 +11,7 @@
 namespace Google\Site_Kit_Dependencies\Monolog\Handler;
 
 use Google\Site_Kit_Dependencies\Monolog\Logger;
+use Google\Site_Kit_Dependencies\Monolog\Utils;
 /**
  * Stores to any stream resource
  *
@@ -42,7 +43,7 @@ class StreamHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\Abstra
         if (\is_resource($stream)) {
             $this->stream = $stream;
         } elseif (\is_string($stream)) {
-            $this->url = $stream;
+            $this->url = \Google\Site_Kit_Dependencies\Monolog\Utils::canonicalizePath($stream);
         } else {
             throw new \InvalidArgumentException('A stream must either be a resource or a string.');
         }

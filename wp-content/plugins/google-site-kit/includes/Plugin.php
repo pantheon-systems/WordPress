@@ -87,36 +87,93 @@ final class Plugin {
 			return;
 		}
 
+		// REST route to set up a temporary tag to verify meta tag output works reliably.
+		add_filter(
+			'googlesitekit_rest_routes',
+			function( $routes ) {
+				$can_setup = function() {
+					return current_user_can( Core\Permissions\Permissions::SETUP );
+				};
+				$routes[]  = new Core\REST_API\REST_Route(
+					'core/site/data/setup-tag',
+					array(
+						array(
+							'methods'             => \WP_REST_Server::EDITABLE,
+							'callback'            => function( \WP_REST_Request $request ) {
+								$token = wp_generate_uuid4();
+								set_transient( 'googlesitekit_setup_token', $token, 5 * MINUTE_IN_SECONDS );
+
+								return new \WP_REST_Response( array( 'token' => $token ) );
+							},
+							'permission_callback' => $can_setup,
+						),
+					)
+				);
+				return $routes;
+			}
+		);
+
+		// Output temporary tag if set.
+		add_action(
+			'wp_head',
+			function () {
+				$token = get_transient( 'googlesitekit_setup_token' );
+
+				if ( $token ) {
+					printf( '<meta name="googlesitekit-setup" content="%s" />', esc_attr( $token ) );
+				}
+			}
+		);
+
 		$display_site_kit_meta = function() {
 			printf( '<meta name="generator" content="Site Kit by Google %s" />', esc_attr( GOOGLESITEKIT_VERSION ) );
 		};
 		add_action( 'wp_head', $display_site_kit_meta );
 		add_action( 'login_head', $display_site_kit_meta );
 
-		$options    = new Core\Storage\Options( $this->context );
-		$transients = new Core\Storage\Transients( $this->context );
-		$assets     = new Core\Assets\Assets( $this->context );
-		$assets->register();
+		$options = new Core\Storage\Options( $this->context );
+
+		// Register activation flag logic outside of 'init' since it hooks into
+		// plugin activation.
+		$activation_flag = new Core\Util\Activation_Flag( $this->context, $options );
+		$activation_flag->register();
 
 		// Initiate the plugin on 'init' for relying on current user being set.
 		add_action(
 			'init',
-			function() use ( $options, $transients, $assets ) {
+			function() use ( $options, $activation_flag ) {
+				$transients   = new Core\Storage\Transients( $this->context );
 				$user_options = new Core\Storage\User_Options( $this->context, get_current_user_id() );
 
 				$authentication = new Core\Authentication\Authentication( $this->context, $options, $user_options, $transients );
 				$authentication->register();
 
+				$permissions = new Core\Permissions\Permissions( $this->context, $authentication );
+				$permissions->register();
+
 				$modules = new Core\Modules\Modules( $this->context, $options, $user_options, $authentication );
 				$modules->register();
 
-				( new Core\Permissions\Permissions( $this->context, $authentication ) )->register();
-				( new Core\Util\Tracking( $this->context, $authentication ) )->register();
+				$assets = new Core\Assets\Assets( $this->context );
+				$assets->register();
+
+				$screens = new Core\Admin\Screens( $this->context, $assets, $modules );
+				$screens->register();
+
+				( new Core\Util\Reset( $this->context ) )->register();
+				( new Core\Util\Developer_Plugin_Installer( $this->context ) )->register();
+				( new Core\Util\Tracking( $this->context, $user_options, $screens ) )->register();
 				( new Core\REST_API\REST_Routes( $this->context, $authentication, $modules ) )->register();
-				( new Core\Admin_Bar\Admin_Bar( $this->context, $assets ) )->register();
-				( new Core\Admin\Screens( $this->context, $assets ) )->register();
+				( new Core\Admin_Bar\Admin_Bar( $this->context, $assets, $modules ) )->register();
 				( new Core\Admin\Notices() )->register();
-				( new Core\Admin\Dashboard( $this->context, $assets ) )->register();
+				( new Core\Admin\Dashboard( $this->context, $assets, $modules ) )->register();
+				( new Core\Notifications\Notifications( $this->context, $options, $authentication ) )->register();
+				( new Core\Util\Debug_Data( $this->context, $options, $user_options, $authentication, $modules ) )->register();
+				( new Core\Util\Health_Checks( $authentication ) )->register();
+				( new Core\Admin\Standalone( $this->context ) )->register();
+				( new Core\Util\Activation_Notice( $this->context, $activation_flag, $assets ) )->register();
+				( new Core\Util\Migration_1_3_0( $this->context, $options, $user_options ) )->register();
+				( new Core\Util\Migration_1_8_1( $this->context, $options, $user_options, $authentication ) )->register();
 
 				// If a login is happening (runs after 'init'), update current user in dependency chain.
 				add_action(
@@ -138,18 +195,18 @@ final class Plugin {
 			-999
 		);
 
-		( new Core\Util\Activation( $this->context, $options, $assets ) )->register();
-		( new Core\Util\Beta_Migration( $this->context ) )->register();
-		( new Core\Util\Migration_1_0_0( $this->context ) )->register();
+		// Register _gl parameter to be removed from the URL.
+		add_filter(
+			'removable_query_args',
+			function ( $args ) {
+				$args[] = '_gl';
+				return $args;
+			}
+		);
 
-		if ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) {
-			add_filter(
-				'debug_bar_panels',
-				function( $panels ) {
-					$panels[] = new Core\Util\Debug_Bar();
-					return $panels;
-				}
-			);
+		// WP CLI Commands.
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			( new \Google\Site_Kit\Core\CLI\CLI_Commands( $this->context ) )->register();
 		}
 	}
 

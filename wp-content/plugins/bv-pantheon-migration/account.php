@@ -42,6 +42,10 @@ if (!class_exists('PTNAccount')) :
 			return $str;
 		}
 
+		public static function sanitizeKey($key) {
+			return preg_replace('/[^a-zA-Z0-9_\-]/', '', $key);
+		}
+
 		public static function apiPublicAccount($settings) {
 			$pubkey = $settings->getOption(self::$api_public_key);
 			return self::find($settings, $pubkey);
@@ -98,6 +102,7 @@ if (!class_exists('PTNAccount')) :
 		}
 
 		public function newAuthParams($version) {
+			$bvinfo = new PTNInfo($this->settings);
 			$args = array();
 			$time = time();
 			$sig = sha1($this->public.$this->secret.$time.$version);
@@ -106,6 +111,7 @@ if (!class_exists('PTNAccount')) :
 			$args['bvPublic'] = $this->public;
 			$args['bvVersion'] = $version;
 			$args['sha1'] = '1';
+			$args['plugname'] = $bvinfo->plugname;
 			return $args;
 		}
 
@@ -118,7 +124,7 @@ if (!class_exists('PTNAccount')) :
 			self::update($settings, $accounts);
 		}
 
-		public function respInfo() {
+		public function info() {
 			return array(
 				"public" => substr($this->public, 0, 6),
 				"sigmatch" => substr($this->sig_match, 0, 6)

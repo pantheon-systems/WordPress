@@ -2,6 +2,9 @@
 
 namespace Google\Site_Kit_Dependencies\React\Promise;
 
+/**
+ * @deprecated 2.8.0 External usage of RejectedPromise is deprecated, use `reject()` instead.
+ */
 class RejectedPromise implements \Google\Site_Kit_Dependencies\React\Promise\ExtendedPromiseInterface, \Google\Site_Kit_Dependencies\React\Promise\CancellablePromiseInterface
 {
     private $reason;

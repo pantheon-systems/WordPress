@@ -91,10 +91,3 @@ abstract class LoggerInterfaceTest extends \Google\Site_Kit_Dependencies\PHPUnit
         $this->assertEquals($expected, $this->getLogs());
     }
 }
-class DummyTest
-{
-    public function __toString()
-    {
-        return 'DummyTest';
-    }
-}

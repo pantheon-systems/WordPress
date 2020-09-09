@@ -105,7 +105,7 @@ class Session_Handler implements \SessionHandlerInterface {
 		// for three weeks before deleting them, you need to set gc_maxlifetime
 		// to '1814400'. At that value, only after a user doesn't log in after
 		// three weeks (1814400 seconds) will his/her session be removed.
-		$wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->pantheon_sessions WHERE `datetime` <= %s ", date( 'Y-m-d H:i:s', time() - $maxlifetime ) ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->pantheon_sessions WHERE `datetime` <= %s ", gmdate( 'Y-m-d H:i:s', time() - $maxlifetime ) ) );
 		return true;
 	}
 

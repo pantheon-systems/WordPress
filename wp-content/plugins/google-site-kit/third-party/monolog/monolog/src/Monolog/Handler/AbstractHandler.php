@@ -29,8 +29,8 @@ abstract class AbstractHandler implements \Google\Site_Kit_Dependencies\Monolog\
     protected $formatter;
     protected $processors = array();
     /**
-     * @param int  $level  The minimum logging level at which this handler will be triggered
-     * @param bool $bubble Whether the messages that are handled can bubble up the stack or not
+     * @param int|string $level  The minimum logging level at which this handler will be triggered
+     * @param bool       $bubble Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct($level = \Google\Site_Kit_Dependencies\Monolog\Logger::DEBUG, $bubble = \true)
     {

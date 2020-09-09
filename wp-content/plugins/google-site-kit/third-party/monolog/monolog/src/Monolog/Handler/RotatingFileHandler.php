@@ -11,6 +11,7 @@
 namespace Google\Site_Kit_Dependencies\Monolog\Handler;
 
 use Google\Site_Kit_Dependencies\Monolog\Logger;
+use Google\Site_Kit_Dependencies\Monolog\Utils;
 /**
  * Stores logs to files that are rotated every day and a limited number of files are kept.
  *
@@ -41,7 +42,7 @@ class RotatingFileHandler extends \Google\Site_Kit_Dependencies\Monolog\Handler\
      */
     public function __construct($filename, $maxFiles = 0, $level = \Google\Site_Kit_Dependencies\Monolog\Logger::DEBUG, $bubble = \true, $filePermission = null, $useLocking = \false)
     {
-        $this->filename = $filename;
+        $this->filename = \Google\Site_Kit_Dependencies\Monolog\Utils::canonicalizePath($filename);
         $this->maxFiles = (int) $maxFiles;
         $this->nextRotation = new \DateTime('tomorrow');
         $this->filenameFormat = '{filename}-{date}';

@@ -68,12 +68,11 @@ class Google_Service_PeopleService_Resource_People extends \Google\Site_Kit_Depe
      * separating them with commas. Defaults to empty if not set, which will skip
      * the post mutate get. Valid values are:
      *
-     * * addresses * ageRanges * biographies * birthdays * braggingRights *
-     * coverPhotos * emailAddresses * events * genders * imClients * interests *
-     * locales * memberships * metadata * names * nicknames * occupations *
-     * organizations * phoneNumbers * photos * relations * relationshipInterests *
-     * relationshipStatuses * residences * sipAddresses * skills * taglines * urls *
-     * userDefined
+     * * addresses * ageRanges * biographies * birthdays * coverPhotos *
+     * emailAddresses * events * genders * imClients * interests * locales *
+     * memberships * metadata * names * nicknames * occupations * organizations *
+     * phoneNumbers * photos * relations * residences * sipAddresses * skills * urls
+     * * userDefined
      * @return Google_Service_PeopleService_DeleteContactPhotoResponse
      */
     public function deleteContactPhoto($resourceName, $optParams = array())
@@ -93,7 +92,7 @@ class Google_Service_PeopleService_Resource_People extends \Google\Site_Kit_Depe
      * provide information about.
      *
      * - To get information about the authenticated user, specify `people/me`. - To
-     * get information about a google account, specify  `people/`account_id. - To
+     * get information about a google account, specify  `people/{account_id}`. - To
      * get information about a contact, specify the resource name that   identifies
      * the contact as returned by
      * [`people.connections.list`](/people/api/rest/v1/people.connections/list).
@@ -103,12 +102,11 @@ class Google_Service_PeopleService_Resource_People extends \Google\Site_Kit_Depe
      * fields on the person are returned. Multiple fields can be specified by
      * separating them with commas. Valid values are:
      *
-     * * addresses * ageRanges * biographies * birthdays * braggingRights *
-     * coverPhotos * emailAddresses * events * genders * imClients * interests *
-     * locales * memberships * metadata * names * nicknames * occupations *
-     * organizations * phoneNumbers * photos * relations * relationshipInterests *
-     * relationshipStatuses * residences * sipAddresses * skills * taglines * urls *
-     * userDefined
+     * * addresses * ageRanges * biographies * birthdays * coverPhotos *
+     * emailAddresses * events * genders * imClients * interests * locales *
+     * memberships * metadata * names * nicknames * occupations * organizations *
+     * phoneNumbers * photos * relations * residences * sipAddresses * skills * urls
+     * * userDefined
      * @opt_param string requestMask.includeField Required. Comma-separated list of
      * person fields to be included in the response. Each path should start with
      * `person.`: for example, `person.names` or `person.photos`.
@@ -133,25 +131,24 @@ class Google_Service_PeopleService_Resource_People extends \Google\Site_Kit_Depe
      * fields on each person are returned. Multiple fields can be specified by
      * separating them with commas. Valid values are:
      *
-     * * addresses * ageRanges * biographies * birthdays * braggingRights *
-     * coverPhotos * emailAddresses * events * genders * imClients * interests *
-     * locales * memberships * metadata * names * nicknames * occupations *
-     * organizations * phoneNumbers * photos * relations * relationshipInterests *
-     * relationshipStatuses * residences * sipAddresses * skills * taglines * urls *
-     * userDefined
-     * @opt_param string requestMask.includeField Required. Comma-separated list of
-     * person fields to be included in the response. Each path should start with
-     * `person.`: for example, `person.names` or `person.photos`.
+     * * addresses * ageRanges * biographies * birthdays * coverPhotos *
+     * emailAddresses * events * genders * imClients * interests * locales *
+     * memberships * metadata * names * nicknames * occupations * organizations *
+     * phoneNumbers * photos * relations * residences * sipAddresses * skills * urls
+     * * userDefined
      * @opt_param string resourceNames Required. The resource names of the people to
      * provide information about.
      *
      * - To get information about the authenticated user, specify `people/me`. - To
-     * get information about a google account, specify   `people/`account_id. - To
+     * get information about a google account, specify   `people/{account_id}`. - To
      * get information about a contact, specify the resource name that   identifies
      * the contact as returned by
      * [`people.connections.list`](/people/api/rest/v1/people.connections/list).
      *
      * You can include up to 50 resource names in one request.
+     * @opt_param string requestMask.includeField Required. Comma-separated list of
+     * person fields to be included in the response. Each path should start with
+     * `person.`: for example, `person.names` or `person.photos`.
      * @return Google_Service_PeopleService_GetPeopleResponse
      */
     public function getBatchGet($optParams = array())
@@ -177,7 +174,7 @@ class Google_Service_PeopleService_Resource_People extends \Google\Site_Kit_Depe
      *
      * @param string $resourceName The resource name for the person, assigned by the
      * server. An ASCII string with a max length of 27 characters, in the form of
-     * `people/`person_id.
+     * `people/{person_id}`.
      * @param Google_Service_PeopleService_Person $postBody
      * @param array $optParams Optional parameters.
      *
