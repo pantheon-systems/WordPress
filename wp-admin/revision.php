@@ -10,7 +10,7 @@
  */
 
 /** WordPress Administration Bootstrap */
-require_once( dirname( __FILE__ ) . '/admin.php' );
+require_once __DIR__ . '/admin.php';
 
 require ABSPATH . 'wp-admin/includes/revision.php';
 
@@ -47,20 +47,31 @@ switch ( $action ) {
 			break;
 		}
 
-		// Restore if revisions are enabled or this is an autosave.
+		// Don't restore if revisions are disabled and this is not an autosave.
 		if ( ! wp_revisions_enabled( $post ) && ! wp_is_post_autosave( $revision ) ) {
 			$redirect = 'edit.php?post_type=' . $post->post_type;
 			break;
 		}
 
-		// Don't allow revision restore when post is locked
+		// Don't restore if the post is locked.
 		if ( wp_check_post_lock( $post->ID ) ) {
 			break;
 		}
 
 		check_admin_referer( "restore-post_{$revision->ID}" );
 
+		/*
+		 * Ensure the global $post remains the same after revision is restored.
+		 * Because wp_insert_post() and wp_transition_post_status() are called
+		 * during the process, plugins can unexpectedly modify $post.
+		 */
+		$backup_global_post = clone $post;
+
 		wp_restore_post_revision( $revision->ID );
+
+		// Restore the global $post as it was before.
+		$post = $backup_global_post;
+
 		$redirect = add_query_arg(
 			array(
 				'message'  => 5,
@@ -86,7 +97,7 @@ switch ( $action ) {
 			break;
 		}
 
-		// Revisions disabled and we're not looking at an autosave
+		// Bail if revisions are disabled and this is not an autosave.
 		if ( ! wp_revisions_enabled( $post ) && ! wp_is_post_autosave( $revision ) ) {
 			$redirect = 'edit.php?post_type=' . $post->post_type;
 			break;
@@ -147,7 +158,7 @@ $revisions_sidebar .= '<p>' . __( '<a href="https://wordpress.org/support/">Supp
 
 get_current_screen()->set_help_sidebar( $revisions_sidebar );
 
-require_once( ABSPATH . 'wp-admin/admin-header.php' );
+require_once ABSPATH . 'wp-admin/admin-header.php';
 
 ?>
 
@@ -158,4 +169,4 @@ require_once( ABSPATH . 'wp-admin/admin-header.php' );
 <?php
 wp_print_revision_templates();
 
-require_once( ABSPATH . 'wp-admin/admin-footer.php' );
+require_once ABSPATH . 'wp-admin/admin-footer.php';

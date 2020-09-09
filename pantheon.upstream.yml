@@ -7,3 +7,15 @@ php_version: 7.3
 
 # See https://pantheon.io/docs/pantheon-yml/#enforce-https--hsts for valid values.
 enforce_https: transitional
+
+# See https://pantheon.io/docs/pantheon-yml#protected-web-paths for usage.
+protected_web_paths:
+  - /private/
+  - /wp-content/uploads/private/
+  - /xmlrpc.php
+
+# By default, any 'protected_web_paths' added to the pantheon.yml file
+# are combined with the paths from the pantheon.upstream.yml file. If
+# 'protected_web_paths_override' is set to true, then the upstream paths
+# are disabled.
+protected_web_paths_override: false

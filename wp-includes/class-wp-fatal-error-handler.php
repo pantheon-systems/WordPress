@@ -3,7 +3,7 @@
  * Error Protection API: WP_Fatal_Error_Handler class
  *
  * @package WordPress
- * @since   5.2.0
+ * @since 5.2.0
  */
 
 /**
@@ -27,6 +27,11 @@ class WP_Fatal_Error_Handler {
 	 */
 	public function handle() {
 		if ( defined( 'WP_SANDBOX_SCRAPING' ) && WP_SANDBOX_SCRAPING ) {
+			return;
+		}
+
+		// Do not trigger the fatal error handler while updates are being installed.
+		if ( wp_is_maintenance_mode() ) {
 			return;
 		}
 
@@ -187,7 +192,7 @@ class WP_Fatal_Error_Handler {
 			'<p>%s</p><p><a href="%s">%s</a></p>',
 			$message,
 			/* translators: Documentation explaining debugging in WordPress. */
-			esc_url( __( 'https://wordpress.org/support/article/debugging-in-wordpress/' ) ),
+			__( 'https://wordpress.org/support/article/debugging-in-wordpress/' ),
 			__( 'Learn more about debugging in WordPress.' )
 		);
 

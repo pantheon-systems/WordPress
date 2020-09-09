@@ -33,7 +33,7 @@ window.wp = window.wp || {};
 	 */
 	Uploader = function( options ) {
 		var self = this,
-			isIE, // not used, back-compat
+			isIE, // Not used, back-compat.
 			elements = {
 				container: 'container',
 				browser:   'browse_button',
@@ -60,10 +60,12 @@ window.wp = window.wp || {};
 		this.plupload = $.extend( true, { multipart_params: {} }, Uploader.defaults );
 		this.container = document.body; // Set default container.
 
-		// Extend the instance with options.
-		//
-		// Use deep extend to allow options.plupload to override individual
-		// default plupload keys.
+		/*
+		 * Extend the instance with options.
+		 *
+		 * Use deep extend to allow options.plupload to override individual
+		 * default plupload keys.
+		 */
 		$.extend( true, this, options );
 
 		// Proxy all methods so this always refers to the current instance.
@@ -113,13 +115,12 @@ window.wp = window.wp || {};
 		 *
 		 * @since 5.3.0
 		 *
-		 * @param  {string}        message  Error message.
-		 * @param  {object}        data     Error data from Plupload.
-		 * @param  {plupload.File} file     File that was uploaded.
+		 * @param {string}        message Error message.
+		 * @param {object}        data    Error data from Plupload.
+		 * @param {plupload.File} file    File that was uploaded.
 		 */
 		tryAgain = function( message, data, file ) {
-			var times;
-			var id;
+			var times, id;
 
 			if ( ! data || ! data.responseHeaders ) {
 				error( pluploadL10n.http_error_image, data, file, 'no-retry' );
@@ -138,9 +139,11 @@ window.wp = window.wp || {};
 			times = tryAgainCount[ file.id ];
 
 			if ( times && times > 4 ) {
-				// The file may have been uploaded and attachment post created,
-				// but post-processing and resizing failed...
-				// Do a cleanup then tell the user to scale down the image and upload it again.
+				/*
+				 * The file may have been uploaded and attachment post created,
+				 * but post-processing and resizing failed...
+				 * Do a cleanup then tell the user to scale down the image and upload it again.
+				 */
 				$.ajax({
 					type: 'post',
 					url: ajaxurl,
@@ -200,14 +203,14 @@ window.wp = window.wp || {};
 		 * Add a new error to the errors collection, so other modules can track
 		 * and display errors. @see wp.Uploader.errors.
 		 *
-		 * @param  {string}        message  Error message.
-		 * @param  {object}        data     Error data from Plupload.
-		 * @param  {plupload.File} file     File that was uploaded.
-		 * @param  {string}        retry    Whether to try again to create image sub-sizes. Passing 'no-retry' will prevent it.
+		 * @param {string}        message Error message.
+		 * @param {object}        data    Error data from Plupload.
+		 * @param {plupload.File} file    File that was uploaded.
+		 * @param {string}        retry   Whether to try again to create image sub-sizes. Passing 'no-retry' will prevent it.
 		 */
 		error = function( message, data, file, retry ) {
-			var isImage = file.type && file.type.indexOf( 'image/' ) === 0;
-			var status  = data && data.status;
+			var isImage = file.type && file.type.indexOf( 'image/' ) === 0,
+				status = data && data.status;
 
 			// If the file is an image and the error is HTTP 5xx try to create sub-sizes again.
 			if ( retry !== 'no-retry' && isImage && status >= 500 && status < 600 ) {
@@ -238,7 +241,7 @@ window.wp = window.wp || {};
 		fileUploaded = function( up, file, response ) {
 			var complete;
 
-			// Remove the "uploading" UI elements
+			// Remove the "uploading" UI elements.
 			_.each( ['file','loaded','size','percent'], function( key ) {
 				file.attachment.unset( key );
 			} );
@@ -295,11 +298,13 @@ window.wp = window.wp || {};
 			});
 
 			dropzone.bind('dragleave.wp-uploader, drop.wp-uploader', function() {
-				// Using an instant timer prevents the drag-over class from
-				// being quickly removed and re-added when elements inside the
-				// dropzone are repositioned.
-				//
-				// @see https://core.trac.wordpress.org/ticket/21705
+				/*
+				 * Using an instant timer prevents the drag-over class
+				 * from being quickly removed and re-added when elements
+				 * inside the dropzone are repositioned.
+				 *
+				 * @see https://core.trac.wordpress.org/ticket/21705
+				 */
 				timer = setTimeout( function() {
 					active = false;
 					dropzone.trigger('dropzone:leave').removeClass('drag-over');
@@ -321,9 +326,15 @@ window.wp = window.wp || {};
 			this.browser.on( 'mouseenter', this.refresh );
 		} else {
 			this.uploader.disableBrowse( true );
-			// If HTML5 mode, hide the auto-created file container.
-			$('#' + this.uploader.id + '_html5_container').hide();
 		}
+
+		$( self ).on( 'uploader:ready', function() {
+			$( '.moxie-shim-html5 input[type="file"]' )
+				.attr( {
+					tabIndex:      '-1',
+					'aria-hidden': 'true'
+				} );
+		} );
 
 		/**
 		 * After files were filtered and added to the queue, create a model for each.
@@ -338,6 +349,15 @@ window.wp = window.wp || {};
 				// Ignore failed uploads.
 				if ( plupload.FAILED === file.status ) {
 					return;
+				}
+
+				if ( file.type === 'image/heic' && up.settings.heic_upload_error ) {
+					// Show error but do not block uploading.
+					Uploader.errors.unshift({
+						message: pluploadL10n.unsupported_image,
+						data:    {},
+						file:    file
+					});
 				}
 
 				// Generate attributes for a new `Attachment` model.
@@ -513,9 +533,11 @@ window.wp = window.wp || {};
 					node = node.parentNode;
 				}
 
-				// If the browser node is not attached to the DOM, use a
-				// temporary container to house it, as the browser button
-				// shims require the button to exist in the DOM at all times.
+				/*
+				 * If the browser node is not attached to the DOM,
+				 * use a temporary container to house it, as the browser button shims
+				 * require the button to exist in the DOM at all times.
+				 */
 				if ( ! attached ) {
 					id = 'wp-uploader-browser-' + this.uploader.id;
 

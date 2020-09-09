@@ -142,7 +142,7 @@ input[type="radio"]:checked + label:before {
 
 .wp-core-ui input[type="reset"]:hover,
 .wp-core-ui input[type="reset"]:active {
-	color: #00a0d2;
+	color: #006799;
 }
 
 td > input[type="checkbox"],
@@ -324,7 +324,7 @@ input[type="radio"].disabled:checked:before {
 	background-size: 16px 16px;
 	cursor: pointer;
 	vertical-align: middle;
-}e
+}
 
 .wp-core-ui select:hover {
 	color: #007cba;
@@ -396,6 +396,10 @@ input[type="radio"].disabled:checked:before {
 	max-width: 100%;
 }
 
+.meta-box-sortables input {
+	vertical-align: middle;
+}
+
 .misc-pub-post-status select {
 	margin-top: 0;
 }
@@ -462,8 +466,13 @@ input.small-text {
 	padding: 0 6px;
 }
 
+label input.small-text {
+	margin-top: -4px;
+}
+
 input[type="number"].small-text {
 	width: 65px;
+	padding-right: 0;
 }
 
 input.tiny-text {
@@ -472,6 +481,7 @@ input.tiny-text {
 
 input[type="number"].tiny-text {
 	width: 45px;
+	padding-right: 0;
 }
 
 #doaction,
@@ -742,8 +752,12 @@ ul#add-to-blog-users {
 }
 
 .form-table td fieldset label {
-	margin: 0.25em 0 0.5em !important;
+	margin: 0.35em 0 0.5em !important;
 	display: inline-block;
+}
+
+.form-table td fieldset p label { 
+	margin-top: 0 !important;
 }
 
 .form-table td fieldset label,
@@ -1032,7 +1046,7 @@ table.form-table td .updated p {
 
 #search-users,
 #search-sites {
-	max-width: 100%;
+	max-width: 60%;
 }
 
 /*------------------------------------------------------------------------------
@@ -1200,6 +1214,10 @@ table.form-table td .updated p {
 	color: #72777c;
 }
 
+.privacy_requests .row-actions.processing {
+	position: static;
+}
+
 .privacy_requests tbody .has-request-results th {
 	box-shadow: none;
 }
@@ -1218,8 +1236,8 @@ table.form-table td .updated p {
 }
 
 .privacy_requests .next_steps .button {
-	word-break: break-all;
-	white-space: unset;
+	word-wrap: break-word;
+	white-space: normal;
 }
 
 .privacy_requests .status-request-confirmed th,
@@ -1490,16 +1508,13 @@ table.form-table td .updated p {
 	}
 
 	.form-table th {
-		padding-top: 10px;
-		padding-bottom: 0;
+		padding: 10px 0 0 0;
 		border-bottom: 0;
 	}
 
 	.form-table td {
 		margin-bottom: 0;
-		padding-bottom: 6px;
-		padding-top: 4px;
-		padding-left: 0;
+		padding: 4px 0 6px 0;
 	}
 
 	.form-table.permalink-structure td code {
@@ -1627,6 +1642,13 @@ table.form-table td .updated p {
 	.wp-list-table.privacy_requests.widefat thead td input {
 		margin-left: 5px;
 	}
+
+	.wp-privacy-request-form-field input[type="text"] {
+		width: 100%;
+		margin-bottom: 10px;
+		vertical-align: middle;
+	}
+
 	.regular-text {
 		max-width: 100%;
 	}

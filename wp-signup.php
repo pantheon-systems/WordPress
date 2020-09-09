@@ -1,15 +1,15 @@
 <?php
 
 /** Sets up the WordPress Environment. */
-require( dirname( __FILE__ ) . '/wp-load.php' );
+require __DIR__ . '/wp-load.php';
 
 add_action( 'wp_head', 'wp_no_robots' );
 
-require( dirname( __FILE__ ) . '/wp-blog-header.php' );
+require __DIR__ . '/wp-blog-header.php';
 
 nocache_headers();
 
-if ( is_array( get_site_option( 'illegal_names' ) ) && isset( $_GET['new'] ) && in_array( $_GET['new'], get_site_option( 'illegal_names' ) ) ) {
+if ( is_array( get_site_option( 'illegal_names' ) ) && isset( $_GET['new'] ) && in_array( $_GET['new'], get_site_option( 'illegal_names' ), true ) ) {
 	wp_redirect( network_home_url() );
 	die();
 }
@@ -39,7 +39,7 @@ if ( ! is_main_site() ) {
 	die();
 }
 
-// Fix for page title
+// Fix for page title.
 $wp_query->is_404 = false;
 
 /**
@@ -86,7 +86,7 @@ get_header( 'wp-signup' );
 do_action( 'before_signup_form' );
 ?>
 <div id="signup-content" class="widecolumn">
-<div class="mu_register wp-signup-container">
+<div class="mu_register wp-signup-container" role="main">
 <?php
 /**
  * Generates and displays the Signup and Create Site forms
@@ -139,7 +139,7 @@ function show_blog_form( $blogname = '', $blog_title = '', $errors = '' ) {
 		);
 	}
 
-	// Blog Title
+	// Site Title.
 	?>
 	<label for="blog_title"><?php _e( 'Site Title:' ); ?></label>
 	<?php
@@ -169,7 +169,7 @@ function show_blog_form( $blogname = '', $blog_title = '', $errors = '' ) {
 			}
 
 			// Use US English if the default isn't available.
-			if ( ! in_array( $lang, $languages ) ) {
+			if ( ! in_array( $lang, $languages, true ) ) {
 				$lang = '';
 			}
 
@@ -189,7 +189,7 @@ function show_blog_form( $blogname = '', $blog_title = '', $errors = '' ) {
 
 		$blog_public_on_checked  = '';
 		$blog_public_off_checked = '';
-	if ( isset( $_POST['blog_public'] ) && '0' == $_POST['blog_public'] ) {
+	if ( isset( $_POST['blog_public'] ) && '0' === $_POST['blog_public'] ) {
 		$blog_public_off_checked = 'checked="checked"';
 	} else {
 		$blog_public_on_checked = 'checked="checked"';
@@ -198,7 +198,7 @@ function show_blog_form( $blogname = '', $blog_title = '', $errors = '' ) {
 
 	<div id="privacy">
 		<p class="privacy-intro">
-			<label for="blog_public_on"><?php _e( 'Privacy:' ); ?></label>
+			<?php _e( 'Privacy:' ); ?>
 			<?php _e( 'Allow search engines to index this site.' ); ?>
 			<br style="clear:both" />
 			<label class="checkbox" for="blog_public_on">
@@ -253,7 +253,7 @@ function show_user_form( $user_name = '', $user_email = '', $errors = '' ) {
 		$errors = new WP_Error();
 	}
 
-	// User name
+	// Username.
 	echo '<label for="user_name">' . __( 'Username:' ) . '</label>';
 	$errmsg = $errors->get_error_message( 'user_name' );
 	if ( $errmsg ) {
@@ -438,7 +438,7 @@ function validate_another_blog_signup() {
 
 		$languages = signup_get_available_languages();
 
-		if ( in_array( $_POST['WPLANG'], $languages ) ) {
+		if ( in_array( $_POST['WPLANG'], $languages, true ) ) {
 			$language = wp_unslash( sanitize_text_field( $_POST['WPLANG'] ) );
 
 			if ( $language ) {
@@ -457,7 +457,7 @@ function validate_another_blog_signup() {
 	 *
 	 * @param array $blog_meta_defaults An array of default blog meta variables.
 	 */
-	$meta_defaults = apply_filters( 'signup_create_blog_meta', $blog_meta_defaults );
+	$meta_defaults = apply_filters_deprecated( 'signup_create_blog_meta', array( $blog_meta_defaults ), '3.0.0', 'add_signup_meta' );
 
 	/**
 	 * Filters the new default site meta variables.
@@ -641,7 +641,7 @@ function validate_user_signup() {
 		return false;
 	}
 
-	if ( 'blog' == $_POST['signup_for'] ) {
+	if ( 'blog' === $_POST['signup_for'] ) {
 		signup_blog( $user_name, $user_email );
 		return false;
 	}
@@ -789,7 +789,7 @@ function validate_blog_signup() {
 
 		$languages = signup_get_available_languages();
 
-		if ( in_array( $_POST['WPLANG'], $languages ) ) {
+		if ( in_array( $_POST['WPLANG'], $languages, true ) ) {
 			$language = wp_unslash( sanitize_text_field( $_POST['WPLANG'] ) );
 
 			if ( $language ) {
@@ -811,12 +811,12 @@ function validate_blog_signup() {
  *
  * @since MU (3.0.0)
  *
- * @param string $domain The domain URL
- * @param string $path The site root path
- * @param string $blog_title The new site title
- * @param string $user_name The user's username
- * @param string $user_email The user's email address
- * @param array $meta Any additional meta from the {@see 'add_signup_meta'} filter in validate_blog_signup()
+ * @param string $domain     The domain URL.
+ * @param string $path       The site root path.
+ * @param string $blog_title The new site title.
+ * @param string $user_name  The user's username.
+ * @param string $user_email The user's email address.
+ * @param array  $meta       Any additional meta from the {@see 'add_signup_meta'} filter in validate_blog_signup().
  */
 function confirm_blog_signup( $domain, $path, $blog_title, $user_name = '', $user_email = '', $meta = array() ) {
 	?>
@@ -887,7 +887,7 @@ function signup_get_available_languages() {
 	return array_intersect_assoc( $languages, get_available_languages() );
 }
 
-// Main
+// Main.
 $active_signup = get_site_option( 'registration', 'none' );
 
 /**

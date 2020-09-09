@@ -1,3 +1,4 @@
+/*! This file is auto-generated */
 html,
 body {
 	height: 100%;
@@ -27,7 +28,7 @@ a {
 
 a:hover,
 a:active {
-	color: #00a0d2;
+	color: #006799;
 }
 
 a:focus {
@@ -139,13 +140,43 @@ p {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
+.login form.shake {
+	animation: shake 0.2s cubic-bezier(.19,.49,.38,.79) both;
+	animation-iteration-count: 3;
+	transform: translateX(0);
+}
+
+@keyframes shake {
+	25% {
+		transform: translateX(20px);
+	}
+	75% {
+		transform: translateX(-20px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.login form.shake {
+		animation: none;
+		transform: none;
+	}
+}
+
 .login-action-confirm_admin_email #login {
 	width: 60vw;
+	max-width: 650px;
 	margin-top: -2vh;
 }
 
 @media screen and (max-width: 782px) {
 	.login-action-confirm_admin_email #login {
+		box-sizing: border-box;
+		margin-top: 0;
+		padding-right: 4vw;
+		padding-left: 4vw;
 		width: 100vw;
 	}
 }
@@ -266,7 +297,7 @@ p {
 .login #nav a:hover,
 .login #backtoblog a:hover,
 .login h1 a:hover {
-	color: #00a0d2;
+	color: #006799;
 }
 
 .login #nav a:focus,

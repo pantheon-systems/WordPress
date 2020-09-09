@@ -7,7 +7,7 @@
  */
 
 /** WordPress Administration Bootstrap */
-require_once( dirname( __FILE__ ) . '/admin.php' );
+require_once __DIR__ . '/admin.php';
 if ( ! current_user_can( 'edit_posts' ) ) {
 	wp_die(
 		'<h1>' . __( 'You need a higher level of permission.' ) . '</h1>' .
@@ -24,14 +24,14 @@ $doaction = $wp_list_table->current_action();
 if ( $doaction ) {
 	check_admin_referer( 'bulk-comments' );
 
-	if ( 'delete_all' == $doaction && ! empty( $_REQUEST['pagegen_timestamp'] ) ) {
+	if ( 'delete_all' === $doaction && ! empty( $_REQUEST['pagegen_timestamp'] ) ) {
 		$comment_status = wp_unslash( $_REQUEST['comment_status'] );
 		$delete_time    = wp_unslash( $_REQUEST['pagegen_timestamp'] );
 		$comment_ids    = $wpdb->get_col( $wpdb->prepare( "SELECT comment_ID FROM $wpdb->comments WHERE comment_approved = %s AND %s > comment_date_gmt", $comment_status, $delete_time ) );
 		$doaction       = 'delete';
 	} elseif ( isset( $_REQUEST['delete_comments'] ) ) {
 		$comment_ids = $_REQUEST['delete_comments'];
-		$doaction    = ( $_REQUEST['action'] != -1 ) ? $_REQUEST['action'] : $_REQUEST['action2'];
+		$doaction    = ( '-1' !== $_REQUEST['action'] ) ? $_REQUEST['action'] : $_REQUEST['action2'];
 	} elseif ( isset( $_REQUEST['ids'] ) ) {
 		$comment_ids = array_map( 'absint', explode( ',', $_REQUEST['ids'] ) );
 	} elseif ( wp_get_referer() ) {
@@ -52,7 +52,7 @@ if ( $doaction ) {
 
 	wp_defer_comment_counting( true );
 
-	foreach ( $comment_ids as $comment_id ) { // Check the permissions on each
+	foreach ( $comment_ids as $comment_id ) { // Check the permissions on each.
 		if ( ! current_user_can( 'edit_comment', $comment_id ) ) {
 			continue;
 		}
@@ -92,20 +92,7 @@ if ( $doaction ) {
 	if ( ! in_array( $doaction, array( 'approve', 'unapprove', 'spam', 'unspam', 'trash', 'delete' ), true ) ) {
 		$screen = get_current_screen()->id;
 
-		/**
-		 * Fires when a custom bulk action should be handled.
-		 *
-		 * The redirect link should be modified with success or failure feedback
-		 * from the action to be used to display feedback to the user.
-		 *
-		 * The dynamic portion of the hook name, `$screen`, refers to the current screen ID.
-		 *
-		 * @since 4.7.0
-		 *
-		 * @param string $redirect_url The redirect URL.
-		 * @param string $doaction     The action being taken.
-		 * @param array  $items        The items to take the action on.
-		 */
+		/** This action is documented in wp-admin/edit.php */
 		$redirect_to = apply_filters( "handle_bulk_actions-{$screen}", $redirect_to, $doaction, $comment_ids ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 	}
 
@@ -185,7 +172,7 @@ get_current_screen()->add_help_tab(
 		'id'      => 'overview',
 		'title'   => __( 'Overview' ),
 		'content' =>
-				'<p>' . __( 'You can manage comments made on your site similar to the way you manage posts and other content. This screen is customizable in the same ways as other management screens, and you can act on comments using the on-hover action links or the Bulk Actions.' ) . '</p>',
+				'<p>' . __( 'You can manage comments made on your site similar to the way you manage posts and other content. This screen is customizable in the same ways as other management screens, and you can act on comments using the on-hover action links or the bulk actions.' ) . '</p>',
 	)
 );
 get_current_screen()->add_help_tab(
@@ -196,8 +183,8 @@ get_current_screen()->add_help_tab(
 					'<p>' . __( 'A red bar on the left means the comment is waiting for you to moderate it.' ) . '</p>' .
 					'<p>' . __( 'In the <strong>Author</strong> column, in addition to the author&#8217;s name, email address, and blog URL, the commenter&#8217;s IP address is shown. Clicking on this link will show you all the comments made from this IP address.' ) . '</p>' .
 					'<p>' . __( 'In the <strong>Comment</strong> column, hovering over any comment gives you options to approve, reply (and approve), quick edit, edit, spam mark, or trash that comment.' ) . '</p>' .
-					'<p>' . __( 'In the <strong>In Response To</strong> column, there are three elements. The text is the name of the post that inspired the comment, and links to the post editor for that entry. The View Post link leads to that post on your live site. The small bubble with the number in it shows the number of approved comments that post has received. If there are pending comments, a red notification circle with the number of pending comments is displayed. Clicking the notification circle will filter the comments screen to show only pending comments on that post.' ) . '</p>' .
-					'<p>' . __( 'In the <strong>Submitted On</strong> column, the date and time the comment was left on your site appears. Clicking on the date/time link will take you to that comment on your live site.' ) . '</p>' .
+					'<p>' . __( 'In the <strong>In response to</strong> column, there are three elements. The text is the name of the post that inspired the comment, and links to the post editor for that entry. The View Post link leads to that post on your live site. The small bubble with the number in it shows the number of approved comments that post has received. If there are pending comments, a red notification circle with the number of pending comments is displayed. Clicking the notification circle will filter the comments screen to show only pending comments on that post.' ) . '</p>' .
+					'<p>' . __( 'In the <strong>Submitted on</strong> column, the date and time the comment was left on your site appears. Clicking on the date/time link will take you to that comment on your live site.' ) . '</p>' .
 					'<p>' . __( 'Many people take advantage of keyboard shortcuts to moderate their comments more quickly. Use the link to the side to learn more.' ) . '</p>',
 	)
 );
@@ -218,7 +205,7 @@ get_current_screen()->set_screen_reader_content(
 	)
 );
 
-require_once( ABSPATH . 'wp-admin/admin-header.php' );
+require_once ABSPATH . 'wp-admin/admin-header.php';
 ?>
 
 <div class="wrap">
@@ -283,7 +270,7 @@ if ( isset( $_REQUEST['approved'] ) || isset( $_REQUEST['deleted'] ) || isset( $
 	if ( $approved > 0 || $deleted > 0 || $trashed > 0 || $untrashed > 0 || $spammed > 0 || $unspammed > 0 || $same > 0 ) {
 		if ( $approved > 0 ) {
 			/* translators: %s: Number of comments. */
-			$messages[] = sprintf( _n( '%s comment approved', '%s comments approved', $approved ), $approved );
+			$messages[] = sprintf( _n( '%s comment approved.', '%s comments approved.', $approved ), $approved );
 		}
 
 		if ( $spammed > 0 ) {
@@ -294,7 +281,7 @@ if ( isset( $_REQUEST['approved'] ) || isset( $_REQUEST['deleted'] ) || isset( $
 
 		if ( $unspammed > 0 ) {
 			/* translators: %s: Number of comments. */
-			$messages[] = sprintf( _n( '%s comment restored from the spam', '%s comments restored from the spam', $unspammed ), $unspammed );
+			$messages[] = sprintf( _n( '%s comment restored from the spam.', '%s comments restored from the spam.', $unspammed ), $unspammed );
 		}
 
 		if ( $trashed > 0 ) {
@@ -305,12 +292,12 @@ if ( isset( $_REQUEST['approved'] ) || isset( $_REQUEST['deleted'] ) || isset( $
 
 		if ( $untrashed > 0 ) {
 			/* translators: %s: Number of comments. */
-			$messages[] = sprintf( _n( '%s comment restored from the Trash', '%s comments restored from the Trash', $untrashed ), $untrashed );
+			$messages[] = sprintf( _n( '%s comment restored from the Trash.', '%s comments restored from the Trash.', $untrashed ), $untrashed );
 		}
 
 		if ( $deleted > 0 ) {
 			/* translators: %s: Number of comments. */
-			$messages[] = sprintf( _n( '%s comment permanently deleted', '%s comments permanently deleted', $deleted ), $deleted );
+			$messages[] = sprintf( _n( '%s comment permanently deleted.', '%s comments permanently deleted.', $deleted ), $deleted );
 		}
 
 		if ( $same > 0 ) {
@@ -364,4 +351,4 @@ if ( isset( $_REQUEST['approved'] ) || isset( $_REQUEST['deleted'] ) || isset( $
 <?php
 wp_comment_reply( '-1', true, 'detail' );
 wp_comment_trashnotice();
-include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+require_once ABSPATH . 'wp-admin/admin-footer.php'; ?>

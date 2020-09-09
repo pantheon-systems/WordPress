@@ -33,7 +33,7 @@
  * @param string $cap     Capability name.
  * @param int    $user_id User ID.
  * @param mixed  ...$args Optional further parameters, typically starting with an object ID.
- * @return array Actual capabilities for meta capability.
+ * @return string[] Actual capabilities for meta capability.
  */
 function map_meta_cap( $cap, $user_id, ...$args ) {
 	$caps = array();
@@ -53,8 +53,8 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 			break;
 		case 'edit_user':
 		case 'edit_users':
-			// Allow user to edit itself
-			if ( 'edit_user' == $cap && isset( $args[0] ) && $user_id == $args[0] ) {
+			// Allow user to edit themselves.
+			if ( 'edit_user' === $cap && isset( $args[0] ) && $user_id == $args[0] ) {
 				break;
 			}
 
@@ -73,7 +73,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				break;
 			}
 
-			if ( 'revision' == $post->post_type ) {
+			if ( 'revision' === $post->post_type ) {
 				$caps[] = 'do_not_allow';
 				break;
 			}
@@ -94,7 +94,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 			if ( ! $post_type->map_meta_cap ) {
 				$caps[] = $post_type->cap->$cap;
 				// Prior to 3.1 we would re-call map_meta_cap here.
-				if ( 'delete_post' == $cap ) {
+				if ( 'delete_post' === $cap ) {
 					$cap = $post_type->cap->$cap;
 				}
 				break;
@@ -105,7 +105,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				// If the post is published or scheduled...
 				if ( in_array( $post->post_status, array( 'publish', 'future' ), true ) ) {
 					$caps[] = $post_type->cap->delete_published_posts;
-				} elseif ( 'trash' == $post->post_status ) {
+				} elseif ( 'trash' === $post->post_status ) {
 					$status = get_post_meta( $post->ID, '_wp_trash_meta_status', true );
 					if ( in_array( $status, array( 'publish', 'future' ), true ) ) {
 						$caps[] = $post_type->cap->delete_published_posts;
@@ -122,7 +122,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				// The post is published or scheduled, extra cap required.
 				if ( in_array( $post->post_status, array( 'publish', 'future' ), true ) ) {
 					$caps[] = $post_type->cap->delete_published_posts;
-				} elseif ( 'private' == $post->post_status ) {
+				} elseif ( 'private' === $post->post_status ) {
 					$caps[] = $post_type->cap->delete_private_posts;
 				}
 			}
@@ -137,7 +137,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 
 			break;
 		// edit_post breaks down to edit_posts, edit_published_posts, or
-		// edit_others_posts
+		// edit_others_posts.
 		case 'edit_post':
 		case 'edit_page':
 			$post = get_post( $args[0] );
@@ -146,7 +146,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				break;
 			}
 
-			if ( 'revision' == $post->post_type ) {
+			if ( 'revision' === $post->post_type ) {
 				$post = get_post( $post->post_parent );
 				if ( ! $post ) {
 					$caps[] = 'do_not_allow';
@@ -165,7 +165,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 			if ( ! $post_type->map_meta_cap ) {
 				$caps[] = $post_type->cap->$cap;
 				// Prior to 3.1 we would re-call map_meta_cap here.
-				if ( 'edit_post' == $cap ) {
+				if ( 'edit_post' === $cap ) {
 					$cap = $post_type->cap->$cap;
 				}
 				break;
@@ -176,7 +176,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				// If the post is published or scheduled...
 				if ( in_array( $post->post_status, array( 'publish', 'future' ), true ) ) {
 					$caps[] = $post_type->cap->edit_published_posts;
-				} elseif ( 'trash' == $post->post_status ) {
+				} elseif ( 'trash' === $post->post_status ) {
 					$status = get_post_meta( $post->ID, '_wp_trash_meta_status', true );
 					if ( in_array( $status, array( 'publish', 'future' ), true ) ) {
 						$caps[] = $post_type->cap->edit_published_posts;
@@ -193,7 +193,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				// The post is published or scheduled, extra cap required.
 				if ( in_array( $post->post_status, array( 'publish', 'future' ), true ) ) {
 					$caps[] = $post_type->cap->edit_published_posts;
-				} elseif ( 'private' == $post->post_status ) {
+				} elseif ( 'private' === $post->post_status ) {
 					$caps[] = $post_type->cap->edit_private_posts;
 				}
 			}
@@ -215,7 +215,7 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				break;
 			}
 
-			if ( 'revision' == $post->post_type ) {
+			if ( 'revision' === $post->post_type ) {
 				$post = get_post( $post->post_parent );
 				if ( ! $post ) {
 					$caps[] = 'do_not_allow';
@@ -234,13 +234,20 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 			if ( ! $post_type->map_meta_cap ) {
 				$caps[] = $post_type->cap->$cap;
 				// Prior to 3.1 we would re-call map_meta_cap here.
-				if ( 'read_post' == $cap ) {
+				if ( 'read_post' === $cap ) {
 					$cap = $post_type->cap->$cap;
 				}
 				break;
 			}
 
 			$status_obj = get_post_status_object( $post->post_status );
+			if ( ! $status_obj ) {
+				/* translators: 1: Post status, 2: Capability name. */
+				_doing_it_wrong( __FUNCTION__, sprintf( __( 'The post status %1$s is not registered, so it may not be reliable to check the capability "%2$s" against a post with that status.' ), $post->post_status, $cap ), '5.4.0' );
+				$caps[] = 'edit_others_posts';
+				break;
+			}
+
 			if ( $status_obj->public ) {
 				$caps[] = $post_type->cap->read;
 				break;
@@ -283,8 +290,8 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 		case 'edit_user_meta':
 		case 'delete_user_meta':
 		case 'add_user_meta':
-			list( $_, $object_type, $_ ) = explode( '_', $cap );
-			$object_id                   = (int) $args[0];
+			$object_type = explode( '_', $cap )[1];
+			$object_id   = (int) $args[0];
 
 			$object_subtype = get_object_subtype( $object_type, $object_id );
 
@@ -354,8 +361,9 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 					 * The dynamic portion of the hook name, `$meta_key`, refers to the meta key passed to map_meta_cap().
 					 *
 					 * @since 4.6.0 As `auth_post_{$post_type}_meta_{$meta_key}`.
-					 * @since 4.7.0
-					 * @deprecated 4.9.8 Use `auth_{$object_type}_meta_{$meta_key}_for_{$object_subtype}`
+					 * @since 4.7.0 Renamed from `auth_post_{$post_type}_meta_{$meta_key}` to
+					 *              `auth_{$object_type}_{$object_subtype}_meta_{$meta_key}`.
+					 * @deprecated 4.9.8 Use {@see 'auth_{$object_type}_meta_{$meta_key}_for_{$object_subtype}'} instead.
 					 *
 					 * @param bool     $allowed   Whether the user can add the object meta. Default false.
 					 * @param string   $meta_key  The meta key.
@@ -364,7 +372,12 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 					 * @param string   $cap       Capability name.
 					 * @param string[] $caps      Array of the user's capabilities.
 					 */
-					$allowed = apply_filters_deprecated( "auth_{$object_type}_{$object_subtype}_meta_{$meta_key}", array( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ), '4.9.8', "auth_{$object_type}_meta_{$meta_key}_for_{$object_subtype}" );
+					$allowed = apply_filters_deprecated(
+						"auth_{$object_type}_{$object_subtype}_meta_{$meta_key}",
+						array( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ),
+						'4.9.8',
+						"auth_{$object_type}_meta_{$meta_key}_for_{$object_subtype}"
+					);
 				}
 
 				if ( ! $allowed ) {
@@ -526,7 +539,10 @@ function map_meta_cap( $cap, $user_id, ...$args ) {
 				break;
 			}
 
-			if ( 'delete_term' === $cap && ( $term->term_id == get_option( 'default_' . $term->taxonomy ) ) ) {
+			if ( 'delete_term' === $cap
+				&& ( get_option( 'default_' . $term->taxonomy ) == $term->term_id
+					|| get_option( 'default_term_' . $term->taxonomy ) == $term->term_id )
+			) {
 				$caps[] = 'do_not_allow';
 				break;
 			}
@@ -807,9 +823,10 @@ function get_role( $role ) {
  *
  * @since 2.0.0
  *
- * @param string $role Role name.
+ * @param string $role         Role name.
  * @param string $display_name Display name for role.
- * @param array $capabilities List of capabilities, e.g. array( 'edit_posts' => true, 'delete_posts' => false );
+ * @param bool[] $capabilities List of capabilities keyed by the capability name,
+ *                             e.g. array( 'edit_posts' => true, 'delete_posts' => false ).
  * @return WP_Role|null WP_Role object if role is added, null if already exists.
  */
 function add_role( $role, $display_name, $capabilities = array() ) {
@@ -837,7 +854,7 @@ function remove_role( $role ) {
  *
  * @global array $super_admins
  *
- * @return array List of super admin logins
+ * @return string[] List of super admin logins.
  */
 function get_super_admins() {
 	global $super_admins;
@@ -858,7 +875,7 @@ function get_super_admins() {
  * @return bool True if the user is a site admin.
  */
 function is_super_admin( $user_id = false ) {
-	if ( ! $user_id || $user_id == get_current_user_id() ) {
+	if ( ! $user_id || get_current_user_id() == $user_id ) {
 		$user = wp_get_current_user();
 	} else {
 		$user = get_userdata( $user_id );
@@ -870,7 +887,7 @@ function is_super_admin( $user_id = false ) {
 
 	if ( is_multisite() ) {
 		$super_admins = get_super_admins();
-		if ( is_array( $super_admins ) && in_array( $user->user_login, $super_admins ) ) {
+		if ( is_array( $super_admins ) && in_array( $user->user_login, $super_admins, true ) ) {
 			return true;
 		}
 	} else {
@@ -908,11 +925,11 @@ function grant_super_admin( $user_id ) {
 	 */
 	do_action( 'grant_super_admin', $user_id );
 
-	// Directly fetch site_admins instead of using get_super_admins()
+	// Directly fetch site_admins instead of using get_super_admins().
 	$super_admins = get_site_option( 'site_admins', array( 'admin' ) );
 
 	$user = get_userdata( $user_id );
-	if ( $user && ! in_array( $user->user_login, $super_admins ) ) {
+	if ( $user && ! in_array( $user->user_login, $super_admins, true ) ) {
 		$super_admins[] = $user->user_login;
 		update_site_option( 'site_admins', $super_admins );
 
@@ -955,12 +972,12 @@ function revoke_super_admin( $user_id ) {
 	 */
 	do_action( 'revoke_super_admin', $user_id );
 
-	// Directly fetch site_admins instead of using get_super_admins()
+	// Directly fetch site_admins instead of using get_super_admins().
 	$super_admins = get_site_option( 'site_admins', array( 'admin' ) );
 
 	$user = get_userdata( $user_id );
 	if ( $user && 0 !== strcasecmp( $user->user_email, get_site_option( 'admin_email' ) ) ) {
-		$key = array_search( $user->user_login, $super_admins );
+		$key = array_search( $user->user_login, $super_admins, true );
 		if ( false !== $key ) {
 			unset( $super_admins[ $key ] );
 			update_site_option( 'site_admins', $super_admins );

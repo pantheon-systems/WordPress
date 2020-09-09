@@ -7,7 +7,7 @@
  */
 
 /** WordPress Administration Bootstrap */
-require_once( dirname( __FILE__ ) . '/admin.php' );
+require_once __DIR__ . '/admin.php';
 
 // This file was used to also display the Privacy tab on the About screen from 4.9.6 until 5.3.0.
 if ( isset( $_GET['privacy-notice'] ) ) {
@@ -19,29 +19,19 @@ $title = __( 'Freedoms' );
 
 list( $display_version ) = explode( '-', get_bloginfo( 'version' ) );
 
-include( ABSPATH . 'wp-admin/admin-header.php' );
+require_once ABSPATH . 'wp-admin/admin-header.php';
 ?>
 <div class="wrap about__container">
 
 	<div class="about__header">
-		<div class="about__header-title">
-			<h1>
-				<span><?php echo $display_version; ?></span>
-				<?php _e( 'WordPress' ); ?>
-			</h1>
+		<div class="about__header-text">
+			<?php _e( 'Speed. Search. Security.' ); ?>
 		</div>
 
-		<div class="about__header-badge"></div>
-
-		<div class="about__header-text">
+		<div class="about__header-title">
 			<p>
-				<?php
-				printf(
-					/* translators: %s: The current WordPress version number. */
-					__( 'Introducing our most refined user experience with the improved block editor in WordPress %s!' ),
-					$display_version
-				);
-				?>
+				<?php _e( 'WordPress' ); ?>
+				<span><?php echo $display_version; ?></span>
 			</p>
 		</div>
 
@@ -54,7 +44,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 	</div>
 
 	<div class="about__section has-subtle-background-color is-feature">
-		<h2><?php _e( 'Freedoms' ); ?></h2>
+		<h1><?php _e( 'Freedoms' ); ?></h1>
 
 		<p class="about-description">
 		<?php
@@ -72,25 +62,27 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 	<div class="about__section has-4-columns">
 		<div class="column">
 			<div class="freedoms-image"></div>
-			<h3><?php _e( 'The 1st Freedom' ); ?></h3>
+			<h2 class="is-smaller-heading"><?php _e( 'The 1st Freedom' ); ?></h2>
 			<p><?php _e( 'To run the program for any purpose.' ); ?></p>
 		</div>
 		<div class="column">
 			<div class="freedoms-image"></div>
-			<h3><?php _e( 'The 2nd Freedom' ); ?></h3>
+			<h2 class="is-smaller-heading"><?php _e( 'The 2nd Freedom' ); ?></h2>
 			<p><?php _e( 'To study how the program works and change it to make it do what you wish.' ); ?></p>
 		</div>
 		<div class="column">
 			<div class="freedoms-image"></div>
-			<h3><?php _e( 'The 3rd Freedom' ); ?></h3>
+			<h2 class="is-smaller-heading"><?php _e( 'The 3rd Freedom' ); ?></h2>
 			<p><?php _e( 'To redistribute.' ); ?></p>
 		</div>
 		<div class="column">
 			<div class="freedoms-image"></div>
-			<h3><?php _e( 'The 4th Freedom' ); ?></h3>
+			<h2 class="is-smaller-heading"><?php _e( 'The 4th Freedom' ); ?></h2>
 			<p><?php _e( 'To distribute copies of your modified versions to others.' ); ?></p>
 		</div>
 	</div>
+
+	<hr />
 
 	<div class="about__section">
 		<div class="column">
@@ -123,4 +115,4 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 	</div>
 
 </div>
-<?php include( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+<?php require_once ABSPATH . 'wp-admin/admin-footer.php'; ?>

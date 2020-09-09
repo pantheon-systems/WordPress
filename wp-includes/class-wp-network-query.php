@@ -169,7 +169,7 @@ class WP_Network_Query {
 	 * @since 4.6.0
 	 *
 	 * @param string|array $query Array or URL query string of parameters.
-	 * @return array|int List of WP_Network objects, a list of network ids when 'fields' is set to 'ids',
+	 * @return array|int List of WP_Network objects, a list of network IDs when 'fields' is set to 'ids',
 	 *                   or the number of networks when 'count' is passed as a query var.
 	 */
 	public function query( $query ) {
@@ -182,7 +182,7 @@ class WP_Network_Query {
 	 *
 	 * @since 4.6.0
 	 *
-	 * @return array|int List of WP_Network objects, a list of network ids when 'fields' is set to 'ids',
+	 * @return array|int List of WP_Network objects, a list of network IDs when 'fields' is set to 'ids',
 	 *                   or the number of networks when 'count' is passed as a query var.
 	 */
 	public function get_networks() {
@@ -206,7 +206,7 @@ class WP_Network_Query {
 		 *
 		 * The expected return type from this filter depends on the value passed in the request query_vars.
 		 * When `$this->query_vars['count']` is set, the filter should return the network count as an int.
-		 * When `'ids' === $this->query_vars['fields']`, the filter should return an array of network ids.
+		 * When `'ids' === $this->query_vars['fields']`, the filter should return an array of network IDs.
 		 * Otherwise the filter should return an array of WP_Network objects.
 		 *
 		 * @since 5.2.0
@@ -262,7 +262,7 @@ class WP_Network_Query {
 
 		$network_ids = array_map( 'intval', $network_ids );
 
-		if ( 'ids' == $this->query_vars['fields'] ) {
+		if ( 'ids' === $this->query_vars['fields'] ) {
 			$this->networks = $network_ids;
 			return $this->networks;
 		}
@@ -290,7 +290,7 @@ class WP_Network_Query {
 		 */
 		$_networks = apply_filters_ref_array( 'the_networks', array( $_networks, &$this ) );
 
-		// Convert to WP_Network instances
+		// Convert to WP_Network instances.
 		$this->networks = array_map( 'get_network', $_networks );
 
 		return $this->networks;
@@ -509,7 +509,6 @@ class WP_Network_Query {
 	 *
 	 * @param string   $string  Search string.
 	 * @param string[] $columns Array of columns to search.
-	 *
 	 * @return string Search SQL.
 	 */
 	protected function get_search_sql( $string, $columns ) {
@@ -545,13 +544,13 @@ class WP_Network_Query {
 		);
 
 		$parsed = false;
-		if ( $orderby == 'network__in' ) {
+		if ( 'network__in' === $orderby ) {
 			$network__in = implode( ',', array_map( 'absint', $this->query_vars['network__in'] ) );
 			$parsed      = "FIELD( {$wpdb->site}.id, $network__in )";
-		} elseif ( $orderby == 'domain_length' || $orderby == 'path_length' ) {
+		} elseif ( 'domain_length' === $orderby || 'path_length' === $orderby ) {
 			$field  = substr( $orderby, 0, -7 );
 			$parsed = "CHAR_LENGTH($wpdb->site.$field)";
-		} elseif ( in_array( $orderby, $allowed_keys ) ) {
+		} elseif ( in_array( $orderby, $allowed_keys, true ) ) {
 			$parsed = "$wpdb->site.$orderby";
 		}
 

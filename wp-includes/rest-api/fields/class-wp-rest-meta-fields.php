@@ -70,7 +70,7 @@ abstract class WP_REST_Meta_Fields {
 	 *
 	 * @param int             $object_id Object ID to fetch meta for.
 	 * @param WP_REST_Request $request   Full details about the request.
-	 * @return WP_Error|object Object containing the meta values by name, otherwise WP_Error object.
+	 * @return array Array containing the meta values keyed by name.
 	 */
 	public function get_value( $object_id, $request ) {
 		$fields   = $this->get_registered_fields();
@@ -79,15 +79,18 @@ abstract class WP_REST_Meta_Fields {
 		foreach ( $fields as $meta_key => $args ) {
 			$name       = $args['name'];
 			$all_values = get_metadata( $this->get_meta_type(), $object_id, $meta_key, false );
+
 			if ( $args['single'] ) {
 				if ( empty( $all_values ) ) {
 					$value = $args['schema']['default'];
 				} else {
 					$value = $all_values[0];
 				}
+
 				$value = $this->prepare_value_for_response( $value, $request, $args );
 			} else {
 				$value = array();
+
 				foreach ( $all_values as $row ) {
 					$value[] = $this->prepare_value_for_response( $row, $request, $args );
 				}
@@ -126,12 +129,13 @@ abstract class WP_REST_Meta_Fields {
 	 *
 	 * @since 4.7.0
 	 *
-	 * @param array           $meta      Array of meta parsed from the request.
-	 * @param int             $object_id Object ID to fetch meta for.
-	 * @return WP_Error|null WP_Error if one occurs, null on success.
+	 * @param array $meta      Array of meta parsed from the request.
+	 * @param int   $object_id Object ID to fetch meta for.
+	 * @return null|WP_Error Null on success, WP_Error object on failure.
 	 */
 	public function update_value( $meta, $object_id ) {
 		$fields = $this->get_registered_fields();
+
 		foreach ( $fields as $meta_key => $args ) {
 			$name = $args['name'];
 			if ( ! array_key_exists( $name, $meta ) ) {
@@ -210,6 +214,7 @@ abstract class WP_REST_Meta_Fields {
 	 */
 	protected function delete_meta_value( $object_id, $meta_key, $name ) {
 		$meta_type = $this->get_meta_type();
+
 		if ( ! current_user_can( "delete_{$meta_type}_meta", $object_id, $meta_key ) ) {
 			return new WP_Error(
 				'rest_cannot_delete',
@@ -251,6 +256,7 @@ abstract class WP_REST_Meta_Fields {
 	 */
 	protected function update_multi_meta_value( $object_id, $meta_key, $name, $values ) {
 		$meta_type = $this->get_meta_type();
+
 		if ( ! current_user_can( "edit_{$meta_type}_meta", $object_id, $meta_key ) ) {
 			return new WP_Error(
 				'rest_cannot_update',
@@ -263,13 +269,21 @@ abstract class WP_REST_Meta_Fields {
 			);
 		}
 
-		$current = get_metadata( $meta_type, $object_id, $meta_key, false );
+		$current_values = get_metadata( $meta_type, $object_id, $meta_key, false );
+		$subtype        = get_object_subtype( $meta_type, $object_id );
 
-		$to_remove = $current;
+		$to_remove = $current_values;
 		$to_add    = $values;
 
 		foreach ( $to_add as $add_key => $value ) {
-			$remove_keys = array_keys( $to_remove, $value, true );
+			$remove_keys = array_keys(
+				array_filter(
+					$current_values,
+					function ( $stored_value ) use ( $meta_key, $subtype, $value ) {
+						return $this->is_meta_value_same_as_stored_value( $meta_key, $subtype, $stored_value, $value );
+					}
+				)
+			);
 
 			if ( empty( $remove_keys ) ) {
 				continue;
@@ -286,9 +300,11 @@ abstract class WP_REST_Meta_Fields {
 			unset( $to_add[ $add_key ] );
 		}
 
-		// `delete_metadata` removes _all_ instances of the value, so only call once. Otherwise,
-		// `delete_metadata` will return false for subsequent calls of the same value.
-		// Use serialization to produce a predictable string that can be used by array_unique.
+		/*
+		 * `delete_metadata` removes _all_ instances of the value, so only call once. Otherwise,
+		 * `delete_metadata` will return false for subsequent calls of the same value.
+		 * Use serialization to produce a predictable string that can be used by array_unique.
+		 */
 		$to_remove = array_map( 'maybe_unserialize', array_unique( array_map( 'maybe_serialize', $to_remove ) ) );
 
 		foreach ( $to_remove as $value ) {
@@ -335,6 +351,7 @@ abstract class WP_REST_Meta_Fields {
 	 */
 	protected function update_meta_value( $object_id, $meta_key, $name, $value ) {
 		$meta_type = $this->get_meta_type();
+
 		if ( ! current_user_can( "edit_{$meta_type}_meta", $object_id, $meta_key ) ) {
 			return new WP_Error(
 				'rest_cannot_update',
@@ -350,19 +367,9 @@ abstract class WP_REST_Meta_Fields {
 		// Do the exact same check for a duplicate value as in update_metadata() to avoid update_metadata() returning false.
 		$old_value = get_metadata( $meta_type, $object_id, $meta_key );
 		$subtype   = get_object_subtype( $meta_type, $object_id );
-		$args      = $this->get_registered_fields()[ $meta_key ];
 
-		if ( 1 === count( $old_value ) ) {
-			$sanitized = sanitize_meta( $meta_key, $value, $meta_type, $subtype );
-
-			if ( in_array( $args['type'], array( 'string', 'number', 'integer', 'boolean' ), true ) ) {
-				// The return value of get_metadata will always be a string for scalar types.
-				$sanitized = (string) $sanitized;
-			}
-
-			if ( $sanitized === $old_value[0] ) {
-				return true;
-			}
+		if ( 1 === count( $old_value ) && $this->is_meta_value_same_as_stored_value( $meta_key, $subtype, $old_value[0], $value ) ) {
+			return true;
 		}
 
 		if ( ! update_metadata( $meta_type, $object_id, wp_slash( $meta_key ), wp_slash_strings_only( $value ) ) ) {
@@ -378,6 +385,29 @@ abstract class WP_REST_Meta_Fields {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Checks if the user provided value is equivalent to a stored value for the given meta key.
+	 *
+	 * @since 5.5.0
+	 *
+	 * @param string $meta_key     The meta key being checked.
+	 * @param string $subtype      The object subtype.
+	 * @param mixed  $stored_value The currently stored value retrieved from get_metadata().
+	 * @param mixed  $user_value   The value provided by the user.
+	 * @return bool
+	 */
+	protected function is_meta_value_same_as_stored_value( $meta_key, $subtype, $stored_value, $user_value ) {
+		$args      = $this->get_registered_fields()[ $meta_key ];
+		$sanitized = sanitize_meta( $meta_key, $user_value, $this->get_meta_type(), $subtype );
+
+		if ( in_array( $args['type'], array( 'string', 'number', 'integer', 'boolean' ), true ) ) {
+			// The return value of get_metadata will always be a string for scalar types.
+			$sanitized = (string) $sanitized;
+		}
+
+		return $sanitized === $stored_value;
 	}
 
 	/**
@@ -435,7 +465,7 @@ abstract class WP_REST_Meta_Fields {
 
 			$rest_args['schema'] = $this->default_additional_properties_to_false( $rest_args['schema'] );
 
-			if ( ! in_array( $type, array( 'string', 'boolean', 'integer', 'number', 'array', 'object' ) ) ) {
+			if ( ! in_array( $type, array( 'string', 'boolean', 'integer', 'number', 'array', 'object' ), true ) ) {
 				continue;
 			}
 
@@ -494,7 +524,6 @@ abstract class WP_REST_Meta_Fields {
 	 * @return mixed Value prepared for output. If a non-JsonSerializable object, null.
 	 */
 	public static function prepare_value( $value, $request, $args ) {
-
 		if ( $args['single'] ) {
 			$schema = $args['schema'];
 		} else {
@@ -520,7 +549,7 @@ abstract class WP_REST_Meta_Fields {
 	 * @param mixed           $value   The meta value submitted in the request.
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @param string          $param   The parameter name.
-	 * @return WP_Error|string The meta array, if valid, otherwise an error.
+	 * @return array|false The meta array, if valid, false otherwise.
 	 */
 	public function check_meta_is_array( $value, $request, $param ) {
 		if ( ! is_array( $value ) ) {

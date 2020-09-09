@@ -203,20 +203,14 @@
 }
 
 .site-health-copy-buttons .copy-button-wrapper {
+	display: inline-flex;
+	align-items: center;
 	margin: 0.5rem 0 1rem;
 }
 
 .site-health-copy-buttons .success {
-	display: none;
 	color: #40860a;
-	line-height: 1.8;
 	margin-left: 0.5rem;
-}
-
-.site-health-copy-buttons .success.visible {
-	display: inline-block;
-	height: 28px;
-	line-height: 2.2;
 }
 
 .site-status-has-issues.hide {
@@ -304,6 +298,10 @@
 	width: 100%;
 	align-items: center;
 	justify-content: space-between;
+	-webkit-user-select: auto;
+	-moz-user-select: auto;
+	-ms-user-select: auto;
+	user-select: auto;
 }
 
 .wp-core-ui .button.site-health-view-passed {
@@ -321,8 +319,9 @@
 	color: #191e23;
 	border: none;
 	box-shadow: none;
-	outline-offset: -2px;
-	outline: 1px dotted #555d66;
+	outline-offset: -1px;
+	outline: 2px solid #0071a1;
+	background-color: #f8f9f9;
 }
 
 .health-check-accordion-trigger .title {
@@ -450,6 +449,10 @@
 		width: 100%;
 		padding-bottom: 0;
 		font-weight: 600;
+	}
+
+	.wp-core-ui .site-health-copy-buttons .copy-button {
+		margin-bottom: 0;
 	}
 }
 

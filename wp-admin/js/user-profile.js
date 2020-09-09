@@ -2,10 +2,10 @@
  * @output wp-admin/js/user-profile.js
  */
 
-/* global ajaxurl, pwsL10n, userProfileL10n */
+/* global ajaxurl, pwsL10n */
 (function($) {
 	var updateLock = false,
-
+		__ = wp.i18n.__,
 		$pass1Row,
 		$pass1,
 		$pass2,
@@ -39,7 +39,7 @@
 		}
 
 		// Once zxcvbn loads, passwords strength is known.
-		$( '#pw-weak-text-label' ).html( userProfileL10n.warnWeak );
+		$( '#pw-weak-text-label' ).text( __( 'Confirm use of weak password' ) );
 	}
 
 	function bindPass1() {
@@ -64,10 +64,10 @@
 	function resetToggle( show ) {
 		$toggleButton
 			.attr({
-				'aria-label': show ? userProfileL10n.ariaShow : userProfileL10n.ariaHide
+				'aria-label': show ? __( 'Show password' ) : __( 'Hide password' )
 			})
 			.find( '.text' )
-				.text( show ? userProfileL10n.show : userProfileL10n.hide )
+				.text( show ? __( 'Show' ) : __( 'Hide' ) )
 			.end()
 			.find( '.dashicons' )
 				.removeClass( show ? 'dashicons-hidden' : 'dashicons-visibility' )
@@ -196,7 +196,7 @@
 			resetToggle( false );
 
 			if ( $pass1Row.closest( 'form' ).is( '#your-profile' ) ) {
-				// Clear password field to prevent update
+				// Clear password field to prevent update.
 				$pass1.val( '' ).trigger( 'pwupdate' );
 				$submitButtons.prop( 'disabled', false );
 			}
@@ -220,7 +220,7 @@
 			return;
 		}
 
-		strength = wp.passwordStrength.meter( pass1, wp.passwordStrength.userInputBlacklist(), pass1 );
+		strength = wp.passwordStrength.meter( pass1, wp.passwordStrength.userInputDisallowedList(), pass1 );
 
 		switch ( strength ) {
 			case -1:
@@ -342,7 +342,7 @@
 			$this.siblings( '.selected' ).removeClass( 'selected' );
 			$this.addClass( 'selected' ).find( 'input[type="radio"]' ).prop( 'checked', true );
 
-			// Set color scheme
+			// Set color scheme.
 			if ( user_id === current_user_id ) {
 				// Load the colors stylesheet.
 				// The default color scheme won't have one, so we'll need to create an element.
@@ -351,7 +351,7 @@
 				}
 				$stylesheet.attr( 'href', $this.children( '.css_url' ).val() );
 
-				// repaint icons
+				// Repaint icons.
 				if ( typeof wp !== 'undefined' && wp.svgPainter ) {
 					try {
 						colors = $.parseJSON( $this.children( '.icon_colors' ).val() );
@@ -363,7 +363,7 @@
 					}
 				}
 
-				// update user option
+				// Update user option.
 				$.post( ajaxurl, {
 					action:       'save-user-color-scheme',
 					color_scheme: $this.children( 'input[name="admin_color"]' ).val(),
@@ -402,7 +402,7 @@
 	/* Warn the user if password was generated but not saved */
 	$( window ).on( 'beforeunload', function () {
 		if ( true === updateLock ) {
-			return userProfileL10n.warn;
+			return __( 'Your new password has not been saved.' );
 		}
 	} );
 

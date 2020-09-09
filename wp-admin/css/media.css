@@ -306,7 +306,7 @@
 
 #find-posts-close:hover,
 #find-posts-close:focus {
-	color: #00a0d2;
+	color: #006799;
 }
 
 #find-posts-close:focus {
@@ -797,6 +797,16 @@ border color while dragging a file over the uploader drop area */
 	text-decoration: none;
 }
 
+.copy-to-clipboard-container {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	clear: both;
+}
+
+.copy-to-clipboard-container .success {
+	margin-left: 8px;
+}
 
 /*------------------------------------------------------------------------------
   14.2 - Image Editor
@@ -852,6 +862,8 @@ border color while dragging a file over the uploader drop area */
 .wp_attachment_holder .imgedit-wrap .imgedit-panel-content {
 	float: left;
 	padding: 3px 16px 0 0;
+	min-width: 400px;
+	max-width: calc( 100% - 266px );
 }
 
 .wp_attachment_holder .imgedit-wrap .imgedit-settings {
@@ -1053,7 +1065,11 @@ border color while dragging a file over the uploader drop area */
 
 .imgedit-help {
 	display: none;
-	font-style: italic;
+	padding-bottom: 8px;
+}
+
+.imgedit-help.imgedit-restore {
+	padding-bottom: 0;
 }
 
 /* higher specificity than buttons */
@@ -1207,6 +1223,12 @@ audio, video {
 	.wp_attachment_holder .imgedit-wrap .imgedit-settings {
 		float: none;
 		width: auto;
+		max-width: none;
+		padding-bottom: 16px;
+	}
+
+	.copy-to-clipboard-container .success {
+		font-size: 14px;
 	}
 }
 

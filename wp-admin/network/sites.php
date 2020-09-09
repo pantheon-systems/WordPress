@@ -8,7 +8,7 @@
  */
 
 /** Load WordPress Administration Bootstrap */
-require_once( dirname( __FILE__ ) . '/admin.php' );
+require_once __DIR__ . '/admin.php';
 
 if ( ! current_user_can( 'manage_sites' ) ) {
 	wp_die( __( 'Sorry, you are not allowed to access this page.' ), 403 );
@@ -108,7 +108,7 @@ if ( isset( $_GET['action'] ) ) {
 		$site_details = get_site( $id );
 		$site_address = untrailingslashit( $site_details->domain . $site_details->path );
 
-		require_once( ABSPATH . 'wp-admin/admin-header.php' );
+		require_once ABSPATH . 'wp-admin/admin-header.php';
 		?>
 			<div class="wrap">
 				<h1><?php _e( 'Confirm your action' ); ?></h1>
@@ -117,13 +117,13 @@ if ( isset( $_GET['action'] ) ) {
 					<input type="hidden" name="id" value="<?php echo esc_attr( $id ); ?>" />
 					<input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr( wp_get_referer() ); ?>" />
 					<?php wp_nonce_field( $site_action . '_' . $id, '_wpnonce', false ); ?>
-					<p><?php echo sprintf( $manage_actions[ $site_action ], $site_address ); ?></p>
+					<p><?php printf( $manage_actions[ $site_action ], $site_address ); ?></p>
 					<?php submit_button( __( 'Confirm' ), 'primary' ); ?>
 				</form>
 			</div>
 		<?php
-		require_once( ABSPATH . 'wp-admin/admin-footer.php' );
-		exit();
+		require_once ABSPATH . 'wp-admin/admin-footer.php';
+		exit;
 	} elseif ( array_key_exists( $_GET['action'], $manage_actions ) ) {
 		$action = $_GET['action'];
 		check_admin_referer( $action . '_' . $id );
@@ -141,7 +141,7 @@ if ( isset( $_GET['action'] ) ) {
 			}
 
 			$updated_action = 'not_deleted';
-			if ( $id != '0' && $id != get_network()->site_id && current_user_can( 'delete_site', $id ) ) {
+			if ( '0' != $id && get_network()->site_id != $id && current_user_can( 'delete_site', $id ) ) {
 				wpmu_delete_blog( $id, true );
 				$updated_action = 'delete';
 			}
@@ -153,7 +153,7 @@ if ( isset( $_GET['action'] ) ) {
 			foreach ( (array) $_POST['site_ids'] as $site_id ) {
 				$site_id = (int) $site_id;
 
-				if ( $site_id == get_network()->site_id ) {
+				if ( get_network()->site_id == $site_id ) {
 					continue;
 				}
 
@@ -178,13 +178,13 @@ if ( isset( $_GET['action'] ) ) {
 
 		case 'allblogs':
 			if ( ( isset( $_POST['action'] ) || isset( $_POST['action2'] ) ) && isset( $_POST['allblogs'] ) ) {
-				$doaction = $_POST['action'] != -1 ? $_POST['action'] : $_POST['action2'];
+				$doaction = -1 != $_POST['action'] ? $_POST['action'] : $_POST['action2'];
 
 				foreach ( (array) $_POST['allblogs'] as $key => $val ) {
-					if ( $val != '0' && $val != get_network()->site_id ) {
+					if ( '0' != $val && get_network()->site_id != $val ) {
 						switch ( $doaction ) {
 							case 'delete':
-								require_once( ABSPATH . 'wp-admin/admin-header.php' );
+								require_once ABSPATH . 'wp-admin/admin-header.php';
 								?>
 								<div class="wrap">
 									<h1><?php _e( 'Confirm your action' ); ?></h1>
@@ -209,8 +209,8 @@ if ( isset( $_GET['action'] ) ) {
 									</form>
 								</div>
 								<?php
-								require_once( ABSPATH . 'wp-admin/admin-footer.php' );
-								exit();
+								require_once ABSPATH . 'wp-admin/admin-footer.php';
+								exit;
 							break;
 
 							case 'spam':
@@ -223,13 +223,16 @@ if ( isset( $_GET['action'] ) ) {
 						wp_die( __( 'Sorry, you are not allowed to change the current site.' ) );
 					}
 				}
+
 				if ( ! in_array( $doaction, array( 'delete', 'spam', 'notspam' ), true ) ) {
 					$redirect_to = wp_get_referer();
 					$blogs       = (array) $_POST['allblogs'];
+
 					/** This action is documented in wp-admin/network/site-themes.php */
 					$redirect_to = apply_filters( 'handle_network_bulk_actions-' . get_current_screen()->id, $redirect_to, $doaction, $blogs, $id ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+
 					wp_safe_redirect( $redirect_to );
-					exit();
+					exit;
 				}
 			} else {
 				// Process query defined by WP_MS_Site_List_Table::extra_table_nav().
@@ -237,6 +240,7 @@ if ( isset( $_GET['action'] ) ) {
 					array( '_wp_http_referer', '_wpnonce' ),
 					add_query_arg( $_POST, network_admin_url( 'sites.php' ) )
 				);
+
 				wp_redirect( $location );
 				exit;
 			}
@@ -270,6 +274,7 @@ if ( isset( $_GET['action'] ) ) {
 			 * @param string $id The ID of the site being deactivated.
 			 */
 			do_action( 'deactivate_blog', $id );
+
 			update_blog_status( $id, 'deleted', '1' );
 			break;
 
@@ -290,7 +295,7 @@ if ( isset( $_GET['action'] ) ) {
 
 	if ( ! empty( $updated_action ) ) {
 		wp_safe_redirect( add_query_arg( array( 'updated' => $updated_action ), wp_get_referer() ) );
-		exit();
+		exit;
 	}
 }
 
@@ -354,7 +359,7 @@ if ( isset( $_GET['updated'] ) ) {
 
 $wp_list_table->prepare_items();
 
-require_once( ABSPATH . 'wp-admin/admin-header.php' );
+require_once ABSPATH . 'wp-admin/admin-header.php';
 ?>
 
 <div class="wrap">
@@ -388,4 +393,4 @@ if ( isset( $_REQUEST['s'] ) && strlen( $_REQUEST['s'] ) ) {
 </div>
 <?php
 
-require_once( ABSPATH . 'wp-admin/admin-footer.php' ); ?>
+require_once ABSPATH . 'wp-admin/admin-footer.php'; ?>
