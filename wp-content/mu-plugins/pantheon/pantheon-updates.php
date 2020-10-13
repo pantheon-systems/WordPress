@@ -120,7 +120,7 @@ add_action( 'admin_init', '_pantheon_register_upstream_update_notice' );
 function _pantheon_register_upstream_update_notice(){
 	// but only if we are on Pantheon
 	// and there is a WordPress update available
-	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && _pantheon_wordpress_update_available() ){
+	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && ! wp_doing_ajax() && _pantheon_wordpress_update_available() ){
 		add_action( 'admin_notices', '_pantheon_upstream_update_notice' );
 	}
 }
