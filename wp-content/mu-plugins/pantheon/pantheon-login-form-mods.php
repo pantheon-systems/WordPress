@@ -3,20 +3,16 @@
  * Modify the WordPress login form for Pantheon
  */
 
- /**
-  * Should we proceed with adding the
-  * return to Pantheon button?
-  *
-  * Only if:
-  * We are on a Pantheon subdomain and
-  * "RETURN_TO_PANTHEON_BUTTON" is not false
-  */
-$show_return_to_pantheon_button = apply_filters( 'show_return_to_pantheon_button', ( 
-    ( ! defined('RETURN_TO_PANTHEON_BUTTON') || RETURN_TO_PANTHEON_BUTTON ) &&
+/**
+ * Should we proceed with adding the return to Pantheon button?
+ *
+ * Only if we are on a Pantheon subdomain
+ */
+$show_return_to_pantheon_button = apply_filters( 'show_return_to_pantheon_button', (
     (
         false !== stripos( get_site_url(), 'pantheonsite.io') ||
         ( isset( $_SERVER['HTTP_HOST'] ) && false !== stripos( $_SERVER['HTTP_HOST'], 'pantheonsite.io') )
-     )
+    )
 ) );
 
 if( $show_return_to_pantheon_button ){
