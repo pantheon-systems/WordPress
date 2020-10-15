@@ -197,7 +197,7 @@ class Pantheon_Cache {
 	public function view_settings_page() {
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Pantheon Page Cache', 'pantheon-cache' ); ?></h2>
+			<h2><?php esc_html_e( 'Pantheon Page Cache', 'pantheon-cache' ); ?></h2>
 
 			<?php if ( ! empty( $_GET['cache-cleared'] ) && 'true' == $_GET['cache-cleared'] ) : ?>
 				<div class="updated below-h2">
@@ -205,11 +205,10 @@ class Pantheon_Cache {
 				</div>
 			<?php endif ?>
 
-			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : ?>
-				<div class="notice notice-success"><p><?php echo sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://github.com/pantheon-systems/pantheon-advanced-page-cache' ); ?></p></div>
-			<?php else :
-				?>
-				<div class="notice notice-warning"><p><?php echo sprintf( __( 'Want to automatically clear related pages when you update content? Install <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), admin_url( 'plugin-install.php?s=pantheon+advanced+page+cache&tab=search&type=term&action=pantheon-load-infobox' ) ); ?></p></div>
+			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : // translators: %s is a link. ?>
+				<div class="notice notice-success"><p><?php echo esc_html( sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://pantheon.io/docs/wordpress-cache-plugin' ) ); ?></p></div>
+			<?php else : // translators: %s is a link. ?>
+				<div class="notice notice-warning"><p><?php echo esc_html( sprintf( __( 'Want to automatically clear related pages when you update content? Learn more about the <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), 'https://pantheon.io/docs/wordpress-cache-plugin' ) ); ?></p></div>
 			<?php endif; ?>
 
 			<?php
@@ -217,7 +216,8 @@ class Pantheon_Cache {
 			 * Permits the Pantheon Advanced Page Cache plugin to add
 			 * supplemental text.
 			 */
-			do_action( 'pantheon_cache_settings_page_top' ); ?>
+			do_action( 'pantheon_cache_settings_page_top' );
+			?>
 
 			<?php if ( apply_filters( 'pantheon_cache_allow_clear_all', true ) ) : ?>
 
