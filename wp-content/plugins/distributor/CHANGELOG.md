@@ -1,0 +1,262 @@
+# Changelog
+
+All notable changes to this project will be documented in this file, per [the Keep a Changelog standard](http://keepachangelog.com/).
+
+## [Unreleased] - TBD
+
+## [1.6.2] - 2021-01-14
+### Fixed
+- Handles case where Application Passwords is available in WordPress core starting with 5.6 (props [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter), [@jeffpaul](https://github.com/jeffpaul), [@j0HnC0untry](https://github.com/j0HnC0untry), [@dfardon](https://github.com/dfardon), [@anilpainuly121](https://github.com/anilpainuly121) via [#676](https://github.com/10up/distributor/pull/676), [#681](https://github.com/10up/distributor/pull/681), [#682](https://github.com/10up/distributor/pull/682)).
+- Update bundled version of Application Passwords to 1.1.2 (props [@dkotter](https://github.com/dkotter), [@vimalagarwalasentech](https://github.com/vimalagarwalasentech) via [#693](https://github.com/10up/distributor/pull/693)).
+- Issue with HTML entity character encoding in a distributed post's title (props  [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter), [@rickalee](https://github.com/rickalee) via [#672](https://github.com/10up/distributor/pull/672)).
+- Bumped WordPress tested-up-to version to 5.6 (props [@jeffpaul](https://github.com/jeffpaul) via [#683](https://github.com/10up/distributor/pull/683)).
+- Moved readme screenshots to directory that won't be part of bundled release, helping to minimize the distributed ZIP file size (props [@jeffpaul](https://github.com/jeffpaul), [@helen](https://github.com/helen) via [#673](https://github.com/10up/distributor/pull/673)).
+
+## Security
+- Bump `ini` from 1.3.5 to 1.3.7 (props [@dependabot](https://github.com/apps/dependabot) via [#680](https://github.com/10up/distributor/pull/680)).
+
+## [1.6.1] - 2020-11-19
+### Added
+- Support for the [official AMP plugin](https://github.com/ampproject/amp-wp) and front-end Push distribution via `amp-dev-mode` and new Mustache templates (props [@dkotter](https://github.com/dkotter), [@dinhtungdu](https://github.com/dinhtungdu), [@rickalee](https://github.com/rickalee) via [#665](https://github.com/10up/distributor/pull/665)).
+- Better error reporting when creating External Connections and Pushing or Pulling content (props [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter) via [#630](https://github.com/10up/distributor/pull/630)).
+
+### Fixed
+- Empty admin body class causing compatibility issues with other plugins' styling (props [@dinhtungdu](https://github.com/dinhtungdu), [@PaddyWhacks](https://github.com/PaddyWhacks), [@robcain](https://github.com/robcain) via [#654](https://github.com/10up/distributor/pull/654)).
+- `permission_callback` error on WordPress 5.5 (props [@dkotter](https://github.com/dkotter) via [#632](https://github.com/10up/distributor/pull/632)).
+
+### Security
+- Bump `lodash` from 4.17.15 to 4.17.19 (props [@dependabot](https://github.com/apps/dependabot) via [#614](https://github.com/10up/distributor/pull/614)).
+- Bump `elliptic` from 6.5.2 to 6.5.3 (props [@dependabot](https://github.com/apps/dependabot) via [#621](https://github.com/10up/distributor/pull/621)).
+- Bump `dot-prop` from 4.2.0 to 4.2.1 (props [@dependabot](https://github.com/apps/dependabot) via [#664](https://github.com/10up/distributor/pull/664)).
+
+## [1.6.0] - 2020-07-02
+### Added
+- Authorization Setup Wizard for External Connections leveraging [Application Passwords](https://github.com/WordPress/application-passwords) (props [@adamsilverstein](https://github.com/adamsilverstein), [@dkotter](https://github.com/dkotter), [@dinhtungdu](https://github.com/dinhtungdu), [@helen](https://github.com/helen), [@jeffpaul](https://github.com/jeffpaul), [@hearvox](https://github.com/hearvox) via [#368](https://github.com/10up/distributor/pull/368), [#594](https://github.com/10up/distributor/pull/594), [#601](https://github.com/10up/distributor/pull/601)).
+- "Select All" and "Clear" options in the Push menu (props [@biggiebangle](https://github.com/biggiebangle), [@dkotter](https://github.com/dkotter), [@oszkarnagy](https://github.com/oszkarnagy), [@helen](https://github.com/helen) via [#495](https://github.com/10up/distributor/pull/495), [#589](https://github.com/10up/distributor/pull/589)).
+- "Pull" row action in the Pull menu (props [@lakrisgubben](https://github.com/lakrisgubben) via [#508](https://github.com/10up/distributor/pull/508)).
+- "View" link for distribguted posts in Push menu for External Connections (props [@dinhtungdu](https://github.com/dinhtungdu), [@PaddyWhacks](https://github.com/PaddyWhacks) via [#571](https://github.com/10up/distributor/pull/571)).
+- Accessibility improvements (props [@samikeijonen](https://github.com/samikeijonen), [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter) via [#558](https://github.com/10up/distributor/pull/558), [#559](https://github.com/10up/distributor/pull/559), [#560](https://github.com/10up/distributor/pull/560), [#562](https://github.com/10up/distributor/pull/562), [#565](https://github.com/10up/distributor/pull/565), [#566](https://github.com/10up/distributor/pull/566), [#569](https://github.com/10up/distributor/pull/569)).
+- Site Health integration to display Distributor debug information (props [@dinhtungdu](https://github.com/dinhtungdu), [@jeffpaul](https://github.com/jeffpaul), [@johnwatkins0](https://github.com/johnwatkins0), [@dkotter](https://github.com/dkotter) via [#517](https://github.com/10up/distributor/pull/517)).
+- `dt_syndicatable_capabilities` filter to Push menu (props [@pragmatic-tf](https://github.com/pragmatic-tf) via [#473](https://github.com/10up/distributor/pull/473)).
+- `dt_subscription_post_timeout` filter to modify request timeout (props [@ahovhannissian](https://github.com/ahovhannissian), [@dinhtungdu](https://github.com/dinhtungdu) via [#529](https://github.com/10up/distributor/pull/529)).
+- [Hook documentation GitHub Pages site](https://10up.github.io/distributor/) generated by GitHub Actions (props [@adamsilverstein](https://github.com/adamsilverstein), [@helen](https://github.com/helen), [@jeffpaul](https://github.com/jeffpaul) via [#448](https://github.com/10up/distributor/pull/448), [#467](https://github.com/10up/distributor/pull/467), [#474](https://github.com/10up/distributor/pull/474), [#475](https://github.com/10up/distributor/pull/475), [#476](https://github.com/10up/distributor/pull/476), [#477](https://github.com/10up/distributor/pull/477), [#478](https://github.com/10up/distributor/pull/478), [#479](https://github.com/10up/distributor/pull/479), [#482](https://github.com/10up/distributor/pull/482), [#485](https://github.com/10up/distributor/pull/485), [#545](https://github.com/10up/distributor/pull/545)).
+- JSON PHP extension as a Composer requirement (props [@moebrowne](https://github.com/moebrowne), [@adamsilverstein](https://github.com/adamsilverstein), [@dinhtungdu](https://github.com/dinhtungdu) via [#460](https://github.com/10up/distributor/pull/460)).
+- GitHub Actions to build and add release asset (props [@helen](https://github.com/helen), [@jeffpaul](https://github.com/jeffpaul) via [#608](https://github.com/10up/distributor/pull/608)).
+- Documentation improvements (props [@jeffpaul](https://github.com/jeffpaul), [@dmchale](https://github.com/dmchale), [@kant](https://github.com/kant), [@petenelson](https://github.com/petenelson), [@dinhtungdu](https://github.com/dinhtungdu), [@jakemgold](https://github.com/jakemgold) via [#433](https://github.com/10up/distributor/pull/433), [#462](https://github.com/10up/distributor/pull/462), [#489](https://github.com/10up/distributor/pull/489), [#513](https://github.com/10up/distributor/pull/513), [#525](https://github.com/10up/distributor/pull/525), [#528](https://github.com/10up/distributor/pull/528), [#542](https://github.com/10up/distributor/pull/542), [#544](https://github.com/10up/distributor/pull/544), [#588](https://github.com/10up/distributor/pull/588), [#598](https://github.com/10up/distributor/pull/598), [#599](https://github.com/10up/distributor/pull/599)).
+
+### Changed
+- Internal distribution prepares posts the same for Push or Pull actions (props [@rmarscher](https://github.com/rmarscher), [@dinhtungdu](https://github.com/dinhtungdu) via [#169](https://github.com/10up/distributor/pull/169)).
+- Use filesystem for copying media when doing a network pull/push instead of `download_url()` (props [@petenelson](https://github.com/petenelson), [@dkotter](https://github.com/dkotter), [@dmaslogh](https://github.com/dmaslogh), [@Kpudlo](https://github.com/Kpudlo) via [#567](https://github.com/10up/distributor/pull/567)).
+- Redirect to pulled content tab after content is pulled (props [@joshuaabenazer](https://github.com/joshuaabenazer), [@dkotter](https://github.com/dkotter), [@hearvox](https://github.com/hearvox) via [#575](https://github.com/10up/distributor/pull/575)).
+- Remove `hoverIntent` and add empty placeholder child item in Push menu to improve keyboard support (props [@samikeijonen](https://github.com/samikeijonen), [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter) via [#564](https://github.com/10up/distributor/pull/564), [#607](https://github.com/10up/distributor/pull/607)).
+- Order of "View" and "Edit" links in the Pull menu to match WordPress standard order (props [@jspellman814](https://github.com/jspellman814), [@hearvox](https://github.com/hearvox) via [#532](https://github.com/10up/distributor/pull/532)).
+- Show/hide credentials fields based on registration status on that Registration and Settings screen (props [@dinhtungdu](https://github.com/dinhtungdu), [@oszkarnagy](https://github.com/oszkarnagy) via [#543](https://github.com/10up/distributor/pull/543)).
+- `date()` to `gmdate()` per PHPCS (props [@helen](https://github.com/helen) via [#602](https://github.com/10up/distributor/pull/602)).
+- Bumped WordPress version support to 5.3 (props [@dkotter](https://github.com/dkotter) via [#499](https://github.com/10up/distributor/pull/499)).
+- Update all packages and build process (props [@adamsilverstein](https://github.com/adamsilverstein), [@dkotter](https://github.com/dkotter) via [#450](https://github.com/10up/distributor/pull/450)).
+- Run [WP Acceptance](https://github.com/10up/wpacceptance/) tests in parallel in Travis (props [@adamsilverstein](https://github.com/adamsilverstein) via [#439](https://github.com/10up/distributor/pull/439)).
+
+### Fixed
+- Gutenberg compatibility issues ([@dkotter](https://github.com/dkotter), [@dinhtungdu](https://github.com/dinhtungdu) via [#579](https://github.com/10up/distributor/pull/579)).
+- Issue where push menu would disappear when push is in progress (props [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter), [@helen](https://github.com/helen) via [#538](https://github.com/10up/distributor/pull/538)).
+- Undefined variable issue causing external pushes to not fully work (props [@dkotter](https://github.com/dkotter) via [#578](https://github.com/10up/distributor/pull/578)).
+- Check for value of remote post id to verify push result (props [@dinhtungdu](https://github.com/dinhtungdu), [@eriktad](https://github.com/eriktad), [@arsendovlatyan](https://github.com/arsendovlatyan) via [#574](https://github.com/10up/distributor/pull/574)).
+- Issue with wrong permission route that causes External Connections to fail on creation (props [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter) via [#570](https://github.com/10up/distributor/pull/570)).
+- Issue where view links for external connections are incorrect if it is set up with a trailing slash (props [@dkotter](https://github.com/dkotter) via [#586](https://github.com/10up/distributor/pull/586)).
+- Issue with timeouts on `ajax_verify_external_connection` (props [@madmax3365](https://github.com/madmax3365), [@dinhtungdu](https://github.com/dinhtungdu) via [#245](https://github.com/10up/distributor/pull/245)).
+- Issue where searching for posts during a multisite pull does not work correctly (props [@petenelson](https://github.com/petenelson), [@dinhtungdu](https://github.com/dinhtungdu) via [#533](https://github.com/10up/distributor/pull/533)).
+- Issue where block content pulled through External Connections get converted to classic block (props [@dinhtungdu](https://github.com/dinhtungdu), [@jshwlkr](https://github.com/jshwlkr) via [#534](https://github.com/10up/distributor/pull/534)).
+- Issue where shortcodes were not rendered when pulling content within a multisite instance (props [@petenelson](https://github.com/petenelson), [@dkotter](https://github.com/dkotter) via [#498](https://github.com/10up/distributor/pull/498)).
+- Issue where updating a post in a multisite environment was setting the distributed post's author to the current user rather than maintaining the original author (props [@petenelson](https://github.com/petenelson) via [#527](https://github.com/10up/distributor/pull/527)).
+- Issue where REST API field was not getting populated correctly (props [@dinhtungdu](https://github.com/dinhtungdu), [@dkotter](https://github.com/dkotter), [@ivanlopez](https://github.com/ivanlopez) via [#519](https://github.com/10up/distributor/pull/519)).
+- Issue where terms/meta/etc. gets distributed when updating a previously distributed post (props [@lakrisgubben](https://github.com/lakrisgubben), [@dkotter](https://github.com/dkotter) via [#518](https://github.com/10up/distributor/pull/518)).
+- Replace `has_blocks` with `use_block_editor_for_post` in `is_using_gutenberg check` (props [@johnwatkins0](https://github.com/johnwatkins0), [@dkotter](https://github.com/dkotter) via [#514](https://github.com/10up/distributor/pull/514)).
+- Issue where previously distributed posts appear as distributable for External Connections (props [@madmax3365](https://github.com/madmax3365), [@avag-novembit](https://github.com/avag-novembit), [@adamsilverstein](https://github.com/adamsilverstein) via [#444](https://github.com/10up/distributor/pull/444)).
+- Enable multisite support for VIP Go sites (props [@dinhtungdu](https://github.com/dinhtungdu), [@WPprodigy](https://github.com/WPprodigy), [@jonny-bull](https://github.com/jonny-bull) via [#606](https://github.com/10up/distributor/pull/606)).
+- External connections page markup enhancements (props [@joshuaabenazer](https://github.com/joshuaabenazer), [@samikeijonen](https://github.com/samikeijonen) via [#576](https://github.com/10up/distributor/pull/576)).
+- Fixes and updates unit and acceptance tests, coding standards issues, and WordPress tested-up-to version (props [@dinhtungdu](https://github.com/dinhtungdu) via [#603](https://github.com/10up/distributor/pull/603)).
+
+### Security
+- Bump `websocket-extensions` from 0.1.3 to 0.1.4 (props [@dependabot](https://github.com/apps/dependabot) via [#587](https://github.com/10up/distributor/pull/587)).
+- Bump `acorn` from 5.7.3 to 5.7.4 (props [@dependabot](https://github.com/apps/dependabot) via [#548](https://github.com/10up/distributor/pull/548)).
+- Bump `extend` from 3.0.1 to 3.0.2 (props [@dependabot](https://github.com/apps/dependabot) via [#447](https://github.com/10up/distributor/pull/447)).
+
+## [1.5.0] - 2019-07-18
+### Added
+- Provide more context to the `dt_create_missing_terms` hook (props [@mmcachran](https://github.com/mmcachran), [@helen](https://github.com/helen) via [#378](https://github.com/10up/distributor/pull/378))
+- Test against multiple WP Snapshot variations and block tests (props [@adamsilverstein](https://github.com/adamsilverstein) via [#342](https://github.com/10up/distributor/pull/342) and [#367](https://github.com/10up/distributor/pull/367))
+- Documentation improvements (props [@adamsilverstein](https://github.com/adamsilverstein), [@jeffpaul](https://github.com/jeffpaul), [@arsendovlatyan](https://github.com/arsendovlatyan) via [#352](https://github.com/10up/distributor/pull/352), [#363](https://github.com/10up/distributor/pull/363), [#403](https://github.com/10up/distributor/pull/403), [#414](https://github.com/10up/distributor/pull/414), [#415](https://github.com/10up/distributor/pull/415))
+
+### Changed
+- More efficient method of generating internal connection data on push and pull screens (props [@dkotter](https://github.com/dkotter) via [#355](https://github.com/10up/distributor/pull/355))
+- Lazy load available push connections in toolbar dropdown to avoid blocking page render (props [@dkotter](https://github.com/dkotter) via [#365](https://github.com/10up/distributor/pull/365))
+- More performant retrieval and consistent ordering on the pull content screen (props [@helen](https://github.com/helen) via [#431](https://github.com/10up/distributor/pull/431) and [#434](https://github.com/10up/distributor/pull/434))
+- Unify args provided to the `dt_push_post_args` filter (props [@gthayer](https://github.com/gthayer) via [#371](https://github.com/10up/distributor/pull/371))
+- Bumped WordPress version support to 5.2 (props [@adamsilverstein](https://github.com/adamsilverstein), [@jeffpaul](https://github.com/jeffpaul) via [#376](https://github.com/10up/distributor/pull/376))
+
+### Fixed
+- Avoid connection errors on the pull content screen for connections with a lot of pulled/skipped content (props [@helen](https://github.com/helen) via [#431](https://github.com/10up/distributor/pull/431))
+- Pass slug when distributing terms to avoid duplicating terms with special characters or custom slugs (props [@arsendovlatyan](https://github.com/arsendovlatyan) and [@helen](https://github.com/helen) via [#262](https://github.com/10up/distributor/pull/262))
+- Simplify and avoid a fatal error in `is_using_gutenberg()` (props [@helen](https://github.com/helen) via [#426](https://github.com/10up/distributor/pull/426))
+- Avoid PHP notices (props [@grappler](https://github.com/grappler) via [#401](https://github.com/10up/distributor/pull/401) and [@mrazzari](https://github.com/mrazzari) via [#420](https://github.com/10up/distributor/pull/420))
+
+## [1.4.1] - 2019-03-15
+### Fixed
+- Improve block editor detection, correcting an issue with post saving.
+
+## [1.4.0] - 2019-03-07
+### Added
+- Clearer instructions and help text when adding an external connection.
+- Log image sideloading failures when using `DISTRIBUTOR_DEBUG`.
+
+### Fixed
+- Allow attachments to be distributed from local environments.
+- Ensure pagination is reset when switching views on the pull content screen.
+- Remove extraneous checkboxes from pulled content screen.
+- Suppress a PHP warning when no meta is being distributed for attachments.
+
+## [1.3.9] - 2019-02-21
+### Fixed
+- Ensure posts distributed as draft can be published.
+
+## [1.3.8] - 2019-01-30
+### Added
+- Add `dt_after_set_meta` action.
+- Add `dt_process_subscription_attributes` action.
+
+### Fixed
+- Ensure post types without excerpt support can be distributed.
+
+## [1.3.7] - 2019-01-16
+### Added
+- Distribute plaintext URLs instead of full markup for automatic embeds (oEmbeds). This was causing issues for non-privileged users where the markup was subject to sanitization/kses.
+- Add `push`/`pull` context to `get_available_authorized_sites()`.
+- Add `dt_allowed_media_extensions` and `dt_media_processing_filename` filters so that different media types or specific files can be detected and targeted.
+
+### Fixed
+- Ensure media meta is passed through `prepare_meta()` to apply the blacklist. This completes the generated image size info fix from 1.3.3.
+- Avoid a PHP notice when only using the block editor on the receiving site.
+- Avoid a jQuery Migrate notice.
+
+## [1.3.6] - 2018-12-19
+### Fixed (for WP 5.0 block editor)
+- Properly detect block editor content.
+- Show notices with actions.
+- Ensure distributed posts can be published.
+- Fully disable editing of classic blocks in distributed posts.
+- Clean up distribution status display in side panel.
+- Not block editor: Avoid notices on the pull content screen when no connections are set up yet.
+
+## [1.3.5] - 2018-12-05
+### Added
+- Add a `dt_available_pull_post_types` filter to enable pulling of post types not registered on the destination site. NOTE: This requires custom handling to pull into an existing post type.
+
+### Fixed
+- Avoid duplicating empty meta values.
+- Align with JS i18n coming in WordPress 5.0.
+
+## [1.3.4] - 2018-11-20
+### Added
+- Provide `$taxonomy` to the `dt_update_term_hierarchy` filter.
+
+### Fixed
+- Enable distribution of multiple meta values stored using the same key.
+- Retain comment status, pingback status, and post passwords on pull.
+
+## [1.3.3] - 2018-10-19
+### Fixed
+- Do not interfere with non-subscription REST API requests.
+- Retain generated image size info after media distribution.
+
+## [1.3.2] - 2018-10-16
+### Fixed
+- Correctly encode search query in the pull list.
+- Properly check the key for subscription updates.
+- Ensure featured images are properly detected from environments that type juggle.
+- Add plugin icon to plugin update UI.
+
+## [1.3.1] - 2018-10-09
+### Fixed
+- Retain keys for associative array meta.
+- Properly pass CPT slugs to external connections.
+- Don't push updates to network sites that no longer exist.
+- Escaping improvements.
+- Stable build now only contains files necessary for production.
+
+## [1.3.0] - 2018-09-20
+### Added
+- Add a media processing option to only distribute the featured image instead of the featured image and all attached media.
+
+**Important note**: This is now the default option **for all sites**. Attached media is often loosely correlated with media use and in-content media URLs are not rewritten on distribution, making local copies of most attached media unnecessary in default setups, even as they add significant overhead to distribution. To retain the previous behavior of distributing all attached media (children attachments), change the setting on the **receiving** site to `Process the featured image and any attached images.`
+
+- Support pulling multiple post types for external connections.
+
+This adds a post type selector when viewing the Pull Content list for both external and internal connections, which is both easier to use and more performant.
+
+- Distributed copies of posts that are later permanently deleted are now marked as `skipped` in the Pull Content list, making them available for pull again while not appearing as new content.
+- Add `dt_original_post_parent` to post meta, allowing developers to better manage post parent handling.
+
+### Fixed
+- Restore support for storing arrays in meta
+- Don't show pushed posts as available for pull on the receiving site
+- Correctly save screen options on Distributor pages
+- Removed a redundant argument
+- Code formatting fixes
+
+## [1.2.3] - 2018-08-16
+### Fixed
+- Issue that was hiding the "As Draft" checkbox on the push screen. We've introduced a new filter "dt_allow_as_draft_distribute" which can be set to false to disable the "as draft" checkbox.
+
+## [1.2.2] - 2018-08-14
+### Added
+- Helper function to return post statuses that are allowed to be distributed
+- Utilize the og:url from Yoast for external connections
+- Add new filters for authorized sites for internal connections
+- Documentation and formatting updates
+
+### Changed
+- Don’t set Distributor meta data on REST API post creation unless post was created by Distributor
+- Blacklist the `_wp_old_slug` and `_wp_old_date` meta
+- Disable pull UI while switching between pull connections
+
+### Fixed
+- Issue where content pulled or skipped from an internal connection (in the Pull interface) would show up as "pulled" across all internal sites / connections. **Backwards compatibility break**: internal posts that were previously skipped or pulled will show as available for pull again in all internal sites.
+
+## [1.2.1] - 2018-07-06
+### Fixed
+- Gutenberg bugs; parent post bug.
+
+## [1.2.0] - 2018-05-27
+### Added
+- Gutenberg support, public release.
+
+## [1.1.0] - 2018-01-19
+### Added
+- WordPress.com Oauth2 authentication.
+
+## [1.0.0] - 2016-09-26
+- Initial closed release.
+
+[Unreleased]: https://github.com/10up/distributor/compare/trunk...develop
+[1.6.2]: https://github.com/10up/distributor/compare/1.6.1...1.6.2
+[1.6.1]: https://github.com/10up/distributor/compare/1.6.0...1.6.1
+[1.6.0]: https://github.com/10up/distributor/compare/1.5.0...1.6.0
+[1.5.0]: https://github.com/10up/distributor/compare/1.4.1...1.5.0
+[1.4.1]: https://github.com/10up/distributor/compare/1.4.0...1.4.1
+[1.4.0]: https://github.com/10up/distributor/compare/1.3.9...1.4.0
+[1.3.9]: https://github.com/10up/distributor/compare/1.3.8...1.3.9
+[1.3.8]: https://github.com/10up/distributor/compare/1.3.7...1.3.8
+[1.3.7]: https://github.com/10up/distributor/compare/1.3.6...1.3.7
+[1.3.6]: https://github.com/10up/distributor/compare/1.3.5...1.3.6
+[1.3.5]: https://github.com/10up/distributor/compare/1.3.4...1.3.5
+[1.3.4]: https://github.com/10up/distributor/compare/1.3.3...1.3.4
+[1.3.3]: https://github.com/10up/distributor/compare/1.3.2...1.3.3
+[1.3.2]: https://github.com/10up/distributor/compare/1.3.1...1.3.2
+[1.3.1]: https://github.com/10up/distributor/compare/1.3.0...1.3.1
+[1.3.0]: https://github.com/10up/distributor/compare/1.2.3...1.3.0
+[1.2.3]: https://github.com/10up/distributor/compare/1.2.2...1.2.3
+[1.2.2]: https://github.com/10up/distributor/compare/7f245b5...1.2.2
+[1.2.1]: https://github.com/10up/distributor/compare/457b14...7f245b5
+[1.2.0]: https://github.com/10up/distributor/compare/archive%2Ffeature%2Fenable-oath2...457b14
+[1.1.0]: https://github.com/10up/distributor/compare/5f68677...archive%2Ffeature%2Fenable-oath2
+[1.0.0]: https://github.com/10up/distributor/commit/5f68677da972336b6a8161c143faa456bfdbe4ef
