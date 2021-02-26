@@ -58,7 +58,7 @@ function _pantheon_fetch_custom_upstream_info() {
 // Check if Pantheon upstream updates are available.
 function _pantheon_wordpress_update_available() {
 
-	if ( ! function_exists( 'pantheon_curl' ) ) {
+	if ( ! function_exists( 'pantheon_curl_timeout' ) ) {
 		return false;
 	}
 
@@ -88,7 +88,7 @@ function _pantheon_curl_cached( $api_url ) {
 	if ( false !== $cache_value ) {
 		return $cache_value;
 	}
-	$api_response = pantheon_curl( $api_url, null, 8443 );
+	$api_response = pantheon_curl_timeout( $api_url, null, 8443 );
 	$data = $api_response ? json_decode( $api_response['body'], true ) : [];
 	set_transient( $cache_key, $data, 2 * MINUTE_IN_SECONDS );
 	return $data;
@@ -119,8 +119,9 @@ function _pantheon_upstream_update_notice() {
 add_action( 'admin_init', '_pantheon_register_upstream_update_notice' );
 function _pantheon_register_upstream_update_notice(){
 	// but only if we are on Pantheon
+	// and this is not a WordPress Ajax request
 	// and there is a WordPress update available
-	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && _pantheon_wordpress_update_available() ){
+	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && ! wp_doing_ajax() && _pantheon_wordpress_update_available() ){
 		add_action( 'admin_notices', '_pantheon_upstream_update_notice' );
 	}
 }
@@ -147,5 +148,3 @@ if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], array('test', 'live') ) && (php_sa
 	remove_action( 'load-update-core.php', 'wp_update_themes' );
 	add_filter( 'pre_site_transient_update_themes', '_pantheon_disable_wp_updates' );
 }
-
-
