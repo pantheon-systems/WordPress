@@ -1,0 +1,17 @@
+{
+    "format": "\nName\n\t%s\n\nUsage\n\t%s\n\nOptions\n\t%s\n",
+    "name": [
+        "Vulnerability scanner for WordPress",
+        "https://github.com/sergejmueller/wpcheck"
+    ],
+    "usage": "wpcheck <url> [url] [options]",
+    "options": [
+        "-s, --silent       Disable success and info messages",
+        "-r, --rules-dir    Load and execute additional rules from any directory",
+        "-b, --bulk-file    Read and scan additional URLs from a text file",
+        "-u, --user-agent   Define a custom User-Agent string",
+        "-i, --ignore-rule  Skip loading and execution of a specific rule",
+        "-v, --version      Print wpcheck version",
+        "-h, --help         Show this help"
+    ]
+}

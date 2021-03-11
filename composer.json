@@ -1,0 +1,17 @@
+{
+    "name": "the-scranton-branch/scranton-wordpress",
+    "description": "WordPress Distro for Scranton Upstream",
+    "authors": [
+        {
+            "name": "Kyle Taylor",
+            "email": "kyle.taylor@pantheon.io"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5",
+        "wp-coding-standards/wpcs": "^2.3",
+        "pheromone/phpcs-security-audit": "^2.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0"
+    }
+}
