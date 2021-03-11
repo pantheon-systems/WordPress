@@ -1,0 +1,125 @@
+﻿/*------------------------------------*
+  $PAGINATION
+*------------------------------------*/
+ul.page-numbers {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0 0;
+  list-style: none;
+  text-align: right;
+  clear: both;
+}
+
+ul.page-numbers li {
+  display: inline-block;
+}
+
+.page-links {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.page-numbers a,
+.page-numbers span,
+.page-links span {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  margin: 0 8px 0 0;
+  text-align: center;
+  color: #555;
+  border: 1px solid #e9e9e9;
+  font-size: 18px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 2px;
+  transition: all .3s ease-in-out;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.page-numbers a span {
+  padding: 0;
+}
+
+.page-numbers a:hover,
+.page-links a:hover span,
+.page-numbers.current,
+.page-numbers.current:hover {
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.oceanwp-pagination.oceanwp-center ul.page-numbers,
+.oceanwp-pagination.oceanwp-center .page-links {
+  text-align: center;
+}
+
+.oceanwp-pagination.oceanwp-left ul.page-numbers,
+.oceanwp-pagination.oceanwp-left .page-links {
+  text-align: left;
+}
+
+/* next/prev */
+.page-jump a {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.2;
+  padding-bottom: 3px;
+  border-bottom: 1px solid;
+  text-transform: uppercase;
+}
+
+/* infinite scroll */
+.infinite-scroll-loader {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    height: 18px;
+    width: 18px;
+    margin-left: -9px;
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    border-right: 2px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+    border-top: 2px solid rgba(0, 0, 0, 0.8);
+    border-radius: 100%;
+    -webkit-animation: rotation .6s infinite linear;
+    -moz-animation: rotation .6s infinite linear;
+    -o-animation: rotation .6s infinite linear;
+    animation: rotation .6s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+   from {-webkit-transform: rotate(0deg);}
+   to {-webkit-transform: rotate(359deg);}
+}
+@-moz-keyframes rotation {
+   from {-moz-transform: rotate(0deg);}
+   to {-moz-transform: rotate(359deg);}
+}
+@-o-keyframes rotation {
+   from {-o-transform: rotate(0deg);}
+   to {-o-transform: rotate(359deg);}
+}
+@keyframes rotation {
+   from {transform: rotate(0deg);}
+   to {transform: rotate(359deg);}
+}
+
+#infscr-loading img {
+  display: none !important;
+}
+
+.infinite-scroll-nav {
+  display: none;
+}
+
+/* Add some padding */
+.infinite-scroll-wrap {
+  position: relative;
+  padding-bottom: 20px;
+}

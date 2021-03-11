@@ -1,0 +1,324 @@
+﻿/*------------------------------------*
+  $TOP BAR
+*------------------------------------*/
+#top-bar-wrap {
+  background-color: #fff;
+  font-size: 12px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+#top-bar {
+  padding: 8px 0;
+}
+
+#top-bar-inner {
+  position: relative;
+}
+
+.top-bar-left {
+  float: left;
+}
+
+.top-bar-right {
+  float: right;
+}
+
+.top-bar-centered {
+  float: none;
+  text-align: center;
+}
+
+/**
+ * Top Bar Content
+ */
+#top-bar-content strong {
+  color: #333;
+}
+
+#top-bar-content > a {
+  color: #555;
+}
+
+#top-bar-content > a:hover {
+  color: #13aff0;
+}
+
+#top-bar-content select {
+  background-color: transparent;
+  padding: 5px;
+  color: rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0.2);
+  min-width: 100px;
+}
+
+#top-bar-content #lang_sel {
+  position: relative;
+  display: inline-block;
+  top: 3px;
+  margin-right: 10px;
+  z-index: 99;
+}
+
+#top-bar-wrap #lang_sel ul ul {
+  z-index: 99999;
+}
+
+.top-bar-right .polylang-switcher-shortcode {
+  float: right;
+  margin: 0;
+  margin-left: 20px;
+}
+
+.top-bar-left .polylang-switcher-shortcode {
+  float: left;
+  margin: 0;
+  margin-right: 20px;
+}
+
+/**
+ * Top Bar Menu
+ */
+.top-bar-left.has-content #top-bar-nav,
+.top-bar-right.has-content #top-bar-nav {
+  margin: 0;
+  margin-right: 20px;
+  padding: 0;
+}
+
+#top-bar-nav,
+#top-bar-nav > li {
+  display: inline-block;
+}
+
+#top-bar-content.top-bar-centered #top-bar-nav,
+#top-bar-content.top-bar-centered #top-bar-nav > li {
+  display: inline-block;
+  float: none;
+}
+
+#top-bar-nav > ul > li {
+  display: inline-block;
+  float: none;
+  margin-right: 15px;
+}
+
+#top-bar-nav > ul > li:last-child {
+  margin-right: 0;
+}
+
+#top-bar-nav > ul > li a .nav-arrow {
+  margin-left: 4px;
+  margin-right: 0;
+}
+
+/* Hide middle logo if is not in main menu */
+#top-bar-nav > ul > li.middle-site-logo {
+  display: none;
+}
+
+/**
+ * Top Bar Social
+ */
+#top-bar-social ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#top-bar-social li {
+  float: left;
+}
+
+#top-bar-social li a {
+  display: block;
+  float: left;
+  font-size: 14px;
+  color: #bbb;
+  padding: 0 6px;
+}
+
+#top-bar-social li:last-child {
+  margin-right: 0;
+}
+
+#top-bar-social.top-bar-left li:first-child a {
+  padding-left: 0;
+}
+
+#top-bar-social.top-bar-right li:last-child a {
+  padding-right: 0;
+}
+
+#top-bar-social li.oceanwp-twitter a:hover {
+  color: #46d4fe;
+}
+
+#top-bar-social li.oceanwp-facebook a:hover {
+  color: #37589b;
+}
+
+#top-bar-social li.oceanwp-googleplus a:hover {
+  color: #de5a49;
+}
+
+#top-bar-social li.oceanwp-pinterest a:hover {
+  color: #cb2027;
+}
+
+#top-bar-social li.oceanwp-dribbble a:hover {
+  color: #ea4c89;
+}
+
+#top-bar-social li.oceanwp-vk a:hover {
+  color: #597BA5;
+}
+
+#top-bar-social li.oceanwp-instagram a:hover {
+  color: #3F729B;
+}
+
+#top-bar-social li.oceanwp-linkedin a:hover {
+  color: #3399CC;
+}
+
+#top-bar-social li.oceanwp-tumblr a:hover {
+  color: #2C4762;
+}
+
+#top-bar-social li.oceanwp-github a:hover {
+  color: #60b044;
+}
+
+#top-bar-social li.oceanwp-flickr a:hover {
+  color: #fa4086;
+}
+
+#top-bar-social li.oceanwp-skype a:hover {
+  color: #00AFF0;
+}
+
+#top-bar-social li.oceanwp-youtube a:hover {
+  color: #C4302B;
+}
+
+#top-bar-social li.oceanwp-vimeo a:hover {
+  color: #1ab7ea;
+}
+
+#top-bar-social li.oceanwp-vine a:hover {
+  color: #00bf8f;
+}
+
+#top-bar-social li.oceanwp-xing a:hover {
+  color: #006464;
+}
+
+#top-bar-social li.oceanwp-yelp a:hover {
+  color: #C41200;
+}
+
+#top-bar-social li.oceanwp-tripadvisor a:hover {
+  color: #589442;
+}
+
+#top-bar-social li.oceanwp-rss a:hover {
+  color: #ff7900;
+}
+
+#top-bar-social li.oceanwp-email a:hover {
+  color: #13aff0;
+}
+
+/**
+ * Top Bar Social Right
+ */
+#top-bar-social.top-bar-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  height: 20px;
+  line-height: 20px;
+  margin-top: -10px;
+}
+
+/**
+ * Top Bar Social Left
+ */
+#top-bar-social.top-bar-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 20px;
+  line-height: 20px;
+  margin-top: -10px;
+}
+
+/**
+ * Top Bar Social Centered
+ */
+#top-bar-social.top-bar-centered {
+  padding-top: 15px;
+}
+
+#top-bar-social.top-bar-centered li {
+  display: inline-block;
+  float: none;
+}
+
+/*------------------------------------*
+  All Devices under 960px
+*------------------------------------*/
+@media only screen and (max-width: 959px) {
+  /* hide navbar */
+  #top-bar-nav {
+    display: none;
+  }
+}
+
+/*------------------------------------*
+  Phone Portrait and Landscape
+*------------------------------------*/
+@media only screen and (max-width: 767px) {
+  /* top-bar */
+  #top-bar {
+    padding: 20px 0;
+  }
+  #top-bar > div:nth-child(2) {
+    padding-top: 20px;
+  }
+  #top-bar-content, #top-bar-social-alt {
+    float: none;
+    text-align: center;
+  }
+  #top-bar-social {
+    text-align: center;
+  }
+  #top-bar-social.top-bar-left, #top-bar-social.top-bar-right {
+    position: inherit;
+    left: auto;
+    right: auto;
+    float: none;
+    height: auto;
+    line-height: 1.5em;
+    margin-top: 0;
+  }
+  .top-bar-right {
+    float: none;
+    text-align: center;
+  }
+  #top-bar-social li,
+  #top-bar #top-bar-nav > li {
+    float: none;
+    display: inline-block;
+  }
+  #top-bar-nav {
+    float: none;
+    text-align: center;
+  }
+  #top-bar #lang_sel {
+    text-align: left;
+  }
+  body.rtl #top-bar #lang_sel {
+    text-align: right;
+  }
+}

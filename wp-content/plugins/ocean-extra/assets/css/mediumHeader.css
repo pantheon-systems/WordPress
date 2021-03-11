@@ -1,0 +1,293 @@
+﻿/*------------------------------------*
+  $MEDIUM HEADER
+*------------------------------------*/
+#site-header.medium-header {
+  background-color: transparent;
+  text-align: center;
+}
+
+#site-header.medium-header .top-header-wrap {
+  position: relative;
+  background-color: #fff;
+  padding: 30px 0;
+  -webkit-transition: padding .4s ease-in-out;
+  -moz-transition: padding .4s ease-in-out;
+  -o-transition: padding .4s ease-in-out;
+  -ms-transition: padding .4s ease-in-out;
+  transition: padding .4s ease-in-out;
+  z-index: 10;
+}
+
+#site-header.medium-header .top-header-inner {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+#site-header.medium-header .top-col {
+  -webkit-flex: 1 0 0;
+  flex: 1 0 0;
+}
+
+#site-header.medium-header .top-col.logo-col {
+  -webkit-flex: auto 0 0;
+  flex: auto 0 0;
+}
+
+#site-header.medium-header .top-col.col-1 {
+  text-align: left;
+}
+
+#site-header.medium-header .top-col.col-2 {
+  text-align: center;
+}
+
+#site-header.medium-header .top-col.col-3 {
+  text-align: right;
+}
+
+#site-header.medium-header #medium-searchform form {
+  display: inline-block;
+  position: relative;
+}
+
+#site-header.medium-header #medium-searchform form.search-filled label {
+  opacity: 0;
+  -webkit-transition-duration: 150ms;
+  -moz-transition-duration: 150ms;
+  -o-transition-duration: 150ms;
+  transition-duration: 150ms;
+}
+
+#site-header.medium-header #medium-searchform input {
+  position: relative;
+  background-color: transparent !important;
+  border: 0;
+  margin: 0;
+  padding: 6px 38px 6px 12px;
+  max-width: 178px;
+  z-index: 2;
+}
+
+#site-header.medium-header #medium-searchform input:focus {
+  max-width: 220px;
+}
+
+#site-header.medium-header #medium-searchform label, #site-header.medium-header #medium-searchform button {
+  position: absolute;
+  top: 0;
+  line-height: 40px;
+  margin: 0;
+}
+
+#site-header.medium-header #medium-searchform label {
+  left: 12px;
+  color: #333;
+  cursor: text;
+  opacity: .5;
+  z-index: 1;
+}
+
+#site-header.medium-header #medium-searchform button {
+  right: 0;
+  width: 38px;
+  background-color: transparent;
+  color: #555;
+  border: 0;
+  padding: 0;
+  z-index: 2;
+  transition: all .3s ease;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+}
+
+#site-header.medium-header #medium-searchform button:hover {
+  color: #13aff0;
+}
+
+#site-header.medium-header #medium-searchform .search-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f5f5f5;
+}
+
+#site-header.medium-header #site-logo {
+  float: none;
+  display: block;
+}
+
+#site-header.medium-header #site-logo #site-logo-inner {
+  display: block;
+  height: auto !important;
+}
+
+#site-header.medium-header #oceanwp-social-menu {
+  float: none;
+  display: block;
+  right: auto !important;
+  left: auto !important;
+}
+
+#site-header.medium-header #oceanwp-social-menu .social-menu-inner {
+  display: block;
+  height: auto;
+}
+
+#site-header.medium-header #oceanwp-social-menu ul li {
+  float: none;
+  display: inline-block;
+}
+
+#site-header.medium-header #site-navigation-wrap {
+  position: relative;
+  background-color: #f9f9f9;
+  float: none;
+  position: relative;
+  right: auto !important;
+  left: auto !important;
+  -ms-transform: none;
+  -webkit-transform: none;
+  transform: none;
+  z-index: 9;
+}
+
+#site-header.medium-header #site-navigation-wrap.left-menu #site-navigation {
+  float: left;
+  left: -22px;
+}
+
+#site-header.medium-header #site-navigation-wrap.center-menu #site-navigation .dropdown-menu > li {
+  float: none;
+  display: inline-block;
+}
+
+#site-header.medium-header #site-navigation-wrap.right-menu #site-navigation {
+  float: right;
+  right: -22px;
+}
+
+#site-header.medium-header #site-navigation-wrap #site-navigation {
+  display: inline-block;
+  position: relative;
+}
+
+#site-header.medium-header #site-navigation-wrap .dropdown-menu > li > a {
+  font-size: 12px;
+  line-height: 60px;
+  padding: 0 22px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#site-header.medium-header.hidden-menu #site-navigation-wrap,
+#site-header.medium-header.hidden-menu #site-navigation,
+#site-header.medium-header.hidden-menu #oceanwp-mobile-menu-icon {
+  max-height: 150px;
+  -webkit-transition: all .4s ease-in-out;
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -ms-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.is-sticky #site-header.medium-header .top-header-wrap {
+  padding: 20px 0;
+}
+
+.is-sticky #site-header.medium-header .top-header-wrap #oceanwp-social-menu .social-menu-inner {
+  height: auto;
+}
+
+.is-sticky #site-header.medium-header.hidden-menu #site-navigation-wrap,
+.is-sticky #site-header.medium-header.hidden-menu #site-navigation,
+.is-sticky #site-header.medium-header.hidden-menu #oceanwp-mobile-menu-icon {
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.is-sticky #site-header.medium-header.hidden-menu:hover #site-navigation-wrap,
+.is-sticky #site-header.medium-header.hidden-menu:hover #site-navigation,
+.is-sticky #site-header.medium-header.hidden-menu:hover #oceanwp-mobile-menu-icon {
+  max-height: 150px;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Medium header mobile menu */
+#site-header.medium-header #oceanwp-mobile-menu-icon {
+  float: none;
+  right: auto !important;
+  left: auto !important;
+}
+
+#site-header.medium-header #oceanwp-mobile-menu-icon a {
+  float: none;
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 22px;
+  line-height: 60px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/*------------------------------------*
+  All Devices under 960px
+*------------------------------------*/
+@media only screen and (max-width: 959px) {
+  /* Hide social and search form in sidr for the medium header style */
+  .medium-header-style .sidr-class-social-menu-inner,
+  .medium-header-style .sidr-class-mobile-searchform {
+    display: none;
+  }
+}
+
+/*------------------------------------*
+  Phone Portrait and Landscape
+*------------------------------------*/
+@media only screen and (max-width: 767px) {
+  /* medium header style */
+  #site-header.medium-header .top-header-inner {
+    display: block;
+  }
+  #site-header.medium-header .top-col:not(.logo-col) {
+    display: none;
+  }
+  #site-header.medium-header .top-col.logo-col {
+    display: inline-block;
+    text-align: center;
+  }
+  /* Show social and search form in sidr for the medium header style */
+  .medium-header-style .sidr-class-social-menu-inner,
+  .medium-header-style .sidr-class-mobile-searchform {
+    display: block;
+  }
+}
+
+/*------------------------------------*
+  Phone Landscape
+*------------------------------------*/
+@media only screen and (max-width: 480px) {
+  /* medium header style */
+  #site-header.medium-header .header-top-wrap {
+    padding: 20px 0;
+  }
+  #site-header.medium-header #oceanwp-mobile-menu-icon a {
+    line-height: 40px;
+  }
+}

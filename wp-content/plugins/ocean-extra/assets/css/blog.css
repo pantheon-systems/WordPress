@@ -1,0 +1,299 @@
+﻿/*------------------------------------*
+  $BLOG
+*------------------------------------*/
+#blog-entries {
+  padding-bottom: 0;
+}
+
+.blog-entry.post {
+  position: relative;
+}
+
+.blog-entry.post .thumbnail {
+  position: relative;
+}
+
+.blog-entry.post .thumbnail .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  text-align: center;
+  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  -ms-transition: all .3s ease-in-out;
+}
+
+.blog-entry.post .thumbnail:hover .overlay {
+  opacity: 1;
+}
+
+.blog-entry.post .thumbnail img {
+  width: 100%;
+}
+
+.blog-entry.post ul.meta {
+  margin: 0 0 12px;
+}
+
+.blog-entry.post .blog-entry-header {
+  margin-bottom: 20px;
+}
+
+.blog-entry.post .blog-entry-header h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.blog-entry.post .blog-entry-header h2 a {
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
+.blog-entry.post .blog-entry-summary {
+  margin-bottom: 20px;
+}
+
+.blog-entry.post .blog-entry-summary p:last-child {
+  margin-bottom: 0;
+}
+
+/**
+ * Gallery Format
+ */
+.gallery-format {
+  display: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-format img {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.gallery-format .slick-prev,
+.gallery-format .slick-next {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gallery-format:hover .slick-prev,
+.gallery-format:hover .slick-next {
+  opacity: 1;
+  visibility: visible;
+}
+
+/**
+ * Video/audio format
+ */
+.wp-video {
+  width: 100% !important;
+}
+
+/**
+ * Link Format
+ */
+.link-entry i {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  line-height: 60px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  transition: all .3s ease;
+}
+
+.thumbnail:hover i {
+  background-color: #13aff0;
+}
+
+/**
+ * Quote format
+ */
+.post-quote-content,
+.post-quote-author {
+  position: relative;
+  background-color: #13aff0;
+  color: #fff;
+  font-size: 20px;
+  padding: 20px 30px;
+  line-height: 1.6;
+  z-index: 1;
+}
+
+.post-quote-icon {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  font-size: 48px;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.post-quote-author {
+  background-color: #0b7cac;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 30px;
+  margin-top: 1px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.single-post .post-quote-wrap {
+  margin-bottom: 30px;
+}
+
+/**
+ * Meta
+ */
+ul.meta {
+  display: inline-block;
+  width: 100%;
+  color: #777;
+  font-size: 12px;
+  line-height: 1;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+ul.meta li {
+  float: left;
+  line-height: 1.3;
+}
+
+ul.meta li:after {
+  content: '-';
+  padding: 0 6px;
+}
+
+ul.meta li:last-child:after {
+  display: none;
+  padding: 0;
+}
+
+ul.meta li a {
+  color: #777;
+}
+
+ul.meta li a:hover {
+  color: #13aff0;
+}
+
+ul.meta li i {
+  display: inline-block;
+  color: #929292;
+  padding-right: 5px;
+}
+
+/**
+ * Single Post
+ */
+.single .thumbnail {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.single .thumbnail img {
+  width: 100%;
+}
+
+.single h2.entry-title {
+  font-size: 34px;
+  padding: 0 0 20px;
+  margin: 0 0 15px;
+  border-bottom: 1px solid #f1f1f1;
+  letter-spacing: 0.6px;
+}
+
+/**
+ * Single Post Content
+ */
+.single .entry-content {
+  margin-bottom: 20px;
+}
+
+.dropcap {
+  float: left;
+  color: #13aff0;
+  font-size: 120px;
+  line-height: 80px;
+  margin-top: 6px;
+  margin-right: 10px;
+}
+
+.entry-footer {
+  display: inline-block;
+  width: 100%;
+}
+
+/**
+ * Single Post Tags
+ */
+.single .post-tags {
+  font-size: 11px;
+  font-weight: 600;
+  margin: 30px 0 0;
+  text-transform: uppercase;
+}
+
+/*------------------------------------*
+  $SEARCH
+*------------------------------------*/
+#blog-entries .type-page {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+#blog-entries .type-page .entry-summary p:last-child {
+  margin-bottom: 0;
+}
+
+/*------------------------------------*
+  Phone Portrait and Landscape
+*------------------------------------*/
+@media only screen and (max-width: 767px) {
+  .blog-entry {
+    width: 100% !important;
+    margin-bottom: 25px;
+  }
+}
+
+/*------------------------------------*
+  Phone Landscape
+*------------------------------------*/
+@media only screen and (max-width: 480px) {
+  /* blog  */
+  .single-post.media-above-content .thumbnail {
+    margin-bottom: 20px;
+  }
+  .single-post h2.entry-title {
+    font-size: 26px;
+  }
+  ul.meta {
+    margin-bottom: 12px;
+  }
+  ul.meta li {
+    margin-bottom: 8px;
+  }
+  blockquote {
+    margin: 20px 0;
+  }
+}

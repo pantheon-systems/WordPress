@@ -1,0 +1,36 @@
+﻿/*------------------------------------*
+  $SEARCHFORM DROPDOWN
+*------------------------------------*/
+#searchform-dropdown {
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  border-top: 3px solid #13aff0;
+  top: 100%;
+  padding: 15px;
+  width: 260px;
+  -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+  z-index: 10000;
+}
+
+#searchform-dropdown input {
+  display: block;
+  background-color: transparent;
+  border-radius: 0;
+  margin: 0;
+}
+
+.oceanwp-dropdown-top-border #searchform-dropdown {
+  border: none;
+}
+
+/* display search on click */
+#searchform-dropdown.show {
+  visibility: visible;
+  opacity: 1;
+}

@@ -1,0 +1,32 @@
+﻿/*------------------------------------*
+	$BLOG LARGE
+*------------------------------------*/
+.blog-entry.large-entry {
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.blog-entry.large-entry .thumbnail {
+  margin-bottom: 20px;
+}
+
+.blog-entry.large-entry .blog-entry-readmore a {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1;
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.blog-entry.large-entry .blog-entry-readmore a:hover {
+  color: #13aff0;
+  border-color: #13aff0;
+}
+
+.blog-entry.large-entry .blog-entry-readmore a i {
+  margin-left: 8px;
+}

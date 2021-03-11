@@ -1,0 +1,165 @@
+﻿#site-header {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #f1f1f1;
+  z-index: 10;
+}
+
+.no-header-border #site-header {
+  border-bottom: none;
+}
+
+.is-sticky #site-header.transparent-header {
+  background-color: #fff;
+}
+
+#site-header-inner {
+  position: relative;
+  height: 100%;
+}
+
+#site-logo {
+  float: left;
+  height: 100%;
+  display: table;
+}
+
+#site-logo.has-transparent-logo .transparent-logo-link {
+  display: none;
+}
+
+#site-logo #site-logo-inner {
+  display: table-cell;
+  vertical-align: middle;
+  height: 74px;
+}
+
+#site-logo #site-logo-inner a {
+  background-color: transparent !important;
+}
+
+#site-logo #site-logo-inner a img {
+  width: auto;
+  vertical-align: middle;
+  -webkit-transition: opacity .3s ease-out;
+  -moz-transition: opacity .3s ease-out;
+  -o-transition: opacity .3s ease-out;
+  transition: opacity .3s ease-out;
+}
+
+#site-logo #site-logo-inner a:hover img {
+  opacity: 0.6;
+}
+
+#site-logo a.site-logo-text {
+  font-size: 24px;
+  margin: 0;
+}
+
+#site-logo-fa-icon {
+  margin-right: 10px;
+}
+
+#site-logo-fa-icon.fa-oceanwp-hidden {
+  margin-right: 0;
+}
+
+/**
+ * Video header
+ */
+#site-header .custom-header-media {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+#site-header .custom-header-media:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  height: 100%;
+  z-index: 2;
+  background: -moz-linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 75%, rgba(0, 0, 0, 0.3) 100%);
+  background: -webkit-linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 75%, rgba(0, 0, 0, 0.3) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 75%, rgba(0, 0, 0, 0.3) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00000000", endColorstr="#4d000000", GradientType=0);
+}
+
+#site-header .custom-header-media video, #site-header .custom-header-media iframe {
+  position: absolute;
+  height: auto;
+  left: 50%;
+  max-width: 1000%;
+  min-height: 100%;
+  min-width: 100%;
+  min-width: 100vw;
+  width: auto;
+  top: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+#site-header .custom-header-media .wp-custom-header-video-button {
+  display: none;
+}
+
+.has-header-video #site-header-inner {
+  z-index: 10;
+}
+
+/*------------------------------------*
+  Mobile Menu
+*------------------------------------*/
+#site-logo .retina-logo-link,
+#site-logo .transparent-retina-logo-link {
+  display: none;
+}
+
+/*------------------------------------*
+  Retina Logo
+*------------------------------------*/
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  /* logo */
+  #site-logo.has-retina-logo .custom-logo-link {
+    display: none;
+  }
+  #site-logo.has-retina-logo .retina-logo-link {
+    display: block;
+  }
+}
+
+/*------------------------------------*
+  All Devices under 960px
+*------------------------------------*/
+@media only screen and (max-width: 959px) {
+  /* header > logo */
+  .has-left-menu #site-logo {
+    padding: 0 !important;
+  }
+}
+
+/*------------------------------------*
+  Phone Portrait and Landscape
+*------------------------------------*/
+@media only screen and (max-width: 767px) {
+  #site-logo {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+  #site-logo.has-retina-logo .custom-logo-link {
+    display: none;
+  }
+  #site-logo.has-retina-logo .retina-logo-link {
+    display: block;
+  }
+}
