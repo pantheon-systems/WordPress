@@ -17,6 +17,7 @@ $meta = json_decode($req['body'], true);
 
 // Install from profile.
 echo "Installing WordPress core...\n";
+var_dump($meta);
 $title = $meta['label'];
 $email = $_POST['user_email'];
 passthru("$ wp core install --title='{$title}' --admin_user=superuser --admin_email='{$email}'");
