@@ -11,6 +11,7 @@ $post = [
   "Site" => $_ENV['PANTHEON_SITE_NAME'],
   "User" => $_POST['user_email'],
   "Dashboard Link" => 'https://dashboard.pantheon.io/sites/' . $_ENV['PANTHEON_SITE'] . '#' . $_ENV['PANTHEON_ENVIRONMENT'] . '/deploys',
+  "Site Link" => "https://{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.pantheonsite.io",
   "Environment" => $_ENV['PANTHEON_ENVIRONMENT'],
   "Stage" => ucfirst($_POST['stage']) . ' ' . str_replace('_', ' ',  $_POST['wf_type']),
   "Workflow" => $_POST['wf_description'],
