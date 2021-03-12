@@ -11,15 +11,9 @@ if (isset($_POST['environment'])) {
   }
 }
 
-// Get Label
-$req = pantheon_curl('https://api.live.getpantheon.com/sites/self', NULL, 8443);
-var_dump($req);
-$meta = json_decode($req['body'], true);
-
 // Install from profile.
 echo "Installing WordPress core...\n";
-var_dump($meta);
-$title = $meta['label'];
+$title = ucwords(implode(" ", explode('-', $_ENV['PANTHEON_SITE_NAME'])));
 $email = $_POST['user_email'];
-passthru("$ wp core install --title='{$title}' --admin_user=superuser --admin_email='{$email}'");
+system("$ wp core install --title='{$title}' --admin_user=superuser --admin_email='{$email}'");
 echo "Installation complete.\n";
