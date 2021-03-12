@@ -13,6 +13,7 @@ if (isset($_POST['environment'])) {
 
 // Get Label
 $req = pantheon_curl('https://api.live.getpantheon.com/sites/self', NULL, 8443);
+var_dump($req);
 $meta = json_decode($req['body'], true);
 
 // Install from profile.
