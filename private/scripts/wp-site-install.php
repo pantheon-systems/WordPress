@@ -15,5 +15,5 @@ if (isset($_POST['environment'])) {
 echo "Installing WordPress core...\n";
 $title = ucwords(implode(" ", explode('-', $_ENV['PANTHEON_SITE_NAME'])));
 $email = $_POST['user_email'];
-system("$ wp core install --title='{$title}' --admin_user=superuser --admin_email='{$email}'");
+system("wp core install --title='{$title}' --admin_user=superuser --admin_email='{$email}'");
 echo "Installation complete.\n";
