@@ -300,7 +300,7 @@ class Pantheon_Cache {
 		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
 			$ttl = 60;
 		}
-		$server->send_header( 'Cache-Control', 'public, max-age=' . $ttl );
+		$response->header( 'Cache-Control', 'public, max-age=' . $ttl );
 		return $response;
 	}
 
