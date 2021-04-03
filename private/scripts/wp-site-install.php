@@ -1,5 +1,9 @@
 <?php
 
+echo "-- POST START -- \n";
+var_dump($_POST);
+echo "-- POST END -- \n";
+
 // Enable Redis on site creation
 if (isset($_POST['environment'])) {
   $req = pantheon_curl('https://api.live.getpantheon.com/sites/self/settings', NULL, 8443);
@@ -11,9 +15,12 @@ if (isset($_POST['environment'])) {
   }
 }
 
+$req = pantheon_curl('https://api.live.getpantheon.com/sites/self/attributes', NULL, 8443);
+$meta = json_decode($req['body'], true);
+
 // Install from profile.
 echo "Installing WordPress core...\n";
-$title = ucwords(implode(" ", explode('-', $_ENV['PANTHEON_SITE_NAME'])));
+$title = $meta['label'];
 $email = $_POST['user_email'];
 system("wp core install --title='{$title}' --admin_user=superuser --admin_email='{$email}'");
 echo "Installation complete.\n";
