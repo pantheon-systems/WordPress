@@ -206,9 +206,9 @@ class Pantheon_Cache {
 			<?php endif ?>
 
 			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : // translators: %s is a link. ?>
-				<div class="notice notice-success"><p><?php echo esc_html( sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://pantheon.io/docs/wordpress-cache-plugin' ) ); ?></p></div>
+				<div class="notice notice-success"><p><?php echo wp_kses_post( sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://pantheon.io/docs/wordpress-cache-plugin' ) ); ?></p></div>
 			<?php else : // translators: %s is a link. ?>
-				<div class="notice notice-warning"><p><?php echo esc_html( sprintf( __( 'Want to automatically clear related pages when you update content? Learn more about the <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), 'https://pantheon.io/docs/wordpress-cache-plugin' ) ); ?></p></div>
+				<div class="notice notice-warning"><p><?php echo wp_kses_post( sprintf( __( 'Want to automatically clear related pages when you update content? Learn more about the <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), 'https://pantheon.io/docs/wordpress-cache-plugin' ) ); ?></p></div>
 			<?php endif; ?>
 
 			<?php
