@@ -65,7 +65,7 @@ if (isset($_SERVER['HTTP_HOST'])) {
 // Don't show deprecations; useful under PHP 5.5
 error_reporting(E_ALL ^ E_DEPRECATED);
 /** Define appropriate location for default tmp directory on Pantheon */
-define('WP_TEMP_DIR', $_SERVER['HOME'] .'/tmp');
+define('WP_TEMP_DIR', sys_get_temp_dir());
 
 // FS writes aren't permitted in test or live, so we should let WordPress know to disable relevant UI
 if (in_array($_ENV['PANTHEON_ENVIRONMENT'], array( 'test', 'live' )) && ! defined('DISALLOW_FILE_MODS')) {
