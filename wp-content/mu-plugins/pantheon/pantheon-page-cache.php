@@ -93,7 +93,7 @@ class Pantheon_Cache {
 
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
-		if ( ! is_admin() && ! is_user_logged_in() ) {
+		if ( ! is_admin() && function_exists( 'is_user_logged_in' ) && ! is_user_logged_in() ) {
 			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
 		}
 		else {
