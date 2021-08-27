@@ -83,7 +83,7 @@ class Pantheon_Cache {
 		$this->options = get_option( self::SLUG, array() );
 		$this->default_options = array(
 			'default_ttl' => 600,
-			'maintenance_mode' => '',
+			'maintenance_mode' => 'disabled',
 		);
 		$this->options = wp_parse_args( $this->options, $this->default_options );
 
@@ -180,7 +180,7 @@ class Pantheon_Cache {
 	public function maintenance_mode_field() {
 		echo '<h3>' . __( 'Maintenance Mode', 'pantheon-cache' ) . '</h3>';
 		echo '<p>' . __( 'Enable maintenance mode to work on your site while serving cached pages to logged-out requests.', 'pantheon-cache' ) . '</p>';
-		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="" ' . checked( '', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Off', 'pantheon-cache' ) . '</label>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="" ' . checked( 'disabled', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Disabled', 'pantheon-cache' ) . '</label>';
 		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="anonymous" ' . checked( 'anonymous', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'anonymous', 'pantheon-cache' ) . '</label>';
 		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="everyone" ' . checked( 'everyone', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'everyone', 'pantheon-cache' ) . '</label>';
 	}
@@ -205,7 +205,7 @@ class Pantheon_Cache {
 			&& in_array( $in['maintenance_mode'], [ 'anonymous', 'everyone' ], true ) ) {
 			$out['maintenance_mode'] = $in['maintenance_mode'];
 		} else {
-			$out['maintenance_mode'] = '';
+			$out['maintenance_mode'] = 'disabled';
 		}
 		return $out;
 	}
