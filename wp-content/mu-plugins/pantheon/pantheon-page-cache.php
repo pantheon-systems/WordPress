@@ -87,6 +87,8 @@ class Pantheon_Cache {
 		);
 		$this->options = wp_parse_args( $this->options, $this->default_options );
 
+		add_action( 'init', array( $this, 'action_init_do_maintenance_mode' ) );
+
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
 		add_action( 'load-plugin-install.php', array( $this, 'action_load_plugin_install' ) );
@@ -112,6 +114,34 @@ class Pantheon_Cache {
 		add_action( 'shutdown', array( $this, 'cache_clean_urls' ), 999 );
 	}
 
+	/**
+	 * Displays maintenance mode when enabled.
+	 */
+	public function action_init_do_maintenance_mode() {
+
+		$do_maintenance_mode = false;
+
+		if ( in_array( $this->options['maintenance_mode'], [ 'anonymous', 'everyone' ], true )
+			&& ! is_user_logged_in() ) {
+			$do_maintenance_mode = true;
+		}
+
+		if ( 'everyone' === $this->options['maintenance_mode']
+			&& is_user_logged_in()
+			&& ! current_user_can( 'manage_options' ) ) {
+			$do_maintenance_mode = true;
+		}
+
+		if ( ! $do_maintenance_mode || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+			return;
+		}
+
+		wp_die(
+			__( 'Briefly unavailable for scheduled maintenance. Check back in a minute.' ),
+			__( 'Maintenance' ),
+			503
+		);
+	}
 
 	/**
 	 * Prep the Settings API.
