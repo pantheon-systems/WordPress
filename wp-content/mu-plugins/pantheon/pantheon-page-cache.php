@@ -82,7 +82,8 @@ class Pantheon_Cache {
 	protected function setup() {
 		$this->options = get_option( self::SLUG, array() );
 		$this->default_options = array(
-			'default_ttl' => 600
+			'default_ttl' => 600,
+			'maintenance_mode' => '',
 		);
 		$this->options = wp_parse_args( $this->options, $this->default_options );
 
@@ -121,6 +122,7 @@ class Pantheon_Cache {
 		register_setting( self::SLUG, self::SLUG, array( self::$instance, 'sanitize_options' ) );
 		add_settings_section( 'general', false, '__return_false', self::SLUG );
 		add_settings_field( 'default_ttl', null, array( self::$instance, 'default_ttl_field' ), self::SLUG, 'general' );
+		add_settings_field( 'maintenance_mode', null, array( self::$instance, 'maintenance_mode_field' ), self::SLUG, 'general' );
 	}
 
 
@@ -165,8 +167,22 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function default_ttl_field() {
+		echo '<h3>' . __( 'Default Time to Live (TTL)', 'pantheon-cache' ) . '</h3>';
 		echo '<p>' . __( 'Maximum time a cached page will be served. A higher TTL typically improves site performance.', 'pantheon-cache' ) . '</p>';
 		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $this->options['default_ttl'] . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
+	}
+
+	/**
+	 * Add the HTML for the maintenance mode field.
+	 *
+	 * @return void
+	 */
+	public function maintenance_mode_field() {
+		echo '<h3>' . __( 'Maintenance Mode', 'pantheon-cache' ) . '</h3>';
+		echo '<p>' . __( 'Enable maintenance mode to work on your site while serving cached pages to logged-out requests.', 'pantheon-cache' ) . '</p>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="" ' . checked( '', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Off', 'pantheon-cache' ) . '</label>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="anonymous" ' . checked( 'anonymous', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'anonymous', 'pantheon-cache' ) . '</label>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="everyone" ' . checked( 'everyone', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'everyone', 'pantheon-cache' ) . '</label>';
 	}
 
 
@@ -185,6 +201,12 @@ class Pantheon_Cache {
 			$out['default_ttl'] = 60;
 		}
 
+		if ( ! empty( $in['maintenance_mode'] )
+			&& in_array( $in['maintenance_mode'], [ 'anonymous', 'everyone' ], true ) ) {
+			$out['maintenance_mode'] = $in['maintenance_mode'];
+		} else {
+			$out['maintenance_mode'] = '';
+		}
 		return $out;
 	}
 
@@ -246,7 +268,6 @@ class Pantheon_Cache {
 			}
 			</style>
 
-			<h3><?php _e( 'Default Time to Live (TTL)', 'pantheon-cache' ); ?></h3>
 			<form action="options.php" method="POST" class="ttl-form">
 				<?php settings_fields( self::SLUG ); ?>
 				<?php do_settings_sections( self::SLUG ); ?>
