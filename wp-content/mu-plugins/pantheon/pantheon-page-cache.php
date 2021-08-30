@@ -132,7 +132,15 @@ class Pantheon_Cache {
 			$do_maintenance_mode = true;
 		}
 
-		if ( ! $do_maintenance_mode || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			$do_maintenance_mode = false;
+		}
+
+		if ( 'wp-login.php' === $GLOBALS['pagenow'] ) {
+			$do_maintenance_mode = false;
+		}
+
+		if ( ! $do_maintenance_mode ) {
 			return;
 		}
 
