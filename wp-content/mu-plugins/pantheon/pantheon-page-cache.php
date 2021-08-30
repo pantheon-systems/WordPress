@@ -316,7 +316,7 @@ class Pantheon_Cache {
 			<form action="options.php" method="POST" class="ttl-form">
 				<?php settings_fields( self::SLUG ); ?>
 				<?php do_settings_sections( self::SLUG ); ?>
-				<?php submit_button( __( 'Update TTL', 'pantheon-cache' ) ); ?>
+				<?php submit_button( __( 'Save Changes', 'pantheon-cache' ) ); ?>
 			</form>
 
 			<hr />
