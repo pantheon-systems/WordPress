@@ -140,6 +140,13 @@ class Pantheon_Cache {
 			$do_maintenance_mode = false;
 		}
 
+		/**
+		 * Modify maintenance mode behavior with more advanced conditionals.
+		 *
+		 * @var boolean $do_maintenance_mode Whether or not to do maintenance mode.
+		 */
+		$do_maintenance_mode = apply_filters( 'pantheon_cache_do_maintenance_mode', $do_maintenance_mode );
+
 		if ( ! $do_maintenance_mode ) {
 			return;
 		}
