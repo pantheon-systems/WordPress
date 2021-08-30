@@ -9,12 +9,12 @@ Feature: Perform Pantheon-specific actions
     And the "pantheon-cache[default_ttl]" field should contain "600"
 
     When I fill in "pantheon-cache[default_ttl]" with "300"
-    And I press "Update TTL"
+    And I press "Save Changes"
     Then I should see "Settings saved."
     And the "pantheon-cache[default_ttl]" field should contain "300"
 
     When I fill in "pantheon-cache[default_ttl]" with "600"
-    And I press "Update TTL"
+    And I press "Save Changes"
     Then I should see "Settings saved."
     And the "pantheon-cache[default_ttl]" field should contain "600"
 
