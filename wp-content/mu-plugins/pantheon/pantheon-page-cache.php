@@ -226,7 +226,7 @@ class Pantheon_Cache {
 		echo '<h3>' . __( 'Maintenance Mode', 'pantheon-cache' ) . '</h3>';
 		echo '<p>' . __( 'Enable maintenance mode to work on your site while serving cached pages to:', 'pantheon-cache' ) . '</p>';
 		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="" ' . checked( 'disabled', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Disabled', 'pantheon-cache' ) . '</label>';
-		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="anonymous" ' . checked( 'anonymous', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Visitors and Bots', 'pantheon-cache' ) . '</label>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="anonymous" ' . checked( 'anonymous', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Logged-Out Visitors', 'pantheon-cache' ) . '</label>';
 		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="everyone" ' . checked( 'everyone', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Everyone except Administrators', 'pantheon-cache' ) . '</label>';
 	}
 
