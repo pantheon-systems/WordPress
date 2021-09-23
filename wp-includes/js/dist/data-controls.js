@@ -82,19 +82,19 @@ this["wp"] = this["wp"] || {}; this["wp"]["dataControls"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 444);
+/******/ 	return __webpack_require__(__webpack_require__.s = "71Oy");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 4:
+/***/ "1ZqX":
 /***/ (function(module, exports) {
 
-(function() { module.exports = this["wp"]["data"]; }());
+(function() { module.exports = window["wp"]["data"]; }());
 
 /***/ }),
 
-/***/ 444:
+/***/ "71Oy":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -103,17 +103,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "select", function() { return select; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "syncSelect", function() { return syncSelect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dispatch", function() { return dispatch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__unstableAwaitPromise", function() { return __unstableAwaitPromise; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "controls", function() { return controls; });
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ywyh");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("1ZqX");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("NMb1");
+/* harmony import */ var _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_deprecated__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * WordPress dependencies
  */
 
- // TODO: mark the deprecated controls after all Gutenberg usages are removed
-// import deprecated from '@wordpress/deprecated';
+
 
 /**
  * Dispatches a control action for triggering an api fetch call.
@@ -138,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 function apiFetch(request) {
   return {
     type: 'API_FETCH',
-    request: request
+    request
   };
 }
 /**
@@ -148,11 +150,12 @@ function apiFetch(request) {
  * @param {Array} args Arguments passed without change to the `@wordpress/data` control.
  */
 
-function select() {
-  // deprecated( '`select` control in `@wordpress/data-controls`', {
-  // 	alternative: 'built-in `resolveSelect` control in `@wordpress/data`',
-  // } );
-  return _wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"].resolveSelect.apply(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"], arguments);
+function select(...args) {
+  _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_2___default()('`select` control in `@wordpress/data-controls`', {
+    since: '5.7',
+    alternative: 'built-in `resolveSelect` control in `@wordpress/data`'
+  });
+  return _wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"].resolveSelect(...args);
 }
 /**
  * Control for calling a selector in a registered data store.
@@ -161,11 +164,12 @@ function select() {
  * @param {Array} args Arguments passed without change to the `@wordpress/data` control.
  */
 
-function syncSelect() {
-  // deprecated( '`syncSelect` control in `@wordpress/data-controls`', {
-  // 	alternative: 'built-in `select` control in `@wordpress/data`',
-  // } );
-  return _wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"].select.apply(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"], arguments);
+function syncSelect(...args) {
+  _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_2___default()('`syncSelect` control in `@wordpress/data-controls`', {
+    since: '5.7',
+    alternative: 'built-in `select` control in `@wordpress/data`'
+  });
+  return _wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"].select(...args);
 }
 /**
  * Control for dispatching an action in a registered data store.
@@ -174,12 +178,39 @@ function syncSelect() {
  * @param {Array} args Arguments passed without change to the `@wordpress/data` control.
  */
 
-function dispatch() {
-  // deprecated( '`dispatch` control in `@wordpress/data-controls`', {
-  // 	alternative: 'built-in `dispatch` control in `@wordpress/data`',
-  // } );
-  return _wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"].dispatch.apply(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"], arguments);
+function dispatch(...args) {
+  _wordpress_deprecated__WEBPACK_IMPORTED_MODULE_2___default()('`dispatch` control in `@wordpress/data-controls`', {
+    since: '5.7',
+    alternative: 'built-in `dispatch` control in `@wordpress/data`'
+  });
+  return _wordpress_data__WEBPACK_IMPORTED_MODULE_1__["controls"].dispatch(...args);
 }
+/**
+ * Dispatches a control action for awaiting on a promise to be resolved.
+ *
+ * @param {Object} promise Promise to wait for.
+ *
+ * @example
+ * ```js
+ * import { __unstableAwaitPromise } from '@wordpress/data-controls';
+ *
+ * // Action generator using apiFetch
+ * export function* myAction() {
+ * 	const promise = getItemsAsync();
+ * 	const items = yield __unstableAwaitPromise( promise );
+ * 	// do something with the items.
+ * }
+ * ```
+ *
+ * @return {Object} The control descriptor.
+ */
+
+const __unstableAwaitPromise = function (promise) {
+  return {
+    type: 'AWAIT_PROMISE',
+    promise
+  };
+};
 /**
  * The default export is what you use to register the controls with your custom
  * store.
@@ -197,32 +228,44 @@ function dispatch() {
  * import * as resolvers from './resolvers';
  *
  * registerStore( 'my-custom-store', {
- * 	reducer,
- * 	controls,
- * 	actions,
- * 	selectors,
- * 	resolvers,
+ * reducer,
+ * controls,
+ * actions,
+ * selectors,
+ * resolvers,
  * } );
  * ```
- *
  * @return {Object} An object for registering the default controls with the
- *                  store.
+ * store.
  */
 
-var controls = {
-  API_FETCH: function API_FETCH(_ref) {
-    var request = _ref.request;
+const controls = {
+  AWAIT_PROMISE: ({
+    promise
+  }) => promise,
+
+  API_FETCH({
+    request
+  }) {
     return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_0___default()(request);
   }
+
 };
 
 
 /***/ }),
 
-/***/ 47:
+/***/ "NMb1":
 /***/ (function(module, exports) {
 
-(function() { module.exports = this["wp"]["apiFetch"]; }());
+(function() { module.exports = window["wp"]["deprecated"]; }());
+
+/***/ }),
+
+/***/ "ywyh":
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["apiFetch"]; }());
 
 /***/ })
 
