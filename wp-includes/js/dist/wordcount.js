@@ -82,19 +82,19 @@ this["wp"] = this["wp"] || {}; this["wp"]["wordcount"] =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 482);
+/******/ 	return __webpack_require__(__webpack_require__.s = "pC98");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 2:
+/***/ "YLtl":
 /***/ (function(module, exports) {
 
-(function() { module.exports = this["lodash"]; }());
+(function() { module.exports = window["lodash"]; }());
 
 /***/ }),
 
-/***/ 482:
+/***/ "pC98":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104,8 +104,8 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "count", function() { return /* binding */ count; });
 
-// EXTERNAL MODULE: external {"this":"lodash"}
-var external_this_lodash_ = __webpack_require__(2);
+// EXTERNAL MODULE: external "lodash"
+var external_lodash_ = __webpack_require__("YLtl");
 
 // CONCATENATED MODULE: ./node_modules/@wordpress/wordcount/build-module/defaultSettings.js
 /** @typedef {import('./index').WPWordCountStrategy} WPWordCountStrategy */
@@ -146,7 +146,7 @@ var external_this_lodash_ = __webpack_require__(2);
  */
 
 /* eslint-enable jsdoc/valid-types */
-var defaultSettings = {
+const defaultSettings = {
   HTMLRegExp: /<\/?[a-z][^>]*?>/gi,
   HTMLcommentRegExp: /<!--[\s\S]*?-->/g,
   spaceRegExp: /&nbsp;|&#160;/gi,
@@ -155,8 +155,8 @@ var defaultSettings = {
   connectorRegExp: /--|\u2014/g,
   // Characters to be removed from input text.
   removeRegExp: new RegExp(['[', // Basic Latin (extract)
-  "!-@[-`{-~", // Latin-1 Supplement (extract)
-  "\x80-\xBF\xD7\xF7",
+  '\u0021-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007E', // Latin-1 Supplement (extract)
+  '\u0080-\u00BF\u00D7\u00F7',
   /*
    * The following range consists of:
    * General Punctuation
@@ -184,8 +184,8 @@ var defaultSettings = {
    * Supplemental Mathematical Operators
    * Miscellaneous Symbols and Arrows
    */
-  "\u2000-\u2BFF", // Supplemental Punctuation
-  "\u2E00-\u2E7F", ']'].join(''), 'g'),
+  '\u2000-\u2BFF', // Supplemental Punctuation
+  '\u2E00-\u2E7F', ']'].join(''), 'g'),
   // Remove UTF-16 surrogate points, see https://en.wikipedia.org/wiki/UTF-16#U.2BD800_to_U.2BDFFF
   astralRegExp: /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
   wordsRegExp: /\S\s+/g,
@@ -371,7 +371,7 @@ function transposeHTMLEntitiesToCountableChars(settings, text) {
 function loadSettings(type, userSettings) {
   var _settings$l10n$shortc, _settings$l10n;
 
-  var settings = Object(external_this_lodash_["extend"])({}, defaultSettings, userSettings);
+  const settings = Object(external_lodash_["extend"])({}, defaultSettings, userSettings);
   settings.shortcodes = (_settings$l10n$shortc = (_settings$l10n = settings.l10n) === null || _settings$l10n === void 0 ? void 0 : _settings$l10n.shortcodes) !== null && _settings$l10n$shortc !== void 0 ? _settings$l10n$shortc : [];
 
   if (settings.shortcodes && settings.shortcodes.length) {
@@ -400,7 +400,7 @@ function loadSettings(type, userSettings) {
 function countWords(text, regex, settings) {
   var _text$match$length, _text$match;
 
-  text = Object(external_this_lodash_["flow"])(stripTags.bind(null, settings), stripHTMLComments.bind(null, settings), stripShortcodes.bind(null, settings), stripSpaces.bind(null, settings), stripHTMLEntities.bind(null, settings), stripConnectors.bind(null, settings), stripRemovables.bind(null, settings))(text);
+  text = Object(external_lodash_["flow"])(stripTags.bind(null, settings), stripHTMLComments.bind(null, settings), stripShortcodes.bind(null, settings), stripSpaces.bind(null, settings), stripHTMLEntities.bind(null, settings), stripConnectors.bind(null, settings), stripRemovables.bind(null, settings))(text);
   text = text + '\n';
   return (_text$match$length = (_text$match = text.match(regex)) === null || _text$match === void 0 ? void 0 : _text$match.length) !== null && _text$match$length !== void 0 ? _text$match$length : 0;
 }
@@ -418,7 +418,7 @@ function countWords(text, regex, settings) {
 function countCharacters(text, regex, settings) {
   var _text$match$length2, _text$match2;
 
-  text = Object(external_this_lodash_["flow"])(stripTags.bind(null, settings), stripHTMLComments.bind(null, settings), stripShortcodes.bind(null, settings), transposeAstralsToCountableChar.bind(null, settings), stripSpaces.bind(null, settings), transposeHTMLEntitiesToCountableChars.bind(null, settings))(text);
+  text = Object(external_lodash_["flow"])(stripTags.bind(null, settings), stripHTMLComments.bind(null, settings), stripShortcodes.bind(null, settings), transposeAstralsToCountableChar.bind(null, settings), stripSpaces.bind(null, settings), transposeHTMLEntitiesToCountableChars.bind(null, settings))(text);
   text = text + '\n';
   return (_text$match$length2 = (_text$match2 = text.match(regex)) === null || _text$match2 === void 0 ? void 0 : _text$match2.length) !== null && _text$match$length2 !== void 0 ? _text$match$length2 : 0;
 }
@@ -440,8 +440,8 @@ function countCharacters(text, regex, settings) {
 
 
 function count(text, type, userSettings) {
-  var settings = loadSettings(type, userSettings);
-  var matchRegExp;
+  const settings = loadSettings(type, userSettings);
+  let matchRegExp;
 
   switch (settings.type) {
     case 'words':

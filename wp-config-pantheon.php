@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Pantheon platform settings.
  *
@@ -39,14 +38,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY', !empty($_ENV['AUTH_KEY']) ? $_ENV['AUTH_KEY'] : '');
-define('SECURE_AUTH_KEY', !empty($_ENV['SECURE_AUTH_KEY']) ? $_ENV['SECURE_AUTH_KEY'] : '');
-define('LOGGED_IN_KEY', !empty($_ENV['LOGGED_IN_KEY']) ? $_ENV['LOGGED_IN_KEY'] : '');
-define('NONCE_KEY', !empty($_ENV['NONCE_KEY']) ? $_ENV['NONCE_KEY'] : '');
-define('AUTH_SALT', !empty($_ENV['AUTH_SALT']) ? $_ENV['AUTH_SALT'] : '');
-define('SECURE_AUTH_SALT', !empty($_ENV['SECURE_AUTH_SALT']) ? $_ENV['SECURE_AUTH_SALT'] : '');
-define('LOGGED_IN_SALT', !empty($_ENV['LOGGED_IN_SALT']) ? $_ENV['LOGGED_IN_SALT'] : '');
-define('NONCE_SALT', !empty($_ENV['NONCE_SALT']) ? $_ENV['NONCE_SALT'] : '');
+define('AUTH_KEY', $_ENV['AUTH_KEY']);
+define('SECURE_AUTH_KEY', $_ENV['SECURE_AUTH_KEY']);
+define('LOGGED_IN_KEY', $_ENV['LOGGED_IN_KEY']);
+define('NONCE_KEY', $_ENV['NONCE_KEY']);
+define('AUTH_SALT', $_ENV['AUTH_SALT']);
+define('SECURE_AUTH_SALT', $_ENV['SECURE_AUTH_SALT']);
+define('LOGGED_IN_SALT', $_ENV['LOGGED_IN_SALT']);
+define('NONCE_SALT', $_ENV['NONCE_SALT']);
 /**#@-*/
 
 /** A couple extra tweaks to help things run well on Pantheon. **/
@@ -66,10 +65,10 @@ if (isset($_SERVER['HTTP_HOST'])) {
 // Don't show deprecations; useful under PHP 5.5
 error_reporting(E_ALL ^ E_DEPRECATED);
 /** Define appropriate location for default tmp directory on Pantheon */
-define('WP_TEMP_DIR', $_SERVER['HOME'] . '/tmp');
+define('WP_TEMP_DIR', sys_get_temp_dir());
 
 // FS writes aren't permitted in test or live, so we should let WordPress know to disable relevant UI
-if (in_array($_ENV['PANTHEON_ENVIRONMENT'], array('test', 'live')) && !defined('DISALLOW_FILE_MODS')) {
+if (in_array($_ENV['PANTHEON_ENVIRONMENT'], array( 'test', 'live' )) && ! defined('DISALLOW_FILE_MODS')) {
     define('DISALLOW_FILE_MODS', true);
 }
 

@@ -105,7 +105,7 @@ function _pantheon_upstream_update_notice() {
 	}
 
     ?>
-    <div class="update-nag">
+    <div class="update-nag notice notice-warning">
 		<p style="font-size: 14px; font-weight: bold; margin: 0 0 0.5em 0;">
 			A <?php echo $update_type; ?> is available! Please update from <a href="https://dashboard.pantheon.io/sites/<?php echo $_ENV['PANTHEON_SITE']; ?>">your Pantheon dashboard</a>.
 		</p>
