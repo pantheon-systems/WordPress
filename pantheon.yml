@@ -8,33 +8,20 @@ workflows:
   # Clear CDN and app cache
   clear_cache:
     after:
-      - description: 'Post to Slack after cache clear'
+      - description: "Post to Slack after cache clear"
         script: private/scripts/slack-notification.php
         type: webphp
 
   # Clone Database
   clone_database:
     after:
-      - description: 'Sanitize the db after each database Clone'
+      - description: "Sanitize the db after each database Clone"
         script: private/scripts/db-sanitize.php
         type: webphp
 
   # Multidev Creation
   create_cloud_development_environment:
     after:
-      - description: 'Post to Slack after Multidev creation'
-        script: private/scripts/slack-notification.php
-        type: webphp
-
-  # New site creation
-  deploy_product:
-    after:
-      - description: 'Install WordPress core'
-        script: private/scripts/wp-site-install.php
-        type: webphp
-      - description: 'Import default content'
-        script: private/scripts/wp-site-import.php
-        type: webphp
-      - description: 'Post to Slack after each deploy'
+      - description: "Post to Slack after Multidev creation"
         script: private/scripts/slack-notification.php
         type: webphp

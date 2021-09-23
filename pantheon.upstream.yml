@@ -19,3 +19,17 @@ protected_web_paths:
 # 'protected_web_paths_override' is set to true, then the upstream paths
 # are disabled.
 protected_web_paths_override: false
+
+workflows:
+  # New site creation
+  deploy_product:
+    after:
+      - description: "Install WordPress core"
+        script: private/scripts/wp-site-install.php
+        type: webphp
+      - description: "Import default content"
+        script: private/scripts/wp-site-import.php
+        type: webphp
+      - description: "Post to Slack after each deploy"
+        script: private/scripts/slack-notification.php
+        type: webphp
