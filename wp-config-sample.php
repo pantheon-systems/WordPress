@@ -48,6 +48,7 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
+define('JWT_AUTH_SECRET_KEY', 'your-top-secrect-key');
 define( 'AUTH_KEY',         'put your unique phrase here' );
 define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
 define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
