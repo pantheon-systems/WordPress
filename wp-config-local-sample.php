@@ -6,7 +6,7 @@
  *
  * Be sure to replace YOUR LOCAL DOMAIN below too.
  */
-
+define('JWT_AUTH_SECRET_KEY', 'your-top-secrect-key');
 define( 'DB_NAME', 'database_name' );
 define( 'DB_USER', 'database_username' );
 define( 'DB_PASSWORD', 'database_password' );
