@@ -38,6 +38,7 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
+define('JWT_AUTH_SECRET_KEY', 'your-top-secrect-key');
 define('AUTH_KEY', $_ENV['AUTH_KEY']);
 define('SECURE_AUTH_KEY', $_ENV['SECURE_AUTH_KEY']);
 define('LOGGED_IN_KEY', $_ENV['LOGGED_IN_KEY']);
