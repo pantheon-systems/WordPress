@@ -32,6 +32,7 @@ if (file_exists(dirname(__FILE__) . '/wp-config-pantheon.php') && isset($_ENV['P
  * If you are only running on Pantheon, you can ignore this block.
  */
 } else {
+	define('JWT_AUTH_SECRET_KEY', 'your-top-secrect-key');
 	define('DB_NAME',          'database_name');
 	define('DB_USER',          'database_username');
 	define('DB_PASSWORD',      'database_password');
