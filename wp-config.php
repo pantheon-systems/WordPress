@@ -46,6 +46,8 @@ if (file_exists(dirname(__FILE__) . '/wp-config-pantheon.php') && isset($_ENV['P
 	define('SECURE_AUTH_SALT', 'put your unique phrase here');
 	define('LOGGED_IN_SALT',   'put your unique phrase here');
 	define('NONCE_SALT',       'put your unique phrase here');
+	define('JWT_AUTH_SECRET_KEY', 'your-top-secrect-key');
+
 }
 
 
