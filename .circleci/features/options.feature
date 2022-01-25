@@ -5,8 +5,8 @@ Feature: Manage WordPress options
 
   Scenario: Update the site tagline
     When I go to "/"
-    Then I should see "Just another WordPress site" in the ".site-description" element
-    And I should not see "Pantheon upstream testing site" in the ".site-description" element
+    Then I should see "Just another WordPress site" in the "title" element
+    And I should not see "Pantheon upstream testing site" in the "title" element
 
     When I go to "/wp-admin/options-general.php"
     And I fill in "blogdescription" with "Pantheon upstream testing site"
@@ -14,8 +14,8 @@ Feature: Manage WordPress options
     Then I should see "Settings saved."
 
     When I go to "/"
-    Then I should see "Pantheon upstream testing site" in the ".site-description" element
-    Then I should not see "Just another WordPress site" in the ".site-description" element
+    Then I should see "Pantheon upstream testing site" in the "title" element
+    Then I should not see "Just another WordPress site" in the "title" element
 
     When I go to "/wp-admin/options-general.php"
     And I fill in "blogdescription" with "Just another WordPress site"
@@ -23,5 +23,5 @@ Feature: Manage WordPress options
     Then I should see "Settings saved."
 
     When I go to "/"
-    Then I should see "Just another WordPress site" in the ".site-description" element
-    And I should not see "Pantheon upstream testing site" in the ".site-description" element
+    Then I should see "Just another WordPress site" in the "title" element
+    And I should not see "Pantheon upstream testing site" in the "title" element
