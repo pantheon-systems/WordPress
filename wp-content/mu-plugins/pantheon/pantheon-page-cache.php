@@ -82,9 +82,12 @@ class Pantheon_Cache {
 	protected function setup() {
 		$this->options = get_option( self::SLUG, array() );
 		$this->default_options = array(
-			'default_ttl' => 600
+			'default_ttl' => 600,
+			'maintenance_mode' => 'disabled',
 		);
 		$this->options = wp_parse_args( $this->options, $this->default_options );
+
+		add_action( 'init', array( $this, 'action_init_do_maintenance_mode' ) );
 
 		add_action( 'admin_init', array( $this, 'action_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
@@ -92,7 +95,7 @@ class Pantheon_Cache {
 
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
-		if ( ! is_admin() && ! is_user_logged_in() ) {
+		if ( ! is_admin() && function_exists( 'is_user_logged_in' ) && ! is_user_logged_in() ) {
 			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
 		}
 		else {
@@ -111,6 +114,49 @@ class Pantheon_Cache {
 		add_action( 'shutdown', array( $this, 'cache_clean_urls' ), 999 );
 	}
 
+	/**
+	 * Displays maintenance mode when enabled.
+	 */
+	public function action_init_do_maintenance_mode() {
+
+		$do_maintenance_mode = false;
+
+		if ( in_array( $this->options['maintenance_mode'], [ 'anonymous', 'everyone' ], true )
+			&& ! is_user_logged_in() ) {
+			$do_maintenance_mode = true;
+		}
+
+		if ( 'everyone' === $this->options['maintenance_mode']
+			&& is_user_logged_in()
+			&& ! current_user_can( 'manage_options' ) ) {
+			$do_maintenance_mode = true;
+		}
+
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			$do_maintenance_mode = false;
+		}
+
+		if ( 'wp-login.php' === $GLOBALS['pagenow'] ) {
+			$do_maintenance_mode = false;
+		}
+
+		/**
+		 * Modify maintenance mode behavior with more advanced conditionals.
+		 *
+		 * @var boolean $do_maintenance_mode Whether or not to do maintenance mode.
+		 */
+		$do_maintenance_mode = apply_filters( 'pantheon_cache_do_maintenance_mode', $do_maintenance_mode );
+
+		if ( ! $do_maintenance_mode ) {
+			return;
+		}
+
+		wp_die(
+			__( 'Briefly unavailable for scheduled maintenance. Check back in a minute.' ),
+			__( 'Maintenance' ),
+			503
+		);
+	}
 
 	/**
 	 * Prep the Settings API.
@@ -121,6 +167,7 @@ class Pantheon_Cache {
 		register_setting( self::SLUG, self::SLUG, array( self::$instance, 'sanitize_options' ) );
 		add_settings_section( 'general', false, '__return_false', self::SLUG );
 		add_settings_field( 'default_ttl', null, array( self::$instance, 'default_ttl_field' ), self::SLUG, 'general' );
+		add_settings_field( 'maintenance_mode', null, array( self::$instance, 'maintenance_mode_field' ), self::SLUG, 'general' );
 	}
 
 
@@ -165,8 +212,22 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function default_ttl_field() {
+		echo '<h3>' . __( 'Default Time to Live (TTL)', 'pantheon-cache' ) . '</h3>';
 		echo '<p>' . __( 'Maximum time a cached page will be served. A higher TTL typically improves site performance.', 'pantheon-cache' ) . '</p>';
 		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $this->options['default_ttl'] . '" size="5" /> ' . __( 'seconds', 'pantheon-cache' );
+	}
+
+	/**
+	 * Add the HTML for the maintenance mode field.
+	 *
+	 * @return void
+	 */
+	public function maintenance_mode_field() {
+		echo '<h3>' . __( 'Maintenance Mode', 'pantheon-cache' ) . '</h3>';
+		echo '<p>' . __( 'Enable maintenance mode to work on your site while serving cached pages to:', 'pantheon-cache' ) . '</p>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="" ' . checked( 'disabled', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Disabled', 'pantheon-cache' ) . '</label>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="anonymous" ' . checked( 'anonymous', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Logged-Out Visitors', 'pantheon-cache' ) . '</label>';
+		echo '<label style="display: block; margin-bottom: 5px;"><input type="radio" name="' . self::SLUG . '[maintenance_mode]" value="everyone" ' . checked( 'everyone', $this->options['maintenance_mode'], false ) . ' /> ' . __( 'Everyone except Administrators', 'pantheon-cache' ) . '</label>';
 	}
 
 
@@ -185,6 +246,12 @@ class Pantheon_Cache {
 			$out['default_ttl'] = 60;
 		}
 
+		if ( ! empty( $in['maintenance_mode'] )
+			&& in_array( $in['maintenance_mode'], [ 'anonymous', 'everyone' ], true ) ) {
+			$out['maintenance_mode'] = $in['maintenance_mode'];
+		} else {
+			$out['maintenance_mode'] = 'disabled';
+		}
 		return $out;
 	}
 
@@ -246,11 +313,10 @@ class Pantheon_Cache {
 			}
 			</style>
 
-			<h3><?php _e( 'Default Time to Live (TTL)', 'pantheon-cache' ); ?></h3>
 			<form action="options.php" method="POST" class="ttl-form">
 				<?php settings_fields( self::SLUG ); ?>
 				<?php do_settings_sections( self::SLUG ); ?>
-				<?php submit_button( __( 'Update TTL', 'pantheon-cache' ) ); ?>
+				<?php submit_button( __( 'Save Changes', 'pantheon-cache' ) ); ?>
 			</form>
 
 			<hr />
@@ -432,6 +498,40 @@ class Pantheon_Cache {
 			pantheon_clear_edge_paths( $this->paths );
 		}
 	}
+
+	/**
+	 * Sets maintenance mode status.
+	 *
+	 * Enable maintenance mode to work on your site while serving cached pages
+	 * to visitors and bots, or everyone except administators.
+	 *
+	 * ## OPTIONS
+	 *
+	 * <status>
+	 * : Maintenance mode status.
+	 * ---
+	 * options:
+	 *   - disabled
+	 *   - anonymous
+	 *   - everyone
+	 * ---
+	 *
+	 * @subcommand set-maintenance-mode
+	 */
+	public function set_maintenance_mode_command( $args ) {
+
+		list( $status ) = $args;
+
+		$out = $this->default_options;
+		if ( ! empty( $status )
+			&& in_array( $status, [ 'anonymous', 'everyone' ], true ) ) {
+			$out['maintenance_mode'] = $status;
+		} else {
+			$out['maintenance_mode'] = 'disabled';
+		}
+		update_option( self::SLUG, $out );
+		WP_CLI::success( sprintf( 'Maintenance mode set to: %s', $out['maintenance_mode'] ) );
+	}
 }
 
 
@@ -448,6 +548,10 @@ function Pantheon_Cache() {
 }
 add_action( 'plugins_loaded', 'Pantheon_Cache' );
 
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	WP_CLI::add_command( 'pantheon-cache set-maintenance-mode', [ Pantheon_Cache::instance(), 'set_maintenance_mode_command' ] );
+}
 
 /**
  * @see Pantheon_Cache::clean_post_cache
