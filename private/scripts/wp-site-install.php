@@ -1,9 +1,5 @@
 <?php
 
-echo "-- POST START -- \n";
-var_dump($_POST);
-echo "-- POST END -- \n";
-
 // Enable Redis on site creation
 if (isset($_POST['environment'])) {
   $req = pantheon_curl('https://api.live.getpantheon.com/sites/self/settings', NULL, 8443);
