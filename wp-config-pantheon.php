@@ -92,8 +92,8 @@ if (getenv('WP_ENVIRONMENT_TYPE') === false) {
 /**
  * Resolves valhalla performance issue
  * 
- * If you see the following warning after applying this update, check if
- * you are defining this elsewhere after this code runs:
+ * If the warning below occurs, check if this constant is being defined 
+ * again in code that runs after this:
  * 
  * PHP Warning:  Constant FS_METHOD already defined in...
  */
