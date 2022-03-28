@@ -92,10 +92,8 @@ if (getenv('WP_ENVIRONMENT_TYPE') === false) {
 /**
  * Resolves valhalla performance issue
  * 
- * If the warning below occurs, check if this constant is being defined 
- * again in code that runs after this:
- * 
- * PHP Warning:  Constant FS_METHOD already defined in...
+ * If the site dashboard shows the error "Constant FS_METHOD already defined"
+ * check if this constant is being defined again in code that runs after this
  */
 if(!defined('FS_METHOD')) {
     define('FS_METHOD', 'direct');
