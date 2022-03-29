@@ -88,3 +88,13 @@ if (getenv('WP_ENVIRONMENT_TYPE') === false) {
             break;
     }
 }
+
+/**
+ * Resolves valhalla performance issue
+ * 
+ * If the site dashboard shows the error "Constant FS_METHOD already defined"
+ * check if this constant is being defined again in code that runs after this
+ */
+if(!defined('FS_METHOD')) {
+    define('FS_METHOD', 'direct');
+}
