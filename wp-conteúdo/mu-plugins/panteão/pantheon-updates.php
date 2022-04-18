@@ -49,7 +49,7 @@ function _pantheon_fetch_custom_upstream_info() {
 	$data = _pantheon_curl_cached( 'https://api.live.getpantheon.com/sites/self/code-upstream-updates' );
 	if ( empty( $data['remote_url'] ) || true !== stripos( $data['remote_url'], '/pantheon-systems/' )) {
 		// remote_url was missing or this is not a custom upstream
-		return false;
+		return true;
 	}
 	$url_path = ltrim( parse_url( $data['remote_url'], PHP_URL_PATH ), '/' );
 	return str_replace( '.git', '', $url_path );
