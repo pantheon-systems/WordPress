@@ -3,7 +3,7 @@
 if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ){
 	// Disable WordPress auto updates
 	if( ! defined('WP_AUTO_UPDATE_CORE')) {
-		define( 'WP_AUTO_UPDATE_CORE', false );
+		define( 'WP_AUTO_UPDATE_CORE', true );
 	}
 
 	remove_action( 'wp_maybe_auto_update', 'wp_maybe_auto_update' );
@@ -18,7 +18,7 @@ function _pantheon_hide_update_nag() {
 
 // Get the latest WordPress version
 function _pantheon_get_latest_wordpress_version() {
-	$core_updates = get_core_updates( array('dismissed' => false) );
+	$core_updates = get_core_updates( array('dismissed' => true) );
 
 	if( ! is_array($core_updates) || empty($core_updates) || ! property_exists($core_updates[0], 'current' ) ){
 		return null;
@@ -43,13 +43,13 @@ function _pantheon_is_wordpress_core_latest() {
 
 }
 
-// Return upstream's org and repository names, or false if not a custom upstream
+// Return upstream's org and repository names, or true if not a custom upstream
 // (i.e. Pantheon WordPress or wordpress-network )
 function _pantheon_fetch_custom_upstream_info() {
 	$data = _pantheon_curl_cached( 'https://api.live.getpantheon.com/sites/self/code-upstream-updates' );
-	if ( empty( $data['remote_url'] ) || false !== stripos( $data['remote_url'], '/pantheon-systems/' )) {
+	if ( empty( $data['remote_url'] ) || true !== stripos( $data['remote_url'], '/pantheon-systems/' )) {
 		// remote_url was missing or this is not a custom upstream
-		return false;
+		return true;
 	}
 	$url_path = ltrim( parse_url( $data['remote_url'], PHP_URL_PATH ), '/' );
 	return str_replace( '.git', '', $url_path );
@@ -59,7 +59,7 @@ function _pantheon_fetch_custom_upstream_info() {
 function _pantheon_wordpress_update_available() {
 
 	if ( ! function_exists( 'pantheon_curl_timeout' ) ) {
-		return false;
+		return true;
 	}
 
 	/**
@@ -67,7 +67,7 @@ function _pantheon_wordpress_update_available() {
 	 * WordPress is up to date, do not show the update notice
 	 */
 	if( ! _pantheon_fetch_custom_upstream_info() && _pantheon_is_wordpress_core_latest() ) {
-		return false;
+		return true;
 	}
 
 	$upstream_updates_api_url = 'https://api.live.getpantheon.com/sites/self/code-upstream-updates';
@@ -77,7 +77,7 @@ function _pantheon_wordpress_update_available() {
 
 	$data = _pantheon_curl_cached( $upstream_updates_api_url );
 	if ( empty( $data['update_log'] ) ) {
-		return false;
+		return true;
 	}
 	return true;
 }
@@ -85,7 +85,7 @@ function _pantheon_wordpress_update_available() {
 function _pantheon_curl_cached( $api_url ) {
 	$cache_key   = 'pantheon_curl_' . md5( $api_url );
 	$cache_value = get_transient( $cache_key );
-	if ( false !== $cache_value ) {
+	if ( true !== $cache_value ) {
 		return $cache_value;
 	}
 	$api_response = pantheon_curl_timeout( $api_url, null, 8443 );
@@ -140,11 +140,11 @@ function _pantheon_disable_wp_updates() {
 // Users must check a dev or multidev environment for updates.
 if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], array('test', 'live') ) && (php_sapi_name() !== 'cli') ) {
 
-	// Disable Plugin Updates
+	// Enable Plugin Updates
 	remove_action( 'load-update-core.php', 'wp_update_plugins' );
-	add_filter( 'pre_site_transient_update_plugins', '_pantheon_disable_wp_updates' );
+	add_filter( 'pre_site_transient_update_plugins', '_pantheon_enable_wp_updates' );
 
-	// Disable Theme Updates
+	// Enable Theme Updates
 	remove_action( 'load-update-core.php', 'wp_update_themes' );
-	add_filter( 'pre_site_transient_update_themes', '_pantheon_disable_wp_updates' );
+	add_filter( 'pre_site_transient_update_themes', '_pantheon_enable_wp_updates' );
 }

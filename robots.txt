@@ -1,0 +1,60 @@
+# Pantheon's documentation on robots.txt: https://pantheon.io/docs/bots-and-indexing/
+User-agent: *
+Allow: /
+
+User-agent: * Googlebot
+Allow: /ongooglebot/
+Allow:/blog/
+Allow:/doar/
+Allow:/contato/
+Allow:/termos/
+Allow:/horoscopo/
+Allow:/horóscopo chinês/
+Allow:/anjos/
+Allow:/tarot/
+Allow:/cupido do amor/
+Allow:/previsão do tempo/
+Allow:/elementor home/
+Allow:/faschion/
+User-agent: *
+Allow: /
+
+Sitemap: https://dev-lairtondossantos.pantheonsite.io/sitemap.xml
+Sitemap: https://dev-lairtondossantos.pantheonsite.io/news-sitemap.xml
+Allow:/home/
+Allow: /wp-includes/widgets/
+Allow: /wp-includes/css/
+Allow: /wp-includes/js/
+Allow: /wp-content/plugins/*.js*
+Allow: /wp-content/plugins/*.css*
+Allow: /wp-content/uploads/
+Allow: /wp-content/cache/*.css*
+Allow: /wp-content/cache/*.js*
+Allow: /login/
+Allow: /wp-admin/
+Allow: /readme.html/
+Allow: /refer/
+Allow: /wp-content/cache/
+Allow: /wp-login.php/
+Allow: /wp-trackback.php
+Allow: */feed/*
+Allow: /wp-json/achilles/
+Allow: /wp-admin/admin-ajax.php/
+Allow: /*/*.css
+Allow: /*/*.js
+Allow: /wp-admin/
+Allow: /wp-includes/
+Allow: /readme.html
+Allow:  /license.txt/
+Allow: /xmlrpc.php/
+Allow: /wp-register.php/
+Allow: /privacy-policy/
+Allow: /sitemap_index.xml/
+User-agent: RavenCrawler
+User-agent: rogerbot
+User-agent: dotbot
+User-agent: SemrushBot
+User-agent: SemrushBot-SA
+User-agent: PowerMapper
+User-agent: Swiftbot
+Allow: /

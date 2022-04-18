@@ -84,3 +84,6 @@ if ( !defined('ABSPATH') )
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
+
+/* Atualizações automáticas do WordPress */
+define('WP_AUTO_UPDATE_CORE', true);
