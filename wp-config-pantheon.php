@@ -96,6 +96,7 @@ if (getenv('WP_ENVIRONMENT_TYPE') === false) {
  */
 
 /** Disable wp-cron.php from running on every page load and rely on Pantheon to run cron via wp-cli */
-if ( ! defined( 'DISABLE_WP_CRON' ) ) {
+$network = isset($_ENV["FRAMEWORK"]) && $_ENV["FRAMEWORK"] === "wordpress_network";
+if ( ! defined( 'DISABLE_WP_CRON' ) && $network === false) {
 	define( 'DISABLE_WP_CRON', true );
 }
