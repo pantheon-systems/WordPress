@@ -19,6 +19,9 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 	if ( ! defined('RETURN_TO_PANTHEON_BUTTON') || RETURN_TO_PANTHEON_BUTTON ) {
 		require_once 'pantheon/pantheon-login-form-mods.php';
 	}
+	if ( 'dev' === $_ENV['PANTHEON_ENVIRONMENT'] && function_exists( 'wp_is_writable' ) ) {
+		require_once 'pantheon/pantheon-plugin-install-notice.php';
+	}
 	if ( ! defined( 'FS_METHOD' ) ) {
 		/**
 		 * When this constant is not set, WordPress writes and then deletes a 
