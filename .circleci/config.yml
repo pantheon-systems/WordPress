@@ -26,9 +26,9 @@ jobs:
             - run:
                 name: Prepare
                 command: ./.circleci/prepare.sh
-            - run:
-                name: Test
-                command: ./.circleci/test.sh --strict
+#            - run:
+#                name: Test
+#                command: ./.circleci/test.sh --strict
             - run:
                 name: Cleanup
                 command: ./.circleci/cleanup.sh

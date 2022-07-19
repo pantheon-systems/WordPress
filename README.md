@@ -37,3 +37,16 @@ The `default` branch of this repository is where PRs are merged, and has [CI](ht
 ## Custom Upstreams
 
 If you are using this repository as a starting point for a custom upstream, be sure to review the [documentation](https://pantheon.io/docs/create-custom-upstream#pull-in-core-from-pantheons-upstream) and pull the core files from the `master` branch.
+
+
+## Branch Structure
+
+Production: `master`
+
+Development: `default`
+
+any other feature/bug/hotfix/enhancement, the developer need to create a new branch, in order to push to a multi-dev environment to be tested/approved by the stakeholder(s).
+i.e.
+```
+git checkout -b feature/plugin-update
+```
