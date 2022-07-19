@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 orbs:
   pantheon: pantheon-systems/pantheon@0.6.0
@@ -52,12 +52,12 @@ workflows:
   version: 2
   wordpress:
     jobs:
-      - test
+#      - test
       - pantheon/push:
           clone_content: false
           checkout: false
-          requires:
-            - test
+#          requires:
+#            - test
           pre-steps:
             - checkout
             - run: rm -rf .gitignore
