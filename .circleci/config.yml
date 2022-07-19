@@ -1,3 +1,8 @@
+version: 2
+
+orbs:
+  pantheon: pantheon-systems/pantheon@0.6.0
+
 test-defaults: &test-defaults
   docker:
     - image: quay.io/pantheon-public/terminus-plugin-test:1.x
@@ -14,7 +19,6 @@ merge-defaults: &merge-defaults
     TZ: "/usr/share/zoneinfo/America/Los_Angeles"
     TERM: dumb
 
-version: 2
 jobs:
     test:
         <<: *test-defaults
@@ -49,10 +53,11 @@ workflows:
   wordpress:
     jobs:
       - test
-      - merge:
+      - pantheon/push:
+          clone_content: false
+          checkout: false
           requires:
             - test
-          filters:
-            branches:
-              only:
-                - default
+          pre-steps:
+            - checkout
+            - run: rm -rf .gitignore
