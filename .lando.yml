@@ -1,0 +1,54 @@
+name: lf-us
+
+env_file:
+  - .env
+recipe: pantheon
+
+proxy:
+  mailhog:
+    - mailhog.lf-us.lndo.site
+
+config:
+  composer_version: '2.2.12'
+  webroot: .
+  xdebug: true
+  via: nginx
+  php: '7.4'
+  database: mariadb
+  framework: wordpress
+  site: leaffilter-rebuild-us
+  id: 34e526ad-2c67-4f17-83ab-4d7692068f8a
+
+services:
+  appserver:
+    #    run_as_root:
+    #      - chmod u+x /app/init.sh
+    #      - /app/init.sh
+    overrides:
+      environment:
+        PHP_IDE_CONFIG: serverName=appserver
+  mailhog:
+    type: mailhog
+    portforward: true
+    hogfrom:
+      - appserver
+  node:
+    type: node:16
+
+tooling:
+  composer:
+    description: Runs Composer Commands in the appserver
+    cmd: composer
+    service: appserver
+  node:
+    description: Runs Node Commands in the Node
+    cmd: node
+    service: node
+  npm:
+    description: Runs NPM Commands in the Node
+    cmd: npm
+    service: node
+  dev:
+    description: Execute webpack in the leaffilter-theme
+    cmd: cd wp-content/themes/leaffilter-theme && npm run watch
+    service: node
