@@ -15,7 +15,7 @@ function lost_pass_help() {
 		<script>
 		let loginUrlParams = new URLSearchParams(window.location.search);
 		if (loginUrlParams.has('user_login')) {
-			window.document.querySelector('input#user_login').value = loginUrlParams.get('user_login');
+			window.document.querySelector('input#user_login').value = atob(loginUrlParams.get('user_login'));
 		}
 		</script>
 	LOST;

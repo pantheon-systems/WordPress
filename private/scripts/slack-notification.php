@@ -3,7 +3,6 @@
 // Get Slack API key.
 $secrets = json_decode(file_get_contents('https://dev-dunder-mifflin-legacy-site.pantheonsite.io/quicksilver.php?name=qs'), 1);
 $slack_url = $secrets['slack_url'];
-$login_link = "None";
 
 // Customize the message based on the workflow type.  Note that slack_notification.php
 // must appear in your pantheon.yml for each workflow type you wish to send notifications on.
@@ -52,7 +51,9 @@ switch ($_POST['wf_type']) {
     $title = $meta['label'];
     $email = $_POST['user_email'];
     $text = "\n" . ':ship: Created a new site: ' . $_ENV['PANTHEON_SITE_NAME'] . "\n";
-    $login_link = 'https://' . $_ENV['PANTHEON_ENVIRONMENT'] . '-' . $_ENV['PANTHEON_SITE_NAME'] . '.pantheonsite.io/wp-login.php?action=lostpassword&user_login=' . $email;
+    $encrypted_email = base64_encode($email);
+    $resetLink = 'https://' . $_ENV['PANTHEON_ENVIRONMENT'] . '-' . $_ENV['PANTHEON_SITE_NAME'] . '.pantheonsite.io/wp-login.php?action=lostpassword&user_login=' . $encrypted_email;
+    $text .= 'Reset Password Link: ' . $resetLink . "\n";
 
     break;
 
