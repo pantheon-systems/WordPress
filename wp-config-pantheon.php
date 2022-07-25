@@ -88,3 +88,15 @@ if (getenv('WP_ENVIRONMENT_TYPE') === false) {
             break;
     }
 }
+
+/**
+ * Defaults you may override
+ *
+ * To override, define your constant in your wp-config.php before wp-config-pantheon.php is required.
+ */
+
+/** Disable wp-cron.php from running on every page load and rely on Pantheon to run cron via wp-cli */
+$network = isset($_ENV["FRAMEWORK"]) && $_ENV["FRAMEWORK"] === "wordpress_network";
+if ( ! defined( 'DISABLE_WP_CRON' ) && $network === false) {
+	define( 'DISABLE_WP_CRON', true );
+}

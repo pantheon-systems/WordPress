@@ -43,76 +43,45 @@ function _pantheon_is_wordpress_core_latest() {
 
 }
 
-// Return upstream's org and repository names, or false if not a custom upstream
-// (i.e. Pantheon WordPress or wordpress-network )
-function _pantheon_fetch_custom_upstream_info() {
-	$data = _pantheon_curl_cached( 'https://api.live.getpantheon.com/sites/self/code-upstream-updates' );
-	if ( empty( $data['remote_url'] ) || false !== stripos( $data['remote_url'], '/pantheon-systems/' )) {
-		// remote_url was missing or this is not a custom upstream
-		return false;
-	}
-	$url_path = ltrim( parse_url( $data['remote_url'], PHP_URL_PATH ), '/' );
-	return str_replace( '.git', '', $url_path );
-}
-
-// Check if Pantheon upstream updates are available.
-function _pantheon_wordpress_update_available() {
-
-	if ( ! function_exists( 'pantheon_curl_timeout' ) ) {
-		return false;
-	}
-
-	/**
-	 * If the site is using the default WordPress upstream and
-	 * WordPress is up to date, do not show the update notice
-	 */
-	if( ! _pantheon_fetch_custom_upstream_info() && _pantheon_is_wordpress_core_latest() ) {
-		return false;
-	}
-
-	$upstream_updates_api_url = 'https://api.live.getpantheon.com/sites/self/code-upstream-updates';
-	if ( 'dev' != $_ENV['PANTHEON_ENVIRONMENT'] ) {
-		$upstream_updates_api_url .= '?base_branch=refs%2Fheads%2F'.$_ENV['PANTHEON_ENVIRONMENT'];
-	}
-
-	$data = _pantheon_curl_cached( $upstream_updates_api_url );
-	if ( empty( $data['update_log'] ) ) {
-		return false;
-	}
-	return true;
-}
-
-function _pantheon_curl_cached( $api_url ) {
-	$cache_key   = 'pantheon_curl_' . md5( $api_url );
-	$cache_value = get_transient( $cache_key );
-	if ( false !== $cache_value ) {
-		return $cache_value;
-	}
-	$api_response = pantheon_curl_timeout( $api_url, null, 8443 );
-	$data = $api_response ? json_decode( $api_response['body'], true ) : [];
-	set_transient( $cache_key, $data, 2 * MINUTE_IN_SECONDS );
-	return $data;
-}
-
 // Replace WordPress core update nag EVERYWHERE with our own notice (use git upstream)
 function _pantheon_upstream_update_notice() {
-	$update_type = 'new WordPress version';
-	$update_help = 'If you need help, open a support chat on Pantheon.';
-	$upstream_path = _pantheon_fetch_custom_upstream_info();
-	if ( ! empty( $upstream_path ) ) {
-		$update_type = 'Pantheon Custom Upstream update from "'.$upstream_path.'"';
-		$update_help = 'If you need help, contact an administrator for your Pantheon organization.';
-	}
+	// Translators: %s is a URL to the user's Pantheon Dashboard.
+	$notice_message = wp_kses_post( sprintf( __( 'Check for updates on <a href="%s">your Pantheon dashboard</a>.', 'pantheon-systems' ), 'https://dashboard.pantheon.io/sites/' . $_ENV['PANTHEON_SITE'] ) );
+	// Translators: %s is a URL to Pantheon's upstream updates documentation.
+	$upstream_help_message = wp_kses_post( sprintf( __( 'For details on applying updates, see the <a href="%s">Applying Upstream Updates</a> documentation.', 'pantheon-systems' ), 'https://pantheon.io/docs/upstream-updates/' ) );
+	$update_help = wp_kses_post( __( 'If you need help, contact an administrator for your Pantheon organization.', 'pantheon-systems' ) );
+	$div_class = esc_attr( 'update-nag notice notice-warning' );
+	$div_style = esc_attr( 'display: table;' );
+	$paragraph_style = esc_attr( 'font-size: 14px; font-weight: bold; margin: 0 0 0.5em 0;' );
 
-    ?>
-    <div class="update-nag notice notice-warning">
-		<p style="font-size: 14px; font-weight: bold; margin: 0 0 0.5em 0;">
-			A <?php echo $update_type; ?> is available! Please update from <a href="https://dashboard.pantheon.io/sites/<?php echo $_ENV['PANTHEON_SITE']; ?>">your Pantheon dashboard</a>.
-		</p>
-		For details on applying updates, see the <a href="https://pantheon.io/docs/upstream-updates/" target="_blank">Applying Upstream Updates</a> documentation. <br />
-		<?php echo $update_help; ?>
-	</div>
-    <?php
+	if ( _pantheon_is_wordpress_core_latest() ) {
+		// If a WP core update is not detected, only show the nag on the updates page.
+		$screen = get_current_screen(); 
+		if ( 'update-core' === $screen->id || 'update-core-network' === $screen->id ) { ?>
+			<div class="<?php echo $div_class; ?>" style="<?php echo $div_style; ?>">
+				<p style="<?php echo $paragraph_style; ?>">
+					<?php echo $notice_message; ?>
+				</p>
+				<?php echo $upstream_help_message; ?>
+				<br />
+				<?php echo $update_help; ?>
+			</div>
+			<?php
+		}
+	} else {
+		// If WP core is out of date, alter the message and show the nag everywhere.
+		// Translators: %s is a URL to the user's Pantheon Dashboard.
+		$notice_message = wp_kses_post( sprintf( __( 'A new WordPress update is available! Please update from <a href="%s">your Pantheon dashboard</a>.', 'pantheon-systems' ), 'https://dashboard.pantheon.io/sites/' . $_ENV['PANTHEON_SITE'] ) );; ?>
+		<div class="<?php echo $div_class; ?>" style="<?php echo $div_style; ?>">
+			<p style="<?php echo $paragraph_style; ?>">
+				<?php echo $notice_message; ?>
+			</p>
+			<?php echo $upstream_help_message; ?>
+			<br />
+			<?php echo $update_help; ?>
+		</div>
+		<?php
+	}
 }
 
 // Register Pantheon specific WordPress update admin notice
@@ -120,9 +89,9 @@ add_action( 'admin_init', '_pantheon_register_upstream_update_notice' );
 function _pantheon_register_upstream_update_notice(){
 	// but only if we are on Pantheon
 	// and this is not a WordPress Ajax request
-	// and there is a WordPress update available
-	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && ! wp_doing_ajax() && _pantheon_wordpress_update_available() ){
+	if( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && ! wp_doing_ajax() ){
 		add_action( 'admin_notices', '_pantheon_upstream_update_notice' );
+		add_action( 'network_admin_notices', '_pantheon_upstream_update_notice' );
 	}
 }
 
