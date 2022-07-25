@@ -10,5 +10,5 @@ passthru("wp plugin install pantheon-advanced-page-cache wp-native-php-sessions 
 
 // Import data into WordPress
 echo "Importing default content...\n";
-passthru("wp import $path/sample-data.xml --authors=skip");
+passthru("wp import $path/sample-data.xml --authors=skip &");
 echo "Import complete.\n";
