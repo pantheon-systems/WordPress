@@ -51,7 +51,8 @@ switch ($_POST['wf_type']) {
     $title = $meta['label'];
     $email = $_POST['user_email'];
     $text = "\n" . ':ship: Created a new site: ' . $_ENV['PANTHEON_SITE_NAME'] . "\n";
-    $text .= '*Reset Password Link*: ' . "https://{$_ENV['PANTHEON_ENVIRONMENT']}-{$_ENV['PANTHEON_SITE_NAME']}.pantheonsite.io/wp-login.php?action=lostpassword&user_login=" . $email . "\n";
+    $resetLink = 'https://' . $_ENV['PANTHEON_ENVIRONMENT'] . '-' . $_ENV['PANTHEON_SITE_NAME'] . '.pantheonsite.io/wp-login.php?action=lostpassword&user_login=' . $email;
+    $text .= 'Reset Password Link: ' . $resetLink . "\n";
 
     break;
 
