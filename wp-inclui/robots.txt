@@ -1,0 +1,35 @@
+# Pantheon's documentation on robots.txt: https://pantheon.io/docs/bots-and-indexing/
+User-agent: *
+Allow: /
+Allow: /https://dev-lairtondossantos.pantheonsite.io/sitemap.xml/
+Allow: /https://dev-lairtondossantos.pantheonsite.io/news-sitemap.xml/
+Allow: /home/
+Allow: /blog/
+Allow: /elementor home/
+Allow: /moda/
+Allow: /carrinho/
+Allow: /comprar/
+Allow: /doar/
+Allow: /contato/
+Allow: /politica de privacidade/
+Allow: /termos/
+Allow: /checkout/
+Allow: /minha conta/
+Allow: /reembolso e política de devoluções/
+Allow: /wp admin/
+Allow: /horóscopo/
+Allow: /horóscopo chines/
+Allow: /anjos/
+Allow: /tarot/
+Allow: /cupido do amor/
+Allow: /previsão do tempo/
+Allow: /homepage/
+
+User-agent: * RavenCrawler
+User-agent: * rogerbot
+User-agent: * dotbot
+User-agent: * SemrushBot
+User-agent: * SemrushBot-SA
+User-agent: * PowerMapper
+User-agent: * Swiftbot
+Allow: /
