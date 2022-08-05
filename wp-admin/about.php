@@ -55,15 +55,35 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 				printf(
 					/* translators: %s: WordPress version number */
 					__( '<strong>Version %s</strong> addressed some security issues.' ),
+					'5.2.5'
+				);
+				?>
+				<?php
+				printf(
+					/* translators: %s: HelpHub URL */
+					__( 'For more information, see <a href="%s">the release notes</a>.' ),
+					sprintf(
+						/* translators: %s: WordPress version */
+						esc_url( __( 'https://wordpress.org/support/wordpress-version/version-%s/' ) ),
+						sanitize_title( '5.2.5' )
+					)
+				);
+				?>
+			</p>
+			<p>
+				<?php
+				printf(
+					/* translators: %s: WordPress version number */
+					__( '<strong>Version %s</strong> addressed some security issues.' ),
 					'5.2.4'
 				);
 				?>
 				<?php
 				printf(
-				/* translators: %s: HelpHub URL */
+					/* translators: %s: HelpHub URL */
 					__( 'For more information, see <a href="%s">the release notes</a>.' ),
 					sprintf(
-					/* translators: %s: WordPress version */
+						/* translators: %s: WordPress version */
 						esc_url( __( 'https://wordpress.org/support/wordpress-version/version-%s/' ) ),
 						sanitize_title( '5.2.4' )
 					)
@@ -73,7 +93,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 			<p>
 				<?php
 				printf(
-				/* translators: 1: WordPress version number, 2: plural number of bugs. More than one security issue. */
+					/* translators: 1: WordPress version number, 2: plural number of bugs. More than one security issue. */
 					_n(
 						'<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug.',
 						'<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs.',
@@ -85,10 +105,10 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 				?>
 				<?php
 				printf(
-				/* translators: %s: HelpHub URL */
+					/* translators: %s: HelpHub URL */
 					__( 'For more information, see <a href="%s">the release notes</a>.' ),
 					sprintf(
-					/* translators: %s: WordPress version */
+						/* translators: %s: WordPress version */
 						esc_url( __( 'https://wordpress.org/support/wordpress-version/version-%s/' ) ),
 						sanitize_title( '5.2.3' )
 					)
