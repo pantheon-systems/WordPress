@@ -1793,7 +1793,7 @@ function wp_insert_user( $userdata ) {
 	}
 
 	if ( $update ) {
-		if ( $user_email !== $old_user_data->user_email ) {
+		if ( $user_email !== $old_user_data->user_email || $user_pass !== $old_user_data->user_pass ) {
 			$data['user_activation_key'] = '';
 		}
 		$wpdb->update( $wpdb->users, $data, compact( 'ID' ) );
@@ -3063,7 +3063,11 @@ function _wp_privacy_send_request_confirmation_notification( $request_id ) {
 		return;
 	}
 
-	$manage_url         = add_query_arg( 'page', $request->action_name, admin_url( 'tools.php' ) );
+	if ( 'export_personal_data' === $request->action_name ) {
+		$manage_url = admin_url( 'export-personal-data.php' );
+	} elseif ( 'remove_personal_data' === $request->action_name ) {
+		$manage_url = admin_url( 'erase-personal-data.php' );
+	}
 	$action_description = wp_user_request_action_description( $request->action_name );
 
 	/**
