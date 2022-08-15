@@ -28,9 +28,6 @@ workflows:
   # New site creation
   deploy_product:
     after:
-      - description: "Wait for converge"
-        script: private/scripts/wp-sleep.php
-        type: webphp
       - description: "Install WordPress core"
         script: private/scripts/wp-site-install.php
         type: webphp
