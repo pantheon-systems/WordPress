@@ -95,12 +95,7 @@ class Pantheon_Cache {
 
 		add_action( 'admin_post_pantheon_cache_flush_site',  array( $this, 'flush_site' ) );
 
-		if ( ! is_admin() && function_exists( 'is_user_logged_in' ) && ! is_user_logged_in() ) {
-			add_action( 'send_headers',               array( $this, 'cache_add_headers' ) );
-		}
-		else {
-			add_action( 'send_headers',               array( $this, 'no_cache_add_headers' ) );
-		}
+		add_action( 'send_headers',       array( $this, 'cache_add_headers' ) );
 		add_filter( 'rest_post_dispatch', array( $this, 'filter_rest_post_dispatch_send_cache_control' ), 10, 2 );
 
 		add_action( 'admin_notices', function(){
@@ -333,15 +328,24 @@ class Pantheon_Cache {
 	}
 
 	/**
-	 * Set a stronger cache-control header for admin or logged in requests.
+	 * Get the cache-control header value
 	 *
 	 * This removes "max-age=0" which could hypothetically be used by
 	 * Varnish on an immediate subsequent request.
 	 *
 	 * @return void
 	 */
-	public function no_cache_add_headers() {
-		header( 'cache-control: no-cache, no-store, must-revalidate');
+	private function get_cache_control_header_value() {
+		if ( ! is_admin() && ! is_user_logged_in() ) {
+			$ttl = absint( $this->options['default_ttl'] );
+			if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
+				$ttl = 60;
+			}
+
+			return sprintf( 'public, max-age=%d', $ttl );
+		} else {
+			return 'no-cache, no-store, must-revalidate';
+		}
 	}
 
 	/**
@@ -350,23 +354,17 @@ class Pantheon_Cache {
 	 * @return void
 	 */
 	public function cache_add_headers() {
-		$ttl = absint( $this->options['default_ttl'] );
-		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
-			$ttl = 60;
-		}
-
-		header( 'cache-control: public, max-age=' . $ttl );
+		header( sprintf( 'cache-control: %s', $this->get_cache_control_header_value() ) );
 	}
 
 	/**
 	 * Send the cache control header for REST API requests
+	 * 
+	 * @param WP_REST_Response $response Response.
+	 * @return WP_REST_Response Response.
 	 */
-	public function filter_rest_post_dispatch_send_cache_control( $response, $server ) {
-		$ttl = absint( $this->options['default_ttl'] );
-		if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
-			$ttl = 60;
-		}
-		$response->header( 'Cache-Control', 'public, max-age=' . $ttl );
+	public function filter_rest_post_dispatch_send_cache_control( $response ) {
+		$response->header( 'Cache-Control', $this->get_cache_control_header_value() );
 		return $response;
 	}
 
