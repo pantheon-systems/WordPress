@@ -41,3 +41,5 @@ git push -f pantheon $CIRCLE_BRANCH:$TERMINUS_ENV
 # Switch to SFTP mode so the site can install plugins and themes
 ###
 terminus --yes connection:set $TERMINUS_SITE.$TERMINUS_ENV sftp
+
+sleep 5
