@@ -3,7 +3,7 @@
  * Plugin Name: Pantheon
  * Plugin URI: https://pantheon.io/
  * Description: Building on Pantheon's and WordPress's strengths, together.
- * Version: 0.3
+ * Version: 1.0.0
  * Author: Pantheon
  * Author URI: https://pantheon.io/
  *
@@ -12,18 +12,18 @@
 
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 
-	require_once 'pantheon/pantheon-page-cache.php';
+	require_once 'inc/pantheon-page-cache.php';
 	if ( ! defined( 'DISABLE_PANTHEON_UPDATE_NOTICES' ) || ! DISABLE_PANTHEON_UPDATE_NOTICES ) {
-		require_once 'pantheon/pantheon-updates.php';
+		require_once 'inc/pantheon-updates.php';
 	}
 	if ( ! defined('RETURN_TO_PANTHEON_BUTTON') || RETURN_TO_PANTHEON_BUTTON ) {
-		require_once 'pantheon/pantheon-login-form-mods.php';
+		require_once 'inc/pantheon-login-form-mods.php';
 	}
 	if ( 'dev' === $_ENV['PANTHEON_ENVIRONMENT'] && function_exists( 'wp_is_writable' ) ) {
-		require_once 'pantheon/pantheon-plugin-install-notice.php';
+		require_once 'inc/pantheon-plugin-install-notice.php';
 	}
     if ( defined( 'WP_CLI' ) && WP_CLI ) {
-        require_once 'pantheon/cli.php';
+        require_once 'inc/cli.php';
     }
 	if ( ! defined( 'FS_METHOD' ) ) {
 		/**
