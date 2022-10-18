@@ -27,17 +27,22 @@ PANTHEON_SITE_URL="$TERMINUS_ENV-$TERMINUS_SITE.pantheonsite.io"
 BASH_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ###
-# Switch to git mode for pushing the files up
+# Switch to git mode for pushing the files up.
 ###
 terminus --yes connection:set $TERMINUS_SITE.$TERMINUS_ENV git
 
 ###
-# Push the upstream branch to the environment
+# Push the upstream branch to the environment.
 ###
 git remote add pantheon $PANTHEON_GIT_URL
 git push -f pantheon $CIRCLE_BRANCH:$TERMINUS_ENV
 
 ###
-# Switch to SFTP mode so the site can install plugins and themes
+# Switch to SFTP mode so the site can install plugins and themes.
 ###
 terminus --yes connection:set $TERMINUS_SITE.$TERMINUS_ENV sftp
+
+###
+# Ensure the test environment is awake before proceeding.
+###
+terminus env:wake $TERMINUS_SITE.$TERMINUS_ENV
