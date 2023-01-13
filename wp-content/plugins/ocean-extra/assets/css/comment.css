@@ -1,0 +1,225 @@
+﻿/*------------------------------------*
+  $COMMENT
+*------------------------------------*/
+#respond {
+  margin-bottom: 20px;
+}
+
+#respond form {
+  display: inline-block;
+  width: 100%;
+}
+
+#respond .comment-textarea,
+#respond .comment-form-author,
+#respond .comment-form-email,
+#respond .comment-form-url {
+  margin-bottom: 20px;
+}
+
+#respond .comment-form-author,
+#respond .comment-form-email,
+#respond .comment-form-url {
+  float: left;
+  width: 33.33%;
+}
+
+#respond .comment-form-author {
+  padding-right: 10px;
+}
+
+#respond .comment-form-email {
+  padding: 0 10px;
+}
+
+#respond .comment-form-url {
+  padding-left: 10px;
+}
+
+#respond input[type="text"] {
+  width: 100%;
+}
+
+#respond .form-submit {
+  float: right;
+  margin-bottom: 0;
+}
+
+#comments {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #f1f1f1;
+}
+
+#comments ol {
+  margin: 0;
+  list-style: none;
+}
+
+#comments ol.children {
+  margin-left: 30px;
+}
+
+#comments.empty-closed-comments {
+  display: none;
+}
+
+.comment-body {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.comment-body img {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin-right: 30px;
+  border-radius: 50%;
+}
+
+.comment-body .comment-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.comment-author {
+  display: inline-block;
+  width: 100%;
+}
+
+.comment-author .comment-link, .comment-author .comment-meta {
+  font-weight: 600;
+  margin: 5px 0 8px;
+}
+
+.comment-author .comment-link {
+  float: left;
+  font-size: 18px;
+}
+
+.comment-author .comment-meta {
+  float: right;
+  text-align: right;
+  font-size: 10px;
+  line-height: 2.5;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.comment-author .comment-meta .comment-reply-link, .comment-author .comment-meta .comment-edit-link {
+  margin-left: 15px;
+}
+
+.comment-author .comment-meta .comment-reply-link {
+  color: #13aff0;
+}
+
+.comment-author .comment-meta .comment-reply-link:hover {
+  color: #333;
+}
+
+#respond #cancel-comment-reply-link {
+  font-size: 10px;
+  color: #929292;
+  float: right;
+  border: 2px solid #f1f1f1;
+  padding: 3px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+#respond #cancel-comment-reply-link:hover {
+  color: #13aff0;
+  border-color: #13aff0;
+}
+
+span.required {
+  position: relative;
+  top: -4px;
+  font-size: 10px;
+  margin-left: 3px;
+  color: #F00;
+}
+
+.comment-body p {
+  margin: 0;
+}
+
+.no-comments {
+  text-align: right;
+}
+
+.no-comments i {
+  margin-right: 8px;
+}
+
+.comment-navigation {
+    display: inline-block;
+    width: 100%;
+}
+
+.comment-navigation .nav-links a {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1.2;
+    padding-bottom: 3px;
+    border-bottom: 1px solid;
+    text-transform: uppercase;
+}
+
+.comment-navigation .nav-links .nav-previous {
+  float: left;
+  margin-right: 1.5em;
+}
+
+.comment-navigation .nav-links .nav-previous i {
+  margin-right: 5px;
+}
+
+.comment-navigation .nav-links .nav-next {
+  float: right;
+  margin-right: 1.5em;
+}
+
+.comment-navigation .nav-links .nav-next i {
+  margin-left: 5px;
+}
+
+/*------------------------------------*
+  Phone Portrait and Landscape
+*------------------------------------*/
+@media only screen and (max-width: 767px) {
+  /* comments */
+  #comments ol.children {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #respond .comment-form-author,
+  #respond .comment-form-email,
+  #respond .comment-form-url {
+    float: none;
+    width: 100%;
+    padding-right: 0;
+    padding: 0;
+    padding-left: 0;
+  }
+}
+
+/*------------------------------------*
+  Phone Landscape
+*------------------------------------*/
+@media only screen and (max-width: 480px) {
+  /* comments */
+  .comment-body img {
+    display: none;
+  }
+  .comment-author {
+    margin-bottom: 16px;
+  }
+  .comment-author .comment-link,
+  .comment-author .comment-meta {
+    float: none;
+  }
+}

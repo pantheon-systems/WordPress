@@ -1,0 +1,59 @@
+﻿/*------------------------------------*
+  $404 PAGE
+*------------------------------------*/
+.error404-content {
+  position: relative;
+  width: 65%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.error404-content .error-title {
+  font-size: 46px;
+  margin: 0 0 25px;
+}
+
+.error404-content .error-text {
+  font-size: 18px;
+  color: #555;
+  font-weight: 300;
+  margin-bottom: 35px;
+}
+
+.error404-content .searchform {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.error404-content .error-btn {
+  font-size: 13px;
+  padding: 14px 26px;
+  margin-top: 60px;
+}
+
+.error404-content .error-btn:hover {
+  color: #fff;
+}
+
+/*------------------------------------*
+  All Devices under 960px
+*------------------------------------*/
+@media only screen and (max-width: 959px) {
+  /* 404 page */
+  .error404-content {
+    width: 100%;
+  }
+}
+
+/*------------------------------------*
+  Phone Landscape
+*------------------------------------*/
+@media only screen and (max-width: 480px) {
+  /* 404 page */
+  .error404-content .searchform {
+    width: 100%;
+  }
+  .error404-content .error-btn {
+    margin-top: 40px;
+  }
+}

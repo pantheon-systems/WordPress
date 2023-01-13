@@ -1,0 +1,123 @@
+.oceanwp-extensions-panel * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body .oceanwp-extensions-panel h2:first-child,
+.oceanwp-extensions-panel .oceanwp-desc {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.oceanwp-extensions-panel .oceanwp-desc {
+    margin: 6px 0 30px;
+}
+
+.oceanwp-extensions-panel .extensions-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.oceanwp-extensions-panel .extensions-wrap li {
+    width: 33.33%;
+    padding: 0 10px 20px;
+    margin: 0;
+    overflow: hidden;
+}
+
+.oceanwp-extensions-panel .extensions-wrap li .owp-card-top {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    min-height: 140px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom: 0;
+    padding: 20px;
+    text-decoration: none;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.oceanwp-extensions-panel .extensions-wrap li .owp-card-top:hover {
+    background-color: #f1f1f1;
+}
+
+.oceanwp-extensions-panel .extensions-wrap li .owp-card-top:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.oceanwp-extensions-panel .owp-img {
+    padding-right: 15px;
+    line-height: 1;
+}
+
+.oceanwp-extensions-panel .owp-img img {
+    max-width: 80px;
+    border-radius: 50%;
+}
+
+.oceanwp-extensions-panel h3 {
+    margin: 0 0 15px;
+}
+
+.oceanwp-extensions-panel .owp-description p {
+    color: #777;
+    font-size: 14px;
+    margin: 0;
+}
+
+.oceanwp-extensions-panel .owp-card-btn {
+    display: block;
+    background-color: #13aff0;
+    color: #fff;
+    padding: 12px 10px;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.oceanwp-extensions-panel .owp-card-btn:hover {
+    background-color: #0b7cac;
+}
+
+.oceanwp-extensions-panel .owp-card-btn:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+/* RTL */
+.rtl .oceanwp-extensions-panel .owp-img {
+    padding-left: 15px;
+    padding-right: 0;
+}
+
+/* Responsive */
+@media only screen and (max-width: 1180px) {
+    .oceanwp-extensions-panel .extensions-wrap li {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 780px) {
+    .oceanwp-extensions-panel .extensions-wrap li {
+        width: 100%;
+    }
+}

@@ -1,0 +1,81 @@
+﻿/*------------------------------------*
+  $TRANSPARENT HEADER
+*------------------------------------*/
+#transparent-header-wrap {
+  position: relative;
+}
+
+#site-header.transparent-header {
+  position: absolute;
+  top: 0;
+  background-color: transparent;
+  height: auto;
+  z-index: 9999;
+}
+
+#site-header.transparent-header #site-logo.has-transparent-logo .custom-logo-link {
+  display: none;
+}
+
+#site-header.transparent-header #site-logo.has-transparent-logo .transparent-logo-link {
+  display: block;
+}
+
+.is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .custom-logo-link {
+  display: block;
+}
+
+.is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .transparent-logo-link {
+  display: none;
+}
+
+body.has-transparent-header .oceanwp-sticky-header-holder {
+  height: auto !important;
+  background: none !important;
+}
+
+/*------------------------------------*
+  Retina Logo
+*------------------------------------*/
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  /* Transparent logo */
+  #site-header.transparent-header #site-logo.has-transparent-logo .transparent-logo-link,
+  .is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .custom-logo-link {
+    display: none;
+  }
+  #site-logo.has-transparent-logo .retina-logo-link {
+    display: none;
+  }
+  #site-logo.has-transparent-logo .transparent-retina-logo-link {
+    display: block;
+  }
+  .is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .retina-logo-link {
+    display: block;
+  }
+  .is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .transparent-retina-logo-link {
+    display: none;
+  }
+}
+
+/*------------------------------------*
+  Phone Portrait and Landscape
+*------------------------------------*/
+@media only screen and (max-width: 767px) {
+  /* Transparent logo */
+  #site-header.transparent-header #site-logo.has-transparent-logo .transparent-logo-link,
+  .is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .custom-logo-link {
+    display: none;
+  }
+  #site-logo.has-transparent-logo .retina-logo-link {
+    display: none;
+  }
+  #site-logo.has-transparent-logo .transparent-retina-logo-link {
+    display: block;
+  }
+  .is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .retina-logo-link {
+    display: block;
+  }
+  .is-sticky #site-header.transparent-header #site-logo.has-transparent-logo .transparent-retina-logo-link {
+    display: none;
+  }
+}

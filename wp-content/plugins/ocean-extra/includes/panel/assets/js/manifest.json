@@ -1,0 +1,14 @@
+{
+  "name": "Push Monkey Notification",
+  "short_name": "Notification",
+  "icons": [{
+        "src": "/static/js/chrome/images/test.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }],
+  "start_url": "./index.html?homescreen=1",
+  "display": "standalone",
+  "gcm_sender_id": "956785459164",  
+  "//": "gcm_user_visible_only is only needed until Chrome 44 is in stable ",
+  "gcm_user_visible_only": true
+}

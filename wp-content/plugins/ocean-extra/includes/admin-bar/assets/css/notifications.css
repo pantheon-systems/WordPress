@@ -1,0 +1,172 @@
+#ocean-notifications {
+  position: relative;
+  background: #ffffff 0 0 no-repeat padding-box;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  opacity: 1;
+  min-height: 48px;
+  margin: 0 0 20px 0;
+  max-width: 1220px;
+  font-family: poppins, Sans-serif;
+}
+
+#ocean-notifications * {
+  box-sizing: border-box;
+}
+
+#ocean-notifications .ocean-notifications-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(204, 208, 212, 0.5);
+}
+
+#ocean-notifications .ocean-notifications-header .ocean-notifications-icon {
+  position: relative;
+  width: 16px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+#ocean-notifications .ocean-notifications-header .ocean-notifications-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #23282d;
+  text-transform: uppercase;
+}
+
+#ocean-notifications .ocean-notifications-body {
+  position: relative;
+}
+
+#ocean-notifications .ocean-notifications-messages {
+  padding: 16px 100px 16px 16px;
+}
+
+#ocean-notifications .ocean-notifications-messages .ocean-notifications-message {
+  display: none;
+}
+
+#ocean-notifications .ocean-notifications-messages .ocean-notifications-message.current {
+  display: block;
+}
+
+#ocean-notifications .ocean-notifications-messages .ocean-notifications-title {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 17px;
+  margin: 0;
+  color: #444444;
+  border-bottom: 2px solid;
+  padding-bottom: 5px;
+}
+
+#ocean-notifications .ocean-notifications-messages .ocean-notifications-content {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
+  margin: 8px 0 41px 0;
+  color: #4E4E4E;
+}
+
+#ocean-notifications .ocean-notifications-messages .ocean-notifications-buttons {
+  margin: -30px 80px 0 0;
+}
+
+#ocean-notifications .ocean-notifications-messages .ocean-notifications-buttons a {
+  margin: 0 10px 0 0;
+  min-height: unset;
+}
+
+#ocean-notifications .navigation {
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  width: 63px;
+  height: 30px;
+}
+
+#ocean-notifications .navigation a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #161d30;
+  border-radius: 3px;
+  font-size: 16px;
+  line-height: 1.625;
+  text-align: center;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #161d30;
+}
+
+#ocean-notifications .navigation a:hover {
+  background-color: #f1f1f1;
+}
+
+#ocean-notifications .navigation .prev {
+  float: left;
+}
+
+#ocean-notifications .navigation .next {
+  float: right;
+}
+
+#ocean-notifications .navigation .disabled {
+  border-color: #dddddd;
+  color: #a0a5aa;
+  cursor: default;
+}
+
+#ocean-notifications .navigation .disabled:hover {
+  background-color: #ffffff;
+}
+
+#ocean-notifications .notice-dismiss:before {
+  color: #161d30;
+}
+
+#ocean-notifications .button-primary {
+  border-color: #161d30;
+  background: #06214e;
+}
+
+#ocean-notifications .button-primary:hover {
+  background: #163c80;
+}
+
+#ocean-notifications .button-secondary {
+  border-color: #161d30;
+  color: #161d30;
+}
+
+@media screen and (max-width: 768px) {
+  #ocean-notifications .ocean-notifications-messages {
+    padding: 15px 50px 20px 16px;
+  }
+
+  #ocean-notifications .ocean-notifications-messages .ocean-notifications-message .ocean-notifications-title {
+    margin: 0 30px 0 0;
+    line-height: 22px;
+  }
+
+  #ocean-notifications .ocean-notifications-messages .ocean-notifications-message .ocean-notifications-content {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  #ocean-notifications .ocean-notifications-messages .ocean-notifications-message .ocean-notifications-buttons {
+    margin: -30px 80px 0 0;
+  }
+
+  #ocean-notifications .ocean-notifications-messages .ocean-notifications-message .ocean-notifications-buttons a {
+    margin: 0;
+    display: table;
+  }
+
+  #ocean-notifications .ocean-notifications-messages .ocean-notifications-message .ocean-notifications-buttons .button-secondary {
+    margin-top: 6px;
+  }
+}

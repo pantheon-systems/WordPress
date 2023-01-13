@@ -1,0 +1,176 @@
+/**
+ * Contact Info Widget
+ */
+.contact-info-widget {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	 li {
+	 	display: inline-block;
+    	width: 100%;
+	    margin: 0 0 20px;
+	    padding: 0;
+	    border: 0;
+
+	    &:last-child {
+		    margin-bottom: 0;
+		}
+	}
+
+	.oceanwp-info-wrap,
+	span.oceanwp-contact-title,
+	span.oceanwp-contact-text {
+	    display: block;
+	}
+
+	span.oceanwp-contact-title {
+	    color: #777;
+	    font-weight: bold;
+	    line-height: 1.4;
+	}
+
+	span.oceanwp-contact-text {
+	    line-height: 18px;
+	}
+
+	li.skype {
+	    display: inline-block;
+
+	    a {
+		    display: inline-block;
+		    background-color: #0ca5de;
+		    color: #fff;
+		    font-size: 12px;
+		    font-weight: 600;
+		    line-height: 1;
+		    letter-spacing: 1px;
+		    text-transform: uppercase;
+		    padding: 12px 15px;
+
+		    &:hover {
+			    background-color: #0581af;
+			    color: #fff;
+			}
+		}
+	}
+}
+
+/* Default style */
+.contact-info-widget.default {
+	i,
+	.owp-icon {
+	    float: left;
+	    width: 40px;
+	    height: 40px;
+	    line-height: 40px;
+	    border: 1px solid $border-color;
+	    color: $color-5;
+	    margin-right: 15px;
+	    text-align: center;
+	    -webkit-border-radius: 2px;
+	    -moz-border-radius: 2px;
+	    border-radius: 2px;
+	}
+
+	.owp-icon {
+		padding: 10px;
+
+		use {
+			stroke: $color-5;
+		}
+	}
+
+	.oceanwp-info-wrap {
+	    padding-left: 55px;
+	}
+}
+
+/* Big icons style */
+.contact-info-widget.big-icons {
+	li {
+	    display: -webkit-box;
+	    display: -ms-flexbox;
+	    display: flex;
+	    -webkit-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	    -webkit-box-align: center;
+	    -webkit-align-items: center;
+	    -ms-flex-align: center;
+	    align-items: center;
+	    margin-bottom: 30px;
+
+	    &:last-child {
+		    margin-bottom: 0;
+		}
+	}
+
+	i,
+	.owp-icon {
+	    float: left;
+	    width: 72px;
+	    height: 72px;
+	    line-height: 72px;
+	    font-size: 30px;
+	    margin-right: 20px;
+	    color: $color-5;
+	    border: 1px solid $border-color;
+	    text-align: center;
+	    -webkit-border-radius: 50%;
+	    -moz-border-radius: 50%;
+	    border-radius: 50%;
+	    -webkit-transition: all .3s ease;
+	    -moz-transition: all .3s ease;
+	    transition: all .3s ease;
+	}
+
+	.owp-icon {
+		padding: 16px;
+
+		use {
+			stroke: $color-5;
+		}
+	}
+
+	li:hover i {
+	    background-color: $color-5;
+	    color: #fff;
+	    border-color: $color-5;
+	}
+
+	li:hover .owp-icon {
+	    background-color: $color-5;
+	    border-color: $color-5;
+
+		use {
+			stroke: #fff;
+		}
+	}
+
+	.oceanwp-info-wrap {
+
+	}
+
+	span.oceanwp-contact-title {
+	    display: block;
+	    font-size: 14px;
+	}
+
+	li.skype a {
+	    width: 100%;
+	    text-align: center;
+	}
+}
+
+/* No icons style */
+.contact-info-widget.no-icons {
+    li .oceanwp-contact-title {
+	    display: inline-block;
+	    min-width: 70px;
+	    font-weight: 600;
+	}
+
+	li.skype {
+	    margin-top: 20px;
+	}
+}

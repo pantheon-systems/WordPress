@@ -1,0 +1,42 @@
+.ocean-preloader--active {
+    #ocean-preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: #323232;
+        z-index: 99999999999999;
+    }
+
+    .preloader-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .preloader-inner {
+        text-align: center;
+    }
+
+    .preloader-image {
+        max-width: 100px;
+        margin: 0 auto;
+    }
+
+    .preloader-logo {
+        max-width: 180px;
+        margin: 0 auto;
+    }
+
+    .preloader-svg {
+        margin: 0 auto;
+    }
+
+    .preloader-after-content {
+        padding: 20px 0;
+        font-size: 20px;
+    }
+}

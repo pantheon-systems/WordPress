@@ -1,0 +1,9 @@
+﻿/*------------------------------------------------------------------
+Woo Categories WidgetCart
+-------------------------------------------------------------------*/
+.widget_product_categories li { position: relative; }
+.widget_product_categories li a { display: block; font-size: 12px; line-height: 1.6; font-weight: 600; text-transform: uppercase; padding: 10px 22px 10px 40px; border-bottom: 1px dotted; }
+.widget_product_categories li .open-this { position: absolute; left: 0; width: 40px; height: 40px; line-height: 40px; font-size: 14px; text-align: center; cursor: pointer; }
+.widget_product_categories .count { position: absolute; top: 0; right: 0; color: #999; padding: 10px 20px 0 0; z-index: 10; }
+.widget_product_categories li ul.children { display: none; margin: 0 0 0 16px; }
+.widget_product_categories li ul a { font-weight: 400; text-transform: none; border-bottom: 0; }

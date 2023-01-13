@@ -1,0 +1,105 @@
+﻿/*------------------------------------*
+  $FOOTER BOTTOM
+*------------------------------------*/
+#footer-bottom {
+  background-color: #1B1B1B;
+  padding: 15px 0;
+  font-size: 12px;
+  line-height: 1;
+}
+
+#footer-bottom #footer-bottom-menu, #footer-bottom #copyright {
+  width: 50%;
+}
+
+#footer-bottom #footer-bottom-menu {
+  float: right;
+  text-align: right;
+  padding-left: 15px;
+}
+
+#footer-bottom #footer-bottom-menu ul {
+  display: inline-block;
+  margin: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#footer-bottom #footer-bottom-menu li {
+  float: left;
+}
+
+#footer-bottom #footer-bottom-menu li:after {
+  content: '|';
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#footer-bottom #footer-bottom-menu li:last-child:after {
+  content: '';
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#footer-bottom #footer-bottom-menu a {
+  color: #fff;
+}
+
+#footer-bottom #footer-bottom-menu a:hover {
+  color: #13aff0;
+}
+
+#footer-bottom.no-footer-nav #copyright {
+  float: none;
+  width: 100%;
+  text-align: center;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+#footer-bottom #copyright {
+  float: left;
+  text-align: left;
+  padding-right: 15px;
+}
+
+#footer-bottom a {
+  color: #fff;
+}
+
+#footer-bottom a:hover {
+  color: #13aff0;
+}
+
+/*------------------------------------*
+  All Devices under 960px
+*------------------------------------*/
+@media only screen and (max-width: 959px) {
+  /* center footer bottom */
+  #footer-bottom #copyright,
+  #footer-bottom #footer-bottom-menu {
+    float: none;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    text-align: center;
+  }
+  #footer-bottom #footer-bottom-menu {
+    margin-bottom: 15px;
+  }
+  #footer-bottom #footer-bottom-menu li {
+    float: none;
+    display: inline-block;
+  }
+}
+
+/*------------------------------------*
+  Phone Landscape
+*------------------------------------*/
+@media only screen and (max-width: 480px) {
+  /* footer bottom links menu */
+  #footer-bottom #footer-bottom-menu li {
+    margin-bottom: 8px;
+  }
+}

@@ -1,0 +1,132 @@
+﻿/*------------------------------------*
+  $FOOTER
+*------------------------------------*/
+.site-footer {
+  position: relative;
+}
+
+/**
+ * Footer widgets
+ */
+#footer-widgets {
+  background-color: #222;
+  padding: 30px 0;
+  margin: 0;
+}
+
+#footer-widgets .footer-box {
+  padding: 0 15px;
+  margin: 0;
+}
+
+#footer-widgets .footer-box .footer-widget {
+  margin-bottom: 20px;
+}
+
+#footer-widgets .footer-box .footer-widget:last-child {
+  margin-bottom: 0;
+}
+
+#footer-widgets .footer-box .footer-widget ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#footer-widgets .footer-box .widget-title {
+  color: #fff;
+}
+
+#footer-widgets .footer-box a {
+  color: #fff;
+}
+
+#footer-widgets .footer-box a:hover {
+  color: #13aff0;
+}
+
+#footer-widgets #wp-calendar caption,
+#footer-widgets #wp-calendar th,
+#footer-widgets #wp-calendar tbody,
+#footer-widgets .contact-info-widget i,
+#footer-widgets .mailchimp-widget input[type="email"],
+#footer-widgets .posts-thumbnails-widget li,
+#footer-widgets .social-widget li a {
+  border-color: #555;
+}
+
+#footer-widgets .mailchimp-widget input[type="email"]:focus {
+  border-color: #13aff0;
+}
+
+#footer-widgets .tagcloud a {
+  background-color: #222;
+  border-color: #333;
+}
+
+#footer-widgets .tagcloud a:hover {
+  background-color: #444;
+  color: #fff;
+  border-color: #555;
+}
+
+/* Responsive columns */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  #footer-widgets.tablet-1-col .footer-box {
+    width: 100%;
+  }
+  #footer-widgets.tablet-2-col .footer-box {
+    width: 50% !important;
+  }
+  #footer-widgets.tablet-2-col .footer-box:nth-child(3n) {
+    clear: left;
+  }
+  #footer-widgets.tablet-3-col .footer-box {
+    width: 33.33% !important;
+    clear: none;
+  }
+  #footer-widgets.tablet-3-col .footer-box:nth-child(4n) {
+    clear: left;
+  }
+  #footer-widgets.tablet-4-col .footer-box {
+    width: 25% !important;
+  }
+  #footer-widgets.tablet-4-col .footer-box:nth-child(5n) {
+    clear: left;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #footer-widgets.mobile-1-col .footer-box {
+    width: 100%;
+  }
+  #footer-widgets.mobile-2-col .footer-box {
+    width: 50% !important;
+  }
+  #footer-widgets.mobile-2-col .footer-box:nth-child(3n) {
+    clear: left;
+  }
+  #footer-widgets.mobile-3-col .footer-box {
+    width: 33.33% !important;
+    clear: none;
+  }
+  #footer-widgets.mobile-3-col .footer-box:nth-child(4n) {
+    clear: left;
+  }
+  #footer-widgets.mobile-4-col .footer-box {
+    width: 25% !important;
+  }
+  #footer-widgets.mobile-4-col .footer-box:nth-child(5n) {
+    clear: left;
+  }
+}
+
+/*------------------------------------*
+  All Devices under 960px
+*------------------------------------*/
+@media only screen and (max-width: 959px) {
+  /* margin footer columns */
+  #footer-widgets .col {
+    margin-bottom: 30px;
+  }
+}

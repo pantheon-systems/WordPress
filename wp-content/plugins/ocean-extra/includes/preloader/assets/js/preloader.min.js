@@ -1,0 +1,1 @@
+window.addEventListener("load",async function(){document.body.classList.remove("ocean-preloader--active");const e=document.getElementById("ocean-preloader");e.remove()});

@@ -1,0 +1,135 @@
+.clr:after { content: ''; display: block; height: 0; clear: both; visibility: hidden; zoom: 1; }
+a:focus, .button, .wp-core-ui .button-link:focus,
+.wp-core-ui .button-secondary:focus, .wp-core-ui .button.focus,
+.wp-core-ui .button:focus { -webkit-box-shadow: none !important; box-shadow: none !important; }
+body .button.owp-button { background-color: #13aff0; color: #fff; height: auto; font-size: 12px; line-height: 1; font-weight: 600; text-transform: uppercase; margin: 0; padding: 14px 20px; border: 0; cursor: pointer; text-align: center; letter-spacing: .1em; border-radius: 3px; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -o-transition: all .3s ease; -ms-transition: all .3s ease; transition: all .3s ease; }
+body .button.owp-button:hover,
+body .button.owp-button:focus,
+body .button.owp-button:active { background-color: #0b7cac; color: #fff; }
+body .button.owp-button:active { -webkit-transform: none; -ms-transform: none; transform: none; }
+
+/* Settings wrap */
+.wrap.oceanwp-theme-panel { margin-right: 40px; }
+.oceanwp-settings .left { float: left; width: 75%; margin-top: 20px; }
+.oceanwp-settings .right { float: right; width: 23%; margin-top: 30px; }
+.oceanwp-settings .oceanwp-title { font-size: 26px; line-height: 1.6; margin: 0 0 3px 8px; }
+.oceanwp-settings .oceanwp-desc { margin: 0 0 30px 8px; font-size: 15px; }
+.oceanwp-settings .divider { display: block; height: 1px; margin: 40px 0 33px; border-bottom: 1px solid #ccc; }
+
+/* Customizer panels */
+.oceanwp-panels .column-wrap { float: left; position: relative; width: 32.33%; margin: 0 0.5% 1% 0.5%; overflow: hidden; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.oceanwp-panels .column-name { display: block; background-color: #fff; border: 2px solid #eee; padding: 25px 25px 20px; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -o-transition: all .3s ease; -ms-transition: all .3s ease; transition: all .3s ease; }
+.oceanwp-panels .column-name:hover { border-color: #ddd; }
+.oceanwp-panels .column-name h3.title { float: left; display: block; position: relative; font-size: 18px; color: #333; margin: 0; z-index: 2; }
+.oceanwp-panels .column-name .desc { display: block; position: relative; font-size: 17px; line-height: 1.6; font-weight: 400; color: #777; z-index: 2; }
+.oceanwp-panels input[type=checkbox] { float: right; width: 22px; height: 22px; min-width: 22px; margin: 0; }
+.oceanwp-panels input[type=checkbox]:checked:before { width: 26px; font-size: 27px; }
+.oceanwp-panels p.submit { display: inline-block; width: 100%; margin: 10px 0 0 0.5%; padding: 0; clear: both; }
+
+/* Customizer options */
+.oceanwp-options .options-inner { display: -webkit-box; display: -ms-flexbox; display: flex; flex-wrap: wrap; margin-top: 30px; }
+.oceanwp-options .column-wrap { display: -webkit-box; display: -ms-flexbox; display: flex; position: relative; background: #fff; border: 1px solid #ccc; width: 24%; min-height: 150px; margin: 0 0.5% 1% 0.5%;  padding: 25px 25px 20px; overflow: hidden; box-sizing: border-box; }
+.oceanwp-options .column-wrap.hidden { display: none !important; }
+.oceanwp-options .column-inner { display: -webkit-box; display: -ms-flexbox; display: flex; flex-direction: column; }
+.oceanwp-options .title { display: block; position: relative; font-size: 17px; color: #333; margin: 0 0 20px; padding-bottom: 20px; border-bottom: 1px solid #eaeaea; text-transform: capitalize; }
+.oceanwp-options .desc { flex: 1 0 auto; display: block; margin: 0 0 20px; font-size: 14px; line-height: 1.6; font-weight: 400; color: #777; }
+.oceanwp-options .bottom-column { padding: 20px 0 0; border-top: 1px solid #eaeaea; margin: 0; }
+.oceanwp-options .bottom-column .option-link { font-size: 12px; font-weight: 600; line-height: 1.6; text-transform: uppercase; letter-spacing: .6px; text-decoration: none; }
+
+/* Sidebar */
+.oceanwp-wizard { margin-bottom: 15px; }
+.oceanwp-wizard a { width: 100%; }
+
+.oceanwp-bloc { display: inline-block; position: relative; width: 100%; background-color: #fff; margin: 0 auto 15px auto; border-radius: 3px; border: 1px solid #e5e5e5; -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04); box-shadow: 0 1px 1px rgba(0,0,0,.04); -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; overflow: hidden; }
+.oceanwp-bloc h3 { display: block; font-size: 14px; font-weight: 600; padding: 12px 10px; background-color: #13aff0; color: #fff; text-transform: uppercase; letter-spacing: .4px; margin: 0 0 22px; text-align: center; }
+.oceanwp-bloc .content-wrap { position: relative; padding: 0 30px 25px; z-index: 2; text-align: center; }
+.oceanwp-bloc p.content { font-size: 14px; color: #5a5a5a; margin: 0; }
+body .oceanwp-bloc .button.owp-button { margin: 22px 0 10px; }
+.oceanwp-bloc p.bottom-text { color: #5a5a5a; font-size: 12px; font-weight: 600; font-style: italic; margin: 0; }
+.oceanwp-bloc i { position: absolute; bottom: -30px; right: -26px; width: auto; height: auto; font-size: 120px; opacity: .07; z-index: 1; }
+
+.oceanwp-bundle { background-color: #2794da; background: -moz-linear-gradient(4deg,#2386c5 58%,#2386c5 58%,#2386c5 58%); background: -webkit-linear-gradient(4deg,#2386c5 58%,#2386c5 58%,#2794da 58%); background: linear-gradient(4deg,#2386c5 58%,#2386c5 58%,#2794da 58%); color: #fff; }
+.oceanwp-bundle .owp-text { text-align: center; margin: 0; padding: 25px 10px; }
+.oceanwp-bundle a.logo-text { display: inline-block; font-size: 38px; line-height: 1; color: #fff; text-decoration: none; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -o-transition: all .3s ease; -ms-transition: all .3s ease; transition: all .3s ease; }
+.oceanwp-bundle a.logo-text:hover { opacity: .6; }
+.oceanwp-bundle a.logo-text .circle { display: inline-block; width: 5px; height: 5px; background-color: #fff; border-radius: 50%; }
+.oceanwp-bundle p.content { color: #fff; }
+.oceanwp-bundle p.content a { color: #afd8f3; text-decoration: underline; }
+.oceanwp-bundle p.content a:hover { text-decoration: none; }
+body .oceanwp-bundle .button.owp-button { display: block; background-color: #1d2428; color: #fff; margin-top: 30px; }
+body .oceanwp-bundle .button.owp-button:hover { background-color: #303e4c; }
+
+.oceanwp-facebook { background-color: #3b5998; color: #fff; }
+.oceanwp-facebook .owp-img { position: relative; z-index: 2; padding: 30px 30px 0; margin: 0 0 18px; text-align: center; }
+.oceanwp-facebook .owp-img img { max-width: 200px; }
+.oceanwp-bloc.oceanwp-facebook p.content { color: #fff; }
+body .oceanwp-facebook .button.owp-button { background-color: #fff; color: #3b5998; }
+body .oceanwp-facebook .button.owp-button:hover { background-color: #597dca; color: #fff; }
+.owp-ribbon { position: absolute; top: 0; left: 0; width: 100px; height: 100px; z-index: 1; overflow: hidden; }
+.owp-ribbon > div { background-color: #3fc387; left: 0; width: 200%; margin-top: 28px; font-size: 13px; line-height: 2; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; text-align: center; -webkit-transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg); -ms-transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg); transform: translateY(-50%) translateX(-50%) translateX(35px) rotate(-45deg); }
+
+.oceanwp-buttons { display: inline-block; width: 100%; }
+body .oceanwp-buttons .button.owp-button { padding: 14px 10px; }
+body .oceanwp-buttons .button.owp-button.owp-yt-btn { background-color: #e62117; float: left; width: 48%; }
+body .oceanwp-buttons .button.owp-button.owp-yt-btn:hover { background-color: #b31217; }
+body .oceanwp-buttons .button.owp-button.owp-doc-btn { background-color: #2e3243; float: right; width: 48%; }
+body .oceanwp-buttons .button.owp-button.owp-doc-btn:hover { background-color: #262939; }
+body .oceanwp-buttons .button.owp-button.owp-support-btn { background-color: #13aff0; width: 100%; margin-top: 10px; }
+body .oceanwp-buttons .button.owp-button.owp-support-btn:hover { background-color: #0b7cac; }
+
+/* RTL */
+body.rtl .wrap.oceanwp-theme-panel { margin-left: 40px; margin-right: 0; }
+body.rtl .oceanwp-settings .left { float: right; }
+body.rtl .oceanwp-settings .right { float: left; }
+body.rtl .oceanwp-settings .oceanwp-title { margin: 0 8px 3px 0; }
+body.rtl .oceanwp-settings .oceanwp-desc { margin: 0 8px 30px 0; }
+body.rtl .oceanwp-panels .column-wrap { float: right; }
+body.rtl .oceanwp-panels .column-name h3.title { float: right; }
+body.rtl .oceanwp-panels input[type=checkbox] { float: left; }
+body.rtl .oceanwp-panels p.submit { margin: 10px 0.5% 0 0; }
+body.rtl .oceanwp-bloc i { left: -26px; right: auto; }
+body.rtl .oceanwp-buttons .button.owp-button.owp-yt-btn { float: right; }
+body.rtl .oceanwp-buttons .button.owp-button.owp-doc-btn { float: left; }
+body.rtl .owp-ribbon { right: 0; left: auto; -webkit-transform: rotate(90deg); -ms-transform: rotate(90deg); transform: rotate(90deg); }
+body.rtl .owp-ribbon > div { right: 0; left: auto; -webkit-transform: translateY(-50%) translateX(0) translateX(35px) rotate(-45deg); -ms-transform: translateY(-50%) translateX(0) translateX(35px) rotate(-45deg); transform: translateY(-50%) translateX(0) translateX(35px) rotate(-45deg); }
+
+@media screen and ( max-width: 1280px ) {
+	.wrap.oceanwp-theme-panel { margin-right: 20px; }
+	.oceanwp-settings .left,
+	.oceanwp-settings .right { float: none; width: 100%; }
+    .oceanwp-options .column-wrap { width: 32.33%; }
+    .oceanwp-bloc,
+    .oceanwp-buttons { width: 49%; }
+    .oceanwp-review,
+    .oceanwp-facebook.has-bundle { float: left; }
+    .oceanwp-facebook.has-bundle { clear: left; }
+    .oceanwp-bundle,
+    .oceanwp-facebook,
+    .oceanwp-buttons.has-bundle { float: right; }
+    .oceanwp-buttons.has-bundle { clear: none; }
+    .oceanwp-facebook { clear: none; }
+    .oceanwp-buttons { float: left; clear: left; }
+    body.rtl .wrap.oceanwp-theme-panel { margin-left: 20px; margin-right: 0; }
+    body.rtl .oceanwp-review,
+    body.rtl .oceanwp-facebook.has-bundle { float: right; }
+    body.rtl .oceanwp-facebook.has-bundle { clear: right; }
+    body.rtl .oceanwp-bundle,
+    body.rtl .oceanwp-buttons.has-bundle { float: left; }
+    body.rtl .oceanwp-facebook { float: left; }
+    body.rtl .oceanwp-buttons { float: right; clear: right; }
+}
+
+@media screen and ( max-width: 1100px ) {
+    .oceanwp-panels .column-wrap,
+    .oceanwp-options .column-wrap { width: 49%; }
+}
+
+@media screen and ( max-width: 600px ) {
+    .oceanwp-panels .column-wrap,
+    .oceanwp-options .column-wrap { width: 100%; }
+}
+
+@media screen and ( max-width: 480px ) {
+    .oceanwp-bloc,
+    .oceanwp-buttons { float: none !important; width: 100%; min-width: 100%; }
+}

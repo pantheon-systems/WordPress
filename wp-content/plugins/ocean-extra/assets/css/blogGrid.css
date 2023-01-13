@@ -1,0 +1,49 @@
+﻿/*------------------------------------*
+	$BLOG GRID
+*------------------------------------*/
+.blog-entry.grid-entry {
+  float: left;
+}
+
+.blog-entry.grid-entry .blog-entry-inner {
+  padding: 0 20px 20px;
+  border: 1px solid #e9e9e9;
+}
+
+.blog-entry.grid-entry .thumbnail {
+  margin: 0 -20px;
+}
+
+.blog-entry.grid-entry ul.meta {
+  margin: 0;
+}
+
+.blog-entry.grid-entry .blog-entry-header {
+  margin: 20px 0 12px;
+}
+
+.blog-entry.grid-entry .blog-entry-header h2 {
+  font-size: 18px;
+}
+
+.blog-entry.grid-entry .blog-entry-summary {
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+
+.blog-entry.grid-entry .blog-entry-readmore {
+  margin-top: 16px;
+}
+
+.blog-entry.grid-entry .blog-entry-readmore a {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.2;
+  padding-bottom: 3px;
+  border-bottom: 1px solid;
+  text-transform: uppercase;
+}
+
+.blog-entry.grid-entry .blog-entry-readmore a i {
+  margin-left: 5px;
+}

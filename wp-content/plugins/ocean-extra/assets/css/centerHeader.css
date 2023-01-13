@@ -1,0 +1,88 @@
+﻿/*------------------------------------*
+  $CENTER HEADER
+*------------------------------------*/
+#site-header.center-header #site-logo {
+  display: none;
+}
+
+#site-header.center-header #site-navigation-wrap {
+  float: none;
+  right: auto;
+  text-align: center;
+}
+
+#site-header.center-header #site-navigation-wrap .dropdown-menu > li {
+  float: none;
+  display: inline-block;
+}
+
+#site-header.center-header #site-navigation-wrap .dropdown-menu > li > a {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 18px;
+  text-transform: uppercase;
+}
+
+#site-header.center-header #site-navigation {
+  position: relative;
+  display: inline-block;
+}
+
+#site-header.center-header #site-navigation .middle-site-logo {
+  margin: 15px 25px;
+}
+
+#site-header.center-header #site-navigation .middle-site-logo a {
+  background-color: transparent !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+#site-header.center-header #site-navigation .middle-site-logo a img {
+  width: auto;
+  vertical-align: middle;
+  -webkit-transition: opacity .3s ease-out;
+  -moz-transition: opacity .3s ease-out;
+  -o-transition: opacity .3s ease-out;
+  transition: opacity .3s ease-out;
+}
+
+#site-header.center-header #site-navigation .middle-site-logo a:hover img {
+  opacity: 0.6;
+}
+
+/*------------------------------------*
+  Retina Logo
+*------------------------------------*/
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  /* logo */
+  #site-navigation-wrap .dropdown-menu > li.middle-site-logo.has-retina-logo > a.custom-logo-link {
+    display: none;
+  }
+  #site-navigation-wrap .dropdown-menu > li.middle-site-logo.has-retina-logo > a.retina-logo-link {
+    display: block;
+  }
+}
+
+/*------------------------------------*
+  All Devices under 960px
+*------------------------------------*/
+@media only screen and (max-width: 959px) {
+  /* header > logo */
+  #site-header.center-header #site-logo {
+    display: table;
+  }
+}
+
+/*------------------------------------*
+  Phone Portrait and Landscape
+*------------------------------------*/
+@media only screen and (max-width: 767px) {
+  /* logo */
+  #site-navigation-wrap .dropdown-menu > li.middle-site-logo.has-retina-logo > a.custom-logo-link {
+    display: none;
+  }
+  #site-navigation-wrap .dropdown-menu > li.middle-site-logo.has-retina-logo > a.retina-logo-link {
+    display: block;
+  }
+}

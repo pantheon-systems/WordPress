@@ -1,0 +1,49 @@
+#customize-theme-controls #accordion-section-oceanwp_freemius_section{
+    border-top:1px solid #0085ba !important;
+    border-bottom:1px solid #0085ba !important
+}
+#customize-theme-controls #accordion-section-oceanwp_freemius_section h3.upsell-section-title a{
+    color:#fff;
+    background-color:#0085ba;
+    border-left:4px solid #0085ba;
+    transition:.15s background-color ease-in-out,.15s border-color ease-in-out;
+    outline:none;
+    border-bottom:none !important
+}
+#customize-theme-controls #accordion-section-oceanwp_freemius_section h3.upsell-section-title:hover > a{
+    background-color:#008ec2;
+    border-left-color:#0073aa
+}
+#customize-theme-controls #accordion-section-oceanwp_freemius_section h3.upsell-section-title:after{
+    color:#fff
+}
+#customize-theme-controls #accordion-section-oceanwp_freemius_section .rtl h3.upsell-section-title a{
+    border-left:none;
+    border-right:4px solid #0085ba
+}
+#customize-theme-controls #accordion-section-oceanwp_freemius_section .rtl h3.upsell-section-title:hover > a{
+    border-right-color:#0073aa
+}
+
+
+#accordion-section-oceanwp_freemius_section {
+    order: -99999999;
+}
+
+.adobe{
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.adobe-ok{
+    color: green;
+}
+
+.adobe-error{
+    color: red;
+}
+
+.oceanwp-notify.failure {
+    background-color: #ff0000;
+    opacity: 0.5;
+}

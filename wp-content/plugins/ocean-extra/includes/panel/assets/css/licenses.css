@@ -1,0 +1,43 @@
+.clr:after { content: ''; display: block; height: 0; clear: both; visibility: hidden; zoom: 1; }
+a:focus, .button, .wp-core-ui .button-link:focus,
+.wp-core-ui .button-secondary:focus, .wp-core-ui .button.focus,
+.wp-core-ui .button:focus { -webkit-box-shadow: none !important; box-shadow: none !important; }
+body .button.owp-button { background-color: #13aff0; color: #fff; height: auto; font-size: 12px; line-height: 1; font-weight: 600; text-transform: uppercase; margin: 0; padding: 14px 20px; border: 0; cursor: pointer; text-align: center; letter-spacing: .1em; border-radius: 3px; -webkit-transition: all .3s ease; -moz-transition: all .3s ease; -o-transition: all .3s ease; -ms-transition: all .3s ease; transition: all .3s ease; }
+body .button.owp-button:hover,
+body .button.owp-button:focus,
+body .button.owp-button:active { background-color: #0b7cac; color: #fff; }
+body .button.owp-button:active { -webkit-transform: none; -ms-transform: none; transform: none; }
+
+/* Licenses tab */
+#oceanwp-license-form .form-table, #oceanwp-license-form thead, #oceanwp-license-form tbody, #oceanwp-license-form tfoot,
+#oceanwp-license-form tr, #oceanwp-license-form td, #oceanwp-license-form th, #oceanwp-license-form caption { display: block; }
+#oceanwp-license-form .form-table tr { float: left; margin: 0 15px 15px 0; background: #fff; border: 1px solid #ccc; width: 30.5%; max-width: 350px; padding: 14px; min-height: 220px; position: relative; box-sizing: border-box; }
+#oceanwp-license-form .form-table th { background: #f9f9f9; padding: 14px; border-bottom: 1px solid #ccc; margin: -14px -14px 20px; width: 100%; }
+#oceanwp-license-form .form-table td { padding: 0; }
+#oceanwp-license-form td input.regular-text { margin: 0 0 8px; width: 100%; }
+#oceanwp-license-form .oceanwp-license-data[class*="oceanwp-license-"] { position: absolute; background: #fafafa; padding: 14px; border-top: 1px solid #eee; margin: 20px -14px -14px; min-height: 67px; width: 100%; bottom: 14px; box-sizing: border-box; }
+#oceanwp-license-form .oceanwp-license-data[class*="oceanwp-license-"] a { color: #444; }
+#oceanwp-license-form .oceanwp-license-data[class*="oceanwp-license-"] a:hover { text-decoration: none; }
+#oceanwp-license-form .oceanwp-license-data.license-expires-soon-notice { background-color: #00a0d2; color: #fff; border-color: #00a0d2; }
+#oceanwp-license-form .oceanwp-license-data.oceanwp-license-expired-msg { background-color: #e24e4e; color: #fff; border-color: #e24e4e; }
+#oceanwp-license-form .oceanwp-license-data.oceanwp-license-error-msg { background-color: #ffebcd; border-color: #ffebcd; }
+#oceanwp-license-form .oceanwp-license-data p { font-size: 13px; margin-top: 0; }
+#oceanwp-license-form .oceanwp-license-data.license-expires-soon-notice a,
+#oceanwp-license-form .oceanwp-license-data.oceanwp-license-expired-msg a { color: #fff; }
+#oceanwp-license-form .oceanwp-license-data.license-expires-soon-notice a:hover,
+#oceanwp-license-form .oceanwp-license-data.oceanwp-license-expired-msg a:hover { text-decoration: none; }
+#oceanwp-license-form p.submit { clear: both; }
+
+#oceanwp-license-form .form-table.bundle-block tr { max-width: 500px; }
+#oceanwp-license-form .form-table.bundle-block th { background-color: #13aff0; color: #fff; }
+
+/* RTL */
+body.rtl #oceanwp-license-form .form-table tr { float: right; margin: 0 0 15px 15px; }
+
+@media screen and ( max-width: 1100px ) {
+    #oceanwp-license-form .form-table tr { width: 46%; max-width: none; min-height: 230px; }
+}
+
+@media screen and ( max-width: 600px ) {
+    #oceanwp-license-form .form-table tr { width: 100%; min-height: 230px; }
+}
