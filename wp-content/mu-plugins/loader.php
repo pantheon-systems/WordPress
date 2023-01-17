@@ -67,7 +67,7 @@ add_action( 'pre_current_active_plugins', function () use ( $pantheon_mu_plugins
 });
 
 add_filter( 'network_admin_plugin_action_links', function ( $actions, $plugin_file, $plugin_data, $context ) use ( $pantheon_mu_plugins ) {
-	if ( $context !== 'mustuse' || ! in_array( $plugin_file, $hm_mu_plugins, true ) ) {
+	if ( $context !== 'mustuse' || ! in_array( $plugin_file, $pantheon_mu_plugins, true ) ) {
 		return $actions;
 	}
 
