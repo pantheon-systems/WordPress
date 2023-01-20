@@ -1,0 +1,39 @@
+$top-offset: 12px;
+
+.ct-color-modal-wrapper {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	width: 100%;
+	z-index: 20;
+}
+
+.ct-color-picker-modal {
+	width: var(--modalWidth, 295px);
+	border-radius: 8px;
+}
+
+// modal arrow
+.ct-color-picker-modal {
+	&[data-position='bottom'] {
+		.ct-arrow {
+			top: -12px;
+		}
+	}
+
+	&[data-position='top'] {
+		.ct-arrow {
+			bottom: -12px;
+		}
+	}
+
+	.ct-arrow {
+		position: absolute;
+		z-index: 1;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 6px 7px 6px;
+		border-color: transparent transparent red transparent;
+	}
+}

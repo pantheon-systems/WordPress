@@ -1,0 +1,61 @@
+$buttons-type-1:
+	'.button',
+	'.ct-button',
+	'.entry-tags a',
+	'.added_to_cart',
+	'[type="submit"]',
+	'.wp-element-button',
+	'.wp-block-button__link',
+	// '.wp-block-file .wp-block-file__button',
+
+	// special buttons
+	'a.showlogin',
+	'a.restore-item',
+	'button.regform-button',
+	'button[class*="ajax"]',
+	'.submit:where(:not(div.submit))',
+	'.forminator-ui[data-design="none"] .forminator-button',
+;
+
+#{$buttons-type-1} {
+	position: relative;
+	color: var(--buttonTextInitialColor);
+	border: var(--button-border);
+	background-color: var(--buttonInitialColor);
+
+	&:hover {
+		border-color: var(--button-border-hover-color);
+		color: var(--buttonTextHoverColor);
+		background-color: var(--buttonHoverColor);
+	}
+
+	@media (hover: hover) {
+		@supports (filter: blur()) {
+			&:before {
+				display: var(--buttonShadow, block);
+				position: absolute;
+				z-index: -1;
+				content: '';
+				top: 12px;
+				left: 10px;
+				right: 10px;
+				bottom: 0;
+				opacity: 0;
+				border-radius: inherit;
+				background: inherit;
+				transition: opacity 0.2s ease;
+				filter: blur(11px);
+			}
+
+			&:hover {
+				@media (prefers-reduced-motion: no-preference) {
+					transform: var(--buttonTransform, translate3d(0, -3px, 0));
+
+					&:before {
+						opacity: 0.8;
+					}
+				}
+			}
+		}
+	}
+}

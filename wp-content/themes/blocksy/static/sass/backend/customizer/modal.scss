@@ -1,0 +1,134 @@
+.wp-customizer [data-reach-dialog-overlay] {
+	z-index: 999999;
+	--modal-left: 0;
+}
+
+.ct-export-modal,
+.ct-reset-options,
+.ct-import-export-modal {
+	--modal-width: 450px;
+	--modal-min-height: 270px;
+	--modal-padding: 45px;
+	text-align: center;
+
+	.close-button {
+		display: none;
+	}
+}
+
+.ct-import-export-modal {
+	svg {
+		fill: #3e5667;
+		margin: auto;
+		margin-bottom: 25px;
+		animation: spin 5s linear infinite reverse;
+	}
+}
+
+.ct-export-modal {
+	.ct-export-options {
+		margin: 10px 0 20px;
+	}
+
+	.ct-checkbox-container {
+		padding-left: 15px;
+		padding-right: 15px;
+		margin-bottom: 10px;
+		border-radius: 4px;
+		border: 1px solid rgba(179, 189, 201, 0.3);
+	}
+}
+
+
+// GDPR fonts modal
+.ct-gdpr-fonts-notice {
+	--modal-width: 550px;
+	--modal-min-height: 400px;
+	--modal-padding: 45px;
+	text-align: center;
+
+	i {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 20px auto;
+		width: 50px;
+		height: 50px;
+		background: #fff;
+		border-radius: 100%;
+		border: 2px solid #DEECF3;
+
+		svg {
+			fill: var(--accentColor);
+			animation: ring-shake 5s ease-in-out infinite;
+			transform-origin: 50% 0%;
+		}
+	}
+
+	.ct-modal-actions.has-divider {
+		padding-top: 30px;
+	}
+
+	.ct-checkbox-container {
+		grid-column: 1/-1;
+		justify-content: center;
+		gap: 10px;
+		padding: 0 0 30px 0;
+	}
+
+	.close-button {
+		display: none;
+	}
+}
+
+@keyframes ring-shake {
+	0% {  transform: rotate(-15deg) }
+	2% {  transform: rotate(15deg) }
+	4% {  transform: rotate(-18deg) }
+	6% {  transform: rotate(18deg) }
+	8% {  transform: rotate(-22deg) }
+	10% {  transform: rotate(22deg) }
+	12% {  transform: rotate(-18deg) }
+	14% {  transform: rotate(18deg) }
+	16% {  transform: rotate(-12deg) }
+	18% {  transform: rotate(12deg) }
+	20% {  transform: rotate(0deg) }
+	100% {  transform: rotate(0deg) }
+}
+
+
+// onboarding modal
+.ct-onboarding-button {
+	margin-bottom: -10px;
+
+	button {
+		width: 100%;
+	}
+}
+
+.ct-onboarding-modal{
+	--modal-width: 500px;
+	--modal-min-height: 360px;
+
+	text-align: center;
+
+	.close-button {
+		display: none;
+	}
+
+	svg {
+		width: 55px;
+		height: 55px;
+		margin: 0 auto 25px auto;
+	}
+	
+	h2 {
+		color: #3e5667;
+	}
+
+	button {
+		--buttonHeight: 42px;
+		--buttonPadding: 20px;
+		--buttonFontSize: 14px;
+	}
+}

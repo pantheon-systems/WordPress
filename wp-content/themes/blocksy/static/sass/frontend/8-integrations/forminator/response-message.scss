@@ -1,0 +1,42 @@
+.forminator-ui[data-design="none"] {
+	
+	.forminator-response-message {
+		--fontSize: 15px;
+		background: #fff;
+		margin-bottom: 30px;
+		padding: 10px 20px 10px 22px;
+		box-shadow: inset 4px 0 0 0 var(--messageIndicator), 0px 5px 15px rgba(0,0,0,.05);
+
+		p {
+			--content-spacing: 10px;
+		}
+
+		&[aria-hidden="true"] {
+			display: none;
+		}
+
+		&.forminator-success {
+			--messageIndicator: var(--paletteColor1);
+		}
+
+		&.forminator-error {
+			--messageIndicator: #E04562;
+		}
+
+
+		&.forminator-accessible {
+			display: none;
+		}
+	}
+
+	.forminator-error-message {
+		display: block;
+		margin-top: 5px;
+		padding: 5px 10px;
+		border-radius: 2px;
+		font-size: 12px;
+		font-weight: 500;
+		color: #E04562;
+		background-color: #F9E4E8;
+	}
+}

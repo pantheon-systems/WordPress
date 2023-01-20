@@ -1,0 +1,96 @@
+$checkbox:
+	'.ct-checkbox',
+	'.comment-form input[type="checkbox"]',
+	'#ship-to-different-address-checkbox',
+	'.wc-block-checkbox-list input[type="checkbox"]',
+	'.wc-block-checkbox-list .wc-block-components-checkbox .wc-block-components-checkbox__input[type=checkbox]',
+	'.woocommerce-form__input[type="checkbox"]',
+	'.woocommerce-form__label-for-checkbox input[type="checkbox"]',
+	'#wc-stripe-new-payment-method[type="checkbox"]',
+	'.ppcp-credit-card-vault[type="checkbox"]',
+	'.forminator-ui[data-design="none"] .forminator-checkbox input[type="checkbox"]',
+	'.wpforms-container:not(.wpforms-container-full) input[type="checkbox"]'
+;
+
+$radiobox:
+	'.wc_payment_method > input[type="radio"]',
+	'.woocommerce-shipping-methods input[type="radio"]',
+	'.mp-ticket-payments input[type="radio"]',
+	'.forminator-ui[data-design="none"] .forminator-radio input[type="radio"]',
+	'.wpforms-container:not(.wpforms-container-full) input[type="radio"]'
+;
+
+
+// common styles
+#{$checkbox}, #{$radiobox} {
+	display: inline-block;
+	vertical-align: baseline;
+	position: relative;
+	top: var(--top, 3px);
+	min-width: 16px;
+	width: 16px;
+	height: 16px;
+	min-height: initial;
+	padding: 0 !important;
+	margin: var(--form-selection-control-margin, 0 0.7em 0 0);
+	border-width: var(--form-selection-control-border-width, var(--form-field-border-width, 1px));
+	border-style: solid;
+	cursor: pointer;
+	-webkit-appearance: none;
+	background: transparent;
+	border-color: var(--form-selection-control-initial-color);
+
+	&:before {
+		position: absolute;
+		content: '';
+		z-index: 2;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0;
+		margin: auto;
+	}
+
+	&:checked {
+		border-color: var(--form-selection-control-accent-color);
+		background: var(--form-selection-control-accent-color);
+
+		&:before {
+			opacity: 1;
+		}
+	}
+
+	&:focus {
+		outline: none;
+		border-color: var(--form-selection-control-accent-color);
+	}
+}
+
+
+// checkbox only
+#{$checkbox} {
+	border-radius: var(--form-checkbox-border-radius, 3px);
+
+	&:before {
+		top: -2px;
+		width: 8px;
+		height: 5px;
+		border: 2px solid #fff;
+		border-top: none;
+		border-right: none;
+		transform: rotate(-45deg);
+	}
+}
+
+// radiobox only
+#{$radiobox} {
+	border-radius: 100% !important;
+
+	&:before {
+		width: 6px;
+		height: 6px;
+		background: #fff;
+		border-radius: inherit;
+	}
+}

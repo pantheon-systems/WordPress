@@ -1,0 +1,42 @@
+.woocommerce-notices-wrapper,
+article > .related,
+article > .upsells,
+article > .page-links,
+article > .entry-tags,
+article > .author-box,
+article > .ct-comments,
+article > .ct-share-box,
+article > .hero-section,
+article > .post-edit-link,
+article > .post-navigation,
+article > .ct-related-posts,
+article > .ct-newsletter-subscribe-block,
+article > .product .wc-tabs,
+article > .post-password-form,
+article > .product .product-entry-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	width: var(--block-width, var(--container-width));
+	max-width: var(--block-max-width, var(--normal-container-max-width));
+}
+
+
+article > .ct-comments,
+article > .ct-related-posts {
+	margin-top: 60px;
+	padding-top: 50px;
+	border-top: 1px solid var(--border-color);
+}
+
+// separated comments
+.ct-comments-container > div {
+	@include media-breakpoint-down(sm) {
+		padding-top: 40px;
+		padding-bottom: 60px;
+	}
+
+	@include media-breakpoint-up(md) {
+		padding-top: 60px;
+		padding-bottom: 100px;
+	}
+}

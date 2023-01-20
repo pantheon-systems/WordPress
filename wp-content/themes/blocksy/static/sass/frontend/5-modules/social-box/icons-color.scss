@@ -1,0 +1,29 @@
+// official colors
+[data-color='official'] {
+	> * {
+		--transition: opacity 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+
+	.ct-icon-container {
+		--icon-color: var(--official-color);
+		--icon-hover-color: var(--official-color);
+	}
+
+	.ct-label {
+		color: var(--official-color);
+	}
+
+	&[data-icons-type*='solid'] .ct-icon-container {
+		--icon-color: #fff;
+		--icon-hover-color: #fff;
+		background-color: var(--official-color);
+	}
+
+	&[data-icons-type*='outline'] .ct-icon-container {
+		border: 1px solid var(--official-color);
+	}
+}

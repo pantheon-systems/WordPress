@@ -1,0 +1,36 @@
+// search form
+#bbpress-forums div.bbp-search-form {
+	margin-bottom: 20px;
+
+	input[type="text"] {
+		--form-field-height: 30px;
+		--form-field-padding: 0 7px;
+	}
+
+	.button {
+		--buttonMinHeight: 30px;
+		--padding: 5px 15px;
+		--buttonShadow: none;
+		--buttonTransform: none;
+	}
+}
+
+.bbp-the-content-wrapper {
+	input[type="button"] {
+		--buttonShadow: none;
+		--buttonTransform: none;
+	}
+}
+
+
+#bbpress-forums fieldset {
+
+	&.bbp-form {
+
+		select,
+		input[type=text] {
+			height: 38px;
+			padding: 5px 10px;
+		}
+	}
+}

@@ -1,0 +1,13 @@
+.generic-button a.button {
+    display: initial !important;
+    min-height: initial !important;
+}
+
+.generic-button a.button {
+    &:before {
+        display: initial;
+        position: initial;
+        filter: initial;
+        opacity: initial;
+    }
+}

@@ -1,0 +1,94 @@
+.widget_calendar table {
+	position: relative;
+	width: 100%;
+	font-size: 15px;
+	border: none;
+
+	caption {
+		font-weight: bold;
+		text-transform: uppercase;
+		text-align: center;
+		margin-bottom: 5px;
+		border-bottom: 1px solid #d7dee5;
+	}
+
+	thead th, tbody td {
+		text-align: center;
+		padding: 10px 0;
+		border: none;
+	}
+
+	tbody {
+		td {
+			overflow: hidden;
+			position: relative;
+			border-radius: 2px;
+
+			a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				padding: 10px 0;
+				margin: -10px 0;
+				background: rgba(215, 222, 229, 0.2);
+				transition: color 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+							background 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+				&:after {
+					position: absolute;
+					content: '';
+					bottom: 7px;
+					width: 3px;
+					height: 3px;
+					border-radius: 100%;
+					background: var(--paletteColor1);
+					transition: background 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+				}
+
+				&:hover {
+					color: #fff;
+					background: var(--paletteColor1);
+
+					&:after {
+						background: #fff;
+					}
+				}
+			}
+		}
+
+		#today {
+			color: #fff;
+			font-weight: 500;
+			background: var(--paletteColor2);
+
+			a {
+				color: inherit;
+				background: inherit;
+
+				&:after {
+					background: currentColor;
+				}
+			}
+		}
+	}
+
+	tfoot {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		font-size: 14px;
+		font-weight: 500;
+		text-transform: uppercase;
+
+		tr {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		td {
+			border: none;
+		}
+	}
+}

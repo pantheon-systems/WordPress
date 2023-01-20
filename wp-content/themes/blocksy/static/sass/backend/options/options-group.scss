@@ -1,0 +1,40 @@
+.ct-controls-group {
+
+	> header {
+		margin-bottom: 10px;
+	}
+
+	> section {
+		.ct-control {
+			padding: 0;
+		}
+
+		&[data-columns="1"] > * {
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+
+		&[data-columns*="2"] {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-column-gap: var(--col-gap, 7px);
+
+			> .ct-control {
+				margin: 0;
+			}
+		}
+
+		// columns spacing
+		&[data-columns*="medium"] {
+			--col-gap: 25px;
+		}
+	}
+}
+
+// group inside layer
+.ct-layer-content .ct-controls-group {
+	> section > * {
+		padding: 0;
+	}
+}

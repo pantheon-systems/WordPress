@@ -1,0 +1,16 @@
+.widget_recent_entries {
+	ul li {
+		display: flex;
+		flex-direction: column;
+
+		a {
+			font-weight: 500;
+		}
+
+		&:not(:last-child) {
+			.post-date {
+				margin-bottom: 10px;
+			}
+		}
+	}
+}

@@ -1,0 +1,782 @@
+.ct-dark-mode {
+
+	// input
+	textarea,
+	input[type='text'],
+	input[type='number'],
+	input[type='search'] {
+		// &:not(.components-text-control__input) {
+			color: $light;
+			border-color: $border;
+			background: $background_light;
+		// }
+	}
+
+	// checkbox & radiobox
+	input[type=checkbox],
+	input[type=radio] {
+		&:not(:checked) {
+			background: $background_light;
+
+			&:not(:hover) {
+				border-color: lighten($border, 5%);
+			}
+		}
+	}
+
+	.ct-option-spacing > span input.inactive {
+		color: darken($light, 50%);
+		background: darken($background_light, 2%);
+	}
+
+
+	// ct-title
+	.ct-title {
+		h3 {
+			color: $light;
+		}
+
+		p {
+			color: lighten($background, 60%);
+		}
+	}
+
+	// group title
+	.ct-group-title {
+		border-top-color: $border;
+
+		h3 {
+			// color: $accent;
+			color: lighten($accent, 7%);
+		}
+	}
+
+
+	// revert button
+	.ct-control .ct-revert {
+		color: $light;
+	}
+
+	.ct-control > header label {
+		color: lighten($background, 65%);
+	}
+
+	// switch
+	.ct-option-switch {
+		&:not(.ct-active) {
+			border-color: lighten($border, 4%);
+
+			> span {
+				background: lighten($border, 15%);
+			}
+
+			&:after {
+				border-color: lighten($border, 15%);
+			}
+		}
+
+		&.ct-active {
+			background: $accent;
+			border-color: $accent;
+		}
+	}
+	
+	.ct-control:hover {
+		.ct-option-switch:not(.ct-active) {
+			border-color: lighten($border, 12%);
+
+			> span {
+				background: lighten($border, 25%);
+			}
+		}
+	}
+
+	// slider
+	.ct-option-slider .ct-slider{
+		&:before {
+			--backgroundColor: var(--borderColor);
+		}
+	}
+
+	// image picker
+	.ct-image-picker {
+		li {
+			&.active {
+				background: $accent;
+			}
+
+			&:not(.active):not(:hover) {
+				background: rgba(221, 224, 226, 0.5);
+
+				svg {
+					fill: $background_light;
+				}
+			}
+		}
+	}
+
+	// panel
+	.ct-panel.ct-click-allowed {
+		&:hover:before {
+			background: $background_light;
+		}
+
+		.ct-customizer-panel-option button {
+			color: lighten($background, 60%);
+		}
+	}
+
+	.customize-panel-actions {
+		background: $background_light;
+		border-top-color: $border;
+		border-bottom-color: $border;
+
+		h3 {
+			color: lighten($background, 40%);
+		}
+	}
+
+	.ct-customizer-panel {
+		background: $background;
+		border-bottom-color: $border;
+		border-top-color: $border;
+	}
+
+	// tabs
+	.ct-tabs {
+		> ul > li {
+			color: lighten($background, 60%);
+			border-color: lighten($border, 5%);
+			background: $background_light;
+
+			&:after {
+				background: $background;
+			}
+
+			&:not(.active):hover {
+				color: lighten($background, 60%);
+				background: lighten($background_light, 5%);
+			}
+		}
+
+		.ct-current-tab {
+			border-top-color: lighten($border, 5%);
+		}
+	}
+
+	.widget-inside .ct-tabs li.active:after {
+		background: darken($background_light, 1.5%);
+	}
+
+	// color picker
+	.ct-color-picker-single {
+		> span > span {
+			box-shadow: 0 0 0 2px lighten($background, 10%);
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+	
+	.ct-color-picker-modal {
+		.components-color-picker__inputs-wrapper .components-base-control__field label,
+		.components-color-picker__inputs-toggle {
+			background: lighten($background_light, 3%);
+			color: lighten($background, 60%);
+		}
+	}
+
+
+	// responsive controls
+	.ct-responsive-controls li {
+		&:not(.active) {
+			--color: #929499;
+
+			&:hover {
+				--color: #babbbe;
+			}
+		}
+
+		&.active {
+			color: $accent;
+		}
+	}
+
+	// number
+	.ct-option-number > a {
+		color: #fff;
+	}
+
+	// buttons group
+	.ct-buttons-group li {
+		color: lighten($background, 60%);
+		background: $background_light;
+		box-shadow: inset 0px 0px 0px 1px $border;
+
+		&.active {
+			color: $light;
+			background: $accent;
+			box-shadow: inset 0px 0px 0px 1px darken($accent, 5%);
+		}
+
+		&:not(.active) {
+			color: lighten($background, 60%);
+
+			&:hover {
+				color: $light;
+				background: lighten($background_light, 4%);
+			}
+		}
+	}
+
+	// option description
+	.ct-option-description {
+		color: lighten($background, 50%);
+	}
+
+	// select
+	.ct-select-input {
+		input {
+			color: $light;
+			border-color: $border;
+			background: $background_light;
+		}
+
+		&:before {
+			background: $background_light;
+		}
+
+		&:after {
+			color: $light;
+		}
+	}
+
+	.ct-select-dropdown {
+		border-color: $border;
+		background: $background_light;
+
+		> div {
+			color: lighten($background, 60%);
+			border-top-color: $border;
+
+			&.active,
+			&.selected {
+				color: $light;
+				background: lighten($background_light, 4%);
+			}
+		}
+
+		.ct-select-dropdown-group {
+			color: $light;
+			background: lighten($background_light, 2%);
+		}
+	}
+
+	// layers
+	.ct-layer {
+		background: darken($background_light, 1.5%);
+	}
+
+	.ct-layer-controls {
+		color: lighten($background, 60%);
+		background: lighten($background_light, 1%);
+
+		> * {
+			color: lighten($background, 60%);
+		}
+
+		.ct-visibility:before {
+			background: lighten($background, 60%);
+			box-shadow: 0px 0px 0px 1px lighten($background_light, 1%);
+		}
+	}
+
+	// value changer
+	.ct-value-changer {
+		--backgroundColor: #{$background_light};
+
+		input[type="number"] {
+			background: transparent;
+		}
+
+		.ct-units-list {
+			background: $background_light;
+
+			span:not(:hover) {
+				color: lighten($background, 60%);
+			}
+
+			&:after, span {
+				border-color: $border;
+			}
+		}
+	}
+
+	// notification
+	.ct-notification,
+	.ct-disabled-notification {
+		color: lighten($background, 50%);
+		background: $background_light;
+		border-left-color: $accent;
+	}
+
+	// attachment
+	.ct-attachment {
+		
+		.thumbnail {
+			border-color: $border; 
+		}
+
+		.actions {
+			background: lighten($background_light, 1%);
+		}
+	}
+
+	.ct-upload-button {
+		box-shadow: none;
+		background: $background_light !important;
+
+		&:not(:hover) {
+			border-color: $border;
+		}
+	}
+
+	// tooltip
+	[class*="ct-tooltip"] {
+		background: $accent;
+	}
+
+	.ct-tooltip-top:after {
+		border-top: 5px solid $accent;
+	}
+
+
+	// color pallete
+	.ct-color-palettes {
+		li {
+			&.active,
+			&:hover {
+				background: $background_light;
+			}
+		}
+	}
+
+	.ct-spacing-controls a {
+		&:not(:hover) {
+			color: lighten($background, 40%);
+		}
+	}
+
+	// box-shadow
+	.ct-box-shadow-values {
+		background: $background_light;
+
+		button {
+			color: lighten($background, 65%);
+			border-right-color: var(--borderColor);
+
+			&:before {
+				background: lighten($background, 65%);
+				box-shadow: 0px 0px 0px 1px $background_light;
+			}
+		}
+
+		span {
+			&:hover {
+				color: #fff;
+			}
+
+			&:after {
+				background: var(--accentColor);
+			}
+		}
+	}
+
+
+	// ratio picker
+	.ct-ratio-preview {
+		background: $background_light;
+	}
+
+	.ct-ratio-modal {
+		background: $background_light;
+
+		&:before {
+			border-color: transparent transparent $background_light transparent
+		}
+
+		.ct-radio-option {
+			border-color: lighten($border, 5%);
+		}
+	}
+
+	// conditions
+	.ct-display-conditions {
+		border-top-color: $border;
+	}
+
+	.ct-condition-group {
+		border-bottom-color: $border;
+	}
+
+	.ct-condition-group button:not(:hover) {
+		color: $light;
+	}
+
+	// admin modal
+	.ct-admin-modal {
+		background: $background;
+		box-shadow: 0 10px 500px 10px rgba(0, 0, 0, 0.7);
+
+		--optionBorderColor: red;
+
+		.ct-modal-content {
+			h2, h4 {
+				color: $light;
+			}
+
+			p {
+				color: lighten($background, 30%);
+			}
+		}
+
+		.ct-modal-actions.has-divider:before {
+			background: $border;
+		}
+	}
+
+	[data-reach-dialog-overlay] {
+		background: rgba(56, 57, 60, 0.85);
+	}
+
+	// option modal
+	.ct-option-modal {
+		background: $background_light;
+
+		&[data-position='bottom']:before {
+			border-color: transparent transparent $background_light transparent;
+		}
+
+		&[data-position='top']:before {
+			border-color: $background_light transparent transparent transparent;
+		}
+
+		.ct-color-picker-top,
+		.components-color-picker__inputs-wrapper,
+		.ct-gradient-swatches,
+		.ct-color-picker-modal,
+		.ct-patterns-list,
+		.ct-patterns-list li:not(.active),
+		.ct-color-picker-modal:before,
+		.ct-typography-top,
+		.ct-typography-options > li:not(:last-child) {
+			border-color: $border;
+		}
+
+		.ct-typography-single-font, 
+		.ct-typography-variations li {
+
+			&:not(.active):not(:first-child) {
+				border-color: $border;
+			}
+		}
+	}
+
+	.components-popover__content {
+		background: $background_light;
+	}
+
+	.ct-color-picker-value,
+	.components-popover__content {
+		border-color: $border !important;
+	}
+
+	// option modal tabs
+	.ct-modal-tabs {
+		li {
+			color: lighten($background, 30%);
+			border-bottom-color: lighten($border, 5%);
+
+			&.active,
+			&:hover {
+				color: lighten($background, 60%);
+			}
+
+			&:not(:last-child) {
+				border-right-color: lighten($border, 5%);
+			}
+		}
+	}
+
+	// background modal
+	.ct-background-modal {
+		.ct-patterns-list li:not(.active):hover {
+			border-color: lighten($border, 15%);
+		}
+
+		.ct-color-picker-modal:before {
+			background: $background_light;
+		}
+	}
+
+	// icon picker
+	.ct-icon-picker-value > div {
+		background: $background_light;
+	}
+
+	.ct-icon-picker-modal {
+		
+		.ct-icons-list h2 {
+			color: lighten($background, 65%);
+		}
+
+		ul li:not(.active):hover {
+			color: #fff;
+			background: lighten($background_light, 4%);
+		}
+	}
+
+	// typography
+	.ct-typohraphy-value {
+		border-color: $border;
+		background: $background_light;
+
+		&:hover {
+			border-color: $accent;
+		}
+
+		> div > span {
+			&:hover span {
+				color: $light;
+			}
+
+			&:after {
+				background: $accent;
+			}
+		}
+
+		> a {
+			color: $light;
+		}
+	}
+
+	.ct-typography-top li {
+		color: lighten($background, 65%);
+		background: $background_light;
+
+		&:not(.active) {
+			border-color: lighten($border, 10%);
+
+			&:hover {
+				border-color: $accent;
+			}
+		}
+
+		&.ct-weight {
+			&:before {
+				color: lighten($background, 40%);
+			}
+
+			span {
+				background: $background_light;
+				box-shadow: 0px 0px 10px 3px $background_light;
+			}
+		}
+	}
+
+	.ct-typography-variant ul li {
+		&:not(.active) {
+			border-color: lighten($border, 5%);
+		}
+
+		&:not(:hover):not(.active) {
+			color: lighten($background, 50%);
+		}
+	}
+
+	.ct-typography-single-font:not(.active):not(:hover):after {
+		box-shadow: -5px 0px 15px 10px $background_light;
+	}
+
+	.ct-control {
+		border-color: var(--optionBorderColor) !important;
+	}
+
+	// widgets
+	.customize-control-widget_form .widget-top {
+		border-color: var(--optionBorderColor);
+		background: lighten($background_light, 1%);
+
+		h3 {
+			color: lighten($background, 60%);
+		}
+	}
+
+	.widget-inside {
+		border-color: var(--optionBorderColor);
+		background: darken($background_light, 1.5%);
+	}
+
+	#available-widgets,
+	#available-menu-items {
+		background: $background_light;
+	}
+
+	#available-widgets-filter {
+		background: $background_light;
+	}
+
+	#available-widgets,
+	#available-widgets-list {
+		border-color: var(--optionBorderColor);
+	}
+
+	#available-widgets {
+		.widget-tpl {
+			background: $background_light;
+
+			h3 {
+				color: lighten($background, 60%);
+			}
+
+			.widget-title:before {
+				color: lighten($background, 60%);
+			}
+
+			.widget-description {
+				color: lighten($background, 25%);
+			}
+			
+			&:not(:hover) {
+				border-left-color: $background_light;
+				border-bottom-color: var(--optionBorderColor);
+			}
+
+			&:hover {
+				background: lighten($background_light, 3%);
+				border-left-color: var(--accentColor);
+				border-bottom-color: lighten($border, 3%);
+			}
+		}
+	}
+}
+
+
+// header builder
+.ct-dark-mode {
+	
+	// header instances
+	.ct-panels-manager li {
+		color: lighten($background, 60%);
+		background: lighten($background_light, 1%);
+
+		&:not(.active):not(:hover) {
+			border-color: $border;
+		}
+	}
+
+	// available items
+	.ct-available-items {
+		.ct-title {
+			color: $light;
+		}
+
+		.ct-builder-item.sortable-chosen,
+		.ct-item-in-builder {
+			border-color: lighten($background, 15%);
+			background: lighten($background, 1%);
+
+			&:hover {
+				background: lighten($background, 2.5%);
+			}
+		}
+
+		.ct-builder-item:not(.sortable-chosen):hover {
+			border-color: var(--accentColor);
+		}
+	}
+
+	.ct-panel-builder {
+		background: $background;
+	}
+
+	.placements-builder {
+		border-top-color: $border;
+	}
+
+	.ct-view-switch {
+		border-top-color: $border;
+		background: $background_light;
+
+		li {
+			color: lighten($background, 60%);
+			border-right-color: $border;
+
+			&.active {
+				&:after {
+					background: var(--accentColor);
+				}
+			}
+
+			&.active,
+			&:hover {
+				color: $light;
+				background: lighten($background_light, 2.5%);
+			}
+
+			&.ct-builder-toggle {
+				border-left-color: $border;
+			}
+		}
+	}
+
+	.row-inner {
+		background: $background;
+		border-color: lighten($background, 20%);
+
+		.ct-builder-item:not(.sortable-ghost):hover {
+			border-color: var(--accentColor);
+		}
+	}
+
+	.ct-builder-column-middle {
+		background: lighten($background, 2%);
+		border-color: lighten($background, 20%);
+	}
+
+	.ct-builder-item {
+		color: lighten($background, 60%);
+		border-color: $border;
+		background: lighten($background_light, 1%);
+	}
+
+	// footer builder
+	[data-builder='footer'] {
+		.builder-column:not(:last-child) {
+			border-right-color: lighten($background, 20%);
+		}
+	}
+
+	// instances
+	[class*="ct-instance-button"]:not(.active) {
+		color: lighten($background, 60%);
+		border-color: $border;
+		background: lighten($background_light, 1%);
+
+		&:hover {
+			border-color: var(--accentColor);
+		}
+	}
+
+	// palette picker
+	.ct-palettes-modal {
+		label {
+			color: lighten($background, 65%);
+		}
+
+		.ct-single-palette {
+			border-bottom-color: $border;
+		}
+	}
+}

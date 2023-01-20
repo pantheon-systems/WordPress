@@ -1,0 +1,108 @@
+.ct-header-trigger {
+	// --toggle-button-radius: 3px;
+
+	// icon type
+	.ct-icon {
+		transition: none;
+
+		rect {
+			transform-origin: 50% 50%;
+			transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+		}
+
+		// type 2
+		&[data-type="type-2"] rect {
+			&:nth-child(1) {
+				width: 10px;
+			}
+
+			&:nth-child(3) {
+				width: 15px;
+			}
+		}
+
+		// type 3
+		&[data-type="type-3"] rect {
+			&:nth-child(1), &:nth-child(3) {
+				width: 12px;
+			}
+
+			&:nth-child(1) {
+				x: 6px;
+			}
+		}
+	}
+
+	&:hover {
+		[data-type="type-2"], [data-type="type-3"] {
+			rect {
+				&:nth-child(1), &:nth-child(3) {
+					width: 18px;
+				}
+			}
+		}
+
+		[data-type="type-3"] rect {
+			&:nth-child(1) {
+				x: 0px;
+			}
+		}
+	}
+
+	&[aria-expanded="true"] .ct-icon {
+		rect {
+			&:nth-child(1), &:nth-child(3) {
+				width: 18px;
+				y: 6.15px;
+			}
+
+			&:nth-child(1) {
+				x: 0px;
+				transform: rotate(45deg);
+			}
+
+			&:nth-child(2) {
+				opacity: 0;
+			}
+
+			&:nth-child(3) {
+				transform: rotate(-45deg);
+			}
+		}
+	}
+
+
+	// shape type
+	&[data-design="outline"],
+	&[data-design="solid"] {
+		--toggle-button-padding: 8px 10px;
+	}
+
+	&[data-design*="outline"] {
+		--toggle-button-border-width: 1px;
+		--toggle-button-border-color: var(--secondColor, rgba(224, 229, 235, 0.9));
+		// border: 1px solid var(--secondColor, rgba(224, 229, 235, 0.9));
+
+		&:hover {
+			// border-color: var(--secondColorHover, rgba(224, 229, 235, 0.9));
+			--toggle-button-border-color: var(--secondColorHover, rgba(224, 229, 235, 0.9));
+		}
+	}
+
+	&[data-design*="solid"] {
+		// background: var(--secondColor, rgba(224, 229, 235, 0.9));
+		--toggle-button-background: var(--secondColor, rgba(224, 229, 235, 0.9));
+
+		&:hover {
+			// background: var(--secondColorHover, rgba(224, 229, 235, 0.9));
+			--toggle-button-background: var(--secondColorHover, rgba(224, 229, 235, 0.9));
+		}
+	}
+}
+
+// hide trigger when off-canvas is oppened
+// [data-panel*='in'] .ct-header-trigger {
+// 	@include media-breakpoint-down (md) {
+// 		opacity: 0;
+// 	}
+// }

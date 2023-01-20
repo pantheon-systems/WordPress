@@ -1,0 +1,23 @@
+.entry-tags {
+	margin-top: 40px;
+	clear: both;
+	margin-bottom: -10px;
+
+	a {
+		display: inline-flex;
+		font-size: 14px;
+		font-weight: 500;
+		padding: 0.3em 0.85em;
+		margin-bottom: 10px;
+		--buttonTextInitialColor: var(--color);
+		--buttonInitialColor: transparent;
+
+		&:not(:hover) {
+			box-shadow: inset 0px 0px 0px 1px var(--border-color);
+		}
+
+		&:not(:last-child) {
+			margin-inline-end: 10px;
+		}
+	}
+}

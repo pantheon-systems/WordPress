@@ -1,0 +1,7 @@
+.has-drop-cap {
+	&:not(:focus):first-letter {
+		font-size: 5.8em;
+		font-weight: 700;
+		margin: 0.1em 0.12em 0.05em 0;
+	}
+}

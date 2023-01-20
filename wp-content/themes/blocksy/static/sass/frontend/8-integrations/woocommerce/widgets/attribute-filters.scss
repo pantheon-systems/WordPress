@@ -1,0 +1,38 @@
+.wc-block-checkbox-list li:not([hidden]),
+.woocommerce-widget-layered-nav-list li:not([hidden]) a {
+	display: flex;
+	align-items: center;
+
+	input[type="checkbox"] {
+		--top: 0;
+	}
+}
+
+.woocommerce-widget-layered-nav-list li {
+	
+	a {
+		&:before {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			content: '';
+			font-size: 12px;
+			line-height: 100%;
+			font-weight: 600;
+			width: 16px;
+			height: 16px;
+			margin-inline-end: 10px;
+			border-radius: 3px;
+			border-width: var(--form-field-border-width, 1px);
+			border-style: solid;
+			border-color: var(--form-selection-control-initial-color);
+		}
+	}
+
+	&.chosen a:before {
+		content: '✓';
+		color: #fff;
+		border-color: var(--form-selection-control-accent-color);
+		background: var(--form-selection-control-accent-color);
+	}
+}

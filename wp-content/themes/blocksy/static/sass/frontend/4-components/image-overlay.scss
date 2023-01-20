@@ -1,0 +1,17 @@
+$selector: 
+	'[data-cards="cover"] .entry-card > .ct-image-container',
+	'.hero-section[data-type='type-2'] > figure > .ct-image-container',
+;
+
+
+#{$selector} {
+	&:after {
+		position: absolute;
+		z-index: 2;
+		content: '';
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}

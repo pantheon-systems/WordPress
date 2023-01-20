@@ -1,0 +1,125 @@
+:root {
+	color: var(--color);
+
+	// link color
+	a {
+		color: var(--linkInitialColor);
+
+		&:hover {
+			color: var(--linkHoverColor);
+		}
+	}
+
+	// heading color
+	.editor-post-title__input {
+		color: var(--headings-color);
+	}
+
+	h1 {
+		color: var(
+			--heading-color,
+			var(--heading-1-color, var(--headings-color))
+		);
+	}
+
+	h2 {
+		color: var(
+			--heading-color,
+			var(--heading-2-color, var(--headings-color))
+		);
+	}
+
+	h3 {
+		color: var(
+			--heading-color,
+			var(--heading-3-color, var(--headings-color))
+		);
+	}
+
+	h4 {
+		color: var(
+			--heading-color,
+			var(--heading-4-color, var(--headings-color))
+		);
+	}
+
+	h5 {
+		color: var(
+			--heading-color,
+			var(--heading-5-color, var(--headings-color))
+		);
+	}
+
+	h6 {
+		color: var(
+			--heading-color,
+			var(--heading-6-color, var(--headings-color))
+		);
+	}
+}
+
+// editor color palettes
+.has-palette-color-1-color {
+	color: var(--paletteColor1);
+}
+
+.has-palette-color-2-color {
+	color: var(--paletteColor2);
+}
+
+.has-palette-color-3-color {
+	color: var(--paletteColor3);
+}
+
+.has-palette-color-4-color {
+	color: var(--paletteColor4);
+}
+
+.has-palette-color-5-color {
+	color: var(--paletteColor5);
+}
+
+.has-palette-color-6-color {
+	color: var(--paletteColor6);
+}
+
+.has-palette-color-7-color {
+	color: var(--paletteColor7);
+}
+
+.has-palette-color-8-color {
+	color: var(--paletteColor8);
+}
+
+// background color
+.has-palette-color-1-background-color {
+	background-color: var(--paletteColor1);
+}
+
+.has-palette-color-2-background-color {
+	background-color: var(--paletteColor2);
+}
+
+.has-palette-color-3-background-color {
+	background-color: var(--paletteColor3);
+}
+
+.has-palette-color-4-background-color {
+	background-color: var(--paletteColor4);
+}
+
+.has-palette-color-5-background-color {
+	background-color: var(--paletteColor5);
+}
+
+.has-palette-color-6-background-color {
+	background-color: var(--paletteColor6);
+}
+
+.has-palette-color-7-background-color {
+	background-color: var(--paletteColor7);
+}
+
+.has-palette-color-8-background-color {
+	background-color: var(--paletteColor8);
+}

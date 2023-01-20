@@ -1,0 +1,16 @@
+.component_option_thumbnail button {
+	display: inline-block;
+}
+
+.composite_button {
+	display: flex;
+
+	.single_add_to_cart_button {
+		--buttonMinHeight: 55px;
+	}
+
+	.added_to_cart,
+	.single_add_to_cart_button {
+		margin-left: 10px;
+	}
+}

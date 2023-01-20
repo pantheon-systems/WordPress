@@ -1,0 +1,57 @@
+[class*="ct-contact-info"] {
+
+	ul {
+		display: flex;
+		gap: var(--items-spacing, 15px);
+	}
+
+	li {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-column-gap: 15px;
+		align-items: center;
+
+		&:hover a {
+			color: var(--linkHoverColor);
+		}
+	}
+
+	.contact-info {
+		display: flex;
+		flex-direction: column;
+		color: var(--color);
+	}
+
+	.contact-title {
+		font-weight: 600;
+	}
+
+	.ct-contact-info-text {
+		margin-bottom: 20px;
+	}
+
+	// items direction
+	[data-items-direction="horizontal"] {
+		flex-wrap: wrap;
+	}
+
+	[data-items-direction="vertical"] {
+		flex-direction: column;
+	}
+}
+
+
+// widget
+.ct-contact-info-widget {
+	--items-spacing: 20px;
+
+	ul {
+		text-align: start;
+		align-items: var(--horizontal-alignment);
+	}
+
+	.contact-info {
+		font-size: 15px;
+		line-height: 1.4;
+	}
+}

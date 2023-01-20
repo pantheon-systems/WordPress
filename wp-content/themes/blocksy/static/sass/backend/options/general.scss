@@ -1,0 +1,336 @@
+// Panel options
+$accent-color: #0e8ecc;
+
+.ct-control,
+.ct-controls-group {
+	position: relative;
+	padding: var(--options-horizontal-spacing, 0 14px);
+	margin-top: var(--options-vertical-spacing, 25px);
+
+	> header {
+		&:not(:empty) {
+			display: flex;
+			justify-content: space-between;
+			position: relative;
+		}
+
+		label {
+			font-size: 12px;
+			font-weight: 500;
+			letter-spacing: 0.1px;
+			// text-transform: capitalize;
+			cursor: default;
+		}
+	}
+
+	// inline
+	&[data-design='inline'] {
+		display: flex;
+		flex-wrap: wrap;
+
+		> header {
+			flex: var(--flex, 1 1 auto);
+
+			label {
+				display: flex;
+				align-items: center;
+				// max-width: 180px;
+				max-width: 220px;
+			}
+		}
+	}
+
+	// block
+	&[data-design*='block'] {
+		> header {
+			&:not(:empty) {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	&[data-design='block:right'] {
+		display: flex;
+		flex-direction: column;
+
+		> section {
+			align-self: flex-end;
+		}
+	}
+}
+
+
+.ct-options-container {
+	
+	.customize-control-ct-options {
+		display: block !important;
+	}
+
+	// control options
+	.ct-control-options {
+		display: flex;
+		align-self: center;
+	}
+
+
+	// title
+	.ct-title {
+		h3 {
+			color: #484f56;
+			font-size: 13px !important;
+			font-weight: 600;
+			margin: 0;
+			text-transform: initial;
+		}
+		
+		&:not(:first-child) {
+			padding-top: var(--title-option-vertical-spacing, 30px);
+			border-top: 1px solid var(--optionBorderColor);
+		}
+
+		&[data-type*="simple"] {
+			width: calc(100% + 24px);
+			margin-top: var(--title-option-vertical-spacing, 30px);
+			margin-left: -12px;
+			margin-right: -12px;
+			padding-left: 26px;
+			padding-right: 26px;
+			box-sizing: border-box;
+		}
+
+		&[data-type*="small-heading"] {
+			margin-top: 25px;
+			padding-top: 25px;
+
+			h3 {
+				font-size: 12px !important;
+			}
+		}
+
+		&[data-type*="no-border"] {
+			border-top: 0;
+			padding-top: 0;
+
+			&:first-child {
+				margin-top: var(--title-option-vertical-spacing, 30px);	
+			}
+		}
+
+		&[data-type*="menu-location"] {
+			width: calc(100% + 24px);
+			margin-top: 21px;
+			margin-left: -12px;
+			margin-right: -12px;
+			padding: 0 26px;
+			box-sizing: border-box;
+			border-top: none;
+
+			h3 {
+				padding: 10px;
+				border-radius: 3px;
+				border: 1px dashed #cecece;
+				background: rgba(255, 255, 255, 0.5);
+			}
+		}
+	}
+
+	.ct-panel-options-header + .ct-title {
+		padding-top: 0;
+		// margin-top: 25px;
+		border-top: none;
+
+		h3 {
+			font-size: 12px !important;
+		}
+	}
+
+
+	.ct-separated,
+	.ct-linked {
+		width: 15px;
+		height: 15px;
+		padding: 0;
+		color: #000;
+		cursor: pointer;
+		border: none;
+		opacity: 0.2;
+		background: transparent;
+		transition: opacity 0.1s ease, color 0.1s ease;
+
+		svg {
+			fill: currentColor;
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		&:hover {
+			opacity: 0.4;
+		}
+
+		&.active {
+			color: $accent-color;
+			opacity: 1;
+		}
+	}
+
+	.ct-linked {
+		margin-left: 10px;
+	}
+
+
+	// layers
+	.ct-layer {
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
+	}
+
+	// select
+	[data-design="inline"] {
+		.ct-option-input,
+		.ct-select-input {
+			max-width: var(--select-input-width, 130px);
+		}
+	}
+
+	// option heading divider
+	[data-label='heading-label'] {
+		header > label {
+			font-size: 13px;
+			font-weight: 600;
+			// color: #23282d;
+			color: #484f56;
+		}
+	}
+
+	// option notification
+	.ct-disabled-notification {
+		display: flex;
+		align-items: center;
+		font-size: 12px;
+		min-height: 28px;
+		padding: 8px 10px 8px 12px;
+		background: #fff;
+		border-left: 2px solid rgba(14, 142, 204, 0.8);
+	}
+
+	.ct-notification {
+		padding: 0 14px;
+		margin-top: 20px;
+	}
+}
+
+// divider
+.ct-divider {
+	&:before {
+		content: '';
+		display: block;
+		height: 1px;
+		background: var(--optionBorderColor);
+	}
+
+	&:not([data-type]) {
+		margin: 30px 0;
+
+		&:before {
+			width: calc(100% + 24px);
+			margin: 0 -12px;
+		}
+	}
+
+	&[data-type="full-small"] {
+		margin: 20px 0;
+
+		&:before {
+			width: calc(100% + 24px);
+			margin: 0 -12px;
+		}
+	}
+
+	&[data-type="small"] {
+		margin: 25px 0;
+
+		&:before {
+			opacity: 0.8;
+			width: calc(100% - 24px);
+			margin: 0 12px;
+		}
+	}
+}
+
+// option description
+.ct-option-description {
+	flex: 0 0 100%;
+	font-size: 12px;
+	line-height: 1.5;
+	font-style: italic;
+	opacity: 0.65;
+	color: rgba(85, 93, 102, 1);
+	margin: 10px 0 0 0;
+	transition: opacity 0.1s ease;
+
+	a {
+		color: inherit;
+		text-decoration: none;
+		transition: color 0.1s ease;
+
+		&:hover {
+			color: var(--accentColor);
+			text-decoration: underline;
+		}
+	}
+}
+
+.ct-title,
+.ct-control {
+	&:hover {
+		.ct-option-description {
+			opacity: 1;
+		}
+	}
+}
+
+// control with divider
+[data-divider] {
+	&:before, &:after {
+		display: block;
+		width: 100%;
+		border-bottom: 1px var(--option-border-style, solid) var(--optionBorderColor);
+	}
+}
+
+[data-divider*="top"]:not(:first-child) {
+	&:before {
+		content: '';
+		margin-bottom: var(--options-vertical-spacing, 25px);
+	}
+}
+
+[data-divider*="bottom"]:not(:last-child) {
+	&:after {
+		content: '';
+		margin-top: var(--options-vertical-spacing, 25px);
+	}
+}
+
+[data-divider*="full"] {
+	&:before, &:after {
+		width: calc(100% + 52px);
+		margin: 0 -26px;
+	}
+}
+
+// option modal
+.wp-customizer {
+	.ct-option-modal {
+		left: 12px;
+	}
+}
+
+// reset button styles
+.ct-reset-styles {
+	appearance: none;
+	border: 0;
+	padding: initial;
+	background: transparent;
+}

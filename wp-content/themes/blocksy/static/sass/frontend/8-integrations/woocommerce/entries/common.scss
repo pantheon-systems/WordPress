@@ -1,0 +1,56 @@
+.products {
+	
+	.ct-image-container img {
+		height: 100%;
+	}
+
+	.woocommerce-loop-product__title,
+	.woocommerce-loop-category__title {
+		transition: var(--transition);
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	
+	.entry-meta {
+		font-size: 13px;
+		margin-top: 8px;
+	}
+
+	.entry-excerpt {
+		margin-top: 15px;
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+
+	// hide added to cart button
+	.add_to_cart_button {
+		&.added {
+			--display: none;
+		}
+	}
+
+
+	// quick view
+	.ct-woo-card-extra {
+		top: 15px;
+		right: 15px;
+	}
+
+
+	// hover state
+	.product:hover {
+		
+		.ct-open-quick-view {
+			opacity: 1;
+		}
+
+		.woocommerce-loop-product__title,
+		.woocommerce-loop-category__title {
+			color: var(--linkHoverColor);
+		}
+	}
+}

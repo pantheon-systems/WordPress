@@ -1,0 +1,128 @@
+.ct-image-picker {
+	display: grid;
+	grid-template-columns: var(--grid-columns, repeat(2, 1fr));
+	grid-column-gap: var(--column-gap, 23px);
+	grid-row-gap: var(--row-gap, 23px);
+
+	&[data-columns='3'] {
+		--grid-columns: repeat(3, 1fr);
+		--column-gap: 16px;
+		--row-gap: 16px;
+	}
+
+	&[data-columns='4'] {
+		--grid-columns: repeat(4, 1fr);
+		--column-gap: 12px;
+	}
+
+	&[data-columns='5'] {
+		--grid-columns: repeat(5, 1fr);
+		--column-gap: 15px;
+	}
+
+	li {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 3px;
+		cursor: pointer;
+		margin: 0;
+		position: relative;
+		background: var(--image-picker-bg, rgba(221, 224, 226, 0.7));
+		transition: background 0.15s ease, box-shadow 0.15s ease;
+
+		span {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-height: inherit;
+
+			svg {
+				fill: #565d66;
+			}
+		}
+
+		&:hover {
+			background: rgba(221, 224, 226, 1);
+		}
+
+		&.active {
+			background: var(--accentColor);
+			box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+
+			span svg {
+				fill: #fff;
+			}
+		}
+
+		// ratio
+		> *:first-child {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		&:before {
+			content: '';
+			width: 100%;
+			height: 0;
+			padding-bottom: var(--ratio, 69.67%);
+		}
+	}
+
+
+
+	// ratio
+	&[data-ratio="2:1"] li:before {
+		--ratio: 62%;
+	}
+
+	// data sync
+	&[data-state='sync'] li:first-child {
+		position: relative;
+
+		&:after {
+			background: url(../images/sync.svg);
+			position: absolute;
+			top: calc(50% - 5px);
+			content: '';
+			width: 25px;
+			height: 25px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			animation: rotation 3.5s infinite linear;
+			animation-play-state: paused;
+			will-change: transform;
+			// display: none;
+		}
+
+		&.active {
+			&:after {
+				animation-play-state: running;
+			}
+		}
+
+		@keyframes rotation {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(359deg);
+			}
+		}
+	}
+
+
+	// tooltip
+	li:hover {
+		.ct-tooltip-top {
+			opacity: 1;
+			visibility: visible;
+			transform: translate3d(0px, -40px, 0px);
+		}
+	}
+}

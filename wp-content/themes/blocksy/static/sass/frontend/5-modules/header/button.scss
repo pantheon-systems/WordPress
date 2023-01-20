@@ -1,0 +1,29 @@
+.ct-header-cta {
+
+	a {
+		gap: 0.5em;
+	}
+
+	// button size
+	[data-size="small"] {
+		--buttonMinHeight: 34px;
+		--button-padding: 5px 15px;
+		--buttonFontSize: 13px;
+	}
+
+	[data-size="medium"] {
+		--buttonMinHeight: 42px;
+		--button-padding: 5px 20px;
+	}
+
+	[data-size="large"] {
+		--buttonMinHeight: 50px;
+		--button-padding: 5px 30px;
+		--buttonFontSize: 16px;
+	}
+
+	// button icon
+	.ct-icon {
+		--icon-color: currentColor;
+	}
+}

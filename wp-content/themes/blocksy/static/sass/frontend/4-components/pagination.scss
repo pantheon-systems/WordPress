@@ -1,0 +1,144 @@
+.ct-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: var(--spacing, 60px);
+
+	&[data-divider] {
+		padding-top: var(--spacing, 60px);
+		border-top: var(--pagination-divider, none);
+	}
+
+	svg {
+		fill: currentColor;
+	}
+}
+
+// simple & prev next type
+[data-pagination="simple"],
+[data-pagination="next_prev"] {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--color);
+	--linkInitialColor: var(--color);
+
+	.page-numbers {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 40px;
+		border-radius: var(--border-radius, 4px);
+		border: 2px solid transparent;
+
+		&.current {
+			color: var(--colorActive, #fff);
+			background: var(--linkHoverColor);
+		}
+
+		&:not(.dots) {
+			&:hover {
+				border-color: var(--linkHoverColor);
+			}
+		}
+	}
+
+	.prev, .next {
+		font-size: 12px;
+		text-transform: uppercase;
+		padding: 0 17px;
+		white-space: nowrap;
+		border-color: var(--border-color);
+	}
+
+	.prev {
+		grid-column: 1;
+		justify-self: start;
+
+		svg {
+			margin-inline-end: 8px;
+		}
+	}
+
+	.next {
+		grid-column: 3;
+		justify-self: end;
+
+		svg {
+			margin-inline-start: 8px
+		}
+	}
+}
+
+
+// simple type
+[data-pagination="simple"] > div {
+	grid-column: 2;
+	text-align: center;
+	margin: -5px;
+
+	.page-numbers {
+		flex: 0 0 41px;
+		width: 41px;
+		margin: 5px;
+	}
+}
+
+
+// load more & infinite type
+[data-pagination="load_more"],
+[data-pagination="infinite_scroll"] {
+	justify-content: center;
+
+	.page-numbers {
+		display: none;
+	}
+
+	.ct-load-more-helper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		min-width: var(--buttonMinHeight, 45px);
+		min-height: var(--buttonMinHeight, 45px);
+
+		@media (prefers-reduced-motion: no-preference) {
+			[data-loader] {
+				opacity: 0;
+				transition: opacity 0.2s ease;
+			}
+
+			&.ct-loading {
+				[data-loader] {
+					opacity: 1;
+					animation-play-state: running;
+				}
+
+				.ct-load-more {
+					opacity: 0;
+				}
+			}
+		}
+	}
+
+	.ct-load-more {
+		z-index: 2;
+		opacity: 1;
+	}
+
+	.ct-last-page-text {
+		display: none;
+		opacity: 0.7;
+	}
+
+	&.ct-last-page {
+		.ct-load-more, [data-loader] {
+			display: none;
+		}
+
+		.ct-last-page-text {
+			display: flex;
+		}
+	}
+}

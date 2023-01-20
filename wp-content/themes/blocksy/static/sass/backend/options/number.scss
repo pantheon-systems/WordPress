@@ -1,0 +1,85 @@
+.ct-option-number {
+	display: flex;
+	align-items: center;
+	position: relative;
+	height: 30px;
+	width: 100px;
+
+	&[data-width="full"] {
+		width: 100%;
+	}
+
+	&[data-position="right"] {
+		margin-left: auto;
+	}
+
+	input {
+		--padding: 3px 30px;
+		text-align: center;
+	}
+
+	> a {
+		position: absolute;
+		top: 1px;
+		width: 30px;
+		height: calc(100% - 2px);
+		color: inherit;
+
+		&:before, &:after {
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			width: 8px;
+			height: 1px;
+			opacity: 0.8;
+			background: currentColor;
+			transition: background 0.1s linear,
+						opacity 0.1s linear;
+		}
+
+		&.ct-minus {
+			left: 1px;
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+			
+			&:after {
+				display: none;
+			}
+		}
+
+		&.ct-plus {
+			right: 1px;
+			border-top-right-radius: 2px;
+			border-bottom-right-radius: 2px;
+
+			&:after {
+				transform: rotate(90deg);
+			}
+		}
+
+		// not disabled state
+		&:not(.ct-disabled) {
+			cursor: pointer;
+
+			&:hover {
+				color: #fff;
+				opacity: 1;
+				background: var(--accentColor);
+			}
+		}
+
+		&.ct-disabled {
+			opacity: 0.4;
+		}
+
+		&:hover {
+			~ input {
+				--borderColor: var(--accentColor) !important;
+			}
+		}
+	}
+}

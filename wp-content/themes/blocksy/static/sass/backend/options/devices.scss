@@ -1,0 +1,52 @@
+.ct-devices li {
+	margin-bottom: 0;
+
+	&:before, &:after {
+		content: '';
+		border-radius: 2px;
+		box-sizing: border-box;
+	}
+
+	&.ct-desktop {
+		flex-direction: column;
+
+		&:before {
+			margin-bottom: 1px;
+			width: 17px;
+			height: 11px;
+			border: 2px solid currentColor;
+		}
+
+		&:after {
+			width: 9px;
+			height: 2px;
+			background: currentColor;
+		}
+	}
+
+	&.ct-tablet {
+		&:before {
+			width: 13px;
+			height: 14px;
+			border: 2px solid currentColor;
+			border-bottom-width: 3px;
+		}
+
+		&:after {
+			display: none;
+		}
+	}
+
+	&.ct-mobile {
+		&:before {
+			width: 10px;
+			height: 14px;
+			border: 2px solid currentColor;
+			border-bottom-width: 3px;
+		}
+
+		&:after {
+			display: none;
+		}
+	}
+}

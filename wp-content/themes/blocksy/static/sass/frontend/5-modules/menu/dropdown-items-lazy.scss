@@ -1,0 +1,65 @@
+.menu > .menu-item:not([class*="ct-mega-menu"]) {
+	.sub-menu li:first-child {
+		border-top: none;
+	}
+}
+
+// solid and padded
+[data-dropdown*='solid'] .sub-menu li,
+[data-dropdown*='padded'] .sub-menu li {
+	
+	// a:hover,
+	// &.current-menu-item > a,
+	&:hover > a,
+	&[class*="current-menu-"] > a {
+		background-color: var(--dropdown-background-hover-color, rgba(255, 255, 255, 0.03));
+	}
+}
+
+// solid
+[data-dropdown*='solid'] .sub-menu li {
+	&:first-child {
+		border-top-left-radius: inherit;
+		border-top-right-radius: inherit;
+	}
+
+	&:last-child {
+		border-bottom-left-radius: inherit;
+		border-bottom-right-radius: inherit;
+	}
+}
+
+// padded
+[data-dropdown*='padded'] {
+	.sub-menu {
+		--menu-item-radius: 3px;
+		--menu-item-padding: calc(
+			var(--dropdown-items-spacing, 13px) - 7px) 
+			calc(var(--dropdown-items-spacing, 13px) - 4px
+		);
+
+		li > a {
+			margin: calc(var(--has-divider) * 8px)
+					calc(8px + (1 - var(--has-divider)) * 8px);
+		}
+	}
+
+	// apply top/bottom margin only to regular dropdowns (not mega menu)
+	> ul > li:not([class*="ct-mega-menu"]) .sub-menu li {
+		// display: flex;
+		// flex-direction: column;
+
+		&:first-child > a {
+			margin-top: calc(8px + (1 - var(--has-divider)) * 8px);
+		}
+
+		&:last-child > a {
+			margin-bottom: calc(8px + (1 - var(--has-divider)) * 8px);
+		}
+	}
+
+	// dropdown top adjuster when items have no divider
+	.animated-submenu [data-submenu]:not(:first-child) > ul {
+		--top: calc((1 - var(--has-divider)) * -16px);
+	}
+}

@@ -1,0 +1,63 @@
+.ct-comparison-table {
+
+	ul {
+		margin: 0 0 50px 0;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+
+		li {
+			display: grid;
+			grid-template-columns: 3fr 1fr 1fr;
+			// min-height: 65px;
+    		padding: 15px 18px;
+    		font-size: 14px;
+    		
+    		&:not(:first-child) {
+    			border-bottom: 1px dashed rgba(226, 230, 235, 0.7);
+    		}
+
+    		span {
+    			width: initial;
+    			text-align: center;
+
+    			&:first-child {
+    				text-align: left;
+    			}
+
+    			&.dashicons-yes {
+    				color: var(--accentColor);
+    			}
+
+    			&.dashicons-no-alt {
+    				color: #ef9a9a;
+    				// color: #e57373;
+    			}
+    		}
+		}
+	}
+
+	.ct-table-heading {
+		position: sticky;
+		top: 50px;
+		color: #435c6d;
+		font-size: 15px;
+		font-weight: 600;
+		border-radius: 3px;
+		background: #F8FAFB;
+		border: 1px solid rgba(226, 230, 235, 0.7);
+		box-shadow: 0 2px 5px rgba(143, 163, 184, 0.12);
+
+		&:before {
+			position: absolute;
+			z-index: -1;
+			content: '';
+			top: -31px;
+			left: 0;
+			right: 0;
+			height: 30px;
+			background: #fff;
+		}
+	}
+}

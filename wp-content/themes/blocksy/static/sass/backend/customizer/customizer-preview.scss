@@ -1,0 +1,55 @@
+.wp-full-overlay {
+	background-color: #f0f0f1;
+}
+
+#customize-preview {
+	height: initial;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	box-sizing: border-box;
+	background-color: transparent;
+	// transition: all 0.2s linear;
+
+	iframe {
+		height: calc(100% - 50px);
+		box-shadow: 0 0 25px rgba(0, 0, 0, 0.11),
+					0 0 0 1px rgba(0, 0, 0, 0.025);
+
+		// fix preview window height in Safari browser
+		@media not all and (min-resolution:.001dpcm) { 
+			@supports (-webkit-appearance:none) and (stroke-color:transparent) {
+				height: 100%;
+			}
+		}
+	}
+}
+
+.preview-desktop {
+	#customize-preview {
+		padding-left: 25px;
+		padding-right: 25px;
+		max-height: 100%;
+		margin-top: auto;
+		margin-bottom: auto;
+
+		iframe {
+			width: calc(100% - 50px);
+		}
+	}
+}
+
+.preview-tablet {
+	#customize-preview {
+		width: 850px;
+		max-height: 1080px;
+		margin-inline-start: -425px;
+	}
+}
+
+.preview-mobile {
+	#customize-preview {
+		width: 390px;
+		max-height: 720px;
+		margin-inline-start: -195px;
+	}
+}

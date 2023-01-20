@@ -1,0 +1,41 @@
+[data-content="normal"] > article {
+	--block-width: var(--has-wide, var(--container-width));
+	--block-max-width: var(--has-wide, var(--normal-container-max-width));
+	--block-wide-max-width: var(--has-wide, calc(var(--normal-container-max-width) + var(--wide-offset) * 2));
+
+	--boxed-content-max-width: var(--normal-container-max-width);
+}
+
+[data-content="narrow"] > article {
+	--block-width: var(--has-wide, var(--container-width));
+	--block-max-width: var(--has-wide, var(--narrow-container-max-width));
+	--block-wide-max-width: var(--has-wide, calc(var(--narrow-container-max-width) + var(--wide-offset) * 2));
+
+	--boxed-content-max-width: var(--narrow-container-max-width);
+}
+
+
+// content area style
+[class*="ct-container"] > article {
+	--has-background: var(--has-boxed);
+	--has-boxed-structure: var(--has-boxed);
+	--wp--style--global--content-size: var(--block-max-width);
+	--wp--style--global--wide-size: var(--block-wide-max-width);
+	
+	box-shadow: var(--has-boxed, var(--box-shadow));
+	border: var(--has-boxed, var(--boxed-content-border));
+	border-radius: var(--has-boxed, var(--border-radius));
+	padding: var(--has-boxed, var(--boxed-content-spacing));
+
+	margin-left: var(--has-boxed-structure, auto);
+	margin-right: var(--has-boxed-structure, auto);
+	width: var(--has-boxed-structure, var(--container-width));
+	max-width: var(--has-boxed-structure, var(--boxed-content-max-width));
+}
+
+
+// disable layout styles if CPT has no customizer options
+[data-prefix*="preview-mode"] article[class*="post"] {
+	--has-boxed: var(--false);
+	--has-wide: var(--true);
+}

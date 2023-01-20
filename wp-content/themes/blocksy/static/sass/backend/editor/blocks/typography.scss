@@ -1,0 +1,46 @@
+:root {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+
+	&,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	pre,
+	code,
+	// .wp-block-pullquote p,
+	// .wp-block-quote.is-style-large p,
+	.wp-block-quote,
+	.wp-block-pullquote {
+		font-family: var(--fontFamily);
+		font-size: var(--fontSize);
+		font-weight: var(--fontWeight);
+		font-style: var(--fontStyle, inherit);
+		line-height: var(--lineHeight);
+		letter-spacing: var(--letterSpacing);
+		text-transform: var(--textTransform);
+		text-decoration: var(--textDecoration);
+	}
+
+	// buttons
+	.wp-block-button__link {
+		font-family: var(--buttonFontFamily, var(--fontFamily));
+		font-size: var(--buttonFontSize);
+		font-weight: var(--buttonFontWeight);
+		font-style: var(--buttonFontStyle);
+		line-height: var(--buttonLineHeight);
+		letter-spacing: var(--buttonLetterSpacing);
+		text-transform: var(--buttonTextTransform);
+		text-decoration: var(--buttonTextDecoration);
+	}
+
+	.edit-post-visual-editor__post-title-wrapper > h1 {
+		font-size: 2.44em;
+		font-weight: 700;
+		line-height: 1.4;
+		color: var(--headings-color);
+	}
+}

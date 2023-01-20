@@ -1,0 +1,76 @@
+.ct-view-switch {
+	order: 2;
+	display: flex;
+	align-items: center;
+	position: relative;
+	z-index: 2;
+	margin: 0;
+	height: $panel-bar-height;
+	box-sizing: border-box;
+	border-top: 1px solid #ddd;
+	background: #f0f0f1;
+
+	li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		height: var(--ui-height, 100%);
+		margin: var(--ui-margin, 0);
+		padding: var(--ui-padding, 0 25px);
+		cursor: pointer;
+		font-weight: 600;
+		color: var(--ui-color, #555D65);
+		border-right: 1px solid #ddd;
+		box-sizing: border-box;
+		transition: color 0.1s ease;
+
+		&:after {
+			position: absolute;
+			content: '';
+			width: 100%;
+			height: 4px;
+			left: 0;
+			bottom: 0px;
+			opacity: 0;
+			transition: opacity 0.1s ease;
+		}
+
+		&:hover {
+			--ui-color: #0071a1;
+			background: #fff;
+		}
+
+		&.active {
+			color: #191e23;
+			background: #fff;
+
+			&:after {
+				opacity: 1;
+				background: #191e23;
+			}
+		}
+	}
+}
+
+// builder toggle
+.ct-builder-toggle {
+	--ui-margin: 0 0 0 auto;
+	// --ui-padding: 0;
+	min-width: 148px;
+	font-size: 12px;
+	border-right: none !important;
+	border-left: 1px solid #ddd;
+
+	&:before {
+		font-family: dashicons;
+		content: "\f347";
+		margin-right: 10px;
+	}
+}
+
+.ct-builder-collapsed .ct-builder-toggle {
+	&:before {
+		content: "\f343";
+	}
+}

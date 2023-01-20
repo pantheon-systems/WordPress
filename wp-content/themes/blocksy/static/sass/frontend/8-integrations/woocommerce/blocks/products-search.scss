@@ -1,0 +1,14 @@
+.wc-block-product-search__label {
+	display: block;
+	margin-bottom: 10px;
+}
+
+.wc-block-product-search {
+	.wc-block-product-search__field {
+		padding: var(--form-field-padding, 0 15px);
+	}
+
+	.wc-block-product-search__button {
+		transform: none !important;
+	}
+}

@@ -1,0 +1,46 @@
+table.cart {
+
+	@include media-breakpoint-down (sm) {
+		--table-padding: 1.3em 0.7em;
+	}
+
+	@include media-breakpoint-up (md) {
+		--table-padding: 1.5em 0.7em;
+	}
+
+	tbody {
+		tr:last-child {
+			--table-border-width: 0;
+		}
+	}
+
+
+	// product name
+	.product-name {
+		@include media-breakpoint-up (md) {
+			max-width: 300px;
+		}
+	}
+
+	.product-quantity,
+	.product-subtotal {
+		text-align: center;
+	}
+
+
+	// misc
+	@include media-breakpoint-down (md) {
+		tr > {
+			.product-price,
+			.product-quantity,
+			.product-subtotal,
+			.product-remove {
+				display: none;
+			}
+		}
+	}
+}
+
+.multiply-symbol {
+	margin: 0 12px;
+}

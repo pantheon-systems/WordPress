@@ -1,0 +1,228 @@
+$customizer-width: 320px;
+// $customizer-width: #{'max(320px, 400px)'};
+
+// header actions
+#customize-header-actions {
+	.customize-controls-close {
+		height: 45px;
+		border-top: none;
+
+		&:before {
+			top: 1px;
+		}
+	}
+
+	.customize-controls-preview-toggle {
+		left: 97px;
+		width: 49px;
+
+		.preview {
+			font-size: 0;
+
+			&:before {
+				height: 100%;
+				margin-right: 0;
+				position: relative;
+				top: 11px;
+				left: -2px;
+			}
+		}
+	}
+}
+
+.in-sub-panel {
+	.wp-full-overlay-sidebar {
+		.wp-full-overlay-header {
+			padding-left: 15px;
+		}
+	}
+}
+
+#accordion-section-themes {
+	h3 {
+		border-top: none !important;
+		margin-bottom: 0 !important;
+	}
+}
+
+// first level controls
+#customize-controls {
+	-webkit-font-smoothing: antialiased;
+
+	.customize-info {
+		margin-bottom: 0 !important;
+
+		&.panel-meta {
+			margin-bottom: 15px;
+		}
+	}
+
+	.customize-section-title {
+		&.is-in-view {
+			box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.03);
+		}
+	}
+
+	// group title
+	.ct-group-title {
+		height: auto !important;
+		display: block !important;
+		visibility: visible !important;
+		margin: 18px 0 0 0 !important;
+		padding: 30px 26px 20px 26px !important;
+		border-bottom: none;
+		border-top: 1px solid #ddd;
+
+		h3 {
+			font-size: 14px;
+			font-weight: 600;
+			text-transform: capitalize;
+			color: #555d66;
+			margin: 0;
+		}
+	}
+
+	#accordion-section-publish_settings {
+		+ .ct-group-title {
+			margin-top: 0 !important;
+			border-top: none;
+		}
+	}
+
+	// section title
+	.control-section {
+		> h3.accordion-section-title {
+			display: flex;
+			align-items: center;
+			padding: 14px 26px;
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 13px;
+			border-left: none;
+			border-bottom: none;
+			background-color: transparent;
+
+			&:after {
+				font-size: 12px;
+				top: calc(50% - 6px);
+				right: 23px;
+				color: inherit;
+			}
+
+			&:hover {
+				background: initial;
+			}
+
+			&:focus {
+				background: rgba(255, 255, 255, 0.7) !important;
+			}
+		}
+
+		&:hover {
+			> h3.accordion-section-title {
+				background-color: rgba(255, 255, 255, 0.7);
+			}
+		}
+	}
+
+	// child section
+	.control-section-child > h3 {
+		font-size: 12px;
+
+		&:before {
+			display: inline-flex;
+			content: '';
+			width: 5px;
+			height: 4px;
+			border: 1px solid currentColor;
+			border-top: none;
+			border-right: none;
+			margin-right: 7px;
+		}
+	}
+
+	// divider for child section
+	.ct-group-divider {
+		height: auto !important;
+		display: block !important;
+		visibility: visible !important;
+		border-bottom: none;
+		padding: 10px 26px !important;
+
+		h3 {
+			width: 100%;
+			height: 1px;
+			margin: 0;
+			opacity: 0.7;
+			background: #ddd;
+		}
+	}
+
+	// second level panel
+	.customize-pane-child {
+		bottom: 0; // fix panel height
+		min-height: 100%;
+
+
+		.panel-meta + .accordion-section.control-section {
+			margin-top: 15px;
+			border-top: none !important;
+		}
+	}
+}
+
+#customize-theme-controls {
+	.customize-pane-parent {
+		padding-bottom: 20px;
+	}
+}
+
+.customize-control-ct-options {
+	margin-bottom: 30px;
+}
+
+// footer actions
+#customize-footer-actions {
+	// min-width: #{$customizer-width - 1px};
+	width: #{$customizer-width - 1px};
+}
+
+
+.wp-full-overlay-sidebar {
+	width: $customizer-width;
+	box-shadow: none !important;
+
+	// min-width: 320px;
+	// max-width: 500px;
+}
+
+// new customizer width
+.wp-full-overlay.expanded {
+	@media screen and (max-width: 1666px) {
+		margin-left: $customizer-width;
+	}
+
+	@media screen and (min-width: 1667px) {
+		margin-left: $customizer-width;
+	}
+}
+
+.wp-full-overlay.collapsed .wp-full-overlay-sidebar {
+	margin-left: -#{$customizer-width};
+}
+
+.control-panel-themes .customize-themes-full-container {
+	margin-left: $customizer-width;
+}
+
+.customize-control-hidden {
+	display: none !important;
+}
+
+
+// adding widgets fix
+#available-menu-items, 
+#available-widgets {
+	transition: left 0.2s ease,
+				visibility 0.2s ease !important;
+}

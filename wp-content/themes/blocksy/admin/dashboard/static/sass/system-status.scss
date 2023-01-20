@@ -1,0 +1,117 @@
+.ct-system-status .ct-info {
+	display: flex;
+	align-items: center;
+
+	i {
+		flex: 0 0 90px;
+		width: 90px;
+		height: 90px;
+		margin-right: 20px;
+		background-image: url("../img/system-status.svg");
+		background-repeat: no-repeat;
+	}
+
+	p {
+		padding-right: 50px;
+		flex: 1;
+	}
+
+	.ct-button-primary {
+		--buttonHeight: 40px;
+		--buttonPadding: 30px;
+
+		font-weight: 500;
+		flex: 0 0 auto;
+		min-width: 100px;
+	}
+}
+
+.ct-system-status-group {
+	margin-top: 50px;
+
+	h3 {
+		font-size: 15px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		margin: 0 0 20px 0;
+	}
+
+	ul {
+		margin: 0;
+
+		li {
+			display: flex;
+			align-items: center;
+			min-height: 50px;
+			margin: 0;
+			padding: 15px 25px;
+			box-sizing: border-box;
+
+			&:nth-child(2n+1) {
+				background: rgba(245, 247, 249, 0.6);
+			}
+
+			p {
+				font-size: 15px !important;
+			}
+
+			.ct-entry-title {
+				font-weight: 500;
+				flex: 0 0 300px;
+				max-width: 300px;
+			}
+
+			.ct-entry-value {
+				flex: 1 1 auto;
+				min-width: 80px;
+				overflow: hidden;
+				padding-right: 15px;
+				font-style: italic;
+			}
+		}
+	}
+}
+
+
+.ct-system-status-help {
+	display: flex;
+	svg {
+		fill: #CBD0D6;
+	}
+}
+
+
+// badges
+.ct-validity-badge {
+	flex: 0 0 8px;
+	width: 8px;
+	height: 8px;
+	margin-right: 10px;
+	border-radius: 100%;
+}
+
+// success & error
+.success {
+	.ct-validity-badge {
+		background: #4bb255;
+	}
+}
+
+.error {
+	.ct-validity-badge {
+		background: #da3438;
+	}
+
+	.ct-entry-value {
+		color: #da3438;
+		font-weight: 400;
+
+		span {
+			margin-left: 10px;
+
+			a {
+				color: inherit;
+			}
+		}
+	}
+}

@@ -1,0 +1,89 @@
+// single product rating
+.woocommerce-product-rating {
+	display: flex;
+	align-items: center;
+
+	.woocommerce-review-link {
+		margin-inline-start: 10px;
+		font-size: 12px;
+		--linkInitialColor: var(--color);
+	}
+}
+
+
+// comment form rating
+.comment-form-rating {
+	display: flex;
+	align-items: center;
+
+	label {
+		--fontSize: 11px;
+		--fontWeight: 500;
+		margin-bottom: 0;
+		text-transform: uppercase;
+	}
+
+	.stars {
+		color: var(--star-rating-initial-color, #fda256);
+		font-size: 0.9em;
+
+		span {
+			display: flex;
+		}
+
+		a {
+			position: relative;
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			text-indent: -999em;
+			text-decoration: none;
+			color: currentColor;
+			// margin-left: 8px;
+			margin-inline-start: 8px;
+
+			&:before {
+				position: absolute;
+				display: block;
+				top: 0;
+				left: 0;
+				width: 1em;
+				height: 1em;
+				font-family: 'star';
+				content: '\73';
+				line-height: 1;
+				text-indent: 0;
+			}
+
+			&:hover {
+				~ a:before {
+					content: '\73';
+				}
+			}
+		}
+
+		&:hover {
+			a:before {
+				content: '\53';
+			}
+		}
+
+		&.selected {
+			a {
+				&.active {
+					&:before {
+						content: '\53';
+					}
+
+					~ a:before {
+						content: '\73';
+					}
+				}
+
+				&:not(.active):before {
+					content: '\53';
+				}
+			}
+		}
+	}
+}

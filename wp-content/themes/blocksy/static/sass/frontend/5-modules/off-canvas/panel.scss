@@ -1,0 +1,24 @@
+[data-behaviour*='side'] {
+	.ct-panel-inner {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		max-width: var(--side-panel-width, 500px);
+		box-shadow: var(--box-shadow);
+		transition: transform 0.25s ease-in-out;
+	}
+
+	&.active .ct-panel-inner {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+[data-behaviour*='right-side'] .ct-panel-inner {
+	right: 0;
+	transform: translate3d(20%, 0, 0);
+}
+
+[data-behaviour*='left-side'] .ct-panel-inner {
+	left: 0;
+	transform: translate3d(-20%, 0, 0);
+}

@@ -1,0 +1,118 @@
+body.rtl {
+
+	&.toplevel_page_ct-dashboard,
+	&.appearance_page_ct-dashboard {
+		#wpcontent {
+			padding-left: initial;
+			padding-right: 0;
+		}
+	}
+
+	#ct-dashboard > header h2 {
+		svg {
+			margin-right: initial;
+			margin-left: 15px;
+		}
+
+		span {
+			margin: 0 10px 0 0;
+		}
+	}
+
+	#ct-dashboard .ct-first-steps-container .ct-first-steps .ct-button:after {
+		content: '←';
+		margin-left: initial;
+		margin-right: 5px;
+	}
+
+	.ct-loading-text span {
+		margin-right: initial;
+		margin-left: 8px;
+	}
+
+	// starter sites
+	.ct-demo-actions .ct-button {
+		margin-right: initial;
+		margin-left: 15px;
+	}
+
+	.ct-demo-step-controls {
+		button.demo-back-btn {
+			left: initial;
+			right: 0;
+		}
+
+		button.demo-main-btn {
+			right: initial;
+			left: 0;
+		}
+	}
+
+	.ct-demo-erase {
+		text-align: right;
+	}
+
+	.ct-install-success a:first-child,
+	.ct-modify-actions > *:not(:last-child) {
+		margin-right: initial;
+		margin-left: 15px;
+	}
+
+	// extensions
+	.ct-extensions-sourse li {
+		&:first-child {
+			border-radius: 0 4px 4px 0;
+		}
+
+		&:last-child {
+			border-radius: 4px 0 0 4px;
+		}
+	}
+
+	.ct-extensions-list .ct-info i {
+		margin-right: initial;
+		margin-left: 20px;
+	}
+
+	.ct-extension-readme {
+		text-align: right;
+	}
+
+	.ct-extension-readme ul, 
+	.ct-extension-readme ol {
+		padding-left: initial;
+		padding-right: 20px;
+	}
+
+	.ct-config-btn:before {
+		margin-right: initial;
+		margin-left: 5px;
+	}
+
+	// changelog
+	.ct-changelog-wrapper ul li span {
+		margin-right: initial;
+		margin-left: 12px;
+	}
+
+	.ct-changelog-wrapper .changelog-explanation li:not(:last-child) {
+		margin-right: initial;
+		margin-left: 30px;
+	}
+
+	.ct-changelog-wrapper .changelog-sources li:not(:last-child) {
+		margin-right: initial;
+		margin-left: 15px;
+
+		&:after {
+			margin-left: initial;
+			margin-right: 15px;
+		}
+	}
+
+	// admin modal
+	.ct-admin-modal .close-button {
+		right: initial;
+		left: 10px;
+	}
+}

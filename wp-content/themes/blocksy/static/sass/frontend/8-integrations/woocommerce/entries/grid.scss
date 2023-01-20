@@ -1,0 +1,28 @@
+[data-products] {
+	display: grid;
+	grid-template-columns: var(--shop-columns) !important;
+	grid-column-gap: var(--grid-columns-gap, 30px);
+
+
+	@include media-breakpoint-up (lg) {
+		&.columns-2 {
+			--shop-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		&.columns-3 {
+			--shop-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		&.columns-4 {
+			--shop-columns: repeat(4, minmax(0, 1fr));
+		}
+
+		&.columns-5 {
+			--shop-columns: repeat(5, minmax(0, 1fr));
+		}
+
+		&.columns-6 {
+			--shop-columns: repeat(6, minmax(0, 1fr));
+		}
+	}
+}

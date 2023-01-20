@@ -1,0 +1,29 @@
+#offcanvas {
+	.ct-panel-content {
+		--margin: 20px 0;
+
+		> * {
+			margin: var(--margin);
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	[data-device="desktop"] {
+		@include media-breakpoint-down(md) {
+			display: none;
+		}
+	}
+
+	[data-device="mobile"] {
+		@include media-breakpoint-up(lg) {
+			display: none;
+		}
+	}
+}

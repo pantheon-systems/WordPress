@@ -1,0 +1,31 @@
+.widget_media_gallery {
+	.gallery {
+		display: grid;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+	}
+
+	.gallery-columns-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.gallery-columns-3 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.gallery-columns-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.gallery-columns-5 {
+		grid-template-columns: repeat(5, 1fr);
+	}
+
+	.gallery-columns-6 {
+		grid-template-columns: repeat(6, 1fr);
+	}
+
+	.gallery-item a:hover {
+		opacity: 0.8;
+	}
+}

@@ -1,0 +1,40 @@
+:root {
+	--tec-color-accent-primary: var(--paletteColor1);
+}
+
+#main {
+
+	#tribe-events-pg-template,
+	.tribe-common .tribe-common-l-container {
+		max-width: initial;
+		padding: 0;
+	}
+
+	.tribe-events-back {
+		margin-bottom: 1em;
+	}
+
+	#tribe-events-footer {
+		padding-bottom: 0;
+	}
+
+	.tribe-events-sub-nav {
+		padding: 0;
+		margin-bottom: 0;
+	}
+}
+
+.tribe-common {
+	
+	.tribe-common-c-btn,
+	a.tribe-common-c-btn {
+		color: var(--buttonTextInitialColor);
+		background-color: var(--buttonInitialColor);
+
+		&:hover,
+		&:focus {
+			color: var(--buttonTextHoverColor);
+			background-color: var(--buttonHoverColor);			
+		}
+	}
+}

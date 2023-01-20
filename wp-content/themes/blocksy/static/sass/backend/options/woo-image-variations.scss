@@ -1,0 +1,22 @@
+.woocommerce_variable_attributes .form-row {
+	margin-bottom: 1.5em;
+}
+
+.ct-variation-image-gallery {
+	padding-bottom: 0.5em;
+	border-top: 1px solid #eee;
+	--options-horizontal-spacing: 0;
+	--optionBorderColor: #eee;
+
+	[data-design="inline"] > section {
+		width: 48%;
+	}
+
+	[data-design="block"] .ct-thumbnails-list {
+		justify-content: flex-end;
+	}
+
+	.ct-attachment-multi {
+		text-align: right;
+	}
+}

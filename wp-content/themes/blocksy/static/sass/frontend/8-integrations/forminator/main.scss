@@ -1,0 +1,53 @@
+@import 'pagination-steps';
+@import 'pagination-footer';
+@import 'response-message';
+@import 'calendar';
+
+.forminator-ui[data-design="none"] {
+	
+	.forminator-label {
+		display: block;
+		font-weight: 500;
+
+		.forminator-required {
+			color: #E04562;
+		}
+	}
+
+	.forminator-hidden {
+		display: none !important;
+	}
+
+	.forminator-description {
+		display: flex;
+		font-size: 12px;
+
+		span {
+			text-align: right;
+			margin-left: auto;
+		}
+	}
+
+	.forminator-radio,
+	.forminator-checkbox,
+	.forminator-checkbox__wrapper {
+		display: flex;
+		--top: 4px;
+	}
+
+	.forminator-input-with-icon {
+		position: relative;
+
+		[class*="forminator-icon-"] {
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 10px;
+			transform: translateY(-50%);
+		}
+
+		.forminator-input {
+			padding-left: 35px;
+		}
+	}
+}

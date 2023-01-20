@@ -1,0 +1,12 @@
+.ct-order-review,
+.sticky-summary .entry-summary,
+.sticky-gallery .woocommerce-product-gallery {
+	@include media-breakpoint-up(lg) {
+		align-self: flex-start;
+		position: sticky;
+		top: calc(
+			50px + var(--admin-bar, 0px) + var(--header-sticky-height, 0px) *
+				(var(--sticky-shrink, 100) / 100)
+		);
+	}
+}

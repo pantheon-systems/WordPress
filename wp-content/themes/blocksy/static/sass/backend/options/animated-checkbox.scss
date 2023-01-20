@@ -1,0 +1,85 @@
+.ct-checkbox-container {
+	--checkMarkColor: #fff;
+	--background: rgba(179, 189, 201, 0.8);
+	--backgroundActive: var(--accentColor);
+
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 0;
+	transition: color 0.15s ease;
+
+	&:not(.activated) {
+		cursor: pointer;
+
+		&:hover {
+			color: #0e8ecc;
+
+			.ct-checkbox:not(.active) {
+				--background: var(--backgroundActive);
+			}
+		}
+	}
+
+	&.activated {
+		--checkMarkColor: rgba(104, 124, 147, 0.6);
+		--backgroundActive: rgba(179, 189, 201, 0.3);
+	}
+}
+
+
+.ct-checkbox {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 18px;
+	height: 18px;
+	flex: 0 0 18px;
+
+	&:before {
+		position: absolute;
+		z-index: 1;
+		content: '';
+		width: 18px;
+		height: 18px;
+		margin: auto;
+		border-radius: 100%;
+		box-shadow: inset 0px 0px 0px 2px var(--background);
+		transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	}
+
+	svg {
+		position: relative;
+		z-index: 2;
+	}
+
+	&.active {
+		&:before {
+			width: 22px;
+			height: 22px;
+			box-shadow: inset 0px 0px 0px 12px var(--backgroundActive);
+		}
+	}
+
+
+	// check mark
+	.check {
+		fill: none;
+		stroke: var(--checkMarkColor);
+		stroke-width: 2.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-miterlimit: 10;
+
+		stroke-dasharray: 15;
+		stroke-dashoffset: 16;
+		transition: stroke 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+					stroke-dashoffset 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	}
+
+	&.active .check {
+		stroke-dashoffset: 0;	
+	}
+}

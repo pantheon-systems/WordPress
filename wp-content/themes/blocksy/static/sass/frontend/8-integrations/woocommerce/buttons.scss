@@ -1,0 +1,15 @@
+[class*="add_to_cart_button"].loading {	
+	position: relative;
+
+	&:after {
+		position: var(--loadingIndicatorPosition, static);
+		font-family: 'woo' !important;
+		content: '\e910' !important;
+		width: 13px;
+		height: 13px;
+		font-size: 13px;
+		line-height: 13px;
+		margin-left: 10px;
+		animation: spin 1.5s linear infinite;
+	}
+}

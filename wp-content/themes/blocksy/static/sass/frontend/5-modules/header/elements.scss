@@ -1,0 +1,76 @@
+#header [data-items] {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+
+	> * {
+		margin: var(--margin, 0 10px);
+	}
+}
+
+[data-column="start"] [data-items="primary"] > * {
+	&:first-child {
+		--margin: 0 10px 0 0;
+	}
+}
+
+[data-column="end"] [data-items="primary"] > * {
+	&:last-child {
+		--margin: 0 0 0 10px;
+	}
+}
+
+
+// commun styles
+.ct-cart-item,
+.ct-header-cta,
+.ct-header-text,
+// .ct-header-search,
+// .ct-header-trigger,
+.ct-header-account,
+.ct-header-wishlist {
+	display: flex;
+	align-items: var(--align-items, center);
+}
+
+
+.ct-cart-item,
+.ct-social-box,
+.ct-header-search,
+.ct-header-account,
+.ct-header-trigger,
+.ct-header-wishlist {
+	--linkInitialColor: var(--color);
+}
+
+
+.ct-cart-item,
+.ct-social-box a,
+.ct-header-search,
+.ct-header-account,
+.ct-header-trigger,
+.ct-header-wishlist {
+
+	// &:hover .ct-icon {
+	&:hover svg {
+		fill: var(--icon-hover-color, var(--paletteColor2));
+	}
+}
+
+
+.ct-header-search,
+.ct-header-trigger {
+	.ct-label {
+		transition: inherit;
+		color: var(--linkInitialColor);
+	}
+
+	&:hover .ct-label {
+		color: var(--linkHoverColor);
+	}
+}
+
+// unregistered item
+.ct-builder-no-item {
+	font-size: 13px;
+}

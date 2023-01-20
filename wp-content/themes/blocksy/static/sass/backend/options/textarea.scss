@@ -1,0 +1,28 @@
+.ct-option-textarea {
+	textarea {
+		width: 100%;
+		min-height: 80px;
+		padding: 4px 8px;
+		font-size: 14px;
+		border-radius: 3px;
+		border-color: var(--borderColor, #ddd);
+		transition: box-shadow 0.1s linear, border-color 0.1s linear;
+
+		&:hover {
+			border-color: #0e8ecc;
+		}
+
+		&:focus {
+			border-color: #0e8ecc;
+			box-shadow: 0 0 0 1px #0e8ecc;
+		}
+	}
+
+	&:not([data-resize]) textarea {
+		resize: none;
+	}
+
+	&[data-resize="resize-y"] textarea {
+		resize: vertical;
+	}
+}

@@ -1,0 +1,26 @@
+.wfc-cart-table .wfc-cart-form__cart-item .product-quantity {
+
+	.quantity {
+
+		&[data-type] {
+			--quantity-height: 30px;
+
+			input[type="number"] {
+				width: initial;
+				height: inherit;
+				text-align: center;
+				font-size: 13px;
+			}
+		}
+
+		&[data-type="type-1"] {
+			--quantity-width: 55px;
+			// --quantity-height: 30px;
+		}
+
+		&[data-type="type-2"] {
+			--quantity-width: 70px;
+			// --quantity-height: 30px;
+		}
+	}
+}

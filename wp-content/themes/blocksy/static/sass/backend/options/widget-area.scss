@@ -1,0 +1,65 @@
+.ct-option-widget-area {
+	min-height: 150px;
+
+	> .customize-pane-child {
+		display: flex !important;
+		flex-direction: column;
+		position: relative !important;
+		padding: 0 !important;
+		margin-top: 25px !important;
+		border-bottom: none !important;
+		overflow: initial !important;
+
+		.customize-control {
+			--ui-padding: 0 8px;
+		}
+
+		.customize-control-sidebar_widgets {
+			order: 100;
+		}
+	}
+
+	// loading block widget screen
+	&.ct-loading {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+
+// widgets top
+.customize-control-widget_form .widget-top {
+	.widget-title h3 {
+		padding: 13px 15px;
+	}
+
+	.widget-action {
+		padding: 8px;
+	}
+
+	.widget-reorder-nav span {
+		height: 39px;
+
+		&:before {
+			line-height: 39px;
+		}
+	}
+}
+
+
+// adjust Stackable UI in customizer widgets
+.customizer-panel-content {
+	.ugb-panel-tabs {
+		top: -1px !important;
+	}
+
+	.ugb-toggle-panel-body.is-opened .components-panel__body-title {
+		top: 80px !important;
+	}
+
+	.stk-navigation-view__wrapper {
+		width: 320px !important;
+		bottom: 0px !important;
+	}
+}

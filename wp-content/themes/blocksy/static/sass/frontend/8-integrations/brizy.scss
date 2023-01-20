@@ -1,0 +1,61 @@
+.entry-content {
+	> #brz-ed-root,
+	> .brz-root__container {
+		--default-editor: var(--false);
+	}
+}
+
+.brz-section--boxed {
+	--brz-section-container-width: var(--block-width, var(--container-width));
+	--brz-section-container-max-width: var(--block-max-width, var(--normal-container-max-width));
+}
+
+// menu and mega menu
+.brz-menu {
+	--listItemSpacing: 0;
+}
+
+.sub-menu > .menu-item .brz-reset-all {
+	pointer-events: inherit;
+}
+
+// popups
+.brz .brz-popup2 {
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.brz .brz-root__container-after {
+	margin-bottom: 0;
+}
+
+// builder options
+.brz-ed {
+	div.brz-ed-wrap-block-wrap--first {
+		height: 500px;
+	}
+
+	// input option
+	.brz-input[class*="brz-ed-control"] {
+		border: none !important;
+		border-radius: 4px !important;
+	}
+
+	.brz-input[class*="brz-ed-control__input"],
+	.brz-input[class*="brz-ed-control__input"]:focus {
+		background-color: #383e48;
+	}
+}
+
+// first section controls
+#brz-ed-page__blocks > .brz-ed-wrap-block-item:first-child {
+
+	.brz-ed-collapsible--section {
+		top: calc(var(--header-height) * var(--has-transparent-header, 0));
+	}
+}
+
+// popup with brizy content
+[data-popup-animation]:not(.active) .brz-reset-all {
+	pointer-events: none;
+}

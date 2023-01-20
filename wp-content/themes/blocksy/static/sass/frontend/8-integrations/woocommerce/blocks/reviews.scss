@@ -1,0 +1,20 @@
+.wc-block-review-list-item__rating__stars {
+	font-family: 'star' !important;
+}
+
+.wc-block-review-list {
+	margin-top: 0 !important;
+	padding-left: 0;
+
+	li {
+		margin-bottom: 48px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	+ .wc-block-load-more {
+		margin-top: 30px;
+	}
+}

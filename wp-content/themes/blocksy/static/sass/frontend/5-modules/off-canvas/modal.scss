@@ -1,0 +1,44 @@
+// modal animations
+[data-panel*='in'] [data-behaviour='modal'].active,
+[data-panel*='out'] [data-behaviour='modal'] {
+	.ct-panel-content {
+		animation-duration: 0.3s;
+		animation-fill-mode: both;
+	}
+}
+
+[data-panel*='in'] [data-behaviour='modal'].active {
+	opacity: 1;
+	visibility: visible;
+
+	.ct-panel-content {
+		animation-name: move-in;
+	}
+}
+
+[data-panel*='out'] [data-behaviour='modal'] {
+	.ct-panel-content {
+		animation-name: move-out;
+	}
+}
+
+// move keyframes
+@keyframes move-in {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, -40px, 0);
+	}
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes move-out {
+	0% {
+		transform: translate3d(0, 0, 0);
+	}
+	100% {
+		transform: translate3d(0, 40px, 0);
+	}
+}

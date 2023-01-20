@@ -1,0 +1,38 @@
+.ct-responsive-controls {
+	display: flex;
+	align-items: center;
+	margin: 0;
+
+	li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		color: var(--color);
+
+		&:not(:last-child) {
+			margin-inline-end: 18px;
+		}
+
+		&.active {
+			--color: var(--accentColor);
+		}
+
+		&:not(.active) {
+			--color: #CFD1D2;
+			
+			&:hover {
+				--color: #a5abaf;
+			}
+		}
+
+		// // spacing
+		// &.ct-desktop {
+		// 	margin-inline-end: 18px;
+		// }
+
+		// &.ct-tablet {
+		// 	margin-inline-end: 17px;
+		// }
+	}
+}

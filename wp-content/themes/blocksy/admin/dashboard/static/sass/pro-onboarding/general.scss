@@ -1,0 +1,35 @@
+.dashboard-navigation .ct-pro-tab a {
+	font-weight: 600;
+
+	&:not(:hover):not([aria-current="page"]) {
+		background: rgba(255, 255, 255, 0.6);
+		box-shadow: inset 0 -5px 5px rgba(0, 0, 0, 0.01);
+	}
+}
+
+.ct-cta-container {
+	svg {
+		margin-bottom: 20px;
+	}
+
+	h2 {
+		font-weight: 700;
+	}
+}
+
+.ct-cta-container-small {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 4px;
+	padding: 15px 15px 15px 20px;
+	margin-bottom: 50px;
+	background: rgba(245, 247, 249, 0.6);
+
+	h2 {
+		margin: 0;
+		font-size: 14px;
+		font-weight: 800;
+		// color: #fff !important;
+	}
+}

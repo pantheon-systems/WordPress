@@ -1,0 +1,57 @@
+.ct-option-spacing {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 75px;
+	grid-column-gap: 4px;
+
+	> span {
+
+		input {
+			text-align: center;
+			position: relative;
+
+			&.inactive {
+				color: rgba(50, 55, 60, 0.5);
+				pointer-events: none;
+				background: rgba(255, 255, 255, 0.8);
+			}
+
+			&:focus {
+				+ small {
+					color: rgba(85, 93, 102, 0.8);
+				}
+			}
+		}
+
+		small {
+			display: block;
+			margin-top: 5px;
+			font-size: 9px;
+			font-weight: 500;
+			line-height: normal;
+			text-align: center;
+			text-transform: uppercase;
+			color: rgba(85, 93, 102, 0.5);
+			overflow-wrap: anywhere;
+		}
+	}
+
+	.ct-spacing-controls {
+
+		a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100%;
+			cursor: pointer;
+			color: #555d66;
+
+			&:hover {
+				color: var(--accentColor);
+			}
+
+			svg {
+				fill: currentColor;
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+// products price
+.price {
+	--fontWeight: 600;
+	color: var(--color);
+}
+
+.sale-price {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	column-gap: 5px;
+
+	del {
+		order: 2;
+		font-size: 80%;
+	}
+}
+
+
+// clear
+.clear {
+	clear: both;
+}

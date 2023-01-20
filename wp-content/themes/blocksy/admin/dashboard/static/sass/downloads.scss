@@ -1,0 +1,40 @@
+#ct-dashboard h2.ct-downloads-heading {
+	margin-top: 50px;
+}
+
+.ct-downloads {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-column-gap: 35px;
+	margin: 40px 0 0 0;
+
+	li {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-decoration: none;
+		padding: 40px;
+		margin-bottom: 0;
+		background: #fff;
+		border-radius: 3px;
+		box-shadow: 0 20px 30px rgba(143, 163, 184, 0.15);
+		transition: all 0.25s ease;
+	}
+
+	h3, p, svg {
+		transition: all 0.2s ease;
+	}
+
+	svg {
+		fill: #3297d3;
+	}
+
+	p {
+		color: #687c93;
+	}
+
+
+	.ct-button {
+		margin-top: 20px;
+	}
+}

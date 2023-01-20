@@ -1,0 +1,131 @@
+.entry-meta {
+	--items-spacing: 9px;
+
+	li {
+		display: inline-block;
+
+		&:not(:last-of-type) {
+			margin-inline-end: var(--items-spacing);
+		}
+
+		&:after {
+			margin-inline-start: var(--items-spacing);
+		}
+
+		svg,
+		&:after,
+		[class*='ct-image-container'] {
+			position: relative;
+			top: -0.1em;
+			vertical-align: var(--vertical-align, middle);
+		}
+
+		[class*='ct-image-container'] {
+			border-radius: 100%;
+			margin-inline-end: 10px;
+
+			+ svg {
+				display: none;
+			}
+		}
+
+		svg {
+			fill: currentColor;
+			margin-inline-end: 7px;
+		}
+
+		> span {
+			margin-inline-end: 5px;
+		}
+	}
+
+	// meta style
+	&[data-type*='none'] li:not(:last-of-type) {
+		--items-spacing: 20px;
+	}
+
+	&[data-type*='slash'] li:not(:last-of-type) {
+		&:after {
+			content: '/';
+			--vertical-align: baseline;
+		}
+	}
+
+	&[data-type*='line'] li:not(:last-of-type) {
+		&:after {
+			content: '-';
+		}
+	}
+
+	&[data-type*='circle'] li:not(:last-of-type) {
+		&:after {
+			content: '●';
+			font-size: 0.35em;
+		}
+	}
+
+	&[data-type*='icons'] svg {
+		width: 13px;
+		height: 13px;
+	}
+
+	// categories type
+	[data-type='pill'],
+	[data-type='underline'] {
+		a {
+			display: inline-flex;
+			align-items: center;
+			margin-top: 2px;
+			margin-bottom: 2px;
+		}
+	}
+
+	[data-type='pill'] a {
+		min-height: 25px;
+		padding: 0 8px;
+		border-radius: 3px;
+		background: var(--buttonInitialColor);
+
+		--linkInitialColor: var(--buttonTextInitialColor);
+		--linkHoverColor: var(--buttonTextHoverColor);
+
+		&:not(:last-of-type) {
+			margin-inline-end: 4px;
+		}
+
+		&:hover {
+			background: var(--buttonHoverColor);
+		}
+	}
+
+	[data-type='underline'] a {
+		position: relative;
+
+		&:before {
+			position: absolute;
+			bottom: -0.1em;
+			content: '';
+			width: 100%;
+			height: 1px;
+			opacity: 0.5;
+			background: currentColor;
+			transform: opacity 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+		}
+
+		&:hover {
+			&:before {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+// dynamic layer
+.ct-dynamic-data {
+	color: var(--color);
+	--linkInitialColor: var(--color);
+	
+	> span {
+		margin-inline-end: 5px;
+	}
+}

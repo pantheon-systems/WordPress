@@ -1,0 +1,32 @@
+[class*="tag_cloud"] {
+	.tagcloud {
+		display: flex;
+		flex-wrap: wrap;
+		margin: -8px -4px 0 -4px;
+
+		a {
+			display: flex;
+			align-items: center;
+			height: 36px;
+			font-size: 14px !important;
+			line-height: 100%;
+			padding: 0 12px;
+			margin: 8px 4px 0 4px;
+			border-radius: 3px;
+			border: 1px solid #d7dee5;
+			transition: color 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+						background 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+						border-color 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+			&:hover {
+				color: #fff;
+				border-color: var(--paletteColor1);
+				background: var(--paletteColor1);
+			}
+
+			span {
+				margin-left: 0.3em;
+			}
+		}
+	}
+}

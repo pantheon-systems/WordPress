@@ -1,0 +1,15 @@
+[data-column*='copyright'] {
+	display: flex;
+	flex-direction: column;
+	justify-content: var(--vertical-alignment);
+	text-align: var(--horizontal-alignment);
+}
+
+.ct-footer-copyright {
+	color: var(--color);
+	--content-spacing: 0;
+
+	> *:not(:first-child) {
+		margin-top: 0.5em;
+	}
+}

@@ -1,0 +1,35 @@
+.ct-dark-mode {
+
+	#customize-controls {
+
+		.control-section {
+			&:hover > .accordion-section-title {
+				color: lighten($accent, 7%);
+				background-color: $background_light;
+
+				&:after {
+					color: inherit;
+				}
+			}
+
+			.accordion-section-title {
+				&:hover .menu-in-location {
+					color: inherit;
+				}
+			}
+		}
+
+		.panel-meta.customize-info .accordion-section-title {
+			&:hover {
+				color: $color_background_light;
+				background: $background_light;
+			}
+		}
+	}
+}
+
+.wp-customizer .ct-dark-mode {
+	.control-section-nav_menu .menu-location-settings {
+		border-top-color: $border;
+	}
+}

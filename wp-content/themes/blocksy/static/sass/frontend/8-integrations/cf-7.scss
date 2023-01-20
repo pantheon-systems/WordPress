@@ -1,0 +1,49 @@
+.wpcf7 {
+	p {
+		&:after {
+			content: "";
+			clear: both;
+			display: table;
+		}
+
+		&:last-of-type {
+			--content-spacing: 0;
+		}
+	}
+
+	label {
+		&:not(.wpcf7-form-control-wrap) {
+			display: block;
+			font-size: 15px;
+			font-weight: 600;
+		}
+	}
+
+	.wpcf7-submit {
+		float: left;
+
+		+ .ajax-loader {
+			float: left;
+			margin-left: 20px;
+		}
+	}
+
+	.wpcf7-not-valid-tip {
+		font-size: 0.9em;
+		font-style: italic;
+		margin-top: 5px;
+	}
+
+	.wpcf7-response-output {
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: 0;
+		font-style: italic;
+	}
+
+	.wpcf7-list-item {
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+}

@@ -1,0 +1,43 @@
+// body,
+// .ct-panel,
+// .ct-footer,
+// [data-row],
+// [data-row*="boxed"] > div,
+// .ct-floating-bar,
+// .ct-account-form,
+// .ct-trending-block,
+// .ct-panel > section,
+// .footer-widgets-area,
+// .ct-comments-container,
+// [data-block-container],
+// .ct-shortcuts-container,
+// .ct-popup-inner > article,
+// [data-popup-backdrop="yes"],
+// .ct-related-posts-container,
+// .ct-quick-view-card > section,
+// .hero-section[data-type='type-2'],
+// [class*="ct-container"] > article,
+// [class*='ct-mega-menu'] > .sub-menu,
+// [class*="tutor-course"] .tutor-col-8,
+
+
+// [data-cards="boxed"] .entry-card,
+// [data-cards="cover"] .entry-card,
+// [data-cards="cover"] .entry-card .ct-image-container:after {
+// 	background-color: var(--has-background, var(--background-color));
+// 	background-image: var(--has-background, var(--overlay-color, none), var(--background-image));
+// 	background-size: var(--has-background, var(--background-size));
+// 	background-repeat: var(--has-background, var(--background-repeat));
+// 	background-position: var(--has-background, var(--background-position));
+// 	background-attachment: var(--has-background, var(--background-attachment));
+
+// 	--overlay-color: linear-gradient(var(--overlay), var(--overlay));
+// }
+
+// apply background to site-main when sticky footer is enabled
+[data-footer*='reveal'] {
+	#main-container,
+	.site-main {
+		background: inherit;
+	}
+}

@@ -1,0 +1,39 @@
+.hero-section[data-type='type-2'] {
+	position: relative;
+	z-index: 1;
+	padding-top: calc(var(--has-transparent-header) * var(--header-height));
+
+	> [class*='ct-container'] {
+		display: flex;
+		flex-direction: column;
+		justify-content: var(--vertical-alignment, center);
+		text-align: var(--alignment, center);
+		position: relative;
+		z-index: 2;
+		padding: var(--container-padding, 50px 0);
+		min-height: var(--min-height, 250px);
+	}
+
+	> figure {
+		position: absolute;
+		overflow: hidden;
+		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: inherit;
+
+		.ct-image-container {
+			height: 100%;
+			vertical-align: top;
+		}
+	}
+
+	.ct-title-label {
+		display: block;
+		font-size: 12px;
+		text-transform: uppercase;
+		margin-bottom: 0.5em;
+	}
+}

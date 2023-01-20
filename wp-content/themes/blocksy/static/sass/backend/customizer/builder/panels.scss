@@ -1,0 +1,75 @@
+.ct-panel-builder {
+	position: absolute;
+	z-index: 3;
+	left: 0;
+	width: 100%;
+	// right: 0;
+	bottom: -#{$panel-height};
+	// height: $panel-height;
+	background: #f0f0f1;
+	box-sizing: border-box;
+	transition: left 0.2s ease,
+				bottom 0.2s ease,
+				opacity 0.2s ease;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	@media screen and (max-width: 600px) {
+		display: none !important;
+	}
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		position: relative;
+	}
+}
+
+@media screen and (min-width: 601px) {
+	.wp-full-overlay {
+
+		&.ct-show-builder {
+			#customize-preview {
+				bottom: $panel-height;
+			}
+
+			.ct-panel-builder {
+				bottom: 0;
+			}
+
+			// collapsed builder
+			&.ct-builder-collapsed {
+				#customize-preview {
+					bottom: $panel-bar-height;
+				}
+
+				.placements-builder {
+					margin-bottom: -#{$panel-placement-height};
+				}
+			}
+		}
+	}
+}
+
+// block widgets
+.outer-section-open {
+	.wp-full-overlay.expanded {
+
+		.wp-full-overlay-main,
+		.ct-panel-builder {
+			left: 350px;
+		}
+
+		.ct-panel-builder {
+			opacity: 0.4;
+		}
+	}
+}
+
+
+// adding widgets
+.adding-widget .ct-panel-builder {
+	opacity: 0.4;
+	left: 300px;
+}

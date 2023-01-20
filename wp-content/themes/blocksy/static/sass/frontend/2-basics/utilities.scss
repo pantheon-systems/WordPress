@@ -1,0 +1,95 @@
+@include media-breakpoint-down(sm) {
+	.ct-hidden-sm {
+		display: none !important;
+	}
+}
+
+@include media-breakpoint-only(md) {
+	.ct-hidden-md {
+		display: none !important;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	.ct-hidden-lg {
+		display: none !important;
+	}
+}
+
+// Hidden elements
+.hidden, [hidden] {
+	display: none;
+}
+
+// align center
+.aligncenter {
+	clear: both;
+	display: block;
+	text-align: center;
+}
+
+// hidden elements
+.sticky,
+.wp-caption,
+.bypostauthor,
+.wp-caption-text,
+.gallery-caption,
+.screen-reader-text {
+	background: transparent;
+}
+
+// disable transitions
+// .ct-disable-transitions,
+// .ct-disable-transitions *:not(.entry-card) {
+// 	transition: none !important;
+// }
+
+// spin animation
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+// shake animation
+@keyframes shake {
+	10%,
+	90% {
+		transform: translate3d(-4px, 0, 0);
+	}
+	20%,
+	80% {
+		transform: translate3d(5px, 0, 0);
+	}
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-7px, 0, 0);
+	}
+	40%,
+	60% {
+		transform: translate3d(7px, 0, 0);
+	}
+}
+
+// bounce animation
+@keyframes bounce-in {
+	0% {
+		transform: scale(0, 0);
+	}
+	20% {
+		transform: scale(1.4, 1.4);
+	}
+	50% {
+		transform: scale(0.8, 0.8);
+	}
+	85% {
+		transform: scale(1.1, 1.1);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
+}

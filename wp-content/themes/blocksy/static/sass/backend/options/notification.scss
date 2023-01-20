@@ -1,0 +1,21 @@
+.ct-notification {
+	font-size: 12px;
+	font-style: italic;
+	color: rgba(85, 93, 102, 0.8);
+
+	&[data-type*="background"] {
+		line-height: 1.5;
+		color: #3c434a;
+		padding: 0.7em 1em;
+	}
+
+	&[data-type="background:yellow"] {
+		background: #fcf9e8;
+		border-left: 4px solid #dba617;
+	}
+
+	&[data-type="background:white"] {
+		background: #fff;
+		border-left: 4px solid var(--accentColor);
+	}
+}

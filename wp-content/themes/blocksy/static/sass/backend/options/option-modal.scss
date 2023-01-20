@@ -1,0 +1,47 @@
+.ct-option-modal {
+	position: fixed;
+	z-index: 100000;
+	width: var(--option-modal-width, 295px);
+	background: #fff;
+	border-radius: 6px;
+	box-sizing: border-box;
+	box-shadow: var(--option-modal-shadown, 0 15px 15px rgba(0, 0, 0, 0.08));
+	right: var(--modal-x-offset);
+
+	&:before {
+		position: absolute;
+		content: '';
+		left: var(--option-modal-arrow-position, calc(100% - 55px));
+		border-style: solid;
+	}
+
+	&[data-position='bottom'] {
+		top: calc(var(--modal-y-offset) + var(--modal-y-offset-plus, 13px));
+		transform-origin: center top;
+
+		&:before {
+			top: -7px;
+			border-width: 0 6px 7px 6px;
+			border-color: transparent transparent #ffffff transparent;
+		}
+	}
+
+	&[data-position='top'] {
+		bottom: calc(var(--modal-y-offset) + var(--modal-y-offset-plus, 13px));
+		transform-origin: center bottom;
+
+		&:before {
+			bottom: -7px;
+			border-width: 7px 6px 0 6px;
+			border-color: #ffffff transparent transparent transparent;
+		}
+	}
+}
+
+.wp-customizer .ct-option-modal {
+	z-index: 500000;
+}
+
+.block-editor-page:not(.widgets-php) .ct-option-modal {
+	--modal-x-offset: 12px !important;
+}

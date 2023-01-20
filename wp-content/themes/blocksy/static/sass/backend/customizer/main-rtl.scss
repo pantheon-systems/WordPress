@@ -1,0 +1,138 @@
+$customizer-width: 320px;
+
+body.rtl {
+
+	.wp-full-overlay.expanded,
+	#customize-header-actions .ct-revert,
+	.wp-full-overlay.collapsed .wp-full-overlay-sidebar {
+		margin-left: 0 !important;
+	}
+
+	.wp-full-overlay.expanded {
+		@media screen and (max-width: 1666px) {
+			margin-right: $customizer-width;
+		}
+
+		@media screen and (min-width: 1667px) {
+			margin-right: $customizer-width;
+		}
+	}
+
+	.wp-full-overlay.collapsed .wp-full-overlay-sidebar {
+		margin-right: -#{$customizer-width};
+	}
+
+	
+	// customizer controls
+	#customize-controls .control-section > h3.accordion-section-title {
+		border-right: none;
+
+		&:after {
+			right: initial;
+			left: 23px;
+		}
+	}
+
+	#customize-controls .control-section-child > h3 {
+		&:before {
+			border-left: none;
+			border-right: 1px solid;
+			margin-right: 0;
+			margin-left: 7px;
+		}
+	}
+
+
+	// revert button
+	#customize-header-actions .ct-revert {
+		margin-right: 33px;
+		border-right: none;
+		border-left: 1px solid #ddd;
+	}
+
+	// dark mode switch
+	.ct-dark-mode-switch {
+		left: initial;
+		right: 48px;
+	}
+
+	.ct-dark-mode {
+		#customize-controls {
+			border-left-color: #47484b;
+		}
+
+		&.expanded .wp-full-overlay-footer .devices {
+			box-shadow: 20px 0 10px -5px #38393c;
+
+			&:before {
+				left: initial;
+				right: -5px;
+			}
+		}
+
+		#customize-controls .wp-full-overlay-header .ct-revert,
+		#customize-controls .wp-full-overlay-header .customize-controls-close {
+			border-left-color: #47484b;
+		}
+
+		.ct-view-switch li.ct-builder-toggle {
+			border-right-color: #47484b !important;
+		}
+	}
+
+
+	// header builder
+	.ct-view-switch li {
+		border-right: none;
+		border-left: 1px solid #ddd;
+	}
+
+	.ct-available-items .ct-item-in-builder:after {
+		content: "\f341";
+	}
+
+	.ct-builder-toggle {
+		--ui-margin: 0 auto 0 0;
+		border-left: none !important;
+		border-right: 1px solid #ddd !important;
+
+		&:before {
+			margin-right: initial;
+			margin-left: 10px;
+		}
+	}
+
+	.ct-row-actions {
+		left: initial;
+		right: -2px;
+
+		&:before {
+			margin-right: initial;
+			margin-left: 7px;
+		}
+	}
+
+	.offcanvas-container {
+		margin: 0 0 0 20px;
+	}
+
+	.ct-btn-remove {
+		// margin-right: initial;
+		// margin-left: -12px;
+		right: initial;
+		left: 0px;
+	}
+
+	// footer builder
+	[data-builder='footer'] .builder-column:not(:last-child) {
+		border-right: none;
+		border-left: 1px dashed #ccc;
+
+		&:after {
+			right: initial;
+			left: -1px;
+		}
+	}
+}
+
+

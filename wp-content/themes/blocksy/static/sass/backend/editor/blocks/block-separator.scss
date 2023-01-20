@@ -1,0 +1,13 @@
+.wp-block-separator {
+	border: none;
+	color: var(--form-field-border-initial-color);
+
+	&:not(.is-style-wide):not(.is-style-dots) {
+		max-width: 100px;
+	}
+
+	&:not(.is-style-dots) {
+		height: 2px;
+		background-color: currentColor;
+	}
+}

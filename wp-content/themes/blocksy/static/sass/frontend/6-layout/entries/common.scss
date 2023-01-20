@@ -1,0 +1,6 @@
+[data-layout*='grid'] {
+	display: grid;
+	grid-template-columns: var(--grid-template-columns);
+	grid-column-gap: var(--grid-columns-gap, 30px);
+	grid-row-gap: var(--grid-columns-gap, 30px);
+}

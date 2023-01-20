@@ -1,0 +1,13 @@
+.post-edit-link {
+	display: flex;
+	align-items: center;
+	font-size: 15px;
+	margin-top: var(--content-spacing);
+	--linkInitialColor: var(--color);
+
+	&:before {
+		font-family: 'dashicons';
+		content: "\f464";
+		margin-inline-end: 5px;
+	}
+}

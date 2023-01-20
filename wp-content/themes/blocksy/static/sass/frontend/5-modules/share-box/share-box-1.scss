@@ -1,0 +1,21 @@
+.ct-share-box[data-type="type-1"] {
+
+	> div {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+		border: var(--border);
+		overflow: hidden;
+	}
+
+	a {
+		margin-right: -1px;
+		margin-bottom: -1px;
+		border-right: var(--border);
+		border-bottom: var(--border);
+	}
+
+	.ct-icon-container {
+		min-height: 50px;
+		padding: 10px 0;
+	}
+}

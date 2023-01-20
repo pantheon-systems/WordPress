@@ -1,0 +1,27 @@
+.ct-header-divider {
+	display: inline-flex;
+
+	&:before {
+		content: '';
+	}
+}
+
+#header .ct-header-divider {
+	align-items: center;
+	height: 100%;
+
+	&:before {
+		height: var(--divider-size, 100%);
+		border-right: var(--divider-style);
+	}
+}
+
+#offcanvas .ct-header-divider {
+	justify-content: var(--horizontal-alignment);
+	width: 100%;
+
+	&:before {
+		width: var(--divider-size, 100%);
+		border-bottom: var(--divider-style);
+	}
+}

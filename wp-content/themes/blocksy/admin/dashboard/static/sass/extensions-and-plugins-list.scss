@@ -1,0 +1,53 @@
+$extension-spacing: 25px;
+
+.ct-extensions-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-column-gap: 30px;
+	grid-row-gap: 30px;
+	margin: 0;
+
+	li {
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		border-radius: 3px;
+		border: 1px solid rgba(226, 230, 235, 0.7);
+		box-shadow: 0 2px 5px rgba(143, 163, 184, 0.12);
+	}
+}
+
+.ct-extension-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 30px 0 15px 0;
+	padding: 0 $extension-spacing;
+
+	svg {
+		opacity: 0.7;
+	}
+}
+
+.ct-extension-description {
+	font-size: 14px;
+	line-height: 1.7;
+	margin-bottom: 30px;
+	padding: 0 $extension-spacing;
+}
+
+.ct-extension-actions {
+	display: flex;
+	justify-content: space-between;
+	margin-top: auto;
+	padding: 20px #{$extension-spacing - 12px} 20px $extension-spacing;
+	border-top: 1px solid rgba(226, 230, 235, 0.5);
+	// background: rgba(235, 237, 241, 0.2);
+	background: rgba(245, 247, 249, 0.6);
+
+	[class*="ct-button"] {
+		--buttonHeight: 32px;
+		--buttonPadding: 12px;
+		min-width: 92px;
+	}
+}

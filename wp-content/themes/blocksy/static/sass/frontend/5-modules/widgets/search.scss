@@ -1,0 +1,78 @@
+form.search-form {
+	position: relative;
+
+	input {
+		position: relative;
+		padding-inline-end: calc(var(--search-button-size, var(--form-field-height, 40px)) + var(--search-input-additional-padding, 0px));
+
+		// hide chrome X button
+		&::-webkit-search-decoration,
+		&::-webkit-search-cancel-button,
+		&::-webkit-search-results-button,
+		&::-webkit-search-results-decoration {
+			-webkit-appearance: none;
+		}
+	}
+
+	button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: initial;
+		width: var(--search-button-size, var(--form-field-height, 40px));
+		min-height: var(--search-button-size, var(--form-field-height, 40px));
+		border: none; // For elementor global styles
+		box-shadow: none; // For elementor global styles
+		border-radius: var(--search-button-border-radius, 0px);
+		background: var(--search-button-background);
+		transition: background 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+		--buttonShadow: none;
+		--buttonTransform: none;
+
+		// button loader
+		[data-loader] {
+			opacity: 0;
+			visibility: hidden;
+			--loaderSize: 30px;
+			--loaderColor: rgba(44, 62, 80, 0.2);
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	button:hover,
+	input:focus + button {
+		border: none; // For elementor global styles
+		box-shadow: none; // For elementor global styles
+		background: var(--search-button-focus-background);
+
+		svg {
+			fill: var(--icon-focus-color, var(--color));
+		}
+	}
+
+	&.ct-has-dropdown {
+		input,
+		button {
+			z-index: 2;
+		}
+	}
+}
+
+// customizer helper
+.search-form {
+	&:not([data-live-results*='thumbs']) {
+		.ct-image-container {
+			display: none;
+		}
+	}
+
+	&:not([data-live-results*='product_price']) {
+		.price {
+			display: none;
+		}	
+	}
+}

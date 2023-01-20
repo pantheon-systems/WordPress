@@ -1,0 +1,101 @@
+.woocommerce-info, 
+.woocommerce-error, 
+.woocommerce-message,
+.woocommerce-thankyou-order-received {
+	display: flex;
+	position: relative;
+	font-size: 15px;
+	color: var(--color);
+	padding: 10px;
+	min-height: 65px;
+	clear: both;
+	border-radius: 5px;
+	background: var(--background-color);
+
+	// --listItemSpacing: 0;
+	--listItemSpacing: 0.3em;
+	--listStyleType: none;
+	--linkInitialColor: var(--color);
+
+	@include media-breakpoint-down (xs) {
+		align-items: flex-start;
+		flex-direction: column;
+		padding: 15px;
+	}
+
+	@include media-breakpoint-up (sm) {
+		align-items: center;
+		padding-inline-start: 55px;
+	}
+
+	@include media-breakpoint-down (md) {
+		margin-bottom: 30px;
+	}
+
+	@include media-breakpoint-up (lg) {
+		margin-bottom: 45px;
+	}
+
+	li {
+		width: 100%;
+	}
+
+	.button,
+	.showlogin,
+	.restore-item {
+		order: 2;
+		--buttonFontSize: 14px;
+		--buttonMinHeight: 45px;
+		--button-padding: 5px 20px;
+
+		@include media-breakpoint-down (xs) {
+			margin-top: 15px;
+		}
+
+		@include media-breakpoint-up (sm) {
+			margin-inline-start: auto;
+		}
+	}
+
+	&:before {
+		position: absolute;
+		width: 18px;
+		height: 18px;
+		font-family: 'woo';
+		content: '\e901';
+		font-size: 18px;
+		line-height: 18px;
+		opacity: 0.9;
+
+		@include media-breakpoint-down (xs) {
+			display: none;
+		}
+
+		@include media-breakpoint-up (sm) {
+			top: 23px;
+			left: 20px;
+		}
+	}
+
+	&:after {
+		display: table;
+		content: '';
+		clear: both;
+	}
+}
+
+
+ul.woocommerce-error {
+	flex-direction: column;
+	justify-content: center;
+
+	li {
+		display: flex;
+		align-items: center;
+		column-gap: 0.3em;
+
+		@include media-breakpoint-down (xs) {
+			flex-wrap: wrap;
+		}
+	}
+}

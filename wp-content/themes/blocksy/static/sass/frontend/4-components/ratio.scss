@@ -1,0 +1,33 @@
+[class*='ct-image-container'] {
+	display: inline-flex;
+	overflow: hidden;
+	-webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.ct-image-container {
+	position: relative;
+	width: 100%;
+
+	img,
+	video,
+	picture {
+		width: inherit;
+		border-radius: inherit;
+		object-fit: var(--object-fit, cover);
+		object-position: var(--object-position, 50% 50%);
+	}
+
+	picture {
+		display: inline-flex;
+	}
+
+	iframe {
+		height: auto;
+	}
+}
+
+.ct-image-container-static {
+	img {
+		aspect-ratio: 1/1;
+	}
+}

@@ -1,0 +1,29 @@
+[class*='ct-dynamic-count'] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	z-index: 1;
+	top: -9px;
+	right: -9px;
+	min-width: 16px;
+	cursor: pointer;
+	height: 16px;
+	padding: 0 3px;
+	font-size: 10px;
+	font-weight: 600;
+	font-style: normal;
+	border-radius: 10px;
+	color: var(--cartBadgeText, #fff);
+	background: var(--cartBadgeBackground, var(--paletteColor1));
+
+	&[data-count='0'] {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	a.ct-added [class*='ct-dynamic-count'] {
+		animation: 0.6s ease-in-out 0.12s normal both 1 bounce-in;
+	}
+}

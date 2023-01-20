@@ -1,0 +1,91 @@
+@import 'header';
+@import 'button';
+@import 'navigation';
+@import 'welcome-screen';
+@import 'downloads';
+@import 'system-status';
+@import 'changelog';
+@import 'support-container';
+@import 'extensions-and-plugins-list';
+
+@import 'pro-onboarding/main';
+
+:root {
+	--accentColor: #2271b1;
+}
+
+.toplevel_page_ct-dashboard,
+.appearance_page_ct-dashboard {
+	background: #fff;
+
+	#wpcontent {
+		padding-left: 0;
+	}
+}
+
+#ct-dashboard {
+	font-size: 15px;
+	color: #687c93;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		color: #3e5667;
+	}
+
+	> header {
+		text-align: center;
+		padding: 60px 30px 0 30px;
+		overflow: hidden;
+	}
+
+	> section {
+		max-width: 1200px;
+		// max-width: 1200px;
+		min-height: 400px;
+		margin: 0 auto;
+		position: relative;
+
+		> div {
+			width: 100%;
+			padding-top: 60px;
+			padding: 70px 30px;
+			box-sizing: border-box;
+		}
+	}
+
+	p {
+		font-size: 15px;
+		line-height: 1.6;
+		margin: 0;
+	}
+}
+
+.ct-loading {
+	content: '';
+	width: 18px;
+	height: 18px;
+	background: url('../img/spinner.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.ct-loading-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	span {
+		display: block;
+		width: 17px;
+		height: 17px;
+		margin-right: 8px;
+		opacity: 0.8;
+		background: url('../img/spinner.svg');
+		background-repeat: no-repeat;
+		background-size: 100%;
+	}
+}

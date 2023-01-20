@@ -1,0 +1,10 @@
+.ct-woo-columns-and-rows {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-column-gap: 23px;
+}
+
+[data-disabled-last] > *:last-child {
+	opacity: 0.5;
+	pointer-events: none;
+}

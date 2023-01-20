@@ -1,0 +1,19 @@
+.ct-inner-layer {
+
+	.ct-layer-controls {
+		height: 34px;
+
+		button {
+			flex: 0 0 33px;
+			width: 33px;
+		}
+
+		.ct-layer-label {
+			font-size: 11px;
+		}
+	}
+
+	.ct-layer-content > * {
+		--options-horizontal-spacing: 0 15px 17px 15px;
+	}
+}

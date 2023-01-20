@@ -1,0 +1,27 @@
+.blockUI.blockOverlay {
+	--overlay-loader-size: 16px;
+
+	&:before {
+		position: absolute;
+		font-family: 'woo';
+		content: var(--overlay-loader-icon, '\e910');
+		top: calc(50% - var(--overlay-loader-size) / 2);
+		left: calc(50% - var(--overlay-loader-size) / 2);
+		width: var(--overlay-loader-size);
+		height: var(--overlay-loader-size);
+		font-size: var(--overlay-loader-size);
+		line-height: var(--overlay-loader-size);
+		animation: spin 1.5s linear infinite;
+	}
+}
+
+// remove overlay in minicart
+.woocommerce-mini-cart {
+
+	.blockUI.blockOverlay {
+		--overlay-loader-icon: none;
+
+		// opacity: 0.85;
+		background-color: transparent;
+	}
+}

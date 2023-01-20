@@ -1,0 +1,107 @@
+.elementor-control-blocksy_stretch_section {
+	padding-bottom: 30px;
+
+	&:after {
+		bottom: 15px !important;
+	}
+}
+
+.elementor-panel #elementor-panel-header {
+	background-color: #495157;
+}
+
+.elementor-panel
+	.elementor-panel-navigation
+	.elementor-panel-navigation-tab.elementor-active {
+	border-bottom-color: #2e76f6;
+}
+
+.elementor-panel .elementor-element {
+	transition: background 0.15s ease, box-shadow 0.15s ease;
+
+	.icon,
+	.title {
+		transition: color 0.15s ease;
+	}
+
+	&:hover {
+		background: #2e76f6;
+
+		.icon,
+		.title {
+			color: #fff;
+		}
+	}
+}
+
+.elementor-revision-item__wrapper .elementor-revision-item__tools-current {
+	color: #fff;
+}
+
+.elementor-panel a {
+	color: #a4afb7;
+
+	&:hover {
+		color: #2e76f6;
+	}
+}
+
+.elementor-button.elementor-button-success:not([disabled]) {
+	background-color: #0089ff;
+}
+
+.elementor-control-type-switcher {
+	.elementor-switch {
+		width: 37px;
+	}
+
+	.elementor-switch-handle {
+		top: 3px;
+		left: 3px;
+		width: 14px;
+		height: 14px;
+		box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15) !important;
+	}
+
+	.elementor-switch-label {
+		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08),
+			inset 0 0 2px rgba(0, 0, 0, 0.08);
+	}
+
+	.elementor-switch-input:checked {
+		~ .elementor-switch-label {
+			background: #2181f7;
+		}
+
+		~ .elementor-switch-handle {
+			left: 20px;
+		}
+	}
+
+	.elementor-switch-label {
+		&:before,
+		&:after {
+			display: none;
+			line-height: 22px;
+		}
+	}
+}
+
+.elementor-control-responsive-switchers .elementor-responsive-switcher {
+	transition: background-color 0.3s;
+
+	&:hover {
+		color: #fff;
+		border: none;
+	}
+}
+
+#elementor-mode-switcher {
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+#elementor-mode-switcher:hover,
+body.elementor-editor-preview #elementor-mode-switcher {
+	background-color: #2e76f6;
+}

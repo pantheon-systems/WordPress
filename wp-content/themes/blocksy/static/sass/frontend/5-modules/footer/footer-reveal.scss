@@ -1,0 +1,17 @@
+[data-footer*='reveal'] {
+	.site-main {
+		box-shadow: var(--footer-box-shadow);
+	}
+
+	.ct-footer {
+		position: var(--position);
+		bottom: var(--frame-size, 0px);
+	}
+
+
+	.site-main,
+	.ct-trending-block,
+	#main-container > [data-block] {
+		z-index: 1;
+	}
+}

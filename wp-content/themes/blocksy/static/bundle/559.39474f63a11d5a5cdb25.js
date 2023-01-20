@@ -1,0 +1,2 @@
+"use strict";(globalThis.blocksyJsonP=globalThis.blocksyJsonP||[]).push([[559],{559:function(t,n,e){e.r(n),e.d(n,{mount:function(){return i}});const i=function(t){if(!t.nextElementSibling)return;const n=t.nextElementSibling;let e=t.getBoundingClientRect().left>innerWidth/2?"left":"right";t.getBoundingClientRect().left+n.getBoundingClientRect().width>innerWidth&&(e="left"),t.getBoundingClientRect().left-n.getBoundingClientRect().width<0&&(e="right"),n.dataset.placement=e}}}]);
+//# sourceMappingURL=559.39474f63a11d5a5cdb25.js.map

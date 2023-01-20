@@ -1,0 +1,38 @@
+.woocommerce-shipping-totals {
+	--listItemSpacing: 0.8em;
+	--content-spacing: 1em;
+
+	form button {
+		width: 100%;
+	}
+
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+.woocommerce-shipping-methods {
+
+	li {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row-reverse;
+
+		input[type="radio"] {
+			--top: 0.2em;
+			--form-selection-control-margin: 0 0 0 0.7em;
+		}
+
+		label {
+			flex: 1;
+
+			@include media-breakpoint-down (sm) {
+				hyphens: auto;
+			}
+
+			~ * {
+				width: 100%;
+			}
+		}
+	}
+}

@@ -1,0 +1,42 @@
+.mp-panel-checkout,
+.mp-panel-custom-checkout {
+	padding: 0 !important;
+	background: transparent !important;
+}
+
+
+.mp-panel-custom-checkout {
+
+	.mp-row-checkout .mp-col-md-6 {
+		&:nth-child(odd) {
+			.mp-ticket-payments {
+				padding-inline-start: 0;
+			}
+		}
+
+		&:nth-child(even) {
+			.mp-ticket-payments {
+				padding-inline-end: 0;
+			}
+		}
+	}
+
+	.mp-img-ticket {
+		max-height: 1.618em;
+	}
+
+	.mp-ticket-name {
+		font-size: 12px !important;
+	}
+}
+
+
+// checkboxes
+.mp-ticket-payments input[type="radio"] {
+	border: var(--form-selection-control-border-width, var(--form-field-border-width, 1px)) solid var(--form-selection-control-initial-color) !important;
+
+	&:checked {
+		border-color: var(--form-selection-control-accent-color) !important;
+		background-color: var(--form-selection-control-accent-color) !important;
+	}
+}

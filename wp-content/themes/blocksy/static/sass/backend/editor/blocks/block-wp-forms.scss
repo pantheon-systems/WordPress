@@ -1,0 +1,36 @@
+.wpforms-submit {
+	border: none;
+}
+
+.wpforms-field input {
+	height: var(--form-field-height);
+	border-radius: initial;
+	padding: 0 12px;
+}
+
+.ct-wpforms-inline-fields {
+	
+	form fieldset,
+	.wpforms-field-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--wpforms-inline-fields-gap, 20px);
+
+		@media (max-width: 370px) {
+			flex-direction: column;
+		}
+	}
+
+	.wpforms-field-container {
+		flex: 1;
+
+		.wpforms-field {
+			flex: 1;
+			padding: 0;
+		}
+	}
+
+	.wpforms-submit-container {
+		padding: 0;
+	}
+}

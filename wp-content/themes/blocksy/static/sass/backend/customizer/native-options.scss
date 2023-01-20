@@ -1,0 +1,82 @@
+$margin: 22px;
+
+#customize-controls {
+
+	.customize-section-description-container {
+		margin-bottom: $margin;
+	}
+
+	.customize-control,
+	.customize-section-description {
+		padding: var(--ui-padding, 0 14px) !important;
+		box-sizing: border-box;
+	}
+
+	// menus section
+	.control-panel-nav_menus {
+		.customize-control-title {
+			margin-top: $margin;
+			padding: 0 26px;
+
+			+ li {
+				border-top: none;
+			}
+		}
+	}
+
+	.control-section-nav_menu {
+		.customize-control-nav_menu_name {
+			margin-top: $margin;
+		}
+	}
+
+
+	// widgets section
+	.control-panel-widgets {
+		.panel-meta {
+			margin-bottom: $margin !important;
+		}
+
+		.control-section-sidebar {
+			&:nth-child(2) {
+				margin-top: $margin;
+				border-top: none !important;
+			}
+
+			&[id*="widgets-ct-footer-sidebar"] {
+				display: none !important;
+			}
+		}
+	}
+
+	.control-section-sidebar {
+		.customize-section-title {
+			margin-bottom: $margin;
+		}
+
+		.customize-control {
+			--ui-padding: 0 8px;
+		}
+
+		.customize-section-description {
+			--ui-padding: 0 8px;
+			margin-bottom: 15px;
+		}
+	}
+
+
+	// custom css
+	#sub-accordion-section-custom_css {
+		.description {
+			--ui-padding: 12px 15px;
+		}
+
+		.customize-control-code_editor {
+			--ui-padding: 0;
+
+			.CodeMirror-lint-markers {
+				width: 19px;
+			}
+		}
+	}
+}

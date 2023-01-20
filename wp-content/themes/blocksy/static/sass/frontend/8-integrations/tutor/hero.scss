@@ -1,0 +1,42 @@
+[data-prefix="courses_single"] {
+
+	.tutor-course-details-title {
+		max-width: initial;
+		color: var(--heading-color, var(--heading-1-color, var(--headings-color)));
+	}
+
+	.tutor-ratings {
+		display: inline-flex;
+	}
+
+	.tutor-ratings-stars {
+		color: var(--tutor-ratings-stars-color, #ED9700);
+	}
+
+	.tutor-course-details-top .tutor-row {
+		align-items: center;
+	}
+
+	.tutor-meta > * a {
+		color: inherit;
+	}
+
+	.tutor-meta > * a,
+	.tutor-course-details-actions > a {
+		&:hover {
+			color: var(--linkHoverColor);
+		}
+	}
+
+	.tutor-meta > * a,
+	.tutor-ratings-average {
+		font-weight: var(--fontWeight);
+	}
+
+	.tutor-meta > *,
+	.tutor-ratings-count,
+	.tutor-ratings-average,
+	.tutor-course-details-actions > a {
+		color: var(--color);
+	}
+}

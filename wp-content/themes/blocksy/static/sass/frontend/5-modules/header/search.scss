@@ -1,0 +1,65 @@
+#search-modal {
+	--vertical-alignment: initial;
+
+	// input field
+	input {
+		--has-classic-forms: var(--false);
+		--form-field-border-width: 0 0 1px 0;
+		--form-field-border-initial-color: rgba(255, 255, 255, 0.2);
+		--search-input-additional-padding: 10px;
+
+		@include media-breakpoint-down(sm) {
+			--form-font-size: 22px;
+			--form-field-height: 70px;
+			--form-field-padding: 0px;
+			margin-bottom: 25px;
+		}
+
+		@include media-breakpoint-up(md) {
+			--form-font-size: 35px;
+			--form-field-height: 90px;
+			--form-field-padding: 0 50px 0 0;
+			margin-bottom: 35px;
+		}
+	}
+
+
+	form {
+		width: 100%;
+		margin: auto;
+		max-width: var(--max-width, 800px);
+
+		@include media-breakpoint-down(md) {
+			--max-width: 90%;
+			--search-button-size: 40px;
+		}
+
+		@include media-breakpoint-up(md) {
+			--search-button-size: 48px;
+		}
+
+		// submit button
+		button {
+			--icon-color: rgba(255, 255, 255, 0.7);
+			--icon-focus-color: #fff;
+			--icon-size: calc(100% / 3);
+			--search-button-border-radius: 100%;
+			--search-button-background: var(--paletteColor1);
+			--search-button-focus-background: var(--paletteColor1);
+
+			@include media-breakpoint-down(sm) {
+				// --search-button-size: 40px;
+				top: calc(35px - 20px);
+			}
+
+			@include media-breakpoint-up(md) {
+				// --search-button-size: 48px;
+				top: calc(45px - 24px);
+			}
+
+			[data-loader] {
+				--loaderColor: #fff;
+			}
+		}
+	}
+}

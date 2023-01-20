@@ -1,0 +1,58 @@
+[class*="ct-toggle"] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: var(--toggle-button-position, relative);
+	z-index: var(--toggle-button-z-index, initial);
+	cursor: pointer;
+	appearance: none;
+	width: var(--toggle-button-size);
+	height: var(--toggle-button-size);
+	margin-inline-start: var(--toggle-button-margin-start, auto);
+	margin-inline-end: var(--toggle-button-margin-end, initial);
+	transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+	padding: var(--toggle-button-padding, 0px) !important;
+	box-shadow: var(--toggle-button-shadow, none) !important;
+	border-radius: var(--toggle-button-radius, 0) !important;
+	border-width: var(--toggle-button-border-width, 0px) !important;
+	border-style: var(--toggle-button-border-style, solid) !important;
+	border-color: var(--toggle-button-border-color, transparent) !important;
+	background: var(--toggle-button-background, transparent) !important;
+
+	svg {
+		transform: var(--toggle-icon-transform);
+		--icon-transition: transform 0.15s ease-out, fill 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	}
+}
+
+
+[class*="ct-toggle-close"] {
+	top: var(--toggle-button-top, initial);
+	right: var(--toggle-button-inset-end, 0);
+
+	--icon-size: 12px;
+	--icon-color: rgba(255, 255, 255, 0.7);
+
+	&:hover {
+		--toggle-icon-transform: rotate(90deg);
+	}
+
+	&:not([data-type="type-1"]) {
+		--toggle-button-size: 33px;
+		--toggle-button-radius: 5px;
+	}
+
+	&[data-type="type-1"] {
+		--outline-offset: 5px;
+	}
+
+	&[data-type="type-2"] {
+		--toggle-button-border-width: 1px;
+		--toggle-button-border-color: rgba(0, 0, 0, 0.5);
+	}
+
+	&[data-type="type-3"] {
+		--toggle-button-background: rgba(0, 0, 0, 0.5);
+	}
+}

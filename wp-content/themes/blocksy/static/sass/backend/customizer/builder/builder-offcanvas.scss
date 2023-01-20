@@ -1,0 +1,41 @@
+.placements-builder {
+	&.ct-mobile {
+		display: flex;
+
+		> .horizontal-rows {
+			flex: 1;
+		}
+	}
+}
+
+.offcanvas-container {
+	width: 200px;
+	margin: 0 20px 0 0;
+
+	.builder-row {
+		height: 100%;
+
+		.row-inner {
+			flex-direction: column;
+			height: 100%;
+			overflow-y: auto;
+
+			.ct-builder-items {
+				flex-direction: column;
+				align-items: flex-start;
+				width: 100%;
+				height: 100%;
+				padding: #{calc($builder-items-spacing / 2)} $builder-items-spacing;
+
+				.ct-builder-item {
+					width: 100%;
+					margin: #{calc($builder-items-spacing / 2)} 0;
+				}
+
+				.ct-pointer {
+					align-self: center;
+				}
+			}
+		}
+	}
+}
