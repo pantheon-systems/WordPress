@@ -1,0 +1,27 @@
+# Put overrides to your pantheon.upstream.yml file here.
+# For more information, see: https://pantheon.io/docs/pantheon-yml/
+api_version: 1
+
+# Quicksilver Platform Integration Hooks
+# https://pantheon.io/docs/pantheon-yml#quicksilver
+workflows:
+  # Clear CDN and app cache
+  clear_cache:
+    after:
+      - description: "Post to Slack after cache clear"
+        script: private/scripts/slack-notification.php
+        type: webphp
+
+  # Clone Database
+  clone_database:
+    after:
+      - description: "Sanitize the db after each database Clone"
+        script: private/scripts/db-sanitize.php
+        type: webphp
+
+  # Multidev Creation
+  create_cloud_development_environment:
+    after:
+      - description: "Post to Slack after Multidev creation"
+        script: private/scripts/slack-notification.php
+        type: webphp
