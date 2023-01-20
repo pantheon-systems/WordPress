@@ -34,12 +34,6 @@ workflows:
       - description: "Install plugins"
         script: private/scripts/wp-site-setup.php
         type: webphp
-      - description: "Import default content"
-        script: private/scripts/wp-site-import.php
-        type: webphp
-      - description: "Commit added plugins"
-        script: private/scripts/wp-commit.php
-        type: webphp
       - description: "Post to Slack after each deploy"
         script: private/scripts/slack-notification.php
         type: webphp
