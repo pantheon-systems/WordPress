@@ -1,0 +1,273 @@
+.blocksy-fs-optin-dashboard {
+	background: #fff;
+
+	#wpcontent {
+		padding-inline-start: 0;
+	}
+
+	#wpbody-content {
+		height: 100vh;
+		padding-bottom: 0;
+	}
+
+	&.admin-bar #wpbody-content {
+		height: calc(100vh - 32px);
+	}
+
+	.toplevel_page_ct-dashboard.current {
+		&:after {
+			border-right-color: #EED59C !important;
+		}
+	}
+}
+
+
+.blocksy-fs-optin-wrapper {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	height: 100%;
+
+	> * {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 9%;
+		box-sizing: border-box;
+	}
+
+	.ct-optin-svg {
+		// background: #F2CF88;
+		background: rgb(242 207 136 / 90%);
+
+		svg {
+			// max-width: 500px;
+			// max-width: 27vw;
+			width: clamp(300px, 27vw, 550px);
+			margin: 0 auto;
+		}
+	}
+
+
+	#fs_connect {
+		width: 100%;
+		max-width: 900px;
+		margin: 0 auto;
+
+
+		.fs-header {
+			height: initial;
+			line-height: initial;
+			margin-bottom: 15px;
+
+			.fs-plugin-icon {
+				position: initial;
+				margin-left: initial;
+				width: 50px;
+				height: 50px;
+
+				img {
+					width: inherit;
+					height: inherit;
+				}
+			}
+		}
+
+		.fs-box-container {
+			overflow: initial;
+			box-shadow: none;
+			padding-top: 0;
+			background: transparent;
+
+			.fs-content,
+			.fs-actions,
+			.fs-permissions {
+				padding-left: 0;
+				padding-right: 0;
+			}
+
+
+			// content
+			.fs-content {
+				display: flex;
+				flex-direction: column;
+				padding: 0;
+
+				.fs-license-key-container {
+					width: 100%;
+					margin: 30px 0 0 0;
+
+					input[type=text] {
+						min-height: 49px;
+						padding: 0 17px;
+						margin: 0;
+						line-height: initial;
+
+						&:not(:focus) {
+							border-color: #ddd;
+						}
+					}
+
+					.dashicons {
+						top: 18px;
+						right: 17px;
+						font-size: 14px;
+						height: 14px;
+						width: 14px;
+					}
+
+					.show-license-resend-modal {
+						// font-size: .9em;
+						// margin-top: 10px;
+						display: none;
+					}
+				}
+
+				.fs-error {
+					order: 10;
+					box-shadow: none;
+					margin: 10px 0 0 0;
+					border: none;
+					padding: 0;
+					color: #d63638;
+					font-size: 13px;
+					text-align: initial;
+					background: transparent;
+				}
+			}
+
+
+			// actions
+			.fs-actions {
+				padding-top: 15px;
+				padding-bottom: 30px;
+				border-bottom: 1px dashed #ddd;
+
+				.button {
+					height: 49px;
+					line-height: 49px;
+
+					&:after {
+						display: none;
+					}
+				}
+
+				#license_issues_link {
+					// text-align: initial;
+					display: none;
+				}
+			}
+
+
+			// permissions
+			.fs-permissions {
+				padding-top: 25px;
+
+				> .fs-trigger {
+					font-size: 13px;
+					text-align: initial;
+
+					&:focus {
+						box-shadow: none;
+					}
+
+					&:hover {
+						color: #135e96 !important;
+					}
+
+					.fs-arrow {
+						margin-inline-start: 0.5em;
+					}
+				}
+
+				&.fs-open {
+
+					ul {
+						margin-bottom: 0;
+
+						li:last-child {
+							padding-bottom: 0;
+						}
+					}
+				}
+
+				.fs-switch {
+					width: 40px;
+					height: 22px;
+					padding: 0;
+					box-shadow: none;
+					box-sizing: border-box;
+					border: 2px solid #3c434a;
+					transition: all 0.1s ease;
+
+					.fs-toggle {
+						top: 2px;
+						width: 14px;
+						height: 14px;
+						border: none;
+						box-shadow: none;
+						box-sizing: border-box;
+						transition: all 0.1s ease;
+					}
+
+					&.fs-off {
+						background: transparent;
+
+						.fs-toggle {
+							left: 2px;
+							background: #3c434a;
+						}
+					}
+
+					&.fs-on {
+						background: var(--wp-admin-theme-color);
+						border-color: var(--wp-admin-theme-color);
+
+						.fs-toggle {
+							left: 20px;
+						}
+					}
+				}
+
+				.fs-tooltip {
+					font-weight: normal;
+					padding: 15px 18px;
+					line-height: 1.5em;
+					background: rgba(0, 0, 0, 0.85);
+
+					&:after {
+						border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
+					}
+				}
+			}
+
+
+			// licensing
+			.fs-freemium-licensing {
+				display: none;
+			}
+		}
+
+		.fs-terms {
+			display: none;
+		}
+	}
+}
+
+
+// multisite
+.multisite.blocksy-fs-optin-dashboard {
+
+	#fs_connect {
+
+		.fs-multisite-options-container {
+			margin-top: 15px;
+		}
+
+		#delegate_to_site_admins {
+			height: 49px;
+			line-height: 49px;
+			font-weight: 500;
+			border: none;
+		}
+	}
+}

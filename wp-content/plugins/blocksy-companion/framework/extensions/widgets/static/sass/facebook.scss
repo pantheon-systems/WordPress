@@ -1,0 +1,37 @@
+.ct-facebook-like-box {
+	overflow: hidden;
+
+	--fbHeader: 0px;
+	--fbFacepile: 0px;
+
+	.fb-page {
+		display: flex;
+		justify-content: center;
+
+		&[data-small-header="false"] {
+			--fbHeader: 130px;
+		}
+
+		&[data-small-header="true"] {
+			--fbHeader: 70px;
+		}
+
+		&[data-show-facepile="true"] {
+			--fbFacepile: 84px;
+		}
+
+		&:not([data-tabs="timeline"]) {
+			min-height: calc(var(--fbHeader) + var(--fbFacepile));	
+		}
+
+		&[data-tabs="timeline"] {
+			min-height: 500px;
+		}
+		
+	}
+	
+	iframe {
+		max-width: 500px;
+		margin: 0 auto;
+	}
+}

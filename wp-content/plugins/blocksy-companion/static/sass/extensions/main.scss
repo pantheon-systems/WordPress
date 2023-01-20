@@ -1,0 +1,97 @@
+@import 'mailchimp-config';
+
+.ct-extensions-sourse {
+	display: flex;
+	justify-content: center;
+	margin: 0 0 40px 0;
+
+	li {
+		display: flex;
+		align-items: center;
+		height: 38px;
+		font-weight: 500;
+		padding: 0 30px;
+		margin: 0;
+		cursor: pointer;
+		border: 1px solid rgba(226, 230, 235, 0.7);
+
+		&.active {
+			color: #fff;
+			background: var(--accentColor);
+			border-color: var(--accentColor);
+		}
+
+		&:hover:not(.active) {
+			color: var(--accentColor);
+		}
+
+		&:first-child {
+			border-inline-end: 0;
+			border-radius: 4px 0 0 4px;
+		}
+
+		&:last-child {
+			border-inline-start: 0;
+			border-radius: 0 4px 4px 0;
+		}
+	}
+}
+
+
+
+.ct-config-btn {
+	margin-inline-end: auto;
+	margin-inline-start: 10px;
+
+	&:before {
+		font-family: dashicons;
+		content: "\f111";
+		font-size: 14px;
+		margin-right: 5px;
+		opacity: 0.9;
+	}
+}
+
+.ct-minimal-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	appearance: none;
+	border: none;
+	padding: 0;
+	color: inherit;
+	cursor: pointer;
+	color: #c9cfd6;
+	background: transparent;
+	transition: color 0.2s ease;
+
+	&:hover {
+		color: #9ca9b9;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	svg {
+		fill: currentColor;
+	}
+}
+
+.ct-option-info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-style: normal;
+	line-height: normal;
+	margin-left: auto;
+
+	&:before {
+		font-family: dashicons;
+		content: "\f348";
+		font-size: 16px;
+		line-height: 16px;
+	}
+}

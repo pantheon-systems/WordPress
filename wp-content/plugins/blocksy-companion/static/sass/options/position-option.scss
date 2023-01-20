@@ -1,0 +1,41 @@
+.ct-option-position {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-column-gap: 7px;
+	grid-row-gap: 7px;
+	margin: 0;
+
+	li {
+		height: 40px;
+		margin: 0;
+		cursor: pointer;
+		border: 1px solid var(--optionBorderColor);
+		transition: border-color 0.1s ease,
+					background 0.1s ease;
+
+		&.active {
+			background: var(--accentColor);
+			border-color: var(--accentColor);
+		}
+
+		&:hover {
+			border-color: var(--accentColor);
+		}
+
+		&:nth-child(1) {
+			border-top-left-radius: 4px;
+		}
+
+		&:nth-child(3) {
+			border-top-right-radius: 4px;
+		}
+
+		&:nth-child(7) {
+			border-bottom-left-radius: 4px;
+		}
+
+		&:nth-child(9) {
+			border-bottom-right-radius: 4px;
+		}
+	}
+}

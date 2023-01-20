@@ -1,0 +1,119 @@
+.ct-demo-modal {
+	--modal-width: 500px;
+	height: 100%;
+	transition: max-height 0.2s ease;
+
+	&:not(.ct-demo-installer) {
+		--modal-max-height: 620px;
+	}
+
+	&.ct-demo-installer {
+		--modal-max-height: 380px;
+	}
+}
+
+.ct-demo-step-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	// min-height: 550px !important;
+	color: #687c93;
+	text-align: center;
+
+	> * {
+		&:first-child {
+			flex: 1;
+            position: relative;
+
+			> * {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+			}
+		}
+	}
+
+	.ct-demo-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 85px;
+		height: 85px;
+		margin: 10px auto 20px auto;
+		background: #f3f6f8;
+		border-radius: 100%;
+	}
+
+	h2 {
+		text-align: center;
+		font-size: 17px;
+		font-weight: 600;
+		color: #3e5667;
+		margin-top: 0;
+	}
+}
+
+.ct-demo-step-controls {
+	position: relative;
+	width: 100%;
+	height: 40px;
+	// margin-top: 40px;
+
+	button {
+		position: absolute;
+		z-index: 2;
+		top: 0;
+
+		&.demo-back-btn {
+			left: 0;
+		}
+
+		&.demo-main-btn {
+			right: 0;
+		}
+	}
+}
+
+.ct-steps-pills {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 200px;
+	@include list-normalize;
+	margin: 0 auto;
+
+	li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		margin: 0;
+		font-size: 0;
+
+		&:before {
+			content: '';
+			width: 12px;
+			height: 12px;
+			border-radius: 100%;
+			box-shadow: inset 0 0 0 2px rgba(104, 124, 147, 0.8);
+			// box-shadow: inset 0 0 0 5px rgba(104, 124, 147, 0.8);
+			transition: box-shadow 0.2s ease, transform 0.2s ease;
+		}
+
+		&:not(.active) {
+			&:before {
+				transform: scale3d(0.5, 0.5, 1);
+				box-shadow: inset 0 0 0 10px rgba(104, 124, 147, 0.8);
+			}
+		}
+	}
+}

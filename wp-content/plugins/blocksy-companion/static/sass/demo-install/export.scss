@@ -1,0 +1,51 @@
+.ct-site-export-modal {
+	// --modal-width: 650px;
+}
+
+.ct-export {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.ct-site-export {
+	display: flex;
+	flex-direction: column;
+	// padding: 30px;
+	max-height: calc(var(--modal-max-height) - var(--modal-padding) * 2);
+
+	label {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 0;
+	}
+
+	input[type="checkbox"] {
+		margin: 0;
+	}
+
+	textarea,
+	input[type="text"] {
+		width: 60%;
+	}
+
+	textarea {
+		min-height: 80px;
+	}
+
+	button {
+		margin-top: 20px;
+	}
+}
+
+.ct-bundled-plugins-list {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 15px;
+
+	label {
+		gap: 10px;
+		padding: 10px;
+		border-radius: 3px;
+		background: rgba(0, 0, 0, 0.02);
+	}
+}

@@ -1,0 +1,141 @@
+.ct-demos-list-container {
+	ul {
+		display: grid;
+		grid-column-gap: 30px;
+		grid-row-gap: 30px;
+		@include list-normalize;
+
+		@media (min-width: 783px) {
+			grid-template-columns: repeat(3, 1fr);
+			// grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		}
+
+		li {
+			display: flex;
+			flex-direction: column;
+			margin: 0;
+			box-sizing: border-box;
+			box-shadow: 0 2px 5px rgba(143, 163, 184, 0.12);
+
+			figure {
+				position: relative;
+				aspect-ratio: 4/3;
+				margin: 0;
+				overflow: hidden;
+				border-radius: 3px 3px 0 0;
+
+				img {
+					max-width: 100%;
+					aspect-ratio: inherit;
+				}
+
+				section {
+					position: absolute;
+					display: flex;
+					flex-direction: column;
+					// flex-wrap: wrap;
+					align-items: center;
+					justify-content: center;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					opacity: 0;
+					background: rgba(36, 41, 45, 0.9);
+					transition: opacity 0.2s ease;
+
+					h3 {
+						font-size: 15px;
+						color: #fff !important;
+						margin: 0 0 25px 0;
+					}
+
+					div {
+						display: flex;
+					}
+
+					span {
+						padding: 8px 12px;
+						display: block;
+						font-size: 17px;
+						font-weight: 500;
+						color: #fff;
+						border-radius: 3px;
+						border: 2px solid rgba(255, 255, 255, 0.5);
+						background: rgba(36, 41, 45, 0.4);
+
+						&:not(:last-child) {
+							margin-right: 15px;
+						}
+					}
+				}
+			}
+
+			&:hover {
+				figure > section {
+					opacity: 1;
+				}
+			}
+
+			// pro
+			&.ct-is-pro figure {
+				position: relative;
+
+				a {
+					position: absolute;
+					z-index: 1;
+					content: 'PRO';
+					top: 0;
+					right: 0;
+					font-size: 13px;
+					font-weight: 700;
+					letter-spacing: .03em;
+					color: rgb(161,104,13);
+					text-decoration: none;
+					padding: 5px 15px;
+					margin: 25px;
+					background: #ffc568;
+					border-radius: 3px;
+					box-shadow: 0 5px 8px 0 rgba(234,157,33,.3);
+				}
+			}
+		}
+	}
+}
+
+.ct-demo-actions {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	padding: 20px;
+	border-radius: 0 0 3px 3px;
+	border: 1px solid rgba(226, 230, 235, 0.7);
+	background: rgba(235, 237, 241, 0.2);
+
+	@media (max-width: 549px) {
+		flex-direction: column;
+	}
+
+	@media (min-width: 550px) {
+		justify-content: space-between;
+	}
+
+	h4 {
+		margin: 0;
+
+		@media (max-width: 549px) {
+			margin-bottom: 20px;
+		}
+	}
+
+	> div {
+		display: flex;
+		gap: 15px;
+	}
+
+	button[disabled] {
+		opacity: 0.3;
+		user-select: none;
+		pointer-events: none;
+	}
+}

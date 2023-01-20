@@ -1,0 +1,45 @@
+// placeholder
+@mixin input-placeholder {
+	&.placeholder {
+		@content;
+	}
+	&:-moz-placeholder {
+		@content;
+	}
+	&::-moz-placeholder {
+		@content;
+	}
+	&:-ms-input-placeholder {
+		@content;
+	}
+	&::-webkit-input-placeholder {
+		@content;
+	}
+}
+
+
+// list normalize
+@mixin list-normalize( $args: () ) {
+
+	$args: map-merge( (
+		margin: 0,
+		padding: 0,
+	), $args );
+
+	margin: map-get( $args, margin );
+	padding: map-get( $args, padding );
+	list-style: none;
+}
+
+
+// line height crop
+@mixin lhCrop($line-height) {
+	&::before {
+		content: '';
+		display: block;
+		height: 0;
+		width: 0;
+		margin-top: calc((1 - #{$line-height}) * 0.5em);
+	}
+}
+

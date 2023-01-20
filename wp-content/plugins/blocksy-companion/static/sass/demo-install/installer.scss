@@ -1,0 +1,96 @@
+.ct-demo-installer {
+	.close-button {
+		opacity: 0 !important;
+	}
+}
+
+.ct-demo-install {
+	position: relative;
+
+	> * {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	svg path {
+		transform-origin: 50% 50%;
+		transform-box: fill-box;
+		animation-name: spin;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+
+	.g1 {
+		fill: #44ACDF;
+		animation-duration: 5.5s;
+		animation-direction: reverse;	
+	}
+
+	.g2 {
+		fill: #3497D3;
+		animation-duration: 4.5s;
+		// animation-direction: reverse;
+	}
+
+	.g3 {
+		fill: #0C7AB3;
+		animation-duration: 4s;
+		// animation-direction: reverse;
+	}
+}
+
+.ct-installer-progress {
+	width: 100%;
+	
+	border-radius: 5px;
+	background: #f3f6f8;
+	box-sizing: border-box;
+
+	div {
+		width: var(--progress);
+		height: 4px;
+		border-radius: inherit;
+		background: var(--accentColor);
+		transition: width 0.3s ease;
+	}
+}
+
+.ct-progress-info {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+	margin-bottom: 15px;
+	font-size: 13px;
+	opacity: 0.8;
+	// font-weight: 500;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+.ct-install-success {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+	div {
+		margin-top: 10px;
+	}
+
+	a {
+		&:first-child {
+			margin-right: 15px;
+		}
+	}
+}

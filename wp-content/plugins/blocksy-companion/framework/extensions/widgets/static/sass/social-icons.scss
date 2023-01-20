@@ -1,0 +1,22 @@
+.ct-socials-widget,
+.ct-about-me-widget {
+
+	[data-icons-type*="solid"] {
+		--icon-hover-color: #fff;
+		--background-color: rgba(218, 222, 228, 0.2);
+		--background-hover-color: var(--linkHoverColor, var(--paletteColor1));
+	}
+
+	[data-icons-type*="outline"] {
+		--icon-hover-color: var(--linkHoverColor, var(--paletteColor1));
+		--background-color: rgba(218, 222, 228, 0.4);
+		--background-hover-color: var(--linkHoverColor, var(--paletteColor1));
+	}
+}
+
+.ct-contact-info-widget ul {
+	--icon-hover-color: var(--color);
+
+	--background-color: rgba(218, 222, 228, 0.3);
+	--background-hover-color: rgba(218, 222, 228, 0.3);
+}

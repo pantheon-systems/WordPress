@@ -1,0 +1,36 @@
+.ct-product-hero {
+
+	.flexy-container {
+		overflow: hidden;
+	}
+
+	.flexy-pills {
+		@include media-breakpoint-down (md) {
+			--thumbs-spacing: 10px;
+		}
+
+		@include media-breakpoint-up (lg) {
+			max-width: 70%;
+			margin: -8% auto 0 auto;
+
+			--thumbs-spacing: 20px;
+		}
+
+		ol {
+			margin: 0 calc(var(--thumbs-spacing) * -1);
+		}
+
+		li {
+			padding-top: var(--thumbs-spacing);
+			padding-left: var(--thumbs-spacing);
+			padding-right: var(--thumbs-spacing);
+
+			img {
+				width: 100%;
+				border-radius: 3px;
+				border-radius: 2px;
+				border: 3px solid #fff;
+			}
+		}
+	}
+}
