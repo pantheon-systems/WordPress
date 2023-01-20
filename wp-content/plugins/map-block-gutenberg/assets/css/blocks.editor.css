@@ -1,0 +1,52 @@
+/*
+ * Map Block for Google Maps
+ * (c) WebFactory Ltd, 2018 - 2021
+ */
+
+
+.map-block-red-pin{
+  fill:red;
+}
+
+.wp-block-webfactory-map {
+  position: relative;
+}
+
+.wp-block-webfactory-map::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+}
+
+.wp-block-webfactory-map:hover::before {
+  background-color: #ff000088;
+  cursor: pointer;
+}
+
+.wp-block-webfactory-map::after {
+  display: none;
+  content: 'Click to edit the map; all settings are located in block settings (right sidebar).';
+  color: white;
+  font-weight: bolder;
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: calc(50% - 20px);
+  line-height: 150%;
+  left: 0;
+  background-color: transparent;
+}
+
+.wp-block-webfactory-map:hover:hover::after {
+  display: block;
+  cursor: pointer;
+}
+
+p.wf-control-label {
+  margin: -1.5em 0 1.5em 0;
+}
