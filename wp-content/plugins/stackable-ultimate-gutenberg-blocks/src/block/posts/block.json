@@ -1,0 +1,29 @@
+{
+	"apiVersion": 2,
+	"name": "stackable/posts",
+	"title": "Posts",
+	"description": "Your latest blog posts. Use this to showcase a few of your posts in your landing pages.",
+	"category": "stackable",
+	"usesContext": [ "postId", "postType", "queryId" ],
+	"keywords": [
+		"Blog Posts",
+		"Lastest Posts",
+		"Query Loop"
+	],
+	"providesContext": {
+		"type": "type",
+		"orderBy": "orderBy",
+		"order": "order",
+		"taxonomyType": "taxonomyType",
+		"taxonomy": "taxonomy",
+		"taxonomyFilterType": "taxonomyFilterType",
+		"postOffset": "postOffset",
+		"postExclude": "postExclude",
+		"postInclude": "postInclude",
+		"numberOfItems": "numberOfItems",
+		"stkQueryId": "stkQueryId"
+	},
+	"textdomain": "stackable-ultimate-gutenberg-blocks",
+	"stk-type": "special",
+	"stk-demo": "https://wpstackable.com/blog-posts-block/?utm_source=welcome&utm_medium=settings&utm_campaign=view_demo&utm_content=demolink"
+}
