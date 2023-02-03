@@ -33,8 +33,7 @@ define('DB_COLLATE', '');
  * Authentication Unique Keys and Salts.
  *
  * Changing these will force all users to have to log in again.
- * Pantheon sets these values for you. If you want to shuffle them you must
- * contact support: https://pantheon.io/docs/getting-support
+ * Pantheon sets these values for you.
  *
  * @since 2.6.0
  */
