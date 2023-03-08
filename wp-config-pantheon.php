@@ -45,12 +45,6 @@ define('AUTH_SALT', $_ENV['AUTH_SALT']);
 define('SECURE_AUTH_SALT', $_ENV['SECURE_AUTH_SALT']);
 define('LOGGED_IN_SALT', $_ENV['LOGGED_IN_SALT']);
 define('NONCE_SALT', $_ENV['NONCE_SALT']);
-
-// When developing a WordPress Multisite locally, ensure that this constant is set.
-// This will set the Multisite variable in all Pantheon environments.
-if (getenv('FRAMEWORK') == 'wordpress_network') {
-  define('WP_ALLOW_MULTISITE', true);
-}
 /**#@-*/
 
 /** A couple extra tweaks to help things run well on Pantheon. **/

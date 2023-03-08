@@ -37,4 +37,10 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 		 */
 		define( 'FS_METHOD', 'direct' );
 	}
+
+    // When developing a WordPress Multisite locally, ensure that this constant is set.
+    // This will set the Multisite variable in all Pantheon environments.
+    if (getenv('FRAMEWORK') == 'wordpress_network' && !defined('WP_ALLOW_MULTISITE')) {
+        define('WP_ALLOW_MULTISITE', true);
+    }
 } // Ensuring that this is on Pantheon.
