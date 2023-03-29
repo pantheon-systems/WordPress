@@ -25,6 +25,9 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
     if ( defined( 'WP_CLI' ) && WP_CLI ) {
         require_once 'inc/cli.php';
     }
+	if ( defined( 'MULTISITE' ) && defined( 'WP_ALLOW_MULTISITE' ) && WP_ALLOW_MULTISITE ) {
+		require_once 'inc/pantheon-network-setup.php';
+	}
 	if ( ! defined( 'FS_METHOD' ) ) {
 		/**
 		 * When this constant is not set, WordPress writes and then deletes a
@@ -37,4 +40,12 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 		 */
 		define( 'FS_METHOD', 'direct' );
 	}
+    // When developing a WordPress Multisite locally, ensure that this constant is set.
+    // This will set the Multisite variable in all Pantheon environments.
+    if ( getenv( 'FRAMEWORK' ) === 'wordpress_network' && ! defined( 'WP_ALLOW_MULTISITE' ) ) {
+        define( 'WP_ALLOW_MULTISITE', true );
+    }
+    if ( defined( 'WP_ALLOW_MULTISITE' ) && ( ! defined( 'MULTISITE' ) || empty( MULTISITE ) ) ) {
+        require_once 'inc/pantheon-multisite-finalize.php';
+    }
 } // Ensuring that this is on Pantheon.
