@@ -33,7 +33,9 @@ define('DB_COLLATE', '');
  * Authentication Unique Keys and Salts.
  *
  * Changing these will force all users to have to log in again.
- * Pantheon sets these values for you.
+ * Pantheon sets these values for you. If you want to shuffle them you could
+ * use terminus env:rotate-random-seed command:
+ * https://docs.pantheon.io/terminus/commands/env-rotate-random-seed
  *
  * @since 2.6.0
  */
