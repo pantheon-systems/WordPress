@@ -3,14 +3,14 @@ on:
   pull_request:
     types: [closed]
     branches: ["master"]
+  push:
+    branches: ["master"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      sites: ${{ steps.upstream-sites.outputs.sites }}
-    env:
-      GITHUB_CONTEXT: ${{ toJson(github) }}
+      sites: ${{ steps.upstream-sites.outputs.test }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.0
@@ -29,7 +29,7 @@ jobs:
         id: upstream-sites
         run: |
           SITES=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V)
-          echo "sites=$SITES" >> "$GITHUB_OUTPUT"
+          echo "test=$SITES" >> "$GITHUB_OUTPUT"
         env:
           ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
           UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
