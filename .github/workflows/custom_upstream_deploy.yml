@@ -28,11 +28,8 @@ jobs:
       - name: Get Deployment Sites
         id: upstream-sites
         run: |
-          {
-            echo 'sites<<EOF'
-            terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V
-            echo EOF
-          } >> "$GITHUB_OUTPUT"
+          SITES=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V | tr '\n' ',')
+          echo "sites=$SITES" >> "$GITHUB_OUTPUT"
         env:
           ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
           UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
