@@ -56,6 +56,9 @@ jobs:
           echo "PR_BRANCH_NAME=$PR_BRANCH_NAME" >> $GITHUB_ENV
           git remote add pantheon $CANARY_REPO
 
+          # Set to git mode
+          terminus connection:set $CANARY_SITE.$PR_BRANCH_NAME git
+
           # Fetch full history from pantheon
           git fetch pantheon
 
