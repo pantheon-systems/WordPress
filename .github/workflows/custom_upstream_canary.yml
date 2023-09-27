@@ -61,7 +61,7 @@ jobs:
 
       - name: Create multidev
         run: |
-          terminus env:create $CANARY_SITE.dev $BASE_BRANCH
+          terminus env:create $CANARY_SITE.dev $PR_BRANCH_NAME
           MULTIDEV_URL=$(echo "https://$PR_BRANCH_NAME-$CANARY_SITE.pantheonsite.io")
           echo "MULTIDEV_URL=$MULTIDEV_URL" >> "$GITHUB_ENV"
 
