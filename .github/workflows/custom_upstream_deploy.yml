@@ -1,0 +1,82 @@
+name: Deploy Branch to Pantheon Canary Multidev
+on:
+  pull_request:
+    types: [closed]
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      sites: ${{ steps.upstream-sites.outputs.sites }}
+    env:
+      GITHUB_CONTEXT: ${{ toJson(github) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+
+      - name: Installing Terminus
+        uses: kyletaylored/terminus-github-actions@main
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
+
+      - name: Get Deployment Sites
+        id: upstream-sites
+        run: |
+          SITES=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V)
+          echo "sites=$SITES" >> "$GITHUB_OUTPUT"
+        env:
+          ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
+          UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        site: ${{needs.build.outputs.sites}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+
+      - name: Installing Terminus
+        uses: kyletaylored/terminus-github-actions@main
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
+
+      - name: Apply upstream updates
+        run: |
+          SITE=${{ matrix.site }}
+          DEV=$(echo "${SITE}.dev")
+          TEST=$(echo "${SITE}.test")
+          START=$SECONDS
+
+          echo -e "Starting deploy for ${SITE}...";
+
+          # Check site upstream for updates, apply
+          terminus site:upstream:clear-cache $SITE -q
+
+          terminus connection:set $DEV git
+          terminus upstream:updates:apply $DEV -q
+
+          # Clear cache
+          terminus env:clear-cache $DEV
+
+          # Deploy code to test and live
+          terminus env:deploy $TEST --cc --updatedb -n -q
+
+          # Report time to results.
+          DURATION=$(( SECONDS - START ))
+          TIME_DIFF=$(bc <<< "scale=2; $DURATION / 60")
+          MIN=$(printf "%.2f" $TIME_DIFF)
+          echo -e "Finished ${SITE} in ${MIN} minutes"
