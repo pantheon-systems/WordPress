@@ -1,7 +1,7 @@
 name: Deploy Branch to Pantheon Canary Multidev
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
@@ -9,7 +9,9 @@ jobs:
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+
       - uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.PANTHEON_SSH_KEY }}
@@ -61,7 +63,11 @@ jobs:
 
       - name: Create multidev
         run: |
-          terminus env:create $CANARY_SITE.dev $PR_BRANCH_NAME
+          if ! terminus env:info $CANARY_SITE.$PR_BRANCH_NAME > /dev/null 2>&1; then
+              terminus env:create $CANARY_SITE.dev $PR_BRANCH_NAME
+          else
+              echo "Environment $PR_BRANCH_NAME already exists."
+          fi
           MULTIDEV_URL=$(echo "https://$PR_BRANCH_NAME-$CANARY_SITE.pantheonsite.io")
           echo "MULTIDEV_URL=$MULTIDEV_URL" >> "$GITHUB_ENV"
 
