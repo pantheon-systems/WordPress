@@ -28,7 +28,7 @@ jobs:
       - name: Get Deployment Sites
         id: upstream-sites
         run: |
-          SITES=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V | tr '\n' ',')
+          SITES=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V | tr '\n' ',' | sed 's/,$//')
           echo "sites=$SITES" >> "$GITHUB_OUTPUT"
         env:
           ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
@@ -39,7 +39,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        site: ${{needs.build.outputs.sites}}
+        site: [${{needs.build.outputs.sites}}]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.0
