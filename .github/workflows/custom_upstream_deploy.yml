@@ -39,6 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     strategy:
+      fail-fast: false
       matrix:
         site: ${{fromJson(needs.build.outputs.sites)}}
     steps:
