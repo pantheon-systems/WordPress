@@ -26,6 +26,15 @@ jobs:
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
 
+      - name: Get Committer Email and Name
+        run: |
+          COMMITTER_EMAIL=$(git log --format='%ae' -n 1 ${{ github.sha }})
+          COMMITTER_NAME=$(git log --format='%an' -n 1 ${{ github.sha }})
+
+          # Configure git defaults
+          git config --global user.email "$COMMITTER_EMAIL"
+          git config --global user.name "$COMMITTER_NAME"
+
       - name: Get Canary site
         run: |
           CANARY_SITE=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name --tag canary | head -1)
@@ -37,17 +46,8 @@ jobs:
           UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
 
       - name: Sync code to site
-        env:
-          GIT_EMAIL: ${{ github.event.commits[0].committer.email }}
-          GIT_NAME: ${{ github.event.commits[0].committer.name }}
         run: |
-          # Configure git defaults
-          git config --global user.email "$GIT_EMAIL"
-          git config --global user.name "$GIT_NAME"
-
           # Setup remote branch connection
-          BASE_BRANCH=${GITHUB_REF##*/}
-          echo "BASE_BRANCH=$BASE_BRANCH" >> $GITHUB_ENV
           PR_BRANCH_NAME="pr-${{ github.event.pull_request.number }}" # PR branch name
           echo "PR_BRANCH_NAME=$PR_BRANCH_NAME" >> $GITHUB_ENV
           git remote add pantheon $CANARY_REPO
