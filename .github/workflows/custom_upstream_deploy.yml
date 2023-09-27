@@ -66,16 +66,16 @@ jobs:
           echo -e "Starting deploy for ${SITE}...";
 
           # Check site upstream for updates, apply
-          terminus site:upstream:clear-cache $SITE -q
+          terminus site:upstream:clear-cache $SITE
 
           terminus connection:set $DEV git
-          terminus upstream:updates:apply $DEV -q
+          terminus upstream:updates:apply $DEV
 
           # Clear cache
           terminus env:clear-cache $DEV
 
           # Deploy code to test and live
-          terminus env:deploy $TEST --cc --updatedb -n -q
+          terminus env:deploy $TEST --cc
 
           # Report time to results.
           DURATION=$(( SECONDS - START ))
