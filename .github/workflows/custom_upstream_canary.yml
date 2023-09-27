@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.0
+        with:
+          fetch-depth: 0
 
       - uses: shimataro/ssh-key-action@v2
         with:
@@ -53,6 +55,9 @@ jobs:
           PR_BRANCH_NAME="pr-${{ github.event.pull_request.number }}" # PR branch name
           echo "PR_BRANCH_NAME=$PR_BRANCH_NAME" >> $GITHUB_ENV
           git remote add pantheon $CANARY_REPO
+
+          # Fetch full history from pantheon
+          git fetch pantheon
 
           # Check if remote branch exists
           _check_branch=$(git ls-remote --heads pantheon $PR_BRANCH_NAME)
