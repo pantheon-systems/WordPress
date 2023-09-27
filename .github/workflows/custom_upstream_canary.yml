@@ -70,9 +70,10 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            const { MULTIDEV_URL } = process.env;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "*Multidev created*: $MULTIDEV_URL"
+              body: `*Multidev created*: ${MULTIDEV_URL}`
             });
