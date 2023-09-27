@@ -1,0 +1,42 @@
+.ct-meta-box {
+
+	.ct-control,
+	.ct-controls-group {
+
+		> header {
+			--flex: 0 0 20%;
+			max-width: 20%;
+			align-self: flex-start;
+		}
+
+		> section {
+			width: 80%;
+			max-width: 700px;
+		}
+
+		&[data-design="inline"] {
+
+			.ct-option-description {
+				width: 80%;
+				max-width: 700px;
+				margin: 10px 0 0 20%;
+			}
+		}
+	}
+
+
+	// tabs
+	.ct-tabs {
+
+		> ul {
+			> li {
+				max-width: 120px;
+				background: #f3f3f3;
+
+				&.active:after {
+					background: #fff;
+				}
+			}
+		}
+	}
+}

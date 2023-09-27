@@ -1,0 +1,48 @@
+nav[class*="menu"] {
+
+	li {
+		a {
+			color: var(--linkInitialColor);
+			--icon-color: var(--linkInitialColor);
+		}
+	}
+
+	li:hover {
+		> a,
+		> .ct-sub-menu-parent {
+			color: var(--linkHoverColor);
+
+			svg {
+				fill: var(--icon-hover-color, var(--linkHoverColor));
+			}
+		}
+	}
+
+	li[class*="current-menu-"] {
+		> a,
+		> .ct-sub-menu-parent {
+			color: var(--linkActiveColor, var(--linkHoverColor));
+
+			svg {
+				fill: var(--icon-active-color, var(--icon-hover-color, var(--linkActiveColor, var(--linkHoverColor))));
+			}
+		}
+	}
+}
+
+
+// old CSS
+// nav[class*="menu"] {
+	
+// 	li > a:hover,
+// 	> ul > li:hover > a {
+// 		color: var(--linkHoverColor);
+// 		--icon-color: var(--icon-hover-color, var(--linkHoverColor));
+// 	}
+
+// 	li > a.ct-highlight,
+// 	li[class*="current-menu-"] > a {
+// 		color: var(--linkActiveColor, var(--linkHoverColor));
+// 		--icon-color: var(--icon-active-color, var(--icon-hover-color, var(--linkActiveColor, var(--linkHoverColor))));
+// 	}
+// }

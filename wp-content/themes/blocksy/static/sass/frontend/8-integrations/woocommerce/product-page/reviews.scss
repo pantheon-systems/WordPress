@@ -1,0 +1,126 @@
+[data-content="normal"] .woocommerce-Reviews {
+	@include media-breakpoint-up (lg) {
+		flex-direction: row;
+		justify-content: space-between;
+
+		#comments,
+		#review_form_wrapper {
+			width: 47%;
+		}
+	}
+
+	// @include media-breakpoint-up (lg) {
+	// 	display: flex;
+	// 	justify-content: space-between;
+
+	// 	#comments,
+	// 	#review_form_wrapper {
+	// 		width: 47%;
+	// 	}
+	// }
+}
+
+.woocommerce-Reviews {
+	display: flex;
+	flex-direction: column;
+	row-gap: 40px;
+
+
+
+	// @include media-breakpoint-down (md) {
+		#comments {
+			// margin-bottom: 40px;
+		}
+	// }
+
+	h2,
+	.comment-reply-title {
+		--fontSize: 20px;
+		margin-bottom: 20px;
+	}
+
+	.comment-notes,
+	.woocommerce-noreviews {
+		font-size: 13px;
+	}
+
+	.commentlist {
+		border-top: 1px solid var(--border-color);
+
+		li {
+			margin-bottom: 0;
+
+			&:not(:last-child) {
+				.comment_container {
+					padding-bottom: 40px;
+					border-bottom: 1px solid var(--border-color);
+				}
+			}
+		}
+	}
+
+	.comment_container {
+		position: relative;
+		padding-top: 40px;
+	}
+
+	.avatar {
+		position: absolute;
+		left: 0;
+		width: 45px;
+		height: 45px;
+		border-radius: 100%;
+	}
+
+	.comment-text {
+		padding-inline-start: 70px;
+
+		.description > * {
+			margin: 20px 0 0 0;
+
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+
+	.star-rating {
+		@include media-breakpoint-down (xs) {
+			margin-bottom: 7px;
+		}
+
+		@include media-breakpoint-up (sm) {
+			float: right;
+			margin-top: 2px;
+		}
+	}
+
+	.meta {
+		display: flex;
+		align-items: center;
+		line-height: 20px;
+
+		span {
+			display: inline-block;
+			text-indent: -99999px;
+			margin: 0 10px;
+
+			&:before {
+				font-size: 10px;
+				float: left;
+				content: '/';
+				text-indent: 1px;
+			}
+		}
+
+		time {
+			font-size: 11px;
+			font-weight: 500;
+			text-transform: uppercase;
+		}
+	}
+
+	> .clear {
+		display: none;
+	}
+}

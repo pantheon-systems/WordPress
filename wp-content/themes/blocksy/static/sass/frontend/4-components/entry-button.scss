@@ -1,0 +1,58 @@
+.entry-button {
+	font-size: 15px;
+
+	&[data-type="simple"],
+	&[data-type="outline"] {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&[data-type="simple"] {
+		
+	}
+
+	&[data-type="background"] {
+		--height: 39px;
+		--padding: 0 18px;
+		--buttonShadow: none;
+		--buttonTransform: none;
+	}
+
+	&[data-type="outline"] {
+		height: 39px;
+		padding: 0 18px;
+		border-radius: 4px;
+		border: 2px solid var(--buttonInitialColor);
+
+		&:hover {
+			border-color: var(--buttonHoverColor);
+			background: var(--buttonHoverColor);
+		}
+	}
+
+	// icon
+	svg {
+		position: relative;
+		fill: currentColor;
+		margin-inline-end: -2px;
+		margin-inline-start: 10px;
+	}
+
+	// alignment
+	&[data-alignment="left"] {
+		align-self: flex-start;
+	}
+
+	&[data-alignment="center"] {
+		align-self: center;
+	}
+
+	&[data-alignment="right"] {
+		align-self: flex-end;
+	}
+}
+
+.entries:not([data-cards="cover"]) .entry-button {
+	margin-top: auto;
+}

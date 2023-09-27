@@ -1,0 +1,82 @@
+.ct-btn-remove {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	font-family: dashicons;
+	font-size: 14px;
+	line-height: 14px;
+	color: inherit;
+	padding: 0;
+	// margin-right: -12px;
+	border: none;
+	cursor: pointer;
+	background: none;
+	transition: color 0.1s ease;
+
+	position: absolute;
+	right: 0px;
+	top: calc(50% - 14px);
+
+	&:before {
+		content: "\f335";
+	}
+
+	&:hover {
+		color: #dd4b39;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+// clone & remove
+.ct-available-items .ct-builder-items > * {
+	
+	.ct-clone-item,
+	.ct-remove-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: $builder-item-height;
+		cursor: pointer;
+		margin-left: auto;
+		margin-right: 10px;
+		opacity: 0.85;
+		transition: color 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+					opacity 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+		svg {
+			fill: currentColor;
+		}
+
+		.ct-tooltip-top {
+			transform: translate3d(0px, -28px, 0px);
+		}
+
+		&:hover {
+			opacity: 1;
+
+			.ct-tooltip-top {
+				opacity: 1;
+				visibility: visible;
+				transform: translate3d(0px, -33px, 0px);
+			}
+		}
+	}
+
+	.ct-clone-item {
+		&:hover {
+			color: var(--accentColor);
+		}
+	}
+
+	.ct-remove-item {
+		&:hover {
+			color: #dd4b39;
+		}
+	}
+}

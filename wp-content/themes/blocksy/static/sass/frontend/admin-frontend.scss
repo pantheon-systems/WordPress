@@ -1,0 +1,236 @@
+.blocksy-hook-indicator,
+.ct-customizer-shortcut {
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+}
+
+// hooks locations
+.blocksy-hook-indicator {
+	position: relative;
+	padding: 6px 30px 6px 10px;
+	color: #614a00;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: initial;
+	text-transform: lowercase;
+	word-break: break-word;
+	text-align: left;
+
+	// background: rgba(255, 205, 5, 0.4);
+	background: #FFEBAC;
+	border-radius: 3px;
+	border: 1px dashed #eabc4b;
+
+	&.blocksy-woo-indicator {
+		color: #6d4665;
+		background: #e4afc9;
+		border-color: #8a6282;
+	}
+
+	span {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		opacity: 0.5;
+		transition: opacity 0.15s ease;
+
+		&:before {
+			font-family: dashicons;
+			content: "\f464";
+			font-size: 17px;
+			line-height: 17px;
+			cursor: pointer;
+		}
+	}
+
+	&:hover span {
+		opacity: 1;
+	}
+}
+
+
+// indicator spacing
+.blocksy-hook-indicator {
+	margin: 15px var(--hook-side-margin, 0);
+
+	&[data-type*="full"] {
+		--hook-side-margin: 15px;
+	}
+
+	&:not([data-type*="top-margin"]) {
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	&:not([data-type*="bottom-margin"]) {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.ct-container {
+
+	.blocksy-hook-indicator[data-type*="full"] {
+		--hook-side-margin: 0;
+	}
+}
+
+
+// customizer utilities
+body [data-customize-hide] {
+	display: none !important;
+}
+
+// disable transitions
+// .ct-disable-transitions,
+// .ct-disable-transitions * {
+// 	transition: none !important;
+// }
+
+// Customizer shortcuts
+[data-shortcut] {
+	--accentColor: #2271b1;
+	position: relative;
+}
+
+.ct-customizer-shortcut {
+	position: absolute !important;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #fff !important;
+	margin: 0 !important;
+	opacity: 0;
+	visibility: hidden;
+
+	transition: color 0.15s ease, opacity 0.15s ease, transform 0.15s ease,
+		visibility 0.15s ease;
+
+	&:hover {
+		color: rgba(255, 255, 255, 0.75);
+	}
+}
+
+// type border
+[data-shortcut*='border'] {
+	outline-width: 1px;
+	outline-style: var(--ui-outlineStyle, solid);
+	outline-offset: var(--ui-outlineOffset, -1px);
+	outline-color: transparent;
+	transition: outline 0.15s ease;
+
+	> .ct-customizer-shortcut {
+		top: var(--ui-top, 0px);
+		left: var(--ui-left, 0px);
+		width: auto !important;
+		height: 28px;
+		padding: 0 13px;
+		font-size: 10px;
+		font-weight: 600;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		background: var(--accentColor);
+		border-radius: 0 0 2px 0;
+	}
+
+	&:hover {
+		outline-color: var(--accentColor);
+
+		> .ct-customizer-shortcut {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+
+[data-shortcut='border-dashed'] {
+	--ui-outlineStyle: dashed;
+	--ui-outlineOffset: 5px;
+
+	> .ct-customizer-shortcut {
+		--ui-top: -6px;
+		--ui-left: -6px;
+	}
+}
+
+[data-shortcut*='outside'] {
+	--ui-outlineOffset: 0px;
+}
+
+// type drop
+$drop-size: 22px;
+
+[data-shortcut='drop'] {
+	> .ct-customizer-shortcut {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		top: calc(50% - #{calc($drop-size / 2)});
+		right: -5px;
+		width: $drop-size;
+		height: $drop-size;
+		transform: translateX(100%);
+
+		@media (max-width: 690px) {
+			display: none;
+		}
+
+		&:before,
+		&:after {
+			position: absolute;
+			content: '';
+		}
+
+		&:before {
+			top: 0;
+			left: 0;
+			width: inherit;
+			height: inherit;
+			background: var(--accentColor);
+			border-radius: 100% 100% 100% 2px;
+			transform: rotate(45deg);
+		}
+
+		&:after {
+			left: -15px;
+			width: calc(100% + #{$drop-size});
+			height: calc(100% + #{$drop-size});
+		}
+
+		svg {
+			position: relative;
+			z-index: 1;
+			width: 14px;
+			height: 14px;
+			fill: currentColor;
+		}
+	}
+
+	&:hover {
+		> .ct-customizer-shortcut {
+			opacity: 1;
+			visibility: visible;
+			transform: translateX(calc(100% + 10px));
+		}
+	}
+}
+
+
+// customizer partial refresh
+.customize-partial-refreshing {
+	opacity: 0.25 !important;
+}
+
+// admin bar shift when overlay opens
+[data-panel] #wpadminbar {
+	padding-right: var(--scrollbar-width, 0px);
+}
+

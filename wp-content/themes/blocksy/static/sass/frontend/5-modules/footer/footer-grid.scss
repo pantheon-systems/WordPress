@@ -1,0 +1,34 @@
+.ct-footer [data-row] {
+
+	> div {
+		display: grid;
+		grid-template-columns: var(--grid-template-columns);
+		grid-column-gap: var(--columns-gap, 50px);
+		grid-row-gap: var(--columns-gap, 50px);
+
+		padding-top: var(--container-spacing);
+		padding-bottom: var(--container-spacing);
+	}
+}
+
+
+// footer columns
+.ct-footer {
+
+	[data-column] {
+		display: flex;
+		flex-direction: column;
+		align-items: var(--horizontal-alignment);
+		justify-content: var(--vertical-alignment, flex-start);
+	}
+
+	[data-column*="widget"] {
+		text-align: var(--text-horizontal-alignment);
+	}
+
+	[data-column="ghost"] {
+		@include media-breakpoint-down (md) {
+			display: none;
+		}
+	}
+}

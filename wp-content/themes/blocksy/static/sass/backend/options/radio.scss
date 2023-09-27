@@ -1,0 +1,136 @@
+.ct-radio-option input[type="radio"] {
+	flex: 0 0 16px;
+	width: 16px;
+	height: 16px;
+	margin: 0 8px 0 0;
+	border: 2px solid #c3c7ca;
+	box-shadow: none;
+	appearance: none;
+
+	&:checked {
+		border-color: var(--accentColor);
+		background: var(--accentColor);
+
+		&:before {
+			content: '';
+			width: 6px;
+			height: 6px;
+			margin: 3px;
+			background: #fff;
+		}
+	}
+}
+
+.ct-radio-option label:hover {
+	input[type="radio"]:not(:checked) {
+		border-color: var(--accentColor);
+	}
+}
+
+.ct-radio-option {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+
+	// simple type
+	label {
+		display: flex;
+		align-items: center;
+		user-select: none;
+	}
+
+	&:not([data-inline]):not([data-columns]) {
+		label {
+			&:not(:last-child) {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
+	&[data-inline] {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: -10px;
+
+		label {
+			padding-top: 10px;
+
+			&:not(:last-child) {
+				margin-right: 15px;
+			}
+		}
+	}
+
+
+
+	// columns
+	&[data-columns="2"] {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: 15px;
+		grid-row-gap: 15px;
+	}
+
+	&[data-columns="3"] {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-column-gap: 15px;
+		grid-row-gap: 15px;
+	}
+
+	&[data-radio-text="small"] li {
+		font-size: 12px;
+	}
+
+
+
+	// alignment
+	&[data-type*="alignment"] li {
+		font-family: dashicons;
+		font-size: 16px;		
+
+		&:first-child:before {
+			content: "\f138";
+		}
+
+		&:nth-child(2):before {
+			content: "\f134";
+		}
+
+		&:last-child:before {
+			content: "\f138";
+			transform: rotate(180deg);
+		}
+	}
+
+	// horizontal alignment
+	&[data-type="vertical-alignment"] li {
+		&:before {
+			transform: rotate(90deg);
+		}
+
+		&:last-child:before {
+			transform: rotate(-90deg);
+		}
+	}
+
+
+	// repeat
+	&[data-type="repeat"] li {
+		&:not(.active) {
+			color: #5c5c5c;
+		}
+
+		svg {
+			width: 13px;
+			height: 13px;
+			fill: currentColor;
+		}
+
+		&:hover .ct-tooltip-top {
+			opacity: 1;
+			visibility: visible;
+			transform: translate3d(0px, -40px, 0px);
+		}
+	}
+}

@@ -1,0 +1,50 @@
+$selector: 
+	'.entry-content p > a', 
+	'.entry-content em > a',
+	'.entry-content strong > a', 
+	'.entry-content > ul a',
+	'.entry-content > ol a',
+;
+
+// type 3
+[data-link='type-3'] {
+	#{$selector} {
+		background-size: var(--has-link-decoration, 0% 1px);
+		background-image: var(--has-link-decoration, linear-gradient(currentColor, currentColor));
+
+		&:hover {
+			background-size: var(--has-link-decoration, 100% 1px);
+		}
+	}
+}
+
+// type 4
+[data-link='type-4'] {
+	#{$selector} {
+		// background-size: var(--has-link-decoration, 100% 2px);
+		// background-image: var(
+		// 	--has-link-decoration,
+		// 	linear-gradient(currentColor, currentColor)
+		// );
+
+		&:hover {
+			color: var(--has-link-decoration, #fff);
+
+			background-size: var(--has-link-decoration, 100% 100%);
+			background-image: var(--has-link-decoration, linear-gradient(var(--linkHoverColor), var(--linkHoverColor)));
+		}
+	}
+}
+
+// type 5
+[data-link='type-5'] {
+	#{$selector} {
+		background-size: var(--has-link-decoration, 0% 100%);
+		background-image: var(--has-link-decoration, linear-gradient(var(--linkHoverColor), var(--linkHoverColor)));
+
+		&:hover {
+			color: var(--has-link-decoration, #fff);
+			background-size: var(--has-link-decoration, 100% 100%);
+		}
+	}
+}

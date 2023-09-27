@@ -1,0 +1,29 @@
+// modal scroll default
+.ct-modal-scroll {
+	overflow: auto;
+	padding: 0 var(--modal-padding);
+	margin: 0 calc(var(--modal-padding) * -1);
+}
+
+// tabs scroll
+.ct-tabs-scroll {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	margin: 0 calc(var(--modal-padding) * -1);
+
+	.ct-tabs {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		padding-top: 1px;
+		--tabs-container-margin: 20px 0 0 0;
+		--tabs-pills-margin: 0 var(--modal-padding);
+	}
+
+	.ct-current-tab {
+		overflow-y: auto;
+		overflow-x: hidden;
+		padding: 15px var(--modal-padding) 35px var(--modal-padding);
+	}
+}

@@ -1,0 +1,28 @@
+.entry-content > .fl-builder-content {
+	--default-editor: var(--false);
+}
+
+.fl-builder-content-primary {
+	margin-bottom: 0;
+}
+
+
+// first row - show controls on bottom
+.fl-builder-content > .fl-block-overlay-active:first-child {
+	
+	> .fl-row-overlay {
+		top: 0;
+		bottom: -32px;
+
+		> .fl-block-overlay-header {
+			position: absolute;
+			bottom: 0;
+
+			> .fl-block-overlay-actions {
+				border-radius: 0;
+				border-top-right-radius: 5px;
+				border-bottom-left-radius: 3px;
+			}
+		}
+	}
+}

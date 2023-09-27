@@ -1,0 +1,7 @@
+[data-archive="default"][data-layout="classic"] {
+	article {
+		&:not(:last-child) {
+			margin-bottom: var(--grid-columns-gap, 30px);
+		}
+	}
+}

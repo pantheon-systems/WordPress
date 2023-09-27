@@ -1,0 +1,65 @@
+div.quantity {
+	position: relative;
+	display: inline-block;
+	width: var(--quantity-width, 70px);
+	height: var(--quantity-height, 55px);
+
+	input[type="number"] {
+		--form-font-size: 0.9em;
+		--form-field-height: 100%;
+		font-weight: 500;
+		text-align: center;
+		max-width: initial;
+		height: inherit;
+		border-radius: var(--form-field-border-radius, 3px) !important;
+		
+		--form-field-border-style: solid;
+		--form-field-border-initial-color: var(--quantity-initial-color, var(--buttonInitialColor));
+		--form-field-initial-background: transparent;
+	}
+
+	&[data-type] input[type="number"] {
+		padding: var(--form-field-padding) !important;
+
+		// hide top & bottom arrows
+		-moz-appearance: textfield;
+		
+		&::-webkit-inner-spin-button,
+		&::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+		}
+	}
+
+	.ct-increase, 
+	.ct-decrease {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		cursor: pointer;
+		user-select: none;
+		color: var(--quantity-arrows-initial-color, #fff);
+		background: var(--quantity-initial-color, var(--buttonInitialColor));
+		transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+		&:before {
+			font-family: 'woo';
+			font-weight: normal;
+			line-height: normal;
+		}
+
+		&:hover {
+			color: var(--quantity-arrows-hover-color, #fff);
+			background: var(--quantity-hover-color, var(--buttonHoverColor));
+		}
+
+		~ input[type="number"]:focus {
+			border-color: var(--quantity-initial-color, var(--buttonInitialColor));
+			box-shadow: 0 0 0 1px var(--quantity-initial-color, var(--buttonInitialColor));
+		}
+	}
+
+	&.hidden {
+		display: none;
+	}
+}

@@ -1,0 +1,38 @@
+[class*="ct-option"] {
+
+	input[type="text"],
+	input[type="number"] {
+		--fontSize: 12px;
+
+		height: var(--input-height, 30px) !important;
+		width: var(--input-width, 100%) !important;
+		margin: var(--margin, 0) !important;
+		padding: var(--padding, 3px 8px) !important;
+		min-height: initial;
+		font-size: var(--fontSize) !important;
+		color: #555d66;
+		line-height: normal;
+		background-color: var(--background, #fff);
+		border: var(--borderWidth, 1px) solid var(--borderColor, #ddd) !important;
+		border-radius: var(--borderRadius, 3px) !important;
+		box-shadow: 0 0 0 0 transparent;
+
+		transition: box-shadow 0.1s linear,
+					background 0.1s linear,
+					border-radius 0.1s linear,
+					border-color 0.1s linear;
+
+		&:hover,
+		&:focus {
+			--borderColor: var(--accentColor) !important;
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 1px var(--accentColor);
+		}
+
+		&::placeholder {
+			opacity: 0.5;
+		}
+	}
+}

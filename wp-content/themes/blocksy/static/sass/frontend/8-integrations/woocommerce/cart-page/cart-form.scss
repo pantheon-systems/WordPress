@@ -1,0 +1,27 @@
+.ct-cart-form {
+	display: grid;
+
+	@include media-breakpoint-down (md) {
+		grid-row-gap: 50px;
+	}
+
+	@include media-breakpoint-up (lg) {
+		grid-template-columns: 2fr 1fr;
+		grid-column-gap: 50px;
+	}
+
+	h2 {
+		--fontSize: 17px;
+	}
+
+	.woocommerce-cart-form {
+		@include media-breakpoint-up (md) {
+			padding-top: 7px;
+		}
+	}
+}
+
+// cart form + checkout form
+.woocommerce-checkout .ct-cart-form {
+	grid-template-columns: initial;
+}

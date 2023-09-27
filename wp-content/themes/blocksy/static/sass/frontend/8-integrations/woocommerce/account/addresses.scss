@@ -1,0 +1,44 @@
+.woocommerce-Addresses {
+	display: grid;
+
+	@include media-breakpoint-down (sm) {
+		grid-row-gap: 2em;
+	}
+
+	@include media-breakpoint-up (md) {
+		grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: 30px;
+	}
+
+	> * {
+		padding: 1.5em;
+		border-radius: 5px;
+		border: 1px dashed var(--border-color);
+	}
+
+
+	.woocommerce-column__title,
+	.woocommerce-Address-title h3 {
+		--fontSize: 20px;
+	}
+
+	.woocommerce-Address-title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 20px;
+
+		h3 {
+			margin-bottom: 0;
+		}
+	}
+
+	address {
+		font-size: 15px;
+		opacity: 0.8;
+	}
+}
+
+.woocommerce-address-fields__field-wrapper {
+	margin-bottom: 2em;
+}

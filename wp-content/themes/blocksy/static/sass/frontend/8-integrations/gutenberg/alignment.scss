@@ -1,0 +1,48 @@
+.alignleft, .alignright {
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+}
+
+.alignleft {
+	float: left;
+	margin-inline-end: 1.5em;
+}
+
+.alignright {
+	float: right;
+	margin-inline-start: 1.5em;
+}
+
+.aligncenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+.entry-content {
+
+	> .alignleft {
+		margin-inline-start: calc( ( 100% - #{'min(var(--block-max-width), var(--container-width-base))'} ) / 2 );
+	}
+
+	> .alignright {
+		margin-inline-end: calc( ( 100% - #{'min(var(--block-max-width), var(--container-width-base))'} ) / 2 );
+	}
+
+	.alignleft {
+		margin-inline-end: var(--content-spacing);
+	}
+
+	.alignright {
+		margin-inline-start: var(--content-spacing);
+	}
+
+
+	// fix for left & right alignments
+	&:after {
+		display: table;
+		clear: both;
+		content: '';
+	}
+}

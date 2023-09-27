@@ -1,0 +1,26 @@
+.ct-onboarding-modal {
+	--modal-width: 500px;
+	--modal-min-height: 360px;
+
+	text-align: center;
+
+	.close-button {
+		display: none;
+	}
+
+	svg {
+		width: 55px;
+		height: 55px;
+		margin: 0 auto 25px auto;
+	}
+	
+	h2 {
+		color: #3e5667;
+	}
+
+	button {
+		--buttonHeight: 42px;
+		--buttonPadding: 20px;
+		--buttonFontSize: 14px;
+	}
+}

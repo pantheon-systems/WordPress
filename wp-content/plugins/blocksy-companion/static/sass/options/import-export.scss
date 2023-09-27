@@ -1,0 +1,14 @@
+.ct-import-export {
+
+	input[type="file"] {
+		display: none;
+	}
+
+	.button {
+		width: 100%;
+
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+	}
+}

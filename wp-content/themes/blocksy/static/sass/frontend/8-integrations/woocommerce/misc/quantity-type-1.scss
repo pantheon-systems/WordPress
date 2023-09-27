@@ -1,0 +1,39 @@
+$arrows-width: 25%;
+
+.quantity[data-type="type-1"] {
+	width: var(--quantity-width, 100px);
+
+	input[type="number"] {
+		--form-field-border-width: 1px 0 1px 1px;
+		--form-field-padding: 0 calc(#{$arrows-width} + 3px) 0 5px;
+	}
+
+	.ct-increase, 
+	.ct-decrease {
+		right: 0;
+		border-radius: 0;
+		width: $arrows-width;
+		max-width: 25px;
+
+		&:before {
+			content: '\e911';
+			font-size: calc(var(--quantity-height, 55px) / 6.7);
+		}
+	}
+
+	.ct-increase {
+		top: 0;
+		height: calc(50% - 1px);
+		border-radius: 0 var(--form-field-border-radius, 3px) 0 0;
+	}
+
+	.ct-decrease {
+		bottom: 0;
+		height: 50%;
+		border-radius: 0 0 var(--form-field-border-radius, 3px) 0;
+
+		&:before {
+			transform: rotate(180deg);
+		}
+	}
+}

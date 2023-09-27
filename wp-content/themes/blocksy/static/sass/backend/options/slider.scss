@@ -1,0 +1,162 @@
+$handle-size: 14px;
+
+.ct-slider {
+	position: relative;
+	user-select: none;
+	height: 18px;
+	cursor: pointer;
+	border-radius: 2px;
+	margin-inline-end: $handle-size;
+
+	&:before {
+		position: absolute;
+		content: '';
+		top: calc(50% - 1px);
+		left: 0;
+		width: calc(100% + #{$handle-size});
+		height: 2px;
+		border-radius: inherit;
+		background: var(--backgroundColor, #ced1d4);
+	}
+
+	span {
+		position: absolute;
+		top: 0;
+		left: var(--position);
+		bottom: 0;
+		margin: auto 0;
+		width: $handle-size;
+		height: $handle-size;
+		border-radius: 100%;
+		background: var(--accentColor);
+		transition: box-shadow 0.1s ease, background 0.1s ease;
+		outline: none;
+
+		&:hover,
+		&:focus,
+		&:active {
+			box-shadow: 0px 0px 0px 2px var(--accentColor),
+				0px 8px 15px 0px rgba(0, 0, 0, 0.25);
+		}
+
+		&:active {
+			background: #fff;
+		}
+	}
+
+	div {
+		position: absolute;
+		top: calc(50% - 1px);
+		left: 0;
+		height: 2px;
+		padding-right: #{calc($handle-size / 2)};
+		background: var(--accentColor);
+		border-radius: inherit;
+	}
+}
+
+.ct-option-slider {
+	display: grid;
+	grid-template-columns: 1fr 75px;
+	align-items: center;
+	grid-column-gap: 7%;
+
+	// sides
+	[class*='placement'] {
+		flex: 0 0 15px;
+		display: flex;
+		margin-right: 5%;
+
+		.shape {
+			opacity: 0.15;
+			fill: #000000;
+		}
+
+		.shape-active {
+			fill: #0073aa;
+		}
+	}
+
+	.placement-right svg {
+		transform: rotate(90deg);
+	}
+
+	.placement-bottom svg {
+		transform: rotate(180deg);
+	}
+
+	.placement-left svg {
+		transform: rotate(270deg);
+	}
+}
+
+// .ct-slider-input {
+// 	position: relative;
+
+// 	input {
+// 		position: relative;
+// 		z-index: 2;
+// 		text-align: center;
+// 	}
+// }
+
+// slider steps
+[data-steps] {
+	div {
+		display: none;
+	}
+
+	section {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: absolute;
+		left: 0;
+		bottom: -7px;
+		height: 5px;
+		opacity: 0.5;
+		pointer-events: none;
+		width: calc(100% + #{$handle-size});
+
+		i {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			width: 5px;
+			height: 5px;
+			font-style: normal;
+
+			&:before {
+				position: absolute;
+				content: '';
+				width: inherit;
+				height: 1px;
+				background: currentColor;
+			}
+
+			&.zero:before {
+				transform: rotate(90deg);
+			}
+
+			&.plus:after {
+				position: absolute;
+				content: '';
+				width: 1px;
+				height: inherit;
+				background: currentColor;
+			}
+		}
+
+		// positive
+		&.positive {
+			.minus {
+				display: none;
+			}
+
+			.zero:before {
+				left: -2px;
+			}
+		}
+	}
+}

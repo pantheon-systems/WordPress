@@ -1,0 +1,43 @@
+.woocommerce-cart-form__contents {
+
+	.actions {
+		text-align: right;
+
+		.button {
+			@include media-breakpoint-down (sm) {
+				width: 100%;
+			}
+		}
+	}
+
+	.coupon {
+		display: flex;
+		
+		@include media-breakpoint-down (sm) {
+			flex-direction: column;
+			margin-bottom: .8em;
+		}
+
+		@include media-breakpoint-up (md) {
+			float: left;
+		}
+
+		label {
+			display: none;
+		}
+
+		input {
+			--form-field-height: var(--buttonMinHeight);
+			
+			@include media-breakpoint-down (sm) {
+				width: 100%;
+				margin-bottom: .8em;
+			}
+
+			@include media-breakpoint-up (md) {
+				width: 220px;
+				margin-inline-end: 8px;
+			}
+		}
+	}
+}

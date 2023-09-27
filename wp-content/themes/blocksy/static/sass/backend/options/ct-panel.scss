@@ -1,0 +1,221 @@
+.ct-panel {
+	&.ct-click-allowed {
+		cursor: pointer;
+		position: relative;
+
+		&:before {
+			position: absolute;
+			content: '';
+			top: -11px;
+			left: -12px;
+			width: calc(100% + 24px);
+			height: 42px;
+		}
+
+		&:hover {
+			&:before {
+				background: rgba(255, 255, 255, 0.7);
+			}
+		}
+
+		header > label {
+			cursor: pointer;
+		}
+
+		.ct-customizer-panel-option {
+			button {
+				opacity: 0.7;
+				pointer-events: auto;
+				transform: translate3d(0, 0, 0);
+				transition: opacity 0.2s ease 0.2s, transform 0.2s ease 0.2s;
+			}
+		}
+	}
+
+	&[data-panel='only-arrow'] {
+		.ct-customizer-panel-option button {
+			right: -10px;
+		}
+	}
+}
+
+// option
+.ct-customizer-panel-option {
+	position: relative;
+	cursor: pointer;
+	min-height: 20px;
+
+	button {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 25px;
+		height: 20px;
+		top: calc(50% - 10px);
+		right: -24px;
+		padding: 0;
+		cursor: pointer;
+		border: none;
+		opacity: 0;
+		pointer-events: none;
+		background: transparent;
+
+		&:after {
+			font-family: dashicons;
+			content: '\f345';
+			width: 12px;
+			height: 12px;
+			font-size: 12px;
+			color: inherit;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.ct-option-switch + button {
+		transform: translate3d(-7px, 0, 0);
+		transition: opacity 0s ease 0s, transform 0s ease 0s;
+	}
+}
+
+// panel
+.ct-customizer-panel {
+	position: absolute;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 99;
+	background: #f0f0f1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+
+	> * {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	}
+
+	> *:nth-child(2) {
+		display: none;
+	}
+
+	&.ct-panel-second-level {
+		width: 200%;
+		transform: translateX(-50%) !important;
+
+		> * {
+			width: 50%;
+		}
+
+		> *:last-child {
+			left: 50%;
+			display: block;
+		}
+	}
+}
+
+.ct-panel-open {
+	height: 100% !important;
+	overflow-y: hidden !important;
+	transform: translateX(-100%) !important;
+}
+
+// panel actions
+.customize-panel-actions {
+	display: flex;
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+
+	button {
+		width: 48px;
+		// padding: 0 24px 0 0;
+		padding-inline-end: 24px;
+		background: #fff;
+		cursor: pointer;
+		border: none;
+		border-inline-end: 1px solid #ddd;
+		border-inline-start: 4px solid #fff;
+
+		&:before {
+			font: normal 20px/48px dashicons;
+			content: '\f341';
+			position: relative;
+			left: 9px;
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	h3 {
+		font-size: 20px !important;
+		font-weight: 200;
+		line-height: 26px;
+		display: block;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		color: #555d66;
+		width: 100%;
+		margin: 0;
+		padding: 10px 10px 12px 14px;
+
+		span {
+			font-size: 13px;
+			display: block;
+			font-weight: 400;
+			overflow: hidden;
+		}
+	}
+}
+
+// panel content
+.customizer-panel-content {
+	margin: 0;
+	padding: 0 12px 30px 12px;
+
+	> li {
+		&:first-child {
+			margin-top: 30px;
+
+			&.customize-control-ct-title {
+				margin-top: 0;
+				border-top: none !important;
+			}
+		}
+	}
+
+	> form {
+		margin-left: -12px;
+		margin-right: -12px;
+	}
+}
+
+// #customize-controls {
+
+// 	.wp-full-overlay-sidebar-content {
+// 		overflow-x: initial;
+// 		overflow-y: initial;
+// 	}
+
+// 	.ct-customizer-panel {
+// 		overflow-x: initial;
+// 		overflow-y: initial;
+// 	}
+// }
+
+.ct-tmp-panel-actions {
+	z-index: 999999;
+	position: relative;
+}

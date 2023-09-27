@@ -1,0 +1,59 @@
+[class*="ct-tooltip"] {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	z-index: 200;
+	width: auto;
+	height: 26px;
+	padding: 0 8px;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: normal;
+	letter-spacing: initial;
+	text-transform: initial;
+	color: #fff;
+	-webkit-font-smoothing: antialiased;
+	user-select: none;
+	white-space: nowrap;
+	border-radius: 3px;
+	pointer-events: none;
+	background: rgba(54, 63, 66, 1);
+
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+				transform 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+				visibility 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+	&:before, &:after {
+		content: '';
+		position: absolute;
+		box-sizing: border-box;
+	}
+
+	// Reveal top
+	&[class*='-top'] {
+		&:before {
+			left: 0;
+			bottom: -10px;
+			width: 100%;
+			height: 10px;
+		}
+
+		&:after {
+			width: 10px;
+			height: 5px;
+			bottom: -5px;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 5px solid rgba(54, 63, 66, 1);
+		}
+	}
+}
+
+.ct-tooltip-top {
+	transform: translate3d(0px, -35px, 0px);
+}

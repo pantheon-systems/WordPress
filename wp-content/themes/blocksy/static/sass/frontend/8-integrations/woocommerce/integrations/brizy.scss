@@ -1,0 +1,24 @@
+.brz .flex-control-thumbs li {
+	--thumbs-spacing: 0;
+	flex: initial;
+}
+
+// quantity input
+.brz .brz-woo-add-to-cart {
+
+	.quantity[data-type="type-1"] {
+		width: 80px !important;
+
+		input[type="number"] {
+			padding: 0 calc(25% + 3px) 0 5px;
+		}
+	}
+
+	.quantity[data-type="type-2"] {
+		width: 120px !important;
+
+		input[type="number"] {
+			padding: 0 calc(var(--quantity-height, 55px) / 1.8 + 9%);
+		}
+	}
+}

@@ -1,0 +1,92 @@
+// common
+[data-menu] > ul > li {
+	// display: flex;
+	// align-items: center;
+	
+	> a {
+		&:before, &:after {
+			position: absolute;
+			left: var(--menu-indicator-left, 0);
+			right: var(--menu-indicator-right, 0);
+			margin: var(--menu-indicator-margin, 0);
+			height: var(--menu-indicator-height, 2px);
+			opacity: var(--menu-indicator-opacity, 0);
+			background-color: var(--menu-indicator-active-color, var(--paletteColor2));
+			transition: opacity 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+						width 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+						height 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+						top 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+						bottom 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+		}
+
+		&:before {
+			top: var(--menu-indicator-y-position, 0);
+		}
+
+		&:after {
+			bottom: var(--menu-indicator-y-position, 0);
+		}
+	}
+}
+
+
+// type 2
+[data-menu*="type-2"] > ul > li {
+	> a:after {
+		content: '';
+		width: var(--menu-indicator-width, 100%);
+	}
+
+	&:hover > a,
+	&[class*="current-menu-"] > a {
+		--menu-indicator-opacity: 1;
+	}
+}
+
+[data-menu="type-2:center"] > ul > li {
+	--menu-indicator-width: 0;
+	--menu-indicator-margin: 0 auto;
+
+	&:hover > a,
+	&[class*="current-menu-"] > a {
+		--menu-indicator-width: calc(100% - var(--menu-items-spacing, 25px));
+	}
+}
+
+[data-menu="type-2:left"] > ul > li {
+	--menu-indicator-opacity: 1;
+	--menu-indicator-left: calc(var(--menu-items-spacing, 25px) / 2);
+	--menu-indicator-width: 0;
+
+	&:hover > a,
+	&[class*="current-menu-"] > a {
+		--menu-indicator-width: calc(100% - var(--menu-items-spacing, 25px));
+	}
+}
+
+// type 3
+[data-menu*="type-3"] > ul > li {
+	&:hover > a,
+	&[class*="current-menu-"] > a {
+		background-color: var(--menu-indicator-active-color, var(--paletteColor2));
+	}
+}
+
+
+// type 4
+[data-menu*="type-4"] > ul > li {
+	> a {
+		&:before, &:after {
+			--menu-indicator-y-position: 10px;
+			content: '';
+		}
+	}
+
+	&:hover > a,
+	&[class*="current-menu-"] > a {
+		&:before, &:after {
+			--menu-indicator-y-position: 0px;
+			opacity: 1;
+		}
+	}
+}

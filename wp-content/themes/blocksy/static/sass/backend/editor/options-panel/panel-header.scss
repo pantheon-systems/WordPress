@@ -1,0 +1,19 @@
+.blocksy-sidebar-active .edit-post-sidebar {
+
+	> .edit-post-sidebar-header,
+	> .interface-complementary-area-header {
+		display: none;
+	}
+}
+
+.ct-panel-options-header {
+	display: flex;
+	align-items: center;
+	margin: 0 -12px;
+	padding-inline-end: 4px;
+	border-top: none;
+
+	button:not(:last-of-type) {
+		margin-inline-start: auto;
+	}
+}

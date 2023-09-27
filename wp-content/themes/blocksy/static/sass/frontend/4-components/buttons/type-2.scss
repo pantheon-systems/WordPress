@@ -1,0 +1,21 @@
+$buttons-type-2:
+	'.ct-button-ghost',
+	'.wp-block-buttons .wp-block-button .wp-block-button__link.is-style-outline',
+	'.wp-block-buttons .wp-block-button.is-style-outline .wp-block-button__link',
+;
+
+#{$buttons-type-2} {
+	--buttonTextInitialColor: var(--buttonInitialColor);
+
+	border-width: 2px;
+	border-style: solid;
+	color: var(--buttonTextInitialColor);
+	background-color: transparent;
+	border-color: var(--buttonInitialColor);
+
+	&:hover {
+		color: var(--buttonTextHoverColor);
+		border-color: var(--buttonHoverColor);
+		background-color: var(--buttonHoverColor);
+	}
+}

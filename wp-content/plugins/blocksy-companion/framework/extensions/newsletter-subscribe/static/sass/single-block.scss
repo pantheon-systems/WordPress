@@ -1,0 +1,29 @@
+.ct-newsletter-subscribe-block {
+	margin-top: 60px;
+	text-align: center;
+	border: var(--newsletter-container-border, none);
+	border-radius: var(--border-radius, 0px);
+	--linkInitialColor: var(--color);
+
+	h3 {
+		font-size: 20px;
+	}
+
+	> * {
+		// max-width: 550px;
+		margin-left: auto;
+		margin-right: auto;
+
+		@include media-breakpoint-up(md) {
+			width: 80%;
+		}
+
+		&:first-child {
+			margin-top: 20px;
+		}
+
+		&:last-child {
+			margin-bottom: 20px;
+		}
+	}
+}

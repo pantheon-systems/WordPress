@@ -1,0 +1,105 @@
+[data-archive="default"] .entry-card {
+	display: flex;
+	text-align: var(--horizontal-alignment);
+
+	.entry-title {
+		margin: initial;
+		--linkInitialColor: initial;
+	}
+
+	.entry-meta {
+		color: var(--color);
+		--linkInitialColor: var(--color);
+	}
+
+	.ct-ghost {
+		margin: 0 !important;
+		flex: 1 0 auto;
+	}
+}
+
+.entry-excerpt {
+	color: var(--color);
+	word-break: break-word;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.entry-divider {
+	margin-left: calc(var(--card-inner-spacing, 30px) * -1);
+	margin-right: calc(var(--card-inner-spacing, 30px) * -1);
+	border-bottom: var(--entry-divider);
+}
+
+// elements spacing
+[data-archive="default"] {
+
+	&[data-layout*="grid"] .entry-card,
+	&[data-layout="classic"] .entry-card,
+	&[data-layout="simple"] .card-content {
+
+		> *:not(:last-child) {
+			margin-bottom: 20px;
+
+			&.entry-meta {
+				// because the meta li ads margin-bottom 5px
+				margin-bottom: 15px;
+			}
+		}
+	}
+
+	&[data-layout*="grid"] .entry-card,
+	&[data-layout="classic"] .entry-card {
+		flex-direction: column;
+
+		> .ct-image-container + * {
+			margin-top: 10px;
+		}
+	}
+}
+
+
+// Boxed & Cover card
+[data-cards="boxed"], 
+[data-cards="cover"] {
+
+	.entry-card {
+		padding: var(--card-inner-spacing, 30px);
+		border: var(--card-border, none);
+		box-shadow: var(--box-shadow);
+		border-radius: var(--borderRadius);
+	}
+}
+
+// Cover card
+[data-archive="default"][data-cards="cover"] .entry-card {
+	justify-content: var(--vertical-alignment);
+	position: relative;
+	min-height: var(--card-min-height, 400px);
+
+	.ct-image-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin-bottom: 0;
+	}
+
+	> *:not(.ct-image-container) {
+		position: relative;
+		z-index: 1;
+	}
+}
+
+// Simple card
+[data-archive="default"][data-cards="simple"] {
+	overflow: hidden;
+	
+	.entry-card {
+		padding-bottom: var(--grid-columns-gap, 30px);
+		border-bottom: var(--card-border, none);
+	}
+}

@@ -1,0 +1,137 @@
+.product > .woocommerce-tabs {
+	padding-top: 60px;
+}
+
+// default tabs & type 1
+.woocommerce div.product div.woocommerce-tabs ul.tabs {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: var(--vertical-alignment, center);
+
+	@include media-breakpoint-down (sm) {
+		flex-direction: column;
+		--vertical-alignment: stretch;
+	}
+
+	@include media-breakpoint-up (md) {
+		justify-content: var(--horizontal-alignment, center);
+	}
+
+	li {
+		display: inline-flex;
+		position: relative;
+
+		&:before {
+			position: absolute;
+			content: '';
+			left: 0;
+			right: 0;
+			bottom: var(--tab-bottom, -1px);
+			height: var(--tab-height, 3px);
+			opacity: var(--tab-visibility, 0);
+			border-radius: var(--tab-border-radius, 5px);
+			background: var(--tab-background, var(--paletteColor1));
+		}
+
+		a {
+			position: relative;
+			width: 100%;
+			text-align: center;
+			line-height: inherit;
+			padding: var(--tab-padding, 1.3em 1.5em);
+		}
+
+		&.active {
+			z-index: 1;
+			--tab-visibility: 1;
+
+			a {
+				color: var(--linkActiveColor);
+			}
+		}
+	}
+}
+
+// tabs type 1
+.woocommerce-tabs[data-type*="type-1"] {
+	.tabs {
+		border-bottom: 1px solid var(--tab-border-color, var(--border-color));
+
+		li {
+			margin-bottom: -1px;
+
+			@include media-breakpoint-down (sm) {
+				border-bottom: 1px solid var(--tab-border-color, var(--border-color));
+			}
+		}
+	}
+}
+
+// tabs type 2
+.woocommerce-tabs[data-type*="type-2"] {
+	.tabs {
+		li {
+			--tab-bottom: 0;
+			--tab-height: 100%;
+			--tab-border-radius: 0;
+			--tab-padding: 1em 2em;
+			border: 1px solid var(--tab-border-color, var(--border-color));
+
+			@include media-breakpoint-down (sm) {
+				&:not(:first-child) {
+					margin-top: -1px;
+				}
+			}
+
+			@include media-breakpoint-up (md) {
+				margin-right: -1px;
+			}
+		}
+
+		@include media-breakpoint-up (md) {
+			&:before, &:after {
+				flex: 1 0 auto;
+				height: 1px;
+				background: var(--border-color);
+			}
+		}
+	}
+}
+
+// tabs panel
+.woocommerce-tabs .panel > h2:first-child {
+	--fontSize: 20px;
+}
+
+.woocommerce div.product div.woocommerce-tabs div.woocommerce-Tabs-panel.panel {
+	padding-top: 40px;
+}
+
+// tabs alignment
+.woocommerce-tabs[data-type*="left"] {
+	--horizontal-alignment: flex-start;
+}
+
+.woocommerce-tabs[data-type*="right"] {
+	--horizontal-alignment: flex-end;
+}
+
+@include media-breakpoint-up (md) {
+	[data-type="type-2:left"] .tabs {
+		&:after {
+			content: '';
+		}
+	}
+
+	[data-type="type-2:center"] .tabs {
+		&:before, &:after {
+			content: '';
+		}			
+	}
+
+	[data-type="type-2:right"] .tabs {
+		&:before {
+			content: '';
+		}
+	}
+}

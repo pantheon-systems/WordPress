@@ -1,0 +1,26 @@
+nav[class*="menu"] {
+
+	li > a.ct-highlight {
+		color: var(--linkActiveColor, var(--linkHoverColor));
+	}
+}
+
+[data-menu*="type-2"] > ul > li > a.ct-highlight {
+	--menu-indicator-opacity: 1;
+}
+
+[data-menu="type-2:left"] > ul > li > a.ct-highlight,
+[data-menu="type-2:center"] > ul > li > a.ct-highlight {
+	--menu-indicator-width: calc(100% - var(--menu-items-spacing, 25px));
+}
+
+[data-menu*="type-3"] > ul > li > a.ct-highlight {
+	background-color: var(--menu-indicator-active-color, var(--paletteColor2));
+}
+
+[data-menu*="type-4"] > ul > li > a.ct-highlight {
+	&:before, &:after {
+		--menu-indicator-y-position: 0px;
+		opacity: 1;
+	}
+}

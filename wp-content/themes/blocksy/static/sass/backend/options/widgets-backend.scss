@@ -1,0 +1,130 @@
+// block widgets
+.ct-option-widget-area {
+	margin-top: 15px;
+
+	.editor-styles-wrapper {
+		padding: 0;
+		background: transparent;
+	}
+}
+
+// block widgets panel
+#customize-controls .control-section-sidebar {
+	li.customize-control-sidebar_block_editor {
+		--ui-padding: 0;
+		margin-top: -7px;
+	}
+}
+
+.ct-customizer-panel {
+
+	.customize-widgets-layout__inspector {
+		.customize-section-description-container {
+			display: none;
+		}
+
+		> form {
+			margin: -12px;
+		}
+	}
+
+	&.ct-panel-second-level > div:last-child {
+		z-index: 10;
+		background: inherit;
+	}
+}
+
+
+// classic widgets
+.widget-inside {
+	// padding: 1px 15px 15px 15px;
+	padding: 0;
+
+	.ct-control {
+		position: relative;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		margin-left: var(--widget-control-margin, -11px);
+		margin-right: var(--widget-control-margin, -11px);
+		border-bottom: 1px solid #e5e5e5;
+
+		&[data-design*="inline"] {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		&[data-design="inline"] {
+			> header {
+				flex: 0 0 45%;
+				max-width: 45%
+			}
+
+			> section {
+				flex: 0 0 55%;
+				max-width: 55%;
+				text-align: right;
+			}
+		}
+
+		&[data-design="inline-full"] {
+			> header {
+				flex: 1 1 auto;
+			}
+		}
+	}
+
+	.ct-option-description {
+		margin-top: 15px;
+	}
+}
+
+// classic widgets inside block editor
+.wp-block-legacy-widget__edit-form {
+
+	.ct-options-panel {
+
+		.ct-control {
+			--select-input-width: 100%;
+
+			&:not(:first-child) {
+				--options-vertical-spacing: 0px;
+			}
+
+			&:last-child {
+				margin-bottom: 0px;
+				border-bottom: none;
+			}
+		}
+
+		.ct-buttons-group {
+			margin: 0;
+			padding: 0;
+		}
+
+		.ct-layer-content > * {
+			--widget-control-margin: 0px;
+			--options-vertical-spacing: 20px;
+		}
+	}
+}
+
+// widgets list
+#widget-list > div[id*="blocksy_ct"] {
+	h3 {
+		position: relative;
+
+		&:before {
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			width: 3px;
+			height: 100%;
+			background: #0085ba;
+		}
+	}
+}
+
+#customize-theme-controls .customize-pane-child.customize-widgets__sidebar-section {
+	background-color: transparent;
+}

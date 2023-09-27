@@ -1,0 +1,85 @@
+name: Deploy Branch to Pantheon Canary Multidev
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_CONTEXT: ${{ toJson(github) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+
+      - uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PANTHEON_SSH_KEY }}
+          config: ${{ secrets.SSH_CONFIG }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+
+      - name: Installing Terminus
+        uses: pantheon-systems/terminus-github-actions@main
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
+
+      - name: Get Committer Email and Name
+        run: |
+          COMMITTER_EMAIL=$(git log --format='%ae' -n 1 ${{ github.sha }})
+          COMMITTER_NAME=$(git log --format='%an' -n 1 ${{ github.sha }})
+
+          # Configure git defaults
+          git config --global user.email "$COMMITTER_EMAIL"
+          git config --global user.name "$COMMITTER_NAME"
+
+      - name: Get Canary site
+        run: |
+          CANARY_SITE=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name --tag canary | head -1)
+          echo "CANARY_SITE=$CANARY_SITE" >> $GITHUB_ENV
+          CANARY_REPO=$(terminus connection:info ${CANARY_SITE}.dev --fields git_url --format list)
+          echo "CANARY_REPO=$CANARY_REPO" >> $GITHUB_ENV
+        env:
+          ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
+          UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
+
+      - name: Sync code to site
+        run: |
+          # Setup remote branch connection
+          PR_BRANCH_NAME="pr-${{ github.event.pull_request.number }}" # PR branch name
+          echo "PR_BRANCH_NAME=$PR_BRANCH_NAME" >> $GITHUB_ENV
+          git remote add pantheon $CANARY_REPO
+
+          # Check if remote branch exists
+          _check_branch=$(git ls-remote --heads pantheon $PR_BRANCH_NAME)
+          [[ -n ${_check_branch} ]] && git pull pantheon $PR_BRANCH_NAME --rebase
+
+          # Sync branch
+          git push -u pantheon HEAD:refs/heads/$PR_BRANCH_NAME
+
+      - name: Create multidev
+        run: |
+          if ! terminus env:info $CANARY_SITE.$PR_BRANCH_NAME > /dev/null 2>&1; then
+              terminus env:create $CANARY_SITE.dev $PR_BRANCH_NAME
+          else
+              echo "Environment $PR_BRANCH_NAME already exists."
+          fi
+          MULTIDEV_URL=$(echo "https://$PR_BRANCH_NAME-$CANARY_SITE.pantheonsite.io")
+          echo "MULTIDEV_URL=$MULTIDEV_URL" >> "$GITHUB_ENV"
+
+      - name: Comment on PR
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { MULTIDEV_URL } = process.env;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `*Multidev created*: ${MULTIDEV_URL}`
+            });

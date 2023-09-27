@@ -1,0 +1,23 @@
+.ct-demo-child {
+
+	.ct-checkbox-container {
+		max-width: 250px;
+		margin: 25px auto 0 auto;
+		padding-left: 15px;
+		padding-right: 15px;
+		border-radius: 4px;
+		border: 1px solid rgba(179, 189, 201, 0.3);
+	}
+
+	a {
+		display: block;
+		color: #687c93;
+		font-weight: 500;
+		text-decoration: none;
+		margin-top: 25px;
+
+		&:hover {
+			color: #0073aa;
+		}
+	}
+}

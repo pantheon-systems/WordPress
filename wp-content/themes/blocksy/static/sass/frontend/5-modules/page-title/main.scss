@@ -1,0 +1,26 @@
+@import 'type-1';
+@import 'type-2';
+
+.entry-header {
+	
+	> *:not(:first-child) {
+		margin-top: var(--itemSpacing, 20px);
+	}
+
+	.page-title {
+		margin-bottom: 0;
+	}
+
+	.entry-meta {
+		color: var(--color);
+		--linkInitialColor: var(--color);
+	}
+
+	.page-description {
+		color: var(--color);
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

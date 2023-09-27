@@ -1,0 +1,38 @@
+@import 'options/display-conditions';
+@import 'options/import-export';
+@import 'options/position-option';
+
+#adminmenu .toplevel_page_ct-dashboard {
+	.wp-menu-image img {
+		max-width: 18px;
+		height: auto;
+		padding: 7px 0 0 0;
+	}
+
+	a[href*='ct-dashboard-pricing'] {
+		display: none !important;
+	}
+}
+
+[data-slug='blocksy-companion'] {
+	.upgrade {
+		display: none;
+	}
+}
+
+.fs-field-beta_program {
+	display: none;
+}
+
+#fs_account {
+
+	tr.fs-field-plan form.button-group {
+		.fs-change-plan {
+			display: none;
+		}
+
+		input.button {
+			border-radius: 3px;
+		}
+	}
+}

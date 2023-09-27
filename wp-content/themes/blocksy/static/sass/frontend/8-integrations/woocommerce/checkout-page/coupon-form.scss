@@ -1,0 +1,27 @@
+.showcoupon {
+	padding-left: 5px;
+	text-decoration: underline;
+}
+
+.checkout_coupon {
+	margin-bottom: 50px;
+	border-bottom: 1px dashed rgba(224, 229, 235, 0.8);
+
+	p {
+		&:first-child {
+			display: none;
+		}
+	}
+
+	.form-row {
+		@include media-breakpoint-up (md) {
+			margin-bottom: 40px;
+			width: 49%;
+		}
+	}
+
+	.button {
+		width: 100%;
+		min-width: 100%;
+	}
+}

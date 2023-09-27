@@ -1,0 +1,2784 @@
+1.8.67: 2023-01-19
+- Improvement: Single add to cart button custom width is not respected if AJAX option is enabled
+- Improvement: Single product "Add to Cart" button with option issue when value is set to pixels
+- Improvement: Remove related posts module divider when it is right after author box
+- Improvement: Fix WooCommerce hook position in archive when card type 2 is set
+- Improvement: Integrate live search results REST API call with Polylang Pro
+- Improvement: Show sales price in live search results
+- Fix: Nested advanced menu elements do not inherit the correct color for their label
+
+1.8.66: 2023-01-11
+- Improvement: Ensure current screen prefix is never null
+- Improvement: Integrate antispambot() function into e-mail address fields
+- Improvement: Border and shadow options inherit state issue
+- Improvement: Better integration with WooCommerce Customize My Account Page plugin
+- Fix: Table inside additional information tab width issue when layout set to boxed
+- Fix: Background option responsive issue when setting different image or color per device
+- Fix: Minor PHP syntax improvement for better compatibility with old PHP versions
+- Fix: Password protected products form is full width
+- Fix: Header button ghost view gap issue
+
+1.8.65: 2022-12-29
+Improvement: General fixes and improvements
+
+1.8.64: 2022-12-28
+- Improvement: Header menu item - better handle the stretch menu option
+- Improvement: Proper computation of price taxes in search live results
+- Improvement: Correctly count articles for author pages
+- Improvement: Support for LearnDash quiz CPT
+- Fix: Minor syntax error for old php versions
+- Fix: Translation (POT) files are not generated correctly
+
+1.8.63: 2022-12-22
+- Improvement: Better compatibility with WooCommerce Composite Products
+- Improvement: Add check for missing haystack
+- Improvement: Button header element without a label has some redundant spacing
+- Improvement: Shortcode support in header button link option
+
+1.8.62: 2022-12-15
+- Improvement: Additional actions for page title with two post meta elements
+- Improvement: Don't output `data-header` and `data-footer` attributes if header or footer is disabled
+- Improvement: Add filter to disable comments.css file on single pages
+- Fix: WooCommerce 7.2 and "Sold individually" products have a broken quantity input design
+- Fix: Global colors won't change dynamically when changing a color palette
+
+1.8.61: 2022-12-09
+- Fix: Minor layout issue with overflow-x on mobile
+
+1.8.60: 2022-12-08
+- Improvement: Better handle the theme color palettes inside block editor
+- Improvement: Scoped selector for infinite loading pagination
+- Improvement: Correctly compute sidebar position for BuddyPress pages
+- Improvement: Better integration with "WooCommerce Buy for me" plugin
+
+1.8.59: 2022-11-24
+- Improvement: Menu accessibility improvements
+- Improvement: theme.json file minor styling improvements
+- Improvement: Insert WooCommerce variation images only once
+- Improvement: Better integration with Simple Block Gallery plugin
+- Fix: Respect post number option on search results page
+- Fix: Menu aria-expanded attribute toggle issue
+
+1.8.58: 2022-11-17
+- Improvement: Don't output HTML tags in aria-label attribute
+- Improvement: Correctly sync customiser options on posts with metabox overrides
+- Fix: WooCommerce archive video thumbnail ratio issue
+- Fix: Table block default border color issue
+- Fix: Manually embedded iframe affected by block-width CSS if sidebar is present
+
+1.8.57: 2022-11-10
+- Improvement: Introduce filter for modifying static assets urls for CDN
+- Improvement: Outline button type not inheriting the correct color
+- Improvement: Left/right alignment blocks improvement
+- Improvement: Don't show iOS focus highlighter on trigger buttons
+- Improvement: Option to disable live results in header search module
+- Fix: Legacy nav widget menu inherits page site body background options in preview
+
+1.8.56: 2022-11-04
+- Improvement: Integrate quantity input buttons with WooCommerce Pre Order
+- Improvement: Gutenberg container and inner container width improvements
+- Fix: WooCommerce "Highlight Required Fields" customizer option issue
+- Fix: Some customiser options do not work for BuddyPress pages
+- Fix: Boxed view posts/pages make the Gutenberg editor extremely narrow
+- Fix: Links underline decoration issue
+
+1.8.55: 2022-11-03
+- Improvement: Gradient tool does not work correctly with WP 6.1
+- Improvement: Don't steal focus when clicking a link inside overlay
+- Improvement: Added `theme.json` file in to the theme folder
+- Improvement: WordPress 6.1 compatibility
+- Improvement: Optimise search overlay REST API URL query string parameters
+- Improvement: Update WooCommerce template versions
+- Improvement: Better integration with new Elementor 3.8 container element
+- Fix: Related posts module columns number option
+
+1.8.53: 2022-10-20
+- Improvement: Better integration with Read Meter plugin
+- Improvement:  Show type and source of the font in typography option
+- Improvement: More reliable focus lock for all overlays and popups
+- Improvement: Correct whole page refresh in customizer partial sync
+- Improvement: Better integration with CheckoutWC plugin
+- Fix: Top positioned trending posts module z-index issue with footer reveal effect
+- Fix: Show password icon jumps when the password strength meter is shown
+- Fix: Custom WooCommerce sorting lists items do not appear in "Default product sorting" option
+
+1.8.52: 2022-10-13
+- Improvement: Page background option for archives
+- Improvement: More reliable integration with Woocommerce Custom Product Addons
+- Improvement: Smarter calculations of excerpt with special characters
+- Improvement: Correctly check for method presence in header cart item
+- Improvement: Improve excerpt display in shop archives with categories
+- Improvement: Display a GDPR related notice when trying to select a Google Font
+
+1.8.51: 2022-10-07
+- Improvement: YITH Advanced Woo Filters not working correctly on iOS
+- Improvement: Better handling of Custom unit in font size option
+- Improvement: Better compatibility with WooCommerce Custom Product Addons
+- Improvement: Live search results module - show correct product price including taxes
+- Improvement: WooCommerce cart item with variations display issue
+- Improvement: Add ID to footer element
+- Improvement: Better handling of multi byte characters in excerpt generation
+- Fix: Header bottom border stays on screen if sticky is auto-hide
+- Fix: Author box typography options do not appear if "social icons" option is disabled
+
+1.8.50: 2022-09-23
+- Improvement: Correct condition matching for Page title meta colors
+
+1.8.49: 2022-09-22
+- Improvement: More reliable check for WooCommerce presence
+- Improvement: Better integration between search forms and Polylang
+- Improvement: Integration with WooCommerce Mix & Match plugin
+- Improvement: Smarter check for dynamic chunks URLs
+- Improvement: Very long sub-menus cause ghost white space at the bottom of short pages
+
+1.8.48: 2022-09-22
+- Improvement: More reliable check for WooCommerce presence
+- Improvement: Better integration between search forms and Polylang
+- Improvement: Integration with WooCommerce Mix & Match plugin
+- Improvement: Smarter check for dynamic chunks URLs
+- Improvement: Very long sub-menus cause ghost white space at the bottom of short pages
+
+1.8.47: 2022-09-15
+- New: Add support for "clamp" and "calc" inside font size typography option
+- Improvement: Better handling of Post Meta font controls conditions
+- Improvement: Integration with archive pages of GeoDirectory plugin
+- Improvement: Support picture tag in gallery of variable products
+- Improvement: Better handling of thumbnails style with custom galleries in variations
+- Improvement: Smarter logic for calculation menu width in responsive menu
+- Improvement: Integration with WooCommerce Subscriptions plugin on cart page
+- Improvement: More robust logic of cart fragments updates
+- Improvement: Strengthen custom icons implementations for header elements
+- Improvement: Better integration YITH WooCommerce Advanced Reviews plugin
+- Fix: TutorLMS filters and pagination issue
+- Fix: "Filter by attributes" WooCommerce widget shows hidden items
+- Fix: Mega menu label is cut off inside the footer area
+
+1.8.46: 2022-08-18
+- New: Comment form labels new position (outside inputs) option
+- Improvement: Divider block small CSS improvement
+- Improvement: Better handling of alt tag in avatars when using a custom uploaded image
+- Improvement: Content spacing option small CSS improvement
+- Improvement: WooCommerce single product gallery CSS improvements
+- Improvement: Support for font weight property for Google variable fonts in typography option
+- Fix: Standard quantity selector doesn't work on phones on cart page
+
+1.8.45: 2022-08-04
+- Improvement: Improve `entry-content` headings spacing
+- Fix: WooCommerce quantity input type 1 RTL fix
+
+1.8.44: 2022-07-27
+- Improvement: Better style WooCommerce account error notifications
+- Improvement: Better customizer sync selector for single posts/pages elements
+
+1.8.43: 2022-07-26
+- Improvement: Correctly handle custom WooCommerce placeholder images
+- Improvement: Header cart item better handle customizer changes
+- Improvement: Remove extra spacing between icons in header social element
+- Fix: Customizer color values where not inherited in editor mode in some special cases
+
+1.8.42: 2022-07-14
+- New: Font customisation controls for the single post author box
+- Improvement: Correctly recalculate popover position in scrollable modals
+- Improvement: Style new WooCommerce filter blocks
+- Fix: Enhanced Grid blog structure and large title font size causes overflow for cards
+- Fix: Footer's columns divider behaves better on RTL languages
+
+1.8.41: 2022-07-08
+- Improvement: Correctly minify CSS files in the final build
+
+1.8.40: 2022-07-07
+- Improvement: Added blocksy:footer:logo:url filter for changing the footer logo URL
+- Improvement: Cart drawer type 2 scrollbar out of bounds
+- Improvement: Show woo categories descriptions in archive cards
+- Improvement: Header/footer builder items are not removable sometimes
+- Fix: bbPress taxonomy archives pagination doesn't work with Blocksy
+- Fix: Author archive "date joined" doesn't respect localisation
+
+1.8.39: 2022-06-28
+- New: Scoped post navigation by taxonomy
+- Improvement: Support detection of late registered custom post types
+- Improvement: Treat CPT type as special only when TutorLMS is active
+- Improvement: Output drawer canvas styles even it no items are inside it
+- Improvement: Color picker modal doesn't close if you click on `ct-color-picker-container`
+- Improvement: Better sync for WooCommerce product gallery in Customizer
+- Fix: Default header row shadow option takes effect on header transparent state
+- Fix: Post meta user avatar CSS display issue
+- Fix: Correctly override header row styles in transparent state
+- Fix: Menu hover Type 2 misaligned on RTL
+- Fix: Site title + logo are squished together in RTL mode
+- Fix: Fractional image ratio doesn't work
+- Fix: Header search show price option sync issue
+
+1.8.38: 2022-06-21
+- Improvement: Make breadcrumbs blog item to have the same name as the page
+- Improvement: Ensure Webpack output is compatible with caching plugins
+- Improvement: More stable Elementor integration with Blocksy color palette
+- Fix: Author avatar image size
+
+1.8.37: 2022-06-20
+- New: Option to move comment form above or below comments list
+- New: Option to deactivate image lazy load from WooCommerce archive and single product page
+- New: WooCommerce cards short description option
+- Improvement: Header row background values overwritten in some specific circumstances
+- Improvement: Better handling of messages outside the WooCommerce pages
+- Improvement: Search live results accessibility improvements
+- Improvement: Show price in live search results for product items
+- Improvement: Update the image ratio option to use native `aspect-ratio` property
+- Improvement: Do not output blank tags if entry meta label is empty
+- Improvement: Better integration with Default Featured Image plugin
+- Improvement: Better logic for picking taxonomies in breadcrumbs
+- Improvement: Search overlay placeholder translatable string
+- Improvement: Header sticky offset jump in Safari browser
+- Improvement: Better integration with Tutor LMS 2.0
+- Improvement: Header elements sync state in off-canvas drawer
+- Fix: WooCommerce gallery thumbnails do not display the image title on hover
+- Fix: Customizer page force reload while switching to a different header
+- Fix: Variable products gallery not initialized in some cases
+- Fix: Don't affect styles within iframe tag from third party plugins
+- Fix: Skype link in social channels doesn't work correctly
+
+1.8.36: 2022-06-03
+- Improvement: Use native browser lazy load functionality in Blocksy images
+- Improvement: Don't close offcanvas when clicking on generic anchor links from it
+- Improvement: Don't load additional variation data when default product gallery is used
+- Improvement: Make custom meta labels from page title translateable
+- Improvement: Stabler mouse enter handler in menus
+- Improvement: Sticky state logo shrink sync issue
+- Fix: Custom post type and custom options not propagated inside post settings
+
+1.8.35: 2022-05-25
+- Improvement: WordPress 6.0 minor improvements
+
+1.8.34: 2022-05-20
+- Improvement: Correctly load deps data for dynamic JS chunks
+
+1.8.33: 2022-05-20
+- Improvement: Better computation of URLs for dynamic JS chunks
+- Improvement: Better interoperability of Blocksy Customizer with Email designer plugins
+- Improvement: Store notice overlaps header
+- Improvement: Cart page items are not removed with AJAX on mobile devices
+- Improvement: Remove unneeded breadcrumbs action
+- Improvement: Author social links target option
+- Improvement: Better integration with FacetWP plugin
+- Fix: Archive card read more button alignment
+
+1.8.32: 2022-05-11
+- Improvement: General fixes and improvements
+
+1.8.31: 2022-05-11
+- Improvement: Smart loading of wp-components script to avoid CSP issues
+
+1.8.30: 2022-05-10
+- Improvement: Smarter check for wp.components presence in OptionsPanel
+
+1.8.29: 2022-05-10
+- New: Hooks for related posts module
+- Improvement: Group block inner container width when no background is set
+- Improvement: Do not require unsafe-eval CSP rule for script-src
+- Improvement: Cart & checkout page - output theme container div only when needed
+- Improvement: Dropdown menus sometimes get stuck under specific circumstances
+- Improvement: Border controls for boxed layouts
+- Improvement: CartFlows CSS checkout page conflict
+- Fix: Text alignment option doesn't work in tables in RTL mode
+- Fix: Dropdown menus parent element not accessible via keyboard
+- Fix: Shortcode slider autoplay option
+- Fix: WooCommerce product reviews pagination not inheriting styles
+
+1.8.28: 2022-04-22
+- Improvement: More robust handling for product visiblity in search
+
+1.8.27: 2022-04-22
+- Improvement: Respect product visiblity in live search
+- Improvement: Woo "Thank you" notice styles
+- Fix: Archive cards thumbnail spacing
+
+1.8.26: 2022-04-21
+- Improvement: Footer alignment sync issue
+- Improvement: Posts navigation image border radius option
+- Improvement: Integrate breadcrumbs with WooCommerce structured data
+- Improvement: Smarter loading of infinite-scroll library
+- Improvement: Icon position inside products search form submit button
+
+1.8.26-beta10: 2022-04-20
+- Improvement: Posts navigation image border radius option
+- Improvement: Integrate breadcrumbs with WooCommerce structured data
+- Improvement: Smarter loading of infinite-scroll library
+- Improvement: Icon position inside products search form submit button
+
+1.8.25: 2022-04-07
+- Improvement: Ensure regeneration for dynamic styles in metabox options
+
+1.8.24: 2022-04-07
+- Improvement: Changed variable name from `--container-max-width` to `--normal-container-max-width`
+- Improvement: Improve variable products with small images in gallery
+- Improvement: Better compatibility with YITH WooCommerce Product Add-ons & Extra Options plugin
+- Improvement: Quantity input infinity as default for unparseable max attr
+- Improvement: Cards featured image rendering issue if zoom in hover effect enabled (only Chrome 100)
+- Improvement: Disable theme checkout actions if Fluid Checkout plugin is active
+- Fix: Compatibility issue with WooCommerce Name Your Price plugin
+- Fix: Search box header element long input overlaps the search icon
+- Fix: Google fonts render issue in customizer widgets
+
+1.8.23: 2022-03-25
+- Improvement: Cleanup on legacy widget form
+- Improvement: Ability to change the related posts wrapper tag
+
+1.8.22: 2022-03-24
+- Fix: Infinite scroll/load more doesn’t work for blog archives
+
+1.8.21: 2022-03-23
+- New: Better integration with WooCommerce German Market
+- Improvement: Respect WooCommerce shop permalinks settings in breadcrumbs
+- Improvement: Better handle the load more pagination module selector
+- Improvement: Better integration with WooCommerce Product Add-Ons Ultimate plugin
+- Improvement: Off canvas menu icons click interaction
+- Improvement: Better integration with Fancy Product Designer plugin
+- Improvement: Add filter for wishlist icons (archive cards and single product)
+- Improvement: Improvement of some translation strings
+- Improvement: Select box color not rendered correctly in some Windows browsers
+- Improvement: Pull quote border color doesn't recognize global palette
+- Improvement: Add filter for adding custom gradients
+- Improvement: Add image size option to page title type 2 featured and custom image
+- Improvement: Better compatibility with Fast Cart plugin
+- Improvement: Posts card background color when inserted in a boxed page
+- Improvement: Rework customizer widgets option type
+- Improvement: Hook for hero breadcrumbs and description
+- Fix: Comments meta and login to reply link squished together
+- Fix: Issue with variable products and WPC Frequently Bought Together plugin
+
+1.8.20: 2022-03-01
+- Improvement: More color options for WooCommerce notices/messages
+- Improvement: Better output fonts (Google, Typekit, Local Google Fonts) inside block editor
+- Fix: Drop-down menu boxed and solid color selector
+- Fix: Comments data/time format inherit correct settings from WordPress
+- Fix: WhatsApp and Viber share buttons don't work
+- Fix: Off-canvas cart panel title color
+
+1.8.19: 2022-02-18
+- Improvement: Menu dropdowns on touch devices
+- Improvement: Accessibility improvement for WooCommerce cards type 2
+
+1.8.18: 2022-02-17
+- Improvement: WPML copy post meta values on translated posts
+- Improvement: Revert to default state option
+- Fix: Form checkboxes checked state issue
+
+1.8.17: 2022-02-16
+- Improvement: WooCommerce gallery zoom issue with really small images
+- Improvement: Archive cards excerpt functionality
+- Improvement: Share box type 2 alignment option
+- Improvement: Minor menu accessibility improvements
+- Improvement: Better integration with WPC Frequently Bought Together plugin
+- Improvement: WordPress 5.9 - better handle block widgets in Customizer
+- Improvement: Allow line breaks in author bio box
+- Improvement: Add `http` or `https` automatically in social links option
+- Improvement: Better sync of styles in Gutenberg editor with 5.9
+- Improvement: WooCommerce order review column sticky position
+- Improvement: Grid block "Choose Layout" dialog out of bounds in block editor
+- Fix: Header transparent state background color when set to gradient
+- Fix: Removing font fallback breaks the font stack
+- Fix: Color picker input field not detecting the correct color format
+- Fix: Mobile menu divider/border issue when Interactive Collapse option is disabled
+- Fix: Sticky logo shrink breaks header row shrink calculations
+- Fix: Menu drop downs do not work consistently on iPad (desktop view)
+- Fix: Woo variations border issue
+
+1.8.16: 2022-01-21
+- Fix: Trailing comma in button options
+
+1.8.15: 2022-01-21
+- New: Header off canvas logo
+- Improvement: Stability and general improvements for WordPress 5.9
+- Improvement: Compatibility with WP 5.9 React components
+- Improvement: More design options for author box
+- Improvement: Deactivate lazy loading from page title type 2 image
+- Improvement: Add CSS class option to header button
+- Improvement: WooCommerce single product zoom image effect
+- Improvement: Shortcode support in header button URL field
+- Improvement: Better position Google and Apple Pay buy buttons from Square plugin
+- Improvement: Device visibility options for mobile menu trigger
+- Improvement: Customizer export widgets functionality
+- Improvement: Add search form icon filter
+- Improvement: Nested menus items highlighting
+- Fix: WPML's String Author Bio Translation does not work with Blocksy
+- Fix: Make use of passive listeners to improve scrolling performance
+- Fix: Off-Canvas menu alignment when text is too long
+- Fix: Screen reader issue with dropdown menu toggle
+- Fix: Anchor navigation makes mobile menu stop working in some edge cases
+- Fix: Favorite button in meta box panel doesn't work
+
+1.8.15-beta25: 2022-01-19
+- Improvement: Add CSS class option to header button
+- Improvement: WooCommerce single product zoom image effect
+- Improvement: Shortcode support in header button URL field
+- Improvement: Better position Google and Apple Pay buy buttons from Square plugin
+- Improvement: Device visibility options for mobile menu trigger
+- Improvement: Customizer export widgets functionality
+- Improvement: Add search form icon filter
+- Improvement: Nested menus items highlighting
+- Improvement: Compatibility with WP 5.9 React components
+- Fix: WPML's String Author Bio Translation does not work with Blocksy
+- Fix: Does not use passive listeners to improve scrolling performance
+- Fix: Off-Canvas menu alignment when text is too long
+- Fix: Anchor navigation makes mobile menu stop working in some edge cases
+- Fix: Favorite button in meta box panel doesn't work
+
+1.8.14: 2021-12-29
+- Improvement: Infinite scroll integration with JetWooBuilder
+- Improvement: Responsive menu accessibility improvements
+- Improvement: WooCommerce archive cards responsive alignment option
+- Fix: WooCommerce archive categories cards alignment
+
+1.8.13: 2021-12-24
+- Improvement: WooCommerce notice/messages small CSS improvement
+- Improvement: Correctly mount fast overlays that have loaders
+- Fix: Search box live results CSS
+
+1.8.12: 2021-12-24
+- New: Options for changing out of stock and sale badge labels
+- Improvement: Better output color variable for related posts title
+- Improvement: Mobile menu trigger button accessibility improvements
+- Improvement: Add horizontal spacing option for desktop menu dropdowns
+- Fix: Menu arrows color transition
+- Fix: Add missing default to WooCommerce gallery variation variable
+
+1.8.11: 2021-12-18
+- Improvement: Toggle close button minor CSS improvements
+- Improvement: Sticky state header minor CSS improvements
+
+1.8.10: 2021-12-17
+- New: Integration with WooCommerce Price Based on Country
+- Improvement: Elementor default template layout CSS improvements
+
+1.8.9: 2021-12-16
+- Improvement: Windows browsers viewport shift when overlay/modal is active
+- Fix: Header menu dropdown indicator color when Elementor template kit is active
+
+1.8.8: 2021-12-15
+- Improvement: Better initialize the responsive menus
+- Fix: Better detect Elementor theme builder templates
+
+1.8.7: 2021-12-15
+- New: Header menu dropdown interaction mode (hover/click)
+- New: Integration with YITH WooCommerce Ajax Product Filter
+- Improvement: Add share box module to pages
+- Improvement: Load offcanvas overlay without delays
+- Improvement: Mobile menu accessibility improvements
+- Improvement: Desktop menu accessibility improvements
+- Improvement: Mailster backend compatibility with Blocksy
+- Improvement: Nested categories handling in breadcrumbs
+
+1.8.7-beta1: 2021-12-10
+- New: Header menu dropdown interaction mode (hover/click)
+- New: Integration with YITH WooCommerce Ajax Product Filter
+- Improvement: Mobile menu accessibility improvements
+- Improvement: Desktop menu accessibility improvements
+- Improvement: Mailster backend compatibility with Blocksy
+- Improvement: Nested categories handling in breadcrumbs
+
+1.8.6.9: 2021-11-26
+- Improvement: Menu dropdown position when header row has shrink option enabled
+- Improvement: Single product gallery type 3 with variation products
+- Improvement: Breadcrumbs filter to pick taxonomy for a post type
+- Improvement: WooCommerce notice for mobile devices
+- Fix: Columns layout sync option
+
+1.8.6.8: 2021-11-18
+- Improvement: Customizer background option better output the value
+- Improvement: Better integration with Forminator plugin
+- Fix: Translation string of the header button
+- Fix: Header row min height option sync if switched to Boxed Row view
+
+1.8.6.7: 2021-11-16
+- Improvement: Stretch menu alignment handling
+
+1.8.6.6: 2021-11-16
+- New: Additional hook for product cards (between actions and information)
+- Improvement: WooCommerce lightbox icon color options
+- Improvement: Better integration with UberMenu plugin
+- Improvement: Single page author box social profiles `rel` attribute improvement
+- Improvement: Buttons CSS minor improvements
+- Improvement: Footer social items direction option
+- Improvement: Better integration with The Events Calendar plugin
+- Improvement: Remove image lazy loading from header logo element
+- Improvement: Header logo element
+- Improvement: Proper logic for italic + weight in css2 syntax
+- Improvement: Live search results respect out of stock setting
+- Fix: Off canvas cart close button position (RTL mode)
+- Fix: Sticky height calculation for offsets with logo shrink
+- Fix: Background option (image & gradient) does not output correctly if set from page settings metabox
+- Fix: Handle NaN input case in slider option (typography)
+
+1.8.6.5: 2021-10-27
+- Improvement: Better check in background option when no overlay functionality is present
+- Improvement: Better handle WooCommerce single product gallery hook
+- Improvement: Update sticky header logic to not perform computations twice
+- Fix: Pjax not working after updates above 1.8.6
+
+1.8.6.4: 2021-10-21
+- New: Introduce blocksy:excerpt:output filter
+- Improvement: Better retrieval of current taxonomy in breadcrumbs
+- Fix: Elementor menu items spacing issue
+- Fix: HTML header element width fix
+
+1.8.6.3: 2021-10-20
+- Improvement: Rename variable `—contentSpacing` to `--content-spacing`
+- Improvement: Allow shortcode in button header element
+- Improvement: Typography option allow individual revert for font options
+- Improvement: CSS improvements for sticky sidebar and header
+- Improvement: Minor WooCommerce RTL issues
+- Improvement: Off canvas drawer validation issue
+- Improvement: Better editor sync
+- Improvement: Improve excessive DOM manipulations from JavaScript
+- Improvement: Sticky header behavior
+- Improvement: Better compatibility with AJAX filter plugin
+- Improvement: Allow main JS to be defered by any caching plugin
+- Improvement: Anchor links small improvement
+- Improvement: WooCommerce variation products images aspect ratio
+- Fix: Woo columns reset option doesn't work on desktop
+- Fix: Menu dropdown issue when JS is deferred
+- Fix: Meta author image `alt` attribute
+
+1.8.6.3-beta17: 2021-10-19
+- Improvement: Allow shortcode in button header element
+- Improvement: Typography option allow individual revert for font options
+- Improvement: CSS improvements for sticky sidebar and header
+- Improvement: Off canvas drawer validation issue
+- Improvement: Better editor sync
+- Improvement: Improve excessive DOM manipulations from JavaScript
+- Improvement: Sticky header behavior
+- Improvement: Better compatibility with AJAX filter plugin
+- Improvement: Allow main JS to be defered by any caching plugin
+- Improvement: Anchor links small improvement
+- Improvement: WooCommerce variation products images aspect ratio
+- Fix: Woo columns reset option doesn't work on desktop
+- Fix: Menu dropdown issue when JS is deferred
+
+1.8.6.2: 2021-10-01
+- Fix: Menu position dropdowns of level 2+
+- Fix: CSS background position not outputted correctly
+- Fix: Cover cards type vertical alignment issue when button is present
+- Fix: Sticky header jumps when inside customizer mode
+
+1.8.6.1: 2021-09-30
+- New: Skip link URL filter
+- New: Search results typography options
+- New: Integration with Simply Static plugin
+- New: Archive cards Cover type
+- Improvement: Filter non existent CPTs from the search element
+- Improvement: WooCommerce shipping methods CSS improvements
+- Improvement: Background option output CSS native properties instead of CSS variables
+- Fix: Footer elements margin property not applied correctly
+
+1.8.6.1-beta5: 2021-09-28
+- New: Skip link URL filter
+- New: Search results typography options
+- New: Integration with Simply Static plugin
+- New: Overlay card type
+- Improvement: Filter non existent CPTs from the search element
+- Improvement: WooCommerce shipping methods CSS improvements
+- Improvement: Background option output CSS native properties instead of CSS variables
+- Fix: Footer elements margin property not applied correctly
+
+1.8.6: 2021-09-21
+- Improvement: Mobile menu small improvement for RTL
+- Improvement: HTML tags inside Product Title not parsed correctly on cart page
+- Improvement: Image tags attributes in archives
+- Improvement: Search live results on iOS devices
+- Fix: SVG featured image breaks search live results
+- Fix: Adaptive/responsive menu calculation issue
+
+1.8.5.9: 2021-09-17
+- Fix: Proper detection of attachment image for archives
+
+1.8.5.8: 2021-09-17
+- New: Add email item to share box
+- Improvement: Customizer options panel in RTL mode
+- Improvement: Responsive menu resize calculations
+- Improvement: Ignore custom scroll container when items list is from header
+- Improvement: Related posts sort option
+- Improvement: Google fonts better cache reset
+- Fix: Post Meta top spacing option does not work if the element is cloned
+
+1.8.5.7: 2021-09-14
+- Improvement: Better accessibility for menu dropdowns
+- Improvement: Compatibility with WooCommerce Custom Product Boxes
+- Improvement: Search modal with live results alignment
+- Improvement: Header builder drag & drop functionality
+- Improvement: WooCommerce better handling for products with external images
+- Improvement: Typography option better handle system fonts
+- Fix: Author page title meta does not respect date format
+
+1.8.5.6: 2021-09-09
+- New: Option to display full post content instead of excerpt in archive cards
+- Improvement: Better support for block widgets in header/footer builder
+- Improvement: Sort social profiles alphabetically and add search functionality
+- Improvement: Social icons rel attribute
+- Fix: Some fonts with space in the name won't render
+
+1.8.5.5: 2021-09-07
+- Improvement: Elementor content spacing issue when Improved CSS Loading option is enabled
+- Improvement: Related products & upsells columns number option
+- Improvement: Left and right blocks offset option
+
+1.8.5.4: 2021-09-03
+- Improvement: Block widgets and footer builder
+- Improvement: WooCommerce single product lightbox for touch devices
+- Improvement: WooCommerce Upsells products don't respect limit settings
+- Improvement: Add display swap property to woo font
+- Fix: Header menu sticky state active color option
+
+1.8.5.3: 2021-08-31
+- Improvement: Integration with Advanced AJAX Product Filters By BeRocket
+- Improvement: Integration with WooCommerce Product Filter by WooBeWoo
+- Improvement: Customizer dark mode block widgets UI
+- Fix: Entry content links hover decoration
+
+1.8.5.2: 2021-08-30
+- Improvement: Block widgets minor improvements
+- Improvement: Related Posts module visibility options
+- Improvement: Single product gallery zoom and lightbox
+- Improvement: Fix missing UI translation strings
+- Improvement: Post featured image does not respect gallery texts
+- Fix: Categories number of posts option
+- Fix: Woo Product Filter support
+
+1.8.5.1: 2021-08-23
+- Fix: WooCommerce waterfall of requests caused by quantity inputs
+- Fix: Properly set responsive option device on mount
+
+1.8.5: 2021-08-20
+- New: Support for multiple taxonomies in post meta
+- New: Support for Block Widgets in Header/Footer Builder and Multiple Sidebars
+- Improvement: Update translation files
+- Improvement: Footer menu - items direction option responsive controls
+- Improvement: Pass featured image output through post_thumbnail_html filter
+- Improvement: Product gallery image is loading slow when selecting attributes
+- Improvement: Schema.org markup small improvements
+- Fix: Quantity selector on touch devices
+- Fix: SVG images don't have a height and width inside image widget
+- Fix: Header cart items label position
+- Fix: Conflict with ad inserter plugin and infinite scroll
+- Fix: WooCommerce lightbox does not display caption
+
+1.8.5-beta3: 2021-08-17
+- New: Support for multiple taxonomies in post meta
+- Improvement: Update translation files
+- Improvement: Footer menu - items direction option responsive controls
+- Improvement: Pass featured image output through post_thumbnail_html filter
+- Improvement: Schema.org markup small improvements
+- Fix: SVG images don't have a height and width inside image widget
+- Fix: Header cart items label position
+- Fix: Conflict with ad inserter plugin and infinite scroll
+- Fix: WooCommerce lightbox does not display caption
+
+1.8.4.5: 2021-08-02
+- Improvement: Avoid doing one XHR request for big variable products
+- Fix: Breadcrumbs typography options not applied in single product page
+
+1.8.4.4: 2021-07-30
+- Improvement: WooCommerce better logic for gallery updates in variable products
+- Improvement: Cards reveal effect animation
+- Improvement: Site title spacing
+
+1.8.4.3: 2021-07-29
+- Improvement: Responsive menu calculation improvements
+- Improvement: Share box functionality
+- Improvement: WooCommerce cart page remove item button improvement
+- Improvement: WooCommerce product gallery lazy loading
+- Fix: Excessive ID navigation breaks the mobile menu and scrolling
+- Fix: Off canvas cart not working correctly after product is added to cart
+
+1.8.4.3-beta2: 2021-07-28
+- Improvement: Share box functionality
+- Improvement: WooCommerce cart page remove item button improvement
+- Improvement: WooCommerce product gallery lazy loading
+- Fix: Off canvas cart not working correctly after product is added to cart
+
+1.8.4.2: 2021-07-26
+- Improvement: Responsive menu calculations
+- Improvement: Comments validation improvements
+- Improvement: Don't apply margin to last entry content item
+
+1.8.4.1: 2021-07-23
+- Improvement: Minor CSS loading improvement
+- Improvement: RTL menu position
+- Fix: Author custom avatar not displayed in author box
+- Fix: Menu dropdown level 2 position
+
+1.8.4: 2021-07-22
+- New: Blog structure type grid responsive columns controls
+- New: Sticky last widget only
+- New:  WooCommerce gallery arrows color options
+- New: Social and share icons add nofollow/dofollow option
+- New: WooCommerce sticky gallery option
+- New: Turn on/off add to cart in WooCommerce archives
+- Improvement: I18n correctly translate dynamic strings of cloned header items
+- Improvement: Comments form label reveal improvement
+- Improvement: Editor styles for WP 5.8
+- Improvement: Related posts improvements
+- Improvement: Footer social icons alignment
+- Improvement: Title & thumbnail visibility options for posts navigation items
+- Improvement: Defer JS files and load when appropriate (back to top, comments, share box)
+- Improvement: Offload 40% of non-critical CSS (~40kb)
+- Improvement: Add independent active color to menu items
+- Improvement: Slider option smarter drag and keyboard controls
+- Improvement: Properly init media widgets after moving their controls
+- Improvement: Blog cards image border radius option
+- Improvement: Sidebar position rendering issue
+- Improvement: Sticky header initialization
+- Improvement: Page title parallax effect
+- Improvement: Minor RTL improvements
+- Improvement: Schema markup for single product page
+- Improvement: single products page vertical spacing option
+- Fix: Comments section validation issue
+- Fix: Back to top button not displayed in all cases when enabled
+- Fix: Off-canvas panel Safari issue
+- Fix: Search modal is dismissed on “lazy” text selection
+- Fix: Handle localizations for dependencies in dynamic js chunks
+- Fix: Add to cart button width
+- Fix: Store notice
+- Fix: bbPress page title color options
+
+1.8.4-beta3: 2021-07-16
+- New: Sticky last widget only
+- New:  WooCommerce gallery arrows color options
+- New: Social and share icons add nofollow/dofollow option
+- New: WooCommerce sticky gallery option
+- New: Turn on/off add to cart in WooCommerce archives
+- Improvement: Defer JS files and load when appropriate (back to top, comments, share box)
+- Improvement: Offload 40% of non-critical CSS (~40kb)
+- Improvement: Add independent active color to menu items
+- Improvement: Slider option smarter drag and keyboard controls
+- Improvement: Properly init media widgets after moving their controls
+- Improvement: Blog cards image border radius option
+- Improvement: Sidebar position rendering issue
+- Improvement: Sticky header initialization
+- Improvement: Page title parallax effect
+- Improvement: Minor RTL improvements
+- Improvement: Schema markup for single product page
+- Improvement: single products page vertical spacing option
+- Fix: Off-canvas panel Safari issue
+- Fix: Search modal is dismissed on “lazy” text selection
+- Fix: Handle localizations for dependencies in dynamic js chunks
+- Fix: Add to cart button width
+- Fix: Store notice
+- Fix: bbPress page title color options
+
+1.8.4-beta1: 2021-07-08
+- New:  WooCommerce gallery arrows color options
+- New: Social and share icons add nofollow/dofollow option
+- New: WooCommerce sticky gallery option
+- New: Turn on/off add to cart in WooCommerce archives
+- Improvement: Properly init media widgets after moving their controls
+- Improvement: Sidebar position rendering issue
+- Improvement: Sticky header initialization
+- Improvement: Page title parallax effect
+- Improvement: Minor RTL improvements
+- Improvement: single products page vertical spacing option
+- Fix: Store notice
+
+1.8.3.4: 2021-06-16
+- New: Share box icon size option
+- Improvement: Allow search through Forum, Topic and Reply
+- Improvement: Handle bbPress profile page
+- Improvement: Minor RTL improvements
+- Improvement: Gutenberg columns spacing
+- Improvement: Better compatibility with Wholesale Price plugin
+- Improvement: Deal with popups (CBX bookmark plugin) in archive cards caused by overflow hidden
+- Improvement: WooCommerce gallery with vertical thumbnails
+- Improvement: WooCommerce account page sidebar colors
+- Fix: Single variable product gallery issue
+- Fix: Page title type 2 excerpt alignment
+
+1.8.3.3: 2021-06-11
+- New: WooCommerce variation image gallery option
+- New: Archive cards featured image hover effect
+- New: Conditionally load theme CSS files
+- New: Header row - boxed container structure
+- New: Implement sorting by publication date published to blocksy_posts shortcode
+- Improvement: Sticky header code improvements
+- Improvement: Better support for filtering plugins
+- Improvement: WooCommerce notice wrapper position when used in Elementor
+- Improvement: Form drop down background color becomes unchangeable if type 2 is selected
+- Improvement: Add `nofollow` attribute to social links
+- Improvement: Minor accessibility improvements
+- Improvement: Menu dropdown pointer events
+- Improvement: Adjust wording for "Image Size" width option
+- Improvement: WooCommerce AJAX grouped products add to cart
+- Improvement: Small Elementor section improvement
+- Improvement: WooCommerce gallery zoom icon
+- Improvement: Off Canvas Filter conflict with YITH WooCommerce One-Click Checkout
+- Fix: Container background pattern type issue
+- Fix: Products shortcode not inheriting pagination options from products archive
+- Fix: bbPress page title color issue
+- Fix: Brizy popups layout width fix
+- Fix: Product category archives do not display the featured image on the front end
+- Fix: Product variations do not change the current gallery image
+- Fix: Safari overflow layout issue
+- Fix: Lightbox close icon triggers offcanvas menu on mobile
+- Fix: WooCommerce gallery images issue
+
+1.8.3.3-beta14: 2021-06-09
+- New: Archive cards featured image hover effect
+- New: Conditionally load theme CSS files
+- New: Header row - boxed container structure
+- Improvement: Better support for filtering plugins
+- Improvement: WooCommerce notice wrapper position when used in Elementor
+- Improvement: Form drop down background color becomes unchangeable if type 2 is selected
+- Improvement: Add `nofollow` attribute to social links
+- Improvement: Some more accessibility improvements
+- Improvement: Menu dropdown pointer events
+- Improvement: Adjust wording for "Image Size" width option
+- Improvement: Small Elementor section improvement
+- Improvement: WooCommerce gallery zoom icon
+- Improvement: Off Canvas Filter conflict with YITH WooCommerce One-Click Checkout
+- Fix: Brizy popups layout width fix
+- Fix: Product category archives do not display the featured image on the front end
+- Fix: Product variations do not change the current gallery image
+- Fix: Safari overflow layout issue
+- Fix: Lightbox close icon triggers offcanvas menu on mobile
+- Fix: WooCommerce gallery images issue
+
+1.8.3.2: 2021-05-17
+- Improvement: Smarter handling for Elementor full width template
+
+1.8.3.1: 2021-05-12
+- Improvement: Visual Composer layout
+- Improvement: Elementor boxed sections
+- Improvement: Allow moving upsells and related products from code
+- Fix: Flexy gallery last image from pills pops up on hover
+- Fix: WooCommerce single product page boxed layout issue
+- Fix: Single posts tags alignment issue
+
+1.8.3: 2021-05-11
+- Improvement: Change footer menu `data-direction` attribute to `data-menu-direction` for a better compatibility with YITH carousel
+- Improvement: Sticky header customizer sync
+- Improvement: Posts widget numbered design
+- Improvement: Link back to top button to `#main-container` to prevent an accessibility warning
+- Improvement: Smarter page builders detection and page structure handling
+- Improvement: Update theme WooCommerce `pot` translation files
+- Improvement: Add aria-label attribute on theme SVG icons to comply with WCAG guidelines
+- Improvement: Make social and sharing links open in new tab optional (same tab for a11y)
+- Improvement: Elementor anchor links + sticky header
+- Fix: Image zoom for WooCommerce doesn’t work on first hover after load
+- Fix: Floating cart + sticky bottom row overlap
+- Fix: Desktop off canvas menu duplicates entries
+- Fix: Ajax add to cart doesn’t work on android device
+- Fix: Header row customizer sync issue
+
+1.8.3-beta9: 2021-05-07
+- Improvement: Posts widget numbered design
+- Improvement: Link back to top button to `#main-container` to prevent an accessibility warning
+- Improvement: Smarter page builders detection and page structure handling
+- Improvement: Add aria-label attribute on theme SVG icons to comply with WCAG guidelines
+- Improvement: Make social and sharing links open in new tab optional (same tab for a11y)
+- Improvement: Elementor anchor links + sticky header
+- Fix: Floating cart + sticky bottom row overlap
+- Fix: Desktop off canvas menu duplicates entries
+- Fix: WooCommerce strings issue
+- Fix: Header row issue
+
+1.8.2: 2021-05-01
+- Fix: Check terms list is not WP_Error
+
+1.8.1: 2021-05-01
+- Improvement: Sticky sidebar (Safari browser)
+- Improvement: Small layout issue on mobile
+- Improvement: page with sidebar and wide aligned blocks
+- Improvement: Better compatibility CSS with Getwid plugin
+- Improvement: Load Getwid compatibility CSS only when the plugin is active
+- Improvement: Remove redundant links in Related Posts module
+- Improvement: Dynamic JS chunks with SG Optimiser
+- Fix: Page hero type-2 top padding
+- Fix: Boxed layout issue
+- Fix: Ajax add to cart
+- Fix: Load more pagination issue
+- Fix: Beaver builder layout
+
+1.8.0: 2021-04-28
+- New: Make Gutenberg editor to inherit or not the theme global styles
+- New: 12 new global color palettes
+- New: Elementor compatibility with theme global colors and palettes
+- New: Add 3 more colors to the color palette
+- New: Better loading strategy for global & metabox dynamic CSS
+- New: Separated color option for each heading tag
+- New: Change variable name from var(--headingColor) to var(--heading-color)
+- New: Support for Badge Designer Lite For WooCommerce
+- New: integration with WooCommerce Single Variations
+- New: Footer widget area alignment options
+- New: Form elements border radius option
+- New: Better loading strategy for Google Fonts
+- New: Implement dynamic JavaScript chunks
+- New: Open account modal when clicking on Login to leave a reply
+- New: WooCommerce support for WooCommerce Additional Variation Images
+- New: Global button border option
+- New: Scroll to top new icons
+- New: Add scroll smooth behavior
+- New: Site title heading filter
+- New: Integration with Zion builder
+- New: Filter to disable sidebar in some places
+- New: Option to move the sidebar to top/bottom on mobile devices
+- New: Add Mastodon social network
+- New: Responsive boxed/wide layout
+- New: WooCommerce - new quantity input style
+- Improvement: Breadcrumbs proper handling for page hierarchy
+- Improvement: WooCommerce allow more product rows
+- Improvement: Share box type 2 - add official color option
+- Improvement: Refactor share box type 2
+- Improvement: Move reset customizer button
+- Improvement: WooCommerce single product gallery
+- Improvement: Change theme text domain `woocommerce` to `blocksy` in cart and checkout templates
+- Improvement: RTL - header elements label and badge position
+- Improvement: RTL - cart page
+- Improvement: RTL - single product gallery
+- Improvement: RTL - checkout page
+- Improvement: RTL - search icon position
+- Improvement: RTL - archive cards and single product sale badge position
+- Improvement: WooCommerce single product tabs colors
+- Improvement: Make border radius option to change values from keyboard arrows
+- Improvement: WooCommerce related products - option to set number of columns
+- Improvement: Use .min.css file extension for minified files
+- Improvement: Improve post editor background color
+- Improvement: A11Y tabindex=-1 on featured image when title is present in archive card
+- Improvement: RTL - header cart dropdown position
+- Improvement: WooCommerce cart page
+- Improvement: Refactor form types options and dynamic CSS
+- Improvement: Thinner theme icons
+- Improvement: Improve excerpts length for non-latin languages - Chinese, Japanese, Arabic, etc.
+- Improvement: Anchor links with sticky header
+- Fix: Footer background overlay color issue
+- Fix: Posts shortcode pagination
+- Fix: Color picker modal position
+- Fix: Related posts - when no meta selected all items are displayed
+- Fix: Menu type 3 safari bug
+- Fix: Embeds in content blocks
+- Fix: Empty Category & Tag pages search form design
+- Fix: Better handling for original ratio
+- Fix: Share box icon colors
+- Fix: WooCommerce select option when inside offcanvas
+
+1.8.0-beta8: 2021-04-24
+- Fix: Proper reveal logic
+
+1.8.0-beta7: 2021-04-23
+- New: 12 new global color palettes
+- New: Elementor compatibility with theme global colors and palettes
+- New: Add 3 more colors to the color palette
+- New: Better loading strategy for global & metabox dynamic CSS
+- New: Separated color option for each heading tag
+- New: Change variable name from var(--headingColor) to var(--heading-color)
+- New: Support for Badge Designer Lite For WooCommerce
+- New: integration with WooCommerce Single Variations
+- New: Footer widget area alignment options
+- New: Form elements border radius option
+- New: Better loading strategy for Google Fonts
+- Improvement: Breadcrumbs proper handling for page hierarchy
+- Improvement: WooCommerce allow more product rows
+- Improvement: Share box type 2 - add official color option
+- Improvement: Refactor share box type 2
+- Improvement: Move reset customizer button
+- Fix: Footer background overlay color issue
+- Fix: Posts shortcode pagination
+
+1.8.0-beta2: 2021-04-09
+- New: Implement dynamic JavaScript chunks
+- New: Open account modal when clicking on Login to leave a reply
+- New: Responsive options for boxed/wide layout
+- New: WooCommerce support for WooCommerce Additional Variation Images
+- New: Global button border option
+- New: Scroll to top new icons
+- New: Add scroll smooth behavior
+- New: Site title heading filter
+- New: Integration with Zion builder
+- New: Filter to disable sidebar in some places
+- New: Option to move the sidebar to top/bottom on mobile devices
+- New: Add Mastodon social network
+- New: Responsive boxed/wide layout
+- New: WooCommerce - new quantity input style
+- Improvement: WooCommerce single product gallery
+- Improvement: Change theme text domain `woocommerce` to `blocksy` in cart and checkout templates
+- Improvement: RTL - header elements label and badge position
+- Improvement: RTL - cart page
+- Improvement: RTL - single product gallery
+- Improvement: RTL - checkout page
+- Improvement: RTL - search icon position
+- Improvement: RTL - archive cards and single product sale badge position
+- Improvement: WooCommerce single product tabs colors
+- Improvement: Make border radius option to change values from keyboard arrows
+- Improvement: WooCommerce related products - option to set number of columns
+- Improvement: Use .min.css file extension for minified files
+- Improvement: Improve post editor background color
+- Improvement: A11Y tabindex=-1 on featured image when title is present in archive card
+- Improvement: RTL - header cart dropdown position
+- Improvement: WooCommerce cart page
+- Improvement: Refactor form types options and dynamic CSS
+- Improvement: Thinner theme icons
+- Improvement: Improve excerpts length for non-latin languages - Chinese, Japanese, Arabic, etc.
+- Improvement: Anchor links with sticky header
+- Fix: Color picker modal position
+- Fix: Related posts - when no meta selected all items are displayed
+- Fix: Menu type 3 safari bug
+- Fix: Embeds in content blocks
+- Fix: Empty Category & Tag pages search form design
+- Fix: Better handling for original ratio
+- Fix: Share box icon colors
+- Fix: WooCommerce select option when inside offcanvas
+
+1.8.0-beta1: 2021-04-06
+- New: Implement dynamic JavaScript chunks
+- New: Open account modal when clicking on Login to leave a reply
+- New: Responsive options for boxed/wide layout
+- New: WooCommerce support for WooCommerce Additional Variation Images
+- New: Global button border option
+- New: Scroll to top new icons
+- New: Add scroll smooth behavior
+- New: Site title heading filter
+- New: Integration with Zion builder
+- New: Filter to disable sidebar in some places
+- New: Option to move the sidebar to top/bottom on mobile devices
+- New: Add Mastodon social network
+- New: Responsive boxed/wide layout
+- New: WooCommerce - new quantity input style
+- Improvement: RTL - header elements label and badge position
+- Improvement: RTL - cart page
+- Improvement: RTL - single product gallery
+- Improvement: RTL - checkout page
+- Improvement: RTL - search icon position
+- Improvement: RTL - archive cards and single product sale badge position
+- Improvement: WooCommerce single product tabs colors
+- Improvement: Make border radius option to change values from keyboard arrows
+- Improvement: WooCommerce related products - option to set number of columns
+- Improvement: Use .min.css file extension for minified files
+- Improvement: Improve post editor background color
+- Improvement: A11Y tabindex=-1 on featured image when title is present in archive card
+- Improvement: RTL - header cart dropdown position
+- Improvement: WooCommerce cart page
+- Improvement: Refactor form types options and dynamic CSS
+- Improvement: Thinner theme icons
+- Improvement: Improve excerpts length for non-latin languages - Chinese, Japanese, Arabic, etc.
+- Improvement: Anchor links with sticky header
+- Fix: Related posts - when no meta selected all items are displayed
+- Fix: Menu type 3 safari bug
+- Fix: Embeds in content blocks
+- Fix: Empty Category & Tag pages search form design
+- Fix: Better handling for original ratio
+- Fix: Share box icon colors
+- Fix: WooCommerce select option when inside offcanvas
+
+1.7.72-beta2: 2021-04-01
+- New: Responsive options for boxed/wide layout
+- New: WooCommerce support for WooCommerce Additional Variation Images
+- New: Global button border option
+- New: Scroll to top new icons
+- New: Add scroll smooth behavior
+- New: Site title heading filter
+- New: Integration with Zion builder
+- New: Filter to disable sidebar in some places
+- New: Option to move the sidebar to top/bottom on mobile devices
+- New: Add Mastodon social network
+- New: WooCommerce - new quantity input style
+- Improvement: RTL - header elements label and badge position
+- Improvement: RTL - cart page
+- Improvement: RTL - single product gallery
+- Improvement: RTL - checkout page
+- Improvement: RTL - search icon position
+- Improvement: RTL - archive cards and single product sale badge position
+- Improvement: WooCommerce single product tabs colors
+- Improvement: Make border radius option to change values from keyboard arrows
+- Improvement: WooCommerce related products - option to set number of columns
+- Improvement: Use .min.css file extension for minified files
+- Improvement: Improve post editor background color
+- Improvement: A11Y tabindex=-1 on featured image when title is present in archive card
+- Improvement: RTL - header cart dropdown position
+- Improvement: WooCommerce cart page
+- Improvement: Refactor form types options and dynamic CSS
+- Improvement: Thinner theme icons
+- Improvement: Improve excerpts length for non-latin languages - Chinese, Japanese, Arabic, etc.
+- Improvement: Anchor links with sticky header
+- Fix: Menu type 3 safari bug
+- Fix: Embeds in content blocks
+- Fix: Empty Category & Tag pages search form design
+- Fix: Better handling for original ratio
+- Fix: Share box icon colors
+- Fix: WooCommerce select option when inside offcanvas
+
+1.7.71: 2021-02-24
+- Improvement: Validation issue with `ontouchmove` attribute
+- Improvement: WooCommerce small improvements
+- Improvement: Archives grid CSS
+- Improvement: Social icons official color
+- Fix: Unique widgets ID not outputted
+
+1.7.70: 2021-02-22
+- New: Breadcrumbs - add support for SEO plugins breadcrumbs
+- New: Support for adjust the quantity input values filter
+- Improvement: Add label options for Account, Cart, Search and Wishlist items
+- Improvement: Thinner Search icon
+- Improvement: Respect primary category in breadcrumbs for RankMath, SEOPress, The Seo Framework and WPSEO
+- Fix: Link type 4 and 5 text color
+- Fix: Drowdown color when input color is set to transparent
+
+1.7.70-beta1: 2021-02-20
+- Improvement: Add label options for Account, Cart, Search and Wishlist items
+- Improvement: Thinner Search icon
+- Improvement: Adjust the quantity input values
+- Improvement: Respect primary category in breadcrumbs for RankMath, SEOPress, The Seo Framework and WPSEO
+- Fix: Link type 4 and 5 text color
+- Fix: Drowdown color when input color is set to transparent
+
+1.7.69: 2021-02-16
+- New: Detect WPRocket Lazy load
+- Fix: Images display block problem
+- Fix: Breadcrumbs keep parent page
+- Fix: select2 offcanvas problems
+- Fix: SVG icons fill property
+
+1.7.68: 2021-02-09
+- Fix: Search icons colors
+
+1.7.67: 2021-02-08
+- New: Blocksy sidebar hooks
+- Fix: Ignore Polylang hierarchical taxonomies
+
+1.7.66: 2021-02-08
+- Fix: Do not override fill for SVGs
+
+1.7.65: 2021-02-07
+- New: Option to change the search modal input text
+- New: Add filter to add new custom social icons
+- New: Better handling for non-hierarchical taxonomies in CPTs
+- New: Unsplash, 500px, Alignable social icons
+- New: WooCommerce: Add option to deactivate product tabs
+- New: Add option to hide thumbnails from live results search
+- Improvement: Customizer/dashboard select option
+- Improvement: WooCommerce select form - inherit form colors
+- Improvement: Responsive typography option for mobile menu
+- Improvement: Make footer background color options to be responsive
+- Improvement: Mobile menu typography option in combination with Elementor global fonts
+- Improvement: improved some RTL issues
+- Fix: Header menu Indicator Effect not receiving the default CSS value
+- Fix: Footer nav validation issue
+
+1.7.65-beta1: 2021-02-02
+- New: WooCommerce: Add option to deactivate product tabs
+- New: Add option to hide thumbnails from live results search
+- Fix: Fix some RTL issues
+
+1.7.64: 2021-01-28
+- New: WooCommerce: new type of tabs in single product
+- New: WooCommerce: Add alignment option for product tabs
+- New: Add padding option for page title Type 2
+- Improvement: Improve mobile menu options panel
+- Improvement: Improve cards reveal effect
+- Improvement: CartFlows plugin integration
+- Fix: Fix drawer cart freeze
+- Fix: Fix drawer cart scroll bar on Windows OS
+
+1.7.63: 2021-01-26
+- Improvement: WooCommerce: improve single product buttons position
+- Improvement: Improve Google Fonts CSS2 italic fonts output
+- Fix: Fix share box hover colors
+- Fix: Fix mobile and cart drawer panel scroll
+- Fix: Fix infinite pagination issue on categories
+- Fix: Fix accessibility alerts for broken and redundant links
+- Fix: WooCommerce: fix quantity input width for grouped products
+
+1.7.62: 2021-01-24
+- Improvement: Improve embeds aspect ratio
+- Fix: Fix WooCommerce image zoom distortion
+- Fix: Author and WooCommerce archives fix cards display
+
+1.7.61: 2021-01-23
+- New: Posts shortcode [blocksy_posts post_type="posts"] + supports for CPT's
+- New: SoundCloud social icon
+- New: Update Google Fonts syntax to CSS2
+- New: Add filter to auto enable the Elementor columns alignment fix
+- New: Flipboard share social network
+- New: Option for hiding taxonomy item from breadcrumbs
+- New: Add color options for widget headings
+- New: Integration with Page scroll to id plugin with .ct-highlight class
+- New: Add global border color option
+- New: Add none content spacing option
+- New: WooCommerce: single product add to cart button responsive width option
+- New: WooCommerce: single product add typography option for price
+- New: WooCommerce: integration with WooCommerce Additional Variation Images plugin
+- New: WooCommerce: Compatibility with Themify - WooCommerce Product Filter
+- New: WooCommerce: color options for single product view cart button
+- New: WooCommerce: compatibility with WPC Product Quantity for WooCommerce plugin
+- New: WooCommerce: option to change quantity input color
+- Improvement: Improve off-canvas drawer
+- Improvement: Make blog title & description translatable
+- Improvement: Improve menu active/hover decorations
+- Improvement: Improve pagination alignment
+- Improvement: Customizer dark mode improvements
+- Improvement: Improve Brizy container width (max-width/width) with variables
+- Improvement: Changelog date parsing
+- Improvement: Better compatibility with Advanced Product Labels plugins
+- Improvement: Multiple footers dynamic CSS logic
+- Improvement: Close Account & Search modal on click outside
+- Improvement: Better compatibility with Preloader Plus plugin
+- Improvement: Do not put code in footer.php/header.php to allow template overriding
+- Improvement: Deprecate blocksy_get_woo_minicart AJAX call
+- Improvement: Performance improvements for WooCommerce minicart
+- Improvement: video player max width
+- Fix: Posts cards read more button: fix font color for simple & outline styles
+- Fix: Fix search results page when no results
+- Fix: Fix options modal z-index issue
+- Fix: Fix customizer image uploader option controls
+- Fix: Don't show Logo Image Position if an image is not set
+- Fix: WooCommerce: fix page description
+- Fix: WooCommerce: fix single product landscape image ratio
+
+1.7.61-beta1: 2021-01-19
+- New: WooCommerce: single product add to cart button responsive width option
+- New: Add SoundCloud social icon
+- New: Update Google Fonts syntax to CSS2
+- New: Add filter to auto enable the Elementor columns alignment fix
+- New: Flipboard share social network
+- New: WooCommerce single product add typography option for price
+- New: Option for hiding taxonomy item from breadcrumbs
+- New: WooCommerce: add color options for single product view cart button
+- New: Add compatibility with WPC Product Quantity for WooCommerce plugin
+- New: Add color options for widget headings
+- Improvement: Improve pagination alignment
+- Improvement: Customizer dark mode improvements
+- Improvement: Improve Brizy container width (max-width/width) with variables
+- Improvement: Changelog date parsing
+- Improvement: Better compatibility with Advanced Product Labels plugins
+- Improvement: Multiple footers dynamic CSS logic
+- Improvement: Close Account & Search modal on click outside
+- Improvement: Better compatibility with Preloader Plus plugin
+- Improvement: Do not put code in footer.php/header.php to allow template overriding
+- Fix: Fix search results page when no results
+- Fix: Fix options modal z-index issue
+- Fix: Fix customizer image uploader option controls
+- Fix: Don't show Logo Image Position if an image is not set
+
+1.7.60: 2020-12-31
+- Improvement: Select2 click outside while in offcanvas
+
+1.7.59: 2020-12-28
+- Improvement: Better support for PHP 8
+- Improvement: Allow pagination arrows to be hidden on all devices
+- Improvement: Posts archive - allow 5 columns per row
+- Improvement: Allow two columns for footer mobile devices
+- Fix: Fix footer menu horizontal alignment option
+- Fix: Fix footer items spacing option
+
+1.7.58: 2020-12-25
+- New: WooCommerce: add out of stock badge
+- New: WooCommerce: add single product title options
+- New: Author box - add option to show all written posts
+- New: Add visibility option for simple pagination numbers and arrows
+- New: AJAX add to cart integration with WooCommerce Bookings
+- Improvement: Footer element logo: add vertical & horizontal alignment options
+- Improvement: Footer element button: add vertical & horizontal alignment options
+- Improvement: Footer element search box: add vertical & horizontal alignment options
+- Improvement: Footer element menu: add vertical & horizontal alignment options
+- Improvement: Footer element search socials: add vertical & horizontal alignment options
+- Improvement: Footer element HTML: add vertical & horizontal alignment options
+- Improvement: Footer element language switcher: add vertical & horizontal alignment options
+- Fix: Fix page title when switching to custom image
+- Fix: Mobile Menu Dropdown Freeze after add an product to cart
+- Fix: Fix box shadow not working for mobile devices
+- Fix: Elementor columns alignment fix
+
+1.7.57: 2020-12-18
+- Fix: Bring back TutorLMS templates
+
+1.7.56: 2020-12-18
+- New: Cart totals label visibility
+- New: LearnDash integration
+- New: Add Flickr icon
+- New: Add option to disable related post thumbnail
+- New: Add menu location inside the select menu dropdown
+- New: Add option to vertically align footer widgets/columns
+- New: Add Visibility option to hide footer elements on different devices
+- New: Add full width option for featured image
+- New: Related posts chose different taxonomy
+- New: Add content vertical alignment option in off canvas
+- New: Add TutorLMS integration
+- New: Add overlay color option to backgroun option when image is set as a background
+- Improvement: Improve header menu page list
+- Improvement: Improve gradient picker
+- Improvement: Improve customizer dark mode
+- Improvement: Search results don't show placeholders if featured image is not set
+- Improvement: Do not allow menu items in desktop offcanvas
+- Improvement: Don't show image placeholder if featured image is not set
+- Improvement: Hide transparent/sticky state colors when item is in off-canvas
+- Improvement: Alignment option for HTML element from header and footer
+- Improvement: Improve mobile menu alignment in off-canvas
+- Improvement: Better support for WP-Backery plugin
+- Improvement: Improve header menus
+- Improvement: Do not allow menu items in desktop offcanvas
+- Improvement: Typography modal position engine
+- Improvement: RTL modals issue
+- Fix: Social icons size option error with Litespeed plugin
+- Fix: Fix RTL post meta spacing issue
+- Fix: Brizy single product arrow problem
+- Fix: Disable menu doesn't work with conditional menus plugin
+- Fix: Fix language switcher color & font issue
+- Fix: Fix header and footer builder freeze
+- Fix: Fix Formidable Forms datepicker select color
+- Fix: Fix boxed content shadow and color modal position
+- Fix: Header & Footer Builders freeze fixes
+
+1.7.56-beta3: 2020-12-16
+- New: Add TutorLMS integration
+- New: Add overlay color option to backgroun option when image is set as a background
+- Improvement: Improve header menu page list
+- Improvement: Improve gradient picker
+- Improvement: Improve customizer dark mode
+- Improvement: Search results don't show placeholders if featured image is not set
+- Fix: Fix boxed content shadow and color modal position
+- Fix: Header & Footer Builders freeze fixes
+
+1.7.56-beta2: 2020-12-15
+- New: LearnDash integration
+- New: Cart totals label visibility
+- New: Add Flickr icon
+- New: Add option to disable related post thumbnail
+- New: Add menu location inside the select menu dropdown
+- New: Add option to vertically align footer widgets/columns
+- New: Add Visibility option to hide footer elements on different devices
+- New: Add full width option for featured image
+- New: Related posts chose different taxonomy
+- New: Add content vertical alignment option in off canvas
+- Improvement: Do not allow menu items in desktop offcanvas
+- Improvement: Don't show image placeholder if featured image is not set
+- Improvement: Hide transparent/sticky state colors when item is in off-canvas
+- Improvement: Alignment option for HTML element from header and footer
+- Improvement: Improve mobile menu alignment in off-canvas
+- Improvement: Better support for WP-Backery plugin
+- Improvement: Improve header menus
+- Fix: Social icons size option error with Litespeed plugin
+- Fix: Fix RTL post meta spacing issue
+- Fix: Brizy single product arrow problem
+- Fix: Disable menu doesn't work with conditional menus plugin
+- Fix: Fix language switcher color & font issue
+- Fix: Fix header and footer builder freeze
+- Fix: Fix Formidable Forms datepicker select color
+
+1.7.56-beta1: 2020-12-10
+- New: Cart totals label visibility
+- New: LearnDash integration
+- Improvement: Do not allow menu items in desktop offcanvas
+- Improvement: Typography modal position engine
+- Improvement: RTL modals issue
+
+1.7.55: 2020-12-04
+- New: Add support for Beaver theme builder
+- New: Add Tripadvisor and Foursquare icons
+- New: Boostify Header Footer Builder integration
+- New: Add border option for share box Type 1
+- New: Add more option for single product add to cart
+- Improvement: Single product zoomed image as variable
+- Improvement: Improve single product gallery images spacing
+- Improvement: Improve WooCommerce mini cart CSS
+- Improvement: Account element - add label device visibility option
+- Improvement: Make Elementor columns alignment fix option to be enabled by default
+- Fix: Fix WP video element opacity
+- Fix: Fix single product sticky summary + sticky header
+- Fix: Issue with menu More item
+- Fix: Fix woo single product vertical gallery overlapping content
+- Fix: Fix tags widget count spacing
+
+1.7.54: 2020-11-26
+- Improvement: Make sidebar typography colors responsive
+- Fix: Fix cart hover color
+- Fix: Fix logo URL filter
+- Fix: Fix desktop trigger
+- Fix: Fix conditions menu
+- Fix: Fix options popup z-index
+
+1.7.54-beta1: 2020-11-26
+- Improvement: Make sidebar typography colors responsive
+- Fix: Fix cart hover color
+
+1.7.53: 2020-11-24
+- Improvement: Some layout CSS improvements for page builders
+
+1.7.53-beta1: 2020-11-24
+- Improvement: Some layout CSS improvements for page builders
+
+1.7.52: 2020-11-23
+- New: Add gradient option and gradient swatches
+- New: Add Apple Podcasts icon
+- Improvement: Improve Brizy layout when theme sidebar is active
+- Improvement: Some RTL improvements
+- Improvement: Improve sticky state shrink behavior
+- Improvement: Improve options modal windows (color picker, background, shadow)
+- Improvement: Scroll to top side offset option
+- Improvement: Improve related posts and comments spacing when Module Placement is contained
+- Improvement: Improve WooCommerce minicart behavior
+- Improvement: Load more WooCommerce pagination issue
+- Fix: Make sure header builder stabilizes items from secondary column
+- Fix: Subscribe form sync not working
+
+1.7.52-beta1: 2020-11-20
+- New: Add gradient option and gradient swatches
+- New: Add Apple Podcasts icon
+- Improvement: Improve sticky state shrink behavior
+- Improvement: Improve options modal windows (color picker, background, shadow)
+- Improvement: Scroll to top side offset option
+- Improvement: Improve related posts and comments spacing when Module Placement is contained
+- Improvement: Some minor RTL issues
+- Improvement: Improve WooCommerce minicart behavior
+- Improvement: Load more WooCommerce pagination issue
+- Fix: Make sure header builder stabilizes items from secondary column
+- Fix: Subscribe form sync not working
+
+1.7.51: 2020-11-14
+- Improvement: Minor CSS improvement for comments section container
+- Improvement: `content-wide` class sync
+
+1.7.50: 2020-11-14
+- Improvement: Blocksy Companion reference from wp.org
+- Improvement: Form plugins stylings
+
+1.7.49: 2020-11-13
+- Improvement: Minor layout improvements
+
+1.7.48: 2020-11-13
+- New: Add 5 and 6 columns and widgets for footer builder
+- New: Add filter to change logo URL (`blocksy:header:logo:url`)
+- Improvement: Some RTL improvements
+- Improvement: Improve responsive menu "More" item
+- Improvement: Major layout changes to better handle the content blocks/hooks
+- Improvement: Change variable name from `--containerWidth` to `--container-width`
+- Improvement: Change variable name from `--maxSiteWidth` to `--container-max-width`
+- Improvement: Change variable name from `--narrowContainer` to `--narrow-container-max-width`
+- Improvement: Change variable name from `--blockMaxWidth` to `--block-max-width`
+- Improvement: Change variable name from `--blockWideWidth` to `--block-wide-max-width`
+- Improvement: Change attribute `data-columns` to `data-column-set`
+- Improvement: Improve header menu height when row has shrink enabled
+- Improvement: Show page title on products search page
+- Improvement: Improve breadcrumbs for Author archives
+- Fix: Fix featured image, Full Size is not displayed in the dropdown
+- Fix: Fix header and footer `data-columns` attribute
+- Fix: Search live results images blurry
+- Fix: Fix cart icon sync
+- Fix: Fix menu responsive "More" item dropdowns
+- Fix: Fix minor issue with WooCommerce notifications
+
+1.7.48-beta2: 2020-11-12
+- New: Add filter to change logo URL (`blocksy:header:logo:url`)
+- Improvement: Improve responsive menu "More" item
+- Improvement: Major layout changes to better handle the content blocks/hooks
+- Improvement: Change variable name from `--containerWidth` to `--container-width`
+- Improvement: Change variable name from `--maxSiteWidth` to `--container-max-width`
+- Improvement: Change variable name from `--narrowContainer` to `--narrow-container-max-width`
+- Improvement: Change variable name from `--blockMaxWidth` to `--block-max-width`
+- Improvement: Change variable name from `--blockWideWidth` to `--block-wide-max-width`
+- Improvement: Change attribute `data-columns` to `data-column-set`
+- Improvement: Improve header menu height when row has shrink enabled
+- Improvement: Show page title on products search page
+- Improvement: Improve breadcrumbs for Author archives
+- Fix: Fix featured image, Full Size is not displayed in the dropdown
+- Fix: Fix header and footer `data-columns` attribute
+- Fix: Search live results images blurry
+- Fix: Fix cart icon sync
+
+1.7.48-beta1: 2020-11-10
+- Fix: Fix menu responsive "More" item dropdowns
+
+1.7.47: 2020-11-06
+- Fix: Small bugfix
+
+1.7.46: 2020-11-06
+- Improvement: Display product image on cart page on mobile devices
+- Improvement: Display custom declared image sizes in options
+- Improvement: Some CSS improvements
+
+1.7.45: 2020-11-05
+- Improvement: Logo item when picture tag is added by ShortPixel or WebP plugin
+- Improvement: Logo item position option not appearing in some cases
+- Fix: Anchor links offsets
+
+1.7.45-beta2: 2020-11-05
+- Fix: Anchor links offsets
+
+1.7.45-beta1: 2020-11-04
+- Fix: Social icons colors
+
+1.7.44: 2020-11-03
+- Fix: Header logo correct width
+
+1.7.43: 2020-11-03
+- New: Add suppport for Google Analytics 4
+- New: Add footer border full/contained width option
+- New: Add Skype, GitLab, WordPress, phone and email icons to social element
+- Improvement: Improve Brizy boxed custom width option
+- Improvement: disable responsive header menu for ubermenu
+- Improvement: Elementor container width adjustment
+- Improvement: Better handling for anchor links & sticky header
+- Improvement: Brizy boxed custom width option
+- Improvement: `More` button in live search results
+- Fix: Logo item when no position options
+- Fix: Responsive desktop menu resize handling
+
+1.7.43-beta6: 2020-11-03
+- Fix: Responsive desktop menu resize handling
+
+1.7.43-beta5: 2020-11-03
+- New: Add suppport for Google Analytics 4
+- New: Add footer border full/contained width option
+- New: Add Skype, GitLab, WordPress, phone and email icons to social element
+- Improvement: Brizy boxed custom width option
+- Improvement: `More` button in live search results
+- Fix: Logo item when no position options
+
+1.7.43-beta4: 2020-10-28
+- Improvement: Better handling for anchor links & sticky header
+
+1.7.43-beta3: 2020-10-27
+- Improvement: Elementor container width adjustment
+
+1.7.43-beta1: 2020-10-24
+- Improvement: Improve Brizy boxed custom width option
+- Improvement: disable responsive header menu for ubermenu
+
+1.7.42: 2020-10-22
+- Improvement: Background for posts & pages in metabox
+- Improvement: Styles enqueueing order improvement
+
+1.7.41: 2020-10-22
+- New: Enable theme menu locations & add options in header menu items
+- Improvement: WooCommerce RTL support
+- Improvement: Better check for `wp.customize` presence
+- Improvement: Improve logo item with sticky functionality
+- Improvement: Better handle Customizer settings in Gutenberg editor
+- Improvement: Fallback option for non-system fonts
+- Improvement: Add tags switch in Page when taxonomy available
+- Improvement: WooCommerce responsive archive in Elementor
+- Fix: WooCommerce sale custom string for grouped products
+- Fix: CPT related posts default value
+- Fix: Better check for wp.customize in frontend
+
+1.7.41-beta1: 2020-10-20
+- Fix: Better check for wp.customize in frontend
+
+1.7.40: 2020-10-13
+- Improvement: Ratio picker option
+- Improvement: Html select item for Firefox browser
+- Improvement: Refactor font family output strategy
+- Improvement: Page title featured image for CPTs
+- Improvement: Add CodePen social network
+- Improvement: Add WPML and Polylang translations strings
+- Fix: Issues with plugins that enqueue CSS depending on the post content
+
+1.7.39: 2020-10-10
+- Fix: More items proper submenu handling
+
+1.7.38: 2020-10-09
+- Improvement: Page title/hero background image
+- Improvement: Hide post items from Elementor Saved Templates
+- Improvement: Improve Elementor variable product select fields
+- Improvement: Improve header sticky state and anchor links
+- Improvement: Some CSS fixes and improvements
+- Fix: Blog cards button alignment issue
+- Fix: Don't display tags on single pages
+
+1.7.38-beta2: 2020-10-06
+- Improvement: Elementor variable product select fields
+- Improvement: Don't display background image if there is a custom or featured image set
+- Improvement: Elementor product gallery
+- Fix: button alignment issue
+- Fix: Don't display tags on single pages
+
+1.7.38-beta1: 2020-10-05
+- New: Allow querying of CPTs from REST API
+
+1.7.37: 2020-09-29
+- New: Add image size option for featured image in single post
+- Improvement: Search module functionality
+- Improvement: Add customizer shortcuts for archive cards & sidebars
+- Fix: Typography rem unit issue
+
+1.7.36: 2020-09-29
+- New: Add Snapchat social icon
+- Improvement: Correctly sync header builder logo with custom_logo
+- Improvement: Smarter pick of taxonomies depending on hierarchical for CPTs
+- Improvement: Add WooCommerce product card actions
+- Fix: Correctly detect Elementor templates
+- Fix: Header HTML item improvement
+- Fix: jQuery Migrate absence compatibility
+- Fix: Side offcanvas z-index issue
+
+1.7.36-beta2: 2020-09-29
+- Improvement: Add WooCommerce product card actions
+- Fix: Header HTML item improvement
+- Fix: jQuery Migrate absence compatibility
+
+1.7.36-beta1: 2020-09-29
+- Improvement: Correctly sync header builder logo with custom_logo
+- Fix: Correctly detect Elementor templates
+
+1.7.35: 2020-09-28
+- Improvement: Elementor boxed content with option `--containerWidth`
+- Improvement: WooComerce Filters lazy loading integration with filters
+- Improvement: Sticky header shrink height
+- Fix: Product view gallery
+- Fix: Menu dropdown negative offset
+
+1.7.34: 2020-09-25
+- Fix: Elementor layout fixes
+- Fix: Header properly correct position of items in secondary
+
+1.7.34-beta1: 2020-09-25
+- Fix: Elementor layout fixes
+- Fix: Header properly correct position of items in secondary
+
+1.7.33: 2020-09-24
+- Fix: Get rid of the crash with old Companion versions
+
+1.7.32: 2020-09-23
+- Improvement: Support for Brizy WooCommerce module
+- Improvement: Improve sticky header height default value
+- Improvement: Add responsive controls to the Site Background option
+- Fix: Issue with menu type 3 colors
+- Fix: Footer socials alignment
+- Fix: Social icons styles when in mobile menu
+
+1.7.32-beta1: 2020-09-22
+- Improvement: Support for Brizy WooCommerce module
+- Fix: Issue with menu type 3 colors
+- Fix: Footer socials alignment
+
+1.7.31: 2020-09-18
+- Fix: Minor issue with mobile menu dropdowns
+
+1.7.30: 2020-09-18
+- New: responsive background option for page in Page Structure
+- New: Content Area Spacing for all sides
+- New: Add color option for close offcanvas button
+- New: Add font size option for mobile menu dropdown items
+- New: Add dropdown menu items hover types
+- Improvement: Dynamically add submenu indicator in menus
+- Improvement: Improve header social icons size CSS
+- Improvement: Viewport Frame + full width blocks
+- Improvement: Don't allow changing of number value above maximum
+- Improvement: Smarter calculation for responsive desktop menus
+- Fix: WooCommerce make scrollbar hide by default with `overflow: auto`
+- Fix: WooCommerce cart/checkout scrollbar on Windows browsers
+- Fix: Elementor layout issue
+- Fix: Press Enter in search results form causes a redirect to wrong language
+- Fix: Load CSS in Customizer correctly for Gutenberg 8.9.1
+- Fix: JS Error when dropdown is disabled for header cart
+- Fix: UberMenu megamenu lazy load images
+- Fix: Flexy sliding direction with 2 images in the gallery
+- Fix: Sync for offcanvas open
+- Fix: Empty social box defaults to all social networks
+- Fix: Jetpack handle lazy load
+- Fix: Parallax tablet/mobile sizing issue
+- Fix: Parallax correctly detect iPad PRO
+- Fix: Default post types for REST Search
+- Fix: Use proper action for changing product wrapper
+- Fix: Dynamic CSS regeneration on update
+- Fix: Header builder item fixes
+
+1.7.30-beta10: 2020-09-18
+- New: Add dropdown menu items hover types
+- Improvement: Smarter calculation for responsive desktop menus
+
+1.7.30-beta9: 2020-09-16
+- Fix: Header builder item fixes
+
+1.7.30-beta8: 2020-09-16
+- Fix: Dynamic CSS regeneration on update
+
+1.7.30-beta7: 2020-09-16
+- New: responsive background option for page in Page Structure
+- New: Content Area Spacing for all sides
+- New: Add color option for close offcanvas button
+- New: Add typography option for mobile menu dropdown items
+- Improvement: Dynamically add submenu indicator in menus
+- Improvement: Improve header social icons size CSS
+- Improvement: Viewport Frame + full width blocks
+- Improvement: Don't allow changing of number value above maximum
+- Fix: Default post types for REST Search
+- Fix: Use proper action for changing product wrapper
+
+1.7.30-beta6: 2020-09-11
+- Fix: Parallax correctly detect iPad PRO
+
+1.7.30-beta5: 2020-09-10
+- Fix: Jetpack handle lazy load
+- Fix: Parallax tablet/mobile sizing issue
+
+1.7.30-beta3: 2020-09-09
+- Fix: UberMenu megamenu lazy load images
+- Fix: Flexy sliding direction with 2 images in the gallery
+- Fix: Sync for offcanvas open
+- Fix: Empty social box defaults to all social networks
+
+1.7.30-beta2: 2020-09-04
+- Fix: Press Enter in search results form causes a redirect to wrong language
+- Fix: Load CSS in Customizer correctly for Gutenberg 8.9.1
+- Fix: JS Error when dropdown is disabled for header cart
+
+1.7.30-beta1: 2020-09-02
+- Fix: WooCommerce make scrollbar hide by default with `overflow: auto`
+- Fix: WooCommerce cart/checkout scrollbar on Windows browsers
+- Fix: Elementor layout issue
+
+1.7.29: 2020-08-26
+- Improvement: WP Rocket CDN support for dynamic JS
+- Improvement: Logo alignment
+- Improvement: Dynamic CSS output for mobile devices
+
+1.7.28: 2020-08-24
+- Fix: Syntax error
+
+1.7.27: 2020-08-24
+- New: `blocksy:breadcrumbs:items-array` filter for breadcrumbs
+- New: Add Edit Post link at the end of the post
+- New: Option to disable comments website field
+- Improvement: Google fonts are not displayed inside editor
+- Improvement: Row min height
+- Fix: Sticky header + viewport frame
+- Fix: Elementor single variable product select field
+- Fix: Sticky sidebar offset when sticky header is enabled
+- Fix: Related posts title color
+- Fix: Row background color on mobile
+- Fix: Logo position top alignment issue
+
+1.7.26: 2020-08-20
+- Fix: Sticky header logo
+- Fix: Logic for dynamic CSS on small devices
+
+1.7.25: 2020-08-20
+- New: Sticky Header
+- New: Simpler Transparent Header
+- New: Dynamic JavaScript integration with BunnyCDN
+- New: Make blocks editor inherit customizer fonts
+- New: Add TikTok, DTube, Parler social icons
+- Improvement: WooCommerce 4.4 Compatibility
+- Improvement: Make blocks editor inherit customizer fonts
+- Improvement: Revamped Logo header element
+- Improvement: Display post type in breadcrumbs for CPTs
+- Improvement: Revamped shadow option
+- Improvement: Search live results on search page
+- Improvement: Blog cards excerpt typography option
+- Improvement: Make `blogdescription` translateable via WPML
+- Improvement: Better compatibility with Qubely
+- Improvement: Page title Type 2 featured image not displayed in some cases
+- Fix: WooCommerce pagination issue
+- Fix: Shop Page Title not taking the featured image from the page settings
+- Fix: Remove selectr script from being loaded
+- Fix: Header builder issue when header is not available in the preview
+- Fix: Page title Type 1 alignment option
+
+1.7.25-beta1: 2020-08-13
+- New: Sticky Header
+- New: Simpler Transparent Header
+- New: Dynamic JavaScript integration with BunnyCDN
+- New: Make blocks editor inherit customizer fonts
+- Improvement: Revamped Logo header element
+- Improvement: Revamped shadow option
+- Improvement: Add TikTok, DTube, Parler social icons
+- Improvement: Search live results on search page
+- Improvement: Blog cards excerpt typography option
+- Improvement: Make `blogdescription` translateable via WPML
+- Improvement: Button `type="submit"` better compatibility with Qubely
+- Fix: Shop Page Title not taking the featured image from the page settings
+- Fix: Remove selectr script from being loaded
+- Fix: Header builder issue when header is not available in the preview
+- Fix: Page title Type 1 alignment option
+
+1.7.24: 2020-07-28
+- Improvement: WCAG compliant cart header element
+- Improvement: Integration with Delivery Slots by Iconic
+- Improvement: Allow custom images in page title
+- Improvement: Correct handling for links that open second tabs
+- Fix: Related posts schema.org markup
+
+1.7.24-beta2: 2020-07-28
+- Fix: proper versioning
+
+1.7.24-beta1: 2020-07-28
+- Improvement: Add `aria-label` to cart header element
+- Improvement: Integration with Delivery Slots by Iconic
+- Fix: Related posts schema.org markup
+
+1.7.23: 2020-07-27
+- New: Hide header/footer option per page
+- Improvement: Correctly detect WooCommerce product taxonomies
+- Improvement: rel="noopener" for external links
+- Improvement: WP Bakery builder better compatibility
+- Fix: Lightbox with placeholder image
+- Fix: Related Posts background color option
+- Fix: iOS <13 header dropdowns open
+
+1.7.23-beta2: 2020-07-24
+- New: Hide header/footer option per page
+- Improvement: Improve JetPack subscribe widget button
+- Improvement: Correctly detect WooCommerce product taxonomies
+- Improvement: rel="noopener" for external links
+- Fix: Lightbox with placeholder image
+- Fix: Related Posts background color option
+- Fix: iOS <13 header dropdowns open
+
+1.7.22: 2020-07-20
+- Fix: Properly check for IntersectionObserver presence
+
+1.7.21: 2020-07-20
+- Improvement: Compatibility with Toolset Custom post types
+- Improvement: Back to top button WCAG compliant
+- Improvement: Make headings in single posts WCAG compliant
+- Improvement: Video alignment
+- Improvement: Better WPForms compatibility
+- Fix: Variable products gallery, zoom & lightbox
+- Fix: Search live results when a result doesn't have an image
+
+1.7.21-beta3: 2020-07-18
+- Fix: Cleanup changelog
+
+1.7.21-beta2: 2020-07-18
+- Improvement: Compatibility with Toolset Custom post types
+- Improvement: Back to top button WCAG compliant
+- Improvement: Video alignment
+- Improvement: Better WPForms compatibility
+- Fix: Variable products gallery, zoom & lightbox
+- Fix: Search live results when a result doesn't have an image
+
+1.7.21-beta1: 2020-07-14
+- Improvement: Compatibility with Toolset Custom post types
+
+1.7.20: 2020-07-13
+- New: Automatically detect Custom Post Types and add their appropriate options
+- New: Add Related Posts thumbnail size option
+- Improvement: Better compatibility with Stackable plugin
+- Improvement: Page & post title minor improvements
+- Improvement: Add Twitch social icon
+- Improvement: Open mobile dropdown if parent item is empty
+- Improvement: Improve Floating cart and Store notice when website frame is enabled
+- Improvement: Compatibility with WooCommerce Smart Coupons plugin
+- Improvement: Improve WooCommerce product cards customizer sync
+
+1.7.20-beta1: 2020-07-10
+- New: Automatically detect Custom Post Types and add their appropriate options
+- Improvement: Open mobile dropdown if parent item is empty
+- Improvement: Improve Floating cart and Store notice when website frame is enabled
+- Improvement: Compatibility with WooCommerce Smart Coupons plugin
+
+1.7.19: 2020-07-04
+- New: Hero vertical alignment
+- Improvement: Proper skip to content link
+- Fix: Breadcrumbs validation fixes
+- Fix: Hero section deep links in customizer
+
+1.7.18: 2020-07-03
+- New: Keyboard handling for sub-menus & cart dropdown (A11Y)
+- New: Focus trap for all modals (A11Y)
+- New: Header global & conditions flow
+- New: Add `blocksy:header:item-view-path:item_id` filter
+- New: Support for Elementor Header, Footer & Blocks Plugin
+- New: WooCommerce product archives image hover effects
+- New: WooCommerce sale badge options
+- New: Add text selection color option
+- Improvement: Breadcrumbs schema.org
+- Improvement: Gutenberg Group Block - apply top/bottom padding only when container has a background
+- Improvement: WooCommerce attributes archives
+- Improvement: Semantic breadcrumbs html structure
+- Improvement: Image Zoom & Lightbox improvements
+- Fix: Cards border radius option not outputting value in frontend
+- Fix: Cart top totals
+- Fix: Author avatar size option not getting the right value
+- Fix: Improve minicart dropdown position
+- Fix: Breadcrumbs last item link
+
+1.7.18-beta2: 2020-07-02
+- New: Keyboard handling for sub-menus & cart dropdown (A11Y)
+- New: Focus trap for all modals (A11Y)
+- New: Header global & conditions flow
+- New: Add `blocksy:header:item-view-path:item_id` filter
+- Improvement: WooCommerce attributes archives
+- Improvement: Semantic breadcrumbs html structure
+- Fix: Improve minicart dropdown position
+- Fix: Breadcrumbs last item link
+- Fix: Header migrator logic
+
+1.7.18-beta1: 2020-06-30
+- New: Support for Elementor Header, Footer & Blocks Plugin
+- New: WooCommerce product archives image hover effects
+- New: WooCommerce sale badge options
+- New: Add text selection color option
+- Improvement: Breadcrumbs schema.org
+- Improvement: Gutenberg Group Block - apply top/bottom padding only when container has a background
+- Improvement: Image Zoom & Lightbox improvements
+- Fix: Cards border radius option not outputting value in frontend
+- Fix: Cart top totals
+- Fix: Author avatar size option not getting the right value
+
+1.7.17: 2020-06-26
+- New: Redesigned WooCommerce cart page
+- New: Container structure option for Page Title Type 2
+- New: Color picker color format switcher
+- New: Disable archive pagination option
+- New: Strava social icon
+- New: Custom Post Type support in Trending Block
+- New: Custom Post Type support in Posts Widget
+- New: Content Area Style to editor options
+- New: WooCommerce single product image zoom
+- New: Option for top/bottom vertical spacing inside post types
+- Improvement: Better Custom Post Types integration
+- Improvement: Narrow Container Width - make 400px minimum value
+- Improvement: Better handling for sliders in shadow option type
+- Improvement: Do not show Nothing Found for non-search queries
+- Improvement: Breadcrumbs validation
+- Improvement: Other minor validator improvements
+- Improvement: Conditionally display beta change log entries
+- Improvement: Typography letter spacing option to handle negative values
+- Improvement: Improve single posts inner pagination
+- Improvement: Elementor float left/right images
+- Improvement: Simple archive pagination
+- Improvement: Radio boxes and checkboxes
+- Improvement: Share Box type 2 open action for touch devices
+- Improvement: Get rid of the @import statement from Google Fonts
+- Improvement: WooCommerce image placeholder
+- Improvement: WooCommerce hidden quantity form
+- Improvement: Do not output WooCommerce mini cart if WooCommerce is inactive
+- Improvement: Add rel="opener" for social share links
+- Fix: Disable comments avatar WordPress option
+- Fix: Don't capitalize options labels strings
+
+1.7.17-beta9: 2020-06-23
+- Fix: Syntax errors
+
+1.7.17-beta8: 2020-06-23
+- New: Add option to disable pagination
+- New: Add Strava social icon
+- Improvement: Refactor Posts, Pages and Custom Post Types options & sync
+- Improvement: Header Account element
+- Improvement: Add Color Picker color format switcher
+- Improvement: Improve single post (inner) pagination
+- Improvement: Improve Elementor floated images
+- Improvement: Don't capitalize strings
+- Improvement: Improve radio boxes and checkboxes
+- Improvement: Improve Simple pagination
+- Improvement: WooCommerce cart & mini cart improvements
+- Improvement: Add rel="opener" for social share links
+
+1.7.17-beta7: 2020-06-09
+- Improvement: Remove category featured image option
+- Improvement: Typography letter spacing option
+- Improvement: Custom post types display taxonomies in cards and meta
+- Fix: Update mini cart issues
+
+1.7.17-beta6: 2020-06-08
+- Fix: CPT integration deal with missing post types
+- Fix: Hero properly fetch featured image for posts
+- Fix: Hero $mode variable warning
+
+1.7.17-beta5: 2020-06-05
+- New: Add Page title type 2 container structure option
+- Improvement: Improve CPT integration
+- Improvement: Improve WooCommerce image placeholder
+- Improvement: Disable comments avatar option
+- Improvement: Make 400px to be minimum value for narrow container max width
+- Improvement: Better handling for sliders in shadow option type
+- Improvement: Breadcrumbs improvements
+- Improvement: Minor validator improvements
+- Fix: Do not show Nothing found for non-search queries
+
+1.7.16: 2020-05-29
+- Improvement: Better handle for mobile logo wrapper tag
+- Improvement: Entry excerpt sync
+- Fix: Account element dynamic styles
+
+1.7.15: 2020-05-28
+- New: Add responsive alignment options for page title content
+- New: Option to enable/disable coupon form on checkout page
+- New: Header search through post types option
+- New: Posts listings featured image size option
+- Improvement: WooCommerce minicart
+- Improvement: Entry meta module
+- Improvement: Related posts increase limit
+- Improvement: Logo item wrapper tag options
+- Fix: WooCommerce search results page title
+
+1.7.14: 2020-05-23
+- Fix: Handling for metabox on posts and pages
+- Fix: Search modal
+
+1.7.13: 2020-05-22
+- New: Add Custom Post Type meta box options
+- Improvement: Related posts meta options
+- Fix: Single Posts background color
+- Fix: Account element not opening when inside offcanvas
+- Fix: Simple cards border radius option
+- Fix: Header mobile logo not being displayed
+- Fix: Gutenberg images spacing issue
+- Fix: Entry content headings alignment
+
+1.7.12: 2020-05-21
+- Fix: Critical error with blocksy_dirname_to_classname()
+- Fix: Post meta elements defaults
+- Fix: Custom post types detection
+
+1.7.11: 2020-05-21
+- New: Add support for Custom Post Types
+- New: Add bbPress integration
+- New: Add BuddyPress integration
+- New: Number of WooCommerce products for mobile
+- New: Add Tumblr, Behance, Slack and Spotify social icons
+- New: Add typography option for sidebar widgets text
+- New: WooCommerce Floating Cart visibility option
+- Improvement: Avoid header js detection and do not use `wp_is_mobile()` anymore
+- Improvement: Get rid of the `script` tags from header
+- Improvement: Performance for General options in Header
+- Improvement: Entry content items spacing
+- Improvement: Breadcrumbs schema.org
+- Improvement: Change lists indentation from margin to padding
+- Improvement: Color picker option
+- Improvement: Change comments ID from ct-comments to comments
+- Improvement: Refactor post meta module
+- Improvement: Improve blocks left & right alignment
+- Fix: Woo mini cart totals
+- Fix: Woo variations switch Android bug
+- Fix: Remove drafts and coming soon (sheduled) from trending block
+- Fix: Conflict with data-lazy attribute in Draw Attention plugin
+- Fix: Avoid high CPU usage in Safari due to CSS variables in gradients
+- Fix: Header modal click propagation
+- Fix: Woo shortcodes pagination
+- Fix: Woo Product Filter plugin conflict
+- Fix: Header display for big tablets
+- Fix: Footer widget text not initializing
+
+1.7.10: 2020-04-22
+- New: Page/Post title advanced module
+- Improvement: Add caption support to single post featured image
+- Improvement: Posts Navigation module
+- Improvement: Thumbnail size for Gutenberg blog layout
+- Improvement: Gutenberg left/right aligned blocks
+- Improvement: Improve full width blocks spacing
+- Improvement: Allow <script> tags in header HTML item
+- Improvement: WooCommerce quantity input
+- Improvement: Update language file with latest strings
+- Improvement: Lists items spacing
+- Improvement: Form fields appearance for Safari
+- Improvement: Load minicart modal after the page finishes to load
+- Improvement: Global Header system
+- Fix: Menu current ancestor/parent item color
+- Fix: Google Fonts Default family and variation loading
+
+1.7.9: 2020-04-10
+- New: Add option and enable/disable sticky single product summary
+- New: Add size option for back to top button
+- Improvement: Add `blocksy:post-meta:items` filter for post meta
+- Improvement: Translate strings for IE guard template
+- Improvement: Add compatibility with Variation Swatches for WooCommerce plugin
+- Improvement: Improve Composite Products compatibility
+- Improvement: Improve Elementor single products pages css
+- Fix: Brizy input form field color conflict
+- Fix: Strip urls from excerpts
+- Fix: Custom HTML widget handling in Footer Builder
+
+1.7.8: 2020-04-03
+- Improvement: Post updated date
+- Improvement: Include page/post title in share box social networks
+- Improvement: FacetWP lazyload and select init
+- Improvement: Improve color palette in Gutenberg
+- Fix: Ordered lists link type
+- Fix: Pods categories template
+- Fix: WordPress 5.2 Gutenberg JS API incompatibility
+- Fix: Center aligned images in Classic editor
+
+1.7.7: 2020-03-26
+- New: Shop starter site
+- New: Blog starter site
+- New: Add header login element
+- New: RTL support
+- New: Trending block - Woo products criteria
+- New: Single Product image size option
+- New: Background option to page/post title
+- Improvement: Header menu responsive mode and dropdown position
+- Improvement: Add support for Brizy Boxed/Full Width sections
+- Improvement: Make WooCommerce Thumbnail size input combined with ratio option
+- Improvement: Background option transparent state
+- Improvement: Inline images alignment
+- Improvement: Select options
+- Improvement: I18n for `More Information` string
+- Fix: Variable Product not imported correctly
+- Fix: Sticky Footer CSS output when enabled for all devices
+- Fix: Blank state text widgets in footer builder
+- Fix: Header Search live results enable/disable option
+- Fix: Comments links color
+- Fix: Fix proper use of `the_post()`
+- Fix: Footer rows background option inheritance
+- Fix: Parallax `style` attribute
+- Fix: Header button border radius option
+- Fix: Page Title avatar enable/disable option
+
+1.7.6: 2020-03-12
+- Fix: Avoid error about `blocksy_some_device()`
+
+1.7.5: 2020-03-12
+- Fix: Avoid error on update about the missing function
+
+1.7.4: 2020-03-12
+- Improvement: WPML and Polylang integration improvements
+
+1.7.3: 2020-03-12
+- Improvement: Panel trigger & close buttons
+- Improvement: WooCommerce Cards Type 1
+- Improvement: Simplify page settings button
+- Improvement: Revamp sticky footer functionality
+- Fix: Sync for Pages content area style Boxed style
+- Fix: Brizy WooCommerce categories element
+
+1.7.2: 2020-03-09
+- Fix: Header text element error
+
+1.7.1: 2020-03-09
+- Fix: CRLF issues
+
+1.7.0: 2020-03-09
+- New: Add mobile menu trigger label
+- New: Add Divi builder integration
+- New: Add Border Radius option for Boxed Content area
+- New: Add Border Radius option for sidebar Type 2
+- New: Add a global panel options for theme buttons
+- New: Implement compatibility with Polylang and WPML
+- New: Add sidebar only for WooCommerce
+- New: Add Content Spacing option for Entry Content elements
+- New: Add more ratio options for Product and Product Single Image
+- New: Add option to separate & Related Posts & Commets from/with content area
+- New: Make Gutenberg buttons block & content inherit theme styles
+- Improvement: WooCommerce variable products support
+- Improvement: WooCommerce Product Add-Ons support
+- Improvement: WooCommerceCross Sells products
+- Improvement: Wrap all functions in `function_exists()` checks
+- Improvement: Enhance WooCommerce order review page
+- Fix: Make Main Menu the default menu
+- Fix: `wpColorPicker` problem in WooCommerce settings
+- Fix: Author box social icons
+- Fix: Brizy popup width conflict
+- Fix: Header row border option causing overflow on Windows browsers
+- Fix: Quote and Pullquote blocks content spacing
+- Fix: Hide hamburger button when offcanvas is opened
+- Fix: Elementor default fonts and palette option
+- Fix: Elementor 404 page template
+
+1.6.16: 2020-02-12
+- New: Add option to disable the category label
+- Fix: Back to top button bottom variable
+- Fix: Proper check the `attachment_id` presence
+- Fix: Categories widget dropdown submit on change
+
+1.6.15: 2020-02-07
+- Fix: Resolve inexisting `blocksy_output_visibility()` function exception
+
+1.6.14: 2020-02-07
+- New: Add Reddit social icon
+- New: Add GitHub social icon
+- New: Featured image options for pages
+- Improvement: Visibility for social labels
+- Improvement: Better check for beaver builder presence
+- Fix: Comments label when Antispam Bee plugin is active
+- Fix: Text selection on Microsoft OS + Edge
+
+1.6.13: 2020-01-30
+- New: Add support for Elementor Theme Locations API
+- New: Facebook Group social icon
+- Improvement: Brizy builder templates handling
+- Improvement: Trending block functionality improvements
+- Improvement: Header & Footer builder switch panels
+- Improvement: Beaver builder full width sections
+- Fix: Make sure `is_block_editor()` check works fine when current screen object is missing
+
+1.6.12: 2020-01-24
+- New: Make Gutenberg editor inherit the width from post/page width option
+- New: Add for Related posts `ct-container` & `ct-container-narrow` options
+- New: Social icons (header & footer) show label option
+- New: Add original & custom ratio option for featured images
+- Improvement: Layout structure improvements
+
+1.6.11: 2020-01-23
+- Improvement: Attachment change image to original ratio
+- Improvement: Attachment click on image -> opens image full size
+- Fix: Critical fix for search results display in modal
+- Fix: Attachment page is not taking options from Page Structure
+- Fix: Attribute classic is not added if post/page is using a sidebar
+
+1.6.10: 2020-01-22
+- New: Attachment page
+- New: Content Area Style option for single product page
+- Improvement: Better chunks management for dynamic CSS
+- Improvement: Change the Gutenberg editor font to selected font from Base Font option
+- Improvement: WooCommerce archives page title improvements
+- Improvement: Trending block sort criteria option
+- Improvement: Trending block smoother animation
+- Improvement: Minor improvements for classic editor
+- Fix: Mobile menu indentation
+- Fix: 404 page live search results
+
+1.6.9: 2020-01-17
+- New: Add Trending Block
+- Improvement: Add page title options for author page
+- Improvement: Simplified Related Posts html structure
+
+1.6.8: 2020-01-16
+- New: Gutenberg-style post settings sidebar
+- Improvement: Make indentation bigger for first level list items
+- Improvement: Image picker tooltip
+- Improvement: Posts & pages comments structure enhancements
+- Improvement: Take options for custom taxonomies from categories
+- Improvement: Rename Sidebar to Main Sidebar
+- Fix: Remove avatar from comments pingbacks
+- Fix: File block for mobile devices
+
+1.6.7: 2020-01-06
+- New: Add related posts title tag picker (make the default to be `h2`)
+- Improvement: WooCommerce CSS enhancements
+- Improvement: Change Wide Alignment Offset minimum value to `20px`
+- Fix: Properly check TTL for Google Fonts API
+- Fix: List style indentation
+- Fix: Selectr not loaded for WooCommerce
+- Fix: Sync for `Content Area Spacing` in single post/page
+
+1.6.6: 2019-12-29
+- New: Footer responsive reveal effect
+- Improvement: Enhance Quote widget html
+- Improvement: CSS reset enhancements
+- Fix: Featured image wide alignment
+- Fix: WooCommerce table issue
+- Fix: Minor typography inheritance issues
+
+1.6.5: 2019-12-27
+- New: Card border radius
+- New: Add widget title tag
+- New: Add LifterLMS sidebar support
+- New: Add responsive controls for background option
+- New: Header builder shared background option
+- New: Vertical alignment for footer menu, footer socials, footer copyright
+- New: Close off canvas when clicking on anchor links with hash only
+- New: Forminator compatibility
+- Improvement: Better CSS architecture
+- Improvement: Remove responsive controls from dropdown shadow and border-radius
+- Improvement: Improve social box and share box with a common function/style
+- Improvement: Close select option when clicking second time on it
+- Improvement: Better handling for page layouts
+- Fix: Brave browser images loading
+- Fix: Offcanvas panel when no js
+- Fix: Remove `hfeed` class if schema is deactivated
+- Fix: Remove `sidebar` class from product single
+- Fix: Hide Meta Label if no meta elements are checked
+- Fix: When no menu state is saved in customizer -- the header builder UI breaks
+- Fix: Cards reveal animation when javascript is disabled
+- Fix: Quick View modal Add to cart button
+
+1.6.4: 2019-11-28
+- New: Add inheritance for single post/pages elements
+- Fix: Modal transition for Chrome browser
+- Fix: Woo product gallery swipe/scroll action
+
+1.6.3: 2019-11-26
+- Fix: Critical bug with offcanvas not being present in frontend
+
+1.6.2: 2019-11-25
+- New: Add option to deactivate the page title meta avatar
+- New: Add footer widgets typography option
+- Fix: Options with long labels
+- Fix: Footer elements alignment
+- Fix: Typography error when switching to another unit, with default value
+
+1.6.1: 2019-11-23
+- Fix: Footer socials item sync failure
+
+1.6.0: 2019-11-22
+- New: Footer Builder
+- New: Gravity Forms compatibility
+- New: QQ, Weibo and Wechat social networks
+- Improvement: Add the possibility to hide the inset button from Box Shadow option
+- Fix: Multisite issue with Companion activation
+- Fix: Dropdown menu items color when parent item is active
+- Fix: Columns block css
+- Fix: Typography error when clicking in `line-height` input
+
+1.5.10: 2019-11-13
+- New: Add WhatsApp, Viber and Telegram social icons
+- Improvement: UI and options styles improvements for WordPress 5.3
+- Fix: Revert Media & Text block to default/native styles
+- Fix: Posts/pages metabox settings
+- Fix: Cookies notice background
+- Fix: Typography modal position in post settings
+
+1.5.9: 2019-11-11
+- Improvement: IE banner conflict with cache plugins
+- Improvement: Header border enhancements
+- Improvement: Support shortcodes in header HTML element
+- Fix: Click on select option arrow
+- Fix: Header Search item not being clickable in builder mode
+
+1.5.8: 2019-11-07
+- New: Enhance top level menu type
+- New: Add typography option for buttons
+- Improvement: Load font variables only when needed
+- Improvement: Typography option type only render modals on open
+- Fix: Header text item typography
+- Fix: Customizer error when not in single
+- Fix: Slider fix for negative values
+- Fix: Missing translations for author page
+- Fix: `entry-meta` categories & tags divider position
+- Fix: Click on Default variation doesn't work & throws an error
+- Fix: Minify `global.css` file
+
+1.5.7: 2019-11-01
+- New: Narrow Container width 95%
+- New: Add option to disable Emojis Script
+- New: Add divider style and color option for blog cards type simple
+- New: Bring back menu locations
+- Improvement: Re-implement schema.org markup
+- Improvement: Enhance ratio position button
+- Improvement: Style the default and wide line
+- Improvement: Improve typography modal position
+- Improvement: Add download links in dashboard for Blocksy Companion and Child Theme
+- Improvement: Remove plugins tab from dashboard
+- Fix: Cart NAN grouped products
+- Fix: Card button text color
+- Fix: Brizy `input` size conflict
+- Fix: WooCommerce buttons
+- Fix: Passepartout color sync and `z-index`
+- Fix: Lazy load animation type circle doesn't work
+- Fix: `singleProductTitleFont` sync
+- Fix: Footer primary area sections spacing
+- Fix: Cards comments number
+- Fix: Woo product catalog categories
+- Fix: Image caption text color
+
+1.5.6: 2019-10-21
+- New: Add ratio picker for related posts
+- Improvement: Enhance comments content area
+- Fix: Add `srcset` for related posts images
+- Fix: Related posts query issue
+- Fix: IE11 check for guard template
+
+1.5.5: 2019-10-18
+- New: Style links from `.entry-content`
+- New: Add IE info page
+- New: Add button text color
+- New: Add Related Posts meta options
+- Improvement: Improve accessibility
+- Improvement: Add sync for links type
+- Improvement: Add `entry-content` class to Text Widget
+- Improvement: Move Posts Reveal effect to Card Options
+- Improvement: Change woo pagination text to `No more products to load`
+- Improvement: Woo notice position and color
+- Improvement: Change date format for post meta to respect wordpress settings
+- Fix: Remove option from `metabox/categories`
+- Fix: Quick view close button spacing
+- Fix: Accessibility and validation issues
+- Fix: Categories count
+- Fix: Single product Breadcrumbs sync
+- Fix: Single product `entry-summary` position sticky
+- Fix: Woo payment options
+
+1.5.4: 2019-10-10
+- New: Add option to make Featured Image boundless when Content Area Style is boxed
+- New: Add box-shadow for content area boxed style
+- New: Add WooCommerce cards gap
+- New: Add comments container width option
+- New: Add reset confirmation modal
+- Improvement: WooCommerce block
+- Improvement: Enhance close button for panels
+- Improvement: Add footer builder notification
+- Improvement: Header items default spacing
+- Improvement: Fix editor palette colors
+- Fix: Header `z-index`
+- Fix: Background modal distance
+- Fix: Multiple color modals
+- Fix: Panel customizer error when closed on desktop
+- Fix: Remove data-divider from ct-pagination when pagination is set to Infinite Scroll
+- Fix: Color palette revert sync
+- Fix: Companion `CT_CSS_SKIP_RULEDEFAULT`
+- Fix: Fix double id in GDPR confirm box
+- Fix: Cart item margin
+- Fix: Footer reveal sync
+- Fix: Menu dropdown divider
+- Fix: Offcanvas panel left/right side sync bug
+
+1.5.3: 2019-10-01
+- New: Add box shadow option
+- New: Add back to top bottom offset option
+- Improvement: Responsive menu smarter logic
+- Improvement: Change header builder panel position
+- Improvement: Update dashboard Header link
+- Improvement: Change panel class to `ct-panel`
+- Improvement: Make several strings in theme translatable
+- Fix: Menu item proper link to WordPress section
+- Fix: Header builder panel blank sidebar bug
+- Fix: Modal overflow bug
+- Fix: `body` scroll bar when `overflow: hidden`
+- Fix: Background pattern opacity sync not applying
+- Fix: Back to top sync
+- Fix: Sidebar position bug
+- Fix: Author box sync
+- Fix: Share box sync
+
+1.5.2: 2019-09-24
+- New: Add sub-menu items spacing option
+- Improvement: Make most theme files rewritable from child theme
+- Improvement: Refactor modals & side panels in the whole theme
+- Fix: Header HTML text mode
+- Fix: Console errors related to responsive desktop menu
+- Fix: Responsive footer menu
+- Fix: Site tagline alignment on mobile
+- Fix: Trigger item not displayed on iPad landscape mode
+- Fix: Panel alignment attribute
+
+1.5.1: 2019-09-20
+- Fix: Remove Header Builder admin notification
+
+1.5.0: 2019-09-20
+- New: Header Builder
+- Improvement: Add a filter for manual Google Fonts list, without any JSON parsing going on `blocksy-typography-google-fonts-source`
+- Improvement: Enhance images `figcaption`
+- Improvement: Comments CSS enhancements
+- Fix: Footer Social Icons
+- Fix: Footer menu links color
+
+1.4.2: 2019-09-10
+- New: Option to enable/disable parallax on different devices for page title
+- Improvement: Comments behavior for author pages
+- Fix: Products image ratio
+- Fix: Parallax on screen resize for page title
+
+1.4.1: 2019-09-04
+- Improvement: Add border option for blog cards
+- Improvement: Add meta typography option
+- Fix: Updated date in customizer blog cards
+- Fix: Entry tags css
+- Fix: Meta categories (long names)
+- Fix: Scroll to top sync
+- Fix: Frontend JS no longer fails when wp global variable is not present
+
+1.4.0: 2019-08-28
+- New: Add tags and last update date in post meta
+- Improvement: Update admin notification
+- Improvement: Comment form improvements
+
+1.3.9: 2019-08-20
+- New: Add WhatsApp, Viber, Reddit, Hacker News share buttons
+- Improvement: Add Rellax.js license
+- Improvement: Scripts loading order, makes sure `ct-events` are always present
+- Improvement: Comments rating, for Tasty Reciepes
+- Improvement: Add a button in color picker modal, that redirects to Colors Section
+- Fix: Remove Google+ social network
+- Fix: Instagram block
+- Fix:  `.alignfull` blocks
+- Fix: Comments form labels
+
+1.3.8: 2019-08-13
+- Improvement: Update to latest WooCommerce templates
+- Improvement: Hero visibility label
+- Fix: Layers option type properly receive missing layers
+
+1.3.7: 2019-08-12
+- Improvement: Post pagination CSS improvements
+- Improvement: Make Author Box disabled by default
+- Fix: Drop-down animation type-2 child reveal
+- Fix: Remove `Arial Black`, `Tahoma`, `Geneva` fonts from list
+- Fix: Customizer links from dashboard
+
+1.3.6: 2019-08-05
+- New: Add option for single post meta format in page titles
+- Improvement: Add `wp_body_open()` call
+- Fix: Styles for Woo store notice
+- Fix: Small text overflow issue
+- Fix: Remove user social networks filter
+- Fix: Remove System Status from Dashboard
+- Fix: Re-add skip link
+- Fix: Duplicated text domains
+
+1.3.5: 2019-08-01
+- Improvement: Remove `.ct-classic-forms` from `body`
+- Improvement: Add more styling options for pagination (button color, text color)<Paste>
+- Improvement: Refactor css code
+- Improvement: Refactor WooCommerce css
+- Improvement: WooCommerce pagination with global options
+- Improvement: Cleaned up demo content
+- Improvement: Remove woo code that changes the css breakpoints
+- Fix: Hide number when pagination type is set to Next/Prev (visible only in Customizer)
+- Fix: Page title meta sync
+- Fix: Error on product single page
+- Fix: Cart icon type output
+- Fix: Flexy doesn't work on Android devices
+- Fix: Lazy load attributes when dropping a product image in Elementor
+- Fix: Selectr init in Elementor
+
+1.3.4: 2019-07-15
+- New: Add option for search through Posts, Pages, Products
+- Improvement: Major performance boost in customizer options
+- Fix: Disqus comments system fix for post meta
+- Fix: Change color palette from Gutenberg, based on colors from customizer
+- Fix: Fix Contact Info icons
+- Fix: Remove child theme from theme folder
+- Fix: Fix Navigation Menu widget dropdown
+
+1.3.3: 2019-07-10
+- Fix: Search results page style when no results
+- Fix: Header mobile H1 duplicate
+- Fix: Rename Page Excerpt Visibility to Page Info Visibility
+- Fix: Page title `type-2` alignment
+
+1.3.2: 2019-07-06
+- Fix: Background color option properly transform from color picker
+- Fix: Make logo `image` by default
+
+1.3.1: 2019-07-05
+- New: Background option type
+- New: Add slogan option for logo area in header
+- New: Add background Image for header
+- Improvement: Make the Site Tagline visibility option
+- Improvement: Add Styling options (font, color) when logo is text
+- Improvement: Add possibility to change Load More label text
+- Improvement: Add RSS icon in top bar and footer
+- Improvement: Allow HTML in taxonomy description
+- Fix: Remove old logic for background and pattern from options and frontend
+- Fix: Lazy load images broken when JavaScript disabled
+- Fix: Blog page title alignment is not working in customizer
+- Fix: Fix Design tab in Card Options
+- Fix: Color palettes properly handle old values
+- Fix: Fix page comments option
+- Fix: Remove Accent Color option from categories
+
+1.3.0: 2019-06-27
+- New: Multiple color palettes
+- New: Site background options with color, patterns and images
+- New: Load JavaScript with async script
+- New: Single post featured image
+- New: Post archives read more button
+- Improvement: Reverse post navigation logic
+- Improvement: Add `16/9`, `9/16` ratios for images
+- Fix: Posts widget thumbnails in customizer
+- Fix: Posts navigation position
+- Fix: Remove `data-menu-type` and `data-dropdown-animation` attributes from mobile menu
+
+1.2.14: 2019-06-18
+- Improvement: Add check for XMLReader in System Status
+- Fix: Share box fixed for Firefox on iOS
+- Fix: Jetpack images lazy load with infinite scrolling
+- Fix: Flexy drag-n-drop prevents page from being scrolled on touch devices
+- Fix: Author posts count pass correct ID
+- Fix: Google Fonts pass HTTPS protocol for loading fonts
+- Fix: Content width for Cover Image Block
+
+1.2.13: 2019-06-07
+- New: Share box fixed style
+- New: Page title description for pages
+- New: Lazy load for Gravatar avatars
+- Improvement: Footer fluid/fixed containers options
+- Fix: Sync for back to top link
+- Fix: Sync for footer widgets area
+- Fix: Default for page title font in metabox
+- Fix: Typography popper behavior
+
+1.2.12: 2019-06-05
+- Fix: Remove old `echo`
+
+1.2.11: 2019-06-05
+- New: Site title typography
+- Fix: Popper modifiers list
+- Fix: Remove stale echo from code
+
+1.2.10: 2019-06-05
+- New: Typography options, with Google & System Fonts
+- New: Gutenberg layout type
+- New: Lazy load animation type
+- Improvement: Integration with WP Smush lazy load option
+- Improvement: Page title better alignment
+- Improvement: Pagination divider option
+- Improvement: Better translations handling for JSX
+- Improvement: More ratio options for images in archives -- `2/1`, `1/2`, `1/1`
+- Improvement: Dashboard UI updates
+- Fix: Comments cookies field styling
+- Fix: Proper default for logo option in customizer
+- Fix: Customizer avatar_size live update
+
+1.2.9: 2019-05-20
+- Fix: Customizer sync errors
+
+1.2.8: 2019-05-20
+- New: Add Products Quick View
+- New: Add Flexy slider in the WooCommerce single products
+- New: Drop `selectize.js` in favor of `selectr`
+- New: Drop jQuery from loading
+- New: Integration with Brizy builder
+- New: Add ok.ru, vk.ru and telegram in posts share box
+- Improvement: Post meta improvements for posts listings
+- Improvement: Dinamically load mini cart on hover. Speeds up the page dramatically
+- Improvement: Load smaller image sizes in posts widgets and posts listings
+- Improvement: Smarter loading behavior that prevents elements jumping
+- Fix: Disable images lazy load when Jetpack lazy load module is enabled
+
+1.2.7: 2019-05-11
+- Improvement: Add Theme URI
+
+1.2.6: 2019-05-11
+- Improvement: Use all the wp scripts from WordPress core itself
+
+1.2.5: 2019-05-11
+- Improvement: Include original source files and build instructions
+- Fix: Customizer sync for single posts
+
+1.2.4: 2019-05-10
+- Improvement: Switch WPForms to Contact Form 7
+- Improvement: Style fixes
+
+1.2.3: 2019-05-10
+- Improvement: Change fallback for default main menu
+
+1.2.2: 2019-05-10
+- Fix: Remove theme URI temporarily
+
+1.2.1: 2019-05-08
+- Fix: Proper lazy load attributes in sync
+
+1.2.0: 2019-05-08
+- New: Global forms type
+- New: Page title alignment option
+- Improvement: Test with WordPress 5.2
+- Improvement: Disable MailChimp form for pages
+- Improvement: Offcanvas styles
+- Improvement: Search styles
+- Fix: Sticky header and sidebar works
+- Fix: Layers stabilize item keys earlier
+- Fix: Lots of escaping fixes inside every file
+
+1.1.19: 2019-05-07
+- New: Offcanvas for mobile menu
+- Improvement: Companion plugin as a download
+
+1.1.18: 2019-04-22
+- New: Changelog screen in dashboard
+- New: Notification for installing the companion plugin from wp.org
+- New: Type for the mobile menu trigger
+- Improvement: `data-lazy` attribute for images lazy loading
+- Improvement: Parallax for page title
+- Improvement: Remove widgets from theme
+- Improvement: WooCommerce integration updates
+
+1.1.17: 2019-04-11
+- New: Footer reveal
+- New: Lazy load disable option
+- New: Header menu type option
+- Improvement: Blocksy Companion is no longer pending
+
+1.1.16: 2019-04-09
+- New: Menu Divider
+- New: Default favicon
+- Improvement: Implement `output.chunkFilename` webpack config for avoiding cache problems
+- Improvement: Social widgets updates for social icons
+
+1.1.15: 2019-04-09
+- New: Transparent Header
+- New: Border option type
+- New: Header CTA button
+- New: Newsletter Subscribe Widget
+- New: Passepartout Option
+- Improvement: Disable Header Top Bar from post metabox
+- Improvement: Disable image uploader cropper
+- Improvement: readme updates, JS licenses
+- Improvement: Split WooCommerce CSS and load it conditionally
+- Fix: iOS mobile menu scroll fix
+
+1.1.14: 2019-04-01
+- New: Sidebar sticky
+- New: Ad widget
+- Improvement: Shop title handling
+
+1.1.13: 2019-04-01
+- New: Different cards type for listings
+- New: Reveal effect for cards
+- New: No color option for color picker
+- New: Mailchimp subscribe widget
+- New: Passepartout option
+- Improvement: PHP version check in theme. We require 5.7
+- Improvement: Improved pagination. Load more with button & infinite scroll
+- Improvement: Product search widget live results
+- Improvement: Page title improvements. Remove custom title & description where they are not needed
+- Fix: Complete sanitization of customizer controls
+
+1.1.12: 2019-03-26
+- New: Related criteria option
+- New: Per page option in listings
+- Improvement: Live results switch for search overlay
+- Fix: Make selectize not fail when jquery is not present
+
+1.1.11: 2019-03-22
+- Fix: Remove playground
+- Fix: Translation issues
+
+1.1.10: 2019-03-22
+- New: Back to top link
+- New: schema.org markup for common elements
+- New: Option for mobile logo
+
+1.1.8: 2019-03-21
+- New: Option to enable/disable WooCommerce product zoom
+- Improvement: Better view for single product
+- Fix: Fix WooCommerce presence checker
+- Fix: `selectize` related fixes
+
+1.1.7: 2019-03-20
+- Fix: Short description
+
+1.1.6: 2019-03-20
+- New: Add description and missing fields to `readme.txt`
+- Fix: Fix escaping
+
+1.1.5: 2019-03-20
+- Fix: Do not use `file_get_contents()`
+- Fix: Small CSS fixes
+- Fix: Sanity checks for WooCommerce
+
+1.1.4: 2019-03-19
+- Fix: Check WooCommerce activation status before doing actual checks
+
+1.1.3: 2019-03-19
+- Fix: Check `is_product()` presence
+
+1.1.2: 2019-03-19
+- Fix: Theme Check fixes
+
+1.1.1: 2019-03-19
+- Fix: Fix bug with skipping `bundle/` folders from final build
+
+1.1.0: 2019-03-19
+- New: WooCommerce Integration
+- Improvement: More options for existing customizer panels
+- Improvement: Change prefixes and text domain from `ct` to `blocksy`
+
+1.0.7: 2019-02-25
+- New: New screenshot
+- Fix: Widgets title escaping fix
+
+1.0.6: 2019-02-22
+- New: WP Forms integration
+- Fix: Fix logic for picking an image from REST API response in live search
+- Fix: Layers option type without options does not fail anymore
+
+1.0.5: 2019-02-21
+- Improvement: New theme URL
+
+1.0.4: 2019-02-21
+- Fix: Theme check fixes
+
+1.0.3: 2019-02-21
+- New: Implement Google Analytics support
+- Improvement: Small change in options render
+
+1.0.2: 2019-02-20
+- New: Implement 404 page
+- Fix: Fix browsersync check for `WP_DEBUG`
+- Fix: Re-sync plugins status even if the action failed
+
+1.0.1: 2019-02-20
+- New: Add Beaver and Elementor recommended plugins
+- Fix: Related posts sync fixes
+
+1.0.0: 2019-02-20
+- New: First release.

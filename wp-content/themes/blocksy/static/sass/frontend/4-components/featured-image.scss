@@ -1,0 +1,36 @@
+.ct-featured-image {
+	margin-left: auto;
+	margin-right: auto;
+
+
+	// image alignment
+	&:not(.alignfull) {
+		width: var(--block-width);
+	}
+
+	&:not(.alignwide):not(.alignfull) {
+		max-width: var(--block-max-width);
+	}
+
+	&.alignwide {
+		max-width: var(--block-wide-max-width);
+	}
+
+
+	// image spacing
+	@include media-breakpoint-down(md) {
+		padding-bottom: 30px;
+	}
+
+	@include media-breakpoint-up(lg) {
+		padding-bottom: 50px;
+	}
+
+
+	// image figcaption
+	figcaption {
+		--fontSize: 14px;
+		text-align: center;
+		margin-top: 5px;
+	}
+}

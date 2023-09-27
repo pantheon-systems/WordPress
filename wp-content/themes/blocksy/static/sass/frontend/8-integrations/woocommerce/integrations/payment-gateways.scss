@@ -1,0 +1,38 @@
+.wc-proceed-to-checkout {
+	#wc-stripe-payment-request-wrapper {
+		margin-bottom: 15px;
+	}
+}
+
+// for variable product case
+// place pp button under the dropdown select
+// because pp button has a big z-index
+.product-type-variable .wcppec-checkout-buttons {
+	position: relative;
+	z-index: 1;
+}
+
+#wc-stripe-payment-request-wrapper {
+	padding-top: 0 !important;
+}
+
+.wcppec-checkout-buttons__separator,
+#wc-square-wallet-divider,
+#wcpay-payment-request-button-separator,
+#wc-stripe-payment-request-button-separator {
+	display: none !important;
+}
+
+// Square payment method adjustments
+div#wc-square-digital-wallet {
+	max-width: 100%;
+}
+
+div.wc-square-wallet-buttons {
+	width: 100%;
+}
+
+// stripe input field width reset
+.woocommerce fieldset .wc-stripe-elements-field {
+	width: initial;
+}

@@ -1,0 +1,6 @@
+.has-background {
+
+	&:is(p, .wp-block-group) {
+		padding: var(--content-spacing);
+	}
+}

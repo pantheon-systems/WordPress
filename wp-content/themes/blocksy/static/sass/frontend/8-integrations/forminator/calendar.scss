@@ -1,0 +1,80 @@
+.forminator-calendar {
+	font-size: 15px;
+	padding: 25px;
+	background-color: #fff;
+	box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.1);
+
+	.ui-datepicker-header {
+		position: relative;
+		display: block;
+		margin-bottom: 20px;
+
+		.ui-corner-all {
+			position: absolute;
+			top: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
+			cursor: pointer;
+			color: #fff;
+			background-color: var(--paletteColor1);
+
+			&.ui-datepicker-prev {
+				&:before {
+					content: "❮";
+				}
+			}
+
+			&.ui-datepicker-next {
+				right: 0;
+
+				&:before {
+					content: "❯";					
+				}
+			}
+
+			.ui-icon {
+				display: none;
+			}
+
+
+		}
+
+		.ui-datepicker-title {
+			display: flex;
+			justify-content: space-between;
+			padding: 0 55px;
+
+			select {
+				max-width: 47%;
+				font-size: 15px;
+			}
+		}
+	}
+
+	.ui-datepicker-calendar {
+		
+
+		th, td {
+			text-align: center;
+		}
+	}
+
+	.ui-datepicker-today,
+	.ui-datepicker-current-day {
+		background-color: var(--paletteColor1);
+
+		a {
+			color: #fff;
+			font-weight: bold;
+		}
+	}
+}
+
+.forminator-ui[data-design="none"] {
+	&:not(.forminator-size--small) .forminator-timepicker .forminator-row {
+		align-items: flex-end;
+	}
+}

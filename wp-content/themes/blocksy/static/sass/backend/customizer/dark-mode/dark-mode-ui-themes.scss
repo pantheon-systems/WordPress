@@ -1,0 +1,64 @@
+.ct-dark-mode {
+
+	.control-panel-themes {
+		#accordion-section-installed_themes {
+			border-top-color: $border;
+		}
+
+		.customize-themes-section-title {
+			background: $background_light;
+			border-bottom-color: $border;
+			border-left-color: $border;
+
+			&.selected {
+				color: $accent;
+
+				&:after {
+					background: $accent;
+				}
+			}
+
+			&:not(.selected) {
+				&:after {
+					border-color: lighten($border, 3%);
+					background: lighten($background_light, 5%);
+				}
+			}
+
+			&:hover {
+				color: $accent;
+				border-left-color: $accent;
+			}
+		}
+
+		.customize-themes-full-container {
+			background: $background_light;
+		}
+
+		.filter-themes-count .themes-displayed {
+			color: $color_background_light;
+		}
+	}
+
+	.customize-preview-header.themes-filter-bar {
+		background: $background_light;
+		border-bottom-color: $border;
+
+		.search-icon {
+			color: $color_background_light;
+		}
+	}
+
+	.customize-control-theme .theme {
+		border-color: $border;
+
+		.theme-name {
+			color: $light;
+			background: $background;
+		}
+
+		.theme-actions {
+			background: transparent;	
+		}
+	}
+}

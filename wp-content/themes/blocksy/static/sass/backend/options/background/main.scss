@@ -1,0 +1,31 @@
+@import 'background-preview';
+
+@import 'color';
+@import 'gradient';
+@import 'image-pattern';
+
+
+.ct-background-modal {
+	display: flex;
+	flex-direction: column;
+	height: 430px;
+
+	opacity: 0;
+	visibility: hidden;
+	transform: scale3d(0.95, 0.95, 1);
+	transition: opacity 0.1s ease, visibility 0.1s ease, transform 0.1s ease-out;
+
+	--option-modal-arrow-position: calc(100% - 38px);
+
+	&.active {
+		opacity: 1;
+		visibility: visible;
+		transform: scale3d(1, 1, 1);
+	}
+
+	.ct-image-tab,
+	[class*="ct-gradient-tab"] {
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+}

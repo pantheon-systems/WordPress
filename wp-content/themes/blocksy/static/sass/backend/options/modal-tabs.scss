@@ -1,0 +1,52 @@
+.ct-modal-tabs {
+	flex: 0 0 43px;
+	height: 43px;
+	display: flex;
+	margin: 0;
+	overflow-x: hidden;
+
+	li {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100%;
+		margin: 0;
+		cursor: pointer;
+		font-size: 13px;
+		font-weight: 500;
+		box-sizing: border-box;
+		border-bottom: 1px solid #eee;
+
+		&:not(:last-child) {
+			border-right: 1px solid #eee;
+		}
+
+		&:not(.active) {
+			color: rgba(68, 68, 68, 0.7);
+
+			&:hover {
+				color: rgba(68, 68, 68, 1);
+			}
+		}
+
+		&.active {
+			position: relative;
+
+			&:after {
+				position: absolute;
+				content: '';
+				left: -1px;
+				bottom: -1px;
+				width: calc(100% + 2px);
+				height: 2px;
+				background: var(--accentColor);
+			}
+		}
+	}
+}
+
+
+.ct-modal-tabs-content {
+	flex: 1;
+}

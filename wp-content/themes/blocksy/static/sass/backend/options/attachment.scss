@@ -1,0 +1,124 @@
+[class*="ct-attachment"]{
+
+	.thumbnail {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		cursor: pointer;
+
+		img {
+			border-radius: 3px;
+			max-width: 100%;
+		}
+
+		&:hover .actions {
+			opacity: 1;
+		}
+	}
+
+	.actions {
+		position: absolute;
+		top: var(--actions-spacing, 18px);
+		right: var(--actions-spacing, 18px);
+		overflow: hidden;
+		border-radius: 3px;
+		background: #fff;
+		opacity: 0;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+
+		button {
+			width: 34px;
+			height: 29px;
+			line-height: 29px;
+			min-height: initial;
+			padding: 0;
+			border: none;
+			border-radius: 0;
+			background: transparent;
+
+			&:hover {
+				color: #fff;
+				background: var(--accentColor);
+			}
+			
+			&:last-child {
+				border-left: 1px solid rgba(0, 0, 0, 0.1);
+			}
+
+			&:before {
+				font-family: 'dashicons';
+				font-size: 15px;
+			}
+		}
+
+		.edit-button {
+			&:before {
+				content: "\f464";
+			}
+		}
+
+		.remove-button {
+			&:before {
+				content: "\f335";
+			}
+		}
+	}
+}
+
+
+// simple attachment
+.ct-attachment {
+
+	&:not([data-type="no-frame"]) .thumbnail {
+		padding: 8px;
+		border-radius: 3px;
+		border: 1px dashed #c1c4ca;
+	}
+
+	&[data-type="small"],
+	&[data-type="no-frame"] {
+		--actions-spacing: 10px;
+	}
+
+	// small height
+	&[data-type="small"] {
+		.thumbnail {
+			justify-content: center;
+			
+			img {
+				min-height: 32px;
+				max-height: 100px;
+			}
+		}
+	}
+}
+
+
+// multi attachment
+.ct-thumbnails-list {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax(80px, 120px));
+	grid-column-gap: 15px;
+	grid-row-gap: 15px;
+	margin-bottom: 20px;
+
+	.thumbnail {
+		max-height: 120px;
+		padding-bottom: 100%;
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center center;
+		}
+	}
+
+	.actions {
+		--actions-spacing: 12px;
+	}
+}

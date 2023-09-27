@@ -1,0 +1,68 @@
+.ct-about-me-widget {
+
+	figure {
+		margin-bottom: 15px;
+
+		&[data-size="small"] {
+			max-width: 90px;
+		}
+
+		&[data-size="medium"] {
+			max-width: 140px;
+		}
+
+		&[data-shape="square"] {
+			border-radius: 2px;
+		}
+
+		&[data-shape="rounded"] {
+			border-radius: 100%;
+		}
+	}
+
+	.ct-about-me-name {
+		display: flex;
+		flex-direction: column;
+		font-weight: 700;
+
+		&:not(:last-child) {
+			margin-bottom: 15px;
+		}
+	}
+
+	.ct-about-me-text {
+		&:not(:last-child) {
+			margin-bottom: 25px;
+		}
+	}
+
+	.ct-about-me-link {
+		font-size: 13px;
+		font-weight: normal;
+	}
+
+	// alignment
+	[data-alignment="center"] {
+		text-align: center;
+
+		.ct-social-box {
+			justify-content: center;
+		}
+	}
+
+	[data-alignment="right"] {
+		text-align: right;
+
+		.ct-social-box {
+			justify-content: flex-end;
+		}
+	}
+
+	// bordered
+	[data-type="bordered"] {
+		padding: 35px 25px;
+		border-radius: 7px;
+		background: #fff;
+		border: 1px dashed rgba(0, 0, 0, 0.1);
+	}
+}

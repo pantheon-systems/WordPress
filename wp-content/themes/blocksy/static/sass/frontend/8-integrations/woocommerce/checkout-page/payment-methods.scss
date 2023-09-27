@@ -1,0 +1,127 @@
+.woocommerce-checkout-payment {
+	// margin-top: 40px;
+
+	@include media-breakpoint-down (sm) {
+		position: relative;
+		margin-left: calc(26px * -1);
+		margin-right: calc(26px * -1);
+	}	
+
+	.place-order {
+		margin-top: 30px;
+
+		@include media-breakpoint-down (sm) {
+			padding: 0 25px;
+		}
+
+		.woocommerce-terms-and-conditions-wrapper {
+			font-size: 14px;
+			line-height: 1.4;
+			margin-bottom: 30px;
+		}
+
+		button[type="submit"] {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}
+
+
+// payment methods
+#payment .payment_methods {
+	> li {
+		position: relative;
+		border: 1px solid var(--border-color);
+
+		&:not(:first-child) {
+			border-top: none;
+		}
+
+		> label {
+			display: flex;
+			align-items: center;
+			margin: 0;
+			padding: 18px 25px;
+			// padding: 0 25px;
+			// height: 60px;
+			cursor: pointer;
+			font-size: 15px;
+			font-weight: 600;
+
+			img {
+				max-height: 35px;
+				max-width: 50%;
+
+				&:first-of-type {
+					margin-inline-start: auto !important;
+				}
+			}
+
+			.about_paypal {
+				display: none;
+			}
+		}
+
+		// radio box
+		> label:before {
+			content: '';
+			width: 16px;
+			height: 16px;
+			min-width: 16px;
+			margin-inline-end: 0.7em;
+			border-radius: 100%;
+			border: var(--form-selection-control-border-width, var(--form-field-border-width, 1px)) solid var(--form-selection-control-initial-color);
+			
+		}
+
+		> input[type="radio"]:first-child {
+			display: none;
+			visibility: hidden;
+
+			&:checked + label:before {
+				background: #fff;
+				border-width: 5px;
+				border-color: var(--form-selection-control-accent-color);
+			}
+		}
+
+
+		// payment box
+		.payment_box {
+			padding: 20px 25px;
+			border-top: 1px solid var(--border-color);
+
+			p {
+				font-size: 14px;
+				line-height: 1.5;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			fieldset {
+				padding: 0;
+				border: none;
+			}
+		}
+
+		// notification
+		&.woocommerce-notice {
+			border: none;
+
+			@include media-breakpoint-down (sm) {
+				margin: 0 25px;
+			}
+		}
+	}
+}
+
+
+// stripe cc
+fieldset .wc-stripe-elements-field {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}

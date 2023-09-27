@@ -1,0 +1,68 @@
+form.variations_form {
+
+	table.variations {
+		margin-bottom: 1.5em;
+
+		tr {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+
+			&:not(:last-child) {
+				margin-bottom: 1.5em;
+			}
+
+			&:last-child td select {
+				margin-bottom: 0.5em;
+			}
+		}
+
+		td, th {
+			text-align: initial;
+			padding: 0;
+			// border: none;
+		}
+
+		label {
+			display: block;
+			// margin-bottom: 10px;
+			margin-bottom: 0;
+			--fontWeight: 500;
+		}
+
+		select {
+			width: 100%;
+			max-width: 100%;
+		}
+
+		// reset variations
+		.reset_variations {
+			display: none;
+			visibility: hidden;
+			margin-top: 0.5em;
+			font-size: 13px;
+			line-height: 13px;
+			--linkInitialColor: var(--color);
+
+			&[style*="visible"] {
+				display: inline-block;
+			}
+
+			&:before {
+				font-family: 'woo';
+				content: '\e910';
+				margin-right: 5px;
+				font-size: 10px;
+			}
+		}
+	}
+
+	.single_variation {
+		display: none;
+	}
+
+	.single_variation,
+	.wc-no-matching-variations {
+		margin-bottom: 1.5em;
+	}
+}

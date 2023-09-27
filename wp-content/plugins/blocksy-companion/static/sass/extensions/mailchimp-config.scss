@@ -1,0 +1,39 @@
+.ct-mailchimp-modal {
+	--modal-min-height: 300px;
+}
+
+.ct-newsletter-select-provider {
+	padding-top: 1.5em;
+	border-top: 1px dashed #eee;
+
+	p {
+		margin-top: 1em;
+		font-style: italic;
+	}
+}
+
+.mailchimp-credentials {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	margin-top: 1.5em;
+	padding-top: 1.5em;
+	border-top: 1px dashed #eee;
+
+	section {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+	}
+
+	label {
+		display: block;
+		font-size: 12px;
+		margin-bottom: 3px;
+		opacity: 0.7;
+	}
+
+	input {
+		--input-height: 35px;
+	}
+}

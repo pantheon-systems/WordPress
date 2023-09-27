@@ -1,0 +1,70 @@
+[data-loader] {
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	color: var(--loaderColor, #c5cbd0);
+}
+
+// Circles loader
+[data-loader='circles'] {
+	max-width: var(--loaderSize, 40px);
+	max-height: var(--loaderSize, 40px);
+	animation-play-state: paused;
+
+	> span {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+		width: 100%;
+		height: 100%;
+		background: currentColor;
+		border-radius: 100%;
+	}
+
+	@keyframes circles {
+		0% {
+			transform: scale(0);
+			opacity: 0;
+		}
+
+		5% {
+			opacity: 1;
+		}
+
+		100% {
+			transform: scale(1);
+			opacity: 0;
+		}
+	}
+
+	// reduce motion
+	@media (prefers-reduced-motion: no-preference) {
+		animation-play-state: paused;
+
+		> span {
+			animation: circles 1.5s linear infinite;
+			// animation-play-state: inherit;
+			// animation-name: circles;
+			// animation-duration: 1.5s;
+			// animation-timing-function: linear;
+			// animation-iteration-count: infinite;
+
+			&:nth-child(1) {
+				animation-delay: 0s;
+			}
+
+			&:nth-child(2) {
+				animation-delay: 0.8s;
+			}
+
+			&:nth-child(3) {
+				animation-delay: 0.4s;
+			}
+		}
+	}
+}

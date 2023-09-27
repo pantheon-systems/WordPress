@@ -1,0 +1,83 @@
+@import 'modal';
+@import 'panel';
+
+body:not(.ct-loading) {
+	.ct-panel {
+		transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+	}
+}
+
+body[data-panel] {
+	padding-right: var(--scrollbar-width, 0px);
+}
+
+.ct-panel {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	z-index: 999999;
+	top: var(--admin-bar, 0px);
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	content-visibility: auto;
+
+	&.active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	.ct-panel-inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		box-shadow: var(--box-shadow);
+	}
+
+	@include media-breakpoint-down(sm) {
+		--panel-padding: 25px;
+	}
+}
+
+// panel actions
+.ct-panel-actions {
+	display: flex;
+	align-items: center;
+	padding: var(--panel-padding, 35px);
+	padding-bottom: 0;
+
+	@include media-breakpoint-down(sm) {
+		padding-top: 20px;
+	}
+
+	@include media-breakpoint-up(md) {
+		padding-top: 30px;
+	}
+
+	.ct-panel-heading {
+		font-size: 15px;
+		font-weight: 600;
+		color: var(--color);
+	}
+
+	.close-button {
+		margin-inline-start: auto;
+	}
+}
+
+.ct-panel-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: var(--vertical-alignment, flex-start);
+	align-items: var(--horizontal-alignment, flex-start);
+	overflow: var(--overflow, auto);
+	padding: var(--panel-padding, 35px);
+	// padding-top: 20px;
+	box-sizing: border-box;
+}

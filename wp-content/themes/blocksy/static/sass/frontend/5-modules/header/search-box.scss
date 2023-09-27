@@ -1,0 +1,20 @@
+//when search box is inside middle column
+[data-middle='search-input'] {
+	--middle-column-width: var(--search-box-max-width, 25%);
+}
+
+// search box
+.ct-search-box {
+	width: 100%;
+	max-width: var(--max-width, 250px);
+}
+
+[data-row="middle"][data-middle="search-input"] {
+
+	[data-column="middle"] {
+
+		.ct-search-box {
+			--max-width: 100%;
+		}
+	}
+}

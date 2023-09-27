@@ -1,0 +1,25 @@
+[class*="menu-inline"] {
+	// overflow: hidden; // if items spacing is too big
+
+	ul {
+		flex-wrap: wrap;
+		justify-content: var(--horizontal-alignment);
+		row-gap: calc(var(--menu-items-spacing, 25px) / 2);
+		margin: 0 calc(var(--menu-items-spacing, 25px) / 2 * -1);
+		// margin-bottom: 0;
+	}
+
+	// li {
+	// 	margin-top: calc(var(--menu-items-spacing, 25px) / 2);
+	// }
+}
+
+
+// footer menu specific
+.footer-menu-inline {
+	--menu-item-alignment: var(--horizontal-alignment);
+
+	li {
+		width: var(--menu-item-width);
+	}
+}

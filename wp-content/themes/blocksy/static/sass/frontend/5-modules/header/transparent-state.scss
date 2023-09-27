@@ -1,0 +1,17 @@
+@include media-breakpoint-down(md) {
+	[data-device='mobile'][data-transparent] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+}
+
+@include media-breakpoint-up(lg) {
+	[data-device='desktop'][data-transparent] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+}

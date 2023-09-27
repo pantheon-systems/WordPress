@@ -1,0 +1,45 @@
+$buttons-base:
+	'.button',
+	'.ct-button',
+	'.added_to_cart',
+	'.ct-button-ghost',
+	'[type="submit"]',
+	'.wp-element-button',
+	'.wp-block-button__link',
+	// '.wp-block-file .wp-block-file__button',
+
+	// special buttons
+	'a.showlogin',
+	'a.restore-item',
+	'button.regform-button',
+	'button[class*="ajax"]',
+	'.submit:where(:not(div.submit))',
+	'.forminator-ui[data-design="none"] .forminator-button',
+;
+
+
+#{$buttons-base} {
+	display: var(--display, inline-flex);
+	align-items: center;
+	justify-content: center;
+	min-height: var(--buttonMinHeight);
+	padding: var(--button-padding);
+	border: none;
+	appearance: none;
+	cursor: pointer;
+	user-select: none;
+	text-align: center;
+	border-radius: var(--buttonBorderRadius, 3px);
+	transition: all 0.2s ease;
+	--has-link-decoration: var(--false);
+
+
+	&:disabled, &.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	@include media-breakpoint-down (xs) {
+		--padding: 5px 15px;
+	}
+}

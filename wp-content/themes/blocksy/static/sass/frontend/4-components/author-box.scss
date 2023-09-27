@@ -1,0 +1,142 @@
+@import '../1-helpers/mixins';
+@import '../1-helpers/functions';
+
+.author-box {
+	display: flex;
+	padding: var(--spacing, 40px);
+
+	@include media-breakpoint-down(sm) {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.ct-image-container {
+		flex: 0 0 60px;
+		width: 60px;
+		height: 60px;
+		border-radius: 100%;
+
+		&:before,
+		svg {
+			position: absolute;
+			z-index: 2;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			opacity: 0;
+			transition: opacity 0.15s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+				transform 0.15s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+		}
+
+		&:before {
+			content: '';
+			background: var(--paletteColor1);
+		}
+
+		svg {
+			margin: auto;
+			fill: #fff;
+			transform: translateX(-10px);
+		}
+
+		&:hover {
+			&:before {
+				opacity: 0.85;
+			}
+
+			svg {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+	}
+
+	&[data-type='type-1'] {
+		margin-top: 60px;
+		margin-bottom: 60px;
+		box-shadow: var(--box-shadow);
+		border: var(--border);
+		border-radius: var(--border-radius, 0);
+
+		.ct-image-container {
+			@include media-breakpoint-down(sm) {
+				margin-bottom: 20px;
+			}
+
+			@include media-breakpoint-up(md) {
+				margin-right: 25px;
+			}
+		}
+	}
+
+	&[data-type='type-2'] {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		position: relative;
+		padding-top: 50px;
+		margin-top: 90px;
+		border-bottom: 1px solid var(--border-color, #e8ebf0);
+
+		&:not(:last-child) {
+			margin-bottom: 60px;
+		}
+
+		.ct-image-container {
+			position: absolute;
+			top: calc(-30px - 3px);
+		}
+
+		&:after,
+		&:before {
+			position: absolute;
+			content: '';
+			top: -1px;
+			width: calc(50% - 50px);
+			height: 1px;
+			background: var(--border-color, #e8ebf0);
+		}
+
+		&:before {
+			left: 0;
+		}
+
+		&:after {
+			right: 0;
+		}
+
+		.author-box-social {
+			justify-content: center;
+		}
+	}
+
+	.author-box-name:is(p, div) {
+		margin-bottom: 20px;
+		color: var(--heading-color);
+	}
+
+	.author-box-bio {
+		color: var(--color);
+	}
+
+	.author-box-social + .ct-author-box-more {
+		margin-top: 15px;
+	}
+
+	.ct-author-box-more {
+		font-size: 11px;
+		font-weight: 500;
+		text-transform: uppercase;
+		display: inline-flex;
+	}
+
+
+	// special case with related posts
+	+ .ct-related-posts {
+		border-top: none;
+		margin-top: 0;
+		padding-top: 0;
+	}
+}

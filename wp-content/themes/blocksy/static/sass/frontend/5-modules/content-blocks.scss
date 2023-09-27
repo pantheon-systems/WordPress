@@ -1,0 +1,15 @@
+// block position
+[data-block*="fixed"] {
+	position: fixed;
+	z-index: 100;
+	left: var(--frame-size, 0px);
+	right: var(--frame-size, 0px);
+}
+
+[data-block*="top"] {
+	top: calc(var(--block-offset, 0px) + var(--admin-bar, 0px) + var(--frame-size, 0px));
+}
+
+[data-block*="bottom"] {
+	bottom: calc(var(--block-offset, 0px) + var(--frame-size, 0px));
+}

@@ -1,0 +1,38 @@
+.ct-quote-widget {
+	--color: #fff;
+	position: relative;
+	min-height: 250px;
+	border-radius: 7px;
+	padding: 70px 40px 60px 60px !important;
+	background: var(--paletteColor1) !important;
+
+	&:before {
+		position: absolute;
+		top: 50px;
+		left: 35px;
+		content: "”";
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight: bold;
+		font-size: 200px;
+		line-height: 150px;
+		opacity: 0.3;
+		width: 80px;
+		height: 80px;
+		display: flex;
+		justify-content: center;
+		transform: rotate(180deg);
+	}
+
+	.ct-quote-author {
+		display: flex;
+		column-gap: 15px;
+		align-items: center;
+		margin-top: 25px;
+		font-weight: 500;
+
+		figure {
+			flex: 0 0 40px;
+			border-radius: 100%;
+		}
+	}
+}

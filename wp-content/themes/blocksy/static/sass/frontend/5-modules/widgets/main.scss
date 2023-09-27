@@ -1,0 +1,32 @@
+.ct-widget {
+
+	ul {
+		--listIndent: 0;
+		--listStyleType: none;
+		--content-spacing: 0;
+	}
+
+	li {
+		ul, ol {
+			--listIndent: 25px;
+		}
+
+		.post-date,
+		.ct-entry-meta {
+			font-size: 13px;
+			line-height: normal;
+			opacity: 0.7;
+			margin-top: 5px;
+		}
+	}
+}
+
+
+@import 'text';
+@import 'search';
+@import 'gallery';
+@import 'calendar';
+@import 'tag-cloud';
+@import 'contact-info';
+@import 'recent-posts';
+@import 'recent-comments';

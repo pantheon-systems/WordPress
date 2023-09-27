@@ -1,0 +1,111 @@
+div.woocommerce-product-gallery {
+	position: relative;
+	overflow: hidden;
+	align-self: flex-start;
+
+	@include media-breakpoint-down(md) {
+		margin-bottom: 3em;
+	}
+
+	ol {
+		margin: var(--thumbs-container-margin, 0 calc(var(--thumbs-spacing, 15px) / -2));
+	}
+
+	li {
+		padding-top: var(--thumbs-top-spacing, var(--thumbs-spacing, 15px));
+		padding-left: var(--thumbs-left-spacing, calc(var(--thumbs-spacing, 15px) / 2));
+		padding-right: var(--thumbs-right-spacing, calc(var(--thumbs-spacing, 15px) / 2));
+		margin-bottom: 0;
+		transition: opacity 0.25s cubic-bezier(.215,.61,.355,1);
+
+		@include media-breakpoint-down (xs) {
+			--thumbs-width: 33.333%;
+		}
+
+		@include media-breakpoint-only (sm) {
+			--thumbs-width: 25%;
+		}
+
+		&:hover {
+			opacity: 0.75;
+		}
+
+		&.active {
+			opacity: 1;
+			
+			.ct-image-container:after {
+				border-color: rgba(0,0,0,0.2);
+			}
+		}
+
+		.ct-image-container:after {
+			position: absolute;
+			content: '';
+			z-index: 2;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			pointer-events: none;
+			border: 2px solid rgba(0,0,0,0);
+			transition: border-color 0.25s cubic-bezier(.215,.61,.355,1);
+		}
+	}
+}
+
+
+// thumbs on the left
+@include media-breakpoint-up (md) {
+	.thumbs-left {
+		.flexy {
+			margin-left: calc(var(--thumbs-width) + var(--thumbs-spacing, 15px));
+		}
+
+		.flexy-pills {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			height: 100%;
+			--pills-direction: column;
+			--pills-wrap: nowrap;
+			--thumbs-left-spacing: 0;
+			--thumbs-right-spacing: 0;
+			--thumbs-container-margin: calc(var(--thumbs-spacing, 15px) * -1) 0 0 0;
+
+			[data-flexy] {
+				max-height: calc(100% + var(--thumbs-spacing, 15px));
+			}
+
+			[class*='flexy-arrow'] {
+				left: calc(50% - 20px);
+				right: initial;
+
+				--rotate: 90deg;
+			}
+
+			.flexy-arrow-prev {
+				top: 20px;
+			}
+
+			.flexy-arrow-next {
+				top: initial;
+				bottom: 20px;
+			}
+		}
+	}
+}
+
+
+// native woo gallery
+.woocommerce-product-gallery.images img {
+	width: 100%;
+
+	&.flex-active {
+		opacity: 0.5;
+	}
+}
+
+.woocommerce-product-gallery__wrapper {
+	max-width: initial;
+}

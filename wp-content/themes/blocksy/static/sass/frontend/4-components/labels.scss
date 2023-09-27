@@ -1,0 +1,18 @@
+[data-label="bottom"] {
+	flex-direction: column;
+
+	.ct-label {
+		order: 2;
+		line-height: 1;
+		margin-top: 0.5em;
+	}
+}
+
+[data-label="left"] .ct-label {
+	margin-inline-end: 0.7em;
+}
+
+[data-label="right"] .ct-label {
+	order: 2;
+	margin-inline-start: 0.7em;
+}

@@ -1,0 +1,137 @@
+.ct-modal-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	color: #5c6977;
+	max-height: calc(var(--modal-max-height) - var(--modal-padding) * 2);
+
+	h2, h4 {
+		// color: #23282d;
+		color: #3e5667;
+		margin: 0 0 0.8em 0;
+	}
+
+	h2 {
+		font-size: 17px;
+		line-height: 1.5;
+	}
+
+	p {
+		font-size: inherit;
+		margin-top: 0;
+		margin-bottom: 1.5em;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	code {
+		font-size: 12px;
+		font-style: normal;
+		padding: 3px 7px;
+		border-radius: 2px;
+		background: #f1f3f5;
+	}
+
+	// vars
+	--optionBorderColor: #efefef;
+	--option-modal-shadown: 0 5px 25px 1px rgba(0, 0, 0, 0.08);
+	--image-picker-bg: #f3f5f6;
+	--options-horizontal-spacing: 0;
+}
+
+
+// modal list
+.ct-modal-list {
+	list-style: initial;
+	margin: 0;
+	padding-left: 20px;
+
+	li {
+		line-height: 1.5;
+		margin-bottom: 2em;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		i {
+			display: block;
+			line-height: 1.7;
+		}
+	}
+}
+
+
+// modal actions
+.ct-modal-actions {
+	margin-top: 25px;
+
+	button  svg {
+		// margin-top: 11px;
+	}
+
+	[class*="button"] {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 14px;
+		font-weight: 500;
+		width: 100%;
+		min-height: 40px;
+	}
+
+	&.has-divider {
+		position: relative;
+		padding-top: calc(var(--modal-padding) - 10px);
+		margin-top: auto;
+		margin-bottom: -10px;
+
+		&:before {
+			position: absolute;
+			content: '';
+			top: 0;
+			left: calc(var(--modal-padding) * -1);
+			height: 1px;
+			width: var(--modal-width);
+			background: var(--optionBorderColor);
+		}
+	}
+
+	&[data-buttons="2"] {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: 20px;
+	}
+}
+
+
+// divider
+.ct-divider[data-type="full-modal"] {
+	margin: 30px 0;
+
+	&:before {
+		width: var(--modal-width);
+		margin-left: calc(var(--modal-padding) * -1);
+	}
+}
+
+
+// notice
+.extension-notice {
+	padding: 20px;
+	margin-top: 30px;
+	border-radius: 5px;
+	border: 2px dashed #dfe3e6;
+	max-height: 300px;
+	overflow-y: scroll;
+	color: #717a84;
+	line-height: 1.5;
+
+	h3 {
+		font-size: 15px;
+		margin-top: 0;
+	}
+}

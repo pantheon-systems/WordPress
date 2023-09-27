@@ -1,0 +1,369 @@
+.ct-dark-mode {
+	color: lighten($background, 50%);
+
+	a,
+	.button-link {
+		color: $accent;
+
+		&:hover {
+			color: lighten($accent, 10%);
+		}
+	}
+
+	#customize-controls {
+		background: $background;
+		border-right-color: $border;
+
+		.description {
+			color: lighten($background, 50%);
+		}
+
+		.wp-full-overlay-header {
+			background: $background_light;
+			border-bottom-color: $border;
+
+			.customize-controls-close {
+				// color: $light;
+				color: $color_background_light;
+				background: transparent;
+				border-right-color: $border;
+
+				&:hover {
+					color: $light;
+				}
+			}
+
+			.ct-revert,
+			.customize-controls-preview-toggle {
+				color: $color_background_light;
+				background: transparent;
+				border-right-color: $border;
+
+				&:hover {
+					color: $light;
+				}
+			}
+		}
+
+		.customize-info {
+			border-bottom-color: $border;
+
+			.accordion-section-title {
+				color: $color_background_light;
+				background: $background_light;
+			}
+
+			.customize-panel-description,
+			.customize-section-description,
+			.no-widget-areas-rendered-notice {
+				color: $color_background_light;
+				border-top-color: $border;
+				background: $background_light;
+
+				.button-link {
+					color: $accent;
+				}
+			}
+
+			&.open {
+				.customize-help-toggle {
+					color: $light;
+				}
+			}
+
+			.customize-help-toggle {
+				color: inherit;
+
+				&:hover {
+					color: $light;
+				}
+
+				&:focus {
+					&:before {
+						outline: none;
+						box-shadow: none;
+					}
+				}
+			}
+		}
+
+		.theme-location-set {
+			color: $accent;
+		}
+
+		#customize-notifications-area {
+			border-bottom-color: $border;
+		}
+
+		// group title
+		.ct-group-title {
+			border-top-color: $border;
+
+			h3 {
+				color: lighten($accent, 7%);
+			}
+		}
+
+		// group divider
+		.ct-group-divider h3 {
+			background: $border;
+		}
+
+		.control-section {
+			> h3 {
+				color: lighten($background, 80%);
+
+				&:hover {
+					color: lighten($accent, 7%);
+					background-color: $background_light;
+
+					&:after {
+						color: inherit;
+					}
+				}
+
+				&:focus {
+					color: lighten($accent, 7%);
+					background: $background_light !important;
+
+					&:after {
+						color: inherit;
+					}
+				}
+			}
+		}
+	}
+
+	.customize-section-title {
+		background: $background_light;
+		border-bottom-color: $border;
+
+		h3 {
+			color: $color_background_light;
+		}
+	}
+
+	.customize-panel-back, 
+	.customize-section-back {
+		color: $light;
+		background: $background_light;
+		border-right-color: $border;
+		border-left-color: $border;
+
+		&:hover {
+			border-left-color: $accent;
+		}
+	}
+
+	#customize-theme-controls {
+		.control-section.open {
+			border-bottom-color: transparent;
+		}
+
+		.accordion-section-content {
+			color: lighten($background, 60%);
+		}
+		
+		.control-panel-themes > .accordion-section-title {
+			color: lighten($background, 40%);
+			background: transparent;
+			border-bottom-color: $border;
+		}
+	}
+
+	// footer actions
+	.expanded .wp-full-overlay-footer {
+		background: $background_light;
+		border-top-color: $border;
+
+		.collapse-sidebar-arrow {
+			color: $background_light;
+		}
+
+		.devices {
+			background: inherit;
+			box-shadow: -20px 0 10px -5px $background_light;
+
+			&:before {
+				position: absolute;
+				content: '';
+				top: 0;
+				left: -5px;
+				width: 1px;
+				height: 100%;
+				background: $border;
+			}
+
+			button {
+				&:not(.active) {
+					&:before {
+						color: $light;
+					}
+				}
+
+				&.active,
+				&:focus {
+					&:before {
+						color: $accent;
+					}
+
+					border-bottom-color: $accent;
+				}
+
+				&:focus,
+				&:hover {
+					background: transparent;
+				}
+			}
+		}
+	}
+
+	// button
+	#customize-save-button-wrapper {
+		.button {
+			&.active {
+				background: darken($accent, 7%);
+				border-color: darken($accent, 9%);
+			}
+
+			&.publish-settings {
+				border-left: none;
+			}
+
+			&:focus {
+				box-shadow: 0 1px 0 darken($accent, 7%);
+			}
+		}
+	}
+
+	.button,
+	.button-primary {
+		color: #fff;
+		text-shadow: none;
+		background: $accent;
+		border-color: lighten($accent, 4%);
+		box-shadow: 0 1px 0 darken($accent, 8%);
+
+		&:hover,
+		&:focus {
+			color: #fff;
+			background: darken($accent, 2%);
+			border-color: darken($accent, 3%);
+		}
+
+		&:disabled {
+			color: $color_background_light !important;
+			background: lighten($background_light, 5%) !important;
+			border-color: lighten($background_light, 8%) !important;
+		}
+	}
+
+	.button-link-delete {
+		color: #ff3030;
+	}
+
+	// notice
+	.notice {
+		color: $color_background_light;
+		background: $background_light;
+	}
+
+	.notice-dismiss,
+	.customize-screen-options-toggle {
+		&:before {
+			color: $color_background_light;
+		}
+
+		&:hover {
+			&:before {
+				color: $light;
+			}
+		}
+
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+	}
+
+	// site area
+	.wp-full-overlay {
+		background: $background_light !important;
+	}
+
+	// block widgets
+	.customize-widgets-header {
+		background: $background;
+		border-bottom-color: $border;
+	}
+
+	.customize-widgets-editor-history-button,
+	.customize-widgets-more-menu button {
+		color: $light;
+	}
+
+	.wp-block-legacy-widget__edit-form {
+		border-color: var(--optionBorderColor);
+		background: darken($background_light, 1.5%);
+	}
+
+	.block-editor-button-block-appender {
+		color: $light;
+		box-shadow: inset 0 0 0 1px var(--optionBorderColor);
+
+		&:hover {
+			box-shadow: inset 0 0 0 1px var(--accentColor);
+		}
+	}
+}
+
+
+// outer section	
+// .outer-section-open.ct-dark-mode #customize-controls {
+// 	#customize-sidebar-outer-content {
+// 		background: $background;
+// 		border-right-color: $border;
+// 		border-left-color: $border;
+// 	}
+
+// 	.wp-full-overlay-sidebar-content {
+// 		background: $background;
+// 	}
+// }
+
+.ct-dark-mode #customize-outer-theme-controls {
+	.customize-control-title {
+		color: lighten($background, 50%);
+	}
+
+	#customize-control-changeset_status  {
+		.customize-inside-control-row {
+			color: lighten($background, 70%);
+			background: $background_light;
+			border-bottom-color: $border;
+
+			&:first-of-type {
+				border-top-color: $border;
+			}
+		}
+	}
+
+	.notice {
+		background: $background_light;
+	}
+
+	.preview-control-element {
+		color: $light;
+		border-top-color: $border;
+		border-bottom-color: $border;
+		background: $background_light;
+	}
+
+	.customize-copy-preview-link {
+		text-shadow: none !important;
+
+		&:before, &:after {
+			background: $background_light;
+		}
+	}
+}

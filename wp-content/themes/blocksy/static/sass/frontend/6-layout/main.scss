@@ -1,0 +1,63 @@
+#main-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	min-height: calc(100vh - var(--admin-bar, 0px) - var(--frame-size, 0px) * 2);
+
+	overflow: hidden; // to remove later, check caniuse.com
+	overflow: clip;
+
+	.site-main {
+		flex-grow: 1;
+	}
+}
+
+
+
+// Layout containers
+[class*='ct-container'] {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ct-container,
+.ct-container-narrow {
+	width: var(--container-width);
+}
+
+// Default container
+.ct-container {
+	max-width: var(--normal-container-max-width);
+}
+
+// Narrow container
+.ct-container-narrow {
+	max-width: var(--narrow-container-max-width);
+}
+
+
+// Fluid container
+.ct-container-fluid {
+	@include media-breakpoint-down (sm) {
+		width: 88vw;
+	}
+
+	@include media-breakpoint-only (md) {
+		width: 90vw;
+	}
+
+	@include media-breakpoint-up (lg) {
+		width: calc(100vw - 60px);
+	}
+}
+
+
+
+// Page verticla spacing
+[data-vertical-spacing*='top'] {
+	padding-top: var(--content-vertical-spacing);
+}
+
+[data-vertical-spacing*='bottom'] {
+	padding-bottom: var(--content-vertical-spacing);
+}

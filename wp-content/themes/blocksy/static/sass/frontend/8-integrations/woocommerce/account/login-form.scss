@@ -1,0 +1,84 @@
+.ct-woo-unauthorized {
+	> h2 {
+		display: none;
+	}
+
+	> .woocommerce-form-login,
+	> .woocommerce-ResetPassword {
+		max-width: 450px;
+		margin-left: auto;
+		margin-right: auto;
+
+		button[type="submit"] {
+			width: 100%;
+		}
+	}
+
+	label {
+		--fontSize: 14px;
+		--fontWeight: 500;
+	}
+
+	.woocommerce-form-login__rememberme {
+		margin-bottom: var(--content-spacing);
+	}
+
+	.woocommerce-LostPassword {
+		font-size: 14px;
+		margin: 0;
+	}
+
+	.woocommerce-ResetPassword {
+
+		.form-row-first:nth-last-of-type(2) {
+			width: 100%;
+		}
+	}
+
+	//&.ct-request-password-screen {
+		// .form-row-first {
+		// 	width: 100%;
+		// }
+	//}
+
+	// two columns
+	.col2-set {
+		display: grid;
+
+		@include media-breakpoint-up (md) {
+			grid-template-columns: 1fr 1fr;
+			// max-width: var(--has-wide, 900px);
+			// margin: var(--has-wide, 0 auto);
+		}
+
+		h2 {
+			--fontSize: 20px;
+			margin-top: 0;
+			margin-bottom: 20px;
+		}
+
+		> * {
+			@include media-breakpoint-down (sm) {
+				&:first-child {
+					padding-bottom: 30px;
+					border-bottom: 1px dashed var(--border-color);
+				}
+
+				&:last-child {
+					padding-top: 30px;
+				}
+			}
+
+			@include media-breakpoint-up (md) {
+				&:first-child {
+					padding-inline-end: 40px;
+					border-inline-end: 1px dashed var(--border-color);
+				}
+
+				&:last-child {
+					padding-inline-start: 40px;
+				}
+			}
+		}
+	}
+}

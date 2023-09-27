@@ -1,0 +1,13 @@
+[data-state="disabled"] {
+
+	> section {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	&.ct-panel {
+		> header > label {
+			opacity: 0.5;
+		}
+	}
+}

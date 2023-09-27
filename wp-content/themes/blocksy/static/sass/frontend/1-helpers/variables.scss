@@ -1,0 +1,34 @@
+:root {
+	
+	// default values
+	--default-editor: var(--true);
+	--border: none;
+	--transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+
+
+	// lists
+	--listIndent: 2.5em;
+	--listItemSpacing: 0.3em;
+
+
+
+	// conditions
+	--true: initial;
+	--false: "";
+	--has-link-decoration: var(--true);
+	--has-transparent-header: 0;
+
+
+
+	// container width
+	--container-width: #{'min(100%, var(--container-width-base))'};
+
+	@include media-breakpoint-down(sm) {
+		--container-width-base: calc(88vw - var(--frame-size, 0px) * 2);
+	}
+
+	@include media-breakpoint-up(md) {
+		--container-width-base: calc(90vw - var(--frame-size, 0px) * 2);
+	}
+}

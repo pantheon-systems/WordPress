@@ -1,0 +1,17 @@
+.woocommerce-product-attributes {
+	font-size: 15px;
+	--content-spacing: 0;
+
+	th {
+		font-weight: 500;
+		text-align: initial;
+	}
+
+	tr {
+		&:nth-child(even) {
+			th, td {
+				background: rgba(242, 244, 247, 0.5);
+			}
+		}
+	}
+}

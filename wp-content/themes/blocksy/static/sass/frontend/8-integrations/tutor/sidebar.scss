@@ -1,0 +1,28 @@
+// right sidebar
+[data-tutor-sidebar='right'] .tutor-single-course-sidebar {
+	@media (min-width: 992px) {
+		padding-left: 40px;
+	}
+}
+
+// left sidebar
+[data-tutor-sidebar='left'] {
+	.tutor-course-details-page > .tutor-row {
+		flex-direction: row-reverse;
+	}
+
+	.tutor-single-course-sidebar {
+		@media (min-width: 992px) {
+			padding-right: 40px;
+		}
+	}
+}
+
+// sticky sidebar
+.tutor-single-course-sidebar {
+	position: sticky;
+	top: calc(
+		var(--sidebar-offset, 50px) + var(--admin-bar, 0px) +
+			var(--header-sticky-height, 0px) * (var(--sticky-shrink, 100) / 100)
+	);
+}

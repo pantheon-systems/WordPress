@@ -1,0 +1,18 @@
+.ct-product-actions-group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:not(:last-child) {
+		margin-bottom: 60px;
+	}
+
+	.ct-button:not(:last-child) {
+		margin-inline-end: 25px;
+	}
+
+	.ct-icon-container {
+		color: inherit;
+		margin-inline-start: 10px;
+	}
+}

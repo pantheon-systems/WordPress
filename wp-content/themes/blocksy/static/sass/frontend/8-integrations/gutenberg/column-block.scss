@@ -1,0 +1,15 @@
+.wp-block-columns {
+	row-gap: var(--wp--style--block-gap, 2em);
+
+	.wp-block-column {
+		// @media (max-width: 781px) {
+		// 	&:not(:last-child) {
+		// 		margin-bottom: var(--content-spacing);
+		// 	}
+		// }
+
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

@@ -1,0 +1,76 @@
+#ct-dashboard {
+	.ct-welcome-message {
+		text-align: center;
+
+		h2 {
+			margin-top: 0;
+		}
+
+		p {
+			font-size: 18px;
+		}
+	}
+
+	.ct-first-steps-container {
+		text-align: center;
+
+		h2 {
+			margin: 0 auto 0 auto;
+
+			@media (min-width: 783px) {
+				width: 50%;
+			}
+		}
+
+		.ct-first-steps {
+			display: grid;
+			grid-column-gap: 30px;
+			grid-row-gap: 30px;
+			margin-top: 40px;
+
+			@media (min-width: 550px) and (max-width: 782px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			@media (min-width: 783px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+
+			li {
+				margin: 0;
+				background: #fff;
+				border-radius: 3px;
+				// box-shadow: 0 20px 30px rgba(143, 163, 184, 0.15);
+				border: 1px solid rgba(226, 230, 235, 0.5);
+				box-shadow: 0 2px 5px rgba(143, 163, 184, 0.1);
+
+				@media (max-width: 782px) {
+					padding: 10%;
+				}
+
+				@media (min-width: 783px) {
+					padding: 15% 10%;
+				}
+
+
+		
+				svg {
+					width: 25px;
+					height: 25px;
+					fill: var(--accentColor);
+				}
+
+				p {
+					margin: 10px 0 30px 0;
+				}
+			}
+
+			.ct-button {
+				&:after {
+					content: '→';
+					margin-left: 5px;
+				}
+			}
+		}	
+	}
+}

@@ -1,0 +1,134 @@
+.ct-gradient-tab {
+
+	> .components-spacer {
+		margin: 0;
+		padding: 20px 14px 20px 14px;
+	}
+
+	.components-custom-gradient-picker {
+
+		.components-custom-gradient-picker__gradient-bar {
+			position: relative;
+			z-index: 1;
+
+			.components-popover {
+				top: 33px !important;
+				transform: none !important;
+
+				.components-popover__content {
+					overflow: hidden !important;
+					padding: 0;
+					outline: none;
+					border-radius: 0;
+					box-shadow: none;
+					border-bottom: 1px solid #eee;
+
+					.components-color-picker {
+						padding: 14px;
+						width: var(--modalWidth, 295px);
+
+						.react-colorful {
+							width: 100%;
+							overflow: visible;
+
+							.react-colorful__saturation {
+								height: 150px;
+								border-radius: 2px;
+								margin-bottom: 20px;
+							}
+
+							.react-colorful__hue,
+							.react-colorful__alpha {
+								width: 100%;
+								height: 18px;
+								margin-bottom: 10px;
+							}
+						}
+
+						.react-colorful + div > * {
+							&:first-child {
+								display: none;
+							}
+
+							&:last-child {
+								padding: 20px 14px;
+								margin: 0 -14px -14px -14px;
+								border-top: 1px solid #eee;
+
+								.components-input-control__container {
+									width: 100%;
+								}
+
+								.components-input-control__input {
+									height: 30px;
+									min-height: 30px;
+								}
+
+								.components-input-control__backdrop {
+									border-color: var(--borderColor, #ddd);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.components-custom-gradient-picker__ui-line {
+			.components-input-control__input {
+				border: none !important;
+				padding-inline-start: 16px !important;
+				padding-inline-end: 8px !important;
+			}
+		}
+	}
+
+	.components-circular-option-picker__custom-clear-wrapper {
+		display: none;
+	}
+}
+
+
+// gradient swatches
+.ct-gradient-swatches {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-column-gap: 19px;
+	grid-row-gap: 19px;
+	padding: 20px 14px;
+	margin: 0;
+	border-top: 1px dashed #eee;
+
+	li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		margin: auto;
+		cursor: pointer;
+		border-radius: 100%;
+		box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+		background-image: var(--background-image);
+		transition: box-shadow .1s ease;
+
+		&.active {
+			position: relative;
+			box-shadow: inset 0 0 0 1px rgba(0,0,0,.1),
+						0 0 0 2px #fff,
+						0 0 0 4px #606a73;
+
+			&:before {
+				margin-top: 1px;
+				position: absolute;
+				content: "\f15e";
+				font-family: 'dashicons';
+				font-size: 20px;
+				color: #fff;
+				text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+				-moz-osx-font-smoothing: grayscale;
+				-webkit-font-smoothing: antialiased;
+			}
+		}
+	}
+}

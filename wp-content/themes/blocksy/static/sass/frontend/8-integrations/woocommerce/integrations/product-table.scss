@@ -1,0 +1,25 @@
+.wc-product-table {
+	.ct-cart-actions {
+		--display: inline-block;
+	}
+
+	.cart div.quantity .qty {
+		padding-right: calc(25% + 3px) !important;
+	}
+}
+
+
+.wtbpTableWrapper .dataTables_wrapper {
+	table.wtbpContentTable {
+		text-align: left;
+	}
+
+	div.quantity {
+		--quantity-width: 65px;
+		--quantity-height: 35px;
+	}
+
+	.add_to_cart_inline a {
+		--buttonMinHeight: 35px;
+	}
+}

@@ -1,0 +1,29 @@
+.ct-breadcrumbs {
+	color: var(--color);
+
+	> span {
+		display: inline-flex;
+		align-items: center;
+		vertical-align: middle;
+
+		.separator {
+			margin: 0 8px;
+		}
+	}
+
+	.first-item, .last-item {
+		svg + span {
+			display: none;
+		}
+	}
+
+	svg {
+		fill: currentColor;
+	}
+
+	.ct-home-icon {
+		position: relative;
+		top: -0.15em;
+		vertical-align: middle;
+	}
+}

@@ -1,0 +1,25 @@
+[data-layout="enhanced-grid"] {
+
+	@include media-breakpoint-down (sm) {
+		--grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+
+	@include media-breakpoint-up (md) {
+		--grid-template-columns: repeat( 6, 1fr);
+	}
+
+	> article {
+		@include media-breakpoint-only (md) {
+			grid-column: span 3;
+		}
+
+		@include media-breakpoint-up (lg) {
+			grid-column: span 2;
+
+			&:nth-child(5n+1),
+			&:nth-child(5n+2) {
+				grid-column: span 3;
+			}
+		}
+	}
+}

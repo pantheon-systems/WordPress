@@ -1,0 +1,48 @@
+form.woocommerce-checkout {
+	display: var(--display, grid);
+
+	@include media-breakpoint-down (md) {
+		grid-row-gap: 40px;
+	}
+
+	@include media-breakpoint-up (lg) {
+		grid-template-columns: repeat(2, 1fr);
+		grid-column-gap: 35px;
+
+		> .woocommerce-NoticeGroup {
+			grid-column: 1/-1;
+		}
+	}
+
+	h3 {
+		--fontSize: 17px;
+	}
+
+	select {
+		width: 100%;
+	}
+}
+
+
+// customer details
+#customer_details {
+	.col-2 {
+		margin-top: 40px;
+
+		.form-row:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+#ship-to-different-address {
+	label {
+		--fontSize: 15px;
+		--fontWeight: 600;
+	}
+}
+
+// notice group
+.woocommerce-NoticeGroup-checkout {
+	grid-column: 1/-1;
+}

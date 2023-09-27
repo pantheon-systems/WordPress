@@ -1,0 +1,42 @@
+// inherit preview
+.ct-color-inherit {
+	will-change: transform;
+	background-color: #fff !important;
+
+	svg {
+		width: 18px;
+		height: 18px;
+		fill: #555d66;
+		animation: spin 4.5s infinite linear;
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+.ct-color-picker-single .ct-color-inherit svg {
+	width: 14px;
+	height: 14px;
+}
+
+
+// no color pill
+.ct-no-color {
+	background: rgba(255, 255, 255, 0.8);
+
+	&:after {
+		position: absolute;
+		content: '';
+		width: 12px;
+		height: 2px;
+		background: #e60606;
+		border-radius: 2px;
+		transform: rotate(-40deg);
+	}
+}

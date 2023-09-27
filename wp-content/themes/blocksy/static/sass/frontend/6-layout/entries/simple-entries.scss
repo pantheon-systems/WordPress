@@ -1,0 +1,45 @@
+[data-archive="default"][data-layout="simple"] {
+	article {
+		&:not(:last-child) {
+			margin-bottom: var(--grid-columns-gap, 30px);
+		}
+
+		@include media-breakpoint-down (sm) {
+			flex-direction: column;
+		}
+
+		.card-content {
+			display: flex;
+			flex-direction: column;
+			
+			@include media-breakpoint-up (md) {
+				align-self: center;
+			}
+		}
+
+		> .ct-image-container {
+			&:not(.boundless-image) {
+				align-self: flex-start;
+			}
+
+			@include media-breakpoint-down (sm) {
+				margin-bottom: 35px !important;
+			}
+
+			@include media-breakpoint-up (md) {
+				flex-shrink: 0;
+				max-width: 42%;
+				margin-inline-end: 35px !important;
+			}
+		}
+	}
+
+	&[data-cards="boxed"] {
+		.entry-card .boundless-image {
+			@include media-breakpoint-up (md) {
+				width: 100%;
+				margin-bottom: calc(var(--card-inner-spacing, 30px) * -1);
+			}
+		}
+	}
+}

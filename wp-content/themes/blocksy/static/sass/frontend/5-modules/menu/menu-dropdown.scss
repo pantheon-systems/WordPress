@@ -1,0 +1,109 @@
+[data-submenu] {
+	position: relative;
+}
+
+// drop-down
+.animated-submenu > .sub-menu {
+	position: var(--dropdown-position, absolute);
+	top: var(--top, 100%);
+	z-index: 10;
+	min-width: 100px;
+	margin-top: var(--sticky-state-dropdown-top-offset, var(--dropdown-top-offset, 0));
+	border-radius: var(--border-radius);
+	width: var(--dropdown-width, 200px);
+	background-color: var(--dropdown-background-color, var(--paletteColor4));
+	box-shadow: var(--box-shadow);
+
+	// drop-down bridge
+	&:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: var(--dropdown-top-offset, 0);
+		transform: translateY(-100%);
+	}
+}
+
+// first drop-down
+.menu > [data-submenu='right'] > .sub-menu {
+	left: 0;
+}
+
+.menu > [data-submenu='left'] > .sub-menu {
+	right: 0;
+}
+
+[data-submenu] .menu-item:not([data-submenu]) {
+	--top: 0;
+	--dropdown-position: fixed;
+}
+
+// other drop-downs
+.animated-submenu [data-submenu] > ul {
+	--top: 0;
+	margin-top: 0;
+
+	&:before {
+		width: var(--dropdown-horizontal-offset, 5px);
+		height: 100%;
+		transform: initial;
+	}
+}
+
+.animated-submenu [data-submenu='right'] {
+	> ul {
+		right: calc(var(--dropdown-horizontal-offset, 5px) * -1);
+		margin-right: -100%;
+
+		&:before {
+			left: calc(var(--dropdown-horizontal-offset, 5px) * -1);
+			right: initial;
+		}
+	}
+}
+
+.animated-submenu [data-submenu='left'] {
+	> ul {
+		left: calc(var(--dropdown-horizontal-offset, 5px) * -1);
+		margin-left: -100%;
+
+		&:before {
+			left: initial;
+			right: calc(var(--dropdown-horizontal-offset, 5px) * -1);
+		}
+	}
+}
+
+// dropdown toggle
+.ct-toggle-dropdown-desktop {
+	--icon-size: 8px;
+	--toggle-button-size: 18px;
+	--toggle-button-margin-end: -5px;
+	--toggle-button-margin-start: var(--dropdown-toggle-margin-start, 0.2em);
+}
+
+.animated-submenu [data-submenu='left'] > a {
+	--toggle-icon-transform: rotate(90deg);
+}
+
+.animated-submenu [data-submenu='right'] > a {
+	--toggle-icon-transform: rotate(-90deg);
+}
+
+
+// ghost dropdown toggle
+.ct-toggle-dropdown-desktop-ghost {
+	pointer-events: none;
+	flex: 0 0 var(--toggle-button-size, 18px);
+	right: var(--toggle-ghost-inset-end, calc(var(--menu-items-spacing, 25px) / 2 + 13px));
+
+	--toggle-button-size: 18px;
+	--toggle-button-margin-end: -18px;
+}
+
+.sub-menu {
+	--dropdown-toggle-margin-start: auto;
+	--toggle-ghost-inset-end: calc(var(--dropdown-items-spacing, 13px) * 1.5 + 13px);
+}

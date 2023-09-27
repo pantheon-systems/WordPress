@@ -1,0 +1,103 @@
+.mobile-menu {
+
+	li {
+		&:hover > .ct-sub-menu-parent,
+		&.dropdown-active > .ct-sub-menu-parent,
+		&[class*="current-menu-"] > .ct-sub-menu-parent {
+
+			.ct-menu-link,
+			.ct-toggle-dropdown-mobile {
+				color: inherit;
+			}
+		}
+
+		&.dropdown-active > .ct-sub-menu-parent {
+			color: var(--linkHoverColor);
+
+			svg {
+				fill: var(--icon-hover-color, var(--linkHoverColor));
+			}
+		}
+	}
+
+	[class*="children"] > ul {
+		li {
+			a {
+				&:before {
+					position: absolute;
+					content: '';
+					top: calc(50% - 2px);
+					left: -30px;
+					width: 3px;
+					height: calc(3px * var(--has-indentation, 1));
+					opacity: 0.3;
+					border-radius: 5px;
+					background: currentColor;
+					transition: opacity 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+								background 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
+								width 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+				}
+			}
+		}
+	}
+
+
+	[class*="children"] > ul li a:hover,
+	[class*="children"] > ul li.dropdown-active > .ct-sub-menu-parent > a {
+		&:before {
+			opacity: 1;
+			width: 15px;
+		}
+	}
+
+	// toggle
+	.ct-toggle-dropdown-mobile {
+		color: var(--linkInitialColor);
+		flex: 0 0 var(--toggle-button-size, 25px);
+
+		--toggle-button-size: 25px;
+		--toggle-button-margin-end: -5px;
+		--icon-color: var(--linkInitialColor);
+	}
+
+	// toggle animation
+	.dropdown-active > .ct-sub-menu-parent {
+		.toggle-icon-1, .toggle-icon-3 {
+			--toggle-icon-transform: rotate(-180deg);
+		}
+
+		.toggle-icon-2 {
+			--toggle-icon-transform: rotate(-45deg);
+		}
+	}
+
+	// toggle shape with border
+	&[data-toggle-type="type-2"] {
+
+		.ct-toggle-dropdown-mobile {
+			--toggle-button-margin-end: 0;
+			--toggle-button-radius: 3px;
+			--toggle-button-border-width: 1px;
+			--toggle-button-border-color: currentColor;
+		}
+
+		.toggle-icon-2 {
+			--icon-size: 12px;
+		}
+	}
+
+	// border
+	> ul {
+		border-top: var(--mobile-menu-divider);
+	}
+
+	li,
+	.menu-item-has-children > a,
+	.dropdown-active > .ct-sub-menu-parent {
+		border-bottom: var(--mobile-menu-divider);
+	}
+
+	.sub-menu li:last-child {
+		border-bottom: none;
+	}
+}

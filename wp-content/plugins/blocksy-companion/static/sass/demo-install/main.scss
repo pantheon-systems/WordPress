@@ -1,0 +1,49 @@
+@import '../../../static/sass/common-frontend';
+
+@import 'demo-list';
+@import 'install-steps';
+@import 'child-theme';
+@import 'builders';
+@import 'plugins';
+@import 'erase-content';
+@import 'export';
+@import 'installer';
+@import 'modify-demo';
+@import 'demo-notification';
+
+.ct-demos-list {
+	display: flex;
+	flex-direction: column;
+
+	.ct-single-demo {
+		img {
+			max-width: 100px;
+		}
+	}
+}
+
+.ct-demo-btn {
+	display: inline-flex;
+	align-items: center;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: 0.03em;
+	color: #687c93;
+	height: 40px;
+	border: none;
+	cursor: pointer;
+	padding: 0 18px;
+	text-decoration: none;
+	border-radius: 4px;
+	background: rgb(243, 246, 248);
+	transition: background 0.2s ease color 0.2s ease;
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover {
+		color: #fff;
+		background: var(--ct-buttonHoverColor, var(--accentColor));
+	}
+}

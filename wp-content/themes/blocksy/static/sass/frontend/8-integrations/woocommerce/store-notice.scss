@@ -1,0 +1,58 @@
+.demo_store {
+	margin: 0;
+	padding: 13px 60px 13px 30px;
+	font-size: 15px;
+	color: var(--color);
+	z-index: 55;
+	background-color: var(--backgroundColor);
+
+	&:before {
+		display: inline-block;
+		font-family: 'woo';
+		font-size: 17px;
+		font-weight: 700;
+		content: "\e901";
+		margin-right: 15px;
+
+		@include media-breakpoint-down (sm) {
+			display: none !important;
+		}
+	}
+
+	.woocommerce-store-notice__dismiss-link {
+		position: absolute;
+		top: calc(50% - 15px);
+		right: 30px;
+		width: 30px;
+		height: 30px;
+		font-size: 0;
+		border-radius: 100%;
+		background: rgba(0, 0, 0, 0.07);
+
+		&:before {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			content: '×';
+			font-size: 17px;
+			color: var(--color);
+		}
+
+		&:hover {
+			background: rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	// position
+	&[data-position="top"] {
+		position: relative;
+		// top: calc(var(--admin-bar, 0px) + var(--frame-size, 0px));
+	}
+
+	&[data-position="bottom"] {
+		position: fixed;
+		left: var(--frame-size, 0px);
+		right: var(--frame-size, 0px);
+		bottom: var(--frame-size, 0px);
+	}
+}

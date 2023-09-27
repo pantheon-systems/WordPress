@@ -1,0 +1,13 @@
+.ct-modify-actions {
+	margin-top: 50px;
+
+	> * {
+		&:not(:last-child) {
+			margin-right: 15px;
+		}
+	}
+
+	.demo-remove {
+		--ct-buttonHoverColor: #e04f4f;
+	}
+}

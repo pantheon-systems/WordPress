@@ -1,0 +1,27 @@
+.ct-available-items {
+	margin: 25px 0 20px 0;
+	padding: 0 14px;
+
+	.ct-title {
+		font-size: 13px !important;
+		color: #484f56;
+		width: calc( 100% + 52px);
+		padding: 30px 26px 0 26px;
+		margin: 30px -26px 10px -26px;
+		box-sizing: border-box;
+
+		&:first-child {
+			margin-top: 0;
+			padding-top: 0;
+		}
+	}
+
+	.ct-tabs {
+		--tabs-container-margin: 25px -26px 0 -26px;
+	}
+
+	.ct-builder-items {
+		margin-top: 25px;
+		padding: 0 14px !important;
+	}
+}

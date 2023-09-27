@@ -3,7 +3,7 @@
 # Override the defaults specified here in a site-specific `pantheon.yml` file.
 # For more information see: https://pantheon.io/docs/pantheon-upstream-yml
 api_version: 1
-php_version: 7.4
+php_version: 8.1
 
 # See https://pantheon.io/docs/pantheon-yml#specify-a-version-of-mariadb
 database:
@@ -33,12 +33,6 @@ workflows:
         type: webphp
       - description: "Install plugins"
         script: private/scripts/wp-site-setup.php
-        type: webphp
-      - description: "Import default content"
-        script: private/scripts/wp-site-import.php
-        type: webphp
-      - description: "Commit added plugins"
-        script: private/scripts/wp-commit.php
         type: webphp
       - description: "Post to Slack after each deploy"
         script: private/scripts/slack-notification.php

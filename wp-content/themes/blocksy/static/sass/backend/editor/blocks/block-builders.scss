@@ -1,0 +1,28 @@
+// stackable v3
+[data-type="stackable/button"] {
+
+	.stk-button {
+		border-radius: var(--buttonBorderRadius, 3px);
+	}
+	
+	--stk-button-text-color: var(--buttonTextInitialColor);
+	--stk-button-background-color: var(--buttonInitialColor);
+}
+
+
+// getwid
+div.wp-block-getwid-section {
+	.wp-block-getwid-section__wrapper {
+		.wp-block-getwid-section__inner-wrapper {
+			max-width: var(--block-max-width);
+		}
+	}
+}
+
+
+// qubely
+.qubely-section .qubely-container {
+	max-width: var(--block-max-width) !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}

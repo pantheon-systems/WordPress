@@ -1,0 +1,183 @@
+table.shop_table {
+	--table-padding: 1em 0.7em;
+	--table-border-width: 0;
+	--table-font-size: 15px;
+
+	tr {
+		// --table-border-width: 1px 0 0 0;
+		--table-border-width: 0 0 1px 0;
+		--table-border-style: dashed;
+
+		> * {
+			&:first-child {
+				padding-inline-start: 0;
+			}
+
+			&:last-child {
+				padding-inline-end: 0;
+			}
+		}
+	}
+
+	th {
+		vertical-align: top;
+	}
+
+	thead {
+		th {
+			--table-border-width: 0 0 2px 0;
+			--table-border-style: solid;
+			color: var(--headings-color);
+		}
+	}
+
+	tfoot {
+		tr:last-child {
+			--table-border-width: 0;
+		}
+
+		td {
+			font-weight: 600;
+		}
+	}
+
+	a {
+		font-weight: 500;
+		--linkInitialColor: var(--color);
+	}
+
+	ul, ol {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+// responsive table
+@include media-breakpoint-down (sm) {
+	table.shop_table_responsive {
+		--table-padding: 1em 0;
+
+		thead {
+			display: none;
+		}
+
+		tbody {
+
+			th {
+				display: none;
+			}
+
+			td {
+				display: block;
+				text-align: right;
+
+				&:before {
+					content: attr(data-title) ": ";
+					display: table;
+					float: left;
+					font-size: 14px;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+
+	table.woocommerce-orders-table {
+
+		tbody {
+			tr:first-child td:first-child {
+				--table-border-width: 0;
+			}
+
+			tr td:first-child {
+				--table-border-width: 2px 0 0 0;
+				--table-border-style: solid;	
+			}
+		}
+	}
+}
+
+
+// common items in table
+.shop_table {
+
+	// pruduct thumbnail
+	[class*="product-thumbnail"] {
+		@include media-breakpoint-down (md) {
+			width: 120px;
+		}
+
+		@include media-breakpoint-up (lg) {
+			width: 100px;
+		}
+
+		img {
+			border-radius: 2px;
+		}
+	}
+
+
+	// product name
+	[class*="product-name"] {
+		@include media-breakpoint-down (md) {
+			padding-inline-end: 0;
+		}
+
+		.price {
+			--fontSize: 15px;
+			--fontWeight: normal;
+			margin-top: 5px;
+			margin-bottom: 0;
+		}
+	}
+
+
+	// product mobile actions
+	.product-mobile-actions {
+		display: flex;
+		align-items: center;
+		margin-top: 1em;
+
+		.remove {
+			margin-inline-start: auto;
+			padding-inline-start: 10px;
+		}
+	}
+
+
+	// product quantity
+	.quantity {
+		font-size: 14px;
+		--quantity-height: 40px;
+	}
+
+	.quantity[data-type="type-1"] {
+		--quantity-width: 70px;
+	}
+
+	.quantity[data-type="type-2"] {
+		--quantity-width: 100px;
+	}
+	
+
+	// product remove button
+	tr > [class*="product-remove"] {
+		width: 20px;
+		text-align: end;
+	}
+
+	.remove {
+		--icon-size: 12px;
+
+		&:hover svg {
+			fill: #d83428;
+		}
+	}
+}
+
+// Woocommerce Germanized
+[class*="wc-gzd"] ~ table.shop_table {
+	background-color: transparent;
+}

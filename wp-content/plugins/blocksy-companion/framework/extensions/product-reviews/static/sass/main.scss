@@ -1,0 +1,23 @@
+@import '../../../../../static/sass/common-frontend';
+@import 'slider';
+@import 'title';
+@import 'scores';
+@import 'actions';
+@import 'description';
+@import 'quick-info';
+
+.ct-product-hero {
+	padding-top: var(--content-vertical-spacing, 60px);
+
+	.ct-container {
+		padding-bottom: var(--content-vertical-spacing, 60px);
+		border-bottom: 1px solid #ececec;
+	}
+
+	ul {
+		--listIndent: 0;
+		// --listItemSpacing: 0;
+		--listStyleType: none;
+		--content-spacing: 0;
+	}
+}

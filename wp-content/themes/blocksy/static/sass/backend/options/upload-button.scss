@@ -1,0 +1,18 @@
+.ct-attachment .ct-upload-button {
+	width: 100%;
+	padding: 5px 0;
+	border-radius: 3px;
+	box-shadow: none;
+	background: rgba(0, 0, 0, 0.02);
+	border: 1px dashed #c1c4ca;
+
+	&.active,
+	&:hover {
+		background: #fbfbfc;
+		box-shadow: none;
+	}
+
+	&:active {
+		transform: none;
+	}
+}

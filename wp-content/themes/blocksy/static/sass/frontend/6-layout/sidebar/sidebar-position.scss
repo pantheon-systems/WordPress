@@ -1,0 +1,30 @@
+[data-sidebar] {
+	display: grid;
+	grid-template-columns: var(--grid-template-columns, 100%);
+	grid-column-gap: var(--sidebar-gap, 4%);
+	grid-row-gap: 50px;
+
+	> aside {
+		order: var(--sidebar-order);
+	}
+}
+
+@include media-breakpoint-up (lg) {
+	[data-sidebar='right'] {
+		--grid-template-columns: minmax(100px, 1fr) var(--sidebar-width, 27%);
+	}
+
+	[data-sidebar='left'] {
+		--sidebar-order: -1;
+		--grid-template-columns: var(--sidebar-width, 27%) minmax(100px, 1fr);
+
+		> section {
+			grid-column: 2;
+		}
+	}
+}
+
+[data-prefix] div[data-sidebar] > article {
+	--has-wide: var(--false);
+	--has-boxed-structure: var(--false);
+}

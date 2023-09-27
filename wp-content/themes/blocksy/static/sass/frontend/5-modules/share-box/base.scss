@@ -1,0 +1,41 @@
+.ct-share-box {
+	
+	.ct-module-title {
+		display: block;
+		font-size: var(--font-size, 14px);
+		font-weight: var(--font-weight, 600);
+		margin-bottom: 15px;
+	}
+}
+
+// box location
+.ct-share-box {
+	&[data-location="top"] {
+		margin-bottom: var(--margin, 50px);
+	}
+
+	&[data-location="bottom"] {
+		margin-top: var(--margin, 50px);
+		
+		&:not(:last-child) {
+			margin-bottom: var(--margin, 50px);
+		}
+	}
+}
+
+.hero-section[data-type="type-1"] {
+	+ .ct-share-box[data-location="top"] {
+		margin-top: var(--margin, 50px);
+	}
+}
+
+// type 2 & type 3 common
+.ct-share-box[data-type="type-2"],
+.ct-share-box[data-type="type-3"] {
+	> div {
+		display: inline-flex;
+		flex-wrap: wrap;
+		gap: var(--spacing, 15px);
+		justify-content: var(--horizontal-alignment);
+	}
+}

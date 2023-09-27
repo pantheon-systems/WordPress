@@ -1,0 +1,59 @@
+select,
+textarea,
+input[type='url'],
+input[type='tel'],
+input[type='text'],
+input[type='time'], // added on Dec 10th
+input[type='date'],
+input[type='datetime'], // added on Dec 10th
+input[type='datetime-local'],
+input[type='email'],
+input[type='number'],
+input[type='search'],
+input[type='password'],
+.ct-widget select,
+fieldset .wc-stripe-elements-field {
+	appearance: none;
+	width: var(--form-field-width, 100%);
+	height: var(--form-field-height, 40px);
+	font-family: inherit;
+	font-size: var(--form-font-size, 16px);
+	color: var(--form-text-initial-color, var(--color));
+	padding: var(--has-classic-forms, var(--form-field-padding, 0 12px));
+	border-width: var(--form-field-border-width, 1px);
+	border-style: var(--form-field-border-style, solid);
+	border-color: var(--form-field-border-initial-color);
+	border-radius: var(--has-classic-forms, var(--form-field-border-radius, 3px));
+	background-color: var(--has-classic-forms, var(--form-field-initial-background));
+	transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+	&:focus {
+		outline: none;
+		color: var(--form-text-focus-color, var(--color));
+		border-color: var(--form-field-border-focus-color);
+		background-color: var(--has-classic-forms, var(--form-field-focus-background));
+	}
+
+	@include input-placeholder {
+		opacity: 0.6;
+		color: inherit;
+	}
+}
+
+select {
+	padding-right: 25px;
+	background-image: url("data:image/svg+xml,%3Csvg width='21' height='13' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18.5.379L20.621 2.5 10.5 12.621.379 2.5 2.5.379l8 8z' fill='%234F5D6D' fill-rule='nonzero'/%3E%3C/svg%3E");
+	background-repeat: no-repeat, repeat;
+	background-size: 8px auto, 100%;
+	background-position: right 10px top 50%, 0 0;
+
+	option {
+		color: initial;
+	}
+}
+
+textarea {
+	line-height: 1.5;
+	resize: vertical;
+	--form-field-padding: 15px;
+}

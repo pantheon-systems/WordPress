@@ -1,0 +1,24 @@
+.ct-demo-erase {
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	text-align: left;
+	font-weight: 600;
+	border-top: 1px dashed rgba(179, 189, 201, 0.5);
+	border-bottom: 1px dashed rgba(179, 189, 201, 0.5);
+
+	.ct-checkbox-container {
+		align-items: flex-start;
+		padding-bottom: 0;
+	}
+
+	i {
+		display: block;
+		width: 90%;
+		font-size: 13px;
+		margin-top: 8px;
+		opacity: 0.8;
+		font-weight: 400;
+		font-style: normal;
+	}
+}

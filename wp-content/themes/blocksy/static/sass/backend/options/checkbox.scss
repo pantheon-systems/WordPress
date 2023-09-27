@@ -1,0 +1,57 @@
+.ct-option-checkbox {
+	label {
+		display: flex;
+		align-items: center;
+		user-select: none;
+
+		&:hover input {
+			&:not(:checked) {
+				border-color: #C3CACF;
+			}
+		}
+	}
+
+	input[type="checkbox"] {
+		flex: 0 0 16px;
+		width: 16px;
+		height: 16px;
+		margin: 0 8px 0 0;
+		border-radius: 2px;
+		border: 2px solid #d5dbde;
+		box-sizing: border-box;
+		background: rgba(255, 255, 255, 0.2);
+		box-shadow: none;
+		transition: none;
+		appearance: none;
+
+		&:checked {
+			border-color: var(--accentColor);
+			background: var(--accentColor);
+
+			&:before {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-family: dashicons;
+				font-size: 15px;
+				content: "\f147";
+				color: #fff !important;
+				width: 16px;
+				height: 16px;
+				// left: -0.6px;
+				margin: -2px 0 0 -2px;
+			}
+		}
+	}
+
+	// columns
+	&[data-columns] {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-row-gap: 15px;
+
+		&:not([data-columns*="no-gap"]) {
+			grid-column-gap: 10px;
+		}
+	}
+}

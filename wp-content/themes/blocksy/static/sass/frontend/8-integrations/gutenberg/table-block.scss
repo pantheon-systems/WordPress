@@ -1,0 +1,15 @@
+.wp-block-table {
+
+	table {
+
+		&:not(.has-border-color) {
+			td, th {
+				border-color: var(--table-border-color, var(--border-color));
+			}
+		}
+	}
+
+	&.is-style-stripes {
+		border: 0;
+	}
+}

@@ -1,0 +1,18 @@
+.ct-option-editor {
+	.wp-editor-container {
+		border-color: #dfdfdf;
+
+		.mce-tinymce {
+			border: none;
+		}
+	}
+
+	.mce-tinymce {
+		border: 1px solid #dfdfdf;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	}
+	
+	.mce-top-part:before {
+		box-shadow: none;
+	}
+}

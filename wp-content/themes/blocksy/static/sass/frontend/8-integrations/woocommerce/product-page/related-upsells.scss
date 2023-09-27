@@ -1,0 +1,12 @@
+.single-product article {
+
+	> .related, 
+	> .up-sells {
+		margin-top: 50px;
+
+		> h2 {
+			--fontSize: 20px;
+			margin-bottom: 30px;	
+		}	
+	}
+}

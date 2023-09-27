@@ -1,0 +1,37 @@
+.ct-option-border {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	column-gap: 10px;
+
+	.ct-value-changer {
+		width: 75px;
+		order: 1;
+	}
+
+
+	// border styles
+	[data-style]:not([data-style='none']):after {
+		content: '';
+		width: 18px;
+		border-bottom-width: 2px;
+		border-bottom-color: currentColor;
+	}
+
+	[data-style='dotted']:after {
+		border-bottom-style: dotted;
+	}
+
+	[data-style='solid']:after {
+		border-bottom-style: solid;
+	}
+
+	[data-style='dashed']:after {
+		border-bottom-style: dashed;
+	}
+
+	.ct-units-list [data-style='none'] {
+		font-size: 8px;
+		letter-spacing: initial;
+	}
+}

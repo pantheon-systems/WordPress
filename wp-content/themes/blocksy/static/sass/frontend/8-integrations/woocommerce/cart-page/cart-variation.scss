@@ -1,0 +1,18 @@
+dl.variation {
+	--descListIndent: 0;
+	--descListSpacing: 0;
+
+	text-align: left;
+	margin-top: 0.7em;
+
+	&:not(:last-child) {
+		margin-bottom: 0.7em;
+	}
+
+	dt {
+		float: left;
+		clear: both;
+		margin-right: 0.25em;
+		display: inline-block;
+	}
+}

@@ -1,0 +1,18 @@
+.qubely-section {
+
+	.qubely-container {
+		max-width: var(--block-max-width) !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	&.alignfull {
+		.qubely-container {
+			width: var(--block-width) !important;
+		}
+	}
+
+	p:last-child {
+		margin-bottom: 0 !important;
+	}
+}

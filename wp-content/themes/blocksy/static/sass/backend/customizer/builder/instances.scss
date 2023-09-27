@@ -1,0 +1,69 @@
+[class*="ct-instance-button"] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 40px;
+	max-width: 40px;
+	height: 37px;
+	cursor: pointer;
+	margin-inline-start: 10px;
+	// background: #f7f7f7;
+	border-radius: 3px;
+	color: inherit;
+	// border: 1px solid #ddd;
+	box-sizing: border-box;
+	// box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+	// transition: background 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover {
+		border-color: var(--accentColor);
+
+		.ct-tooltip-top {
+			opacity: 1;
+			visibility: visible;
+			transform: translate3d(0px, -38px, 0px);
+		}
+	}
+}
+
+.ct-instance-button-global {
+	svg {
+		width: 11px;
+		height: 11px;
+		fill: currentColor;
+	}
+
+	&.active {
+		color: #fff;
+		background: var(--accentColor);
+		border-color: #007bba;
+
+		svg {
+			animation: spin 4.5s infinite linear;
+		}
+	}
+}
+
+
+// dropdown item
+.ct-global-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 9px;
+	text-transform: uppercase;
+	font-weight: 600;
+	color: #fff;
+	padding: 2px 5px;
+	margin-left: auto;
+	border-radius: 2px;
+	background: var(--accentColor);
+}
+
+.selected .ct-global-item {
+	margin-right: 21px;
+}

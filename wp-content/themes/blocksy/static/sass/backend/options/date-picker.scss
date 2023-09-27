@@ -1,0 +1,90 @@
+.ct-date-time-picker {
+	.components-datetime {
+		padding: 0;
+	}
+	
+	.DayPicker__horizontal,
+	.DayPicker__horizontal > div > div,
+	.DayPicker_transitionContainer,
+	.CalendarMonthGrid,
+	.CalendarMonthGrid_month__horizontal,
+	.CalendarMonth_table {
+		width: 100% !important;
+	}
+
+	.CalendarMonthGrid__horizontal {
+		left: 0;
+	}
+
+	.CalendarMonth {
+		padding: 0 !important;
+	}
+
+	.DayPickerNavigation_rightButton__horizontalDefault {
+		right: 0;
+	}
+
+	.DayPicker_weekHeaders__horizontal {
+		margin-left: 0;
+	}
+
+	.DayPicker, 
+	.DayPicker__horizontal,
+	.CalendarMonth,
+	.CalendarMonthGrid,
+	.CalendarDay__default:not(:hover):not(.CalendarDay__selected) {
+		background: transparent;
+	}
+
+	.CalendarDay {
+		height: 36px !important;
+	}
+
+	.components-datetime__time-field-month {
+		flex: 1;
+
+		select {
+			width: calc(100% - 5px);
+
+			&:not(:focus) {
+				border-color: var(--borderColor, #ddd);
+			}
+		}
+	}
+
+	.components-datetime__time-field-day-input, 
+	.components-datetime__time-field-hours-input, 
+	.components-datetime__time-field-minutes-input {
+		--input-width: 35px;
+		--margin: 0 4px 0 0;
+	}
+
+	.components-datetime__time-field-year-input {
+		--input-width: 55px;
+	}
+
+	.DayPicker_weekHeader {
+		right: 0px;
+		top: 55px;
+		padding: 0 !important;
+	}
+
+	.DayPicker_weekHeader_ul {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.DayPicker_weekHeader_li {
+		margin-bottom: 0;
+	}
+
+	.DayPicker_transitionContainer {
+		&[style*="height: 246px"] {
+			height: 270px !important;
+		}
+
+		&[style*="height: 275px"] {
+			height: 305px !important;
+		}
+	}
+}
