@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      sites: ${{ steps.upstream-sites.outputs.test }}
+      sites: ${{ steps.upstream-sites.outputs.sites }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.0
@@ -28,8 +28,11 @@ jobs:
       - name: Get Deployment Sites
         id: upstream-sites
         run: |
-          SITES=$(terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V)
-          echo "test=$SITES" >> "$GITHUB_OUTPUT"
+          {
+            echo 'sites<<EOF'
+            terminus org:site:list ${ORG_UUID} --format list --upstream ${UPSTREAM_UUID} --field name | sort -V
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
         env:
           ORG_UUID: ${{ secrets.PANTHEON_ORG_UUID }}
           UPSTREAM_UUID: ${{ secrets.PANTHEON_UPSTREAM_UUID }}
