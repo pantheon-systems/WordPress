@@ -69,13 +69,12 @@ jobs:
           terminus site:upstream:clear-cache $SITE
 
           terminus connection:set $DEV git
-          terminus upstream:updates:apply $DEV
+          terminus upstream:updates:apply $DEV --accept-upstream
 
           # Clear cache
           terminus env:clear-cache $DEV
 
           # Deploy code to test and live
-          terminus env:deploy $TEST --cc
 
           # Report time to results.
           DURATION=$(( SECONDS - START ))
