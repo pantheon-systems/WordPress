@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.0
+        with:
+          fetch-depth: 0
 
       - uses: shimataro/ssh-key-action@v2
         with:
@@ -54,6 +56,9 @@ jobs:
           echo "PR_BRANCH_NAME=$PR_BRANCH_NAME" >> $GITHUB_ENV
           git remote add pantheon $CANARY_REPO
 
+          # Fetch full history from pantheon
+          git fetch pantheon
+
           # Check if remote branch exists
           _check_branch=$(git ls-remote --heads pantheon $PR_BRANCH_NAME)
           [[ -n ${_check_branch} ]] && git pull pantheon $PR_BRANCH_NAME --rebase
@@ -76,10 +81,13 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const { MULTIDEV_URL } = process.env;
+            const { MULTIDEV_URL, PR_BRANCH_NAME, CANARY_SITE } = process.env;
+            const doubleDash = (str) => str.replace(/-/g, '--');
+            const site = doubleDash(CANARY_SITE);
+            const branch = doubleDash(PR_BRANCH_NAME);
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `*Multidev created*: ${MULTIDEV_URL}`
+              body: `[![Static Badge](https://img.shields.io/badge/${site}-${branch}-%23FFDC28?logo=pantheon&logoColor=white)](${MULTIDEV_URL})`
             });
