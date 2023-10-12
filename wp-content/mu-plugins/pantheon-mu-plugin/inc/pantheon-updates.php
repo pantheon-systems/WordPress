@@ -32,7 +32,7 @@ function _pantheon_hide_update_nag() {
  *
  * @return string
  */
-function _pantheon_get_current_wordpress_version() : string {
+function _pantheon_get_current_wordpress_version(): string {
 	include ABSPATH . WPINC . '/version.php';
 	return $wp_version; // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
 }
@@ -42,7 +42,7 @@ function _pantheon_get_current_wordpress_version() : string {
  *
  * @return string|null
  */
-function _pantheon_get_latest_wordpress_version() : ?string {
+function _pantheon_get_latest_wordpress_version(): ?string {
 	$core_updates = get_core_updates();
 
 	if ( ! is_array( $core_updates ) || empty( $core_updates ) || ! property_exists( $core_updates[0], 'current' ) ) {
@@ -57,7 +57,7 @@ function _pantheon_get_latest_wordpress_version() : ?string {
  *
  * @return bool
  */
-function _pantheon_is_wordpress_core_latest() : bool {
+function _pantheon_is_wordpress_core_latest(): bool {
 	$latest_wp_version = _pantheon_get_latest_wordpress_version();
 	$wp_version = _pantheon_get_current_wordpress_version();
 
@@ -67,7 +67,6 @@ function _pantheon_is_wordpress_core_latest() : bool {
 
 	// Return true if our version is the latest.
 	return version_compare( str_replace( '-src', '', $latest_wp_version ), str_replace( '-src', '', $wp_version ), '<=' ); // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-
 }
 
 /**
@@ -75,7 +74,7 @@ function _pantheon_is_wordpress_core_latest() : bool {
  *
  * @return bool
  */
-function _pantheon_is_wordpress_core_prerelease() : bool {
+function _pantheon_is_wordpress_core_prerelease(): bool {
 	$wp_version = _pantheon_get_current_wordpress_version();
 
 	// Return true if our version is a prerelease. Pre-releases are identified by a dash in the version number.
@@ -159,7 +158,7 @@ add_action( 'admin_init', '_pantheon_register_upstream_update_notice' );
  *
  * @return object
  */
-function _pantheon_disable_wp_updates() : object {
+function _pantheon_disable_wp_updates(): object {
 	$wp_version = _pantheon_get_current_wordpress_version();
 	return (object) [
 		'updates' => [],

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Network Setup
+ *
+ * @package pantheon-mu-plugin
+ */
 
 namespace Pantheon\NetworkSetup;
 
@@ -11,9 +16,9 @@ namespace Pantheon\NetworkSetup;
  */
 function pantheon_remove_network_setup() {
 	global $submenu;
-    if ( isset( $submenu['tools.php'][50] ) ) {
-	    unset( $submenu['tools.php'][50] );
-    }
+	if ( isset( $submenu['tools.php'][50] ) ) {
+		unset( $submenu['tools.php'][50] );
+	}
 }
 
 /**
@@ -25,7 +30,7 @@ function pantheon_add_network_setup() {
 		__( 'Network Setup', 'network-setup' ),
 		'setup_network',
 		'setup_network',
-		 __NAMESPACE__ . '\\pantheon_render_network_setup_page'
+		__NAMESPACE__ . '\\pantheon_render_network_setup_page'
 	);
 }
 
@@ -33,8 +38,8 @@ function pantheon_add_network_setup() {
  * Render the Pantheon network setup page.
  */
 function pantheon_render_network_setup_page() {
-    global $wpdb;
-    require_once __DIR__ . '/network/network.php';
+	global $wpdb;
+	require_once __DIR__ . '/network/network.php';
 }
 
 add_action( 'admin_menu', __NAMESPACE__ . '\\pantheon_remove_network_setup' );
