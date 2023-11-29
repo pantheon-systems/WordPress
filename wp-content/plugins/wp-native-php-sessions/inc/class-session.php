@@ -17,14 +17,14 @@ class Session {
 	 *
 	 * @var array
 	 */
-	private static $sessions = array();
+	private static $sessions = [];
 
 	/**
 	 * Any secure sessions stored statically.
 	 *
 	 * @var array
 	 */
-	private static $secure_sessions = array();
+	private static $secure_sessions = [];
 
 	/**
 	 * Session id.
@@ -84,10 +84,10 @@ class Session {
 
 		$wpdb = self::restore_wpdb_if_null( $wpdb );
 
-		$insert_data = array(
+		$insert_data = [
 			'session_id' => $sid,
 			'user_id'    => (int) get_current_user_id(),
-		);
+		];
 		if ( function_exists( 'is_ssl' ) && is_ssl() ) {
 			$insert_data['secure_session_id'] = $sid;
 		}
@@ -148,10 +148,10 @@ class Session {
 		$this->user_id = (int) $user_id;
 		$wpdb->update(
 			$wpdb->pantheon_sessions,
-			array(
+			[
 				'user_id' => $this->user_id,
-			),
-			array( self::get_session_id_column() => $this->get_id() )
+			],
+			[ self::get_session_id_column() => $this->get_id() ]
 		);
 	}
 
@@ -175,13 +175,13 @@ class Session {
 
 		$wpdb->update(
 			$wpdb->pantheon_sessions,
-			array(
+			[
 				'user_id'    => (int) get_current_user_id(),
 				'datetime'   => gmdate( 'Y-m-d H:i:s' ),
 				'ip_address' => self::get_client_ip_server(),
 				'data'       => maybe_serialize( $data ),
-			),
-			array( self::get_session_id_column() => $this->get_id() )
+			],
+			[ self::get_session_id_column() => $this->get_id() ]
 		);
 
 		$this->data = maybe_serialize( $data );
@@ -197,14 +197,14 @@ class Session {
 		$ip_address = apply_filters( 'pantheon_sessions_client_ip_default', '127.0.0.1' );
 		$ip_source  = null;
 
-		$keys = array(
+		$keys = [
 			'HTTP_CLIENT_IP',
 			'HTTP_X_FORWARDED_FOR',
 			'HTTP_X_FORWARDED',
 			'HTTP_FORWARDED_FOR',
 			'HTTP_FORWARDED',
 			'REMOTE_ADDR',
-		);
+		];
 
 		$ip_filter_flags = apply_filters( 'pantheon_sessions_client_ip_filter_flags', FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_RES_RANGE );
 
@@ -243,13 +243,12 @@ class Session {
 
 		$wpdb = self::restore_wpdb_if_null( $wpdb );
 
-		$wpdb->delete( $wpdb->pantheon_sessions, array( self::get_session_id_column() => $this->get_id() ) );
+		$wpdb->delete( $wpdb->pantheon_sessions, [ self::get_session_id_column() => $this->get_id() ] );
 
 		// Reset $_SESSION to prevent a new session from being started.
-		$_SESSION = array();
+		$_SESSION = [];
 
 		$this->delete_cookies();
-
 	}
 
 	/**
@@ -281,11 +280,11 @@ class Session {
 		}
 
 		$session_name = session_name();
-		$cookies      = array(
+		$cookies      = [
 			$session_name,
 			substr( $session_name, 1 ),
 			'S' . $session_name,
-		);
+		];
 
 		foreach ( $cookies as $cookie_name ) {
 
@@ -297,7 +296,6 @@ class Session {
 			setcookie( $cookie_name, '', $_SERVER['REQUEST_TIME'] - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly'] );
 			unset( $_COOKIE[ $cookie_name ] );
 		}
-
 	}
 
 	/**
@@ -321,5 +319,4 @@ class Session {
 			return 'session_id';
 		}
 	}
-
 }

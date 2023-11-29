@@ -33,7 +33,7 @@ class Admin {
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new Admin;
+			self::$instance = new Admin();
 			self::$instance->setup_actions();
 		}
 		return self::$instance;
@@ -44,9 +44,8 @@ class Admin {
 	 */
 	private function setup_actions() {
 
-		add_action( 'admin_menu', array( $this, 'action_admin_menu' ) );
-		add_action( 'wp_ajax_pantheon_clear_session', array( $this, 'handle_clear_session' ) );
-
+		add_action( 'admin_menu', [ $this, 'action_admin_menu' ] );
+		add_action( 'wp_ajax_pantheon_clear_session', [ $this, 'handle_clear_session' ] );
 	}
 
 	/**
@@ -54,8 +53,7 @@ class Admin {
 	 */
 	public function action_admin_menu() {
 
-		add_management_page( __( 'Pantheon Sessions', 'wp-native-php-sessions' ), __( 'Sessions', 'wp-native-php-sessions' ), self::$capability, 'pantheon-sessions', array( $this, 'handle_page' ) );
-
+		add_management_page( __( 'Pantheon Sessions', 'wp-native-php-sessions' ), __( 'Sessions', 'wp-native-php-sessions' ), self::$capability, 'pantheon-sessions', [ $this, 'handle_page' ] );
 	}
 
 	/**
@@ -65,21 +63,21 @@ class Admin {
 		global $wpdb;
 
 		require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
-		require_once dirname( __FILE__ ) . '/class-list-table.php';
+		require_once __DIR__ . '/class-list-table.php';
 
 		echo '<div class="wrap">';
 
 		echo '<div>';
-		$query_args = array(
+		$query_args = [
 			'action'  => 'pantheon_clear_session',
 			'nonce'   => wp_create_nonce( 'pantheon_clear_session' ),
 			'session' => 'all',
-		);
+		];
 		if ( $wpdb->get_var( "SELECT COUNT(session_id) FROM $wpdb->pantheon_sessions" ) ) {
 			echo '<a class="button pantheon-clear-all-sessions" style="float:right; margin-top: 9px;" href="' . esc_url( add_query_arg( $query_args, admin_url( 'admin-ajax.php' ) ) ) . '">' . esc_html__( 'Clear All', 'wp-native-php-sessions' ) . '</a>';
 		}
 		echo '<h2>' . esc_html__( 'Pantheon Sessions', 'wp-native-php-sessions' ) . '</h2>';
-		if ( isset( $_GET['message'] ) && in_array( $_GET['message'], array( 'delete-all-session', 'delete-session' ), true ) ) {
+		if ( isset( $_GET['message'] ) && in_array( $_GET['message'], [ 'delete-all-session', 'delete-session' ], true ) ) {
 			if ( 'delete-all-session' === $_GET['message'] ) {
 				$message = __( 'Cleared all sessions.', 'wp-native-php-sessions' );
 			} elseif ( 'delete-session' === $_GET['message'] ) {
@@ -89,14 +87,13 @@ class Admin {
 		}
 		echo '</div>';
 
-		$wp_list_table = new List_Table;
+		$wp_list_table = new List_Table();
 		$wp_list_table->prepare_items();
 		$wp_list_table->display();
 
 		echo '</div>';
 
-		add_action( 'admin_footer', array( $this, 'action_admin_footer' ) );
-
+		add_action( 'admin_footer', [ $this, 'action_admin_footer' ] );
 	}
 
 	/**
@@ -118,7 +115,6 @@ class Admin {
 		}
 		wp_safe_redirect( add_query_arg( 'message', $message, wp_get_referer() ) );
 		exit;
-
 	}
 
 	/**
@@ -139,5 +135,4 @@ class Admin {
 	</script>
 		<?php
 	}
-
 }

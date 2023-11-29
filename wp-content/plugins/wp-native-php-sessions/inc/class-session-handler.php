@@ -71,7 +71,7 @@ class Session_Handler implements \SessionHandlerInterface {
 
 		$session = Session::get_by_sid( $session_id );
 		if ( $session ) {
-			return $session->get_data();
+			return $session->get_data() ?: '';
 		} else {
 			return '';
 		}
@@ -119,8 +119,8 @@ class Session_Handler implements \SessionHandlerInterface {
 	 *
 	 * @return boolean
 	 */
+	#[\ReturnTypeWillChange]
 	public function close() {
 		return true;
 	}
-
 }
