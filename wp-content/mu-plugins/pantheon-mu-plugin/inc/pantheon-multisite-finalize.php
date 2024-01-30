@@ -11,19 +11,39 @@
  *
  * @return void
  */
-function pantheon_multisite_install_finalize_message() { ?>
+function pantheon_multisite_install_finalize_message() {
+	?>
 	<div class="notice notice-info is-dismissible">
 		<?php
 		if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 			if ( getenv( 'FRAMEWORK' ) === 'wordpress_network' ) {
 				?>
 					<p><?php esc_html_e( 'Your WordPress Multisite is almost ready!', 'pantheon' ); ?></p>
-					<p><?php echo sprintf( __( 'Visit <a href="%s">Pantheon Multisite Configuration</a> for documentation on how to finalize configuration of your site network.', 'pantheon' ), 'https://pantheon.io/docs/guides/multisite/config/#install-the-wordpress-site-network' ); ?></p>
+					<p>
+						<?php
+						printf(
+							wp_kses_post(
+								// translators: %s is the link to the Pantheon Multisite Configuration documentation.
+								__( 'Visit <a href="%s">Pantheon Multisite Configuration</a> for documentation on how to finalize configuration of your site network.', 'pantheon' )
+							),
+							'https://pantheon.io/docs/guides/multisite/config/#install-the-wordpress-site-network'
+						);
+						?>
+					</p>
 				<?php
 			} else {
 				?>
 					<p><?php esc_html_e( 'You are trying to configure a WordPress Multisite with a wrong upstream!', 'pantheon' ); ?></p>
-					<p><?php echo sprintf( __( 'Make sure that you have the correct upstream configuration for WPMS. If you do not have that capability or check if you are eligible, please <a href="%s">Contact Support</a>.', 'pantheon' ), 'https://pantheon.io/support' ); ?></p>
+					<p>
+						<?php
+						printf(
+							wp_kses_post(
+								// translators: %s is the link to the Pantheon Support page.
+								__( 'Make sure that you have the correct upstream configuration for WPMS. If you do not have that capability or to check if you are eligible, please <a href="%s">Contact Support</a>.', 'pantheon' )
+							), 'https://pantheon.io/support'
+						);
+						?>
+					</p>
 				<?php
 			}
 		}
