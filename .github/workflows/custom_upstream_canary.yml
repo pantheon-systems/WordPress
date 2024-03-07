@@ -26,7 +26,7 @@ jobs:
           php-version: "7.4"
 
       - name: Installing Terminus
-        uses: pantheon-systems/terminus-github-actions@main
+        uses: kyletaylored/terminus-github-actions@CMSO-1538
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_MACHINE_TOKEN }}
 
