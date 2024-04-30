@@ -96,6 +96,13 @@ if (getenv('WP_ENVIRONMENT_TYPE') === false) {
  * To override, define your constant in your wp-config.php before wp-config-pantheon.php is required.
  */
 
+if ( ! defined('PANTHEON_HOSTNAME' ) ) {
+    $site_name = $_ENV['PANTHEON_SITE_NAME'];
+    $hostname = isset( $_SERVER['HTTP_HOST'] ) ? $_SERVER['HTTP_HOST'] : $_ENV['PANTHEON_ENVIRONMENT'] . "-{$site_name}.pantheonsite.io" ;
+    $hostname = isset( $_ENV['LANDO'] ) ? "{$site_name}.lndo.site" : $hostname;
+    define( 'PANTHEON_HOSTNAME', $hostname );
+}
+
 /** Disable wp-cron.php from running on every page load and rely on Pantheon to run cron via wp-cli */
 $network = isset($_ENV["FRAMEWORK"]) && $_ENV["FRAMEWORK"] === "wordpress_network";
 if ( ! defined( 'DISABLE_WP_CRON' ) && $network === false) {
