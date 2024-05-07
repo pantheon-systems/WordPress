@@ -360,7 +360,6 @@ function network_step1( $errors = false ) {
 function network_step2( $errors = false ) {
 	global $wpdb, $is_nginx;
 
-	$hostname          = get_clean_basedomain();
 	$slashed_home      = trailingslashit( get_option( 'home' ) );
 	$base              = parse_url( $slashed_home, PHP_URL_PATH );
 	$document_root_fix = str_replace( '\\', '/', realpath( $_SERVER['DOCUMENT_ROOT'] ) );
@@ -459,40 +458,21 @@ function network_step2( $errors = false ) {
 		</label></p>
 		<textarea id="network-wpconfig-rules" class="code" readonly="readonly" cols="100" rows="31" aria-describedby="network-wpconfig-rules-description">
 	<?php ob_start(); ?>
-if ( !empty( $_ENV['PANTHEON_ENVIRONMENT'] )) {
-	$site_name = $_ENV['PANTHEON_SITE_NAME'];
-	// Override $hostname value as needed.
-	switch ( $_ENV['PANTHEON_ENVIRONMENT'] ) {
-		case 'live':
-			$hostname = $_SERVER['HTTP_HOST'];
-			break;
-		case 'test':
-			$hostname = 'test-' . $site_name . '.pantheonsite.io';
-			break;
-		case 'dev':
-			$hostname = 'dev-' . $site_name . '.pantheonsite.io';
-			break;
-		case 'lando':
-			$hostname = $site_name . '.lndo.site';
-			break;
-		default:
-			$hostname = $_ENV['PANTHEON_ENVIRONMENT'] . '-' . $site_name . '.pantheonsite.io';
-			break;
-	}
-} else {
-	// Override with a default hostname.
-	$hostname = '<?php echo $hostname; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>';
-}
 define( 'MULTISITE', true );
 define( 'SUBDOMAIN_INSTALL', <?php echo $subdomain_install ? 'true' : 'false'; ?> );
-define( 'DOMAIN_CURRENT_SITE', $hostname );
-define( 'PATH_CURRENT_SITE', '<?php echo $base; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>' );
+// Use PANTHEON_HOSTNAME if in a Pantheon environment, otherwise use HTTP_HOST.
+define( 'DOMAIN_CURRENT_SITE', defined( 'PANTHEON_HOSTNAME' ) ? PANTHEON_HOSTNAME : $_SERVER['HTTP_HOST'] );
 define( 'SITE_ID_CURRENT_SITE', 1 );
 define( 'BLOG_ID_CURRENT_SITE', 1 );
 	<?php
-	$config_file_contents = ob_get_contents();
-	ob_end_clean();
-	$config_file_contents = apply_filters( 'pantheon.multisite.config_contents', $config_file_contents );
+	/**
+	 * Filters the contents of the network configuration rules for WordPress configuration files.
+	 *
+	 * This allows this screen to be modified for different environments or configurations (e.g. Composer-based WordPress multisite).
+	 *
+	 * @param string $config_file_contents The contents of the network configuration rules.
+	 */
+	$config_file_contents = apply_filters( 'pantheon.multisite.config_contents', ob_get_clean() );
 	echo $config_file_contents; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	?>
 </textarea>
