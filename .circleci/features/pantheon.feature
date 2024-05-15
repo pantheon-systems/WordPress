@@ -6,7 +6,7 @@ Feature: Perform Pantheon-specific actions
   Scenario: Change the cache TTL
     When I go to "/wp-admin/options-general.php?page=pantheon-cache"
     Then I should see "Pantheon Page Cache"
-    And the "pantheon-cache[default_ttl]" field should contain "600"
+    And the "pantheon-cache[default_ttl]" field should contain "604800"
 
     When I fill in "pantheon-cache[default_ttl]" with "300"
     And I press "Save Changes"

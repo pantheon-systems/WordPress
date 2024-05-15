@@ -1,6 +1,6 @@
 test-defaults: &test-defaults
   docker:
-    - image: quay.io/pantheon-public/terminus-plugin-test:1.x
+    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
   working_directory: ~/work/wp
   environment:
     TZ: "/usr/share/zoneinfo/America/Los_Angeles"
