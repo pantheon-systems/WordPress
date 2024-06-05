@@ -179,9 +179,18 @@ class Pantheon_Cache {
 	 */
 	public function action_admin_init() {
 		register_setting( self::SLUG, self::SLUG, [ self::$instance, 'sanitize_options' ] );
-		add_settings_section( 'general', false, '__return_false', self::SLUG );
-		add_settings_field( 'default_ttl', null, [ self::$instance, 'default_ttl_field' ], self::SLUG, 'general' );
-		add_settings_field( 'maintenance_mode', null, [ self::$instance, 'maintenance_mode_field' ], self::SLUG, 'general' );
+		add_settings_section( 'general', false, '__return_false', self::SLUG, [
+			'before_section' => '<div class="pantheon-page-cache-settings">',
+			'after_section' => '</div>',
+		] );
+		add_settings_field( 'default_ttl', null, [ self::$instance, 'default_ttl_field' ], self::SLUG, 'general', [
+			'class' => 'cache-default-max-age',
+			'label_for' => 'default_ttl',
+		] );
+		add_settings_field( 'maintenance_mode', null, [ self::$instance, 'maintenance_mode_field' ], self::SLUG, 'general', [
+			'class' => 'maintenance-mode',
+			'label_for' => 'maintenance_mode',
+		] );
 	}
 
 
@@ -227,14 +236,46 @@ class Pantheon_Cache {
 	 */
 	public function default_ttl_field() {
 		$disabled = ( has_filter( 'pantheon_cache_default_max_age' ) ) ? ' disabled' : '';
-		echo '<h3>' . esc_html__( 'Default Max Age', 'pantheon-cache' ) . '</h3>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<p>' . esc_html__( 'Maximum time a cached page will be served. A higher max-age typically improves site performance.', 'pantheon-cache' ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $this->options['default_ttl'] . '" size="5" ' . $disabled . ' /> ' . esc_html__( 'seconds', 'pantheon-cache' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$default_ttl = ! $disabled ? $this->options['default_ttl'] : apply_filters( 'pantheon_cache_default_max_age', $this->options['default_ttl'] );
+		echo wp_kses_post( apply_filters( 'pantheon_cache_max_age_field_before_html', '<div class="pantheon-cache-default-max-age">' ) );
+		echo '<h3>' . esc_html__( 'Page Cache Max Age', 'pantheon-cache' ) . '</h3>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<p>' . wp_kses_post( sprintf(
+			// translators: %s is a link to the Pantheon Advanced Page Cache plugin page.
+			__( 'When your site content is updated, <a href="%s">Pantheon Advanced Page Cache</a> clears page cache automatically. This setting determines how long a page will be stored in the Global Content Delivery Network (GCDN) cache before GCDN retrieves the content from WordPress again.', 'pantheon-cache' ),
+			'https://wordpress.org/plugins/pantheon-advanced-page-cache/'
+		) ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		$input_field = '<input type="text" name="' . self::SLUG . '[default_ttl]" value="' . $default_ttl . '" size="7" ' . $disabled . ' /> ' . esc_html__( 'seconds', 'pantheon-cache' );
+		echo wp_kses( apply_filters( 'pantheon_cache_max_age_input', $input_field ), $this->get_cache_max_age_input_allowed_html() );
+		echo wp_kses_post( apply_filters( 'pantheon_cache_max_age_field_after_html', '</div>' ) );
 
 		// Display a message if the setting is disabled.
 		if ( $disabled ) {
-			echo '<p>' . esc_html__( 'This setting is disabled because the default max-age has been filtered to the current value.', 'pantheon-cache' ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo '<p class="pantheon-cache-default-max-age-description">' . esc_html__( 'This setting is disabled because the default max-age has been filtered to the current value.', 'pantheon-cache' ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
+	}
+
+	/**
+	 * Get the allowed input HTML for the settings page.
+	 *
+	 * @return array
+	 */
+	private function get_cache_max_age_input_allowed_html() {
+		return apply_filters( 'pantheon_cache_max_age_input_allowed_html', [
+			'input' => [
+				'type' => [],
+				'name' => [],
+				'value' => [],
+				'size' => [],
+				'disabled' => [],
+			],
+			'select' => [
+				'name' => [],
+			],
+			'option' => [
+				'value' => [],
+				'selected' => [],
+			],
+		] );
 	}
 
 	/**
@@ -283,19 +324,39 @@ class Pantheon_Cache {
 	 */
 	public function view_settings_page() {
 		?>
-		<div class="wrap">
+		<div class="wrap pantheon-page-cache">
 			<h2><?php esc_html_e( 'Pantheon Page Cache', 'pantheon-cache' ); ?></h2>
 
 			<?php if ( ! empty( $_GET['cache-cleared'] ) && 'true' === $_GET['cache-cleared'] ) : ?>
-				<div class="updated below-h2">
+				<div class="updated below-h2" id="cache-cleared-alert">
 					<p><?php esc_html_e( 'Site cache flushed.', 'pantheon-cache' ); ?></p>
 				</div>
 			<?php endif ?>
 
-			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : // translators: %s is a link. ?>
-				<div class="notice notice-success"><p><?php echo wp_kses_post( sprintf( __( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ), 'https://docs.pantheon.io/guides/wordpress-configurations/wordpress-cache-plugin' ) ); ?></p></div>
-			<?php else : // translators: %s is a link. ?>
-				<div class="notice notice-warning"><p><?php echo wp_kses_post( sprintf( __( 'Want to automatically clear related pages when you update content? Learn more about the <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ), 'https://docs.pantheon.io/guides/wordpress-configurations/wordpress-cache-plugin' ) ); ?></p></div>
+			<?php if ( class_exists( 'Pantheon_Advanced_Page_Cache\Purger' ) ) : ?>
+				<div class="notice notice-success" id="papc-installed-notice">
+					<p>
+						<?php
+						echo wp_kses_post( sprintf(
+							// translators: %s is a link.
+							__( 'Pantheon Advanced Page Cache activated. <a target="_blank" href="%s">Learn more</a>', 'pantheon-cache' ),
+							'https://docs.pantheon.io/guides/wordpress-configurations/wordpress-cache-plugin'
+						) );
+						?>
+					</p>
+				</div>
+			<?php else : ?>
+				<div class="notice notice-warning" id="papc-not-installed-notice">
+					<p>
+						<?php
+						echo wp_kses_post( sprintf(
+							// translators: %s is a link.
+							__( 'Want to automatically clear related pages when you update content? Learn more about the <a href="%s">Pantheon Advanced Page Cache</a>.', 'pantheon-cache' ),
+							'https://docs.pantheon.io/guides/wordpress-configurations/wordpress-cache-plugin'
+						) );
+						?>
+					</p>
+				</div>
 			<?php endif; ?>
 
 			<?php
@@ -308,7 +369,7 @@ class Pantheon_Cache {
 
 			<?php if ( apply_filters( 'pantheon_cache_allow_clear_all', true ) ) : ?>
 
-				<form action="admin-post.php" method="POST">
+				<form action="admin-post.php" method="POST" class="clear-site-cache">
 					<input type="hidden" name="action" value="pantheon_cache_flush_site" />
 					<?php wp_nonce_field( 'pantheon-cache-clear-all', 'pantheon-cache-nonce' ); ?>
 					<h3><?php esc_html_e( 'Clear Site Cache', 'pantheon-cache' ); ?></h3>
@@ -363,7 +424,7 @@ class Pantheon_Cache {
 	 */
 	private function get_cache_control_header_value() {
 		if ( ! is_admin() && ! is_user_logged_in() ) {
-			$ttl = absint( $this->options['default_ttl'] );
+			$ttl = apply_filters( 'pantheon_cache_default_max_age', absint( $this->options['default_ttl'] ) );
 			if ( $ttl < 60 && isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && 'live' === $_ENV['PANTHEON_ENVIRONMENT'] ) {
 				$ttl = 60;
 			}

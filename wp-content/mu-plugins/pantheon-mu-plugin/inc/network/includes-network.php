@@ -438,7 +438,7 @@ function network_step2( $errors = false ) {
 		<?php
 		printf(
 			/* translators: 1: wp-config.php, 2: Location of wp-config file, 3: Translated version of "That's all, stop editing! Happy publishing." */
-			esc_html__( 'Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:' ),
+			wp_kses_post( __( 'Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:' ) ),
 			'<code>' . $config_filename . '</code>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'<code>' . $location_of_wp_config . '</code>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			// translators: This string should only be translated if wp-config-sample.php is localized.
@@ -456,8 +456,8 @@ function network_step2( $errors = false ) {
 			);
 			?>
 		</label></p>
-		<textarea id="network-wpconfig-rules" class="code" readonly="readonly" cols="100" rows="31" aria-describedby="network-wpconfig-rules-description">
-	<?php ob_start(); ?>
+		<textarea id="network-wpconfig-rules" class="code" readonly="readonly" cols="100" rows="8" aria-describedby="network-wpconfig-rules-description">
+<?php ob_start(); // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect ?>
 define( 'MULTISITE', true );
 define( 'SUBDOMAIN_INSTALL', <?php echo $subdomain_install ? 'true' : 'false'; ?> );
 // Use PANTHEON_HOSTNAME if in a Pantheon environment, otherwise use HTTP_HOST.
