@@ -28,16 +28,6 @@ function _pantheon_hide_update_nag() {
 }
 
 /**
- * Helper function that returns the current WordPress version.
- *
- * @return string
- */
-function _pantheon_get_current_wordpress_version(): string {
-	include ABSPATH . WPINC . '/version.php';
-	return $wp_version; // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
-}
-
-/**
  * Get the latest WordPress version.
  *
  * @return string|null
@@ -59,7 +49,7 @@ function _pantheon_get_latest_wordpress_version(): ?string {
  */
 function _pantheon_is_wordpress_core_latest(): bool {
 	$latest_wp_version = _pantheon_get_latest_wordpress_version();
-	$wp_version = _pantheon_get_current_wordpress_version();
+	$wp_version = Pantheon\_pantheon_get_current_wordpress_version();
 
 	if ( null === $latest_wp_version ) {
 		return true;
@@ -75,7 +65,7 @@ function _pantheon_is_wordpress_core_latest(): bool {
  * @return bool
  */
 function _pantheon_is_wordpress_core_prerelease(): bool {
-	$wp_version = _pantheon_get_current_wordpress_version();
+	$wp_version = Pantheon\_pantheon_get_current_wordpress_version();
 
 	// Return true if our version is a prerelease. Pre-releases are identified by a dash in the version number.
 	return false !== strpos( $wp_version, '-' ); // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
@@ -88,7 +78,7 @@ function _pantheon_is_wordpress_core_prerelease(): bool {
  * @return void
  */
 function _pantheon_upstream_update_notice() {
-	$wp_version = _pantheon_get_current_wordpress_version();
+	$wp_version = Pantheon\_pantheon_get_current_wordpress_version();
 	$screen = get_current_screen();
 	// Translators: %s is a URL to the user's Pantheon Dashboard.
 	$notice_message = sprintf( __( 'Check for updates on <a href="%s">your Pantheon dashboard</a>.', 'pantheon-systems' ), 'https://dashboard.pantheon.io/sites/' . $_ENV['PANTHEON_SITE'] );
@@ -159,7 +149,7 @@ add_action( 'admin_init', '_pantheon_register_upstream_update_notice' );
  * @return object
  */
 function _pantheon_disable_wp_updates(): object {
-	$wp_version = _pantheon_get_current_wordpress_version();
+	$wp_version = Pantheon\_pantheon_get_current_wordpress_version();
 	return (object) [
 		'updates' => [],
 		'version_checked' => $wp_version, // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable
