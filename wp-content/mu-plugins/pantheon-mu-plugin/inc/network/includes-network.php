@@ -100,6 +100,22 @@ function get_clean_basedomain() {
 }
 
 /**
+ * Returns the warning message about subdirectory multisites not liking custom wp-content directories.
+ *
+ * Applies the 'pantheon.subdirectory_networks_message' filter.
+ *
+ * @since 1.4.5
+ * @return string Warning message or empty string.
+ */
+function pantheon_get_subdirectory_networks_message() {
+	if ( apply_filters( 'pantheon.enable_subdirectory_networks_message', true ) ) {
+		return '<div class="error inline"><p><strong>' . __( 'Warning:' ) . '</strong> ' . __( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</p></div>';
+	}
+
+	return '';
+}
+
+/**
  * Prints step 1 for Network installation process.
  *
  * @todo Realistically, step 1 should be a welcome screen explaining what a Network is and such.
@@ -231,7 +247,7 @@ function network_step1( $errors = false ) {
 	endif;
 
 	if ( WP_CONTENT_DIR !== ABSPATH . 'wp-content' && ( allow_subdirectory_install() || ! allow_subdomain_install() ) ) {
-		echo '<div class="error inline"><p><strong>' . esc_html__( 'Warning:' ) . '</strong> ' . esc_html__( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</p></div>';
+		echo esc_html( pantheon_get_subdirectory_networks_message() );
 	}
 
 	$is_www = ( 0 === strpos( $hostname, 'www.' ) );
@@ -595,7 +611,8 @@ define( 'BLOG_ID_CURRENT_SITE', 1 );
 			);
 		echo '</p>';
 		if ( ! $subdomain_install && WP_CONTENT_DIR !== ABSPATH . 'wp-content' ) {
-			echo '<p><strong>' . esc_html__( 'Warning:' ) . ' ' . esc_html__( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</strong></p>';
+			// Display the subdirectory networks message unless filtered.
+			echo esc_html( pantheon_get_subdirectory_networks_message() );
 		}
 		?>
 			<p class="configuration-rules-label"><label for="network-webconfig-rules">
@@ -657,7 +674,8 @@ EOF;
 		);
 		echo '</p>';
 		if ( ! $subdomain_install && WP_CONTENT_DIR !== ABSPATH . 'wp-content' ) {
-			echo '<p><strong>' . esc_html__( 'Warning:' ) . ' ' . esc_html__( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</strong></p>';
+			// Display the subdirectory networks message unless filtered.
+			echo esc_html( pantheon_get_subdirectory_networks_message() );
 		}
 		?>
 			<p class="configuration-rules-label"><label for="network-htaccess-rules">

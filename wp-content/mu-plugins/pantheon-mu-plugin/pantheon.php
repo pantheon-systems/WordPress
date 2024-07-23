@@ -3,14 +3,14 @@
  * Plugin Name: Pantheon
  * Plugin URI: https://pantheon.io/
  * Description: Building on Pantheon's and WordPress's strengths, together.
- * Version: 1.4.4
+ * Version: 1.4.5
  * Author: Pantheon
  * Author URI: https://pantheon.io/
  *
  * @package pantheon
  */
 
-define( 'PANTHEON_MU_PLUGIN_VERSION', '1.4.4' );
+define( 'PANTHEON_MU_PLUGIN_VERSION', '1.4.5' );
 
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 	require_once 'inc/functions.php';
