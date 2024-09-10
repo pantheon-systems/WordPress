@@ -383,15 +383,13 @@ function network_step2( $errors = false ) {
 	$home_path         = 0 === strpos( $abspath_fix, $document_root_fix ) ? $document_root_fix . $base : get_home_path();
 	$wp_siteurl_subdir = preg_replace( '#^' . preg_quote( $home_path, '#' ) . '#', '', $abspath_fix );
 	$rewrite_base      = ! empty( $wp_siteurl_subdir ) ? ltrim( trailingslashit( $wp_siteurl_subdir ), '/' ) : '';
-
-	$config_filename = 'wp-config.php';
 	$config_filename = apply_filters( 'pantheon.multisite.config_filename', 'wp-config.php' );
 
 	$location_of_wp_config = $abspath_fix;
 	if ( ! file_exists( ABSPATH . $config_filename ) && file_exists( dirname( ABSPATH ) . '/' . $config_filename ) ) {
 		$location_of_wp_config = dirname( $abspath_fix );
 	}
-	$location_of_wp_config = trailingslashit( $location_of_wp_config );
+	$location_of_wp_config = apply_filters( 'pantheon.multisite.location_of_wp_config', trailingslashit( $location_of_wp_config ) );
 
 	// Wildcard DNS message.
 	if ( is_wp_error( $errors ) ) {
@@ -448,6 +446,8 @@ function network_step2( $errors = false ) {
 		</p></div>
 		<?php
 	}
+
+	$happy_publishing_msg = apply_filters( 'pantheon.multisite.end_of_file_message', '<code>/* ' . esc_html__( 'That&#8217;s all, stop editing! Happy publishing.' ) . ' */</code>' );
 	?>
 	<ol>
 		<li><p id="network-wpconfig-rules-description">
@@ -457,9 +457,7 @@ function network_step2( $errors = false ) {
 			wp_kses_post( __( 'Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:' ) ),
 			'<code>' . $config_filename . '</code>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'<code>' . $location_of_wp_config . '</code>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			// translators: This string should only be translated if wp-config-sample.php is localized.
-			// You can check the localized release package or https://i18n.svn.wordpress.org/<locale code>/branches/<wp version>/dist/wp-config-sample.php.
-			'<code>/* ' . esc_html__( 'That&#8217;s all, stop editing! Happy publishing.' ) . ' */</code>'
+			$happy_publishing_msg // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		);
 		?>
 		</p>
@@ -478,6 +476,7 @@ define( 'MULTISITE', true );
 define( 'SUBDOMAIN_INSTALL', <?php echo $subdomain_install ? 'true' : 'false'; ?> );
 // Use PANTHEON_HOSTNAME if in a Pantheon environment, otherwise use HTTP_HOST.
 define( 'DOMAIN_CURRENT_SITE', defined( 'PANTHEON_HOSTNAME' ) ? PANTHEON_HOSTNAME : $_SERVER['HTTP_HOST'] );
+define( 'PATH_CURRENT_SITE', '/' );
 define( 'SITE_ID_CURRENT_SITE', 1 );
 define( 'BLOG_ID_CURRENT_SITE', 1 );
 	<?php
