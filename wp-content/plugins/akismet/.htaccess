@@ -12,7 +12,7 @@
 </IfModule>
 
 # Akismet CSS and JS
-<FilesMatch "^(form|akismet)\.(css|js)$">
+<FilesMatch "^(form\.js|akismet(-frontend|-admin)?\.js|akismet(-admin)?(-rtl)?\.css|inter\.css)$">
 	<IfModule !mod_authz_core.c>
 		Allow from all
 	</IfModule>
@@ -23,7 +23,7 @@
 </FilesMatch>
 
 # Akismet images
-<FilesMatch "^(.+)\.(png|gif)$">
+<FilesMatch "^(logo-a-2x\.png|akismet-refresh-logo\.svg|akismet-refresh-logo@2x\.png|arrow-left\.svg|icon-external\.svg|akismet-activation-banner-elements\.png)$">
 	<IfModule !mod_authz_core.c>
 		Allow from all
 	</IfModule>

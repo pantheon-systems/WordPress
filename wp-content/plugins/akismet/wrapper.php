@@ -13,7 +13,7 @@ function akismet_test_mode() {
 function akismet_http_post( $request, $host, $path, $port = 80, $ip = null ) {
 	$path = str_replace( '/1.1/', '', $path );
 
-	return Akismet::http_post( $request, $path, $ip ); 
+	return Akismet::http_post( $request, $path, $ip );
 }
 
 function akismet_microtime() {
@@ -24,19 +24,20 @@ function akismet_delete_old() {
 	return Akismet::delete_old_comments();
 }
 
-function akismet_delete_old_metadata() { 
+function akismet_delete_old_metadata() {
 	return Akismet::delete_old_comments_meta();
 }
 
 function akismet_check_db_comment( $id, $recheck_reason = 'recheck_queue' ) {
-   	return Akismet::check_db_comment( $id, $recheck_reason );
+	return Akismet::check_db_comment( $id, $recheck_reason );
 }
 
 function akismet_rightnow() {
-	if ( !class_exists( 'Akismet_Admin' ) )
+	if ( ! class_exists( 'Akismet_Admin' ) ) {
 		return false;
-   
-   	return Akismet_Admin::rightnow_stats();
+	}
+
+	return Akismet_Admin::rightnow_stats();
 }
 
 function akismet_admin_init() {
@@ -175,7 +176,7 @@ function akismet_get_ip_address() {
 function akismet_cron_recheck() {
 	return Akismet::cron_recheck();
 }
-function akismet_add_comment_nonce() {
+function akismet_add_comment_nonce( $post_id ) {
 	return Akismet::add_comment_nonce( $post_id );
 }
 function akismet_fix_scheduled_recheck() {
@@ -206,7 +207,8 @@ function akismet_kill_proxy_check( $option ) {
 	return 0;
 }
 function akismet_pingback_forwarded_for( $r, $url ) {
-	return Akismet::pingback_forwarded_for( $r, $url );
+	// This functionality is now in core.
+	return false;
 }
 function akismet_pre_check_pingback( $method ) {
 	return Akismet::pre_check_pingback( $method );
