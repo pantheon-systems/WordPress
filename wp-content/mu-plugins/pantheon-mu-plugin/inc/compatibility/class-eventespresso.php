@@ -2,7 +2,7 @@
 /**
  * Compatibility fix for Event Espresso
  *
- * @link https://docs.pantheon.io/plugins-known-issues#event-espresso
+ * @link https://docs.pantheon.io/wordpress-known-issues#event-espresso
  * @package Pantheon\Compatibility
  */
 

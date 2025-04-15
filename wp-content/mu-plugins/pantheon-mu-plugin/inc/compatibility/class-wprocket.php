@@ -2,7 +2,7 @@
 /**
  * Compatibility class for WP Rocket plugin.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#wp-rocket
+ * @link https://docs.pantheon.io/wordpress-known-issues#wp-rocket
  * @package Pantheon\Compatibility
  */
 

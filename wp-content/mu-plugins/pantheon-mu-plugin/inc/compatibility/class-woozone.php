@@ -2,7 +2,7 @@
 /**
  * Compatibility fix for WooZone.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#woozone
+ * @link https://docs.pantheon.io/wordpress-known-issues#woozone
  * @package Pantheon\Compatibility
  */
 

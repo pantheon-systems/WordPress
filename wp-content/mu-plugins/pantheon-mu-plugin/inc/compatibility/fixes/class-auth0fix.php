@@ -2,7 +2,7 @@
 /**
  * Auth0 Fix
  *
- * @link https://docs.pantheon.io/plugins-known-issues#auth0
+ * @link https://docs.pantheon.io/wordpress-known-issues#auth0
  * @package Pantheon\Compatibility\Fixes
  */
 
