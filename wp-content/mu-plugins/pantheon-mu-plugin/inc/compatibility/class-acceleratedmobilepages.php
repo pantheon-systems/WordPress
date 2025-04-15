@@ -2,7 +2,7 @@
 /**
  * Accelerated Mobile Pages compatibility fix.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#amp-for-wp--accelerated-mobile-pages
+ * @link https://docs.pantheon.io/wordpress-known-issues#amp-for-wp--accelerated-mobile-pages
  * @package Pantheon\Compatibility
  */
 

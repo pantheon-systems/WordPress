@@ -2,7 +2,7 @@
 /**
  * Compatibility class for Broken Link Checker plugin.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#broken-link-checker
+ * @link https://docs.pantheon.io/wordpress-known-issues#broken-link-checker
  * @package Pantheon\Compatibility
  */
 

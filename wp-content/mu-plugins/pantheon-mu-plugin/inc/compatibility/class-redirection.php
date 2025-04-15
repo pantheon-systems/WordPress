@@ -2,7 +2,7 @@
 /**
  * Redirection compatibility class
  *
- * @link https://docs.pantheon.io/plugins-known-issues#redirection
+ * @link https://docs.pantheon.io/wordpress-known-issues#redirection
  * @package Pantheon\Compatibility
  */
 

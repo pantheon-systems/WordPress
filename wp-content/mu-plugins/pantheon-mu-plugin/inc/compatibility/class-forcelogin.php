@@ -2,7 +2,7 @@
 /**
  * Force Login compatibility fix.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#force-login
+ * @link https://docs.pantheon.io/wordpress-known-issues#force-login
  * @package Pantheon\Compatibility
  */
 

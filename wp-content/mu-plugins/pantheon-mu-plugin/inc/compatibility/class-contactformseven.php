@@ -2,7 +2,7 @@
 /**
  * Compatibility class for Contact Form 7 plugin.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#contact-form-7
+ * @link https://docs.pantheon.io/wordpress-known-issues#contact-form-7
  * @package Pantheon\Compatibility
  */
 

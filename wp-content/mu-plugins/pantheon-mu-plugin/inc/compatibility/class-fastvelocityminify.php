@@ -2,7 +2,7 @@
 /**
  * Compatibility fix for Fast Velocity Minify plugin.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#fast-velocity-minify
+ * @link https://docs.pantheon.io/wordpress-known-issues#fast-velocity-minify
  * @package Pantheon\Compatibility
  */
 
