@@ -1,0 +1,32 @@
+name: Update browserslist regex
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1" # Every Monday at midnight
+
+jobs:
+  update-browserslist-regex:
+    name: Update browserslist regex
+    if: github.repository == ${{ github.event.repository.full_name }}
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      - name: Update browserslist
+        run: ./bin/update-browsers.sh
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update-browserslist
+          commit-message: "Update browser regex from browserslist"
+          title: "[browserslist] Update browser regex"
+          body: "Automated update of browser regex from browserslist."
+          base: main
+          signoff: true
+          delete-branch: true
