@@ -100,6 +100,22 @@ function get_clean_basedomain() {
 }
 
 /**
+ * Returns the warning message about subdirectory multisites not liking custom wp-content directories.
+ *
+ * Applies the 'pantheon.subdirectory_networks_message' filter.
+ *
+ * @since 1.4.5
+ * @return string Warning message or empty string.
+ */
+function pantheon_get_subdirectory_networks_message() {
+	if ( apply_filters( 'pantheon.enable_subdirectory_networks_message', true ) ) {
+		return '<div class="error inline"><p><strong>' . __( 'Warning:' ) . '</strong> ' . __( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</p></div>';
+	}
+
+	return '';
+}
+
+/**
  * Prints step 1 for Network installation process.
  *
  * @todo Realistically, step 1 should be a welcome screen explaining what a Network is and such.
@@ -231,7 +247,7 @@ function network_step1( $errors = false ) {
 	endif;
 
 	if ( WP_CONTENT_DIR !== ABSPATH . 'wp-content' && ( allow_subdirectory_install() || ! allow_subdomain_install() ) ) {
-		echo '<div class="error inline"><p><strong>' . esc_html__( 'Warning:' ) . '</strong> ' . esc_html__( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</p></div>';
+		echo esc_html( pantheon_get_subdirectory_networks_message() );
 	}
 
 	$is_www = ( 0 === strpos( $hostname, 'www.' ) );
@@ -360,7 +376,6 @@ function network_step1( $errors = false ) {
 function network_step2( $errors = false ) {
 	global $wpdb, $is_nginx;
 
-	$hostname          = get_clean_basedomain();
 	$slashed_home      = trailingslashit( get_option( 'home' ) );
 	$base              = parse_url( $slashed_home, PHP_URL_PATH );
 	$document_root_fix = str_replace( '\\', '/', realpath( $_SERVER['DOCUMENT_ROOT'] ) );
@@ -368,15 +383,13 @@ function network_step2( $errors = false ) {
 	$home_path         = 0 === strpos( $abspath_fix, $document_root_fix ) ? $document_root_fix . $base : get_home_path();
 	$wp_siteurl_subdir = preg_replace( '#^' . preg_quote( $home_path, '#' ) . '#', '', $abspath_fix );
 	$rewrite_base      = ! empty( $wp_siteurl_subdir ) ? ltrim( trailingslashit( $wp_siteurl_subdir ), '/' ) : '';
-
-	$config_filename = 'wp-config.php';
 	$config_filename = apply_filters( 'pantheon.multisite.config_filename', 'wp-config.php' );
 
 	$location_of_wp_config = $abspath_fix;
 	if ( ! file_exists( ABSPATH . $config_filename ) && file_exists( dirname( ABSPATH ) . '/' . $config_filename ) ) {
 		$location_of_wp_config = dirname( $abspath_fix );
 	}
-	$location_of_wp_config = trailingslashit( $location_of_wp_config );
+	$location_of_wp_config = apply_filters( 'pantheon.multisite.location_of_wp_config', trailingslashit( $location_of_wp_config ) );
 
 	// Wildcard DNS message.
 	if ( is_wp_error( $errors ) ) {
@@ -433,18 +446,18 @@ function network_step2( $errors = false ) {
 		</p></div>
 		<?php
 	}
+
+	$happy_publishing_msg = apply_filters( 'pantheon.multisite.end_of_file_message', '<code>/* ' . esc_html__( 'That&#8217;s all, stop editing! Happy publishing.' ) . ' */</code>' );
 	?>
 	<ol>
 		<li><p id="network-wpconfig-rules-description">
 		<?php
 		printf(
 			/* translators: 1: wp-config.php, 2: Location of wp-config file, 3: Translated version of "That's all, stop editing! Happy publishing." */
-			esc_html__( 'Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:' ),
+			wp_kses_post( __( 'Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:' ) ),
 			'<code>' . $config_filename . '</code>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'<code>' . $location_of_wp_config . '</code>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			// translators: This string should only be translated if wp-config-sample.php is localized.
-			// You can check the localized release package or https://i18n.svn.wordpress.org/<locale code>/branches/<wp version>/dist/wp-config-sample.php.
-			'<code>/* ' . esc_html__( 'That&#8217;s all, stop editing! Happy publishing.' ) . ' */</code>'
+			$happy_publishing_msg // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		);
 		?>
 		</p>
@@ -457,42 +470,24 @@ function network_step2( $errors = false ) {
 			);
 			?>
 		</label></p>
-		<textarea id="network-wpconfig-rules" class="code" readonly="readonly" cols="100" rows="31" aria-describedby="network-wpconfig-rules-description">
-	<?php ob_start(); ?>
-if ( !empty( $_ENV['PANTHEON_ENVIRONMENT'] )) {
-	$site_name = $_ENV['PANTHEON_SITE_NAME'];
-	// Override $hostname value as needed.
-	switch ( $_ENV['PANTHEON_ENVIRONMENT'] ) {
-		case 'live':
-			$hostname = $_SERVER['HTTP_HOST'];
-			break;
-		case 'test':
-			$hostname = 'test-' . $site_name . '.pantheonsite.io';
-			break;
-		case 'dev':
-			$hostname = 'dev-' . $site_name . '.pantheonsite.io';
-			break;
-		case 'lando':
-			$hostname = $site_name . '.lndo.site';
-			break;
-		default:
-			$hostname = $_ENV['PANTHEON_ENVIRONMENT'] . '-' . $site_name . '.pantheonsite.io';
-			break;
-	}
-} else {
-	// Override with a default hostname.
-	$hostname = '<?php echo $hostname; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>';
-}
+		<textarea id="network-wpconfig-rules" class="code" readonly="readonly" cols="100" rows="8" aria-describedby="network-wpconfig-rules-description">
+<?php ob_start(); // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect ?>
 define( 'MULTISITE', true );
 define( 'SUBDOMAIN_INSTALL', <?php echo $subdomain_install ? 'true' : 'false'; ?> );
-define( 'DOMAIN_CURRENT_SITE', $hostname );
-define( 'PATH_CURRENT_SITE', '<?php echo $base; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>' );
+// Use PANTHEON_HOSTNAME if in a Pantheon environment, otherwise use HTTP_HOST.
+define( 'DOMAIN_CURRENT_SITE', defined( 'PANTHEON_HOSTNAME' ) ? PANTHEON_HOSTNAME : $_SERVER['HTTP_HOST'] );
+define( 'PATH_CURRENT_SITE', '/' );
 define( 'SITE_ID_CURRENT_SITE', 1 );
 define( 'BLOG_ID_CURRENT_SITE', 1 );
 	<?php
-	$config_file_contents = ob_get_contents();
-	ob_end_clean();
-	$config_file_contents = apply_filters( 'pantheon.multisite.config_contents', $config_file_contents );
+	/**
+	 * Filters the contents of the network configuration rules for WordPress configuration files.
+	 *
+	 * This allows this screen to be modified for different environments or configurations (e.g. Composer-based WordPress multisite).
+	 *
+	 * @param string $config_file_contents The contents of the network configuration rules.
+	 */
+	$config_file_contents = apply_filters( 'pantheon.multisite.config_contents', ob_get_clean() );
 	echo $config_file_contents; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	?>
 </textarea>
@@ -615,7 +610,8 @@ define( 'BLOG_ID_CURRENT_SITE', 1 );
 			);
 		echo '</p>';
 		if ( ! $subdomain_install && WP_CONTENT_DIR !== ABSPATH . 'wp-content' ) {
-			echo '<p><strong>' . esc_html__( 'Warning:' ) . ' ' . esc_html__( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</strong></p>';
+			// Display the subdirectory networks message unless filtered.
+			echo esc_html( pantheon_get_subdirectory_networks_message() );
 		}
 		?>
 			<p class="configuration-rules-label"><label for="network-webconfig-rules">
@@ -677,7 +673,8 @@ EOF;
 		);
 		echo '</p>';
 		if ( ! $subdomain_install && WP_CONTENT_DIR !== ABSPATH . 'wp-content' ) {
-			echo '<p><strong>' . esc_html__( 'Warning:' ) . ' ' . esc_html__( 'Subdirectory networks may not be fully compatible with custom wp-content directories.' ) . '</strong></p>';
+			// Display the subdirectory networks message unless filtered.
+			echo esc_html( pantheon_get_subdirectory_networks_message() );
 		}
 		?>
 			<p class="configuration-rules-label"><label for="network-htaccess-rules">

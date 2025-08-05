@@ -3,18 +3,19 @@
  * Plugin Name: Pantheon
  * Plugin URI: https://pantheon.io/
  * Description: Building on Pantheon's and WordPress's strengths, together.
- * Version: 1.2.1
+ * Version: 1.5.3
  * Author: Pantheon
  * Author URI: https://pantheon.io/
  *
  * @package pantheon
  */
 
-define( 'PANTHEON_MU_PLUGIN_VERSION', '1.2.1' );
+define( 'PANTHEON_MU_PLUGIN_VERSION', '1.5.3' );
 
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
-
+	require_once 'inc/functions.php';
 	require_once 'inc/pantheon-page-cache.php';
+	require_once 'inc/site-health.php';
 	if ( ! defined( 'DISABLE_PANTHEON_UPDATE_NOTICES' ) || ! DISABLE_PANTHEON_UPDATE_NOTICES ) {
 		require_once 'inc/pantheon-updates.php';
 	}
@@ -45,10 +46,14 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 		define( 'WP_ALLOW_MULTISITE', true );
 	}
 	if ( defined( 'WP_ALLOW_MULTISITE' ) && WP_ALLOW_MULTISITE ) {
-		if ( defined( 'MULTISITE' ) && MULTISITE ) {
-			require_once 'inc/pantheon-network-setup.php';
-		} else {
+		require_once 'inc/pantheon-network-setup.php';
+		if ( ! defined( 'MULTISITE' ) && MULTISITE ) {
 			require_once 'inc/pantheon-multisite-finalize.php';
 		}
+	}
+
+	if ( ! defined( 'PANTHEON_COMPATIBILITY' ) || PANTHEON_COMPATIBILITY ) {
+		require_once 'inc/compatibility/class-compatibilityfactory.php';
+		Pantheon\Compatibility\CompatibilityFactory::get_instance();
 	}
 } // Ensuring that this is on Pantheon.
