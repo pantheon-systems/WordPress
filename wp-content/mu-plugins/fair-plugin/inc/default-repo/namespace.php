@@ -1,13 +1,11 @@
 <?php
 /**
- * Prevents calls to the WordPress.org API for the default repository.
+ * Replaces calls to the WordPress.org API with calls to the API of the chosen FAIR repository.
  *
  * @package FAIR
  */
 
 namespace FAIR\Default_Repo;
-
-use WP_Error;
 
 /**
  * Bootstrap.
@@ -36,11 +34,12 @@ function get_default_repo_domain() : string {
  * Replace the repository API URLs.
  *
  * Replaces api.wordpress.org with the repository we're using, for the plugins
- * and themes APIs. Only these get passed to AspirePress, as the others are
+ * and themes APIs. Only these get passed to the chosen FAIR repo, as the others are
  * handled in other modules.
  *
- * @param array $args
- * @param string $url
+ * @param bool|array $status Filtered value, or false to proceed.
+ * @param array $args HTTP request arguments.
+ * @param string $url The request URL.
  * @return bool|array Replaced value, or false to proceed.
  */
 function replace_repo_api_urls( $status, $args, $url ) {
@@ -50,9 +49,9 @@ function replace_repo_api_urls( $status, $args, $url ) {
 	}
 
 	if (
-		strpos( $url, 'api.wordpress.org/plugins/' ) === false
-		&& strpos( $url, 'api.wordpress.org/themes/' ) === false
-		&& strpos( $url, 'api.wordpress.org/core/version-check/' ) === false
+		! str_contains( $url, 'api.wordpress.org/plugins/' )
+		&& ! str_contains( $url, 'api.wordpress.org/themes/' )
+		&& ! str_contains( $url, 'api.wordpress.org/core/version-check/' )
 	) {
 		return $status;
 	}
@@ -76,7 +75,7 @@ function replace_repo_api_urls( $status, $args, $url ) {
  * This tab only makes sense for WordPress.org, so is not supported by
  * other repositories.
  *
- * @param array $tabs
+ * @param array $tabs Tabs in the plugin browser.
  */
 function remove_favorites_tab( array $tabs ) : array {
 	unset( $tabs['favorites'] );

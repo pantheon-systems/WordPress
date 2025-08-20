@@ -1,6 +1,6 @@
 <?php
 /**
- * Prevents calls to the WordPress.org API for version checks.
+ * Replaces calls to the WordPress.org BrowseHappy and ServeHappy APIs with static local data.
  *
  * @package FAIR
  */
@@ -12,7 +12,7 @@ namespace FAIR\Version_Check;
  *
  * DO NOT EDIT THIS CONSTANT MANUALLY.
  */
-const BROWSER_REGEX = '/Edge?\/13[4-6]\.0(\.\d+|)|Firefox\/(128\.0|1(3[7-9]|4[0-2])\.0)(\.\d+|)|Chrom(ium|e)\/(109\.0|1(3[1-9]|40)\.0)(\.\d+|)|(Maci|X1{2}).+ Version\/18\.[3-5]([,.]\d+|)( \(\w+\)|)( Mobile\/\w+|) Safari\/|Chrome.+OPR\/1{2}[67]\.0\.\d+|(CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS|CPU iPad OS)[ +]+(16[._][67]|17[._][67]|18[._]1|18[._][3-5])([._]\d+|)|Opera Mini|Android:?[ /-]136(\.0|)(\.\d+|)|Mobile Safari.+OPR\/8(0\.){2}\d+|Android.+Firefox\/137\.0(\.\d+|)|Android.+Chrom(ium|e)\/136\.0(\.\d+|)|Android.+(UC? ?Browser|UCWEB|U3)[ /]?1(5\.){2}\d+|SamsungBrowser\/2[67]\.0|Android.+MQ{2}Browser\/14(\.9|)(\.\d+|)|K[Aa][Ii]OS\/(2\.5|3\.[01])(\.\d+|)/';
+const BROWSER_REGEX = '/Edge?\/13[6-8]\.0(\.\d+|)|Firefox\/(128\.0|1(39|4[0-3])\.0)(\.\d+|)|Chrom(ium|e)\/(109\.0|1{2}2\.0|131\.0|1(3[6-9]|4[01])\.0)(\.\d+|)|(Maci|X1{2}).+ Version\/(18\.[45]|26\.0)([,.]\d+|)( \(\w+\)|)( Mobile\/\w+|) Safari\/|Chrome.+OPR\/1{2}[67]\.0\.\d+|(CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS|CPU iPad OS)[ +]+(16[._][67]|17[._][67]|18[._][3-5]|26[._]0)([._]\d+|)|Opera Mini|Android:?[ /-]138(\.0|)(\.\d+|)|Mobile Safari.+OPR\/8(0\.){2}\d+|Android.+Firefox\/140\.0(\.\d+|)|Android.+Chrom(ium|e)\/138\.0(\.\d+|)|Android.+(UC? ?Browser|UCWEB|U3)[ /]?1(5\.){2}\d+|SamsungBrowser\/2[78]\.0|Android.+MQ{2}Browser\/14(\.9|)(\.\d+|)|K[Aa][Ii]OS\/(2\.5|3\.[01])(\.\d+|)/';
 
 /**
  * The latest branch of PHP which WordPress.org recommends.
@@ -61,16 +61,16 @@ function bootstrap() {
  * Replace the browser version check.
  *
  * @param bool|array $value Filtered value, or false to proceed.
- * @param array $args
- * @param string $url
+ * @param array $args HTTP request arguments.
+ * @param string $url The request URL.
  * @return bool|array Replaced value, or false to proceed.
  */
 function replace_browser_version_check( $value, $args, $url ) {
-	if ( strpos( $url, 'api.wordpress.org/core/browse-happy' ) !== false ) {
+	if ( str_contains( $url, 'api.wordpress.org/core/browse-happy' ) ) {
 		$agent = $args['body']['useragent'];
 		return get_browser_check_response( $agent );
 	}
-	if ( strpos( $url, 'api.wordpress.org/core/serve-happy' ) !== false ) {
+	if ( str_contains( $url, 'api.wordpress.org/core/serve-happy' ) ) {
 		$query = parse_url( $url, PHP_URL_QUERY );
 		$url_args = wp_parse_args( $query );
 		return get_server_check_response( $url_args['php_version'] ?? PHP_VERSION );
@@ -97,8 +97,8 @@ function get_browser_check_response( string $agent ) {
 			'message' => 'OK',
 		],
 		'body' => json_encode( [
-			'platform' => _x( 'your platform', 'browser version check', 'fair' ),
-			'name' => __( 'your browser', 'browser version check', 'fair' ),
+			'platform' => _x( 'your platform', 'operating system check', 'fair' ),
+			'name' => _x( 'your browser', 'browser version check', 'fair' ),
 			'version' => '',
 			'current_version' => '',
 			'upgrade' => ! $supported,
@@ -139,7 +139,7 @@ function get_php_branches() {
 	// Index data by branch.
 	$indexed = [];
 	foreach ( $data as $ver ) {
-		if ( empty( $ver['branch' ] ) ) {
+		if ( empty( $ver['branch'] ) ) {
 			continue;
 		}
 
@@ -168,7 +168,7 @@ function get_php_branches() {
  * - Else if is_lower_than_future_minimum, show "outdated version which does not receive security updates and will soon not be supported"
  * - Else, show "outdated version which does not receive security updates"
  *
- * @param string $agent User-agent to check.
+ * @param string $version Version to check.
  * @return array HTTP API response-like data.
  */
 function check_php_version( string $version ) {
@@ -224,9 +224,9 @@ function check_php_version( string $version ) {
 
 	$cur_branch_data = $branches[ $cur_branch ];
 
-	if ( $cur_branch_data['state'] === 'stable' || $cur_branch_data['state'] === 'security' ) {
+	if ( $cur_branch_data['state'] === 'security' ) {
 		return [
-			// If we're on the stable or secure branches, the recommended version
+			// If we're on the security branches, the recommended version
 			// should be the latest version of this branch.
 			'recommended_version' => $cur_branch_data['latest'],
 			'minimum_version'     => MINIMUM_PHP,
