@@ -2,7 +2,7 @@
 /**
  * Plugin Name: FAIR - Federated and Independent Repositories
  * Description: Make your site more FAIR.
- * Version: 0.4.1
+ * Version: 1.0.0
  * Author: FAIR Contributors
  * License: GPLv2
  * Requires at least: 5.4
@@ -12,12 +12,13 @@
  * Update URI: https://api.fair.pm
  * GitHub Plugin URI: https://github.com/fairpm/fair-plugin
  * Primary Branch: main
+ * Release Asset: true
  * Network: true
  */
 
 namespace FAIR;
 
-const VERSION = '0.4.1';
+const VERSION = '1.0.0';
 const PLUGIN_DIR = __DIR__;
 const PLUGIN_FILE = __FILE__;
 
