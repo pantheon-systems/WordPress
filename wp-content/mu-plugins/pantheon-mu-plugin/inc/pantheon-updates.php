@@ -89,8 +89,11 @@ function _pantheon_upstream_update_notice() {
 	$div_style = esc_attr( 'display: table;' );
 	$paragraph_style = esc_attr( 'font-size: 14px; font-weight: bold; margin: 0 0 0.5em 0;' );
 
+	/**
+	 * If WP core is out of date, alter the message and show the nag
+	 * everywhere.
+	 */
 	if ( ! _pantheon_is_wordpress_core_latest() ) {
-		// If WP core is out of date, alter the message and show the nag everywhere.
 		// Translators: %s is a URL to the user's Pantheon Dashboard.
 		$notice_message = sprintf( __( 'A new WordPress update is available! Please update from <a href="%s">your Pantheon dashboard</a>.', 'pantheon-systems' ), 'https://dashboard.pantheon.io/sites/' . $_ENV['PANTHEON_SITE'] );
 	}
@@ -157,8 +160,10 @@ function _pantheon_disable_wp_updates(): object {
 	];
 }
 
-// In the Test and Live environments, clear plugin/theme update notifications.
-// Users must check a dev or multidev environment for updates.
+/**
+ * In the Test and Live environments, clear plugin/theme update notifications.
+ * Users must check a dev or multidev environment for updates.
+ */
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && in_array( $_ENV['PANTHEON_ENVIRONMENT'], [ 'test', 'live' ], true ) && ( php_sapi_name() !== 'cli' ) ) {
 
 	// Disable Plugin Updates.
