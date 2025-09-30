@@ -21,6 +21,7 @@ use function get_option;
 use function get_plugin_data;
 use function in_array;
 use function number_format_i18n;
+use function Pantheon\_pantheon_get_header;
 use function printf;
 use function sprintf;
 use function ucfirst;
@@ -928,12 +929,30 @@ function object_cache_tests( $tests ) {
  * @return array
  */
 function test_object_cache() {
-	if ( ! isset( $_ENV['CACHE_HOST'] ) ) {
+	$cache_host = isset( $_ENV['CACHE_HOST'] ) ? $_ENV['CACHE_HOST'] : null;
+	$service_level = _pantheon_get_header( 'Pcontext-Service-Level' );
+	$redis_unavailable = [ 'basic', 'basic_small' ];
+
+	// If we can't find a service level nor cache host, bail early.
+	if ( ! $service_level && ! $cache_host ) {
+		return [];
+	}
+
+	/**
+	 * If the service level is basic, we cannot use Redis. Bail early, this
+	 * test is not helpful.
+	 */
+	if ( in_array( $service_level, $redis_unavailable, true ) ) {
+		return [];
+	}
+
+	// Redis is available on the plan, but not active.
+	if ( ! $cache_host ) {
 		$result = [
 			'label' => __( 'Redis Object Cache', 'pantheon' ),
 			'status' => 'critical',
 			'badge' => [
-				'label' => __( 'Performance', 'pantheon' ),
+				'label' => __( 'Pantheon', 'pantheon' ),
 				'color' => 'red',
 			],
 			'description' => sprintf(
@@ -946,15 +965,17 @@ function test_object_cache() {
 		return $result;
 	}
 
+	// Redis is available and active. Check which object cache plugin is active.
 	$wp_redis_active = is_plugin_active( 'wp-redis/wp-redis.php' );
 	$ocp_active = is_plugin_active( 'object-cache-pro/object-cache-pro.php' );
 
+	// If WP Redis is active, we recommend using Object Cache Pro.
 	if ( $wp_redis_active ) {
 		$result = [
 			'label' => __( 'WP Redis Active', 'pantheon' ),
 			'status' => 'recommended',
 			'badge' => [
-				'label' => __( 'Performance', 'pantheon' ),
+				'label' => __( 'Pantheon', 'pantheon' ),
 				'color' => 'orange',
 			],
 			'description' => sprintf(
@@ -969,13 +990,14 @@ function test_object_cache() {
 		return $result;
 	}
 
+	// If Object Cache Pro is active, we can return a good status.
 	if ( $ocp_active ) {
 		$result = [
 			'label' => __( 'Object Cache Pro Active', 'pantheon' ),
 			'status' => 'good',
 			'badge' => [
-				'label' => __( 'Performance', 'pantheon' ),
-				'color' => 'green',
+				'label' => __( 'Pantheon', 'pantheon' ),
+				'color' => 'blue',
 			],
 			'description' => sprintf(
 				'<p>%s</p><p>%s</p>',
@@ -989,11 +1011,12 @@ function test_object_cache() {
 		return $result;
 	}
 
+	// Redis is active but no object cache plugin is installed. Recommend OCP.
 	$result = [
 		'label' => __( 'No Object Cache Plugin Active', 'pantheon' ),
 		'status' => 'critical',
 		'badge' => [
-			'label' => __( 'Performance', 'pantheon' ),
+			'label' => __( 'Pantheon', 'pantheon' ),
 			'color' => 'red',
 		],
 		'description' => sprintf(
