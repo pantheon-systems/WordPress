@@ -2,7 +2,7 @@
 /**
  * Compatibility class for Tweet Old Post plugin.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#revive-old-post
+ * @link https://docs.pantheon.io/wordpress-known-issues#revive-old-post
  * @package Pantheon\Compatibility
  */
 

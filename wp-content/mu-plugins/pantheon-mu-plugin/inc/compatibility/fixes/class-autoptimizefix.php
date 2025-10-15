@@ -2,7 +2,7 @@
 /**
  * AutoptimizeFix
  *
- * @link https://docs.pantheon.io/plugins-known-issues#autoptimize
+ * @link https://docs.pantheon.io/wordpress-known-issues#autoptimize
  * @package Pantheon\Compatibility\Fixes
  */
 

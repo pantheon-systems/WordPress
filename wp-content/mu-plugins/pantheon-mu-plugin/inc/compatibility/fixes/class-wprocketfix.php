@@ -2,7 +2,7 @@
 /**
  * WP Rocket compatibility fix.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#wp-rocket
+ * @link https://docs.pantheon.io/wordpress-known-issues#wp-rocket
  * @package Pantheon\Compatibility\Fixes
  */
 
@@ -25,4 +25,9 @@ class WPRocketFix {
 		DefineConstantFix::apply( 'WP_ROCKET_CACHE_ROOT_URL',
 		sprintf( '%s/wp-content/uploads/wp-rocket/cache/', $home_url ) );
 	}
+
+	/**
+	 * @return void
+	 */
+	public static function remove() {}
 }

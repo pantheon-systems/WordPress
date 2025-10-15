@@ -2,7 +2,7 @@
 /**
  * Compatibility fix for Official Facebook Pixel plugin.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#facebook-for-wordpress-official-facebook-pixel
+ * @link https://docs.pantheon.io/wordpress-known-issues#facebook-for-wordpress-official-facebook-pixel
  * @package Pantheon\Compatibility
  */
 
