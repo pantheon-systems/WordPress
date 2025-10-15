@@ -2,7 +2,7 @@
 /**
  * YITH WooCommerce Compatibility
  *
- * @link https://docs.pantheon.io/plugins-known-issues#yith-woocommerce-extensions-with-mpdf-library
+ * @link https://docs.pantheon.io/wordpress-known-issues#yith-woocommerce-extensions-with-mpdf-library
  * @package Pantheon\Compatibility
  */
 

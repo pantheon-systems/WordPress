@@ -2,7 +2,7 @@
 /**
  * Compatibility fix for Polylang plugin.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#polylang
+ * @link https://docs.pantheon.io/wordpress-known-issues#polylang
  * @package Pantheon\Compatibility
  */
 

@@ -25,6 +25,10 @@ function pantheon_remove_network_setup() {
  * Register the Pantheon network setup submenu page.
  */
 function pantheon_add_network_setup() {
+	if ( defined( 'MULTISITE' ) && MULTISITE ) {
+		return;
+	}
+
 	add_management_page(
 		__( 'Create a Network of WordPress  Sites', 'network-setup' ),
 		__( 'Network Setup', 'network-setup' ),

@@ -3,14 +3,14 @@
  * Plugin Name: Pantheon
  * Plugin URI: https://pantheon.io/
  * Description: Building on Pantheon's and WordPress's strengths, together.
- * Version: 1.5.1
+ * Version: 1.5.3
  * Author: Pantheon
  * Author URI: https://pantheon.io/
  *
  * @package pantheon
  */
 
-define( 'PANTHEON_MU_PLUGIN_VERSION', '1.5.1' );
+define( 'PANTHEON_MU_PLUGIN_VERSION', '1.5.3' );
 
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 	require_once 'inc/functions.php';
@@ -40,8 +40,12 @@ if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 		 */
 		define( 'FS_METHOD', 'direct' );
 	}
-	// When developing a WordPress Multisite locally, ensure that this constant is set.
-	// This will set the Multisite variable in all Pantheon environments.
+
+	/**
+	 * When developing a WordPress Multisite locally, ensure that this constant 
+	 * is set.
+	 * This will set the Multisite variable in all Pantheon environments.
+	 */
 	if ( getenv( 'FRAMEWORK' ) === 'wordpress_network' && ! defined( 'WP_ALLOW_MULTISITE' ) ) {
 		define( 'WP_ALLOW_MULTISITE', true );
 	}

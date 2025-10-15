@@ -2,7 +2,7 @@
 /**
  * Better Search Replace compatibility fix.
  *
- * @link https://docs.pantheon.io/plugins-known-issues#better-search-and-replace
+ * @link https://docs.pantheon.io/wordpress-known-issues#better-search-and-replace
  * @package Pantheon\Compatibility
  */
 

@@ -2,7 +2,7 @@
 /**
  * Slider Revolution Compatibility
  *
- * @link https://docs.pantheon.io/plugins-known-issues#slider-revolution
+ * @link https://docs.pantheon.io/wordpress-known-issues#slider-revolution
  * @package Pantheon\Compatibility
  */
 
