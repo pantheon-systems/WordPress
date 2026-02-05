@@ -14,7 +14,7 @@ If you do not yet have a Pantheon account, you can create one for free. Once you
 
 When the spin-up process is complete, you will be redirected to the site's dashboard. Click on the link under the site's name to access the Dev environment.
 
-![alt](http://i.imgur.com/2wjCj9j.png?1, '')
+![Dashboard image](http://i.imgur.com/2wjCj9j.png)
 
 ### 3. Run the WordPress installer
 
@@ -22,13 +22,13 @@ How about the WordPress database config screen? No need to worry about database 
 
 We will post more information about how this works but we recommend developers take a look at `wp-config.php` to get an understanding.
 
-![alt](http://i.imgur.com/4EOcqYN.png, '')
+![Installation screen](http://i.imgur.com/4EOcqYN.png)
 
 If you would like to keep a separate set of configuration for local development, you can use a file called `wp-config-local.php`, which is already in our .gitignore file.
 
 ### 4. Enjoy!
 
-![alt](http://i.imgur.com/fzIeQBP.png, '')
+![WordPress dashboard](http://i.imgur.com/fzIeQBP.png)
 
 ## Branches
 
