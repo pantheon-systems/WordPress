@@ -13,6 +13,7 @@ if ( defined( 'WP_INSTALLING' ) && WP_INSTALLING ) {
 
 // Add mu-plugins here.
 $pantheon_mu_plugins = [
+	'fair-plugin/plugin.php',
 	'pantheon-mu-plugin/pantheon.php',
 ];
 
