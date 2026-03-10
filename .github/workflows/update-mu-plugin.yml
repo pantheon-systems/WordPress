@@ -1,0 +1,189 @@
+name: Update MU Plugin
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 6 * * *'  # daily at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-mu-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout WordPress upstream
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: default
+          fetch-depth: 0
+
+      - name: Get installed mu-plugin version
+        id: installed
+        run: |
+          set -euo pipefail
+          installed=$(grep -m1 '^\s*\*\s*Version:' wp-content/mu-plugins/pantheon-mu-plugin/pantheon.php \
+            | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')
+          echo "version=${installed}" >> "$GITHUB_OUTPUT"
+
+      - name: Get latest mu-plugin release
+        id: latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          tag=$(gh api repos/pantheon-systems/pantheon-mu-plugin/releases/latest --jq '.tag_name')
+          # Strip leading 'v' for comparison with plugin header version
+          version="${tag#v}"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Check for existing PR
+        id: existing_pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          tag="${{ steps.latest.outputs.tag }}"
+          pr_number=$(gh pr list \
+            --base default \
+            --state open \
+            --search "Update the Pantheon MU Plugin to ${tag}" \
+            --json number \
+            --jq '.[0].number // empty')
+          echo "number=${pr_number}" >> "$GITHUB_OUTPUT"
+
+      - name: Skip if already up-to-date or PR exists
+        id: should_update
+        run: |
+          set -euo pipefail
+          installed="${{ steps.installed.outputs.version }}"
+          latest="${{ steps.latest.outputs.version }}"
+          existing="${{ steps.existing_pr.outputs.number }}"
+
+          if [ "${installed}" = "${latest}" ]; then
+            echo "Already at ${latest}, nothing to do."
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          elif [ -n "${existing}" ]; then
+            echo "PR #${existing} already open for ${latest}, nothing to do."
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Update needed: ${installed} -> ${latest}"
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Clone mu-plugin at release tag
+        if: steps.should_update.outputs.needed == 'true'
+        run: |
+          set -euo pipefail
+          tag="${{ steps.latest.outputs.tag }}"
+          git clone --depth=1 --branch "${tag}" \
+            https://github.com/pantheon-systems/pantheon-mu-plugin.git \
+            /tmp/pantheon-mu-plugin
+
+      - name: Copy mu-plugin files into upstream
+        if: steps.should_update.outputs.needed == 'true'
+        run: |
+          set -euo pipefail
+          dest="wp-content/mu-plugins/pantheon-mu-plugin"
+          src="/tmp/pantheon-mu-plugin"
+
+          # Build rsync exclusion list from .gitattributes export-ignore entries
+          excludes=()
+          if [ -f "${src}/.gitattributes" ]; then
+            while IFS= read -r pattern; do
+              pattern="${pattern#/}"
+              excludes+=(--exclude="${pattern}")
+            done < <(grep -v '^#' "${src}/.gitattributes" \
+              | grep 'export-ignore' \
+              | awk '{print $1}' \
+              | grep -v '^$')
+          fi
+
+          # Always exclude these regardless of .gitattributes
+          excludes+=(--exclude=".git")
+          excludes+=(--exclude="catalog-info.yaml")
+          excludes+=(--exclude="catalog-info.yml")
+          excludes+=(--exclude="composer.json")
+          excludes+=(--exclude="README.md")
+
+          # Replace existing files with the new release
+          rsync -a --delete "${excludes[@]}" "${src}/" "${dest}/"
+
+      - name: Collect changelog for included versions
+        if: steps.should_update.outputs.needed == 'true'
+        id: changelog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          installed="${{ steps.installed.outputs.version }}"
+          latest="${{ steps.latest.outputs.version }}"
+
+          # Fetch all releases, filter to those between installed and latest
+          changelog=$(gh api repos/pantheon-systems/pantheon-mu-plugin/releases --paginate --jq '
+            .[]
+            | select(.draft == false and .prerelease == false)
+            | {tag: .tag_name, body: .body}
+          ' | jq -rs --arg installed "$installed" --arg latest "$latest" '
+            # Helper: split version into numeric array for comparison
+            def ver: ltrimstr("v") | split(".") | map(tonumber);
+
+            # Sort releases by tag and filter to the range (installed, latest]
+            map(select(
+              (.tag | ver) as $v |
+              ($v != ($installed | ver)) and
+              ($v <= ($latest | ver)) and
+              ($v > ($installed | ver))
+            ))
+            | sort_by(.tag | ver)
+            | map(
+                # Strip "New Contributors" section and everything after it
+                .body |= (split("\n## New Contributors")[0] | split("\n**Full Changelog")[0])
+                # Bump ## headings to #### so they nest under ### version
+                | .body |= gsub("(?m)^## "; "#### ")
+                | "### " + .tag + "\n\n" + .body
+              )
+            | join("\n\n---\n\n")
+          ')
+
+          # Write to a file to avoid output escaping issues
+          echo "${changelog}" > /tmp/changelog.md
+
+      - name: Open PR
+        if: steps.should_update.outputs.needed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          tag="${{ steps.latest.outputs.tag }}"
+          installed="${{ steps.installed.outputs.version }}"
+          timestamp=$(date +%Y%m%d%H%M%S)
+          branch="update-mu-plugin-${tag}-${timestamp}"
+
+          git config user.email "bot@getpantheon.com"
+          git config user.name "Pantheon Automation"
+
+          git checkout -b "${branch}"
+          git add wp-content/mu-plugins/pantheon-mu-plugin
+          git commit -m "Update the Pantheon MU Plugin to ${tag}."
+          git push origin "${branch}"
+
+          changelog=$(cat /tmp/changelog.md)
+
+          {
+            echo "Update the Pantheon MU Plugin from ${installed} to [${tag}](https://github.com/pantheon-systems/pantheon-mu-plugin/releases/tag/${tag})."
+            echo ""
+            echo "## Changelog"
+            echo ""
+            echo "${changelog}"
+          } > /tmp/pr-body.md
+
+          gh pr create \
+            --draft \
+            --base default \
+            --head "${branch}" \
+            --title "Update the Pantheon MU Plugin to ${tag}." \
+            --body-file /tmp/pr-body.md
