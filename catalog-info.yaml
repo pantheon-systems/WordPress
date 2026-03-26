@@ -1,0 +1,10 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: WordPress
+  description: WordPress upstream for the Pantheon website platform
+spec:
+  type: template
+  lifecycle: production
+  owner: sitex
