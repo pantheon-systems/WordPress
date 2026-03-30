@@ -26,7 +26,7 @@ Feature: Perform Pantheon-specific actions
     When I press "Clear Cache"
     Then print current URL
     And I should be on "/wp-admin/options-general.php?page=pantheon-cache&cache-cleared=true"
-    And I should see "Site cache flushed." in the ".updated" element
+    And I should see "Site cache flushed." in the ".notice-success" element
 
   Scenario: Verify the Pantheon MU plugin is present
     When I go to "/wp-admin/plugins.php?plugin_status=mustuse"
