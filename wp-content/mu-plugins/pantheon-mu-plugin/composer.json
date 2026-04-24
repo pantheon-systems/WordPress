@@ -1,0 +1,48 @@
+{
+  "name": "pantheon-systems/pantheon-wp-main",
+  "description": "Pantheon mu-plugin for WordPress sites.",
+  "type": "wordpress-muplugin",
+  "license": "MIT",
+  "require": {
+    "vlucas/phpdotenv": "*"
+  },
+  "require-dev": {
+    "pantheon-systems/pantheon-wp-coding-standards": "^3.0",
+    "pantheon-systems/wpunit-helpers": "^2.0",
+    "phpunit/phpunit": "^9",
+    "yoast/phpunit-polyfills": "^2.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "pantheon-systems/wpunit-helpers": true
+    }
+  },
+  "scripts": {
+    "chmod-scripts": [
+      "chmod +x bin/*.sh"
+    ],
+    "post-install-cmd": [
+      "@chmod-scripts"
+    ],
+    "post-update-cmd": [
+      "@chmod-scripts"
+    ],
+    "lint": [
+      "@phplint",
+      "@phpcs"
+    ],
+    "phplint": "find . -type f -name '*.php' -not -path './vendor/*' -not -path './tests/*' -exec php -l {} \\;",
+    "phpcs": "vendor/bin/phpcs -s .",
+    "phpcbf": "vendor/bin/phpcbf -s .",
+    "phpunit": "vendor/bin/phpunit --colors=always",
+    "test": [
+      "@phpunit",
+      "@test:multisite"
+    ],
+    "test:multisite": "WP_MULTISITE=1 vendor/bin/phpunit --colors=always",
+    "test:install": "bin/install-local-tests.sh --skip-db=true",
+    "test:install:withdb": "bin/install-local-tests.sh",
+    "test:install:nightly": "bin/install-local-tests.sh --version=nightly --skip-db=true"
+  }
+}
