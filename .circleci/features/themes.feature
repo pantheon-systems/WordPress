@@ -1,1 +1,0 @@
-Feature: Manage WordPress themes
