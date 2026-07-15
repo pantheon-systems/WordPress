@@ -97,19 +97,23 @@ function _pantheon_get_dashboard_url( $path = '' ) {
  *     @type string $button_text    Optional button text.
  *     @type string $button_url     Optional button URL.
  *     @type string $logo_url       Optional logo URL. Default uses Pantheon logo in plugin directory.
- *     @type bool   $dismissible    Whether notice can be dismissed. Default false.
+ *     @type bool         $dismissible    Whether notice can be dismissed. Default false.
+ *     @type string       $id             Optional unique HTML id for the notice wrapper. Default ''.
+ *     @type string|array $extra_classes  Optional extra CSS class(es) for targeting. String (space-separated) or array. Default ''.
  * }
  * @return void
  */
 function _pantheon_render_notice( $args = [] ) {
 	$defaults = [
-		'type'        => 'warning',
-		'heading'     => '',
-		'message'     => '',
-		'button_text' => '',
-		'button_url'  => '',
-		'logo_url'    => plugins_url( 'assets/images/logo-fist-black.webp', __FILE__ ),
-		'dismissible' => false,
+		'type'          => 'warning',
+		'heading'       => '',
+		'message'       => '',
+		'button_text'   => '',
+		'button_url'    => '',
+		'logo_url'      => plugins_url( 'assets/images/logo-fist-black.webp', __FILE__ ),
+		'dismissible'   => false,
+		'id'            => '',
+		'extra_classes' => '',
 	];
 
 	$args = wp_parse_args( $args, $defaults );
@@ -123,8 +127,17 @@ function _pantheon_render_notice( $args = [] ) {
 	if ( $args['dismissible'] ) {
 		$notice_classes[] = 'is-dismissible';
 	}
+
+	if ( $args['extra_classes'] ) {
+		$extra = is_array( $args['extra_classes'] ) ? $args['extra_classes'] : explode( ' ', $args['extra_classes'] );
+		foreach ( $extra as $class ) {
+			if ( '' !== trim( $class ) ) {
+				$notice_classes[] = sanitize_html_class( $class );
+			}
+		}
+	}
 	?>
-	<div class="<?php echo esc_attr( implode( ' ', $notice_classes ) ); ?>">
+	<div class="<?php echo esc_attr( implode( ' ', $notice_classes ) ); ?>"<?php echo $args['id'] ? ' id="' . esc_attr( $args['id'] ) . '"' : ''; ?>>
 		<div class="pantheon-notice-aside">
 			<div class="pantheon-notice-icon-wrapper">
 				<img src="<?php echo esc_url( $args['logo_url'] ); ?>" alt="Pantheon" width="48" height="48">
@@ -170,3 +183,16 @@ function _pantheon_enqueue_notice_styles() {
 	);
 }
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\_pantheon_enqueue_notice_styles' );
+
+/**
+ * Replace http:// with https:// at the start of a URL string.
+ *
+ * @param mixed $url The option value.
+ * @return mixed The URL with https:// scheme, or the original value if not an http:// string.
+ */
+function _pantheon_ep_force_https_url( $url ) {
+	if ( is_string( $url ) && strpos( $url, 'http://' ) === 0 ) {
+		return 'https://' . substr( $url, 7 );
+	}
+	return $url;
+}

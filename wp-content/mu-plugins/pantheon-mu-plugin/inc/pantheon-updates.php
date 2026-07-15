@@ -5,6 +5,15 @@
  * Handles modifying the default WordPress update behavior on Pantheon.
  */
 
+/*
+ * User-meta key storing the WordPress version a user dismissed the update notice for.
+ * A newer available version no longer matches the stored value, so the notice returns.
+ */
+const PANTHEON_UPDATE_NOTICE_DISMISSED_META = 'pantheon_dismissed_update_notice';
+
+// AJAX action + nonce used by the dismiss handler and its front-end script.
+const PANTHEON_UPDATE_NOTICE_DISMISS_ACTION = 'pantheon_dismiss_update_notice';
+
 // If on Pantheon...
 if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
 	// Disable WordPress auto updates.
@@ -72,12 +81,28 @@ function _pantheon_is_wordpress_core_prerelease(): bool {
 }
 
 /**
- * Replace WordPress core update nag EVERYWHERE with our own notice.
- * Use git upstream instead
+ * Render Pantheon's upstream update notice in place of the WordPress core update nag.
+ *
+ * Suppressed by the PANTHEON_SHOW_UPDATE_NOTICE constant or the
+ * pantheon_show_update_notice filter (see the respective checks below).
  *
  * @return void
  */
 function _pantheon_upstream_update_notice() {
+	// Allow admins/developers to disable the update notice via constant or filter.
+	if ( defined( 'PANTHEON_SHOW_UPDATE_NOTICE' ) && ! PANTHEON_SHOW_UPDATE_NOTICE ) {
+		return;
+	}
+
+	/**
+	 * Filters whether the Pantheon WordPress update notice is shown.
+	 *
+	 * @param bool $show Whether to show the update notice. Default true.
+	 */
+	if ( ! apply_filters( 'pantheon_show_update_notice', true ) ) {
+		return;
+	}
+
 	$screen = get_current_screen();
 
 	// Check if using a pre-release version of WordPress.
@@ -92,6 +117,13 @@ function _pantheon_upstream_update_notice() {
 
 	// If core update is available, show the update notice on ALL pages.
 	if ( $core_update_available ) {
+		// Skip the notice if this user already dismissed it for the current available version.
+		$available_version = _pantheon_get_latest_wordpress_version();
+		$dismissed_version = get_user_meta( get_current_user_id(), PANTHEON_UPDATE_NOTICE_DISMISSED_META, true );
+		if ( $available_version && $dismissed_version === $available_version ) {
+			return;
+		}
+
 		$message = sprintf(
 			// translators: %s is a link to the Pantheon upstream updates documentation.
 			__( 'For details on applying updates, see the <a href="%s">Applying Upstream Updates</a> documentation. If you need help, contact an administrator for your Pantheon organization.', 'pantheon-systems' ),
@@ -99,11 +131,14 @@ function _pantheon_upstream_update_notice() {
 		);
 
 		Pantheon\_pantheon_render_notice( [
-			'type'        => 'warning',
-			'heading'     => __( 'A new WordPress update is available!', 'pantheon-systems' ),
-			'message'     => $message,
-			'button_text' => __( 'Pantheon Dashboard', 'pantheon-systems' ),
-			'button_url'  => $dashboard_url,
+			'type'          => 'warning',
+			'heading'       => __( 'A new WordPress update is available!', 'pantheon-systems' ),
+			'message'       => $message,
+			'button_text'   => __( 'Pantheon Dashboard', 'pantheon-systems' ),
+			'button_url'    => $dashboard_url,
+			'id'            => 'pantheon-update-notice',
+			'extra_classes' => 'pantheon-update-notice',
+			'dismissible'   => true,
 		] );
 	} elseif ( $is_update_page ) {
 		// If no update is available but we're on the update pages, show the "Check for updates" message.
@@ -114,11 +149,13 @@ function _pantheon_upstream_update_notice() {
 		);
 
 		Pantheon\_pantheon_render_notice( [
-			'type'        => 'warning',
-			'heading'     => __( 'Check for Updates', 'pantheon-systems' ),
-			'message'     => $message,
-			'button_text' => __( 'Pantheon Dashboard', 'pantheon-systems' ),
-			'button_url'  => $dashboard_url,
+			'type'          => 'warning',
+			'heading'       => __( 'Check for Updates', 'pantheon-systems' ),
+			'message'       => $message,
+			'button_text'   => __( 'Pantheon Dashboard', 'pantheon-systems' ),
+			'button_url'    => $dashboard_url,
+			'id'            => 'pantheon-update-notice',
+			'extra_classes' => 'pantheon-update-notice',
 		] );
 	}
 }
@@ -162,6 +199,56 @@ function _pantheon_register_upstream_update_notice() {
 	}
 }
 add_action( 'admin_init', '_pantheon_register_upstream_update_notice' );
+
+/**
+ * AJAX handler: record that the current user dismissed the update notice for the
+ * current available WordPress version. The version is resolved server-side so the
+ * client cannot influence which version the dismissal applies to.
+ *
+ * @return void
+ */
+function _pantheon_dismiss_update_notice() {
+	check_ajax_referer( PANTHEON_UPDATE_NOTICE_DISMISS_ACTION, 'nonce' );
+
+	if ( ! is_user_logged_in() ) {
+		wp_send_json_error( 'not_logged_in', 403 );
+	}
+
+	$available_version = _pantheon_get_latest_wordpress_version();
+	if ( ! $available_version ) {
+		wp_send_json_error( 'no_available_version' );
+	}
+
+	update_user_meta( get_current_user_id(), PANTHEON_UPDATE_NOTICE_DISMISSED_META, $available_version );
+	wp_send_json_success();
+}
+add_action( 'wp_ajax_' . PANTHEON_UPDATE_NOTICE_DISMISS_ACTION, '_pantheon_dismiss_update_notice' );
+
+/**
+ * Enqueue the dismiss script and pass it the AJAX URL, action, and nonce.
+ *
+ * @return void
+ */
+function _pantheon_enqueue_update_notice_dismiss() {
+	wp_enqueue_script(
+		'pantheon-update-notice-dismiss',
+		plugin_dir_url( __FILE__ ) . 'assets/js/pantheon-update-notice-dismiss.js',
+		[],
+		PANTHEON_MU_PLUGIN_VERSION,
+		true
+	);
+
+	wp_localize_script(
+		'pantheon-update-notice-dismiss',
+		'pantheonUpdateNotice',
+		[
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'action'  => PANTHEON_UPDATE_NOTICE_DISMISS_ACTION,
+			'nonce'   => wp_create_nonce( PANTHEON_UPDATE_NOTICE_DISMISS_ACTION ),
+		]
+	);
+}
+add_action( 'admin_enqueue_scripts', '_pantheon_enqueue_update_notice_dismiss' );
 
 /**
  * Return zero updates and current time as last checked time.
