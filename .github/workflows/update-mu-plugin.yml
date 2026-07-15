@@ -163,8 +163,8 @@ jobs:
           timestamp=$(date +%Y%m%d%H%M%S)
           branch="update-mu-plugin-${tag}-${timestamp}"
 
-          git config user.email "bot@getpantheon.com"
-          git config user.name "Pantheon Automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
 
           git checkout -b "${branch}"
           git add wp-content/mu-plugins/pantheon-mu-plugin
