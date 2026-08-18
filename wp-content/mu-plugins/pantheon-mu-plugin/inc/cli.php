@@ -125,22 +125,9 @@ WP_CLI::add_hook( 'before_invoke:elasticpress', function () {
 	}
 
 	if ( ! defined( 'WP_HOME' ) || strpos( WP_HOME, 'http://' ) === 0 ) {
-		add_filter( 'option_home', '\\Pantheon\\CLI\\_pantheon_ep_force_https_url' );
+		add_filter( 'option_home', '\\Pantheon\\_pantheon_ep_force_https_url' );
 	}
 	if ( ! defined( 'WP_SITEURL' ) || strpos( WP_SITEURL, 'http://' ) === 0 ) {
-		add_filter( 'option_siteurl', '\\Pantheon\\CLI\\_pantheon_ep_force_https_url' );
+		add_filter( 'option_siteurl', '\\Pantheon\\_pantheon_ep_force_https_url' );
 	}
 } );
-
-/**
- * Replace http:// with https:// in a URL string.
- *
- * @param string $url The option value.
- * @return string The URL with https:// scheme.
- */
-function _pantheon_ep_force_https_url( $url ) {
-	if ( is_string( $url ) && strpos( $url, 'http://' ) === 0 ) {
-		return 'https://' . substr( $url, 7 );
-	}
-	return $url;
-}
