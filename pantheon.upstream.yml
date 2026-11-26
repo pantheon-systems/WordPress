@@ -5,9 +5,8 @@
 api_version: 1
 php_version: 8.3
 
-# See https://pantheon.io/docs/pantheon-yml#specify-a-version-of-mariadb
-database:
-  version: 10.4
+# No database pin: sites created from this upstream get the platform default
+# (MariaDB 10.0). Test fixture for go-ellis canaries (PRT-4475); do not use for real sites.
 
 # See https://pantheon.io/docs/pantheon-yml/#enforce-https--hsts for valid values.
 enforce_https: transitional
